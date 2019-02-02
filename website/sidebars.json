@@ -1,0 +1,26 @@
+{
+  "docs": {
+    "Usage": [
+      "getting-started",
+      "main-concepts",
+      "purchase"
+    ],
+    "Advanced Guides": [
+      "advanced/targeting",
+      "advanced/team-collaboration",
+      "advanced/notifications-webhooks"
+    ],
+    "SDK References": [
+      "sdk-reference/overview",
+      "sdk-reference/csharp",
+      "sdk-reference/java",
+      "sdk-reference/js",
+      "sdk-reference/node",
+      "sdk-reference/android",
+      "sdk-reference/ios",
+      "sdk-reference/python",
+      "sdk-reference/go",
+      "sdk-reference/php"
+    ]
+  }
+}
