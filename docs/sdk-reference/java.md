@@ -216,12 +216,12 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 Any time you want to refresh the cached configuration with the latest one, you can call the forceRefresh() method of the library, which will initiate a new fetch and will update the local cache.
 
 ## Sample Apps
-Check out our Sample Applications how they use the ConfigCat SDK:
+Check out our Sample Applications how they use the ConfigCat SDK
 * <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/console" target="_blank">Simple Console Application</a>
 * <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/web" target="_blank">Web Application</a> with Dependency Injection that uses [ConfigCat Webhooks](../../advanced/notifications-webhooks) to get notified about configuration updates
 
-There is more:
+Look under the hood
 * <a href="https://github.com/ConfigCat/java-sdk" target="_blank">ConfigCat Java SDK's repository on Github</a>
-* <a href="http://javadoc.io/doc/com.configcat/configcat-client/1.1.3" target="_blank">ConfigCat Java SDK's javadoc page</a>
-* <a href="https://mvnrepository.com/artifact/com.configcat/configcat-client" target="_blank">ConfigCat Java SDK on MVNRepository</a>
+* <a href="http://javadoc.io/doc/com.configcat/configcat-client" target="_blank">ConfigCat Java SDK's javadoc page</a>
+* <a href="https://mvnrepository.com/artifact/com.configcat/configcat-client" target="_blank">ConfigCat Java SDK on MVN Repository</a>
 * <a href="https://bintray.com/configcat/releases/configcat-client" target="_blank">ConfigCat Java SDK on jcenter</a>
