@@ -218,7 +218,7 @@ Any time you want to refresh the cached configuration with the latest one, you c
 ## Sample Apps
 Check out our Sample Applications how they use the ConfigCat SDK:
 * <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/console" target="_blank">Simple Console Application</a>
-* <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/web" target="_blank">Web Application</a> with Dependency Injection that uses [ConfigCat Webhooks](../../advanced/notifications-webhooks.md) to get notified about configuration updates
+* <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/web" target="_blank">Web Application</a> with Dependency Injection that uses [ConfigCat Webhooks](../../advanced/notifications-webhooks) to get notified about configuration updates
 
 There is more:
 * <a href="https://github.com/ConfigCat/java-sdk" target="_blank">ConfigCat Java SDK's repository on Github</a>
