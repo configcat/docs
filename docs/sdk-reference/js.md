@@ -169,6 +169,6 @@ configcat.createClientWithManualPoll("#YOUR-API-KEY#", { logger: customLogger })
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/react-sample" target="_blank">React</a>
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/html" target="_blank">Pure HTML + JS</a>
 
-## Go deeper
+## Look under the hood
 * <a href="https://github.com/configcat/js-sdk" target="_blank">ConfigCat's JavaScript SDK on GitHub</a>
 * <a href="https://www.npmjs.com/package/configcat-js" target="_blank">ConfigCat JavaScript SDK in NPM</a>

@@ -165,6 +165,6 @@ configcat.createClientWithManualPoll("#YOUR-API-KEY#", { logger: customLogger })
 ## Sample Application
 <a href="https://github.com/configcat/node-sdk/blob/master/samples/console" target="_blank">Sample Console App</a>
 
-## Go deeper
+## Look under the hood
 * <a href="https://github.com/configcat/node-sdk" target="_blank">ConfigCat's Node.js SDK on GitHub</a>
 * <a href="https://www.npmjs.com/package/configcat-node" target="_blank">ConfigCat's Node.js SDK in NPM</a>

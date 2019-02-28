@@ -93,6 +93,6 @@ $user = new \ConfigCat\User(
 ## Sample Applications
 - [Sample Laravel App](https://github.com/configcat/php-sdk/tree/master/samples/laravel)
 
-## Go deeper
+## Look under the hood
 - [ConfigCat PHP SDK's repository on GitHub](https://github.com/configcat/php-sdk)
 - [ConfigCat PHP SDK on packagist.org](https://packagist.org/packages/configcat/configcat-client)
