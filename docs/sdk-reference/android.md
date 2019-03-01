@@ -41,9 +41,21 @@ android {
        .build("<PLACE-YOUR-USER-IDENTIFIER-HERE>")
    ```
 1. Get your config value:
-   `java val isMyAwesomeFeatureEnabled = client.getValue(Boolean::class.java, "<key-of-my-awesome-feature>", user, false) if(isMyAwesomeFeatureEnabled) { //show your awesome feature to the world! }`
-   Async is also available:
-   `java client.getValueAsync(Boolean::class.java, "<key-of-my-awesome-feature>", user, false) .thenAccept { isMyAwesomeFeatureEnabled -> if (isMyAwesomeFeatureEnabled) { //show your awesome feature to the world! } }`
+    ```java
+    boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "<key-of-my-awesome-feature>", user, false);
+    if(isMyAwesomeFeatureEnabled) {
+        //show your awesome feature to the world!
+    }
+    ```
+    Or use the async APIs:
+    ```java
+    client.getValueAsync(Boolean.class, "<key-of-my-awesome-feature>", user, false)
+        .thenAccept(isMyAwesomeFeatureEnabled -> {
+            if(isMyAwesomeFeatureEnabled) {
+                //show your awesome feature to the world!
+            }
+        });
+    ```
    > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
 ## User object
