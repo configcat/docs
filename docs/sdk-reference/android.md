@@ -268,6 +268,6 @@ Any time you want to refresh the cached configuration with the latest one, you c
 There is more:
 
 - <a href="https://github.com/ConfigCat/java-sdk" target="_blank">ConfigCat Android SDK's repository on Github</a>
-- <a href="http://javadoc.io/doc/com.configcat/configcat-client/1.1.3" target="_blank">ConfigCat Android SDK's javadoc page</a>
+- <a href="http://javadoc.io/doc/com.configcat/configcat-client" target="_blank">ConfigCat Android SDK's javadoc page</a>
 - <a href="https://mvnrepository.com/artifact/com.configcat/configcat-client" target="_blank">ConfigCat Android SDK on MVNRepository</a>
 - <a href="https://bintray.com/configcat/releases/configcat-client" target="_blank">ConfigCat Android SDK on jcenter</a>
