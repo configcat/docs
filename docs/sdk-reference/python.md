@@ -51,10 +51,10 @@ Creating the client is different for each polling mode.
 > We strongly recommend using the *ConfigCat Client* as a Singleton object in your application.
 
 ## Anatomy of `get_value()`
-| Parameters      | Description                                                                                                  |
-| --------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
-| `default_value` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| Parameters      | Description                                                                                                     |
+| --------------- | --------------------------------------------------------------------------------------------------------------- |
+| `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
+| `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                  |
 | `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
 ```python
 value = configcat_client.get_value(
@@ -78,7 +78,8 @@ user_object = User("john@example.com")
 | `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
 | `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 ``` javascript
-user_object = User('435170f4-8a8b-4b67-a723-505ac7cdea92', 'john@example', 'United Kingdom', {'SubscriptionType': 'Pro', 'UserRole': 'Admin'})
+user_object = User('435170f4-8a8b-4b67-a723-505ac7cdea92', 'john@example', 'United Kingdom',
+                {'SubscriptionType': 'Pro', 'UserRole': 'Admin'})
 ```
 
 ## Polling Modes
@@ -89,7 +90,8 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 
 Use the `poll_interval_seconds` option parameter to change the polling interval.
 ```python
-configcatclient.create_client_with_auto_poll("#YOUR-API-KEY#", poll_interval_seconds=95);
+configcatclient.create_client_with_auto_poll(
+    "#YOUR-API-KEY#", poll_interval_seconds=95);
 ```
 Adding a callback to `on_configuration_changed_callback` option parameter will get you notified about changes.
 ```python
@@ -112,7 +114,8 @@ When calling `get_value()` the *ConfigCat SDK* downloads the latest setting valu
 
 Use `cache_time_to_live_seconds` option parameter to set cache lifetime.
 ```python
-configcatclient.create_client_with_lazy_load("#YOUR-API-KEY#", cache_time_to_live_seconds=600);
+configcatclient.create_client_with_lazy_load(
+    "#YOUR-API-KEY#", cache_time_to_live_seconds=600);
 ```
 
 Use a custom `config_cache_class` option parameter.
