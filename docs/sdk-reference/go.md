@@ -59,7 +59,7 @@ The internal caching control and the communication between the client and Config
 This policy fetches the latest configuration and updates the cache repeatedly. 
 
 ```go
-config := DefaultClientConfig()
+config := configcat.DefaultClientConfig()
 config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *configcat.ConfigStore) configcat.RefreshPolicy {
     return configcat.NewAutoPollingPolicy(configProvider, store, 
     // The auto poll interval
@@ -72,7 +72,7 @@ client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 You have the option to configure the polling interval and an `configChanged` callback that will be notified when a new configuration is fetched. The policy calls the given method only, when the new configuration is differs from the cached one.
 
 ```go
-config := DefaultClientConfig()
+config := configcat.DefaultClientConfig()
 config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *configcat.ConfigStore) configcat.RefreshPolicy {
     return configcat.NewAutoPollingPolicyWithChangeListener(configProvider, store, 
     // The auto poll interval
@@ -99,7 +99,7 @@ You can define how do you want to handle the expiration of the cached configurat
 when a request is being made on the cache while it's expired, the previous value will be returned immediately 
 until the fetching of the new configuration is completed.
 ```go
-config := DefaultClientConfig()
+config := configcat.DefaultClientConfig()
 config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *configcat.ConfigStore) configcat.RefreshPolicy {
     return configcat.NewExpiringCachePolicy(configProvider, store, 
 	// The cache expiration interval
