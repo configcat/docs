@@ -53,9 +53,9 @@ user := configcat.NewUserWithAdditionalAttributes("<PLACE-YOUR-USER-IDENTIFIER-H
     "simple@but.awesome.com", "Awesomnia", custom)
 ```
 ## Configuration
-### Refresh policies
+## Refresh policies
 The internal caching control and the communication between the client and ConfigCat are managed through a refresh policy. There are 3 predefined implementations built in the library.
-#### 1. Auto polling policy (default)
+### 1. Auto polling policy (default)
 This policy fetches the latest configuration and updates the cache repeatedly. 
 
 ```go
@@ -89,12 +89,12 @@ config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *conf
 client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 ```
 
-#### 2. Expiring cache policy
+### 2. Expiring cache policy
 This policy uses an expiring cache to maintain the internally stored configuration. 
-##### Cache refresh interval 
+#### Cache refresh interval 
 You can define the refresh rate of the cache in seconds, 
 after the initial cached value is set this value will be used to determine how much time must pass before initiating a new configuration fetch request through the `ConfigProvider`.
-##### Async / Sync refresh
+#### Async / Sync refresh
 You can define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then 
 when a request is being made on the cache while it's expired, the previous value will be returned immediately 
 until the fetching of the new configuration is completed.
@@ -111,7 +111,7 @@ config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *conf
 client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 ```
 
-#### 3. Manual polling policy
+### 3. Manual polling policy
 With this policy every new configuration request on the ConfigCatClient will trigger a new fetch over HTTP.
 ```go
 config := configcat.DefaultClientConfig()
@@ -122,7 +122,7 @@ config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *conf
 client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 ```
 
-#### Custom Policy
+### Custom Policy
 You can also implement your custom refresh policy by satisfying the `RefreshPolicy` interface.
 ```go
 type CustomPolicy struct {
