@@ -55,7 +55,7 @@ user := configcat.NewUserWithAdditionalAttributes("<PLACE-YOUR-USER-IDENTIFIER-H
 ## Configuration
 ## Refresh policies
 The internal caching control and the communication between the client and ConfigCat are managed through a refresh policy. There are 3 predefined implementations built in the library.
-### 1. Auto polling policy (default)
+### Auto polling policy (default)
 This policy fetches the latest configuration and updates the cache repeatedly. 
 
 ```go
@@ -89,7 +89,7 @@ config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *conf
 client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 ```
 
-### 2. Expiring cache policy
+### Expiring cache policy
 This policy uses an expiring cache to maintain the internally stored configuration. 
 #### Cache refresh interval 
 You can define the refresh rate of the cache in seconds, 
@@ -111,7 +111,7 @@ config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *conf
 client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 ```
 
-### 3. Manual polling policy
+### Manual polling policy
 With this policy every new configuration request on the ConfigCatClient will trigger a new fetch over HTTP.
 ```go
 config := configcat.DefaultClientConfig()
