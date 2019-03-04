@@ -3,7 +3,7 @@ id: main-concepts
 title: Main Concepts 
 ---
 ## Setting
-A *Setting* is an essential bit of *ConfigCat*. It can represent a feature flag/toggle, a number as a discount price or any text your application requires to be modified without the need of a new deployment.
+A *Setting* is an essential bit of *ConfigCat*. It can represent a feature flag/toggle, a number or any text your application requires to be modified without the need of a new deployment.
 ### Anatomy of a *Setting*
 Properties|Description
 ---|---
