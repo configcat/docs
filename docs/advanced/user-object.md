@@ -20,7 +20,7 @@ Also, it contains user-specific information as a basis to evaluate what Feature 
 ### Example
 Let's say in the <a href="https://configcat.com/App" target="_blank">Admin Console</a> you'd like to have the following targeting rule:
 
-`newUI` feature is `ON` if `User's Email contains @example.com`, otherwise it is `OFF`.
+`myAwesomeFeature` is `ON` if `User's Email contains @example.com`, otherwise it is `OFF`.
 
 The ConfigCat SDK will return `true` for a User Object with an email address of `jane@example.com`, and it will return `false` for a User Object with an email address of `john@gmail.com`
 
