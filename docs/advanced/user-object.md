@@ -6,14 +6,14 @@ The User Object is an optional parameter when getting a feature flag or setting 
 
 >The *User Object* is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
-Also it contains user specific information as a basis to evaluate what Feature Flag state or setting value should be returned by ConfigCat.
+Also, it contains user-specific information as a basis to evaluate what Feature Flag state or setting value should be returned by ConfigCat.
 
 ## Security concerns first
 Keeping your user data safe was one of our main goals when designing ConfigCat. The main concept here is that the ConfigCat SDK which connects your application to our servers always pulls your configs and never pushes back any data.
 
 >In ConfigCat the Feature Flag and Setting **evaluation is on the Client** side within the ConfigCat SDK. This means that your **user data will never leave your system**. 
 
-This way you can crate your targeting rules even based on data considered sensitive.
+This way you can create your targeting rules even based on data considered sensitive.
 You can double check the above since all the [ConfigCat SDKs are open source and on GitGub](https://github.com/configcat).
 
 ## User Object's structure
