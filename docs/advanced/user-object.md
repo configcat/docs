@@ -45,6 +45,8 @@ Email|**OPTIONAL** Email address of your user. By adding this parameter you will
 Country|**OPTIONAL** Fill this for location or country based targeting. e.g: Turn on a feature for users in Canada only.
 Custom|**OPTIONAL** This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role etc.
 
+Despite it's name, a User Object can contain non-user related information as well, that could be important for targeting like your application's version number or the device type/OS your application is running on.
+
 ### Identifier property
 Unique identifier of a user in your application. Required because we need to differentiate your users  from each other and to be able to evaluate the setting value for percentage based targeting.
 
