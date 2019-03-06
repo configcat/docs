@@ -11,11 +11,11 @@ And represents a user in your application.
 
 Also, it contains user-specific information as a basis to evaluate what Feature Flag state or setting value should be returned by ConfigCat.
 
-## Relationship between User Object and Targeting rules
+## The relationship between User Object and Targeting rules
 
 **As a product manager**, you can set [Targeting rules](advanced/targeting.md) in the <a href="https://configcat.com/App" target="_blank">ConfigCat Admin Console</a> based on the parameters given to ConfigCat by your application.
 
-**As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your team mates) can use in the <a href="https://configcat.com/App" target="_blank">ConfigCat Admin Console</a> to apply [Targeting rules](advanced/targeting.md) on.
+**As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your teammates) can use in the <a href="https://configcat.com/App" target="_blank">ConfigCat Admin Console</a> to apply [Targeting rules](advanced/targeting.md) on.
 
 ### Example
 Let's say in the <a href="https://configcat.com/App" target="_blank">Admin Console</a> you'd like to have the following targeting rule:
@@ -40,7 +40,7 @@ The data that could and should be passed to the User Object.
 
 Property|Description
 ---|---
-Identifier|**REQUIRED** *Please see description below table.*
+Identifier|**REQUIRED** *Please see description below the table.*
 Email|**OPTIONAL** Email address of your user. By adding this parameter you will be able to create Email address based targeting. e.g: Turn on a feature for only users with @example.com addresses.
 Country|**OPTIONAL** Fill this for location or country based targeting. e.g: Turn on a feature for users in Canada only.
 Custom|**OPTIONAL** This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role etc.
@@ -50,7 +50,7 @@ Unique identifier of a user in your application. Required because we need to dif
 
 Our recommendation as an identifier:
 - User ID - If you have one in your application you can use the same User ID with ConfigCat.
-- Email address - In most cases adding an email address works perfect here. As long as it is unique.
+- Email address - In most cases adding an email address works perfectly here. As long as it is unique.
 - SessionId - This comes useful when you'd like to target users who aren't logged in your application.
 
 
