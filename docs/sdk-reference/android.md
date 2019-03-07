@@ -19,101 +19,111 @@ android {
 }
 ```
 
-## Basic configuration:
-
-1. Add the ConfigCat SDK to your project:
-   ```
-   compile 'com.configcat:configcat-client:2.+'
-   ```
-1. Import the ConfigCat SDK:
-   ```java
-   import com.configcat.*;
-   ```
-1. Create a ConfigCatClient using your API Key:
-   ```java
-   val client = ConfigCatClient("<PLACE-YOUR-API-KEY-HERE>")
-   ```
-1. (Optional) Prepare a User object for [Targeting](advanced/targeting.md) calculation
-   ```java
-   val user = User.newBuilder()
-       .email("simple@but.awesome.com")
-       .country("Awesomnia")
-       .build("<PLACE-YOUR-USER-IDENTIFIER-HERE>")
-   ```
-1. Get your config value:
-    ```java
-    boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "<key-of-my-awesome-feature>", user, false);
-    if(isMyAwesomeFeatureEnabled) {
-        //show your awesome feature to the world!
-    }
-    ```
-    Or use the async APIs:
-    ```java
-    client.getValueAsync(Boolean.class, "<key-of-my-awesome-feature>", user, false)
-        .thenAccept(isMyAwesomeFeatureEnabled -> {
-            if(isMyAwesomeFeatureEnabled) {
-                //show your awesome feature to the world!
-            }
-        });
-    ```
-   > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
-
-## User object
-
-Specific user or percentage-based targeting is calculated by the user object you should pass to the configuration requests.
-
-### Identifying your user
-
-The user object must be created with a **mandatory** identifier parameter which should uniquely identify each user. In most cases this could be the same or similar userID that exists in your application.
-
+## Getting Started:
+### 1. Add the ConfigCat SDK to your project
+```
+compile 'com.configcat:configcat-client:2.+'
+```
+### 2. Import the ConfigCat SDK:
 ```java
-val user = User.newBuilder()
-        .build("<PLACE-YOUR-USER-IDENTIFIER-HERE>") // mandatory
+import com.configcat.*;
+```
+### 3. Create the *ConfigCat* client with your *API Key*
+```java
+val client = ConfigCatClient("<PLACE-YOUR-API-KEY-HERE>")
+```
+### 4. Get your setting value
+```java
+var isMyAwesomeFeatureEnabled = client.getValue(Boolean.class.java, "<key-of-my-awesome-feature>", user, false);
+if(isMyAwesomeFeatureEnabled) {
+    doTheNewThing()
+} else {
+    doTheOldThing()
+}
+```
+Or use the async APIs:
+```java
+client.getValueAsync(Boolean.class.java, "<key-of-my-awesome-feature>", user, false)
+    .thenAccept(isMyAwesomeFeatureEnabled -> {
+        if(isMyAwesomeFeatureEnabled) {
+            doTheNewThing()
+        } else {
+            doTheOldThing()
+        }
+    });
 ```
 
-### Using custom attributes
-
-You can also set other custom attributes (e.g., Email address, Country) if you'd like to target your users based on them:
-
+### 5. Stop *ConfigCat* client
+You can safely shut down the client instance and release all associated resources on application exit.
 ```java
+client.close()
+```
+
+## Creating the *ConfigCat Client*
+*ConfigCat Client* is responsible for:
+- managing the communication between your application and ConfigCat servers.
+- caching your setting values and feature flags.
+- serving values quickly in a failsafe way.
+
+`ConfigCatClient(<apiKey>)` returns a client with default options.
+| Builder options       | Description                                                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------|
+| `apiKey()`            | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.    |
+| `httpClient()`        | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).     |
+| `maxWaitTimeForSyncCallsInSeconds()`      | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
+| `cache()`             | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                              |
+| `refreshPolicy()`     | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                    |
+
+> We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
+
+## Anatomy of `getValue()`
+| Parameters      | Description                                                                                                     |
+| --------------- | --------------------------------------------------------------------------------------------------------------- |
+| `classOfT`      | **REQUIRED.** The type of the setting.                                                                          |
+| `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
+| `defaultValue`  | **REQUIRED.** This value will be returned in case of an error.                                                  |
+| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
+```java
+var value = client.getValue(
+    Boolean.class.java, // Setting type
+    "keyOfMySetting", // Setting Key
+    false, // Default value
+    User.newBuilder().build('435170f4-8a8b-4b67-a723-505ac7cdea92') // Optional User Object
+)
+```
+
+### User Object 
+``` java
+val user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")   
+```
+``` java
+val user = User.newBuilder().build("john@example.com")   
+```
+| Builder options   | Description                                                                                                                     |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier()`    | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
+| `email()`         | Optional parameter for easier targeting rule definitions.                                                                       |
+| `country()`       | Optional parameter for easier targeting rule definitions.                                                                       |
+| `custom()`        | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+``` java
 Map<String,String> customAttributes = new HashMap<String,String>();
-    customAttributes.put("SubscriptionType", "Free");
-    customAttributes.put("Role", "Knight of Awesomnia");
+    customAttributes.put("SubscriptionType", "Pro");
+    customAttributes.put("UserRole", "Admin");
 
 val user = User.newBuilder()
-    .email("simple@but.awesome.com")
-    .country("Awesomnia")
-    .custom(hashMapOf("SubscriptionType" to "Free", "Role" to "Knight of Awesomnia"))
-    .build("<PLACE-YOUR-USER-IDENTIFIER-HERE>") // mandatory
+    .email("john@example.com")
+    .country("United Kingdom")
+    .custom(customAttributes)
+    .build("435170f4-8a8b-4b67-a723-505ac7cdea92")
 ```
 
-## HttpClient
+## Polling Modes
+The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all requests are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 
-The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to fetch the latest configuration over HTTP. You have the option to override the internal Http client with your customized one. For example if your application runs behind a proxy you can do the following:
+### Auto polling (default)
+The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
-```java
-val proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("proxyHost", proxyPort))
-val client = ConfigCatClient.newBuilder()
-    .httpClient(OkHttpClient.Builder()
-                .proxy(proxy)
-                .build())
-    .build("<PLACE-YOUR-API-KEY-HERE>")
-```
-
-> As the ConfigCat SDK maintains the whole lifetime of the internal http client, it's being closed simultaneously with the ConfigCatClient, refrain from closing the http client manually.
-
-## Refresh policies
-
-The internal caching control and the communication between the client and ConfigCat are managed through a refresh policy. There are 3 predefined implementations built in the library.
-
-### Auto polling policy (default)
-
-This policy fetches the latest configuration and updates the cache repeatedly.
-
-#### Poll interval
-
-You have the option to configure the polling interval through the builder (it must be greater than 2 seconds, the default is 60):
-
+Use the the `autoPollIntervalInSeconds` option parameter of the `AutoPollingPolicy` to change the polling interval.
 ```java
 val client = ConfigCatClient.newBuilder()
     .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache ->
@@ -122,11 +132,7 @@ val client = ConfigCatClient.newBuilder()
             .build(fetcher, cache)})
     .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
-
-#### Change listeners
-
-You can set change listeners that will be notified when a new configuration is fetched. The policy calls the listeners only, when the new configuration is differs from the cached one.
-
+Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
 ```java
 val client = ConfigCatClient.newBuilder()
     .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache ->
@@ -139,58 +145,37 @@ val client = ConfigCatClient.newBuilder()
     .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
 
-If you want to subscribe to the configuration changed event later in your applications lifetime, then you can do the following (this will only work when you have an auto polling refresh policy configured in the ConfigCatClient):
+### Lazy loading
+When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
 
-```java
-client.getRefreshPolicy(AutoPollingPolicy.class)
-    .addConfigurationChangeListener({ parser, newConfiguration ->
-        // here you can parse the new configuration like this:
-        // parser.parseValue(Boolean::class.java, newConfiguration, <key-of-my-awesome-feature>)
-    })
-```
-
-### Expiring cache policy
-
-This policy uses an expiring cache to maintain the internally stored configuration.
-
-#### Cache refresh interval
-
-You can define the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a new configuration fetch request through the `ConfigFetcher`.
-
+Use the `cacheRefreshIntervalInSeconds` option parameter of the `LazyLoadingPolicy` to set cache lifetime.
 ```java
 val client = ConfigCatClient.newBuilder()
     .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache ->
-        ExpiringCachePolicy.newBuilder()
+        LazyLoadingPolicy.newBuilder()
             .cacheRefreshIntervalInSeconds(120) // the cache will expire in 120 seconds
             .build(fetcher, cache)})
     .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
-
-#### Async / Sync refresh
-
-You can define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
-
+Use the `asyncRefresh` option parameter of the `LazyLoadingPolicy` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
 ```java
 val client = ConfigCatClient.newBuilder()
     .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache ->
-        ExpiringCachePolicy.newBuilder()
+        LazyLoadingPolicy.newBuilder()
             .asyncRefresh(true) // the refresh will be executed asynchronously
             .build(fetcher, cache)})
     .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
+If you set the `.asyncRefresh()` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
 
-If you set the `.asyncRefresh()` to be `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
-
-### Manual polling policy
-
+### Manual polling
 With this policy every new configuration request on the ConfigCatClient will trigger a new fetch over HTTP.
-
 ```java
 val client = ConfigCatClient.newBuilder()
     .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache -> ManualPollingPolicy(fetcher,cache)})
 ```
 
-#### Custom Policy
+### Custom Policy
 
 You can also implement your custom refresh policy by extending the RefreshPolicy abstract class.
 
@@ -247,19 +232,23 @@ val client = ConfigCatClient.newBuilder()
     .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
 
-#### Maximum wait time for synchronous calls
+## HttpClient
 
-You have the option to set a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout value, it'll return with the default.
+The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to fetch the latest configuration over HTTP. You have the option to override the internal Http client with your customized one. For example if your application runs behind a proxy you can do the following:
 
 ```java
+val proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("proxyHost", proxyPort))
 val client = ConfigCatClient.newBuilder()
-    .maxWaitTimeForSyncCallsInSeconds(2) // set the max wait time
+    .httpClient(OkHttpClient.Builder()
+                .proxy(proxy)
+                .build())
     .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
 
-#### Force refresh
+> As the ConfigCat SDK maintains the whole lifetime of the internal http client, it's being closed simultaneously with the ConfigCatClient, refrain from closing the http client manually.
 
-Any time you want to refresh the cached configuration with the latest one, you can call the forceRefresh() method of the library, which will initiate a new fetch and will update the local cache.
+### Force refresh
+Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
 
 ## Sample App
 
