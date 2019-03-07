@@ -34,7 +34,7 @@ val client = ConfigCatClient("<PLACE-YOUR-API-KEY-HERE>")
 ```
 ### 4. Get your setting value
 ```java
-var isMyAwesomeFeatureEnabled = client.getValue(Boolean.class.java, "<key-of-my-awesome-feature>", user, false);
+val isMyAwesomeFeatureEnabled = client.getValue(Boolean.class.java, "<key-of-my-awesome-feature>", user, false);
 if(isMyAwesomeFeatureEnabled) {
     doTheNewThing()
 } else {
@@ -84,7 +84,7 @@ client.close()
 | `defaultValue`  | **REQUIRED.** This value will be returned in case of an error.                                                  |
 | `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
 ```java
-var value = client.getValue(
+val value = client.getValue(
     Boolean.class.java, // Setting type
     "keyOfMySetting", // Setting Key
     false, // Default value
@@ -106,14 +106,10 @@ val user = User.newBuilder().build("john@example.com")
 | `country()`       | Optional parameter for easier targeting rule definitions.                                                                       |
 | `custom()`        | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 ``` java
-Map<String,String> customAttributes = new HashMap<String,String>();
-    customAttributes.put("SubscriptionType", "Pro");
-    customAttributes.put("UserRole", "Admin");
-
 val user = User.newBuilder()
     .email("john@example.com")
     .country("United Kingdom")
-    .custom(customAttributes)
+    .custom(hashMapOf("SubscriptionType" to "Pro", "UserRole" to "Admin"))
     .build("435170f4-8a8b-4b67-a723-505ac7cdea92")
 ```
 

@@ -53,12 +53,12 @@ client.Close()
 | ---------------------- | --------------------------------------------------------------------------------------------------------|
 | `apiKey`               | API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.    |
 
+### Custom configuration options
 `configcat.NewCustomClient(<apiKey>, config)` returns a client with custom configuration.
 | Arguments              | Description                                                                                             |
 | ---------------------- | --------------------------------------------------------------------------------------------------------|
 | `apiKey`               | API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.    |
 | `config`               | An object which contains the custom configuration.                                                      |
-### Custom configuration options
 You can get and customize the default configuration options:
 ```go
 config := configcat.DefaultClientConfig()
@@ -69,6 +69,12 @@ config := configcat.DefaultClientConfig()
 | `MaxWaitTimeForSyncCalls` | Sets a timeout value for the synchronous methods of the library (`GetValue()`, `GetValueForUser()`, `Refresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
 | `HttpTimeout`             | Sets maximum wait time for a HTTP response.                                                                           |
 | `PolicyFactory`           | Sets a custom refresh policy implementation for the client. [See below](#custom-policy).                              | 
+
+Then you can pass it to the `NewCustomClient()` method:
+```go
+client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+```
+
 
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
@@ -91,7 +97,7 @@ value := client.GetValue(
 | `defaultValue`  | This value will be returned in case of an error.                                                  |
 | `user`          | *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
 ```go
-value := client.GetValue(
+value := client.GetValueForUser(
     "keyOfMySetting", // Setting Key
     false // Default value
     configcat.NewUser("435170f4-8a8b-4b67-a723-505ac7cdea92") // User Object
