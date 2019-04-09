@@ -14,14 +14,16 @@ When creating working feature flag, first you will **add a switch** in the *Conf
 
 ## Create a feature flag on *ConfigCat Management Console*
 1. <a href="https://configcat.com/Account/Login" target="_blank">Log in</a> to access the *Management Console*
-2. **Create a project**. It will store your switch.
-3. Click **Add setting** and give it a name.
-4. Select **On/Off toggle (Boolean)** as a *Setting type*.
+2. On the *Welcome!* page just click *CLOSE*. (*You'll find it in the Leave me alone...* section)
+3. **Create a product**. Use your application's name or your company name. In this example I'll use *Angry Cats*.
+4. **Create environment**. Anyhting like *Test* or *Production* is fine. (I'll use *Test*)
+5. **Create a Config**. It will store your feature flag. (I'll use *Mobile app* here)
+6. Click **ADD FEATURE FLAG** and give it a name. (I'll use *Is my feature enabled* in this example)
 
 ![getting-started](assets/getting-started-1.png)
 
 ## Connect your app
-Find code examples below your switch in the *Management Console* on how to connect your application. Then you can access the value of your switch within your code.
+Find code examples on the *Connect your applications* tab on how to connect your application. Then you can access the value of your switch within your code.
 
 This is an example code snippet to show the idea behind our SDKs:
 ```
