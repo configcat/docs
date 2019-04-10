@@ -3,7 +3,7 @@ id: user-object
 title: The User Object
 ---
 
-The User Object is an optional parameter when getting a feature flag or setting value from ConfigCat. 
+The *User Object* is an optional parameter when getting a feature flag or setting value from ConfigCat. 
 It allows you to pass potential [Targeting rule](advanced/targeting.md) variables to the ConfigCat SDK.
 And represents a user in your application. 
 
@@ -13,21 +13,21 @@ Also, it contains user-specific information as a basis to evaluate what Feature 
 
 ## The relationship between User Object and Targeting rules
 
-**As a product manager**, you can set [Targeting rules](advanced/targeting.md) in the <a href="https://configcat.com/App" target="_blank">ConfigCat Admin Console</a> based on the parameters given to ConfigCat by your application.
+**As a product manager**, you can set [Targeting rules](advanced/targeting.md) in the <a href="https://app.configcat.com" target="_blank">ConfigCat Admin Console</a> based on the parameters given to ConfigCat by your application.
 
-**As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your teammates) can use in the <a href="https://configcat.com/App" target="_blank">ConfigCat Admin Console</a> to apply [Targeting rules](advanced/targeting.md) on.
+**As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your teammates) can use in the <a href="https://app.configcat.com" target="_blank">ConfigCat Admin Console</a> to apply [Targeting rules](advanced/targeting.md) on.
 
 ### Example
 Let's say in the <a href="https://configcat.com/App" target="_blank">Admin Console</a> you'd like to have the following targeting rule:
 
-`myAwesomeFeature` is `ON` if `User's Email contains @example.com`, otherwise it is `OFF`.
+`myAwesomeFeature` is `ON` if `User's Email` `CONTAINS` `@example.com`, otherwise it is `OFF`.
 
-The ConfigCat SDK will return `true` for a User Object with an email address of `jane@example.com`, and it will return `false` for a User Object with an email address of `john@gmail.com`
+The ConfigCat SDK will return `true` for a *User Object* with an email address of `jane@example.com`, and it will return `false` for a *User Object* with an email address of `jane@gmail.com`
 
-To achieve this, your application needs to pass the email address of your user to the ConfigCat SDK via User Object.
+To achieve this, your application needs to pass the email address of your user to the ConfigCat SDK via *User Object*.
 
 ## Security concerns
-Keeping your user data safe was one of our main goals when designing ConfigCat. The main concept here is that the ConfigCat SDK which connects your application to our servers always pulls your configs and never pushes back any data.
+Keeping your user data safe was one of our main goals when designing ConfigCat. The main concept here is that the ConfigCat SDK which connects your application to our servers never pushes any data to the ConfigCat servers. It pulls only configs and targeting rules.
 
 >Feature Flag and Setting **evaluation is on the Client** side within the ConfigCat SDK. This means that your **user data will never leave your system**. 
 
@@ -48,7 +48,7 @@ Custom|**OPTIONAL** This parameter will let you create targeting based on any us
 Despite it's name, a User Object can contain non-user related information as well, that could be important for targeting like your application's version number or the device type/OS your application is running on.
 
 ### Identifier property
-Unique identifier of a user in your application. Required because we need to differentiate your users  from each other and to be able to evaluate the setting value for percentage based targeting.
+Unique identifier of a user in your application. Required. Enables ConfigCat to differentiate your users from each other and to evaluate the setting values for percentage based targeting.
 
 Our recommendation as an identifier:
 - User ID - If you have one in your application you can use the same User ID with ConfigCat.
