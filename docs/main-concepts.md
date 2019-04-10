@@ -20,12 +20,12 @@ Text|String|any string, max. 1000 characters
 Whole Number|Integer|any whole number within the range of `int`
 Decimal Number|Double|any decimal number within the range of `double`
 
-## Projects
-A *Project* is a collection of *Settings* and *Environments*. One *Project* usually represents a website, an application or any kind of software.
+## Config
+A *Config* is a collection of *Settings*. *Configs* help you organize settings around topics, or around your software components. A *Config* is like an online version of a traditional config file.
 
 ## Environments
-An environment in ConfigCat represents an environment in your development lifecycle (like production, staging, development etc.). Different environments have the same settings but can have different values. By default every project comes with a predefined *Production* environment but you can rename it or create more.
+An environment in ConfigCat represents an environment in your development lifecycle (like production, staging, development etc.). Different environments have the same settings but can have different values.
 > Each environment has its own API key which must be used to initialize the ConfigCat SDK within your application.
 
-## Teams
-A collection of *Projects*. It might be a good idea to invite others to your *Team* to collaborate.
+## Product
+A collection of *Configs*, *Environments* and *Team members*. A *Product* typically represents your application (or your service) and the people working on it. It might be a good idea to invite others to your *Product* to collaborate.
