@@ -6,23 +6,24 @@ Using this feature you will be able set different setting values for different u
 
 ## Targeting specific users
 ### Enable feature
-1. <a href="https://configcat.com/Account/Login" target="_blank">Log in</a> to access the *Management Console*
-2. Go to **Settings** within your *Projects*/*Environments*
-3. Select **Target specific users** after clicking the actions icon.
+1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to access the *Management Console*
+2. Go to **Feature Flags & Settings**
+3. Select **TARGET SPECIFIC USERS** after clicking the actions icon.
 
 ![targeting-1](assets/targeting-1.png)
 
 ## Anatomy of a Targeting Rule
 By adding a rule you can specify a group of your users whom a feature will be enabled or a different value will be served. A rule consists of an **Attribute** of a user in your application, a **Comparison value** (e.g., a list of email addresses) and a **Comparator**. ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
 ### Attribute
-A property of your user. e.g., user ID, email address, geographic location. This will be passed to ConfigCat by your application to compare.
-There are 3 preset attributes plus you can add multiple custom ones:
+A property of your user (e.g. *email address*, *geographic location*). Your application should pass the attribute values (e.g. *jane@example.com*, *Europe*) to ConfigCat for comparison.
+
+There are 3 preset attributes. Additionally you can define your ***custom attributes*** as well:
 Attribute Name|Description
 ---|---
-Email|The e-mail address of your user.
-Identifier|Usually a unique user identifier in your application.
-Country|Might come useful for testing a new feature only in one country.
-Custom|If you require a custom attribute, just type it's name to the textbox.
+`Email`|The e-mail address of your user.
+`Identifier`|Usually a unique user identifier in your application.
+`Country`|Might come useful for testing a new feature only in one country.
+`Custom`|***Define any attribute (e.g. `OS version`), by typing its name to the textbox.***
 
 ### Comparison value
 Any string, number or comma separated list to be compared with the selected *Attribute* using the *Comparator*.
@@ -53,23 +54,23 @@ By adding multiple targeting rules you can create more complex rule sets.
 >Change the order of targeting rules by drag n' drop.
 
 #### Example
-*Enable a feature only to users within your company except the sales team by adding two targeting rules:*
+*Enable a feature only to users within your company except the sales team (Susan and Simon) by adding two targeting rules:*
 #|Attribute|Comparator|Comparison value|Served value
 ---|---|---|---|---|
-1|Email|CONTAINS|`@mycompany.com`|ON
-2|Email|CONTAINS|`susan@mycompany.com, simon@mycompany.com`|OFF
+1|Email|CONTAINS|`susan@mycompany.com, simon@mycompany.com`|OFF
+2|Email|CONTAINS|`@mycompany.com`|ON
 All other cases: OFF
 
 ### All other cases
-This value will be served as a fallback if none of the above rules apply or a `User Object` was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
+This value will be served as a fallback if none of the above rules apply or a [`User Object`](user-object) was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
 
 ## Targeting a percentage of users
 With percentage-based user targeting you can specify a randomly selected fraction of your users whom a feature will be enabled or a different value will be served.
 
 ### Enable feature
-1. <a href="https://configcat.com/Account/Login" target="_blank">Log in</a> to access the *Management Console*
-2. Go to **Settings** within your *Projects*/*Environments*
-3. Select **Target % of users** after clicking the actions icon.
+1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to access the *Management Console*
+2. Go to **Feature Flags & Settings**
+3. Select **TARGET % OF USERS** after clicking the actions icon.
 
 ![targeting-1](assets/targeting-1.png)
 
@@ -90,9 +91,9 @@ Decimal Number|Double|any decimal number within the range of `double`
 ### On/Off Toggle
 When the Setting Kind is On/Off Toggle the number of options must be 2. One for the *On* and one for the *Off* state.
 ### Text and Number
-When the Setting Kind is *Text*, *Whole Number* or *Decimal Number* the maximum number options is 8 and the minimum is 2. You can add/remove optons by clicking the *Actions* icon.
+When the Setting Kind is *Text*, *Whole Number* or *Decimal Number* the maximum number options depends on your subscription plan. You can add/remove options by clicking the *Actions* icon.
 
-> The summary of all *% values* must be equal to 100.
+> The sum of all *% values* must be equal to 100.
 
 ### All other cases
-This value will be served as a fallback if none of the above rules apply or a `User Object` was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
+This value will be served as a fallback if none of the above rules apply or a [`User Object`](user-object) was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
