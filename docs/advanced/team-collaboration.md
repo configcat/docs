@@ -2,11 +2,11 @@
 id: team-collaboration
 title: Team Collaboration
 ---
-#### You can organize your Projects into Teams and invite others to collaborate.
+#### You can invite others to collaborate
 
-Team members are your friends, colleagues, and clients who work on related sets of Projects (e.g. they are responsible for the same apps, backends, and websites).
+Team members are your friends, colleagues, and clients who work on your Product (e.g. they are responsible for the success of the same application).
 
-You can invite anyone to join your Team regardless of whether they have a ConfigCat account or not.
+You can invite anyone to join your Product's team regardless of whether they have a ConfigCat account or not.
 
 ## Permissions
 ConfigCat has several different roles for Team members:
