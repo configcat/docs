@@ -6,9 +6,11 @@ ConfigCat can notify your system about setting changes. Just register your Url i
 
 ### Add your webhook
 1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab.
-2. Set up the Url, and the HttpMethod and save it.
+1. Set up the Url, and the HttpMethod and save it.
 
 ### Test your webhook
-1. You can expose your locally running webhook to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your dev env.
-2. Change some of your settings and click **SAVE & PUBLISH SETTINGS**.
-3. Check if your webhook is called correctly.
+1. Change some of your settings and click **SAVE & PUBLISH SETTINGS**.
+1. Check if your webhook is called correctly.
+
+> **Developer Tip:** Running your webhook on `localhost`? Expose it to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your dev env.
+
