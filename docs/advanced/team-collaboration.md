@@ -2,30 +2,35 @@
 id: team-collaboration
 title: Team Collaboration
 ---
-#### You can invite others to collaborate
 
-Team members are your friends, colleagues, and clients who work on your Product (e.g. they are responsible for the success of the same application).
+*Team members* are your friends, colleagues, and clients who work on the same *Product*. You can invite as many of them to your *Product* as many you want.
 
-You can invite anyone to join your Product's team regardless of whether they have a ConfigCat account or not.
-
-## Permissions
-ConfigCat has several different roles for Team members:
-
-* **Team Owner** has full control over the team. 
-* **Team Administrator** has almost full control over the team (except billing, deleting team). Invite team administrators to your team if you want to delegate all the team related work to the person you are inviting.
-* **Project Manager** has full control over the projects.
-* **Project User** can only change the setting values of projects.
-* **Custom**: Select Custom if you want to further customize permissions per project.
-
-## Invitation of new users
-Here is how to invite new users to your team:
-1. Navigate to your Team's page and click on Add Team members.
-1. Enter the invitees' email addresses (comma separated).
-1. Setup the invitees' initial permissions and click on Invite Team members.
+## Invite others to collaborate
+1. Navigate to the <a href="https://testapp.configcat.com/product" target="_blank">Manage product page</a>.
+1. Click **INVITE TEAM MEMBERS** and enter the invitees' email addresses (comma separated).
+1. Setup the invitees' initial *Permission group* and click on **SEND INVITATION EMAIL**.
 1. A ConfigCat invitation will be sent to the invitees' email addresses.
-You can modify these permissions anytime. (see: Managing Team members)
+
+You can modify their permissions anytime.
 
 ## Managing team members
-1. Navigate to your Team's management page.
-1. Click on edit permissions for a team member.
-1. Modify the permissions and click Save permissions
+1. Navigate to the <a href="https://testapp.configcat.com/product" target="_blank">Manage product page</a>.
+1. Click on  🗑️ ️to delete a *Team member*.
+1. Click on a *Team member*'s *Permission group* to change it.
+
+## Permissions & groups
+ConfigCat has the following permissions:
+* *Manage Members* - allows you to invite and remove team members, manage permissions, and see the product-level audit log
+* *Manage Resources* - allows you to create, update and delete feature flags, settings, configs, and environments
+* *Full access* to all/some environment - allows you to change setting values and switch feature flags
+* *Read-only acces* to all/some environment - allows you to see feature flags and settings, but prevents you from changing their value
+* *No access* to a specific environment - prevents you from seeing and changing setting values
+
+*Permission groups* are collections of permissions. They help you organize the permissions into groups that are meaningful to you.
+
+> For example you could define the following *Permission groups*:
+> * Administrator - *Manage Members*, *Manage Resources*, *Full access* to all environments
+> * Product Manager -  *Full access* to all environments
+> * Developer - *Manage Resources*, *Read only access* to LIVE environment, *Full access* to all other environments
+
+You control what your *Team members* are allowed to do by assigning them to these *Permission groups*. 
