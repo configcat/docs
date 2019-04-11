@@ -20,7 +20,7 @@ When creating working feature flag, first you will **add a switch** in the *Conf
 ![getting-started](assets/getting-started-1.png)
 
 ## Connect your app
-Find code examples on the *Connect your applications* tab on how to connect your application. Then you can access the value of your switch within your code.
+Find code examples on the <a href="https://app.configcat.com/connect" target="_blank">*Connect your applications*</a> tab on how to connect your application. Then you can access the value of your switch within your code.
 
 This is an example code snippet to show the idea behind our SDKs:
 ```
@@ -30,7 +30,7 @@ npm i configcat-client
 var configcat = require("configcat-client");
 var client = configcat.createClient("YOUR API KEY HERE");
 
-client.getValue("ismyfeatureenabled", false, (value) => {
+client.getValue("isMyFeatureEnabled", false, (value) => {
     if (value === true) {
         do_the_new_thing();
     } else {
