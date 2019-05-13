@@ -2,7 +2,7 @@
 id: notifications-webhooks
 title: Notifications (Webhooks)
 ---
-ConfigCat can notify your system about setting changes. Just register your Url in in the *Management Console* and ConfigCat will call that Url when setting changes occur.
+ConfigCat can notify your system about setting changes. Just register your Url in the *Management Console* and ConfigCat will call that Url when setting changes occur.
 
 ### Add your webhook
 1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab.
