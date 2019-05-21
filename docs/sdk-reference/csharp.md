@@ -175,7 +175,7 @@ IConfigCatClient client = ConfigCatClientBuilder
     .Initialize("#YOUR-API-KEY#")
     .WithLazyLoad()
     .WithCacheTimeToLiveSeconds(120)
-    .Build();
+    .Create();
 ```
 
 ## Sample Applications
