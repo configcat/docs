@@ -46,7 +46,7 @@ Available configuration options:
 Example:
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
-    'cache' => new LaravelCache(Cache::store()),
+    'cache' => new \ConfigCat\Cache\LaravelCache(Cache::store()),
     'cache-refresh-interval' => 5
  ]);
 ```
