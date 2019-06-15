@@ -87,7 +87,8 @@ const siteConfig = {
             src: 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.1/clipboard.min.js',
             async: true
         },
-        '/js/code-blocks-buttons.js'
+        '/js/code-blocks-buttons.js',
+        '/js/tawk.to.js'
     ],
 
     stylesheets: [
