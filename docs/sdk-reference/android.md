@@ -3,13 +3,13 @@ id: android
 title: Android (Kotlin)
 ---
 
-> The minimum supported sdk version is 26 (Oreo). Java 1.8 or later is required.
+> The minimum supported sdk version is 23 (Marshmallow). Java 1.8 or later is required.
 
 ```
 android {
     defaultConfig {
         //...
-        minSdkVersion 26
+        minSdkVersion 23
     }
 
     compileOptions {
@@ -22,7 +22,7 @@ android {
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
 ```
-compile 'com.configcat:configcat-client:2.+'
+implementation 'com.configcat:configcat-android-client:1.+'
 ```
 ### 2. Import the ConfigCat SDK:
 ```java
