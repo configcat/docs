@@ -18,7 +18,7 @@ Also, it contains user-specific information as a basis to evaluate what Feature 
 **As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your teammates) can use in the <a href="https://app.configcat.com" target="_blank">ConfigCat Admin Console</a> to apply [Targeting rules](advanced/targeting.md) on.
 
 ### Example
-Let's say in the <a href="https://configcat.com/App" target="_blank">Admin Console</a> you'd like to have the following targeting rule:
+Let's say in the <a href="https://app.configcat.com" target="_blank">Admin Console</a> you'd like to have the following targeting rule:
 
 `myAwesomeFeature` is `ON` if `User's Email` `CONTAINS` `@example.com`, otherwise it is `OFF`.
 
