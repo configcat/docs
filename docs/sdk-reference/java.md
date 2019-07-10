@@ -9,13 +9,13 @@ Maven:
 ```
 <dependency>
     <groupId>com.configcat</groupId>
-    <artifactId>configcat-client</artifactId>
-    <version>[2.0.0,)</version>
+    <artifactId>configcat-java-client</artifactId>
+    <version>[1.0.0,)</version>
 </dependency>
 ```
 Gradle:
 ```
-compile 'com.configcat:configcat-client:2.+'
+implementation 'com.configcat:configcat-java-client:1.+'
 ```
 ### 2. Import the ConfigCat SDK:
 ```java
@@ -248,5 +248,5 @@ Check out our Sample Applications how they use the ConfigCat SDK
 Look under the hood
 * <a href="https://github.com/ConfigCat/java-sdk" target="_blank">ConfigCat Java SDK's repository on Github</a>
 * <a href="http://javadoc.io/doc/com.configcat/configcat-client" target="_blank">ConfigCat Java SDK's javadoc page</a>
-* <a href="https://mvnrepository.com/artifact/com.configcat/configcat-client" target="_blank">ConfigCat Java SDK on MVN Repository</a>
-* <a href="https://bintray.com/configcat/releases/configcat-client" target="_blank">ConfigCat Java SDK on jcenter</a>
+* <a href="https://mvnrepository.com/artifact/com.configcat/configcat-java-client" target="_blank">ConfigCat Java SDK on MVN Repository</a>
+* <a href="https://bintray.com/configcat/releases/configcat-java-client" target="_blank">ConfigCat Java SDK on jcenter</a>
