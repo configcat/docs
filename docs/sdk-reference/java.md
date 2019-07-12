@@ -27,7 +27,7 @@ ConfigCatClient client = new ConfigCatClient("<PLACE-YOUR-API-KEY-HERE>");
 ```
 ### 4. Get your setting value
 ```java
-boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "<key-of-my-awesome-feature>", user, false);
+boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "<key-of-my-awesome-feature>", false);
 if(isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
@@ -36,7 +36,7 @@ if(isMyAwesomeFeatureEnabled) {
 ```
 Or use the async APIs:
 ```java
-client.getValueAsync(Boolean.class, "<key-of-my-awesome-feature>", user, false)
+client.getValueAsync(Boolean.class, "<key-of-my-awesome-feature>", false)
     .thenAccept(isMyAwesomeFeatureEnabled -> {
         if(isMyAwesomeFeatureEnabled) {
             doTheNewThing();
@@ -74,14 +74,14 @@ client.close()
 | --------------- | --------------------------------------------------------------------------------------------------------------- |
 | `classOfT`      | **REQUIRED.** The type of the setting.                                                                          |
 | `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
-| `defaultValue`  | **REQUIRED.** This value will be returned in case of an error.                                                  |
-| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
+| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting)
+| `defaultValue`  | **REQUIRED.** This value will be returned in case of an error. |
 ```java
 Boolean value = client.getValue(
     Boolean.class, // Setting type
     "keyOfMySetting", // Setting Key
-    false, // Default value
-    User.newBuilder().build('435170f4-8a8b-4b67-a723-505ac7cdea92') // Optional User Object
+    User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
+    false // Default value
 );
 ```
 
@@ -122,7 +122,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
     .refreshPolicy((configFetcher, cache) -> 
         AutoPollingPolicy.newBuilder()
             .autoPollIntervalInSeconds(120) // set the polling interval
-            .build(configFetcher, cache)
+            .build(configFetcher, cache))
     .build("<PLACE-YOUR-API-KEY-HERE>");
 ```
 Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
@@ -134,7 +134,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
                 // here you can parse the new configuration like this: 
                 // parser.parseValue(Boolean.class, newConfiguration, <key-of-my-awesome-feature>)
             })
-            .build(configFetcher, cache)
+            .build(configFetcher, cache))
     .build("<PLACE-YOUR-API-KEY-HERE>");
 ```
 
@@ -147,7 +147,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
     .refreshPolicy((configFetcher, cache) -> 
         LazyLoadingPolicy.newBuilder()
             .cacheRefreshIntervalInSeconds(120) // the cache will expire in 120 seconds
-            .build(configFetcher, cache)
+            .build(configFetcher, cache))
     .build("<PLACE-YOUR-API-KEY-HERE>");
 ```
 Use the `asyncRefresh` option parameter of the `LazyLoadingPolicy` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
@@ -156,7 +156,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
     .refreshPolicy((configFetcher, cache) -> 
         LazyLoadingPolicy.newBuilder()
             .asyncRefresh(true) // the refresh will be executed asynchronously
-            .build(configFetcher, cache)
+            .build(configFetcher, cache))
     .build("<PLACE-YOUR-API-KEY-HERE>");
 ```
 If you set the `.asyncRefresh()` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
@@ -165,7 +165,8 @@ If you set the `.asyncRefresh()` to `false`, the refresh operation will be await
 With this policy every new configuration request on the ConfigCatClient will trigger a new fetch over HTTP.
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
-    .refreshPolicy((configFetcher, cache) -> new ManualPollingPolicy(configFetcher,cache));
+    .refreshPolicy((configFetcher, cache) -> new ManualPollingPolicy(configFetcher,cache))
+    .build("<PLACE-YOUR-API-KEY-HERE>");
 ```
 ### Custom policy
 You can also implement your custom refresh policy by extending the `RefreshPolicy` abstract class.
