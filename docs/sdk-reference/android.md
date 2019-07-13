@@ -25,16 +25,16 @@ android {
 implementation 'com.configcat:configcat-android-client:1.+'
 ```
 ### 2. Import the ConfigCat SDK:
-```java
-import com.configcat.*;
+```kotlin
+import com.configcat.*
 ```
 ### 3. Create the *ConfigCat* client with your *API Key*
-```java
+```kotlin
 val client = ConfigCatClient("<PLACE-YOUR-API-KEY-HERE>")
 ```
 ### 4. Get your setting value
-```java
-val isMyAwesomeFeatureEnabled = client.getValue(Boolean.class.java, "<key-of-my-awesome-feature>", user, false);
+```kotlin
+val isMyAwesomeFeatureEnabled = client.getValue(Boolean::class.javaObjectType, "<key-of-my-awesome-feature>", false)
 if(isMyAwesomeFeatureEnabled) {
     doTheNewThing()
 } else {
@@ -42,15 +42,15 @@ if(isMyAwesomeFeatureEnabled) {
 }
 ```
 Or use the async APIs:
-```java
-client.getValueAsync(Boolean.class.java, "<key-of-my-awesome-feature>", user, false)
-    .thenAccept(isMyAwesomeFeatureEnabled -> {
+```kotlin
+client.getValueAsync(Boolean::class.javaObjectType, "<key-of-my-awesome-feature>", false)
+    .thenAccept({ isMyAwesomeFeatureEnabled ->
         if(isMyAwesomeFeatureEnabled) {
             doTheNewThing()
         } else {
             doTheOldThing()
         }
-    });
+    })
 ```
 
 ### 5. Stop *ConfigCat* client
@@ -81,14 +81,14 @@ client.close()
 | --------------- | --------------------------------------------------------------------------------------------------------------- |
 | `classOfT`      | **REQUIRED.** The type of the setting.                                                                          |
 | `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
-| `defaultValue`  | **REQUIRED.** This value will be returned in case of an error.                                                  |
-| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
-```java
+| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting)
+| `defaultValue`  | **REQUIRED.** This value will be returned in case of an error. |
+```kotlin
 val value = client.getValue(
-    Boolean.class.java, // Setting type
+    Boolean::class.javaObjectType, // Setting type
     "keyOfMySetting", // Setting Key
-    false, // Default value
-    User.newBuilder().build('435170f4-8a8b-4b67-a723-505ac7cdea92') // Optional User Object
+    User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
+    false // Default value
 )
 ```
 
@@ -169,6 +169,7 @@ With this policy every new configuration request on the ConfigCatClient will tri
 ```java
 val client = ConfigCatClient.newBuilder()
     .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache -> ManualPollingPolicy(fetcher,cache)})
+    .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
 
 ### Custom Policy
@@ -253,6 +254,6 @@ Any time you want to refresh the cached configuration with the latest one, you c
 There is more:
 
 - <a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android SDK's repository on Github</a>
-- <a href="http://javadoc.io/doc/com.configcat/configcat-client" target="_blank">ConfigCat Android SDK's javadoc page</a>
+- <a href="http://javadoc.io/doc/com.configcat/configcat-android-client" target="_blank">ConfigCat Android SDK's javadoc page</a>
 - <a href="https://mvnrepository.com/artifact/com.configcat/configcat-android-client" target="_blank">ConfigCat Android SDK on MVNRepository</a>
 - <a href="https://bintray.com/configcat/releases/configcat-android-client" target="_blank">ConfigCat Android SDK on jcenter</a>
