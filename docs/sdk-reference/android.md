@@ -25,16 +25,16 @@ android {
 implementation 'com.configcat:configcat-android-client:1.+'
 ```
 ### 2. Import the ConfigCat SDK:
-```java
-import com.configcat.*;
+```kotlin
+import com.configcat.*
 ```
 ### 3. Create the *ConfigCat* client with your *API Key*
-```java
+```kotlin
 val client = ConfigCatClient("<PLACE-YOUR-API-KEY-HERE>")
 ```
 ### 4. Get your setting value
-```java
-val isMyAwesomeFeatureEnabled = client.getValue(Boolean::class.javaObjectType, "<key-of-my-awesome-feature>", false);
+```kotlin
+val isMyAwesomeFeatureEnabled = client.getValue(Boolean::class.javaObjectType, "<key-of-my-awesome-feature>", false)
 if(isMyAwesomeFeatureEnabled) {
     doTheNewThing()
 } else {
@@ -42,7 +42,7 @@ if(isMyAwesomeFeatureEnabled) {
 }
 ```
 Or use the async APIs:
-```java
+```kotlin
 client.getValueAsync(Boolean::class.javaObjectType, "<key-of-my-awesome-feature>", false)
     .thenAccept({ isMyAwesomeFeatureEnabled ->
         if(isMyAwesomeFeatureEnabled) {
