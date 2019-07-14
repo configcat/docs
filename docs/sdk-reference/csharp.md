@@ -44,9 +44,10 @@ client.Dispose();
 - serving values quickly in a failsafe way.
 
 `new ConfigCatClient()` creates a client with default options.
+
 | Properties      | Description                                                                                                        | Default                               |
 | --------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------- |
-| `ApiKey`        | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |
+| `ApiKey`        | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |                                       |
 | `LoggerFactory` | Factory to create an ILogger instance for tracing.                                                                 | NullTrace (no default tracing method) |
 
 `AutoPollConfiguration`, `LazyLoadConfiguration`, `ManualPollConfiguration`  
@@ -57,14 +58,15 @@ Creating the client is different for each polling mode.
 
 
 ## Anatomy of `GetValue()`, `GetValueAsync()`
-| Parameters     | Description                                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
-| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+
+| Parameters     | Description                                                                                                     |
+| -------------- | --------------------------------------------------------------------------------------------------------------- |
+| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                                  |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
 ```csharp
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
-configCatClient.GetValue("keyOfMySetting", false, userObject);
+client.GetValue("keyOfMySetting", false, userObject);
 ```
 
 ### User Object 
@@ -98,7 +100,7 @@ The *ConfigCat SDK* downloads and stores the latest values automatically every 6
 
 Use the `PollIntervalSeconds` option parameter to change the polling interval.
 ```csharp
-var clientConfiguration = new ConfigCat.Client.Configuration.AutoPollConfiguration
+var clientConfiguration = new ConfigCat.Client.AutoPollConfiguration
 {
     ApiKey = "#YOUR-API-KEY#",
     PollIntervalSeconds = 95
@@ -108,7 +110,7 @@ IConfigCatClient client = new ConfigCatClient(clientConfiguration);
 
 Subscribing to the `OnConfigurationChanged` event will get you notified about changes.
 ```csharp
-var clientConfiguration = new ConfigCat.Client.Configuration.AutoPollConfiguration
+var clientConfiguration = new ConfigCat.Client.AutoPollConfiguration
     {
         ApiKey = "#YOUR-API-KEY#"
     };
@@ -120,6 +122,7 @@ IConfigCatClient client = new ConfigCatClient(clientConfiguration);
 ```
 
 Available options:
+
 | Option Parameter          | Description                                                                                          | Default |
 | ------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
 | `PollIntervalSeconds`     | Polling interval.                                                                                    | 60      |
@@ -130,7 +133,7 @@ When calling `GetValue()` or `GetValueAsync()` the *ConfigCat SDK* downloads the
 
 Use `CacheTimeToLiveSeconds` parameter to manage configuration lifetime.
 ```csharp
-var clientConfiguration = new ConfigCat.Client.Configuration.LazyLoadConfiguration
+var clientConfiguration = new ConfigCat.Client.LazyLoadConfiguration
 {
     ApiKey = "#YOUR-API-KEY#",
     CacheTimeToLiveSeconds = 600
@@ -139,6 +142,7 @@ IConfigCatClient client = new ConfigCatClient(clientConfiguration);
 ```
 
 Available options:
+
 | Option Parameter         | Description | Default |
 | ------------------------ | ----------- | ------- |
 | `CacheTimeToLiveSeconds` | Cache TTL.  | 60      |
@@ -166,6 +170,90 @@ IConfigCatClient client = new ConfigCatClient(clientConfiguration);
 Console.WriteLine(client.GetValue("key", "my default value")); // console: "my default value"
 client.ForceRefresh();
 Console.WriteLine(client.GetValue("key", "my default value")); // console: "value from server"
+```
+
+### Logging
+You can set `LoggerFactory` property on any configuration object. This value is a factory object to create a `ILogger` instance.
+
+The following example shows how to configure the ConsoleLoggerFactory to log messages to the `System.Console`. 
+```csharp
+ var clientConfiguration = new LazyLoadConfiguration
+{
+    ApiKey = "#YOUR-API-KEY#",               
+    LoggerFactory = new ConsoleLoggerFactory()
+};
+
+IConfigCatClient client = new ConfigCatClient(clientConfiguration);
+```
+
+You can create your logger implementation easily. Implement `ConfigCat.Client.ILogger` and `ConfigCat.Client.ILoggerFactory` interface and setup in the configuration.
+
+This example shows how to create a basic file logger implementation for ConfigCat client
+```csharp
+using System;
+using System.IO;
+using ConfigCat.Client;
+
+namespace SampleApplication
+{
+    class Program
+    {
+        class MyFileLogger : LoggerBase
+        {
+            private readonly string filePath;
+            private static object lck = new object();
+
+            public MyFileLogger(string filePath, string loggerName, LogLevel logLevel) : base(loggerName, logLevel)
+            {
+                this.filePath = filePath;
+            }
+
+            protected override void LogMessage(string message)
+            {
+                lock (lck) // ensure thread safe
+                {
+                    System.IO.File.AppendAllText(this.filePath, message + Environment.NewLine); 
+                }
+            }
+        }
+
+        class MyFileLoggerFactory : ILoggerFactory
+        {
+            private readonly string filePath;
+            private readonly LogLevel logLevel;
+
+            public MyFileLoggerFactory(string filePath, LogLevel logLevel)
+            {
+                this.filePath = filePath;
+                this.logLevel = logLevel;
+            }
+
+            public ILogger GetLogger(string loggerName)
+            {
+                return new MyFileLogger(this.filePath, loggerName, this.logLevel);
+            }
+        }
+
+        static void Main(string[] args)
+        {            
+            string filePath = Path.Combine(Environment.CurrentDirectory, "configcat.log");
+            LogLevel logLevel = LogLevel.Warn; // I would like to log only WARNING and higher entires.
+
+            var clientConfiguration = new ConfigCat.Client.AutoPollConfiguration
+            {
+                ApiKey = "#YOUR-API-KEY#",
+                LoggerFactory = new MyFileLoggerFactory(filePath, logLevel),
+                PollIntervalSeconds = 5
+            };
+
+            IConfigCatClient client = new ConfigCatClient(clientConfiguration);
+
+            var feature = client.GetValue("keyNotExists", "N/A");
+
+            Console.ReadKey();
+        }
+    }
+}
 ```
 
 ### Configuration with clientbuilder
