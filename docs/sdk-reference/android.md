@@ -249,7 +249,7 @@ Any time you want to refresh the cached configuration with the latest one, you c
 
 ## Sample App
 
-<a href="https://github.com/configcat/java-sdk/tree/master/samples/android" target="_blank">Android App with auto polling and change listener</a>
+<a href="https://github.com/configcat/android-sdk/tree/master/samples/android" target="_blank">Android App with auto polling and change listener</a>
 
 There is more:
 
