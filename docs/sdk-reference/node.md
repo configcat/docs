@@ -35,6 +35,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 - serving values quickly in a failsafe way.
 
 `createClient()` returns a client with default options.
+
 | Properties | Description                                                                                                        |
 | ---------- | ------------------------------------------------------------------------------------------------------------------ |
 | `apiKey`   | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |
@@ -46,6 +47,7 @@ Creating the client is different for each polling mode.
 > We strongly recommend using the *ConfigCat Client* as a Singleton object in your application.
 
 ## Anatomy of `getValue()`
+
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
@@ -71,12 +73,14 @@ let userObject = {
     identifier : "john@example.com"
 };   
 ```
+
 | Parameters   | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |
 | `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
 | `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
 | `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+
 ``` javascript
 let userObject = {
     identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92",
@@ -97,15 +101,16 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
 ```js
-configcat.createClientWithAutoPoll("#YOUR-API-KEY#", { pollIntervalSeconds: 95 });
+let configCatClient = configcat.createClientWithAutoPoll("#YOUR-API-KEY#", { pollIntervalSeconds: 95 });
 ```
 Adding a callback to `configChanged` option parameter will get you notified about changes.
 ```js
-configcat.createClientWithAutoPoll("#YOUR-API-KEY#", { configChanged: () => {
+let configCatClient = configcat.createClientWithAutoPoll("#YOUR-API-KEY#", { configChanged: () => {
     console.log("Your config has been changed!");
 }});
 ```
 Available options:
+
 | Option Parameter      | Description                                            | Default        |
 | --------------------- | ------------------------------------------------------ | -------------- |
 | `pollIntervalSeconds` | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER` | 60             |
@@ -117,9 +122,10 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 ```js
-configcat.createClientWithLazyLoad("#YOUR-API-KEY#", { cacheTimeToLiveSeconds: 600 });
+let configCatClient = configcat.createClientWithLazyLoad("#YOUR-API-KEY#", { cacheTimeToLiveSeconds: 600 });
 ```
 Available options:
+
 | Option Parameter         | Description                                     | Default        |
 | ------------------------ | ----------------------------------------------- | -------------- |
 | `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER` | 60             |
@@ -129,24 +135,41 @@ Available options:
 Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 
 ```js
-configcat.createClientWithManualPoll("#YOUR-API-KEY#");
-configcat.forceRefresh();
+let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
+
+configCatClient.forceRefresh(() =>{
+
+    configCatClient.getValue("key", "my default value", (value)=>{
+        
+        console.log(value);
+    });
+});
 ```
 Available options:
+
 | Option Parameter | Description                           | Default        |
 | ---------------- | ------------------------------------- | -------------- |
 | `logger`         | Custom logger. See below for details. | Console logger |
+
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
+
 ```js
-let client = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
-client.getValue("key", "my default value", (value)=>{
+let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
+
+configCatClient.getValue("key", "my default value", (value)=>{
+
     console.log(value) // console: "my default value"
 });
-configcat.forceRefresh();
-client.getValue("key", "my default value", (value)=>{
-    console.log(value) // console: "value from server"
+
+configCatClient.forceRefresh(() =>{
+
+    configCatClient.getValue("key", "my default value", (value)=>{
+
+        console.log(value); // console: "value from server"
+    });
 });
 ```
+
 ## Logging
 To customize logging create a logger instance and add it to Options object when creating the ConfigCat client. 2 log levels are supported: `log` and `error`.
 ```js
@@ -159,7 +182,7 @@ let customLogger = {
     }
 };
 
-configcat.createClientWithManualPoll("#YOUR-API-KEY#", { logger: customLogger });
+let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { logger: customLogger });
 ```
 
 ## Sample Application
