@@ -185,6 +185,13 @@ let customLogger = {
 let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { logger: customLogger });
 ```
 
+## CDN base url (forward proxy, dedicated subscription)
+You can customize your CDN path in the SDK with `baseUrl` propery in the `options` paramter.
+
+```js
+let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { baseUrl: "https://myCDN.configcat.com" });
+```
+
 ## Sample Application
 <a href="https://github.com/configcat/node-sdk/blob/master/samples/console" target="_blank">Sample Console App</a>
 
