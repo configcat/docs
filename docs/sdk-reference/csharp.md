@@ -266,7 +266,7 @@ IConfigCatClient client = ConfigCatClientBuilder
     .Create();
 ```
 
-### CDN base url (forward proxy, dedicated subscription)
+## CDN base url (forward proxy, dedicated subscription)
 You can set `BaseUrl` property on any configuration object to customize your CDN path in the SDK.
 
 ```csharp
