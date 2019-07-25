@@ -169,8 +169,8 @@ You can customize your CDN path in the SDK with `baseUrl` property in the `optio
 ```js
 var configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { baseUrl: "https://myCDN.configcat.com" });
 ```
-## Get All Keys
-You can query the keys from your config file in the SDK with the `getAllKeys` method.
+## `getAllKeys()`
+You can query the keys from your config file in the SDK with the `getAllKeys()` method.
 
 ```js
 var configCatClient = configcat.createClient("#YOUR-API-KEY#");
