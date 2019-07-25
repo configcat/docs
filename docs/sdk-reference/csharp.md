@@ -273,7 +273,7 @@ You can set `BaseUrl` property on any configuration object to customize your CDN
 var clientConfiguration = new AutoPollConfiguration
 {
     ApiKey = "#YOUR-API-KEY#",
-    BaseUrl = "https://myCDN.configcat.com"
+    BaseUrl = new Uri("https://myCDN.configcat.com")
 };
 IConfigCatClient client = new ConfigCatClient(clientConfiguration);
 ```
@@ -282,7 +282,7 @@ or
 IConfigCatClient client = ConfigCatClientBuilder
     .Initialize("#YOUR-API-KEY#")
     .WithAutoPoll()
-    .WithBaseUrl("https://myCDN.configcat.com")
+    .WithBaseUrl(new Uri("https://myCDN.configcat.com"))
     .Create();
 ```
 
