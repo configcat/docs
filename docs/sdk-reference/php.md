@@ -90,6 +90,14 @@ $user = new \ConfigCat\User(
     ]);
 ```
 
+## `getAllKeys()`
+You can query the keys from your config file in the SDK with the `getAllKeys()` method.
+
+```php
+$client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#");
+$keys = $client->getAllKeys();
+```
+
 ## Sample Applications
 - [Sample Laravel App](https://github.com/configcat/php-sdk/tree/master/samples/laravel)
 
