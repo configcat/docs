@@ -22,7 +22,34 @@ You can specify a Content at your webhook which will be sent as the payload of t
 We can send a notification to Slack about setting changes. Steps:
 1. Define a <a href="https://api.slack.com/incoming-webhooks" target="_blank">Slack Incoming Webhook</a> and copy the Webhook URL.
 1. Create a webhook in ConfigCat with the Slack Incoming Webhook URL and with Post Http method. 
-Sample content: ```{"text": "<##URL##|##ConfigName## - ##EnvironmentName##> changed in ConfigCat."}```
+
+Sample content: 
+```{
+  "text": "<##URL##|##ConfigName## - ##EnvironmentName##> changed in ConfigCat."
+}```
+
+## Example Microsoft Teams Webhook
+We can send a notification to Microsoft Teams about setting changes. Steps:
+1. Define an Incoming Webhook connector and copy the Webhook URL.
+1. Create a webhook in ConfigCat with the Microsoft Teams Incoming Webhook URL and with Post Http method. 
+
+Sample content: 
+```{
+  "@context": "https://schema.org/extensions",
+  "@type": "MessageCard",
+  "themeColor": "0072C6",
+  "title": "##ConfigName## - ##EnvironmentName## ",
+  "text": "Config changed",
+  "potentialAction": [
+    {
+      "@type": "OpenUri",
+      "name": "Open",
+      "targets": [
+        { "os": "default", "uri": "##URL##" }
+      ]
+    }
+  ]
+}```
 
 > **Developer Tip:** Running your webhook on `localhost`? Expose it to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your dev env.
 
