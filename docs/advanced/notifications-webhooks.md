@@ -18,7 +18,7 @@ You can specify a Content at your webhook which will be sent as the payload of t
 1. Change some of your settings and click **SAVE & PUBLISH SETTINGS**.
 1. Check if your webhook is called correctly.
 
-## Example <a href="https://api.slack.com/incoming-webhooks" target="_blank">Slack Incoming Webhook</a>
+## Example Slack Incoming Webhook
 We can send a notification to Slack about setting changes. Steps:
 1. Define an <a href="https://api.slack.com/incoming-webhooks" target="_blank">Slack Incoming Webhook</a> and copy the Webhook URL.
 1. Create a webhook in ConfigCat with the Slack Incoming Webhook Url and with Post Http method. Sample content:
