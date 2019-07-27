@@ -4,7 +4,7 @@ title: Notifications (Webhooks)
 ---
 ConfigCat can notify your system about setting changes. Just register your Url in the *Management Console* and ConfigCat will call that Url when setting changes occur.
 
-### Add your webhook
+## Add your webhook
 1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab.
 1. Set up the Url, the HttpMethod and the optional Content and save it.
 
@@ -20,7 +20,7 @@ We can send a notification to Slack about setting changes. Steps:
 1. Create a webhook in ConfigCat with the Slack Incoming Webhook Url and with Post Http method. Sample content:
 ```{"text": "<##URL##|##ConfigName## - ##EnvironmentName##> changed in ConfigCat."}```
 
-### Test your webhook
+## Test your webhook
 1. Change some of your settings and click **SAVE & PUBLISH SETTINGS**.
 1. Check if your webhook is called correctly.
 
