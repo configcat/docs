@@ -43,7 +43,7 @@ Sample content:
   "potentialAction": [
     {
       "@type": "OpenUri",
-      "name": "Open",
+      "name": "Open Config in ConfigCat Management Console",
       "targets": [
         { "os": "default", "uri": "##URL##" }
       ]
