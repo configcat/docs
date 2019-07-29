@@ -59,13 +59,22 @@ client.close()
 - serving values quickly in a failsafe way.
 
 `new ConfigCatClient(<apiKey>)` returns a client with default options.
-| Builder options       | Description                                                                                                           |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------|
-| `apiKey()`            | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.    |
-| `httpClient()`        | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).     |
-| `maxWaitTimeForSyncCallsInSeconds()`      | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
-| `cache()`             | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                              |
-| `refreshPolicy()`     | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                    |
+### Builder
+```java
+ConfigCatClient.newBuilder()
+    .maxWaitTimeForSyncCallsInSeconds(5)
+    .
+    .build(<apikey>);
+```
+
+| Builder options       | Description                                                                                                                        |
+| --------------------- | -----------------------------------------------------------------------------------------------------------------------------------|
+| `build(<apikey>)`            | **REQUIRED.** Waits for the API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.                 |
+| `baseUrl(string)`           | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
+| `httpClient(OkHttpClient)`        | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                  |
+| `maxWaitTimeForSyncCallsInSeconds(int)`      | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
+| `cache(ConfigCache)`             | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                           |
+| `refreshPolicy(BiFunction<ConfigFetcher, ConfigCache, RefreshPolicy>)`     | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                                 |
 
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
@@ -83,6 +92,14 @@ Boolean value = client.getValue(
     User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
     false // Default value
 );
+```
+
+## `getAllKeys()`
+You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
+
+```java
+ConfigCatClient client = ConfigCatClient("#YOUR-API-KEY#");
+Collection<String> keys = client.getAllKeys();
 ```
 
 ### User Object 

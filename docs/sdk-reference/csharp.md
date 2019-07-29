@@ -286,6 +286,13 @@ IConfigCatClient client = ConfigCatClientBuilder
     .Create();
 ```
 
+## `GetAllKeys()`
+You can get all the setting keys from your configuration by calling the `GetAllKeys()` method of the `ConfigCatClient`.
+
+```csharp
+IConfigCatClient client = new ConfigCatClient("#YOUR-API-KEY#");
+IEnumerable<string> keys = client.GetAllKeys();
+```
 
 ## Sample Applications
 Check out our Sample Applications how they use the ConfigCat SDK:

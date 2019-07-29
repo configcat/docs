@@ -25,7 +25,7 @@ import ConfigCat
  ```
 ### 3. Create the *ConfigCat* client with your *API Key*
 ```swift
-let client = ConfigCatClient("<PLACE-YOUR-API-KEY-HERE>")
+let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>")
 ```
 ### 4. Get your setting value
 ```swift
@@ -53,14 +53,15 @@ client.getValueAsync(for: "key-of-my-awesome-feature", defaultValue: false, comp
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
-`ConfigCatClient(<apiKey>)` returns a client with default options.
-| Arguments              | Description                                                                                                           |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------|
-| `apiKey`               | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.    |
-| `configCache`          | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).       |
-| `maxWaitTimeForSyncCallsInSeconds` | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
-| `sessionConfiguration` | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                             |
-| `policyFactory`        | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                    | 
+`ConfigCatClient(apiKey: <apiKey>)` returns a client with default options.
+| Arguments              | Type                 | Description                                                                                                           |
+| ---------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------|
+| `apiKey`               | string               | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.    |
+| `baseUrl`              | string               | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.    |
+| `configCache`          | ConfigCache?         | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).       |
+| `maxWaitTimeForSyncCallsInSeconds` | int | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
+| `sessionConfiguration` | URLSessionConfiguration | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                             |
+| `policyFactory`        | ((ConfigCache, ConfigFetcher) -> RefreshPolicy)? | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                    | 
 
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
@@ -76,6 +77,14 @@ let value = client.getValue(
     defaultValue: false, // Default value
     user: User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
 )
+```
+
+## `getAllKeys()`
+You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
+
+```go
+let client = ConfigCatClient(apiKey: "#YOUR-API-KEY#")
+let keys = client.getAllKeys()
 ```
 
 ### User Object 

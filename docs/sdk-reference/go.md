@@ -63,12 +63,13 @@ You can get and customize the default configuration options:
 ```go
 config := configcat.DefaultClientConfig()
 ```
-| Properties                | Description                                                                                                           |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------|
-| `Cache `                  | Sets a custom cache implementation for the client. [See below](#custom-cache).                                        |
-| `MaxWaitTimeForSyncCalls` | Sets a timeout value for the synchronous methods of the library (`GetValue()`, `GetValueForUser()`, `Refresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
-| `HttpTimeout`             | Sets maximum wait time for a HTTP response.                                                                           |
-| `PolicyFactory`           | Sets a custom refresh policy implementation for the client. [See below](#custom-policy).                              | 
+| Properties               | Type                 | Description                                                                                                           |
+| ------------------------ | -------------------- | ----------------------------------------------------------------------------------------------------------------------|
+| `BaseUrl`                | string               | Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.    |
+| `Cache `                 | ConfigCache          | Sets a custom cache implementation for the client. [See below](#custom-cache).                                        |
+| `MaxWaitTimeForSyncCalls`| time.Duration        | Sets a timeout value for the synchronous methods of the library (`GetValue()`, `GetValueForUser()`, `Refresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
+| `HttpTimeout`            | time.Duration        | Sets maximum wait time for a HTTP response.                                                                           |
+| `PolicyFactory`          | func(ConfigProvider, *ConfigStore) RefreshPolicy | Sets a custom refresh policy implementation for the client. [See below](#custom-policy).                              | 
 
 Then you can pass it to the `NewCustomClient()` method:
 ```go
@@ -102,6 +103,14 @@ value := client.GetValueForUser(
     false // Default value
     configcat.NewUser("435170f4-8a8b-4b67-a723-505ac7cdea92") // User Object
 )
+```
+
+## `GetAllKeys()`
+You can get all the setting keys from your configuration by calling the `GetAllKeys()` method of the `ConfigCatClient`.
+
+```go
+client := configcat.NewClient("#YOUR-API-KEY#")
+keys, err := client.GetAllKeys()
 ```
 
 ### User Object
