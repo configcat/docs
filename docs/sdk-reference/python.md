@@ -167,6 +167,14 @@ configcat_client.force_refresh();
 value = configcat_client.get_value('key', 'my default value') # Returns "value from server"
 ```
 
+## `get_all_keys()`
+You can query the keys from your config file in the SDK with the `get_all_keys()` method.
+
+```python
+configcat_client = configcatclient.create_client('#YOUR-API-KEY#')
+keys = configcat_client.get_all_keys()
+```
+
 ## Sample Applications
 - <a href="https://github.com/configcat/python-sdk/tree/master/samples/consolesample" target="_blank">Sample Console App</a>
 - <a href="https://github.com/configcat/python-sdk/tree/master/samples/webappsample" target="_blank">Django Web App</a>
