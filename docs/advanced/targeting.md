@@ -2,7 +2,7 @@
 id: targeting
 title: Targeting
 ---
-Using this feature you will be able set different setting values for different users in your application. Lets say you would like to enable a feature only for the users within your company  or only to a small percentage of your users before releasing it to the entire world.
+Using this feature you will be able to set different setting values for different users in your application. Lets say you would like to enable a feature only for the users within your company  or only to a small percentage of your users before releasing it to the entire world.
 
 ## Targeting specific users
 ### Enable feature
