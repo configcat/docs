@@ -1,41 +1,53 @@
 ---
 id: notifications-webhooks
-title: Notifications (Webhooks)
+title: Notifications - Webhooks
 ---
-ConfigCat can notify your system about setting changes. Just register your Url in the *Management Console* and ConfigCat will call that Url when setting changes occur.
+You can add your own URLs in the *Management Console*. ConfigCat will send a HTTP POST or GET request when your setting changes. This way your application gets notified and can download the latest values.
 
 ## Add your webhook
 1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab.
-1. Set up the Url, the HttpMethod and the optional Content and save it.
+2. Set the Url, the HttpMethod and the optional Request body.
 
-### Content
-You can specify a Content at your webhook which will be sent as the payload of the Http call. ConfigCat will replace the following literals in the content:
-1. **##ConfigName##** with the Config's name
-1. **##EnvironmentName##** with the Environment's name 
-1. **##URL##** with a link to the Config in ConfigCat Management Console.
+### Request body
+You can specify a Request body which will be sent as the payload of the HTTP request. 
 
-## Test your webhook
-1. Change some of your settings and click **SAVE & PUBLISH SETTINGS**.
-1. Check if your webhook is called correctly.
+ConfigCat will replace the following literals in the request body:
 
-## Example Slack Incoming Webhook
-We can send a notification to Slack about setting changes. Steps:
+| Literal                 | The values it gets replaced with                                   |
+| ----------------------- | ------------------------------------------------------------------ |
+| **##ConfigName##**      | The name of the Config your setting belongs to                     |
+| **##EnvironmentName##** | The name of the Environment it has been changed                    |
+| **##URL##**             | A direct link to the Config in the *ConfigCat Management Console.* |
+
+## Testing your Webhook
+1. Change some of your settings in the *ConfigCat Management Console.* 
+2. Click **SAVE & PUBLISH SETTINGS**.
+3. Check if your Webhook was called correctly.
+
+> **Developer Tip:** Running your Webhook on `localhost`? Expose it to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your local development environment.
+
+## Connecting to Slack
+A few steps to set up Slack and get a message when a setting changes:
 1. Define a <a href="https://api.slack.com/incoming-webhooks" target="_blank">Slack Incoming Webhook</a> and copy the Webhook URL.
-1. Create a webhook in ConfigCat with the Slack Incoming Webhook URL and with Post Http method. 
-
-Sample content: 
+2. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the *ConfigCat Management Console.* 
+3. Create a Webhook and add your Slack URL.
+4. Select POST as HTTP method.
+5. Add a request body like so:
 ```
 {
   "text": "<##URL##|##ConfigName## - ##EnvironmentName##> changed in ConfigCat."
 }
 ```
 
-## Example Microsoft Teams Webhook
-We can send a notification to Microsoft Teams about setting changes. Steps:
-1. Define an Incoming Webhook connector and copy the Webhook URL.
-1. Create a webhook in ConfigCat with the Microsoft Teams Incoming Webhook URL and with Post Http method. 
+## Connecting to Microsoft Teams
+A few steps to set up Microsoft Teams and get a message when a setting changes:
+1. Define an Incoming Webhook connector in Microsoft Teams and copy the Webhook URL.
+1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the *ConfigCat Management Console.* 
+1. Create a Webhook and add your Teams URL.
+2. Select POST as HTTP method.
+3. Add a request body like so:
 
-Sample content: 
+Sample request body of the Webhook: 
 ```
 {
   "@context": "https://schema.org/extensions",
@@ -54,6 +66,3 @@ Sample content:
   ]
 }
 ```
-
-> **Developer Tip:** Running your webhook on `localhost`? Expose it to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your dev env.
-
