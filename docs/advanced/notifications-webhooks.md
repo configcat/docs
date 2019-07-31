@@ -4,16 +4,16 @@ title: Notifications - Webhooks
 ---
 You can add your own URLs in the *Management Console*. ConfigCat will send a HTTP POST or GET request when your setting changes. This way your application gets notified and can download the latest values.
 
-## Add your webhook
+## Adding Webhook
 1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab.
 2. Set the Url, the HttpMethod and the optional Request body.
 
-### Request body
+## Request body with variables
 You can specify a Request body which will be sent as the payload of the HTTP request. 
 
-ConfigCat will replace the following literals in the request body:
+ConfigCat will replace the following variables in the request body:
 
-| Literal                 | The values it gets replaced with                                   |
+| Variable                 | The values it gets replaced with                                   |
 | ----------------------- | ------------------------------------------------------------------ |
 | **##ConfigName##**      | The name of the Config your setting belongs to                     |
 | **##EnvironmentName##** | The name of the Environment it has been changed                    |
