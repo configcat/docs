@@ -298,26 +298,21 @@ IEnumerable<string> keys = client.GetAllKeys();
 Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by injecting a HttpClientHandler instance into the ConfigCatClient's configuration.
 
 ```csharp
-var proxy = new WebProxy()
+var myProxySettings = new WebProxy(proxyHost, proxyPort)
 {
-    Address = new Uri($"{proxyHost}:{proxyPort}"),
-    BypassOnLocal = false,
     UseDefaultCredentials = false,
-
     Credentials = new NetworkCredential(
         userName: proxyUserName,
-        password: proxyPassword);
+        password: proxyPassword)
 };
 
-var httpClientHandler = new HttpClientHandler()
+var myHttpClientHandler = new HttpClientHandler { Proxy = myProxySettings };
+
+var client = new ConfigCatClient(new AutoPollConfiguration
 {
-    Proxy = proxy,
-};
-
-var client = new ConfigCatClient(new AutoPollConfiguration {
-                        ApiKey = "#YOUR-API-KEY#",
-                        HttpClientHandler = httpClientHandler
-                    });
+    HttpClientHandler = myHttpClientHandler,
+    ApiKey = "#YOUR-API-KEY#",
+});
 ```
 
 ## Sample Applications
