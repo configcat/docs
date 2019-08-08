@@ -301,9 +301,7 @@ Provide your own network credentials (username/password), and proxy server setti
 var myProxySettings = new WebProxy(proxyHost, proxyPort)
 {
     UseDefaultCredentials = false,
-    Credentials = new NetworkCredential(
-        userName: proxyUserName,
-        password: proxyPassword)
+    Credentials = new NetworkCredential(proxyUserName, proxyPassword)
 };
 
 var myHttpClientHandler = new HttpClientHandler { Proxy = myProxySettings };
