@@ -22,7 +22,7 @@ const siteConfig = {
     title: 'ConfigCat Docs', // Title for your website.
     tagline: 'Documentation regarding the ConfigCat website and SDKs',
     url: 'https://docs.configcat.com', // Your website URL
-    baseUrl: '/', // Base URL for your project */
+    baseUrl: '/docs/', // Base URL for your project */
     // For github.io type URLs, you would set the url and baseUrl like:
     //   url: 'https://facebook.github.io',
     //   baseUrl: '/test-site/',
@@ -92,7 +92,7 @@ const siteConfig = {
     ],
 
     stylesheets: [
-        'css/code-blocks-buttons.css'
+        '/css/code-blocks-buttons.css'
     ],
 
     usePrism: true,
