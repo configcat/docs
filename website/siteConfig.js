@@ -30,9 +30,9 @@ const siteConfig = {
     ],
 
     /* path to images for header/footer */
-    headerIcon: 'docs/img/cat.svg',
-    footerIcon: 'docs/img/cat.svg',
-    favicon: 'docs/img/favicon.png',
+    headerIcon: 'img/cat.svg',
+    footerIcon: 'img/cat.svg',
+    favicon: 'img/favicon.png',
 
     /* Colors for website */
     colors: {
@@ -55,12 +55,12 @@ const siteConfig = {
             src: 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.1/clipboard.min.js',
             async: true
         },
-        '/docs/js/code-blocks-buttons.js',
-        '/docs/js/tawk.to.js'
+        '/js/code-blocks-buttons.js',
+        '/js/tawk.to.js'
     ],
 
     stylesheets: [
-        '/docs/css/code-blocks-buttons.css'
+        '/css/code-blocks-buttons.css'
     ],
 
     usePrism: true,
