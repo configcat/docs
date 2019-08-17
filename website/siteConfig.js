@@ -12,7 +12,7 @@ const siteConfig = {
     title: 'ConfigCat Docs', // Title for your website.
     tagline: 'Documentation regarding the ConfigCat website and SDKs',
     url: 'https://configcat.com', // Your website URL
-    baseUrl: '/docs/', // Base URL for your project */
+    baseUrl: '/', // Base URL for your project */
 
     // Used for publishing and more
     projectName: 'configcat',
@@ -30,9 +30,9 @@ const siteConfig = {
     ],
 
     /* path to images for header/footer */
-    headerIcon: 'img/cat.svg',
-    footerIcon: 'img/cat.svg',
-    favicon: 'img/favicon.png',
+    headerIcon: 'docs/img/cat.svg',
+    footerIcon: 'docs/img/cat.svg',
+    favicon: 'docs/img/favicon.png',
 
     /* Colors for website */
     colors: {
