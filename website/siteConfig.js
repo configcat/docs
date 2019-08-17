@@ -12,7 +12,7 @@ const siteConfig = {
     title: 'ConfigCat Docs', // Title for your website.
     tagline: 'Documentation regarding the ConfigCat website and SDKs',
     url: 'https://configcat.com', // Your website URL
-    baseUrl: '/', // Base URL for your project */
+    baseUrl: '/alma/', // Base URL for your project */
 
     // Used for publishing and more
     projectName: 'configcat',
