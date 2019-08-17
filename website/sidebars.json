@@ -1,4 +1,5 @@
 {
+  "docs": {
     "Usage": [
       "getting-started",
       "main-concepts",
@@ -22,4 +23,5 @@
       "sdk-reference/go",
       "sdk-reference/php"
     ]
+  }
 }
