@@ -8,39 +8,23 @@
 // See https://docusaurus.io/docs/site-config for all the possible
 // site configuration options.
 
-// List of projects/orgs using your project for the users page.
-const users = [{
-    caption: 'User1',
-    // You will need to prepend the image path with your baseUrl
-    // if it is not '/', like: '/test-site/img/docusaurus.svg'.
-    image: '/img/docusaurus.svg',
-    infoLink: 'https://www.facebook.com',
-    pinned: true,
-}, ];
-
 const siteConfig = {
     title: 'ConfigCat Docs', // Title for your website.
     tagline: 'Documentation regarding the ConfigCat website and SDKs',
-    url: 'https://docs.configcat.com', // Your website URL
+    url: 'https://configcat.com', // Your website URL
     baseUrl: '/docs/', // Base URL for your project */
-    // For github.io type URLs, you would set the url and baseUrl like:
-    //   url: 'https://facebook.github.io',
-    //   baseUrl: '/test-site/',
 
     // Used for publishing and more
     projectName: 'configcat',
     organizationName: 'configcat',
-    // For top-level user or org sites, the organization is still the same.
-    // e.g., for the https://JoelMarcey.github.io site, it would be set like...
-    //   organizationName: 'JoelMarcey'
 
     // For no header links in the top nav bar -> headerLinks: [],
     headerLinks: [{
-            href: 'https://www.configcat.com',
+            href: 'https://configcat.com',
             label: 'ConfigCat.com'
         },
         {
-            href: 'https://configcat.com/Home/Blog',
+            href: 'https://configcat.com/blog',
             label: 'Blog'
         }
     ],
@@ -49,9 +33,9 @@ const siteConfig = {
     users,
 
     /* path to images for header/footer */
-    headerIcon: 'img/cat.svg',
-    footerIcon: 'img/cat.svg',
-    favicon: 'img/favicon.png',
+    headerIcon: '/docs/img/cat.svg',
+    footerIcon: '/docs/img/cat.svg',
+    favicon: '/docs/img/favicon.png',
 
     /* Colors for website */
     colors: {
@@ -59,19 +43,6 @@ const siteConfig = {
         secondaryColor: '#f46a20',
     },
 
-    /* Custom fonts for website */
-    /*
-    fonts: {
-      myFont: [
-        "Times New Roman",
-        "Serif"
-      ],
-      myOtherFont: [
-        "-apple-system",
-        "system-ui"
-      ]
-    },
-    */
     // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
     copyright: `Copyright © ${new Date().getFullYear()} ConfigCat`,
 
@@ -87,12 +58,12 @@ const siteConfig = {
             src: 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.1/clipboard.min.js',
             async: true
         },
-        '/js/code-blocks-buttons.js',
-        '/js/tawk.to.js'
+        '/docs/js/code-blocks-buttons.js',
+        '/docs/js/tawk.to.js'
     ],
 
     stylesheets: [
-        '/css/code-blocks-buttons.css'
+        '/docs/css/code-blocks-buttons.css'
     ],
 
     usePrism: true,
@@ -102,8 +73,8 @@ const siteConfig = {
     cleanUrl: true,
 
     // Open Graph and Twitter card images.
-    ogImage: 'img/docusaurus.png',
-    twitterImage: 'img/docusaurus.png',
+    ogImage: '/docsimg/docusaurus.png',
+    twitterImage: '/docsimg/docusaurus.png',
     gaTrackingId: 'UA-126035559-3',
     editUrl: 'https://github.com/configcat/docs/edit/master/docs/',
     algolia: {
