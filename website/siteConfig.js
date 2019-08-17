@@ -55,12 +55,12 @@ const siteConfig = {
             src: 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.1/clipboard.min.js',
             async: true
         },
-        '/js/code-blocks-buttons.js',
-        '/js/tawk.to.js'
+        '/docs/js/code-blocks-buttons.js',
+        '/docs/js/tawk.to.js'
     ],
 
     stylesheets: [
-        '/css/code-blocks-buttons.css'
+        '/docs/css/code-blocks-buttons.css'
     ],
 
     usePrism: true,
