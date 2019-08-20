@@ -168,7 +168,7 @@ If you set the `.asyncRefresh()` to `false`, the refresh operation will be await
 With this policy every new configuration request on the ConfigCatClient will trigger a new fetch over HTTP.
 ```swift
 let factory = { (cache: ConfigCache, fetcher: ConfigFetcher) -> RefreshPolicy in
-    ManualPollingPolicy(cache, fetcher))
+    ManualPollingPolicy(cache: cache, fetcher: fetcher)
 }
         
 let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>", policyFactory: factory)
