@@ -104,7 +104,7 @@ let user = User(identifier: "john@example.com")
 let user = User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
     email: "john@example.com", 
     country: "United Kingdom", 
-    custom: ["SubscriptionType":"Pro", "UserRole":"Admin"]])
+    custom: ["SubscriptionType":"Pro", "UserRole":"Admin"])
 ```
 
 ## Polling Modes
