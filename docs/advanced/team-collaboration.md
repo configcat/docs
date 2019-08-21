@@ -6,7 +6,7 @@ title: Team Collaboration
 *Team members* are your friends, colleagues, and clients who work on the same *Product*. You can invite as many of them to your *Product* as many you want.
 
 ## Invite others to collaborate
-1. Navigate to the <a href="https://testapp.configcat.com/product" target="_blank">Manage product page</a>.
+1. Navigate to the <a href="https://test.configcat.com/product" target="_blank">Manage product page</a>.
 1. Click **INVITE TEAM MEMBERS** and enter the invitees' email addresses (comma separated).
 1. Setup the invitees' initial *Permission group* and click on **SEND INVITATION EMAIL**.
 1. A ConfigCat invitation will be sent to the invitees' email addresses.
@@ -14,7 +14,7 @@ title: Team Collaboration
 You can modify their permissions anytime.
 
 ## Managing team members
-1. Navigate to the <a href="https://testapp.configcat.com/product" target="_blank">Manage product page</a>.
+1. Navigate to the <a href="https://test.configcat.com/product" target="_blank">Manage product page</a>.
 1. Click on  🗑️ ️to delete a *Team member*.
 1. Click on a *Team member*'s *Permission group* to change it.
 
