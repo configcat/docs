@@ -104,7 +104,7 @@ let user = User(identifier: "john@example.com")
 let user = User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
     email: "john@example.com", 
     country: "United Kingdom", 
-    custom: ["SubscriptionType":"Pro", "UserRole":"Admin"]])
+    custom: ["SubscriptionType":"Pro", "UserRole":"Admin"])
 ```
 
 ## Polling Modes
@@ -168,7 +168,7 @@ If you set the `.asyncRefresh()` to `false`, the refresh operation will be await
 With this policy every new configuration request on the ConfigCatClient will trigger a new fetch over HTTP.
 ```swift
 let factory = { (cache: ConfigCache, fetcher: ConfigFetcher) -> RefreshPolicy in
-    ManualPollingPolicy(cache, fetcher))
+    ManualPollingPolicy(cache: cache, fetcher: fetcher)
 }
         
 let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>", policyFactory: factory)

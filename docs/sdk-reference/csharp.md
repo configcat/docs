@@ -294,6 +294,25 @@ IConfigCatClient client = new ConfigCatClient("#YOUR-API-KEY#");
 IEnumerable<string> keys = client.GetAllKeys();
 ```
 
+## Using ConfigCat behind a proxy
+Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by injecting a HttpClientHandler instance into the ConfigCatClient's configuration.
+
+```csharp
+var myProxySettings = new WebProxy(proxyHost, proxyPort)
+{
+    UseDefaultCredentials = false,
+    Credentials = new NetworkCredential(proxyUserName, proxyPassword)
+};
+
+var myHttpClientHandler = new HttpClientHandler { Proxy = myProxySettings };
+
+var client = new ConfigCatClient(new AutoPollConfiguration
+{
+    HttpClientHandler = myHttpClientHandler,
+    ApiKey = "#YOUR-API-KEY#",
+});
+```
+
 ## Sample Applications
 Check out our Sample Applications how they use the ConfigCat SDK:
 * <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>

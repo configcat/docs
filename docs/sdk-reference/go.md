@@ -157,16 +157,19 @@ You have the option to configure the polling interval and an `configChanged` cal
 ```go
 config := configcat.DefaultClientConfig()
 config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *configcat.ConfigStore) configcat.RefreshPolicy {
-    return configcat.NewAutoPollingPolicyWithChangeListener(configProvider, store, 
-    // The auto poll interval
-    time.Second * 120,
-    // The callback called when the configuration changes
-    func(config string, parser *configcat.ConfigParser) { 
-        isMyAwesomeFeatureEnabled, ok := parser.Parse(config, "key-of-my-awesome-feature").(bool)
-        if ok && isMyAwesomeFeatureEnabled {
-            //show your awesome feature to the world!
-        }
-    })
+	return configcat.NewAutoPollingPolicyWithChangeListener(configProvider, store,
+		// The auto poll interval
+		time.Second * 120,
+		// The callback called when the configuration changes
+		func(config string, parser *configcat.ConfigParser) {
+			result, err := parser.Parse(config, "key-of-my-awesome-feature")
+			if err != nil {
+				isMyAwesomeFeatureEnabled, ok := result.(bool)
+				if ok && isMyAwesomeFeatureEnabled {
+					//show your awesome feature to the world!
+				}
+			}
+		})
 }
        
 client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
