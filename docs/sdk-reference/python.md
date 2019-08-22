@@ -58,18 +58,18 @@ Creating the client is different for each polling mode.
 | `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
 ```python
 value = configcat_client.get_value(
-    "keyOfMySetting", # Setting Key
-    false, # Default value
+    'keyOfMySetting', # Setting Key
+    False, # Default value
     User('435170f4-8a8b-4b67-a723-505ac7cdea92') # Optional User Object
 );
 ```
 
 ### User Object 
 ``` python
-user_object = User("435170f4-8a8b-4b67-a723-505ac7cdea92")   
+user_object = User('435170f4-8a8b-4b67-a723-505ac7cdea92')   
 ```
 ``` python
-user_object = User("john@example.com")   
+user_object = User('john@example.com')   
 ```
 | Parameters   | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -161,7 +161,7 @@ Available options:
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
 ```python
-configcat_client = configcatclient.create_client_with_manual_poll("#YOUR-API-KEY#");
+configcat_client = configcatclient.create_client_with_manual_poll('#YOUR-API-KEY#');
 value = configcat_client.get_value('key', 'my default value') # Returns "my default value"
 configcat_client.force_refresh();
 value = configcat_client.get_value('key', 'my default value') # Returns "value from server"
