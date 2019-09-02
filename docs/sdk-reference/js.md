@@ -131,8 +131,15 @@ Available options:
 Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 
 ```js
-configcat.createClientWithManualPoll("#YOUR-API-KEY#");
-configcat.forceRefresh();
+let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
+
+configCatClient.forceRefresh(() =>{
+
+    configCatClient.getValue("key", "my default value", (value)=>{
+        
+        console.log(value);
+    });
+});
 ```
 Available options:
 | Option Parameter | Description                           | Default        |
@@ -140,13 +147,19 @@ Available options:
 | `logger`         | Custom logger. See below for details. | Console logger |
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
 ```js
-var client = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
-client.getValue("key", "my default value", function(value) {
+let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
+
+configCatClient.getValue("key", "my default value", (value)=>{
+
     console.log(value) // console: "my default value"
 });
-configcat.forceRefresh();
-client.getValue("key", "my default value", function(value) {
-    console.log(value) // console: "value from server"
+
+configCatClient.forceRefresh(() =>{
+
+    configCatClient.getValue("key", "my default value", (value)=>{
+
+        console.log(value); // console: "value from server"
+    });
 });
 ```
 ## Logging
