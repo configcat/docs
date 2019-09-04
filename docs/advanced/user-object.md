@@ -13,12 +13,12 @@ Also, it contains user-specific information as a basis to evaluate what Feature 
 
 ## The relationship between User Object and Targeting rules
 
-**As a product manager**, you can set [Targeting rules](advanced/targeting.md) in the <a href="https://app.configcat.com" target="_blank">ConfigCat Admin Console</a> based on the parameters given to ConfigCat by your application.
+**As a product manager**, you can set [Targeting rules](advanced/targeting.md) in the <a href="https://app.configcat.com" target="_blank">ConfigCat Management Console</a> based on the parameters given to ConfigCat by your application.
 
-**As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your teammates) can use in the <a href="https://app.configcat.com" target="_blank">ConfigCat Admin Console</a> to apply [Targeting rules](advanced/targeting.md) on.
+**As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your teammates) can use in the <a href="https://app.configcat.com" target="_blank">ConfigCat Management Console</a> to apply [Targeting rules](advanced/targeting.md) on.
 
 ### Example
-Let's say in the <a href="https://app.configcat.com" target="_blank">Admin Console</a> you'd like to have the following targeting rule:
+Let's say in the <a href="https://app.configcat.com" target="_blank">Management Console</a> you'd like to have the following targeting rule:
 
 `myAwesomeFeature` is `ON` if `User's Email` `CONTAINS` `@example.com`, otherwise it is `OFF`.
 
@@ -55,6 +55,21 @@ Our recommendation as an identifier:
 - Email address - In most cases adding an email address works perfectly here. As long as it is unique.
 - SessionId - This comes useful when you'd like to target users who aren't logged in your application.
 
+### Custom property usage
+First you need to pass a User Object to the ConfigCat SDK containing the `custom` property.
 
+Example:
+``` javascript
+var userObject = {
+    identifier : "<unique-identifier-here>", // required
+    custom : {
+        "SubscriptionType": "Pro",
+        "UserRole": "Admin"
+    }
+};
+```
+*The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](sdk-reference/overview.md)*
 
-
+In the Admin Console a targeting rule for the custom property `SubscriptionType` would look like:
+*You can manually type your custom attribute to the text field despite it looks like a dropdown*
+![customPropertyUsageAdminConsole](../assets/custom-property-ui.png)
