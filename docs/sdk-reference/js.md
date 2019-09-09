@@ -32,7 +32,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, function(value) {
 });
 ```
 ## Working Demo on CodePen
-<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="html,result" data-user="configcat" data-slug-hash="pozaLLV" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="ConfigCat feature flags based dynamically updating page">
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="html,result" data-user="configcat" data-slug-hash="pozaLLV" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="ConfigCat feature flags based dynamically updating page">
   <span>See the Pen <a href="https://codepen.io/configcat/pen/pozaLLV/">
   ConfigCat feature flags based dynamically updating page</a> by ConfigCat (<a href="https://codepen.io/configcat">@configcat</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
