@@ -26,9 +26,7 @@ Attribute Name|Description
 `Custom`|***Define any attribute (e.g. `OS version`), by typing its name to the textbox.***
 
 ### Comparison value
-Any string, number or comma separated list to be compared with the selected *Attribute* using the *Comparator*.
----|---
-Max Length|65535
+Any string, number or comma separated list to be compared with the selected *Attribute* using the *Comparator*. **Max Length: 65535 chars**
 
 ### Comparator
 Comparator|Description
