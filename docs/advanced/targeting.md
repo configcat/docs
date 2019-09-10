@@ -27,6 +27,8 @@ Attribute Name|Description
 
 ### Comparison value
 Any string, number or comma separated list to be compared with the selected *Attribute* using the *Comparator*.
+---|---
+Max Length|65535
 
 ### Comparator
 Comparator|Description
