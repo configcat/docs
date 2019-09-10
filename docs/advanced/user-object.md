@@ -72,4 +72,4 @@ var userObject = {
 
 In the Admin Console a targeting rule for the custom property `SubscriptionType` would look like:
 *You can manually type your custom attribute to the text field despite it looks like a dropdown*
-![customPropertyUsageAdminConsole](../assets/custom-property-ui.png)
+![customPropertyUsageAdminConsole](assets/custom-property-ui.png)
