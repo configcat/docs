@@ -89,7 +89,8 @@ const siteConfig = {
             async: true
         },
         '/docs/js/code-blocks-buttons.js',
-        '/docs/js/tawk.to.js'
+        '/docs/js/tawk.to.js',
+        '/docs/js/smartlook.js'
     ],
 
     stylesheets: [
