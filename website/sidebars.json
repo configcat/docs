@@ -22,6 +22,9 @@
       "sdk-reference/python",
       "sdk-reference/go",
       "sdk-reference/php"
+    ],
+    "Video Courses": [
+      "video/developer"
     ]
   }
 }
