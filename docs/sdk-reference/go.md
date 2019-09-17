@@ -96,7 +96,7 @@ value := client.GetValue(
 | --------------- | --------------------------------------------------------------------------------------------------------------- |
 | `key`           | Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
 | `defaultValue`  | This value will be returned in case of an error.                                                  |
-| `user`          | *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
+| `user`          | *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```go
 value := client.GetValueForUser(
     "keyOfMySetting", // Setting Key

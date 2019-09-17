@@ -55,7 +55,7 @@ Creating the client is different for each polling mode.
 | --------------- | --------------------------------------------------------------------------------------------------------------- |
 | `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                  |
-| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
+| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```python
 value = configcat_client.get_value(
     'keyOfMySetting', # Setting Key

@@ -62,7 +62,7 @@ By adding multiple targeting rules you can create more complex rule sets.
 All other cases: OFF
 
 ### All other cases
-This value will be served as a fallback if none of the above rules apply or a [`User Object`](user-object) was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
+This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
 
 ## Targeting a percentage of users
 With percentage-based user targeting you can specify a randomly selected fraction of your users whom a feature will be enabled or a different value will be served.
@@ -96,4 +96,4 @@ When the Setting Kind is *Text*, *Whole Number* or *Decimal Number* the maximum 
 > The sum of all *% values* must be equal to 100.
 
 ### All other cases
-This value will be served as a fallback if none of the above rules apply or a [`User Object`](user-object) was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
+This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
