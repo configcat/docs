@@ -9,8 +9,6 @@ And represents a user in your application.
 
 >The *User Object* is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
-Also, it contains user-specific information as a basis to evaluate what Feature Flag state or setting value should be returned by ConfigCat.
-
 ## The relationship between User Object and Targeting rules
 
 **As a product manager**, you can set [Targeting rules](advanced/targeting.md) in the <a href="https://app.configcat.com" target="_blank">ConfigCat Management Console</a> based on the parameters given to ConfigCat by your application.
@@ -25,6 +23,27 @@ Let's say in the <a href="https://app.configcat.com" target="_blank">Management 
 The ConfigCat SDK will return `true` for a *User Object* with an email address of `jane@example.com`, and it will return `false` for a *User Object* with an email address of `jane@gmail.com`
 
 To achieve this, your application needs to pass the email address of your user to the ConfigCat SDK via *User Object*.
+```csharp
+User user = new User("jane@example.com`")
+
+var isEnabled = client.GetValue("myAwesomeFeature", false, user);
+```
+Or if you want to target based on other user details as well.
+```csharp
+User user = new User("##SOME-USER-IDENTIFICATION##")
+{
+    Country = "Awesomnia",
+    Email = "jane@example.com",
+    Custom =
+    {
+        { "SubscriptionType", "Pro"},
+        { "Role", "Knight of Awesomnia"}
+    }
+};
+
+var isEnabled = client.GetValue("myAwesomeFeature", false, user);
+
+```
 
 ## Security concerns
 Keeping your user data safe was one of our main goals when designing ConfigCat. The main concept here is that the ConfigCat SDK which connects your application to our servers never pushes any data to the ConfigCat servers. It pulls only configs and targeting rules.
@@ -40,12 +59,10 @@ The data that could and should be passed to the User Object.
 
 Property|Description
 ---|---
-Identifier|**REQUIRED** *Please see description below the table.*
+Identifier|**REQUIRED** We recommend adding a UserID, Email address or SessionID. [More](advanced/user-object.md#identifier-property)
 Email|**OPTIONAL** Email address of your user. By adding this parameter you will be able to create Email address based targeting. e.g: Turn on a feature for only users with @example.com addresses.
 Country|**OPTIONAL** Fill this for location or country based targeting. e.g: Turn on a feature for users in Canada only.
-Custom|**OPTIONAL** This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role etc.
-
-Despite it's name, a User Object can contain non-user related information as well, that could be important for targeting like your application's version number or the device type/OS your application is running on.
+Custom|**OPTIONAL** This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role, Device type, App version number etc.
 
 ### Identifier property
 Unique identifier of a user in your application. Required. Enables ConfigCat to differentiate your users from each other and to evaluate the setting values for percentage based targeting.
