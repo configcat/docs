@@ -4,7 +4,7 @@ title: Getting Started
 ---
 This page is an overview and a short guide to get started.
 
-**ConfigCat** is a cloud based service that lets you release a feature to a part of your users without the need to actually deploy new code.
+**ConfigCat** is a cloud based service that lets you release a feature without the need to actually deploy new code.
 
 You can use it with many similar techniques such as feature flags/toggles, canary releases, soft launches, A-B testing, remote configuration management, phased rollouts.
 
