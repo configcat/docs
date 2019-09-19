@@ -106,7 +106,7 @@ const siteConfig = {
     // Open Graph and Twitter card images.
     ogImage: 'docs/img/docusaurus.png',
     twitterImage: 'docs/img/docusaurus.png',
-    gaTrackingId: 'UA-126035559-3',
+    gaTrackingId: 'UA-126035559-1',
     editUrl: 'https://github.com/configcat/docs/edit/master/docs/',
     algolia: {
         apiKey: '36b9ea4801b9b88e1e8fa2e42d3cc705',

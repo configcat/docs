@@ -89,7 +89,7 @@ ConfigCatClient.newBuilder()
 | --------------- | --------------------------------------------------------------------------------------------------------------- |
 | `classOfT`      | **REQUIRED.** The type of the setting.                                                                          |
 | `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
-| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting)
+| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md)
 | `defaultValue`  | **REQUIRED.** This value will be returned in case of an error. |
 ```kotlin
 val value = client.getValue(

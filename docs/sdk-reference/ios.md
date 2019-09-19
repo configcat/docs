@@ -70,7 +70,7 @@ client.getValueAsync(for: "key-of-my-awesome-feature", defaultValue: false, comp
 | --------------- | --------------------------------------------------------------------------------------------------------------- |
 | `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
 | `defaultValue`  | **REQUIRED.** This value will be returned in case of an error.                                                  |
-| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
+| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```swift
 let value = client.getValue(
     for: "keyOfMySetting", // Setting Key

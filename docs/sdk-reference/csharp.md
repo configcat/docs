@@ -4,7 +4,7 @@ title: .NET (C#)
 ---
 ## Getting started:
 ### 1. Install *ConfigCat SDK* <a href="https://www.nuget.org/packages/ConfigCat.Client" target="_blank">Nuget</a> package
-```PowerShell
+```powershell
 Install-Package ConfigCat.Client
 ```
 
@@ -63,7 +63,7 @@ Creating the client is different for each polling mode.
 | -------------- | --------------------------------------------------------------------------------------------------------------- |
 | `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                                  |
-| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting) |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```csharp
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 client.GetValue("keyOfMySetting", false, userObject);

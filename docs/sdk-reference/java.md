@@ -14,7 +14,7 @@ Maven:
 </dependency>
 ```
 Gradle:
-```
+```bash
 implementation 'com.configcat:configcat-java-client:1.+'
 ```
 ### 2. Import the ConfigCat SDK:
@@ -83,7 +83,7 @@ ConfigCatClient.newBuilder()
 | --------------- | --------------------------------------------------------------------------------------------------------------- |
 | `classOfT`      | **REQUIRED.** The type of the setting.                                                                          |
 | `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
-| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](../../advanced/targeting)
+| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md)
 | `defaultValue`  | **REQUIRED.** This value will be returned in case of an error. |
 ```java
 Boolean value = client.getValue(
@@ -261,7 +261,7 @@ Any time you want to refresh the cached configuration with the latest one, you c
 ## Sample Apps
 Check out our Sample Applications how they use the ConfigCat SDK
 * <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/console" target="_blank">Simple Console Application</a>
-* <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/web" target="_blank">Web Application</a> with Dependency Injection that uses [ConfigCat Webhooks](../../advanced/notifications-webhooks) to get notified about configuration updates
+* <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/web" target="_blank">Web Application</a> with Dependency Injection that uses [ConfigCat Webhooks](advanced/notifications-webhooks.md) to get notified about configuration updates
 
 Look under the hood
 * <a href="https://github.com/ConfigCat/java-sdk" target="_blank">ConfigCat Java SDK's repository on Github</a>
