@@ -63,7 +63,6 @@ client.close()
 ```java
 ConfigCatClient.newBuilder()
     .maxWaitTimeForSyncCallsInSeconds(5)
-    .
     .build(<apikey>);
 ```
 
