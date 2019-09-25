@@ -41,7 +41,7 @@ const siteConfig = {
             label: 'ConfigCat.com'
         },
         {
-            href: 'https://configcat.com/Home/Blog',
+            href: 'https://configcat.com/blog',
             label: 'Blog'
         }
     ],
