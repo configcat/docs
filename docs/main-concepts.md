@@ -16,7 +16,7 @@ Value|The actual value of your *Setting*. e.g., `true`, `false`. Can be differen
 Setting Kind|Setting Type|Description
 ---|---|---
 On/Off Toggle|Boolean|true/false, usually the state of a feature flag
-Text|String|any string, max. 1000 characters
+Text|String|any string, max. 65535 characters
 Whole Number|Integer|any whole number within the range of `int`
 Decimal Number|Double|any decimal number within the range of `double`
 
