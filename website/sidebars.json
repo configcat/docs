@@ -25,6 +25,9 @@
     ],
     "Video Courses": [
       "video/developer"
+    ],
+    "Integrations": [
+      "integrations/circleci"
     ]
   }
 }
