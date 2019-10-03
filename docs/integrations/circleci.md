@@ -3,7 +3,7 @@ id: circleci
 title: CircleCI Orb
 ---
 
-The [ConfigCat Feature Flag Reference Validator](https://github.com/configcat/flag-reference-validator) CLI tool is available as a CircleCI Orb to integrate with CircleCI workflows.
+The [ConfigCat Feature Flag Reference Validator](https://github.com/configcat/feature-flag-reference-validator) CLI tool is available as a CircleCI Orb to integrate with CircleCI workflows.
 
 This tool can be used for discovering ConfigCat feature flag usages in your source code and validating them against your own ConfigCat configuration dashboard. It searches for ConfigCat SDK usage and greps the feature flag keys from the source code, then it compares them with the keys got from your ConfigCat dashboard.
 
@@ -14,7 +14,7 @@ Then you can use ConfigCat's Orb as a job:
 ```yaml
 version: 2.1
 orbs:
-  configcat: configcat/flag_reference_validator@1.0.3
+  configcat: configcat/feature-flag-reference-validator@1.0.4
 workflows:
   main:
     jobs:
@@ -24,7 +24,7 @@ Or as an individual command:
 ```yaml
 version: 2.1
 orbs:
-  configcat: configcat/flag_reference_validator@1.0.3
+  configcat: configcat/feature-flag-reference-validator@1.0.4
 jobs:
   build:
     docker:
@@ -37,4 +37,4 @@ jobs:
 ```
 
 ## Documentation
-For more information and usage examples check the [official documentation](https://circleci.com/orbs/registry/orb/configcat/flag_reference_validator) of ConfigCat's Orb.
+For more information and usage examples check the [official documentation](https://circleci.com/orbs/registry/orb/configcat/feature-flag-reference-validator) of ConfigCat's Orb.
