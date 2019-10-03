@@ -33,3 +33,6 @@ If you'd like to see what's under the hood.
 ### PHP
 - [Documentation](sdk-reference/php.md) on how to connect your application.
 - <a href="https://github.com/configcat/php-sdk" target="_blank">GitHub</a> repository of the SDK.
+### Ruby
+- [Documentation](sdk-reference/ruby.md) on how to connect your application.
+- <a href="https://github.com/configcat/ruby-sdk" target="_blank">GitHub</a> repository of the SDK.

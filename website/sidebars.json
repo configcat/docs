@@ -21,7 +21,8 @@
       "sdk-reference/ios",
       "sdk-reference/python",
       "sdk-reference/go",
-      "sdk-reference/php"
+      "sdk-reference/php",
+      "sdk-reference/ruby"
     ],
     "Video Courses": [
       "video/developer"
