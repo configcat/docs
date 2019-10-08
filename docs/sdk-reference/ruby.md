@@ -172,7 +172,7 @@ value = configcat_client.get_value("key", "my default value") # Returns "value f
 ```
 
 ## `get_all_keys()`
-You can query the keys from your config file in the SDK with the `get_all_keys()` method.
+You can query the keys from your configuration in the SDK with the `get_all_keys()` method.
 
 ```ruby
 configcat_client = ConfigCat.create_client("#YOUR-API-KEY#")
