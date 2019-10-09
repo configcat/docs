@@ -91,7 +91,7 @@ $user = new \ConfigCat\User(
 ```
 
 ## `getAllKeys()`
-You can query the keys from your config file in the SDK with the `getAllKeys()` method.
+You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#");
