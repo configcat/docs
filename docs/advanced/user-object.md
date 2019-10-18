@@ -87,6 +87,5 @@ var userObject = {
 ```
 *The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](sdk-reference/overview.md)*
 
-In the Admin Console a targeting rule for the custom property `SubscriptionType` would look like:
-*You can manually type your custom attribute to the text field despite it looks like a dropdown*
+In the Admin Console a targeting rule for the custom property `EyeColor` would look like:
 ![customPropertyUsageAdminConsole](assets/custom-property-ui.png)
