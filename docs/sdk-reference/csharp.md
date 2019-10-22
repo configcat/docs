@@ -100,7 +100,7 @@ The *ConfigCat SDK* downloads and stores the latest values automatically every 6
 
 Use the `PollIntervalSeconds` option parameter to change the polling interval.
 ```csharp
-var clientConfiguration = new ConfigCat.Client.AutoPollConfiguration
+var clientConfiguration = new AutoPollConfiguration
 {
     ApiKey = "#YOUR-API-KEY#",
     PollIntervalSeconds = 95
@@ -110,7 +110,7 @@ IConfigCatClient client = new ConfigCatClient(clientConfiguration);
 
 Subscribing to the `OnConfigurationChanged` event will get you notified about changes.
 ```csharp
-var clientConfiguration = new ConfigCat.Client.AutoPollConfiguration
+var clientConfiguration = new AutoPollConfiguration
     {
         ApiKey = "#YOUR-API-KEY#"
     };
@@ -133,7 +133,7 @@ When calling `GetValue()` or `GetValueAsync()` the *ConfigCat SDK* downloads the
 
 Use `CacheTimeToLiveSeconds` parameter to manage configuration lifetime.
 ```csharp
-var clientConfiguration = new ConfigCat.Client.LazyLoadConfiguration
+var clientConfiguration = new LazyLoadConfiguration
 {
     ApiKey = "#YOUR-API-KEY#",
     CacheTimeToLiveSeconds = 600
@@ -151,7 +151,7 @@ Available options:
 Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
 
 ```csharp
-var clientConfiguration = new ConfigCat.Client.Configuration.ManualPollConfiguration
+var clientConfiguration = new ManualPollConfiguration
 {
     ApiKey = "#YOUR-API-KEY#"
 };
@@ -161,7 +161,7 @@ client.ForceRefresh();
 ```
 > `GetValue()` returns `defaultValue` if the cache is empty. Call `ForceRefresh()` to update the cache.
 ```csharp
-var clientConfiguration = new ConfigCat.Client.Configuration.ManualPollConfiguration
+var clientConfiguration = new ManualPollConfiguration
 {
     ApiKey = "#YOUR-API-KEY#"
 };
@@ -239,7 +239,7 @@ namespace SampleApplication
             string filePath = Path.Combine(Environment.CurrentDirectory, "configcat.log");
             LogLevel logLevel = LogLevel.Warn; // I would like to log only WARNING and higher entires.
 
-            var clientConfiguration = new ConfigCat.Client.AutoPollConfiguration
+            var clientConfiguration = new AutoPollConfiguration
             {
                 ApiKey = "#YOUR-API-KEY#",
                 LoggerFactory = new MyFileLoggerFactory(filePath, logLevel),
