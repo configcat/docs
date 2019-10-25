@@ -185,12 +185,6 @@ let customLogger = {
 let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { logger: customLogger });
 ```
 
-## CDN base url (forward proxy, dedicated subscription)
-You can customize your CDN path in the SDK with `baseUrl` property in the `options` parameter.
-
-```js
-let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { baseUrl: "https://myCDN.configcat.com" });
-```
 ## `getAllKeys()`
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
@@ -199,6 +193,13 @@ let configCatClient = configcat.createClient("#YOUR-API-KEY#");
 configCatClient.getAllKeys((keys)=>{
     console.log(keys);
 });
+```
+
+## CDN base url (forward proxy, dedicated subscription)
+You can customize your CDN path in the SDK with `baseUrl` property in the `options` parameter.
+
+```js
+let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { baseUrl: "https://myCDN.configcat.com" });
 ```
 
 ## Sample Application
