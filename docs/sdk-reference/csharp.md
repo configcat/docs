@@ -266,6 +266,14 @@ IConfigCatClient client = ConfigCatClientBuilder
     .Create();
 ```
 
+## `GetAllKeys()`
+You can get all the setting keys from your configuration by calling the `GetAllKeys()` method of the `ConfigCatClient`.
+
+```csharp
+IConfigCatClient client = new ConfigCatClient("#YOUR-API-KEY#");
+IEnumerable<string> keys = client.GetAllKeys();
+```
+
 ## CDN base url (forward proxy, dedicated subscription)
 You can set `BaseUrl` property on any configuration object to customize your CDN path in the SDK.
 
@@ -284,14 +292,6 @@ IConfigCatClient client = ConfigCatClientBuilder
     .WithAutoPoll()
     .WithBaseUrl(new Uri("https://myCDN.configcat.com"))
     .Create();
-```
-
-## `GetAllKeys()`
-You can get all the setting keys from your configuration by calling the `GetAllKeys()` method of the `ConfigCatClient`.
-
-```csharp
-IConfigCatClient client = new ConfigCatClient("#YOUR-API-KEY#");
-IEnumerable<string> keys = client.GetAllKeys();
 ```
 
 ## Using ConfigCat behind a proxy
