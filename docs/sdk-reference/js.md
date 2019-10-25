@@ -17,10 +17,12 @@ import * as configcat from "configcat-js";
 ```html
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@latest/dist/configcat.min.js"></script>
 ```
+
 ### 2. Create the *ConfigCatClient* with your API Key:
 ```js
 var configCatClient = configcat.createClient("#YOUR-API-KEY#");
 ```
+
 ### 3. Get your setting value:
 ```js
 configCatClient.getValue("isMyAwesomeFeatureEnabled", false, function(value) {
@@ -31,6 +33,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, function(value) {
     }
 });
 ```
+
 ## Working Demo on CodePen
 <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="html,result" data-user="configcat" data-slug-hash="pozaLLV" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="ConfigCat feature flags based dynamically updating page">
   <span>See the Pen <a href="https://codepen.io/configcat/pen/pozaLLV/">
@@ -71,6 +74,7 @@ configCatClient.getValue(
     { identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92" } // Optional User Object
 );
 ```
+
 ### User Object 
 ``` javascript
 var userObject = {
@@ -170,6 +174,7 @@ configCatClient.forceRefresh(() =>{
     });
 });
 ```
+
 ## Logging
 To customize logging create a logger instance and add it to Options object when creating the ConfigCat client. 2 log levels are supported: `log` and `error`.
 ```js
@@ -184,12 +189,7 @@ var customLogger = {
 
 configcat.createClientWithManualPoll("#YOUR-API-KEY#", { logger: customLogger });
 ```
-## CDN base url (forward proxy, dedicated subscription)
-You can customize your CDN path in the SDK with `baseUrl` property in the `options` parameter.
 
-```js
-var configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { baseUrl: "https://myCDN.configcat.com" });
-```
 ## `getAllKeys()`
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
@@ -200,6 +200,12 @@ configCatClient.getAllKeys(function(keys) {
 });
 ```
 
+## CDN base url (forward proxy, dedicated subscription)
+You can customize your CDN path in the SDK with `baseUrl` property in the `options` parameter.
+
+```js
+var configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { baseUrl: "https://myCDN.configcat.com" });
+```
 
 ## Sample Applications
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/angular-sample" target="_blank">Angular 2+</a>
