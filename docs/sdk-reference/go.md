@@ -49,27 +49,27 @@ client.Close()
 - serving values quickly in a failsafe way.
 
 `configcat.NewClient(<apiKey>)` returns a client with default options.
-| Arguments              | Description                                                                                             |
-| ---------------------- | --------------------------------------------------------------------------------------------------------|
-| `apiKey`               | API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.    |
+| Arguments | Description                                                                                          |
+| --------- | ---------------------------------------------------------------------------------------------------- |
+| `apiKey`  | API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |
 
 ### Custom configuration options
 `configcat.NewCustomClient(<apiKey>, config)` returns a client with custom configuration.
-| Arguments              | Description                                                                                             |
-| ---------------------- | --------------------------------------------------------------------------------------------------------|
-| `apiKey`               | API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.    |
-| `config`               | An object which contains the custom configuration.                                                      |
+| Arguments | Description                                                                                          |
+| --------- | ---------------------------------------------------------------------------------------------------- |
+| `apiKey`  | API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |
+| `config`  | An object which contains the custom configuration.                                                   |
 You can get and customize the default configuration options:
 ```go
 config := configcat.DefaultClientConfig()
 ```
-| Properties               | Type                 | Description                                                                                                           |
-| ------------------------ | -------------------- | ----------------------------------------------------------------------------------------------------------------------|
-| `BaseUrl`                | string               | Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.    |
-| `Cache `                 | ConfigCache          | Sets a custom cache implementation for the client. [See below](#custom-cache).                                        |
-| `MaxWaitTimeForSyncCalls`| time.Duration        | Sets a timeout value for the synchronous methods of the library (`GetValue()`, `GetValueForUser()`, `Refresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
-| `HttpTimeout`            | time.Duration        | Sets maximum wait time for a HTTP response.                                                                           |
-| `PolicyFactory`          | func(ConfigProvider, *ConfigStore) RefreshPolicy | Sets a custom refresh policy implementation for the client. [See below](#custom-policy).                              | 
+| Properties                | Type                                             | Description                                                                                                                                                                                                       |
+| ------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BaseUrl`                 | string                                           | *Obsolete* Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                     |
+| `Cache `                  | ConfigCache                                      | Sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                                    |
+| `MaxWaitTimeForSyncCalls` | time.Duration                                    | Sets a timeout value for the synchronous methods of the library (`GetValue()`, `GetValueForUser()`, `Refresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
+| `HttpTimeout`             | time.Duration                                    | Sets maximum wait time for a HTTP response.                                                                                                                                                                       |
+| `PolicyFactory`           | func(ConfigProvider, *ConfigStore) RefreshPolicy | Sets a custom refresh policy implementation for the client. [See below](#custom-policy).                                                                                                                          |
 
 Then you can pass it to the `NewCustomClient()` method:
 ```go
@@ -80,10 +80,10 @@ client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
 ## Anatomy of `GetValue()`
-| Parameters      | Description                                                                                       |
-| --------------- | --------------------------------------------------------------------------------------------------|
-| `key`           | Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
-| `defaultValue`  | This value will be returned in case of an error.                                                  |
+| Parameters     | Description                                                                   |
+| -------------- | ----------------------------------------------------------------------------- |
+| `key`          | Setting-specific key. Set in *ConfigCat Management Console* for each setting. |
+| `defaultValue` | This value will be returned in case of an error.                              |
 ```go
 value := client.GetValue(
     "keyOfMySetting", // Setting Key
@@ -92,11 +92,11 @@ value := client.GetValue(
 ```
 
 ## Anatomy of `GetValueForUser()`
-| Parameters      | Description                                                                                                     |
-| --------------- | --------------------------------------------------------------------------------------------------------------- |
-| `key`           | Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
-| `defaultValue`  | This value will be returned in case of an error.                                                  |
-| `user`          | *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| Parameters     | Description                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------- |
+| `key`          | Setting-specific key. Set in *ConfigCat Management Console* for each setting.                      |
+| `defaultValue` | This value will be returned in case of an error.                                                   |
+| `user`         | *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```go
 value := client.GetValueForUser(
     "keyOfMySetting", // Setting Key
@@ -122,12 +122,12 @@ user = configcat.NewUser("435170f4-8a8b-4b67-a723-505ac7cdea92")
 user = configcat.NewUser("john@example.com")   
 ```
 #### Customized user object creation:
-| Arguments       |   Description                                                                                                                     |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier`    | Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email`         | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country`       | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom`        | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| Arguments    | Description                                                                                                                     |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | Unique identifier of a user in your application. Can be any value, even an email address.                                       |
+| `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
+| `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
+| `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 ```go
 custom := map[string]string{}
 custom["SubscriptionType"] = "Pro"

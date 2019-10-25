@@ -54,23 +54,23 @@ client.getValueAsync(for: "key-of-my-awesome-feature", defaultValue: false, comp
 - serving values quickly in a failsafe way.
 
 `ConfigCatClient(apiKey: <apiKey>)` returns a client with default options.
-| Arguments              | Type                 | Description                                                                                                           |
-| ---------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------|
-| `apiKey`               | string               | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.    |
-| `baseUrl`              | string               | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.    |
-| `configCache`          | ConfigCache?         | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).       |
-| `maxWaitTimeForSyncCallsInSeconds` | int | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
-| `sessionConfiguration` | URLSessionConfiguration | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                             |
-| `policyFactory`        | ((ConfigCache, ConfigFetcher) -> RefreshPolicy)? | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                    | 
+| Arguments                          | Type                                             | Description                                                                                                                                                                                                 |
+| ---------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apiKey`                           | string                                           | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.                                                                                          |
+| `baseUrl`                          | string                                           | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                     |
+| `configCache`                      | ConfigCache?                                     | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                    |
+| `maxWaitTimeForSyncCallsInSeconds` | int                                              | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
+| `sessionConfiguration`             | URLSessionConfiguration                          | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                                                                                                                   |
+| `policyFactory`                    | ((ConfigCache, ConfigFetcher) -> RefreshPolicy)? | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                                                                                                          |
 
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
 ## Anatomy of `getValue()`
-| Parameters      | Description                                                                                                     |
-| --------------- | --------------------------------------------------------------------------------------------------------------- |
-| `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
-| `defaultValue`  | **REQUIRED.** This value will be returned in case of an error.                                                  |
-| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```swift
 let value = client.getValue(
     for: "keyOfMySetting", // Setting Key
@@ -94,12 +94,12 @@ let user = User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92")
 ```swift
 let user = User(identifier: "john@example.com")   
 ```
-| Arguments       |   Description                                                                                                                     |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier`    | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email`         | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country`       | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom`        | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| Arguments    | Description                                                                                                                     |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
+| `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
+| `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
+| `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 ```swift
 let user = User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
     email: "john@example.com", 

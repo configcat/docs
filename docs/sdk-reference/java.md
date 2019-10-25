@@ -66,24 +66,24 @@ ConfigCatClient.newBuilder()
     .build(<apikey>);
 ```
 
-| Builder options       | Description                                                                                                                        |
-| --------------------- | -----------------------------------------------------------------------------------------------------------------------------------|
-| `build(<apikey>)`            | **REQUIRED.** Waits for the API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.                 |
-| `baseUrl(string)`           | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
-| `httpClient(OkHttpClient)`        | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                  |
-| `maxWaitTimeForSyncCallsInSeconds(int)`      | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
-| `cache(ConfigCache)`             | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                           |
-| `refreshPolicy(BiFunction<ConfigFetcher, ConfigCache, RefreshPolicy>)`     | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                                 |
+| Builder options                                                        | Description                                                                                                                                                                                                 |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `build(<apikey>)`                                                      | **REQUIRED.** Waits for the API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.                                                                            |
+| `baseUrl(string)`                                                      | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                     |
+| `httpClient(OkHttpClient)`                                             | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                                                                                           |
+| `maxWaitTimeForSyncCallsInSeconds(int)`                                | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
+| `cache(ConfigCache)`                                                   | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                    |
+| `refreshPolicy(BiFunction<ConfigFetcher, ConfigCache, RefreshPolicy>)` | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                                                                                                          |
 
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
 ## Anatomy of `getValue()`
-| Parameters      | Description                                                                                                     |
-| --------------- | --------------------------------------------------------------------------------------------------------------- |
-| `classOfT`      | **REQUIRED.** The type of the setting.                                                                          |
-| `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
-| `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md)
-| `defaultValue`  | **REQUIRED.** This value will be returned in case of an error. |
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
+| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 ```java
 Boolean value = client.getValue(
     Boolean.class, // Setting type
@@ -108,12 +108,12 @@ User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92");
 ``` java
 User user = User.newBuilder().build("john@example.com");   
 ```
-| Builder options   | Description                                                                                                                     |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier()`    | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email()`         | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country()`       | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom()`        | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| Builder options | Description                                                                                                                     |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier()`  | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
+| `email()`       | Optional parameter for easier targeting rule definitions.                                                                       |
+| `country()`     | Optional parameter for easier targeting rule definitions.                                                                       |
+| `custom()`      | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 ``` java
 Map<String,String> customAttributes = new HashMap<String,String>();
     customAttributes.put("SubscriptionType", "Pro");
