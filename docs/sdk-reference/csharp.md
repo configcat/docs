@@ -278,6 +278,16 @@ IEnumerable<string> keys = client.GetAllKeys();
 You can set `BaseUrl` property on any configuration object to customize your CDN path in the SDK.
 
 ```csharp
+IConfigCatClient client = ConfigCatClientBuilder
+    .Initialize("#YOUR-API-KEY#")
+    .WithAutoPoll()
+    .WithBaseUrl(new Uri("https://myCDN.configcat.com"))
+    .Create();
+```
+
+or
+
+```csharp
 var clientConfiguration = new AutoPollConfiguration
 {
     ApiKey = "#YOUR-API-KEY#",
@@ -285,14 +295,10 @@ var clientConfiguration = new AutoPollConfiguration
 };
 IConfigCatClient client = new ConfigCatClient(clientConfiguration);
 ```
-or
-```csharp
-IConfigCatClient client = ConfigCatClientBuilder
-    .Initialize("#YOUR-API-KEY#")
-    .WithAutoPoll()
-    .WithBaseUrl(new Uri("https://myCDN.configcat.com"))
-    .Create();
-```
+
+You can use the `BaseUrl` with the following configurations too:
+* `ManualPollConfiguration`
+* `LazyLoadConfiguration`
 
 ## Using ConfigCat behind a proxy
 Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by injecting a HttpClientHandler instance into the ConfigCatClient's configuration.
