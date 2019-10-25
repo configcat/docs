@@ -274,32 +274,6 @@ IConfigCatClient client = new ConfigCatClient("#YOUR-API-KEY#");
 IEnumerable<string> keys = client.GetAllKeys();
 ```
 
-## CDN base url (forward proxy, dedicated subscription)
-You can set `BaseUrl` property on any configuration object to customize your CDN path in the SDK.
-
-```csharp
-IConfigCatClient client = ConfigCatClientBuilder
-    .Initialize("#YOUR-API-KEY#")
-    .WithAutoPoll()
-    .WithBaseUrl(new Uri("https://myCDN.configcat.com"))
-    .Create();
-```
-
-or
-
-```csharp
-var clientConfiguration = new AutoPollConfiguration
-{
-    ApiKey = "#YOUR-API-KEY#",
-    BaseUrl = new Uri("https://myCDN.configcat.com")
-};
-IConfigCatClient client = new ConfigCatClient(clientConfiguration);
-```
-
-You can use the `BaseUrl` with the following configurations too:
-* `ManualPollConfiguration`
-* `LazyLoadConfiguration`
-
 ## Using ConfigCat behind a proxy
 Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by injecting a HttpClientHandler instance into the ConfigCatClient's configuration.
 

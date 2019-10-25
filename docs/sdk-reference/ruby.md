@@ -171,20 +171,6 @@ configcat_client = ConfigCat.create_client("#YOUR-API-KEY#")
 keys = configcat_client.get_all_keys()
 ```
 
-## CDN base url (forward proxy, dedicated subscription)
-You can customize your CDN path in the SDK with `base_url` parameter.
-
-```ruby
-ConfigCat.create_client_with_auto_poll(
-    "#YOUR-API-KEY#", base_url: "https://myCDN.configcat.com");
-```
-
-The following methods support the `base_url` parameter:
-
-- `ConfigCat.create_client_with_auto_poll()`
-- `ConfigCat.create_client_with_manual_poll()`
-- `ConfigCat.create_client_with_lazy_load()`
-
 ## Sample Applications
 - <a href="https://github.com/configcat/ruby-sdk/tree/master/samples/consolesample.rb" target="_blank">Sample Console App</a>
 

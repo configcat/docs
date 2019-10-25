@@ -167,20 +167,6 @@ configcat_client = configcatclient.create_client('#YOUR-API-KEY#')
 keys = configcat_client.get_all_keys()
 ```
 
-## CDN base url (forward proxy, dedicated subscription)
-You can customize your CDN path in the SDK with `base_url` parameter.
-
-```python
-configcatclient.create_client_with_auto_poll(
-    "#YOUR-API-KEY#", base_url="https://myCDN.configcat.com");
-```
-
-The following methods support the `base_url` parameter:
-
-- `configcatclient.create_client_with_auto_poll()`
-- `configcatclient.create_client_with_manual_poll()`
-- `configcatclient.create_client_with_lazy_load()`
-
 ## Sample Applications
 - <a href="https://github.com/configcat/python-sdk/tree/master/samples/consolesample" target="_blank">Sample Console App</a>
 - <a href="https://github.com/configcat/python-sdk/tree/master/samples/webappsample" target="_blank">Django Web App</a>

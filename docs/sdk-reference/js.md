@@ -200,13 +200,6 @@ configCatClient.getAllKeys(function(keys) {
 });
 ```
 
-## CDN base url (forward proxy, dedicated subscription)
-You can customize your CDN path in the SDK with `baseUrl` property in the `options` parameter.
-
-```js
-var configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { baseUrl: "https://myCDN.configcat.com" });
-```
-
 ## Sample Applications
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/angular-sample" target="_blank">Angular 2+</a>
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/react-sample" target="_blank">React</a>
