@@ -82,20 +82,6 @@ user_object = User('435170f4-8a8b-4b67-a723-505ac7cdea92', 'john@example', 'Unit
                 {'SubscriptionType': 'Pro', 'UserRole': 'Admin'})
 ```
 
-### CDN base url (forward proxy, dedicated subscription)
-You can customize your CDN path in the SDK with `base_url` parameter.
-
-```python
-configcatclient.create_client_with_auto_poll(
-    "#YOUR-API-KEY#", base_url="https://myCDN.configcat.com");
-```
-
-The following methods support tha `base_url` parameter:
-
-- `configcatclient.create_client_with_auto_poll()`
-- `configcatclient.create_client_with_manual_poll()`
-- `configcatclient.create_client_with_lazy_load()`
-
 ## Polling Modes
 The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all requests are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 
@@ -180,6 +166,20 @@ You can query the keys from your configuration in the SDK with the `get_all_keys
 configcat_client = configcatclient.create_client('#YOUR-API-KEY#')
 keys = configcat_client.get_all_keys()
 ```
+
+## CDN base url (forward proxy, dedicated subscription)
+You can customize your CDN path in the SDK with `base_url` parameter.
+
+```python
+configcatclient.create_client_with_auto_poll(
+    "#YOUR-API-KEY#", base_url="https://myCDN.configcat.com");
+```
+
+The following methods support the `base_url` parameter:
+
+- `configcatclient.create_client_with_auto_poll()`
+- `configcatclient.create_client_with_manual_poll()`
+- `configcatclient.create_client_with_lazy_load()`
 
 ## Sample Applications
 - <a href="https://github.com/configcat/python-sdk/tree/master/samples/consolesample" target="_blank">Sample Console App</a>
