@@ -24,8 +24,20 @@ var configCatClient = configcat.createClient("#YOUR-API-KEY#");
 ```
 
 ### 3. Get your setting value:
+The Promise (async/await) way:
 ```js
-configCatClient.getValue("isMyAwesomeFeatureEnabled", false, function(value) {
+configCatClient.getValueAsync("isMyAwesomeFeatureEnabled", false)
+.then((value) => {
+    if(value) {
+        do_the_new_thing();
+    } else {
+        do_the_old_thing();
+    }
+});
+```
+or the Callback way:
+```js
+configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     if(value) {
         do_the_new_thing();
     } else {
@@ -75,12 +87,37 @@ configCatClient.getValue(
 );
 ```
 
+## `getValueAsync()`
+Returns a Promise with the value.
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+```js
+const value = await configCatClient.getValueAsync(
+    "keyOfMySetting", // Setting Key
+    false, // Default value
+    { identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92" } // Optional User Object
+);
+```
+or
+```js
+configCatClient.getValueAsync(
+    "keyOfMySetting", // Setting Key
+    false, // Default value
+    { identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92" }) // Optional User Object
+.then((value) => { console.log(value) });
+```
+
 ### User Object 
+For simple targeting:
 ``` javascript
 var userObject = {
     identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92"
 };   
 ```
+or
 ``` javascript
 var userObject = {
     identifier : "john@example.com"
@@ -92,6 +129,8 @@ var userObject = {
 | `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
 | `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
 | `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+
+For advanced targeting:
 ``` javascript
 var userObject = {
     identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92",

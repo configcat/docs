@@ -19,6 +19,18 @@ const configcat = require("configcat-node");
 let configCatClient = configcat.createClient("#YOUR-API-KEY#");
 ```
 ### 4. Get your setting value
+The Promise (async/await) way:
+```js
+configCatClient.getValueAsync("isMyAwesomeFeatureEnabled", false)
+.then((value) => {
+    if(value) {
+        do_the_new_thing();
+    } else {
+        do_the_old_thing();
+    }
+});
+```
+or the Callback way:
 ```js
 configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     if(value) {
@@ -28,6 +40,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     }
 });
 ```
+
 ## Creating the *ConfigCat Client*
 *ConfigCat Client* is responsible for:
 - managing the communication between your application and ConfigCat servers.
@@ -62,6 +75,30 @@ configCatClient.getValue(
     { identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92" } // Optional User Object
 );
 ```
+
+## `getValueAsync()`
+Returns a Promise with the value.
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+```js
+const value = await configCatClient.getValueAsync(
+    "keyOfMySetting", // Setting Key
+    false, // Default value
+    { identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92" } // Optional User Object
+);
+```
+or
+```js
+configCatClient.getValueAsync(
+    "keyOfMySetting", // Setting Key
+    false, // Default value
+    { identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92" }) // Optional User Object
+.then((value) => { console.log(value) });
+```
+
 ### User Object 
 ``` javascript
 let userObject = {
