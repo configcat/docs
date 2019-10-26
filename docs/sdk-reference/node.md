@@ -99,7 +99,8 @@ configCatClient.getValueAsync(
 .then((value) => { console.log(value) });
 ```
 
-### User Object 
+### User Object
+The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting]((advanced/targeting.md)) feature.
 ``` javascript
 let userObject = {
     identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92"
@@ -110,7 +111,6 @@ let userObject = {
     identifier : "john@example.com"
 };   
 ```
-
 | Parameters   | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |

@@ -69,7 +69,8 @@ User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 client.GetValue("keyOfMySetting", false, userObject);
 ```
 
-### User Object 
+### User Object
+The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting]((advanced/targeting.md)) feature. 
 ``` csharp
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 ```
