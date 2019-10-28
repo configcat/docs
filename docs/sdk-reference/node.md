@@ -118,6 +118,7 @@ let userObject = {
 | `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
 | `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
+For advanced targeting:
 ``` javascript
 let userObject = {
     identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92",
@@ -135,7 +136,6 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
-
 
 #### `createClientWithAutoPoll(apiKey, options)`
 

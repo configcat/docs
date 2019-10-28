@@ -143,11 +143,20 @@ var userObject = {
     }
 };
 ```
+
 ## Polling Modes
 The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all requests are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
+
+#### `createClientWithAutoPoll(apiKey, options)`
+
+| Option Parameter      | Description                                            | Default        |
+| --------------------- | ------------------------------------------------------ | -------------- |
+| `pollIntervalSeconds` | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER` | 60             |
+| `configChanged`       | Callback to get notified about changes.                | -              |
+| `logger`              | Custom logger. See below for details.                  | Console logger |
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
 ```js
@@ -159,28 +168,31 @@ configcat.createClientWithAutoPoll("#YOUR-API-KEY#", { configChanged: function()
     console.log("Your config has been changed!");
 }});
 ```
-Available options:
-| Option Parameter      | Description                                            | Default        |
-| --------------------- | ------------------------------------------------------ | -------------- |
-| `pollIntervalSeconds` | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER` | 60             |
-| `configChanged`       | Callback to get notified about changes.                | -              |
-| `logger`              | Custom logger. See below for details.                  | Console logger |
 
 ### Lazy loading
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `callback` will be called after the cache is updated.
 
-Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
-```js
-configcat.createClientWithLazyLoad("#YOUR-API-KEY#", { cacheTimeToLiveSeconds: 600 });
-```
-Available options:
+#### `createClientWithLazyLoad(apiKey, options)`
+
 | Option Parameter         | Description                                     | Default |
 | ------------------------ | ----------------------------------------------- | ------- |
 | `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER` | 60      |
 | `logger`                 | Custom logger.                                  |
 
+Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
+
+```js
+configcat.createClientWithLazyLoad("#YOUR-API-KEY#", { cacheTimeToLiveSeconds: 600 });
+```
+
 ### Manual polling
-Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `forceRefresh()` or `forceRefreshAsync()` is your application's responsibility.
+
+#### `createClientWithManualPoll(apiKey, options)`
+
+| Option Parameter | Description                           | Default        |
+| ---------------- | ------------------------------------- | -------------- |
+| `logger`         | Custom logger. See below for details. | Console logger |
 
 ```js
 let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
@@ -193,11 +205,9 @@ configCatClient.forceRefresh(() =>{
     });
 });
 ```
-Available options:
-| Option Parameter | Description                           | Default        |
-| ---------------- | ------------------------------------- | -------------- |
-| `logger`         | Custom logger. See below for details. | Console logger |
-> `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
+
+> `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` or `forceRefreshAsync()` to update the cache.
+
 ```js
 let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
 
@@ -240,6 +250,14 @@ configCatClient.getAllKeys(function(keys) {
 });
 ```
 
+## `getAllKeysAsync()`
+You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
+
+```js
+let configCatClient = configcat.createClient("#YOUR-API-KEY#");
+const keys = await configCatClient.getAllKeysAsync();
+console.log(keys);
+```
 ## Sample Applications
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/angular-sample" target="_blank">Angular 2+</a>
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/react-sample" target="_blank">React</a>
