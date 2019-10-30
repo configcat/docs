@@ -223,6 +223,29 @@ let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>", configCache: M
 #### Force refresh
 Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
 
+## Using ConfigCat behind a proxy
+Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by adding a *ProxyDictionary* to the ConfigCat's `URLSessionConfiguration`.
+
+```swift
+let proxyHost = "127.0.0.1"
+let proxyPort = 8080
+let configuration = URLSessionConfiguration.default
+let proxyUser = "user"
+let proxyPassword = "password" 
+configuration.connectionProxyDictionary = [
+    kCFNetworkProxiesHTTPEnable: true,
+    kCFNetworkProxiesHTTPProxy: proxyHost,
+    kCFNetworkProxiesHTTPPort: proxyPort,
+    kCFNetworkProxiesHTTPSEnable: true,
+    kCFNetworkProxiesHTTPSProxy: proxyHost,
+    kCFNetworkProxiesHTTPSPort: proxyPort,
+    kCFProxyUsernameKey: proxyUser, // Optional
+    kCFProxyPasswordKey: proxyPassword // Optional
+]
+
+let client: ConfigCatClient = ConfigCatClient(apiKey: apiKey, sessionConfiguration: configuration)
+```
+
 ## Sample App
 Check out our Sample Application how they use the ConfigCat SDK
 * <a href="https://github.com/configcat/swift-sdk/tree/master/samples/ios" target="_blank">iOS with auto polling and change listener</a>
