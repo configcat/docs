@@ -1,6 +1,6 @@
 ---
 id: ios
-title: iOS
+title: iOS (Swift)
 ---
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
