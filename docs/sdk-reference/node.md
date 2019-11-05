@@ -87,6 +87,7 @@ configCatClient.getValue(
 ## `getValueAsync()`
 
 Returns a Promise with the value.
+
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
@@ -225,6 +226,7 @@ configCatClient.forceRefresh(() =>{
 ```
 
 ## Logging
+
 To customize logging create a logger instance and add it to Options object when creating the ConfigCat client. 2 log levels are supported: `log` and `error`.
 ```js
 let customLogger = {
@@ -240,6 +242,7 @@ let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { l
 ```
 
 ## `getAllKeys()`
+
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
@@ -250,6 +253,7 @@ configCatClient.getAllKeys((keys)=>{
 ```
 
 ## `getAllKeysAsync()`
+
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
@@ -259,8 +263,10 @@ console.log(keys);
 ```
 
 ## Sample Application
+
 <a href="https://github.com/configcat/node-sdk/blob/master/samples/console" target="_blank">Sample Console App</a>
 
 ## Look under the hood
+
 * <a href="https://github.com/configcat/node-sdk" target="_blank">ConfigCat's Node.js SDK on GitHub</a>
 * <a href="https://www.npmjs.com/package/configcat-node" target="_blank">ConfigCat's Node.js SDK in NPM</a>
