@@ -5,20 +5,26 @@ title: Node.js
 ## Getting started
 
 ### 1. Install *ConfigCat SDK*
+
 *via NPM*
 ```bash
 npm i configcat-node
 ```
+
 ### 2. Import package
+
 ```js
 const configcat = require("configcat-node");
 ```
 
 ### 3. Create the *ConfigCat* client with your *API Key*
+
 ```js
 let configCatClient = configcat.createClient("#YOUR-API-KEY#");
 ```
+
 ### 4. Get your setting value
+
 The Promise (async/await) way:
 ```js
 configCatClient.getValueAsync("isMyAwesomeFeatureEnabled", false)
@@ -42,6 +48,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 ```
 
 ## Creating the *ConfigCat Client*
+
 *ConfigCat Client* is responsible for:
 - managing the communication between your application and ConfigCat servers.
 - caching your setting values and feature flags.
@@ -67,6 +74,7 @@ Creating the client is different for each polling mode.
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `callback`     | **REQUIRED.** Called with the actual setting value.                                                          |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
 ```js
 configCatClient.getValue(
     "keyOfMySetting", // Setting Key
@@ -77,12 +85,14 @@ configCatClient.getValue(
 ```
 
 ## `getValueAsync()`
+
 Returns a Promise with the value.
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
 ```js
 const value = await configCatClient.getValueAsync(
     "keyOfMySetting", // Setting Key
@@ -100,6 +110,7 @@ configCatClient.getValueAsync(
 ```
 
 ### User Object
+
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting]((advanced/targeting.md)) feature.
 ``` javascript
 let userObject = {
@@ -111,6 +122,7 @@ let userObject = {
     identifier : "john@example.com"
 };   
 ```
+
 | Parameters   | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |
@@ -132,9 +144,11 @@ let userObject = {
 ```
 
 ## Polling Modes
+
 The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all requests are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 
 ### Auto polling (default)
+
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
 #### `createClientWithAutoPoll(apiKey, options)`
@@ -144,6 +158,7 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 | `pollIntervalSeconds` | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER` | 60             |
 | `configChanged`       | Callback to get notified about changes.                | -              |
 | `logger`              | Custom logger. See below for details.                  | Console logger |
+| `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
 ```js
@@ -157,6 +172,7 @@ let configCatClient = configcat.createClientWithAutoPoll("#YOUR-API-KEY#", { con
 ```
 
 ### Lazy loading
+
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `callback` will be called after the cache is updated.
 
 #### `createClientWithLazyLoad(apiKey, options)`
@@ -165,6 +181,7 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 | ------------------------ | ----------------------------------------------- | -------------- |
 | `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER` | 60             |
 | `logger`                 | Custom logger. See below for details.           | Console logger |
+| `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
@@ -180,6 +197,7 @@ Manual polling gives you full control over when the setting values are downloade
 | Option Parameter | Description                           | Default        |
 | ---------------- | ------------------------------------- | -------------- |
 | `logger`         | Custom logger. See below for details. | Console logger |
+| `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 
 ```js
 let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
