@@ -5,6 +5,7 @@ id: "js"
 ## Getting started
 
 ### 1. Install and import package
+
 *via NPM:*
 ```bash
 npm i configcat-js
@@ -19,11 +20,13 @@ import * as configcat from "configcat-js";
 ```
 
 ### 2. Create the *ConfigCatClient* with your API Key:
+
 ```js
 var configCatClient = configcat.createClient("#YOUR-API-KEY#");
 ```
 
 ### 3. Get your setting value:
+
 The Promise (async/await) way:
 ```js
 configCatClient.getValueAsync("isMyAwesomeFeatureEnabled", false)
@@ -47,6 +50,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 ```
 
 ## Working Demo on CodePen
+
 <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="html,result" data-user="configcat" data-slug-hash="pozaLLV" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="ConfigCat feature flags based dynamically updating page">
   <span>See the Pen <a href="https://codepen.io/configcat/pen/pozaLLV/">
   ConfigCat feature flags based dynamically updating page</a> by ConfigCat (<a href="https://codepen.io/configcat">@configcat</a>)
@@ -55,12 +59,14 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 ## Creating the *ConfigCat* Client
+
 *ConfigCat Client* is responsible for:
 - managing the communication between your application and ConfigCat servers.
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
 `createClient()` returns a client with default options.
+
 | Properties | Description                                                                                                        |
 | ---------- | ------------------------------------------------------------------------------------------------------------------ |
 | `apiKey`   | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |
@@ -72,6 +78,7 @@ Creating the client is different for each polling mode.
 > We strongly recommend using the *ConfigCat Client* as a Singleton object in your application.
 
 ## Anatomy of `getValue()`
+
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
@@ -88,12 +95,15 @@ configCatClient.getValue(
 ```
 
 ## `getValueAsync()`
+
 Returns a Promise with the value.
+
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
 ```js
 const value = await configCatClient.getValueAsync(
     "keyOfMySetting", // Setting Key
@@ -111,6 +121,7 @@ configCatClient.getValueAsync(
 ```
 
 ### User Object
+
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting]((advanced/targeting.md)) feature. 
 For simple targeting:
 ``` javascript
@@ -124,6 +135,7 @@ var userObject = {
     identifier : "john@example.com"
 };   
 ```
+
 | Parameters   | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |
@@ -145,9 +157,11 @@ var userObject = {
 ```
 
 ## Polling Modes
+
 The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all requests are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 
 ### Auto polling (default)
+
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
 #### `createClientWithAutoPoll(apiKey, options)`
@@ -157,6 +171,7 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 | `pollIntervalSeconds` | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER` | 60             |
 | `configChanged`       | Callback to get notified about changes.                | -              |
 | `logger`              | Custom logger. See below for details.                  | Console logger |
+| `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache | 30000          |
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
 ```js
@@ -170,6 +185,7 @@ configcat.createClientWithAutoPoll("#YOUR-API-KEY#", { configChanged: function()
 ```
 
 ### Lazy loading
+
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `callback` will be called after the cache is updated.
 
 #### `createClientWithLazyLoad(apiKey, options)`
@@ -178,6 +194,7 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 | ------------------------ | ----------------------------------------------- | ------- |
 | `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER` | 60      |
 | `logger`                 | Custom logger.                                  |
+| `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache | 30000          |
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
@@ -193,6 +210,7 @@ Manual polling gives you full control over when the setting values are downloade
 | Option Parameter | Description                           | Default        |
 | ---------------- | ------------------------------------- | -------------- |
 | `logger`         | Custom logger. See below for details. | Console logger |
+| `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache | 30000          |
 
 ```js
 let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
@@ -226,6 +244,7 @@ configCatClient.forceRefresh(() =>{
 ```
 
 ## Logging
+
 To customize logging create a logger instance and add it to Options object when creating the ConfigCat client. 2 log levels are supported: `log` and `error`.
 ```js
 var customLogger = {
@@ -241,6 +260,7 @@ configcat.createClientWithManualPoll("#YOUR-API-KEY#", { logger: customLogger })
 ```
 
 ## `getAllKeys()`
+
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
@@ -251,6 +271,7 @@ configCatClient.getAllKeys(function(keys) {
 ```
 
 ## `getAllKeysAsync()`
+
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
@@ -259,10 +280,12 @@ const keys = await configCatClient.getAllKeysAsync();
 console.log(keys);
 ```
 ## Sample Applications
+
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/angular-sample" target="_blank">Angular 2+</a>
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/react-sample" target="_blank">React</a>
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/html" target="_blank">Pure HTML + JS</a>
 
 ## Look under the hood
+
 * <a href="https://github.com/configcat/js-sdk" target="_blank">ConfigCat's JavaScript SDK on GitHub</a>
 * <a href="https://www.npmjs.com/package/configcat-js" target="_blank">ConfigCat JavaScript SDK in NPM</a>
