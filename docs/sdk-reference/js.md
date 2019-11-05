@@ -166,11 +166,11 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 
 #### `createClientWithAutoPoll(apiKey, options)`
 
-| Option Parameter      | Description                                            | Default        |
-| --------------------- | ------------------------------------------------------ | -------------- |
-| `pollIntervalSeconds` | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER` | 60             |
-| `configChanged`       | Callback to get notified about changes.                | -              |
-| `logger`              | Custom logger. See below for details.                  | Console logger |
+| Option Parameter      | Description                                                                                                                | Default        |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `pollIntervalSeconds` | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                     | 60             |
+| `configChanged`       | Callback to get notified about changes.                                                                                    | -              |
+| `logger`              | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
@@ -190,11 +190,11 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 
 #### `createClientWithLazyLoad(apiKey, options)`
 
-| Option Parameter         | Description                                     | Default |
-| ------------------------ | ----------------------------------------------- | ------- |
-| `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER` | 60      |
-| `logger`                 | Custom logger.                                  |
-| `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
+| Option Parameter         | Description                                                                                                                | Default        |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                            | 60             |
+| `logger`                 | Custom logger. See below for details.                                                                                      | Console logger |
+| `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
@@ -207,10 +207,10 @@ Manual polling gives you full control over when the setting values are downloade
 
 #### `createClientWithManualPoll(apiKey, options)`
 
-| Option Parameter | Description                           | Default        |
-| ---------------- | ------------------------------------- | -------------- |
-| `logger`         | Custom logger. See below for details. | Console logger |
-| `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
+| Option Parameter   | Description                                                                                                                | Default        |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `logger`           | Custom logger. See below for details.                                                                                      | Console logger |
+| `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 
 ```js
 let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
