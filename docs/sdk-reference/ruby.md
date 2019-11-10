@@ -172,6 +172,17 @@ configcat_client = ConfigCat.create_client("#YOUR-API-KEY#")
 keys = configcat_client.get_all_keys()
 ```
 
+## Using ConfigCat behind a proxy
+Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
+
+```ruby
+configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-API-KEY#",
+                                                           proxy_address: "127.0.0.1",
+                                                           proxy_port: 8080,
+                                                           proxy_user: "user",
+                                                           proxy_pass: "password")
+```
+
 ## Sample Applications
 - <a href="https://github.com/configcat/ruby-sdk/tree/master/samples/consolesample.rb" target="_blank">Sample Console App</a>
 
