@@ -44,7 +44,7 @@ DOES NOT CONTAIN|True if the *Attribute* doesn't contain the *Comparison value*.
 
 #### Semantic version comparators
 
-These comparators assume that *Attribute* and *Comparison value* contain <a target="_blank" href="https://semver.org/">semantic versions</a>. 
+These comparators assume that *Attribute* and *Comparison value* contain <a target="_blank" href="https://semver.org/">semantic versions</a>.
 
 Comparator|Description
 ---|---
@@ -54,6 +54,8 @@ IS NOT ONE OF (Semver)|True if the *Attribute* is not listed in the *Comparison 
 <= (Semver)|True if *Attribute* is smaller than or equals to *Comparison value*. 
 \> (Semver)|True if *Attribute* is a larger version number than *Comparison value*.
 \>= (Semver)|True if *Attribute* is larger than or equals to *Comparison value*. 
+
+All semantic version comparators return False if either *Attribute* or *Comparison value* is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
 
 #### Number comparators
 
@@ -67,6 +69,8 @@ Comparator|Description
 <= (Number)|True if *Attribute* is less than or equals to *Comparison value*. 
 \> (Number)|True if *Attribute* is a larger than *Comparison value*.
 \>= (Number)|True if *Attribute* is larger than or equals to *Comparison value*. 
+
+All number comparators return False if either *Attribute* or *Comparison value* is not a valid number.
 
 ### Served value
 The exact value that will be served to the users who match the targeting rule. Depending on the kind of your setting this could be:
