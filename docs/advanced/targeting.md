@@ -53,7 +53,7 @@ IS NOT ONE OF (Semver)|True if the *Attribute* is not listed in the *Comparison 
 < (Semver)|True if *Attribute* is a smaller version number than *Comparison value*.
 <= (Semver)|True if *Attribute* is smaller than or equals to *Comparison value*. 
 \> (Semver)|True if *Attribute* is a larger version number than *Comparison value*.
->= (Semver)|True if *Attribute* is larger than or equals to *Comparison value*. 
+\>= (Semver)|True if *Attribute* is larger than or equals to *Comparison value*. 
 
 #### Number comparators
 
@@ -66,7 +66,7 @@ Comparator|Description
 < (Number)|True if *Attribute* is less than *Comparison value*.
 <= (Number)|True if *Attribute* is less than or equals to *Comparison value*. 
 \> (Number)|True if *Attribute* is a larger than *Comparison value*.
->= (Number)|True if *Attribute* is larger than or equals to *Comparison value*. 
+\>= (Number)|True if *Attribute* is larger than or equals to *Comparison value*. 
 
 ### Served value
 The exact value that will be served to the users who match the targeting rule. Depending on the kind of your setting this could be:
