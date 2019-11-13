@@ -46,6 +46,8 @@ DOES NOT CONTAIN|True if the *Attribute* doesn't contain the *Comparison value*.
 
 These comparators assume that *Attribute* and *Comparison value* contain <a target="_blank" href="https://semver.org/">semantic versions</a>. 
 
+Comparator|Description
+---|---
 IS ONE OF (Semver)|True if *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list of semantic versions.
 IS NOT ONE OF (Semver)|True if the *Attribute* is not listed in the *Comparison value*.
 < (Semver)|True if *Attribute* is a smaller version number than *Comparison value*.
@@ -57,6 +59,8 @@ IS NOT ONE OF (Semver)|True if the *Attribute* is not listed in the *Comparison 
 
 These comparators assume that *Attribute* and *Comparison value* contain numbers. 
 
+Comparator|Description
+---|---
 = (Number)|True if *Attribute* equals *Comparison value*.
 <> (Number)|True if *Attribute* does not equal *Comparison value*.
 < (Number)|True if *Attribute* is less than *Comparison value*.
