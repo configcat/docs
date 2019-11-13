@@ -52,7 +52,7 @@ IS ONE OF (Semver)|True if *Attribute* is listed in the *Comparison value*. *Com
 IS NOT ONE OF (Semver)|True if the *Attribute* is not listed in the *Comparison value*.
 < (Semver)|True if *Attribute* is a smaller version number than *Comparison value*.
 <= (Semver)|True if *Attribute* is smaller than or equals to *Comparison value*. 
-> (Semver)|True if *Attribute* is a larger version number than *Comparison value*.
+\> (Semver)|True if *Attribute* is a larger version number than *Comparison value*.
 >= (Semver)|True if *Attribute* is larger than or equals to *Comparison value*. 
 
 #### Number comparators
@@ -65,7 +65,7 @@ Comparator|Description
 <> (Number)|True if *Attribute* does not equal *Comparison value*.
 < (Number)|True if *Attribute* is less than *Comparison value*.
 <= (Number)|True if *Attribute* is less than or equals to *Comparison value*. 
-> (Number)|True if *Attribute* is a larger than *Comparison value*.
+\> (Number)|True if *Attribute* is a larger than *Comparison value*.
 >= (Number)|True if *Attribute* is larger than or equals to *Comparison value*. 
 
 ### Served value
