@@ -110,8 +110,8 @@ With percentage-based user targeting you can specify a randomly selected fractio
 
 ![targeting-1](assets/targeting-1.png)
 
-## Anatomy of the percentage targeting
-Percentage based targeting add up from the **% value** and the **Served value**.
+## Anatomy of the percentage-based targeting
+Percentage based targeting consists of **% value** and the **Served value** pairs.
 ### % value
 Any *number between 0 and 100* that represents a randomly allocated fraction of your users.
 ### Served value
