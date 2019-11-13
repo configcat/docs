@@ -13,11 +13,12 @@ Using this feature you will be able to set different setting values for differen
 ![targeting-1](assets/targeting-1.png)
 
 ## Anatomy of a Targeting Rule
-By adding a rule you can specify a group of your users whom a feature will be enabled or a different value will be served. A rule consists of an **Attribute** of a user in your application, a **Comparison value** (e.g., a list of email addresses) and a **Comparator**. ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
+By adding a rule, you specify a group of your users and specify what feature flag - or other setting - value they should get. A rule consists of an **Attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses) and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
+
 ### Attribute
 A property of your user (e.g. *email address*, *geographic location*). Your application should pass the attribute values (e.g. *jane@example.com*, *Europe*) to ConfigCat for comparison.
 
-There are 3 preset attributes. Additionally you can define your ***custom attributes*** as well:
+There are 3 predefined attributes. Additionally you can define your own ***custom attributes*** as well:
 Attribute Name|Description
 ---|---
 `Email`|The e-mail address of your user.
@@ -26,18 +27,45 @@ Attribute Name|Description
 `Custom`|***Define any attribute (e.g. `OS version`), by typing its name to the textbox.***
 
 ### Comparison value
-Any string, number or comma separated list to be compared with the selected *Attribute* using the *Comparator*. **Max Length: 65535 chars**
+Any string, number or comma separated list. Will be compared to the selected *Attribute* using the *Comparator*. **Max Length: 65535 chars**
 
 ### Comparator
+
+#### Text comparators
+
+These comparators assume that *Attribute* and *Comparison value* contain text. Use these comparators unless you want to compare numbers or semantic version numbers.
+
 Comparator|Description
 ---|---
-IS IN|Checks if the *Attribute* passed by your application is within the *Comparison value*.
-IS NOT IN|True if the *Attribute* is not within the *Comparison value*.
+IS ONE OF|Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list.
+IS NOT ONE OF|True if the *Attribute* is not listed in the *Comparison value*.
 CONTAINS|True if the *Attribute* contains the *Comparison value*.
-NOT CONTAINS|True if the *Attribute* doesn't contain the *Comparison value*.
+DOES NOT CONTAIN|True if the *Attribute* doesn't contain the *Comparison value*.
+
+#### Semantic version comparators
+
+These comparators assume that *Attribute* and *Comparison value* contain <a target="_blank" href="https://semver.org/">semantic versions</a>. 
+
+IS ONE OF (Semver)|True if *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list of semantic versions.
+IS NOT ONE OF (Semver)|True if the *Attribute* is not listed in the *Comparison value*.
+< (Semver)|True if *Attribute* is a smaller version number than *Comparison value*.
+<= (Semver)|True if *Attribute* is smaller than or equals to *Comparison value*. 
+> (Semver)|True if *Attribute* is a larger version number than *Comparison value*.
+>= (Semver)|True if *Attribute* is larger than or equals to *Comparison value*. 
+
+#### Number comparators
+
+These comparators assume that *Attribute* and *Comparison value* contain numbers. 
+
+= (Number)|True if *Attribute* equals *Comparison value*.
+<> (Number)|True if *Attribute* does not equal *Comparison value*.
+< (Number)|True if *Attribute* is less than *Comparison value*.
+<= (Number)|True if *Attribute* is less than or equals to *Comparison value*. 
+> (Number)|True if *Attribute* is a larger than *Comparison value*.
+>= (Number)|True if *Attribute* is larger than or equals to *Comparison value*. 
 
 ### Served value
-The exact value that will be served to the users that match the targeting rule. Depending on the kind of your setting this could be:
+The exact value that will be served to the users who match the targeting rule. Depending on the kind of your setting this could be:
 Setting Kind|Setting Type|Description
 ---|---|---
 On/Off Toggle|Boolean|true/false, usually the state of a feature flag
@@ -61,8 +89,8 @@ By adding multiple targeting rules you can create more complex rule sets.
 2|Email|CONTAINS|`@mycompany.com`|ON
 All other cases: OFF
 
-### All other cases
-This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
+### To all other users, serve
+This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) is not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
 
 ## Targeting a percentage of users
 With percentage-based user targeting you can specify a randomly selected fraction of your users whom a feature will be enabled or a different value will be served.
