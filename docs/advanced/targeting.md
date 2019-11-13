@@ -39,7 +39,7 @@ Any string, number or comma separated list. Will be compared to the selected *At
 
 #### Text comparators
 
-These comparators assume that *Attribute* and *Comparison value* contain text. Use these comparators unless you want to compare numbers or semantic version numbers.
+These comparators assume that *Attribute* and *Comparison value* contain text. Use these comparators unless you want to compare numbers or semantic versions.
 
 Comparator|Description
 ---|---
@@ -57,9 +57,9 @@ Comparator|Description
 IS ONE OF (Semver)|True if *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list of semantic versions.
 IS NOT ONE OF (Semver)|True if the *Attribute* is not listed in the *Comparison value*.
 < (Semver)|True if *Attribute* is a smaller version number than *Comparison value*.
-<= (Semver)|True if *Attribute* is smaller than or equals to *Comparison value*. 
+<= (Semver)|True if *Attribute* is smaller than or equals *Comparison value*. 
 \> (Semver)|True if *Attribute* is a larger version number than *Comparison value*.
-\>= (Semver)|True if *Attribute* is larger than or equals to *Comparison value*. 
+\>= (Semver)|True if *Attribute* is larger than or equals *Comparison value*. 
 
 All semantic version comparators return False if either *Attribute* or *Comparison value* is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
 
@@ -72,9 +72,9 @@ Comparator|Description
 = (Number)|True if *Attribute* equals *Comparison value*.
 <> (Number)|True if *Attribute* does not equal *Comparison value*.
 < (Number)|True if *Attribute* is less than *Comparison value*.
-<= (Number)|True if *Attribute* is less than or equals to *Comparison value*. 
+<= (Number)|True if *Attribute* is less than or equals *Comparison value*. 
 \> (Number)|True if *Attribute* is a larger than *Comparison value*.
-\>= (Number)|True if *Attribute* is larger than or equals to *Comparison value*. 
+\>= (Number)|True if *Attribute* is larger than or equals *Comparison value*. 
 
 All number comparators return False if either *Attribute* or *Comparison value* is not a valid number.
 
