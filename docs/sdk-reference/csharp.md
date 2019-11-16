@@ -178,7 +178,7 @@ You can set `LoggerFactory` property on any configuration object. This value is 
 
 The following example shows how to configure the ConsoleLoggerFactory to log messages to the `System.Console`. 
 ```csharp
- var clientConfiguration = new LazyLoadConfiguration
+var clientConfiguration = new LazyLoadConfiguration
 {
     ApiKey = "#YOUR-API-KEY#",               
     LoggerFactory = new ConsoleLoggerFactory()
