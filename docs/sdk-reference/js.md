@@ -123,7 +123,7 @@ configCatClient.getValueAsync(
 
 ### User Object
 
-The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting]((advanced/targeting.md)) feature. 
+The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 For simple targeting:
 ``` javascript
 var userObject = {
