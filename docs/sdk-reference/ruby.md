@@ -109,7 +109,8 @@ Available options:
 | `poll_interval_seconds`             | Polling interval.                                                                                    | 60      |
 | `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
 | `max_init_wait_time_seconds`        | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
-| `config_cache_class`                | Custom cache implementation.                                                                         | None    |
+| `config_cache_class`                | Custom cache implementation.                                                                         | nil     |
+| `base_url`                          | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations.        | nil     |
 
 ### Lazy loading
 When calling `get_value()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
@@ -139,10 +140,11 @@ end
 ConfigCat.create_client_with_lazy_load("#YOUR-API-KEY#", config_cache_class: InMemoryConfigCache);
 ```
 Available options:
-| Option Parameter             | Description                  | Default |
-| ---------------------------- | ---------------------------- | ------- |
-| `cache_time_to_live_seconds` | Cache TTL.                   | 60      |
-| `config_cache_class`         | Custom cache implementation. | None    |
+| Option Parameter             | Description                                                                                   | Default |
+| ---------------------------- | --------------------------------------------------------------------------------------------- | ------- |
+| `cache_time_to_live_seconds` | Cache TTL.                                                                                    | 60      |
+| `config_cache_class`         | Custom cache implementation.                                                                  | nil     |
+| `base_url`                   | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
 
 ### Manual polling
 Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
@@ -152,9 +154,10 @@ configcat_client = ConfigCat.create_client_with_manual_poll("#YOUR-API-KEY#");
 configcat_client.force_refresh();
 ```
 Available options:
-| Option Parameter     | Description                  | Default |
-| -------------------- | ---------------------------- | ------- |
-| `config_cache_class` | Custom cache implementation. | None    |
+| Option Parameter     | Description                                                                                   | Default |
+| -------------------- | --------------------------------------------------------------------------------------------- | ------- |
+| `config_cache_class` | Custom cache implementation.                                                                  | nil     |
+| `base_url`           | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
 ```ruby
