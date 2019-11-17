@@ -2,6 +2,7 @@
 title: "JavaScript"
 id: "js"
 ---
+*For SSR (Server-Side Rendering) Universal applications we recommend using [ConfigCat SDK for Node.js](node.md)*
 ## Getting started
 
 ### 1. Install and import package

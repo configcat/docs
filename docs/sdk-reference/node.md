@@ -2,6 +2,8 @@
 id: node
 title: Node.js
 ---
+*For SSR (Server-Side Rendering) Universal applications instead of the [ConfigCat SDK for JS](js.md) we recommend using this SDK.*
+
 ## Getting started
 
 ### 1. Install *ConfigCat SDK*
