@@ -109,7 +109,8 @@ Available options:
 | `poll_interval_seconds`             | Polling interval.                                                                                    | 60      |
 | `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
 | `max_init_wait_time_seconds`        | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
-| `config_cache_class`                | Custom cache implementation.                                                                         | None    |
+| `config_cache_class`                | Custom cache implementation.                                                                         | nil     |
+| `base_url`                          | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations.        | nil     |
 
 ### Lazy loading
 When calling `get_value()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
@@ -139,10 +140,11 @@ end
 ConfigCat.create_client_with_lazy_load("#YOUR-API-KEY#", config_cache_class: InMemoryConfigCache);
 ```
 Available options:
-| Option Parameter             | Description                  | Default |
-| ---------------------------- | ---------------------------- | ------- |
-| `cache_time_to_live_seconds` | Cache TTL.                   | 60      |
-| `config_cache_class`         | Custom cache implementation. | None    |
+| Option Parameter             | Description                                                                                   | Default |
+| ---------------------------- | --------------------------------------------------------------------------------------------- | ------- |
+| `cache_time_to_live_seconds` | Cache TTL.                                                                                    | 60      |
+| `config_cache_class`         | Custom cache implementation.                                                                  | nil     |
+| `base_url`                   | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
 
 ### Manual polling
 Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
@@ -152,9 +154,10 @@ configcat_client = ConfigCat.create_client_with_manual_poll("#YOUR-API-KEY#");
 configcat_client.force_refresh();
 ```
 Available options:
-| Option Parameter     | Description                  | Default |
-| -------------------- | ---------------------------- | ------- |
-| `config_cache_class` | Custom cache implementation. | None    |
+| Option Parameter     | Description                                                                                   | Default |
+| -------------------- | --------------------------------------------------------------------------------------------- | ------- |
+| `config_cache_class` | Custom cache implementation.                                                                  | nil     |
+| `base_url`           | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
 ```ruby
@@ -164,12 +167,37 @@ configcat_client.force_refresh();
 value = configcat_client.get_value("key", "my default value") # Returns "value from server"
 ```
 
+## Logging
+In the *ConfigCat SDK* there is a default logger writes logs to the standard output.  
+The following example shows how to configure the *Log Level* of the default logger. 
+
+```ruby
+ConfigCat.logger.level = Logger::DEBUG
+```
+
+You can easily replace the default logger with your own one. The following example shows how to set a logger writes logs into a text file.
+
+```ruby
+ConfigCat.logger = Logger.new('log.txt')
+```
+
 ## `get_all_keys()`
 You can query the keys from your configuration in the SDK with the `get_all_keys()` method.
 
 ```ruby
 configcat_client = ConfigCat.create_client("#YOUR-API-KEY#")
 keys = configcat_client.get_all_keys()
+```
+
+## Using ConfigCat behind a proxy
+Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
+
+```ruby
+configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-API-KEY#",
+                                                           proxy_address: "127.0.0.1",
+                                                           proxy_port: 8080,
+                                                           proxy_user: "user",
+                                                           proxy_pass: "password")
 ```
 
 ## Sample Applications
