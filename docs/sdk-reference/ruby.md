@@ -168,8 +168,7 @@ value = configcat_client.get_value("key", "my default value") # Returns "value f
 ```
 
 ## Logging
-In the *ConfigCat SDK* there is a default logger writes logs to the standard output.  
-The following example shows how to configure the *Log Level* of the default logger. 
+In the *ConfigCat SDK* there is a default logger writes logs to the standard output. The following example shows how to configure the *Log Level* of the default logger. 
 
 ```ruby
 ConfigCat.logger.level = Logger::DEBUG
