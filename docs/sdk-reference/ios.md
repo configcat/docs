@@ -79,14 +79,6 @@ let value = client.getValue(
 )
 ```
 
-## `getAllKeys()`
-You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
-
-```go
-let client = ConfigCatClient(apiKey: "#YOUR-API-KEY#")
-let keys = client.getAllKeys()
-```
-
 ### User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting]((advanced/targeting.md)) feature. 
 ```swift
@@ -106,6 +98,14 @@ let user = User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
     email: "john@example.com", 
     country: "United Kingdom", 
     custom: ["SubscriptionType":"Pro", "UserRole":"Admin"])
+```
+
+## `getAllKeys()`
+You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
+
+```go
+let client = ConfigCatClient(apiKey: "#YOUR-API-KEY#")
+let keys = client.getAllKeys()
 ```
 
 ## Polling Modes
