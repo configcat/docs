@@ -105,14 +105,6 @@ value := client.GetValueForUser(
 )
 ```
 
-## `GetAllKeys()`
-You can get all the setting keys from your configuration by calling the `GetAllKeys()` method of the `ConfigCatClient`.
-
-```go
-client := configcat.NewClient("#YOUR-API-KEY#")
-keys, err := client.GetAllKeys()
-```
-
 ### User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting]((advanced/targeting.md)) feature.
 #### Simple user object creation:
@@ -122,6 +114,7 @@ user = configcat.NewUser("435170f4-8a8b-4b67-a723-505ac7cdea92")
 ```go
 user = configcat.NewUser("john@example.com")   
 ```
+
 #### Customized user object creation:
 | Arguments    | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -135,6 +128,14 @@ custom["SubscriptionType"] = "Pro"
 custom["UserRole"] = "Admin"
 user := configcat.NewUserWithAdditionalAttributes("435170f4-8a8b-4b67-a723-505ac7cdea92",
     "john@example.com", "United Kingdom", custom)
+```
+
+## `GetAllKeys()`
+You can get all the setting keys from your configuration by calling the `GetAllKeys()` method of the `ConfigCatClient`.
+
+```go
+client := configcat.NewClient("#YOUR-API-KEY#")
+keys, err := client.GetAllKeys()
 ```
 
 ## Polling Modes
