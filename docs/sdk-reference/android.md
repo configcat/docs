@@ -100,14 +100,6 @@ val value = client.getValue(
 )
 ```
 
-## `getAllKeys()`
-You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
-
-```kotlin
-val client = ConfigCatClient("#YOUR-API-KEY#")
-val keys = client.getAllKeys()
-```
-
 ### User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting]((advanced/targeting.md)) feature. 
 ``` java
@@ -128,6 +120,14 @@ val user = User.newBuilder()
     .country("United Kingdom")
     .custom(hashMapOf("SubscriptionType" to "Pro", "UserRole" to "Admin"))
     .build("435170f4-8a8b-4b67-a723-505ac7cdea92")
+```
+
+## `getAllKeys()`
+You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
+
+```kotlin
+val client = ConfigCatClient("#YOUR-API-KEY#")
+val keys = client.getAllKeys()
 ```
 
 ## Polling Modes
