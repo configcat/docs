@@ -264,6 +264,14 @@ const keys = await configCatClient.getAllKeysAsync();
 console.log(keys);
 ```
 
+## Using ConfigCat behind a proxy
+Provide your own proxy server settings (proxy server/port) by adding a `proxy` option parameter when creating the ConfigCat client.
+```js
+const options = { pollIntervalSeconds: 2, proxy: 'http://192.168.1.1:8080' }
+
+let configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ', options );
+```
+
 ## Sample Application
 
 <a href="https://github.com/configcat/node-sdk/blob/master/samples/console" target="_blank">Sample Console App</a>
