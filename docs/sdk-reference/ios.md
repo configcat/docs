@@ -100,10 +100,15 @@ let user = User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
     custom: ["SubscriptionType":"Pro", "UserRole":"Admin"])
 ```
 
+## Logging
+We are using the *Unified Logging System* in the *ConfigCat SDK* for logging. For more information please visit
+<a href="https://developer.apple.com/documentation/os/logging" target="_blank">Apple's developer page</a>
+or check <a href="https://developer.apple.com/videos/play/wwdc2016/721" target="_blank">Session 721 - Unified Logging and Activity Tracing</a> from WWDC 2016.
+
 ## `getAllKeys()`
 You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
 
-```go
+```swift
 let client = ConfigCatClient(apiKey: "#YOUR-API-KEY#")
 let keys = client.getAllKeys()
 ```
