@@ -101,7 +101,7 @@ let user = User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
 ```
 
 ## Logging
-We are using the *Unified Logging System* in the *ConfigCat SDK* for logging. For more information please visit
+We are using the *Unified Logging System* in the *ConfigCat SDK* for logging. For more information about *Unified Logging* please visit
 <a href="https://developer.apple.com/documentation/os/logging" target="_blank">Apple's developer page</a>
 or check <a href="https://developer.apple.com/videos/play/wwdc2016/721" target="_blank">Session 721 - Unified Logging and Activity Tracing</a> from WWDC 2016.
 
