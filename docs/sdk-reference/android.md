@@ -264,6 +264,14 @@ val client = ConfigCatClient.newBuilder()
 ### Force refresh
 Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
 
+## Logging
+As the SDK uses the facade of [slf4j](https://www.slf4j.org) for logging you can use any of the implementation packages for logging. 
+```
+dependencies {
+    implementation 'org.slf4j:slf4j-android:1.+'
+}
+```
+
 ## Sample App
 
 <a href="https://github.com/configcat/android-sdk/tree/master/samples/android" target="_blank">Android App with auto polling and change listener</a>

@@ -99,6 +99,34 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#");
 $keys = $client->getAllKeys();
 ```
 
+## Cache
+You can use the following caching options:
+* Laravel:
+  ```php
+  $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
+    'cache' => new \ConfigCat\Cache\LaravelCache(\Illuminate\Support\Facades\Cache::store()),
+  ]);
+  ```
+* Psr6 cache (the example uses the [redis adapter](https://github.com/php-cache/redis-adapter) for Psr6):
+  ```php
+  $client = new \RedisArray(['127.0.0.1:6379', '127.0.0.2:6379']);
+  $pool = new RedisCachePool($client);
+
+  $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
+    'cache' => new \ConfigCat\Cache\Psr6Cache($pool),
+  ]);
+  ```
+* Psr16 cache (the example uses the [redis adapter](https://github.com/php-cache/redis-adapter) for Psr6):
+  ```php
+  $client = new \RedisArray(['127.0.0.1:6379', '127.0.0.2:6379']);
+  $pool = new RedisCachePool($client);
+
+  $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
+    'cache' => new \ConfigCat\Cache\Psr6Cache($pool),
+  ]);
+  ```
+
+
 ## Sample Applications
 - [Sample Laravel App](https://github.com/configcat/php-sdk/tree/master/samples/laravel)
 

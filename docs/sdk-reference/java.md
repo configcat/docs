@@ -10,12 +10,12 @@ Maven:
 <dependency>
     <groupId>com.configcat</groupId>
     <artifactId>configcat-java-client</artifactId>
-    <version>[1.0.0,)</version>
+    <version>[2.0.0,)</version>
 </dependency>
 ```
 Gradle:
 ```bash
-implementation 'com.configcat:configcat-java-client:1.+'
+implementation 'com.configcat:configcat-java-client:2.+'
 ```
 ### 2. Import the ConfigCat SDK:
 ```java
@@ -257,6 +257,14 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 
 ### Force refresh
 Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
+
+## Logging
+As the SDK uses the facade of [slf4j](https://www.slf4j.org) for logging you can use any of the implementation packages for logging. 
+```
+dependencies {
+    implementation 'org.slf4j:slf4j-simple:1.+'
+}
+```
 
 ## Sample Apps
 Check out our Sample Applications how they use the ConfigCat SDK
