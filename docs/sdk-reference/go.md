@@ -5,11 +5,11 @@ title: Go
 ## Getting Started:
 ### 1. Get the SDK with `go`
 ```bash
-go get gopkg.in/configcat/go-sdk.v1
+go get gopkg.in/configcat/go-sdk.v2
 ```
 ### 2. Import the ConfigCat package
 ```go
-import gopkg.in/configcat/go-sdk.v1
+import gopkg.in/configcat/go-sdk.v2
 ```
 ### 3. Create the *ConfigCat* client with your *API Key*
 ```go
@@ -69,6 +69,8 @@ config := configcat.DefaultClientConfig()
 | `Cache `                  | ConfigCache                                      | Sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                                    |
 | `MaxWaitTimeForSyncCalls` | time.Duration                                    | Sets a timeout value for the synchronous methods of the library (`GetValue()`, `GetValueForUser()`, `Refresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
 | `HttpTimeout`             | time.Duration                                    | Sets maximum wait time for a HTTP response.                                                                                                                                                                       |
+| `Transport`               | http.RoundTripper                                | Sets the transport options for the underlying HTTP calls.                                                                                                                                                                       |
+| `Logger`                  | configcat.Logger                                | Sets the `Logger` implementation used by the SDK for logging.                                                                                                                                                                       |
 | `PolicyFactory`           | func(ConfigProvider, *ConfigStore) RefreshPolicy | Sets a custom refresh policy implementation for the client. [See below](#custom-policy).                                                                                                                          |
 
 Then you can pass it to the `NewCustomClient()` method:
@@ -261,3 +263,28 @@ client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 ### Force refresh
 Any time you want to refresh the cached configuration with the latest one, you can call the `Refresh()` or `RefreshAsync()` method of the library,
 which will initiate a new fetch and will update the local cache.
+
+## HTTP Proxy
+You can use the `Transport` config option to set up proxy settings for the http client used by the SDK:
+```go
+config := configcat.DefaultClientConfig()
+config.Transport = &http.Transport{
+	Proxy: http.ProxyURL(url.Parse("<PROXY-URL>")),
+}
+client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+```
+
+## Logging
+The default logger used by the SDK is [logrus](https://github.com/sirupsen/logrus), but you have the option to override it with your logger via the `Logger` config option, it only has to satisfy the [Logger](https://github.com/configcat/go-sdk/blob/master/logger.go) interface:
+```go
+config := configcat.DefaultClientConfig()
+config.Logger = logrus.New()
+
+client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+```
+
+## Sample Applications
+- [Sample Console App](https://github.com/configcat/go-sdk/tree/master/samples/console)
+
+## Look under the hood
+- [ConfigCat Go SDK's repository on GitHub](https://github.com/configcat/go-sdk)

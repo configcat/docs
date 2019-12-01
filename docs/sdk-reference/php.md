@@ -41,8 +41,7 @@ Available configuration options:
 | `logger`                 | `Psr\Log\LoggerInterface`     | Configures a logger for errors and warnings produced by the SDK, defaults to `Psr\Log\NullLogger`.                                                                                                                         |
 | `cache`                  | `ConfigCat\Cache\ConfigCache` | Sets a `ConfigCat\Cache\ConfigCache` implementation for caching the actual configurations. You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache).       |
 | `cache-refresh-interval` | `int`                         | Sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a new configuration fetch request. Defaults to 60. |
-| `timeout`                | `int`                         | Sets the default http request timeout in seconds. Defaults to 30.                                                                                                                                                          |
-| `connect-timeout`        | `int`                         | Sets the http connect timeout in seconds. Defaults to 10.                                                                                                                                                                  |
+| `request-options`        | `array`                       | Sets the options for the request initiated by the`Guzzle` HTTP client.                                                                                                                                                          |
 Example:
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
@@ -107,7 +106,7 @@ You can use the following caching options:
     'cache' => new \ConfigCat\Cache\LaravelCache(\Illuminate\Support\Facades\Cache::store()),
   ]);
   ```
-* Psr6 cache (the example uses the [redis adapter](https://github.com/php-cache/redis-adapter) for Psr6):
+* PSR-6 cache (the example uses the [redis adapter](https://github.com/php-cache/redis-adapter) for PSR-6):
   ```php
   $client = new \RedisArray(['127.0.0.1:6379', '127.0.0.2:6379']);
   $pool = new RedisCachePool($client);
@@ -116,16 +115,54 @@ You can use the following caching options:
     'cache' => new \ConfigCat\Cache\Psr6Cache($pool),
   ]);
   ```
-* Psr16 cache (the example uses the [redis adapter](https://github.com/php-cache/redis-adapter) for Psr6):
+* PSR-16 cache (the example uses the [redis adapter](https://github.com/php-cache/redis-adapter) for PSR-6 and the [PSR-6 to PSR-16 cache bridge](https://github.com/php-cache/simple-cache-bridge)):
   ```php
   $client = new \RedisArray(['127.0.0.1:6379', '127.0.0.2:6379']);
   $pool = new RedisCachePool($client);
+  $simpleCache = new SimpleCacheBridge($pool);
 
   $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
-    'cache' => new \ConfigCat\Cache\Psr6Cache($pool),
+    'cache' => new \ConfigCat\Cache\Psr16Cache($simpleCache),
   ]);
   ```
+* Custom cache implementation
+  ```php
+  class CustomCache extends ConfigCache
+  { 
+      protected function get($key)
+      {
+          // load from cache
+      } 
+    
+      protected function set($key, $value)
+      {
+          // save into cache
+      }
+  }
+  ```
 
+## Logging
+As the SDK uses the PSR-3 `LoggerInterface` for logging, so you can use any implementor package like [Monolog](https://github.com/Seldaek/monolog).
+```php
+
+$client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
+    'logger' => new \Monolog\Logger\Logger("name"),
+]);
+```
+
+## HTTP Client (Proxy)
+The SDK uses [Guzzle](http://docs.guzzlephp.org/en/stable/index.html) for HTTP calls and its request options argument is available to customize through the SDK options like:
+```php
+
+$client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
+    'request-options' => [
+        'proxy' => [
+            'http'  => 'tcp://localhost:8125',
+            'https' => 'tcp://localhost:9124',
+        ]
+    ],
+]);
+```
 
 ## Sample Applications
 - [Sample Laravel App](https://github.com/configcat/php-sdk/tree/master/samples/laravel)
