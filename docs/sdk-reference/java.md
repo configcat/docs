@@ -259,7 +259,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
 
 ## Logging
-As the SDK uses the facade of [slf4j](https://www.slf4j.org) for logging you can use any of the implementation packages for logging. 
+As the SDK uses the facade of [slf4j](https://www.slf4j.org) for logging you can use any of the slf4j implementation package. 
 ```
 dependencies {
     implementation 'org.slf4j:slf4j-simple:1.+'

@@ -265,7 +265,7 @@ Any time you want to refresh the cached configuration with the latest one, you c
 which will initiate a new fetch and will update the local cache.
 
 ## HTTP Proxy
-You can use the `Transport` config option to set up proxy settings for the http client used by the SDK:
+You can use the `Transport` config option to set up http transport related (like proxy) settings for the http client used by the SDK:
 ```go
 config := configcat.DefaultClientConfig()
 config.Transport = &http.Transport{

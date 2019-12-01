@@ -142,7 +142,7 @@ You can use the following caching options:
   ```
 
 ## Logging
-As the SDK uses the PSR-3 `LoggerInterface` for logging, so you can use any implementor package like [Monolog](https://github.com/Seldaek/monolog).
+The SDK uses the PSR-3 `LoggerInterface` for logging, so you can use any implementor package like [Monolog](https://github.com/Seldaek/monolog).
 ```php
 
 $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
@@ -151,7 +151,7 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
 ```
 
 ## HTTP Client (Proxy)
-The SDK uses [Guzzle](http://docs.guzzlephp.org/en/stable/index.html) for HTTP calls and its request options argument is available to customize through the SDK options like:
+The SDK uses [Guzzle](http://docs.guzzlephp.org/en/stable/index.html) for the underlying HTTP calls and its request options are available to customize through the SDK options like:
 ```php
 
 $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
