@@ -146,7 +146,7 @@ The SDK uses the PSR-3 `LoggerInterface` for logging, so you can use any impleme
 ```php
 
 $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
-    'logger' => new \Monolog\Logger\Logger("name"),
+    'logger' => new \Monolog\Logger("name"),
 ]);
 ```
 
