@@ -48,7 +48,11 @@ client.Dispose();
 | Properties      | Description                                                                                                        | Default                               |
 | --------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------- |
 | `ApiKey`        | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |                                       |
-| `LoggerFactory` | Factory to create an ILogger instance for tracing.                                                                 | NullTrace (no default tracing method) |
+| `ConfigCache` | IConfigCache instance for cache the config.                                                                 | InMemoryConfigCache |
+| `Logger` | ILogger instance for tracing.                                                                 | ConsoleLogger (with WARNING level) |
+| `HttpClientHandler` |  HttpClientHandler to provide network credentials and proxy settings                                                                 | built-in HttpClientHandler |
+
+
 
 `AutoPollConfiguration`, `LazyLoadConfiguration`, `ManualPollConfiguration`  
 Creating the client is different for each polling mode.
@@ -173,10 +177,12 @@ client.ForceRefresh();
 Console.WriteLine(client.GetValue("key", "my default value")); // console: "value from server"
 ```
 
-### Logging
-You can set `LoggerFactory` property on any configuration object. This value is a factory object to create a `ILogger` instance.
+## Logging
+You can set `Logger` property on any configuration object. `ILogger` interface provides a mechanism for tracing.
 
-The following example shows how to configure the ConsoleLoggerFactory to log messages to the `System.Console`. 
+There are four loglevels: `DEBUG > INFORMATION > WARNING > ERROR`
+
+The following example shows how to configure the default logger (ConsoleLogger) to set log level `Info` (Information, Error and Warning messages).
 ```csharp
 var clientConfiguration = new LazyLoadConfiguration
 {
@@ -184,66 +190,72 @@ var clientConfiguration = new LazyLoadConfiguration
     LoggerFactory = new ConsoleLoggerFactory()
 };
 
-IConfigCatClient client = new ConfigCatClient(clientConfiguration);
+client.LogLevel = LogLevel.Info;
 ```
 
-You can create your logger implementation easily. Implement `ConfigCat.Client.ILogger` and `ConfigCat.Client.ILoggerFactory` interface and setup in the configuration.
+You can create your logger implementation easily. Implement `ConfigCat.Client.ILogger` and setup in the configuration.
 
+### Logging sample (filelogger)
 This example shows how to create a basic file logger implementation for ConfigCat client
 ```csharp
 using System;
-using System.IO;
 using ConfigCat.Client;
 
 namespace SampleApplication
 {
     class Program
     {
-        class MyFileLogger : LoggerBase
+        class MyFileLogger : ILogger
         {
             private readonly string filePath;
             private static object lck = new object();
 
-            public MyFileLogger(string filePath, string loggerName, LogLevel logLevel) : base(loggerName, logLevel)
+            public LogLevel LogLevel { get ; set ; }
+
+            public MyFileLogger(string filePath, LogLevel logLevel)
             {
                 this.filePath = filePath;
+                this.LogLevel = logLevel;
             }
 
-            protected override void LogMessage(string message)
+            private void LogMessage(string message)
             {
                 lock (lck) // ensure thread safe
                 {
-                    System.IO.File.AppendAllText(this.filePath, message + Environment.NewLine); 
+                    System.IO.File.AppendAllText(this.filePath, message + Environment.NewLine);
                 }
             }
-        }
 
-        class MyFileLoggerFactory : ILoggerFactory
-        {
-            private readonly string filePath;
-            private readonly LogLevel logLevel;
-
-            public MyFileLoggerFactory(string filePath, LogLevel logLevel)
+            public void Debug(string message)
             {
-                this.filePath = filePath;
-                this.logLevel = logLevel;
+                LogMessage("DEBUG - " + message);
             }
 
-            public ILogger GetLogger(string loggerName)
+            public void Information(string message)
             {
-                return new MyFileLogger(this.filePath, loggerName, this.logLevel);
+                LogMessage("INFO - " + message);
             }
-        }
+
+            public void Warning(string message)
+            {
+                LogMessage("WARN - " + message);
+            }
+
+            public void Error(string message)
+            {
+                LogMessage("ERROR - " + message);
+            }
+        }        
 
         static void Main(string[] args)
-        {            
-            string filePath = Path.Combine(Environment.CurrentDirectory, "configcat.log");
-            LogLevel logLevel = LogLevel.Warn; // I would like to log only WARNING and higher entires.
+        {
+            string filePath = System.IO.Path.Combine(Environment.CurrentDirectory, "configcat.log");
+            LogLevel logLevel = LogLevel.Warning; // I would like to log only WARNING and higher entires (Warnings and Errors).
 
             var clientConfiguration = new AutoPollConfiguration
             {
-                ApiKey = "#YOUR-API-KEY#",
-                LoggerFactory = new MyFileLoggerFactory(filePath, logLevel),
+                ApiKey = "YOUR-API-KEY",
+                Logger = new MyFileLogger(filePath, logLevel),
                 PollIntervalSeconds = 5
             };
 
@@ -257,7 +269,7 @@ namespace SampleApplication
 }
 ```
 
-### Configuration with clientbuilder
+## Configuration with clientbuilder
 You can use `ConfigCatClientBuilder` to create the *ConfigCat* client instance:
 ```csharp
 IConfigCatClient client = ConfigCatClientBuilder
@@ -267,7 +279,7 @@ IConfigCatClient client = ConfigCatClientBuilder
     .Create();
 ```
 
-## `GetAllKeys()`
+## .GetAllKeys()
 You can get all the setting keys from your configuration by calling the `GetAllKeys()` method of the `ConfigCatClient`.
 
 ```csharp
