@@ -160,12 +160,31 @@ configcat_client.force_refresh();
 value = configcat_client.get_value('key', 'my default value') # Returns "value from server"
 ```
 
+## Logging
+In the *ConfigCat SDK* we use the default Python logging system writes logs to the standard output. The following example shows how to configure the *Log Level* of the default logger. 
+
+```python
+import logging
+logging.basicConfig(level=logging.DEBUG)
+```
+
 ## `get_all_keys()`
 You can query the keys from your configuration in the SDK with the `get_all_keys()` method.
 
 ```python
 configcat_client = configcatclient.create_client('#YOUR-API-KEY#')
 keys = configcat_client.get_all_keys()
+```
+
+## Using ConfigCat behind a proxy
+Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
+
+```python
+proxies = {'https': '127.0.0.1:8080'}
+proxy_auth = HTTPProxyAuth("user", "password")
+configcat_client = configcatclient.create_client_with_auto_poll('#YOUR-API-KEY#',
+                                                                proxies=proxies,
+                                                                proxy_auth=proxy_auth)
 ```
 
 ## Sample Applications
