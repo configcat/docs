@@ -29,6 +29,9 @@
     ],
     "Integrations": [
       "integrations/circleci"
+    ],
+    "Service": [
+      "service/status"
     ]
   }
 }

@@ -11,12 +11,12 @@ And represents a user in your application.
 
 ## The relationship between User Object and Targeting rules
 
-**As a product manager**, you can set [Targeting rules](advanced/targeting.md) in the <a href="https://app.configcat.com" target="_blank">ConfigCat Management Console</a> based on the parameters given to ConfigCat by your application.
+**As a product manager**, you can set [Targeting rules](advanced/targeting.md) on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> based on the parameters given to ConfigCat by your application.
 
-**As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your teammates) can use in the <a href="https://app.configcat.com" target="_blank">ConfigCat Management Console</a> to apply [Targeting rules](advanced/targeting.md) on.
+**As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your teammates) can use in the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> to apply [Targeting rules](advanced/targeting.md) on.
 
 ### Example
-Let's say in the <a href="https://app.configcat.com" target="_blank">Management Console</a> you'd like to have the following targeting rule:
+Let's say on the <a href="https://app.configcat.com" target="_blank">Dashboard</a> you'd like to have the following targeting rule:
 
 `myAwesomeFeature` is `ON` if `User's Email` `CONTAINS` `@example.com`, otherwise it is `OFF`.
 
@@ -87,5 +87,5 @@ var userObject = {
 ```
 *The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](sdk-reference/overview.md)*
 
-In the Admin Console a targeting rule for the custom property `EyeColor` would look like:
-![customPropertyUsageAdminConsole](assets/custom-property-ui.png)
+On the Dashboard a targeting rule for the custom property `EyeColor` would look like:
+![customPropertyUsageDashboard](assets/custom-property-ui.png)

@@ -47,7 +47,7 @@ client.Dispose();
 
 | Properties      | Description                                                                                                        | Default                               |
 | --------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------- |
-| `ApiKey`        | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |                                       |
+| `ApiKey`        | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |                                       |
 | `ConfigCache` | IConfigCache instance for cache the config.                                                                 | InMemoryConfigCache |
 | `Logger` | ILogger instance for tracing.                                                                 | ConsoleLogger (with WARNING level) |
 | `HttpClientHandler` |  HttpClientHandler to provide network credentials and proxy settings                                                                 | built-in HttpClientHandler |
@@ -65,7 +65,7 @@ Creating the client is different for each polling mode.
 
 | Parameters     | Description                                                                                                     |
 | -------------- | --------------------------------------------------------------------------------------------------------------- |
-| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                     |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                                  |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```csharp

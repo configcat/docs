@@ -10,10 +10,10 @@ You can use it with many similar techniques such as feature flags/toggles, canar
 
 # The birth of a Feature Flag
 
-When creating feature flag, first you will **add a switch** in the *ConfigCat Management Console*, then **connect your app** to the ConfigCat service.
+When creating feature flag, first you will **add a switch** on the *ConfigCat Dashboard*, then **connect your app** to the ConfigCat service.
 
-## Create a feature flag on *ConfigCat Management Console*
-1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to access the *Management Console*
+## Create a feature flag on *ConfigCat Dashboard*
+1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to access the *Dashboard*
 2. **Create** a **product, environment** and  **config** if necessary. These will store your feature flag.
 3. Click *ADD FEATURE FLAG* and give it a name.
 

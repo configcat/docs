@@ -56,7 +56,7 @@ client.getValueAsync(for: "key-of-my-awesome-feature", defaultValue: false, comp
 `ConfigCatClient(apiKey: <apiKey>)` returns a client with default options.
 | Arguments                          | Type                                             | Description                                                                                                                                                                                                 |
 | ---------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `apiKey`                           | string                                           | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.                                                                                          |
+| `apiKey`                           | string                                           | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                                          |
 | `baseUrl`                          | string                                           | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                     |
 | `configCache`                      | ConfigCache?                                     | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                    |
 | `maxWaitTimeForSyncCallsInSeconds` | int                                              | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
@@ -68,7 +68,7 @@ client.getValueAsync(for: "key-of-my-awesome-feature", defaultValue: false, comp
 ## Anatomy of `getValue()`
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```swift

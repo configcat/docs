@@ -51,13 +51,13 @@ client.Close()
 `configcat.NewClient(<apiKey>)` returns a client with default options.
 | Arguments | Description                                                                                          |
 | --------- | ---------------------------------------------------------------------------------------------------- |
-| `apiKey`  | API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |
+| `apiKey`  | API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 ### Custom configuration options
 `configcat.NewCustomClient(<apiKey>, config)` returns a client with custom configuration.
 | Arguments | Description                                                                                          |
 | --------- | ---------------------------------------------------------------------------------------------------- |
-| `apiKey`  | API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |
+| `apiKey`  | API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 | `config`  | An object which contains the custom configuration.                                                   |
 You can get and customize the default configuration options:
 ```go
@@ -84,7 +84,7 @@ client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 ## Anatomy of `GetValue()`
 | Parameters     | Description                                                                   |
 | -------------- | ----------------------------------------------------------------------------- |
-| `key`          | Setting-specific key. Set in *ConfigCat Management Console* for each setting. |
+| `key`          | Setting-specific key. Set on *ConfigCat Dashboard* for each setting. |
 | `defaultValue` | This value will be returned in case of an error.                              |
 ```go
 value := client.GetValue(
@@ -96,7 +96,7 @@ value := client.GetValue(
 ## Anatomy of `GetValueForUser()`
 | Parameters     | Description                                                                                        |
 | -------------- | -------------------------------------------------------------------------------------------------- |
-| `key`          | Setting-specific key. Set in *ConfigCat Management Console* for each setting.                      |
+| `key`          | Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                      |
 | `defaultValue` | This value will be returned in case of an error.                                                   |
 | `user`         | *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```go

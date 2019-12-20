@@ -8,7 +8,7 @@ Using this feature you will be able to set different setting values for differen
 
 ### Enable feature
 
-1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to access the *Management Console*
+1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to access the *Dashboard*
 2. Go to **Feature Flags & Settings**
 3. Select **TARGET SPECIFIC USERS** after clicking the actions icon.
 
@@ -118,7 +118,7 @@ With percentage-based user targeting you can specify a randomly selected fractio
 
 ### Enable feature
 
-1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to access the *Management Console*
+1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to access the *Dashboard*
 2. Go to **Feature Flags & Settings**
 3. Select **TARGET % OF USERS** after clicking the actions icon.
 

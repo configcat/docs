@@ -42,7 +42,7 @@ configcat_client.stop()
 `create_client()` returns a client with default options.
 | Properties | Description                                                                                                        |
 | ---------- | ------------------------------------------------------------------------------------------------------------------ |
-| `api_key`  | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |
+| `api_key`  | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 `create_client_with_auto_poll()`, `create_client_with_lazy_load()`, `create_client_with_manual_poll()`  
 Creating the client is different for each polling mode.
@@ -53,7 +53,7 @@ Creating the client is different for each polling mode.
 ## Anatomy of `get_value()`
 | Parameters      | Description                                                                                                     |
 | --------------- | --------------------------------------------------------------------------------------------------------------- |
-| `key`           | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                     |
+| `key`           | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                     |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                  |
 | `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```python

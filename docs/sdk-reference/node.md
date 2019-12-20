@@ -60,7 +60,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 
 | Parameters | Description                                                                                                        |
 | ---------- | ------------------------------------------------------------------------------------------------------------------ |
-| `apiKey`   | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |
+| `apiKey`   | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 `createClientWithAutoPoll()`, `createClientWithLazyLoad()`, `createClientWithManualPoll()`  
 Creating the client is different for each polling mode.
@@ -72,7 +72,7 @@ Creating the client is different for each polling mode.
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `callback`     | **REQUIRED.** Called with the actual setting value.                                                          |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
@@ -92,7 +92,7 @@ Returns a Promise with the value.
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 

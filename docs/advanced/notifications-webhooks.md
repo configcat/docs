@@ -2,7 +2,7 @@
 id: notifications-webhooks
 title: Notifications - Webhooks
 ---
-Your application can be notified about Setting value changes in real-time. ConfigCat enables this by calling a public URL of your system (a so-called Webhook). You can add your own Webhook URLs in the *Management Console*.
+Your application can be notified about Setting value changes in real-time. ConfigCat enables this by calling a public URL of your system (a so-called Webhook). You can add your own Webhook URLs in the *Dashboard*.
 
 ## Adding Webhook
 1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab.
@@ -17,10 +17,10 @@ ConfigCat will replace the following variables in the request body:
 | ----------------------- | ------------------------------------------------------------------ |
 | **##ConfigName##**      | The name of the Config your setting belongs to                     |
 | **##EnvironmentName##** | The name of the Environment it has been changed                    |
-| **##URL##**             | A direct link to the Config in the *ConfigCat Management Console.* |
+| **##URL##**             | A direct link to the Config in the *ConfigCat Dashboard.* |
 
 ## Testing your Webhook
-1. Change some of your settings in the *ConfigCat Management Console.* 
+1. Change some of your settings in the *ConfigCat Dashboard.* 
 2. Click **SAVE & PUBLISH SETTINGS**.
 3. Check if your Webhook was called correctly.
 
@@ -29,7 +29,7 @@ ConfigCat will replace the following variables in the request body:
 ## Connecting to Slack
 A few steps to set up Slack and get a message when a setting changes:
 1. Define a <a href="https://api.slack.com/incoming-webhooks" target="_blank">Slack Incoming Webhook</a> and copy the Webhook URL.
-2. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the *ConfigCat Management Console.* 
+2. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the *ConfigCat Dashboard.* 
 3. Create a Webhook and add your Slack URL.
 4. Select POST as HTTP method.
 5. Add a request body like so:
@@ -42,7 +42,7 @@ A few steps to set up Slack and get a message when a setting changes:
 ## Connecting to Microsoft Teams
 A few steps to set up Microsoft Teams and get a message when a setting changes:
 1. Define an Incoming Webhook connector in Microsoft Teams and copy the Webhook URL.
-1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the *ConfigCat Management Console.* 
+1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the *ConfigCat Dashboard.* 
 1. Create a Webhook and add your Teams URL.
 2. Select POST as HTTP method.
 3. Add a request body like so:
@@ -58,7 +58,7 @@ Sample request body of the Webhook:
   "potentialAction": [
     {
       "@type": "OpenUri",
-      "name": "Open Config in ConfigCat Management Console",
+      "name": "Open Config in ConfigCat Dashboard",
       "targets": [
         { "os": "default", "uri": "##URL##" }
       ]

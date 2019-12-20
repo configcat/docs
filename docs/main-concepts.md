@@ -7,7 +7,7 @@ A *Setting* is an essential bit of *ConfigCat*. It can represent a feature flag/
 ### Anatomy of a *Setting*
 Properties|Description
 ---|---
-Name|A human readable name that differentiates the *Setting* within the *ConfigCat Management Console*. e.g., `My Cool Feature enabled`.
+Name|A human readable name that differentiates the *Setting* on the *ConfigCat Dashboard*. e.g., `My Cool Feature enabled`.
 Key|A variable name within your code. e.g., `isCoolFeatureEnabled`.
 Type|Type of information you'd like to keep in the *Setting*. e.g., On/Off Toggle, Text, Number
 Value|The actual value of your *Setting*. e.g., `true`, `false`. Can be different in each environment.

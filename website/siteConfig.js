@@ -38,11 +38,18 @@ const siteConfig = {
     // For no header links in the top nav bar -> headerLinks: [],
     headerLinks: [{
             href: 'https://www.configcat.com',
-            label: 'ConfigCat.com'
+            label: 'ConfigCat.com',
+            external: true
         },
         {
             href: 'https://configcat.com/blog',
-            label: 'Blog'
+            label: 'Blog',
+            external: true
+        },
+        {
+            href: 'https://status.configcat.com',
+            label: 'Service Status Monitor',
+            external: true
         }
     ],
 

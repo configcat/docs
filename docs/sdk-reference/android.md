@@ -75,7 +75,7 @@ ConfigCatClient.newBuilder()
 ```
 | Builder options                                                        | Description                                                                                                                                                                                                 |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `build(<apikey>)`                                                      | **REQUIRED.** Waits for the API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*.                                                                            |
+| `build(<apikey>)`                                                      | **REQUIRED.** Waits for the API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                            |
 | `baseUrl(string)`                                                      | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                |
 | `httpClient(OkHttpClient)`                                             | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                                                                                           |
 | `maxWaitTimeForSyncCallsInSeconds(int)`                                | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
@@ -88,7 +88,7 @@ ConfigCatClient.newBuilder()
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
-| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 ```kotlin

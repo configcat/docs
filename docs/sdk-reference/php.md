@@ -32,7 +32,7 @@ if(is_bool($isMyAwesomeFeatureEnabled) && $isMyAwesomeFeatureEnabled) {
 Constructor parameters:
 | Name      | Type     | Description                                                                                                        |
 | --------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
-| `apiKey`  | `string` | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Management Console*. |
+| `apiKey`  | `string` | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 | `options` | `array`  | **Optional.** Additional configuration options, see below for the detailed list.                                   |
 
 Available configuration options:
@@ -54,7 +54,7 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
 ## Anatomy of `getValue()`
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set in *ConfigCat Management Console* for each setting.                  |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```php
