@@ -68,8 +68,8 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 
 `createClient()` returns a client with default options.
 
-| Properties | Description                                                                                                        |
-| ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| Properties | Description                                                                                               |
+| ---------- | --------------------------------------------------------------------------------------------------------- |
 | `apiKey`   | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 `createClientWithAutoPoll()`, `createClientWithLazyLoad()`, `createClientWithManualPoll()`  
@@ -82,7 +82,7 @@ Creating the client is different for each polling mode.
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `callback`     | **REQUIRED.** Called with the actual setting value.                                                          |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
@@ -101,7 +101,7 @@ Returns a Promise with the value.
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
@@ -246,18 +246,31 @@ configCatClient.forceRefresh(() =>{
 
 ## Logging
 
-To customize logging create a logger instance and add it to Options object when creating the ConfigCat client. 2 log levels are supported: `log` and `error`.
-```js
-var customLogger = {
-    log: function(message) {
-        console.log('ConfigCat log: ' + message);
-    },
-    error: function(message) {
-        console.error('ConfigCat log: ' + message);
-    }
-};
+### Setting log levels
 
-configcat.createClientWithManualPoll("#YOUR-API-KEY#", { logger: customLogger });
+```js
+const logger = configcat.createConsoleLogger(3); // Setting log level to 3 (= Info)
+
+const configCatClient = configcat.createClientWithAutoPoll('#YOUR-API-KEY#', 
+    { logger: logger }
+);
+```
+
+Available log levels:
+| Level | Name  | Description                                             |
+| ----- | ----- | ------------------------------------------------------- |
+| -1    | Off   | Nothing gets logged.                                    |
+| 1     | Error | Only error level events are logged.                     |
+| 2     | Warn  | Errors and Warnings are logged.                         |
+| 3     | Info  | Errors, Warnings and feature flag evaluation is logged. |
+
+Info level logging helps understanding the feature flag evaluation process:
+```bash
+ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
+ User : {"identifier":"#SOME-USER-ID#","email":"configcat@example.com"}
+ Evaluating rule: 'configcat@example.com' CONTAINS '@something.com' => no match
+ Evaluating rule: 'configcat@example.com' CONTAINS '@example.com' => MATCH
+ Returning value : true
 ```
 
 ## `getAllKeys()`
