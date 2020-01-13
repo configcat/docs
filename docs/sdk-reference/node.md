@@ -58,8 +58,8 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 
 `createClient()` returns a client with default options.
 
-| Parameters | Description                                                                                                        |
-| ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| Parameters | Description                                                                                               |
+| ---------- | --------------------------------------------------------------------------------------------------------- |
 | `apiKey`   | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 `createClientWithAutoPoll()`, `createClientWithLazyLoad()`, `createClientWithManualPoll()`  
@@ -72,7 +72,7 @@ Creating the client is different for each polling mode.
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `callback`     | **REQUIRED.** Called with the actual setting value.                                                          |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
@@ -92,10 +92,10 @@ Returns a Promise with the value.
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
-
+logLevel
 ```js
 const value = await configCatClient.getValueAsync(
     "keyOfMySetting", // Setting Key
@@ -156,11 +156,11 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 
 #### `createClientWithAutoPoll(apiKey, options)`
 
-| Option Parameter      | Description                                            | Default        |
-| --------------------- | ------------------------------------------------------ | -------------- |
-| `pollIntervalSeconds` | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER` | 60             |
-| `configChanged`       | Callback to get notified about changes.                | -              |
-| `logger`              | Custom logger. See below for details.                  | Console logger |
+| Option Parameter      | Description                                                                                                                | Default        |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `pollIntervalSeconds` | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                     | 60             |
+| `configChanged`       | Callback to get notified about changes.                                                                                    | -              |
+| `logger`              | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
@@ -180,11 +180,11 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 
 #### `createClientWithLazyLoad(apiKey, options)`
 
-| Option Parameter         | Description                                     | Default        |
-| ------------------------ | ----------------------------------------------- | -------------- |
-| `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER` | 60             |
-| `logger`                 | Custom logger. See below for details.           | Console logger |
-| `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
+| Option Parameter         | Description                                                                                                                | Default        |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                            | 60             |
+| `logger`                 | Custom logger. See below for details.                                                                                      | Console logger |
+| `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
@@ -197,10 +197,10 @@ Manual polling gives you full control over when the setting values are downloade
 
 #### `createClientWithManualPoll(apiKey, options)`
 
-| Option Parameter | Description                           | Default        |
-| ---------------- | ------------------------------------- | -------------- |
-| `logger`         | Custom logger. See below for details. | Console logger |
-| `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
+| Option Parameter   | Description                                                                                                                | Default        |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `logger`           | Custom logger. See below for details.                                                                                      | Console logger |
+| `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 
 ```js
 let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
@@ -229,18 +229,31 @@ configCatClient.forceRefresh(() =>{
 
 ## Logging
 
-To customize logging create a logger instance and add it to Options object when creating the ConfigCat client. 2 log levels are supported: `log` and `error`.
-```js
-let customLogger = {
-    log: (message) => {
-        console.log('ConfigCat log: ' + message);
-    },
-    error: (message) => {
-        console.error('ConfigCat log: ' + message);
-    }
-};
+### Setting log levels
 
-let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { logger: customLogger });
+```js
+const logger = configcat.createConsoleLogger(3); // Setting log level to 3 (= Info)
+
+const configCatClient = configcat.createClientWithAutoPoll('#YOUR-API-KEY#', 
+    { logger: logger }
+);
+```
+
+Available log levels:
+| Level | Name  | Description                                             |
+| ----- | ----- | ------------------------------------------------------- |
+| -1    | Off   | Nothing gets logged.                                    |
+| 1     | Error | Only error level events are logged.                     |
+| 2     | Warn  | Errors and Warnings are logged.                         |
+| 3     | Info  | Errors, Warnings and feature flag evaluation is logged. |
+
+Info level logging helps understanding the feature flag evaluation process:
+```bash
+ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
+ User : {"identifier":"#SOME-USER-ID#","email":"configcat@example.com"}
+ Evaluating rule: 'configcat@example.com' CONTAINS '@something.com' => no match
+ Evaluating rule: 'configcat@example.com' CONTAINS '@example.com' => MATCH
+ Returning value : true
 ```
 
 ## `getAllKeys()`
@@ -248,7 +261,7 @@ let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#", { l
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
-let configCatClient = configcat.createClient("#YOUR-API-KEY#");
+let configCatClient = configcat.createClient("#YOUR-API-KEY#i");
 configCatClient.getAllKeys((keys)=>{
     console.log(keys);
 });
