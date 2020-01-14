@@ -45,12 +45,12 @@ client.Dispose();
 
 `new ConfigCatClient()` creates a client with default options.
 
-| Properties      | Description                                                                                                        | Default                               |
-| --------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------- |
-| `ApiKey`        | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |                                       |
-| `ConfigCache` | IConfigCache instance for cache the config.                                                                 | InMemoryConfigCache |
-| `Logger` | ILogger instance for tracing.                                                                 | ConsoleLogger (with WARNING level) |
-| `HttpClientHandler` |  HttpClientHandler to provide network credentials and proxy settings                                                                 | built-in HttpClientHandler |
+| Properties          | Description                                                                                               | Default                            |
+| ------------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| `ApiKey`            | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |                                    |
+| `ConfigCache`       | IConfigCache instance for cache the config.                                                               | InMemoryConfigCache                |
+| `Logger`            | ILogger instance for tracing.                                                                             | ConsoleLogger (with WARNING level) |
+| `HttpClientHandler` | HttpClientHandler to provide network credentials and proxy settings                                       | built-in HttpClientHandler         |
 
 
 
@@ -63,10 +63,10 @@ Creating the client is different for each polling mode.
 
 ## Anatomy of `GetValue()`, `GetValueAsync()`
 
-| Parameters     | Description                                                                                                     |
-| -------------- | --------------------------------------------------------------------------------------------------------------- |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                     |
-| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                                  |
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```csharp
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
@@ -178,98 +178,34 @@ Console.WriteLine(client.GetValue("key", "my default value")); // console: "valu
 ```
 
 ## Logging
-You can set `Logger` property on any configuration object. `ILogger` interface provides a mechanism for tracing.
-
-There are four loglevels: `DEBUG > INFORMATION > WARNING > ERROR`
-
-The following example shows how to configure the default logger (ConsoleLogger) to set log level `Info` (Information, Error and Warning messages).
+### Setting log levels
 ```csharp
-var clientConfiguration = new LazyLoadConfiguration
-{
-    ApiKey = "#YOUR-API-KEY#",               
-    LoggerFactory = new ConsoleLoggerFactory()
-};
+var client = new ConfigCatClient("#YOUR-API-KEY#");
 
 client.LogLevel = LogLevel.Info;
 ```
 
-You can create your logger implementation easily. Implement `ConfigCat.Client.ILogger` and setup in the configuration.
+Available log levels:
+| Level   | Description                                             |
+| ------- | ------------------------------------------------------- |
+| Off     | Nothing is logged.                                      |
+| Error   | Only error level events are logged.                     |
+| Warning | Errors and Warnings are logged.                         |
+| Info    | Errors, Warnings and feature flag evaluation is logged. |
+| Debug   | All of the above plus debug info is logged.             |
 
-### Logging sample (filelogger)
-This example shows how to create a basic file logger implementation for ConfigCat client
-```csharp
-using System;
-using ConfigCat.Client;
-
-namespace SampleApplication
-{
-    class Program
-    {
-        class MyFileLogger : ILogger
-        {
-            private readonly string filePath;
-            private static object lck = new object();
-
-            public LogLevel LogLevel { get ; set ; }
-
-            public MyFileLogger(string filePath, LogLevel logLevel)
-            {
-                this.filePath = filePath;
-                this.LogLevel = logLevel;
-            }
-
-            private void LogMessage(string message)
-            {
-                lock (lck) // ensure thread safe
-                {
-                    System.IO.File.AppendAllText(this.filePath, message + Environment.NewLine);
-                }
-            }
-
-            public void Debug(string message)
-            {
-                LogMessage("DEBUG - " + message);
-            }
-
-            public void Information(string message)
-            {
-                LogMessage("INFO - " + message);
-            }
-
-            public void Warning(string message)
-            {
-                LogMessage("WARN - " + message);
-            }
-
-            public void Error(string message)
-            {
-                LogMessage("ERROR - " + message);
-            }
-        }        
-
-        static void Main(string[] args)
-        {
-            string filePath = System.IO.Path.Combine(Environment.CurrentDirectory, "configcat.log");
-            LogLevel logLevel = LogLevel.Warning; // I would like to log only WARNING and higher entires (Warnings and Errors).
-
-            var clientConfiguration = new AutoPollConfiguration
-            {
-                ApiKey = "YOUR-API-KEY",
-                Logger = new MyFileLogger(filePath, logLevel),
-                PollIntervalSeconds = 5
-            };
-
-            IConfigCatClient client = new ConfigCatClient(clientConfiguration);
-
-            var feature = client.GetValue("keyNotExists", "N/A");
-
-            Console.ReadKey();
-        }
-    }
-}
+Info level logging helps to inspect the feature flag evaluation process:
+```bash
+ConfigCat - Info -  Evaluate 'isPOCFeatureEnabled'
+ User object: {"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","Custom":{"SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}}
+ evaluate rule: 'configcat@example.com' CONTAINS '@something.com' => no match
+ evaluate rule: 'configcat@example.com' CONTAINS '@example.com' => match
+ Returning: True
 ```
 
-## Configuration with clientbuilder
+Sample code on how to create a basic file logger implementation for ConfigCat client: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/FileLoggerSample.cs" target="_blank">See Sample Code</a>
+
+## Configuration with ConfigCatClientBuilder
 You can use `ConfigCatClientBuilder` to create the *ConfigCat* client instance:
 ```csharp
 IConfigCatClient client = ConfigCatClientBuilder
