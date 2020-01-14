@@ -247,7 +247,7 @@ Available log levels:
 | 2     | Warn  | Errors and Warnings are logged.                         |
 | 3     | Info  | Errors, Warnings and feature flag evaluation is logged. |
 
-Info level logging helps understanding the feature flag evaluation process:
+Info level logging helps to inspect the feature flag evaluation process:
 ```bash
 ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
  User : {"identifier":"#SOME-USER-ID#","email":"configcat@example.com"}

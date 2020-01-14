@@ -277,10 +277,46 @@ client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 ## Logging
 The default logger used by the SDK is [logrus](https://github.com/sirupsen/logrus), but you have the option to override it with your logger via the `Logger` config option, it only has to satisfy the [Logger](https://github.com/configcat/go-sdk/blob/master/logger.go) interface:
 ```go
+import {
+	"github.com/configcat/go-sdk"
+	"github.com/sirupsen/logrus"
+}
 config := configcat.DefaultClientConfig()
 config.Logger = logrus.New()
 
 client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+```
+
+### Setting log levels
+
+```go
+import {
+	"github.com/configcat/go-sdk"
+	"github.com/sirupsen/logrus"
+}
+
+logger := logrus.New()
+logger.SetLevel(logrus.InfoLevel)
+config := configcat.DefaultClientConfig()
+config.Logger = logger
+
+client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+```
+
+Available log levels:
+| Level | Name  | Description                                             |
+| ----- | ----- | ------------------------------------------------------- |
+| -1    | Off   | Nothing gets logged.                                    |
+| 1     | Error | Only error level events are logged.                     |
+| 2     | Warn  | Errors and Warnings are logged.                         |
+| 3     | Info  | Errors, Warnings and feature flag evaluation is logged. |
+
+Info level logging helps to inspect the feature flag evaluation process:
+```bash
+ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
+INFO[0000] Evaluating rule: [Email:] [CONTAINS] [@something.com] => no match 
+INFO[0000] Evaluating rule: [Email:] [CONTAINS] [@example.com] => no match 
+INFO[0000] Returning false.   
 ```
 
 ## Sample Applications
