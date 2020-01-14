@@ -68,10 +68,10 @@ value = configcat_client.get_value(
 ### User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ``` ruby
-user_object = ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92")   
+user_object = ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92")
 ```
 ``` ruby
-user_object = ConfigCat::User.new("john@example.com")   
+user_object = ConfigCat::User.new("john@example.com")
 ```
 | Parameters   | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -184,9 +184,9 @@ Available log levels:
 
 Info level logging helps to inspect the feature flag evaluation process:
 ```bash
-I, [2020-01-14T13:34:45.946878 #20810]  INFO -- : Evaluating get_value('isPOCFeatureEnabled').
-I, [2020-01-14T13:34:45.947328 #20810]  INFO -- : Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
-I, [2020-01-14T13:34:45.947447 #20810]  INFO -- : Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: true
+INFO -- : Evaluating get_value('isPOCFeatureEnabled').
+INFO -- : Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
+INFO -- : Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: true
 ```
 
 You can easily replace the default logger with your own one. The following example shows how to set a logger writes logs into a text file.

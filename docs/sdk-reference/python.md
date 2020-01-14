@@ -161,11 +161,26 @@ value = configcat_client.get_value('key', 'my default value') # Returns "value f
 ```
 
 ## Logging
-In the *ConfigCat SDK* we use the default Python logging system writes logs to the standard output. The following example shows how to configure the *Log Level* of the default logger. 
+In the *ConfigCat SDK* there is a default logger writes logs to the standard output. The following example shows how to configure the *Log Level* of the default logger. 
 
 ```python
 import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
+```
+
+Available log levels:
+| Level  | Description                                             |
+| ----- | ------------------------------------------------------- |
+| ERROR | Only error level events are logged.                     |
+| WARN  | Errors and Warnings are logged.                         |
+| INFO  | Errors, Warnings and feature flag evaluation is logged. |
+| DEBUG | All of the above plus debug info is logged.             |
+
+Info level logging helps to inspect the feature flag evaluation process:
+```bash
+INFO -- : Evaluating get_value('isPOCFeatureEnabled').
+INFO -- : Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
+INFO -- : Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: true
 ```
 
 ## `get_all_keys()`
