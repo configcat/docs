@@ -49,16 +49,16 @@ client.Close()
 - serving values quickly in a failsafe way.
 
 `configcat.NewClient(<apiKey>)` returns a client with default options.
-| Arguments | Description                                                                                          |
-| --------- | ---------------------------------------------------------------------------------------------------- |
+| Arguments | Description                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------- |
 | `apiKey`  | API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 ### Custom configuration options
 `configcat.NewCustomClient(<apiKey>, config)` returns a client with custom configuration.
-| Arguments | Description                                                                                          |
-| --------- | ---------------------------------------------------------------------------------------------------- |
+| Arguments | Description                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------- |
 | `apiKey`  | API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
-| `config`  | An object which contains the custom configuration.                                                   |
+| `config`  | An object which contains the custom configuration.                                          |
 You can get and customize the default configuration options:
 ```go
 config := configcat.DefaultClientConfig()
@@ -69,8 +69,8 @@ config := configcat.DefaultClientConfig()
 | `Cache `                  | ConfigCache                                      | Sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                                    |
 | `MaxWaitTimeForSyncCalls` | time.Duration                                    | Sets a timeout value for the synchronous methods of the library (`GetValue()`, `GetValueForUser()`, `Refresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
 | `HttpTimeout`             | time.Duration                                    | Sets maximum wait time for a HTTP response.                                                                                                                                                                       |
-| `Transport`               | http.RoundTripper                                | Sets the transport options for the underlying HTTP calls.                                                                                                                                                                       |
-| `Logger`                  | configcat.Logger                                | Sets the `Logger` implementation used by the SDK for logging.                                                                                                                                                                       |
+| `Transport`               | http.RoundTripper                                | Sets the transport options for the underlying HTTP calls.                                                                                                                                                         |
+| `Logger`                  | configcat.Logger                                 | Sets the `Logger` implementation used by the SDK for logging.                                                                                                                                                     |
 | `PolicyFactory`           | func(ConfigProvider, *ConfigStore) RefreshPolicy | Sets a custom refresh policy implementation for the client. [See below](#custom-policy).                                                                                                                          |
 
 Then you can pass it to the `NewCustomClient()` method:
@@ -82,10 +82,10 @@ client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
 ## Anatomy of `GetValue()`
-| Parameters     | Description                                                                   |
-| -------------- | ----------------------------------------------------------------------------- |
+| Parameters     | Description                                                          |
+| -------------- | -------------------------------------------------------------------- |
 | `key`          | Setting-specific key. Set on *ConfigCat Dashboard* for each setting. |
-| `defaultValue` | This value will be returned in case of an error.                              |
+| `defaultValue` | This value will be returned in case of an error.                     |
 ```go
 value := client.GetValue(
     "keyOfMySetting", // Setting Key
@@ -96,7 +96,7 @@ value := client.GetValue(
 ## Anatomy of `GetValueForUser()`
 | Parameters     | Description                                                                                        |
 | -------------- | -------------------------------------------------------------------------------------------------- |
-| `key`          | Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                      |
+| `key`          | Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                               |
 | `defaultValue` | This value will be returned in case of an error.                                                   |
 | `user`         | *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```go
@@ -304,12 +304,12 @@ client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
 ```
 
 Available log levels:
-| Level | Name  | Description                                             |
-| ----- | ----- | ------------------------------------------------------- |
-| -1    | Off   | Nothing gets logged.                                    |
-| 1     | Error | Only error level events are logged.                     |
-| 2     | Warn  | Errors and Warnings are logged.                         |
-| 3     | Info  | Errors, Warnings and feature flag evaluation is logged. |
+| Level       | Description                                             |
+| ---------- | ------------------------------------------------------- |
+| ErrorLevel | Only error level events are logged.                     |
+| WarnLevel  | Errors and Warnings are logged.                         |
+| InfoLevel  | Errors, Warnings and feature flag evaluation is logged. |
+| DebugLevel | All of the above plus debug info is logged.             |
 
 Info level logging helps to inspect the feature flag evaluation process:
 ```bash

@@ -41,8 +41,8 @@ configcat_client.stop()
 - serving values quickly in a failsafe way.
 
 `create_client()` returns a client with default options.
-| Properties | Description                                                                                                        |
-| ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| Properties | Description                                                                                               |
+| ---------- | --------------------------------------------------------------------------------------------------------- |
 | `api_key`  | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 `create_client_with_auto_poll()`, `create_client_with_lazy_load()`, `create_client_with_manual_poll()`  
@@ -52,10 +52,10 @@ Creating the client is different for each polling mode.
 > We strongly recommend using the *ConfigCat Client* as a Singleton object in your application.
 
 ## Anatomy of `get_value()`
-| Parameters      | Description                                                                                                     |
-| --------------- | --------------------------------------------------------------------------------------------------------------- |
-| `key`           | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                     |
-| `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                  |
+| Parameters      | Description                                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------------------------------ |
+| `key`           | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
+| `default_value` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`          | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```ruby
 value = configcat_client.get_value(
@@ -171,7 +171,22 @@ value = configcat_client.get_value("key", "my default value") # Returns "value f
 In the *ConfigCat SDK* there is a default logger writes logs to the standard output. The following example shows how to configure the *Log Level* of the default logger. 
 
 ```ruby
-ConfigCat.logger.level = Logger::DEBUG
+ConfigCat.logger.level = Logger::INFO
+```
+
+Available log levels:
+| Level  | Description                                             |
+| ----- | ------------------------------------------------------- |
+| ERROR | Only error level events are logged.                     |
+| WARN  | Errors and Warnings are logged.                         |
+| INFO  | Errors, Warnings and feature flag evaluation is logged. |
+| DEBUG | All of the above plus debug info is logged.             |
+
+Info level logging helps to inspect the feature flag evaluation process:
+```bash
+I, [2020-01-14T13:34:45.946878 #20810]  INFO -- : Evaluating get_value('isPOCFeatureEnabled').
+I, [2020-01-14T13:34:45.947328 #20810]  INFO -- : Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
+I, [2020-01-14T13:34:45.947447 #20810]  INFO -- : Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: true
 ```
 
 You can easily replace the default logger with your own one. The following example shows how to set a logger writes logs into a text file.
