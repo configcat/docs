@@ -16,7 +16,7 @@ Using this feature you will be able to set different setting values for differen
 
 ## Anatomy of a Targeting Rule
 
-By adding a rule, you specify a group of your users and specify what feature flag - or other setting - value they should get. A rule consists of an **Attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses) and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
+By adding a rule, you specify a group of your users and specify what feature flag - or other setting - value they should get. A rule consists of an **Attribute** of a user in your application (e.g. email address), a **Condition** (e.g. a list of email addresses) and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
 
 ### Attribute
 
@@ -31,7 +31,7 @@ Attribute Name|Description
 `Country`|Might come useful for testing a new feature only in one country.
 `Custom`|***Define any attribute (e.g. `OS version`), by typing its name to the textbox.***
 
-### Comparison value
+### Condition
 
 Any string, number or comma separated list. Will be compared to the selected *Attribute* using the *Comparator*. **Max Length: 65535 chars**
 
@@ -39,44 +39,45 @@ Any string, number or comma separated list. Will be compared to the selected *At
 
 #### Text comparators
 
-These comparators assume that *Attribute* and *Comparison value* contain text. Use these comparators unless you want to compare numbers or semantic versions.
+The following comparators assume that *Attribute* and *Condition* contain string/text.
 
 Comparator|Description
 ---|---
-IS ONE OF|Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list.
-IS NOT ONE OF|True if the *Attribute* is not listed in the *Comparison value*.
-CONTAINS|True if the *Attribute* contains the *Comparison value*.
-DOES NOT CONTAIN|True if the *Attribute* doesn't contain the *Comparison value*.
+IS ONE OF|Checks if the *Attribute* is listed in the *Condition*. *Condition* should be a comma separated list.
+IS NOT ONE OF|True if the *Attribute* is not listed in the *Condition*.
+CONTAINS|True if the *Attribute* contains the *Condition*.
+DOES NOT CONTAIN|True if the *Attribute* doesn't contain the *Condition*.
 
 #### Semantic version comparators
 
-These comparators assume that *Attribute* and *Comparison value* contain <a target="_blank" href="https://semver.org/">semantic versions</a>.
+The following comparators assume that *Attribute* and *Condition* contain semantic versions.
+Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer Semantic Version Specification</a>.
 
 Comparator|Description
 ---|---
-IS ONE OF (Semver)|True if *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list of semantic versions.
-IS NOT ONE OF (Semver)|True if the *Attribute* is not listed in the *Comparison value*.
-< (Semver)|True if *Attribute* is a smaller version number than *Comparison value*.
-<= (Semver)|True if *Attribute* is smaller than or equals *Comparison value*. 
-\> (Semver)|True if *Attribute* is a larger version number than *Comparison value*.
-\>= (Semver)|True if *Attribute* is larger than or equals *Comparison value*. 
+IS ONE OF (Semver)|True if *Attribute* is listed in the *Condition*. *Condition* should be a comma separated list of semantic versions.
+IS NOT ONE OF (Semver)|True if the *Attribute* is not listed in the *Condition*.
+< (Semver)|True if *Attribute* is a smaller version number than *Condition*.
+<= (Semver)|True if *Attribute* is smaller than or equals *Condition*. 
+\> (Semver)|True if *Attribute* is a larger version number than *Condition*.
+\>= (Semver)|True if *Attribute* is larger than or equals *Condition*. 
 
-All semantic version comparators return False if either *Attribute* or *Comparison value* is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
+All semantic version comparators return `false` if either *Attribute* or *Condition* is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
 
 #### Number comparators
 
-These comparators assume that *Attribute* and *Comparison value* contain numbers. 
+The following comparators assume that *Attribute* and *Condition* contain numbers. 
 
 Comparator|Description
 ---|---
-= (Number)|True if *Attribute* equals *Comparison value*.
-<> (Number)|True if *Attribute* does not equal *Comparison value*.
-< (Number)|True if *Attribute* is less than *Comparison value*.
-<= (Number)|True if *Attribute* is less than or equals *Comparison value*. 
-\> (Number)|True if *Attribute* is a larger than *Comparison value*.
-\>= (Number)|True if *Attribute* is larger than or equals *Comparison value*. 
+= (Number)|True if *Attribute* equals *Condition*.
+<> (Number)|True if *Attribute* does not equal *Condition*.
+< (Number)|True if *Attribute* is less than *Condition*.
+<= (Number)|True if *Attribute* is less than or equals *Condition*. 
+\> (Number)|True if *Attribute* is a larger than *Condition*.
+\>= (Number)|True if *Attribute* is larger than or equals *Condition*. 
 
-All number comparators return False if either *Attribute* or *Comparison value* is not a valid number.
+All number comparators return `false` if either *Attribute* or *Condition* is not a valid number.
 
 ### Served value
 
@@ -102,7 +103,7 @@ By adding multiple targeting rules you can create more complex rule sets.
 
 *Enable a feature only to users within your company except the sales team (Susan and Simon) by adding two targeting rules:*
 
-#|Attribute|Comparator|Comparison value|Served value
+#|Attribute|Comparator|Condition|Served value
 ---|---|---|---|---|
 1|Email|CONTAINS|`susan@mycompany.com, simon@mycompany.com`|OFF
 2|Email|CONTAINS|`@mycompany.com`|ON
