@@ -14,7 +14,7 @@ Then you can use ConfigCat's Orb as a job:
 ```yaml
 version: 2.1
 orbs:
-  configcat: configcat/feature-flag-reference-validator@1.0.5
+  configcat: configcat/feature-flag-reference-validator@1.1
 workflows:
   main:
     jobs:
@@ -24,7 +24,7 @@ Or as an individual command:
 ```yaml
 version: 2.1
 orbs:
-  configcat: configcat/feature-flag-reference-validator@1.0.5
+  configcat: configcat/feature-flag-reference-validator@1.1
 jobs:
   build:
     docker:
