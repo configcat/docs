@@ -36,16 +36,6 @@ if(isMyAwesomeFeatureEnabled) {
     doTheOldThing()
 }
 ```
-Or use the async APIs:
-```swift
-client.getValueAsync(for: "key-of-my-awesome-feature", defaultValue: false) { isMyAwesomeFeatureEnabled in
-    if(isMyAwesomeFeatureEnabled) {
-        doTheNewThing()
-    } else {
-        doTheOldThing()
-    }
-}
-```
 
 ## Creating the *ConfigCat Client*
 *ConfigCat Client* is responsible for:
@@ -88,7 +78,7 @@ let value = client.getValue(
 | `completion`   | **REQUIRED.** Callback function to call, when the result is ready.                        |
 
 ```swift
-client.getValue(
+client.getValueAsync(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
     user: User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
@@ -141,18 +131,18 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
-Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.manualPoll()` to change the polling interval.
+Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.autoPoll()` to change the polling interval.
 ```swift
 let client = ConfigCatClient(
     apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
-    refreshMode: PollingModes.manualPoll(autoPollIntervalInSeconds: 120 /* polling interval in seconds */)
+    refreshMode: PollingModes.autoPoll(autoPollIntervalInSeconds: 120 /* polling interval in seconds */)
 )
 ```
 Adding a callback to `onConfigChanged` option parameter will get you notified about changes.
 ```swift
 let client = ConfigCatClient(
     apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
-    refreshMode: PollingModes.manualPoll(
+    refreshMode: PollingModes.autoPoll(
         autoPollIntervalInSeconds: 120, // polling interval in seconds
         onConfigChanged: { (config, parser) in
             let isMyAwesomeFeatureEnabled: String = try! parser.parseValue(for: "key-of-my-awesome-feature", json: configString)

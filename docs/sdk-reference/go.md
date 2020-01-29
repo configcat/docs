@@ -91,7 +91,7 @@ client.GetValueAsync(
     "keyOfMySetting", // Setting Key
     false, // Default value
     func(result interface{}) { // callback
-		fmt.Print(result)
+	    fmt.Print(result)
 	}
 )
 ```
@@ -118,7 +118,7 @@ value := client.GetValueForUser(
 | `user`         | *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 | `completion`   | Callback function to call, when the result is ready.                                               |
 ```go
-client.GetValueForUser(
+client.GetValueForUserAsync(
     "keyOfMySetting", // Setting Key
     false // Default value
     configcat.NewUser("435170f4-8a8b-4b67-a723-505ac7cdea92"), // User Object
