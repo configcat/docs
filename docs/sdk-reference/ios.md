@@ -38,13 +38,13 @@ if(isMyAwesomeFeatureEnabled) {
 ```
 Or use the async APIs:
 ```swift
-client.getValueAsync(for: "key-of-my-awesome-feature", defaultValue: false, completion: { isMyAwesomeFeatureEnabled in
+client.getValueAsync(for: "key-of-my-awesome-feature", defaultValue: false) { isMyAwesomeFeatureEnabled in
     if(isMyAwesomeFeatureEnabled) {
         doTheNewThing()
     } else {
         doTheOldThing()
     }
-})
+}
 ```
 
 ## Creating the *ConfigCat Client*
@@ -68,8 +68,8 @@ client.getValueAsync(for: "key-of-my-awesome-feature", defaultValue: false, comp
 ## Anatomy of `getValue()`
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
-| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.        |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                            |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```swift
 let value = client.getValue(
@@ -77,6 +77,28 @@ let value = client.getValue(
     defaultValue: false, // Default value
     user: User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
 )
+```
+
+## Anatomy of `getValueAsync()`
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.        |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                            |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `completion`   | **REQUIRED.** Callback function to call, when the result is ready.                        |
+
+```swift
+client.getValue(
+    for: "keyOfMySetting", // Setting Key
+    defaultValue: false, // Default value
+    user: User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+) { isMyAwesomeFeatureEnabled in
+    if(isMyAwesomeFeatureEnabled) {
+        doTheNewThing()
+    } else {
+        doTheOldThing()
+    }
+}
 ```
 
 ### User Object

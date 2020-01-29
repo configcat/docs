@@ -41,17 +41,6 @@ if(isMyAwesomeFeatureEnabled) {
     doTheOldThing()
 }
 ```
-Or use the async APIs:
-```kotlin
-client.getValueAsync(Boolean::class.javaObjectType, "<key-of-my-awesome-feature>", false)
-    .thenAccept({ isMyAwesomeFeatureEnabled ->
-        if(isMyAwesomeFeatureEnabled) {
-            doTheNewThing()
-        } else {
-            doTheOldThing()
-        }
-    })
-```
 
 ### 5. Stop *ConfigCat* client
 You can safely shut down the client instance and release all associated resources on application exit.
@@ -98,6 +87,28 @@ val value = client.getValue(
     User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
     false // Default value
 )
+```
+
+## Anatomy of `getValueAsync()`
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+```kotlin
+client.getValueAsync(
+    Boolean::class.javaObjectType, // Setting type
+    "keyOfMySetting", // Setting Key
+    User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
+    false // Default value
+).thenAccept({ isMyAwesomeFeatureEnabled ->
+    if(isMyAwesomeFeatureEnabled) {
+        doTheNewThing()
+    } else {
+        doTheOldThing()
+    }
+})
 ```
 
 ### User Object

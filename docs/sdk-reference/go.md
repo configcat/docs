@@ -24,17 +24,6 @@ if ok && isMyAwesomeFeatureEnabled {
     doTheOldThing()
 }
 ```
-Or use the async APIs:
-```go
-client.GetValueAsyncForUser("key-of-my-awesome-feature", false, func(result interface{}) {
-    isMyAwesomeFeatureEnabled, ok := result.(bool)
-    if ok && isMyAwesomeFeatureEnabled {
-        doTheNewThing()
-    } else {
-        doTheOldThing()
-    }
-})
-```
 
 ### 5. Stop *ConfigCat* client
 You can safely shut down the client instance and release all associated resources on application exit.
@@ -91,6 +80,22 @@ value := client.GetValue(
 )
 ```
 
+## Anatomy of `GetValueAsync()`
+| Parameters     | Description                                                          |
+| -------------- | -------------------------------------------------------------------- |
+| `key`          | Setting-specific key. Set on *ConfigCat Dashboard* for each setting. |
+| `defaultValue` | This value will be returned in case of an error.                     |
+| `completion`   | Callback function to call, when the result is ready.                 |
+```go
+client.GetValueAsync(
+    "keyOfMySetting", // Setting Key
+    false, // Default value
+    func(result interface{}) { // callback
+		fmt.Print(result)
+	}
+)
+```
+
 ## Anatomy of `GetValueForUser()`
 | Parameters     | Description                                                                                        |
 | -------------- | -------------------------------------------------------------------------------------------------- |
@@ -102,6 +107,24 @@ value := client.GetValueForUser(
     "keyOfMySetting", // Setting Key
     false // Default value
     configcat.NewUser("435170f4-8a8b-4b67-a723-505ac7cdea92") // User Object
+)
+```
+
+## Anatomy of `GetValueForUserAsync()`
+| Parameters     | Description                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------- |
+| `key`          | Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                               |
+| `defaultValue` | This value will be returned in case of an error.                                                   |
+| `user`         | *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `completion`   | Callback function to call, when the result is ready.                                               |
+```go
+client.GetValueForUser(
+    "keyOfMySetting", // Setting Key
+    false // Default value
+    configcat.NewUser("435170f4-8a8b-4b67-a723-505ac7cdea92"), // User Object
+    func(result interface{}) { // callback
+		fmt.Print(result)
+	}
 )
 ```
 
