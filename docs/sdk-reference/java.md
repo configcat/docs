@@ -10,12 +10,12 @@ Maven:
 <dependency>
     <groupId>com.configcat</groupId>
     <artifactId>configcat-java-client</artifactId>
-    <version>[2.0.0,)</version>
+    <version>[3.0.0,)</version>
 </dependency>
 ```
 Gradle:
 ```bash
-implementation 'com.configcat:configcat-java-client:2.+'
+compile group: 'com.configcat', name: 'configcat-java-client', version: '3.+'
 ```
 ### 2. Import the ConfigCat SDK:
 ```java
@@ -73,7 +73,7 @@ ConfigCatClient.newBuilder()
 | `httpClient(OkHttpClient)`                                             | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                                                                                           |
 | `maxWaitTimeForSyncCallsInSeconds(int)`                                | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
 | `cache(ConfigCache)`                                                   | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                    |
-| `refreshPolicy(BiFunction<ConfigFetcher, ConfigCache, RefreshPolicy>)` | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                                                                                                          |
+| `mode(PollingMode pollingMode)`                                        | Optional, sets the polling mode for the client. [See below](#polling-modes).                                                                                                          |
 
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
@@ -133,90 +133,53 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
-Use the the `autoPollIntervalInSeconds` option parameter of the `AutoPollingPolicy` to change the polling interval.
+Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.AutoPoll()` to change the polling interval.
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
-    .refreshPolicy((configFetcher, cache) -> 
-        AutoPollingPolicy.newBuilder()
-            .autoPollIntervalInSeconds(120) // set the polling interval
-            .build(configFetcher, cache))
-    .build("<PLACE-YOUR-API-KEY-HERE>");
+    .mode(PollingModes.AutoPoll(120 /* polling interval in seconds */))
+    .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
 Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
-    .refreshPolicy((configFetcher, cache) -> 
-        AutoPollingPolicy.newBuilder()
-            .configurationChangeListener((parser, newConfiguration) -> {
+    .mode(PollingModes.AutoPoll(
+        120 /* polling interval in seconds */,
+        (parser, newConfiguration) -> {
                 // here you can parse the new configuration like this: 
                 // parser.parseValue(Boolean.class, newConfiguration, <key-of-my-awesome-feature>)
-            })
-            .build(configFetcher, cache))
+        })
+    )
     .build("<PLACE-YOUR-API-KEY-HERE>");
 ```
 
 ### Lazy loading
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
 
-Use the `cacheRefreshIntervalInSeconds` option parameter of the `LazyLoadingPolicy` to set cache lifetime.
+Use the `cacheRefreshIntervalInSeconds` option parameter of the `PollingModes.LazyLoad()` to set cache lifetime.
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
-    .refreshPolicy((configFetcher, cache) -> 
-        LazyLoadingPolicy.newBuilder()
-            .cacheRefreshIntervalInSeconds(120) // the cache will expire in 120 seconds
-            .build(configFetcher, cache))
+    .mode(PollingModes.LazyLoad(120 /* the cache will expire in 120 seconds */))
     .build("<PLACE-YOUR-API-KEY-HERE>");
 ```
-Use the `asyncRefresh` option parameter of the `LazyLoadingPolicy` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
+Use the `asyncRefresh` option parameter of the `PollingModes.LazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
-    .refreshPolicy((configFetcher, cache) -> 
-        LazyLoadingPolicy.newBuilder()
-            .asyncRefresh(true) // the refresh will be executed asynchronously
-            .build(configFetcher, cache))
+    .mode(PollingModes.LazyLoad(
+        120, // the cache will expire in 120 seconds
+        true // the refresh will be executed asynchronously
+        )
+    )
     .build("<PLACE-YOUR-API-KEY-HERE>");
 ```
-If you set the `.asyncRefresh()` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
+If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
 
 ### Manual polling
 With this policy every new configuration request on the ConfigCatClient will trigger a new fetch over HTTP.
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
-    .refreshPolicy((configFetcher, cache) -> new ManualPollingPolicy(configFetcher,cache))
+    .mode(PollingModes.ManualPoll())
     .build("<PLACE-YOUR-API-KEY-HERE>");
 ```
-### Custom policy
-You can also implement your custom refresh policy by extending the `RefreshPolicy` abstract class.
-```java
-public class MyCustomPolicy extends RefreshPolicy {
-    
-    public MyCustomPolicy(ConfigFetcher configFetcher, ConfigCache cache) {
-        super(configFetcher, cache);
-    }
-
-    @Override
-    public CompletableFuture<String> getConfigurationJsonAsync() {
-        // this method will be called when the configuration is requested from the ConfigCatClient.
-        // you can access the config fetcher through the super.fetcher() and the internal cache via super.cache()
-    }
-    
-    // optional, in case if you have any resources that should be closed
-    @Override
-     public void close() throws IOException {
-        super.close();
-        // here you can close your resources
-    }
-}
-```
- > If you decide to override the `close()` method, you should also call the `super.close()` to tear the cache appropriately down.
-
-Then you can simply inject your custom policy implementation into the ConfigCatClient:
-```java
-ConfigCatClient client = ConfigCatClient.newBuilder()
-    .refreshPolicy((configFetcher, cache) -> new MyCustomPolicy(configFetcher, cache)) // inject your custom policy
-    .build("<PLACE-YOUR-API-KEY-HERE>");
-```
-
 ## Custom cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCache` abstract class:
 ```java
@@ -262,7 +225,7 @@ Any time you want to refresh the cached configuration with the latest one, you c
 As the SDK uses the facade of [slf4j](https://www.slf4j.org) for logging you can use any of the slf4j implementation package. 
 ```
 dependencies {
-    implementation 'org.slf4j:slf4j-simple:1.+'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.+'
 }
 ```
 

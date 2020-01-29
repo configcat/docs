@@ -61,7 +61,7 @@ client.getValueAsync(for: "key-of-my-awesome-feature", defaultValue: false, comp
 | `configCache`                      | ConfigCache?                                     | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                    |
 | `maxWaitTimeForSyncCallsInSeconds` | int                                              | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
 | `sessionConfiguration`             | URLSessionConfiguration                          | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                                                                                                                   |
-| `policyFactory`                    | ((ConfigCache, ConfigFetcher) -> RefreshPolicy)? | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                                                                                                          |
+| `refreshMode`                      | PollingMode?                                     | Optional, sets the polling mode for the client. [See below](#polling-modes).                                                                                                          |
 
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
@@ -119,90 +119,58 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
-Use the the `autoPollIntervalInSeconds` option parameter of the `AutoPollingPolicy` to change the polling interval.
+Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.manualPoll()` to change the polling interval.
 ```swift
-let factory = { (cache: ConfigCache, fetcher: ConfigFetcher) -> RefreshPolicy in
-    AutoPollingPolicy(cache: cache,
-        fetcher: fetcher,
-        autoPollIntervalInSeconds: 30)
-}
-
-let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>", policyFactory: factory)
+let client = ConfigCatClient(
+    apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
+    refreshMode: PollingModes.manualPoll(autoPollIntervalInSeconds: 120 /* polling interval in seconds */)
+)
 ```
-Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
+Adding a callback to `onConfigChanged` option parameter will get you notified about changes.
 ```swift
-let factory = { (cache: ConfigCache, fetcher: ConfigFetcher) -> RefreshPolicy in
-    AutoPollingPolicy(cache: cache,
-        fetcher: fetcher,
+let client = ConfigCatClient(
+    apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
+    refreshMode: PollingModes.manualPoll(
+        autoPollIntervalInSeconds: 120, // polling interval in seconds
         onConfigChanged: { (config, parser) in
             let isMyAwesomeFeatureEnabled: String = try! parser.parseValue(for: "key-of-my-awesome-feature", json: configString)
             if(isMyAwesomeFeatureEnabled) {
                 //show your awesome feature to the world!
             }
-        })
-}
-
-let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>", policyFactory: factory)
+        }
+    )
+)
 ```
 
 ### Lazy loading
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
 
-Use the `cacheRefreshIntervalInSeconds` option parameter of the `LazyLoadingPolicy` to set cache lifetime.
+Use the `cacheRefreshIntervalInSeconds` option parameter of the `PollingModes.lazyLoad()` to set cache lifetime.
 ```swift
-let factory = { (cache: ConfigCache, fetcher: ConfigFetcher) -> RefreshPolicy in
-    LazyLoadingPolicy(cache: cache,
-                      fetcher: fetcher,
-                      cacheRefreshIntervalInSeconds: 30)
-}
-
-let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>", policyFactory: factory)
+let client = ConfigCatClient(
+    apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
+    refreshMode: PollingModes.lazyLoad(cacheRefreshIntervalInSeconds: 120 /* the cache will expire in 120 seconds */)
+)
 ```
-Use the `asyncRefresh` option parameter of the `LazyLoadingPolicy` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
+Use the `asyncRefresh` option parameter of the `PollingModes.lazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
 ```swift
-let factory = { (cache: ConfigCache, fetcher: ConfigFetcher) -> RefreshPolicy in
-    LazyLoadingPolicy(cache: cache,
-                      fetcher: fetcher,
-                      useAsyncRefresh = true)
-}
-
-let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>", policyFactory: factory)
+let client = ConfigCatClient(
+    apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
+    refreshMode: PollingModes.lazyLoad(
+        cacheRefreshIntervalInSeconds: 120, // the cache will expire in 120 seconds
+        useAsyncRefresh: true // the refresh will be executed asynchronously
+    )
+)
 ```
-If you set the `.asyncRefresh()` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
+If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
 
 ### Manual polling
 With this policy every new configuration request on the ConfigCatClient will trigger a new fetch over HTTP.
 ```swift
-let factory = { (cache: ConfigCache, fetcher: ConfigFetcher) -> RefreshPolicy in
-    ManualPollingPolicy(cache: cache, fetcher: fetcher)
-}
-        
-let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>", policyFactory: factory)
-```
-
-### Custom Policy
-You can also implement your custom refresh policy by extending the `RefreshPolicy` open class.
-```swift
-public class MyCustomPolicy : RefreshPolicy {
-    public required init(cache: ConfigCache, fetcher: ConfigFetcher) {
-        super.init(cache: cache, fetcher: fetcher)
-    }
-    
-    public override func getConfiguration() -> AsyncResult<String> {
-        // this method will be called when the configuration is requested from the ConfigCat client.
-        // you can access the config fetcher through the super.fetcher and the internal cache via super.cache
-    }
-}
-```
-> The AsyncResult is an internal type used to signal back to the caller about the completion of a given task like Futures.
-
-Then you can simply inject your custom policy implementation into the ConfigCat client:
-```swift
-let factory = { (cache: ConfigCache, fetcher: ConfigFetcher) -> RefreshPolicy in
-    MyCustomPolicy(cache, fetcher))
-}
-        
-let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>", policyFactory: factory)
+let client = ConfigCatClient(
+    apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
+    refreshMode: PollingModes.manualPoll()
+)
 ```
 
 ## Custom cache

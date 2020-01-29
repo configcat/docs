@@ -5,11 +5,11 @@ title: Go
 ## Getting Started:
 ### 1. Get the SDK with `go`
 ```bash
-go get gopkg.in/configcat/go-sdk.v2
+go get gopkg.in/configcat/go-sdk.v3
 ```
 ### 2. Import the ConfigCat package
 ```go
-import gopkg.in/configcat/go-sdk.v2
+import gopkg.in/configcat/go-sdk.v3
 ```
 ### 3. Create the *ConfigCat* client with your *API Key*
 ```go
@@ -59,10 +59,8 @@ client.Close()
 | --------- | ------------------------------------------------------------------------------------------- |
 | `apiKey`  | API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 | `config`  | An object which contains the custom configuration.                                          |
-You can get and customize the default configuration options:
-```go
-config := configcat.DefaultClientConfig()
-```
+
+Available configuration options:
 | Properties                | Type                                             | Description                                                                                                                                                                                                       |
 | ------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `BaseUrl`                 | string                                           | *Obsolete* Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                     |
@@ -71,11 +69,11 @@ config := configcat.DefaultClientConfig()
 | `HttpTimeout`             | time.Duration                                    | Sets maximum wait time for a HTTP response.                                                                                                                                                                       |
 | `Transport`               | http.RoundTripper                                | Sets the transport options for the underlying HTTP calls.                                                                                                                                                         |
 | `Logger`                  | configcat.Logger                                 | Sets the `Logger` implementation used by the SDK for logging.                                                                                                                                                     |
-| `PolicyFactory`           | func(ConfigProvider, *ConfigStore) RefreshPolicy | Sets a custom refresh policy implementation for the client. [See below](#custom-policy).                                                                                                                          |
+| `Mode`                    | configcat.RefreshMode                            | Sets the polling mode for the client. [See below](#polling-modes).                                                                                                                          |
 
 Then you can pass it to the `NewCustomClient()` method:
 ```go
-client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", ClientConfig{ Mode: ManualPoll() })
 ```
 
 
@@ -146,26 +144,23 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
-Use the `NewAutoPollingPolicy` method to create the policy.
-```go
-config := configcat.DefaultClientConfig()
-config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *configcat.ConfigStore) configcat.RefreshPolicy {
-    return configcat.NewAutoPollingPolicy(configProvider, store, 
-    // The auto poll interval
-    time.Second * 120)
-}
-       
-client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+Use the the `autoPollIntervalInSeconds` option parameter of the `configcat.AutoPoll()` to change the polling interval.
+```go  
+client := configcat.NewCustomClient(
+    "<PLACE-YOUR-API-KEY-HERE>", 
+    configcat.ClientConfig{ Mode: configcat.AutoPoll(time.Second * 120 /* polling interval in seconds */) }
+)
 ```
 You have the option to configure the polling interval and an `configChanged` callback that will be notified when a new configuration is fetched. The policy calls the given method only, when the new configuration is differs from the cached one.
 ```go
-config := configcat.DefaultClientConfig()
-config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *configcat.ConfigStore) configcat.RefreshPolicy {
-	return configcat.NewAutoPollingPolicyWithChangeListener(configProvider, store,
-		// The auto poll interval
-		time.Second * 120,
-		// The callback called when the configuration changes
-		func(config string, parser *configcat.ConfigParser) {
+
+client := configcat.NewCustomClient(
+    "<PLACE-YOUR-API-KEY-HERE>", 
+    configcat.ClientConfig{ Mode: configcat.AutoPoll(
+        // The auto poll interval
+        time.Second * 120,
+        // The callback called when the configuration changes
+        func(config string, parser *configcat.ConfigParser) {
 			result, err := parser.Parse(config, "key-of-my-awesome-feature")
 			if err != nil {
 				isMyAwesomeFeatureEnabled, ok := result.(bool)
@@ -174,68 +169,34 @@ config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *conf
 				}
 			}
 		})
-}
-       
-client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+    )}
+)
 ```
 
 ### Lazy loading
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
 
-Use the `NewLazyLoadingPolicy` method to create the policy.
+Use the `cacheRefreshIntervalInSeconds` parameter of the `configcat.LazyLoad()` to set cache lifetime.
 ```go
-config := configcat.DefaultClientConfig()
-config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *configcat.ConfigStore) configcat.RefreshPolicy {
-    return configcat.NewExpiringCachePolicy(configProvider, store, 
-    // The cache expiration interval
-    time.Second * 120,
-    // True for async, false for sync refresh
-    true)
-}
-       
-client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+client := configcat.NewCustomClient(
+    "<PLACE-YOUR-API-KEY-HERE>", 
+    configcat.ClientConfig{ Mode: configcat.LazyLoad(
+        time.Second * 120, // polling interval in seconds
+        true // the refresh will be executed asynchronously
+    )}
+)
 ```
-> Use the `asyncRefresh` option parameter of the `NewLazyLoadingPolicy` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
+> Use the `asyncRefresh` option parameter of the `configcat.LazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
 
->If you set the `.asyncRefresh()` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
+>If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
 
 ### Manual polling
 With this policy every new configuration request on the ConfigCatClient will trigger a new fetch over HTTP.
 ```go
-config := configcat.DefaultClientConfig()
-config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *configcat.ConfigStore) configcat.RefreshPolicy {
-    return configcat.NewManualPollingPolicy(configProvider, store)
-}
-       
-client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
-```
-
-### Custom Policy
-You can also implement your custom refresh policy by satisfying the `RefreshPolicy` interface.
-```go
-type CustomPolicy struct {
-    configcat.ConfigRefresher
-}
-
-func NewCustomPolicy(fetcher configcat.ConfigProvider, store *configcat.ConfigStore) *NewCustomPolicy {
-    return &NewCustomPolicy{ ConfigRefresher: ConfigRefresher{ Fetcher:fetcher, Store:store }}
-}
-
-func (policy *NewCustomPolicy) GetConfigurationAsync() *configcat.AsyncResult {
-    // this method will be called when the configuration is requested from the ConfigCat client.
-    // you can access the config fetcher through the policy.Fetcher and the internal store via policy.Store
-}
-```
-> The `AsyncResult` and the `Async` are internal types used to signal back to the caller about the completion of a given task like [Futures](https://en.wikipedia.org/wiki/Futures_and_promises).
-
-Then you can simply inject your custom policy implementation into the ConfigCat client:
-```go
-config := configcat.DefaultClientConfig()
-config.PolicyFactory = func(configProvider configcat.ConfigProvider, store *configcat.ConfigStore) configcat.RefreshPolicy {
-    return NewCustomPolicy(configProvider, store)
-}
-
-client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+client := configcat.NewCustomClient(
+    "<PLACE-YOUR-API-KEY-HERE>", 
+    configcat.ClientConfig{ Mode: configcat.ManualPoll() }
+)
 ```
 
 ## Custom Cache
@@ -253,11 +214,11 @@ func (cache *CustomCache) Set(value string) error {
 }
 ```
 Then use your custom cache implementation:
-```go      
-config := configcat.DefaultClientConfig()
-config.Cache = CustomCache{}
-
-client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+```go
+client := configcat.NewCustomClient(
+    "<PLACE-YOUR-API-KEY-HERE>", 
+    configcat.ClientConfig{ Cache: CustomCache{} }
+)
 ```
 
 ### Force refresh
@@ -267,11 +228,14 @@ which will initiate a new fetch and will update the local cache.
 ## HTTP Proxy
 You can use the `Transport` config option to set up http transport related (like proxy) settings for the http client used by the SDK:
 ```go
-config := configcat.DefaultClientConfig()
-config.Transport = &http.Transport{
-	Proxy: http.ProxyURL(url.Parse("<PROXY-URL>")),
-}
-client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+client := configcat.NewCustomClient(
+    "<PLACE-YOUR-API-KEY-HERE>", 
+    configcat.ClientConfig{ 
+        Transport: &http.Transport{
+	        Proxy: http.ProxyURL(url.Parse("<PROXY-URL>")),
+        }    
+    }
+)
 ```
 
 ## Logging
@@ -281,10 +245,11 @@ import {
 	"github.com/configcat/go-sdk"
 	"github.com/sirupsen/logrus"
 }
-config := configcat.DefaultClientConfig()
-config.Logger = logrus.New()
 
-client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+client := configcat.NewCustomClient(
+    "<PLACE-YOUR-API-KEY-HERE>", 
+    configcat.ClientConfig{ Logger: logrus.New() }
+)
 ```
 
 ### Setting log levels
@@ -297,10 +262,11 @@ import {
 
 logger := logrus.New()
 logger.SetLevel(logrus.InfoLevel)
-config := configcat.DefaultClientConfig()
-config.Logger = logger
 
-client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", config)
+client := configcat.NewCustomClient(
+    "<PLACE-YOUR-API-KEY-HERE>", 
+    configcat.ClientConfig{ Logger: logger }
+)
 ```
 
 Available log levels:

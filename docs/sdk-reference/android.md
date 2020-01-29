@@ -22,7 +22,7 @@ android {
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
 ```
-implementation 'com.configcat:configcat-android-client:1.+'
+implementation 'com.configcat:configcat-android-client:3.+'
 ```
 ### 2. Import the ConfigCat SDK:
 ```kotlin
@@ -80,7 +80,7 @@ ConfigCatClient.newBuilder()
 | `httpClient(OkHttpClient)`                                             | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                                                                                           |
 | `maxWaitTimeForSyncCallsInSeconds(int)`                                | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
 | `cache(ConfigCache)`                                                   | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                    |
-| `refreshPolicy(BiFunction<ConfigFetcher, ConfigCache, RefreshPolicy>)` | Optional, sets a custom refresh policy implementation for the client. [See below](#custom-policy).                                                                                                          |
+| `mode(PollingMode pollingMode)`                                        | Optional, sets the polling mode for the client. [See below](#polling-modes).                                                                                                          |
 
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
@@ -136,87 +136,51 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
-Use the the `autoPollIntervalInSeconds` option parameter of the `AutoPollingPolicy` to change the polling interval.
+Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.AutoPoll()` to change the polling interval.
 ```java
 val client = ConfigCatClient.newBuilder()
-    .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache ->
-        AutoPollingPolicy.newBuilder()
-            .autoPollIntervalInSeconds(120) // set the polling interval
-            .build(fetcher, cache)})
+    .mode(PollingModes.AutoPoll(120 /* polling interval in seconds */))
     .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
 Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
 ```java
 val client = ConfigCatClient.newBuilder()
-    .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache ->
-        AutoPollingPolicy.newBuilder()
-            .configurationChangeListener({parser, newConfiguration  ->
-                // here you can parse the new configuration like this:
-                // parser.parseValue(Boolean::class.java, newConfiguration, <key-of-my-awesome-feature>)
-            })
-            .build(fetcher, cache)})
+    .mode(PollingModes.AutoPoll(
+        120 /* polling interval in seconds */,
+        {parser, newConfiguration  ->
+            // here you can parse the new configuration like this:
+            // parser.parseValue(Boolean::class.java, newConfiguration, <key-of-my-awesome-feature>)
+        })
+    )
     .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
 
 ### Lazy loading
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
 
-Use the `cacheRefreshIntervalInSeconds` option parameter of the `LazyLoadingPolicy` to set cache lifetime.
+Use the `cacheRefreshIntervalInSeconds` parameter of the `PollingModes.LazyLoad()` to set cache lifetime.
 ```java
 val client = ConfigCatClient.newBuilder()
-    .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache ->
-        LazyLoadingPolicy.newBuilder()
-            .cacheRefreshIntervalInSeconds(120) // the cache will expire in 120 seconds
-            .build(fetcher, cache)})
+    .mode(PollingModes.LazyLoad(120 /* the cache will expire in 120 seconds */))
     .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
-Use the `asyncRefresh` option parameter of the `LazyLoadingPolicy` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
+Use the `asyncRefresh` option parameter of the `PollingModes.LazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
 ```java
 val client = ConfigCatClient.newBuilder()
-    .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache ->
-        LazyLoadingPolicy.newBuilder()
-            .asyncRefresh(true) // the refresh will be executed asynchronously
-            .build(fetcher, cache)})
+    .mode(PollingModes.LazyLoad(
+        120, // the cache will expire in 120 seconds
+        true // the refresh will be executed asynchronously
+        )
+    )
     .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
-If you set the `.asyncRefresh()` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
+If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
 
 ### Manual polling
 With this policy every new configuration request on the ConfigCatClient will trigger a new fetch over HTTP.
 ```java
 val client = ConfigCatClient.newBuilder()
-    .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache -> ManualPollingPolicy(fetcher,cache)})
-    .build("<PLACE-YOUR-API-KEY-HERE>")
-```
-
-### Custom Policy
-
-You can also implement your custom refresh policy by extending the RefreshPolicy abstract class.
-
-```java
-class MyCustomPolicy(fetcher: ConfigFetcher, cache: ConfigCache)
-    : RefreshPolicy(fetcher, cache) {
-
-    override fun getConfigurationJsonAsync(): CompletableFuture<String> {
-        // this method will be called when the configuration is requested from the ConfigCatClient.
-        // you can access the config fetcher through the super.fetcher() and the internal cache via super.cache()
-    }
-
-    // optional, in case if you have any resources that should be closed
-    override fun close() {
-        super.close()
-        // here you can close your resources
-    }
-}
-```
-
-> If you decide to override the `close()` method, you should also call the `super.close()` to tear the cache appropriately down.
-
-Then you can simply inject your custom policy implementation into the ConfigCatClient:
-
-```java
-val client = ConfigCatClient.newBuilder()
-    .refreshPolicy({ fetcher: ConfigFetcher, cache: ConfigCache -> MyCustomPolicy(fetcher, cache)}) // inject your custom policy
+    .mode(PollingModes.ManualPoll())
     .build("<PLACE-YOUR-API-KEY-HERE>")
 ```
 
