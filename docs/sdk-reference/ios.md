@@ -144,11 +144,8 @@ let client = ConfigCatClient(
     apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
     refreshMode: PollingModes.autoPoll(
         autoPollIntervalInSeconds: 120, // polling interval in seconds
-        onConfigChanged: { (config, parser) in
-            let isMyAwesomeFeatureEnabled: String = try! parser.parseValue(for: "key-of-my-awesome-feature", json: configString)
-            if(isMyAwesomeFeatureEnabled) {
-                //show your awesome feature to the world!
-            }
+        onConfigChanged: {
+            // here you can subscribe to configuration changes 
         }
     )
 )

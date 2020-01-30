@@ -155,9 +155,8 @@ Adding a callback to `configurationChangeListener` option parameter will get you
 ConfigCatClient client = ConfigCatClient.newBuilder()
     .mode(PollingModes.AutoPoll(
         120 /* polling interval in seconds */,
-        (parser, newConfiguration) -> {
-                // here you can parse the new configuration like this: 
-                // parser.parseValue(Boolean.class, newConfiguration, <key-of-my-awesome-feature>)
+        () -> {
+            // here you can subscribe to configuration changes 
         })
     )
     .build("<PLACE-YOUR-API-KEY-HERE>");

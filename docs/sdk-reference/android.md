@@ -34,7 +34,7 @@ val client = ConfigCatClient("#YOUR-API-KEY#")
 ```
 ### 4. Get your setting value
 ```kotlin
-val isMyAwesomeFeatureEnabled = client.getValue(Boolean::class.javaObjectType, "<key-of-my-awesome-feature>", false)
+val isMyAwesomeFeatureEnabled = client.getValue(Boolean::class.java "<key-of-my-awesome-feature>", false)
 if(isMyAwesomeFeatureEnabled) {
     doTheNewThing()
 } else {
@@ -82,7 +82,7 @@ val client = ConfigCatClient.newBuilder()
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 ```kotlin
 val value = client.getValue(
-    Boolean::class.javaObjectType, // Setting type
+    Boolean::class.java, // Setting type
     "keyOfMySetting", // Setting Key
     User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
     false // Default value
@@ -98,7 +98,7 @@ val value = client.getValue(
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 ```kotlin
 client.getValueAsync(
-    Boolean::class.javaObjectType, // Setting type
+    Boolean::class.java, // Setting type
     "keyOfMySetting", // Setting Key
     User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
     false // Default value
@@ -158,9 +158,8 @@ Adding a callback to `configurationChangeListener` option parameter will get you
 val client = ConfigCatClient.newBuilder()
     .mode(PollingModes.AutoPoll(
         120 /* polling interval in seconds */,
-        {parser, newConfiguration  ->
-            // here you can parse the new configuration like this:
-            // parser.parseValue(Boolean::class.java, newConfiguration, <key-of-my-awesome-feature>)
+        {
+            // here you can subscribe to configuration changes
         })
     )
     .build("#YOUR-API-KEY#")

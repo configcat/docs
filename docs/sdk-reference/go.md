@@ -183,14 +183,8 @@ client := configcat.NewCustomClient(
         // The auto poll interval
         time.Second * 120,
         // The callback called when the configuration changes
-        func(config string, parser *configcat.ConfigParser) {
-			result, err := parser.Parse(config, "key-of-my-awesome-feature")
-			if err != nil {
-				isMyAwesomeFeatureEnabled, ok := result.(bool)
-				if ok && isMyAwesomeFeatureEnabled {
-					//show your awesome feature to the world!
-				}
-			}
+        func() {
+			// here you can subscribe to configuration changes
 		})
     )}
 )
