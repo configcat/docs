@@ -50,7 +50,7 @@ client.close()
 `new ConfigCatClient(<apiKey>)` returns a client with default options.
 ### Builder
 ```java
-ConfigCatClient.newBuilder()
+ConfigCatClient client = ConfigCatClient.newBuilder()
     .maxWaitTimeForSyncCallsInSeconds(5)
     .build(<apikey>);
 ```
@@ -74,7 +74,7 @@ ConfigCatClient.newBuilder()
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 ```java
-Boolean value = client.getValue(
+boolean value = client.getValue(
     Boolean.class, // Setting type
     "keyOfMySetting", // Setting Key
     User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
@@ -90,7 +90,7 @@ Boolean value = client.getValue(
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 ```java
-client.getValue(
+client.getValueAsync(
     Boolean.class, // Setting type
     "keyOfMySetting", // Setting Key
     User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
@@ -119,7 +119,7 @@ User user = User.newBuilder().build("john@example.com");
 | `country()`     | Optional parameter for easier targeting rule definitions.                                                                       |
 | `custom()`      | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 ``` java
-Map<String,String> customAttributes = new HashMap<String,String>();
+java.util.Map<String,String> customAttributes = new java.util.HashMap<String,String>();
     customAttributes.put("SubscriptionType", "Pro");
     customAttributes.put("UserRole", "Admin");
 
@@ -134,8 +134,8 @@ User user = User.newBuilder()
 You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
 
 ```java
-ConfigCatClient client = ConfigCatClient("#YOUR-API-KEY#");
-Collection<String> keys = client.getAllKeys();
+ConfigCatClient client = new ConfigCatClient("#YOUR-API-KEY#");
+java.util.Collection<String> keys = client.getAllKeys();
 ```
 
 ## Polling Modes
@@ -148,7 +148,7 @@ Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.Au
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
     .mode(PollingModes.AutoPoll(120 /* polling interval in seconds */))
-    .build("<PLACE-YOUR-API-KEY-HERE>")
+    .build("<PLACE-YOUR-API-KEY-HERE>");
 ```
 Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
 ```java
@@ -219,6 +219,9 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 ## HttpClient
 The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to fetch the latest configuration over HTTP. You have the option to override the internal Http client with your customized one. For example if your application runs behind a proxy you can do the following:
 ```java
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+
 Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxyHost", proxyPort));
 
 ConfigCatClient client = ConfigCatClient.newBuilder()
