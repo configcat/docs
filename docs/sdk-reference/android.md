@@ -30,7 +30,7 @@ import com.configcat.*
 ```
 ### 3. Create the *ConfigCat* client with your *API Key*
 ```kotlin
-val client = ConfigCatClient("<PLACE-YOUR-API-KEY-HERE>")
+val client = ConfigCatClient("#YOUR-API-KEY#")
 ```
 ### 4. Get your setting value
 ```kotlin
@@ -54,7 +54,7 @@ client.close()
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
-`ConfigCatClient(<apiKey>)` returns a client with default options.
+`ConfigCatClient("#YOUR-API-KEY#")` returns a client with default options.
 
 ### Builder
 ```kotlin
@@ -151,7 +151,7 @@ Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.Au
 ```java
 val client = ConfigCatClient.newBuilder()
     .mode(PollingModes.AutoPoll(120 /* polling interval in seconds */))
-    .build("<PLACE-YOUR-API-KEY-HERE>")
+    .build("#YOUR-API-KEY#")
 ```
 Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
 ```java
@@ -163,7 +163,7 @@ val client = ConfigCatClient.newBuilder()
             // parser.parseValue(Boolean::class.java, newConfiguration, <key-of-my-awesome-feature>)
         })
     )
-    .build("<PLACE-YOUR-API-KEY-HERE>")
+    .build("#YOUR-API-KEY#")
 ```
 
 ### Lazy loading
@@ -173,7 +173,7 @@ Use the `cacheRefreshIntervalInSeconds` parameter of the `PollingModes.LazyLoad(
 ```java
 val client = ConfigCatClient.newBuilder()
     .mode(PollingModes.LazyLoad(120 /* the cache will expire in 120 seconds */))
-    .build("<PLACE-YOUR-API-KEY-HERE>")
+    .build("#YOUR-API-KEY#")
 ```
 Use the `asyncRefresh` option parameter of the `PollingModes.LazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
 ```java
@@ -183,7 +183,7 @@ val client = ConfigCatClient.newBuilder()
         true // the refresh will be executed asynchronously
         )
     )
-    .build("<PLACE-YOUR-API-KEY-HERE>")
+    .build("#YOUR-API-KEY#")
 ```
 If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
 
@@ -192,7 +192,7 @@ With this policy every new configuration request on the ConfigCatClient will tri
 ```java
 val client = ConfigCatClient.newBuilder()
     .mode(PollingModes.ManualPoll())
-    .build("<PLACE-YOUR-API-KEY-HERE>")
+    .build("#YOUR-API-KEY#")
 ```
 
 ## Custom cache
@@ -218,7 +218,7 @@ Then use your custom cache implementation:
 ```java
 val client = ConfigCatClient.newBuilder()
     .cache(MyCustomCache()) // inject your custom cache
-    .build("<PLACE-YOUR-API-KEY-HERE>")
+    .build("#YOUR-API-KEY#")
 ```
 
 ## HttpClient
@@ -231,7 +231,7 @@ val client = ConfigCatClient.newBuilder()
     .httpClient(OkHttpClient.Builder()
                 .proxy(proxy)
                 .build())
-    .build("<PLACE-YOUR-API-KEY-HERE>")
+    .build("#YOUR-API-KEY#")
 ```
 
 > As the ConfigCat SDK maintains the whole lifetime of the internal http client, it's being closed simultaneously with the ConfigCatClient, refrain from closing the http client manually.
