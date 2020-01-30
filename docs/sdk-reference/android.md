@@ -58,7 +58,7 @@ client.close()
 
 ### Builder
 ```kotlin
-ConfigCatClient.newBuilder()
+val client = ConfigCatClient.newBuilder()
     .maxWaitTimeForSyncCallsInSeconds(5)
     .build(<apikey>)
 ```
