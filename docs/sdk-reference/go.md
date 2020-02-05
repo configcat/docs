@@ -183,14 +183,8 @@ client := configcat.NewCustomClient(
         // The auto poll interval
         time.Second * 120,
         // The callback called when the configuration changes
-        func(config string, parser *configcat.ConfigParser) {
-			result, err := parser.Parse(config, "key-of-my-awesome-feature")
-			if err != nil {
-				isMyAwesomeFeatureEnabled, ok := result.(bool)
-				if ok && isMyAwesomeFeatureEnabled {
-					//show your awesome feature to the world!
-				}
-			}
+        func() {
+			// here you can subscribe to configuration changes
 		})
     )}
 )
@@ -214,13 +208,16 @@ client := configcat.NewCustomClient(
 >If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
 
 ### Manual polling
-With this policy every new configuration request on the ConfigCatClient will trigger a new fetch over HTTP.
+Manual polling gives you full control over when the setting values are downloaded. ConfigCat SDK will not update them automatically. Calling `Refresh()` is your application's responsibility.
 ```go
 client := configcat.NewCustomClient(
     "<PLACE-YOUR-API-KEY-HERE>", 
     configcat.ClientConfig{ Mode: configcat.ManualPoll() }
 )
+
+client.ForceRefresh()
 ```
+> `GetValue()` returns `defaultValue` if the cache is empty. Call `Refresh()` to update the cache.
 
 ## Custom Cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to satisfy the `ConfigCache` interface:
