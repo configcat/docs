@@ -105,7 +105,7 @@ client.getValueAsync(
 ```
 
 ### User Object
-The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting]((advanced/targeting.md)) feature. 
+The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ``` java
 User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92");   
 ```
