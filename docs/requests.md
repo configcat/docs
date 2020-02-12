@@ -32,7 +32,7 @@ We have different approaches called polling modes in our SDKs.
 
 Check out our video how the polling modes actually work.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_LWPjR4_GqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="800" height="490" src="https://www.youtube.com/embed/_LWPjR4_GqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Auto polling (default mode in the SDKs)
 In auto polling mode the ConfigCat SDK downloads the latest values and stores them automatically. This is done in every 60 seconds by default. Feature flag values are served from local cache.
