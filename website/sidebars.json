@@ -3,7 +3,8 @@
     "Usage": [
       "getting-started",
       "main-concepts",
-      "purchase"
+      "purchase",
+      "requests"
     ],
     "Advanced Guides": [
       "advanced/targeting",
