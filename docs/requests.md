@@ -49,7 +49,7 @@ You can (and should) update the cache manually, by calling a `forceRefresh()` - 
 Additionally, there are Webhooks available to get notified about changes instantly.
 [Read more about Webhooks.](advanced/notifications-webhooks.md)
 
-# Requests explained via live examples
+# Requests explained through examples
 
 ### Backend
 Backend applications typically have a lower number of instances than frontend applications.
