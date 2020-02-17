@@ -3,8 +3,8 @@ id: requests
 title: About requests
 ---
 
-At ConfigCat we only limit the requests which are sent to the ConfigCat servers from your applications.  
-We don't limit MAUs (Monthly Active Users) or any other fictional measurements which are hard to predict or calculate.
+At ConfigCat we have a soft limit on the number of requests which are sent to the ConfigCat servers from your applications.  
+At the same time, we don't limit MAUs (Monthly Active Users) or any other fictional measurements which are hard to predict or calculate.
 
 Check out our <a href="https://configcat.com/Home/Architecture" target="_blank">architectural overview</a>.
 
@@ -19,12 +19,13 @@ Check out our <a href="https://configcat.com/Home/Architecture" target="_blank">
 > If you hit this limit, we will keep your application up and running. However, you can expect us contacting you on how we can meet your needs.
 
 ## What is a request?
-The ConfigCat SDKs - which you import into your application - download your feature flags and settings in the 
+The ConfigCat SDKs - which you import into your applications - download your feature flags and settings in the 
 form of a config.json from the ConfigCat servers and cache it locally. One config.json download counts as 1 request.
 
 ## What is NOT a request?
-Those feature flag and setting values which are served from the cache and are not considered to be requests. You can 
-call `GetValue()` as many times as you like. These calls are always evaluated locally.
+Reading feature flag and setting values from the cache is not considered a request.
+You can call `GetValue()` as many times as you like.
+These calls are always evaluated locally.
 
 ## About caching
 There are 3 different ways (polling modes) to control caching.
