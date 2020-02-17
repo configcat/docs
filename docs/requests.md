@@ -3,8 +3,7 @@ id: requests
 title: About requests
 ---
 
-At ConfigCat we have a soft limit on the number of requests which are sent to the ConfigCat servers from your applications.  
-At the same time, we don't limit MAUs (Monthly Active Users) or any other fictional measurements which are hard to predict or calculate.
+At ConfigCat we have a soft limit on the number of requests which are sent to the ConfigCat servers from your applications. At the same time, we don't limit MAUs (Monthly Active Users) or any other fictional measurements which are hard to predict or calculate.
 
 Check out our <a href="https://configcat.com/Home/Architecture" target="_blank">architectural overview</a>.
 
