@@ -53,7 +53,7 @@ DOES NOT CONTAIN|True if the *Attribute* doesn't contain the *Comparison value*.
 If you don't see them among your comparators, please <a href="https://configcat.com/Support/ContactUs" target="_blank">contact us</a> 
 and we are happy to turn this feature on.
 
-> Please note that sensitive text comparators are only available in confiigcat-js (from v2.1.0) and configcat-node (from v3.1.0). 
+> Please note that sensitive text comparators are only available in configcat-js (from v2.1.1) and configcat-node (from v3.1.1). 
 > Accessing feature flags using other SDKs might cause critical errors in your application.
 
 Use sensitive text comparators if you are using ConfigCat with frontend applications and you are targeting users based on sensitive data 
