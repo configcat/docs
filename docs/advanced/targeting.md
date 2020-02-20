@@ -24,12 +24,12 @@ A property of your user (e.g. *email address*, *geographic location*). Your appl
 
 There are 3 predefined attributes. Additionally you can define your own ***custom attributes*** as well:
 
-Attribute Name|Description
----|---
-`Email`|The e-mail address of your user.
-`Identifier`|Usually a unique user identifier in your application.
-`Country`|Might come useful for testing a new feature only in one country.
-`Custom`|***Define any attribute (e.g. `OS version`), by typing its name to the textbox.***
+| Attribute Name | Description                                                                        |
+| -------------- | ---------------------------------------------------------------------------------- |
+| `Email`        | The e-mail address of your user.                                                   |
+| `Identifier`   | Usually a unique user identifier in your application.                              |
+| `Country`      | Might come useful for testing a new feature only in one country.                   |
+| `Custom`       | ***Define any attribute (e.g. `OS version`), by typing its name to the textbox.*** |
 
 ### Comparison value
 
@@ -41,12 +41,12 @@ Any string, number or comma separated list. Will be compared to the selected *At
 
 The following comparators assume that *Attribute* and *Comparison value* contain string/text.
 
-Comparator|Description
----|---
-IS ONE OF|Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list.
-IS NOT ONE OF|True if the *Attribute* is not listed in the *Comparison value*.
-CONTAINS|True if the *Attribute* contains the *Comparison value*.
-DOES NOT CONTAIN|True if the *Attribute* doesn't contain the *Comparison value*.
+| Comparator       | Description                                                                                                         |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------- |
+| IS ONE OF        | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list. |
+| IS NOT ONE OF    | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
+| CONTAINS         | True if the *Attribute* contains the *Comparison value*.                                                            |
+| DOES NOT CONTAIN | True if the *Attribute* doesn't contain the *Comparison value*.                                                     |
 
 #### Sensitive text comparators (Beta)
 
@@ -60,24 +60,41 @@ Use sensitive text comparators if you are using ConfigCat with frontend applicat
 (like email addresses). In this case the feature flag evaluation is based on the secure hashes of your comparison values. So whenever 
 the ConfigCat SDK downloads the feature flag values and all the targeting rules associated with them the exact values of the rules are not visible.
 
-Comparator|Description
----|---
-IS ONE OF (Sensitive)|Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list.
-IS NOT ONE OF (Sensitive)|True if the *Attribute* is not listed in the *Comparison value*.
+| Comparator                | Description                                                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| IS ONE OF (Sensitive)     | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list. |
+| IS NOT ONE OF (Sensitive) | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
+
+Since sensitive text comparators don't support CONTAINS like comparisons, here is an example how to target users from the same company. 
+Adding a `domain` custom attribute and using only sensitive comparators to target them.
+
+On the Dashboard:
+![targeting-1](assets/sensitive1.png)
+
+In your code:
+```js
+const userDomain = userEmail.split('@').pop();
+const userObject = {
+    identifier: this.accountInfo.id,
+    email: this.accountInfo.email,
+    custom: { domain: userDomain }
+}
+return this.getValue(key, defaultValue, callback, userObject);
+```
 
 #### Semantic version comparators
 
 The following comparators assume that *Attribute* and *Comparison value* contain semantic versions.
 Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer Semantic Version Specification</a>.
 
-Comparator|Description
----|---
-IS ONE OF (Semver)|True if *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list of semantic versions.
-IS NOT ONE OF (Semver)|True if the *Attribute* is not listed in the *Comparison value*.
-< (Semver)|True if *Attribute* is a smaller version number than *Comparison value*.
-<= (Semver)|True if *Attribute* is smaller than or equals *Comparison value*. 
-\> (Semver)|True if *Attribute* is a larger version number than *Comparison value*.
-\>= (Semver)|True if *Attribute* is larger than or equals *Comparison value*. 
+| Comparator             | Description                                                                                                                        |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| IS ONE OF (Semver)     | True if *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list of semantic versions. |
+| IS NOT ONE OF (Semver) | True if the *Attribute* is not listed in the *Comparison value*.                                                                   |
+| < (Semver)             | True if *Attribute* is a smaller version number than *Comparison value*.                                                           |
+| <= (Semver)            | True if *Attribute* is smaller than or equals *Comparison value*.                                                                  |
+| \> (Semver)            | True if *Attribute* is a larger version number than *Comparison value*.                                                            |
+| \>= (Semver)           | True if *Attribute* is larger than or equals *Comparison value*.                                                                   |
 
 All semantic version comparators return `false` if either *Attribute* or *Comparison value* is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
 
@@ -85,14 +102,14 @@ All semantic version comparators return `false` if either *Attribute* or *Compar
 
 The following comparators assume that *Attribute* and *Comparison value* contain numbers. 
 
-Comparator|Description
----|---
-= (Number)|True if *Attribute* equals *Comparison value*.
-<> (Number)|True if *Attribute* does not equal *Comparison value*.
-< (Number)|True if *Attribute* is less than *Comparison value*.
-<= (Number)|True if *Attribute* is less than or equals *Comparison value*. 
-\> (Number)|True if *Attribute* is a larger than *Comparison value*.
-\>= (Number)|True if *Attribute* is larger than or equals *Comparison value*. 
+| Comparator   | Description                                                      |
+| ------------ | ---------------------------------------------------------------- |
+| = (Number)   | True if *Attribute* equals *Comparison value*.                   |
+| <> (Number)  | True if *Attribute* does not equal *Comparison value*.           |
+| < (Number)   | True if *Attribute* is less than *Comparison value*.             |
+| <= (Number)  | True if *Attribute* is less than or equals *Comparison value*.   |
+| \> (Number)  | True if *Attribute* is a larger than *Comparison value*.         |
+| \>= (Number) | True if *Attribute* is larger than or equals *Comparison value*. |
 
 All number comparators return `false` if either *Attribute* or *Comparison value* is not a valid number.
 
@@ -100,12 +117,12 @@ All number comparators return `false` if either *Attribute* or *Comparison value
 
 The exact value that will be served to the users who match the targeting rule. Depending on the kind of your setting this could be:
 
-Setting Kind|Setting Type|Description
----|---|---
-On/Off Toggle|Boolean|true/false, usually the state of a feature flag
-Text|String|any string, max. 65535 characters
-Whole Number|Integer|any whole number within the range of `int`
-Decimal Number|Double|any decimal number within the range of `double`
+| Setting Kind   | Setting Type | Description                                     |
+| -------------- | ------------ | ----------------------------------------------- |
+| On/Off Toggle  | Boolean      | true/false, usually the state of a feature flag |
+| Text           | String       | any string, max. 65535 characters               |
+| Whole Number   | Integer      | any whole number within the range of `int`      |
+| Decimal Number | Double       | any decimal number within the range of `double` |
 
 ### Multiple targeting rules and ordering
 
@@ -120,10 +137,10 @@ By adding multiple targeting rules you can create more complex rule sets.
 
 *Enable a feature only to users within your company except the sales team (Susan and Simon) by adding two targeting rules:*
 
-#|Attribute|Comparator|Comparison value|Served value
----|---|---|---|---|
-1|Email|CONTAINS|`susan@mycompany.com, simon@mycompany.com`|OFF
-2|Email|CONTAINS|`@mycompany.com`|ON
+| #   | Attribute | Comparator | Comparison value                           | Served value |
+| --- | --------- | ---------- | ------------------------------------------ | ------------ |
+| 1   | Email     | CONTAINS   | `susan@mycompany.com, simon@mycompany.com` | OFF          |
+| 2   | Email     | CONTAINS   | `@mycompany.com`                           | ON           |
 All other cases: OFF
 
 ### To all other users, serve
@@ -154,12 +171,12 @@ Any *number between 0 and 100* that represents a randomly allocated fraction of 
 
 The exact value that will be served to the users that fall into that fraction. Depending on the kind of your setting this could be:
 
-Setting Kind|Setting Type|Description
----|---|---
-On/Off Toggle|Boolean|true/false, usually the state of a feature flag
-Text|String|any `string`, max. 65535 characters
-Whole Number|Integer|any whole number within the range of `int`
-Decimal Number|Double|any decimal number within the range of `double`
+| Setting Kind   | Setting Type | Description                                     |
+| -------------- | ------------ | ----------------------------------------------- |
+| On/Off Toggle  | Boolean      | true/false, usually the state of a feature flag |
+| Text           | String       | any `string`, max. 65535 characters             |
+| Whole Number   | Integer      | any whole number within the range of `int`      |
+| Decimal Number | Double       | any decimal number within the range of `double` |
 
 ## Multiple options
 
