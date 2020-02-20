@@ -75,11 +75,11 @@ In your code:
 ```js
 const userDomain = userEmail.split('@').pop();
 const userObject = {
-    identifier: this.accountInfo.id,
-    email: this.accountInfo.email,
+    identifier: '<SOME USER ID>',
+    email: userEmail,
     custom: { domain: userDomain }
 }
-return this.getValue(key, defaultValue, callback, userObject);
+const value = configCatClient.getValue(key, defaultValue, callback, userObject);
 ```
 
 #### Semantic version comparators
