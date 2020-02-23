@@ -31,13 +31,13 @@ jobs:
         fail-on-warnings: false
 ```
 
-> We strongly recommend that you update the second uses attribute value to reference the latest tag in the configcat/feature-flag-reference-validator-action repository. This pins your workflow to a latest version of the action.
+> We strongly recommend that you update the second uses attribute value to reference the latest tag in the [configcat/feature-flag-reference-validator-action](https://github.com/configcat/feature-flag-reference-validator-action) repository. This pins your workflow to a latest version of the action.
 
 Commit this file under a new branch and submit as a PR to your code reviewers to be merged into your master branch.
 
 > Feature Flag Reference Validator are not blocked by PR approval. To block the PR use `fail-on-warnings: true`
 
-As shown in the example above, the workflow should run on the push event and contain an action provided by the configcat/feature-flag-reference-validator-action repository.
+As shown in the example above, the workflow should run on the push event and contain an action provided by the [configcat/feature-flag-reference-validator-action](https://github.com/configcat/feature-flag-reference-validator-action) repository.
 
 ## Documentation
 For more information and usage examples check the [official documentation](https://circleci.com/orbs/registry/orb/configcat/feature-flag-reference-validator) of ConfigCat's GitHub Action.
