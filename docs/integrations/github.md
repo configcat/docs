@@ -1,7 +1,6 @@
 ---
 id: github
 title: GitHub Action
-unlisted: true
 ---
 
 The [ConfigCat Feature Flag Reference Validator](https://github.com/configcat/feature-flag-reference-validator) CLI tool is available as a GitHub Action to integrate with GitHub workflows.
