@@ -29,7 +29,8 @@
       "video/developer"
     ],
     "Integrations": [
-      "integrations/circleci"
+      "integrations/circleci",
+      "integrations/github"
     ],
     "Service": [
       "service/status"
