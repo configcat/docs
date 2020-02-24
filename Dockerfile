@@ -1,5 +1,6 @@
 FROM nginx:alpine AS base
 RUN rm -rf /usr/share/nginx/html/*
+COPY ./start.sh start.sh
 
 FROM node:latest AS builder
 COPY ./website /app/website
