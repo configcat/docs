@@ -11,5 +11,5 @@ COPY ./website /app/static
 RUN npm run build
 
 FROM base as final
-COPY --from=builder /app/website/build /usr/share/nginx/html
+COPY --from=builder /app/website/build/configcat /usr/share/nginx/html
 CMD ["sh", "start.sh"]
