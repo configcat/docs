@@ -3,7 +3,7 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY ./start.sh start.sh
 COPY ./nginx/nginx.conf.template /etc/nginx/conf.d/nginx.conf.template
 
-FROM node:latest AS builder
+FROM node:13.8 AS builder
 COPY ./website /app/website
 WORKDIR /app/website
 RUN npm install
