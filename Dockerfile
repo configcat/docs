@@ -1,10 +1,14 @@
-FROM node:8.11.4
+FROM nginx:alpine AS base
+RUN rm -rf /usr/share/nginx/html/*
 
-WORKDIR /app/website
-
-EXPOSE 3000 35729
-COPY ./docs /app/docs
+FROM node:latest AS builder
 COPY ./website /app/website
-RUN yarn install
+WORKDIR /app/website
+RUN npm install
+COPY ./docs /app/docs
+COPY ./website /app/static
+RUN npm run build
 
-CMD ["yarn", "start"]
+FROM base as final
+COPY --from=builder /app/website/build /usr/share/nginx/html
+CMD ["sh", "start.sh"]
