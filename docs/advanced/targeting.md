@@ -53,8 +53,18 @@ The following comparators assume that *Attribute* and *Comparison value* contain
 If you don't see them among your comparators, please <a href="https://configcat.com/Support/ContactUs" target="_blank">contact us</a> 
 and we are happy to turn this feature on.
 
-> Please note that sensitive text comparators are only available in configcat-js (from v2.1.1) and configcat-node (from v3.1.1). 
-> Accessing feature flags using other SDKs might cause critical errors in your application.
+| SDK     | Sensitive comparator support from |
+| ------- | --------------------------------- |
+| JS      | v3.0.0                            |
+| Node    | v4.0.0                            |
+| PHP     | v3.0.2                            |
+| Python  | v3.0.2                            |
+| Ruby    | v2.0.3                            |
+| Go      | v4.0.2                            |
+| Java    | v4.0.1                            |
+| Android | v4.0.0                            |
+| .NET    | v4.0.0                            |
+| Swift   | v4.0.0                            |
 
 Use sensitive text comparators if you are using ConfigCat with frontend applications and you are targeting users based on sensitive data 
 (like email addresses). In this case the feature flag evaluation is based on the secure hashes of your comparison values. So whenever 
