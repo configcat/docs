@@ -8,14 +8,14 @@ title: Java
 Maven:
 ```
 <dependency>
-    <groupId>com.configcat</groupId>
-    <artifactId>configcat-java-client</artifactId>
-    <version>[3.0.0,)</version>
+  <groupId>com.configcat</groupId>
+  <artifactId>configcat-java-client</artifactId>
+  <version>[4.0.1,)</version>
 </dependency>
 ```
 Gradle:
 ```bash
-compile group: 'com.configcat', name: 'configcat-java-client', version: '3.+'
+compile group: 'com.configcat', name: 'configcat-java-client', version: '4.+'
 ```
 ### 2. Import the ConfigCat SDK:
 ```java
