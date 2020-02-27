@@ -48,34 +48,17 @@ The following comparators assume that *Attribute* and *Comparison value* contain
 | CONTAINS         | True if the *Attribute* contains the *Comparison value*.                                                            |
 | DOES NOT CONTAIN | True if the *Attribute* doesn't contain the *Comparison value*.                                                     |
 
-#### Sensitive text comparators (Beta)
+#### Sensitive text comparators
 
-If you don't see them among your comparators, please <a href="https://configcat.com/Support/ContactUs" target="_blank">contact us</a> 
-and we are happy to turn this feature on.
-
-| SDK     | Sensitive comparator support from |
-| ------- | --------------------------------- |
-| JS      | v3.0.0                            |
-| Node    | v4.0.0                            |
-| PHP     | v3.0.2                            |
-| Python  | v3.0.2                            |
-| Ruby    | v2.0.3                            |
-| Go      | v4.0.2                            |
-| Java    | v4.0.1                            |
-| Android | v4.0.0                            |
-| .NET    | v4.0.0                            |
-| Swift   | v4.0.0                            |
-
-Use sensitive text comparators if you are using ConfigCat with frontend applications and you are targeting users based on sensitive data 
-(like email addresses). In this case the feature flag evaluation is based on the secure hashes of your comparison values. So whenever 
-the ConfigCat SDK downloads the feature flag values and all the targeting rules associated with them the exact values of the rules are not visible.
+We recommend sensitive text comparators in case of frontend applications targeting users based on sensitive data (like email addresses, name etc).
+In this case the feature flag evaluation is based on the secure hashes of the comparison values.
 
 | Comparator                | Description                                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | IS ONE OF (Sensitive)     | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list. |
 | IS NOT ONE OF (Sensitive) | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
 
-Since sensitive text comparators don't support CONTAINS like comparisons, here is an example how to target users from the same company. 
+Since sensitive text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example how to target users from the same company. 
 Adding a `domain` custom attribute and using only sensitive comparators to target them.
 
 On the Dashboard:
@@ -91,6 +74,19 @@ const userObject = {
 }
 const value = configCatClient.getValue(key, defaultValue, callback, userObject);
 ```
+Sensitive comparators are supported from these SDK versions:
+| SDK     | Version |
+| ------- | --------------------------------- |
+| JS      | v3.0.0                            |
+| Node    | v4.0.0                            |
+| PHP     | v3.0.2                            |
+| Python  | v3.0.2                            |
+| Ruby    | v2.0.3                            |
+| Go      | v4.0.2                            |
+| Java    | v4.0.1                            |
+| Android | v4.0.0                            |
+| .NET    | v4.0.0                            |
+| Swift   | v4.0.0                            |
 
 #### Semantic version comparators
 
