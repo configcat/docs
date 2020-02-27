@@ -5,11 +5,11 @@ title: Go
 ## Getting Started:
 ### 1. Get the SDK with `go`
 ```bash
-go get gopkg.in/configcat/go-sdk.v3
+go get github.com/configcat/go-sd
 ```
 ### 2. Import the ConfigCat package
 ```go
-import gopkg.in/configcat/go-sdk.v3
+import ("github.com/configcat/go-sdk")
 ```
 ### 3. Create the *ConfigCat* client with your *API Key*
 ```go
