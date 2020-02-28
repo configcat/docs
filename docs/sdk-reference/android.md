@@ -22,7 +22,7 @@ android {
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
 ```
-implementation 'com.configcat:configcat-android-client:3.+'
+implementation 'com.configcat:configcat-android-client:4.+'
 ```
 ### 2. Import the ConfigCat SDK:
 ```kotlin
