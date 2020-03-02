@@ -58,11 +58,15 @@ In this case the feature flag evaluation is based on the secure hashes of the co
 | IS ONE OF (Sensitive)     | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list. |
 | IS NOT ONE OF (Sensitive) | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
 
-Since sensitive text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example how to target users from the same company. 
-Adding a `domain` custom attribute and using only sensitive comparators to target them.
+Since sensitive text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example how to target users from the same company. Which used to be handled by a rule like:
+
+![Sensitive](assets/sensitive2.png)
+
+
+You can add a custom attribute called `domain` and use only sensitive comparators in the targeting rule.
 
 On the Dashboard:
-![targeting-1](assets/sensitive1.png)
+![Sensitive](assets/sensitive1.png)
 
 In your code:
 ```js
