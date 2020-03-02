@@ -23,9 +23,9 @@ This tool can be used for discovering ConfigCat feature flag usages in your sour
        name: ConfigCat Feature Flag Cleanup
        runs-on: ubuntu-latest
        steps:
-       - uses: actions/checkout@v1.0.0
+       - uses: actions/checkout@v1
        - name: ConfigCat Feature Flag Cleanup
-         uses: configcat/github-action-feature-flag-cleanup@master
+         uses: configcat/github-action-feature-flag-cleanup@1.0.0
          with:
            configcat-api-key: ${{ secrets.CONFIG_CAT_API_KEY }}
            fail-on-warnings: false
