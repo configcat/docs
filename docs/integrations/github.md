@@ -23,7 +23,7 @@ This tool can be used for discovering ConfigCat feature flag usages in your sour
        name: ConfigCat Feature Flag Cleanup
        runs-on: ubuntu-latest
        steps:
-       - uses: actions/checkout@v1
+       - uses: actions/checkout@v1.0.0
        - name: ConfigCat Feature Flag Cleanup
          uses: configcat/github-action-feature-flag-cleanup@master
          with:
