@@ -54,4 +54,4 @@ Add these to the `with` section to enable more functionality.
 | `debug`                | More verbose logging.                                                               |       false        |
 
 ## Documentation
-For more information check the [official documentation](https://circleci.com/orbs/registry/orb/configcat/feature-flag-reference-validator) of ConfigCat's GitHub Action.
+For more information check the [ConfigCat's GitHub Action](https://github.com/marketplace/actions/configcat-feature-flag-cleanup) on the marketplace.
