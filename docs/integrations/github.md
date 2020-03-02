@@ -25,7 +25,7 @@ This tool can be used for discovering ConfigCat feature flag usages in your sour
        steps:
        - uses: actions/checkout@v1
        - name: ConfigCat Feature Flag Cleanup
-         uses: configcat/github-action-feature-flag-cleanup@master
+         uses: configcat/github-action-feature-flag-cleanup@1.0.0
          with:
            configcat-api-key: ${{ secrets.CONFIG_CAT_API_KEY }}
            fail-on-warnings: false
@@ -54,4 +54,4 @@ Add these to the `with` section to enable more functionality.
 | `debug`                | More verbose logging.                                                               |       false        |
 
 ## Documentation
-For more information check the [official documentation](https://circleci.com/orbs/registry/orb/configcat/feature-flag-reference-validator) of ConfigCat's GitHub Action.
+For more information check the [ConfigCat's GitHub Action](https://github.com/marketplace/actions/configcat-feature-flag-cleanup) on the marketplace.
