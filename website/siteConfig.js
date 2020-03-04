@@ -104,6 +104,10 @@ const siteConfig = {
         '/docs/css/code-blocks-buttons.css'
     ],
 
+    separateCss: [
+        'static/css'
+    ],
+
     usePrism: true,
     // On page navigation for the current documentation page.
     onPageNav: 'separate',
