@@ -31,4 +31,4 @@ Contributions are welcome via PR.
 # Questions & Support
 
 We are happy to help.
-https://configcat.com/Support/Contactus
+https://configcat.com/support

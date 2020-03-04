@@ -7,7 +7,7 @@ title: Plans and Purchase
 ## Plans
 You can use ConfigCat by subscribing with an email address which is free forever. Additionally, we offer three more plans with fewer limitations and more additional features. For a detailed comparison <a href="https://configcat.com/#pricing" target="_blank">check out the pricing table</a>.
 
-If you have any questions, don't hesitate to <a href="https://configcat.com/Support/ContactUs" target="_blank">contact us</a>.
+If you have any questions, don't hesitate to <a href="https://configcat.com/support" target="_blank">contact us</a>.
 
 ## Purchase
 You can purchase a ConfigCat subscription plan on the <a href="https://app.configcat.com/plans" target="_blank">Plans page</a> or after clicking *CHANGE PLAN* on your <a href="https://app.configcat.com/my-account" target="_blank">My account</a> page.
@@ -17,4 +17,4 @@ If you select to upgrade your current plan, we are taking you to a third party p
 
 ## Security
 We don’t store your credit card information. It's all securely managed by <a href="https://www.chargebee.com/" target="_blank">Chargebee</a>, our payment provider.
-If you experience any difficulties, please <a href="https://configcat.com/Support/ContactUs" target="_blank">contact us</a>.
+If you experience any difficulties, please <a href="https://configcat.com/support" target="_blank">contact us</a>.
