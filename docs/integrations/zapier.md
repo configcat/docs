@@ -29,10 +29,10 @@ Available fields to include in your flow:
     * **What**: Details about the changes
 
 ## Example Slack notification setup
-### Configuration:
+### Configuration in Zapier:
 <img src="../../img/zapier_config.png"/>
 
-### Result:
+### Result in Slack:
 <img src="../../img/zapier_slack.png"/>
 
 
