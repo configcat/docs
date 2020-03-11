@@ -19,14 +19,14 @@ This Zap can notify you about Feature Flags or Settings changes in ConfigCat so 
 
 5. You should select the [Product](main-concepts/#product) in which you want to get notified about the Feature Flag or Setting value changes and optionally you can filter these notifications by specific [Configs](main-concepts/#config) or [Environments](main-concepts/#environment).
 
-6. Make sure you have changed a Feature Flag or Setting value in ConfigCat in the past 1 hour so Zapier can poll those changes from ConfigCat. Optionally you can skip this Find data step at all.
+6. Make sure you have changed a Feature Flag or Setting value in ConfigCat in the past 1 hour so Zapier can poll those changes from ConfigCat. Optionally you can skip this Find data step.
 
 7. Add an App or Event (e.g. Slack/Email notification) to use the Feature Flag or Setting value change data in your flows.  
 Available fields to include in your flow:
     * **When**: When was the change
     * **Who (email), Who (full name)**: Who made the change
-    * **Where**: In which Config and Environment was the change
-    * **What**: Details about the changes
+    * **Where**: To which Config and Environment the change belongs to
+    * **What**: The exact values that changed
 
 ## Example Slack notification setup
 ### Configuration in Zapier:
