@@ -30,10 +30,10 @@ Available fields to include in your flow:
 
 ## Example Slack notification setup
 ### Configuration:
-<img src="img/zapier_config.png"></img>
+<img src="img/zapier_config.png"/>
 
 ### Result:
-<img src="img/zapier_slack.png"/></img>
+<img src="img/zapier_slack.png"/>
 
 
 
