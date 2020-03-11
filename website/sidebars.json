@@ -30,7 +30,8 @@
     ],
     "Integrations": [
       "integrations/circleci",
-      "integrations/github"
+      "integrations/github",
+      "integrations/zapier"
     ],
     "Service": [
       "service/status"
