@@ -14,7 +14,6 @@ This Zap can notify you about Feature Flags or Settings changes in ConfigCat so 
 2. Create a new Zap and select ConfigCat at Choose App & Event.
 
 3. The ConfigCat Zap currently supports a Trigger Event - Feature Flag & Setting value changed. Click continue to select it.
-> [Contact us](https://configcat.com/support) if you have any awesome ideas to include in this Zap.
 
 4. Generate a Public API credential at [ConfigCat Dashboard](https://app.configcat.com/my-account/public-api-credentials). Use the generated `Basic auth user name` and `Basic auth password` during the Zapier authentication flow. Click continue.
 
@@ -22,7 +21,21 @@ This Zap can notify you about Feature Flags or Settings changes in ConfigCat so 
 
 6. Make sure you have changed a Feature Flag or Setting value in ConfigCat in the past 1 hour so Zapier can poll those changes from ConfigCat. Optionally you can skip this Find data step at all.
 
-7. Add an App or Event to use the Feature Flag or Setting value change data in your flows.
+7. Add an App or Event (e.g. Slack/Email notification) to use the Feature Flag or Setting value change data in your flows.  
+Available fields to include in your flow:
+    * **When**: When was the change
+    * **Who (email), Who (full name)**: Who made the change
+    * **Where**: In which Config and Environment was the change
+    * **What**: Details about the changes
+
+## Example Slack notification setup
+### Configuration:
+<img src="img/zapier_config.png"></img>
+
+### Result:
+<img src="img/zapier_slack.png"/></img>
+
+
 
 ## Need help?
 [Contact us](https://configcat.com/support) if you need any help or you have any awesome improvement ideas for this Zap.
