@@ -1,19 +1,25 @@
 ---
 id: requests
-title: About requests
+title: Requests
 ---
 
-At ConfigCat we have a soft limit on the number of requests which are sent to the ConfigCat servers from your applications. At the same time, we don't limit MAUs (Monthly Active Users) or any other fictional measurements which are hard to predict or calculate.
+A request is counted every time your application downloads a configuration file from the ConfigCat
+CDN. The frequency of these downloads is totally under your control. Between downloads you can access your feature
+flags as many times as you like, it still counts as one.
+
+Keep track of the number of requests your apps are making on the 
+<a href="https://app.configcat.com/product/statistics" target="_blank">ConfigCat Dashboard.</a>
+![ConfigCat Statisitcs](assets/stats.png)
 
 Check out our <a href="https://configcat.com/architecture" target="_blank">architectural overview</a>.
 
 ## Current request/month limits
 | Plan          | requests/month | requests/second |
-| ------------- | --------------: | ---: |
-| **Free**      | 5,000,000      | ~2    |
-| **Pro**       | 25,000,000     | ~10   |
-| **Unlimited** | 250,000,000    | ~100  |
-| **Dedicated** | 5,000,000,000  | ~2000 |
+| ------------- | -------------: | --------------: |
+| **Free**      |      5,000,000 |              ~2 |
+| **Pro**       |     25,000,000 |             ~10 |
+| **Unlimited** |    250,000,000 |            ~100 |
+| **Dedicated** |  5,000,000,000 |           ~2000 |
 
 > If you hit this limit, we will keep your application up and running. However, you can expect us contacting you on how we can meet your needs.
 
