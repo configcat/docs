@@ -3,8 +3,6 @@ id: datadog
 title: DataDog
 ---
 
-# DataDog
-
 <img src="../../img/datadog_event.png"/>
 
 ## Overview
