@@ -14,20 +14,20 @@ DataDog integration ensures that all ConfigCat settings changes send to DataDog 
 First of all you need DataDog subscription and [DataDog API key](https://docs.datadoghq.com/account_management/api-app-keys/#api-keys).
 <img src="../../img/datadog_apikey.png"/>
 
-1. Navigate to product's settings page
+### 1. Navigate to product's settings page
 
 <img src="../../img/datadog_manageproduct.png"/>
 
-2. Select *Integrations* tab
+### 2. Select *Integrations* tab
 
 <img src="../../img/datadog_connect.png"/>
 
-3. Click to DataDog's CONNECT button and set a DataDog API key
+### 3. Click to DataDog's CONNECT button and set a DataDog API key
 
 ## Remove
-1. Navigate to product's settings page
-2. Select *Integrations* tab
-3. Click to DataDog's DISCONNECT button
+### 1. Navigate to product's settings page
+### 2. Select *Integrations* tab
+### 3. Click to DataDog's DISCONNECT button
 
 ## DataDog filtering
 
