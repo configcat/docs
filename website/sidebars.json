@@ -31,7 +31,8 @@
     "Integrations": [
       "integrations/circleci",
       "integrations/github",
-      "integrations/zapier"
+      "integrations/zapier",
+	  "integrations/datadog"
     ],
     "Service": [
       "service/status"
