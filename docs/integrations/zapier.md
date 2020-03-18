@@ -2,31 +2,42 @@
 id: zapier
 title: Zapier
 ---
+## Connect ConfigCat to hundreds of other apps with Zapier
 
-The [ConfigCat Zap](https://zapier.com/developer/public-invite/90616/693fd87b5bb34ea90583f7d7ce216223/) is currently under review by the Zapier team. You can try the beta version with the [public invitation link](https://zapier.com/developer/public-invite/90616/693fd87b5bb34ea90583f7d7ce216223/).
+[Zapier](https://zapier.com/apps/configcat/integrations) lets you connect ConfigCat to 2,000+ other web services. Automated connections called Zaps, set up in minutes with no coding, can automate your day-to-day tasks and build workflows between apps that otherwise wouldn't be possible.
 
-This Zap can notify you about Feature Flags or Settings changes in ConfigCat so you can easily send e.g. a Slack message/e-mail when somebody changed Feature Flags or Settings in ConfigCat.
+Each Zap has one app as the **Trigger**, where your information comes from and which causes one or more **Actions** in other apps, where your data gets sent automatically. 
+
+ConfigCat's Zap can notify you about Feature Flags or Settings changes in ConfigCat so you can easily send e.g. a Slack message/e-mail when somebody changed Feature Flags or Settings in ConfigCat.
+
 
 ## Setup
 
-1. Open the [public invitation link](https://zapier.com/developer/public-invite/90616/693fd87b5bb34ea90583f7d7ce216223/) and click Accept Invite & Build a Zap
+1. Log in to your [Zapier account](https://zapier.com/sign-up) or create a new account.
 
-2. Create a new Zap and select ConfigCat at Choose App & Event.
+2. Navigate to "My Apps" from the top menu bar.
 
-3. The ConfigCat Zap currently supports a Trigger Event - Feature Flag & Setting value changed. Click continue to select it.
+3. Now click on "Connect a new account..." and search for "ConfigCat"
 
-4. Generate a Public API credential at [ConfigCat Dashboard](https://app.configcat.com/my-account/public-api-credentials). Use the generated `Basic auth user name` and `Basic auth password` during the Zapier authentication flow. Click continue.
+4. Generate a Public API credential at [ConfigCat Dashboard](https://app.configcat.com/my-account/public-api-credentials). Use the generated `Basic auth user name` and `Basic auth password` to connect your ConfigCat account to Zapier.
 
 5. You should select the [Product](main-concepts/#product) in which you want to get notified about the Feature Flag or Setting value changes and optionally you can filter these notifications by specific [Configs](main-concepts/#config) or [Environments](main-concepts/#environment).
 
-6. Make sure you have changed a Feature Flag or Setting value in ConfigCat in the past 1 hour so Zapier can poll those changes from ConfigCat. Optionally you can skip this Find data step.
+6. Once that's done you can start creating an automation! Use a pre-made Zap or create your own with the Zap Editor. Creating a Zap requires no coding knowledge and you'll be walked step-by-step through the setup. 
 
-7. Add an App or Event (e.g. Slack/Email notification) to use the Feature Flag or Setting value change data in your flows.  
+7. Need inspiration? See everything that's possible with [ConfigCat and Zapier](https://zapier.com/apps/configcat/integrations).
+
+
 Available fields to include in your flow:
-    * **When**: When was the change
-    * **Who (email), Who (full name)**: Who made the change
-    * **Where**: To which Config and Environment the change belongs to
-    * **What**: The exact values that changed
+* **When**: When was the change
+* **Who (email), Who (full name)**: Who made the change
+* **Where**: To which Config and Environment the change belongs to
+* **What**: The exact values that changed
+
+## Pre-made zaps
+To help you hit the ground running, here are some popular pre-made Zaps.
+
+<script src="https://zapier.com/zapbook/embed/widget.js?services=configcat&container=true&limit=5,"></script>
 
 ## Example Slack notification setup
 ### Configuration in Zapier:
@@ -34,8 +45,6 @@ Available fields to include in your flow:
 
 ### Result in Slack:
 <img src="../../img/zapier_slack.png"/>
-
-
 
 ## Need help?
 [Contact us](https://configcat.com/support) if you need any help or you have any awesome improvement ideas for this Zap.
