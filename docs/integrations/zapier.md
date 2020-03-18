@@ -18,10 +18,13 @@ ConfigCat's Zap can notify you about Feature Flags or Settings changes in Config
 2. Navigate to "My Apps" from the top menu bar.
 
 3. Now click on "Connect a new account..." and search for "ConfigCat"
+<img src="../../img/zapier_signin.png"/>
 
 4. Generate a Public API credential at [ConfigCat Dashboard](https://app.configcat.com/my-account/public-api-credentials). Use the generated `Basic auth user name` and `Basic auth password` to connect your ConfigCat account to Zapier.
+<img src="../../img/zapier_auth.png"/>
 
 5. You should select the [Product](main-concepts/#product) in which you want to get notified about the Feature Flag or Setting value changes and optionally you can filter these notifications by specific [Configs](main-concepts/#config) or [Environments](main-concepts/#environment).
+<img src="../../img/zapier_customize.png"/>
 
 6. Once that's done you can start creating an automation! Use a pre-made Zap or create your own with the Zap Editor. Creating a Zap requires no coding knowledge and you'll be walked step-by-step through the setup. 
 
