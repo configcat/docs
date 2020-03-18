@@ -34,7 +34,7 @@ Available fields to include in your flow:
 * **Where**: To which Config and Environment the change belongs to
 * **What**: The exact values that changed
 
-## Pre-made zaps
+## Popular use cases
 To help you hit the ground running, here are some popular pre-made Zaps.
 
 <script src="https://zapier.com/zapbook/embed/widget.js?services=configcat&container=true&limit=5,"></script>
