@@ -96,7 +96,8 @@ const siteConfig = {
             async: true
         },
         '/docs/js/code-blocks-buttons.js',
-        '/docs/js/tracking.js'
+        '/docs/js/tracking.js',
+        'https://cdn-eu.pagesense.io/js/configcat/aab93ef4bbb140ff8a795232a2742220.js'
     ],
 
     stylesheets: [
