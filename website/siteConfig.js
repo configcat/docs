@@ -16,7 +16,7 @@ const users = [{
     image: '/img/docusaurus.svg',
     infoLink: 'https://www.facebook.com',
     pinned: true,
-}, ];
+},];
 
 const siteConfig = {
     title: 'ConfigCat Docs', // Title for your website.
@@ -27,7 +27,7 @@ const siteConfig = {
     //   url: 'https://facebook.github.io',
     //   baseUrl: '/test-site/',
     docsUrl: '',
-    
+
     // Used for publishing and more
     projectName: 'configcat',
     organizationName: 'configcat',
@@ -37,20 +37,20 @@ const siteConfig = {
 
     // For no header links in the top nav bar -> headerLinks: [],
     headerLinks: [{
-            href: 'https://www.configcat.com',
-            label: 'ConfigCat.com',
-            external: true
-        },
-        {
-            href: 'https://configcat.com/blog',
-            label: 'Blog',
-            external: true
-        },
-        {
-            href: 'https://status.configcat.com',
-            label: 'Service Status Monitor',
-            external: true
-        }
+        href: 'https://www.configcat.com',
+        label: 'ConfigCat.com',
+        external: true
+    },
+    {
+        href: 'https://configcat.com/blog',
+        label: 'Blog',
+        external: true
+    },
+    {
+        href: 'https://status.configcat.com',
+        label: 'Service Status Monitor',
+        external: true
+    }
     ],
 
     // If you have users set above, you add it here:
@@ -96,8 +96,7 @@ const siteConfig = {
             async: true
         },
         '/docs/js/code-blocks-buttons.js',
-        '/docs/js/tawk.to.js',
-        '/docs/js/smartlook.js'
+        '/docs/js/tracking.js'
     ],
 
     stylesheets: [
