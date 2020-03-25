@@ -3,39 +3,34 @@ id: datadog
 title: DataDog
 ---
 
-<img src="../../img/datadog_event.png"/>
-
 ## Overview
 
-DataDog integration ensures that all ConfigCat settings changes send to DataDog as an Event. With this feature you can see your system behaviour when changing your settings. You can setup the DataDog integration for a products in the ConfigCat.
+Ensures that every setting change in ConfigCat is sent to DataDog as an Event.
 
-## Setup
+![datadog_event](assets/datadog_event.png)
 
-First of all you need DataDog subscription and [DataDog API key](https://docs.datadoghq.com/account_management/api-app-keys/#api-keys).
-<img src="../../img/datadog_apikey.png"/>
+## Installation
 
-### 1. Navigate to product's settings page
+1. Have a <a href="https://www.datadoghq.com/" target="_blank">DataDog subscription.</a>
+2. Get a <a href="https://docs.datadoghq.com/account_management/api-app-keys/#api-keys" target="_blank">DataDog API Key.</a>
+![datadog_event](assets/datadog_apikey.png)
+1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
+2. Click on DataDog's CONNECT button and set your DataDog API key.
+3. You're all set. Go ahead and make some changes on your feature flags then check your Events in DataDog.
 
-<img src="../../img/datadog_manageproduct.png"/>
+## Un-installation
+1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
+2. Click on DataDog's DISCONNECT button and set your DataDog API key.
 
-### 2. Select *Integrations* tab
 
-<img src="../../img/datadog_connect.png"/>
+## Event details
 
-### 3. Click to DataDog's CONNECT button and set a DataDog API key
+Every event sent to DataDog by ConfigCat has a *source* property of `configcat` and *tagged* with the `product_name`, `config_name` and
+ `environment_name` where the change has happened.
 
-## Remove
-### 1. Navigate to product's settings page
-### 2. Select *Integrations* tab
-### 3. Click to DataDog's DISCONNECT button
+### Searching for Events
 
-## DataDog filtering
+For example here is how to search for events that happened in the production environment: ```sources:configcat production```
 
-All configcat related events *source* property is ```configcat``` and tagged with product, config environment names to easy to setup any monitor/alert.
-
-### Example
-
-Search all events where the environment is production: ```sources:configcat production```
-
-<img src="../../img/datadog_filtering.png"/>
+![datadog_filtering](assets/datadog_filtering.png)
 

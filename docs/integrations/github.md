@@ -3,12 +3,12 @@ id: github
 title: GitHub Action
 ---
 
-The [ConfigCat Feature Flag Reference Validator](https://github.com/configcat/feature-flag-reference-validator) CLI tool is available as a GitHub Action to integrate with GitHub workflows.
+The ConfigCat <a href="https://github.com/configcat/feature-flag-reference-validator" target="_blank">Feature Flag Reference Validator CLI</a> tool is available as a GitHub Action to integrate with GitHub workflows.
 
 This tool can be used for discovering ConfigCat feature flag usages in your source code and validating them against your own ConfigCat configuration dashboard. It searches for ConfigCat SDK usage and greps the feature flag keys from the source code, then it compares them with the keys got from your ConfigCat dashboard.
 
 ## Installation
-1. Get your API Key from [ConfigCat Dashboard](https://app.configcat.com/connect) and store it as a [GitHub secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) under the name `CONFIG_CAT_API_KEY`.
+1. Get your API Key from <a href="https://app.configcat.com/connect" target="_blank">ConfigCat Dashboard</a> and store it as a <a href="https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets" target="_blank">GitHub secret</a> under the name `CONFIG_CAT_API_KEY`.
 
 2. Create a new Actions workflow in your GitHub repo.
 
@@ -31,7 +31,7 @@ This tool can be used for discovering ConfigCat feature flag usages in your sour
            fail-on-warnings: false
    ```
 
-  > We strongly recommend that you update the second uses attribute value to reference the latest tag in the [configcat/github-action-feature-flag-cleanup](https://github.com/configcat/github-action-feature-flag-cleanup) repository. This pins your workflow to a latest version of the action.
+  > We strongly recommend that you update the second uses attribute value to reference the latest tag in the <a href="https://github.com/configcat/github-action-feature-flag-cleanup" target="_blank">configcat/github-action-feature-flag-cleanup</a> repository. This pins your workflow to a latest version of the action.
 
 3. Commit & push `action.yml`.
 
@@ -45,13 +45,13 @@ Feature Flag Cleanup Action will run on any push event.
 
 Add these to the `with` section to enable more functionality.
 
-| Parameter              | Description                                                                         |      Default       |
-| ---------------------- | ----------------------------------------------------------------------------------- | :----------------: |
-| `configcat-api-key`    | The [API Key](https://app.configcat.com/connect) for your feature flags & settings. | CONFIG_CAT_API_KEY |
-| `scan-directory`       | The directory to run flag validations on.                                           |         .          |
-| `configcat-cdn-server` | To set a custom ConfigCat CDN server.                                               | cdn.configcat.com  |
-| `fail-on-warnings`     | Show warnings or stop on a build error when validation fails.                       |       false        |
-| `debug`                | More verbose logging.                                                               |       false        |
+| Parameter              | Description                                                                                                    |      Default       |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------- | :----------------: |
+| `configcat-api-key`    | The <a href="https://app.configcat.com/connect" target="_blank">API Key</a> for your feature flags & settings. | CONFIG_CAT_API_KEY |
+| `scan-directory`       | The directory to run flag validations on.                                                                      |         .          |
+| `configcat-cdn-server` | To set a custom ConfigCat CDN server.                                                                          | cdn.configcat.com  |
+| `fail-on-warnings`     | Show warnings or stop on a build error when validation fails.                                                  |       false        |
+| `debug`                | More verbose logging.                                                                                          |       false        |
 
 ## Documentation
-For more information check the [ConfigCat's GitHub Action](https://github.com/marketplace/actions/configcat-feature-flag-cleanup) on the GitHub Marketplace.
+For more information check the <a href="https://github.com/marketplace/actions/configcat-feature-flag-cleanup" target="_blank">ConfigCat's GitHub Action</a> on the GitHub Marketplace.
