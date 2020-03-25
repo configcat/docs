@@ -3,9 +3,10 @@ id: github
 title: GitHub Action
 ---
 
+This utility discovers ConfigCat feature flag usages in your source code and validates them against your feature flags on the ConfigCat Dashboard.
+
 The ConfigCat <a href="https://github.com/configcat/feature-flag-reference-validator" target="_blank">Feature Flag Reference Validator CLI</a> tool is available as a GitHub Action to integrate with GitHub workflows.
 
-This tool can be used for discovering ConfigCat feature flag usages in your source code and validating them against your own ConfigCat configuration dashboard. It searches for ConfigCat SDK usage and greps the feature flag keys from the source code, then it compares them with the keys got from your ConfigCat dashboard.
 
 ## Installation
 1. Get your API Key from <a href="https://app.configcat.com/connect" target="_blank">ConfigCat Dashboard</a> and store it as a <a href="https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets" target="_blank">GitHub secret</a> under the name `CONFIG_CAT_API_KEY`.
