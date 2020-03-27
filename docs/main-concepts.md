@@ -17,7 +17,7 @@ Setting Kind|Setting Type|Description
 ---|---|---
 On/Off Toggle|Boolean|true/false, usually the state of a feature flag
 Text|String|any string, max. 65535 characters
-Whole Number|Integer|any whole number within the range of `int`
+Whole Number|Integer|any whole number within the range of `Int32`
 Decimal Number|Double|any decimal number within the range of `double`
 
 ## Config
