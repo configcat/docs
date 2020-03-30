@@ -20,7 +20,4 @@ Turn features On / Off right from a linked Card on your Trello board. Also you c
 2. Push `Link Feature Flag`
 3. Select a Product, Config, Environment and a Feature Flag to be linked to your card.
 4. When linked, you can turn your features On / Off right from this Card.
-
-## Need help?
-
-https://configcat.com/support
+    
