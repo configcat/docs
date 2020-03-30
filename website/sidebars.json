@@ -29,10 +29,11 @@
       "video/developer"
     ],
     "Integrations": [
-      "integrations/circleci",
-      "integrations/github",
+      "integrations/trello",
+      "integrations/datadog",
       "integrations/zapier",
-	  "integrations/datadog"
+      "integrations/github",
+      "integrations/circleci"
     ],
     "Service": [
       "service/status"
