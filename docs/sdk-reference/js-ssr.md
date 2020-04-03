@@ -285,5 +285,5 @@ console.log(keys);
 
 ## Look under the hood
 
-* <a href="https://github.com/configcat/js-ssr-sdk" target="_blank">ConfigCat's JavaScript (SSR) SDK on GitHub</a>
+* <a href="https://github.com/configcat/js-ssr-sdk" target="_blank">ConfigCat JavaScript (SSR) SDK on GitHub</a>
 * <a href="https://www.npmjs.com/package/configcat-js-ssr" target="_blank">ConfigCat JavaScript (SSR) SDK in NPM</a>

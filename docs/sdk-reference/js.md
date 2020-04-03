@@ -302,5 +302,5 @@ console.log(keys);
 
 ## Look under the hood
 
-* <a href="https://github.com/configcat/js-sdk" target="_blank">ConfigCat's JavaScript SDK on GitHub</a>
+* <a href="https://github.com/configcat/js-sdk" target="_blank">ConfigCat JavaScript SDK on GitHub</a>
 * <a href="https://www.npmjs.com/package/configcat-js" target="_blank">ConfigCat JavaScript SDK in NPM</a>

@@ -291,5 +291,5 @@ let configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q
 
 ## Look under the hood
 
-* <a href="https://github.com/configcat/node-sdk" target="_blank">ConfigCat's Node.js SDK on GitHub</a>
+* <a href="https://github.com/configcat/node-sdk" target="_blank">ConfigCat Node.js SDK on GitHub</a>
 * <a href="https://www.npmjs.com/package/configcat-node" target="_blank">ConfigCat's Node.js SDK in NPM</a>
