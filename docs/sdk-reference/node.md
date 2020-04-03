@@ -2,7 +2,7 @@
 id: node
 title: Node.js
 ---
-*For SSR (Server-Side Rendering) Universal applications instead of the [ConfigCat SDK for JS](js.md) we recommend using this SDK.*
+>For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](js-ssr.md)
 
 ## Getting started
 

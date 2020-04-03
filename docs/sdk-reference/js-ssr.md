@@ -1,24 +1,18 @@
 ---
-title: "JavaScript"
-id: "js"
+title: "JavaScript (SSR)"
+id: "js-ssr"
 ---
->For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](js-ssr.md)
-
+*For Server-Side Rendered JavaScript frameworks like <a href="https://nuxtjs.org" target="_blank">NuxtJS</a>*
 ## Getting started
 
 ### 1. Install and import package
 
 *via NPM:*
 ```bash
-npm i configcat-js
+npm i configcat-js-ssr
 ```
 ```js
-import * as configcat from "configcat-js";
-```
-
-*via CDN:*
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@latest/dist/configcat.min.js"></script>
+import * as configcat from "configcat-js-ssr";
 ```
 
 ### 2. Create the *ConfigCatClient* with your API Key:
@@ -50,15 +44,6 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     }
 });
 ```
-
-## Working Demo on CodePen
-
-<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="html,result" data-user="configcat" data-slug-hash="pozaLLV" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="ConfigCat feature flags based dynamically updating page">
-  <span>See the Pen <a href="https://codepen.io/configcat/pen/pozaLLV/">
-  ConfigCat feature flags based dynamically updating page</a> by ConfigCat (<a href="https://codepen.io/configcat">@configcat</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 ## Creating the *ConfigCat* Client
 
@@ -296,11 +281,9 @@ console.log(keys);
 ```
 ## Sample Applications
 
-- <a href="https://github.com/configcat/js-sdk/tree/master/samples/angular-sample" target="_blank">Angular 2+</a>
-- <a href="https://github.com/configcat/js-sdk/tree/master/samples/react-sample" target="_blank">React</a>
-- <a href="https://github.com/configcat/js-sdk/tree/master/samples/html" target="_blank">Pure HTML + JS</a>
+- <a href="https://github.com/configcat/js-ssr-sdk/tree/master/samples/nuxt-ssr" target="_blank">NuxtJS</a>
 
 ## Look under the hood
 
-* <a href="https://github.com/configcat/js-sdk" target="_blank">ConfigCat's JavaScript SDK on GitHub</a>
-* <a href="https://www.npmjs.com/package/configcat-js" target="_blank">ConfigCat JavaScript SDK in NPM</a>
+* <a href="https://github.com/configcat/js-ssr-sdk" target="_blank">ConfigCat's JavaScript (SSR) SDK on GitHub</a>
+* <a href="https://www.npmjs.com/package/configcat-js-ssr" target="_blank">ConfigCat JavaScript (SSR) SDK in NPM</a>

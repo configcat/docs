@@ -17,6 +17,7 @@
       "sdk-reference/csharp",
       "sdk-reference/java",
       "sdk-reference/js",
+      "sdk-reference/js-ssr",
       "sdk-reference/node",
       "sdk-reference/android",
       "sdk-reference/ios",
