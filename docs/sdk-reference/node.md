@@ -19,10 +19,10 @@ npm i configcat-node
 const configcat = require("configcat-node");
 ```
 
-### 3. Create the *ConfigCat* client with your *API Key*
+### 3. Create the *ConfigCat* client with your *SDK Key*
 
 ```js
-let configCatClient = configcat.createClient("#YOUR-API-KEY#");
+let configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
 ```
 
 ### 4. Get your setting value
@@ -60,7 +60,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 
 | Parameters | Description                                                                                               |
 | ---------- | --------------------------------------------------------------------------------------------------------- |
-| `apiKey`   | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `apiKey`   | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 `createClientWithAutoPoll()`, `createClientWithLazyLoad()`, `createClientWithManualPoll()`  
 Creating the client is different for each polling mode.
@@ -165,11 +165,11 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
 ```js
-let configCatClient = configcat.createClientWithAutoPoll("#YOUR-API-KEY#", { pollIntervalSeconds: 95 });
+let configCatClient = configcat.createClientWithAutoPoll("#YOUR-SDK-KEY#", { pollIntervalSeconds: 95 });
 ```
 Adding a callback to `configChanged` option parameter will get you notified about changes.
 ```js
-let configCatClient = configcat.createClientWithAutoPoll("#YOUR-API-KEY#", { configChanged: () => {
+let configCatClient = configcat.createClientWithAutoPoll("#YOUR-SDK-KEY#", { configChanged: () => {
     console.log("Your config has been changed!");
 }});
 ```
@@ -189,7 +189,7 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
 ```js
-let configCatClient = configcat.createClientWithLazyLoad("#YOUR-API-KEY#", { cacheTimeToLiveSeconds: 600 });
+let configCatClient = configcat.createClientWithLazyLoad("#YOUR-SDK-KEY#", { cacheTimeToLiveSeconds: 600 });
 ```
 
 ### Manual polling
@@ -203,7 +203,7 @@ Manual polling gives you full control over when the setting values are downloade
 | `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 
 ```js
-let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
+let configCatClient = configcat.createClientWithManualPoll("#YOUR-SDK-KEY#");
 
 configCatClient.forceRefresh(() =>{
     configCatClient.getValue("key", "my default value", (value)=>{
@@ -215,7 +215,7 @@ configCatClient.forceRefresh(() =>{
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` or `forceRefreshAsync()` to update the cache.
 
 ```js
-let configCatClient = configcat.createClientWithManualPoll("#YOUR-API-KEY#");
+let configCatClient = configcat.createClientWithManualPoll("#YOUR-SDK-KEY#");
 configCatClient.getValue("key", "my default value", (value)=>{
     console.log(value) // console: "my default value"
 });
@@ -234,7 +234,7 @@ configCatClient.forceRefresh(() =>{
 ```js
 const logger = configcat.createConsoleLogger(3); // Setting log level to 3 (= Info)
 
-const configCatClient = configcat.createClientWithAutoPoll('#YOUR-API-KEY#', 
+const configCatClient = configcat.createClientWithAutoPoll('#YOUR-SDK-KEY#', 
     { logger: logger }
 );
 ```
@@ -261,7 +261,7 @@ ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
-let configCatClient = configcat.createClient("#YOUR-API-KEY#i");
+let configCatClient = configcat.createClient("#YOUR-SDK-KEY#i");
 configCatClient.getAllKeys((keys)=>{
     console.log(keys);
 });
@@ -272,7 +272,7 @@ configCatClient.getAllKeys((keys)=>{
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
-let configCatClient = configcat.createClient("#YOUR-API-KEY#");
+let configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
 const keys = await configCatClient.getAllKeysAsync();
 console.log(keys);
 ```

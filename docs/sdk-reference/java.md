@@ -21,9 +21,9 @@ compile group: 'com.configcat', name: 'configcat-java-client', version: '4.+'
 ```java
 import com.configcat.*;
 ```
-### 3. Create the *ConfigCat* client with your *API Key*
+### 3. Create the *ConfigCat* client with your *SDK Key*
 ```java
-ConfigCatClient client = new ConfigCatClient("<PLACE-YOUR-API-KEY-HERE>");
+ConfigCatClient client = new ConfigCatClient("<PLACE-YOUR-SDK-KEY-HERE>");
 ```
 ### 4. Get your setting value
 ```java
@@ -57,7 +57,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 
 | Builder options                                                        | Description                                                                                                                                                                                                 |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `build(<apikey>)`                                                      | **REQUIRED.** Waits for the API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                            |
+| `build(<apikey>)`                                                      | **REQUIRED.** Waits for the SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                            |
 | `baseUrl(string)`                                                      | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                     |
 | `httpClient(OkHttpClient)`                                             | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                                                                                           |
 | `maxWaitTimeForSyncCallsInSeconds(int)`                                | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
@@ -134,7 +134,7 @@ User user = User.newBuilder()
 You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
 
 ```java
-ConfigCatClient client = new ConfigCatClient("#YOUR-API-KEY#");
+ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
 java.util.Collection<String> keys = client.getAllKeys();
 ```
 
@@ -148,7 +148,7 @@ Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.Au
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
     .mode(PollingModes.AutoPoll(120 /* polling interval in seconds */))
-    .build("<PLACE-YOUR-API-KEY-HERE>");
+    .build("<PLACE-YOUR-SDK-KEY-HERE>");
 ```
 Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
 ```java
@@ -159,7 +159,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
             // here you can subscribe to configuration changes 
         })
     )
-    .build("<PLACE-YOUR-API-KEY-HERE>");
+    .build("<PLACE-YOUR-SDK-KEY-HERE>");
 ```
 
 ### Lazy loading
@@ -169,7 +169,7 @@ Use the `cacheRefreshIntervalInSeconds` option parameter of the `PollingModes.La
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
     .mode(PollingModes.LazyLoad(120 /* the cache will expire in 120 seconds */))
-    .build("<PLACE-YOUR-API-KEY-HERE>");
+    .build("<PLACE-YOUR-SDK-KEY-HERE>");
 ```
 Use the `asyncRefresh` option parameter of the `PollingModes.LazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
 ```java
@@ -179,7 +179,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
         true // the refresh will be executed asynchronously
         )
     )
-    .build("<PLACE-YOUR-API-KEY-HERE>");
+    .build("<PLACE-YOUR-SDK-KEY-HERE>");
 ```
 If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
 
@@ -188,7 +188,7 @@ Manual polling gives you full control over when the setting values are downloade
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
     .mode(PollingModes.ManualPoll())
-    .build("#YOUR-API-KEY#");
+    .build("#YOUR-SDK-KEY#");
 
 client.forceRefresh();
 ```
@@ -216,7 +216,7 @@ Then use your custom cache implementation:
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
     .cache(new MyCustomCache()) // inject your custom cache
-    .build("<PLACE-YOUR-API-KEY-HERE>");
+    .build("<PLACE-YOUR-SDK-KEY-HERE>");
 ```
 
 ## HttpClient
@@ -231,7 +231,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
     .httpClient(new OkHttpClient.Builder()
                 .proxy(proxy)
                 .build())
-    .build("<PLACE-YOUR-API-KEY-HERE>");
+    .build("<PLACE-YOUR-SDK-KEY-HERE>");
 ```
 > As the ConfigCatClient SDK maintains the whole lifetime of the internal http client, it's being closed simultaneously with the ConfigCatClient, refrain from closing the http client manually.
 

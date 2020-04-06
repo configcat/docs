@@ -9,7 +9,7 @@ The ConfigCat <a href="https://github.com/configcat/feature-flag-reference-valid
 
 
 ## Installation
-1. Get your API Key from <a href="https://app.configcat.com/connect" target="_blank">ConfigCat Dashboard</a> and store it as a <a href="https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets" target="_blank">GitHub secret</a> under the name `CONFIG_CAT_API_KEY`.
+1. Get your SDK Key from <a href="https://app.configcat.com/connect" target="_blank">ConfigCat Dashboard</a> and store it as a <a href="https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets" target="_blank">GitHub secret</a> under the name `CONFIG_CAT_SDK-KEY`.
 
 2. Create a new Actions workflow in your GitHub repo.
 
@@ -28,7 +28,7 @@ The ConfigCat <a href="https://github.com/configcat/feature-flag-reference-valid
        - name: ConfigCat Feature Flag Cleanup
          uses: configcat/github-action-feature-flag-cleanup@1.0.0
          with:
-           configcat-api-key: ${{ secrets.CONFIG_CAT_API_KEY }}
+           configcat-sdk-key: ${{ secrets.CONFIG_CAT_SDK-KEY }}
            fail-on-warnings: false
    ```
 
@@ -46,13 +46,13 @@ Feature Flag Cleanup Action will run on any push event.
 
 Add these to the `with` section to enable more functionality.
 
-| Parameter              | Description                                                                                                    |      Default       |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------- | :----------------: |
-| `configcat-api-key`    | The <a href="https://app.configcat.com/connect" target="_blank">API Key</a> for your feature flags & settings. | CONFIG_CAT_API_KEY |
-| `scan-directory`       | The directory to run flag validations on.                                                                      |         .          |
-| `configcat-cdn-server` | To set a custom ConfigCat CDN server.                                                                          | cdn.configcat.com  |
-| `fail-on-warnings`     | Show warnings or stop on a build error when validation fails.                                                  |       false        |
-| `debug`                | More verbose logging.                                                                                          |       false        |
+| Parameter              | Description                                                                                                   |      Default       |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------- | :----------------: |
+| `configcat-sdk-key`    | The <a href="https://app.configcat.com/sdkkey" target="_blank">SDK Key</a> for your feature flags & settings. | CONFIG_CAT_SDK-KEY |
+| `scan-directory`       | The directory to run flag validations on.                                                                     |         .          |
+| `configcat-cdn-server` | To set a custom ConfigCat CDN server.                                                                         | cdn.configcat.com  |
+| `fail-on-warnings`     | Show warnings or stop on a build error when validation fails.                                                 |       false        |
+| `debug`                | More verbose logging.                                                                                         |       false        |
 
 ## Documentation
 For more information check the <a href="https://github.com/marketplace/actions/configcat-feature-flag-cleanup" target="_blank">ConfigCat's GitHub Action</a> on the GitHub Marketplace.

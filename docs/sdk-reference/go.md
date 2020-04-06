@@ -11,9 +11,9 @@ go get github.com/configcat/go-sdk/v4
 ```go
 import "github.com/configcat/go-sdk/v4"
 ```
-### 3. Create the *ConfigCat* client with your *API Key*
+### 3. Create the *ConfigCat* client with your *SDK Key*
 ```go
-client := configcat.NewClient("<PLACE-YOUR-API-KEY-HERE>")
+client := configcat.NewClient("<PLACE-YOUR-SDK-KEY-HERE>")
 ```
 ### 4. Get your setting value
 ```go
@@ -40,13 +40,13 @@ client.Close()
 `configcat.NewClient(<apiKey>)` returns a client with default options.
 | Arguments | Description                                                                                 |
 | --------- | ------------------------------------------------------------------------------------------- |
-| `apiKey`  | API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `apiKey`  | SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 ### Custom configuration options
 `configcat.NewCustomClient(<apiKey>, config)` returns a client with custom configuration.
 | Arguments | Description                                                                                 |
 | --------- | ------------------------------------------------------------------------------------------- |
-| `apiKey`  | API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `apiKey`  | SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 | `config`  | An object which contains the custom configuration.                                          |
 
 Available configuration options:
@@ -62,7 +62,7 @@ Available configuration options:
 
 Then you can pass it to the `NewCustomClient()` method:
 ```go
-client := configcat.NewCustomClient("<PLACE-YOUR-API-KEY-HERE>", ClientConfig{ Mode: ManualPoll() })
+client := configcat.NewCustomClient("<PLACE-YOUR-SDK-KEY-HERE>", ClientConfig{ Mode: ManualPoll() })
 ```
 
 
@@ -157,7 +157,7 @@ user := configcat.NewUserWithAdditionalAttributes("435170f4-8a8b-4b67-a723-505ac
 You can get all the setting keys from your configuration by calling the `GetAllKeys()` method of the `ConfigCatClient`.
 
 ```go
-client := configcat.NewClient("#YOUR-API-KEY#")
+client := configcat.NewClient("#YOUR-SDK-KEY#")
 keys, err := client.GetAllKeys()
 ```
 
@@ -170,7 +170,7 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 Use the the `autoPollIntervalInSeconds` option parameter of the `configcat.AutoPoll()` to change the polling interval.
 ```go  
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-API-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>", 
     configcat.ClientConfig{ Mode: configcat.AutoPoll(time.Second * 120 /* polling interval in seconds */) }
 )
 ```
@@ -178,7 +178,7 @@ You have the option to configure the polling interval and an `configChanged` cal
 ```go
 
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-API-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>", 
     configcat.ClientConfig{ Mode: configcat.AutoPoll(
         // The auto poll interval
         time.Second * 120,
@@ -196,7 +196,7 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 Use the `cacheRefreshIntervalInSeconds` parameter of the `configcat.LazyLoad()` to set cache lifetime.
 ```go
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-API-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>", 
     configcat.ClientConfig{ Mode: configcat.LazyLoad(
         time.Second * 120, // polling interval in seconds
         true // the refresh will be executed asynchronously
@@ -211,7 +211,7 @@ client := configcat.NewCustomClient(
 Manual polling gives you full control over when the setting values are downloaded. ConfigCat SDK will not update them automatically. Calling `Refresh()` is your application's responsibility.
 ```go
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-API-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>", 
     configcat.ClientConfig{ Mode: configcat.ManualPoll() }
 )
 
@@ -236,7 +236,7 @@ func (cache *CustomCache) Set(value string) error {
 Then use your custom cache implementation:
 ```go
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-API-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>", 
     configcat.ClientConfig{ Cache: CustomCache{} }
 )
 ```
@@ -249,7 +249,7 @@ which will initiate a new fetch and will update the local cache.
 You can use the `Transport` config option to set up http transport related (like proxy) settings for the http client used by the SDK:
 ```go
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-API-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>", 
     configcat.ClientConfig{ 
         Transport: &http.Transport{
 	        Proxy: http.ProxyURL(url.Parse("<PROXY-URL>")),
@@ -267,7 +267,7 @@ import {
 }
 
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-API-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>", 
     configcat.ClientConfig{ Logger: logrus.New() }
 )
 ```
@@ -284,7 +284,7 @@ logger := logrus.New()
 logger.SetLevel(logrus.InfoLevel)
 
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-API-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>", 
     configcat.ClientConfig{ Logger: logger }
 )
 ```
