@@ -52,12 +52,12 @@ client.close()
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
     .maxWaitTimeForSyncCallsInSeconds(5)
-    .build(<apikey>);
+    .build(<sdkkey>);
 ```
 
 | Builder options                                                        | Description                                                                                                                                                                                                 |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `build(<apikey>)`                                                      | **REQUIRED.** Waits for the SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                            |
+| `build(<sdkkey>)`                                                      | **REQUIRED.** Waits for the SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                            |
 | `baseUrl(string)`                                                      | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                     |
 | `httpClient(OkHttpClient)`                                             | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                                                                                           |
 | `maxWaitTimeForSyncCallsInSeconds(int)`                                | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |

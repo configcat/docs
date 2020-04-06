@@ -37,16 +37,16 @@ client.Close()
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
-`configcat.NewClient(<apiKey>)` returns a client with default options.
+`configcat.NewClient(<sdkKey>)` returns a client with default options.
 | Arguments | Description                                                                                 |
 | --------- | ------------------------------------------------------------------------------------------- |
-| `apiKey`  | SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `sdkKey`  | SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 ### Custom configuration options
-`configcat.NewCustomClient(<apiKey>, config)` returns a client with custom configuration.
+`configcat.NewCustomClient(<sdkKey>, config)` returns a client with custom configuration.
 | Arguments | Description                                                                                 |
 | --------- | ------------------------------------------------------------------------------------------- |
-| `apiKey`  | SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `sdkKey`  | SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 | `config`  | An object which contains the custom configuration.                                          |
 
 Available configuration options:

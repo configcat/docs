@@ -56,7 +56,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 
 | Properties | Description                                                                                               |
 | ---------- | --------------------------------------------------------------------------------------------------------- |
-| `apiKey`   | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `sdkKey`   | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 `createClientWithAutoPoll()`, `createClientWithLazyLoad()`, `createClientWithManualPoll()`  
 Creating the client is different for each polling mode.
@@ -151,7 +151,7 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
-#### `createClientWithAutoPoll(apiKey, options)`
+#### `createClientWithAutoPoll(sdkKey, options)`
 
 | Option Parameter      | Description                                                                                                                | Default        |
 | --------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
@@ -175,7 +175,7 @@ configcat.createClientWithAutoPoll("#YOUR-SDK-KEY#", { configChanged: function()
 
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `callback` will be called after the cache is updated.
 
-#### `createClientWithLazyLoad(apiKey, options)`
+#### `createClientWithLazyLoad(sdkKey, options)`
 
 | Option Parameter         | Description                                                                                                                | Default        |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
@@ -192,7 +192,7 @@ configcat.createClientWithLazyLoad("#YOUR-SDK-KEY#", { cacheTimeToLiveSeconds: 6
 ### Manual polling
 Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `forceRefresh()` or `forceRefreshAsync()` is your application's responsibility.
 
-#### `createClientWithManualPoll(apiKey, options)`
+#### `createClientWithManualPoll(sdkKey, options)`
 
 | Option Parameter   | Description                                                                                                                | Default        |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |

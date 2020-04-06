@@ -47,7 +47,7 @@ client.Dispose();
 
 | Properties          | Description                                                                                               | Default                            |
 | ------------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| `ApiKey`            | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |                                    |
+| `SdkKey`            | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |                                    |
 | `ConfigCache`       | IConfigCache instance for cache the config.                                                               | InMemoryConfigCache                |
 | `Logger`            | ILogger instance for tracing.                                                                             | ConsoleLogger (with WARNING level) |
 | `HttpClientHandler` | HttpClientHandler to provide network credentials and proxy settings                                       | built-in HttpClientHandler         |
@@ -107,7 +107,7 @@ Use the `PollIntervalSeconds` option parameter to change the polling interval.
 ```csharp
 var clientConfiguration = new AutoPollConfiguration
 {
-    ApiKey = "#YOUR-SDK-KEY#",
+    SdkKey = "#YOUR-SDK-KEY#",
     PollIntervalSeconds = 95
 };
 IConfigCatClient client = new ConfigCatClient(clientConfiguration);
@@ -117,7 +117,7 @@ Subscribing to the `OnConfigurationChanged` event will get you notified about ch
 ```csharp
 var clientConfiguration = new AutoPollConfiguration
     {
-        ApiKey = "#YOUR-SDK-KEY#"
+        SdkKey = "#YOUR-SDK-KEY#"
     };
 clientConfiguration.OnConfigurationChanged += (sender, args) => 
     {
@@ -140,7 +140,7 @@ Use `CacheTimeToLiveSeconds` parameter to manage configuration lifetime.
 ```csharp
 var clientConfiguration = new LazyLoadConfiguration
 {
-    ApiKey = "#YOUR-SDK-KEY#",
+    SdkKey = "#YOUR-SDK-KEY#",
     CacheTimeToLiveSeconds = 600
 };
 IConfigCatClient client = new ConfigCatClient(clientConfiguration);
@@ -158,7 +158,7 @@ Manual polling gives you full control over when the setting values are downloade
 ```csharp
 var clientConfiguration = new ManualPollConfiguration
 {
-    ApiKey = "#YOUR-SDK-KEY#"
+    SdkKey = "#YOUR-SDK-KEY#"
 };
 IConfigCatClient client = new ConfigCatClient(clientConfiguration);
 
@@ -168,7 +168,7 @@ client.ForceRefresh();
 ```csharp
 var clientConfiguration = new ManualPollConfiguration
 {
-    ApiKey = "#YOUR-SDK-KEY#"
+    SdkKey = "#YOUR-SDK-KEY#"
 };
 IConfigCatClient client = new ConfigCatClient(clientConfiguration);
 
@@ -238,7 +238,7 @@ var myHttpClientHandler = new HttpClientHandler { Proxy = myProxySettings };
 var client = new ConfigCatClient(new AutoPollConfiguration
 {
     HttpClientHandler = myHttpClientHandler,
-    ApiKey = "#YOUR-SDK-KEY#",
+    SdkKey = "#YOUR-SDK-KEY#",
 });
 ```
 
