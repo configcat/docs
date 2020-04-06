@@ -4,7 +4,7 @@ title: Overview
 ---
 *ConfigCat* supports different platforms with its own SDKs. Maintained by the ConfigCat team.
 
-After logging in to *ConfigCat*, go to the <a href="https://app.configcat.com/connect" target="_blank">Connect your applications</a> tab and select a platform to see an example integration code already customized with your settings.
+After logging in to *ConfigCat*, go to the <a href="https://app.configcat.com/sdkkey" target="_blank">Connect your applications</a> tab and select a platform to see an example integration code already customized with your settings.
 
 ## GitHub repositories
 If you'd like to see what's under the hood.

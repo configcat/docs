@@ -9,7 +9,7 @@ The ConfigCat <a href="https://github.com/configcat/feature-flag-reference-valid
 
 
 ## Installation
-1. Get your SDK Key from <a href="https://app.configcat.com/connect" target="_blank">ConfigCat Dashboard</a> and store it as a <a href="https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets" target="_blank">GitHub secret</a> under the name `CONFIG_CAT_SDK-KEY`.
+1. Get your SDK Key from <a href="https://app.configcat.com/sdkkey" target="_blank">ConfigCat Dashboard</a> and store it as a <a href="https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets" target="_blank">GitHub secret</a> under the name `CONFIG_CAT_SDK-KEY`.
 
 2. Create a new Actions workflow in your GitHub repo.
 
