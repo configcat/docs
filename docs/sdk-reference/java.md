@@ -47,7 +47,7 @@ client.close()
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
-`new ConfigCatClient(<apiKey>)` returns a client with default options.
+`new ConfigCatClient(<sdkKey>)` returns a client with default options.
 ### Builder
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()

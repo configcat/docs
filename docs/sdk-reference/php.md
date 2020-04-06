@@ -32,7 +32,7 @@ if(is_bool($isMyAwesomeFeatureEnabled) && $isMyAwesomeFeatureEnabled) {
 Constructor parameters:
 | Name      | Type     | Description                                                                                                        |
 | --------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
-| `apiKey`  | `string` | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `sdkKey`  | `string` | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 | `options` | `array`  | **Optional.** Additional configuration options, see below for the detailed list.                                   |
 
 Available configuration options:

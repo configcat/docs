@@ -25,7 +25,7 @@ import ConfigCat
  ```
 ### 3. Create the *ConfigCat* client with your *SDK Key*
 ```swift
-let client = ConfigCatClient(apiKey: "<PLACE-YOUR-SDK-KEY-HERE>")
+let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>")
 ```
 ### 4. Get your setting value
 ```swift
