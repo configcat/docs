@@ -28,7 +28,7 @@ npm i configcat-client
 ```
 ```js
 var configcat = require("configcat-client");
-var client = configcat.createClient("YOUR API KEY HERE");
+var client = configcat.createClient("YOUR SDK KEY HERE");
 
 client.getValue("isMyFeatureEnabled", false, (value) => {
     if (value === true) {
