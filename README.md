@@ -1,6 +1,6 @@
 # ConfigCat Docs
 
-A public repository for the ConfigCat documentation. https://docs.configcat.com
+A public repository for the ConfigCat documentation. https://configcat.com/docs
 
 ## About ConfigCat
 ConfigCat is a feature flag, feature toggle, and configuration management service. That lets you launch new features and change your software configuration remotely without actually (re)deploying code. ConfigCat even helps you do controlled roll-outs like canary releases and blue-green deployments. https://configcat.com
