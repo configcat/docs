@@ -261,7 +261,7 @@ ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
-let configCatClient = configcat.createClient("#YOUR-SDK-KEY#i");
+let configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
 configCatClient.getAllKeys((keys)=>{
     console.log(keys);
 });
