@@ -15,7 +15,13 @@ If you'd like to see what's under the hood.
 ### Java
 - [Documentation](sdk-reference/java.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/java-sdk" target="_blank">GitHub</a> repository of the SDK.
-### Node.js (TypeScript)
+### JavaScript
+- [Documentation](sdk-reference/js.md) on how to connect your application.
+- <a href="https://github.com/ConfigCat/js-sdk" target="_blank">GitHub</a> repository of the SDK.
+### JavaScript for Server-Side Rendered apps
+- [Documentation](sdk-reference/js-ssr.md) on how to connect your application.
+- <a href="https://github.com/ConfigCat/js-ssr-sdk" target="_blank">GitHub</a> repository of the SDK.
+### Node.js
 - [Documentation](sdk-reference/node.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/node-sdk" target="_blank">GitHub</a> repository of the SDK.
 ### Android (Kotlin)

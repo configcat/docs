@@ -10,7 +10,8 @@ You can use it with many similar techniques such as feature flags/toggles, canar
 
 # The birth of a Feature Flag
 
-When creating feature flag, first you will **add a switch** on the *ConfigCat Dashboard*, then **connect your app** to the ConfigCat service.
+First **add a feature flag** on the *ConfigCat Dashboard*, 
+then you can **connect your app** to the ConfigCat service to access your feature flag.
 
 ## Create a feature flag on *ConfigCat Dashboard*
 1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to access the *Dashboard*
@@ -20,10 +21,11 @@ When creating feature flag, first you will **add a switch** on the *ConfigCat Da
 ![getting-started](assets/getting-started-1.png)
 
 ## Connect your app
-Find code examples on the <a href="https://app.configcat.com/sdkkey" target="_blank">*Connect your applications*</a> tab on how to connect your application. Then you can access the value of your switch within your code.
+Find code examples on the <a href="https://app.configcat.com/sdkkey" target="_blank">*SDK Key*</a> tab on how to connect your application.
+Then you can access the value of your switch within your code.
 
 This is an example code snippet to show the idea behind our SDKs:
-```
+```bash
 npm i configcat-client
 ```
 ```js
