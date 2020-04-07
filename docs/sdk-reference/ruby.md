@@ -13,9 +13,9 @@ gem install configcat
 require 'configcat'
 ```
 
-### 3. Create the *ConfigCat* client with your *API Key*
+### 3. Create the *ConfigCat* client with your *SDK Key*
 ```ruby
-configcat_client = ConfigCat.create_client("#YOUR-API-KEY#")
+configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
 ```
 
 ### 4. Get your setting value
@@ -43,7 +43,7 @@ configcat_client.stop()
 `create_client()` returns a client with default options.
 | Properties | Description                                                                                               |
 | ---------- | --------------------------------------------------------------------------------------------------------- |
-| `api_key`  | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `sdk_key`  | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 `create_client_with_auto_poll()`, `create_client_with_lazy_load()`, `create_client_with_manual_poll()`  
 Creating the client is different for each polling mode.
@@ -93,7 +93,7 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 Use the `poll_interval_seconds` option parameter to change the polling interval.
 ```ruby
 ConfigCat.create_client_with_auto_poll(
-    "#YOUR-API-KEY#", poll_interval_seconds: 95);
+    "#YOUR-SDK-KEY#", poll_interval_seconds: 95);
 ```
 Adding a callback to `on_configuration_changed_callback` option parameter will get you notified about changes.
 ```ruby
@@ -101,7 +101,7 @@ def configuration_changed_callback()
     # Configuration changed.
 end
 
-ConfigCat.create_client_with_auto_poll("#YOUR-API-KEY#", on_configuration_changed_callback: method(:configuration_changed_callback));
+ConfigCat.create_client_with_auto_poll("#YOUR-SDK-KEY#", on_configuration_changed_callback: method(:configuration_changed_callback));
 ```
 Available options:
 | Option Parameter                    | Description                                                                                          | Default |
@@ -118,7 +118,7 @@ When calling `get_value()` the *ConfigCat SDK* downloads the latest setting valu
 Use `cache_time_to_live_seconds` option parameter to set cache lifetime.
 ```ruby
 ConfigCat.create_client_with_lazy_load(
-    "#YOUR-API-KEY#", cache_time_to_live_seconds: 600);
+    "#YOUR-SDK-KEY#", cache_time_to_live_seconds: 600);
 ```
 
 Use a custom `config_cache_class` option parameter.
@@ -137,7 +137,7 @@ class InMemoryConfigCache < ConfigCat::ConfigCache
     end
 end
 
-ConfigCat.create_client_with_lazy_load("#YOUR-API-KEY#", config_cache_class: InMemoryConfigCache);
+ConfigCat.create_client_with_lazy_load("#YOUR-SDK-KEY#", config_cache_class: InMemoryConfigCache);
 ```
 Available options:
 | Option Parameter             | Description                                                                                   | Default |
@@ -150,7 +150,7 @@ Available options:
 Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```ruby
-configcat_client = ConfigCat.create_client_with_manual_poll("#YOUR-API-KEY#");
+configcat_client = ConfigCat.create_client_with_manual_poll("#YOUR-SDK-KEY#");
 configcat_client.force_refresh();
 ```
 Available options:
@@ -161,7 +161,7 @@ Available options:
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
 ```ruby
-configcat_client = ConfigCat.create_client_with_manual_poll("#YOUR-API-KEY#");
+configcat_client = ConfigCat.create_client_with_manual_poll("#YOUR-SDK-KEY#");
 value = configcat_client.get_value("key", "my default value") # Returns "my default value"
 configcat_client.force_refresh();
 value = configcat_client.get_value("key", "my default value") # Returns "value from server"
@@ -199,7 +199,7 @@ ConfigCat.logger = Logger.new('log.txt')
 You can query the keys from your configuration in the SDK with the `get_all_keys()` method.
 
 ```ruby
-configcat_client = ConfigCat.create_client("#YOUR-API-KEY#")
+configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
 keys = configcat_client.get_all_keys()
 ```
 
@@ -207,7 +207,7 @@ keys = configcat_client.get_all_keys()
 Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
 
 ```ruby
-configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-API-KEY#",
+configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-SDK-KEY#",
                                                            proxy_address: "127.0.0.1",
                                                            proxy_port: 8080,
                                                            proxy_user: "user",

@@ -23,9 +23,9 @@ Then, run the carthage update command and then follow the Carthage integration s
 ```swift
 import ConfigCat
  ```
-### 3. Create the *ConfigCat* client with your *API Key*
+### 3. Create the *ConfigCat* client with your *SDK Key*
 ```swift
-let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>")
+let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>")
 ```
 ### 4. Get your setting value
 ```swift
@@ -43,10 +43,10 @@ if(isMyAwesomeFeatureEnabled) {
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
-`ConfigCatClient(apiKey: <apiKey>)` returns a client with default options.
+`ConfigCatClient(sdkKey: <sdkKey>)` returns a client with default options.
 | Arguments                          | Type                                             | Description                                                                                                                                                                                                 |
 | ---------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `apiKey`                           | string                                           | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                                          |
+| `sdkKey`                           | string                                           | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                                          |
 | `baseUrl`                          | string                                           | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                     |
 | `configCache`                      | ConfigCache?                                     | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                    |
 | `maxWaitTimeForSyncCallsInSeconds` | int                                              | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
@@ -121,7 +121,7 @@ or check <a href="https://developer.apple.com/videos/play/wwdc2016/721" target="
 You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
 
 ```swift
-let client = ConfigCatClient(apiKey: "#YOUR-API-KEY#")
+let client = ConfigCatClient(sdkKey: "#YOUR-SDK-KEY#")
 let keys = client.getAllKeys()
 ```
 
@@ -134,14 +134,14 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.autoPoll()` to change the polling interval.
 ```swift
 let client = ConfigCatClient(
-    apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
+    sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
     refreshMode: PollingModes.autoPoll(autoPollIntervalInSeconds: 120 /* polling interval in seconds */)
 )
 ```
 Adding a callback to `onConfigChanged` option parameter will get you notified about changes.
 ```swift
 let client = ConfigCatClient(
-    apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
+    sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
     refreshMode: PollingModes.autoPoll(
         autoPollIntervalInSeconds: 120, // polling interval in seconds
         onConfigChanged: {
@@ -157,14 +157,14 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 Use the `cacheRefreshIntervalInSeconds` option parameter of the `PollingModes.lazyLoad()` to set cache lifetime.
 ```swift
 let client = ConfigCatClient(
-    apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
+    sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
     refreshMode: PollingModes.lazyLoad(cacheRefreshIntervalInSeconds: 120 /* the cache will expire in 120 seconds */)
 )
 ```
 Use the `asyncRefresh` option parameter of the `PollingModes.lazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a request is being made on the cache while it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
 ```swift
 let client = ConfigCatClient(
-    apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
+    sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
     refreshMode: PollingModes.lazyLoad(
         cacheRefreshIntervalInSeconds: 120, // the cache will expire in 120 seconds
         useAsyncRefresh: true // the refresh will be executed asynchronously
@@ -177,7 +177,7 @@ If you set the `asyncRefresh` to `false`, the refresh operation will be awaited 
 Manual polling gives you full control over when the setting values are downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 ```swift
 let client = ConfigCatClient(
-    apiKey: "<PLACE-YOUR-API-KEY-HERE>", 
+    sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
     refreshMode: PollingModes.manualPoll()
 )
 
@@ -202,7 +202,7 @@ public class MyCustomCache : ConfigCache {
 ```
 Then use your custom cache implementation:
 ```swift
-let client = ConfigCatClient(apiKey: "<PLACE-YOUR-API-KEY-HERE>", configCache: MyCustomCache())
+let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>", configCache: MyCustomCache())
 ```
 
 #### Force refresh
@@ -228,7 +228,7 @@ configuration.connectionProxyDictionary = [
     kCFProxyPasswordKey: proxyPassword // Optional
 ]
 
-let client: ConfigCatClient = ConfigCatClient(apiKey: apiKey, sessionConfiguration: configuration)
+let client: ConfigCatClient = ConfigCatClient(sdkKey: sdkKey, sessionConfiguration: configuration)
 ```
 
 ## Sample App

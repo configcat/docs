@@ -13,9 +13,9 @@ pip install configcat-client
 import configcatclient
 ```
 
-### 3. Create the *ConfigCat* client with your *API Key*
+### 3. Create the *ConfigCat* client with your *SDK Key*
 ```python
-configcat_client = configcatclient.create_client('#YOUR-API-KEY#')
+configcat_client = configcatclient.create_client('#YOUR-SDK-KEY#')
 ```
 
 ### 4. Get your setting value
@@ -42,7 +42,7 @@ configcat_client.stop()
 `create_client()` returns a client with default options.
 | Properties | Description                                                                                                        |
 | ---------- | ------------------------------------------------------------------------------------------------------------------ |
-| `api_key`  | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `sdk-key`  | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
 `create_client_with_auto_poll()`, `create_client_with_lazy_load()`, `create_client_with_manual_poll()`  
 Creating the client is different for each polling mode.
@@ -92,7 +92,7 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 Use the `poll_interval_seconds` option parameter to change the polling interval.
 ```python
 configcatclient.create_client_with_auto_poll(
-    "#YOUR-API-KEY#", poll_interval_seconds=95);
+    "#YOUR-SDK-KEY#", poll_interval_seconds=95);
 ```
 Adding a callback to `on_configuration_changed_callback` option parameter will get you notified about changes.
 ```python
@@ -100,7 +100,7 @@ def configuration_changed_callback(self):
 # Configuration changed.
     pass
 
-configcatclient.create_client_with_auto_poll("#YOUR-API-KEY#", on_configuration_changed_callback=configuration_changed_callback);
+configcatclient.create_client_with_auto_poll("#YOUR-SDK-KEY#", on_configuration_changed_callback=configuration_changed_callback);
 ```
 Available options:
 | Option Parameter                    | Description                                                                                          | Default |
@@ -116,7 +116,7 @@ When calling `get_value()` the *ConfigCat SDK* downloads the latest setting valu
 Use `cache_time_to_live_seconds` option parameter to set cache lifetime.
 ```python
 configcatclient.create_client_with_lazy_load(
-    "#YOUR-API-KEY#", cache_time_to_live_seconds=600);
+    "#YOUR-SDK-KEY#", cache_time_to_live_seconds=600);
 ```
 
 Use a custom `config_cache_class` option parameter.
@@ -132,7 +132,7 @@ class InMemoryConfigCache(ConfigCache):
     def set(self, value):
         self._value = value
 
-configcatclient.create_client_with_lazy_load("#YOUR-API-KEY#", config_cache_class=InMemoryConfigCache);
+configcatclient.create_client_with_lazy_load("#YOUR-SDK-KEY#", config_cache_class=InMemoryConfigCache);
 ```
 Available options:
 | Option Parameter             | Description                  | Default |
@@ -144,7 +144,7 @@ Available options:
 Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```python
-configcat_client = configcatclient.create_client_with_manual_poll("#YOUR-API-KEY#");
+configcat_client = configcatclient.create_client_with_manual_poll("#YOUR-SDK-KEY#");
 configcat_client.force_refresh();
 ```
 Available options:
@@ -154,7 +154,7 @@ Available options:
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
 ```python
-configcat_client = configcatclient.create_client_with_manual_poll('#YOUR-API-KEY#');
+configcat_client = configcatclient.create_client_with_manual_poll('#YOUR-SDK-KEY#');
 value = configcat_client.get_value('key', 'my default value') # Returns "my default value"
 configcat_client.force_refresh();
 value = configcat_client.get_value('key', 'my default value') # Returns "value from server"
@@ -187,7 +187,7 @@ INFO -- : Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning
 You can query the keys from your configuration in the SDK with the `get_all_keys()` method.
 
 ```python
-configcat_client = configcatclient.create_client('#YOUR-API-KEY#')
+configcat_client = configcatclient.create_client('#YOUR-SDK-KEY#')
 keys = configcat_client.get_all_keys()
 ```
 
@@ -197,7 +197,7 @@ Provide your own network credentials (username/password), and proxy server setti
 ```python
 proxies = {'https': '127.0.0.1:8080'}
 proxy_auth = HTTPProxyAuth("user", "password")
-configcat_client = configcatclient.create_client_with_auto_poll('#YOUR-API-KEY#',
+configcat_client = configcatclient.create_client_with_auto_poll('#YOUR-SDK-KEY#',
                                                                 proxies=proxies,
                                                                 proxy_auth=proxy_auth)
 ```

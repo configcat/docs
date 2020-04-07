@@ -8,9 +8,9 @@ title: PHP
 composer require configcat/configcat-client
 ```
 
-### 2. Create the *ConfigCat* client with your *API Key*
+### 2. Create the *ConfigCat* client with your *SDK Key*
 ```php
-$client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#");
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
 ```
 
 ### 3. Get your setting value:
@@ -32,7 +32,7 @@ if(is_bool($isMyAwesomeFeatureEnabled) && $isMyAwesomeFeatureEnabled) {
 Constructor parameters:
 | Name      | Type     | Description                                                                                                        |
 | --------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
-| `apiKey`  | `string` | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `sdkKey`  | `string` | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 | `options` | `array`  | **Optional.** Additional configuration options, see below for the detailed list.                                   |
 
 Available configuration options:
@@ -44,7 +44,7 @@ Available configuration options:
 | `request-options`        | `array`                       | Sets the options for the request initiated by the`Guzzle` HTTP client.                                                                                                                                                          |
 Example:
 ```php
-$client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
     'cache' => new \ConfigCat\Cache\LaravelCache(Cache::store()),
     'cache-refresh-interval' => 5
  ]);
@@ -94,7 +94,7 @@ $user = new \ConfigCat\User(
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```php
-$client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#");
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
 $keys = $client->getAllKeys();
 ```
 
@@ -102,7 +102,7 @@ $keys = $client->getAllKeys();
 You can use the following caching options:
 * Laravel:
   ```php
-  $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
+  $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
     'cache' => new \ConfigCat\Cache\LaravelCache(\Illuminate\Support\Facades\Cache::store()),
   ]);
   ```
@@ -111,7 +111,7 @@ You can use the following caching options:
   $client = new \RedisArray(['127.0.0.1:6379', '127.0.0.2:6379']);
   $pool = new RedisCachePool($client);
 
-  $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
+  $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
     'cache' => new \ConfigCat\Cache\Psr6Cache($pool),
   ]);
   ```
@@ -121,7 +121,7 @@ You can use the following caching options:
   $pool = new RedisCachePool($client);
   $simpleCache = new SimpleCacheBridge($pool);
 
-  $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
+  $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
     'cache' => new \ConfigCat\Cache\Psr16Cache($simpleCache),
   ]);
   ```
@@ -145,7 +145,7 @@ You can use the following caching options:
 The SDK uses the PSR-3 `LoggerInterface` for logging, so you can use any implementor package like [Monolog](https://github.com/Seldaek/monolog).
 ```php
 
-$client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
     'logger' => new \Monolog\Logger("name"),
 ]);
 ```
@@ -154,7 +154,7 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
 The SDK uses [Guzzle](http://docs.guzzlephp.org/en/stable/index.html) for the underlying HTTP calls and its request options are available to customize through the SDK options like:
 ```php
 
-$client = new \ConfigCat\ConfigCatClient("#YOUR-API-KEY#", [
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
     'request-options' => [
         'proxy' => [
             'http'  => 'tcp://localhost:8125',

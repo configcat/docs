@@ -13,9 +13,9 @@ Install-Package ConfigCat.Client
 using ConfigCat.Client
 ```
 
-### 3. Create the *ConfigCat* client with your *API Key*
+### 3. Create the *ConfigCat* client with your *SDK Key*
 ```csharp
-var client = new ConfigCatClient("#YOUR-API-KEY#");
+var client = new ConfigCatClient("#YOUR-SDK-KEY#");
 ```
 
 ### 4. Get your setting value
@@ -47,7 +47,7 @@ client.Dispose();
 
 | Properties          | Description                                                                                               | Default                            |
 | ------------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| `ApiKey`            | **REQUIRED.** API Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |                                    |
+| `SdkKey`            | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |                                    |
 | `ConfigCache`       | IConfigCache instance for cache the config.                                                               | InMemoryConfigCache                |
 | `Logger`            | ILogger instance for tracing.                                                                             | ConsoleLogger (with WARNING level) |
 | `HttpClientHandler` | HttpClientHandler to provide network credentials and proxy settings                                       | built-in HttpClientHandler         |
@@ -107,7 +107,7 @@ Use the `PollIntervalSeconds` option parameter to change the polling interval.
 ```csharp
 var clientConfiguration = new AutoPollConfiguration
 {
-    ApiKey = "#YOUR-API-KEY#",
+    SdkKey = "#YOUR-SDK-KEY#",
     PollIntervalSeconds = 95
 };
 IConfigCatClient client = new ConfigCatClient(clientConfiguration);
@@ -117,7 +117,7 @@ Subscribing to the `OnConfigurationChanged` event will get you notified about ch
 ```csharp
 var clientConfiguration = new AutoPollConfiguration
     {
-        ApiKey = "#YOUR-API-KEY#"
+        SdkKey = "#YOUR-SDK-KEY#"
     };
 clientConfiguration.OnConfigurationChanged += (sender, args) => 
     {
@@ -140,7 +140,7 @@ Use `CacheTimeToLiveSeconds` parameter to manage configuration lifetime.
 ```csharp
 var clientConfiguration = new LazyLoadConfiguration
 {
-    ApiKey = "#YOUR-API-KEY#",
+    SdkKey = "#YOUR-SDK-KEY#",
     CacheTimeToLiveSeconds = 600
 };
 IConfigCatClient client = new ConfigCatClient(clientConfiguration);
@@ -158,7 +158,7 @@ Manual polling gives you full control over when the setting values are downloade
 ```csharp
 var clientConfiguration = new ManualPollConfiguration
 {
-    ApiKey = "#YOUR-API-KEY#"
+    SdkKey = "#YOUR-SDK-KEY#"
 };
 IConfigCatClient client = new ConfigCatClient(clientConfiguration);
 
@@ -168,7 +168,7 @@ client.ForceRefresh();
 ```csharp
 var clientConfiguration = new ManualPollConfiguration
 {
-    ApiKey = "#YOUR-API-KEY#"
+    SdkKey = "#YOUR-SDK-KEY#"
 };
 IConfigCatClient client = new ConfigCatClient(clientConfiguration);
 
@@ -180,7 +180,7 @@ Console.WriteLine(client.GetValue("key", "my default value")); // console: "valu
 ## Logging
 ### Setting log levels
 ```csharp
-var client = new ConfigCatClient("#YOUR-API-KEY#");
+var client = new ConfigCatClient("#YOUR-SDK-KEY#");
 
 client.LogLevel = LogLevel.Info;
 ```
@@ -209,7 +209,7 @@ Sample code on how to create a basic file logger implementation for ConfigCat cl
 You can use `ConfigCatClientBuilder` to create the *ConfigCat* client instance:
 ```csharp
 IConfigCatClient client = ConfigCatClientBuilder
-    .Initialize("#YOUR-API-KEY#")
+    .Initialize("#YOUR-SDK-KEY#")
     .WithLazyLoad()
     .WithCacheTimeToLiveSeconds(120)
     .Create();
@@ -219,7 +219,7 @@ IConfigCatClient client = ConfigCatClientBuilder
 You can get all the setting keys from your configuration by calling the `GetAllKeys()` method of the `ConfigCatClient`.
 
 ```csharp
-IConfigCatClient client = new ConfigCatClient("#YOUR-API-KEY#");
+IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
 IEnumerable<string> keys = client.GetAllKeys();
 ```
 
@@ -238,7 +238,7 @@ var myHttpClientHandler = new HttpClientHandler { Proxy = myProxySettings };
 var client = new ConfigCatClient(new AutoPollConfiguration
 {
     HttpClientHandler = myHttpClientHandler,
-    ApiKey = "#YOUR-API-KEY#",
+    SdkKey = "#YOUR-SDK-KEY#",
 });
 ```
 
