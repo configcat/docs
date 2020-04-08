@@ -119,11 +119,11 @@ const siteConfig = {
     twitterImage: 'docs/img/docusaurus.png',
     gaTrackingId: 'UA-126035559-1',
     editUrl: 'https://github.com/configcat/docs/edit/master/docs/',
-    // algolia: {
-    //     apiKey: '36b9ea4801b9b88e1e8fa2e42d3cc705',
-    //     indexName: 'configcat',
-    //     algoliaOptions: {} // Optional, if provided by Algolia
-    // },
+    algolia: {
+        apiKey: '36b9ea4801b9b88e1e8fa2e42d3cc705',
+        indexName: 'configcat',
+        algoliaOptions: {} // Optional, if provided by Algolia
+    },
     // You may provide arbitrary config keys to be used as needed by your
     // template. For example, if you need your repo's URL...
     // repoUrl: 'https://github.com/facebook/test-site',
