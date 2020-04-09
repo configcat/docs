@@ -22,7 +22,7 @@ android {
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
 ```
-implementation 'com.configcat:configcat-android-client:4.+'
+implementation 'com.configcat:configcat-android-client:5.+'
 ```
 ### 2. Import the ConfigCat SDK:
 ```kotlin
@@ -62,14 +62,14 @@ val client = ConfigCatClient.newBuilder()
     .maxWaitTimeForSyncCallsInSeconds(5)
     .build(<sdkkey>)
 ```
-| Builder options                                                        | Description                                                                                                                                                                                                 |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `build(<sdkkey>)`                                                      | **REQUIRED.** Waits for the SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                            |
-| `baseUrl(string)`                                                      | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                |
-| `httpClient(OkHttpClient)`                                             | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                                                                                           |
-| `maxWaitTimeForSyncCallsInSeconds(int)`                                | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
-| `cache(ConfigCache)`                                                   | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                    |
-| `mode(PollingMode pollingMode)`                                        | Optional, sets the polling mode for the client. [See below](#polling-modes).                                                                                                          |
+| Builder options                         | Description                                                                                                                                                                                                 |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `build(<sdkkey>)`                       | **REQUIRED.** Waits for the SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                                     |
+| `baseUrl(string)`                       | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                     |
+| `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                                                                                           |
+| `maxWaitTimeForSyncCallsInSeconds(int)` | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
+| `cache(ConfigCache)`                    | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                    |
+| `mode(PollingMode pollingMode)`         | Optional, sets the polling mode for the client. [See below](#polling-modes).                                                                                                                                |
 
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
@@ -77,7 +77,7 @@ val client = ConfigCatClient.newBuilder()
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                                    |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 ```kotlin
