@@ -19,7 +19,7 @@ Turn features On / Off right from a linked Issue on your Jira board with <a href
 2. Push `Link ConfigCat Feature Flag`
 ![Link ConfigCat Feature Flag](assets/jira/link.png)
 3. Select a Product, Config, Environment and a Feature Flag to be linked to your card.
-4. When linked, you can turn your features On / Off right from this Card.
+4. When linked, you can turn your features On / Off right from this Issue.  
 ![Use ConfigCat Feature Flags in Jira](assets/jira/use.png)
-5. View linked issues next to your Feature Flags in ConfigCat and jump to the Jira Issue directly.
+5. View linked issues next to your Feature Flags in ConfigCat and jump to the Jira Issue directly.  
 ![View linked issues in ConfigCat Dashboard](assets/jira/jump.png)
