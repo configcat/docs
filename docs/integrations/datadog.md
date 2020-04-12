@@ -20,7 +20,7 @@ Ensures that every setting change in ConfigCat is sent to DataDog as an Event.
 
 ## Un-installation
 1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
-2. Click on DataDog's DISCONNECT button and set your DataDog API key.
+2. Click on DataDog's DISCONNECT button.
 
 
 ## Event details

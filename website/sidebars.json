@@ -30,6 +30,7 @@
       "video/developer"
     ],
     "Integrations": [
+      "integrations/slack",
       "integrations/trello",
       "integrations/datadog",
       "integrations/zapier",
