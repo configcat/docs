@@ -5,7 +5,7 @@ title: Slack
 
 ## Overview
 
-Get updated via a Slack Channel message when someone changes a feature flag with the <a href="https://configcat.slack.com/apps/A011CN2QZJB-configcat-feature-flags" target="_blank">ConfigCat Feature Flags</a> Slack app.
+Get updated via a Slack Channel message when someone changes a feature flag with the <a href="https://configcat.slack.com/apps/A011CN2QZJB-configcat-feature-flags" target="_blank">ConfigCat Feature Flags</a> Slack App.
 
 ![slack_notification](assets/slack/notification.png)
 
