@@ -20,5 +20,5 @@ Get updated via a Slack Channel message when someone changes a feature flag with
 1. Click on Slack's DISCONNECT button.
 
 ## Usage
-1. Make some changes on your feature flags 
+1. Make some changes on your feature flags.
 1. Check your Slack Channel for notifications.
