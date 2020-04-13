@@ -13,6 +13,8 @@ Turn features On / Off right from a linked Issue on your Jira board with <a href
 3. Get your ConfigCat Public API credentials: https://app.configcat.com/my-account/public-api-credentials
 4. Click authorize.
 
+> Every Jira user should authorize ConfigCat in Jira who wants to use the ConfigCat Feature Flags Jira Cloud Plugin.
+
 ## Usage
 
 1. Open any Issue on your Jira board.
