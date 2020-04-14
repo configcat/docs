@@ -10,7 +10,8 @@
       "advanced/targeting",
       "advanced/user-object",
       "advanced/team-collaboration",
-      "advanced/notifications-webhooks"
+      "advanced/notifications-webhooks",
+      "advanced/public-api"
     ],
     "SDK References": [
       "sdk-reference/overview",
