@@ -4,46 +4,62 @@ title: Public API
 
 ---
 
-With Public API you can access ConfigCat platform programmatically. It is useful when you need to create, modify or delete any entities in ConfigCat. The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON and JSON+HAL format.
+With Public API you can access ConfigCat platform programmatically. It is useful when you need to create, modify or
+delete any entities in ConfigCat. The API is based on HTTP REST, uses resource-oriented URLs, status codes and
+supports JSON and JSON+HAL format.
+
 ## Authentication
-Authentication tokens are passed using an `Authorization` header to authenticate as a user account with the API. The method is *[BASIC](https://tools.ietf.org/html/rfc7617)*. If you are not familiar BASIC method follow the [link](https://en.wikipedia.org/wiki/Basic_access_authentication) to build the proper credentials.
+
+The API uses the ['Basic' HTTP Authentication Scheme](https://tools.ietf.org/html/rfc7617) where a
+**Basic auth user name** and a **Basic auth password is passed** is passed in an `Authorization: Basic`
+header joined by a single colon `:` and **Base64 encoded** .
+
+e.g: `Basic MDhkN2UxMzYtZjE2OS02MzUyLTk5NmQtMjVkMGNmNzQ4ODFjOk9yWkM4dHB3a1V0b256UkFGSlZDdG5kV0o5Qm5DS05SL0lINjMxSzJCeFE9`
+
 ### Create Public API credentials
+
 1. Open your [Public API credentials management page](https://app.configcat.com/my-account/public-api-credentials) on the ConfigCat Dashboard
 2. Click on the _Add New Credentials_ button and enter a name to identify your credential
-3. Click on the _Generate_ button: your credential will generate and it will show in a popup window
-4. Save your credential username and password to your favorite key-vault. 
-> **IMPORTANT:** if you close the popup window you won’t be able to access your password, and will need to create a new one!
-5. Use username-password credentials with BASIC authentication in your HTTP requests. 
-> Keep your credentials secure: do not embed it directly in your code and do not share it.
+3. Click on the _Generate_ button: your credential will generated and it will show in a popup window
+4. Save your basic auth username and password to your favorite key-vault.
+
+	> **IMPORTANT:** if you close the popup window you won’t be able to access your password, and will need to create a new one!
+
+5. Use username-password credentials with BASIC authentication in your HTTP requests.
+
+	> Keep your credentials secure: do not embed it directly in your code and do not share it.
+
 ## Service endpoints
-You can find the full list of the supported Public API endpoints under swagger link:
-**[https://api.configcat.com/docs/index.html](https://api.configcat.com/docs/index.html)**
+**[Detailed list of available endpoints](https://api.configcat.com/docs)**
+
 ### Media types
-|Media|Content-type  |
-|--|--|
-|json|application/json|
-|json with  [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08)|application/hal+json|
+| Media                                                                 | Content-type         |
+| --------------------------------------------------------------------- | -------------------- |
+| json                                                                  | application/json     |
+| json with  [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) | application/hal+json |
+
 > The JSON Hypertext Application Language (HAL) is a standard which
    establishes conventions for expressing hypermedia controls, such as
    links, with JSON 
-### Public API clients
-With [SWAGGER-GEN]([https://github.com/swagger-api/swagger-codegen](https://github.com/swagger-api/swagger-codegen)) you can generate several client types.
-#### Sample client
-*	[AngularJS](https://github.com/configcat/ng-configcat-publicapi)
 
-## Rate limits
+### Public API clients
+You can create clients easily using [Swagger Codegen](https://github.com/swagger-api/swagger-codegen).
+
+#### Sample client
+[ConfigCat Public API client for Angular](https://github.com/configcat/ng-configcat-publicapi)
+
+## Rate limits and throttling
 Public API's responsibility is to manage your products / environments / settings. It has the ability to serve the config value in some special cases but you **must not use** it to evaluate a setting value in your production environment.
+
 ### Public API rate limit policy
 * The rate limit for the one endpoint call is `20` per second and `500` per hour per account credential.
 * The rate limit for the one endpoint call is `20` per second per client's IP address.
 
 >**When you hit your limit all api calls response status will be `HTTP429`**
 
-## Service level agreement
-[https://configcat.com/sla](https://configcat.com/sla)
-## Example
-### List my Products
-#### Signature
+## Examples
+### Get Products
+#### Endpoint
 ```GET ~/v1/products```
 #### Request - cURL
 ```
@@ -61,7 +77,8 @@ curl -X GET \
 	"name": "cat@example.com"
 }]
 ```
-### Update setting value with SDK-KEY
+### Update feature flag
+
 This sample updates a setting to `true`. With this endpoint you don't need to know the environment and the setting identifiers.
 #### Signature
 ```PUT ~/v1/settings/{settingKeyOrId}/value```
