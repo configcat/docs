@@ -4,15 +4,17 @@ title: Public API
 
 ---
 
-With Public API you can access ConfigCat platform programmatically. It is useful when you need to create, modify or
-delete any entities in ConfigCat. The API is based on HTTP REST, uses resource-oriented URLs, status codes and
-supports JSON and JSON+HAL format.
+With Public API you can access ConfigCat platform programmatically. 
+It is useful when you need to create, modify or delete any entities 
+in ConfigCat. The API is based on HTTP REST, uses resource-oriented URLs, 
+status codes and supports JSON and JSON+HAL format.
+
+## Endpoints
+**[Detailed list of all available endpoints](https://api.configcat.com/docs)**
 
 ## Authentication
 
-The API uses the ['Basic' HTTP Authentication Scheme](https://tools.ietf.org/html/rfc7617) where a
-**Basic auth user name** and a **Basic auth password is passed** is passed in an `Authorization: Basic`
-header joined by a single colon `:` and **Base64 encoded** .
+The API uses the ['Basic' HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication) where a **Basic auth user name** and a **Basic auth password is passed** is passed in an `Authorization: Basic` header joined by a single colon `:` and **Base64 encoded** .
 
 e.g: `Basic MDhkN2UxMzYtZjE2OS02MzUyLTk5NmQtMjVkMGNmNzQ4ODFjOk9yWkM4dHB3a1V0b256UkFGSlZDdG5kV0o5Qm5DS05SL0lINjMxSzJCeFE9`
 
@@ -28,9 +30,6 @@ e.g: `Basic MDhkN2UxMzYtZjE2OS02MzUyLTk5NmQtMjVkMGNmNzQ4ODFjOk9yWkM4dHB3a1V0b256
 5. Use username-password credentials with BASIC authentication in your HTTP requests.
 
 	> Keep your credentials secure: do not embed it directly in your code and do not share it.
-
-## Service endpoints
-**[Detailed list of available endpoints](https://api.configcat.com/docs)**
 
 ### Media types
 | Media                                                                 | Content-type         |
@@ -58,9 +57,14 @@ Public API's responsibility is to manage your products / environments / settings
 >**When you hit your limit all api calls response status will be `HTTP429`**
 
 ## Examples
-### Get Products
+### Get your Products
+
+Sample request on how to get all your **Products**.
+
 #### Endpoint
 ```GET ~/v1/products```
+
+[Detailed list of available endpoints](https://api.configcat.com/docs)
 #### Request - cURL
 ```
 auth_credentials_in_base64="dGVzdDp0ZXN0"
@@ -77,22 +81,32 @@ curl -X GET \
 	"name": "cat@example.com"
 }]
 ```
-### Update feature flag
+### Updating a Feature Flag using SDK Key for identification
 
-This sample updates a setting to `true`. With this endpoint you don't need to know the environment and the setting identifiers.
-#### Signature
+A sample on how to switch on `enableMyAwesomeFeature` by updating a 
+**Feature Flag** value from `false` to `true`.
+
+This endpoint uses the `SDK_KEY` in the Header to identify the **Config** and 
+**Environment** for the feature flag. So you don't need to get their IDs before
+updating. [Get your SDK Key](https://app.configcat.com/sdkkey) 
+
+#### Endpoint
+
 ```PUT ~/v1/settings/{settingKeyOrId}/value```
+
+[Detailed list of available endpoints](https://api.configcat.com/docs)
+
 #### Request - cURL
 
 ```
 auth_credentials_in_base64="dGVzdDp0ZXN0"
 setting_key="enableMyAwesomeFeature"
 reason="Automate_Test_Run"
-SDK_KEY="mySDK-KEY"
+SDK_KEY="#YOUR-SDK-KEY#"
 
 curl -X PUT \
 "https://api.configcat.com/v1/settings/${setting_key}/value?reason=${reason}" \
--H "X-CONFIGCAT-APIKEY: ${SDK_KEY}" \
+-H "X-CONFIGCAT-SDKKEY: ${SDK_KEY}" \
 -H "Authorization: Basic ${auth_credentials_in_base64}" \
 -H "Content-Type: application/json" \
 -d "{\"value\":true}"

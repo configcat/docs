@@ -1,5 +1,8 @@
 {
     "editor.rulers": [
         120,100,80
+    ],
+    "cSpell.words": [
+        "SDKKEY"
     ]
 }
