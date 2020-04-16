@@ -9,6 +9,7 @@
     "Advanced Guides": [
       "advanced/targeting",
       "advanced/user-object",
+      "advanced/public-api",
       "advanced/team-collaboration",
       "advanced/notifications-webhooks"
     ],

@@ -2,12 +2,9 @@
 id: overview
 title: Overview
 ---
-*ConfigCat* supports different platforms with its own SDKs. Maintained by the ConfigCat team.
+The purpose of the SDKs are to download, cache feature flag values and to evaluate targeting rules. All SDKs provide a simple interface to access your feature flags from your application. 
 
-After logging in to *ConfigCat*, go to the <a href="https://app.configcat.com/sdkkey" target="_blank">Connect your applications</a> tab and select a platform to see an example integration code already customized with your settings.
-
-## GitHub repositories
-If you'd like to see what's under the hood.
+Check out our language specific<a href="https://app.configcat.com/sdkkey" target="_blank"> Getting Started Guide</a> on how to connect your applications.
   
 ### NET (C#)
 - [Documentation](sdk-reference/csharp.md) on how to connect your application.
