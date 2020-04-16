@@ -9,9 +9,9 @@
     "Advanced Guides": [
       "advanced/targeting",
       "advanced/user-object",
+      "advanced/public-api",
       "advanced/team-collaboration",
-      "advanced/notifications-webhooks",
-      "advanced/public-api"
+      "advanced/notifications-webhooks"
     ],
     "SDK References": [
       "sdk-reference/overview",

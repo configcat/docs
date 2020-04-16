@@ -10,21 +10,31 @@ like **Feature Flags, Configs, Environments** or **Products** within ConfigCat. 
 based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON 
 and JSON+HAL format.
 
+> Do not use this API for accessing and evaluating feature flag values. Use the 
+> [SDKs instead](sdk-reference/overview.md).
+
 ## Endpoints
-**[Detailed list of all available endpoints](https://api.configcat.com/docs)**
+**[Detailed list of all available endpoints and schemas](https://api.configcat.com/docs)**
 
 ## Authentication
 
-The API uses the ['Basic' HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication) where a **Basic auth user name** and a **Basic auth password is passed** is passed in an `Authorization: Basic` header joined by a single colon `:` and **Base64 encoded** .
+The API uses the <a href="https://en.wikipedia.org/wiki/Basic_access_authentication" target="_blank">
+'Basic' HTTP Authentication Scheme</a>. 
 
-e.g: `Basic MDhkN2UxMzYtZjE2OS02MzUyLTk5NmQtMjVkMGNmNzQ4ODFjOk9yWkM4dHB3a1V0b256UkFGSlZDdG5kV0o5Qm5DS05SL0lINjMxSzJCeFE9`
+
+Where a **Basic auth user name** and a 
+**Basic auth password** is passed in an `Authorization: Basic` header joined by a single 
+colon `:` and **Base64 encoded** .
+
+e.g: `Basic MDhkN2UxMzYtZjE2OS02MzUyLTk5NmQtMjVkMGNmNzQ4ODFjO9`
+
+![BasicAuth](/docs/assets/basic-auth.png)
 
 ### Create Public API credentials
 
 1. Open your [Public API credentials management page](https://app.configcat.com/my-account/public-api-credentials) on the ConfigCat Dashboard
-2. Click on the _Add New Credentials_ button and enter a name to identify your credential
-3. Click on the _Generate_ button: your credential will generated and it will show in a popup window
-4. Save your basic auth username and password to your favorite key-vault.
+2. Click **+ Add New Credentials**, give it a name, hit **Generate**. 
+3. Save your basic auth username and password to your favorite key-vault.
 
 	> **IMPORTANT:** if you close the popup window you won’t be able to access your password, and will need to create a new one!
 
@@ -33,29 +43,34 @@ e.g: `Basic MDhkN2UxMzYtZjE2OS02MzUyLTk5NmQtMjVkMGNmNzQ4ODFjOk9yWkM4dHB3a1V0b256
 	> Keep your credentials secure: do not embed it directly in your code and do not share it.
 
 ### Media types
-| Media                                                                 | Content-type         |
-| --------------------------------------------------------------------- | -------------------- |
-| json                                                                  | application/json     |
-| json with  [HAL](https://tools.ietf.org/html/draft-kelly-json-hal-08) | application/hal+json |
+| Media                                                                                                     | Content-type         |
+| --------------------------------------------------------------------------------------------------------- | -------------------- |
+| json                                                                                                      | application/json     |
+| json with  <a href="https://en.wikipedia.org/wiki/Hypertext_Application_Language" target="_blank">HAL</a> | application/hal+json |
 
-> The JSON Hypertext Application Language (HAL) is a standard which
+The JSON Hypertext Application Language (HAL) is a standard which
    establishes conventions for expressing hypermedia controls, such as
    links, with JSON 
 
 ### Public API clients
-You can create clients easily using [Swagger Codegen](https://github.com/swagger-api/swagger-codegen).
+You can create clients easily using <a href="https://github.com/swagger-api/swagger-codegen" target="_blank">Swagger Codegen</a>.
 
 #### Sample client
-[ConfigCat Public API client for Angular](https://github.com/configcat/ng-configcat-publicapi)
+<a href="https://github.com/configcat/ng-configcat-publicapi" target="_blank">ConfigCat Public API client for Angular</a>
 
-## Rate limits and throttling
-Public API's responsibility is to manage your products / environments / settings. It has the ability to serve the config value in some special cases but you **must not use** it to evaluate a setting value in your production environment.
+## Throttling and rate limits
+> Do not use this API for accessing and evaluating feature flag values. Use the 
+> [SDKs instead](sdk-reference/overview.md).
+
+`HTTP 429 - Too many requests` status is returned in case throttling gets activated, along 
+with a reason message with details.
 
 ### Public API rate limit policy
-* The rate limit for the one endpoint call is `20` per second and `500` per hour per account credential.
-* The rate limit for the one endpoint call is `20` per second per client's IP address.
+* You can expect the limits around `20` per second and `500` per hour for each endpoint.
+* <a href="https://configcat.com/support" target="_blank">Let's get in touch</a> 
+if you have different requirements.
 
->**When you hit your limit all api calls response status will be `HTTP429`**
+****
 
 ## Examples
 ### Get your Products
