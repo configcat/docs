@@ -36,7 +36,8 @@ e.g: `Basic MDhkN2UxMzYtZjE2OS02MzUyLTk5NmQtMjVkMGNmNzQ4ODFjO9`
 2. Click **+ Add New Credentials**, give it a name, hit **Generate**. 
 3. Save your basic auth username and password to your favorite key-vault.
 
-	> **IMPORTANT:** if you close the popup window you won’t be able to access your password, and will need to create a new one!
+	> Due to security reasons we don't store your password, so if you close the dialog you 
+	> won't be able to access it again.
 
 5. Use username-password credentials with BASIC authentication in your HTTP requests.
 
