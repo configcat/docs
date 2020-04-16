@@ -1,13 +1,14 @@
 ---
 id: public-api
-title: Public API
+title: Public Management API
 
 ---
 
-With Public API you can access ConfigCat platform programmatically. 
-It is useful when you need to create, modify or delete any entities 
-in ConfigCat. The API is based on HTTP REST, uses resource-oriented URLs, 
-status codes and supports JSON and JSON+HAL format.
+With Public Management API you can access the ConfigCat platform programmatically. 
+It's purpose is to **Create**, **Read**, **Update** and **Delete** any entities 
+like **Feature Flags, Configs, Environments** or **Products** within ConfigCat. The API is 
+based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON 
+and JSON+HAL format.
 
 ## Endpoints
 **[Detailed list of all available endpoints](https://api.configcat.com/docs)**
