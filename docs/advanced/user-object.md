@@ -51,7 +51,7 @@ Keeping your user data safe was one of our main goals when designing ConfigCat. 
 >Feature Flag and Setting **evaluation is on the Client** side within the ConfigCat SDK. This means that your **user data will never leave your system**. 
 
 This allows you to create targeting rules based on sensitive data.
-You can double check the above since all the <a href="https://github.com/configcat" target="_blank">ConfigCat SDKs are open source and on GitHub.</a>
+You can double-check the above since all the <a href="https://github.com/configcat" target="_blank">ConfigCat SDKs are open source and on GitHub.</a>
 
 ## User Object's structure
 
@@ -59,21 +59,21 @@ The data that could and should be passed to the User Object.
 
 Property|Description
 ---|---
-Identifier|**REQUIRED** We recommend adding a UserID, Email address or SessionID. [More](advanced/user-object.md#identifier-property)
-Email|**OPTIONAL** Email address of your user. By adding this parameter you will be able to create Email address based targeting. e.g: Turn on a feature for only users with @example.com addresses.
-Country|**OPTIONAL** Fill this for location or country based targeting. e.g: Turn on a feature for users in Canada only.
-Custom|**OPTIONAL** This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role, Device type, App version number etc.
+Identifier|**REQUIRED** We recommend adding a UserID, Email address, or SessionID. [More](advanced/user-object.md#identifier-property)
+Email|**OPTIONAL** By adding this parameter you will be able to create Email address-based targeting. e.g:  Only turn on a feature for users with @example.com addresses.
+Country|**OPTIONAL** Fill this for location or country-based targeting. e.g: Turn on a feature for users in Canada only.
+Custom|**OPTIONAL** This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role, Device type, App version number, etc.
 
 ### Identifier property
-Unique identifier of a user in your application. Required. Enables ConfigCat to differentiate your users from each other and to evaluate the setting values for percentage based targeting.
+Unique identifier of a user in your application.. This is a **REQUIRED** property which enables ConfigCat to differentiate your users from each other and to evaluate the setting values for percentage-based targeting.
 
 Our recommendation as an identifier:
 - User ID - If you have one in your application you can use the same User ID with ConfigCat.
-- Email address - In most cases adding an email address works perfectly here. As long as it is unique.
-- SessionId - This comes useful when you'd like to target users who aren't logged in your application.
+- Email address - In most cases adding an email address works perfectly here, as long as it is unique.
+- SessionId - This is useful for when you want to target users who are not logged in to your application.
 
 ### Custom property usage
-First you need to pass a User Object to the ConfigCat SDK containing the `custom` property.
+First, you need to pass a User Object to the ConfigCat SDK containing the `custom` property.
 
 Example:
 ``` javascript
