@@ -2,14 +2,14 @@
 id: notifications-webhooks
 title: Notifications - Webhooks
 ---
-Your application can be notified about Setting value changes in real-time. ConfigCat enables this by calling a public URL of your system (a so-called Webhook). You can add your own Webhook URLs in the *Dashboard*.
+Your application can be notified about Setting value changes in real-time. ConfigCat enables this by calling a public URL of your system (a so-called Webhook). You can add your Webhook URLs in the *Dashboard*.
 
 ## Adding Webhook
 1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab.
 2. Set the Url, the HttpMethod and the optional Request body.
 
 ## Request body with variables
-You can specify a Request body which will be sent as the payload of the HTTP request. 
+You can specify a Request body that will be sent as the payload of the HTTP request. 
 
 ConfigCat will replace the following variables in the request body:
 
@@ -42,10 +42,10 @@ A few steps to set up Slack and get a message when a setting changes:
 ## Connecting to Microsoft Teams
 A few steps to set up Microsoft Teams and get a message when a setting changes:
 1. Define an Incoming Webhook connector in Microsoft Teams and copy the Webhook URL.
-1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the *ConfigCat Dashboard.* 
-1. Create a Webhook and add your Teams URL.
-2. Select POST as HTTP method.
-3. Add a request body like so:
+2. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the *ConfigCat Dashboard.* 
+3. Create a Webhook and add your Teams URL.
+4. Select POST as the HTTP method.
+5. Add a request body like so:
 
 Sample request body of the Webhook: 
 ```

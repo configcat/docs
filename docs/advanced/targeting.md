@@ -2,7 +2,7 @@
 id: targeting
 title: Targeting
 ---
-Using this feature you will be able to set different setting values for different users in your application. Lets say you would like to enable a feature only for the users within your company  or only to a small percentage of your users before releasing it to the entire world.
+Using this feature you will be able to set different setting values for different users in your application. Let's say you would like to enable a feature only for the users within your company or only to a small percentage of your users before releasing it to the entire world.
 
 ## Targeting specific users
 
@@ -16,13 +16,13 @@ Using this feature you will be able to set different setting values for differen
 
 ## Anatomy of a Targeting Rule
 
-By adding a rule, you specify a group of your users and specify what feature flag - or other setting - value they should get. A rule consists of an **Attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses) and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
+By adding a rule, you specify a group of your users and what feature flag - or other settings - value they should get. A rule consists of an **Attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses), and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
 
 ### Attribute
 
 A property of your user (e.g. *email address*, *geographic location*). Your application should pass the attribute values (e.g. *jane@example.com*, *Europe*) to ConfigCat for comparison.
 
-There are 3 predefined attributes. Additionally you can define your own ***custom attributes*** as well:
+There are 3 predefined attributes. Additionally, you can define your ***custom attributes*** as well:
 
 | Attribute Name | Description                                                                        |
 | -------------- | ---------------------------------------------------------------------------------- |
@@ -33,7 +33,7 @@ There are 3 predefined attributes. Additionally you can define your own ***custo
 
 ### Comparison value
 
-Any string, number or comma separated list. Will be compared to the selected *Attribute* using the *Comparator*. **Max Length: 65535 chars**
+Any string, number, or comma-separated list. Will be compared to the selected *Attribute* using the *Comparator*. **Max Length: 65535 chars**
 
 ### Comparator
 
@@ -43,22 +43,22 @@ The following comparators assume that *Attribute* and *Comparison value* contain
 
 | Comparator       | Description                                                                                                         |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF        | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list. |
+| IS ONE OF        | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list. |
 | IS NOT ONE OF    | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
 | CONTAINS         | True if the *Attribute* contains the *Comparison value*.                                                            |
 | DOES NOT CONTAIN | True if the *Attribute* doesn't contain the *Comparison value*.                                                     |
 
 #### Sensitive text comparators
 
-We recommend sensitive text comparators in case of frontend applications targeting users based on sensitive data (like email addresses, name etc).
-In this case the feature flag evaluation is based on the secure hashes of the comparison values.
+We recommend sensitive text comparators in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
+In this case, the feature flag evaluation is based on the secure hashes of the comparison values.
 
 | Comparator                | Description                                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF (Sensitive)     | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list. |
+| IS ONE OF (Sensitive)     | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list. |
 | IS NOT ONE OF (Sensitive) | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
 
-Since sensitive text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example how to target users from the same company. Which used to be handled by a rule like:
+Since sensitive text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example of how to target users from the same company. Which used to be handled by a rule like:
 
 ![Sensitive](assets/sensitive2.png)
 
@@ -99,7 +99,7 @@ Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer 
 
 | Comparator             | Description                                                                                                                        |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF (Semver)     | True if *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma separated list of semantic versions. |
+| IS ONE OF (Semver)     | True if *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list of semantic versions. |
 | IS NOT ONE OF (Semver) | True if the *Attribute* is not listed in the *Comparison value*.                                                                   |
 | < (Semver)             | True if *Attribute* is a smaller version number than *Comparison value*.                                                           |
 | <= (Semver)            | True if *Attribute* is smaller than or equals *Comparison value*.                                                                  |
@@ -145,7 +145,7 @@ By adding multiple targeting rules you can create more complex rule sets.
 
 #### Example
 
-*Enable a feature only to users within your company except the sales team (Susan and Simon) by adding two targeting rules:*
+*Enable a feature only to users within your company except for the sales team (Susan and Simon) by adding two targeting rules:*
 
 | #   | Attribute | Comparator | Comparison value                           | Served value |
 | --- | --------- | ---------- | ------------------------------------------ | ------------ |
@@ -159,7 +159,7 @@ This value will be served as a fallback if none of the above rules apply or a [`
 
 ## Targeting a percentage of users
 
-With percentage-based user targeting you can specify a randomly selected fraction of your users whom a feature will be enabled or a different value will be served.
+With percentage-based user targeting, you can specify a randomly selected fraction of your users whom a feature will be enabled or a different value will be served.
 
 ### Enable feature
 
@@ -192,11 +192,11 @@ The exact value that will be served to the users that fall into that fraction. D
 
 ### On/Off Toggle
 
-When the Setting Kind is On/Off Toggle the number of options must be 2. One for the *On* and one for the *Off* state.
+When the Setting Kind is On/Off Toggle, the number of options must be 2. One for the *On* and one for the *Off* state.
 
 ### Text and Number
 
-When the Setting Kind is *Text*, *Whole Number* or *Decimal Number* the maximum number options depends on your subscription plan. You can add/remove options by clicking the *Actions* icon.
+When the Setting Kind is *Text*, *Whole Number*, or *Decimal Number* the maximum number options depend on your subscription plan. You can add/remove options by clicking the *Actions* icon.
 
 > The sum of all *% values* must be equal to 100.
 
