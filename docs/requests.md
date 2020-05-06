@@ -19,7 +19,7 @@ Check out our <a href="https://configcat.com/architecture" target="_blank">archi
 | **Free**      |      5,000,000 |              ~2 |
 | **Pro**       |     25,000,000 |             ~10 |
 | **Unlimited** |    250,000,000 |            ~100 |
-| **Dedicated** |  5,000,000,000 |           ~2000 |
+| **Dedicated** |      unlimited |      contact us |
 
 > If you hit this limit, we will keep your application up and running. However, you can expect us contacting you on how we can meet your needs.
 
