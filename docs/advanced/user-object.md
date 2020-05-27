@@ -75,6 +75,8 @@ Our recommendation as an identifier:
 ### Custom property usage
 First, you need to pass a User Object to the ConfigCat SDK containing the `custom` property.
 
+> In case **a custom property is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), the corresponding targeting rule **evaluation will be skipped**.
+
 Example:
 ``` javascript
 var userObject = {

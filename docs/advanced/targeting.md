@@ -40,6 +40,7 @@ Any string, number, or comma-separated list. Will be compared to the selected *A
 #### Text comparators
 
 The following comparators assume that *Attribute* and *Comparison value* contain string/text.
+> In case **attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), targeting rule **evaluation will be skipped**.
 
 | Comparator       | Description                                                                                                         |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
