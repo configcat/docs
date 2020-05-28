@@ -32,6 +32,7 @@
     ],
     "Integrations": [
       "integrations/slack",
+      "integrations/jira",
       "integrations/trello",
       "integrations/datadog",
       "integrations/zapier",
