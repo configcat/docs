@@ -3,13 +3,13 @@ id: android
 title: Android (Kotlin)
 ---
 
-> The minimum supported sdk version is 23 (Marshmallow). Java 1.8 or later is required.
+> The minimum supported sdk version is 18 (Jelly Bean). Java 1.8 or later is required.
 
 ```
 android {
     defaultConfig {
         //...
-        minSdkVersion 23
+        minSdkVersion 18
     }
 
     compileOptions {
