@@ -19,7 +19,6 @@ ConfigCat's Zap can notify you about Feature Flags or Settings changes in Config
 
 3. Now click on "Connect a new account..." and search for "ConfigCat"
 
-
 ![zapier_signin](assets/zapier_signin.png)
 
 1. Generate a Public API credential at <a href="https://app.configcat.com/my-account/public-api-credentials" target="_blank">ConfigCat Dashboard</a>. 
@@ -27,7 +26,7 @@ ConfigCat's Zap can notify you about Feature Flags or Settings changes in Config
 
 ![zapier_auth](assets/zapier_auth.png)
 
-1. You should select the [Product](main-concepts/#product) in which you want to get notified about the Feature Flag or Setting value changes and optionally you can filter these notifications by specific [Configs](main-concepts/#config) or [Environments](main-concepts/#environment).
+1. You should select the [Product](../../main-concepts/#product) in which you want to get notified about the Feature Flag or Setting value changes and optionally you can filter these notifications by specific [Configs](../../main-concepts/#config) or [Environments](../../main-concepts/#environment).
 
 ![zapier_customize](assets/zapier_customize.png)
 
