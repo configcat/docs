@@ -19,6 +19,7 @@ ConfigCat's Zap can notify you about Feature Flags or Settings changes in Config
 
 3. Now click on "Connect a new account..." and search for "ConfigCat"
 
+
 ![zapier_signin](assets/zapier_signin.png)
 
 1. Generate a Public API credential at <a href="https://app.configcat.com/my-account/public-api-credentials" target="_blank">ConfigCat Dashboard</a>. 
