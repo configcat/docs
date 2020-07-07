@@ -26,7 +26,7 @@ ConfigCat's Zap can notify you about Feature Flags or Settings changes in Config
 
 ![zapier_auth](assets/zapier_auth.png)
 
-1. You should select the [Product](../main-concepts/#product) in which you want to get notified about the Feature Flag or Setting value changes and optionally you can filter these notifications by specific [Configs](../main-concepts/#config) or [Environments](../main-concepts/#environment).
+1. You should select the [Product](main-concepts/#product) in which you want to get notified about the Feature Flag or Setting value changes and optionally you can filter these notifications by specific [Configs](main-concepts/#config) or [Environments](main-concepts/#environment).
 
 ![zapier_customize](assets/zapier_customize.png)
 
