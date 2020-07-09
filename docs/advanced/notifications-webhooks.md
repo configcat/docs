@@ -16,10 +16,10 @@ ConfigCat will replace the following variables in the request body:
 | Variable                | The values it gets replaced with                                   |
 | ----------------------- | ------------------------------------------------------------------ |
 | **##ConfigName##**      | The name of the Config your setting belongs to                     |
-| **##ConfigId##**        | ID of the Config; never changes                                    |
-| **##EnvironmentName##** | The name of the Environment it has been changed                    |
-| **##EnvironmentId##**   | ID of the Environment; never changes                               |
-| **##URL##**             | A direct link to the Config in the *ConfigCat Dashboard.*          |
+| **##ConfigId##**        | ID of the Config                                                   |
+| **##EnvironmentName##** | The name of the Environment where the Setting value changed        |
+| **##EnvironmentId##**   | ID of the Environment                                              |
+| **##URL##**             | A direct link to the Config in the *ConfigCat Dashboard*           |
 
 ## Testing your Webhook
 1. Change some of your settings in the *ConfigCat Dashboard.* 
