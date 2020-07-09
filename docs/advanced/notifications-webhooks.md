@@ -13,11 +13,13 @@ You can specify a Request body that will be sent as the payload of the HTTP requ
 
 ConfigCat will replace the following variables in the request body:
 
-| Variable                 | The values it gets replaced with                                   |
+| Variable                | The values it gets replaced with                                   |
 | ----------------------- | ------------------------------------------------------------------ |
 | **##ConfigName##**      | The name of the Config your setting belongs to                     |
+| **##ConfigId##**        | ID of the Config; never changes                                    |
 | **##EnvironmentName##** | The name of the Environment it has been changed                    |
-| **##URL##**             | A direct link to the Config in the *ConfigCat Dashboard.* |
+| **##EnvironmentId##**   | ID of the Environment; never changes                               |
+| **##URL##**             | A direct link to the Config in the *ConfigCat Dashboard.*          |
 
 ## Testing your Webhook
 1. Change some of your settings in the *ConfigCat Dashboard.* 
