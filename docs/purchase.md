@@ -1,6 +1,6 @@
 ---
 id: purchase
-title: Plans and Purchase
+title: Plans & Purchase
 ---
 
 
