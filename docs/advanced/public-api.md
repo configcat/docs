@@ -1,7 +1,6 @@
 ---
 id: public-api
 title: Public Management API
-
 ---
 
 To access the ConfigCat platform programmatically. 
