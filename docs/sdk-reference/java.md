@@ -41,6 +41,9 @@ You can safely shut down the client instance and release all associated resource
 client.close()
 ```
 
+### Java compatibility
+The ConfigCat Java SDK is compatible with Java 8 and higher.
+
 ## Creating the *ConfigCat Client*
 *ConfigCat Client* is responsible for:
 - managing the communication between your application and ConfigCat servers.
