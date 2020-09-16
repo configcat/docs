@@ -106,7 +106,7 @@ You can use the following caching options:
     'cache' => new \ConfigCat\Cache\LaravelCache(\Illuminate\Support\Facades\Cache::store()),
   ]);
   ```
-* PSR-6 cache (the example uses the [redis adapter](https://github.com/php-cache/redis-adapter) for PSR-6):
+* PSR-6 cache (e.g. the [redis adapter](https://github.com/php-cache/redis-adapter) for PSR-6):
   ```php
   $client = new \RedisArray(['127.0.0.1:6379', '127.0.0.2:6379']);
   $pool = new RedisCachePool($client);
@@ -115,10 +115,31 @@ You can use the following caching options:
     'cache' => new \ConfigCat\Cache\Psr6Cache($pool),
   ]);
   ```
-* PSR-16 cache (the example uses the [redis adapter](https://github.com/php-cache/redis-adapter) for PSR-6 and the [PSR-6 to PSR-16 cache bridge](https://github.com/php-cache/simple-cache-bridge)):
+  or with the [file system adapter](https://github.com/php-cache/filesystem-adapter):
+  ```php
+  $filesystemAdapter = new League\Flysystem\Adapter\Local(__DIR__.'/');
+  $filesystem = new League\Flysystem\Filesystem($filesystemAdapter);
+  $pool = new Cache\Adapter\Filesystem\FilesystemCachePool($filesystem);
+
+  $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
+    'cache' => new \ConfigCat\Cache\Psr6Cache($pool),
+  ]);
+  ```
+* PSR-16 cache (e.g. the [redis adapter](https://github.com/php-cache/redis-adapter) for PSR-6 and the [PSR-6 to PSR-16 cache bridge](https://github.com/php-cache/simple-cache-bridge)):
   ```php
   $client = new \RedisArray(['127.0.0.1:6379', '127.0.0.2:6379']);
   $pool = new RedisCachePool($client);
+  $simpleCache = new SimpleCacheBridge($pool);
+
+  $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
+    'cache' => new \ConfigCat\Cache\Psr16Cache($simpleCache),
+  ]);
+  ```
+  or with the [file system adapter](https://github.com/php-cache/filesystem-adapter):
+  ```php
+  $filesystemAdapter = new League\Flysystem\Adapter\Local(__DIR__.'/');
+  $filesystem = new League\Flysystem\Filesystem($filesystemAdapter);
+  $pool = new Cache\Adapter\Filesystem\FilesystemCachePool($filesystem);
   $simpleCache = new SimpleCacheBridge($pool);
 
   $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
