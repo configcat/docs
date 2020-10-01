@@ -1,6 +1,6 @@
 ---
 id: organization
-title: Organization & Billing
+title: Organization & Billing Management
 ---
 An *Organization* represents a collection of preferences that are valid for all the *Products* and *Members* who belong to
 an *Organization*. Like billing information, authentication rules or data privacy preferences.

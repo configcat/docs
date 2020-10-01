@@ -7,7 +7,8 @@
       "requests",
       "organization"
     ],
-    "Advanced Guides": [
+    "Guides": [
+      "advanced/data-governance",
       "advanced/targeting",
       "advanced/user-object",
       "advanced/public-api",
