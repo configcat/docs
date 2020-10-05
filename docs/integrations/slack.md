@@ -16,11 +16,11 @@ Get updated via a Slack Channel message when someone changes a feature flag with
 1. You're all set. Go ahead and make some changes on your feature flags then check your Slack Channel for notifications.
 
 ## Un-installation
-### Disconnect
 1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
 1. Click on Slack's DISCONNECT button.
 
-### Remove from slack
+With disconnecting ConfigCat, it stops sending notifications to your selected Slack channel. To manage authorizations or remove the integration completely, please follow the instructions below:
+
 1. Open your Slack App Directory: `<YOUR-WORKSPACE>.slack.com/apps/manage`
 2. Select the `ConfigCat Feature Flags` app.
 3. Select the `Configuration` tab.
