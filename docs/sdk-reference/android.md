@@ -22,7 +22,7 @@ android {
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
 ```
-implementation 'com.configcat:configcat-android-client:5.+'
+implementation 'com.configcat:configcat-android-client:6.+'
 ```
 ### 2. Import the ConfigCat SDK:
 ```kotlin
@@ -65,6 +65,7 @@ val client = ConfigCatClient.newBuilder()
 | Builder options                         | Description                                                                                                                                                                                                 |
 | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `build(<sdkkey>)`                       | **REQUIRED.** Waits for the SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                                     |
+| `dataGovernance(DataGovernance)`                                                      | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](docs/advanced/data-governance.md). Available options: `Global`, `EuOnly`.                                                                            |
 | `baseUrl(string)`                       | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                     |
 | `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                                                                                           |
 | `maxWaitTimeForSyncCallsInSeconds(int)` | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
@@ -204,13 +205,13 @@ You have the option to inject your custom cache implementation into the client. 
 
 ```java
 class MyCustomCache : ConfigCache() {
-    override fun read() : String {
+    override fun read(key: String) : String {
         // here you have to return with the cached value
         // you can access the latest cached value in case
         // of a failure like: super.inMemoryValue()
     }
 
-    override fun write(value: String) {
+    override fun write(key: String, value: String) {
         // here you have to store the new value in the cache
     }
 }
