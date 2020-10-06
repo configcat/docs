@@ -132,10 +132,10 @@ client.GetValueForUserAsync(
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 #### Simple user object creation:
 ```go
-user = configcat.NewUser("435170f4-8a8b-4b67-a723-505ac7cdea92")   
+user = configcat.NewUser("435170f4-8a8b-4b67-a723-505ac7cdea92")
 ```
 ```go
-user = configcat.NewUser("john@example.com")   
+user = configcat.NewUser("john@example.com")
 ```
 
 #### Customized user object creation:
@@ -168,9 +168,9 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
 Use the the `autoPollIntervalInSeconds` option parameter of the `configcat.AutoPoll()` to change the polling interval.
-```go  
+```go
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-SDK-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>",
     configcat.ClientConfig{ Mode: configcat.AutoPoll(time.Second * 120 /* polling interval in seconds */) }
 )
 ```
@@ -178,7 +178,7 @@ You have the option to configure the polling interval and an `configChanged` cal
 ```go
 
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-SDK-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>",
     configcat.ClientConfig{ Mode: configcat.AutoPoll(
         // The auto poll interval
         time.Second * 120,
@@ -196,7 +196,7 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 Use the `cacheRefreshIntervalInSeconds` parameter of the `configcat.LazyLoad()` to set cache lifetime.
 ```go
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-SDK-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>",
     configcat.ClientConfig{ Mode: configcat.LazyLoad(
         time.Second * 120, // polling interval in seconds
         true // the refresh will be executed asynchronously
@@ -211,7 +211,7 @@ client := configcat.NewCustomClient(
 Manual polling gives you full control over when the setting values are downloaded. ConfigCat SDK will not update them automatically. Calling `Refresh()` is your application's responsibility.
 ```go
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-SDK-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>",
     configcat.ClientConfig{ Mode: configcat.ManualPoll() }
 )
 
@@ -236,7 +236,7 @@ func (cache *CustomCache) Set(value string) error {
 Then use your custom cache implementation:
 ```go
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-SDK-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>",
     configcat.ClientConfig{ Cache: CustomCache{} }
 )
 ```
@@ -249,11 +249,11 @@ which will initiate a new fetch and will update the local cache.
 You can use the `Transport` config option to set up http transport related (like proxy) settings for the http client used by the SDK:
 ```go
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-SDK-KEY-HERE>", 
-    configcat.ClientConfig{ 
+    "<PLACE-YOUR-SDK-KEY-HERE>",
+    configcat.ClientConfig{
         Transport: &http.Transport{
 	        Proxy: http.ProxyURL(url.Parse("<PROXY-URL>")),
-        }    
+        }
     }
 )
 ```
@@ -267,7 +267,7 @@ import {
 }
 
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-SDK-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>",
     configcat.ClientConfig{ Logger: logrus.New() }
 )
 ```
@@ -284,7 +284,7 @@ logger := logrus.New()
 logger.SetLevel(logrus.InfoLevel)
 
 client := configcat.NewCustomClient(
-    "<PLACE-YOUR-SDK-KEY-HERE>", 
+    "<PLACE-YOUR-SDK-KEY-HERE>",
     configcat.ClientConfig{ Logger: logger }
 )
 ```
@@ -300,9 +300,9 @@ Available log levels:
 Info level logging helps to inspect the feature flag evaluation process:
 ```bash
 ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
-INFO[0000] Evaluating rule: [Email:] [CONTAINS] [@something.com] => no match 
-INFO[0000] Evaluating rule: [Email:] [CONTAINS] [@example.com] => no match 
-INFO[0000] Returning false.   
+INFO[0000] Evaluating rule: [Email:] [CONTAINS] [@something.com] => no match
+INFO[0000] Evaluating rule: [Email:] [CONTAINS] [@example.com] => no match
+INFO[0000] Returning false.
 ```
 
 ## Sample Applications
