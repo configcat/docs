@@ -248,13 +248,14 @@ which will initiate a new fetch and will update the local cache.
 ## HTTP Proxy
 You can use the `Transport` config option to set up http transport related (like proxy) settings for the http client used by the SDK:
 ```go
+proxyURL, _ := url.Parse("<PROXY-URL>")
 client := configcat.NewCustomClient(
     "<PLACE-YOUR-SDK-KEY-HERE>",
     configcat.ClientConfig{
         Transport: &http.Transport{
-	        Proxy: http.ProxyURL(url.Parse("<PROXY-URL>")),
-        }
-    }
+	        Proxy: http.ProxyURL(proxyURL),
+        },
+    },
 )
 ```
 
