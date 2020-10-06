@@ -10,12 +10,12 @@ Maven:
 <dependency>
   <groupId>com.configcat</groupId>
   <artifactId>configcat-java-client</artifactId>
-  <version>[5.0.0,)</version>
+  <version>[6.0.0,)</version>
 </dependency>
 ```
 Gradle:
 ```bash
-compile group: 'com.configcat', name: 'configcat-java-client', version: '5.+'
+compile group: 'com.configcat', name: 'configcat-java-client', version: '6.+'
 ```
 ### 2. Import the ConfigCat SDK:
 ```java
@@ -61,6 +61,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 | Builder options                         | Description                                                                                                                                                                                                 |
 | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `build(<sdkkey>)`                       | **REQUIRED.** Waits for the SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                                     |
+| `dataGovernance(DataGovernance)`                                                      | Optional, defaults to `Global`. Set this parameter to be in sync with the Data Governance preference on the [Dashboard](https://app.configcat.com/organization/data-governance). (Only Organization Admins have access)                                                                            |
 | `baseUrl(string)`                       | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                     |
 | `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                                                                                           |
 | `maxWaitTimeForSyncCallsInSeconds(int)` | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
@@ -203,14 +204,14 @@ You have the option to inject your custom cache implementation into the client. 
 public class MyCustomCache extends ConfigCache {
     
     @Override
-    public String read() {
+    public String read(String key) {
         // here you have to return with the cached value
         // you can access the latest cached value in case 
         // of a failure like: super.inMemoryValue();
     }
 
     @Override
-    public void write(String value) {
+    public void write(String key, String value) {
         // here you have to store the new value in the cache
     }
 }
