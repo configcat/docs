@@ -1,6 +1,6 @@
 ---
 id: requests
-title: Requests
+title: What is a Request?
 ---
 
 A request is counted every time your application downloads a configuration file from the ConfigCat
