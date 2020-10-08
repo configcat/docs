@@ -43,6 +43,7 @@ configcat_client.stop()
 | Properties | Description                                                                                                        |
 | ---------- | ------------------------------------------------------------------------------------------------------------------ |
 | `sdk-key`  | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `data_governance`  | Optional, defaults to `DataGovernance.Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](docs/advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
 
 `create_client_with_auto_poll()`, `create_client_with_lazy_load()`, `create_client_with_manual_poll()`  
 Creating the client is different for each polling mode.
@@ -124,13 +125,13 @@ Use a custom `config_cache_class` option parameter.
 from configcatclient.interfaces import ConfigCache
 class InMemoryConfigCache(ConfigCache):
     def __init__(self):
-        self._value = None
+        self._value = {}
 
-    def get(self):
-        return self._value
+    def get(self, key):
+        return self._value.get(key)
 
-    def set(self, value):
-        self._value = value
+    def set(self, key, value):
+        self._value[key] = value
 
 configcatclient.create_client_with_lazy_load("#YOUR-SDK-KEY#", config_cache_class=InMemoryConfigCache);
 ```

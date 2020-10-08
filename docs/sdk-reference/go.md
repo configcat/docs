@@ -5,11 +5,11 @@ title: Go
 ## Getting Started:
 ### 1. Get the SDK with `go`
 ```bash
-go get github.com/configcat/go-sdk/v4
+go get github.com/configcat/go-sdk/v6
 ```
 ### 2. Import the ConfigCat package
 ```go
-import "github.com/configcat/go-sdk/v4"
+import "github.com/configcat/go-sdk/v6"
 ```
 ### 3. Create the *ConfigCat* client with your *SDK Key*
 ```go
@@ -52,6 +52,7 @@ client.Close()
 Available configuration options:
 | Properties                | Type                                             | Description                                                                                                                                                                                                       |
 | ------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DataGovernance`                 | configcat.DataGovernance                                           | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](docs/advanced/data-governance.md). Available options: `Global`, `EuOnly`.                                                                                     |
 | `BaseUrl`                 | string                                           | *Obsolete* Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                     |
 | `Cache `                  | ConfigCache                                      | Sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                                    |
 | `MaxWaitTimeForSyncCalls` | time.Duration                                    | Sets a timeout value for the synchronous methods of the library (`GetValue()`, `GetValueForUser()`, `Refresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
@@ -225,11 +226,11 @@ You have the option to inject your custom cache implementation into the client. 
 type CustomCache struct {
 }
 
-func (cache *CustomCache) Get() (string, error) {
+func (cache *CustomCache) Get(key string) (string, error) {
     // here you have to return with the cached value
 }
 
-func (cache *CustomCache) Set(value string) error {
+func (cache *CustomCache) Set(key string, value string) error {
     // here you have to store the new value in the cache
 }
 ```

@@ -47,6 +47,7 @@ if(isMyAwesomeFeatureEnabled) {
 | Arguments                          | Type                                             | Description                                                                                                                                                                                                 |
 | ---------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sdkKey`                           | string                                           | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                                          |
+| `dataGovernance`                          | DataGovernance                                           | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](docs/advanced/data-governance.md). Available options: `global`, `euOnly`.                                                                     |
 | `baseUrl`                          | string                                           | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                     |
 | `configCache`                      | ConfigCache?                                     | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                    |
 | `maxWaitTimeForSyncCallsInSeconds` | int                                              | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
@@ -189,13 +190,13 @@ client.forceRefresh()
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCache` open class:
 ```swift
 public class MyCustomCache : ConfigCache {
-    open override func read() throws -> String {
+    public func read(key: String) throws -> String {
         // here you have to return with the cached value
         // you can access the latest cached value in case 
         // of a failure like: super.inMemoryValue
     }
     
-    open override func write(value: String) throws {
+    public func write(key: String, value: String) throws {
         // here you have to store the new value in the cache
     }
 }
