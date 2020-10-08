@@ -30,19 +30,19 @@ if(is_bool($isMyAwesomeFeatureEnabled) && $isMyAwesomeFeatureEnabled) {
 - serving values quickly in a failsafe way.
 
 Constructor parameters:
-| Name      | Type     | Description                                                                                                        |
-| --------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| Name      | Type     | Description                                                                                               |
+| --------- | -------- | --------------------------------------------------------------------------------------------------------- |
 | `sdkKey`  | `string` | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
-| `options` | `array`  | **Optional.** Additional configuration options, see below for the detailed list.                                   |
+| `options` | `array`  | **Optional.** Additional configuration options, see below for the detailed list.                          |
 
 Available configuration options:
-| Name                     | Type                          | Description                                                                                                                                                                                                                |
-| ------------------------ | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data-governance`                  | `int` | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](docs/advanced/data-governance.md). Available options: `GLOBAL_`, `EU_ONLY`.       |
-| `logger`                 | `Psr\Log\LoggerInterface`     | Configures a logger for errors and warnings produced by the SDK, defaults to `Psr\Log\NullLogger`.                                                                                                                         |
-| `cache`                  | `ConfigCat\Cache\ConfigCache` | Sets a `ConfigCat\Cache\ConfigCache` implementation for caching the actual configurations. You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache).       |
-| `cache-refresh-interval` | `int`                         | Sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a new configuration fetch request. Defaults to 60. |
-| `request-options`        | `array`                       | Sets the options for the request initiated by the`Guzzle` HTTP client.                                                                                                                                                          |
+| Name                     | Type                          | Description                                                                                                                                                                                                                                                                                                            |
+| ------------------------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data-governance`        | `int`                         | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](dadvanced/data-governance.md). Available options: `GLOBAL_`, `EU_ONLY`. |
+| `logger`                 | `Psr\Log\LoggerInterface`     | Configures a logger for errors and warnings produced by the SDK, defaults to `Psr\Log\NullLogger`.                                                                                                                                                                                                                     |
+| `cache`                  | `ConfigCat\Cache\ConfigCache` | Sets a `ConfigCat\Cache\ConfigCache` implementation for caching the actual configurations. You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache).                                                                                                   |
+| `cache-refresh-interval` | `int`                         | Sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a new configuration fetch request. Defaults to 60.                                                                                             |
+| `request-options`        | `array`                       | Sets the options for the request initiated by the`Guzzle` HTTP client.                                                                                                                                                                                                                                                 |
 Example:
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
@@ -55,7 +55,7 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
 ## Anatomy of `getValue()`
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                  |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```php

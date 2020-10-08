@@ -44,7 +44,7 @@ configcat_client.stop()
 | Properties | Description                                                                                               |
 | ---------- | --------------------------------------------------------------------------------------------------------- |
 | `sdk_key`  | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
-| `data_governance`  | Optional, defaults to `DataGovernance::GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](docs/advanced/data-governance.md). Available options: `GLOBAL`, `EU_ONLY`. |
+| `data_governance`  | Optional, defaults to `DataGovernance::GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](dadvanced/data-governance.md). Available options: `GLOBAL`, `EU_ONLY`. |
 
 `create_client_with_auto_poll()`, `create_client_with_lazy_load()`, `create_client_with_manual_poll()`  
 Creating the client is different for each polling mode.

@@ -44,23 +44,23 @@ if(isMyAwesomeFeatureEnabled) {
 - serving values quickly in a failsafe way.
 
 `ConfigCatClient(sdkKey: <sdkKey>)` returns a client with default options.
-| Arguments                          | Type                                             | Description                                                                                                                                                                                                 |
-| ---------------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sdkKey`                           | string                                           | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                                          |
-| `dataGovernance`                          | DataGovernance                                           | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](docs/advanced/data-governance.md). Available options: `global`, `euOnly`.                                                                     |
-| `baseUrl`                          | string                                           | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                     |
-| `configCache`                      | ConfigCache?                                     | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                    |
-| `maxWaitTimeForSyncCallsInSeconds` | int                                              | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value. |
-| `sessionConfiguration`             | URLSessionConfiguration                          | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                                                                                                                   |
-| `refreshMode`                      | PollingMode?                                     | Optional, sets the polling mode for the client. [See below](#polling-modes).                                                                                                          |
+| Arguments                          | Type                    | Description                                                                                                                                                                                                                                                                                         |
+| ---------------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sdkKey`                           | string                  | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                                                                                                                                           |
+| `dataGovernance`                   | DataGovernance          | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](dadvanced/data-governance.md). Available options: `global`, `euOnly`. |
+| `baseUrl`                          | string                  | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                             |
+| `configCache`                      | ConfigCache?            | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                                                                                                            |
+| `maxWaitTimeForSyncCallsInSeconds` | int                     | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value.                                                                                         |
+| `sessionConfiguration`             | URLSessionConfiguration | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                                                                                                                                                                                                           |
+| `refreshMode`                      | PollingMode?            | Optional, sets the polling mode for the client. [See below](#polling-modes).                                                                                                                                                                                                                        |
 
 > We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
 
 ## Anatomy of `getValue()`
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.        |
-| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                            |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```swift
 let value = client.getValue(
@@ -73,10 +73,10 @@ let value = client.getValue(
 ## Anatomy of `getValueAsync()`
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.        |
-| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                            |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
-| `completion`   | **REQUIRED.** Callback function to call, when the result is ready.                        |
+| `completion`   | **REQUIRED.** Callback function to call, when the result is ready.                                           |
 
 ```swift
 client.getValueAsync(
