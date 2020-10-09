@@ -72,6 +72,8 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 | Properties | Description                                                                                               |
 | ---------- | --------------------------------------------------------------------------------------------------------- |
 | `sdkKey`   | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| `logger`           | Custom logger. See below for details.                                                                                      | Console logger |
+| `dataGovernance` | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
 
 `createClientWithAutoPoll()`, `createClientWithLazyLoad()`, `createClientWithManualPoll()`  
 Creating the client is different for each polling mode.
@@ -174,6 +176,7 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 | `configChanged`       | Callback to get notified about changes.                                                                                    | -              |
 | `logger`              | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
+| `dataGovernance`      | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
 ```js
@@ -197,6 +200,7 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 | `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                            | 60             |
 | `logger`                 | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
+| `dataGovernance`      | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
@@ -213,6 +217,7 @@ Manual polling gives you full control over when the setting values are downloade
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
 | `logger`           | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
+| `dataGovernance`      | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
 
 ```js
 let configCatClient = configcat.createClientWithManualPoll("#YOUR-SDK-KEY#");
