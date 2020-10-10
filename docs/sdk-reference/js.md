@@ -70,9 +70,9 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 `createClient(sdkKey, options)` returns a client with default options.
 
 | Properties | Description                                                                                               | Default |
-| ---------- | --------------------------------------------------------------------------------------------------------- |
+| ---------- | --------------------------------------------------------------------------------------------------------- | --- |
 | `sdkKey`   | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. | - |
-| `options`  | Optional. [More about the options parameter](#auto-polling-default) | - |
+| `options`  | Optional. [More about the options parameter](#auto-polling-default). | - |
 
 `createClientWithAutoPoll()`, `createClientWithLazyLoad()`, `createClientWithManualPoll()`  
 Creating the client is different for each polling mode.
