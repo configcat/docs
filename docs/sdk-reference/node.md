@@ -56,13 +56,12 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
-`createClient()` returns a client with default options.
+`createClient(sdkKey, options)` returns a client with default options.
 
 | Parameters | Description                                                                                               | Default |
 | ---------- | --------------------------------------------------------------------------------------------------------- | ------- |
 | `sdkKey`   | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. | - |
-| `logger`           | Custom logger. See below for details.                                                                                      | Console logger |
-| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
+| `options`  | Optional. [More about the options parameter](#auto-polling-default) | - |
 
 `createClientWithAutoPoll()`, `createClientWithLazyLoad()`, `createClientWithManualPoll()`  
 Creating the client is different for each polling mode.
