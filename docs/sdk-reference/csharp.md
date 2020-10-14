@@ -51,6 +51,7 @@ client.Dispose();
 | `ConfigCache`       | IConfigCache instance for cache the config.                                                               | InMemoryConfigCache                |
 | `Logger`            | ILogger instance for tracing.                                                                             | ConsoleLogger (with WARNING level) |
 | `HttpClientHandler` | HttpClientHandler to provide network credentials and proxy settings                                       | built-in HttpClientHandler         |
+| `DataGovernance`    | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly` | Global                             |
 
 
 

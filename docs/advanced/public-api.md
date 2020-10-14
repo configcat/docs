@@ -78,7 +78,7 @@ if you have different requirements.
 Sample request on how to get all your **Products**.
 
 #### Endpoint
-```GET https://api.configcat.com/v1/products``
+```GET https://api.configcat.com/v1/products```
 
 [Detailed list of available endpoints](https://api.configcat.com/docs)
 #### Request - cURL

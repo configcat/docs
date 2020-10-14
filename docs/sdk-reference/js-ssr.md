@@ -52,11 +52,12 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
-`createClient()` returns a client with default options.
+`createClient(sdkKey, options)` returns a client with default options.
 
-| Properties | Description                                                                                               |
-| ---------- | --------------------------------------------------------------------------------------------------------- |
-| `sdkKey`   | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
+| Properties | Description                                                                                               | Default |
+| ---------- | --------------------------------------------------------------------------------------------------------- | ------- |
+| `sdkKey`   | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. | - |
+| `options`  | Optional. [More about the options parameter](#auto-polling-default). | - |
 
 `createClientWithAutoPoll()`, `createClientWithLazyLoad()`, `createClientWithManualPoll()`  
 Creating the client is different for each polling mode.
@@ -159,6 +160,7 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 | `configChanged`       | Callback to get notified about changes.                                                                                    | -              |
 | `logger`              | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
+| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
 ```js
@@ -182,6 +184,7 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 | `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                            | 60             |
 | `logger`                 | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
+| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
@@ -198,6 +201,7 @@ Manual polling gives you full control over when the setting values are downloade
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
 | `logger`           | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
+| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
 
 ```js
 let configCatClient = configcat.createClientWithManualPoll("#YOUR-SDK-KEY#");
