@@ -132,7 +132,7 @@ Available options:
 | Option Parameter          | Description                                                                                          | Default |
 | ------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
 | `PollIntervalSeconds`     | Polling interval.                                                                                    | 60      |
-| `MaxInitWaitTimeSeconds ` | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
+| `MaxInitWaitTimeSeconds ` | Maximum waiting time between the client initialization and the first config acquisition in seconds.  | 5       |
 
 ### Lazy loading
 When calling `GetValue()` or `GetValueAsync()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `GetValue())` or `GetValueAsync()` will return the setting value after the cache is updated.
