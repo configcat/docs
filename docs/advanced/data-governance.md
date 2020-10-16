@@ -45,7 +45,7 @@ in your application code when it is being initialized.
 ## Troubleshooting
 
 #### What if I forgot to pass the `dataGovernance` parameter?
-The ConfigCat backend will take the Dashboard preference as primary. Having `EU Only` selected on the Dashboard but forgot to pass the proper `dataGovernance` parameter to the SDK. In this case your config JSONs will only published to the EU CDN nodes. And every request is being made from your application to any node outside the EU, the request will be redirected automatically to the EU CDN. Recommended to deploy a fix with thr correct `dataGovernance` param, since response times will be significantly longer.
+The ConfigCat backend will take the Dashboard preference as primary. Having `EU Only` selected on the Dashboard but forgot to pass the proper `dataGovernance` parameter to the SDK. In this case your config JSONs will only published to the EU CDN nodes. And every request is being made from your application to any node outside the EU, the request will be redirected automatically to the EU CDN. Recommended to deploy a fix with the correct `dataGovernance` param, since response times will be significantly longer.
 
 #### `Warning: Your dataGovernance parameter at ConfigCatClient initialization is not in sync with your preferences...`
 **You worry do not.** Your feature flags are served. See above example.
