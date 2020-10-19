@@ -3,7 +3,7 @@ id: csharp
 title: .NET, .NET Core
 ---
 ## Getting started:
-### 1. Install *ConfigCat SDK* <a href="https://www.nuget.org/packages/ConfigCat.Client" target="_blank">Nuget</a> package
+### 1. Install *ConfigCat SDK* [Nuget](https://www.nuget.org/packages/ConfigCat.Client) package
 ```powershell
 Install-Package ConfigCat.Client
 ```
