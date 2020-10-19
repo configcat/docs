@@ -39,7 +39,8 @@
       "integrations/datadog",
       "integrations/zapier",
       "integrations/github",
-      "integrations/circleci"
+      "integrations/circleci",
+      "integrations/terraform"
     ],
     "Service": [
       "service/status"
