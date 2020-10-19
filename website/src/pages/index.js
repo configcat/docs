@@ -125,7 +125,7 @@ function Home() {
               Get Started
             </Link>
           </div>
-          {/* <img className={styles.heroImage} src={useBaseUrl('img/docs.svg')} alt="" /> */}
+          <img className={styles.heroImage} src={useBaseUrl('img/docs.svg')} alt="" />
         </div>
       </header>
       <main>
