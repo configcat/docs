@@ -25,6 +25,22 @@ const features = [
     ]
   },
   {
+    title: 'Guides',
+    description: (
+      <>
+        TODO
+      </>
+    ),
+    links:[
+      { url: "advanced/data-governance", title: "Data Governance - CDN" },
+      { url: "advanced/targeting", title: "Targeting" },
+      { url: "advanced/user-object", title: "The User Object" },
+      { url: "advanced/public-api", title: "Public Management API" },
+      { url: "advanced/team-collaboration", title: "Team Collaboration" },
+      { url: "advanced/notifications-webhooks", title: "Notifications - Webhooks" }
+    ]
+  },
+  {
     title: 'SDK references',
     description: (
       <>
@@ -50,8 +66,7 @@ const features = [
     title: 'Integrations',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        TODO
       </>
     ),
     links: [
@@ -70,7 +85,7 @@ const features = [
 function Feature({ imageUrl, title, description, links }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={clsx('col col--4', styles.feature)}>
+    <div className={clsx('col col--3', styles.feature)}>
       {imgUrl && (
         <div className="text--center">
           <img className={styles.featureImage} src={imgUrl} alt={title} />
@@ -97,8 +112,8 @@ function Home() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`${siteConfig.title}`}
+      description="ConfigCat is a cloud-based service that lets you release a feature without needing to deploy new code. You can use it with many similar techniques such as feature flags/toggles, canary releases, soft launches, A-B testing, remote configuration management, and phased rollouts.">
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
