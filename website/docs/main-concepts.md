@@ -5,9 +5,9 @@ title: Main Concepts
 ## Feature Flag or Setting
 A *Setting* is an essential bit of *ConfigCat*. It can be of multiple types like on/off switch (bool), number (int, double) or any text (string) your application requires to be modified without the need of a new deployment.
 
-A *Feature Flag* is usally a *Setting* of type Bool.
+A *Feature Flag* is a *Setting* of type Bool.
 
-### Anatomy of a *Setting*
+### Anatomy of a *Feature Flag* or *Setting*
 Properties|Description
 ---|---
 Name|A human readable name that differentiates the *Setting* on the *ConfigCat Dashboard*. e.g., `My Cool Feature enabled`.
@@ -18,7 +18,7 @@ Value|The actual value of your *Setting*. e.g., `true`, `false`. Can be differen
 ### About *Setting* types:
 Setting Kind|Setting Type|Description
 ---|---|---
-On/Off Toggle|Boolean|true/false, usually the state of a feature flag
+On/Off Toggle|Boolean|true/false, usually referenced as Feature Flag, Feature Toggle or Feature switch.
 Text|String|any string, max. 65535 characters
 Whole Number|Integer|any whole number within the range of `Int32`
 Decimal Number|Double|any decimal number within the range of `double`
