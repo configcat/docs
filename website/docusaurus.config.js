@@ -93,6 +93,11 @@ module.exports = {
     prism: {
       additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby'],
     },
+    algolia: {
+      apiKey: '36b9ea4801b9b88e1e8fa2e42d3cc705',
+      indexName: 'configcat',
+      searchParameters: {}
+  },
   },
   presets: [
     [
