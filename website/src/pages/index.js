@@ -46,7 +46,7 @@ const features = [
       </>
     ),
     links: [
-      { url: "sdk-reference/csharp", title: ".NET (C#)" },
+      { url: "sdk-reference/csharp", title: ".NET, .NET Core" },
       { url: "sdk-reference/java", title: "Java" },
       { url: "sdk-reference/js", title: "JavaScript" },
       { url: "sdk-reference/js-ssr", title: "JavaScript (SSR)" },

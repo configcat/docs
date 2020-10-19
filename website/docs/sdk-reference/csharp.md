@@ -1,6 +1,6 @@
 ---
 id: csharp
-title: .NET (C#)
+title: .NET, .NET Core
 ---
 ## Getting started:
 ### 1. Install *ConfigCat SDK* [Nuget](https://www.nuget.org/packages/ConfigCat.Client) package
