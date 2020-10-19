@@ -11,9 +11,7 @@ const features = [
     title: 'Getting started',
     description: (
       <>
-        <strong>ConfigCat</strong> is a cloud-based service that lets you release a feature without needing to deploy new code.
-        <br/>
-        You can use it with many similar techniques such as feature flags/toggles, canary releases, soft launches, A-B testing, remote configuration management, and phased rollouts.
+      Familiarize with ConfigCat basics.
       </>
     ),
     links:[
@@ -28,7 +26,7 @@ const features = [
     title: 'Guides',
     description: (
       <>
-        TODO
+        Get the most out of your feature flags.
       </>
     ),
     links:[
@@ -44,8 +42,7 @@ const features = [
     title: 'SDK references',
     description: (
       <>
-       The purpose of the SDKs are to download, cache feature flag values and to evaluate targeting rules. 
-       All SDKs provide a simple interface to access your feature flags from your application.
+      Let's do some coding.
       </>
     ),
     links: [
@@ -66,7 +63,7 @@ const features = [
     title: 'Integrations',
     description: (
       <>
-        TODO
+        Get connected to increase productivity.
       </>
     ),
     links: [
@@ -128,7 +125,7 @@ function Home() {
               Get Started
             </Link>
           </div>
-          <img className={styles.heroImage} src={useBaseUrl('img/docs.svg')} alt="" />
+          {/* <img className={styles.heroImage} src={useBaseUrl('img/docs.svg')} alt="" /> */}
         </div>
       </header>
       <main>

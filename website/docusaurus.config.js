@@ -1,6 +1,6 @@
 module.exports = {
   title: 'ConfigCat Docs',
-  tagline: 'Documentation regarding the ConfigCat website and SDKs',
+  tagline: 'Learn more on how to use ConfigCat Feature Flags!',
   url: 'https://configcat.com',
   baseUrl: '/docs/',
   onBrokenLinks: 'throw',
