@@ -2,8 +2,11 @@
 id: main-concepts
 title: Main Concepts 
 ---
-## Setting
-A *Setting* is an essential bit of *ConfigCat*. It can represent a feature flag/toggle, a number or any text your application requires to be modified without the need of a new deployment.
+## Feature Flag or Setting
+A *Setting* is an essential bit of *ConfigCat*. It can be of multiple types like on/off switch (bool), number (int, double) or any text (string) your application requires to be modified without the need of a new deployment.
+
+A *Feature Flag* is usally a *Setting* of type Bool.
+
 ### Anatomy of a *Setting*
 Properties|Description
 ---|---
@@ -31,3 +34,7 @@ Each environment-config pair has its own SDK Key which must be used to initializ
 
 ## Product
 A collection of *Configs*, *Environments* and *Team members*. A *Product* typically represents your application (or your service) and the people working on it. It might be a good idea to invite others to your *Product* to collaborate.
+
+## Organization
+An *Organization* represents a collection of preferences that are valid for all the *Products* and *Members* who belong to
+an *Organization*. Like billing information, authentication rules or data privacy preferences.
