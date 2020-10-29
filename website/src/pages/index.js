@@ -75,6 +75,7 @@ const features = [
       { url: "integrations/github", title: "GitHub Action" },
       { url: "integrations/circleci", title: "CircleCI Orb" },
       { url: "integrations/terraform", title: "Terraform" },
+      { url: "integrations/amplitude", title: "Amplitude" },
     ]
   },
 ];

@@ -40,7 +40,8 @@ module.exports = {
       "integrations/zapier",
       "integrations/github",
       "integrations/circleci",
-      "integrations/terraform"
+      "integrations/terraform",
+      "integrations/amplitude"
     ],
     "Service": [
       "service/status"
