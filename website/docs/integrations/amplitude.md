@@ -5,7 +5,7 @@ title: Amplitude
 
 ## Overview
 
-Every setting change in ConfigCat is shown in Amplitude on the charts as a horizontal line and some details are added automatically about the change.
+Every setting change in ConfigCat is annotated on the Amplitude charts as a vertical line and some details are added automatically about the change.
 
 ![amplitude_chart](/assets/amplitude_chart.png)
 
