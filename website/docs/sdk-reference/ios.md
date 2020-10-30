@@ -29,7 +29,7 @@ let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>")
 ```
 ### 4. Get your setting value
 ```swift
-let isMyAwesomeFeatureEnabled = client.getValue(for: "key-of-my-awesome-feature", defaultValue: false, user: user)
+let isMyAwesomeFeatureEnabled = client.getValue(for: "key-of-my-awesome-feature", defaultValue: false)
 if(isMyAwesomeFeatureEnabled) {
     doTheNewThing()
 } else {
@@ -68,7 +68,7 @@ We strongly recommend you to use the ConfigCatClient as a Singleton object in yo
 let value = client.getValue(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
-    user: User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
 )
 ```
 
@@ -84,7 +84,7 @@ let value = client.getValue(
 client.getValueAsync(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
-    user: User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
 ) { isMyAwesomeFeatureEnabled in
     if(isMyAwesomeFeatureEnabled) {
         doTheNewThing()
@@ -97,10 +97,10 @@ client.getValueAsync(
 ### User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ```swift
-let user = User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92")   
+let user = ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92")   
 ```
 ```swift
-let user = User(identifier: "john@example.com")   
+let user = ConfigCatUser(identifier: "john@example.com")   
 ```
 | Arguments    | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -109,7 +109,7 @@ let user = User(identifier: "john@example.com")
 | `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
 | `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 ```swift
-let user = User(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
+let user = ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
     email: "john@example.com", 
     country: "United Kingdom", 
     custom: ["SubscriptionType":"Pro", "UserRole":"Admin"])
