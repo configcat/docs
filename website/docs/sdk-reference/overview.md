@@ -2,10 +2,10 @@
 id: overview
 title: Overview
 ---
-The purpose of the SDKs are to download, cache feature flag values and to evaluate targeting rules. All SDKs provide a simple interface to access your feature flags from your application. 
+The purpose of the SDKs are to download, cache feature flag values and to evaluate targeting rules. All SDKs provide a simple interface to access your feature flags from your application.
 
 Check out our language specific<a href="https://app.configcat.com/sdkkey" target="_blank"> Getting Started Guide</a> on how to connect your applications.
-  
+
 ### .NET, .NET Core
 - [Documentation](sdk-reference/csharp.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">GitHub repository of the ConfigCat .NET SDK.</a>
@@ -39,5 +39,8 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ### Ruby
 - [Documentation](sdk-reference/ruby.md) on how to connect your application.
 - <a href="https://github.com/configcat/ruby-sdk" target="_blank">GitHub repository of the ConfigCat Ruby SDK.</a>
+### Elixir
+- [Documentation](sdk-reference/elixir.md) on how to connect your application.
+- <a href="https://github.com/configcat/elixir-sdk" target="_blank">GitHub repository of the ConfigCat Elixir SDK.</a>
 ### Deno (Community maintained)
 - <a href="https://github.com/sigewuzhere/configcat-deno" target="_blank">GitHub repository of the ConfigCat Deno SDK.</a>
