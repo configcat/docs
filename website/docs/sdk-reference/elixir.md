@@ -127,7 +127,7 @@ Available options:
 | Option Parameter                    | Description                                                                                          | Default |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
 | `poll_interval_seconds`             | Polling interval.                                                                                    | 60      |
-| `on_changed` | A 0-arity function to be called about configuration changes. Nees to run on a separate proccess. Any exceptions raised by `on_changed` are caught and logged. | -       |
+| `on_changed` | A 0-arity function to be called about configuration changes. Needs to run on a separate proccess. Any exceptions raised by `on_changed` are caught and logged. | -       |
 
 ### Lazy loading
 
