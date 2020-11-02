@@ -53,7 +53,7 @@ end
 | ---------- | --------------------------------------------------------------------------------------------------------- |
 | `sdk_key`  | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 | `data_governance`  | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](advanced/data-governance.md). Available options: `:global`, `:eu_only`. |
-| `cache_policy` | `CachePolicy.auto/1`, `CachePolicy.auto/1` and `CachePolicy.auto/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details. |
+| `cache_policy` | `CachePolicy.auto/1`, `CachePolicy.lazy/1` and `CachePolicy.manual/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details. |
 | `cache` | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`. |
 | `http_proxy` | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`. |
 | `name` | A unique identifier for this instance of `ConfigCat`. Defaults to `ConfigCat`.  Must be provided if you need to run more than one instance of `ConfigCat` in the same application. If you provide a `name`, you must then pass that name to all of the API functions using the `client` option. |
