@@ -28,6 +28,7 @@ end
 ```
 
 ### 4. Get your setting value
+
 ```elixir
 isMyAwesomeFeatureEnabled = ConfigCat.get_value("isMyAwesomeFeatureEnabled", false)
 if isMyAwesomeFeatureEnabled do
@@ -48,10 +49,11 @@ end
 | Properties | Description                                                                                               |
 | ---------- | --------------------------------------------------------------------------------------------------------- |
 | `sdk_key`  | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
-| `data_governance`  | Optional, defaults to `ConfigCat.DataGovernance.global()`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.global()`, `DataGovernance.eu_only()`. |
-| `cache_policy` | `CachePolicy.Auto()`, `CachePolicy.Lazy()` and `CachePolicy.Manual()`. Defaults to: `CachePolicy.Auto()` See [See below](#polling-modes) for details. |
+| `data_governance`  | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](advanced/data-governance.md). Available options: `:global`, `:eu_only`. |
+| `cache_policy` | `CachePolicy.auto/1`, `CachePolicy.auto/1` and `CachePolicy.auto/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details. |
 | `cache` | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`. |
-
+| `http_proxy` | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`. |
+| `name` | A unique identifier for this instance of `ConfigCat`. Defaults to `ConfigCat`.  Must be provided if you need to run more than one instance of `ConfigCat` in the same application. If you provide a `name`, you must then pass that name to all of the API functions using the `client` option. |
 
 
 ## Anatomy of `get_value()`
@@ -61,6 +63,7 @@ end
 | `key`           | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`          | Optional, *ConfigCat.User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name you configured for the instance you want to access. |
 ```elixir
 value = ConfigCat.get_value(
     "keyOfMySetting", # Setting Key
@@ -70,6 +73,7 @@ value = ConfigCat.get_value(
 ```
 
 ### User Object
+
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 ```elixir
 user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92")
@@ -90,23 +94,25 @@ user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92", email: 
 ```
 
 ## Polling Modes
+
 The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all requests are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 
 ### Auto polling (default)
+
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
 Use the `poll_interval_seconds` option parameter to change the polling interval.
 ```elixir
 {ConfigCat, [
     sdk_key: "YOUR SDK KEY",
-    cache_policy: ConfigCat.CachePolicy.auto(poll_interval_seconds: 60)
+    cache_policy: CachePolicy.auto(poll_interval_seconds: 60)
 ]},
 ```
 Adding a callback to `on_changed` option parameter will get you notified about changes.
 ```elixir
 {ConfigCat, [
     sdk_key: "YOUR SDK KEY",
-    cache_policy: ConfigCat.CachePolicy.Auto(on_changed: callback)
+    cache_policy: CachePolicy.auto(on_changed: callback/0)
 ]}
 ```
 
@@ -115,16 +121,17 @@ Available options:
 | Option Parameter                    | Description                                                                                          | Default |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
 | `poll_interval_seconds`             | Polling interval.                                                                                    | 60      |
-| `on_changed` | Callback function to be called about configuration changes.                                                              | -       |
+| `on_changed` | A 0-arity function to be called about configuration changes. Nees to run on a separate proccess. Any exceptions raised by `on_changed` are caught and logged. | -       |
 
 ### Lazy loading
+
 When calling `get_value()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
 
 Use `cache_expiry_seconds` option parameter to set cache lifetime.
 ```elixir
 {ConfigCat, [
     sdk_key: "YOUR SDK KEY",
-    cache_policy: ConfigCat.CachePolicy.Lazy(cache_expiry_seconds: 300)
+    cache_policy: CachePolicy.lazy(cache_expiry_seconds: 300)
 ]}
 ```
 
@@ -135,6 +142,7 @@ Available options:
 | `cache_expiry_seconds` | Cache TTL.                                                                                    | 60      |
 
 ### Manual polling
+
 Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```elixir
@@ -149,7 +157,8 @@ value = ConfigCat.get_value("key", "my default value") # Returns "value from ser
 ```
 
 ### Custom cache behaviour with `cache:` option parameter.
-To be able to customize the caching layer behaviour you need to implement the following interface:
+
+To be able to customize the caching layer you need to implement the following behaviour:
 ```elixir
 defmodule ConfigCat.ConfigCache do
   alias ConfigCat.Config
@@ -160,62 +169,37 @@ defmodule ConfigCat.ConfigCache do
   @callback get(key) :: {:ok, Config.t()} | {:error, :not_found}
   @callback set(key, Config.t()) :: :ok
 end
-
 ```
 
-At the moment, this is how the current `InMemoryCache` looks like:
+* You must implement (either explicitly or implicitly) the ConfigCache behaviour
+* It is the responsibility of the calling application to supervise the cache if it needs to be supervised.
+
+### Multiple `ConfigCat` instances.
+
+If you need to run more than one instance of `ConfigCat`, you can add multiple
+`ConfigCat` children. You will need to give `ConfigCat` a unique `name` option
+for each, as well as using `Supervisor.child_spec/2` to provide a unique `id`
+for each instance.
+
 ```elixir
-defmodule ConfigCat.InMemoryCache do
-  use GenServer
-
-  alias ConfigCat.ConfigCache
-  @behaviour ConfigCache
-
-  @spec start_link(options()) :: GenServer.on_start()
-  def start_link(options) do
-    name =
-      options
-      |> Keyword.fetch!(:cache_key)
-      |> name_from_cache_key()
-
-    GenServer.start_link(__MODULE__, :empty, name: name)
-  end
-
-  @impl ConfigCache
-  def get(cache_key) do
-    GenServer.call(name_from_cache_key(cache_key), :get)
-  end
-
-  @impl ConfigCache
-  def set(cache_key, value) do
-    GenServer.call(name_from_cache_key(cache_key), {:set, value})
-  end
-
-  defp name_from_cache_key(cache_key) do
-    String.to_atom(cache_key)
-  end
-
-  @impl GenServer
-  def init(state) do
-    {:ok, state}
-  end
-
-  @impl GenServer
-  def handle_call(:get, _from, :empty = state) do
-    {:reply, {:error, :not_found}, state}
-  end
-
-  @impl GenServer
-  def handle_call(:get, _from, state) do
-    {:reply, {:ok, state}, state}
-  end
-
-  @impl GenServer
-  def handle_call({:set, value}, _from, _state) do
-    {:reply, :ok, value}
-  end
+# lib/my_app/application.ex
+def start(_type, _args) do
+  children = [
+    # ... other children ...
+    Supervisor.child_spec({ConfigCat, [sdk_key: "sdk_key_1", name: :first]}),
+    Supervisor.child_spec({ConfigCat, [sdk_key: "sdk_key_2", name: :second]}),
+  ]
+  opts = [strategy: :one_for_one, name: MyApp.Supervisor]
+  Supervisor.start_link(children, opts)
 end
 ```
+
+Then you can call `.get_value/4` like this:
+```elixir
+ConfigCat.get_value("setting", "default", client: :first)
+ConfigCat.get_value("setting", "default", client: :second)
+```
+
 
 ## Logging
 In the *ConfigCat SDK*, we use the default Elixir's [Logger](https://hexdocs.pm/logger/Logger.html) so you can customise as you like.
@@ -247,5 +231,6 @@ Provide your own network credentials (username/password), and proxy server setti
 - <a href="https://github.com/configcat/elixir-sdk/tree/master/samples/" target="_blank">Sample App</a>
 
 ## Look under the hood
+* <a href="https://hexdocs.pm/configcat" target="_blank">ConfigCat's HexDocs</a>
 * <a href="https://github.com/configcat/elixir-sdk" target="_blank">ConfigCat's Elixir SDK on GitHub</a>
 * <a href="https://hex.pm/packages/configcat" target="_blank">ConfigCat's Elixir SDK on Hex.pm</a>
