@@ -2,8 +2,9 @@
 id: elixir
 title: Elixir
 ---
-## Getting started:
-### 1. Add `configcat` to your list of dependencies in `mix.exs`:
+## Getting started
+
+### 1. Add `configcat` to your list of dependencies in `mix.exs`
 
 ```elixir
 def deps do
@@ -13,7 +14,7 @@ def deps do
 end
 ```
 
-### 2. Add `ConfigCat` to your application Supervisor tree:
+### 2. Add `ConfigCat` to your application Supervisor tree
 
 ```elixir
 def start(_type, _args) do
@@ -27,7 +28,7 @@ def start(_type, _args) do
 end
 ```
 
-### 4. Get your setting value
+### 3. Get your setting value
 
 ```elixir
 isMyAwesomeFeatureEnabled = ConfigCat.get_value("isMyAwesomeFeatureEnabled", false)
@@ -39,7 +40,9 @@ end
 ```
 
 ## Configuring the *ConfigCat Client*
+
 *ConfigCat Client* is responsible for:
+
 - managing the communication between your application and ConfigCat servers.
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
@@ -55,7 +58,6 @@ end
 | `http_proxy` | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`. |
 | `name` | A unique identifier for this instance of `ConfigCat`. Defaults to `ConfigCat`.  Must be provided if you need to run more than one instance of `ConfigCat` in the same application. If you provide a `name`, you must then pass that name to all of the API functions using the `client` option. |
 
-
 ## Anatomy of `get_value()`
 
 | Parameters      | Description                                                                                                  |
@@ -64,6 +66,7 @@ end
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`          | Optional, *ConfigCat.User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 | `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name you configured for the instance you want to access. |
+
 ```elixir
 value = ConfigCat.get_value(
     "keyOfMySetting", # Setting Key
@@ -75,10 +78,9 @@ value = ConfigCat.get_value(
 ### User Object
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+
 ```elixir
 user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92")
-```
-```elixir
 user_object = ConfigCat.User.new("john@example.com")
 ```
 
@@ -88,6 +90,7 @@ user_object = ConfigCat.User.new("john@example.com")
 | `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
 | `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
 | `custom`     | Optional `Map` for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+
 ```elixir
 user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92", email: 'john@example', country: 'United Kingdom',
                 custom: ‰{SubscriptionType: 'Pro', UserRole: 'Admin'})
@@ -102,13 +105,16 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
 Use the `poll_interval_seconds` option parameter to change the polling interval.
+
 ```elixir
 {ConfigCat, [
     sdk_key: "YOUR SDK KEY",
     cache_policy: CachePolicy.auto(poll_interval_seconds: 60)
 ]},
 ```
+
 Adding a callback to `on_changed` option parameter will get you notified about changes.
+
 ```elixir
 {ConfigCat, [
     sdk_key: "YOUR SDK KEY",
@@ -128,6 +134,7 @@ Available options:
 When calling `get_value()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
 
 Use `cache_expiry_seconds` option parameter to set cache lifetime.
+
 ```elixir
 {ConfigCat, [
     sdk_key: "YOUR SDK KEY",
@@ -150,15 +157,17 @@ ConfigCat.force_refresh();
 ```
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
+
 ```elixir
 value = ConfigCat.get_value("key", "my default value") # Returns "my default value"
 ConfigCat.force_refresh();
 value = ConfigCat.get_value("key", "my default value") # Returns "value from server"
 ```
 
-### Custom cache behaviour with `cache:` option parameter.
+### Custom cache behaviour with `cache:` option parameter
 
 To be able to customize the caching layer you need to implement the following behaviour:
+
 ```elixir
 defmodule ConfigCat.ConfigCache do
   alias ConfigCat.Config
@@ -171,10 +180,10 @@ defmodule ConfigCat.ConfigCache do
 end
 ```
 
-* You must implement (either explicitly or implicitly) the ConfigCache behaviour
-* It is the responsibility of the calling application to supervise the cache if it needs to be supervised.
+- You must implement (either explicitly or implicitly) the ConfigCache behaviour
+- It is the responsibility of the calling application to supervise the cache if it needs to be supervised.
 
-### Multiple `ConfigCat` instances.
+### Multiple `ConfigCat` instances
 
 If you need to run more than one instance of `ConfigCat`, you can add multiple
 `ConfigCat` children. You will need to give `ConfigCat` a unique `name` option
@@ -195,12 +204,14 @@ end
 ```
 
 Then you can call `.get_value/4` like this:
+
 ```elixir
 ConfigCat.get_value("setting", "default", client: :first)
 ConfigCat.get_value("setting", "default", client: :second)
 ```
 
 ## Logging
+
 In the *ConfigCat SDK*, we use the default Elixir's [Logger](https://hexdocs.pm/logger/Logger.html) so you can customise as you like.
 
 ```bash
@@ -210,6 +221,7 @@ In the *ConfigCat SDK*, we use the default Elixir's [Logger](https://hexdocs.pm/
 ```
 
 ## `get_all_keys()`
+
 You can query the keys from your configuration in the SDK with the `get_all_keys()` method.
 
 ```elixir
@@ -217,6 +229,7 @@ keys = ConfigCat.get_all_keys()
 ```
 
 ## Using ConfigCat behind a proxy
+
 Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
 
 ```elixir
@@ -227,9 +240,11 @@ Provide your own network credentials (username/password), and proxy server setti
 ```
 
 ## Sample Applications
+
 - <a href="https://github.com/configcat/elixir-sdk/tree/master/samples/" target="_blank">Sample App</a>
 
 ## Look under the hood
-* <a href="https://hexdocs.pm/configcat" target="_blank">ConfigCat's HexDocs</a>
-* <a href="https://github.com/configcat/elixir-sdk" target="_blank">ConfigCat's Elixir SDK on GitHub</a>
-* <a href="https://hex.pm/packages/configcat" target="_blank">ConfigCat's Elixir SDK on Hex.pm</a>
+
+- <a href="https://hexdocs.pm/configcat" target="_blank">ConfigCat's HexDocs</a>
+- <a href="https://github.com/configcat/elixir-sdk" target="_blank">ConfigCat's Elixir SDK on GitHub</a>
+- <a href="https://hex.pm/packages/configcat" target="_blank">ConfigCat's Elixir SDK on Hex.pm</a>
