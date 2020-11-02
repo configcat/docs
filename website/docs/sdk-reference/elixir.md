@@ -93,7 +93,7 @@ user_object = ConfigCat.User.new("john@example.com")
 
 ```elixir
 user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92", email: 'john@example', country: 'United Kingdom',
-                custom: ‰{SubscriptionType: 'Pro', UserRole: 'Admin'})
+                custom: %{SubscriptionType: 'Pro', UserRole: 'Admin'})
 ```
 
 ## Polling Modes
