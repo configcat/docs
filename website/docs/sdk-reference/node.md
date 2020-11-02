@@ -28,6 +28,7 @@ let configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
 ### 4. Get your setting value
 
 The Promise (async/await) way:
+
 ```js
 configCatClient.getValueAsync("isMyAwesomeFeatureEnabled", false)
 .then((value) => {
@@ -38,7 +39,9 @@ configCatClient.getValueAsync("isMyAwesomeFeatureEnabled", false)
     }
 });
 ```
+
 or the Callback way:
+
 ```js
 configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
     if(value) {
@@ -52,6 +55,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 ## Creating the *ConfigCat Client*
 
 *ConfigCat Client* is responsible for:
+
 - managing the communication between your application and ConfigCat servers.
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
@@ -98,7 +102,7 @@ Returns a Promise with the value.
 | `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
-logLevel
+
 ```js
 const value = await configCatClient.getValueAsync(
     "keyOfMySetting", // Setting Key
@@ -106,7 +110,9 @@ const value = await configCatClient.getValueAsync(
     { identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92" } // Optional User Object
 );
 ```
+
 or
+
 ```js
 configCatClient.getValueAsync(
     "keyOfMySetting", // Setting Key
@@ -118,15 +124,17 @@ configCatClient.getValueAsync(
 ### User Object
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+
 ``` javascript
 let userObject = {
     identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92"
-};   
+};
 ```
+
 ``` javascript
 let userObject = {
     identifier : "john@example.com"
-};   
+};
 ```
 
 | Parameters   | Description                                                                                                                     |
@@ -137,6 +145,7 @@ let userObject = {
 | `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 For advanced targeting:
+
 ``` javascript
 let userObject = {
     identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92",
@@ -167,12 +176,16 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 | `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 | `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
 | `maxInitWaitTimeSeconds` | Maximum waiting time between the client initialization and the first config acquisition in seconds.                     | 5              |
+| `cache`               | Cache implementation for config cache                                                                                      | InMemoryCache  |
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
+
 ```js
 let configCatClient = configcat.createClientWithAutoPoll("#YOUR-SDK-KEY#", { pollIntervalSeconds: 95 });
 ```
+
 Adding a callback to `configChanged` option parameter will get you notified about changes.
+
 ```js
 let configCatClient = configcat.createClientWithAutoPoll("#YOUR-SDK-KEY#", { configChanged: () => {
     console.log("Your config has been changed!");
@@ -191,6 +204,7 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 | `logger`                 | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 | `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
+| `cache`                  | Cache implementation for config cache                                                                                      | InMemoryCache  |
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
@@ -199,6 +213,7 @@ let configCatClient = configcat.createClientWithLazyLoad("#YOUR-SDK-KEY#", { cac
 ```
 
 ### Manual polling
+
 Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `forceRefresh()` or `forceRefreshAsync()` is your application's responsibility.
 
 #### `createClientWithManualPoll(sdkKey, options)`
@@ -208,6 +223,7 @@ Manual polling gives you full control over when the setting values are downloade
 | `logger`           | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
 | `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
+| `cache`            | Cache implementation for config cache                                                                                      | InMemoryCache  |
 
 ```js
 let configCatClient = configcat.createClientWithManualPoll("#YOUR-SDK-KEY#");
@@ -255,6 +271,7 @@ Available log levels:
 | 3     | Info  | Errors, Warnings and feature flag evaluation is logged. |
 
 Info level logging helps to inspect the feature flag evaluation process:
+
 ```bash
 ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
  User : {"identifier":"#SOME-USER-ID#","email":"configcat@example.com"}
@@ -285,18 +302,54 @@ console.log(keys);
 ```
 
 ## Using ConfigCat behind a proxy
+
 Provide your own proxy server settings (proxy server/port) by adding a `proxy` option parameter when creating the ConfigCat client.
+
 ```js
 const options = { pollIntervalSeconds: 2, proxy: 'http://192.168.1.1:8080' }
 
 let configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ', options );
 ```
 
+## Using custom cache implementation
+
+Config's data stored in a cache, it is efficiency increases in retrieval of data and performance of the client. If you would like to use your cache solution (for example your system uses external or distributed cache) you can implement those function and set to `cache` parameters in the setting.
+
+```js
+function myCustomCache() { }
+
+myDebugCache.prototype.get = function(key) {
+    // `key` [string] - a unique cachekey
+
+    // insert here your cache read logic
+
+}
+
+myDebugCache.prototype.set = function(key, item) {
+    // `key` [string] - a unique cachekey
+    // `item` [object] - configcat's cache config item
+
+    // insert here your cache write logic
+}
+
+// set the `myCustomCache` when create a client instance
+
+const configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ',
+{
+     cache: new myCustomCache()
+});
+```
+
+> In some cases (eg: fs) you have to use [promisify](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original) to create promisies from callback style funtions.
+
+[See implementation of redis cache.](https://github.com/configcat/node-sdk/tree/master/samples/customcache)
+
 ## Sample Application
 
-<a href="https://github.com/configcat/node-sdk/blob/master/samples/console" target="_blank">Sample Console App</a>
+- [Sample Console App](https://github.com/configcat/node-sdk/blob/master/samples/console)
+- [Sample Console App with custom cache](https://github.com/configcat/node-sdk/tree/master/samples/customcache)
 
 ## Look under the hood
 
-* <a href="https://github.com/configcat/node-sdk" target="_blank">ConfigCat Node.js SDK on GitHub</a>
-* <a href="https://www.npmjs.com/package/configcat-node" target="_blank">ConfigCat's Node.js SDK in NPM</a>
+- [ConfigCat Node.js SDK on GitHub](https://github.com/configcat/node-sdk)
+- [ConfigCat's Node.js SDK in NPM](https://www.npmjs.com/package/configcat-node)
