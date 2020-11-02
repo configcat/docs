@@ -200,7 +200,6 @@ ConfigCat.get_value("setting", "default", client: :first)
 ConfigCat.get_value("setting", "default", client: :second)
 ```
 
-
 ## Logging
 In the *ConfigCat SDK*, we use the default Elixir's [Logger](https://hexdocs.pm/logger/Logger.html) so you can customise as you like.
 
