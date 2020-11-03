@@ -66,9 +66,8 @@ You can create clients easily using <a href="https://github.com/swagger-api/swag
 with a reason message with details.
 
 ### Public API rate limit policy
-* You can expect the limits around `20` per second and `500` per hour for each endpoint.
-* <a href="https://configcat.com/support" target="_blank">Let's get in touch</a> 
-if you have different requirements.
+* You can expect the limits around `20` per second and `500` per minute for each endpoint.
+* <a href="https://configcat.com/support" target="_blank">Let's get in touch</a> if you have different requirements.
 
 ****
 
