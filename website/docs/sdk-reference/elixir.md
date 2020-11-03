@@ -241,7 +241,7 @@ Provide your own network credentials (username/password), and proxy server setti
 
 ## Sample Applications
 
-- <a href="https://github.com/configcat/elixir-sdk/tree/master/samples/" target="_blank">Sample App</a>
+- <a href="https://github.com/configcat/elixir-sdk/tree/main/samples" target="_blank">Sample App</a>
 
 ## Look under the hood
 
