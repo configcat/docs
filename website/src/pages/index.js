@@ -57,6 +57,7 @@ const features = [
       { url: "sdk-reference/go", title: "Go" },
       { url: "sdk-reference/php", title: "PHP" },
       { url: "sdk-reference/ruby", title: "Ruby" },
+      { url: "sdk-reference/elixir", title: "Elixir" },
     ]
   },
   {
