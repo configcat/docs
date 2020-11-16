@@ -8,6 +8,9 @@ module.exports = {
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.
   themeConfig: {
+    googleAnalytics: {
+      trackingID: "G-VNVQ03TVR2"
+    },
     sidebarCollapsible: false,
     navbar: {
       title: 'ConfigCat Docs',
