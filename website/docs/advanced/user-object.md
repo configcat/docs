@@ -24,7 +24,7 @@ The ConfigCat SDK will return `true` for a *User Object* with an email address o
 
 To achieve this, your application needs to pass the email address of your user to the ConfigCat SDK via *User Object*.
 ```csharp
-User user = new User("jane@example.com`")
+User user = new User("jane@example.com")
 
 var isEnabled = client.GetValue("myAwesomeFeature", false, user);
 ```
