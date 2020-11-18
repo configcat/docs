@@ -5,7 +5,7 @@ title: CircleCI Orb
 
 This utility discovers ConfigCat feature flag usages in your source code and validates them against your feature flags on the ConfigCat Dashboard.
 
-The ConfigCat <a href="https://github.com/configcat/feature-flag-reference-validator" target="_blank">Feature Flag Reference Validator CLI</a> tool is available as a CircleCI Orb to integrate with CircleCI workflows.
+The ConfigCat <a href="https://github.com/configcat/feature-flag-reference-validator" target="_blank">Feature Flag Reference Validator CLI</a> tool is available as a <a href="https://circleci.com/developer/orbs/orb/configcat/feature-flag-reference-validator" target="_blank">CircleCI Orb</a> to integrate with CircleCI workflows.
 
 ## Usage
 Get your SDK Key from the <a href="https://app.configcat.com/sdkkey" target="_blank">ConfigCat Dashboard</a> and store it as a <a href="https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project" target="_blank">CircleCI environment variable</a> with the name `CONFIG_CAT_SDK_KEY` in your project settings.

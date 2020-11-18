@@ -4,11 +4,11 @@ title: Zapier
 ---
 ## Connect ConfigCat to hundreds of other apps with Zapier
 
-<a href="https://zapier.com/apps/configcat/integrations" target="_blank">Zapier</a> lets you connect ConfigCat to 2,000+ other web services. Automated connections called Zaps, set up in minutes with no coding, can automate your day-to-day tasks and build workflows between apps that otherwise wouldn't be possible.
+<a href="https://zapier.com/apps/configcat/integrations" target="_blank">ConfigCat's Zap</a> lets you connect ConfigCat to 2,000+ other web services. Automated connections called Zaps, set up in minutes with no coding, can automate your day-to-day tasks and build workflows between apps that otherwise wouldn't be possible.
 
 Each Zap has one app as the **Trigger**, where your information comes from and which causes one or more **Actions** in other apps, where your data gets sent automatically. 
 
-ConfigCat's Zap can notify you about Feature Flags or Settings changes in ConfigCat so you can easily send e.g. a Slack message/e-mail when somebody changed Feature Flags or Settings in ConfigCat.
+<a href="https://zapier.com/apps/configcat/integrations" target="_blank">ConfigCat's Zap</a> can notify you about Feature Flags or Settings changes in ConfigCat so you can easily send e.g. a Slack message/e-mail when somebody changed Feature Flags or Settings in ConfigCat.
 
 
 ## Setup

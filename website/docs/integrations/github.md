@@ -3,7 +3,7 @@ id: github
 title: GitHub Action
 ---
 
-This utility discovers ConfigCat feature flag usages in your source code and validates them against your feature flags on the ConfigCat Dashboard.
+The <a href="https://github.com/marketplace/actions/configcat-feature-flag-cleanup" target="_blank">ConfigCat Feature Flag Cleanup for GitHub Actions</a> discovers feature flag usages in your source code and validates them against your feature flags on the ConfigCat Dashboard.
 
 The ConfigCat <a href="https://github.com/configcat/feature-flag-reference-validator" target="_blank">Feature Flag Reference Validator CLI</a> tool is available as a GitHub Action to integrate with GitHub workflows.
 
