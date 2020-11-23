@@ -45,9 +45,7 @@ You can set **triggers**, add **actions**, use **Delays and Decisions** to creat
 
 ![zoho_product_config_environment](/assets/zoho/select_product_config_environment.png)
 
-11. Once that's done you can continue to build your flow, the trigger is handled by ConfigCat!
-
-12. Now you can connect Zoho Flow to ConfigCat. See the list of <a href="https://www.zoho.com/flow/apps/" target="_blank">available Zoho Flow Apps</a> for inspiration.
+11. Your trigger is set and will be called by ConfigCat. You can go ahead building your flows. See the list of <a href="https://www.zoho.com/flow/apps/" target="_blank">available Zoho Flow Apps</a> for inspiration.
 
 ### Example on how to get Slack notifications on feature flag changes.
 
