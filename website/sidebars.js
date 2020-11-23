@@ -39,6 +39,7 @@ module.exports = {
       "integrations/trello",
       "integrations/datadog",
       "integrations/zapier",
+      "integrations/zoho-flow",
       "integrations/github",
       "integrations/circleci",
       "integrations/terraform",
