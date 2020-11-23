@@ -13,13 +13,23 @@ Keep track of the number of requests your apps are making on the <a href="https:
 
 Check out our <a href="https://configcat.com/architecture" target="_blank">architectural overview</a>.
 
-## Current request/month limits
-| Plan          | requests/month | requests/second |
-| ------------- | -------------: | --------------: |
-| **Free**      |      5,000,000 |              ~2 |
-| **Pro**       |     25,000,000 |             ~10 |
-| **Unlimited** |    250,000,000 |            ~100 |
-| **Dedicated** |      unlimited |      contact us |
+## Shared infrastructure: Current request number limits
+| Plan           | requests/month | avg. req/s | max spike req/s |
+| -------------- | -------------: | ---------: | --------------: |
+| **Free**       |      5,000,000 |         ~2 |              ~4 |
+| **Pro**        |     25,000,000 |        ~10 |             ~20 |
+| **Smart**      |    250,000,000 |       ~100 |            ~200 |
+| **Enterprise** |  1,000,000,000 |       ~400 |            ~800 |
+
+## Dedicated infrastructure
+The following plans include dedicated API servers and CDN nodes.
+### Hosted
+
+
+
+| **Dedicated Hosted**     | 6,000,000,000 + nodes |                ~2400 |
+| **Dedicated On-Premise** |             unlimited |           contact us |
+
 
 :::info
 If you hit this limit, we will keep your application up and running. However, you can expect us contacting you on how we can meet your needs.
