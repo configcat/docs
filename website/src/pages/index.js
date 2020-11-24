@@ -77,6 +77,7 @@ const features = [
       { url: "integrations/circleci", title: "CircleCI Orb" },
       { url: "integrations/terraform", title: "Terraform" },
       { url: "integrations/amplitude", title: "Amplitude" },
+      { url: "integrations/zoho-flow", title: "Zoho Flow" },
     ]
   },
 ];
