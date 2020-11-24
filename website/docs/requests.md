@@ -92,7 +92,9 @@ There are 3 different ways (polling modes) to control caching.
 
 This animation explains the different polling modes:
 
-<iframe width="800" height="490" src="https://www.youtube.com/embed/_LWPjR4_GqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<figure class="video-container">
+<iframe width="100%" src="https://www.youtube.com/embed/_LWPjR4_GqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</figure>
 
 ### Auto polling (default)
 In auto polling mode, the ConfigCat SDK downloads the latest values automatically and stores them in the cache.
