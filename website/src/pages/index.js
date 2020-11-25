@@ -18,7 +18,7 @@ const features = [
       { url: "getting-started", title: "Getting started" },
       { url: "main-concepts", title: "Main Concepts" },
       { url: "requests", title: "What is a request?" },
-      { url: "purchase", title: "Plans & Purchase" },
+      { url: "purchase", title: "Plans, Purchase & Billing" },
       { url: "organization", title: "Organization & Roles" },
     ]
   },
