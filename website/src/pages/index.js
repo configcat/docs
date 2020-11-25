@@ -17,9 +17,9 @@ const features = [
     links:[
       { url: "getting-started", title: "Getting started" },
       { url: "main-concepts", title: "Main Concepts" },
-      { url: "purchase", title: "Plans & Purchase" },
       { url: "requests", title: "What is a request?" },
-      { url: "organization", title: "Organization & Billing Management" },
+      { url: "purchase", title: "Plans & Purchase" },
+      { url: "organization", title: "Organization & Roles" },
     ]
   },
   {
