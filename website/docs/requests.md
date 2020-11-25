@@ -34,7 +34,7 @@ The following plans include dedicated API and CDN nodes.
 Runs on dedicated servers provided by ConfigCat.
 The basic package includes:
 - 1x API node
-- 6x CDN nodes (3 pairs, 1 pair in every location)
+- 6x CDN nodes
 
 |                               | total req/month | avg. req/sec | max. spike req/s |
 | ----------------------------- | --------------: | -----------: | ---------------: |
