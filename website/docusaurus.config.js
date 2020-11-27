@@ -21,7 +21,7 @@ module.exports = {
       items: [
         {
           href: 'https://www.configcat.com',
-          label: 'Home Page',
+          label: 'configcat.com',
           position: "left"
         },
         {
