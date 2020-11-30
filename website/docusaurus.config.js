@@ -8,6 +8,7 @@ module.exports = {
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.
   themeConfig: {
+    image: '/img/docs-cover.png',
     googleAnalytics: {
       trackingID: "G-VNVQ03TVR2"
     },
