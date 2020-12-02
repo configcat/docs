@@ -6,7 +6,8 @@ Your application can be notified about Setting value changes in real-time. Confi
 
 ## Adding Webhook
 1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab.
-2. Set the Url, the HttpMethod and the optional Request body.
+2. Set the Url and the HttpMethod.
+3. Optionally, you can add additional HTTP headers and a body to the request.
 
 ## Request body with variables
 You can specify a Request body that will be sent as the payload of the HTTP request. 
@@ -20,6 +21,24 @@ ConfigCat will replace the following variables in the request body:
 | **##EnvironmentName##** | The name of the Environment where the Setting value changed. |
 | **##EnvironmentId##**   | ID of the Environment.                                       |
 | **##URL##**             | A direct link to the Config in the *ConfigCat Dashboard.*    |
+| **##ChangeNotes##**     | The **Mandatory notes** added to the actual changeset.    |
+| **##ChangeDetails##**   | A detailed explanation in JSON format about what is included in the actual changeset.  |
+
+The structure of the JSON array injected into the **##ChangeDetails##** looks like the following:
+```
+[
+  {
+    "settingKey": "<key-of-the-changed-setting>",
+    "event": "added|deleted|changed",
+    "details": "<details-about-the-change>"
+  },
+  {
+    "settingKey": "<key-of-the-changed-setting>",
+    "event": "added|deleted|changed",
+    "details": "<details-about-the-change>"
+  }
+]
+```
 
 ## Testing your Webhook
 1. Change some of your settings in the *ConfigCat Dashboard.* 
