@@ -118,8 +118,8 @@ module.exports = {
           title: 'Engage',
           items: [
             {
-              label: 'Join our Community Slack',
-              href: 'https://join.slack.com/t/configcat-community/shared_invite/enQtMzkwNDg3MjQ3MTUyLWY1ZmE0NjY5NjA0YjAzMWU3MDg3ODhkMGI2ZjdmZjZmYTY4YTg1NmQ0YzBhMTVhOGE5YmNiYTI5OTg4NmNjYTQ',
+              label: 'Talk with our team on Community Slack',
+              href: 'https://configcat.com/slack',
             },
             {
               label: 'GitHub',
