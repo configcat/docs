@@ -22,20 +22,20 @@ ConfigCat will replace the following variables in the request body:
 | **##EnvironmentId##**   | ID of the Environment.                                       |
 | **##URL##**             | A direct link to the Config in the *ConfigCat Dashboard.*    |
 | **##ChangeNotes##**     | The **Mandatory notes** added to the actual changeset.    |
-| **##ChangeDetails##**   | A detailed explanation in JSON format about what is included in the actual changeset.  |
+| **##ChangeDetails##**   | Details of the change in JSON format including setting name, old, new values and targeting rules.  |
 
 The structure of the JSON array injected into the **##ChangeDetails##** looks like the following:
 ```
 [
   {
-    "settingKey": "<key-of-the-changed-setting>",
-    "event": "added|deleted|changed",
-    "details": "<details-about-the-change>"
+    "settingKey":"myAwesomeFeature1",
+    "event":"changed",
+    "details":"\r\nmyAwesomeFeature1: false ➔ true"
   },
   {
-    "settingKey": "<key-of-the-changed-setting>",
-    "event": "added|deleted|changed",
-    "details": "<details-about-the-change>"
+    "settingKey":"myAwesomeFeature2",
+    "event":"changed",
+    "details":"\r\nmyAwesomeFeature2:\r\n  Rollout percentage items changed:\r\n    + 20% true\r\n    + 80% false"
   }
 ]
 ```
