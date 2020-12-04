@@ -125,7 +125,7 @@ You can change the verbosity of the sdk logs by passing a `logLevel` parameter t
 ```swift
 let client = ConfigCatClient(sdkKey: "#YOUR-SDK-KEY#", logLevel: .info)
 ```
-The available options: 
+Available options: 
 - `.debug`
 - `.info`
 - `.warning`
