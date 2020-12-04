@@ -125,7 +125,14 @@ You can change the verbosity of the sdk logs by passing a `logLevel` parameter t
 ```swift
 let client = ConfigCatClient(sdkKey: "#YOUR-SDK-KEY#", logLevel: .info)
 ```
-> The default level is `.warning`. You can also turn off the logging completely with the `.nolog` option.
+The available options: 
+- `.debug`
+- `.info`
+- `.warning`
+- `.error`
+- `.nolog`
+
+> The default level is `.warning`. With `.nolog` you can turn the logging completely off.
 
 ## `getAllKeys()`
 You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
