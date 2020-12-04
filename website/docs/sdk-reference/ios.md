@@ -120,6 +120,13 @@ We are using the *Unified Logging System* in the *ConfigCat SDK* for logging. Fo
 <a href="https://developer.apple.com/documentation/os/logging" target="_blank">Apple's developer page</a>
 or check <a href="https://developer.apple.com/videos/play/wwdc2016/721" target="_blank">Session 721 - Unified Logging and Activity Tracing</a> from WWDC 2016.
 
+### Log level
+You can change the verbosity of the sdk logs by passing a `logLevel` parameter to its `init` function.
+```swift
+let client = ConfigCatClient(sdkKey: "#YOUR-SDK-KEY#", logLevel: .info)
+```
+> The default level is `.warning`. You can also turn off the logging completely with the `.nolog` option.
+
 ## `getAllKeys()`
 You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
 
