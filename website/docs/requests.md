@@ -1,19 +1,19 @@
 ---
 id: requests
-title: What is a Request?
+title: What is a config.json download?
 ---
 
-A request is counted every time your application downloads a configuration file from the ConfigCat
+A config.json download is counted every time your application downloads a configuration file from the ConfigCat
 CDN. The frequency of these downloads is totally under your control. Between downloads you can access your feature
 flags as many times as you like, it still counts as one.
 
-Keep track of the number of requests your apps are making on the <a href="https://app.configcat.com/product/statistics" target="_blank">statistics page.</a> 
+Keep track of the number of config.json downloads your apps are making on the <a href="https://app.configcat.com/product/statistics" target="_blank">statistics page.</a> 
 
 ![ConfigCat Statistics](/assets/stats.png)
 
 Here is an <a href="https://configcat.com/architecture" target="_blank">overview of the ConfigCat architecture</a>.
 
-# Current request number limits
+# Current config.json download limits
 ## Shared infrastructure
 The following plans run on shared infrastructure. So all customers use the same API nodes and Config Delivery Network (CDN).
 
@@ -44,14 +44,14 @@ The basic package includes:
 ### On-Premise (Self hosted)
 Runs on the customer's own servers. We suggest <a href="https://configcat.com/support" target="_blank">contacting ConfigCat's engineering</a> team on exact requirements and performance.
 
-## What is a request?
-The ConfigCat SDKs - which you import into your applications - download your feature flags and settings in the 
-form of a config.json from the ConfigCat CDN and cache it locally. One config.json download counts as 1 request.
+## config.json downloads
+The ConfigCat SDKs - which you import into your applications - downloads your feature flags and settings in the 
+form of a config.json file from the ConfigCat CDN and caches it locally.
 
-## What is NOT a request?
-Reading feature flag and setting values from the cache is not considered a request.
-You can call `GetValue()` as many times as you like.
-These calls are always evaluated on the client side.
+## `GetValue()` is NOT a config.json download
+Reading feature flag and setting values from the cache is not considered a config.json download.
+You can call `GetValue()` as many times as you like, still counts as one download.
+`GetValue()` calls are evaluated from cache on the client side.
 
 ## Example use cases
 
@@ -63,14 +63,14 @@ Web apps run in the browser, so for each user there will be a different ConfigCa
 In this example, we have 15,000 active users who usually spend 5 hours on your web application per month.
 The ConfigCat SDK is set to Auto polling mode with 60 seconds polling interval.
 
-> **18,000** *(5 hours in seconds)* / **60** *polling interval* = **300 requests/user/month**  
-> **15,000** *(users)* * **300** *(requests/user/month)* = **4,500,000 requests / month**
+> **18,000** *(5 hours in seconds)* / **60** *polling interval* = **300 config.json downloads/user/month**  
+> **15,000** *(users)* * **300** *(config.json downloads/user/month)* = **4,500,000 config.json downloads / month**
 
 #### Example: A mobile application running on 5k devices 24/7
 Having a mobile app which runs on the devices as a background process. The ConfigCat SDK is set to Auto polling mode with 1 hour polling interval.  
 Your application runs on 5,000 devices.
 
-> **5,000** *(devices)* * **730** *(hours in a month)* = **3,650,000 requests / month**
+> **5,000** *(devices)* * **730** *(hours in a month)* = **3,650,000 config.json downloads / month**
 
 ### Backend applications
 Backend applications typically have a lower number of instances than frontend applications.
@@ -79,15 +79,15 @@ Backend applications typically have a lower number of instances than frontend ap
 Let’s say you have an API for your frontend application and you have 4 instances of them behind a load balancer. 
 All these 4 instances use ConfigCat SDK in auto polling mode with a 1 minute polling interval.
 
-> **4** *(instances)* * **43,800** *(minutes in a month)* = **175,200 requests / month**
+> **4** *(instances)* * **43,800** *(minutes in a month)* = **175,200 config.json downloads / month**
 
 #### Example: High frequency polling in 10 instances
 If you want your system to react faster after changing a feature flag in ConfigCat, you can decrease 
 the default polling interval down to 1 seconds. In this case we are calculating with 10 running instances.
 
-> **10** *(instances)* * **2,592,000** *(seconds in a month)* = **25,920,000 requests / month**
+> **10** *(instances)* * **2,592,000** *(seconds in a month)* = **25,920,000 config.json downloads / month**
 
-## About caching
+## A few words on caching
 There are 3 different ways (polling modes) to control caching.
 
 This animation explains the different polling modes:
@@ -108,5 +108,5 @@ Manual polling gives you full control over when the setting values are downloade
 The ConfigCat SDK will not update them automatically.
 You can (and should) update the cache manually, by calling a `forceRefresh()` - this will download the latest values and update the cache.
 #### Webhooks
-Additionally, there are Webhooks available to get notified about changes instantly.
-[Read more about Webhooks.](advanced/notifications-webhooks.md)
+Set up webhooks to get notified about changes instantly.
+[Docs on Webhooks](advanced/notifications-webhooks.md)
