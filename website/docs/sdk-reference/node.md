@@ -285,7 +285,7 @@ ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
-let configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
+const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
 configCatClient.getAllKeys((keys)=>{
     console.log(keys);
 });
@@ -296,9 +296,48 @@ configCatClient.getAllKeys((keys)=>{
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
-let configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
+const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
 const keys = await configCatClient.getAllKeysAsync();
 console.log(keys);
+```
+
+## `getAllValues()`
+
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
+```js
+const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
+configCatClient.getAllValues(function(settingValues) {
+    settingValues.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
+});
+
+
+// invoke with user object
+const userObject = {
+    identifier : "john@example.com"
+}; 
+
+configCatClient.getAllValues(function(settingValues) {
+    settingValues.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
+}, userObject);
+```
+
+## `getAllValuesAsync()`
+
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
+```js
+const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
+const settingValues = await configCatClient.getAllValuesAsync();
+settingValues.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
+
+// invoke with user object
+const userObject = {
+    identifier : "john@example.com"
+}; 
+
+const settingValuesTargeting = await configCatClient.getAllValuesAsync(userObject);
+settingValuesTargeting.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
 ```
 
 ## Using ConfigCat behind a proxy
@@ -308,7 +347,7 @@ Provide your own proxy server settings (proxy server/port) by adding a `proxy` o
 ```js
 const options = { pollIntervalSeconds: 2, proxy: 'http://192.168.1.1:8080' }
 
-let configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ', options );
+const configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ', options );
 ```
 
 ## Using custom cache implementation
