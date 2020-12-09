@@ -42,16 +42,17 @@ The basic package includes:
 | **Every additional CDN node** | + 1,000,000,000 |         ~400 |             ~800 |
 
 ### On-Premise (Self hosted)
-Runs on the customer's own servers. We suggest <a href="https://configcat.com/support" target="_blank">contacting ConfigCat's engineering</a> team on exact requirements and performance.
+Runs on the customer's own servers. We suggest <a href="https://configcat.com/support" target="_blank">contacting ConfigCat's engineering</a> 
+team on exact requirements and performance.
 
 ## config.json downloads
-The ConfigCat SDKs - which you import into your applications - downloads your feature flags and settings in the 
-form of a config.json file from the ConfigCat CDN and caches it locally.
+The ConfigCat SDK - which you import into your applications - downloads your feature flags and settings in the 
+form of a config.json file from the ConfigCat CDN and caches locally.
 
-## `GetValue()` is NOT a config.json download
-Reading feature flag and setting values from the cache is not considered a config.json download.
-You can call `GetValue()` as many times as you like, still counts as one download.
-`GetValue()` calls are evaluated from cache on the client side.
+## `GetValue()` call is NOT a config.json download
+Reading feature flag and setting values from cache with `GetValue()` is not considered as a config.json download.
+If the cache is empty (e.g: on application launch) or expired, a config.json will be downloaded then all coming `GetValue()`
+calls served from cache.
 
 ## Example use cases
 

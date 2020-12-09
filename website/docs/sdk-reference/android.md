@@ -176,7 +176,7 @@ val client = ConfigCatClient.newBuilder()
     .mode(PollingModes.LazyLoad(120 /* the cache will expire in 120 seconds */))
     .build("#YOUR-SDK-KEY#")
 ```
-Use the `asyncRefresh` option parameter of the `PollingModes.LazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a `getValue()` call is made while the cache it's expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
+Use the `asyncRefresh` option parameter of the `PollingModes.LazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a `getValue()` call is made while the cache is expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
 ```java
 val client = ConfigCatClient.newBuilder()
     .mode(PollingModes.LazyLoad(
