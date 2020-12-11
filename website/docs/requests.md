@@ -7,11 +7,14 @@ A config.json download is counted every time your application downloads a config
 CDN. The frequency of these downloads is totally under your control. Between downloads you can access your feature
 flags as many times as you like, it still counts as one.
 
+See an <a href="https://configcat.com/architecture" target="_blank">overview of the ConfigCat architecture</a>.
+
+Use the  <a href="https://configcat.com/calculator" target="_blank">Plan Calculator</a> to get your estimated config.json downloads.
+
 Keep track of the number of config.json downloads your apps are making on the <a href="https://app.configcat.com/product/statistics" target="_blank">statistics page.</a> 
 
 ![ConfigCat Statistics](/assets/stats.png)
 
-Here is an <a href="https://configcat.com/architecture" target="_blank">overview of the ConfigCat architecture</a>.
 
 # Current config.json download limits
 ## Shared infrastructure
@@ -23,6 +26,8 @@ The following plans run on shared infrastructure. So all customers use the same 
 | **Pro**        |      25,000,000 |          ~10 |              ~20 |
 | **Smart**      |     250,000,000 |         ~100 |             ~200 |
 | **Enterprise** |   1,000,000,000 |         ~400 |             ~800 |
+
+Use the  <a href="https://configcat.com/calculator" target="_blank">Plan Calculator</a> to get your estimated config.json downloads.
 
 :::info
 If you hit this limit, we will keep your application up and running. However, you can expect us contacting you on how we can meet your needs.
