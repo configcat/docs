@@ -7,7 +7,7 @@ The following issues were reported by customers. We collected what we learned an
 ## Long response times and connection issues
 
 
-First, verify that ConfigCat is up and running of if there is no planned maintenance: [Service Status Monitor](https://status.configcat.com).
+First, you can verify on the [Service Status Monitor](https://status.configcat.com) that ConfigCat is up and running or if there is a planned maintenance.
 ### General SDK Checklist
 2. It might be a good idea to update the ConfigCat SDK to the latest version.
 3. Check if you configured the [Data Governance](data-governance) functionality properly.
