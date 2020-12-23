@@ -35,7 +35,8 @@ const features = [
       { url: "advanced/user-object", title: "The User Object" },
       { url: "advanced/public-api", title: "Public Management API" },
       { url: "advanced/team-collaboration", title: "Team Collaboration" },
-      { url: "advanced/notifications-webhooks", title: "Notifications - Webhooks" }
+      { url: "advanced/notifications-webhooks", title: "Notifications - Webhooks" },
+      { url: "advanced/troubleshooting", title: "Troubleshooting" },
     ]
   },
   {
