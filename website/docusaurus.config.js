@@ -45,7 +45,11 @@ module.exports = {
           label: 'Blog',
           position: "left"
         },
-
+        {
+          href: 'https://api.configcat.com/docs',
+          label: 'API',
+          position: "right"
+        },
       ],
     },
     footer: {
