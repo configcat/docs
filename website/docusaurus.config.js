@@ -172,4 +172,8 @@ module.exports = {
       },
     ],
   ],
+  scripts: [
+    'https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js'
+  ],
+  stylesheets: ['https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css']
 };

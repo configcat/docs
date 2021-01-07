@@ -1,0 +1,27 @@
+.search {
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 12px;
+}
+
+input {
+    font-size: 12px;
+    width: 140px;
+    height: 25px;
+    padding-left: 6px;
+    text-align: center;
+    border-radius: 18px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.icon {
+    font-weight: bold;
+    font-size: 10px;
+    position: absolute;
+    padding-left: 6px;
+}
