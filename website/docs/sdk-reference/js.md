@@ -220,7 +220,7 @@ Manual polling gives you full control over when the setting values are downloade
 | `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
 
 ```js
-let configCatClient = configcat.createClientWithManualPoll("#YOUR-SDK-KEY#");
+const configCatClient = configcat.createClientWithManualPoll("#YOUR-SDK-KEY#");
 
 configCatClient.forceRefresh(() =>{
 
@@ -234,7 +234,7 @@ configCatClient.forceRefresh(() =>{
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` or `forceRefreshAsync()` to update the cache.
 
 ```js
-let configCatClient = configcat.createClientWithManualPoll("#YOUR-SDK-KEY#");
+const configCatClient = configcat.createClientWithManualPoll("#YOUR-SDK-KEY#");
 
 configCatClient.getValue("key", "my default value", (value)=>{
 
@@ -284,7 +284,7 @@ ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
-var configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
+const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
 configCatClient.getAllKeys(function(keys) {
     console.log(keys);
 });
@@ -295,10 +295,50 @@ configCatClient.getAllKeys(function(keys) {
 You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
 
 ```js
-let configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
+const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
 const keys = await configCatClient.getAllKeysAsync();
 console.log(keys);
 ```
+
+## `getAllValues()`
+
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
+```js
+const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
+configCatClient.getAllValues(function(settingValues) {
+    settingValues.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
+});
+
+
+// invoke with user object
+const userObject = {
+    identifier : "john@example.com"
+}; 
+
+configCatClient.getAllValues(function(settingValues) {
+    settingValues.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
+}, userObject);
+```
+
+## `getAllValuesAsync()`
+
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
+```js
+const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
+const settingValues = await configCatClient.getAllValuesAsync();
+settingValues.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
+
+// invoke with user object
+const userObject = {
+    identifier : "john@example.com"
+}; 
+
+const settingValuesTargeting = await configCatClient.getAllValuesAsync(userObject);
+settingValuesTargeting.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
+```
+
 ## Sample Applications
 
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/angular-sample" target="_blank">Angular 2+</a>
