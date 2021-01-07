@@ -13,7 +13,8 @@ module.exports = {
       "advanced/user-object",
       "advanced/public-api",
       "advanced/team-collaboration",
-      "advanced/notifications-webhooks"
+      "advanced/notifications-webhooks",
+      "advanced/troubleshooting"
     ],
     "SDK References": [
       "sdk-reference/overview",
