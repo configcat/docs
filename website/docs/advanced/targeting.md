@@ -16,7 +16,7 @@ Using this feature you will be able to set different setting values for differen
 
 ## Anatomy of a Targeting Rule
 
-By adding a rule, you specify a group of your users and what feature flag - or other settings - value they should get. A rule consists of an **Attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses), and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
+By adding a rule, you specify a group of your users and what feature flag or setting value they should get. A rule consists of an **Attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses), and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
 
 ### Attribute
 
@@ -41,6 +41,10 @@ Any string, number, or comma-separated list. Will be compared to the selected *A
 
 The following comparators assume that *Attribute* and *Comparison value* contain string/text.
 > In case **attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), targeting rule **evaluation will be skipped**.
+
+:::warning
+Consider using Sensitive text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
+:::
 
 | Comparator       | Description                                                                                                         |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
