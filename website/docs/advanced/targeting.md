@@ -173,7 +173,7 @@ With percentage-based user targeting, you can specify a randomly selected fracti
 2. Go to **Feature Flags & Settings**
 3. Select **TARGET % OF USERS** after clicking the actions icon.
 
-![targeting-1](/assets/targeting-1.png)
+![targeting-2](/assets/targeting-2.png)
 
 ## Anatomy of the percentage-based targeting
 
