@@ -3,14 +3,17 @@ id: public-api
 title: Public Management API
 ---
 
-To access the ConfigCat platform programmatically. 
-It's purpose is to **Create**, **Read**, **Update** and **Delete** any entities 
-like **Feature Flags, Configs, Environments** or **Products** within ConfigCat. The API is 
-based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON 
-and JSON+HAL format.
+To access the ConfigCat platform programmatically. Its purpose is to provide the same functionality 
+as the Dashboard UI only for tests, tools, or scripts. 
 
-> Do not use this API for accessing and evaluating feature flag values. Use the 
-> [SDKs instead](sdk-reference/overview.md).
+You can **Create**, **Read**, **Update** and **Delete** your **Feature Flags, Configs, Environments** or **Products** within ConfigCat. 
+
+The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON and JSON+HAL format.
+
+:::caution
+Please avoid using the Management API for feature flag evaluation, it is not designed to handle massive loads.
+For that, we have the CDN and the [SDKs instead](sdk-reference/overview.md).
+:::
 
 ## Endpoints
 **[Detailed list of all available endpoints and schemas](https://api.configcat.com/docs)**
