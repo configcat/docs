@@ -42,7 +42,7 @@ Any string, number, or comma-separated list. Will be compared to the selected *A
 The following comparators assume that *Attribute* and *Comparison value* contain string/text.
 > In case **attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), targeting rule **evaluation will be skipped**.
 
-:::warning
+:::caution
 Consider using Sensitive text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
 :::
 
