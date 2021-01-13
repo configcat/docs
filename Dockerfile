@@ -15,7 +15,7 @@ FROM sonarsource/sonar-scanner-cli AS sonarqube_scan
 WORKDIR /app
 COPY --from=builder /app/website/build /app
 RUN sonar-scanner \
-    -Dsonar.login=$SONAR_TOKEN \
+    -Dsonar.login="$SONAR_TOKEN" \
     -Dsonar.host.url=https://sonarcloud.io \
     -Dsonar.projectKey=configcat_docs \
     -Dsonar.sources=. \
