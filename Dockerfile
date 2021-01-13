@@ -16,7 +16,8 @@ COPY --from=builder /app/website/build /app
 RUN sonar-scanner \
     -Dsonar.host.url="https://sonarcloud.io" \
     -Dsonar.projectKey="configcat_docs" \
-    -Dsonar.organization="configcat"
+    -Dsonar.organization="configcat" \
+    -Dsonar.login="$SONAR_TOKEN"
 
 FROM base as final
 COPY --from=builder /app/website/build /usr/share/nginx/temphtml
