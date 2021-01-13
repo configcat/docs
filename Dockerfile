@@ -9,17 +9,17 @@ WORKDIR /app/website
 RUN npm install
 COPY ./website /app/website
 RUN npm run build
+ARG SONAR_PROJECT_KEY=docs	
+ARG SONAR_HOST_URL=https://sonarqube.configcat.com	
 ARG SONAR_TOKEN
-ENV SONAR_TOKEN=$SONAR_TOKEN
 FROM sonarsource/sonar-scanner-cli AS sonarqube_scan
 WORKDIR /app
 COPY --from=builder /app/website/build /app
 RUN sonar-scanner \
+    -Dsonar.host.url="$SONAR_HOST_URL" \
     -Dsonar.login="$SONAR_TOKEN" \
-    -Dsonar.host.url=https://sonarcloud.io \
-    -Dsonar.projectKey=configcat_docs \
-    -Dsonar.sources=. \
-    -Dsonar.organization=configcat
+    -Dsonar.projectKey="$SONAR_PROJECT_KEY" \
+    -Dsonar.projectName="$SONAR_PROJECT_KEY"
 
 FROM base as final
 COPY --from=builder /app/website/build /usr/share/nginx/temphtml
