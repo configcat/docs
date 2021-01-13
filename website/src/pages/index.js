@@ -11,10 +11,10 @@ const features = [
     title: 'Getting started',
     description: (
       <>
-      Familiarize with ConfigCat basics.
+        Familiarize with ConfigCat basics.
       </>
     ),
-    links:[
+    links: [
       { url: "getting-started", title: "Getting started" },
       { url: "main-concepts", title: "Main Concepts" },
       { url: "requests", title: "What is a config.json download?" },
@@ -29,7 +29,7 @@ const features = [
         Get the most out of your feature flags.
       </>
     ),
-    links:[
+    links: [
       { url: "advanced/data-governance", title: "Data Governance - CDN" },
       { url: "advanced/targeting", title: "Targeting" },
       { url: "advanced/user-object", title: "The User Object" },
@@ -43,7 +43,7 @@ const features = [
     title: 'SDK references',
     description: (
       <>
-      Let's do some coding.
+        Let's do some coding.
       </>
     ),
     links: [
@@ -95,13 +95,13 @@ function Feature({ imageUrl, title, description, links }) {
       <h3>{title}</h3>
       <p>{description}</p>
       <ul>
-      {links.map((link, idx) => (
-        <li>
-          <Link to={useBaseUrl(link.url)}>
-            {link.title}
-          </Link>
-        </li>
-      ))}
+        {links.map((link, idx) => (
+          <li>
+            <Link to={useBaseUrl(link.url)}>
+              {link.title}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -119,23 +119,24 @@ function Home() {
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <img className={styles.heroImage} src={useBaseUrl('img/docs.svg')} alt="" />
           <div className={styles.buttons}>
             <Link
               className={clsx(
-                'button button--outline button--secondary button--lg',
+                'button button--secondary button--lg',
                 styles.getStarted,
               )}
               to={useBaseUrl('getting-started')}>
-              Get Started
+              Open Docs
             </Link>
           </div>
-          <img className={styles.heroImage} src={useBaseUrl('img/docs.svg')} alt="" />
         </div>
       </header>
       <main>
         {features && features.length > 0 && (
           <section className={styles.features}>
             <div className="container">
+              <h2 className="text--center">Quick links</h2>
               <div className="row">
                 {features.map((props, idx) => (
                   <Feature key={idx} {...props} />

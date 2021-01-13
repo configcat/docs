@@ -6,5 +6,9 @@
         "Deno",
         "JSONs",
         "SDKKEY"
+    ],
+    "grammarly.userWords": [
+        "ConfigCat",
+        "authorTitle"
     ]
 }

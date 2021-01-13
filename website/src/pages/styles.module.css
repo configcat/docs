@@ -6,16 +6,10 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 2rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
-}
-
-@media screen and (max-width: 966px) {
-  .heroBanner {
-    padding: 2rem;
-  }
 }
 
 .buttons {
@@ -37,6 +31,6 @@
 }
 
 .heroImage {
-  width: 250px;
-  margin-top: 32px;
+  width: 200px;
+  margin-bottom: 1rem;
 }
