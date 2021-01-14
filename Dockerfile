@@ -13,12 +13,18 @@ FROM sonarsource/sonar-scanner-cli AS sonarqube_scan
 WORKDIR /app
 ARG SONAR_TOKEN
 COPY --from=builder /app/website/build /app
-RUN sonar-scanner \
-    -Dsonar.host.url="https://sonarcloud.io" \
-    -Dsonar.login="$SONAR_TOKEN" \
-    -Dsonar.projectKey="configcat_docs" \
-    -Dsonar.projectName="docs" \
-    -Dsonar.organization="configcat"
+
+RUN if [ -z "$SONAR_TOKEN" ] \ 
+  ; then \
+    echo Sonar scan skipped \ 
+  ; else \ 
+    sonar-scanner \
+        -Dsonar.host.url="https://sonarcloud.io" \
+        -Dsonar.login="$SONAR_TOKEN" \
+        -Dsonar.projectKey="configcat_docs" \
+        -Dsonar.projectName="docs" \
+        -Dsonar.organization="configcat" \
+  ; fi
 
 FROM base as final
 COPY --from=builder /app/website/build /usr/share/nginx/temphtml
