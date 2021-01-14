@@ -2,6 +2,8 @@
 id: ruby
 title: Ruby
 ---
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/ruby-sdk.svg?style=social)](https://github.com/configcat/ruby-sdk/stargazers)
+
 ## Getting started:
 ### 1. Install *ConfigCat SDK*
 ```

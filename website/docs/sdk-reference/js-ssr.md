@@ -2,6 +2,8 @@
 title: "JavaScript (SSR)"
 id: "js-ssr"
 ---
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/js-ssr-sdk.svg?style=social)](https://github.com/configcat/js-ssr-sdk/stargazers)
+
 *For Server-Side Rendered JavaScript frameworks like <a href="https://nuxtjs.org" target="_blank">NuxtJS</a>*
 ## Getting started
 

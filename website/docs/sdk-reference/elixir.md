@@ -2,6 +2,8 @@
 id: elixir
 title: Elixir
 ---
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/elixir-sdk.svg?style=social)](https://github.com/configcat/elixir-sdk/stargazers)
+
 ## Getting started
 
 ### 1. Add `configcat` to your list of dependencies in `mix.exs`

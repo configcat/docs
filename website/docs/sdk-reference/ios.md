@@ -2,6 +2,8 @@
 id: ios
 title: iOS (Swift)
 ---
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/swift-sdk.svg?style=social)](https://github.com/configcat/swift-sdk/stargazers)
+
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
 

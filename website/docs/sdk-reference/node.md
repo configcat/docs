@@ -2,6 +2,8 @@
 id: node
 title: Node.js
 ---
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/node-sdk.svg?style=social)](https://github.com/configcat/node-sdk/stargazers)
+
 >For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](js-ssr.md)
 
 ## Getting started

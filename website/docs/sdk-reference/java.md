@@ -2,6 +2,8 @@
 id: java
 title: Java
 ---
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/java-sdk.svg?style=social)](https://github.com/configcat/java-sdk/stargazers)
+
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
 

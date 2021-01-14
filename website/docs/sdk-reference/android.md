@@ -3,6 +3,8 @@ id: android
 title: Android (Kotlin)
 ---
 
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/android-sdk.svg?style=social)](https://github.com/configcat/android-sdk/stargazers)
+
 > The minimum supported sdk version is 18 (Jelly Bean). Java 1.8 or later is required.
 
 ```

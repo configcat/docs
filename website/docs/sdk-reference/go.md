@@ -2,6 +2,8 @@
 id: go
 title: Go
 ---
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/go-sdk.svg?style=social)](https://github.com/configcat/go-sdk/stargazers)
+
 ## Getting Started:
 ### 1. Get the SDK with `go`
 ```bash

@@ -2,6 +2,8 @@
 id: php
 title: PHP
 ---
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/php-sdk.svg?style=social)](https://github.com/configcat/php-sdk/stargazers)
+
 ## Getting started
 ### 1. Install the package with [Composer](https://getcomposer.org/)
 ```bash

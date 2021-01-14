@@ -2,6 +2,8 @@
 title: "JavaScript"
 id: "js"
 ---
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/js-sdk.svg?style=social)](https://github.com/configcat/js-sdk/stargazers)
+
 >For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](js-ssr.md)
 
 ## Getting started

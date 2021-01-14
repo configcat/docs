@@ -2,6 +2,8 @@
 id: python
 title: Python
 ---
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/python-sdk.svg?style=social)](https://github.com/configcat/python-sdk/stargazers)
+
 ## Getting started:
 ### 1. Install *ConfigCat SDK*
 ```
