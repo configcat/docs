@@ -193,7 +193,7 @@ Then you can use the descriptor to retrieve the setting's value from a snapshot:
 boolValue := boolSettingDescriptor.Get(snapshot)
 ```
 
-#### `Keys()`
+### `Keys()`
 You can get all the setting keys by calling the `Keys()` method of a `Snapshot`. As snapshots are immutable they allow safe iterative operations over their setting values avoiding the possibility of data change - caused by e.g. a new configuration download initiated by a get value call - within a loop.
 
 For example, evaluating all setting values for every key could be done in the following way:
