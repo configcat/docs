@@ -12,6 +12,7 @@ module.exports = {
       "advanced/targeting",
       "advanced/user-object",
       "advanced/public-api",
+      "advanced/caching",
       "advanced/team-collaboration",
       "advanced/notifications-webhooks",
       "advanced/troubleshooting"
