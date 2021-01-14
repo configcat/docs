@@ -4,7 +4,8 @@ title: iOS (Swift)
 ---
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
-*CocoaPods*
+
+**CocoaPods**
 ```
 target '<YOUR TARGET>' do
 pod 'ConfigCat'
@@ -14,11 +15,27 @@ Then, run the following command to install your dependencies:
 ```
 pod install
 ```
-*Carthage*
+
+**Carthage**
 ```
 github "configcat/swift-sdk"
 ```
+
 Then, run the carthage update command and then follow the Carthage integration steps to link the framework with your project.
+
+**Swift Package Manager**
+
+Add the SDK to your `Package.swift`.
+
+```
+dependencies: [
+    .package(
+        url: "https://github.com/configcat/swift-sdk", 
+        from: "7.0.0"
+    )
+]
+```
+
 ### 2. Import the ConfigCat SDK:
 ```swift
 import ConfigCat
