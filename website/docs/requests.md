@@ -30,7 +30,7 @@ The following plans run on shared infrastructure. So all customers use the same 
 Use the  <a href="https://configcat.com/calculator" target="_blank">Plan Calculator</a> to get your estimated config.json downloads.
 
 :::info
-If you hit this limit, we will keep your application up and running. However, you can expect us contacting you on how we can meet your needs.
+If you hit this limit, we will keep your application up and running. However, you can expect us to contact you on how we can meet your needs.
 :::
 
 ## Dedicated infrastructure
@@ -46,7 +46,7 @@ The basic package includes:
 | **Basic package**             |   6,000,000,000 |        ~2400 |            ~4800 |
 | **Every additional CDN node** | + 1,000,000,000 |         ~400 |             ~800 |
 
-### On-Premise (Self hosted)
+### On-Premise (Self-hosted)
 Runs on the customer's own servers. We suggest <a href="https://configcat.com/support" target="_blank">contacting ConfigCat's engineering</a> 
 team on exact requirements and performance.
 
@@ -83,36 +83,23 @@ Backend applications typically have a lower number of instances than frontend ap
 
 #### Example: Average frequency polling in 4 instances
 Let’s say you have an API for your frontend application and you have 4 instances of them behind a load balancer. 
-All these 4 instances use ConfigCat SDK in auto polling mode with a 1 minute polling interval.
+All these 4 instances use ConfigCat SDK in auto polling mode with a 1-minute polling interval.
 
 > **4** *(instances)* * **43,800** *(minutes in a month)* = **175,200 config.json downloads / month**
 
 #### Example: High frequency polling in 10 instances
 If you want your system to react faster after changing a feature flag in ConfigCat, you can decrease 
-the default polling interval down to 1 seconds. In this case we are calculating with 10 running instances.
+the default polling interval down to 1 second. In this case we are calculating with 10 running instances.
 
 > **10** *(instances)* * **2,592,000** *(seconds in a month)* = **25,920,000 config.json downloads / month**
 
-## A few words on caching
-There are 3 different ways (polling modes) to control caching.
+## How to lower the monthly config.json download count?
 
-This animation explains the different polling modes:
+### Increasing the polling interval
+You can lower the frequency your application downloads the `config.json` by setting larger polling intervals or using a different [polling mode](advanced/caching) other than the default auto polling. See the [SDK References for more.](sdk-reference/overview)
 
-<figure class="video-container">
-<iframe width="100%" src="https://www.youtube.com/embed/_LWPjR4_GqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</figure>
+### Using Webhooks
+In a backend application, you might want to try using [Webhooks.](advanced/notifications-webhooks) This way your application gets notified about changes and downloads the `config.json` only when it is needed.
 
-### Auto polling (default)
-In auto polling mode, the ConfigCat SDK downloads the latest values automatically and stores them in the cache.
-This is done in every 60 seconds by default.
-You can set the polling interval to any number between 1 second and int max.
-### Lazy loading
-In lazy loading mode, the ConfigCat SDK downloads the latest setting values only if they are not present in the cache, or if the cache has expired.
-You can set the cache Time To Leave (TTL) to any number also.
-### Manual polling
-Manual polling gives you full control over when the setting values are downloaded.
-The ConfigCat SDK will not update them automatically.
-You can (and should) update the cache manually, by calling a `forceRefresh()` - this will download the latest values and update the cache.
-#### Webhooks
-Set up webhooks to get notified about changes instantly.
-[Docs on Webhooks](advanced/notifications-webhooks.md)
+### Calling your backend instead of the ConfigCat CDN
+In the case of a frontend application, you can lower the number of calls made towards the ConfigCat CDN by moving the evaluation logic from the frontend application to your backend.
