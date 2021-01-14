@@ -156,7 +156,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KE
 ```
 
 ### Lazy loading
-When calling `Bool()`, `Int()`, `Float` or `String()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case, when the `NoWaitForRefresh` option is `false` the new setting value will be returned just after the cache update. When it's set to `true` the setting value retrievals will not wait for the downloads and they will return immediately with the previous setting value.
+When calling `Bool()`, `Int()`, `Float` or `String()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case, when the `NoWaitForRefresh` option is `false` the new setting value will be returned right after the cache update. When it's set to `true` the setting value retrievals will not wait for the downloads and they will return immediately with the previous setting value.
 
 Use the `MaxAge` option parameter of the *ConfigCat Client* to set the cache TTL.
 ```go
