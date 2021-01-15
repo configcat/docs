@@ -25,6 +25,6 @@ Please, **do not load test** the ConfigCat production infrastructure without our
 1. Does the machine/server your code runs on has access to the above address?
 1. You might need to whitelist the following addresses in your firewall: `cdn.configcat.com`, `cdn-eu.configcat.com`, `cdn-global.configcat.com`.
 ---
-## Too many requests
+## Too many requests error in Angular
 The problem was with Angular's Hot Module Replacement functionality during development. The wrapper class, which contained the auto polling ConfigCat SDK was edited, and the Hot Module Replacement reinitialized the whole class without releasing the old, replaced module's Auto Polling timer.
 We believe that this is a really rare case, it could happen only during development.
