@@ -17,7 +17,7 @@ client := configcat.NewClient("<PLACE-YOUR-SDK-KEY-HERE>")
 ```
 ### 4. Get your setting value
 ```go
-isMyAwesomeFeatureEnabled := client.Bool("key-of-my-awesome-feature", false, nil)
+isMyAwesomeFeatureEnabled := client.GetBoolValue("key-of-my-awesome-feature", false, nil)
 if isMyAwesomeFeatureEnabled {
     doTheNewThing()
 } else {
@@ -55,25 +55,25 @@ Available configuration options:
 | `DataGovernance`          | `configcat.DataGovernance` | Defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
 | `BaseUrl`                 | `string`                   | *Obsolete* Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
 | `Cache `                  | `ConfigCache`              | Sets a custom cache implementation for the client. [See below](#custom-cache).  |
-| `NoWaitForRefresh`        | `bool`                     | Defaults to `false`. When it's `true` the typed get methods (`Bool()`, `Int()`, `Float()`, `String()`) will never wait for a configuration refresh to complete before returning. When it's `false` and `RefreshMode` is `AutoPoll`, the first request may block, when `RefreshMode` is `Lazy`, any request may block. |
+| `NoWaitForRefresh`        | `bool`                     | Defaults to `false`. When it's `true` the typed get methods (`Get[TYPE]Value()`) will never wait for a configuration refresh to complete before returning. When it's `false` and `PollingMode` is `AutoPoll`, the first request may block, when `PollingMode` is `Lazy`, any request may block. |
 | `HttpTimeout`             | `time.Duration`            | Sets the maximum wait time for a HTTP response. |
 | `Transport`               | `http.RoundTripper`        | Sets the transport options for the underlying HTTP calls. |
 | `Logger`                  | `configcat.Logger`         | Sets the `Logger` implementation used by the SDK for logging. |
-| `RefreshMode`             | `configcat.RefreshMode`    | Defaults to `AutoPoll`. Sets the polling mode for the client. [See below](#polling-modes). |
-| `MaxAge`                  | `time.Duration`            | Sets after how much time a configuration is considered stale. When `RefreshMode` is `AutoPoll` this value is used as the polling rate. |
+| `PollingMode`             | `configcat.PollingMode`    | Defaults to `AutoPoll`. Sets the polling mode for the client. [See below](#polling-modes). |
+| `PollInterval`                  | `time.Duration`            | Sets after how much time a configuration is considered stale. When `PollingMode` is `AutoPoll` this value is used as the polling rate. |
 | `ChangeNotify`            | `func()`                   | An optional callback to invoke when a new configuration has fetched. |
 
 Then you can pass it to the `NewCustomClient()` method:
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", RefreshMode: configcat.Manual })
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", PollingMode: configcat.Manual })
 ```
 
 :::caution
-We strongly recommend you to use the ConfigCatClient as a Singleton object in your application
+We strongly recommend you to use the *ConfigCat Client* as a Singleton object in your application
 :::
 
-## Anatomy of `Bool()`, `Int()`, `Float()` and `String()`
-Basically all of the value retrievel methods share the same signature, they only differ in their served value type. `Bool()` is for evaluating feature flags, `Int()` and `Float()` are for numeric and `String()` is for textual settings.
+## Anatomy of `Get[TYPE]Value()`
+Basically all of the value evaluator methods share the same signature, they only differ in their served value type. `GetBoolValue()` is for evaluating feature flags, `GetIntValue()` and `GetFloatValue()` are for numeric and `GetStringValue()` is for textual settings.
 
 | Parameters     | Description                                                          |
 | -------------- | -------------------------------------------------------------------- |
@@ -81,14 +81,14 @@ Basically all of the value retrievel methods share the same signature, they only
 | `defaultValue` | This value will be returned in case of an error.                     |
 | `user`         | *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 ```go
-boolValue := client.Bool(
+boolValue := client.GetBoolValue(
     "keyOfMyBoolSetting", // Setting Key
     false, // Default value
     &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"} // User Object
 )
 ```
 ```go
-intValue := client.Int(
+intValue := client.GetIntValue(
     "keyOfMyIntSetting", // Setting Key
     0, // Default value
     &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"} // User Object
@@ -139,41 +139,44 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
-Use the the `MaxAge` option parameter of the *ConfigCat Client* to change the polling interval.
+Use the the `PollInterval` option parameter of the *ConfigCat Client* to change the polling interval.
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
-    RefreshMode: configcat.AutoPoll,
-    MaxAge: time.Second * 120 /* polling interval in seconds */})
+    PollingMode: configcat.AutoPoll,
+    PollInterval: time.Second * 120 /* polling interval in seconds */})
 ```
 You have the option to configure a `ChangeNotify` callback that will be notified when a new configuration is fetched. The policy calls the given method only, when the new configuration is differs from the cached one.
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
-    RefreshMode: configcat.AutoPoll,
-    MaxAge: time.Second * 120, /* polling interval in seconds */
+    PollingMode: configcat.AutoPoll,
+    PollInterval: time.Second * 120, /* polling interval in seconds */
     ChangeNotify: func() {
 		// here you can subscribe to configuration changes
 	}})
 ```
 
 ### Lazy loading
-When calling `Bool()`, `Int()`, `Float` or `String()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case, when the `NoWaitForRefresh` option is `false` the new setting value will be returned right after the cache update. When it's set to `true` the setting value retrievals will not wait for the downloads and they will return immediately with the previous setting value.
+When calling `GetBoolValue()`, `GetIntValue()`, `GetFloatValue()` or `GetStringValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case, when the `NoWaitForRefresh` option is `false` the new setting value will be returned right after the cache update. When it's set to `true` the setting value retrievals will not wait for the downloads and they will return immediately with the previous setting value.
 
-Use the `MaxAge` option parameter of the *ConfigCat Client* to set the cache TTL.
+Use the `PollInterval` option parameter of the *ConfigCat Client* to set the cache TTL.
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
-    RefreshMode: configcat.Lazy,
-    MaxAge: time.Second * 120 /* cache TTL in seconds */})
+    PollingMode: configcat.Lazy,
+    PollInterval: time.Second * 120 /* cache TTL in seconds */})
 ```
 
 ### Manual polling
 Manual polling gives you full control over when the setting values are downloaded. ConfigCat SDK will not update them automatically. Calling `Refresh()` is your application's responsibility.
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
-    RefreshMode: configcat.Manual})
+    PollingMode: configcat.Manual})
 
 client.Refresh()
 ```
 > The setting value retrieval methods will return `defaultValue` if the cache is empty. Call `Refresh()` to update the cache.
+
+## `GetAllKeys()`
+You can get all the setting keys by calling the `GetAllKeys()` method of the *ConfigCat Client*.
 
 ## Snapshots
 A `Snapshot` represents an immutable state of the given User's current setting values. Because of the immutability they are suitable for sharing between components that rely more on a consistent data state rather than maintaining their own states with individual get setting value calls.
@@ -193,17 +196,15 @@ Then you can use the descriptor to retrieve the setting's value from a snapshot:
 boolValue := boolSettingDescriptor.Get(snapshot)
 ```
 
-### `Keys()`
-You can get all the setting keys by calling the `Keys()` method of a `Snapshot`. As snapshots are immutable they allow safe iterative operations over their setting values avoiding the possibility of data change - caused by e.g. a new configuration download initiated by a get value call - within a loop.
+Also, because of the immutability, snapshots allow safe iterative operations over their setting values avoiding the possibility of data change - caused by e.g. a new configuration download initiated by a get value call - within a loop.
 
-For example, evaluating all setting values for every key could be done in the following way:
+For example, evaluating all setting values for every key could be done safely in the following way:
 ```go
-keys := snapshot.Keys()
+keys := snapshot.GetAllKeys()
 for _, key := range keys {
-    valueForKey := snapshot.Get(key)
+    valueForKey := snapshot.GetValue(key)
 }
 ```
-> If you dont't want to use the snapshot to anything else you can simply just get the setting keys from the ConfigCatClient with `client.Snapshot(nil).Keys()`.
 
 ## Custom Cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to satisfy the `ConfigCache` interface:
