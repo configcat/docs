@@ -3,6 +3,9 @@ title: "JavaScript (SSR)"
 id: "js-ssr"
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/js-ssr-sdk.svg?style=social)](https://github.com/configcat/js-ssr-sdk/stargazers)
+[![Build Status](https://travis-ci.com/configcat/js-ssr-sdk.svg?branch=master)](https://travis-ci.com/configcat/js-ssr-sdk) 
+[![codecov](https://codecov.io/gh/configcat/js-ssr-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/js-ssr-sdk) 
+[![Known Vulnerabilities](https://snyk.io/test/github/configcat/js-ssr-sdk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/configcat/js-ssr-sdk?targetFile=package.json) 
 
 *For Server-Side Rendered JavaScript frameworks like <a href="https://nuxtjs.org" target="_blank">NuxtJS</a>*
 ## Getting started

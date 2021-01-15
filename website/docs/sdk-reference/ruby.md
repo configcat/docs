@@ -3,6 +3,9 @@ id: ruby
 title: Ruby
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/ruby-sdk.svg?style=social)](https://github.com/configcat/ruby-sdk/stargazers)
+[![Build Status](https://travis-ci.com/configcat/ruby-sdk.svg?branch=master)](https://travis-ci.com/configcat/ruby-sdk)
+[![Coverage Status](https://coveralls.io/repos/github/configcat/ruby-sdk/badge.svg?branch=master)](https://coveralls.io/github/configcat/ruby-sdk?branch=master)
+[![Gem version](https://badge.fury.io/rb/configcat.svg)](https://rubygems.org/gems/configcat)
 
 ## Getting started:
 ### 1. Install *ConfigCat SDK*
