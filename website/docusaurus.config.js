@@ -47,7 +47,7 @@ module.exports = {
         },
         {
           href: 'https://api.configcat.com/docs',
-          label: 'API',
+          label: 'Public Management API',
           position: "right"
         },
       ],
