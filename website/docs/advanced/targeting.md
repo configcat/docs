@@ -246,7 +246,7 @@ Let's say you have 2 users and 2 different Feature Flags with percentage-based t
 | Jane | 8 < 10 <br/>-> **ON** | 64 >= 10 <br/>-> **OFF** |
 | Joe | 32 >= 10 <br/>-> **OFF** | 12 >= 10 <br/>-> **OFF** |
 
-> As percentage-based targeting is sticky, the same user base is evaluated to **ON** like in the 1. step.
+> As percentage-based targeting is sticky, the same user base is evaluated to **ON** like in the 2. step.
 
 5. If everything seems alright, we can safely increase both Feature Flags to **100% ON / 0% OFF**.
 
