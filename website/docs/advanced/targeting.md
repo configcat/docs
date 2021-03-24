@@ -194,6 +194,67 @@ The exact value that will be served to the users that fall into that fraction. D
 | Whole Number   | Integer      | any whole number within the range of `Int32`      |
 | Decimal Number | Double       | any decimal number within the range of `double` |
 
+## Stickiness & Consistency
+
+The percentage-based targeting is sticky by design and consistent across all SDKs.
+
+Percentage-based targeting is based on the identifier passed in the `User Object` to get `getValue()` methods in the SDKs. 
+The SDKs are hashing the identifier concatenated with the evaluated Feature Flag's key and assign a 0-99 number to the User for a specific Feature Flag. 
+This number is fix and consistent across all SDKs. The SDKs are checking if the assigned number is greater or less than the percentage set on the ConfigCat Dashboard.
+
+> It is important to note that not only the User's identifier is hashed but the User's identifier concatenated with the evaluated Feature Flag's key.
+With this concatenation we can ensure that you won't test on the same user base for all of your Feature Flags.
+
+> As the evaluation happens in the SDKs, your user's sensitive information will never leave your system. The data flow is unidirectional (only from ConfigCat CDN servers to your SDKs) and ConfigCat doesn't receive or store any of the values passed in the User Object to the SDKs.
+
+### Example
+
+Let's say you have 2 users and 2 different Feature Flags with percentage-based targeting.  
+
+|  | isTwitterSharingEnabled | isFacebookSharingEnabled |
+| - | - | - |
+| Jane | `hash('Jane' + 'isTwitterSharingEnabled') mod 100` <br/>-> The assigned number is **8** | `hash('Jane' + 'isFacebookSharingEnabled') mod 100`  <br/>-> The assigned number is **64** |
+| Joe | `hash('Joe' + 'isTwitterSharingEnabled') mod 100` <br/>-> The assigned number is **32** | `hash('Joe' + 'isFacebookSharingEnabled') mod 100` <br/>-> The assigned number is **12** |
+
+1. Let's start with both Feature Flags with a **0% ON / 100% OFF** setting.
+
+|  | isTwitterSharingEnabled <br/> 0% ON / 100% OFF | isFacebookSharingEnabled <br/> 0% ON / 100% OFF |
+| - | - | - |
+| Jane | 8 >= 0 <br/>-> **OFF** | 64 >= 0 <br/>-> **OFF** |
+| Joe | 32 >= 0 <br/>-> **OFF** | 12 >= 0 <br/>-> **OFF** |
+
+2. Let's set both Feature Flags to **10% ON / 90% OFF**.
+
+|  | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
+| - | - | - |
+| Jane | 8 < 10 <br/>-> **ON** | 64 >= 10 <br/>-> **OFF** |
+| Joe | 32 >= 10 <br/>-> **OFF** | 12 >= 10 <br/>-> **OFF** |
+
+> It is important to note that although both Feature Flags are set to 10% ON / 90% OFF, Jane is only evaluated to **ON** for the `isTwitterSharingEnabled` Feature Flag.
+
+3. The Twitter Sharing Feature seems alright so let's increase the `isTwitterSharingEnabled` to **40% ON / 60% OFF**.
+
+|  | isTwitterSharingEnabled <br/> 40% ON / 60% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
+| - | - | - |
+| Jane | 8 < 40 <br/>-> **ON** | 64 >= 10 <br/>-> **OFF** |
+| Joe | 32 < 40 <br/>-> **ON** | 12 >= 10 <br/>-> **OFF** |
+
+4. Something seems strange with the Twitter Sharing Feature so let's rollback to the safe **10% ON / 90% OFF**.
+
+|  | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
+| - | - | - |
+| Jane | 8 < 10 <br/>-> **ON** | 64 >= 10 <br/>-> **OFF** |
+| Joe | 32 >= 10 <br/>-> **OFF** | 12 >= 10 <br/>-> **OFF** |
+
+> As percentage-based targeting is sticky, the same user base is evaluated to **ON** like in the 1. step.
+
+5. If everything seems alright, we can safely increase both Feature Flags to **100% ON / 0% OFF**.
+
+|  | isTwitterSharingEnabled <br/> 100% ON / 0% OFF | isFacebookSharingEnabled <br/> 100% ON / 0% OFF |
+| - | - | - |
+| Jane | 8 < 100 <br/>-> **ON** | 64 < 100 <br/>-> **ON** |
+| Joe | 32 < 100 <br/>-> **ON** | 12 < 100 <br/>-> **ON** |
+
 ## Multiple options
 
 ### On/Off Toggle
