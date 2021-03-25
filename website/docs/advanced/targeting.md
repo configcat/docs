@@ -207,12 +207,12 @@ As not only the User's identifier is hashed but the User's identifier concatenat
 :::
 
 :::info
-As the evaluation happens in the SDKs, your user's sensitive information will never leave your system. The data flow is unidirectional (only from ConfigCat CDN servers to your SDKs) and ConfigCat doesn't receive or store any of the User Object's attributes passed to the SDKs.
+As the evaluation happens in the SDKs, your User's sensitive information will never leave your system. The data flow is unidirectional (only from ConfigCat CDN servers to your SDKs), and ConfigCat doesn't receive or store any of the User Object's attributes passed to the SDKs.
 :::
 
 ### Example
 
-Let's say you have 2 users and 2 different Feature Flags with percentage-based targeting.  
+Let's say you have two users and two different Feature Flags with percentage-based targeting.  
 
 |  | isTwitterSharingEnabled | isFacebookSharingEnabled |
 | - | - | - |
@@ -237,14 +237,14 @@ Let's say you have 2 users and 2 different Feature Flags with percentage-based t
 Although both Feature Flags are set to 10% ON / 90% OFF, Jane is only evaluated to **ON** for the `isTwitterSharingEnabled` Feature Flag.
 :::
 
-3. The Twitter Sharing Feature seems alright so let's increase the `isTwitterSharingEnabled` to **40% ON / 60% OFF**.
+3. The Twitter Sharing Feature seems alright, so let's increase the `isTwitterSharingEnabled` to **40% ON / 60% OFF**.
 
 |  | isTwitterSharingEnabled <br/> 40% ON / 60% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
 | - | - | - |
 | Jane | 8 < 40 <br/>-> **ON** | 64 >= 10 <br/>-> **OFF** |
 | Joe | 32 < 40 <br/>-> **ON** | 12 >= 10 <br/>-> **OFF** |
 
-4. Something seems strange with the Twitter Sharing Feature so let's rollback to the safe **10% ON / 90% OFF**.
+4. Something seems strange with the Twitter Sharing Feature, so let's rollback to the safe **10% ON / 90% OFF**.
 
 |  | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
 | - | - | - |
