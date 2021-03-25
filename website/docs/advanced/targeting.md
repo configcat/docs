@@ -198,14 +198,17 @@ The exact value that will be served to the users that fall into that fraction. D
 
 The percentage-based targeting is sticky by design and consistent across all SDKs.
 
-Percentage-based targeting is based on the identifier passed in the `User Object` to get `getValue()` methods in the SDKs. 
-The SDKs are hashing the identifier concatenated with the evaluated Feature Flag's key and assign a 0-99 number to the User for a specific Feature Flag. 
-This number is fix and consistent across all SDKs. The SDKs are checking if the assigned number is greater or less than the percentage set on the ConfigCat Dashboard.
+Percentage-based targeting is based on the identifier of the `User Object` passed to the SDK's `getValue()` methods.
+The SDKs are hashing the concatenated value of the `User Object's` `identifier` and the requested Feature Flag's `Key`. Then they assign a 0-99 number to the User for a specific Feature Flag. This number is used to evaluate a particular Feature Flag's value based on it's configured rules.  
+This number is fix and consistent for each User across all SDKs. The SDKs check if the assigned number is greater or less than the percentage set on the ConfigCat Dashboard.
 
-> It is important to note that not only the User's identifier is hashed but the User's identifier concatenated with the evaluated Feature Flag's key.
-With this concatenation we can ensure that you won't test on the same user base for all of your Feature Flags.
+:::caution
+As not only the User's identifier is hashed but the User's identifier concatenated with the evaluated Feature Flag's key, we can ensure that you won't test on the same userbase for all of your Feature Flags.
+:::
 
-> As the evaluation happens in the SDKs, your user's sensitive information will never leave your system. The data flow is unidirectional (only from ConfigCat CDN servers to your SDKs) and ConfigCat doesn't receive or store any of the values passed in the User Object to the SDKs.
+:::info
+As the evaluation happens in the SDKs, your user's sensitive information will never leave your system. The data flow is unidirectional (only from ConfigCat CDN servers to your SDKs) and ConfigCat doesn't receive or store any of the User Object's attributes passed to the SDKs.
+:::
 
 ### Example
 
@@ -216,7 +219,7 @@ Let's say you have 2 users and 2 different Feature Flags with percentage-based t
 | Jane | `hash('Jane' + 'isTwitterSharingEnabled') mod 100` <br/>-> The assigned number is **8** | `hash('Jane' + 'isFacebookSharingEnabled') mod 100`  <br/>-> The assigned number is **64** |
 | Joe | `hash('Joe' + 'isTwitterSharingEnabled') mod 100` <br/>-> The assigned number is **32** | `hash('Joe' + 'isFacebookSharingEnabled') mod 100` <br/>-> The assigned number is **12** |
 
-1. Let's start with both Feature Flags with a **0% ON / 100% OFF** setting.
+1. Let's start with both Feature Flags set to **0% ON / 100% OFF**.
 
 |  | isTwitterSharingEnabled <br/> 0% ON / 100% OFF | isFacebookSharingEnabled <br/> 0% ON / 100% OFF |
 | - | - | - |
@@ -230,7 +233,9 @@ Let's say you have 2 users and 2 different Feature Flags with percentage-based t
 | Jane | 8 < 10 <br/>-> **ON** | 64 >= 10 <br/>-> **OFF** |
 | Joe | 32 >= 10 <br/>-> **OFF** | 12 >= 10 <br/>-> **OFF** |
 
-> It is important to note that although both Feature Flags are set to 10% ON / 90% OFF, Jane is only evaluated to **ON** for the `isTwitterSharingEnabled` Feature Flag.
+::: warning
+Although both Feature Flags are set to 10% ON / 90% OFF, Jane is only evaluated to **ON** for the `isTwitterSharingEnabled` Feature Flag.
+:::
 
 3. The Twitter Sharing Feature seems alright so let's increase the `isTwitterSharingEnabled` to **40% ON / 60% OFF**.
 
