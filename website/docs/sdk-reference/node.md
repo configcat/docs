@@ -360,14 +360,14 @@ Config's data stored in a cache, it is efficiency increases in retrieval of data
 ```js
 function myCustomCache() { }
 
-myDebugCache.prototype.get = function(key) {
+myCustomCache.prototype.get = function(key) {
     // `key` [string] - a unique cachekey
 
     // insert here your cache read logic
 
 }
 
-myDebugCache.prototype.set = function(key, item) {
+myCustomCache.prototype.set = function(key, item) {
     // `key` [string] - a unique cachekey
     // `item` [object] - configcat's cache config item
 
