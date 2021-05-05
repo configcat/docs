@@ -46,7 +46,8 @@ module.exports = {
       "integrations/github",
       "integrations/circleci",
       "integrations/terraform",
-      "integrations/amplitude"
+      "integrations/amplitude",
+      "integrations/vscode"
     ],
     "Service": [
       "service/status"
