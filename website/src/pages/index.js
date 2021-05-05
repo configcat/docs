@@ -80,6 +80,7 @@ const features = [
       { url: "integrations/terraform", title: "Terraform" },
       { url: "integrations/amplitude", title: "Amplitude" },
       { url: "integrations/zoho-flow", title: "Zoho Flow" },
+      { url: "integrations/vscode", title: "Visual Studio Code" },
     ]
   },
 ];
