@@ -28,3 +28,6 @@ Please, **do not load test** the ConfigCat production infrastructure without our
 ## Too many requests error in Angular
 The problem was with Angular's Hot Module Replacement functionality during development. The wrapper class, which contained the auto polling ConfigCat SDK was edited, and the Hot Module Replacement reinitialized the whole class without releasing the old, replaced module's Auto Polling timer.
 We believe that this is a really rare case, it could happen only during development.
+
+## Python Auto polling issue with uWSGI web server
+The Python SDK's Auto polling mode utilizes its polling job in a `threading.Thread` object. If you are running your application behind an uWSGI web server, the auto polling mode may not work as expected, because the uWSGI web server disables Python's threading by default. Please [enable threading](https://uwsgi-docs.readthedocs.io/en/latest/Options.html#enable-threads) or switch to another polling mode in this case.
