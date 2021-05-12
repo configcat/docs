@@ -123,6 +123,10 @@ Available options:
 | `max_init_wait_time_seconds`        | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
 | `config_cache_class`                | Custom cache implementation.                                                                         | None    |
 
+:::caution
+Auto polling mode utilizes its polling job in a `threading.Thread` object. If you are running your application behind an uWSGI web server, the auto polling mode may not work as expected, because the uWSGI web server disables Python's threading by default. Please [enable threading](https://uwsgi-docs.readthedocs.io/en/latest/Options.html#enable-threads) or switch to another polling mode in this case.
+:::
+
 ### Lazy loading
 When calling `get_value()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
 
