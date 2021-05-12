@@ -38,6 +38,7 @@ const features = [
       { url: "advanced/team-collaboration", title: "Team Collaboration" },
       { url: "advanced/notifications-webhooks", title: "Notifications - Webhooks" },
       { url: "advanced/troubleshooting", title: "Troubleshooting" },
+      { url: "advanced/cli", title: "Command Line Interface" },
     ]
   },
   {
