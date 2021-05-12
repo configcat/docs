@@ -1,9 +1,9 @@
 ---
 id: cli
-title:  Command Line Interface (beta)
+title:  Command Line Interface
 ---
 
-The ConfigCat Command Line Interface (CLI) allows you to interact with the [Public Management API](advanced/public-api.md) via the command line. It supports most functionality found on the ConfigCat Dashboard. You can manage ConfigCat resources like Feature Flags, Targeting / Percentage rules, Products, Configs, Environments, and more.
+The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> allows you to interact with the [Public Management API](advanced/public-api.md) via the command line. It supports most functionality found on the ConfigCat Dashboard. You can manage ConfigCat resources like Feature Flags, Targeting / Percentage rules, Products, Configs, Environments, and more.
 
 ```
 configcat
@@ -43,7 +43,7 @@ See the <a target="_blank" href="https://configcat.github.io/cli/">command refer
 The following instructions will guide you through the first steps to start using this tool.
 
 ### Installation
-As the development of the CLI is just in beta phase, there is no official package available yet. It'll be distributed through [snapcraft.io](https://snapcraft.io/), [Chocolatey](https://community.chocolatey.org/packages), [Homebrew](https://brew.sh), and [docker](https://www.docker.com/) in the future.
+Distribution via package managers is not yet available, however we plan publishing packages to <a target="_blank" href="https://snapcraft.io/">snapcraft.io</a>, <a target="_blank" href="https://community.chocolatey.org/packages">Chocolatey</a>, <a target="_blank" href="https://brew.sh">Homebrew</a>, and <a target="_blank" href="https://www.docker.com/">docker</a> in the future.
 
 In the meantime, you can download the binaries directly from [GitHub Releases](https://github.com/configcat/cli/releases).
 
@@ -71,7 +71,9 @@ Parameter | Description | Default value
 
 The possible **architecture** values for Linux: `x64`, `musl-x64`, `arm`, `arm64`.
 
-> For macOS the architecture is fixed to `x64`, but we plan to support Apple silicon in the future.
+:::info
+For macOS, the architecture is fixed to `x64`, but we plan the support of Apple silicon in the future.
+:::
 
 **Script Usage examples**:
 
@@ -111,8 +113,11 @@ When any of these environment variables are set, the CLI will use those over the
 ## Modes
 The CLI supports both interactive and argument driven execution. When no arguments provided for a command and user input is enabled (stdout is not redirected), the CLI automatically activates interactive mode.
 
+### Interactive
+
 ![interactive](/assets/cli/teaser.gif)
 
+### With Arguments
 The same operation with command arguments would look like this:
 ```
 configcat flag create \
@@ -123,6 +128,10 @@ configcat flag create \
 --type boolean \
 --tag-ids <tag-id-1> <tag-id-2> \
 ```
+
+:::info
+Each `create` command writes the newly created resource's ID to the standard output, that you can save for further operations.
+:::
 
 ## Examples
 Here are a few examples showing the true power of the CLI.
@@ -146,3 +155,14 @@ The following example shows how you can add targeting rules to a Feature Flag vi
 The following example shows how you can set percentage rules on a Feature Flag via command line.
 
 ![flag-percentage-add](/assets/cli/flag-percentage-add.gif)
+
+### Scan for code references
+The following example shows how you can scan a codebase for Feature Flag or Setting usages. The scanner command searches for every Feature Flag / Setting key defined within the given Config.
+
+![flag-percentage-add](/assets/cli/scan.gif)
+
+The `scan` command respects all include/exclude patterns listed inside `.gitignore` and `.ignore` files within the given directory. 
+
+In addition, you can create an extra `.ccignore` file with patterns that the scanner must include/exclude.
+
+Each pattern must follow the <a target="_blank" href="https://git-scm.com/docs/gitignore#_pattern_format">gitignore pattern format</a>.
