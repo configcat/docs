@@ -15,7 +15,8 @@ module.exports = {
       "advanced/caching",
       "advanced/team-collaboration",
       "advanced/notifications-webhooks",
-      "advanced/troubleshooting"
+      "advanced/troubleshooting",
+      "advanced/cli"
     ],
     "SDK References": [
       "sdk-reference/overview",
