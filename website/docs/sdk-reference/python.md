@@ -160,7 +160,7 @@ Available options:
 | `config_cache_class`         | Custom cache implementation. | None    |
 
 ### Manual polling
-Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```python
 configcat_client = configcatclient.create_client_with_manual_poll("#YOUR-SDK-KEY#");

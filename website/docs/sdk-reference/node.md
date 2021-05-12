@@ -217,7 +217,7 @@ let configCatClient = configcat.createClientWithLazyLoad("#YOUR-SDK-KEY#", { cac
 
 ### Manual polling
 
-Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `forceRefresh()` or `forceRefreshAsync()` is your application's responsibility.
+Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `forceRefresh()` or `forceRefreshAsync()` is your application's responsibility.
 
 #### `createClientWithManualPoll(sdkKey, options)`
 

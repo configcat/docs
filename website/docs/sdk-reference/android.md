@@ -196,7 +196,7 @@ val client = ConfigCatClient.newBuilder()
 If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
 
 ### Manual polling
-Manual polling gives you full control over when the setting values are downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 ```java
 val client = ConfigCatClient.newBuilder()
     .mode(PollingModes.ManualPoll())
