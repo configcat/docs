@@ -160,7 +160,7 @@ Available options:
 | `CacheTimeToLiveSeconds` | Cache TTL.  | 60      |
 
 ### Manual polling
-Manual polling gives you full control over when the setting values are downloaded. *ConfigCat SDK* will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
 
 ```csharp
 var clientConfiguration = new ManualPollConfiguration
