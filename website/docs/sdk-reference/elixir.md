@@ -32,7 +32,7 @@ def start(_type, _args) do
     MyApp
   ]
 
-  opts = [strategy: :one_for_one, name: Simple.Supervisor]
+  opts = [strategy: :one_for_one, name: MyApp.Supervisor]
   Supervisor.start_link(children, opts)
 end
 ```
@@ -101,8 +101,8 @@ user_object = ConfigCat.User.new("john@example.com")
 | `custom`     | Optional `Map` for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```elixir
-user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92", email: 'john@example', country: 'United Kingdom',
-                custom: %{SubscriptionType: 'Pro', UserRole: 'Admin'})
+user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92", email: "john@example", country: "United Kingdom",
+                custom: %{SubscriptionType: "Pro", UserRole: "Admin"})
 ```
 
 ## Polling Modes
@@ -118,7 +118,7 @@ Use the `poll_interval_seconds` option parameter to change the polling interval.
 ```elixir
 {ConfigCat, [
     sdk_key: "YOUR SDK KEY",
-    cache_policy: CachePolicy.auto(poll_interval_seconds: 60)
+    cache_policy: ConfigCat.CachePolicy.auto(poll_interval_seconds: 60)
 ]},
 ```
 
@@ -127,7 +127,7 @@ Adding a callback to `on_changed` option parameter will get you notified about c
 ```elixir
 {ConfigCat, [
     sdk_key: "YOUR SDK KEY",
-    cache_policy: CachePolicy.auto(on_changed: callback/0)
+    cache_policy: ConfigCat.CachePolicy.auto(on_changed: callback)
 ]}
 ```
 
@@ -147,7 +147,7 @@ Use `cache_expiry_seconds` option parameter to set cache lifetime.
 ```elixir
 {ConfigCat, [
     sdk_key: "YOUR SDK KEY",
-    cache_policy: CachePolicy.lazy(cache_expiry_seconds: 300)
+    cache_policy: ConfigCat.CachePolicy.lazy(cache_expiry_seconds: 300)
 ]}
 ```
 
