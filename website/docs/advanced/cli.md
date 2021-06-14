@@ -66,7 +66,7 @@ docker pull configcat/cli
 ```
 
 #### Install Script
-You can install the CLI by executing an install script on Unix platforms. 
+On Unix platforms, you can install the CLI by executing an install script.
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash
 ```
