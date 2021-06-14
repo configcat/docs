@@ -9,7 +9,7 @@ The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command
 configcat
   This is the Command Line Tool of ConfigCat.
   ConfigCat is a hosted feature flag service: https://configcat.com
-  For more information, see the documentation here: https://configcat.com/docs/
+  For more information, see the documentation here: https://configcat.com/docs/advanced/cli
 
 Usage:
   configcat [options] [command]
@@ -20,15 +20,14 @@ Options:
   -?, -h, --help  Show help and usage information
 
 Commands:
-  setup                Setup the CLI with Management API host and credentials.
+  setup                Setup the CLI with Public Management API host and credentials.
                        You can get your credentials from here:
                        https://app.configcat.com/my-account/public-api-credentials
   ls                   List all Product, Config, and Environment IDs
-  p, product           Manage Products. More about Products: https://configcat.com/docs/main-concepts/#product
-  c, config            Manage Configs. More about Configs: https://configcat.com/docs/main-concepts/#config
-  e, environment       Manage Environments. More about Environments:
-                       https://configcat.com/docs/main-concepts/#environment
-  t, tag               Manage Tags. Tags are stored under a Product. You can attach a Tag to a Feature Flag or Setting.
+  p, product           Manage Products
+  c, config            Manage Configs
+  e, environment       Manage Environments
+  t, tag               Manage Tags
   f, flag, s, setting  Manage Feature Flags & Settings
   k, sdk-key           List SDK Keys
   scan <directory>     Scans files for Feature Flag or Setting usages
@@ -43,9 +42,28 @@ See the <a target="_blank" href="https://configcat.github.io/cli/">command refer
 The following instructions will guide you through the first steps to start using this tool.
 
 ### Installation
-Distribution via package managers is not yet available, however we plan publishing packages to <a target="_blank" href="https://snapcraft.io/">snapcraft.io</a>, <a target="_blank" href="https://community.chocolatey.org/packages">Chocolatey</a>, <a target="_blank" href="https://brew.sh">Homebrew</a>, and <a target="_blank" href="https://www.docker.com/">docker</a> in the future.
+You can install the CLI on multiple operating systems using the following sources.
 
-In the meantime, you can download the binaries directly from [GitHub Releases](https://github.com/configcat/cli/releases).
+#### Homebrew (macOS / Linux)
+```bash
+brew tap configcat/tap
+brew install configcat
+```
+
+#### Snap (Linux)
+```bash
+sudo snap install configcat
+```
+
+#### Chocolatey (Windows)
+```powershell
+choco install configcat
+```
+
+#### Docker
+```bash
+docker pull configcat/cli
+```
 
 #### Install Script
 You can install the CLI by executing an install script on Unix platforms. 
@@ -92,8 +110,13 @@ curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install
 curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash -s -- -a=arm
 ```
 
+#### Manual
+You can download the binaries directly from [GitHub Releases](https://github.com/configcat/cli/releases).
+
 ### Configuration
 After a successful installation, the CLI must be configured with your <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credentials</a>.
+
+You can do this by using the `configcat setup` command.
 
 ![interactive](/assets/cli/setup.gif)
 
@@ -107,7 +130,7 @@ Name | Description |
 `CONFIGCAT_API_PASS` | The Management API basic authentication password. | 
 
 :::caution
-When any of these environment variables are set, the CLI will use those over their local values set by the `configcat setup` command.
+When any of these environment variables are set, the CLI will use them over the local values set by the `configcat setup` command.
 :::
 
 ## Modes
