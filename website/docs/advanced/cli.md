@@ -121,7 +121,7 @@ You can do this by using the `configcat setup` command.
 ![interactive](/assets/cli/setup.gif)
 
 #### Environment Variables
-The CLI can read your credentials from the following environment variables.
+Besides the configuration command above, the CLI can read your credentials from the following environment variables.
 
 Name | Description |
 --------- | ----------- |
