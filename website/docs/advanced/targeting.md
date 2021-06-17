@@ -233,7 +233,7 @@ Let's say you have two users and two different Feature Flags with percentage-bas
 | Jane | 8 < 10 <br/>-> **ON** | 64 >= 10 <br/>-> **OFF** |
 | Joe | 32 >= 10 <br/>-> **OFF** | 12 >= 10 <br/>-> **OFF** |
 
-::: warning
+:::caution
 Although both Feature Flags are set to 10% ON / 90% OFF, Jane is only evaluated to **ON** for the `isTwitterSharingEnabled` Feature Flag.
 :::
 
