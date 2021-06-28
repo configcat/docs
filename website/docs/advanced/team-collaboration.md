@@ -30,6 +30,6 @@ To manage organization members, go to:
 
 *Permission groups* are collections of permissions. They help you organize the permissions into groups that are meaningful to you. You can control your *Team members* permissions by assigning them to *Permission groups*. 
 
-Manage *Permission Groups* on the [Permission Groups page](https://app.configcat.com/product/permission-groups) or every Product.
+Manage *Permission Groups* on the [Permission Groups page](https://app.configcat.com/product/permission-groups) of every Product.
 
 
