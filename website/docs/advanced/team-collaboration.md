@@ -18,12 +18,12 @@ You can modify their permission group later anytime.
 ## Managing Team Members (Product level)
 You can manage your team on the <a href="https://app.configcat.com/product/members" target="_blank">Team Members page</a> of every Product.
 
-Organization Admins have unlimited access to every Product under an Organization. [Read more on Organization Management](/organization.md)
+*Organization Admins* have unlimited access to every Product under an Organization, their permissions can't be edited under the product. [Read more on Organization Management](/organization.md)
 
 ## Managing Team Members (Organization level)
 Only *Organization Admins* can manage Organization level permissions.
 
-To manage Organization Members, go to:
+To manage organization members, go to:
 [Organization Members & Roles page.](https://app.configcat.com/organization/members)
 
 ## Permissions & Permission Groups (Product level)
