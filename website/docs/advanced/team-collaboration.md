@@ -30,11 +30,6 @@ To manage Organization Members, go to:
 
 *Permission groups* are collections of permissions. They help you organize the permissions into groups that are meaningful to you. You can control your *Team members* permissions by assigning them to *Permission groups*. 
 
-> For example, you could define the following *Permission groups*:
-> * Administrator - *Manage Product*, *Manage Resources*, *Full access* to all environments
-> * Product Manager -  *Full access* to all environments
-> * Developer - *Manage Resources*, *Read-only access* to LIVE environment, *Full access* to all other environments
-
 Manage *Permission Groups* on the [Permission Groups page](https://app.configcat.com/product/permission-groups) or every Product.
 
 
