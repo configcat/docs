@@ -255,6 +255,7 @@ const configCatClient = configcat.createClientWithAutoPoll('#YOUR-SDK-KEY#',
 ```
 
 Available log levels:
+
 | Level | Name  | Description                                             |
 | ----- | ----- | ------------------------------------------------------- |
 | -1    | Off   | Nothing gets logged.                                    |

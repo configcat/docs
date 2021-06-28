@@ -193,6 +193,7 @@ client.LogLevel = LogLevel.Info;
 ```
 
 Available log levels:
+
 | Level   | Description                                             |
 | ------- | ------------------------------------------------------- |
 | Off     | Nothing is logged.                                      |
