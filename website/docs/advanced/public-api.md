@@ -30,15 +30,13 @@ colon `:` and **Base64 encoded** .
 
 e.g: `Basic MDhkN2UxMzYtZjE2OS02MzUyLTk5NmQtMjVkMGNmNzQ4ODFjO9`
 
-![BasicAuth](/assets/basic-auth.png)
-
 ### Create Public API credentials
 
 1. Open your [Public API credentials management page](https://app.configcat.com/my-account/public-api-credentials) on the ConfigCat Dashboard
 2. Click **+ Add New Credentials**, give it a name, hit **Generate**. 
 3. Save your basic auth username and password to your favorite key-vault.
 
-	> Due to security reasons we don't store your password, so if you close the dialog you 
+	> Due to security reasons we don't store your password, so if you close the credential dialog you 
 	> won't be able to access it again.
 
 5. Use username-password credentials with BASIC authentication in your HTTP requests.
