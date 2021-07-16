@@ -10,7 +10,7 @@ The following issues were reported by customers. We collected what we learned an
 First, you can verify on the [Service Status Monitor](https://status.configcat.com) that ConfigCat is up and running or if there is planned maintenance.
 ### General SDK Checklist
 1. It might be a good idea to update the ConfigCat SDK to the latest version.
-1. Check if you configured the [Data Governance](data-governance) functionality properly.
+1. Check if you configured the [Data Governance](/advanced/data-governance) functionality properly.
 1. Singleton: We strongly recommend using the ConfigCat SDK as a Singleton. Initializing the SDK over and over again can cause serious performance issues in production.
 1. Are you using the proper polling mode for your use case? Details on polling modes in the [SDK Docs](/sdk-reference/overview.md).
 1. Might be a too frequent `Auto Polling` interval. Please check the [SDK Docs](/sdk-reference/overview.md).
