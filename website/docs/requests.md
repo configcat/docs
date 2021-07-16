@@ -96,10 +96,10 @@ the default polling interval down to 1 second. In this case we are calculating w
 ## How to lower the monthly config.json download count?
 
 ### Increasing the polling interval
-You can lower the frequency your application downloads the `config.json` by setting larger polling intervals or using a different [polling mode](advanced/caching) other than the default auto polling. See the [SDK References for more.](sdk-reference/overview)
+You can lower the frequency your application downloads the `config.json` by setting larger polling intervals or using a different [polling mode](/advanced/caching) other than the default auto polling. See the [SDK References for more.](/sdk-reference/overview)
 
 ### Using Webhooks
-In a backend application, you might want to try using [Webhooks.](advanced/notifications-webhooks) This way your application gets notified about changes and downloads the `config.json` only when it is needed.
+In a backend application, you might want to try using [Webhooks.](/advanced/notifications-webhooks) This way your application gets notified about changes and downloads the `config.json` only when it is needed.
 
 ### Calling your backend instead of the ConfigCat CDN
 In the case of a frontend application, you can lower the number of calls made towards the ConfigCat CDN by moving the evaluation logic from the frontend application to your backend.
