@@ -65,7 +65,8 @@ Creating the client is different for each polling mode.
 [See below](#polling-modes) for details.
 
 :::caution
-We strongly recommend you to use the ConfigCatClient as a singleton object in your application
+We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
+If you want to use multiple SDK Keys in the same application, create only one `ConfigCatClient` per SDK Key.
 :::
 
 ## Anatomy of `GetValue()`, `GetValueAsync()`

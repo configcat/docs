@@ -11,7 +11,7 @@ First, you can verify on the [Service Status Monitor](https://status.configcat.c
 ### General SDK Checklist
 1. It might be a good idea to update the ConfigCat SDK to the latest version.
 1. Check if you configured the [Data Governance](/advanced/data-governance) functionality properly.
-1. Singleton: We strongly recommend using the ConfigCat SDK as a Singleton. Initializing the SDK over and over again can cause serious performance issues in production.
+1. Singleton: We strongly recommend using the ConfigCat SDK as a Singleton. Initializing the SDK over and over again can cause serious performance issues in production. If you want to use multiple SDK Keys in the same application, create only one *ConfigCat Client* per SDK Key.
 1. Are you using the proper polling mode for your use case? Details on polling modes in the [SDK Docs](/sdk-reference/overview.md).
 1. Might be a too frequent `Auto Polling` interval. Please check the [SDK Docs](/sdk-reference/overview.md).
 1. In `Manual Polling` mode, it could be a too frequent `forceRefresh()` call in your code, making the SDK download the config.json often.

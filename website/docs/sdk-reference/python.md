@@ -58,7 +58,8 @@ Creating the client is different for each polling mode.
 [See below](#polling-modes) for details.
 
 :::caution
-We strongly recommend using the *ConfigCat Client* as a Singleton object in your application.
+We strongly recommend you to use the *ConfigCat Client* as a Singleton object in your application.
+If you want to use multiple SDK Keys in the same application, create only one *ConfigCat Client* per SDK Key.
 :::
 
 ## Anatomy of `get_value()`
