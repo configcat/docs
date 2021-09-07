@@ -12,7 +12,6 @@ module.exports = {
     googleAnalytics: {
       trackingID: "G-VNVQ03TVR2"
     },
-    sidebarCollapsible: false,
     navbar: {
       title: 'ConfigCat Docs',
       logo: {
@@ -161,6 +160,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          sidebarCollapsible: true,
           // Please change this to your repo.
           editUrl:
             'https://github.com/configcat/docs/edit/master/website/',
