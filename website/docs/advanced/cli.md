@@ -203,7 +203,7 @@ Each `create` command writes the newly created resource's ID to the standard out
 :::
 
 :::info
-You can change the output format of several command's result to JSON with the `--json` option, like: `configcat flag ls --json`. 
+You can change the output format of several command's result to JSON with the `--json` option, like: `configcat flag ls --json`. See more about these commands in the <a target="_blank" href="https://configcat.github.io/cli/">command reference documentation</a>.
 :::
 
 ## Examples
