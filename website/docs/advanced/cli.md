@@ -44,34 +44,76 @@ The following instructions will guide you through the first steps to start using
 ### Installation
 You can install the CLI on multiple operating systems using the following sources.
 
-#### Homebrew (macOS / Linux)
+<details>
+  <summary><strong>Homebrew (macOS / Linux)</strong></summary>
+
+Install the CLI from <a target="_blank" href="https://github.com/configcat/homebrew-tap">ConfigCat tap</a> with <a target="_blank" href="https://brew.sh">Homebrew</a> by executing the following command:
 ```bash
 brew tap configcat/tap
 brew install configcat
 ```
 
-#### Snap (Linux)
+</details>
+
+<details>
+  <summary><strong>Snap (Linux)</strong></summary>
+
+Install the CLI from <a target="_blank" href="https://snapcraft.io">Snapcraft</a> by executing the following command:
 ```bash
 sudo snap install configcat
 ```
 
-#### Chocolatey (Windows)
+</details>
+
+<details>
+  <summary><strong>Scoop (Windows)</strong></summary>
+
+Install the CLI from <a target="_blank" href="https://github.com/configcat/scoop-configcat">ConfigCat bucket</a> with <a target="_blank" href="https://scoop.sh">Scoop</a> by executing the following command:
+```bash
+scoop bucket add configcat https://github.com/configcat/scoop-configcat
+scoop install configcat
+```
+
+</details>
+
+<details>
+  <summary><strong>Chocolatey (Windows)</strong></summary>
+
+Install the CLI from <a target="_blank" href="https://chocolatey.org/">Chocolatey</a> by executing the following command:
 ```powershell
 choco install configcat
 ```
 
-#### Docker
+</details>
+
+<details>
+  <summary><strong>Docker</strong></summary>
+
+The CLI can be executed from a <a target="_blank" href="https://www.docker.com/">Docker</a> image.
 ```bash
 docker pull configcat/cli
 ```
+An example of how to scan a repository for feature flag & setting references with the docker image.
+```bash
+docker run --rm \
+    --env CONFIGCAT_API_HOST=<API-HOST> \
+    --env CONFIGCAT_API_USER=<API-USER> \
+    --env CONFIGCAT_API_PASS=<API-PASSWORD> \
+    -v /path/to/repository:/repository \
+  configcat/cli scan "/repository" --print --config-id <CONFIG-ID>
+```
 
-#### Install Script
+</details>
+
+<details>
+  <summary><strong>Install Script</strong></summary>
+
 On Unix platforms, you can install the CLI by executing an install script.
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash
 ```
 
-By default, the script downloads the OS specific artifact from the latest [GitHub Release](https://github.com/configcat/cli/releases) with `curl` and moves it into the `/usr/local/bin` directory.
+By default, the script downloads the OS specific artifact from the latest <a target="_blank" href="https://github.com/configcat/cli/releases">GitHub Release</a> with `curl` and moves it into the `/usr/local/bin` directory.
 
 It might happen, that you don't have permissions to write into `/usr/local/bin`, then you should execute the install script with `sudo`.
 
@@ -89,11 +131,9 @@ Parameter | Description | Default value
 
 The possible **architecture** values for Linux: `x64`, `musl-x64`, `arm`, `arm64`.
 
-:::info
-For macOS, the architecture is fixed to `x64`, but we plan the support of Apple silicon in the future.
-:::
+> For macOS, the architecture is fixed to `x64`, but we plan the support of Apple silicon in the future.
 
-**Script Usage examples**:
+**Script usage examples**:
 
 *Custom installation directory*:
 ```bash
@@ -110,8 +150,14 @@ curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install
 curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash -s -- -a=arm
 ```
 
-#### Manual
-You can download the binaries directly from [GitHub Releases](https://github.com/configcat/cli/releases).
+</details>
+
+<details>
+  <summary><strong>Standalone executables</strong></summary>
+
+You can download the executables directly from <a target="_blank" href="https://github.com/configcat/cli/releases">GitHub Releases</a> for your desired platform.
+
+</details>
 
 ### Configuration
 After a successful installation, the CLI must be configured with your <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credentials</a>.
@@ -154,6 +200,10 @@ configcat flag create \
 
 :::info
 Each `create` command writes the newly created resource's ID to the standard output, that you can save for further operations.
+:::
+
+:::info
+You can change the output format of several command's result to JSON with the `--json` option, like: `configcat flag ls --json`. 
 :::
 
 ## Examples
