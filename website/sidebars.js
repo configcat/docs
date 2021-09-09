@@ -14,9 +14,25 @@ module.exports = {
       "advanced/public-api",
       "advanced/caching",
       "advanced/team-collaboration",
+      {
+        "Sign-On & Account Management": [
+          "advanced/sign-on/domain-verification",
+          {
+            "SAML 2.0": [
+              "advanced/sign-on/saml/azure-ad",
+              "advanced/sign-on/saml/adfs",
+              "advanced/sign-on/saml/google",
+              "advanced/sign-on/saml/okta",
+              "advanced/sign-on/saml/auth0",
+              "advanced/sign-on/saml/onelogin",
+            ]
+          },
+          "advanced/sign-on/user-provisioning",
+        ]
+      },
       "advanced/notifications-webhooks",
       "advanced/troubleshooting",
-      "advanced/cli"
+      "advanced/cli",
     ],
     "SDK References": [
       "sdk-reference/overview",

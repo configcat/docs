@@ -36,6 +36,7 @@ const features = [
       { url: "advanced/public-api", title: "Public Management API" },
       { url: "advanced/caching", title: "Polling modes & Caching" },
       { url: "advanced/team-collaboration", title: "Team Collaboration" },
+      { url: "advanced/sign-on/domain-verification", title: "Sign-On & Account Management" },
       { url: "advanced/notifications-webhooks", title: "Notifications - Webhooks" },
       { url: "advanced/troubleshooting", title: "Troubleshooting" },
       { url: "advanced/cli", title: "Command Line Interface" },
