@@ -13,23 +13,28 @@ module.exports = {
       "advanced/user-object",
       "advanced/public-api",
       "advanced/caching",
-      "advanced/team-collaboration",
       {
-        "Sign-On & Account Management": [
-          "advanced/sign-on/domain-verification",
+        "User Management": [
+          "advanced/user-management/team-collaboration",
           {
-            "SAML 2.0": [
-              "advanced/sign-on/saml/azure-ad",
-              "advanced/sign-on/saml/adfs",
-              "advanced/sign-on/saml/google",
-              "advanced/sign-on/saml/okta",
-              "advanced/sign-on/saml/auth0",
-              "advanced/sign-on/saml/onelogin",
+            "SAML Single Sign-On": [
+              "advanced/user-management/saml/sso-overview",
+              {
+                "Identity Providers": [
+                  "advanced/user-management/saml/identity-providers/azure-ad",
+                  "advanced/user-management/saml/identity-providers/adfs",
+                  "advanced/user-management/saml/identity-providers/google",
+                  "advanced/user-management/saml/identity-providers/okta",
+                  "advanced/user-management/saml/identity-providers/auth0",
+                  "advanced/user-management/saml/identity-providers/onelogin",
+                ]
+              },
             ]
           },
-          "advanced/sign-on/user-provisioning",
+          "advanced/user-management/auto-assign-users",
+          "advanced/user-management/domain-verification",
         ]
-      },
+      },      
       "advanced/notifications-webhooks",
       "advanced/troubleshooting",
       "advanced/cli",

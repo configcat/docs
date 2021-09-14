@@ -1,4 +1,0 @@
----
-id: okta
-title: Okta
----
