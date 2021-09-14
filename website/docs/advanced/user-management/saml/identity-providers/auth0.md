@@ -77,7 +77,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
   <TabItem value="manual" label="Manual Configuration">
     <ul>
       <li>
-        Copy the value of the <code>Identity Provider Login URL</code> and <code>Identity Provider Certificate</code> fields and paste them into the Configuration dialog at ConfigCat.
+        Copy the value of <code>Identity Provider Login URL</code> and download the <code>Identity Provider Certificate</code>, then paste them into the Configuration dialog at ConfigCat.
         <img class="saml-tutorial-img" src="/static/assets/saml/auth0/manual.png" />
         <img class="saml-tutorial-img" src="/static/assets/saml/auth0/cc_manual.png" />
       </li>
