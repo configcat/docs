@@ -13,7 +13,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 ### 1. Create an Application in Auth0
 
-- Log in to <a href="https://auth0.com/auth/login" target="_blank">Auth0</a>, go to the admin dashboard, and select `Applications`, then click `Create Application`.
+- Log in to <a href="https://auth0.com/auth/login" target="_blank">Auth0</a>, select `Applications` from the menu, then click `Create Application`.
 
   <img class="saml-tutorial-img" src="/static/assets/saml/auth0/applications.png" />
 
