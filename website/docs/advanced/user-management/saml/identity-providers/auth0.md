@@ -89,7 +89,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 </Tabs>
 
 ### 4. Sign In
-- Go to the `Dashboard Log In` page, and click `COMAPNY ACCOUNT - SAML`.
+- Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMAPNY ACCOUNT - SAML`.
   
   <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/saml_login.png" />
 
