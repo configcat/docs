@@ -1,6 +1,6 @@
 ---
-id: team-collaboration
-title: Team and Collaboration
+id: team-management-basics
+title: Team Management Basics
 ---
 
 *Team members* are your friends, colleagues, and clients who work on the same *Product*. You can invite as many of them to your *Product* as many you want.
