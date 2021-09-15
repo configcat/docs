@@ -62,11 +62,11 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
   <TabItem value="metadataUrl" label="Metadata URL" default>
     <ul>
       <li>
-        Copy the URL of <code>Identity Provide metadata</code>.
+        <p>Copy the URL of <code>Identity Provide metadata</code>.</p>
         <img class="saml-tutorial-img" src="/static/assets/saml/auth0/metadata_url.png" />
       </li>
       <li>
-        Paste the copied value into the <code>Metadata URL</code> field at ConfigCat.
+        <p>Paste the copied value into the <code>Metadata URL</code> field at ConfigCat.</p>
         <img class="saml-tutorial-img" src="/static/assets/saml/auth0/cc_metadata_url.png" />
       </li>
       <li>
@@ -77,7 +77,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
   <TabItem value="manual" label="Manual Configuration">
     <ul>
       <li>
-        Copy the value of <code>Identity Provider Login URL</code> and download the <code>Identity Provider Certificate</code>, then paste them into the Configuration dialog at ConfigCat.
+        <p>Copy the value of <code>Identity Provider Login URL</code> and download the <code>Identity Provider Certificate</code>, then paste them into the Configuration dialog at ConfigCat.</p>
         <img class="saml-tutorial-img" src="/static/assets/saml/auth0/manual.png" />
         <img class="saml-tutorial-img" src="/static/assets/saml/auth0/cc_manual.png" />
       </li>
