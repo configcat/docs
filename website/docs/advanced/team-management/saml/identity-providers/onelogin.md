@@ -1,4 +1,0 @@
----
-id: onelogin
-title: OneLogin
----

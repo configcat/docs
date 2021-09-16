@@ -101,7 +101,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 
   <img class="saml-tutorial-img" src="/static/assets/saml/auth0/login.png" />
 
-- You should be redirected back to ConfigCat signed in with your company account.
+- You should be redirected to ConfigCat signed in with your company account.
 
 ### 5. Next Steps
 
