@@ -32,5 +32,5 @@ Other Identity Providers might also work with ConfigCat, if they support the SAM
     - SP initiated SSO
 
 - Required NameID format: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`
-- Supported Signature Algorithm: `RSA-SHA256`
+- Supported signature algorithm: `RSA-SHA256`
 #### 
