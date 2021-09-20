@@ -4,7 +4,7 @@ title: Auto-assign Users
 ---
 
 All new users who sign-up with a [verified email domain](./domain-verification) will be automatically added to your organization.
-Furthermore, you can set which automatically assigned permissions / roles they should get upon signing up.
+Furthermore, you can also set which Organization roles / Product permissions they should get upon on-boarding.
 
 #### Steps to configure:
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
