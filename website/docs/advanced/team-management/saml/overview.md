@@ -5,7 +5,7 @@ title: Overview
 
 This section describes how you can enable SAML Single Sign-On (SSO) for your ConfigCat environment.
 
-SAML authentication allows your team members to authenticate with ConfigCat via their company accounts using your own Identity Provider (IdP).
+SAML SSO allows your team members to authenticate with ConfigCat via their company accounts using your own Identity Provider (IdP).
 
 ### Prerequisites
 - [Verified domain](../domain-verification)  
@@ -26,11 +26,13 @@ We tested and validated the following SAML Identity Providers:
 Other Identity Providers might also work with ConfigCat, if they support the SAML 2.0 protocol.
 :::
 
-### SAML Attributes
-- Supported SAML flows:
-    - IdP initiated SSO
-    - SP initiated SSO
 
-- Required NameID format: `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`
-- Supported signature algorithm: `RSA-SHA256`
-#### 
+### Supported SAML flows
+  - IdP initiated SSO
+  - SP initiated SSO
+
+### SAML Requirements
+These are the Identity Provider configuration requirements for ConfigCat:
+
+- **Name ID**: ConfigCat only supports the email address in the `NameID` field.
+- **Signature algorithm**: ConfigCat only supports the `RSA-SHA256` signature algorithm.

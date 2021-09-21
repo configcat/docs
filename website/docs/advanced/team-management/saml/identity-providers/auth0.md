@@ -32,7 +32,7 @@ The next step will guide you on how to collect the information required for the 
 
   <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/authentication.png" />
 
-- Select the domain you want to configure with SAML, and click `Set` under the `SAML authentication status`.
+- Select the domain you want to configure with SAML, and click `Set` under the `SAML SSO status`.
 
   <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/domains.png" />
 
