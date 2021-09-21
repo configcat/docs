@@ -3,7 +3,7 @@ id: auto-assign-users
 title: Auto-assign Users
 ---
 
-All new users who sign-up with a [verified email domain](./domain-verification) will be automatically added to your organization.
+All new users who sign up with a [verified email domain](./domain-verification) will be automatically added to your organization.
 Furthermore, you can also set which Organization roles / Product permissions they should get upon on-boarding.
 
 #### Steps to configure:
