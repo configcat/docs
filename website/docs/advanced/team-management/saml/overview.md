@@ -5,7 +5,7 @@ title: Overview
 
 This section describes how you can enable SAML Single Sign-On (SSO) for your ConfigCat environment.
 
-SAML SSO allows your team members to authenticate with ConfigCat via their company accounts using your own Identity Provider (IdP).
+SAML SSO allows your team members to sign up and log in to ConfigCat via their company accounts using your own Identity Provider (IdP).
 
 ### Prerequisites
 - [Verified domain](../domain-verification)  
