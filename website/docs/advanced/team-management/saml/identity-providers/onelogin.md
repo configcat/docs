@@ -41,9 +41,9 @@ The next step will guide you on how to collect the information required for the 
   <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/domains.png" />
 
 - From the appearing dialog, copy the following values and paste them into the OneLogin application's configuration page.
-    - Copy `Entity ID` and paste it into the `Audience (EntityID)`.
-    - Copy `Assertion Consumer Service` and paste it into the `ACS (Consumer) URL`.
-    - Paste the same `Assertion Consumer Service` into the `ACS (Consumer) URL Validator` in regex format.
+    - Copy `Entity ID` and paste it into the `Audience (EntityID)` field.
+    - Copy `Assertion Consumer Service` and paste it into the `ACS (Consumer) URL` field.
+    - Paste the same `Assertion Consumer Service` into the `ACS (Consumer) URL Validator` field in regex format e.g. `^https:\/\/dashboard\-api\.configcat\.com\/saml\/acs\/08d97769\-fed5\-4fd4\-8a09\-0a38bb951177$`
     - For `Login URL` type `https://app.configcat.com/login`.
 
     <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/saml_config.png" />
