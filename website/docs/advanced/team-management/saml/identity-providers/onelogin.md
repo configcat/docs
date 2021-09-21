@@ -21,7 +21,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
   <img class="saml-tutorial-img" src="/static/assets/saml/onelogin/add_app.png" />
 
-- Type `saml` into the search bar, and select `SAML Custom Connector (Advanced)`.
+- Type `SAML` into the search bar, and select `SAML Custom Connector (Advanced)`.
 
   <img class="saml-tutorial-img" src="/static/assets/saml/onelogin/select_app.png" />
 
