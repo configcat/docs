@@ -7,6 +7,7 @@ All new users who sign up with a [verified email domain](./domain-verification) 
 Furthermore, you can also set which Organization roles / Product permissions they should get upon on-boarding.
 
 #### Steps to configure:
+
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
   <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/authentication.png" />

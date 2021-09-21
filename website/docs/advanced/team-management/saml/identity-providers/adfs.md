@@ -168,7 +168,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 
   <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/company_email.png" />
 
-- ConfigCat will redirect you to the ADFS sign in page. Type your credentials for sign-in.
+- ConfigCat will redirect you to the ADFS sign in page. Type your credentials, and click `Sign in`.
 
   <img class="saml-tutorial-img" src="/static/assets/saml/adfs/login.png" />
 

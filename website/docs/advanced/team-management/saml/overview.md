@@ -28,8 +28,8 @@ Other Identity Providers might also work with ConfigCat, if they support the SAM
 
 
 ### Supported SAML flows
-  - IdP initiated SSO
-  - SP initiated SSO
+  - Identity Provider initiated SSO
+  - Service Provider initiated SSO
 
 ### SAML Requirements
 These are the Identity Provider configuration requirements for ConfigCat:

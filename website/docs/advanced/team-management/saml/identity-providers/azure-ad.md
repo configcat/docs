@@ -29,7 +29,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
   <img class="saml-tutorial-img" src="/static/assets/saml/azure-ad/app_name.png" />
 
-- On the `Manage` section of the application, select the `Single sign-on` option, then select `SAML`.
+- On the `Manage` section of the application, select `Single sign-on`, then select `SAML`.
 
   <img class="saml-tutorial-img" src="/static/assets/saml/azure-ad/enable_saml.png" />
 
