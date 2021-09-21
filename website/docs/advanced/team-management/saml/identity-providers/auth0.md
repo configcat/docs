@@ -36,7 +36,7 @@ The next step will guide you on how to collect the information required for the 
 
   <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/domains.png" />
 
-- From the appearing dialog, copy the following values and paste them into the configuration dialog.
+- From the appearing dialog, copy the following values and paste them into the Auth0 configuration dialog.
     - `Assertion Consumer Service` -> `Application Callback URL`
     - For `Settings`, use the following JSON value:
     ```
