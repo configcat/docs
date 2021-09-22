@@ -15,26 +15,26 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 - Log in to <a href="https://auth0.com/auth/login" target="_blank">Auth0</a>, select `Applications` from the menu, then click `Create Application`.
 
-  <img class="saml-tutorial-img" src="/static/assets/saml/auth0/applications.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/auth0/applications.png" />
 
 - Enter a descriptive `Name`, select `Regular Web Applications`, then click `Create`.
 
-  <img class="saml-tutorial-img" src="/static/assets/saml/auth0/app_name.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/auth0/app_name.png" />
 
 - Select the `Addons` tab, and click `SAML2`.
 
-  <img class="saml-tutorial-img" src="/static/assets/saml/auth0/enable_saml.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/auth0/enable_saml.png" />
 
 The next step will guide you on how to collect the information required for the appearing configuration dialog.
 
 ### 2. Configure SAML for the Okta Application
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
-  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/authentication.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/authentication.png" />
 
 - Select the domain you want to configure with SAML, and click `Set` under the `SAML SSO status`.
 
-  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/domains.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/domains.png" />
 
 - From the appearing dialog, copy the following values and paste them into the Auth0 configuration dialog.
     - `Assertion Consumer Service` -> `Application Callback URL`
@@ -48,9 +48,9 @@ The next step will guide you on how to collect the information required for the 
     }
     ```
 
-   <img class="saml-tutorial-img" src="/static/assets/saml/auth0/cc_idp.png" />
+   <img class="saml-tutorial-img" src="/docs/assets/saml/auth0/cc_idp.png" />
 
-   <img class="saml-tutorial-img" src="/static/assets/saml/auth0/acs_url.png" />
+   <img class="saml-tutorial-img" src="/docs/assets/saml/auth0/acs_url.png" />
 
     - Click on `Save`.
 
@@ -63,11 +63,11 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
     <ul>
       <li>
         <p>Copy the URL of <code>Identity Provide metadata</code>.</p>
-        <img class="saml-tutorial-img" src="/static/assets/saml/auth0/metadata_url.png" />
+        <img class="saml-tutorial-img" src="/docs/assets/saml/auth0/metadata_url.png" />
       </li>
       <li>
         <p>Paste the copied value into the <code>Metadata URL</code> field at ConfigCat.</p>
-        <img class="saml-tutorial-img" src="/static/assets/saml/auth0/cc_metadata_url.png" />
+        <img class="saml-tutorial-img" src="/docs/assets/saml/auth0/cc_metadata_url.png" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -78,8 +78,8 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
     <ul>
       <li>
         <p>Copy the value of <code>Identity Provider Login URL</code> and download the <code>Identity Provider Certificate</code>, then paste them into the Configuration dialog at ConfigCat.</p>
-        <img class="saml-tutorial-img" src="/static/assets/saml/auth0/manual.png" />
-        <img class="saml-tutorial-img" src="/static/assets/saml/auth0/cc_manual.png" />
+        <img class="saml-tutorial-img" src="/docs/assets/saml/auth0/manual.png" />
+        <img class="saml-tutorial-img" src="/docs/assets/saml/auth0/cc_manual.png" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -91,15 +91,15 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 ### 4. Sign In
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMAPNY ACCOUNT - SAML`.
   
-  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/saml_login.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/saml_login.png" />
 
 - Sign in with your company email address assigned to the Auth0 application.
 
-  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/company_email.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/company_email.png" />
 
 - ConfigCat will redirect you to Auth0's sign in page. Type your credentials, and click `Continue`.
 
-  <img class="saml-tutorial-img" src="/static/assets/saml/auth0/login.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/auth0/login.png" />
 
 - You should be redirected to ConfigCat signed in with your company account.
 

@@ -9,16 +9,16 @@ In order to use the [SAML Single Sign-On](./saml/saml-overview) and the [Auto-as
 
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
-  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/authentication.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/authentication.png" />
 
 - Click `ADD & VERIFY DOMAIN`.
 
-  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/add_domain.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/add_domain.png" />
 
 - Type your domain name, then click `ADD`
 
-  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/domain_name.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/domain_name.png" />
 
 - Follow the instructions on the appearing dialog to verify your domain.
 
-  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/verify_domain.png" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/verify_domain.png" />
