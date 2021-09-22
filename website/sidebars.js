@@ -13,10 +13,31 @@ module.exports = {
       "advanced/user-object",
       "advanced/public-api",
       "advanced/caching",
-      "advanced/team-collaboration",
+      {
+        "Team Management": [
+          "advanced/team-management/team-management-basics",
+          "advanced/team-management/auto-assign-users",
+          {
+            "SAML Single Sign-On": [
+              "advanced/team-management/saml/saml-overview",
+              {
+                "Identity Providers": [
+                  "advanced/team-management/saml/identity-providers/azure-ad",
+                  "advanced/team-management/saml/identity-providers/adfs",
+                  "advanced/team-management/saml/identity-providers/google",
+                  "advanced/team-management/saml/identity-providers/okta",
+                  "advanced/team-management/saml/identity-providers/auth0",
+                  "advanced/team-management/saml/identity-providers/onelogin",
+                ]
+              },
+            ]
+          },
+          "advanced/team-management/domain-verification",
+        ]
+      },      
       "advanced/notifications-webhooks",
       "advanced/troubleshooting",
-      "advanced/cli"
+      "advanced/cli",
     ],
     "SDK References": [
       "sdk-reference/overview",

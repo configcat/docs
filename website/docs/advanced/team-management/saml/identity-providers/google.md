@@ -1,0 +1,101 @@
+---
+id: google
+title: Google
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Connect ConfigCat with Google via SAML.
+
+### Introduction
+Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with Google as a SAML Identity Provider.
+
+### 1. Create a SAML Application in Google
+
+- Log in to <a href="https://admin.google.com/" target="_blank">Google Admin console</a>, select `Apps` from the side menu, then select `Web and mobile apps`.
+
+  <img class="saml-tutorial-img" src="/static/assets/saml/google/applications.png" />
+
+- Click `Add App`, then select `Add custom SAML app`.
+
+  <img class="saml-tutorial-img" src="/static/assets/saml/google/add_saml_app.png" />
+
+- Enter a descriptive `App name`, then click `CONTINUE`.
+
+  <img class="saml-tutorial-img" src="/static/assets/saml/google/app_name.png" />
+
+The next step will guide you on how to configure ConfigCat with appearing information.
+
+### 2. Configure ConfigCat with SAML Details from Google
+
+- Copy the value of `SSO URL` and `Certificate` fields and save them for further use.
+
+  <img class="saml-tutorial-img" src="/static/assets/saml/google/meta_url_cert.png" />
+
+- Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
+
+  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/authentication.png" />
+
+- Select the domain you want to configure with SAML, and click `Set` under the `SAML SSO status`.
+
+  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/domains.png" />
+
+- Select the `2. Set up ConfigCat` step, click `Manual Configuration`, then paste the copied values into the appearing fields.
+
+  <img class="saml-tutorial-img" src="/static/assets/saml/google/cc_manual.png" />
+
+- Click `CONTINUE` on the Google App configuration.
+
+  <img class="saml-tutorial-img" src="/static/assets/saml/google/meta_continue.png" />
+
+The next step will guide you on how to configure the Google App with details provided by ConfigCat.
+
+### 3. Configure the Google Application with Service Provider Details from ConfigCat
+- Select `1. Set up your Identity Provider` step on the ConfigCat configuration dialog, and copy the following values to the Google App.
+    - `Entity ID` -> `Entity ID`
+    - `Assertion Consumer Service` -> `ACS URL`
+
+    <img class="saml-tutorial-img" src="/static/assets/saml/google/cc_saml_config.png" />
+
+    - Make sure the `Signed response` option is checked.
+    - Select `EMAIL` as `Name ID format`.
+    - Select `Basic Information > Primary email` as `Name ID`.
+    - Click `CONTINUE`.
+
+    <img class="saml-tutorial-img" src="/static/assets/saml/google/sp_data.png" />
+
+- Click `FINISH`.
+
+  <img class="saml-tutorial-img" src="/static/assets/saml/google/attribute_mapping.png" />
+
+- Click `Save` on the ConfigCat SAML configuration dialog.
+
+
+### 4. Give Users Access to the Application
+- Click on `View details` under the `User access` section.
+  
+  <img class="saml-tutorial-img" src="/static/assets/saml/google/user_access.png" />
+
+- Select `ON for everyone`, then click `SAVE`.
+  
+  <img class="saml-tutorial-img" src="/static/assets/saml/google/on_for_everyone.png" />
+
+### 5. Sign In
+- Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMAPNY ACCOUNT - SAML`.
+  
+  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/saml_login.png" />
+
+- Sign in with your company email address used in Google.
+
+  <img class="saml-tutorial-img" src="/static/assets/saml/dashboard/company_email.png" />
+
+- ConfigCat will redirect you to Google's sign in page. Type your credentials, and sign in.
+
+  <img class="saml-tutorial-img" src="/static/assets/saml/google/login.png" />
+
+- You should be redirected to ConfigCat signed in with your company account.
+
+### 5. Next Steps
+
+- Configure the [auto-assignment of users](../../auto-assign-users).
