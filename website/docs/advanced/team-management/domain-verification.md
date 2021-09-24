@@ -3,7 +3,7 @@ id: domain-verification
 title: Domain Verification
 ---
 
-In order to use the [SAML Single Sign-On](./saml/saml-overview) and the [Auto-assign Users](./auto-assign-users) features, you have to verify the ownership of the domain that your company uses for email addresses.
+In order to use the [SAML Single Sign-On](/docs/advanced/team-management/saml/saml-overview) and the [Auto-assign Users](/docs/advanced/team-management/auto-assign-users) features, you have to verify the ownership of the domain that your company uses for email addresses.
 
 #### Steps to verify your domain:
 
