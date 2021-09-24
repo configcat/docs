@@ -146,4 +146,4 @@ To let users authenticate via SAML, you need to assign the newly created applica
 
 ### 6. Next Steps
 
-- Configure the [auto-assignment of users](../../auto-assign-users).
+- Configure the [auto-assignment of users](/docs/advanced/team-management/auto-assign-users).
