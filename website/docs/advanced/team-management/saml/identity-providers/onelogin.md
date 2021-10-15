@@ -44,14 +44,13 @@ The next step will guide you on how to collect the information required for the 
     - Copy `Entity ID` and paste it into the `Audience (EntityID)` field.
     - Copy `Assertion Consumer Service` and paste it into the `ACS (Consumer) URL` field.
     - Paste the same `Assertion Consumer Service` into the `ACS (Consumer) URL Validator` field in regex format e.g. `^https:\/\/dashboard\-api\.configcat\.com\/saml\/acs\/08d97769\-fed5\-4fd4\-8a09\-0a38bb951177$`
-    - For `Login URL` type `https://app.configcat.com/login`.
 
     <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/saml_config.png" />
 
     <img class="saml-tutorial-img" src="/docs/assets/saml/onelogin/saml_config.png" />
 
 - Scroll down a bit on this page and configure the following:
-    - Select `Service Provider` as `SAML Initiator`.
+    - Select `OneLogin` as `SAML Initiator`.
     - Select `Email` as `SAML nameID format`.
     - Select `Both` as `SAML signature element`.
 
