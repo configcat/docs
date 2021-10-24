@@ -38,6 +38,14 @@ module.exports = {
       "advanced/notifications-webhooks",
       "advanced/troubleshooting",
       "advanced/cli",
+      {
+        "Scan & Upload Code References": [
+          "advanced/code-references/overview",
+          "advanced/code-references/github-action",
+          "advanced/code-references/circleci-orb",
+          "advanced/code-references/manual",
+        ]
+      },      
     ],
     "SDK References": [
       "sdk-reference/overview",
