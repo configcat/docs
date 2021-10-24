@@ -208,7 +208,7 @@ You can change the output format of several command's result to JSON with the `-
 
 ## Scan & Upload Code References
 You can use the CLI to scan your repository for feature flag and setting usages in your own source code, and upload them 
-to ConfigCat. [Here](/docs/advanced/code-references/overview) you can read more about this feature.
+to ConfigCat. You can read more about this feature [here](/docs/advanced/code-references/overview).
 
 ## Examples
 Here are a few examples showing the true power of the CLI.
