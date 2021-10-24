@@ -30,6 +30,9 @@ To get the ID of the desired Config, follow the steps below:
 You have the option to upload scan reports for each branch in your associated repository to ConfigCat. You can do this by
 configuring the scan execution in your CI/CD pipeline or running the scan manually. Each scan report is associated to a branch of your repository.
 
+The following screenshot shows how an uploaded report looks like.
+<img class="bordered" src="/docs/assets/cli/scan/scan_report.png" />
+
 ### Scanning Git Repositories
 The `scan` command automatically detects when it's being executed on a git repository. When this happens, it collects the current **branch
 name**, the actual **commit hash**, and each active **remote branches** from the repository. The command uses these extra details to enrich the uploaded report on the ConfigCat Dashboard with links to your actual source code.
