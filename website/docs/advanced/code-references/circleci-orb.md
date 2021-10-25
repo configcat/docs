@@ -18,7 +18,7 @@ to scan your source code for feature flag and setting usages, and to upload the 
     version: 2.1
 
     orbs:
-      configcat: configcat/scan-repository@1.2.0
+      configcat: configcat/scan-repository@1.2.1
 
     workflows:
       main:
