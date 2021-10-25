@@ -71,6 +71,7 @@ Every scan execution uploads the active remote branches of your repository, whic
 ### CI/CD Integrations
 - [GitHub Action](/docs/advanced/code-references/github-action)
 - [CircleCI Orb](/docs/advanced/code-references/circleci-orb)
+- [GitLab CI/CD](/docs/advanced/code-references/gitlab-ci)
 
 ### Manual Integration
 Follow the instructions [here](/docs/advanced/code-references/manual) to configure scan executions directly with the ConfigCat CLI.

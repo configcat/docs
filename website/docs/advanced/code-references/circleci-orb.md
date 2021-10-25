@@ -4,7 +4,7 @@ title: CircleCI Orb
 ---
 
 This section will describe how to use ConfigCat's <a target="_blank" href="https://circleci.com/developer/orbs/orb/configcat/scan-repository">CircleCI Orb</a>
-to scan your source code for feature flag and setting usages, and how to upload the scan report to ConfigCat.
+to scan your source code for feature flag and setting usages, and to upload the scan report to ConfigCat.
 
 ## Configuration
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in <a target="_blank" href="https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project">CircleCI Environment Variables</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
@@ -12,12 +12,13 @@ to scan your source code for feature flag and setting usages, and how to upload 
 
 2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 
-3. Create a new CircleCI YAML config in your GitHub repository under the `.circleci` folder, and paste the following content into it.
+3. Create a new CircleCI YAML config in your GitHub repository under the `.circleci` folder, and paste the following content into it. 
+   Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
     ```yaml
     version: 2.1
 
     orbs:
-      configcat: configcat/scan-repository@1.1.0
+      configcat: configcat/scan-repository@1.2.0
 
     workflows:
       main:

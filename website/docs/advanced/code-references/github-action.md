@@ -4,7 +4,7 @@ title: GitHub Action
 ---
 
 This section will describe how to use ConfigCat's <a target="_blank" href="https://github.com/configcat/scan-repository">GitHub Action</a>
-to scan your source code for feature flag and setting usages, and how to upload the scan report to ConfigCat.
+to scan your source code for feature flag and setting usages, and to upload the scan report to ConfigCat.
 
 ## Configuration
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in your repository's <a target="_blank" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">GitHub Secrets</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
@@ -12,7 +12,7 @@ to scan your source code for feature flag and setting usages, and how to upload 
 
 2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 
-3. Create a new Actions workflow in your GitHub repository under the `.github/workflows` folder, and paste the following content into it.
+3. Create a new Actions workflow in your GitHub repository under the `.github/workflows` folder, and paste the following content into it. Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
     ```yaml
     on: [push]
     name: Code references

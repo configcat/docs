@@ -4,7 +4,7 @@ title: Manual Integration
 ---
 
 This section will describe how to use the [ConfigCat CLI](/docs/advanced/cli)
-to scan your source code for feature flag and setting usages, and how to upload the scan report to ConfigCat.
+to scan your source code for feature flag and setting usages, and to upload the scan report to ConfigCat.
 
 ## Prerequisites
 

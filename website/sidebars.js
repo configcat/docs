@@ -43,6 +43,7 @@ module.exports = {
           "advanced/code-references/overview",
           "advanced/code-references/github-action",
           "advanced/code-references/circleci-orb",
+          "advanced/code-references/gitlab-ci",
           "advanced/code-references/manual",
         ]
       },      
