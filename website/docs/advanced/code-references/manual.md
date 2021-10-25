@@ -57,12 +57,7 @@ configcat scan /path/to/your/repo \
 ```
 
 ### Execute with Docker
-Install the ConfigCat CLI with Docker.
-```bash
-docker pull configcat/cli
-```
-
-You can scan your repository by mounting its folder as a volume, and by passing the ConfigCat Management API credentials as environment variables.
+After pulling the ConfigCat CLI via Docker, you can scan your repository by mounting its folder as a volume, and by setting the ConfigCat Management API credentials as environment variables on the executing container.
 ```bash
 docker run --rm \
     -v /path/to/your/repo:/repository \ # mount the repository as volume
