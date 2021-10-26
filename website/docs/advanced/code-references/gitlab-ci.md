@@ -12,7 +12,7 @@ to scan your source code for feature flag and setting usages, and to upload the 
 
 2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 
-3. Create a new, or open your existing `.gitlab-ci.yml` file, and paste the following job into it.  
+3. Create a new, or open your existing `.gitlab-ci.yml` file, and put the following job into it.  
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
     ```yaml
     configcat-scan-repository:
