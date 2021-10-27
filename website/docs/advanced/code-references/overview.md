@@ -5,12 +5,13 @@ title: Overview
 
 The [ConfigCat CLI](/docs/advanced/cli) can be used to scan your own source code for feature flag and setting usages, and to upload the resulting scan report to ConfigCat. This feature can help clean up unused / <a target="_blank" href="https://app.configcat.com/my-account/zombie-flags-report">zombie feature flags and settings</a> from your code, as you can track their usages in one centralized place. 
 
-Run the following command in your project root to try this feature out.
+The following example shows a simple scan execution that only prints the scan result to the console. The `scan` command searches for every feature flag and setting key defined within a selected Config. 
+
+Run the following command in your project root to try it out.
+
 ```bash
 configcat scan . --print
 ```
-
-The following example shows a simple scan execution that only prints the scan result to the console. The `scan` command searches for every feature flag and setting key defined within a selected Config.
 
 ![flag-percentage-add](/assets/cli/scan.gif)
 
