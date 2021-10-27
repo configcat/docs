@@ -9,7 +9,7 @@ The following example shows a simple scan execution that only prints the scan re
 
 ![flag-percentage-add](/assets/cli/scan.gif)
 
-If you want to see it in action on your project, run the following command in your project's root:
+If you want to see it in action on your project, run the following command in it's root folder:
 
 ```bash
 configcat scan . --print
