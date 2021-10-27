@@ -12,7 +12,7 @@ to scan your source code for feature flag and setting usages, and to upload the 
 
 2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 
-3. Create a new CircleCI YAML config in your GitHub repository under the `.circleci` folder, and paste the following content into it. 
+3. Create a new CircleCI YAML config in your repository under the `.circleci` folder, and put the following snippet into it. 
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
     ```yaml
     version: 2.1
@@ -38,13 +38,13 @@ The code references will be uploaded for each branch in your repository that tri
 
 | Parameter             | Description                                                                | Required   | Default             |
 | --------------------- | -------------------------------------------------------------------------- | ---------- | ------------------- |
-| `api-host`            | ConfigCat Management API host.                                             | yes        | `api.configcat.com` |
-| `api-user`            | Name of the environment variable where the ConfigCat Management API basic authentication username is stored.                                                                                              | yes        | CONFIGCAT_API_USER  |
-| `api-pass`            | Name of the environment variable where the ConfigCat Management API basic authentication password is stored.                                                                                              | yes        | CONFIGCAT_API_PASS  |
-| `config-id`           | ID of the ConfigCat config to scan against.                                | yes        |                     |
-| `file-url-template`   | Template url used to generate VCS file links. Available template parameters: `branch`, `filePath`, `lineNumber`. Example: https://github.com/my/repo/blob/{branch}/{filePath}#L{lineNumber}                           | no         |                     |
-| `commit-url-template` | Template url used to generate VCS commit links. Available template parameters: `commitHash`. Example: https://github.com/my/repo/commit/{commitHash}                                                               | no         |                     |
-| `line-count`          | Context line count before and after the reference line. (min: 1, max: 10)  | no         | 5                   |
-| `sub-folder`          | Sub-folder to scan, relative to the repository root folder.                | no         |                     |
-| `verbose`             | Turns on detailed logging.                                                 | no         | false               |
+| `api-host`            | ConfigCat Management API host.                                             | &#9745;    | `api.configcat.com` |
+| `api-user`            | Name of the environment variable where the ConfigCat Management API basic authentication username is stored.                                                                                              | &#9745;    | CONFIGCAT_API_USER  |
+| `api-pass`            | Name of the environment variable where the ConfigCat Management API basic authentication password is stored.                                                                                              | &#9745;    | CONFIGCAT_API_PASS  |
+| `config-id`           | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
+| `file-url-template`   | Template url used to generate VCS file links. Available template parameters: `branch`, `filePath`, `lineNumber`. Example: https://github.com/my/repo/blob/{branch}/{filePath}#L{lineNumber}                           |            |                     |
+| `commit-url-template` | Template url used to generate VCS commit links. Available template parameters: `commitHash`. Example: https://github.com/my/repo/commit/{commitHash}                                                               |            |                     |
+| `line-count`          | Context line count before and after the reference line. (min: 1, max: 10)  |            | 5                   |
+| `sub-folder`          | Sub-folder to scan, relative to the repository root folder.                |            |                     |
+| `verbose`             | Turns on detailed logging.                                                 |            | false               |
 

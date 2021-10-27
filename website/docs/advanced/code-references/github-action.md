@@ -12,7 +12,7 @@ to scan your source code for feature flag and setting usages, and to upload the 
 
 2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 
-3. Create a new Actions workflow in your GitHub repository under the `.github/workflows` folder, and paste the following content into it. Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
+3. Create a new Actions workflow in your GitHub repository under the `.github/workflows` folder, and put the following snippet into it. Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
     ```yaml
     on: [push]
     name: Code references
@@ -40,10 +40,10 @@ The code references will be uploaded for each branch in your repository that tri
 
 | Parameter     | Description                                                                | Required   | Default             |
 | ------------- | -------------------------------------------------------------------------- | ---------- | ------------------- |
-| `api-host`    | ConfigCat Management API host.                                             | yes        | `api.configcat.com` |
-| `api-user`    | ConfigCat Management API basic authentication username.                    | yes        |                     |
-| `api-pass`    | ConfigCat Management API basic authentication password.                    | yes        |                     |
-| `config-id`   | ID of the ConfigCat config to scan against.                                | yes        |                     |
-| `line-count`  | Context line count before and after the reference line. (min: 1, max: 10)  | no         | 5                   |
-| `sub-folder`  | Sub-folder to scan, relative to the repository root folder.                | no         |                     |
-| `verbose`     | Turns on detailed logging.                                                 | no         | false               |
+| `api-host`    | ConfigCat Management API host.                                             | &#9745;    | `api.configcat.com` |
+| `api-user`    | ConfigCat Management API basic authentication username.                    | &#9745;    |                     |
+| `api-pass`    | ConfigCat Management API basic authentication password.                    | &#9745;    |                     |
+| `config-id`   | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
+| `line-count`  | Context line count before and after the reference line. (min: 1, max: 10)  |            | 5                   |
+| `sub-folder`  | Sub-folder to scan, relative to the repository root folder.                |            |                     |
+| `verbose`     | Turns on detailed logging.                                                 |            | false               |

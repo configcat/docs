@@ -12,7 +12,7 @@ to scan your source code for feature flag and setting usages, and to upload the 
 
 2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 
-3. Create a new, or open your existing `azure-pipelines.yml` file, and put the following <a target="_blank" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema#job">job</a> into your jobs definition.  
+3. Create a new, or open your existing `azure-pipelines.yml` file, and add the following <a target="_blank" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema#job">job</a> to your jobs definition.  
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
    ```yaml
    - job: configcat_scan_and_upload
