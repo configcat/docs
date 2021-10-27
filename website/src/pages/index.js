@@ -40,6 +40,7 @@ const features = [
       { url: "advanced/notifications-webhooks", title: "Notifications - Webhooks" },
       { url: "advanced/troubleshooting", title: "Troubleshooting" },
       { url: "advanced/cli", title: "Command Line Interface" },
+      { url: "advanced/code-references/overview", title: "Scan & Upload Code References" },
     ]
   },
   {

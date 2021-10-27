@@ -188,7 +188,7 @@ The CLI supports both interactive and argument driven execution. When no argumen
 
 ### With Arguments
 The same operation with command arguments would look like this:
-```
+```bash
 configcat flag create \
 --config-id <config-id> \ 
 --name "My awesome feature" \
@@ -205,6 +205,10 @@ Each `create` command writes the newly created resource's ID to the standard out
 :::info
 You can change the output format of several command's result to JSON with the `--json` option, like: `configcat flag ls --json`. See more about these commands in the <a target="_blank" href="https://configcat.github.io/cli/">command reference documentation</a>.
 :::
+
+## Scan & Upload Code References
+You can use the CLI to scan your repository for feature flag and setting usages in your own source code, and upload them 
+to ConfigCat. You can read more about this feature [here](/docs/advanced/code-references/overview).
 
 ## Examples
 Here are a few examples showing the true power of the CLI.
@@ -228,14 +232,3 @@ The following example shows how you can add targeting rules to a Feature Flag vi
 The following example shows how you can set percentage rules on a Feature Flag via command line.
 
 ![flag-percentage-add](/assets/cli/flag-percentage-add.gif)
-
-### Scan for code references
-The following example shows how you can scan a codebase for Feature Flag or Setting usages. The scanner command searches for every Feature Flag / Setting key defined within the given Config.
-
-![flag-percentage-add](/assets/cli/scan.gif)
-
-The `scan` command respects all include/exclude patterns listed inside `.gitignore` and `.ignore` files within the given directory. 
-
-In addition, you can create an extra `.ccignore` file with patterns that the scanner must include/exclude.
-
-Each pattern must follow the <a target="_blank" href="https://git-scm.com/docs/gitignore#_pattern_format">gitignore pattern format</a>.
