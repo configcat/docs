@@ -7,14 +7,14 @@ The [ConfigCat CLI](/docs/advanced/cli) can be used to scan your own source code
 
 The following example shows a simple scan execution that only prints the scan result to the console. The `scan` command searches for every feature flag and setting key defined within a selected Config. 
 
-Run the following command in your project root to try it out.
+![flag-percentage-add](/assets/cli/scan.gif)
+
+If you want to see it in action on your project, run the following command in your project's root:
 
 ```bash
 configcat scan . --print
 ```
-
-![flag-percentage-add](/assets/cli/scan.gif)
-
+  
 See the `scan` command's <a target="_blank" href="https://configcat.github.io/cli/configcat-scan.html">reference documentation</a> for all available command parameters.
 
 ## Config ID
