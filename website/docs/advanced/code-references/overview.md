@@ -78,7 +78,7 @@ When these template URLs are not set, the uploaded report will not contain VCS l
 :::
 
 ### Stale Branches
-When the scan is executed on a Git repository, the CLI joins all active remote branches of your repository to the uploaded report. This information is used for cleaning up each stale report that belongs to a deleted branch.
+When the scan is executed on a Git repository, the CLI attaches the currently active remote branches to the uploaded report. This information is used for cleaning up each stale report that belongs to a deleted branch.
 
 ### CI/CD Integrations
 We have built-in solutions for the following CI/CD providers:
