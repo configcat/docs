@@ -3,8 +3,8 @@ id: bitbucket-pipe
 title: Bitbucket Pipe
 ---
 
-This section will describe how to use ConfigCat's <a target="_blank" href="https://bitbucket.org/configcat/scan-repository-pipe">Bitbucket Pipe</a>
-to scan your source code for feature flag and setting usages, and to upload the scan report to ConfigCat.
+This section describes how to use ConfigCat's <a target="_blank" href="https://bitbucket.org/configcat/scan-repository-pipe">Bitbucket Pipe</a>
+to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat.
 
 ## Configuration
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in secure pipeline variables with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
@@ -22,7 +22,7 @@ to scan your source code for feature flag and setting usages, and to upload the 
 
 4. Commit & push your changes.
 
-The code references will be uploaded for each branch in your repository that triggers the pipe. 
+Scan reports are uploaded for each branch of your repository that triggers the job. 
 
 ## Available Options
 

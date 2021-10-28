@@ -3,8 +3,8 @@ id: manual
 title: Manual Integration
 ---
 
-This section will describe how to use the [ConfigCat CLI](/docs/advanced/cli)
-to scan your source code for feature flag and setting usages, and to upload the scan report to ConfigCat.
+This section describes how to use the [ConfigCat CLI](/docs/advanced/cli)
+to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat.
 
 ## Prerequisites
 
@@ -17,8 +17,8 @@ to scan your source code for feature flag and setting usages, and to upload the 
 To initiate the scanning with uploading the results, you can use the `scan` command with the `--upload` option.
 
 ### With Git VCS
-The scan command detects when it's being executed on a git repository, and extracts additional information automatically.  
-The following snippet shows a minimal example that uses only the required parameters in case of a Git repository.
+The scan command detects when it's being executed on a Git repository and automatically extracts additional information.  
+The following snippet shows a minimal example that uses only the required parameters in the case of a Git repository.
 ```bash
 configcat scan /path/to/your/repo \
     --config-id YOUR-CONFIG-ID \ # required
@@ -26,7 +26,7 @@ configcat scan /path/to/your/repo \
     --upload # upload the scan report
 ```
 
-You can also use the optional template URL parameters for generating VCS links on the ConfigCat Dashboard to your source code.
+You can use the optional template URL parameters for generating VCS links to your source code.
 
 ```bash
 configcat scan /path/to/your/repo \
@@ -43,7 +43,7 @@ collected information from the Git repository.
 :::
 
 ### With Non-Git VCS
-As the `scan` command is not able to determine such information as `branch` and `commitHash` when you execute it on a non-Git repository, you have to set these parameters manually.
+As the `scan` command cannot determine such information as `branch` and `commitHash` when you execute it on a non-Git repository, you have to set these parameters manually.
 
 ```bash
 configcat scan /path/to/your/repo \
@@ -56,8 +56,8 @@ configcat scan /path/to/your/repo \
     --upload # upload the scan report
 ```
 
-### Execute with Docker
-After pulling the ConfigCat CLI via Docker, you can scan your repository by mounting its folder as a volume, and by setting the ConfigCat Management API credentials as environment variables on the executing container.
+### Docker
+After pulling the ConfigCat CLI via Docker, you can scan your repository by mounting its folder as a volume and setting the ConfigCat Management API credentials as environment variables on the executing container.
 ```bash
 docker run --rm \
     -v /path/to/your/repo:/repository \ # mount the repository as volume

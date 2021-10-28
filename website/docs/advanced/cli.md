@@ -190,12 +190,12 @@ The CLI supports both interactive and argument driven execution. When no argumen
 The same operation with command arguments would look like this:
 ```bash
 configcat flag create \
---config-id <config-id> \ 
---name "My awesome feature" \
---hint "This is my awesome feature" \
---key my_awesome_feature
---type boolean \
---tag-ids <tag-id-1> <tag-id-2> \
+  --config-id <config-id> \ 
+  --name "My awesome feature" \
+  --hint "This is my awesome feature" \
+  --key my_awesome_feature
+  --type boolean \
+  --tag-ids <tag-id-1> <tag-id-2> \
 ```
 
 :::info
@@ -207,28 +207,27 @@ You can change the output format of several command's result to JSON with the `-
 :::
 
 ## Scan & Upload Code References
-You can use the CLI to scan your repository for feature flag and setting usages in your own source code, and upload them 
-to ConfigCat. You can read more about this feature [here](/docs/advanced/code-references/overview).
+The CLI has the ability to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. You can read more about this feature [here](/docs/advanced/code-references/overview).
 
 ## Examples
 Here are a few examples showing the true power of the CLI.
 
 ### Create a Feature Flag
-The following example shows how you can create a Feature Flag in a specific Config via command line.
+The following example shows how you can create a Feature Flag in a specific Config.
 
 ![create-flag](/assets/cli/create-flag.gif)
 
 ### Value update
-The following example shows how you can update the value of a Feature Flag in a specific Environment via command line.
+The following example shows how you can update the value of a Feature Flag in a specific Environment.
 
 ![flag-value-update](/assets/cli/flag-value-update.gif)
 
 ### Add targeting rules
-The following example shows how you can add targeting rules to a Feature Flag via command line.
+The following example shows how you can add targeting rules to a Feature Flag.
 
 ![flag-targeting-add](/assets/cli/flag-targeting-add.gif)
 
 ### Add percentage rules
-The following example shows how you can set percentage rules on a Feature Flag via command line.
+The following example shows how you can set percentage rules on a Feature Flag.
 
 ![flag-percentage-add](/assets/cli/flag-percentage-add.gif)
