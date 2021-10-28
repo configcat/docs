@@ -17,7 +17,7 @@ to scan your source code for feature flag and setting usages and upload the foun
 To initiate the scanning with uploading the results, you can use the `scan` command with the `--upload` option.
 
 ### With Git VCS
-The scan command detects when it's being executed on a Git repository and automatically extracts additional information.  
+The scan command detects when it's being executed on a Git repository and automatically [extracts additional information](/docs/advanced/code-references/overview#scanning-git-repositories).  
 The following snippet shows a minimal example that uses only the required parameters in the case of a Git repository.
 ```bash
 configcat scan /path/to/your/repo \
@@ -57,7 +57,7 @@ configcat scan /path/to/your/repo \
 ```
 
 ### Docker
-After pulling the ConfigCat CLI via Docker, you can scan your repository by mounting its folder as a volume and setting the ConfigCat Management API credentials as environment variables on the executing container.
+After [installing](/docs/advanced/cli#installation) the ConfigCat CLI with Docker, you can scan your repository by mounting its folder as a volume and setting the ConfigCat Management API credentials as environment variables on the executing container.
 ```bash
 docker run --rm \
     -v /path/to/your/repo:/repository \ # mount the repository as volume
