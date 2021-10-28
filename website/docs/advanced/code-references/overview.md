@@ -81,8 +81,7 @@ When these template URLs are not set, the uploaded report will not contain VCS l
 When the scan is executed on a Git repository, the CLI attaches the currently active remote branches to the uploaded report. This information is used for cleaning up each stale report that belongs to a deleted branch.
 
 ### CI/CD Integrations
-We have built-in solutions for the following CI/CD providers:
-
+We prepared the following integrations to simplify the usage of the scanner in your CI/CD workflow:
 - [GitHub Action](/docs/advanced/code-references/github-action)
 - [CircleCI Orb](/docs/advanced/code-references/circleci-orb)
 - [GitLab CI/CD](/docs/advanced/code-references/gitlab-ci)
@@ -90,7 +89,7 @@ We have built-in solutions for the following CI/CD providers:
 - [Bitbucket Pipe](/docs/advanced/code-references/bitbucket-pipe)
 
 ### Manual Integration
-If your workflow doesn't have a built-in integration, you can follow the instructions [here](/docs/advanced/code-references/manual) to configure scan executions directly with the ConfigCat CLI.
+If your workflow doesn't have an integration, you can follow the instructions [here](/docs/advanced/code-references/manual) to configure scan executions directly with the ConfigCat CLI.
 
 ## Ignore Files
 
