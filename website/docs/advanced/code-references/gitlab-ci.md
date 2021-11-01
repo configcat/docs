@@ -25,8 +25,8 @@ to scan your source code for feature flag and setting usages and upload the foun
             --config-id=PASTE-YOUR-CONFIG-ID-HERE 
             --repo=${CI_PROJECT_NAME}
             --branch=${CI_COMMIT_REF_NAME}
-            --file-url-template='https://gitlab.com/${CI_PROJECT_PATH}/blob/{branch}/{filePath}#L{lineNumber}' 
-            --commit-url-template='https://gitlab.com/${CI_PROJECT_PATH}/commit/{commitHash}' 
+            --file-url-template=https://gitlab.com/${CI_PROJECT_PATH}/blob/{branch}/{filePath}#L{lineNumber}
+            --commit-url-template=https://gitlab.com/${CI_PROJECT_PATH}/commit/{commitHash}
             --runner="ConfigCat GitLab Job" 
             --upload
             --non-interactive
