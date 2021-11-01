@@ -273,6 +273,17 @@ configuration.connectionProxyDictionary = [
 let client: ConfigCatClient = ConfigCatClient(sdkKey: sdkKey, sessionConfiguration: configuration)
 ```
 
+## Changing the default HTTP timeout 
+
+Set the maximum wait time for a ConfigCat HTTP response by changing the *timeoutIntervalForRequest* of the ConfigCat's `URLSessionConfiguration`.
+
+```swift
+let configuration = URLSessionConfiguration.default
+configuration.timeoutIntervalForRequest = 10; // Timeout in seconds 
+
+let client: ConfigCatClient = ConfigCatClient(sdkKey: sdkKey, sessionConfiguration: configuration)
+```
+
 ## Sample App
 Check out our Sample Application how they use the ConfigCat SDK
 * <a href="https://github.com/configcat/swift-sdk/tree/master/samples/ios" target="_blank">iOS with auto polling and change listener</a>
