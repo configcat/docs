@@ -40,10 +40,10 @@ Scan reports are uploaded for each branch of your repository that triggers the w
 
 | Parameter     | Description                                                                | Required   | Default             |
 | ------------- | -------------------------------------------------------------------------- | ---------- | ------------------- |
-| `api-host`    | ConfigCat Management API host.                                             | &#9745;    | `api.configcat.com` |
+| `config-id`   | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
 | `api-user`    | ConfigCat Management API basic authentication username.                    | &#9745;    |                     |
 | `api-pass`    | ConfigCat Management API basic authentication password.                    | &#9745;    |                     |
-| `config-id`   | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
+| `api-host`    | ConfigCat Management API host.                                             |            | `api.configcat.com` |
 | `line-count`  | Context line count before and after the reference line. (min: 1, max: 10)  |            | 5                   |
 | `sub-folder`  | Sub-folder to scan, relative to the repository root folder.                |            |                     |
 | `verbose`     | Turns on detailed logging.                                                 |            | false               |

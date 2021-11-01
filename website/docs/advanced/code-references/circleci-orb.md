@@ -38,12 +38,12 @@ Scan reports are uploaded for each branch of your repository that triggers the w
 
 | Parameter             | Description                                                                | Required   | Default             |
 | --------------------- | -------------------------------------------------------------------------- | ---------- | ------------------- |
-| `api-host`            | ConfigCat Management API host.                                             | &#9745;    | `api.configcat.com` |
-| `api-user`            | Name of the environment variable where the ConfigCat Management API basic authentication username is stored.                                                                                              | &#9745;    | CONFIGCAT_API_USER  |
-| `api-pass`            | Name of the environment variable where the ConfigCat Management API basic authentication password is stored.                                                                                              | &#9745;    | CONFIGCAT_API_PASS  |
 | `config-id`           | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
+| `api-host`            | ConfigCat Management API host.                                             |            | `api.configcat.com` |
+| `api-user`            | Name of the environment variable where the ConfigCat Management API basic authentication username is stored.                                                                                              |            | CONFIGCAT_API_USER  |
+| `api-pass`            | Name of the environment variable where the ConfigCat Management API basic authentication password is stored.                                                                                              |            | CONFIGCAT_API_PASS  |
 | `file-url-template`   | Template url used to generate VCS file links. Available template parameters: `branch`, `filePath`, `lineNumber`. Example: https://github.com/my/repo/blob/{branch}/{filePath}#L{lineNumber}                           |            |                     |
-| `commit-url-template` | Template url used to generate VCS commit links. Available template parameters: `commitHash`. Example: https://github.com/my/repo/commit/{commitHash}                                                               |            |                     |
+| `commit-url-template` | Template url used to generate VCS commit links. Available template parameters: `commitHash`. Example: https://github.com/my/repo/commit/{commitHash}                                                                      |            |                     |
 | `line-count`          | Context line count before and after the reference line. (min: 1, max: 10)  |            | 5                   |
 | `sub-folder`          | Sub-folder to scan, relative to the repository root folder.                |            |                     |
 | `verbose`             | Turns on detailed logging.                                                 |            | false               |

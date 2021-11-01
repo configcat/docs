@@ -28,8 +28,8 @@ Scan reports are uploaded for each branch of your repository that triggers the j
 
 | Parameter             | Description                                                                | Required   | Default             |
 | --------------------- | -------------------------------------------------------------------------- | ---------- | ------------------- |
-| `CONFIGCAT_API_HOST`  | ConfigCat Management API host.                                             | &#9745;    | `api.configcat.com` |
 | `CONFIG_ID `          | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
+| `CONFIGCAT_API_HOST`  | ConfigCat Management API host.                                             |            | `api.configcat.com` |
 | `LINE_COUNT`          | Context line count before and after the reference line. (min: 1, max: 10)  |            | 5                   |
 | `SUB_FOLDER`          | Sub-folder to scan, relative to the repository root folder.                |            |                     |
 | `VERBOSE`             | Turns on detailed logging.                                                 |            | false               |
