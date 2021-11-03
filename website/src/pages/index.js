@@ -23,10 +23,10 @@ const features = [
     ]
   },
   {
-    title: 'Guides',
+    title: 'Advanced Guides',
     description: (
       <>
-        Get the most out of your feature flags.
+        API, CLI, SAML, Webhooks...
       </>
     ),
     links: [
@@ -39,7 +39,7 @@ const features = [
       { url: "advanced/team-management/saml/saml-overview", title: "SAML Single Sign-On" },
       { url: "advanced/notifications-webhooks", title: "Notifications - Webhooks" },
       { url: "advanced/troubleshooting", title: "Troubleshooting" },
-      { url: "advanced/cli", title: "Command Line Interface" },
+      { url: "advanced/cli", title: "Command Line Interface (CLI)" },
       { url: "advanced/code-references/overview", title: "Scan & Upload Code References" },
     ]
   },

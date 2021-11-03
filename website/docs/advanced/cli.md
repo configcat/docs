@@ -1,6 +1,6 @@
 ---
 id: cli
-title:  Command Line Interface
+title:  Command Line Interface (CLI)
 ---
 
 The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> allows you to interact with the [Public Management API](advanced/public-api.md) via the command line. It supports most functionality found on the ConfigCat Dashboard. You can manage ConfigCat resources like Feature Flags, Targeting / Percentage rules, Products, Configs, Environments, and more.
