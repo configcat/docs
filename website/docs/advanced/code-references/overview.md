@@ -79,13 +79,13 @@ enum FlagKeys : String {
 let myAwesomeFeature: String = "my_awesome_feature"
 ```
 
-You can check a bunch of other examples that we tested <a target="_blank" href="https://raw.githubusercontent.com/configcat/cli/main/test/ConfigCat.Cli.Tests/alias.txt">here</a>.
+You can check <a target="_blank" href="https://raw.githubusercontent.com/configcat/cli/main/test/ConfigCat.Cli.Tests/alias.txt">here</a> a bunch of other samples that we tested.
 :::
 
 :::info
 An alias must be at least **30% identical to the feature flag/setting key**.
 The similarity check is case insensitive and ignores `_` characters. 
-This behavior prevents expressions like `<input type="text" value="my_awesome_feature">` to be recognized as a valid alias source.
+This behavior prevents false recognitions in expressions like `<input type="text" value="my_awesome_feature">` where `value` shouldn't be treated as alias.
 :::
 
 ### Wrappers
