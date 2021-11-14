@@ -41,8 +41,8 @@ To get the ID of a Config, follow the steps below:
 The scanner looks for feature flag and setting keys between quotation marks (`'` `"` `` ` ``) in the first place.  
 
 ### Aliases
-The found keys' context is examined for **aliases**, like variables, constants, or enumerations used to store them.
-These **aliases** are treated as indirect references and are included in the searching process.
+The found keys' context is examined for **aliases**, like variables, constants, or enumerations used to store these keys.
+**Aliases** are treated as indirect references and are included in the searching process.
 
 For example, the following `C#` constant's name (`MyAwesomeFeature`) will be recognized as an alias:
 ```csharp
