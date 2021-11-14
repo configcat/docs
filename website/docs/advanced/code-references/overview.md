@@ -38,10 +38,94 @@ To get the ID of a Config, follow the steps below:
 
 
 ## How Scanning Works
-The scanner looks for feature flag and setting keys between the following quotation marks in the first place: `'` `"` `` ` ``  
-Then, the found keys' context is examined for **aliases** such as variables, constants, or enumerations used to store them.
-These **aliases** are treated as indirect references and included in the searching process.
+The scanner looks for feature flag and setting keys between quotation marks (`'` `"` `` ` ``) in the first place.  
 
+### Aliases
+The found keys' context is examined for **aliases**, like variables, constants, or enumerations used to store them.
+These **aliases** are treated as indirect references and are included in the searching process.
+
+For example, the following `C#` constant's name (`MyAwesomeFeature`) will be recognized as an alias:
+```csharp
+public static class FeatureFlagKeys
+{
+  public const string MyAwesomeFeature = "my_awesome_feature";
+}
+```
+The scanner will treat this constant's usage as an indirect reference to the flag.
+```csharp
+if (configCatClient.GetValue(FeatureFlagKeys.MyAwesomeFeature, false))
+{
+  // the feature is on.
+}
+```
+
+:::info
+The alias recognition **adapts to the characteristics of different languages**.  
+For example, it can find aliases in `Go` constants/variable assignments:
+```go
+const (
+	myAwesomeFeature string = "my_awesome_feature"
+)
+
+myAwesomeFeature := "my_awesome_feature"
+``` 
+
+And in `Swift` enums/variable assignments as well:
+```swift
+enum FlagKeys : String {
+  case MyAwesomeFeature = "my_awesome_feature"
+}
+
+let myAwesomeFeature: String = "my_awesome_feature"
+```
+
+You can check a bunch of other examples that we tested <a target="_blank" href="https://raw.githubusercontent.com/configcat/cli/main/test/ConfigCat.Cli.Tests/alias.txt">here</a>.
+:::
+
+:::info
+An alias must be at least **30% identical to the feature flag/setting key**.
+The similarity check is case insensitive and ignores `_` characters. 
+This behavior prevents expressions like `<input type="text" value="my_awesome_feature">` to be recognized as a valid alias source.
+:::
+
+### Wrappers
+In addition to aliases, the scanner also looks for different feature flag/setting key usage patterns. This helps to recognize functions and properties used to wrap direct ConfigCat SDK calls as indirect references. Aliases are also included in this search.
+
+For example, the scanner will treat the `IsMyAwesomeFeatureEnabled` function of the following `C#` wrapper class as an indirect reference:
+```csharp
+public class FeatureFlagProvider
+{
+  public bool IsMyAwesomeFeatureEnabled(bool defaultValue = false)
+  {
+    return configCatClient.GetValue("my_awesome_feature", defaultValue);
+  }
+}
+```
+And will include it's usage in the scan report:
+```csharp
+if (featureFlagProvider.IsMyAwesomeFeatureEnabled())
+{
+  // the feature is on.
+}
+```
+
+:::info
+The scanner uses the following patterns to look for wrapper usages (case insensitive):
+- `[.|->|::]{settingKeyOrAlias}`
+- `[.|->|::]get{settingKeyOrAlias}`
+- `[.|->|::]is{settingKeyOrAlias}`
+- `[.|->|::]is{settingKeyOrAlias}enabled`
+
+Given the key/alias `my_awesome_feature`, the scanner will find any of the following usages:
+- `.my_awesome_feature` (also: `->my_awesome_feature` / `::my_awesome_feature`)
+- `.MY_AWESOME_FEATURE` (also: `->MY_AWESOME_FEATURE` / `::MY_AWESOME_FEATURE`)
+- `.is_my_awesome_feature` (also: `->is_my_awesome_feature` / `::is_my_awesome_feature`
+- `.is_my_awesome_feature_enabled` (also: `->is_my_awesome_feature_enabled` / `::is_my_awesome_feature_enabled`)
+- `.myAwesomeFeature` (also: `->myAwesomeFeature` / `::myAwesomeFeature`)
+- `.isMyAwesomeFeature` (also: `->isMyAwesomeFeature` / `::isMyAwesomeFeature`)
+- `.isMyAwesomeFeatureEnabled` (also: `->isMyAwesomeFeatureEnabled` / `::isMyAwesomeFeatureEnabled`)
+
+:::
 
 ## Upload Scan Reports
 
