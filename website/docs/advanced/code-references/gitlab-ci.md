@@ -18,14 +18,14 @@ to scan your source code for feature flag and setting usages and upload the foun
     configcat-scan-repository:
       stage: deploy # the job will run in the deploy phase, but you can choose from any other phases you have
       image:
-        name: configcat/cli:1.2.2
+        name: configcat/cli:1.3.0
         entrypoint: [""]
       script:
         - configcat scan $CI_PROJECT_DIR 
             --config-id=PASTE-YOUR-CONFIG-ID-HERE 
             --repo=${CI_PROJECT_NAME}
             --branch=${CI_COMMIT_REF_NAME}
-            --file-url-template=https://gitlab.com/${CI_PROJECT_PATH}/blob/{branch}/{filePath}#L{lineNumber}
+            --file-url-template=https://gitlab.com/${CI_PROJECT_PATH}/blob/{commitHash}/{filePath}#L{lineNumber}
             --commit-url-template=https://gitlab.com/${CI_PROJECT_PATH}/commit/{commitHash}
             --runner="ConfigCat GitLab Job" 
             --upload

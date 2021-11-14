@@ -37,6 +37,12 @@ To get the ID of a Config, follow the steps below:
     <img class="bordered" src="/docs/assets/cli/scan/config_id.png" />
 
 
+## How Scanning Works
+The scanner looks for feature flag and setting keys between the following quotation marks in the first place: `'` `"` `` ` ``  
+Then, the found keys' context is examined for **aliases** such as variables, constants, or enumerations used to store them.
+These **aliases** are treated as indirect references and included in the searching process.
+
+
 ## Upload Scan Reports
 
 You have the option to upload scan reports for each branch of your repository to ConfigCat. 
@@ -59,12 +65,12 @@ Based on the information available during the scanning, the CLI replaces the cor
 
 - **File URL template**: Used to generate VCS file links.  
   Available template parameters:
-    - `branch`
+    - `commitHash`
     - `filePath`
     - `lineNumber`  
   
-  With the following example template URL: `https://github.com/my/repo/blob/{branch}/{filePath}#L{lineNumber}`  
-  For the file `src/example.js`, the result is: `https://github.com/my/repo/blob/main/src/example.js#L69`
+  With the following example template URL: `https://github.com/my/repo/blob/{commitHash}/{filePath}#L{lineNumber}`  
+  For the file `src/example.js`, the result is: `https://github.com/my/repo/blob/4451d61b63a4b4499ed5c607be6c40ce9eeadb9c/src/example.js#L69`
 
 - **Commit URL template**: Used to generate VCS commit links.  
   Available template parameters:

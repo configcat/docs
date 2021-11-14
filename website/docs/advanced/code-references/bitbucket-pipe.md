@@ -15,7 +15,7 @@ to scan your source code for feature flag and setting usages and upload the foun
 3. Add the following snippet to the script section of your `bitbucket-pipelines.yml` file.
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
     ```yaml
-    - pipe: configcat/scan-repository-pipe:1.0.0
+    - pipe: configcat/scan-repository-pipe:1.1.2
       variables:
         CONFIG_ID: 'PASTE-YOUR-CONFIG-ID-HERE'
     ```
@@ -30,7 +30,7 @@ Scan reports are uploaded for each branch of your repository that triggers the j
 | --------------------- | -------------------------------------------------------------------------- | ---------- | ------------------- |
 | `CONFIG_ID `          | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
 | `CONFIGCAT_API_HOST`  | ConfigCat Management API host.                                             |            | `api.configcat.com` |
-| `LINE_COUNT`          | Context line count before and after the reference line. (min: 1, max: 10)  |            | 5                   |
+| `LINE_COUNT`          | Context line count before and after the reference line. (min: 1, max: 10)  |            | 4                   |
 | `SUB_FOLDER`          | Sub-folder to scan, relative to the repository root folder.                |            |                     |
 | `VERBOSE`             | Turns on detailed logging.                                                 |            | false               |
 

@@ -15,14 +15,13 @@ Usage:
   configcat [options] [command]
 
 Options:
-  -v, --verbose   Print detailed execution information
-  --version       Show version information
-  -?, -h, --help  Show help and usage information
+  -v, --verbose           Print detailed execution information
+  -ni, --non-interactive  Turn off progress rendering and interactive features
+  --version               Show version information
+  -?, -h, --help          Show help and usage information
 
 Commands:
-  setup                Setup the CLI with Public Management API host and credentials.
-                       You can get your credentials from here:
-                       https://app.configcat.com/my-account/public-api-credentials
+  setup                Setup the CLI with Public Management API host and credentials
   ls                   List all Product, Config, and Environment IDs
   p, product           Manage Products
   c, config            Manage Configs
@@ -30,7 +29,7 @@ Commands:
   t, tag               Manage Tags
   f, flag, s, setting  Manage Feature Flags & Settings
   k, sdk-key           List SDK Keys
-  scan <directory>     Scans files for Feature Flag or Setting usages
+  scan <directory>     Scan files for Feature Flag & Setting usages
 
 Use "configcat [command] -?" for more information about a command.
 ```
