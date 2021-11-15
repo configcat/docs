@@ -116,14 +116,18 @@ The scanner uses the following patterns to look for wrapper usages (case insensi
 - `[.|->|::]is{settingKeyOrAlias}`
 - `[.|->|::]is{settingKeyOrAlias}enabled`
 
-Given the key/alias `my_awesome_feature`, the scanner will find any of the following usages:
+Given the key/alias `my_awesome_feature`, the scanner will find any of the following usage examples:
 - `.my_awesome_feature` (also: `->my_awesome_feature` / `::my_awesome_feature`)
 - `.MY_AWESOME_FEATURE` (also: `->MY_AWESOME_FEATURE` / `::MY_AWESOME_FEATURE`)
+- `.get_my_awesome_feature` (also: `->get_my_awesome_feature` / `::get_my_awesome_feature`)
+- `.GET_MY_AWESOME_FEATURE` (also: `->GET_MY_AWESOME_FEATURE` / `::GET_MY_AWESOME_FEATURE`)
 - `.is_my_awesome_feature` (also: `->is_my_awesome_feature` / `::is_my_awesome_feature`
 - `.is_my_awesome_feature_enabled` (also: `->is_my_awesome_feature_enabled` / `::is_my_awesome_feature_enabled`)
 - `.myAwesomeFeature` (also: `->myAwesomeFeature` / `::myAwesomeFeature`)
+- `.getMyAwesomeFeature` (also: `->getMyAwesomeFeature` / `::getMyAwesomeFeature`)
 - `.isMyAwesomeFeature` (also: `->isMyAwesomeFeature` / `::isMyAwesomeFeature`)
 - `.isMyAwesomeFeatureEnabled` (also: `->isMyAwesomeFeatureEnabled` / `::isMyAwesomeFeatureEnabled`)
+- `.IsMyAwesomeFeatureEnabled` (also: `->IsMyAwesomeFeatureEnabled` / `::IsMyAwesomeFeatureEnabled`)
 
 :::
 
