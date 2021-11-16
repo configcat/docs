@@ -32,13 +32,13 @@ You can use the optional template URL parameters for generating VCS links to you
 configcat scan /path/to/your/repo \
     --config-id YOUR-CONFIG-ID \ # required
     --repo YOUR-REPOSITORY-NAME \ # required
-    --file-url-template "https://github.com/my/repo/blob/{branch}/{filePath}#L{lineNumber}" \ # optional, used to generate VCS file links
+    --file-url-template "https://github.com/my/repo/blob/{commitHash}/{filePath}#L{lineNumber}" \ # optional, used to generate VCS file links
     --commit-url-template "https://github.com/my/repo/commit/{commitHash}" \ # optional, used to generate VCS commit links
     --upload # upload the scan report
 ```
 
 :::info
-The template parameters (`branch`, `filePath`, `lineNumber`, and `commitHash`) are automatically replaced by the CLI based on the
+The template parameters (`filePath`, `lineNumber`, and `commitHash`) are automatically replaced by the CLI based on the
 collected information from the Git repository.
 :::
 
@@ -51,7 +51,7 @@ configcat scan /path/to/your/repo \
     --repo YOUR-REPOSITORY-NAME \ # required
     --branch BRANCH-NAME \ # required in case of non-git repository
     --commit-hash \ # optional, used to show it on the report and generate commit links
-    --file-url-template "https://github.com/my/repo/blob/{branch}/{filePath}#L{lineNumber}" \ # optional, used to generate VCS file links
+    --file-url-template "https://github.com/my/repo/blob/{commitHash}/{filePath}#L{lineNumber}" \ # optional, used to generate VCS file links
     --commit-url-template "https://github.com/my/repo/commit/{commitHash}" \ # optional, used to generate VCS commit links
     --upload # upload the scan report
 ```

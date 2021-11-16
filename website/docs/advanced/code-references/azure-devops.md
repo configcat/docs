@@ -16,7 +16,7 @@ to scan your source code for feature flag and setting usages and upload the foun
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
    ```yaml
    - job: configcat_scan_and_upload
-     container: configcat/cli:azure-devops-1.2.2
+     container: configcat/cli:azure-devops-1.3.0
      pool:
        vmImage: ubuntu-latest
      steps:
@@ -26,7 +26,7 @@ to scan your source code for feature flag and setting usages and upload the foun
          --config-id=PASTE-YOUR-CONFIG-ID-HERE 
          --repo=$(Build.Repository.Name) 
          --branch=$(Build.SourceBranchName)
-         --file-url-template="$(Build.Repository.Uri)?path={filePath}&version=GB{branch}&line={lineNumber}&lineStartColumn=1    lineEndColumn=1" 
+         --file-url-template="$(Build.Repository.Uri)?path={filePath}&version=GC{commitHash}&line={lineNumber}&lineStartColumn=1&lineEndColumn=1"
          --commit-url-template="$(Build.Repository.Uri)/commit/{commitHash}" 
          --runner="ConfigCat Azure DevOps Job" 
          --upload

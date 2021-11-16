@@ -37,6 +37,100 @@ To get the ID of a Config, follow the steps below:
     <img class="bordered" src="/docs/assets/cli/scan/config_id.png" />
 
 
+## How Scanning Works
+The scanner looks for feature flag and setting keys between quotation marks (`'` `"` `` ` ``) in the first place.  
+
+### Aliases
+The found keys' context is examined for **aliases**, like variables, constants, or enumerations used to store these keys.
+**Aliases** are treated as indirect references and are included in the searching process.
+
+For example, the following `C#` constant's name (`MyAwesomeFeature`) will be recognized as an alias:
+```csharp
+public static class FeatureFlagKeys
+{
+  public const string MyAwesomeFeature = "my_awesome_feature";
+}
+```
+The scanner will treat this constant's usage as an indirect reference to the flag.
+```csharp
+if (configCatClient.GetValue(FeatureFlagKeys.MyAwesomeFeature, false))
+{
+  // the feature is on.
+}
+```
+
+:::info
+The alias recognition **adapts to the characteristics of different languages**.  
+For example, it can find aliases in `Go` constants/variable assignments:
+```go
+const (
+	myAwesomeFeature string = "my_awesome_feature"
+)
+
+myAwesomeFeature := "my_awesome_feature"
+``` 
+
+And in `Swift` enums/variable assignments as well:
+```swift
+enum FlagKeys : String {
+  case MyAwesomeFeature = "my_awesome_feature"
+}
+
+let myAwesomeFeature: String = "my_awesome_feature"
+```
+
+You can check <a target="_blank" href="https://raw.githubusercontent.com/configcat/cli/main/test/ConfigCat.Cli.Tests/alias.txt">here</a> a bunch of other samples that we tested.
+:::
+
+:::info
+An alias must be at least **30% identical to the feature flag/setting key**.
+The similarity check is case insensitive and ignores `_` characters. 
+This behavior prevents false recognitions in expressions like `<input type="text" value="my_awesome_feature">` where `value` shouldn't be treated as alias.
+:::
+
+### Wrappers
+In addition to aliases, the scanner also looks for different feature flag/setting key usage patterns. This helps to recognize functions and properties used to wrap direct ConfigCat SDK calls as indirect references. Aliases are also included in this search.
+
+For example, the scanner will treat the `IsMyAwesomeFeatureEnabled` function of the following `C#` wrapper class as an indirect reference:
+```csharp
+public class FeatureFlagProvider
+{
+  public bool IsMyAwesomeFeatureEnabled(bool defaultValue = false)
+  {
+    return configCatClient.GetValue("my_awesome_feature", defaultValue);
+  }
+}
+```
+And will include it's usage in the scan report:
+```csharp
+if (featureFlagProvider.IsMyAwesomeFeatureEnabled())
+{
+  // the feature is on.
+}
+```
+
+:::info
+The scanner uses the following patterns to look for wrapper usages (case insensitive):
+- `[.|->|::]{settingKeyOrAlias}`
+- `[.|->|::]get{settingKeyOrAlias}`
+- `[.|->|::]is{settingKeyOrAlias}`
+- `[.|->|::]is{settingKeyOrAlias}enabled`
+
+Given the key/alias `my_awesome_feature`, the scanner will find any of the following usage examples:
+- `.my_awesome_feature` (also: `->my_awesome_feature` / `::my_awesome_feature`)
+- `.MY_AWESOME_FEATURE` (also: `->MY_AWESOME_FEATURE` / `::MY_AWESOME_FEATURE`)
+- `.get_my_awesome_feature` (also: `->get_my_awesome_feature` / `::get_my_awesome_feature`)
+- `.GET_MY_AWESOME_FEATURE` (also: `->GET_MY_AWESOME_FEATURE` / `::GET_MY_AWESOME_FEATURE`)
+- `.is_my_awesome_feature` (also: `->is_my_awesome_feature` / `::is_my_awesome_feature`
+- `.is_my_awesome_feature_enabled` (also: `->is_my_awesome_feature_enabled` / `::is_my_awesome_feature_enabled`)
+- `.myAwesomeFeature` (also: `->myAwesomeFeature` / `::myAwesomeFeature`)
+- `.getMyAwesomeFeature` (also: `->getMyAwesomeFeature` / `::getMyAwesomeFeature`)
+- `.isMyAwesomeFeature` (also: `->isMyAwesomeFeature` / `::isMyAwesomeFeature`)
+- `.isMyAwesomeFeatureEnabled` (also: `->isMyAwesomeFeatureEnabled` / `::isMyAwesomeFeatureEnabled`)
+- `.IsMyAwesomeFeatureEnabled` (also: `->IsMyAwesomeFeatureEnabled` / `::IsMyAwesomeFeatureEnabled`)
+
+:::
+
 ## Upload Scan Reports
 
 You have the option to upload scan reports for each branch of your repository to ConfigCat. 
@@ -59,12 +153,12 @@ Based on the information available during the scanning, the CLI replaces the cor
 
 - **File URL template**: Used to generate VCS file links.  
   Available template parameters:
-    - `branch`
+    - `commitHash`
     - `filePath`
     - `lineNumber`  
   
-  With the following example template URL: `https://github.com/my/repo/blob/{branch}/{filePath}#L{lineNumber}`  
-  For the file `src/example.js`, the result is: `https://github.com/my/repo/blob/main/src/example.js#L69`
+  With the following example template URL: `https://github.com/my/repo/blob/{commitHash}/{filePath}#L{lineNumber}`  
+  For the file `src/example.js`, the result is: `https://github.com/my/repo/blob/4451d61b63a4b4499ed5c607be6c40ce9eeadb9c/src/example.js#L69`
 
 - **Commit URL template**: Used to generate VCS commit links.  
   Available template parameters:
