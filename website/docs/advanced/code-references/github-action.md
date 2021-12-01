@@ -3,7 +3,7 @@ id: github-action
 title: GitHub Action
 ---
 
-This section describes how to use ConfigCat's <a target="_blank" href="https://github.com/configcat/scan-repository">GitHub Action</a>
+This section describes how to use ConfigCat's <a target="_blank" href="https://github.com/marketplace/actions/configcat-scan-repository">GitHub Action</a>
 to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat.
 
 ## Configuration

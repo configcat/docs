@@ -78,6 +78,7 @@ module.exports = {
       "integrations/zoho-flow",
       "integrations/github",
       "integrations/circleci",
+      "integrations/bitbucket",
       "integrations/terraform",
       "integrations/amplitude",
       "integrations/vscode"

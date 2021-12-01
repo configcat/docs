@@ -80,6 +80,7 @@ const features = [
       { url: "integrations/zapier", title: "Zapier" },
       { url: "integrations/github", title: "GitHub Action" },
       { url: "integrations/circleci", title: "CircleCI Orb" },
+      { url: "integrations/bitbucket", title: "Bitbucket Pipe" },
       { url: "integrations/terraform", title: "Terraform" },
       { url: "integrations/amplitude", title: "Amplitude" },
       { url: "integrations/zoho-flow", title: "Zoho Flow" },

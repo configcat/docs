@@ -3,7 +3,7 @@ id: bitbucket-pipe
 title: Bitbucket Pipe
 ---
 
-This section describes how to use ConfigCat's <a target="_blank" href="https://bitbucket.org/configcat/scan-repository-pipe">Bitbucket Pipe</a>
+This section describes how to use ConfigCat's <a target="_blank" href="https://bitbucket.org/product/features/pipelines/integrations?p=configcat/scan-repository-pipe">Bitbucket Pipe</a>
 to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat.
 
 ## Configuration

@@ -3,38 +3,11 @@ id: circleci
 title: CircleCI Orb
 ---
 
-This utility discovers ConfigCat feature flag usages in your source code and validates them against your feature flags on the ConfigCat Dashboard.
+import CodeRefIntro from '/docs/advanced/code-references/_intro.mdx'
+import CircleCIOrb from '/docs/advanced/code-references/circleci-orb.md'
 
-The ConfigCat <a href="https://github.com/configcat/feature-flag-reference-validator" target="_blank">Feature Flag Reference Validator CLI</a> tool is available as a <a href="https://circleci.com/developer/orbs/orb/configcat/feature-flag-reference-validator" target="_blank">CircleCI Orb</a> to integrate with CircleCI workflows.
+<CodeRefIntro linkText="CircleCI Orb" linkUrl="https://app.configcat.com/my-account/public-api-credentials" linkTarget="_blank" />
 
-## Usage
-Get your SDK Key from the <a href="https://app.configcat.com/sdkkey" target="_blank">ConfigCat Dashboard</a> and store it as a <a href="https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project" target="_blank">CircleCI environment variable</a> with the name `CONFIG_CAT_SDK_KEY` in your project settings.
+[Here](/docs/advanced/code-references/overview) you can find more details about how this feature works.
 
-Then you can use ConfigCat's Orb as a job:
-```yaml
-version: 2.1
-orbs:
-  configcat: configcat/feature-flag-reference-validator@1.1
-workflows:
-  main:
-    jobs:
-      - configcat/validate-flag-references
-```
-Or as an individual command:
-```yaml
-version: 2.1
-orbs:
-  configcat: configcat/feature-flag-reference-validator@1.1
-jobs:
-  build:
-    docker:
-      - image: 'circleci/python:2.7'
-    steps:
-      - checkout:
-          path: /repo
-      - configcat/install-validator
-      - configcat/execute-validation
-```
-
-## Documentation
-For more information and usage examples check the <a href="https://circleci.com/orbs/registry/orb/configcat/feature-flag-reference-validator" target="_blank">documentation</a> of ConfigCat's Orb.
+<CircleCIOrb />
