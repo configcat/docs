@@ -72,10 +72,9 @@ if(isMyAwesomeFeatureEnabled) {
 | Arguments                          | Type                    | Description                                                                                                                                                                                                                                                                                         |
 | ---------------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sdkKey`                           | string                  | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                                                                                                                                           |
-| `dataGovernance`                   | DataGovernance          | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`. |
+| `dataGovernance`                   | DataGovernance          | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`.  |
 | `baseUrl`                          | string                  | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                             |
 | `configCache`                      | ConfigCache?            | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                                                                                                            |
-| `maxWaitTimeForSyncCallsInSeconds` | int                     | Optional, sets a timeout value for the synchronous methods of the library (`getValue()`, `forceRefresh()`) which means when a sync call takes longer than the timeout, it'll return with the default value.                                                                                         |
 | `sessionConfiguration`             | URLSessionConfiguration | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                                                                                                                                                                                                           |
 | `refreshMode`                      | PollingMode?            | Optional, sets the polling mode for the client. [See below](#polling-modes).                                                                                                                                                                                                                        |
 :::caution
@@ -150,14 +149,25 @@ You can change the verbosity of the logs by passing a `logLevel` parameter to th
 ```swift
 let client = ConfigCatClient(sdkKey: "#YOUR-SDK-KEY#", logLevel: .info)
 ```
-Available options: 
-- `.debug`
-- `.info`
-- `.warning`
-- `.error`
-- `.nolog`
+
+Available log levels:
+
+| Level      | Description                                                                             |
+| ---------- | --------------------------------------------------------------------------------------- |
+| `.nolog`   | Turn the ConfigCat logging off.                                                         |
+| `.error`   | Only error level events are logged.                                                     |
+| `.warning` | Errors and Warnings are logged.                                                         |
+| `.info`    | Errors, Warnings and feature flag evaluation is logged.                                 |
+| `.debug`   | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
 
 > The default level is `.warning`. With `.nolog` you can turn the logging completely off.
+
+Info level logging helps to inspect the feature flag evaluation process:
+```bash
+[main] Evaluating getValue(isPOCFeatureEnabled).
+[main] Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@something.com] => no match
+[main] Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@example.com] => match, returning: Optional(true)
+```
 
 ## `getAllKeys()`
 You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
@@ -192,6 +202,13 @@ let client = ConfigCatClient(
     )
 )
 ```
+Available options:
+
+| Option Parameter                    | Description                                                                                          | Default |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
+| `autoPollIntervalInSeconds`         | Polling interval.                                                                                    | 60      |
+| `onConfigChanged`                   | Callback to get notified about changes.                                                              | -       |
+| `maxInitWaitTimeInSeconds`          | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
 
 ### Lazy loading
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
@@ -214,6 +231,13 @@ let client = ConfigCatClient(
 )
 ```
 If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
+
+Available options:
+
+| Option Parameter                | Description                  | Default |
+| ------------------------------- | ---------------------------- | ------- |
+| `cacheRefreshIntervalInSeconds` | Cache TTL.                   | 60      |
+| `useAsyncRefresh`               | Asynchronously refresh.      | false   |
 
 ### Manual polling
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
@@ -276,6 +300,7 @@ let client: ConfigCatClient = ConfigCatClient(sdkKey: sdkKey, sessionConfigurati
 ## Changing the default HTTP timeout 
 
 Set the maximum wait time for a ConfigCat HTTP response by changing the *timeoutIntervalForRequest* of the ConfigCat's `URLSessionConfiguration`.
+The default *timeoutIntervalForRequest* is 60 seconds.
 
 ```swift
 let configuration = URLSessionConfiguration.default
