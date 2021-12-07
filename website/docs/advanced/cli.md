@@ -57,7 +57,7 @@ brew install configcat
 <details>
   <summary><strong>Snap (Linux)</strong></summary>
 
-Install the CLI from <a target="_blank" href="https://snapcraft.io">Snapcraft</a> by executing the following command:
+Install the CLI with <a target="_blank" href="https://snapcraft.io">Snapcraft</a> by executing the following command:
 ```bash
 sudo snap install configcat
 ```
@@ -78,7 +78,7 @@ scoop install configcat
 <details>
   <summary><strong>Chocolatey (Windows)</strong></summary>
 
-Install the CLI from <a target="_blank" href="https://chocolatey.org/">Chocolatey</a> by executing the following command:
+Install the CLI with <a target="_blank" href="https://chocolatey.org/">Chocolatey</a> by executing the following command:
 ```powershell
 choco install configcat
 ```
