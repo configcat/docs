@@ -3,9 +3,9 @@ id: overview
 title: Overview
 ---
 
-The [ConfigCat CLI](/docs/advanced/cli) has the ability to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. 
+import CodeRefIntro from './_intro.mdx'
 
-This feature makes the erasement of technical debt easier, as it can show which repositories reference your feature flags and settings in one centralized place on your <a target="_blank" href="https://app.configcat.com">Dashboard</a>.
+<CodeRefIntro linkText="CLI" linkUrl="/docs/advanced/cli" linkTarget="_self" />
 
 You can integrate the CLI into your CI/CD pipeline or use it with other execution mechanisms like scheduled jobs or VCS push triggered workflows.
 
