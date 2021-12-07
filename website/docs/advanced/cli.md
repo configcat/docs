@@ -130,7 +130,7 @@ Parameter | Description | Default value
 
 The possible **architecture** values for Linux: `x64`, `musl-x64`, `arm`, `arm64`.
 
-> For macOS, the architecture is fixed to `x64`, but we plan the support of Apple silicon in the future.
+> For macOS, the architecture is fixed to `x64`, but we plan to support Apple silicon in the future.
 
 **Script usage examples**:
 
