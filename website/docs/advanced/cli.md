@@ -46,7 +46,7 @@ You can install the CLI on multiple operating systems using the following source
 <details>
   <summary><strong>Homebrew (macOS / Linux)</strong></summary>
 
-Install the CLI from <a target="_blank" href="https://github.com/configcat/homebrew-tap">ConfigCat tap</a> with <a target="_blank" href="https://brew.sh">Homebrew</a> by executing the following command:
+Install the CLI with <a target="_blank" href="https://brew.sh">Homebrew</a> from <a target="_blank" href="https://github.com/configcat/homebrew-tap">ConfigCat's tap</a> by executing the following command:
 ```bash
 brew tap configcat/tap
 brew install configcat
@@ -67,7 +67,7 @@ sudo snap install configcat
 <details>
   <summary><strong>Scoop (Windows)</strong></summary>
 
-Install the CLI from <a target="_blank" href="https://github.com/configcat/scoop-configcat">ConfigCat bucket</a> with <a target="_blank" href="https://scoop.sh">Scoop</a> by executing the following command:
+Install the CLI with <a target="_blank" href="https://scoop.sh">Scoop</a> from <a target="_blank" href="https://github.com/configcat/scoop-configcat">ConfigCat's bucket</a> by executing the following command:
 ```bash
 scoop bucket add configcat https://github.com/configcat/scoop-configcat
 scoop install configcat
