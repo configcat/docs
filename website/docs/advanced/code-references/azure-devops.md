@@ -6,7 +6,7 @@ title: Azure DevOps
 This section describes how to use the [ConfigCat CLI](/docs/advanced/cli) in <a target="_blank" href="https://dev.azure.com/">Azure DevOps Pipelines</a>
 to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. 
 
-## Configuration
+## Setup
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in Azure DevOps <a target="_blank" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables">Pipeline Variables</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
     <img class="bordered" src="/docs/assets/cli/scan/azure_secrets.png" />
 

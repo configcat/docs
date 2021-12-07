@@ -6,7 +6,7 @@ title: GitHub Action
 This section describes how to use ConfigCat's <a target="_blank" href="https://github.com/marketplace/actions/configcat-scan-repository">GitHub Action</a>
 to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat.
 
-## Configuration
+## Setup
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in your repository's <a target="_blank" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">GitHub Secrets</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
     <img class="bordered" src="/docs/assets/cli/scan/gh_secrets.png" />
 
@@ -41,8 +41,8 @@ Scan reports are uploaded for each branch of your repository that triggers the w
 | Parameter     | Description                                                                | Required   | Default             |
 | ------------- | -------------------------------------------------------------------------- | ---------- | ------------------- |
 | `config-id`   | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
-| `api-user`    | ConfigCat Management API basic authentication username.                    | &#9745;    |                     |
-| `api-pass`    | ConfigCat Management API basic authentication password.                    | &#9745;    |                     |
+| `api-user`    | <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication username</a>.                    | &#9745;    |                     |
+| `api-pass`    | <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication password</a>.                    | &#9745;    |                     |
 | `api-host`    | ConfigCat Management API host.                                             |            | `api.configcat.com` |
 | `line-count`  | Context line count before and after the reference line. (min: 1, max: 10)  |            | 4                   |
 | `sub-folder`  | Sub-folder to scan, relative to the repository root folder.                |            |                     |
