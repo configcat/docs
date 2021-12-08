@@ -162,11 +162,16 @@ Available log levels:
 
 > The default level is `.warning`. With `.nolog` you can turn the logging completely off.
 
-Info level logging helps to inspect the feature flag evaluation process:
+Info level logging helps to inspect the feature flag evaluation process.  
+Example log entries:
 ```bash
 [main] Evaluating getValue(isPOCFeatureEnabled).
-[main] Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@something.com] => no match
-[main] Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@example.com] => match, returning: Optional(true)
+User object: {
+  "Identifier" : "435170f4-8a8b-4b67-a723-505ac7cdea92",
+  "Email" : "john@example.com"
+}.
+Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
+Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: Optional(true)
 ```
 
 ## `getAllKeys()`
