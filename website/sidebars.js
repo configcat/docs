@@ -1,8 +1,7 @@
 module.exports = {
   "docs": [
-    "faq",
     {
-      "Usage": [
+      "Basics": [
         "getting-started",
         "main-concepts",
         "purchase",
@@ -88,6 +87,7 @@ module.exports = {
       "Service": [
         "service/status"
       ]
-    }
+    },
+    "faq"
   ],
 };
