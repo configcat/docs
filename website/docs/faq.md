@@ -42,19 +42,38 @@ You need to have a [Billing Manager](organization#billing-manager-role) role to 
 
 ## A/B Testing & Targeting
 
-### How do I use AND operators in my targeting rules?
-Although there is no direct support for `AND` operators in the UI, you can use the `AND` operator as follows:
+### Can I use AND operators in my targeting rules?
+Although there is no direct support for `AND` operators in the UI, you can use the `AND` operator with a combination of `OR` and `NOT` operators.
 
-🤓 Via [De Morgan's laws](https://en.wikipedia.org/wiki/De_Morgan%27s_laws): `Condtion1 AND Condition2` is equivalent to `NOT (NOT Condition1 OR  NOT Condition2)`.
+#### OR Example
+Turn a feature `ON` if a user is in `Germany` `OR` logged in with an account from `@mycompany.com`.
+
+```
+IF Country IS ONE OF Germany THEN feature is ON
+ELSE IF Email CONTAINS @mycompany.com THEN feature is ON
+To all other users the feature is OFF
+```
+![OR example](/assets/faq/or-example.png)
+
+#### AND Example
+Turn a feature `ON` if a user is in `Germany` `AND` logged in with an account from `@mycompany.com`.
+```
+IF Country IS NOT ONE OF Germany THEN feature is OFF
+ELSE IF Email DOES NOT CONTAIN @mycompany.com THEN feature is OFF
+To all other users the feature is ON
+```
+![AND example](/assets/faq/and-example.png)
 
 [Here is an example in our blog.](https://configcat.com/blog/2019/10/23/feature-flags-user-segmentation-and-targeting-examples/#everyone-in-my-company-plus-android-users-from-germany-above-v53)
 
-### Are percentage rules sticky?
-Yes. Once you set a percentage rule, it will be applied to the same users. So for example if you set a rule for 10% of your users, no matter how you change the percentage, the rule will be applied to the same users when you go back to 10%.
+### Are percentage options sticky?
+Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.
 
 Also consider the following:
 - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)
 - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)
+
+[More on stickiness and consistency](advanced/targeting/#stickiness--consistency)
 
 ### How to use targeting rules based on sensitive data?
 If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Sensitve text comparators](https://configcat.com/docs/advanced/targeting/#sensitive-text-comparators).
