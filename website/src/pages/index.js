@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Getting started',
+    title: 'Basics',
     description: (
       <>
         Familiarize with ConfigCat basics.
@@ -20,6 +20,7 @@ const features = [
       { url: "requests", title: "What is a config.json download?" },
       { url: "purchase", title: "Plans, Purchase & Billing" },
       { url: "organization", title: "Organization & Roles" },
+      { url: "faq", title: "FAQ" },
     ]
   },
   {
