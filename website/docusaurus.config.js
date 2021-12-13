@@ -9,7 +9,7 @@ module.exports = {
   projectName: 'configcat', // Usually your repo name.
   themeConfig: {
     image: '/img/docs-cover.png',
-    googleAnalytics: {
+    gtag: {
       trackingID: "G-VNVQ03TVR2"
     },
     navbar: {
