@@ -266,7 +266,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 ```
 
 ### HTTP Timeout
-You can set the maximum wait time for a ConfigCat HTTP response by using OkHttpClient's timouts.
+You can set the maximum wait time for a ConfigCat HTTP response by using OkHttpClient's timeouts.
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
     .httpClient(new OkHttpClient.Builder()
