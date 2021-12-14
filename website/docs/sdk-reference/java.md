@@ -222,6 +222,120 @@ client.forceRefresh();
 ```
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
 
+## Local Mode
+If you are executing integration tests or you are in a particular stage of the development phase, you might want to use the SDK without an active connection to ConfigCat servers. To achive this, you can configure the SDK with a path to a file that contains your flag configuration, or with a simple `Map<String, Object>` structure.
+
+### JSON File
+
+You can configure the SDK to read your feature flags & settings from a file or classpath resource. You can also specify whether the file should be reloaded when it gets modified.
+#### File
+```java
+ConfigCatClient client = ConfigCatClient.newBuilder()
+    .mode(PollingModes.localFile(
+        "local_flags.json", // path to the file
+        true // reload the file when it gets modified
+    ))
+    .build("localhost");
+```
+#### Classpath Resource
+```java
+ConfigCatClient client = ConfigCatClient.newBuilder()
+    .mode(PollingModes.localClassPathResource(
+        "local_flags.json", // path to the resource
+        true // reload the resource when it gets modified
+    ))
+    .build("localhost");
+```
+#### JSON File Structure
+The SDK supports 2 types of JSON structures to describe feature flags & settings.
+
+The first one is in the same format that the SDK fetches from the ConfigCat CDN. This format allows the usage of all features you can do on the ConfigCat Dashboard.
+```json
+{
+    "f": { // list of feature flags & settings
+        "isFeatureEnabled": { // key of a particular flag
+            "v": false, // default value, served when no rules are defined
+            "i": "430bded3", // variation id (for analytical purposes)
+            "t": 0, // flag's type, possible values: 
+                    // 0 -> BOOLEAN 
+                    // 1 -> STRING
+                    // 2 -> INT
+                    // 3 -> DOUBLE
+            "p": [ // list of percentage rules
+                { 
+                    "o": 0, // rule's order
+                    "v": true, // value served when the rule is evaluated
+                    "p": 10, // % value
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                },
+                {
+                    "o": 1, // rule's order
+                    "v": false, // value served when the rule is evaluated
+                    "p": 90, // % value
+                    "i": "bddac6ae" // variation id (for analytical purposes)
+                }
+            ],
+            "r": [ // list of targeting rules
+                {
+                    "o": 0, // rule's order
+                    "a": "Identifier", // comparison attribute
+                    "t": 2, // comparator, possible values:
+                        // 0  -> 'IS ONE OF',
+                        // 1  -> 'IS NOT ONE OF',
+                        // 2  -> 'CONTAINS',
+                        // 3  -> 'DOES NOT CONTAIN',
+                        // 4  -> 'IS ONE OF (SemVer)',
+                        // 5  -> 'IS NOT ONE OF (SemVer)',
+                        // 6  -> '< (SemVer)',
+                        // 7  -> '<= (SemVer)',
+                        // 8  -> '> (SemVer)',
+                        // 9  -> '>= (SemVer)',
+                        // 10 -> '= (Number)',
+                        // 11 -> '<> (Number)',
+                        // 12 -> '< (Number)',
+                        // 13 -> '<= (Number)',
+                        // 14 -> '> (Number)',
+                        // 15 -> '>= (Number)',
+                        // 16 -> 'IS ONE OF (Sensitive)',
+                        // 17 -> 'IS NOT ONE OF (Sensitive)'
+                    "c": "@example.com", // comparison value
+                    "v": true, // value served when the rule is evaluated
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                }
+            ]
+        },
+    }
+}
+```
+> For a baseline, you can also download your configuration from ConfigCat's CDN and use it as-is from a file.
+
+If you don't need this kind of complexity then you can use the second, a much simpler (key-value) JSON format.
+```json
+{
+  "flags": {
+    "enabledFeature": true,
+    "disabledFeature": false,
+    "intSetting": 5,
+    "doubleSetting": 3.14,
+    "stringSetting": "test"
+  }
+}
+```
+
+### Map
+You can configure the SDK to read your feature flags & settings from a `Map<String, Object>`.
+```java
+Map<String, Object> map = new HashMap<>();
+map.put("enabledFeature", true);
+map.put("disabledFeature", false);
+map.put("intSetting", 5);
+map.put("doubleSetting", 3.14);
+map.put("stringSetting", "test");
+ConfigCatClient client = ConfigCatClient.newBuilder()
+        .mode(PollingModes.localObject(map))
+        .build("localhost");
+```
+
 ## Custom Cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCache` abstract class:
 ```java
