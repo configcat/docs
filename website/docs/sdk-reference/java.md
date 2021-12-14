@@ -223,7 +223,7 @@ client.forceRefresh();
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
 
 ## Local Mode
-If you are executing integration tests or you are in a particular stage of the development phase, you might want to use the SDK without an active connection to ConfigCat servers. To achive this, you can configure the SDK with a path to a file that contains your flag configuration, or with a simple `Map<String, Object>` structure.
+If you are executing integration tests or if you are in a particular stage of the development phase, you might want to use the SDK without an active connection to ConfigCat servers. To achive this, you can configure the SDK to load your feature flags & settings configuration from a file, or from a simple `Map<String, Object>` structure.
 
 ### JSON File
 
