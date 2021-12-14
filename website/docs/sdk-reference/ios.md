@@ -110,7 +110,7 @@ client.getValueAsync(
     defaultValue: false, // Default value
     user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
 ) { isMyAwesomeFeatureEnabled in
-    if(isMyAwesomeFeatureEnabled) {
+    if isMyAwesomeFeatureEnabled {
         doTheNewThing()
     } else {
         doTheOldThing()
@@ -147,7 +147,7 @@ or check <a href="https://developer.apple.com/videos/play/wwdc2016/721" target="
 ### Log level
 You can change the verbosity of the logs by passing a `logLevel` parameter to the ConfigCatClient's `init` function.
 ```swift
-let client = ConfigCatClient(sdkKey: "#YOUR-SDK-KEY#", logLevel: .info)
+let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>", logLevel: .info)
 ```
 
 Available log levels:
@@ -178,8 +178,22 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
 
 ```swift
-let client = ConfigCatClient(sdkKey: "#YOUR-SDK-KEY#")
+let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>")
 let keys = client.getAllKeys()
+```
+
+## `getAllValues()`
+
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
+```swift
+let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>")
+let allValues = client.getAllValues(
+    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+)
 ```
 
 ## Polling Modes
