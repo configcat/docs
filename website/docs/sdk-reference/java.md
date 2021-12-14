@@ -232,7 +232,7 @@ You can configure the SDK to read your feature flags & settings from a file or c
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
     .mode(PollingModes.localFile(
-        "local_flags.json", // path to the file
+        "path/to/the/local_flags.json", // path to the file
         true // reload the file when it gets modified
     ))
     .build("localhost");
@@ -241,7 +241,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
     .mode(PollingModes.localClassPathResource(
-        "local_flags.json", // path to the resource
+        "local_flags.json", // name of the resource
         true // reload the resource when it gets modified
     ))
     .build("localhost");
