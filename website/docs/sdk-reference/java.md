@@ -47,7 +47,7 @@ You can safely shut down the client instance and release all associated resource
 client.close()
 ```
 
-## Java Compatibility
+## Java compatibility
 The ConfigCat Java SDK is compatible with Java 8 and higher.
 
 ## Creating the *ConfigCat Client*
@@ -154,7 +154,7 @@ java.util.Collection<String> keys = client.getAllKeys();
 ## Polling Modes
 The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 
-### Auto Polling (default)
+### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
 Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.autoPoll()` to change the polling interval.
@@ -180,7 +180,7 @@ Available options:
 | Option Parameter                    | Description                              | Default |
 | ----------------------------------- | ---------------------------------------- | ------- |
 | `autoPollIntervalInSeconds`         | Polling interval.                        | 60      |
-| `maxInitWaitTimeSeconds`            | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
+| `maxInitWaitTimeSeconds`            | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
 | `configurationChangeListener`       | Callback to get notified about changes.  | -       |
 
 ### Lazy Loading
@@ -209,7 +209,7 @@ Available options:
 | Option Parameter                | Description                  | Default |
 | ------------------------------- | ---------------------------- | ------- |
 | `cacheRefreshIntervalInSeconds` | Cache TTL.                   | 60      |
-| `useAsyncRefresh`               | Asynchronously refresh.      | false   |
+| `useAsyncRefresh`               | Asynchronous refresh.      | false   |
 
 ### Manual Polling
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
@@ -278,7 +278,7 @@ It allows the usage of all features you can do on the ConfigCat Dashboard.
         "isFeatureEnabled": { // key of a particular flag
             "v": false, // default value, served when no rules are defined
             "i": "430bded3", // variation id (for analytical purposes)
-            "t": 0, // flag's type, possible values: 
+            "t": 0, // feature flag's type, possible values: 
                     // 0 -> BOOLEAN 
                     // 1 -> STRING
                     // 2 -> INT
@@ -401,7 +401,7 @@ OkHttpClient's default timeout is 10 seconds.
 
 > As the ConfigCatClient SDK maintains the whole lifetime of the internal http client, it's being closed simultaneously with the ConfigCatClient, refrain from closing the http client manually.
 
-## Force Refresh
+## Force refresh
 Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
 
 ## Logging
@@ -423,7 +423,7 @@ Available log levels:
 
 | Level      | Description                                                                             |
 | ---------- | --------------------------------------------------------------------------------------- |
-| `NO_LOG`   | Turn the ConfigCat logging off.                                                         |
+| `NO_LOG`   | Turn the logging off.                                                         |
 | `ERROR`    | Only error level events are logged.                                                     |
 | `WARNING`  | Errors and Warnings are logged.                                                         |
 | `INFO`     | Errors, Warnings and feature flag evaluation is logged.                                 |
