@@ -329,7 +329,7 @@ It allows the usage of all features you can do on the ConfigCat Dashboard.
     }
 }
 ```
-> For a baseline, you can download your configuration from ConfigCat's CDN and use it as-is from a file.
+> For a baseline, you can download your configuration from ConfigCat's CDN and use it as-is in a file.
 
 ### Map
 You can configure the SDK to read your feature flags & settings from a `Map<String, Object>`.
