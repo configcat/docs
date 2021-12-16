@@ -340,6 +340,7 @@ map.put("disabledFeature", false);
 map.put("intSetting", 5);
 map.put("doubleSetting", 3.14);
 map.put("stringSetting", "test");
+
 ConfigCatClient client = ConfigCatClient.newBuilder()
         .mode(PollingModes.localObject(map))
         .build("localhost");
