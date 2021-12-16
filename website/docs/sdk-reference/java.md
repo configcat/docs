@@ -222,12 +222,19 @@ client.forceRefresh();
 ```
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
 
-## Local Mode
-If you are executing integration tests or if you are in a particular stage of the development phase, you might want to use the SDK without an active connection to ConfigCat servers. To achive this, you can configure the SDK to load your feature flags & settings configuration from a file, or from a simple `Map<String, Object>` structure.
+## Local/Offline Mode
+
+Local/Offline Mode allows you to use the SDK without an active connection to ConfigCat servers.
+It is designed to support disonnected environments. 
+You can use it in your development environment, automated tests, or isolated production machines.
+
+To enable this mode, you can configure the SDK to load your feature flags & settings configuration from a file or 
+from a simple `Map<String, Object>` structure.
 
 ### JSON File
 
-You can configure the SDK to read your feature flags & settings from a file or classpath resource. You can also specify whether the file should be reloaded when it gets modified.
+The SDK can be configured to read your feature flags & settings from a file or classpath resource. 
+You can also specify whether the file should be reloaded when it gets modified.
 #### File
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
@@ -249,7 +256,22 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 #### JSON File Structure
 The SDK supports 2 types of JSON structures to describe feature flags & settings.
 
-The first one is in the same format that the SDK fetches from the ConfigCat CDN. This format allows the usage of all features you can do on the ConfigCat Dashboard.
+##### 1. Simple (key-value) structure
+```json
+{
+  "flags": {
+    "enabledFeature": true,
+    "disabledFeature": false,
+    "intSetting": 5,
+    "doubleSetting": 3.14,
+    "stringSetting": "test"
+  }
+}
+```
+
+##### 2. Complex (full-featured) structure
+This is the same format that the SDK fetches from the ConfigCat CDN. 
+It allows the usage of all features you can do on the ConfigCat Dashboard.
 ```json
 {
     "f": { // list of feature flags & settings
@@ -264,13 +286,13 @@ The first one is in the same format that the SDK fetches from the ConfigCat CDN.
             "p": [ // list of percentage rules
                 { 
                     "o": 0, // rule's order
-                    "v": true, // value served when the rule is evaluated
+                    "v": true, // value served when the rule is selected during evaluation
                     "p": 10, // % value
                     "i": "bcfb84a7" // variation id (for analytical purposes)
                 },
                 {
                     "o": 1, // rule's order
-                    "v": false, // value served when the rule is evaluated
+                    "v": false, // value served when the rule is selected during evaluation
                     "p": 90, // % value
                     "i": "bddac6ae" // variation id (for analytical purposes)
                 }
@@ -299,7 +321,7 @@ The first one is in the same format that the SDK fetches from the ConfigCat CDN.
                         // 16 -> 'IS ONE OF (Sensitive)',
                         // 17 -> 'IS NOT ONE OF (Sensitive)'
                     "c": "@example.com", // comparison value
-                    "v": true, // value served when the rule is evaluated
+                    "v": true, // value served when the rule is selected during evaluation
                     "i": "bcfb84a7" // variation id (for analytical purposes)
                 }
             ]
@@ -307,20 +329,7 @@ The first one is in the same format that the SDK fetches from the ConfigCat CDN.
     }
 }
 ```
-> For a baseline, you can also download your configuration from ConfigCat's CDN and use it as-is from a file.
-
-If you don't need this kind of complexity then you can use the second, a much simpler (key-value) JSON format.
-```json
-{
-  "flags": {
-    "enabledFeature": true,
-    "disabledFeature": false,
-    "intSetting": 5,
-    "doubleSetting": 3.14,
-    "stringSetting": "test"
-  }
-}
-```
+> For a baseline, you can download your configuration from ConfigCat's CDN and use it as-is from a file.
 
 ### Map
 You can configure the SDK to read your feature flags & settings from a `Map<String, Object>`.
