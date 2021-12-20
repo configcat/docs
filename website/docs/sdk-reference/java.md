@@ -222,35 +222,43 @@ client.forceRefresh();
 ```
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
 
-## Local/Offline Mode
+## Flag Overrides
 
-Local/Offline Mode allows you to use the SDK without an active connection to ConfigCat servers.
-It is designed to support disonnected environments. 
-You can use it in your development environment, automated tests, or isolated production machines.
+With flag overrides you can overwrite the feature flag & setting configuration fetched from the ConfigCat CDN with local values.
+Moreover, you can specify how the overrides should apply over the fetched configuration. The following 3 behaviours are supported:
 
-To enable this mode, you can configure the SDK to load your feature flags & settings configuration from a file or 
-from a simple `Map<String, Object>` structure.
+- **Local only** (`OverrideBehaviour.LOCAL_ONLY`): With this mode, the SDK won't fetch feature flags & settings from the ConfigCat CDN and will use only the local overrides to evaluate feature flags. This mode is designed to support disonnected environments. You can use it in your development environment, automated tests, or isolated production machines.
+
+- **Local over remote** (`OverrideBehaviour.LOCAL_OVER_REMOTE`): With this mode, the SDK will fetch feature flags & settings from the ConfigCat CDN and will override those that have a matching key.
+
+- **Remote over local** (`OverrideBehaviour.REMOTE_OVER_LOCAL`): With this mode, the SDK will fetch feature flags & settings from the ConfigCat CDN and will use the overrides for those flags only that doesn't exist in the fetched configuration.
+
+You can load your feature flag & setting overrides from a file or from a simple `Map<String, Object>` structure.
 
 ### JSON File
 
-The SDK can be configured to read your feature flags & settings from a file or classpath resource. 
+The SDK can be configured to load your feature flag & setting overrides from a file or classpath resource. 
 You can also specify whether the file should be reloaded when it gets modified.
 #### File
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.localFile(
-        "path/to/the/local_flags.json", // path to the file
-        true // reload the file when it gets modified
-    ))
+    flagOverrides(OverrideDataSourceBuilder.localFile(
+            "path/to/the/local_flags.json", // path to the file
+            true // reload the file when it gets modified
+        ), 
+        OverrideBehaviour.LOCAL_ONLY // local/offline mode
+    )
     .build("localhost");
 ```
 #### Classpath Resource
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.localClassPathResource(
-        "local_flags.json", // name of the resource
-        true // reload the resource when it gets modified
-    ))
+    flagOverrides(OverrideDataSourceBuilder.classPathResource(
+            "local_flags.json", // name of the resource
+            true // reload the resource when it gets modified
+        ), 
+        OverrideBehaviour.LOCAL_ONLY // local/offline mode
+    )
     .build("localhost");
 ```
 #### JSON File Structure
@@ -332,7 +340,7 @@ It allows the usage of all features you can do on the ConfigCat Dashboard.
 > For a baseline, you can download your configuration from ConfigCat's CDN and use it as-is in a file.
 
 ### Map
-You can configure the SDK to read your feature flags & settings from a `Map<String, Object>`.
+You can configure the SDK to load your feature flag & setting overrides from a `Map<String, Object>`.
 ```java
 Map<String, Object> map = new HashMap<>();
 map.put("enabledFeature", true);
@@ -342,7 +350,7 @@ map.put("doubleSetting", 3.14);
 map.put("stringSetting", "test");
 
 ConfigCatClient client = ConfigCatClient.newBuilder()
-        .mode(PollingModes.localObject(map))
+        .flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY)
         .build("localhost");
 ```
 
