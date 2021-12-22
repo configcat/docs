@@ -14,15 +14,16 @@ You can specify a Request body that will be sent as the payload of the HTTP requ
 
 ConfigCat will replace the following variables in the request body:
 
-| Variable                | The values it gets replaced with                             |
-| ----------------------- | ------------------------------------------------------------ |
-| **##ConfigName##**      | The name of the Config your setting belongs to.              |
-| **##ConfigId##**        | ID of the Config.                                            |
-| **##EnvironmentName##** | The name of the Environment where the Setting value changed. |
-| **##EnvironmentId##**   | ID of the Environment.                                       |
-| **##URL##**             | A direct link to the Config in the *ConfigCat Dashboard.*    |
-| **##ChangeNotes##**     | The **Mandatory notes** added to the actual changeset.    |
-| **##ChangeDetails##**   | Details of the change in JSON format including setting name, old, new values and targeting rules.  |
+| Variable                   | The values it gets replaced with                             |
+| -------------------------- | ------------------------------------------------------------ |
+| **##ConfigName##**         | The name of the Config your setting belongs to.              |
+| **##ConfigId##**           | ID of the Config.                                            |
+| **##EnvironmentName##**    | The name of the Environment where the Setting value changed. |
+| **##EnvironmentId##**      | ID of the Environment.                                       |
+| **##URL##**                | A direct link to the Config in the *ConfigCat Dashboard.*    |
+| **##ChangeNotes##**        | The **Mandatory notes** added to the actual changeset.       |
+| **##ChangeDetails##**      | Details of the change in JSON format including setting name, old, new values and targeting rules.  |
+| **##ChangeDetailsTeams##** | Details of the change in MS Teams format.                    |
 
 The structure of the JSON array injected into the **##ChangeDetails##** looks like the following:
 ```
@@ -62,11 +63,11 @@ A few steps to set up Slack and get a message when a setting changes:
 
 ## Connecting to Microsoft Teams
 A few steps to set up Microsoft Teams and get a message when a setting changes:
-1. Define an Incoming Webhook connector in Microsoft Teams and copy the Webhook URL.
+1. Define an <a href="https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#create-incoming-webhook-1" target="_blank">Incoming Webhook connector in Microsoft Teams</a> and copy the Webhook URL.
 2. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the *ConfigCat Dashboard.* 
 3. Create a Webhook and add your Teams URL.
 4. Select POST as the HTTP method.
-5. Add a request body like so:
+5. Add a request body similar to the one below.
 
 Sample request body of the Webhook: 
 ```

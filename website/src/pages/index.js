@@ -86,6 +86,7 @@ const features = [
       { url: "integrations/amplitude", title: "Amplitude" },
       { url: "integrations/zoho-flow", title: "Zoho Flow" },
       { url: "integrations/vscode", title: "Visual Studio Code" },
+      { url: "advanced/notifications-webhooks#connecting-to-microsoft-teams", title: "MS Teams (via webhook)" }
     ]
   },
 ];
