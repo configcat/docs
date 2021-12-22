@@ -74,8 +74,8 @@ Sample request body of the Webhook:
   "@context": "https://schema.org/extensions",
   "@type": "MessageCard",
   "themeColor": "0072C6",
-  "title": "##ConfigName## - ##EnvironmentName## ",
-  "text": "Config changed",
+  "title": "##ConfigName## - ##EnvironmentName##",
+  "text": "##ChangeDetailsTeams##",
   "potentialAction": [
     {
       "@type": "OpenUri",
