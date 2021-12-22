@@ -227,7 +227,7 @@ client.forceRefresh();
 With flag overrides you can overwrite the feature flag & setting configuration fetched from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the fetched configuration. The following 3 behaviours are supported:
 
-- **Local only** (`OverrideBehaviour.LOCAL_ONLY`): With this mode, the SDK won't fetch feature flags & settings from the ConfigCat CDN and will use only the local overrides to evaluate feature flags. This mode is designed to support disonnected environments. You can use it in your development environment, automated tests, or isolated production machines.
+- **Local/Offline mode** (`OverrideBehaviour.LOCAL_ONLY`): With this mode, the SDK won't fetch feature flags & settings from the ConfigCat CDN and will use only the local overrides to evaluate feature flags. This mode is designed to support disonnected environments. You can use it in your development environment, automated tests, or isolated production machines.
 
 - **Local over remote** (`OverrideBehaviour.LOCAL_OVER_REMOTE`): With this mode, the SDK will fetch feature flags & settings from the ConfigCat CDN and will override those that have a matching key.
 
