@@ -141,7 +141,7 @@ The following screenshot shows how an uploaded report looks like.
 
 ### Scanning Git Repositories
 The `scan` command automatically detects when it's being executed on a git repository. It collects additional information from Git like the current **branch
-name**, the actual **commit hash**, and each active **remote branches**. These extra details are used to enrich the uploaded report on the ConfigCat Dashboard with links to your actual source code.
+name**, the actual **commit hash**, and each active **remote branch**. These extra details are used to enrich the uploaded report on the ConfigCat Dashboard with links to your actual source code.
 
 :::info
 If you are not using Git as VCS, you have to set at least the `--branch` parameter of the `scan` command.
