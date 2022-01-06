@@ -45,18 +45,27 @@ Constructor parameters:
 
 Available configuration options:
 
-| Name                     | Type                          | Description                                                                                                                                                                                                                                                                                                            |
-| ------------------------ | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data-governance`        | `int`                         | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `GLOBAL_`, `EU_ONLY`. |
-| `logger`                 | `Psr\Log\LoggerInterface`     | Configures a logger for errors and warnings produced by the SDK, defaults to `Psr\Log\NullLogger`.                                                                                                                                                                                                                     |
-| `cache`                  | `ConfigCat\Cache\ConfigCache` | Sets a `ConfigCat\Cache\ConfigCache` implementation for caching the actual configurations. You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache).                                                                                                   |
-| `cache-refresh-interval` | `int`                         | Sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a new configuration fetch request. Defaults to 60.                                                                                             |
-| `request-options`        | `array`                       | Sets the options for the request initiated by the `Guzzle` HTTP client. See the [official documentation](https://docs.guzzlephp.org/en/stable/request-options.html) for the available options.                                                                                                                                                                                                                                                |
+| Name                     | Type                           | Description                         |
+| ------------------------ | ------------------------------ | ----------------------------------- |
+| `data-governance`        | `int`                          | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `GLOBAL_`, `EU_ONLY`. |
+| `logger`                 | `\Psr\Log\LoggerInterface`     | Optional, configures a logger for errors and warnings produced by the SDK, defaults to `Psr\Log\NullLogger`. |
+| `log-level`              | `int`                          | Optional, defaults to `LogLevel::WARNING`. Sets the internal log level. |
+| `cache`                  | `\ConfigCat\Cache\ConfigCache` | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the actual configurations. You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache). |
+| `cache-refresh-interval` | `int`                          | Optional, sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a new configuration fetch request. Defaults to 60. |
+| `request-options`        | `array`                        | Optional, sets the options for the request initiated by the `Guzzle` HTTP client. See the [official documentation](https://docs.guzzlephp.org/en/stable/request-options.html) for the available options. |
+| `flag-overrides`         | `\ConfigCat\Override\OverrideDataSource` | Optional, configures local feature flag & setting overrides. |
+| `exceptions-to-ignore`   | `array`                        | Optional, sets an array of exception classes that should be ignored from logs. |
+| `base-url`               | `string`                       | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
+
+:::info
+Each option name is available through constants of the `\ConfigCat\ClientOptions` class.
+:::
+
 Example:
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
-    'cache' => new \ConfigCat\Cache\LaravelCache(Cache::store()),
-    'cache-refresh-interval' => 5
+    \ConfigCat\ClientOptions::CACHE => new \ConfigCat\Cache\LaravelCache(Cache::store()),
+    \ConfigCat\ClientOptions::CACHE_REFRESH_INTERVAL => 5
  ]);
 ```
 
@@ -110,12 +119,129 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
 $keys = $client->getAllKeys();
 ```
 
+## Flag Overrides
+
+With flag overrides you can overwrite the feature flag & setting configuration fetched from the ConfigCat CDN with local values.
+Moreover, you can specify how the overrides should apply over the fetched configuration. The following 3 behaviours are supported:
+
+- **Local/Offline mode** (`OverrideBehaviour::LOCAL_ONLY`): With this mode, the SDK won't fetch feature flags & settings from the ConfigCat CDN and will use only the local overrides to evaluate feature flags. This mode is designed to support disonnected environments. You can use it in your development environment, automated tests, or isolated production machines.
+
+- **Local over remote** (`OverrideBehaviour::LOCAL_OVER_REMOTE`): With this mode, the SDK will fetch feature flags & settings from the ConfigCat CDN and will override those that have a matching key.
+
+- **Remote over local** (`OverrideBehaviour::REMOTE_OVER_LOCAL`): With this mode, the SDK will fetch feature flags & settings from the ConfigCat CDN and will use the overrides for those flags only that doesn't exist in the fetched configuration.
+
+You can load your feature flag & setting overrides from a file or from a simple associative array.
+
+### JSON File
+
+The SDK can be configured to load your feature flag & setting overrides from a file or classpath resource. 
+You can also specify whether the file should be reloaded when it gets modified.
+```php
+$client = new ConfigCatClient("localhost", [
+  ClientOptions::FLAG_OVERRIDES => OverrideDataSource::localFile(
+    "tests/test-rules.json", // path to the file
+    OverrideBehaviour::LOCAL_ONLY // local/offline mode
+  ),
+]);
+```
+#### JSON File Structure
+The SDK supports 2 types of JSON structures to describe feature flags & settings.
+
+##### 1. Simple (key-value) structure
+```json
+{
+  "flags": {
+    "enabledFeature": true,
+    "disabledFeature": false,
+    "intSetting": 5,
+    "doubleSetting": 3.14,
+    "stringSetting": "test"
+  }
+}
+```
+
+##### 2. Complex (full-featured) structure
+This is the same format that the SDK fetches from the ConfigCat CDN. 
+It allows the usage of all features you can do on the ConfigCat Dashboard.
+```json
+{
+    "f": { // list of feature flags & settings
+        "isFeatureEnabled": { // key of a particular flag
+            "v": false, // default value, served when no rules are defined
+            "i": "430bded3", // variation id (for analytical purposes)
+            "t": 0, // feature flag's type, possible values: 
+                    // 0 -> BOOLEAN 
+                    // 1 -> STRING
+                    // 2 -> INT
+                    // 3 -> DOUBLE
+            "p": [ // list of percentage rules
+                { 
+                    "o": 0, // rule's order
+                    "v": true, // value served when the rule is selected during evaluation
+                    "p": 10, // % value
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                },
+                {
+                    "o": 1, // rule's order
+                    "v": false, // value served when the rule is selected during evaluation
+                    "p": 90, // % value
+                    "i": "bddac6ae" // variation id (for analytical purposes)
+                }
+            ],
+            "r": [ // list of targeting rules
+                {
+                    "o": 0, // rule's order
+                    "a": "Identifier", // comparison attribute
+                    "t": 2, // comparator, possible values:
+                        // 0  -> 'IS ONE OF',
+                        // 1  -> 'IS NOT ONE OF',
+                        // 2  -> 'CONTAINS',
+                        // 3  -> 'DOES NOT CONTAIN',
+                        // 4  -> 'IS ONE OF (SemVer)',
+                        // 5  -> 'IS NOT ONE OF (SemVer)',
+                        // 6  -> '< (SemVer)',
+                        // 7  -> '<= (SemVer)',
+                        // 8  -> '> (SemVer)',
+                        // 9  -> '>= (SemVer)',
+                        // 10 -> '= (Number)',
+                        // 11 -> '<> (Number)',
+                        // 12 -> '< (Number)',
+                        // 13 -> '<= (Number)',
+                        // 14 -> '> (Number)',
+                        // 15 -> '>= (Number)',
+                        // 16 -> 'IS ONE OF (Sensitive)',
+                        // 17 -> 'IS NOT ONE OF (Sensitive)'
+                    "c": "@example.com", // comparison value
+                    "v": true, // value served when the rule is selected during evaluation
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                }
+            ]
+        },
+    }
+}
+```
+> For a baseline, you can download your configuration from ConfigCat's CDN and use it as-is in a file.
+
+### Associative Array
+You can configure the SDK to load your feature flag & setting overrides from an associative array.
+```php
+$client = new ConfigCatClient("localhost", [
+  ClientOptions::FLAG_OVERRIDES => OverrideDataSource::localArray([
+      'enabledFeature' => true,
+      'disabledFeature' => false,
+      'intSetting' => 5,
+      'doubleSetting' => 3.14,
+      'stringSetting' => "test",
+  ], OverrideBehaviour::LOCAL_ONLY),
+]);
+```
+
 ## Cache
 You can use the following caching options:
 * Laravel:
   ```php
   $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
-    'cache' => new \ConfigCat\Cache\LaravelCache(\Illuminate\Support\Facades\Cache::store()),
+    \ConfigCat\ClientOptions::CACHE => new \ConfigCat\Cache\LaravelCache(\Illuminate\Support\Facades\Cache::store()),
   ]);
   ```
 * PSR-6 cache (e.g. the [redis adapter](https://github.com/php-cache/redis-adapter) for PSR-6):
@@ -124,7 +250,7 @@ You can use the following caching options:
   $pool = new RedisCachePool($client);
 
   $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
-    'cache' => new \ConfigCat\Cache\Psr6Cache($pool),
+    \ConfigCat\ClientOptions::CACHE => new \ConfigCat\Cache\Psr6Cache($pool),
   ]);
   ```
   or with the [file system adapter](https://github.com/php-cache/filesystem-adapter):
@@ -134,7 +260,7 @@ You can use the following caching options:
   $pool = new Cache\Adapter\Filesystem\FilesystemCachePool($filesystem);
 
   $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
-    'cache' => new \ConfigCat\Cache\Psr6Cache($pool),
+    \ConfigCat\ClientOptions::CACHE => new \ConfigCat\Cache\Psr6Cache($pool),
   ]);
   ```
 * PSR-16 cache (e.g. the [redis adapter](https://github.com/php-cache/redis-adapter) for PSR-6 and the [PSR-6 to PSR-16 cache bridge](https://github.com/php-cache/simple-cache-bridge)):
@@ -144,7 +270,7 @@ You can use the following caching options:
   $simpleCache = new SimpleCacheBridge($pool);
 
   $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
-    'cache' => new \ConfigCat\Cache\Psr16Cache($simpleCache),
+    \ConfigCat\ClientOptions::CACHE => new \ConfigCat\Cache\Psr16Cache($simpleCache),
   ]);
   ```
   or with the [file system adapter](https://github.com/php-cache/filesystem-adapter):
@@ -155,7 +281,7 @@ You can use the following caching options:
   $simpleCache = new SimpleCacheBridge($pool);
 
   $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
-    'cache' => new \ConfigCat\Cache\Psr16Cache($simpleCache),
+    \ConfigCat\ClientOptions::CACHE => new \ConfigCat\Cache\Psr16Cache($simpleCache),
   ]);
   ```
 * Custom cache implementation
@@ -177,22 +303,58 @@ You can use the following caching options:
 ## Logging
 The SDK uses the PSR-3 `LoggerInterface` for logging, so you can use any implementor package like [Monolog](https://github.com/Seldaek/monolog).
 ```php
-
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
-    'logger' => new \Monolog\Logger("name"),
+    \ConfigCat\ClientOptions::LOGGER => new \Monolog\Logger("name"),
+]);
+```
+You can change the verbosity of the logs by setting the `log-level` configuration option.
+```php
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
+    \ConfigCat\ClientOptions::LOG_LEVEL => \ConfigCat\Log\LogLevel::INFO
 ]);
 ```
 
-## HTTP Client (Proxy)
-The SDK uses [Guzzle](http://docs.guzzlephp.org/en/stable/index.html) for the underlying HTTP calls and its request options are available to customize through the SDK options like:
-```php
+The following levels are used by the ConfigCat SDK:
 
+| Level      | Description                                                                             |
+| ---------- | --------------------------------------------------------------------------------------- |
+| `NO_LOG`   | Turn the logging off.                                                         |
+| `ERROR`    | Only error level events are logged.                                                     |
+| `WARNING`  | Errors and Warnings are logged.                                                         |
+| `INFO`     | Errors, Warnings and feature flag evaluation is logged.                                 |
+| `DEBUG`    | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
+
+> The default level is `WARNING`. With `NO_LOG` you can turn the logging completely off.
+
+Info level logging helps to inspect the feature flag evaluation process:
+```bash
+[2022-01-06T18:34:16.846039+00:00] ConfigCat.INFO: Evaluating getValue(isPOCFeatureEnabled).
+User object: {"Identifier":"435170f4-8a8b-4b67-a723-505ac7cdea92","Email":"john@example.com"}
+Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match.
+Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: true.
+```
+
+## HTTP Client
+The SDK uses [Guzzle](http://docs.guzzlephp.org/en/stable/index.html) for the underlying HTTP calls and its request options are available to customize through SDK options.
+### HTTP Proxy
+If your application runs behind a proxy you can do the following:
+```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
-    'request-options' => [
-        'proxy' => [
+    \ConfigCat\ClientOptions::REQUEST_OPTIONS => [
+        \GuzzleHttp\RequestOptions::PROXY => [
             'http'  => 'tcp://localhost:8125',
             'https' => 'tcp://localhost:9124',
         ]
+    ],
+]);
+```
+### HTTP Timeout
+You can set the maximum wait time for a ConfigCat HTTP response by using Guzzle's timeouts.
+```php
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
+    \ConfigCat\ClientOptions::REQUEST_OPTIONS => [
+        \GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => 5,
+        \GuzzleHttp\RequestOptions::TIMEOUT => 10
     ],
 ]);
 ```

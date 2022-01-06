@@ -50,3 +50,7 @@
   border: 1px solid rgb(224, 224, 224);
   margin-bottom: 1rem;
 }
+
+table td:first-child {
+  white-space: nowrap;
+}
