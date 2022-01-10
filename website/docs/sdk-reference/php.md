@@ -48,17 +48,17 @@ Available options:
 | Name                     | Type                           | Description                         |
 | ------------------------ | ------------------------------ | ----------------------------------- |
 | `data-governance`        | `int`                          | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `GLOBAL_`, `EU_ONLY`. |
-| `logger`                 | `\Psr\Log\LoggerInterface`     | Optional, configures a logger for errors and warnings produced by the SDK, defaults to [Monolog](https://github.com/Seldaek/monolog). [See below](#logging). |
+| `logger`                 | [\Psr\Log\LoggerInterface](https://github.com/php-fig/log/blob/master/src/LoggerInterface.php)     | Optional, configures a logger for errors and warnings produced by the SDK, defaults to [Monolog](https://github.com/Seldaek/monolog). [See below](#logging). |
 | `log-level`              | `int`                          | Optional, defaults to `LogLevel::WARNING`. Sets the internal log level. [See below](#logging). |
-| `cache`                  | `\ConfigCat\Cache\ConfigCache` | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the latest feature flag and setting values. [See below](#cache). You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache). |
+| `cache`                  | [\ConfigCat\Cache\ConfigCache](https://github.com/configcat/php-sdk/blob/master/src/Cache/ConfigCache.php) | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the latest feature flag and setting values. [See below](#cache). You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache). |
 | `cache-refresh-interval` | `int`                          | Optional, sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a [config.json download](/requests). Defaults to 60. |
 | `request-options`        | `array`                        | Optional, sets the request options (e.g. [HTTP Timeout](#http-timeout), [HTTP Proxy](#http-proxy)) for the underlying `Guzzle` HTTP client used for [downloading the config.json](/requests) files. See Guzzle's [official documentation](https://docs.guzzlephp.org/en/stable/request-options.html) for the available request options. |
-| `flag-overrides`         | `\ConfigCat\Override\OverrideDataSource` | Optional, configures local feature flag & setting overrides. [See below](#flag-overrides). |
+| `flag-overrides`         | [\ConfigCat\Override\OverrideDataSource](https://github.com/configcat/php-sdk/blob/master/src/Override/OverrideDataSource.php) | Optional, configures local feature flag & setting overrides. [See below](#flag-overrides). |
 | `exceptions-to-ignore`   | `array`                        | Optional, sets an array of exception classes that should be ignored from logs. |
 | `base-url`               | `string`                       | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the feature flag and setting. |
 
 :::info
-Each option name is available through constants of the `\ConfigCat\ClientOptions` class.
+Each option name is available through constants of the [\ConfigCat\ClientOptions](https://github.com/configcat/php-sdk/blob/master/src/ClientOptions.php) class.
 :::
 
 Example:
