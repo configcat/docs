@@ -69,11 +69,11 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 | `build(<sdkkey>)`                       | **REQUIRED.** Waits for the SDK Key to access your feature flags and settings. Get it from *ConfigCat Dashboard*. |
 | `dataGovernance(DataGovernance)`        | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
 | `baseUrl(string)`                       | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
-| `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [See below](#httpclient). |
-| `cache(ConfigCache)`                    | Optional, sets a custom cache implementation for the client. [See below](#custom-cache). |
-| `mode(PollingMode)`                     | Optional, sets the polling mode for the client. [See below](#polling-modes). |
-| `logLevel(LogLevel)`                    | Optional, defaults to `WARNING`. Sets the internal log level. [See below](#logging). |
-| `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, configures local feature flag & setting overrides. [See below](#flag-overrides). |
+| `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient). |
+| `cache(ConfigCache)`                    | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
+| `mode(PollingMode)`                     | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
+| `logLevel(LogLevel)`                    | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging). |
+| `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
@@ -281,6 +281,14 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 This is the same format that the SDK fetches from the ConfigCat CDN. 
 It allows the usage of all features you can do on the ConfigCat Dashboard.
+
+For a baseline, you can download your configuration from ConfigCat's CDN and use it in a file.
+
+The URL to your configuration is based on your [Data Governance](advanced/data-governance.md): 
+
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+
 ```json
 {
     "f": { // list of feature flags & settings
@@ -338,7 +346,6 @@ It allows the usage of all features you can do on the ConfigCat Dashboard.
     }
 }
 ```
-> For a baseline, you can download your configuration from ConfigCat's CDN and use it as-is in a file.
 
 ### Map
 You can configure the SDK to load your feature flag & setting overrides from a `Map<String, Object>`.

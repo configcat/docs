@@ -48,12 +48,12 @@ Available options:
 | Name                     | Type                           | Description                         |
 | ------------------------ | ------------------------------ | ----------------------------------- |
 | `data-governance`        | `int`                          | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `GLOBAL_`, `EU_ONLY`. |
-| `logger`                 | [\Psr\Log\LoggerInterface](https://github.com/php-fig/log/blob/master/src/LoggerInterface.php)     | Optional, configures a logger for errors and warnings produced by the SDK, defaults to [Monolog](https://github.com/Seldaek/monolog). [See below](#logging). |
+| `logger`                 | [\Psr\Log\LoggerInterface](https://github.com/php-fig/log/blob/master/src/LoggerInterface.php)     | Optional, configures a logger for errors and warnings produced by the SDK, defaults to [Monolog](https://github.com/Seldaek/monolog). [More about logging](#logging). |
 | `log-level`              | `int`                          | Optional, defaults to `LogLevel::WARNING`. Sets the internal log level. [More about log levels](#logging). |
-| `cache`                  | [\ConfigCat\Cache\ConfigCache](https://github.com/configcat/php-sdk/blob/master/src/Cache/ConfigCache.php) | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the latest feature flag and setting values. [See below](#cache). You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache). |
+| `cache`                  | [\ConfigCat\Cache\ConfigCache](https://github.com/configcat/php-sdk/blob/master/src/Cache/ConfigCache.php) | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the latest feature flag and setting values. [More about cache](#cache). You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache). |
 | `cache-refresh-interval` | `int`                          | Optional, sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a [config.json download](/requests). Defaults to 60. |
 | `request-options`        | `array`                        | Optional, sets the request options (e.g. [HTTP Timeout](#http-timeout), [HTTP Proxy](#http-proxy)) for the underlying `Guzzle` HTTP client used for [downloading the config.json](/requests) files. See Guzzle's [official documentation](https://docs.guzzlephp.org/en/stable/request-options.html) for the available request options. |
-| `flag-overrides`         | [\ConfigCat\Override\OverrideDataSource](https://github.com/configcat/php-sdk/blob/master/src/Override/OverrideDataSource.php) | Optional, configures local feature flag & setting overrides. [See below](#flag-overrides). |
+| `flag-overrides`         | [\ConfigCat\Override\OverrideDataSource](https://github.com/configcat/php-sdk/blob/master/src/Override/OverrideDataSource.php) | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 | `exceptions-to-ignore`   | `array`                        | Optional, sets an array of exception classes that should be ignored from logs. |
 | `base-url`               | `string`                       | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the feature flags and settings. |
 
@@ -163,6 +163,14 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 This is the same format that the SDK fetches from the ConfigCat CDN. 
 It allows the usage of all features you can do on the ConfigCat Dashboard.
+
+For a baseline, you can download your configuration from ConfigCat's CDN and use it in a file.
+
+The URL to your configuration is based on your [Data Governance](advanced/data-governance.md): 
+
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+
 ```json
 {
     "f": { // list of feature flags & settings
@@ -220,7 +228,6 @@ It allows the usage of all features you can do on the ConfigCat Dashboard.
     }
 }
 ```
-> For a baseline, you can download your configuration from ConfigCat's CDN and use it as-is in a file.
 
 ### Associative Array
 You can configure the SDK to load your feature flag & setting overrides from an associative array.
