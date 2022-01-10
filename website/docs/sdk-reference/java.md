@@ -69,7 +69,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 | `build(<sdkkey>)`                       | **REQUIRED.** Waits for the SDK Key to access your feature flags and settings. Get it from *ConfigCat Dashboard*. |
 | `dataGovernance(DataGovernance)`        | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
 | `baseUrl(string)`                       | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
-| `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient). |
+| `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [See below](#httpclient). |
 | `cache(ConfigCache)`                    | Optional, sets a custom cache implementation for the client. [See below](#custom-cache). |
 | `mode(PollingMode)`                     | Optional, sets the polling mode for the client. [See below](#polling-modes). |
 | `logLevel(LogLevel)`                    | Optional, defaults to `WARNING`. Sets the internal log level. [See below](#logging). |

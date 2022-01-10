@@ -49,13 +49,13 @@ Available options:
 | ------------------------ | ------------------------------ | ----------------------------------- |
 | `data-governance`        | `int`                          | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `GLOBAL_`, `EU_ONLY`. |
 | `logger`                 | [\Psr\Log\LoggerInterface](https://github.com/php-fig/log/blob/master/src/LoggerInterface.php)     | Optional, configures a logger for errors and warnings produced by the SDK, defaults to [Monolog](https://github.com/Seldaek/monolog). [See below](#logging). |
-| `log-level`              | `int`                          | Optional, defaults to `LogLevel::WARNING`. Sets the internal log level. [See below](#logging). |
+| `log-level`              | `int`                          | Optional, defaults to `LogLevel::WARNING`. Sets the internal log level. [More about log levels](#logging). |
 | `cache`                  | [\ConfigCat\Cache\ConfigCache](https://github.com/configcat/php-sdk/blob/master/src/Cache/ConfigCache.php) | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the latest feature flag and setting values. [See below](#cache). You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache). |
 | `cache-refresh-interval` | `int`                          | Optional, sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a [config.json download](/requests). Defaults to 60. |
 | `request-options`        | `array`                        | Optional, sets the request options (e.g. [HTTP Timeout](#http-timeout), [HTTP Proxy](#http-proxy)) for the underlying `Guzzle` HTTP client used for [downloading the config.json](/requests) files. See Guzzle's [official documentation](https://docs.guzzlephp.org/en/stable/request-options.html) for the available request options. |
 | `flag-overrides`         | [\ConfigCat\Override\OverrideDataSource](https://github.com/configcat/php-sdk/blob/master/src/Override/OverrideDataSource.php) | Optional, configures local feature flag & setting overrides. [See below](#flag-overrides). |
 | `exceptions-to-ignore`   | `array`                        | Optional, sets an array of exception classes that should be ignored from logs. |
-| `base-url`               | `string`                       | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the feature flag and setting. |
+| `base-url`               | `string`                       | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the feature flags and settings. |
 
 :::info
 Each option name is available through constants of the [\ConfigCat\ClientOptions](https://github.com/configcat/php-sdk/blob/master/src/ClientOptions.php) class.
@@ -121,7 +121,7 @@ $keys = $client->getAllKeys();
 
 ## Flag Overrides
 
-With flag overrides you can overwrite the feature flags & settings fetched from the ConfigCat CDN with local values.
+With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the fetched values. The following 3 behaviours are supported:
 
 - **Local/Offline mode** (`OverrideBehaviour::LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
