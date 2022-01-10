@@ -64,15 +64,16 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
     .build(<sdkkey>);
 ```
 
-| Builder options                         | Description                                                                                                                                                                                                                                                                                         |
-| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `build(<sdkkey>)`                       | **REQUIRED.** Waits for the SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*.                                                                                                                                                                             |
+| Builder options                         | Description |
+| --------------------------------------- | ----------- |
+| `build(<sdkkey>)`                       | **REQUIRED.** Waits for the SDK Key to access your feature flags and settings. Get it from *ConfigCat Dashboard*. |
 | `dataGovernance(DataGovernance)`        | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
-| `baseUrl(string)`                       | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                             |
-| `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient).                                                                                                                                                                                   |
-| `cache(ConfigCache)`                    | Optional, sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                                                                                                            |
-| `mode(PollingMode)`         | Optional, sets the polling mode for the client. [See below](#polling-modes).                                                                                                                                                                                                                      |
-| `logLevel(LogLevel)`         | Optional, defaults to `WARNING`. Sets the internal log level. [See below](#logging).                                                                                                                                                                                                                      |
+| `baseUrl(string)`                       | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
+| `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to fetch the configuration over HTTP. [See below](#httpclient). |
+| `cache(ConfigCache)`                    | Optional, sets a custom cache implementation for the client. [See below](#custom-cache). |
+| `mode(PollingMode)`                     | Optional, sets the polling mode for the client. [See below](#polling-modes). |
+| `logLevel(LogLevel)`                    | Optional, defaults to `WARNING`. Sets the internal log level. [See below](#logging). |
+| `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, configures local feature flag & setting overrides. [See below](#flag-overrides). |
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
@@ -144,7 +145,7 @@ User user = User.newBuilder()
 ```
 
 ## `getAllKeys()`
-You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
+You can query the keys of each feature flag and setting with the `getAllKeys()` method.
 
 ```java
 ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
@@ -224,14 +225,14 @@ client.forceRefresh();
 
 ## Flag Overrides
 
-With flag overrides you can overwrite the feature flag & setting configuration fetched from the ConfigCat CDN with local values.
-Moreover, you can specify how the overrides should apply over the fetched configuration. The following 3 behaviours are supported:
+With flag overrides you can overwrite the feature flags & settings fetched from the ConfigCat CDN with local values.
+Moreover, you can specify how the overrides should apply over the fetched values. The following 3 behaviours are supported:
 
-- **Local/Offline mode** (`OverrideBehaviour.LOCAL_ONLY`): With this mode, the SDK won't fetch feature flags & settings from the ConfigCat CDN and will use only the local overrides to evaluate feature flags. This mode is designed to support disonnected environments. You can use it in your development environment, automated tests, or isolated production machines.
+- **Local/Offline mode** (`OverrideBehaviour.LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
-- **Local over remote** (`OverrideBehaviour.LOCAL_OVER_REMOTE`): With this mode, the SDK will fetch feature flags & settings from the ConfigCat CDN and will override those that have a matching key.
+- **Local over remote** (`OverrideBehaviour.LOCAL_OVER_REMOTE`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the fetched and the local-override source then the local-override version will take precedence.
 
-- **Remote over local** (`OverrideBehaviour.REMOTE_OVER_LOCAL`): With this mode, the SDK will fetch feature flags & settings from the ConfigCat CDN and will use the overrides for those flags only that doesn't exist in the fetched configuration.
+- **Remote over local** (`OverrideBehaviour.REMOTE_OVER_LOCAL`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the fetched and the local-override source then the fetched version will take precedence.
 
 You can load your feature flag & setting overrides from a file or from a simple `Map<String, Object>` structure.
 
@@ -440,7 +441,7 @@ Available log levels:
 
 > The default level is `WARNING`. With `NO_LOG` you can turn the logging completely off.
 
-Info level logging helps to inspect the feature flag evaluation process:
+Info level logging helps to inspect how a feature flag was evaluated:
 ```bash
 INFO com.configcat.ConfigCatClient - Evaluating getValue(isPOCFeatureEnabled).
 User object: User{Identifier=435170f4-8a8b-4b67-a723-505ac7cdea92, Email=john@example.com}

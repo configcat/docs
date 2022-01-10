@@ -40,22 +40,22 @@ Constructor parameters:
 
 | Name      | Type     | Description                                                                                               |
 | --------- | -------- | --------------------------------------------------------------------------------------------------------- |
-| `sdkKey`  | `string` | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
-| `options` | `array`  | **Optional.** Additional configuration options, see below for the detailed list.                          |
+| `sdkKey`  | `string` | **REQUIRED.** SDK Key to access your feature flag and setting. Get it from *ConfigCat Dashboard*. |
+| `options` | `array`  | **Optional.** Additional SDK options, see below for the detailed list.                          |
 
-Available configuration options:
+Available options:
 
 | Name                     | Type                           | Description                         |
 | ------------------------ | ------------------------------ | ----------------------------------- |
 | `data-governance`        | `int`                          | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `GLOBAL_`, `EU_ONLY`. |
-| `logger`                 | `\Psr\Log\LoggerInterface`     | Optional, configures a logger for errors and warnings produced by the SDK, defaults to `Psr\Log\NullLogger`. |
-| `log-level`              | `int`                          | Optional, defaults to `LogLevel::WARNING`. Sets the internal log level. |
-| `cache`                  | `\ConfigCat\Cache\ConfigCache` | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the actual configurations. You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache). |
-| `cache-refresh-interval` | `int`                          | Optional, sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a new configuration fetch request. Defaults to 60. |
-| `request-options`        | `array`                        | Optional, sets the options for the request initiated by the `Guzzle` HTTP client. See the [official documentation](https://docs.guzzlephp.org/en/stable/request-options.html) for the available options. |
-| `flag-overrides`         | `\ConfigCat\Override\OverrideDataSource` | Optional, configures local feature flag & setting overrides. |
+| `logger`                 | `\Psr\Log\LoggerInterface`     | Optional, configures a logger for errors and warnings produced by the SDK, defaults to [Monolog](https://github.com/Seldaek/monolog). [See below](#logging). |
+| `log-level`              | `int`                          | Optional, defaults to `LogLevel::WARNING`. Sets the internal log level. [See below](#logging). |
+| `cache`                  | `\ConfigCat\Cache\ConfigCache` | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the latest feature flag and setting values. [See below](#cache). You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache). |
+| `cache-refresh-interval` | `int`                          | Optional, sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a [config.json download](/requests). Defaults to 60. |
+| `request-options`        | `array`                        | Optional, sets the request options (e.g. [HTTP Timeout](#http-timeout), [HTTP Proxy](#http-proxy)) for the underlying `Guzzle` HTTP client used for [downloading the config.json](/requests) files. See Guzzle's [official documentation](https://docs.guzzlephp.org/en/stable/request-options.html) for the available request options. |
+| `flag-overrides`         | `\ConfigCat\Override\OverrideDataSource` | Optional, configures local feature flag & setting overrides. [See below](#flag-overrides). |
 | `exceptions-to-ignore`   | `array`                        | Optional, sets an array of exception classes that should be ignored from logs. |
-| `base-url`               | `string`                       | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
+| `base-url`               | `string`                       | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the feature flag and setting. |
 
 :::info
 Each option name is available through constants of the `\ConfigCat\ClientOptions` class.
@@ -112,7 +112,7 @@ $user = new \ConfigCat\User(
 ```
 
 ## `getAllKeys()`
-You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
+You can query the keys of each feature flag and setting with the `getAllKeys()` method.
 
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
@@ -121,14 +121,14 @@ $keys = $client->getAllKeys();
 
 ## Flag Overrides
 
-With flag overrides you can overwrite the feature flag & setting configuration fetched from the ConfigCat CDN with local values.
-Moreover, you can specify how the overrides should apply over the fetched configuration. The following 3 behaviours are supported:
+With flag overrides you can overwrite the feature flags & settings fetched from the ConfigCat CDN with local values.
+Moreover, you can specify how the overrides should apply over the fetched values. The following 3 behaviours are supported:
 
-- **Local/Offline mode** (`OverrideBehaviour::LOCAL_ONLY`): With this mode, the SDK won't fetch feature flags & settings from the ConfigCat CDN and will use only the local overrides to evaluate feature flags. This mode is designed to support disonnected environments. You can use it in your development environment, automated tests, or isolated production machines.
+- **Local/Offline mode** (`OverrideBehaviour::LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
-- **Local over remote** (`OverrideBehaviour::LOCAL_OVER_REMOTE`): With this mode, the SDK will fetch feature flags & settings from the ConfigCat CDN and will override those that have a matching key.
+- **Local over remote** (`OverrideBehaviour::LOCAL_OVER_REMOTE`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the fetched and the local-override source then the local-override version will take precedence.
 
-- **Remote over local** (`OverrideBehaviour::REMOTE_OVER_LOCAL`): With this mode, the SDK will fetch feature flags & settings from the ConfigCat CDN and will use the overrides for those flags only that doesn't exist in the fetched configuration.
+- **Remote over local** (`OverrideBehaviour::REMOTE_OVER_LOCAL`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the fetched and the local-override source then the fetched version will take precedence.
 
 You can load your feature flag & setting overrides from a file or from a simple associative array.
 
@@ -139,7 +139,7 @@ You can also specify whether the file should be reloaded when it gets modified.
 ```php
 $client = new ConfigCatClient("localhost", [
   ClientOptions::FLAG_OVERRIDES => OverrideDataSource::localFile(
-    "tests/test-rules.json", // path to the file
+    "path/to/the/local_flags.json", // path to the file
     OverrideBehaviour::LOCAL_ONLY // local/offline mode
   ),
 ]);
@@ -307,7 +307,7 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
     \ConfigCat\ClientOptions::LOGGER => new \Monolog\Logger("name"),
 ]);
 ```
-You can change the verbosity of the logs by setting the `log-level` configuration option.
+You can change the verbosity of the logs by setting the `log-level` option.
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
     \ConfigCat\ClientOptions::LOG_LEVEL => \ConfigCat\Log\LogLevel::INFO
@@ -320,13 +320,11 @@ The following levels are used by the ConfigCat SDK:
 | ---------- | --------------------------------------------------------------------------------------- |
 | `NO_LOG`   | Turn the logging off.                                                         |
 | `ERROR`    | Only error level events are logged.                                                     |
-| `WARNING`  | Errors and Warnings are logged.                                                         |
+| `WARNING`  | Default. Errors and Warnings are logged.                                                |
 | `INFO`     | Errors, Warnings and feature flag evaluation is logged.                                 |
 | `DEBUG`    | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
 
-> The default level is `WARNING`. With `NO_LOG` you can turn the logging completely off.
-
-Info level logging helps to inspect the feature flag evaluation process:
+Info level logging helps to inspect how a feature flag was evaluated:
 ```bash
 [2022-01-06T18:34:16.846039+00:00] ConfigCat.INFO: Evaluating getValue(isPOCFeatureEnabled).
 User object: {"Identifier":"435170f4-8a8b-4b67-a723-505ac7cdea92","Email":"john@example.com"}
