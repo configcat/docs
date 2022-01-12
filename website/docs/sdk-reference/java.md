@@ -225,7 +225,7 @@ client.forceRefresh();
 
 ## Flag Overrides
 
-With flag overrides you can overwrite the feature flags & settings fetched from the ConfigCat CDN with local values.
+With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the fetched values. The following 3 behaviours are supported:
 
 - **Local/Offline mode** (`OverrideBehaviour.LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
@@ -282,9 +282,9 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 This is the same format that the SDK fetches from the ConfigCat CDN. 
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
-For a baseline, you can download your configuration from ConfigCat's CDN and use it in a file.
+You can download your current config.json from ConfigCat's CDN and use it as a baseline.
 
-The URL to your configuration is based on your [Data Governance](advanced/data-governance.md): 
+The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings: 
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
@@ -348,7 +348,7 @@ The URL to your configuration is based on your [Data Governance](advanced/data-g
 ```
 
 ### Map
-You can configure the SDK to load your feature flag & setting overrides from a `Map<String, Object>`.
+You can set up the SDK to load your feature flag & setting overrides from a `Map<String, Object>`.
 ```java
 Map<String, Object> map = new HashMap<>();
 map.put("enabledFeature", true);

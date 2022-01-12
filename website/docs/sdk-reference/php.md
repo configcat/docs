@@ -134,7 +134,7 @@ You can load your feature flag & setting overrides from a file or from a simple 
 
 ### JSON File
 
-The SDK can be configured to load your feature flag & setting overrides from a file or classpath resource. 
+The SDK can be set up to load your feature flag & setting overrides from a file or classpath resource. 
 You can also specify whether the file should be reloaded when it gets modified.
 ```php
 $client = new ConfigCatClient("localhost", [
@@ -164,9 +164,9 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 This is the same format that the SDK fetches from the ConfigCat CDN. 
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
-For a baseline, you can download your configuration from ConfigCat's CDN and use it in a file.
+You can download your current config.json from ConfigCat's CDN and use it as a baseline.
 
-The URL to your configuration is based on your [Data Governance](advanced/data-governance.md): 
+The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings: 
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
@@ -230,7 +230,7 @@ The URL to your configuration is based on your [Data Governance](advanced/data-g
 ```
 
 ### Associative Array
-You can configure the SDK to load your feature flag & setting overrides from an associative array.
+You can set up the SDK to load your feature flag & setting overrides from an associative array.
 ```php
 $client = new ConfigCatClient("localhost", [
   ClientOptions::FLAG_OVERRIDES => OverrideDataSource::localArray([
