@@ -53,7 +53,7 @@ Available options:
 | `cache`                  | [\ConfigCat\Cache\ConfigCache](https://github.com/configcat/php-sdk/blob/master/src/Cache/ConfigCache.php) | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the latest feature flag and setting values. [More about cache](#cache). You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache). |
 | `cache-refresh-interval` | `int`                          | Optional, sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a [config.json download](/requests). Defaults to 60. |
 | `request-options`        | `array`                        | Optional, sets the request options (e.g. [HTTP Timeout](#http-timeout), [HTTP Proxy](#http-proxy)) for the underlying `Guzzle` HTTP client used for [downloading the config.json](/requests) files. See Guzzle's [official documentation](https://docs.guzzlephp.org/en/stable/request-options.html) for the available request options. |
-| `flag-overrides`         | [\ConfigCat\Override\OverrideDataSource](https://github.com/configcat/php-sdk/blob/master/src/Override/OverrideDataSource.php) | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `flag-overrides`         | [\ConfigCat\Override\FlagOverrides](https://github.com/configcat/php-sdk/blob/master/src/Override/FlagOverrides.php) | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 | `exceptions-to-ignore`   | `array`                        | Optional, sets an array of exception classes that should be ignored from logs. |
 | `base-url`               | `string`                       | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the feature flags and settings. |
 
@@ -137,10 +137,10 @@ You can load your feature flag & setting overrides from a file or from a simple 
 The SDK can be set up to load your feature flag & setting overrides from a file or classpath resource. 
 You can also specify whether the file should be reloaded when it gets modified.
 ```php
-$client = new ConfigCatClient("localhost", [
-  ClientOptions::FLAG_OVERRIDES => OverrideDataSource::localFile(
-    "path/to/the/local_flags.json", // path to the file
-    OverrideBehaviour::LOCAL_ONLY // local/offline mode
+$client = new \ConfigCat\ConfigCatClient("localhost", [
+  \ConfigCat\ClientOptions::FLAG_OVERRIDES => \ConfigCat\Override\FlagOverrides(
+    \ConfigCat\Override\OverrideDataSource::localFile("path/to/the/local_flags.json"), // path to the file
+    \ConfigCat\Override\OverrideBehaviour::LOCAL_ONLY // local/offline mode
   ),
 ]);
 ```
@@ -232,14 +232,15 @@ The URL to your current config.json is based on your [Data Governance](advanced/
 ### Associative Array
 You can set up the SDK to load your feature flag & setting overrides from an associative array.
 ```php
-$client = new ConfigCatClient("localhost", [
-  ClientOptions::FLAG_OVERRIDES => OverrideDataSource::localArray([
+$client = new \ConfigCat\ConfigCatClient("localhost", [
+  \ConfigCat\ClientOptions::FLAG_OVERRIDES => \ConfigCat\Override\FlagOverrides(
+    \ConfigCat\Override\OverrideDataSource::localArray([
       'enabledFeature' => true,
       'disabledFeature' => false,
       'intSetting' => 5,
       'doubleSetting' => 3.14,
       'stringSetting' => "test",
-  ], OverrideBehaviour::LOCAL_ONLY),
+    ]), \ConfigCat\Override\OverrideBehaviour::LOCAL_ONLY),
 ]);
 ```
 
@@ -262,9 +263,9 @@ You can use the following caching options:
   ```
   or with the [file system adapter](https://github.com/php-cache/filesystem-adapter):
   ```php
-  $filesystemAdapter = new League\Flysystem\Adapter\Local(__DIR__.'/');
-  $filesystem = new League\Flysystem\Filesystem($filesystemAdapter);
-  $pool = new Cache\Adapter\Filesystem\FilesystemCachePool($filesystem);
+  $filesystemAdapter = new \League\Flysystem\Adapter\Local(__DIR__.'/');
+  $filesystem = new \League\Flysystem\Filesystem($filesystemAdapter);
+  $pool = new \Cache\Adapter\Filesystem\FilesystemCachePool($filesystem);
 
   $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
     \ConfigCat\ClientOptions::CACHE => new \ConfigCat\Cache\Psr6Cache($pool),
@@ -282,9 +283,9 @@ You can use the following caching options:
   ```
   or with the [file system adapter](https://github.com/php-cache/filesystem-adapter):
   ```php
-  $filesystemAdapter = new League\Flysystem\Adapter\Local(__DIR__.'/');
-  $filesystem = new League\Flysystem\Filesystem($filesystemAdapter);
-  $pool = new Cache\Adapter\Filesystem\FilesystemCachePool($filesystem);
+  $filesystemAdapter = new \League\Flysystem\Adapter\Local(__DIR__.'/');
+  $filesystem = new \League\Flysystem\Filesystem($filesystemAdapter);
+  $pool = new \Cache\Adapter\Filesystem\FilesystemCachePool($filesystem);
   $simpleCache = new SimpleCacheBridge($pool);
 
   $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
@@ -293,7 +294,7 @@ You can use the following caching options:
   ```
 * Custom cache implementation
   ```php
-  class CustomCache extends ConfigCache
+  class CustomCache extends \ConfigCat\Cache\ConfigCache
   { 
       protected function get($key)
       {
