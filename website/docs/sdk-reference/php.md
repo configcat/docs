@@ -122,13 +122,13 @@ $keys = $client->getAllKeys();
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
-Moreover, you can specify how the overrides should apply over the fetched values. The following 3 behaviours are supported:
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
 - **Local/Offline mode** (`OverrideBehaviour::LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
-- **Local over remote** (`OverrideBehaviour::LOCAL_OVER_REMOTE`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the fetched and the local-override source then the local-override version will take precedence.
+- **Local over remote** (`OverrideBehaviour::LOCAL_OVER_REMOTE`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
 
-- **Remote over local** (`OverrideBehaviour::REMOTE_OVER_LOCAL`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the fetched and the local-override source then the fetched version will take precedence.
+- **Remote over local** (`OverrideBehaviour::REMOTE_OVER_LOCAL`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
 
 You can load your feature flag & setting overrides from a file or from a simple associative array.
 
@@ -161,7 +161,7 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ```
 
 ##### 2. Complex (full-featured) structure
-This is the same format that the SDK fetches from the ConfigCat CDN. 
+This is the same format that the SDK downloads from the ConfigCat CDN. 
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
 You can download your current config.json from ConfigCat's CDN and use it as a baseline.

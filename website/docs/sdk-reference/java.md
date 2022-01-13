@@ -193,7 +193,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
     .mode(PollingModes.lazyLoad(60 /* the cache will expire in 120 seconds */))
     .build("<PLACE-YOUR-SDK-KEY-HERE>");
 ```
-Use the `asyncRefresh` option parameter of the `PollingModes.lazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a `getValue()` calls is made while the cache is expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
+Use the `asyncRefresh` option parameter of the `PollingModes.lazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a `getValue()` calls is made while the cache is expired, the previous value will be returned immediately until the downloading of the new configuration is completed.
 ```java
 ConfigCatClient client = ConfigCatClient.newBuilder()
     .mode(PollingModes.lazyLoad(
@@ -203,7 +203,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
     )
     .build("<PLACE-YOUR-SDK-KEY-HERE>");
 ```
-If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
+If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the downloading of the new configuration is completed.
 
 Available options:
 
@@ -226,13 +226,13 @@ client.forceRefresh();
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
-Moreover, you can specify how the overrides should apply over the fetched values. The following 3 behaviours are supported:
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
 - **Local/Offline mode** (`OverrideBehaviour.LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
-- **Local over remote** (`OverrideBehaviour.LOCAL_OVER_REMOTE`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the fetched and the local-override source then the local-override version will take precedence.
+- **Local over remote** (`OverrideBehaviour.LOCAL_OVER_REMOTE`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
 
-- **Remote over local** (`OverrideBehaviour.REMOTE_OVER_LOCAL`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the fetched and the local-override source then the fetched version will take precedence.
+- **Remote over local** (`OverrideBehaviour.REMOTE_OVER_LOCAL`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
 
 You can load your feature flag & setting overrides from a file or from a simple `Map<String, Object>` structure.
 
@@ -279,7 +279,7 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ```
 
 ##### 2. Complex (full-featured) structure
-This is the same format that the SDK fetches from the ConfigCat CDN. 
+This is the same format that the SDK downloads from the ConfigCat CDN. 
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
 You can download your current config.json from ConfigCat's CDN and use it as a baseline.
@@ -388,7 +388,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 ```
 
 ## HttpClient
-The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to fetch the latest configuration over HTTP. You have the option to override the internal Http client with your customized one. 
+The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to download the latest configuration over HTTP. You have the option to override the internal Http client with your customized one. 
 
 ### HTTP Proxy
 If your application runs behind a proxy you can do the following:
@@ -419,7 +419,7 @@ OkHttpClient's default timeout is 10 seconds.
 > As the ConfigCatClient SDK maintains the whole lifetime of the internal http client, it's being closed simultaneously with the ConfigCatClient, refrain from closing the http client manually.
 
 ## Force refresh
-Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
+Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
 
 ## Logging
 As the SDK uses the facade of [slf4j](https://www.slf4j.org) for logging, so you can use any of the slf4j implementation packages. 
