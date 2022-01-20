@@ -20,7 +20,7 @@ composer require configcat/configcat-client
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
 ```
 
-### 3. Get your setting value:
+### 3. Get your setting value
 ```php
 $isMyAwesomeFeatureEnabled = $client->getValue("isMyAwesomeFeatureEnabled", false);
 if(is_bool($isMyAwesomeFeatureEnabled) && $isMyAwesomeFeatureEnabled) {

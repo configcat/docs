@@ -8,7 +8,7 @@ title: Java
 [![Coverage Status](https://img.shields.io/codecov/c/github/ConfigCat/java-sdk.svg)](https://codecov.io/gh/ConfigCat/java-sdk)
 [![Javadocs](http://javadoc.io/badge/com.configcat/configcat-java-client.svg)](http://javadoc.io/doc/com.configcat/configcat-java-client)
 
-## Getting Started:
+## Getting Started
 ### 1. Add the ConfigCat SDK to your project
 
 Maven:
@@ -23,7 +23,7 @@ Gradle:
 ```bash
 compile group: 'com.configcat', name: 'configcat-java-client', version: '7.+'
 ```
-### 2. Import the ConfigCat SDK:
+### 2. Import the ConfigCat SDK
 ```java
 import com.configcat.*;
 ```

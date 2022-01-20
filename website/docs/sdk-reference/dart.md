@@ -3,7 +3,7 @@ id: dart
 title: Dart (Flutter)
 ---
 
-## Getting Started:
+## Getting Started
 ### 1. Add the ConfigCat SDK to your project
 With Dart:
 ```bash
@@ -18,7 +18,7 @@ Or put the following directly to your `pubspec.yml` and run `dart pub get` or `f
 dependencies:
   configcat_client: ^1.0.0
 ```
-### 2. Import the ConfigCat SDK:
+### 2. Import the ConfigCat SDK
 ```dart
 import 'package:configcat_client/configcat_client.dart';
 ```
