@@ -440,13 +440,11 @@ Available log levels:
 
 | Level      | Description                                                                             |
 | ---------- | --------------------------------------------------------------------------------------- |
-| `NO_LOG`   | Turn the logging off.                                                         |
+| `NO_LOG`   | Turn the logging off.                                                                   |
 | `ERROR`    | Only error level events are logged.                                                     |
-| `WARNING`  | Errors and Warnings are logged.                                                         |
+| `WARNING`  | Default. Errors and Warnings are logged.                                                |
 | `INFO`     | Errors, Warnings and feature flag evaluation is logged.                                 |
 | `DEBUG`    | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
-
-> The default level is `WARNING`. With `NO_LOG` you can turn the logging completely off.
 
 Info level logging helps to inspect how a feature flag was evaluated:
 ```bash

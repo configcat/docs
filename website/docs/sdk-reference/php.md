@@ -326,7 +326,7 @@ The following levels are used by the ConfigCat SDK:
 
 | Level      | Description                                                                             |
 | ---------- | --------------------------------------------------------------------------------------- |
-| `NO_LOG`   | Turn the logging off.                                                         |
+| `NO_LOG`   | Turn the logging off.                                                                   |
 | `ERROR`    | Only error level events are logged.                                                     |
 | `WARNING`  | Default. Errors and Warnings are logged.                                                |
 | `INFO`     | Errors, Warnings and feature flag evaluation is logged.                                 |
