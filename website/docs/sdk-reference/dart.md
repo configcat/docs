@@ -36,6 +36,14 @@ if(isMyAwesomeFeatureEnabled) {
 }
 ```
 
+### 5. Close *ConfigCat* client​
+You can safely shut down all clients at once or individually and release all associated resources on application exit.
+```dart
+ConfigCatClient.close(); // closes all clients
+
+ConfigCatClient.close(client: client); // closes a specific client
+```
+
 ## Configuring the *ConfigCat Client*
 
 *ConfigCat Client* is responsible for:
@@ -70,7 +78,7 @@ final client = ConfigCatClient.get(
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
 The `ConfigCatClient` constructs singleton client instances for your SDK keys with its `ConfigCatClient.get(sdkKey: <sdkKey>)` static factory method.
-These clients can be closed individually or each at once with the `ConfigCatClient.close()` method.
+These clients can be closed all at once or individually with the `ConfigCatClient.close()` method.
 :::
 
 ## Anatomy of `getValue()`
