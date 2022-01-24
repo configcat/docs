@@ -3,7 +3,7 @@ title: "JavaScript (SSR)"
 id: "js-ssr"
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/js-ssr-sdk.svg?style=social)](https://github.com/configcat/js-ssr-sdk/stargazers)
-[![Build Status](https://travis-ci.com/configcat/js-ssr-sdk.svg?branch=master)](https://travis-ci.com/configcat/js-ssr-sdk) 
+[![JS-SSR CI](https://github.com/configcat/js-ssr-sdk/actions/workflows/js-ssr-ci.yml/badge.svg?branch=master)](https://github.com/configcat/js-ssr-sdk/actions/workflows/js-ssr-ci.yml)  
 [![codecov](https://codecov.io/gh/configcat/js-ssr-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/js-ssr-sdk) 
 [![Known Vulnerabilities](https://snyk.io/test/github/configcat/js-ssr-sdk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/configcat/js-ssr-sdk?targetFile=package.json) 
 

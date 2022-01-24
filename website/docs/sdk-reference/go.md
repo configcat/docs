@@ -3,7 +3,7 @@ id: go
 title: Go
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/go-sdk.svg?style=social)](https://github.com/configcat/go-sdk/stargazers)
-[![Build Status](https://travis-ci.com/configcat/go-sdk.svg?branch=master)](https://travis-ci.com/configcat/go-sdk)
+[![Build Status](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml/badge.svg?branch=master)](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/configcat/go-sdk)](https://goreportcard.com/report/github.com/configcat/go-sdk)
 [![codecov](https://codecov.io/gh/configcat/go-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/go-sdk)
 [![GoDoc](https://godoc.org/github.com/configcat/go-sdk?status.svg)](https://pkg.go.dev/github.com/configcat/go-sdk/v7)

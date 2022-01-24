@@ -3,7 +3,7 @@ id: python
 title: Python
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/python-sdk.svg?style=social)](https://github.com/configcat/python-sdk/stargazers)
-[![Build Status](https://travis-ci.com/configcat/python-sdk.svg?branch=master)](https://travis-ci.com/configcat/python-sdk) 
+[![Python CI](https://github.com/configcat/python-sdk/actions/workflows/python-ci.yml/badge.svg?branch=master)](https://github.com/configcat/python-sdk/actions/workflows/python-ci.yml) 
 [![codecov](https://codecov.io/gh/ConfigCat/python-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/ConfigCat/python-sdk)
 [![PyPI](https://img.shields.io/pypi/v/configcat-client.svg)](https://pypi.python.org/pypi/configcat-client)
 [![PyPI](https://img.shields.io/pypi/pyversions/configcat-client.svg)](https://pypi.python.org/pypi/configcat-client)

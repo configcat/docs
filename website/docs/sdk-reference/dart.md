@@ -3,6 +3,9 @@ id: dart
 title: Dart (Flutter)
 ---
 
+[![pub package](https://img.shields.io/pub/v/configcat_client.svg)](https://pub.dev/packages/configcat_client)
+[![Java CI](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml/badge.svg?branch=main)](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml)
+
 ## Getting Started
 ### 1. Add the ConfigCat SDK to your project
 With Dart:
