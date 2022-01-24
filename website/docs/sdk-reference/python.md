@@ -1,6 +1,6 @@
 ---
 id: python
-title: Python
+title: Python SDK Reference
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/python-sdk.svg?style=social)](https://github.com/configcat/python-sdk/stargazers)
 [![Python CI](https://github.com/configcat/python-sdk/actions/workflows/python-ci.yml/badge.svg?branch=master)](https://github.com/configcat/python-sdk/actions/workflows/python-ci.yml) 
@@ -9,7 +9,9 @@ title: Python
 [![PyPI](https://img.shields.io/pypi/pyversions/configcat-client.svg)](https://pypi.python.org/pypi/configcat-client)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=configcat_python-sdk&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=configcat_python-sdk)
 
-## Getting started:
+<a href="https://github.com/configcat/python-sdk" target="_blank">ConfigCat Python SDK on GitHub</a>
+
+## Getting started
 ### 1. Install *ConfigCat SDK*
 ```
 pip install configcat-client

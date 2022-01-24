@@ -1,10 +1,12 @@
 ---
 id: dart
-title: Dart (Flutter)
+title: Dart (Flutter) SDK Reference
 ---
 
 [![pub package](https://img.shields.io/pub/v/configcat_client.svg)](https://pub.dev/packages/configcat_client)
 [![Java CI](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml/badge.svg?branch=main)](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml)
+
+<a href="https://github.com/ConfigCat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK on GitHub</a>
 
 ## Getting Started
 ### 1. Add the ConfigCat SDK to your project
@@ -360,5 +362,5 @@ Check out our Sample Applications how they use the ConfigCat SDK
 - <a href="https://github.com/configcat/dart-sdk/tree/main/example/flutter" target="_blank">Flutter Application</a>
 
 ## Look Under the Hood
-- <a href="https://github.com/ConfigCat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK's repository on Github</a>
+- <a href="https://github.com/ConfigCat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK's repository on GitHub</a>
 - <a href="https://pub.dev/packages/configcat_client" target="_blank">ConfigCat Dart (Flutter) SDK's pub.dev page</a>

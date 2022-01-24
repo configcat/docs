@@ -1,6 +1,6 @@
 ---
 id: php
-title: PHP
+title: PHP SDK Reference
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/php-sdk.svg?style=social)](https://github.com/configcat/php-sdk/stargazers)
 [![Build Status](https://github.com/configcat/php-sdk/actions/workflows/php-ci.yml/badge.svg?branch=master)](https://github.com/configcat/php-sdk/actions/workflows/php-ci.yml)
@@ -8,6 +8,8 @@ title: PHP
 [![Latest Stable Version](https://poser.pugx.org/configcat/configcat-client/version)](https://packagist.org/packages/configcat/configcat-client)
 [![Total Downloads](https://poser.pugx.org/configcat/configcat-client/downloads)](https://packagist.org/packages/configcat/configcat-client)
 [![Latest Unstable Version](https://poser.pugx.org/configcat/configcat-client/v/unstable)](https://packagist.org/packages/configcat/configcat-client)
+
+<a href="https://github.com/configcat/php-sdk" target="_blank">ConfigCat PHP SDK on GitHub</a>
 
 ## Getting started
 ### 1. Install the package with [Composer](https://getcomposer.org/)
