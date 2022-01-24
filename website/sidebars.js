@@ -64,7 +64,8 @@ module.exports = {
         "sdk-reference/go",
         "sdk-reference/php",
         "sdk-reference/ruby",
-        "sdk-reference/elixir"
+        "sdk-reference/elixir",
+        "sdk-reference/dart",
       ],
       "Video Courses": [
         "video/developer"
