@@ -42,5 +42,8 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ### Elixir
 - [Documentation](sdk-reference/elixir.md) on how to connect your application.
 - <a href="https://github.com/configcat/elixir-sdk" target="_blank">GitHub repository of the ConfigCat Elixir SDK.</a>
+### Dart (Flutter)
+- [Documentation](sdk-reference/dart.md) on how to connect your application.
+- <a href="https://github.com/configcat/dart-sdk" target="_blank">GitHub repository of the ConfigCat Dart (Flutter) SDK.</a>
 ### Deno (Community maintained)
 - <a href="https://github.com/sigewuzhere/configcat-deno" target="_blank">GitHub repository of the ConfigCat Deno SDK.</a>
