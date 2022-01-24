@@ -82,3 +82,14 @@ If you want to use targeting rules based on email address, phone number, or othe
 The feature flag evaluation is done on the client side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.
 
 See our the architecture explained [here](https://configcat.com/architecture/).
+
+## Technical Debt
+### What are Zombie Flags?
+Zombie flags (or stale flags) are feature flags that are not changed in the last (configurable) number of days. Most of the time if a feature flag isn't changed for a long time it means it is time to be removed from your source code and from the [ConfigCat Dashboard](https://app.configcat.com/) as well to avoid technical debt.
+
+### What is the Zombie Flags Report?
+The [Zombie Flags Report](https://app.configcat.com/my-account/zombie-flags-report) is a list of all feature flags that are not changed in the last (configurable) number of days. You can use this report to identify and remove stale feature flags from your source code. This report is weekly emailed to you. You can set your [email preferences here](https://app.configcat.com/my-account/zombie-flags-report).
+
+<!-- ### How to avoid technical debt caused by feature flags?
+The [ConfigCat CLI](advanced/code-references/overview) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
+![Code references screenshot](/assets/cli/code-refs.png) -->
