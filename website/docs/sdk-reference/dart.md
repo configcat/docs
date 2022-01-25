@@ -247,8 +247,6 @@ class MyCustomCache extends ConfigCatCache {
     @override
     Future<String> read(String key) {
         // here you have to return with the cached value
-        // you can access the latest cached value in case 
-        // of a failure like: super.inMemoryValue();
     }
 
     @override

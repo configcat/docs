@@ -370,8 +370,6 @@ public class MyCustomCache extends ConfigCache {
     @Override
     public String read(String key) {
         // here you have to return with the cached value
-        // you can access the latest cached value in case 
-        // of a failure like: super.inMemoryValue();
     }
 
     @Override
