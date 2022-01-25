@@ -1,13 +1,15 @@
 ---
 id: ruby
-title: Ruby
+title: Ruby SDK Reference
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/ruby-sdk.svg?style=social)](https://github.com/configcat/ruby-sdk/stargazers)
 [![Ruby CI](https://github.com/configcat/ruby-sdk/actions/workflows/ruby-ci.yml/badge.svg?branch=master)](https://github.com/configcat/ruby-sdk/actions/workflows/ruby-ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/configcat/ruby-sdk/badge.svg?branch=master)](https://coveralls.io/github/configcat/ruby-sdk?branch=master)
 [![Gem version](https://badge.fury.io/rb/configcat.svg)](https://rubygems.org/gems/configcat)
 
-## Getting started:
+<a href="https://github.com/configcat/ruby-sdk" target="_blank">ConfigCat Ruby SDK on GitHub</a>
+
+## Getting started
 ### 1. Install *ConfigCat SDK*
 ```
 gem install configcat
