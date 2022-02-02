@@ -136,7 +136,7 @@ You can load your feature flag & setting overrides from a file or from a simple 
 
 ### JSON File
 
-The SDK can be set up to load your feature flag & setting overrides from a file or classpath resource. 
+The SDK can be set up to load your feature flag & setting overrides from a file. 
 You can also specify whether the file should be reloaded when it gets modified.
 ```php
 $client = new \ConfigCat\ConfigCatClient("localhost", [

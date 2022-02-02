@@ -265,7 +265,7 @@ final client = ConfigCatClient.get(
 ```
 
 ## HttpClient
-The ConfigCat SDK internally uses a <a href="https://github.com/flutterchina/dio" target="_blank">Dio HTTP client</a> instance to download the latest configuration over HTTP. You have the option to customize the internal Http client. 
+The ConfigCat SDK internally uses a <a href="https://github.com/flutterchina/dio" target="_blank">Dio HTTP client</a> instance to download the latest configuration over HTTP. You have the option to customize the internal HTTP client. 
 
 ### HTTP Timeout
 You can set the maximum wait time for a ConfigCat HTTP response by using Dio's timeouts.
