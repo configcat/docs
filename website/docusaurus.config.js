@@ -9,9 +9,6 @@ module.exports = {
   projectName: 'configcat', // Usually your repo name.
   themeConfig: {
     image: '/img/docs-cover.png',
-    gtag: {
-      trackingID: "G-VNVQ03TVR2"
-    },
     navbar: {
       title: 'ConfigCat Docs',
       logo: {
@@ -165,6 +162,9 @@ module.exports = {
           editUrl:
             'https://github.com/configcat/docs/edit/master/website/',
           routeBasePath: '/'
+        },
+        gtag: {
+          trackingID: "G-VNVQ03TVR2"
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
