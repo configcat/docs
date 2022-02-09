@@ -8,6 +8,6 @@ feature flags that are assigned to it.
 
 *For example, you can define a segment called "Beta Users" and assign that segment to all features that you want to be available to beta users.*
 
-You can define your segments on the ConfigCat Dashboard: https://app.configcat.com/product/segments
+You can define your segments on the [ConfigCat Dashboard](https://app.configcat.com/product/segments).
 
 One segment belongs to one product and can be used in multiple feature flags within the same product.
