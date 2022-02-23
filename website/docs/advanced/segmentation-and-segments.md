@@ -14,8 +14,13 @@ You can define your segments on the [ConfigCat Dashboard](https://app.configcat.
 One segment belongs to one product and can be used in multiple feature flags within the same product.
 
 ### Anatomy of a Segment
+
 **Name:** The name of the segment.
+
 **Description:** A description of the segment. It's a good idea to add a hint that helps you remember what the segment is for.
+
 **Comparison attribute:** The attribute that the segment is based on. Could be "User ID", "Email", "Country" or any custom attribute.
+
 **Comparator:** The comparison operator. Holds the connection between the attribute and the value.
+
 **Comparison value:** The value that the attribute is compared to. Could be a string, a number, a semantic version or a list, depending on the comparator.
