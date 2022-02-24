@@ -27,7 +27,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 The next step will guide you on how to collect the information required for the appearing configuration dialog.
 
-### 2. Configure SAML for the Okta Application
+### 2. Configure SAML for the Auth0 Application
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
   <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/authentication.png" />

@@ -1,16 +1,20 @@
 ---
 id: android
-title: Android (Kotlin)
+title: Android (Kotlin) SDK Reference
 ---
-
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/android-sdk.svg?style=social)](https://github.com/configcat/android-sdk/stargazers)
-[![Build Status](https://travis-ci.com/configcat/android-sdk.svg?branch=master)](https://travis-ci.com/configcat/android-sdk)
-[![Download](https://api.bintray.com/packages/configcat/releases/configcat-android-client/images/download.svg)](https://bintray.com/configcat/releases/configcat-android-client/_latestVersion)
+[![Android CI](https://github.com/configcat/android-sdk/actions/workflows/android-ci.yml/badge.svg?branch=master)](https://github.com/configcat/android-sdk/actions/workflows/android-ci.yml)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-android-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-android-client)
 [![Coverage Status](https://img.shields.io/codecov/c/github/ConfigCat/android-sdk.svg)](https://codecov.io/gh/ConfigCat/android-sdk)
 [![Javadocs](http://javadoc.io/badge/com.configcat/configcat-android-client.svg)](http://javadoc.io/doc/com.configcat/configcat-android-client)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=configcat_android-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=configcat_android-sdk)
 
-> The minimum supported sdk version is 18 (Jelly Bean). Java 1.8 or later is required.
+
+<a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android SDK on GitHub</a>  
+
+### Minimum requirements:
+- [Android 4.3 (API level 18)](https://developer.android.com/studio/releases/platforms#4.3) - Jelly Bean
+- Java 1.8
 
 ```
 android {
@@ -266,7 +270,7 @@ dependencies {
 
 ## Look under the hood
 
-- <a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android SDK's repository on Github</a>
+- <a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android SDK's repository on GitHub</a>
 - <a href="http://javadoc.io/doc/com.configcat/configcat-android-client" target="_blank">ConfigCat Android SDK's javadoc page</a>
 - <a href="https://mvnrepository.com/artifact/com.configcat/configcat-android-client" target="_blank">ConfigCat Android SDK on MVNRepository</a>
 - <a href="https://bintray.com/configcat/releases/configcat-android-client" target="_blank">ConfigCat Android SDK on jcenter</a>

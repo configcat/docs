@@ -5,6 +5,8 @@ title:  Command Line Interface (CLI)
 
 The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> allows you to interact with the [Public Management API](advanced/public-api.md) via the command line. It supports most functionality found on the ConfigCat Dashboard. You can manage ConfigCat resources like Feature Flags, Targeting / Percentage rules, Products, Configs, Environments, and more.
 
+The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> has the ability to [scan your source code](/advanced/code-references/overview.md) for feature flag and setting usages and upload the found code references to ConfigCat.
+
 ```
 configcat
   This is the Command Line Tool of ConfigCat.
@@ -46,7 +48,7 @@ You can install the CLI on multiple operating systems using the following source
 <details>
   <summary><strong>Homebrew (macOS / Linux)</strong></summary>
 
-Install the CLI from <a target="_blank" href="https://github.com/configcat/homebrew-tap">ConfigCat tap</a> with <a target="_blank" href="https://brew.sh">Homebrew</a> by executing the following command:
+Install the CLI with <a target="_blank" href="https://brew.sh">Homebrew</a> from <a target="_blank" href="https://github.com/configcat/homebrew-tap">ConfigCat's tap</a> by executing the following command:
 ```bash
 brew tap configcat/tap
 brew install configcat
@@ -57,7 +59,7 @@ brew install configcat
 <details>
   <summary><strong>Snap (Linux)</strong></summary>
 
-Install the CLI from <a target="_blank" href="https://snapcraft.io">Snapcraft</a> by executing the following command:
+Install the CLI with <a target="_blank" href="https://snapcraft.io">Snapcraft</a> by executing the following command:
 ```bash
 sudo snap install configcat
 ```
@@ -67,7 +69,7 @@ sudo snap install configcat
 <details>
   <summary><strong>Scoop (Windows)</strong></summary>
 
-Install the CLI from <a target="_blank" href="https://github.com/configcat/scoop-configcat">ConfigCat bucket</a> with <a target="_blank" href="https://scoop.sh">Scoop</a> by executing the following command:
+Install the CLI with <a target="_blank" href="https://scoop.sh">Scoop</a> from <a target="_blank" href="https://github.com/configcat/scoop-configcat">ConfigCat's bucket</a> by executing the following command:
 ```bash
 scoop bucket add configcat https://github.com/configcat/scoop-configcat
 scoop install configcat
@@ -78,7 +80,7 @@ scoop install configcat
 <details>
   <summary><strong>Chocolatey (Windows)</strong></summary>
 
-Install the CLI from <a target="_blank" href="https://chocolatey.org/">Chocolatey</a> by executing the following command:
+Install the CLI with <a target="_blank" href="https://chocolatey.org/">Chocolatey</a> by executing the following command:
 ```powershell
 choco install configcat
 ```
@@ -130,7 +132,7 @@ Parameter | Description | Default value
 
 The possible **architecture** values for Linux: `x64`, `musl-x64`, `arm`, `arm64`.
 
-> For macOS, the architecture is fixed to `x64`, but we plan the support of Apple silicon in the future.
+> For macOS, the architecture is fixed to `x64`, but we plan to support Apple silicon in the future.
 
 **Script usage examples**:
 

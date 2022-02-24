@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Getting started',
+    title: 'Basics',
     description: (
       <>
         Familiarize with ConfigCat basics.
@@ -20,6 +20,7 @@ const features = [
       { url: "requests", title: "What is a config.json download?" },
       { url: "purchase", title: "Plans, Purchase & Billing" },
       { url: "organization", title: "Organization & Roles" },
+      { url: "faq", title: "FAQ" },
     ]
   },
   {
@@ -32,6 +33,7 @@ const features = [
     links: [
       { url: "advanced/data-governance", title: "Data Governance - CDN" },
       { url: "advanced/targeting", title: "Targeting" },
+      { url: "advanced/segments", title: "Segmentation & Segments" },
       { url: "advanced/user-object", title: "The User Object" },
       { url: "advanced/public-api", title: "Public Management API" },
       { url: "advanced/caching", title: "Polling modes & Caching" },
@@ -63,6 +65,7 @@ const features = [
       { url: "sdk-reference/php", title: "PHP" },
       { url: "sdk-reference/ruby", title: "Ruby" },
       { url: "sdk-reference/elixir", title: "Elixir" },
+      { url: "sdk-reference/dart", title: "Dart (Flutter)" },
     ]
   },
   {
@@ -80,10 +83,12 @@ const features = [
       { url: "integrations/zapier", title: "Zapier" },
       { url: "integrations/github", title: "GitHub Action" },
       { url: "integrations/circleci", title: "CircleCI Orb" },
+      { url: "integrations/bitbucket", title: "Bitbucket Pipe" },
       { url: "integrations/terraform", title: "Terraform" },
       { url: "integrations/amplitude", title: "Amplitude" },
       { url: "integrations/zoho-flow", title: "Zoho Flow" },
       { url: "integrations/vscode", title: "Visual Studio Code" },
+      { url: "advanced/notifications-webhooks#connecting-to-microsoft-teams", title: "MS Teams (via webhook)" }
     ]
   },
 ];

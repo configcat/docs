@@ -9,9 +9,6 @@ module.exports = {
   projectName: 'configcat', // Usually your repo name.
   themeConfig: {
     image: '/img/docs-cover.png',
-    googleAnalytics: {
-      trackingID: "G-VNVQ03TVR2"
-    },
     navbar: {
       title: 'ConfigCat Docs',
       logo: {
@@ -146,7 +143,7 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} ConfigCat.`,
     },
     prism: {
-      additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir'],
+      additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir', 'dart'],
     },
     algolia: {
       apiKey: '36b9ea4801b9b88e1e8fa2e42d3cc705',
@@ -165,6 +162,9 @@ module.exports = {
           editUrl:
             'https://github.com/configcat/docs/edit/master/website/',
           routeBasePath: '/'
+        },
+        gtag: {
+          trackingID: "G-VNVQ03TVR2"
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

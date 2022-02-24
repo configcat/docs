@@ -1,11 +1,11 @@
 ---
 id: overview
-title: Overview
+title: Scan & Upload Code References Overview
 ---
 
-The [ConfigCat CLI](/docs/advanced/cli) has the ability to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. 
+import CodeRefIntro from './_intro.mdx'
 
-This feature makes the erasement of technical debt easier, as it can show which repositories reference your feature flags and settings in one centralized place on your <a target="_blank" href="https://app.configcat.com">Dashboard</a>.
+<CodeRefIntro linkText="CLI" linkUrl="/docs/advanced/cli" linkTarget="_self" />
 
 You can integrate the CLI into your CI/CD pipeline or use it with other execution mechanisms like scheduled jobs or VCS push triggered workflows.
 
@@ -141,7 +141,7 @@ The following screenshot shows how an uploaded report looks like.
 
 ### Scanning Git Repositories
 The `scan` command automatically detects when it's being executed on a git repository. It collects additional information from Git like the current **branch
-name**, the actual **commit hash**, and each active **remote branches**. These extra details are used to enrich the uploaded report on the ConfigCat Dashboard with links to your actual source code.
+name**, the actual **commit hash**, and each active **remote branch**. These extra details are used to enrich the uploaded report on the ConfigCat Dashboard with links to your actual source code.
 
 :::info
 If you are not using Git as VCS, you have to set at least the `--branch` parameter of the `scan` command.

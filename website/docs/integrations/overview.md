@@ -23,11 +23,14 @@ Connect ConfigCat to 2,000+ other web services. Automated connections called Zap
 Connect ConfigCat to 500+ other web apps without any code. It helps you automate day-to-day tasks and build complex business workflows within minutes.
 [Documentation](integrations/zoho-flow.md)
 ### CircleCI
-Discover ConfigCat feature flag usages in your source code and validate them against your feature flags on the ConfigCat Dashboard.
+Discover feature flag usages in your source code and upload the found code references to ConfigCat.
 [Documentation](integrations/circleci.md)
 ### GitHub Actions
-Discover ConfigCat feature flag usages in your source code and validate them against your feature flags on the ConfigCat Dashboard.
+Discover feature flag usages in your source code and upload the found code references to ConfigCat.
 [Documentation](integrations/github.md)
+### Bitbucket Pipe
+Discover feature flag usages in your source code and upload the found code references to ConfigCat.
+[Documentation](integrations/bitbucket.md)
 ### Terraform
 Configure and access ConfigCat resources via ConfigCat Public Management API with Terraform.
 [Documentation](integrations/terraform.md)

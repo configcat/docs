@@ -4,9 +4,10 @@ title: CircleCI Orb
 ---
 
 This section describes how to use ConfigCat's <a target="_blank" href="https://circleci.com/developer/orbs/orb/configcat/scan-repository">CircleCI Orb</a>
-to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. 
+to automatically scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. 
+You can find more information about CircleCI Orbs <a target="_blank" href="https://circleci.com/orbs/">here</a>.
 
-## Configuration
+## Setup
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in <a target="_blank" href="https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project">CircleCI Environment Variables</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
     <img class="bordered" src="/docs/assets/cli/scan/cco_secrets.png" />
 
@@ -40,8 +41,8 @@ Scan reports are uploaded for each branch of your repository that triggers the w
 | --------------------- | -------------------------------------------------------------------------- | ---------- | ------------------- |
 | `config-id`           | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
 | `api-host`            | ConfigCat Management API host.                                             |            | `api.configcat.com` |
-| `api-user`            | Name of the environment variable where the ConfigCat Management API basic authentication username is stored.                                                                                              |            | CONFIGCAT_API_USER  |
-| `api-pass`            | Name of the environment variable where the ConfigCat Management API basic authentication password is stored.                                                                                              |            | CONFIGCAT_API_PASS  |
+| `api-user`            | Name of the environment variable where the <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication username</a> is stored.                                                                                              |            | CONFIGCAT_API_USER  |
+| `api-pass`            | Name of the environment variable where the <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication password</a> is stored.                                                                                              |            | CONFIGCAT_API_PASS  |
 | `file-url-template`   | Template url used to generate VCS file links. Available template parameters: `commitHash`, `filePath`, `lineNumber`. Example: https://github.com/my/repo/blob/{commitHash}/{filePath}#L{lineNumber}                           |            |                     |
 | `commit-url-template` | Template url used to generate VCS commit links. Available template parameters: `commitHash`. Example: https://github.com/my/repo/commit/{commitHash}                                                                      |            |                     |
 | `line-count`          | Context line count before and after the reference line. (min: 1, max: 10)  |            | 4                   |
