@@ -79,6 +79,7 @@ if(isMyAwesomeFeatureEnabled) {
 | `refreshMode`                      | PollingMode?            | Optional, sets the polling mode for the client. [See below](#polling-modes). |
 | `sessionConfiguration`             | URLSessionConfiguration | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls. |
 | `baseUrl`                          | String                  | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
+| `flagOverrides`                    | OverrideDataSource?     | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 | `logLevel`                         | LogLevel                | Optional, sets the internal log level. [See below](#logging). |
 
 :::caution
@@ -273,6 +274,34 @@ let client = ConfigCatClient(
 client.forceRefresh()
 ```
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
+
+## Flag Overrides
+
+With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
+
+- **Local/Offline mode** (`OverrideBehaviour.localOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+
+- **Local over remote** (`OverrideBehaviour.localOverRemote`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
+
+- **Remote over local** (`OverrideBehaviour.remoteOverLocal`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
+
+You can set up the SDK to load your feature flag & setting overrides from a `[String: Any]` dictionary.
+
+```swift
+let dictionary:[String: Any] = [
+    "enabledFeature": true,
+    "disabledFeature": false,
+    "intSetting": 5,
+    "doubleSetting": 3.14,
+    "stringSetting": "test"
+]
+
+let client = ConfigCatClient(
+    sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>",
+    flagOverrides: LocalDictionaryDataSource(source: dictionary, behaviour: .localOnly)
+)
+```
 
 ## Custom cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCache` open class:
