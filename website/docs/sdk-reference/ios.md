@@ -161,11 +161,10 @@ Available log levels:
 | ---------- | --------------------------------------------------------------------------------------- |
 | `.nolog`   | Turn the ConfigCat logging off.                                                         |
 | `.error`   | Only error level events are logged.                                                     |
-| `.warning` | Errors and Warnings are logged.                                                         |
+| `.warning` | Default. Errors and Warnings are logged.                                                         |
 | `.info`    | Errors, Warnings and feature flag evaluation is logged.                                 |
 | `.debug`   | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
 
-> The default level is `.warning`. With `.nolog` you can turn the logging completely off.
 
 Info level logging helps to inspect the feature flag evaluation process.  
 Example log entries:
