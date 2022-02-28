@@ -165,16 +165,16 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
-Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.AutoPoll()` to change the polling interval.
+Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.autoPoll()` to change the polling interval.
 ```kotlin
 val client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.AutoPoll(120 /* polling interval in seconds */))
+    .mode(PollingModes.autoPoll(120 /* polling interval in seconds */))
     .build("#YOUR-SDK-KEY#")
 ```
 Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
 ```kotlin
 val client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.AutoPoll(
+    .mode(PollingModes.autoPoll(
         120 /* polling interval in seconds */,
         {
             // here you can subscribe to configuration changes
@@ -186,16 +186,16 @@ val client = ConfigCatClient.newBuilder()
 ### Lazy loading
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
 
-Use the `cacheRefreshIntervalInSeconds` parameter of the `PollingModes.LazyLoad()` to set cache lifetime.
+Use the `cacheRefreshIntervalInSeconds` parameter of the `PollingModes.lazyLoad()` to set cache lifetime.
 ```java
 val client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.LazyLoad(120 /* the cache will expire in 120 seconds */))
+    .mode(PollingModes.lazyLoad(120 /* the cache will expire in 120 seconds */))
     .build("#YOUR-SDK-KEY#")
 ```
-Use the `asyncRefresh` option parameter of the `PollingModes.LazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a `getValue()` call is made while the cache is expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
+Use the `asyncRefresh` option parameter of the `PollingModes.lazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a `getValue()` call is made while the cache is expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
 ```kotlin
 val client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.LazyLoad(
+    .mode(PollingModes.lazyLoad(
         120, // the cache will expire in 120 seconds
         true // the refresh will be executed asynchronously
         )
@@ -208,7 +208,7 @@ If you set the `asyncRefresh` to `false`, the refresh operation will be awaited 
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 ```kotlin
 val client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.ManualPoll())
+    .mode(PollingModes.manualPoll())
     .build("#YOUR-SDK-KEY#")
 
 client.forceRefresh()
