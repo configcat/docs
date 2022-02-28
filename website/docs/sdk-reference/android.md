@@ -45,7 +45,7 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#")
 ```
 ### 4. Get your setting value
 ```kotlin
-val isMyAwesomeFeatureEnabled = client.getValue(Boolean::class.java "<key-of-my-awesome-feature>", false)
+val isMyAwesomeFeatureEnabled = client.getValue(Boolean::class.java, "<key-of-my-awesome-feature>", false)
 if(isMyAwesomeFeatureEnabled) {
     doTheNewThing()
 } else {
