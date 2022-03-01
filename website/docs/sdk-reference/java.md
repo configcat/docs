@@ -6,7 +6,7 @@ title: Java
 [![Java CI](https://github.com/configcat/java-sdk/actions/workflows/java-ci.yml/badge.svg?branch=master)](https://github.com/configcat/java-sdk/actions/workflows/java-ci.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-java-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-java-client)
 [![Coverage Status](https://img.shields.io/codecov/c/github/ConfigCat/java-sdk.svg)](https://codecov.io/gh/ConfigCat/java-sdk)
-[![Javadocs](http://javadoc.io/badge/com.configcat/configcat-java-client.svg)](http://javadoc.io/doc/com.configcat/configcat-java-client)
+[![Javadocs](https://javadoc.io/badge/com.configcat/configcat-java-client.svg)](https://javadoc.io/doc/com.configcat/configcat-java-client)
 
 ## Getting Started
 ### 1. Add the ConfigCat SDK to your project
@@ -459,5 +459,5 @@ Check out our Sample Applications how they use the ConfigCat SDK
 
 ## Look Under the Hood
 - <a href="https://github.com/ConfigCat/java-sdk" target="_blank">ConfigCat Java SDK's repository on GitHub</a>
-- <a href="http://javadoc.io/doc/com.configcat/configcat-java-client" target="_blank">ConfigCat Java SDK's javadoc page</a>
+- <a href="https://javadoc.io/doc/com.configcat/configcat-java-client" target="_blank">ConfigCat Java SDK's javadoc page</a>
 - <a href="https://search.maven.org/artifact/com.configcat/configcat-java-client" target="_blank">ConfigCat Java SDK on Maven Central</a>

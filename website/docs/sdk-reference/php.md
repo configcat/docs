@@ -343,7 +343,7 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 ```
 
 ## HTTP Client
-The SDK uses [Guzzle](http://docs.guzzlephp.org/en/stable/index.html) for the underlying HTTP calls and its request options are available to customize through SDK options.
+The SDK uses [Guzzle](https://docs.guzzlephp.org/en/stable/index.html) for the underlying HTTP calls and its request options are available to customize through SDK options.
 ### HTTP Proxy
 If your application runs behind a proxy you can do the following:
 ```php
