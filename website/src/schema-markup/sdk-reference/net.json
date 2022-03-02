@@ -1,8 +1,8 @@
 {
     "@context": "https://schema.org/",
     "@type": "HowTo",
-    "name": "How to use Feature Flags in .NET?",
-    "description": "How to use Feature Flags in .NET using ConfigCat Feature Flags. https://configcat.com",
+    "name": "How to use feature flags in .NET?",
+    "description": "How to use feature flags in .NET using ConfigCat Feature Flags. https://configcat.com",
     "image": "https://configcat.com/images/shared/home.png",
     "totalTime": "PT10M",
     "estimatedCost": {
