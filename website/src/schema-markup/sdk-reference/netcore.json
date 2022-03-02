@@ -1,7 +1,7 @@
 {
     "@context": "https://schema.org/",
     "@type": "HowTo",
-    "name": "How to use Feature Flags in .NET Core",
+    "name": "How to use Feature Flags in .NET Core?",
     "description": "How to use Feature Flags in .NET Core using ConfigCat Feature Flags. https://configcat.com",
     "image": "https://configcat.com/images/shared/home.png",
     "totalTime": "PT10M",
