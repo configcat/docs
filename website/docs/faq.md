@@ -3,6 +3,56 @@ id: faq
 title: FAQ
 ---
 
+export const FaqSchema = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "How to use targeting rules in ConfigCat based on sensitive data?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the Sensitive text comparators: https://configcat.com/docs/advanced/targeting/#sensitive-text-comparators."
+            }
+        }, {
+            "@type": "Question",
+            "name": "What if I exceed the config.json download limit of my ConfigCat plan?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Don't worry, we will keep serving your data and feature flags. Someone from our team will contact you to discuss your options."
+            }
+        }, {
+            "@type": "Question",
+            "name": "Where can I find and download my ConfigCat invoices?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "All the invoices we issued are available for download from the Billing & Invoices page: https://app.configcat.com/organization/billing"
+            }
+        }, {
+            "@type": "Question",
+            "name": "I can't login to ConfigCat, because I was asked a 2FA (Two-factor authentication) code that I don't know.",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Solution 1: There might be an authenticator app on your phone that you can use to log in to ConfigCat.  Solution 2: Contact your Organization Admin, and ask them to disable 2FA for your account until you set it up again.  Solution 3: Use the recovery codes that you received when you first set your 2FA up."
+            }
+        }, {
+            "@type": "Question",
+            "name": "Are ConfigCat percentage targeting options sticky?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.  Also, consider the following:  - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)  - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)  More on stickiness and consistency: https://configcat.com/docs/advanced/targeting/#stickiness--consistency"
+            }
+        }, {
+            "@type": "Question",
+            "name": "How can I be sure, that my data is safe at ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.  See ConfigCat's architecture explained here: https://configcat.com/architecture/."
+            }
+        }]
+    });
+
+<script type='application/ld+json' dangerouslySetInnerHTML={ { __html: FaqSchema }} />
+
 A collection of frequently asked questions.
 
 ## Billing, Payments & Subscriptions
@@ -69,17 +119,17 @@ To all other users the feature is ON
 ### Are percentage options sticky?
 Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.
 
-Also consider the following:
+Also, consider the following:
 - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)
 - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)
 
 [More on stickiness and consistency](advanced/targeting/#stickiness--consistency)
 
 ### How to use targeting rules based on sensitive data?
-If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Sensitve text comparators](https://configcat.com/docs/advanced/targeting/#sensitive-text-comparators).
+If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Sensitive text comparators](https://configcat.com/docs/advanced/targeting/#sensitive-text-comparators).
 
 ### How can I be sure, that my data is safe?
-The feature flag evaluation is done on the client side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.
+The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.
 
 See our the architecture explained [here](https://configcat.com/architecture/).
 
@@ -90,6 +140,6 @@ Zombie flags (or stale flags) are feature flags that are not changed in the last
 ### What is the Zombie Flags Report?
 The [Zombie Flags Report](https://app.configcat.com/my-account/zombie-flags-report) is a list of all feature flags that are not changed in the last (configurable) number of days. You can use this report to identify and remove stale feature flags from your source code. This report is weekly emailed to you. You can set your [email preferences here](https://app.configcat.com/my-account/zombie-flags-report).
 
-<!-- ### How to avoid technical debt caused by feature flags?
+### How to avoid technical debt caused by feature flags?
 The [ConfigCat CLI](advanced/code-references/overview) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
-![Code references screenshot](/assets/cli/code-refs.png) -->
+![Code references screenshot](/assets/cli/code-refs.png)
