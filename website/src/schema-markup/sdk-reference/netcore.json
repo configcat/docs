@@ -1,0 +1,44 @@
+{
+    "@context": "https://schema.org/",
+    "@type": "HowTo",
+    "name": "How to use feature flags in .NET Core?",
+    "description": "How to use feature flags in .NET Core using ConfigCat Feature Flags. https://configcat.com",
+    "image": "https://configcat.com/images/shared/home.png",
+    "totalTime": "PT10M",
+    "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "",
+        "value": "0"
+    },
+    "tool": {
+        "@type": "HowToTool",
+        "name": "ConfigCat Feature Flags - https://configcat.com"
+    },
+    "step": [
+        {
+            "@type": "HowToStep",
+            "text": "Register a free account at ConfigCat.",
+            "url": "https://configcat.com"
+        },
+        {
+            "@type": "HowToStep",
+            "text": "Install ConfigCat SDK Nuget package",
+            "url": "https://www.nuget.org/packages/ConfigCat.Client"
+        },
+        {
+            "@type": "HowToStep",
+            "text": "Import package",
+            "url": "https://configcat.com/docs/sdk-reference/csharp#2-import-package"
+        },
+        {
+            "@type": "HowToStep",
+            "text": "Create the *ConfigCat* client with your *SDK Key*",
+            "url": "https://configcat.com/docs/sdk-reference/csharp#3-create-the-configcat-client-with-your-sdk-key"
+        },
+        {
+            "@type": "HowToStep",
+            "text": "Get your feature flag's value",
+            "url": "https://configcat.com/docs/sdk-reference/csharp#4-get-your-setting-value"
+        }
+    ]
+}
