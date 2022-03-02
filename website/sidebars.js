@@ -68,9 +68,6 @@ module.exports = {
         { type: "doc", id: "sdk-reference/elixir", label: "Elixir" },
         { type: "doc", id: "sdk-reference/dart", label: "Dart (Flutter)" },
       ],
-      "Video Courses": [
-        "video/developer"
-      ],
       "Integrations": [
         "integrations/overview",
         "integrations/slack",
@@ -86,7 +83,7 @@ module.exports = {
         "integrations/amplitude",
         "integrations/vscode"
       ],
-      "Service": [
+      "Service Status": [
         "service/status"
       ]
     },
