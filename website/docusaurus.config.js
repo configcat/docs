@@ -1,7 +1,7 @@
 module.exports = {
   title: 'ConfigCat Docs',
   tagline: 'Learn more on how to use ConfigCat Feature Flags.',
-  url: 'https://configcat.com',
+  url: 'https://configcat.com/',
   baseUrl: '/docs/',
   onBrokenLinks: 'throw',
   trailingSlash: true,
@@ -18,17 +18,17 @@ module.exports = {
       },
       items: [
         {
-          href: 'https://www.configcat.com',
+          href: 'https://configcat.com/',
           label: 'configcat.com',
           position: "left"
         },
         {
-          href: 'https://www.configcat.com/pricing',
+          href: 'https://www.configcat.com/pricing/',
           label: 'Pricing',
           position: "left"
         },
         {
-          href: 'https://www.configcat.com/architecture',
+          href: 'https://www.configcat.com/architecture/',
           label: 'Architecture',
           position: "left"
         },
@@ -38,12 +38,12 @@ module.exports = {
           position: "left"
         },
         {
-          href: 'https://configcat.com/blog',
+          href: 'https://configcat.com/blog/',
           label: 'Blog',
           position: "left"
         },
         {
-          href: 'https://api.configcat.com/docs',
+          href: 'https://api.configcat.com/docs/',
           label: 'Public Management API',
           position: "right"
         },
@@ -57,7 +57,7 @@ module.exports = {
           items: [
             {
               label: 'Terms & Policies',
-              href: 'https://configcat.com/policies',
+              href: 'https://configcat.com/policies/',
             },
             {
               label: 'Public Roadmap',
@@ -65,11 +65,11 @@ module.exports = {
             },
             {
               label: 'Our Team',
-              href: 'https://configcat.com/team',
+              href: 'https://configcat.com/team/',
             },
             {
               label: 'Jobs',
-              href: 'https://configcat.com/jobs',
+              href: 'https://configcat.com/jobs/',
             },
           ],
         },
@@ -78,19 +78,19 @@ module.exports = {
           items: [
             {
               label: 'Pricing',
-              href: 'https://configcat.com/pricing',
+              href: 'https://configcat.com/pricing/',
             },
             {
               label: 'On-Premise Self Hosted Plan',
-              href: 'https://configcat.com/on-premise',
+              href: 'https://configcat.com/on-premise/',
             },
             {
               label: 'Referrals',
-              href: 'https://configcat.com/referrals',
+              href: 'https://configcat.com/referrals/',
             },
             {
               label: 'Blog',
-              href: 'https://configcat.com/blog',
+              href: 'https://configcat.com/blog/',
             },
           ],
         },
@@ -103,15 +103,15 @@ module.exports = {
             },
             {
               label: 'Architectural Overview',
-              href: 'https://configcat.com/architecture',
+              href: 'https://configcat.com/architecture/',
             },
             {
               label: 'Public Management API Docs',
-              href: 'https://api.configcat.com/docs',
+              href: 'https://api.configcat.com/docs/',
             },
             {
               label: 'Support',
-              href: 'https://configcat.com/support',
+              href: 'https://configcat.com/support/',
             },
           ],
         },
@@ -120,7 +120,7 @@ module.exports = {
           items: [
             {
               label: 'Talk with our team on Community Slack',
-              href: 'https://configcat.com/slack',
+              href: 'https://configcat.com/slack/',
             },
             {
               label: 'GitHub',
