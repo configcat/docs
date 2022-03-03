@@ -7,9 +7,9 @@ A config.json download is counted every time your application downloads a config
 CDN. The frequency of these downloads is totally under your control. Between downloads you can access your feature
 flags as many times as you like, it still counts as one.
 
-See an <a href="https://configcat.com/architecture" target="_blank">overview of the ConfigCat architecture</a>.
+See an <a href="https://configcat.com/architecture/" target="_blank">overview of the ConfigCat architecture</a>.
 
-Use the  <a href="https://configcat.com/calculator" target="_blank">Plan Calculator</a> to get your estimated config.json downloads.
+Use the  <a href="https://configcat.com/calculator/" target="_blank">Plan Calculator</a> to get your estimated config.json downloads.
 
 Keep track of the number of config.json downloads your apps are making on the <a href="https://app.configcat.com/product/statistics" target="_blank">statistics page.</a> 
 
@@ -47,7 +47,7 @@ The basic package includes:
 | **Every additional CDN node** | + 1,000,000,000 |         ~400 |             ~800 |
 
 ### On-Premise (Self-hosted)
-Runs on the customer's own servers. We suggest <a href="https://configcat.com/support" target="_blank">contacting ConfigCat's engineering</a> 
+Runs on the customer's own servers. We suggest <a href="https://configcat.com/support/" target="_blank">contacting ConfigCat's engineering</a> 
 team on exact requirements and performance.
 
 ## config.json downloads

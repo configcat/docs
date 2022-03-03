@@ -54,4 +54,4 @@ Here are some popular pre-made Zaps.
 ![zapier_slack](/assets/zapier_slack.png)
 
 ## Need help?
-<a href="https://configcat.com/support" target="_blank">Contact us</a> if you need any help or you have any awesome improvement ideas for this Zap.
+<a href="https://configcat.com/support/" target="_blank">Contact us</a> if you need any help or you have any awesome improvement ideas for this Zap.

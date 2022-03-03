@@ -17,23 +17,23 @@ You can always check your Usage & Quota [here](https://app.configcat.com/organiz
 
 ### Where can I find and download my invoices?
 All the invoices we issued are available for download from the [Billing & Invoices page.](https://app.configcat.com/organization/billing).
-You need to have a [Billing Manager](organization#billing-manager-role) role to access the Billing & Invoices page.
+You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Billing & Invoices page.
 
 ### How do I upgrade / downgrade my billing plan?
 You can change your billing plan on the [Plans](https://app.configcat.com/organization/plans) page.
-You need to have a [Billing Manager](organization#billing-manager-role) role to access the Plans page.
+You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Plans page.
 
 ### How do I change my payment method or billing information?
 Go to the [Billing & Invoices page.](https://app.configcat.com/organization/billing) and click the `Update billing details` link.
-You need to have a [Billing Manager](organization#billing-manager-role) role to access the Billing & Invoices page.
+You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Billing & Invoices page.
 
 ### How do I cancel my account?
 Go to the [Plans](https://app.configcat.com/organization/plans) page and click the `Switch Plan` button under the Free plan.
-You need to have a [Billing Manager](organization#billing-manager-role) role to access the Plans page.
+You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Plans page.
 
 ### How do I change my currency?
 Go to the [Plans](https://app.configcat.com/organization/plans) page and use the currency toggle to switch between USD and EUR.
-You need to have a [Billing Manager](organization#billing-manager-role) role to access the Plans page.
+You need to have a [Billing Manager](organization.md#billing-manager-role) role to access the Plans page.
 
 ## Security
 ### I can't login to ConfigCat, because I was asked a 2FA (Two-factor authentication) code that I don't know.
@@ -68,7 +68,7 @@ To all other users the feature is ON
 ```
 ![AND example](/assets/faq/and-example.png)
 
-[Here is an example in our blog.](https://configcat.com/blog/2019/10/23/feature-flags-user-segmentation-and-targeting-examples/#everyone-in-my-company-plus-android-users-from-germany-above-v53)
+[Here is an example in our blog.](https://configcat.com/blog/2019/10/23/feature-flags-user-segmentation-and-targeting-examples/#everyone-in-my-company-plus-android-users-from-germany-above-v53/)
 
 ### Are percentage options sticky?
 Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.
@@ -77,10 +77,10 @@ Also, consider the following:
 - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)
 - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)
 
-[More on stickiness and consistency](advanced/targeting/#stickiness--consistency)
+[More on stickiness and consistency](advanced/targeting.md/#stickiness--consistency)
 
 ### How to use targeting rules based on sensitive data?
-If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Sensitive text comparators](https://configcat.com/docs/advanced/targeting/#sensitive-text-comparators).
+If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Sensitive text comparators](advanced/targeting.md/#sensitive-text-comparators).
 
 ### How can I be sure, that my data is safe?
 The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.

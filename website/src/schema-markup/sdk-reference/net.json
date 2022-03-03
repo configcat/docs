@@ -28,17 +28,17 @@
         {
             "@type": "HowToStep",
             "text": "Import package",
-            "url": "https://configcat.com/docs/sdk-reference/csharp#2-import-package"
+            "url": "https://configcat.com/docs/sdk-reference/csharp/#2-import-package"
         },
         {
             "@type": "HowToStep",
             "text": "Create the *ConfigCat* client with your *SDK Key*",
-            "url": "https://configcat.com/docs/sdk-reference/csharp#3-create-the-configcat-client-with-your-sdk-key"
+            "url": "https://configcat.com/docs/sdk-reference/csharp/#3-create-the-configcat-client-with-your-sdk-key"
         },
         {
             "@type": "HowToStep",
             "text": "Get your feature flag's value",
-            "url": "https://configcat.com/docs/sdk-reference/csharp#4-get-your-setting-value"
+            "url": "https://configcat.com/docs/sdk-reference/csharp/#4-get-your-setting-value"
         }
     ]
 }

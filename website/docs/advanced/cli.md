@@ -11,7 +11,7 @@ The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command
 configcat
   This is the Command Line Tool of ConfigCat.
   ConfigCat is a hosted feature flag service: https://configcat.com
-  For more information, see the documentation here: https://configcat.com/docs/advanced/cli
+  For more information, see the documentation here: https://configcat.com/docs/advanced/cli/
 
 Usage:
   configcat [options] [command]

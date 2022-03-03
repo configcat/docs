@@ -4,6 +4,7 @@ module.exports = {
   url: 'https://configcat.com',
   baseUrl: '/docs/',
   onBrokenLinks: 'throw',
+  trailingSlash: true,
   favicon: 'img/favicon.png',
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.

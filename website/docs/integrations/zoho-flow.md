@@ -63,4 +63,4 @@ You can set **triggers**, add **actions**, use **Delays and Decisions** to creat
 ![zoho_slack_config](/assets/zoho/slack_message.png)
 
 ## Need help?
-<a href="https://configcat.com/support" target="_blank">Contact us</a> if you have questions or any improvement ideas for this app.
+<a href="https://configcat.com/support/" target="_blank">Contact us</a> if you have questions or any improvement ideas for this app.
