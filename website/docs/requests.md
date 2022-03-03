@@ -27,7 +27,7 @@ The following plans run on shared infrastructure. So all customers use the same 
 | **Smart**      |     250,000,000 |         ~100 |             ~200 |
 | **Enterprise** |   1,000,000,000 |         ~400 |             ~800 |
 
-Use the  <a href="https://configcat.com/calculator" target="_blank">Plan Calculator</a> to get your estimated config.json downloads.
+Use the  <a href="https://configcat.com/calculator/" target="_blank">Plan Calculator</a> to get your estimated config.json downloads.
 
 :::info
 If you hit this limit, we will keep your application up and running. However, you can expect us to contact you on how we can meet your needs.
