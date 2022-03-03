@@ -23,12 +23,12 @@ module.exports = {
           position: "left"
         },
         {
-          href: 'https://www.configcat.com/pricing/',
+          href: 'https://configcat.com/pricing/',
           label: 'Pricing',
           position: "left"
         },
         {
-          href: 'https://www.configcat.com/architecture/',
+          href: 'https://configcat.com/architecture/',
           label: 'Architecture',
           position: "left"
         },
