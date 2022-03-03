@@ -14,7 +14,7 @@ export const NetCoreSchema = require('@site/src/schema-markup/sdk-reference/netc
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/.net-sdk.svg?style=social)](https://github.com/configcat/.net-sdk/stargazers)
 [![Build status](https://ci.appveyor.com/api/projects/status/3kygp783vc2uv9xr?svg=true)](https://ci.appveyor.com/project/ConfigCat/net-sdk) [![NuGet Version](https://buildstats.info/nuget/ConfigCat.Client)](https://www.nuget.org/packages/ConfigCat.Client/)
-[![codecov](https://codecov.io/gh/configcat/.net-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/.net-sdk)
+[![Sonar Coverage](https://img.shields.io/sonar/coverage/net-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=net-sdk) 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
 
 <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .Net SDK on GitHub</a>
