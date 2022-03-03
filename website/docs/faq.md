@@ -11,7 +11,7 @@ A collection of frequently asked questions.
 
 ## Billing, Payments & Subscriptions
 
-### What if I exceed the [config.json download](requests) limit of my plan?
+### What if I exceed the [config.json download](/requests) limit of my plan?
 Don't worry, we will keep serving your data and feature flags. Someone from our team will contact you to discuss your options.
 You can always check your Usage & Quota [here](https://app.configcat.com/organization/usage).
 
@@ -95,5 +95,5 @@ Zombie flags (or stale flags) are feature flags that are not changed in the last
 The [Zombie Flags Report](https://app.configcat.com/my-account/zombie-flags-report) is a list of all feature flags that are not changed in the last (configurable) number of days. You can use this report to identify and remove stale feature flags from your source code. This report is weekly emailed to you. You can set your [email preferences here](https://app.configcat.com/my-account/zombie-flags-report).
 
 ### How to avoid technical debt caused by feature flags?
-The [ConfigCat CLI](advanced/code-references/overview) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
+The [ConfigCat CLI](/advanced/code-references/overview) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
 ![Code references screenshot](/assets/cli/code-refs.png)
