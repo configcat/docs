@@ -42,9 +42,6 @@ Available fields to include in your flow:
 * **What**: The exact values that changed
 
 ## Use cases
-Here are some popular pre-made Zaps.
-
-<script src="https://zapier.com/zapbook/embed/widget.js?services=configcat&container=true&limit=5,"></script>
 
 ## Example Slack notification setup
 ### Configuration in Zapier:
