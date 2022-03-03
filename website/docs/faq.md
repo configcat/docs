@@ -68,7 +68,7 @@ To all other users the feature is ON
 ```
 ![AND example](/assets/faq/and-example.png)
 
-[Here is an example in our blog.](https://configcat.com/blog/2019/10/23/feature-flags-user-segmentation-and-targeting-examples/#everyone-in-my-company-plus-android-users-from-germany-above-v53)
+[Here is an example in our blog.](https://configcat.com/blog/2019/10/23/feature-flags-user-segmentation-and-targeting-examples/#everyone-in-my-company-plus-android-users-from-germany-above-v53/)
 
 ### Are percentage options sticky?
 Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.
@@ -80,7 +80,7 @@ Also, consider the following:
 [More on stickiness and consistency](advanced/targeting.md/#stickiness--consistency)
 
 ### How to use targeting rules based on sensitive data?
-If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Sensitive text comparators](https://configcat.com/docs/advanced/targeting/#sensitive-text-comparators).
+If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Sensitive text comparators](advanced/targeting.md/#sensitive-text-comparators).
 
 ### How can I be sure, that my data is safe?
 The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.
