@@ -1,6 +1,7 @@
 ---
 id: dart
 title: Dart (Flutter) SDK Reference
+description: ConfigCat Dart (Flutter) SDK Reference
 ---
 
 [![pub package](https://img.shields.io/pub/v/configcat_client.svg)](https://pub.dev/packages/configcat_client)

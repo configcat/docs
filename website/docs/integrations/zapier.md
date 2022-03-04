@@ -1,6 +1,7 @@
 ---
 id: zapier
 title: Zapier
+description: ConfigCat Zapier integration
 ---
 ## Connect ConfigCat to hundreds of other apps with Zapier
 

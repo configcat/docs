@@ -1,6 +1,7 @@
 ---
-title: JavaScript (SSR) SDK Reference
 id: "js-ssr"
+title: JavaScript (SSR) SDK Reference
+description: ConfigCat JavaScript (SSR) SDK Reference
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/js-ssr-sdk.svg?style=social)](https://github.com/configcat/js-ssr-sdk/stargazers)
 [![JS-SSR CI](https://github.com/configcat/js-ssr-sdk/actions/workflows/js-ssr-ci.yml/badge.svg?branch=master)](https://github.com/configcat/js-ssr-sdk/actions/workflows/js-ssr-ci.yml) 

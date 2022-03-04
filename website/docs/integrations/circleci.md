@@ -1,6 +1,7 @@
 ---
 id: circleci
 title: CircleCI Orb
+description: ConfigCat CircleCI Orb
 ---
 
 import CodeRefIntro from '/docs/advanced/code-references/_intro.mdx'

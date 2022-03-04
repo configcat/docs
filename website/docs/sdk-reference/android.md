@@ -1,6 +1,7 @@
 ---
 id: android
 title: Android (Kotlin) SDK Reference
+description: ConfigCat Android (Kotlin) SDK Reference
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/android-sdk.svg?style=social)](https://github.com/configcat/android-sdk/stargazers)
 [![Android CI](https://github.com/configcat/android-sdk/actions/workflows/android-ci.yml/badge.svg?branch=master)](https://github.com/configcat/android-sdk/actions/workflows/android-ci.yml)

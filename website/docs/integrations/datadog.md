@@ -1,6 +1,7 @@
 ---
 id: datadog
 title: Datadog
+description: ConfigCat Datadog integration
 ---
 
 ## Overview

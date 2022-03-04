@@ -1,6 +1,7 @@
 ---
 id: ruby
 title: Ruby SDK Reference
+description: ConfigCat Ruby SDK Reference
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/ruby-sdk.svg?style=social)](https://github.com/configcat/ruby-sdk/stargazers)
 [![Ruby CI](https://github.com/configcat/ruby-sdk/actions/workflows/ruby-ci.yml/badge.svg?branch=master)](https://github.com/configcat/ruby-sdk/actions/workflows/ruby-ci.yml)

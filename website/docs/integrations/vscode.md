@@ -1,6 +1,7 @@
 ---
 id: vscode
-title:  Visual Studio Code
+title: Visual Studio Code
+description: ConfigCat Visual Studio Code extension
 ---
 
 <a href="https://marketplace.visualstudio.com/items?itemName=ConfigCat.configcat-feature-flags" target="_blank">ConfigCat's Visual Studio Code extension</a> to manage feature flags from Visual Studio Code.  

@@ -1,6 +1,7 @@
 ---
 id: bitbucket
 title: Bitbucket Pipe
+description: ConfigCat Bitbucket Pipe
 ---
 
 import CodeRefIntro from '/docs/advanced/code-references/_intro.mdx'
