@@ -1,6 +1,6 @@
 ---
 id: bitbucket-pipe
-title: Bitbucket Pipe
+title: Bitbucket Pipe code references
 ---
 
 This section describes how to use ConfigCat's <a target="_blank" href="https://bitbucket.org/product/features/pipelines/integrations?p=configcat/scan-repository-pipe">Bitbucket Pipe</a>
@@ -9,7 +9,7 @@ You can find more information about Bitbucket Pipelines <a target="_blank" href=
 
 ## Setup
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in secure pipeline variables with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
-    <img class="bordered" src="/docs/assets/cli/scan/pipe_secrets.png" />
+    <img class="bordered" src="/docs/assets/cli/scan/pipe_secrets.png" alt="Bitbucket Pipe secrets" />
 
 2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 

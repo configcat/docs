@@ -1,6 +1,6 @@
 ---
 id: overview
-title: Overview
+title: Integrations Overview
 ---
 Integrate ConfigCat with your technology stack and leverage all the benefits of Feature flags within your workflows.
 

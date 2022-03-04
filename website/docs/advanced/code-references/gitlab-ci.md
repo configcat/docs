@@ -1,6 +1,6 @@
 ---
 id: gitlab-ci
-title: GitLab CI/CD
+title: GitLab CI/CD code references
 ---
 
 This section describes how to use the [ConfigCat CLI](/docs/advanced/cli) in <a target="_blank" href="https://docs.gitlab.com/ee/ci/">GitLab CI/CD</a>
@@ -8,7 +8,7 @@ to automatically scan your source code for feature flag and setting usages and u
 
 ## Setup
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in GitLab's <a target="_blank" href="https://docs.gitlab.com/ee/ci/variables/">CI/CD Variables</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
-    <img class="bordered" src="/docs/assets/cli/scan/gl_secrets.png" />
+    <img class="bordered" src="/docs/assets/cli/scan/gl_secrets.png" alt="Gitlab secrets" />
 
 2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 
