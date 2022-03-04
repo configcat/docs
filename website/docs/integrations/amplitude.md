@@ -1,6 +1,7 @@
 ---
 id: amplitude
 title: Amplitude
+description: ConfigCat Amplitude integration
 ---
 
 ## Overview

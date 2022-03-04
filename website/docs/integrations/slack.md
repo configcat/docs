@@ -1,6 +1,7 @@
 ---
 id: slack
 title: Slack
+description: ConfigCat Feature Flags Slack App
 ---
 
 ## Overview

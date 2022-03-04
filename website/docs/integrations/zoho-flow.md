@@ -1,6 +1,7 @@
 ---
 id: zoho-flow
 title: Zoho Flow
+description: ConfigCat Zoho Flow integration
 ---
 ## Connect ConfigCat to 500+ apps with Zoho Flow
 

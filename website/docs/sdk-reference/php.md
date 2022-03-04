@@ -1,6 +1,7 @@
 ---
 id: php
 title: PHP SDK Reference
+description: ConfigCat PHP SDK Reference
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/php-sdk.svg?style=social)](https://github.com/configcat/php-sdk/stargazers)
 [![Build Status](https://github.com/configcat/php-sdk/actions/workflows/php-ci.yml/badge.svg?branch=master)](https://github.com/configcat/php-sdk/actions/workflows/php-ci.yml)

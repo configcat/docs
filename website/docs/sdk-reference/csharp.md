@@ -1,6 +1,7 @@
 ---
 id: csharp
 title: .NET, .NET Core SDK Reference
+description: ConfigCat .NET, .NET Core SDK Reference
 ---
 
 export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json');

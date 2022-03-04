@@ -1,6 +1,7 @@
 ---
 id: go
 title: Go SDK Reference
+description: ConfigCat Go SDK Reference
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/go-sdk.svg?style=social)](https://github.com/configcat/go-sdk/stargazers)
 [![Build Status](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml/badge.svg?branch=master)](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml)

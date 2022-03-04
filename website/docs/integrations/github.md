@@ -1,6 +1,7 @@
 ---
 id: github
 title: GitHub Action
+description: ConfigCat GitHub Action
 ---
 
 import CodeRefIntro from '/docs/advanced/code-references/_intro.mdx'
