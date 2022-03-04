@@ -38,7 +38,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 - Select the `Enter data about this relying party manually` option, and click `Next`.
 
-  <img class="saml-tutorial-img" src="/docs/assets/saml/adfs/4_manual_metadata.png" alt="ADFS manual relying party setup />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/adfs/4_manual_metadata.png" alt="ADFS manual relying party setup" />
 
 - Type a descriptive `Display name`, and click `Next`.
 
