@@ -129,7 +129,7 @@ function Home() {
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
-          <img className={styles.heroImage} src={useBaseUrl('img/docs.svg')} alt="" />
+          <img className={styles.heroImage} src={useBaseUrl('img/docs.svg')} alt="ConfigCat Docs" />
           <div className={styles.buttons}>
             <Link
               className={clsx(

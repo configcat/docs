@@ -8,7 +8,7 @@ to automatically scan your source code for feature flag and setting usages and u
 
 ## Setup
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in Azure DevOps <a target="_blank" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables">Pipeline Variables</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
-    <img class="bordered" src="/docs/assets/cli/scan/azure_secrets.png" />
+    <img class="bordered" src="/docs/assets/cli/scan/azure_secrets.png" alt="Azure secrets" />
 
 2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 

@@ -30,11 +30,11 @@ In non-interactive environments, like in a CI/CD pipeline, you have to pass the 
 To get the ID of a Config, follow the steps below:
 1. Go to your <a target="_blank" href="https://app.configcat.com">ConfigCat Dashboard</a>, select the desired Config, and click the code references icon on one of your feature flags.
 
-    <img class="bordered" src="/docs/assets/cli/scan/code_ref.png" />
+    <img class="bordered" src="/docs/assets/cli/scan/code_ref.png" alt="ConfigCat code references button" />
 
 2. Copy the Config ID from the highlighted box.
 
-    <img class="bordered" src="/docs/assets/cli/scan/config_id.png" />
+    <img class="bordered" src="/docs/assets/cli/scan/config_id.png" alt="ConfigCat Config ID"  />
 
 
 ## How Scanning Works
@@ -137,7 +137,7 @@ You have the option to upload scan reports for each branch of your repository to
 Each scan report is associated to one of these branches.
 
 The following screenshot shows how an uploaded report looks like.
-<img class="bordered" src="/docs/assets/cli/scan/scan_report.png" />
+<img class="bordered" src="/docs/assets/cli/scan/scan_report.png" alt="ConfigCat code references report" />
 
 ### Scanning Git Repositories
 The `scan` command automatically detects when it's being executed on a git repository. It collects additional information from Git like the current **branch
