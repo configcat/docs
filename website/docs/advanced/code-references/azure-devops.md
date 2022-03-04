@@ -1,6 +1,6 @@
 ---
 id: azure-devops
-title: Azure DevOps
+title: Azure DevOps code references
 ---
 
 This section describes how to use the [ConfigCat CLI](/docs/advanced/cli) in <a target="_blank" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops">Azure DevOps Pipelines</a>

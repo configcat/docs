@@ -1,6 +1,6 @@
 ---
 id: github-action
-title: GitHub Action
+title: GitHub Action code references
 ---
 
 This section describes how to use ConfigCat's <a target="_blank" href="https://github.com/marketplace/actions/configcat-scan-repository">GitHub Action</a>

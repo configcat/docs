@@ -1,6 +1,6 @@
 ---
 id: gitlab-ci
-title: GitLab CI/CD
+title: GitLab CI/CD code references
 ---
 
 This section describes how to use the [ConfigCat CLI](/docs/advanced/cli) in <a target="_blank" href="https://docs.gitlab.com/ee/ci/">GitLab CI/CD</a>
