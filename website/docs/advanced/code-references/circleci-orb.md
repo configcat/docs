@@ -1,6 +1,6 @@
 ---
 id: circleci-orb
-title: CircleCI Orb code references
+title: CircleCI
 ---
 
 This section describes how to use ConfigCat's <a target="_blank" href="https://circleci.com/developer/orbs/orb/configcat/scan-repository">CircleCI Orb</a>
