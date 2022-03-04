@@ -23,7 +23,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 - Enter a descriptive `App name`, then click `CONTINUE`.
 
-  <img class="saml-tutorial-img" src="/docs/assets/saml/google/app_name.png" img="Google SAML app name" />
+  <img class="saml-tutorial-img" src="/docs/assets/saml/google/app_name.png" alt="Google SAML app name" />
 
 The next step will guide you on how to configure ConfigCat with appearing information.
 
