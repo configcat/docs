@@ -5,12 +5,8 @@ description: ConfigCat .NET, .NET Core SDK Reference
 ---
 
 export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json');
-export const CsharpSchema = require('@site/src/schema-markup/sdk-reference/csharp.json');
-export const NetCoreSchema = require('@site/src/schema-markup/sdk-reference/netcore.json');
 
 <script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(NetSchema) }}></script>
-<script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(CsharpSchema) }}></script>
-<script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(NetCoreSchema) }}></script>
 
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/.net-sdk.svg?style=social)](https://github.com/configcat/.net-sdk/stargazers)
