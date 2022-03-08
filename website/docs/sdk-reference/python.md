@@ -123,9 +123,11 @@ Available options:
 | Option Parameter                    | Description                                                                                          | Default |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
 | `poll_interval_seconds`             | Polling interval.                                                                                    | 60      |
-| `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
 | `max_init_wait_time_seconds`        | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
+| `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
 | `config_cache_class`                | Custom cache implementation.                                                                         | None    |
+| `connect_timeout`                   | How many seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
+| `read_timeout`                      | How many seconds to wait for the server to send data before giving up.                               | 30      |
 
 :::caution
 Auto polling mode utilizes its polling job in a `threading.Thread` object. If you are running your application behind an uWSGI web server, the auto polling mode may not work as expected, because the uWSGI web server disables Python's threading by default. Please [enable threading](https://uwsgi-docs.readthedocs.io/en/latest/Options.html#enable-threads) or switch to another polling mode in this case.
@@ -162,6 +164,9 @@ Available options:
 | ---------------------------- | ---------------------------- | ------- |
 | `cache_time_to_live_seconds` | Cache TTL.                   | 60      |
 | `config_cache_class`         | Custom cache implementation. | None    |
+| `connect_timeout`            | How many seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
+| `read_timeout`               | How many seconds to wait for the server to send data before giving up. | 30 |
+
 
 ### Manual polling
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
@@ -176,6 +181,8 @@ Available options:
 | Option Parameter     | Description                  | Default |
 | -------------------- | ---------------------------- | ------- |
 | `config_cache_class` | Custom cache implementation. | None    |
+| `connect_timeout`    | How many seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
+| `read_timeout`       | How many seconds to wait for the server to send data before giving up. | 30 |
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
 ```python
