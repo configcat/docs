@@ -83,7 +83,7 @@ value = configcat_client.get_value(
 ### User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ``` python
-user_object = User('435170f4-8a8b-4b67-a723-505ac7cdea92')   
+user_object = User('435170f4-8a8b-4b67-a723-505ac7cdea92')
 ```
 ``` python
 user_object = User('john@example.com')   
@@ -218,7 +218,7 @@ dictionary = {
     'stringSetting': 'test'
 }
 
-client = ConfigCatClient(
+configcat_client = ConfigCatClient(
     sdk_key='#YOUR-SDK-KEY#',
     flag_overrides=LocalDictionaryDataSource(source=dictionary, override_behaviour=OverrideBehaviour.LocalOnly)
 )
@@ -254,6 +254,18 @@ You can query the keys from your configuration in the SDK with the `get_all_keys
 ```python
 configcat_client = configcatclient.create_client('#YOUR-SDK-KEY#')
 keys = configcat_client.get_all_keys()
+```
+
+## `get_all_values()`
+
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+| Parameters     | Description                                                                                                  | 
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
+```python
+configcat_client = configcatclient.create_client('#YOUR-SDK-KEY#')
+all_values = configcat_client.get_all_values(User('435170f4-8a8b-4b67-a723-505ac7cdea92'))  # Optional User Object
 ```
 
 ## Using ConfigCat behind a proxy
