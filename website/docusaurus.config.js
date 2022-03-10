@@ -110,6 +110,10 @@ module.exports = {
               href: 'https://api.configcat.com/docs/',
             },
             {
+              label: 'Search the documentation',
+              href: '/search',
+            },
+            {
               label: 'Support',
               href: 'https://configcat.com/support/',
             },
