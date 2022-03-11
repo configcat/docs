@@ -1,6 +1,7 @@
 ---
 id: azure-ad
 title: Azure AD
+description: This is a step-by-step guide on how to set up and configure Azure AD as a SAML Identity Provider for your organization.
 ---
 
 import Tabs from '@theme/Tabs';

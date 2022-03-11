@@ -1,6 +1,7 @@
 ---
 id: adfs
 title: ADFS
+description: This is a step-by-step guide on how to set up and configure ADFS as a SAML Identity Provider for your organization.
 ---
 
 import Tabs from '@theme/Tabs';

@@ -1,6 +1,7 @@
 ---
 id: main-concepts
-title: Main Concepts 
+title: Main Concepts
+description: This page explains the basics of feature flags and how to use them. Displays how configs, products and settings are organized within the feature flag service. 
 ---
 ## Feature Flag or Setting
 A *Setting* is an essential bit of *ConfigCat*. It can be of multiple types like on/off switch (bool), number (int, double) or any text (string) your application requires to be modified without the need of a new deployment.
