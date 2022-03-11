@@ -1,9 +1,10 @@
 ---
 id: saml-overview
 title: SAML Overview
+description: This section is a step-by-step guide on how you can enable SAML Single Sign-On (SSO) for your organization in ConfigCat.
 ---
 
-This section describes how you can enable SAML Single Sign-On (SSO) for your ConfigCat environment.
+This section describes how you can enable SAML Single Sign-On (SSO) for your organization in ConfigCat.
 
 SAML SSO allows your team members to sign up and log in to ConfigCat via their company accounts using your own Identity Provider (IdP).
 

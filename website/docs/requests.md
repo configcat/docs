@@ -1,6 +1,7 @@
 ---
 id: requests
 title: What is a config.json download?
+description: Learn how the usage & quota works, how the number of config.json downloads is counted and how to lower your monthly usage.
 ---
 
 A config.json download is counted every time your application downloads a configuration file from the ConfigCat

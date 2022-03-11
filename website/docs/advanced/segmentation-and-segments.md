@@ -1,6 +1,7 @@
 ---
 id: segments
 title: Segmentation & Segments
+description: Segments help you define user segments and assign them to your feature flags. Ideal for beta testing on a certain group of users.
 ---
 Segments allow you to group your users based on any of their properties. This way you can 
 define segments of your users and then assign them to specific feature flags. If you update a segment definition, it will update all 
