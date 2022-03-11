@@ -1,7 +1,7 @@
 ---
 id: amplitude
 title: Amplitude
-description: ConfigCat Amplitude integration
+description: ConfigCat Amplitude integration reference. This is step-by-step gide on how to use feature flags in your Amplitude project.
 ---
 
 ## Overview

@@ -1,7 +1,7 @@
 ---
 id: ruby
 title: Ruby SDK Reference
-description: ConfigCat Ruby SDK Reference
+description: ConfigCat Ruby SDK Reference. This is a step-by-step guide on how to use feature flags in your Ruby application.
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/ruby-sdk.svg?style=social)](https://github.com/configcat/ruby-sdk/stargazers)
 [![Ruby CI](https://github.com/configcat/ruby-sdk/actions/workflows/ruby-ci.yml/badge.svg?branch=master)](https://github.com/configcat/ruby-sdk/actions/workflows/ruby-ci.yml)

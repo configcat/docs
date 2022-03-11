@@ -1,7 +1,7 @@
 ---
 id: "js"
 title: JavaScript SDK Reference
-description: ConfigCat JavaScript SDK Reference
+description: ConfigCat JavaScript SDK Reference. This is a step-by-step guide on how to use feature flags in your JavaScript applications.
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/js-sdk.svg?style=social)](https://github.com/configcat/js-sdk/stargazers)
 [![JS CI](https://github.com/configcat/js-sdk/actions/workflows/js-ci.yml/badge.svg?branch=master)](https://github.com/configcat/js-sdk/actions/workflows/js-ci.yml) 

@@ -1,7 +1,7 @@
 ---
 id: jira
 title: Jira Cloud Plugin
-description: ConfigCat Jira Cloud Plugin
+description: ConfigCat Jira Cloud Plugin. This is step-by-step gide on how to connect and manage feature flags from Jira Cloud boards.
 ---
 
 Turn features On / Off right from a linked Issue on your Jira board with <a href="https://marketplace.atlassian.com/1222421" target="_blank">ConfigCat Feature Flags Jira Cloud Plugin</a>. Also you can add Targeting or Percentage Rules just as easily.

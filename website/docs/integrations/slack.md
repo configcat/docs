@@ -1,7 +1,7 @@
 ---
 id: slack
 title: Slack
-description: ConfigCat Feature Flags Slack App
+description: ConfigCat Feature Flags Slack App. This is step-by-step gide on how to connect the ConfigCat feature flag service to Slack. 
 ---
 
 ## Overview
