@@ -126,9 +126,9 @@ Available options:
 | `max_init_wait_time_seconds`        | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
 | `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
 | `config_cache_class`                | Custom cache implementation.                                                                         | None    |
-| `connect_timeout`                   | How many seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
-| `read_timeout`                      | How many seconds to wait for the server to send data before giving up.                               | 30      |
-| `flagOverrides`                     | Configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides) | None |
+| `connect_timeout`                   | The number of seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
+| `read_timeout`                      | The number of seconds to wait for the server to respond before giving up.                            | 30      |
+| `flagOverrides`                     | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)         | None |
 
 :::caution
 Auto polling mode utilizes its polling job in a `threading.Thread` object. If you are running your application behind an uWSGI web server, the auto polling mode may not work as expected, because the uWSGI web server disables Python's threading by default. Please [enable threading](https://uwsgi-docs.readthedocs.io/en/latest/Options.html#enable-threads) or switch to another polling mode in this case.
@@ -165,9 +165,9 @@ Available options:
 | ---------------------------- | ---------------------------- | ------- |
 | `cache_time_to_live_seconds` | Cache TTL.                   | 60      |
 | `config_cache_class`         | Custom cache implementation. | None    |
-| `connect_timeout`            | How many seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
-| `read_timeout`               | How many seconds to wait for the server to send data before giving up. | 30 |
-| `flagOverrides`              | Configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides) | None |
+| `connect_timeout`            | The number of seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
+| `read_timeout`               | The number of seconds to wait for the server to respond before giving up. | 30 |
+| `flagOverrides`              | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides) | None |
 
 
 ### Manual polling
@@ -183,9 +183,9 @@ Available options:
 | Option Parameter     | Description                  | Default |
 | -------------------- | ---------------------------- | ------- |
 | `config_cache_class` | Custom cache implementation. | None    |
-| `connect_timeout`    | How many seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
-| `read_timeout`       | How many seconds to wait for the server to send data before giving up. | 30 |
-| `flagOverrides`      | Configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides) | None |
+| `connect_timeout`    | The number of seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
+| `read_timeout`       | The number of seconds to wait for the server to send respond giving up. | 30 |
+| `flagOverrides`      | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides) | None |
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
 ```python
