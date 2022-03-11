@@ -195,7 +195,6 @@ configcat_client.force_refresh()
 value = configcat_client.get_value('key', 'my default value') # Returns "value from server"
 ```
 
-
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
