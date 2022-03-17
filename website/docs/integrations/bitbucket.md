@@ -1,7 +1,7 @@
 ---
 id: bitbucket
 title: Bitbucket Pipe
-description: ConfigCat Bitbucket Pipe integration. This is step-by-step gide on how to use the ConfigCat Bitbucket integration to eliminate tech debt in your project.
+description: ConfigCat Bitbucket Pipe integration. This is a step-by-step guide on how to use the ConfigCat Bitbucket integration to eliminate tech debt in your project.
 ---
 
 import CodeRefIntro from '/docs/advanced/code-references/_intro.mdx'
