@@ -18,6 +18,11 @@ module.exports = {
       },
       items: [
         {
+          href: 'https://configcat.com/docs/search',
+          label: 'Docs Search',
+          position: "left"
+        },
+        {
           href: 'https://configcat.com/',
           label: 'configcat.com',
           position: "left"

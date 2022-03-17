@@ -1,7 +1,7 @@
 ---
 id: terraform
 title: Terraform
-description: ConfigCat Terraform provider
+description: ConfigCat Terraform provider. This is a step-by-step guide on how to manage feature flags from Terraform using the ConfigCat Terraform provider.
 ---
 
 <a href="https://registry.terraform.io/providers/configcat/configcat" target="_blank" >ConfigCat Feature Flags Provider</a> allows you to configure and access ConfigCat resources via ConfigCat Public Management API with <a href="https://www.terraform.io/" target="_blank" >Terraform.</a>

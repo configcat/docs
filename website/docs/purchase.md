@@ -1,6 +1,7 @@
 ---
 id: purchase
 title: Plans, Purchase & Billing
+description: This page explains how to purchase ConfigCat plans, how to manage your billing information and how to pay your bill.
 ---
 
 

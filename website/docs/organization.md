@@ -1,6 +1,7 @@
 ---
 id: organization
 title: Organization & Roles
+description: You can invite an unlimited number of people to your organization in ConfigCat. Learn how to manage your organization and its roles.
 ---
 An *Organization* represents a collection of preferences that are valid for all the *Products* and *Members* who belong to
 an *Organization*. Like billing information, authentication rules or data privacy preferences.

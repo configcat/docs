@@ -1,7 +1,7 @@
 ---
 id: github
 title: GitHub Action
-description: ConfigCat GitHub Action
+description: ConfigCat GitHub Action. This is a step-by-step guide on how to use the ConfigCat GitHub Action to eliminate tech debt in your project.
 ---
 
 import CodeRefIntro from '/docs/advanced/code-references/_intro.mdx'

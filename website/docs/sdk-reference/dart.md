@@ -1,7 +1,7 @@
 ---
 id: dart
 title: Dart (Flutter) SDK Reference
-description: ConfigCat Dart (Flutter) SDK Reference
+description: ConfigCat Dart (Flutter) SDK Reference. This is a step-by-step guide on how to use feature flags in your Dart (Flutter) apps.
 ---
 
 [![pub package](https://img.shields.io/pub/v/configcat_client.svg)](https://pub.dev/packages/configcat_client)

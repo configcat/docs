@@ -1,7 +1,7 @@
 ---
 id: trello
 title: Trello Power-Up
-description: ConfigCat Trello Power-Up
+description: ConfigCat Trello Power-Up. This is a step-by-step guide on how to connect and manage feature flags from Trello boards and cards.
 ---
 
 Turn features On / Off right from a linked Card on your Trello board with <a href="https://trello.com/power-ups/5e694b66d2511a3601ebd0fb" target="_blank">ConfigCat's Trello Power-Up</a>. Also you can add Targeting or Percentage Rules just as easily.

@@ -1,6 +1,7 @@
 ---
 id: auto-assign-users
 title: Auto-assign Users
+description: New users will be automatically added to your organization if you have a verified domain. Here is how to set it up.
 ---
 
 All new users who sign up with a [verified email domain](/docs/advanced/team-management/domain-verification) will be automatically added to your organization.

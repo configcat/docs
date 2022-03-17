@@ -1,7 +1,7 @@
 ---
 id: java
 title: Java SDK reference
-description: ConfigCat Java SDK reference
+description: ConfigCat Java SDK Reference. This is a step-by-step guide on how to use feature flags in your Java application.
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/java-sdk.svg?style=social)](https://github.com/configcat/java-sdk/stargazers)
 [![Java CI](https://github.com/configcat/java-sdk/actions/workflows/java-ci.yml/badge.svg?branch=master)](https://github.com/configcat/java-sdk/actions/workflows/java-ci.yml)

@@ -1,7 +1,7 @@
 ---
 id: zapier
 title: Zapier
-description: ConfigCat Zapier integration
+description: ConfigCat Zapier integration. This is a step-by-step guide on how to use the ConfigCat Zapier integration to connect manage features from thousands of Zapier apps.
 ---
 ## Connect ConfigCat to hundreds of other apps with Zapier
 

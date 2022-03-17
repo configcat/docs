@@ -1,6 +1,7 @@
 ---
 id: faq
 title: FAQ
+description: This is a collection of frequently asked questions and the most typical answers from the ConfigCat Support Team.
 ---
 
 export const FaqSchema = require('@site/src/schema-markup/faq.json');

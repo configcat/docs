@@ -1,7 +1,7 @@
 ---
 id: vscode
 title: Visual Studio Code
-description: ConfigCat Visual Studio Code extension
+description: ConfigCat Visual Studio Code extension. This is a step-by-step guide on how to use the ConfigCat Visual Studio Code extension to manage feature flags in your project.
 ---
 
 <a href="https://marketplace.visualstudio.com/items?itemName=ConfigCat.configcat-feature-flags" target="_blank">ConfigCat's Visual Studio Code extension</a> to manage feature flags from Visual Studio Code.  

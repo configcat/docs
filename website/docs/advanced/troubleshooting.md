@@ -1,6 +1,7 @@
 ---
 id: troubleshooting
 title: Troubleshooting
+description: This section helps you troubleshoot your issues. It's a good idea to double check these before contacting support. 
 ---
 The following issues were reported by customers. We collected what we learned and possible solutions.
 

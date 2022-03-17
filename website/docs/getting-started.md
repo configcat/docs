@@ -1,6 +1,7 @@
 ---
 id: getting-started
 title: Getting Started
+description: This is a step-by-step guide on how to get started with ConfigCat feature flags and on how to implement feature flags in an application.
 ---
 This page is an overview and a short guide on how to get started.
 
