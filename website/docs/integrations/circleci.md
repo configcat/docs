@@ -1,7 +1,7 @@
 ---
 id: circleci
 title: CircleCI Orb
-description: ConfigCat CircleCI Orb. This is step-by-step gide on how to use the ConfigCat CircleCI Orb to eliminate tech debt in your project.
+description: ConfigCat CircleCI Orb. This is a step-by-step guide on how to use the ConfigCat CircleCI Orb to eliminate tech debt in your project.
 ---
 
 import CodeRefIntro from '/docs/advanced/code-references/_intro.mdx'
