@@ -1,7 +1,7 @@
 ---
 id: zoho-flow
 title: Zoho Flow
-description: ConfigCat Zoho Flow integration. This is step-by-step gide on how to use the ConfigCat Zoho Flow integration to manage features using Zoho Flow apps.
+description: ConfigCat Zoho Flow integration. This is a step-by-step guide on how to use the ConfigCat Zoho Flow integration to manage features using Zoho Flow apps.
 ---
 ## Connect ConfigCat to 500+ apps with Zoho Flow
 
