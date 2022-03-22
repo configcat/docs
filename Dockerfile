@@ -5,10 +5,12 @@ COPY ./nginx/nginx.conf.template /etc/nginx/conf.d/nginx.conf.template
 
 FROM node:16.13 AS builder
 COPY ./website/package.json /app/website/package.json
+COPY ./website/package-lock.json /app/website/package-lock.json
 WORKDIR /app/website
 RUN npm install
 COPY ./website /app/website
 RUN npm run build
+
 FROM sonarsource/sonar-scanner-cli:4 AS sonarqube_scan
 WORKDIR /app
 ARG SONAR_TOKEN
