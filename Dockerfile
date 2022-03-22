@@ -9,7 +9,7 @@ WORKDIR /app/website
 RUN npm install
 COPY ./website /app/website
 RUN npm run build
-FROM sonarsource/sonar-scanner-cli AS sonarqube_scan
+FROM sonarsource/sonar-scanner-cli:4 AS sonarqube_scan
 WORKDIR /app
 ARG SONAR_TOKEN
 COPY --from=builder /app/website/build /app
