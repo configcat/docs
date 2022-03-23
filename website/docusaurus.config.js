@@ -116,7 +116,7 @@ module.exports = {
             },
             {
               label: 'Search the documentation',
-              href: '/search',
+              href: '/search/',
             },
             {
               label: 'Support',
