@@ -281,6 +281,16 @@ Available log levels:
 | 1     | Error | Only error level events are logged.                     |
 | 2     | Warn  | Errors and Warnings are logged.                         |
 | 3     | Info  | Errors, Warnings and feature flag evaluation is logged. |
+| 4     | Debug | All of the above plus debug info is logged.             |
+
+You can use `LogLevel` enum type from `configcat-common` package:
+
+```
+import { LogLevel } from 'configcat-common';
+
+const logger = configcat.createConsoleLogger(LogLevel.Info);
+```
+
 
 Info level logging helps to inspect the feature flag evaluation process:
 ```bash
