@@ -339,6 +339,35 @@ const settingValuesTargeting = await configCatClient.getAllValuesAsync(userObjec
 settingValuesTargeting.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
 ```
 
+## Using custom cache implementation
+
+Config's data stored in a cache, it is efficiency increases in retrieval of data and performance of the client. If you would like to use your cache solution (for example your system uses external or distributed cache) you can implement those function and set to `cache` parameters in the setting.
+
+```js
+function myCustomCache() { }
+
+myCustomCache.prototype.get = function(key) {
+    // `key` [string] - a unique cachekey
+
+    // insert here your cache read logic
+
+}
+
+myCustomCache.prototype.set = function(key, item) {
+    // `key` [string] - a unique cachekey
+    // `item` [object] - configcat's cache config item
+
+    // insert here your cache write logic
+}
+
+// set the `myCustomCache` when create a client instance
+
+const configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ',
+{
+     cache: new myCustomCache()
+});
+```
+
 ## Sample Applications
 
 - <a href="https://github.com/configcat/js-ssr-sdk/tree/master/samples/nuxt-ssr" target="_blank">NuxtJS</a>
