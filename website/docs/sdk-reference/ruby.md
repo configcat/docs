@@ -124,10 +124,12 @@ Available options:
 | Option Parameter                    | Description                                                                                          | Default |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
 | `poll_interval_seconds`             | Polling interval.                                                                                    | 60      |
-| `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
 | `max_init_wait_time_seconds`        | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
+| `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
 | `config_cache_class`                | Custom cache implementation.                                                                         | nil     |
 | `base_url`                          | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations.        | nil     |
+| `open_timeout`                      | The number of seconds to wait for the server to make the initial connection.                         | 10      |
+| `read_timeout`                      | The number of seconds to wait for the server to respond before giving up.                            | 30      |
 
 ### Lazy loading
 When calling `get_value()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
@@ -163,6 +165,8 @@ Available options:
 | `cache_time_to_live_seconds` | Cache TTL.                                                                                    | 60      |
 | `config_cache_class`         | Custom cache implementation.                                                                  | nil     |
 | `base_url`                   | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
+| `open_timeout`               | The number of seconds to wait for the server to make the initial connection.                  | 10      |
+| `read_timeout`               | The number of seconds to wait for the server to respond before giving up.                     | 30      |
 
 ### Manual polling
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
@@ -178,6 +182,8 @@ Available options:
 | -------------------- | --------------------------------------------------------------------------------------------- | ------- |
 | `config_cache_class` | Custom cache implementation.                                                                  | nil     |
 | `base_url`           | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
+| `open_timeout`       | The number of seconds to wait for the server to make the initial connection.                  | 10      |
+| `read_timeout`       | The number of seconds to wait for the server to respond before giving up.                     | 30      |
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
 ```ruby
@@ -196,18 +202,23 @@ ConfigCat.logger.level = Logger::INFO
 
 Available log levels:
 
-| Level  | Description                                             |
-| ----- | ------------------------------------------------------- |
-| ERROR | Only error level events are logged.                     |
-| WARN  | Errors and Warnings are logged.                         |
-| INFO  | Errors, Warnings and feature flag evaluation is logged. |
-| DEBUG | All of the above plus debug info is logged.             |
+| Level | Description                                                                             |
+| ----- | --------------------------------------------------------------------------------------- |
+| ERROR | Only error level events are logged.                                                     |
+| WARN  | Errors and Warnings are logged.                                                         |
+| INFO  | Errors, Warnings and feature flag evaluation is logged.                                 |
+| DEBUG | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
 
 Info level logging helps to inspect the feature flag evaluation process:
 ```bash
 INFO -- : Evaluating get_value('isPOCFeatureEnabled').
-INFO -- : Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
-INFO -- : Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: true
+User object:
+{
+    "Identifier" : "435170f4-8a8b-4b67-a723-505ac7cdea92",
+    "Email" : "john@example.com"
+}
+Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
+Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: true
 ```
 
 You can easily replace the default logger with your own one. The following example shows how to set a logger writes logs into a text file.
