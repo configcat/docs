@@ -130,6 +130,7 @@ Available options:
 | `base_url`                          | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations.        | nil     |
 | `open_timeout`                      | The number of seconds to wait for the server to make the initial connection.                         | 10      |
 | `read_timeout`                      | The number of seconds to wait for the server to respond before giving up.                            | 30      |
+| `flag_overrides`                    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)         | nil     |
 
 ### Lazy loading
 When calling `get_value()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
@@ -167,6 +168,7 @@ Available options:
 | `base_url`                   | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
 | `open_timeout`               | The number of seconds to wait for the server to make the initial connection.                  | 10      |
 | `read_timeout`               | The number of seconds to wait for the server to respond before giving up.                     | 30      |
+| `flag_overrides`             | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)  | nil     |
 
 ### Manual polling
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
@@ -184,6 +186,7 @@ Available options:
 | `base_url`           | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
 | `open_timeout`       | The number of seconds to wait for the server to make the initial connection.                  | 10      |
 | `read_timeout`       | The number of seconds to wait for the server to respond before giving up.                     | 30      |
+| `flag_overrides`     | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)  | nil     |
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
 ```ruby
@@ -191,6 +194,34 @@ configcat_client = ConfigCat.create_client_with_manual_poll("#YOUR-SDK-KEY#");
 value = configcat_client.get_value("key", "my default value") # Returns "my default value"
 configcat_client.force_refresh();
 value = configcat_client.get_value("key", "my default value") # Returns "value from server"
+```
+
+## Flag Overrides
+
+With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
+
+- **Local/Offline mode** (`OverrideBehaviour.LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+
+- **Local over remote** (`OverrideBehaviour.LOCAL_OVER_REMOTE`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
+
+- **Remote over local** (`OverrideBehaviour.REMOTE_OVER_LOCAL`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
+
+You can set up the SDK to load your feature flag & setting overrides from a hash.
+
+```ruby
+dictionary = {
+    "enabledFeature" => true,
+    "disabledFeature" => false,
+    "intSetting" => 5,
+    "doubleSetting" => 3.14,
+    "stringSetting" => "test"
+}
+
+configcat_client = ConfigCat::ConfigCatClient.new(
+    "#YOUR-SDK-KEY#",
+    flag_overrides: ConfigCat::LocalDictionaryDataSource.new(dictionary, ConfigCat::OverrideBehaviour::LOCAL_ONLY)
+)
 ```
 
 ## Logging
@@ -244,6 +275,18 @@ configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-SDK-KEY#",
                                                            proxy_port: 8080,
                                                            proxy_user: "user",
                                                            proxy_pass: "password")
+```
+
+## `get_all_values()`
+
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+| Parameters     | Description                                                                                                  | 
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
+```ruby
+configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
+all_values = configcat_client.get_all_values(ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92"))  # Optional User Object
 ```
 
 ## Sample Applications
