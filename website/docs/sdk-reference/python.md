@@ -77,13 +77,13 @@ value = configcat_client.get_value(
     'keyOfMySetting', # Setting Key
     False, # Default value
     User('435170f4-8a8b-4b67-a723-505ac7cdea92') # Optional User Object
-);
+)
 ```
 
 ### User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ``` python
-user_object = User('435170f4-8a8b-4b67-a723-505ac7cdea92')   
+user_object = User('435170f4-8a8b-4b67-a723-505ac7cdea92')
 ```
 ``` python
 user_object = User('john@example.com')   
@@ -108,7 +108,7 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 Use the `poll_interval_seconds` option parameter to change the polling interval.
 ```python
 configcatclient.create_client_with_auto_poll(
-    "#YOUR-SDK-KEY#", poll_interval_seconds=95);
+    '#YOUR-SDK-KEY#', poll_interval_seconds=95)
 ```
 Adding a callback to `on_configuration_changed_callback` option parameter will get you notified about changes.
 ```python
@@ -116,16 +116,19 @@ def configuration_changed_callback(self):
 # Configuration changed.
     pass
 
-configcatclient.create_client_with_auto_poll("#YOUR-SDK-KEY#", on_configuration_changed_callback=configuration_changed_callback);
+configcatclient.create_client_with_auto_poll('#YOUR-SDK-KEY#', on_configuration_changed_callback=configuration_changed_callback)
 ```
 Available options:
 
 | Option Parameter                    | Description                                                                                          | Default |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
 | `poll_interval_seconds`             | Polling interval.                                                                                    | 60      |
-| `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
 | `max_init_wait_time_seconds`        | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
+| `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
 | `config_cache_class`                | Custom cache implementation.                                                                         | None    |
+| `connect_timeout`                   | The number of seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
+| `read_timeout`                      | The number of seconds to wait for the server to respond before giving up.                            | 30      |
+| `flag_overrides`                    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)         | None |
 
 :::caution
 Auto polling mode utilizes its polling job in a `threading.Thread` object. If you are running your application behind an uWSGI web server, the auto polling mode may not work as expected, because the uWSGI web server disables Python's threading by default. Please [enable threading](https://uwsgi-docs.readthedocs.io/en/latest/Options.html#enable-threads) or switch to another polling mode in this case.
@@ -137,7 +140,7 @@ When calling `get_value()` the *ConfigCat SDK* downloads the latest setting valu
 Use `cache_time_to_live_seconds` option parameter to set cache lifetime.
 ```python
 configcatclient.create_client_with_lazy_load(
-    "#YOUR-SDK-KEY#", cache_time_to_live_seconds=600);
+    '#YOUR-SDK-KEY#', cache_time_to_live_seconds=600)
 ```
 
 Use a custom `config_cache_class` option parameter.
@@ -153,7 +156,7 @@ class InMemoryConfigCache(ConfigCache):
     def set(self, key, value):
         self._value[key] = value
 
-configcatclient.create_client_with_lazy_load("#YOUR-SDK-KEY#", config_cache_class=InMemoryConfigCache);
+configcatclient.create_client_with_lazy_load('#YOUR-SDK-KEY#', config_cache_class=InMemoryConfigCache)
 ```
 
 Available options:
@@ -162,13 +165,17 @@ Available options:
 | ---------------------------- | ---------------------------- | ------- |
 | `cache_time_to_live_seconds` | Cache TTL.                   | 60      |
 | `config_cache_class`         | Custom cache implementation. | None    |
+| `connect_timeout`            | The number of seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
+| `read_timeout`               | The number of seconds to wait for the server to respond before giving up. | 30 |
+| `flag_overrides`             | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides) | None |
+
 
 ### Manual polling
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```python
-configcat_client = configcatclient.create_client_with_manual_poll("#YOUR-SDK-KEY#");
-configcat_client.force_refresh();
+configcat_client = configcatclient.create_client_with_manual_poll('#YOUR-SDK-KEY#')
+configcat_client.force_refresh()
 ```
 
 Available options:
@@ -176,13 +183,147 @@ Available options:
 | Option Parameter     | Description                  | Default |
 | -------------------- | ---------------------------- | ------- |
 | `config_cache_class` | Custom cache implementation. | None    |
+| `connect_timeout`    | The number of seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10 |
+| `read_timeout`       | The number of seconds to wait for the server to send respond giving up. | 30 |
+| `flag_overrides`     | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides) | None |
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
 ```python
-configcat_client = configcatclient.create_client_with_manual_poll('#YOUR-SDK-KEY#');
+configcat_client = configcatclient.create_client_with_manual_poll('#YOUR-SDK-KEY#')
 value = configcat_client.get_value('key', 'my default value') # Returns "my default value"
-configcat_client.force_refresh();
+configcat_client.force_refresh()
 value = configcat_client.get_value('key', 'my default value') # Returns "value from server"
+```
+
+## Flag Overrides
+
+With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
+
+- **Local/Offline mode** (`OverrideBehaviour.LocalOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+
+- **Local over remote** (`OverrideBehaviour.LocalOverRemote`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
+
+- **Remote over local** (`OverrideBehaviour.RemoteOverLocal`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
+
+You can set up the SDK to load your feature flag & setting overrides from a file or a dictionary.
+
+### JSON File
+
+The SDK can be configured to load your feature flag & setting overrides from a file. 
+
+#### File
+```python
+configcat_client = ConfigCatClient(
+    sdk_key='#YOUR-SDK-KEY#',
+    flag_overrides=LocalFileDataSource(
+        file_path='path/to/the/local_flags.json',  # path to the file
+        override_behaviour=OverrideBehaviour.LocalOnly  # local/offline mode
+    )
+)
+```
+
+#### JSON File Structure
+The SDK supports 2 types of JSON structures to describe feature flags & settings.
+
+##### 1. Simple (key-value) structure
+```json
+{
+  "flags": {
+    "enabledFeature": true,
+    "disabledFeature": false,
+    "intSetting": 5,
+    "doubleSetting": 3.14,
+    "stringSetting": "test"
+  }
+}
+```
+
+##### 2. Complex (full-featured) structure
+This is the same format that the SDK downloads from the ConfigCat CDN. 
+It allows the usage of all features you can do on the ConfigCat Dashboard.
+
+You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+
+The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings: 
+
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+
+```json
+{
+    "f": { // list of feature flags & settings
+        "isFeatureEnabled": { // key of a particular flag
+            "v": false, // default value, served when no rules are defined
+            "i": "430bded3", // variation id (for analytical purposes)
+            "t": 0, // feature flag's type, possible values: 
+                    // 0 -> BOOLEAN 
+                    // 1 -> STRING
+                    // 2 -> INT
+                    // 3 -> DOUBLE
+            "p": [ // list of percentage rules
+                { 
+                    "o": 0, // rule's order
+                    "v": true, // value served when the rule is selected during evaluation
+                    "p": 10, // % value
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                },
+                {
+                    "o": 1, // rule's order
+                    "v": false, // value served when the rule is selected during evaluation
+                    "p": 90, // % value
+                    "i": "bddac6ae" // variation id (for analytical purposes)
+                }
+            ],
+            "r": [ // list of targeting rules
+                {
+                    "o": 0, // rule's order
+                    "a": "Identifier", // comparison attribute
+                    "t": 2, // comparator, possible values:
+                        // 0  -> 'IS ONE OF',
+                        // 1  -> 'IS NOT ONE OF',
+                        // 2  -> 'CONTAINS',
+                        // 3  -> 'DOES NOT CONTAIN',
+                        // 4  -> 'IS ONE OF (SemVer)',
+                        // 5  -> 'IS NOT ONE OF (SemVer)',
+                        // 6  -> '< (SemVer)',
+                        // 7  -> '<= (SemVer)',
+                        // 8  -> '> (SemVer)',
+                        // 9  -> '>= (SemVer)',
+                        // 10 -> '= (Number)',
+                        // 11 -> '<> (Number)',
+                        // 12 -> '< (Number)',
+                        // 13 -> '<= (Number)',
+                        // 14 -> '> (Number)',
+                        // 15 -> '>= (Number)',
+                        // 16 -> 'IS ONE OF (Sensitive)',
+                        // 17 -> 'IS NOT ONE OF (Sensitive)'
+                    "c": "@example.com", // comparison value
+                    "v": true, // value served when the rule is selected during evaluation
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                }
+            ]
+        },
+    }
+}
+```
+
+### Dictionary
+You can set up the SDK to load your feature flag & setting overrides from a dictionary.
+
+```python
+dictionary = {
+    'enabledFeature': True,
+    'disabledFeature': False,
+    'intSetting': 5,
+    'doubleSetting': 3.14,
+    'stringSetting': 'test'
+}
+
+configcat_client = ConfigCatClient(
+    sdk_key='#YOUR-SDK-KEY#',
+    flag_overrides=LocalDictionaryDataSource(source=dictionary, override_behaviour=OverrideBehaviour.LocalOnly)
+)
 ```
 
 ## Logging
@@ -217,12 +358,24 @@ configcat_client = configcatclient.create_client('#YOUR-SDK-KEY#')
 keys = configcat_client.get_all_keys()
 ```
 
+## `get_all_values()`
+
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+| Parameters     | Description                                                                                                  | 
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
+```python
+configcat_client = configcatclient.create_client('#YOUR-SDK-KEY#')
+all_values = configcat_client.get_all_values(User('435170f4-8a8b-4b67-a723-505ac7cdea92'))  # Optional User Object
+```
+
 ## Using ConfigCat behind a proxy
 Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
 
 ```python
 proxies = {'https': '127.0.0.1:8080'}
-proxy_auth = HTTPProxyAuth("user", "password")
+proxy_auth = HTTPProxyAuth('user', 'password')
 configcat_client = configcatclient.create_client_with_auto_poll('#YOUR-SDK-KEY#',
                                                                 proxies=proxies,
                                                                 proxy_auth=proxy_auth)
