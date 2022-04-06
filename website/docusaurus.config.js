@@ -18,6 +18,11 @@ module.exports = {
       },
       items: [
         {
+          href: 'https://configcat.com/docs/search',
+          label: 'Docs Search',
+          position: "left"
+        },
+        {
           href: 'https://configcat.com/',
           label: 'configcat.com',
           position: "left"
@@ -110,6 +115,10 @@ module.exports = {
               href: 'https://api.configcat.com/docs/',
             },
             {
+              label: 'Search the documentation',
+              href: '/search/',
+            },
+            {
               label: 'Support',
               href: 'https://configcat.com/support/',
             },
@@ -147,7 +156,8 @@ module.exports = {
       additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir', 'dart'],
     },
     algolia: {
-      apiKey: '36b9ea4801b9b88e1e8fa2e42d3cc705',
+      appId: '2KJV4BA55F',
+      apiKey: '893560578e902fe2755446f51c96d895',
       indexName: 'configcat',
       searchParameters: {}
     },

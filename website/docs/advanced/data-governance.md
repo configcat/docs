@@ -1,6 +1,7 @@
 ---
 id: data-governance
 title: Data Governance - CDN
+description: ConfigCat customers can control the geographic location where their data will be published to. Helps to stay compliant with GDPR and other data protection regulations.
 ---
 Addressing global data handling and processing trends via Data Governance feature. Customers 
 can control the geographic location where their config JSONs get published to.

@@ -1,7 +1,7 @@
 ---
 id: csharp
 title: .NET, .NET Core SDK Reference
-description: ConfigCat .NET, .NET Core SDK Reference
+description: ConfigCat .NET, .NET Core SDK Reference. This is a step-by-step guide on how to use feature flags in your .NET, .NET Core application.
 ---
 
 export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json');

@@ -1,6 +1,7 @@
 ---
 id: notifications-webhooks
 title: Notifications - Webhooks
+description: Webhooks are a way to send notifications to your applications about feature flag value changes so you can react to changes quickly.
 ---
 Your application can be notified about Setting value changes in real-time. ConfigCat enables this by calling a public URL of your system (a so-called Webhook). You can add your Webhook URLs in the *Dashboard*.
 

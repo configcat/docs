@@ -1,6 +1,7 @@
 ---
 id: caching
 title: Polling modes & Caching
+description: This section describes how to use the SDK's caching feature. There are three different polling modes available in the ConfigCat SDKs. 
 ---
 
 There are 3 different ways (polling modes) to control caching.

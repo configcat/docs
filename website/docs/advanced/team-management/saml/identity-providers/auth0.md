@@ -1,6 +1,7 @@
 ---
 id: auth0
 title: Auth0
+description: This is a step-by-step guide on how to set up and configure Auth0 as a SAML Identity Provider for your organization.
 ---
 
 import Tabs from '@theme/Tabs';

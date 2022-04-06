@@ -1,7 +1,7 @@
 ---
 id: "js"
 title: JavaScript SDK Reference
-description: ConfigCat JavaScript SDK Reference
+description: ConfigCat JavaScript SDK Reference. This is a step-by-step guide on how to use feature flags in your JavaScript applications.
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/js-sdk.svg?style=social)](https://github.com/configcat/js-sdk/stargazers)
 [![JS CI](https://github.com/configcat/js-sdk/actions/workflows/js-ci.yml/badge.svg?branch=master)](https://github.com/configcat/js-sdk/actions/workflows/js-ci.yml) 
@@ -281,6 +281,16 @@ Available log levels:
 | 1     | Error | Only error level events are logged.                     |
 | 2     | Warn  | Errors and Warnings are logged.                         |
 | 3     | Info  | Errors, Warnings and feature flag evaluation is logged. |
+| 4     | Debug | All of the above plus debug info is logged.             |
+
+You can use `LogLevel` enum type from `configcat-common` package:
+
+```
+import { LogLevel } from 'configcat-common';
+
+const logger = configcat.createConsoleLogger(LogLevel.Info);
+```
+
 
 Info level logging helps to inspect the feature flag evaluation process:
 ```bash
@@ -349,6 +359,35 @@ const userObject = {
 
 const settingValuesTargeting = await configCatClient.getAllValuesAsync(userObject);
 settingValuesTargeting.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
+```
+
+## Using custom cache implementation
+
+Config's data stored in a cache, it is efficiency increases in retrieval of data and performance of the client. If you would like to use your cache solution (for example your system uses external or distributed cache) you can implement those function and set to `cache` parameters in the setting.
+
+```js
+function myCustomCache() { }
+
+myCustomCache.prototype.get = function(key) {
+    // `key` [string] - a unique cachekey
+
+    // insert here your cache read logic
+
+}
+
+myCustomCache.prototype.set = function(key, item) {
+    // `key` [string] - a unique cachekey
+    // `item` [object] - configcat's cache config item
+
+    // insert here your cache write logic
+}
+
+// set the `myCustomCache` when create a client instance
+
+const configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ',
+{
+     cache: new myCustomCache()
+});
 ```
 
 ## Sample Applications

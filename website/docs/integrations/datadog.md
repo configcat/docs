@@ -1,7 +1,7 @@
 ---
 id: datadog
 title: Datadog
-description: ConfigCat Datadog integration
+description: ConfigCat Datadog integration. This is a step-by-step guide on how to connect the ConfigCat feature flag service events to Datadog.
 ---
 
 ## Overview

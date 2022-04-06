@@ -1,6 +1,7 @@
 ---
 id: public-api
 title: Public Management API
+description: The Public Management API allows you to manage ConfigCat resources like Feature Flags, Targeting, Segments and more from your programs.
 ---
 
 To access the ConfigCat platform programmatically. Its purpose is to provide the same functionality 

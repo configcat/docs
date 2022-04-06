@@ -17,7 +17,8 @@
     "supply": {
         "@type": "HowToSupply",
         "name": "ConfigCat",
-        "image": "https://configcat.com/images/shared/home.png"
+        "image": "https://configcat.com/images/shared/home.png",
+        "url": "https://configcat.com"
       },
     "step": [
         {

@@ -1,7 +1,7 @@
 ---
 id: ios
 title: iOS (Swift) SDK Reference
-description: ConfigCat iOS (Swift) SDK Reference
+description: ConfigCat iOS (Swift) SDK Reference. This is a step-by-step guide on how to use feature flags in your iOS mobile application.
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/swift-sdk.svg?style=social)](https://github.com/configcat/swift-sdk/stargazers)
 [![Build Status](https://github.com/configcat/swift-sdk/actions/workflows/swift-ci.yml/badge.svg?branch=master)](https://github.com/configcat/swift-sdk/actions/workflows/swift-ci.yml)

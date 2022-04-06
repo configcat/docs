@@ -1,6 +1,7 @@
 ---
 id: faq
 title: FAQ
+description: This is a collection of frequently asked questions and the most typical answers from the ConfigCat Support Team.
 ---
 
 export const FaqSchema = require('@site/src/schema-markup/faq.json');
@@ -68,7 +69,7 @@ To all other users the feature is ON
 ```
 ![AND example](/assets/faq/and-example.png)
 
-[Here is an example in our blog.](https://configcat.com/blog/2019/10/23/feature-flags-user-segmentation-and-targeting-examples/#everyone-in-my-company-plus-android-users-from-germany-above-v53/)
+[Here is an example in our blog.](https://configcat.com/blog/2019/10/23/user-segmentation-and-targeting/#everyone-in-my-company-plus-android-users-from-germany-above-v53)
 
 ### Are percentage options sticky?
 Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.
@@ -88,11 +89,11 @@ The feature flag evaluation is done on the client-side in the ConfigCat SDK. So 
 See our the architecture explained [here](https://configcat.com/architecture/).
 
 ## Technical Debt
-### What are Zombie Flags?
-Zombie flags (or stale flags) are feature flags that are not changed in the last (configurable) number of days. Most of the time if a feature flag isn't changed for a long time it means it is time to be removed from your source code and from the [ConfigCat Dashboard](https://app.configcat.com/) as well to avoid technical debt.
+### What are Stale Flags?
+Stale flags are feature flags that are not changed in the last (configurable) number of days. Most of the time if a feature flag isn't changed for a long time it means it is time to be removed from your source code and from the [ConfigCat Dashboard](https://app.configcat.com/) as well to avoid technical debt.
 
-### What is the Zombie Flags Report?
-The [Zombie Flags Report](https://app.configcat.com/my-account/zombie-flags-report) is a list of all feature flags that are not changed in the last (configurable) number of days. You can use this report to identify and remove stale feature flags from your source code. This report is weekly emailed to you. You can set your [email preferences here](https://app.configcat.com/my-account/zombie-flags-report).
+### What is the Stale Flags Report?
+The [Stale Flags Report](https://app.configcat.com/my-account/stale-flags-report) is a list of all feature flags that are not changed in the last (configurable) number of days. You can use this report to identify and remove stale feature flags from your source code. This report is weekly emailed to you. You can set your [email preferences here](https://app.configcat.com/my-account/stale-flags-report).
 
 ### How to avoid technical debt caused by feature flags?
 The [ConfigCat CLI](/advanced/code-references/overview) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.

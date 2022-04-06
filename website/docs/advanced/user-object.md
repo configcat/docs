@@ -1,6 +1,7 @@
 ---
 id: user-object
 title: The User Object
+description: The user object lets you target users based on their properties with different features. The user object is essential for beta and A/B testing.
 ---
 
 The *User Object* is an optional parameter when getting a feature flag or setting value from ConfigCat. 

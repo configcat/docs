@@ -1,7 +1,7 @@
 ---
 id: node
 title: Node.js SDK Reference
-description: ConfigCat Node.js SDK Reference
+description: ConfigCat Node.js SDK Reference. This is a step-by-step guide on how to use feature flags in your Node.js applications.
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/node-sdk.svg?style=social)](https://github.com/configcat/node-sdk/stargazers)
 [![Node CI](https://github.com/configcat/node-sdk/actions/workflows/node-ci.yml/badge.svg?branch=master)](https://github.com/configcat/node-sdk/actions/workflows/node-ci.yml) 
@@ -280,6 +280,15 @@ Available log levels:
 | 1     | Error | Only error level events are logged.                     |
 | 2     | Warn  | Errors and Warnings are logged.                         |
 | 3     | Info  | Errors, Warnings and feature flag evaluation is logged. |
+| 4     | Debug | All of the above plus debug info is logged.             |
+
+You can use `LogLevel` enum type from `configcat-common` package:
+
+```
+var configcat-common = require("configcat-common");
+
+const logger = configcat.createConsoleLogger(configcat-common.LogLevel.Info);
+```
 
 Info level logging helps to inspect the feature flag evaluation process:
 

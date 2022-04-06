@@ -1,7 +1,7 @@
 ---
 id: overview
 title: Integrations Overview
-description: ConfigCat Integrations Overview
+description: ConfigCat Integrations Overview. List of the available integrations like Datadog, GitHub, CircleCI, Bitbucket, Slack, Trello, Zapier, Jira, Terraform, Amplitude
 ---
 Integrate ConfigCat with your technology stack and leverage all the benefits of Feature flags within your workflows.
 
