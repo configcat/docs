@@ -207,6 +207,110 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 
 - **Remote over local** (`OverrideBehaviour.REMOTE_OVER_LOCAL`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
 
+You can set up the SDK to load your feature flag & setting overrides from a file or a hash.
+
+
+### JSON File
+
+The SDK can be configured to load your feature flag & setting overrides from a file. 
+
+#### File
+```ruby
+configcat_client = ConfigCat::ConfigCatClient.new(
+    "#YOUR-SDK-KEY#",
+    flag_overrides: ConfigCat::LocalFileDataSource.new(
+        "path/to/the/local_flags.json",  # path to the file
+        ConfigCat::OverrideBehaviour::LOCAL_ONLY  # local/offline mode
+    )
+)
+```
+
+#### JSON File Structure
+The SDK supports 2 types of JSON structures to describe feature flags & settings.
+
+##### 1. Simple (key-value) structure
+```json
+{
+  "flags": {
+    "enabledFeature": true,
+    "disabledFeature": false,
+    "intSetting": 5,
+    "doubleSetting": 3.14,
+    "stringSetting": "test"
+  }
+}
+```
+
+##### 2. Complex (full-featured) structure
+This is the same format that the SDK downloads from the ConfigCat CDN. 
+It allows the usage of all features you can do on the ConfigCat Dashboard.
+
+You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+
+The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings: 
+
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+
+```json
+{
+    "f": { // list of feature flags & settings
+        "isFeatureEnabled": { // key of a particular flag
+            "v": false, // default value, served when no rules are defined
+            "i": "430bded3", // variation id (for analytical purposes)
+            "t": 0, // feature flag's type, possible values: 
+                    // 0 -> BOOLEAN 
+                    // 1 -> STRING
+                    // 2 -> INT
+                    // 3 -> DOUBLE
+            "p": [ // list of percentage rules
+                { 
+                    "o": 0, // rule's order
+                    "v": true, // value served when the rule is selected during evaluation
+                    "p": 10, // % value
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                },
+                {
+                    "o": 1, // rule's order
+                    "v": false, // value served when the rule is selected during evaluation
+                    "p": 90, // % value
+                    "i": "bddac6ae" // variation id (for analytical purposes)
+                }
+            ],
+            "r": [ // list of targeting rules
+                {
+                    "o": 0, // rule's order
+                    "a": "Identifier", // comparison attribute
+                    "t": 2, // comparator, possible values:
+                        // 0  -> 'IS ONE OF',
+                        // 1  -> 'IS NOT ONE OF',
+                        // 2  -> 'CONTAINS',
+                        // 3  -> 'DOES NOT CONTAIN',
+                        // 4  -> 'IS ONE OF (SemVer)',
+                        // 5  -> 'IS NOT ONE OF (SemVer)',
+                        // 6  -> '< (SemVer)',
+                        // 7  -> '<= (SemVer)',
+                        // 8  -> '> (SemVer)',
+                        // 9  -> '>= (SemVer)',
+                        // 10 -> '= (Number)',
+                        // 11 -> '<> (Number)',
+                        // 12 -> '< (Number)',
+                        // 13 -> '<= (Number)',
+                        // 14 -> '> (Number)',
+                        // 15 -> '>= (Number)',
+                        // 16 -> 'IS ONE OF (Sensitive)',
+                        // 17 -> 'IS NOT ONE OF (Sensitive)'
+                    "c": "@example.com", // comparison value
+                    "v": true, // value served when the rule is selected during evaluation
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                }
+            ]
+        },
+    }
+}
+```
+
+### Hash
 You can set up the SDK to load your feature flag & setting overrides from a hash.
 
 ```ruby
