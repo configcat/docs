@@ -190,6 +190,7 @@ let keys = client.getAllKeys()
 ## `getAllValues()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |

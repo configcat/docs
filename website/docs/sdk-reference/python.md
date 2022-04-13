@@ -366,9 +366,11 @@ keys = configcat_client.get_all_keys()
 ## `get_all_values()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
 | Parameters     | Description                                                                                                  | 
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
 
 ```python
 configcat_client = configcatclient.create_client('#YOUR-SDK-KEY#')
