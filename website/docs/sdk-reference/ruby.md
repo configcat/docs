@@ -384,6 +384,7 @@ configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-SDK-KEY#",
 ## `get_all_values()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
 | Parameters     | Description                                                                                                  | 
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
