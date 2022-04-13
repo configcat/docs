@@ -339,7 +339,7 @@ Available log levels:
 | Level | Description                                                                             |
 | ----- | --------------------------------------------------------------------------------------- |
 | ERROR | Only error level events are logged.                                                     |
-| WARN  | Errors and Warnings are logged.                                                         |
+| WARN  | Default. Errors and Warnings are logged.                                                |
 | INFO  | Errors, Warnings and feature flag evaluation is logged.                                 |
 | DEBUG | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
 
