@@ -339,15 +339,20 @@ Available log levels:
 | Level | Description                                                                             |
 | ----- | --------------------------------------------------------------------------------------- |
 | ERROR | Only error level events are logged.                                                     |
-| WARN  | Errors and Warnings are logged.                                                         |
+| WARN  | Default. Errors and Warnings are logged.                                                |
 | INFO  | Errors, Warnings and feature flag evaluation is logged.                                 |
 | DEBUG | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
 
 Info level logging helps to inspect the feature flag evaluation process:
 ```bash
 INFO -- : Evaluating get_value('isPOCFeatureEnabled').
-INFO -- : Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
-INFO -- : Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: true
+User object:
+{
+    "Identifier" : "435170f4-8a8b-4b67-a723-505ac7cdea92",
+    "Email" : "john@example.com"
+}
+Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
+Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: True
 ```
 
 ## `get_all_keys()`

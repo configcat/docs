@@ -124,10 +124,13 @@ Available options:
 | Option Parameter                    | Description                                                                                          | Default |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
 | `poll_interval_seconds`             | Polling interval.                                                                                    | 60      |
-| `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
 | `max_init_wait_time_seconds`        | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
+| `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
 | `config_cache_class`                | Custom cache implementation.                                                                         | nil     |
 | `base_url`                          | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations.        | nil     |
+| `open_timeout`                      | The number of seconds to wait for the server to make the initial connection.                         | 10      |
+| `read_timeout`                      | The number of seconds to wait for the server to respond before giving up.                            | 30      |
+| `flag_overrides`                    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)         | nil     |
 
 ### Lazy loading
 When calling `get_value()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
@@ -163,6 +166,9 @@ Available options:
 | `cache_time_to_live_seconds` | Cache TTL.                                                                                    | 60      |
 | `config_cache_class`         | Custom cache implementation.                                                                  | nil     |
 | `base_url`                   | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
+| `open_timeout`               | The number of seconds to wait for the server to make the initial connection.                  | 10      |
+| `read_timeout`               | The number of seconds to wait for the server to respond before giving up.                     | 30      |
+| `flag_overrides`             | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)  | nil     |
 
 ### Manual polling
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
@@ -178,6 +184,9 @@ Available options:
 | -------------------- | --------------------------------------------------------------------------------------------- | ------- |
 | `config_cache_class` | Custom cache implementation.                                                                  | nil     |
 | `base_url`           | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
+| `open_timeout`       | The number of seconds to wait for the server to make the initial connection.                  | 10      |
+| `read_timeout`       | The number of seconds to wait for the server to respond before giving up.                     | 30      |
+| `flag_overrides`     | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)  | nil     |
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
 ```ruby
@@ -185,6 +194,138 @@ configcat_client = ConfigCat.create_client_with_manual_poll("#YOUR-SDK-KEY#");
 value = configcat_client.get_value("key", "my default value") # Returns "my default value"
 configcat_client.force_refresh();
 value = configcat_client.get_value("key", "my default value") # Returns "value from server"
+```
+
+## Flag Overrides
+
+With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
+
+- **Local/Offline mode** (`ConfigCat::OverrideBehaviour::LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+
+- **Local over remote** (`ConfigCat::OverrideBehaviour::LOCAL_OVER_REMOTE`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
+
+- **Remote over local** (`ConfigCat::OverrideBehaviour::REMOTE_OVER_LOCAL`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
+
+You can set up the SDK to load your feature flag & setting overrides from a file or a hash.
+
+
+### JSON File
+
+The SDK can be configured to load your feature flag & setting overrides from a file. 
+
+#### File
+```ruby
+configcat_client = ConfigCat::ConfigCatClient.new(
+    "#YOUR-SDK-KEY#",
+    flag_overrides: ConfigCat::LocalFileDataSource.new(
+        "path/to/the/local_flags.json",  # path to the file
+        ConfigCat::OverrideBehaviour::LOCAL_ONLY  # local/offline mode
+    )
+)
+```
+
+#### JSON File Structure
+The SDK supports 2 types of JSON structures to describe feature flags & settings.
+
+##### 1. Simple (key-value) structure
+```json
+{
+  "flags": {
+    "enabledFeature": true,
+    "disabledFeature": false,
+    "intSetting": 5,
+    "doubleSetting": 3.14,
+    "stringSetting": "test"
+  }
+}
+```
+
+##### 2. Complex (full-featured) structure
+This is the same format that the SDK downloads from the ConfigCat CDN. 
+It allows the usage of all features you can do on the ConfigCat Dashboard.
+
+You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+
+The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings: 
+
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+
+```json
+{
+    "f": { // list of feature flags & settings
+        "isFeatureEnabled": { // key of a particular flag
+            "v": false, // default value, served when no rules are defined
+            "i": "430bded3", // variation id (for analytical purposes)
+            "t": 0, // feature flag's type, possible values: 
+                    // 0 -> BOOLEAN 
+                    // 1 -> STRING
+                    // 2 -> INT
+                    // 3 -> DOUBLE
+            "p": [ // list of percentage rules
+                { 
+                    "o": 0, // rule's order
+                    "v": true, // value served when the rule is selected during evaluation
+                    "p": 10, // % value
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                },
+                {
+                    "o": 1, // rule's order
+                    "v": false, // value served when the rule is selected during evaluation
+                    "p": 90, // % value
+                    "i": "bddac6ae" // variation id (for analytical purposes)
+                }
+            ],
+            "r": [ // list of targeting rules
+                {
+                    "o": 0, // rule's order
+                    "a": "Identifier", // comparison attribute
+                    "t": 2, // comparator, possible values:
+                        // 0  -> 'IS ONE OF',
+                        // 1  -> 'IS NOT ONE OF',
+                        // 2  -> 'CONTAINS',
+                        // 3  -> 'DOES NOT CONTAIN',
+                        // 4  -> 'IS ONE OF (SemVer)',
+                        // 5  -> 'IS NOT ONE OF (SemVer)',
+                        // 6  -> '< (SemVer)',
+                        // 7  -> '<= (SemVer)',
+                        // 8  -> '> (SemVer)',
+                        // 9  -> '>= (SemVer)',
+                        // 10 -> '= (Number)',
+                        // 11 -> '<> (Number)',
+                        // 12 -> '< (Number)',
+                        // 13 -> '<= (Number)',
+                        // 14 -> '> (Number)',
+                        // 15 -> '>= (Number)',
+                        // 16 -> 'IS ONE OF (Sensitive)',
+                        // 17 -> 'IS NOT ONE OF (Sensitive)'
+                    "c": "@example.com", // comparison value
+                    "v": true, // value served when the rule is selected during evaluation
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                }
+            ]
+        },
+    }
+}
+```
+
+### Hash
+You can set up the SDK to load your feature flag & setting overrides from a hash.
+
+```ruby
+dictionary = {
+    "enabledFeature" => true,
+    "disabledFeature" => false,
+    "intSetting" => 5,
+    "doubleSetting" => 3.14,
+    "stringSetting" => "test"
+}
+
+configcat_client = ConfigCat::ConfigCatClient.new(
+    "#YOUR-SDK-KEY#",
+    flag_overrides: ConfigCat::LocalDictionaryDataSource.new(dictionary, ConfigCat::OverrideBehaviour::LOCAL_ONLY)
+)
 ```
 
 ## Logging
@@ -196,18 +337,23 @@ ConfigCat.logger.level = Logger::INFO
 
 Available log levels:
 
-| Level  | Description                                             |
-| ----- | ------------------------------------------------------- |
-| ERROR | Only error level events are logged.                     |
-| WARN  | Errors and Warnings are logged.                         |
-| INFO  | Errors, Warnings and feature flag evaluation is logged. |
-| DEBUG | All of the above plus debug info is logged.             |
+| Level | Description                                                                             |
+| ----- | --------------------------------------------------------------------------------------- |
+| ERROR | Only error level events are logged.                                                     |
+| WARN  | Default. Errors and Warnings are logged.                                                         |
+| INFO  | Errors, Warnings and feature flag evaluation is logged.                                 |
+| DEBUG | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
 
 Info level logging helps to inspect the feature flag evaluation process:
 ```bash
 INFO -- : Evaluating get_value('isPOCFeatureEnabled').
-INFO -- : Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
-INFO -- : Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: true
+User object:
+{
+    "Identifier" : "435170f4-8a8b-4b67-a723-505ac7cdea92",
+    "Email" : "john@example.com"
+}
+Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
+Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: true
 ```
 
 You can easily replace the default logger with your own one. The following example shows how to set a logger writes logs into a text file.
@@ -233,6 +379,18 @@ configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-SDK-KEY#",
                                                            proxy_port: 8080,
                                                            proxy_user: "user",
                                                            proxy_pass: "password")
+```
+
+## `get_all_values()`
+
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+| Parameters     | Description                                                                                                  | 
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
+```ruby
+configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
+all_values = configcat_client.get_all_values(ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92"))  # Optional User Object
 ```
 
 ## Sample Applications
