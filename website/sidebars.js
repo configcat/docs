@@ -73,6 +73,7 @@ module.exports = {
         "integrations/slack",
         "integrations/jira",
         "integrations/trello",
+        "integrations/monday",
         "integrations/datadog",
         "integrations/zapier",
         "integrations/zoho-flow",
