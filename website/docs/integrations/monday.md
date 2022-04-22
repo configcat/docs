@@ -22,9 +22,9 @@ Turn features On / Off right from a linked Item on your Monday board with <a hre
 
 1. Open any item on your Monday board.
 2. Push `Link existing feature flag`
-3. Select a Product, Config, Environment and a Feature Flag to be linked to your card.
-4. When linked, you can turn your features On / Off right from this Card.
-5. View linked Cards next to your Feature Flags in ConfigCat and jump to the Monday item directly.
+3. Select a Product, Config, Environment and a Feature Flag to be linked to your Monday item.
+4. When linked, you can turn your features On / Off right from this Monday item.
+5. View linked Monday items next to your Feature Flags in ConfigCat and jump to the Monday item directly.
 
 ### Creating new feature flags
 ![Create feature flags with the ConfigCat Feature Flags Monday app](/assets/monday/monday_create.gif)
@@ -34,5 +34,5 @@ Turn features On / Off right from a linked Item on your Monday board with <a hre
 3. Select a Product, Config where you want to create the feature flag.
 4. Setup your feature flag.
 5. Select which environment would you like to link to this item.
-6. When linked, you can turn your features On / Off right from this Card.
-7. View linked Cards next to your Feature Flags in ConfigCat and jump to the Monday item directly.
+6. When linked, you can turn your features On / Off right from this Monday item.
+7. View linked Monday items next to your Feature Flags in ConfigCat and jump to the Monday item directly.
