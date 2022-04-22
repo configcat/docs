@@ -4,12 +4,12 @@ title: Monday
 description: ConfigCat Monday app. This is a step-by-step guide on how to connect and manage feature flags from Monday boards and items.
 ---
 
-Turn features On / Off right from a linked Item on your Monday board with <a href="TODO" target="_blank">ConfigCat's Monday App</a>. Also you can add Targeting or Percentage Rules just as easily.
+Turn features On / Off right from a linked Item on your Monday board with ConfigCat's Monday App. Also you can add Targeting or Percentage Rules just as easily.
 
 ## Installation
 ![Installation of the ConfigCat Feature Flags Monday app](/assets/monday/monday_auth.gif)
 
-1. Install <a href="TODO" target="_blank">ConfigCat Feature Flags Monday app</a> to your Monday account.
+1. Install ConfigCat Feature Flags Monday app to your Monday account.
 2. Open one of your boards in Monday and click on an item.
 3. Add the ConfigCat Feature Flags Monday app to your item.
 4. Get your ConfigCat Public API credentials: https://app.configcat.com/my-account/public-api-credentials
