@@ -1,6 +1,6 @@
 ---
 id: gitlab-ci
-title: GitLab
+title: GitLab - Scan your source code for feature flags
 ---
 
 This section describes how to use the [ConfigCat CLI](/docs/advanced/cli) in <a target="_blank" href="https://docs.gitlab.com/ee/ci/">GitLab CI/CD</a>

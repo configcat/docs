@@ -1,12 +1,12 @@
 ---
 id: amplitude
-title: Amplitude
+title: Amplitude - Add feature flag changes to your charts
 description: ConfigCat Amplitude integration reference. This is a step-by-step guide on how to use feature flags in your Amplitude project.
 ---
 
 ## Overview
 
-Every setting change in ConfigCat is annotated on the Amplitude charts as a vertical line and some details are added automatically about the change.
+Every feature flag change in ConfigCat is annotated on the Amplitude charts as a vertical line and some details are added automatically about the change.
 
 ![amplitude_chart](/assets/amplitude_chart.png)
 

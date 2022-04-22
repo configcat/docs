@@ -1,6 +1,6 @@
 ---
 id: manual
-title: Manual Integration
+title: CLI - Add to CI/CD pipelines manually
 ---
 
 This section describes how to use the [ConfigCat CLI](/docs/advanced/cli)

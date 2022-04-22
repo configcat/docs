@@ -1,6 +1,6 @@
 ---
 id: jira
-title: Jira Cloud Plugin
+title: Jira Cloud Plugin - Manage feature flags right from Jira
 description: ConfigCat Jira Cloud Plugin. This is a step-by-step guide on how to connect and manage feature flags from Jira Cloud boards.
 ---
 
