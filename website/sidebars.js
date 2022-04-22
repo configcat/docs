@@ -87,6 +87,6 @@ module.exports = {
         "service/status"
       ]
     },
-    "faq"
+    { type: "doc", id: "faq", label: "FAQ" },
   ],
 };

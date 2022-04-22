@@ -1,6 +1,6 @@
 ---
 id: faq
-title: FAQ
+title: Frequently Asked Questions
 description: This is a collection of frequently asked questions and the most typical answers from the ConfigCat Support Team.
 ---
 
