@@ -12,8 +12,9 @@ Turn features On / Off right from a linked Item on your Monday board with Config
 1. Install ConfigCat Feature Flags Monday app to your Monday account.
 2. Open one of your boards in Monday and click on an item.
 3. Add the ConfigCat Feature Flags Monday app to your item.
-4. Get your ConfigCat Public API credentials: https://app.configcat.com/my-account/public-api-credentials
-5. Click authorize.
+4. In order to use ConfigCat Feature Flags you have to authorize first with your ConfigCat Public API credentials.
+5. Get your ConfigCat Public API credentials: https://app.configcat.com/my-account/public-api-credentials
+6. Click authorize.
 
 ## Usage
 
