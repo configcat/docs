@@ -7,7 +7,7 @@ description: ConfigCat Monday app. This is a step-by-step guide on how to connec
 Turn features On / Off right from a linked Item on your Monday board with <a href="TODO" target="_blank">ConfigCat's Monday App</a>. Also you can add Targeting or Percentage Rules just as easily.
 
 ## Installation
-<!-- TODO ![Installation of the ConfigCat Feature Flags Monday app](/assets/monday_enable.gif) -->
+![Installation of the ConfigCat Feature Flags Monday app](/assets/monday/monday_auth.gif)
 
 1. Install <a href="TODO" target="_blank">ConfigCat Feature Flags Monday app</a> to your Monday account.
 2. Open one of your boards in Monday and click on an item.
@@ -18,7 +18,7 @@ Turn features On / Off right from a linked Item on your Monday board with <a hre
 ## Usage
 
 ### Linking existing feature flags
-<!-- TODO ![Linking feature flags with the ConfigCat Feature Flags Monday app](/assets/monday_link.gif) -->
+![Linking feature flags with the ConfigCat Feature Flags Monday app](/assets/monday/monday_link.gif)
 
 1. Open any item on your Monday board.
 2. Push `Link existing feature flag`
@@ -27,7 +27,7 @@ Turn features On / Off right from a linked Item on your Monday board with <a hre
 5. View linked Cards next to your Feature Flags in ConfigCat and jump to the Monday item directly.
 
 ### Creating new feature flags
-<!-- TODO ![Create feature flags with the ConfigCat Feature Flags Monday app](/assets/monday_create.gif) -->
+![Create feature flags with the ConfigCat Feature Flags Monday app](/assets/monday/monday_create.gif)
 
 1. Open any item on your Monday board.
 2. Push `Create and link feature flag`
