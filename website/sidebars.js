@@ -24,12 +24,12 @@ module.exports = {
                 "advanced/team-management/saml/saml-overview",
                 {
                   "Identity Providers": [
-                    "advanced/team-management/saml/identity-providers/azure-ad",
-                    "advanced/team-management/saml/identity-providers/adfs",
-                    "advanced/team-management/saml/identity-providers/google",
-                    "advanced/team-management/saml/identity-providers/okta",
-                    "advanced/team-management/saml/identity-providers/auth0",
-                    "advanced/team-management/saml/identity-providers/onelogin",
+                    { type: "doc", id: "advanced/team-management/saml/identity-providers/azure-ad", label: "Azure Active Directory" },
+                    { type: "doc", id: "advanced/team-management/saml/identity-providers/adfs", label: "ADFS" },
+                    { type: "doc", id: "advanced/team-management/saml/identity-providers/google", label: "Google" },
+                    { type: "doc", id: "advanced/team-management/saml/identity-providers/okta", label: "Okta" },
+                    { type: "doc", id: "advanced/team-management/saml/identity-providers/auth0", label: "Auth0" },
+                    { type: "doc", id: "advanced/team-management/saml/identity-providers/onelogin", label: "OneLogin" },
                   ]
                 },
               ]
@@ -42,13 +42,13 @@ module.exports = {
         "advanced/cli",
         {
           "Scan & Upload Code References": [
-            "advanced/code-references/overview",
-            "advanced/code-references/github-action",
-            "advanced/code-references/circleci-orb",
-            "advanced/code-references/gitlab-ci",
-            "advanced/code-references/azure-devops",
-            "advanced/code-references/bitbucket-pipe",
-            "advanced/code-references/manual",
+            { type: "doc", id: "advanced/code-references/overview", label: "Overview" },
+            { type: "doc", id: "advanced/code-references/github-action", label: "GitHub Action" },
+            { type: "doc", id: "advanced/code-references/circleci-orb", label: "CircleCI Orb" },
+            { type: "doc", id: "advanced/code-references/gitlab-ci", label: "GitLab CI/CD" },
+            { type: "doc", id: "advanced/code-references/azure-devops", label: "Azure DevOps" },
+            { type: "doc", id: "advanced/code-references/bitbucket-pipe", label: "Bitbucket Pipe" },
+            { type: "doc", id: "advanced/code-references/manual", label: "Manual Integration" },
           ]
         },
       ],

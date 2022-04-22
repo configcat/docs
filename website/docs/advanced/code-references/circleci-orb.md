@@ -1,6 +1,6 @@
 ---
 id: circleci-orb
-title: CircleCI
+title: CircleCI Orb - Scan your source code for feature flags
 ---
 
 This section describes how to use ConfigCat's <a target="_blank" href="https://circleci.com/developer/orbs/orb/configcat/scan-repository">CircleCI Orb</a>
