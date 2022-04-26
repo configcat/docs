@@ -174,7 +174,7 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 | `configChanged`       | Callback to get notified about changes.                                                                                    | -              |
 | `logger`              | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
-| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
+| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
 | `maxInitWaitTimeSeconds` | Maximum waiting time between the client initialization and the first config acquisition in seconds.                     | 5              |
 | `flagOverrides`       | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                              | -              |
 
@@ -200,7 +200,7 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 | `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                            | 60             |
 | `logger`                 | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
-| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
+| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
 | `flagOverrides`          | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                              | -              |
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
@@ -218,7 +218,7 @@ Manual polling gives you full control over when the `config.json` (with the sett
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
 | `logger`           | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
-| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
+| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
 | `flagOverrides`    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                              | -              |
 
 ```js
