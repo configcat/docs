@@ -1,6 +1,6 @@
 ---
 id: saml-overview
-title: SAML Overview
+title: SAML SSO Overview
 description: This section is a step-by-step guide on how you can enable SAML Single Sign-On (SSO) for your organization in ConfigCat.
 ---
 

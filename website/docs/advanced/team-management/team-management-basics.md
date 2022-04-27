@@ -33,4 +33,15 @@ To manage organization members, go to:
 
 Manage *Permission Groups* on the [Permission Groups page](https://app.configcat.com/product/permission-groups) of every Product.
 
+### Auto-assign users
 
+All new users who sign up with a [verified email domain](/docs/advanced/team-management/domain-verification) can be automatically added to your organization.
+Furthermore, you can also set which Organization roles / Product permissions they should get upon on-boarding.
+
+Read more about [Auto-assigning users](/docs/advanced/team-management/auto-assign-users).
+
+### SSO (Single Sign-On)
+
+You can let your organization members sign in to ConfigCat using 3rd party SSO (Single Sign-On) providers.
+
+Read more about [SSO](/docs/advanced/team-management/single-sign-on-sso/).
