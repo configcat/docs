@@ -6,6 +6,8 @@ description: ConfigCat provides an unlimited number of team members for every su
 
 *Team members* are your friends, colleagues, and clients who work on the same *Product*. You can invite as many of them to your *Product* as many you want.
 
+The following guide provides an overview of how to manage your team in ConfigCat.
+
 ### Invite others to collaborate
 
 1. Click the `Invite Team Members` button on the sidebar.  
@@ -32,6 +34,13 @@ To manage organization members, go to:
 *Permission groups* are collections of permissions. They help you organize the permissions into groups that are meaningful to you. You can control your *Team members* permissions by assigning them to *Permission groups*. 
 
 Manage *Permission Groups* on the [Permission Groups page](https://app.configcat.com/product/permission-groups) of every Product.
+
+### 2FA (Two-Factor Authentication)
+
+Enable 2FA for your team members to increase the security of your organization.
+Go to the [Authentication Preferences](https://app.configcat.com/organization/authentication/) page to enable 2FA. You need to be an 
+organization admin to do this.
+
 
 ### Auto-assign users
 
