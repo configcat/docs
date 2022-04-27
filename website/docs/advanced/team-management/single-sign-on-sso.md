@@ -5,7 +5,7 @@ description: Let you organization members sign in to ConfigCat using 3rd party S
 ---
 You can let your organization members sign in to ConfigCat using 3rd party SSO (Single Sign-On) providers.
 
-Go to the [Authentication Preferences](https://app.configcat.com/organization/authentication/) page to configure 3rd party SSO. You need to be an 
+Go to the [Authentication Preferences](https://app.configcat.com/organization/authentication/) page to set up 3rd party SSO. You need to be an 
 organization admin to do this.
 
 Currently supported SSO providers:

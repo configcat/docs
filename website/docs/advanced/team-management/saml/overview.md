@@ -8,6 +8,10 @@ This section describes how you can enable SAML Single Sign-On (SSO) for your org
 
 SAML SSO allows your team members to sign up and log in to ConfigCat via their company accounts using your own Identity Provider (IdP).
 
+Go to the [Authentication Preferences](https://app.configcat.com/organization/authentication/) page to set up SAML SSO. You need to be an 
+organization admin to do this.
+
+
 ### Prerequisites
 - [Verified domain](/docs/advanced/team-management/domain-verification)  
   In order to configure SAML, you have to verify the ownership of the domain that your company uses for email addresses. This step is required, because at the beginning of the login process, we use the user's email domain to select the appropriate SAML Identity Provider. 
