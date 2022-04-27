@@ -37,7 +37,7 @@ Manage *Permission Groups* on the [Permission Groups page](https://app.configcat
 
 ### 2FA (Two-Factor Authentication)
 
-Enable 2FA for your team members to increase the security of your organization.
+Enforce 2FA for your team members to increase the security of your organization.
 Go to the [Authentication Preferences](https://app.configcat.com/organization/authentication/) page to enable 2FA. You need to be an 
 organization admin to do this.
 
