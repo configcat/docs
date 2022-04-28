@@ -18,9 +18,10 @@ module.exports = {
         {
           "Team Management": [
             "advanced/team-management/team-management-basics",
+            "advanced/team-management/single-sign-on-sso",
             "advanced/team-management/auto-assign-users",
             {
-              "SAML Single Sign-On": [
+              "SAML SSO": [
                 "advanced/team-management/saml/saml-overview",
                 {
                   "Identity Providers": [
