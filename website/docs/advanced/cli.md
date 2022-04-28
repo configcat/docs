@@ -12,7 +12,7 @@ The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command
 configcat
   This is the Command Line Tool of ConfigCat.
   ConfigCat is a hosted feature flag service: https://configcat.com
-  For more information, see the documentation here: https://configcat.com/docs/advanced/cli/
+  For more information, see the documentation here: https://configcat.com/docs/advanced/cli
 
 Usage:
   configcat [options] [command]
@@ -24,15 +24,18 @@ Options:
   -?, -h, --help          Show help and usage information
 
 Commands:
-  setup                Setup the CLI with Public Management API host and credentials
-  ls                   List all Product, Config, and Environment IDs
-  p, product           Manage Products
-  c, config            Manage Configs
-  e, environment       Manage Environments
-  t, tag               Manage Tags
-  f, flag, s, setting  Manage Feature Flags & Settings
-  k, sdk-key           List SDK Keys
-  scan <directory>     Scan files for Feature Flag & Setting usages
+  setup                 Setup the CLI with Public Management API host and credentials
+  ls                    List all Product, Config, and Environment IDs
+  p, product            Manage Products
+  c, config             Manage Configs
+  e, environment        Manage Environments
+  f, flag, s, setting   Manage Feature Flags & Settings
+  seg, segment          Manage Segments
+  pg, permission-group  Manage Permission Groups
+  m, member             Manage Members
+  t, tag                Manage Tags
+  k, sdk-key            List SDK Keys
+  scan <directory>      Scan files for Feature Flag & Setting usages
 
 Use "configcat [command] -?" for more information about a command.
 ```
