@@ -3,7 +3,7 @@ id: bitrise
 title: Bitrise
 ---
 
-This section describes how to use ConfigCat's <a target="_blank" href="https://github.com/configcat/bitrise-step-configcat-scan-repository">Bitrise Step</a>
+This section describes how to use ConfigCat's <a target="_blank" href="https://github.com/configcat/bitrise-step-configcat-feature-flag-sync">Bitrise Step</a>
 to automatically scan your source code for feature flag and setting usages and upload the found code references to ConfigCat.
 You can find more information about Bitrise Steps <a target="_blank" href="https://devcenter.bitrise.io/en/steps-and-workflows/introduction-to-steps.html">here</a>.
 
@@ -16,9 +16,9 @@ You can find more information about Bitrise Steps <a target="_blank" href="https
 3. Add the following step to the workflows section of your `bitrise.yml` file.
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
     ```yaml
-    - git::https://github.com/configcat/bitrise-step-configcat-scan-repository.git@main:
+    - git::https://github.com/configcat/bitrise-step-configcat-feature-flag-sync.git@main:
       inputs:
-      - config_id: 'PASTE-YOUR-CONFIG-ID-HERE'
+      - configcat_config_id: 'PASTE-YOUR-CONFIG-ID-HERE'
     ```
 
 4. Commit & push your changes.
@@ -27,11 +27,11 @@ Scan reports are uploaded for each branch of your repository that triggers the j
 
 ## Available Options
 
-| Parameter    | Description                                                                | Required   | Default             |
-| ------------ | -------------------------------------------------------------------------- | ---------- | ------------------- |
-| `config_id`  | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
-| `api_host`   | ConfigCat Management API host.                                             |            | `api.configcat.com` |
-| `line_count` | Context line count before and after the reference line. (min: 1, max: 10)  |            | 4                   |
-| `sub_folder` | Sub-folder to scan, relative to the repository root folder.                |            |                     |
-| `verbose`    | Turns on detailed logging.                                                 |            | false               |
+| Parameter             | Description                                                                    | Required   | Default             |
+| --------------------- | ------------------------------------------------------------------------------ | ---------- | ------------------- |
+| `configcat_config_id` | The [config ID](https://configcat.com/docs/advanced/code-references/overview#config-id) tells the step which feature flags it should search for in your source code. | &#9745;    |                     |
+| `configcat_api_host`  | ConfigCat Management API host.                                                 |            | `api.configcat.com` |
+| `line_count`          | Code snippet line count before and after the reference line. (min: 1, max: 10) |            | 4                   |
+| `sub_folder`          | Sub-folder to scan, relative to the repository root folder.                    |            |                     |
+| `verbose`             | Turns on detailed logging.                                                     |            | false               |
 
