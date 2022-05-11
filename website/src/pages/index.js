@@ -79,7 +79,7 @@ const features = [
       { url: "integrations/slack", title: "Slack" },
       { url: "integrations/jira", title: "Jira Cloud Plugin" },
       { url: "integrations/trello", title: "Trello Power-Up" },
-      { url: "integrations/monday", title: "Monday" },
+      { url: "integrations/monday", title: "monday" },
       { url: "integrations/datadog", title: "DataDog" },
       { url: "integrations/zapier", title: "Zapier" },
       { url: "integrations/github", title: "GitHub Action" },
