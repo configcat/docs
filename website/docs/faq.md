@@ -24,6 +24,10 @@ You need to have a [Billing Manager](organization.md/#billing-manager-role) role
 You can change your billing plan on the [Plans](https://app.configcat.com/organization/plans) page.
 You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Plans page.
 
+### How do I change the billing email address the way I receive my invoices?
+Go to the [Billing & Invoices page.](https://app.configcat.com/organization/billing) and click the `Update billing details` link.
+You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Billing & Invoices page.
+
 ### How do I change my payment method or billing information?
 Go to the [Billing & Invoices page.](https://app.configcat.com/organization/billing) and click the `Update billing details` link.
 You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Billing & Invoices page.
