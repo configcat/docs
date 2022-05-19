@@ -9,7 +9,7 @@ Turn features On / Off right from a linked item on your monday board with Config
 ## Installation
 ![Installation of the ConfigCat Feature Flags monday app](/assets/monday/monday_auth.gif)
 
-1. Install ConfigCat Feature Flags monday app to your monday account.
+1. Install <a href="https://auth.monday.com/oauth2/authorize?client_id=189dfd82625900f2e6d353da743b1812&response_type=install" target="_blank">ConfigCat Feature Flags</a> monday app to your monday account.
 2. Open one of your boards in monday and click on an item.
 3. Add the ConfigCat Feature Flags monday app to your item.
 4. In order to use ConfigCat Feature Flags you have to authorize first with your ConfigCat Public API credentials.
