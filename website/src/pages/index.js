@@ -84,6 +84,7 @@ const features = [
       { url: "integrations/github", title: "GitHub Action" },
       { url: "integrations/circleci", title: "CircleCI Orb" },
       { url: "integrations/bitbucket", title: "Bitbucket Pipe" },
+      { url: "integrations/bitrise", title: "Bitrise Step" },
       { url: "integrations/terraform", title: "Terraform" },
       { url: "integrations/amplitude", title: "Amplitude" },
       { url: "integrations/zoho-flow", title: "Zoho Flow" },

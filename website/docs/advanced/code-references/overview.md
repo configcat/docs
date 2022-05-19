@@ -181,6 +181,7 @@ We prepared the following integrations to simplify the usage of the scanner in y
 - [GitLab CI/CD](/docs/advanced/code-references/gitlab-ci)
 - [Azure DevOps](/docs/advanced/code-references/azure-devops)
 - [Bitbucket Pipe](/docs/advanced/code-references/bitbucket-pipe)
+- [Bitrise Step](/docs/advanced/code-references/bitrise-step)
 
 ### Manual Integration
 If your workflow doesn't have an integration, you can follow the instructions [here](/docs/advanced/code-references/manual) to configure scan executions directly with the ConfigCat CLI.

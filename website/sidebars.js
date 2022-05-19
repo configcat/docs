@@ -48,7 +48,7 @@ module.exports = {
             "advanced/code-references/gitlab-ci",
             "advanced/code-references/azure-devops",
             "advanced/code-references/bitbucket-pipe",
-            "advanced/code-references/bitrise",
+            "advanced/code-references/bitrise-step",
             "advanced/code-references/manual",
           ]
         },
@@ -80,6 +80,7 @@ module.exports = {
         "integrations/github",
         "integrations/circleci",
         "integrations/bitbucket",
+        "integrations/bitrise",
         "integrations/terraform",
         "integrations/amplitude",
         "integrations/vscode"
