@@ -276,17 +276,16 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 
 You can set up the SDK to load your feature flag & setting overrides from a `{ [name: string]: any }` map.
 ```js
-const configCatClient = configcat.createClientWithAutoPoll('#YOUR-SDK-KEY#', { 
-    flagOverrides: { 
-        dataSource: new MapOverrideDataSource({
+let configCatClient = configcat.createClientWithAutoPoll('#YOUR-SDK-KEY#', { 
+    flagOverrides: configcat.createFlagOverridesFromMap({
             enabledFeature: true,
             disabledFeature: false,
             intSetting: 5,
             doubleSetting: 3.14,
             stringSetting: "test"
-        }), 
-        behaviour: OverrideBehaviour.LocalOnly
-    }
+        }, 
+        configcat.OverrideBehaviour.LocalOnly
+    )
 });
 ```
 
