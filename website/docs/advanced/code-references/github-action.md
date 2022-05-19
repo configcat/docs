@@ -1,6 +1,6 @@
 ---
 id: github-action
-title: GitHub
+title: GitHub Action - Scan your source code for feature flags
 ---
 
 This section describes how to use ConfigCat's <a target="_blank" href="https://github.com/marketplace/actions/configcat-scan-repository">GitHub Action</a>

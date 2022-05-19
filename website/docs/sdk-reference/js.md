@@ -63,10 +63,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 
 ## Working Demo on CodePen
 
-<iframe height="265" style={{width: "100%"}} scrolling="no" title="ConfigCat Feature Flag based dynamically updating page" src="https://codepen.io/configcat/embed/pozaLLV?height=265&theme-id=light&default-tab=html,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/configcat/pen/pozaLLV'>ConfigCat Feature Flag based dynamically updating page</a> by ConfigCat
-  (<a href='https://codepen.io/configcat'>@configcat</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+See the Pen [ConfigCat Feature Flag Demo](https://codepen.io/configcat/pen/pozaLLV) on [CodePen](https://codepen.io).
 
 ## Creating the *ConfigCat* Client
 
@@ -185,8 +182,9 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 | `configChanged`       | Callback to get notified about changes.                                                                                    | -              |
 | `logger`              | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
-| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
+| `dataGovernance`      | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
 | `maxInitWaitTimeSeconds` | Maximum waiting time between the client initialization and the first config acquisition in seconds.                     | 5              |
+| `flagOverrides`       | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                              | -              |
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
 ```js
@@ -210,7 +208,8 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 | `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                            | 60             |
 | `logger`                 | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
-| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
+| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
+| `flagOverrides`       | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                 | -              |
 
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
@@ -228,7 +227,8 @@ Manual polling gives you full control over when the `config.json` (with the sett
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
 | `logger`           | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
-| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global` |
+| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
+| `flagOverrides`       | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                           | -              |
 
 ```js
 const configCatClient = configcat.createClientWithManualPoll("#YOUR-SDK-KEY#");
@@ -258,6 +258,32 @@ configCatClient.forceRefresh(() =>{
 
         console.log(value); // console: "value from server"
     });
+});
+```
+
+## Flag Overrides
+
+With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
+
+- **Local/Offline mode** (`OverrideBehaviour.LocalOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+
+- **Local over remote** (`OverrideBehaviour.LocalOverRemote`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
+
+- **Remote over local** (`OverrideBehaviour.RemoteOverLocal`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
+
+You can set up the SDK to load your feature flag & setting overrides from a `{ [name: string]: any }` map.
+```js
+const configCatClient = configcat.createClientWithAutoPoll('#YOUR-SDK-KEY#', { 
+    flagOverrides: configcat.createFlagOverridesFromMap({
+            enabledFeature: true,
+            disabledFeature: false,
+            intSetting: 5,
+            doubleSetting: 3.14,
+            stringSetting: "test"
+        }, 
+        configcat.OverrideBehaviour.LocalOnly
+    )
 });
 ```
 

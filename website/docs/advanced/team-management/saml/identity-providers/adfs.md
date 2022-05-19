@@ -1,6 +1,6 @@
 ---
 id: adfs
-title: ADFS
+title: ADFS Identity Provider
 description: This is a step-by-step guide on how to set up and configure ADFS as a SAML Identity Provider for your organization.
 ---
 

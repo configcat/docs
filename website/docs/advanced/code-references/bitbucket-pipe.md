@@ -1,6 +1,6 @@
 ---
 id: bitbucket-pipe
-title: Bitbucket
+title: Bitbucket Pipe - Scan your source code for feature flags
 ---
 
 This section describes how to use ConfigCat's <a target="_blank" href="https://bitbucket.org/product/features/pipelines/integrations?p=configcat/scan-repository-pipe">Bitbucket Pipe</a>

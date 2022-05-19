@@ -1,6 +1,6 @@
 ---
 id: azure-devops
-title: Azure
+title: Azure DevOps - Scan your source code for feature flags
 ---
 
 This section describes how to use the [ConfigCat CLI](/docs/advanced/cli) in <a target="_blank" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops">Azure DevOps Pipelines</a>

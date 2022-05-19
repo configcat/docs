@@ -14,6 +14,9 @@ Turn features On / Off right from a linked Issue on your Jira board. Also you ca
 ### Trello
 Turn features On / Off right from a linked Card on your Trello board. Also you can add Targeting or Percentage Rules just as easily.
 [Documentation](integrations/trello.md)
+### monday
+Turn features On / Off right from a linked item on your monday board. Also you can add Targeting or Percentage Rules just as easily.
+[Documentation](integrations/monday.md)
 ### DataDog
 Ensure that every setting change in ConfigCat is sent to DataDog as an Event.
 [Documentation](integrations/datadog.md)
