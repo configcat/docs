@@ -1,6 +1,6 @@
 ---
 id: google
-title: Google
+title: Google Identity Provider
 description: This is a step-by-step guide on how to set up and configure Google as a SAML Identity Provider for your organization.
 ---
 

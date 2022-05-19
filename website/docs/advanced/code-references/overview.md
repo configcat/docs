@@ -137,7 +137,7 @@ You have the option to upload scan reports for each branch of your repository to
 Each scan report is associated to one of these branches.
 
 The following screenshot shows how an uploaded report looks like.
-<img class="bordered" src="/docs/assets/cli/scan/scan_report.png" alt="ConfigCat code references report" />
+<img src="/docs/assets/cli/scan/scan_report.png" alt="ConfigCat code references report" />
 
 ### Scanning Git Repositories
 The `scan` command automatically detects when it's being executed on a git repository. It collects additional information from Git like the current **branch

@@ -1,6 +1,6 @@
 ---
 id: slack
-title: Slack
+title: Slack - Get notified when a feature flag changes
 description: ConfigCat Feature Flags Slack App. This is a step-by-step guide on how to connect the ConfigCat feature flag service to Slack. 
 ---
 

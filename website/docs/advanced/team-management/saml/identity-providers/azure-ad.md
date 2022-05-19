@@ -1,6 +1,6 @@
 ---
 id: azure-ad
-title: Azure AD
+title: Azure AD Identity Provider
 description: This is a step-by-step guide on how to set up and configure Azure AD as a SAML Identity Provider for your organization.
 ---
 

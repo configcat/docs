@@ -5,6 +5,9 @@ A public repository for the ConfigCat documentation. https://configcat.com/docs
 ## About ConfigCat
 ConfigCat is a feature flag, feature toggle, and configuration management service. That lets you launch new features and change your software configuration remotely without actually (re)deploying code. ConfigCat even helps you do controlled roll-outs like canary releases and blue-green deployments. https://configcat.com
 
+# Prerequisites
+Latest LTS version of [Node.js](https://nodejs.org/).
+
 ## Quick start
 1. Open Terminal/CMD/PowerShell and change directory to `/website`
     ```
@@ -43,6 +46,9 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 # Contributions
 
 Contributions are welcome via PR.
+
+# Troubleshooting
+If you face any strange errors when trying to run locally, please check if you have the latest LTS version of [Node.js](https://nodejs.org/).
 
 # Questions & Support
 

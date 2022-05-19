@@ -1,6 +1,6 @@
 ---
 id: zoho-flow
-title: Zoho Flow
+title: Zoho Flow - Automate tasks and build feature flag based workflows
 description: ConfigCat Zoho Flow integration. This is a step-by-step guide on how to use the ConfigCat Zoho Flow integration to manage features using Zoho Flow apps.
 ---
 ## Connect ConfigCat to 500+ apps with Zoho Flow
