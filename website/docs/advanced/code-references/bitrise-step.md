@@ -1,5 +1,5 @@
 ---
-id: bitrise
+id: bitrise-step
 title: Bitrise
 ---
 
