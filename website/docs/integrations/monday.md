@@ -1,10 +1,10 @@
 ---
 id: monday
-title: monday
-description: ConfigCat monday app. This is a step-by-step guide on how to connect and manage feature flags from monday boards and items.
+title: monday.com
+description: ConfigCat monday app. This is a step-by-step guide on how to connect and manage feature flags from monday.com boards and items.
 ---
 
-Turn features On / Off right from a linked item on your monday board with ConfigCat's monday App. Also you can add targeting or percentage rules just as easily.
+Turn features On / Off right from a linked item on your monday.com board with ConfigCat's monday App. Also you can add targeting or percentage rules just as easily.
 
 ## Installation
 ![Installation of the ConfigCat Feature Flags monday app](/assets/monday/monday_auth.gif)
