@@ -3,9 +3,9 @@ id: bitrise
 title: Bitrise
 ---
 
-This section describes how to use ConfigCat's <a target="_blank" href="https://github.com/configcat/bitrise-step-configcat-feature-flag-sync">Bitrise Step</a>
+This section describes how to use ConfigCat's <a target="_blank" href="https://www.bitrise.io/integrations/steps/configcat-feature-flag-sync">Bitrise Step</a>
 to automatically scan your source code for feature flag and setting usages and upload the found code references to ConfigCat.
-You can find more information about Bitrise Steps <a target="_blank" href="https://devcenter.bitrise.io/en/steps-and-workflows/introduction-to-steps.html">here</a>.
+<a target="_blank" href="https://www.bitrise.io/">Bitrise</a> is full-featured mobile CI/CD platform. You can find more information about Bitrise Steps <a target="_blank" href="https://devcenter.bitrise.io/en/steps-and-workflows/introduction-to-steps.html">here</a>.
 
 ## Setup
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in secure pipeline variables with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
@@ -16,7 +16,7 @@ You can find more information about Bitrise Steps <a target="_blank" href="https
 3. Add the following step to the workflows section of your `bitrise.yml` file.
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
     ```yaml
-    - git::https://github.com/configcat/bitrise-step-configcat-feature-flag-sync.git@main:
+    - configcat-feature-flag-sync@0:
       inputs:
       - configcat_config_id: 'PASTE-YOUR-CONFIG-ID-HERE'
     ```
