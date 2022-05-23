@@ -1,7 +1,7 @@
 ---
 id: overview
 title: Integrations Overview
-description: ConfigCat Integrations Overview. List of the available integrations like Datadog, GitHub, CircleCI, Bitbucket, Slack, Trello, Zapier, Jira, Terraform, Amplitude
+description: ConfigCat Integrations Overview. List of the available integrations like Datadog, GitHub, CircleCI, Bitbucket, Bitrise, Slack, Trello, Zapier, Jira, Terraform, Amplitude
 ---
 Integrate ConfigCat with your technology stack and leverage all the benefits of Feature flags within your workflows.
 
@@ -35,6 +35,9 @@ Discover feature flag usages in your source code and upload the found code refer
 ### Bitbucket Pipe
 Discover feature flag usages in your source code and upload the found code references to ConfigCat.
 [Documentation](integrations/bitbucket.md)
+### Bitrise Step
+Discover feature flag usages in your source code and upload the found code references to ConfigCat.
+[Documentation](integrations/bitrise.md)
 ### Terraform
 Configure and access ConfigCat resources via ConfigCat Public Management API with Terraform.
 [Documentation](integrations/terraform.md)

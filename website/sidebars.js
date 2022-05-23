@@ -49,6 +49,7 @@ module.exports = {
             { type: "doc", id: "advanced/code-references/gitlab-ci", label: "GitLab CI/CD" },
             { type: "doc", id: "advanced/code-references/azure-devops", label: "Azure DevOps" },
             { type: "doc", id: "advanced/code-references/bitbucket-pipe", label: "Bitbucket Pipe" },
+            { type: "doc", id: "advanced/code-references/bitrise-step", label: "Bitrise Step" },
             { type: "doc", id: "advanced/code-references/manual", label: "Manual Integration" },
           ]
         },
@@ -81,6 +82,7 @@ module.exports = {
         { type: "doc", id: "integrations/github", label: "GitHub Action" },
         { type: "doc", id: "integrations/circleci", label: "CircleCI Orb" },
         { type: "doc", id: "integrations/bitbucket", label: "Bitbucket Pipe" },
+        { type: "doc", id: "integrations/bitrise", label: "Bitrise Step" },
         { type: "doc", id: "integrations/terraform", label: "Terraform" },
         { type: "doc", id: "integrations/amplitude", label: "Amplitude" },
         { type: "doc", id: "integrations/vscode", label: "Visual Studio Code" },
