@@ -406,6 +406,26 @@ const configCatClient = configcat.createClientWithAutoPoll('PKDVCLf-Hq-h-kCzMp-L
 });
 ```
 
+## Sensitive information handling
+
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config.json](https://configcat.com/docs/requests/) file from ConfigCat's CDN servers. The URL path for this config.json file contains your SDK key, so the SDK key and the content of your config.json file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users. 
+This SDK key is read-only, it only allows downloading your config.json file, but nobody can make any changes with it in your ConfigCat account.  
+Suppose you don't want your SDK key or the content of your config.json file visible to your users. In that case, we recommend you use the SDK only in your backend applications and call a backend endpoint in your frontend/mobile application to evaluate the feature flags for a specific application customer.  
+Also, we recommend using [sensitive targeting comparators](https://configcat.com/docs/advanced/targeting/#sensitive-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
+
+
+## Browser compatibility
+This SDK should be compatible with all modern browsers.
+
+The SDK is [tested](https://github.com/configcat/js-ssr-sdk/blob/master/.github/workflows/js-ssr-ci.yml) against the following browsers:
+- Chrome (stable, latest, beta)
+- Chromium (64.0.3282.0, 72.0.3626.0, 80.0.3987.0)
+- Firefox (latest, latest-beta, 84.0).
+
+These tests are running on each pull request, before each deploy, and on a daily basis. 
+You can view a sample run [here](https://github.com/configcat/js-ssr-sdk/actions/runs/2420724478).
+
+
 ## Sample Applications
 
 - <a href="https://github.com/configcat/js-ssr-sdk/tree/master/samples/nuxt-ssr" target="_blank">NuxtJS</a>
