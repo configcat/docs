@@ -129,14 +129,6 @@ final user = ConfigCatUser(
 );
 ```
 
-## `getAllKeys()`
-You can query the keys of each feature flag and setting with the `getAllKeys()` method.
-
-```dart
-final client = ConfigCatClient.get(sdkKey: '#YOUR-SDK-KEY#');
-final keys = await client.getAllKeys();
-```
-
 ## Polling Modes
 The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](/advanced/caching/)
@@ -242,6 +234,26 @@ final client = ConfigCatClient.get(
         )
     )
 );
+```
+
+## `getAllKeys()`
+You can query the keys of each feature flag and setting with the `getAllKeys()` method.
+
+```dart
+final client = ConfigCatClient.get(sdkKey: '#YOUR-SDK-KEY#');
+final keys = await client.getAllKeys();
+```
+
+## `getAllValues()`
+Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
+
+```dart
+final client = ConfigCatClient.get(sdkKey: '#YOUR-SDK-KEY#');
+final settingValues = await client.getAllValues();
+
+// invoke with user object
+final user = ConfigCatUser(identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92');   
+final settingValuesTargeting = await client.getAllValues(user);
 ```
 
 ## Custom Cache
