@@ -371,17 +371,6 @@ configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
 keys = configcat_client.get_all_keys()
 ```
 
-## Using ConfigCat behind a proxy
-Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
-
-```ruby
-configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-SDK-KEY#",
-                                                           proxy_address: "127.0.0.1",
-                                                           proxy_port: 8080,
-                                                           proxy_user: "user",
-                                                           proxy_pass: "password")
-```
-
 ## `get_all_values()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
@@ -392,7 +381,18 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 ```ruby
 configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
-all_values = configcat_client.get_all_values(ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92"))  # Optional User Object
+setting_values = configcat_client.get_all_values(ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92"))  # Optional User Object
+```
+
+## Using ConfigCat behind a proxy
+Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
+
+```ruby
+configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-SDK-KEY#",
+                                                           proxy_address: "127.0.0.1",
+                                                           proxy_port: 8080,
+                                                           proxy_user: "user",
+                                                           proxy_pass: "password")
 ```
 
 ## Sample Applications

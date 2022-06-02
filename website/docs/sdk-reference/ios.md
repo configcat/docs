@@ -179,15 +179,15 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no matc
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: Optional(true)
 ```
 
-## `getAllKeys()`
-You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
+## `getAllKeys()`, `getAllKeysAsync()`
+You can get all the setting keys from your configuration by calling the `getAllKeys()` or `getAllKeysAsync()` method of the `ConfigCatClient`.
 
 ```swift
 let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>")
 let keys = client.getAllKeys()
 ```
 
-## `getAllValues()`
+## `getAllValues()`, `getAllValuesAsync()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
