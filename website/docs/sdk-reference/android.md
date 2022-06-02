@@ -246,7 +246,8 @@ val keys = client.getAllKeys()
 
 ```kotlin
 val client = ConfigCatClient("#YOUR-SDK-KEY#")
-client.getAllKeysAsync().thenAccept(keys -> {})
+client.getAllKeysAsync().thenAccept({ keys -> 
+})
 ```
 
 ## `getAllValues()`, `getAllValuesAsync()`
