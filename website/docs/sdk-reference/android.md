@@ -269,7 +269,8 @@ client.getAllValuesAsync().thenAccept({ settingValues ->
 
 // invoke with user object
 val user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
-client.getAllValuesAsync(user).thenAccept(settingValuesTargeting -> { })
+client.getAllValuesAsync(user).thenAccept({ settingValuesTargeting ->
+})
 ```
 
 ## Custom cache
