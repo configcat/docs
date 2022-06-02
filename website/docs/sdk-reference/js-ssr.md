@@ -58,7 +58,7 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
 
 ### 4. Dispose *ConfigCat* client
 You can safely `dispose()` the client instance and release all associated resources on application exit.
-```csharp
+```js
 configCatClient.dispose();
 ```
 
