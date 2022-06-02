@@ -355,12 +355,38 @@ ConfigCat - Info -  Evaluate 'isPOCFeatureEnabled'
 
 Sample code on how to create a basic file logger implementation for ConfigCat client: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/FileLoggerSample.cs" target="_blank">See Sample Code</a>
 
-## .GetAllKeys()
-You can get all the setting keys from your configuration by calling the `GetAllKeys()` method of the `ConfigCatClient`.
+## `GetAllKeys()`, `GetAllKeysAsync()`
+You can get all the setting keys from your configuration by calling the `GetAllKeys()` or `GetAllKeysAsync()` method of the `ConfigCatClient`.
 
 ```csharp
 IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
 IEnumerable<string> keys = client.GetAllKeys();
+```
+
+```csharp
+IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+IEnumerable<string> keys = await client.GetAllKeysAsync();
+```
+
+## `GetAllValues()`, `GetAllValuesAsync()`
+Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
+
+```csharp
+IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+IDictionary<string, object> settingValues = client.GetAllValues();
+
+// invoke with user object
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+IEnumerable<string> settingValues = client.GetAllValues(userObject);
+```
+
+```csharp
+IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+IDictionary<string, object> settingValues = await client.GetAllValuesAsync();
+
+// invoke with user object
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+IEnumerable<string> settingValues = await client.GetAllValuesAsync(userObject);
 ```
 
 ## Using ConfigCat behind a proxy
