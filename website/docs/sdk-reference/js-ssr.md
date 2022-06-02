@@ -26,13 +26,13 @@ npm i configcat-js-ssr
 import * as configcat from "configcat-js-ssr";
 ```
 
-### 2. Create the *ConfigCatClient* with your SDK Key:
+### 2. Create the *ConfigCat* client with your SDK Key:
 
 ```js
 const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
 ```
 
-### 3. Get your setting value:
+### 3. Get your setting value
 
 The Promise (async/await) way:
 ```js
@@ -54,6 +54,12 @@ configCatClient.getValue("isMyAwesomeFeatureEnabled", false, (value) => {
         do_the_old_thing();
     }
 });
+```
+
+### 4. Dispose *ConfigCat* client
+You can safely `dispose()` the client instance and release all associated resources on application exit.
+```csharp
+configCatClient.dispose();
 ```
 
 ## Creating the *ConfigCat* Client
@@ -96,7 +102,7 @@ configCatClient.getValue(
 );
 ```
 
-## `getValueAsync()`
+## Anatomy of `getValueAsync()`
 
 Returns a Promise with the value.
 
@@ -122,7 +128,7 @@ configCatClient.getValueAsync(
 .then((value) => { console.log(value) });
 ```
 
-### User Object
+## User Object
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 For simple targeting:
@@ -160,7 +166,8 @@ var userObject = {
 
 ## Polling Modes
 
-The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+[More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
 
@@ -317,9 +324,9 @@ ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
  Returning value : true
 ```
 
-## `getAllKeys()`
+## `getAllKeys()`, `getAllKeysAsync()`
 
-You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
+You can query the keys from your configuration in the SDK with the `getAllKeys()` or `getAllKeysAsync()` method.
 
 ```js
 const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
@@ -328,51 +335,38 @@ configCatClient.getAllKeys(function(keys) {
 });
 ```
 
-## `getAllKeysAsync()`
-
-You can query the keys from your configuration in the SDK with the `getAllKeys()` method.
-
 ```js
 const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
 const keys = await configCatClient.getAllKeysAsync();
 console.log(keys);
 ```
 
-## `getAllValues()`
+## `getAllValues()`, `getAllValuesAsync()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
 ```js
 const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
+
 configCatClient.getAllValues(function(settingValues) {
     settingValues.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
 });
 
-
 // invoke with user object
-const userObject = {
-    identifier : "john@example.com"
-}; 
-
+const userObject = { identifier : "john@example.com" }; 
 configCatClient.getAllValues(function(settingValues) {
     settingValues.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
 }, userObject);
 ```
 
-## `getAllValuesAsync()`
-
-Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
-
 ```js
 const configCatClient = configcat.createClient("#YOUR-SDK-KEY#");
+
 const settingValues = await configCatClient.getAllValuesAsync();
 settingValues.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
 
 // invoke with user object
-const userObject = {
-    identifier : "john@example.com"
-}; 
-
+const userObject = { identifier : "john@example.com" }; 
 const settingValuesTargeting = await configCatClient.getAllValuesAsync(userObject);
 settingValuesTargeting.forEach(i => console.log(i.settingKey + ' -> ' + i.settingValue));
 ```

@@ -124,7 +124,7 @@ client.getValueAsync(
 }
 ```
 
-### User Object
+## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ```swift
 let user = ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92")   
@@ -203,7 +203,8 @@ let allValues = client.getAllValues(
 ```
 
 ## Polling Modes
-The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+[More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.

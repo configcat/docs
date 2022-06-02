@@ -87,7 +87,7 @@ value = ConfigCat.get_value(
 );
 ```
 
-### User Object
+## User Object
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
@@ -110,7 +110,8 @@ user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92", email: 
 
 ## Polling Modes
 
-The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+[More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
 

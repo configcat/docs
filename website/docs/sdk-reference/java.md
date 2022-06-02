@@ -119,7 +119,7 @@ client.getValueAsync(
 });
 ```
 
-### User Object
+## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ``` java
 User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92");   
@@ -145,16 +145,9 @@ User user = User.newBuilder()
     .build("435170f4-8a8b-4b67-a723-505ac7cdea92");
 ```
 
-## `getAllKeys()`
-You can query the keys of each feature flag and setting with the `getAllKeys()` method.
-
-```java
-ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
-java.util.Collection<String> keys = client.getAllKeys();
-```
-
 ## Polling Modes
-The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+[More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
@@ -361,6 +354,40 @@ map.put("stringSetting", "test");
 ConfigCatClient client = ConfigCatClient.newBuilder()
         .flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY)
         .build("localhost");
+```
+
+## `getAllKeys()`, `getAllKeysAsync()`
+You can query the keys of each feature flag and setting with the `getAllKeys()` or `getAllKeysAsync()` method.
+
+```java
+ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+java.util.Collection<String> keys = client.getAllKeys();
+```
+```java
+ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+client.getAllKeysAsync().thenAccept(keys -> {
+});
+```
+
+## `getAllValues()`, `getAllValuesAsync()`
+Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
+
+```java
+ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+Map<String, Object> settingValues = client.getAllValues();
+
+// invoke with user object
+User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
+Map<String, Object> settingValuesTargeting = client.getAllValues(user);
+```
+
+```java
+ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+client.getAllValuesAsync().thenAccept(settingValues -> { });
+
+// invoke with user object
+User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
+client.getAllValuesAsync(user).thenAccept(settingValuesTargeting -> { });
 ```
 
 ## Custom Cache
