@@ -106,9 +106,9 @@ intValue := client.GetIntValue(
 )
 ```
 
-### User Object
+## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
-#### Simple user object creation:
+### Simple user object creation:
 ```go
 user = &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
 ```
@@ -116,7 +116,7 @@ user = &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
 user = &configcat.UserData{Identifier: "john@example.com"}
 ```
 
-#### Customized user object creation:
+### Customized user object creation:
 
 | Arguments | Description |
 | --------- | ----------- |
@@ -134,7 +134,7 @@ user := &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
             Custom: custom}
 ```
 
-#### Other options to create a user object:
+### Other options to create a user object:
 
 The *ConfigCat SDK* uses reflection to determine what attributes are available on a user object. Your can either implement the `UserAttributes` interface - then its `GetAttribute(string) string` method will be used to retrieve the attributes - or use a struct type where each public field is treated as a possible comparison attribute.
 
@@ -145,7 +145,8 @@ If a field's type is `map[string]string`, the map value is used to look up any c
 Otherwise, a field type must be a numeric type, a `string`, a `[]byte` or a `github.com/blang/semver.Version`.
 
 ## Polling Modes
-The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all value retrievals are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all value retrievals are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+[More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.

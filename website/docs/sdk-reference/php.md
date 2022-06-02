@@ -88,13 +88,13 @@ $value = $client->getValue(
 );
 ```
 
-### User Object
+## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ```php
 $user = new \ConfigCat\User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 ```
 ```php
-$user = new \ConfigCat\User("john@example.com");  
+$user = new \ConfigCat\User("john@example.com");
 ```
 
 | Parameters   | Description                                                                                                                |
@@ -120,6 +120,18 @@ You can query the keys of each feature flag and setting with the `getAllKeys()` 
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
 $keys = $client->getAllKeys();
+```
+
+## `getAllValues()`
+Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
+
+```php
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
+$settingValues = $client->getAllValues();
+
+// invoke with user object
+$user = new \ConfigCat\User("john@example.com");
+$settingValuesTargeting = $client->getAllValues($user);
 ```
 
 ## Flag Overrides

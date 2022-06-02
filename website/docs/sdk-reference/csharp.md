@@ -46,7 +46,7 @@ else
 ```
 
 ### 5. Dispose *ConfigCat* client
-You can safely `dispose()` the client instance and release all associated resources on application exit.
+You can safely `Dispose()` the client instance and release all associated resources on application exit.
 ```csharp
 client.Dispose();
 ```
@@ -82,12 +82,18 @@ If you want to use multiple SDK Keys in the same application, create only one `C
 | `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
 ```csharp
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
-client.GetValue("keyOfMySetting", false, userObject);
+var value = client.GetValue("keyOfMySetting", false, userObject);
 ```
 
-### User Object
+```csharp
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+var value = await client.GetValueAsync("keyOfMySetting", false, userObject);
+```
+
+## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ``` csharp
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
@@ -112,7 +118,8 @@ User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92") {
 ```
 
 ## Polling Modes
-The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `GetValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `GetValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+[More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
 The *ConfigCat SDK* downloads and stores the latest values automatically every 60 seconds.
@@ -355,12 +362,38 @@ ConfigCat - Info -  Evaluate 'isPOCFeatureEnabled'
 
 Sample code on how to create a basic file logger implementation for ConfigCat client: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/FileLoggerSample.cs" target="_blank">See Sample Code</a>
 
-## .GetAllKeys()
-You can get all the setting keys from your configuration by calling the `GetAllKeys()` method of the `ConfigCatClient`.
+## `GetAllKeys()`, `GetAllKeysAsync()`
+You can get all the setting keys from your configuration by calling the `GetAllKeys()` or `GetAllKeysAsync()` method of the `ConfigCatClient`.
 
 ```csharp
 IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
 IEnumerable<string> keys = client.GetAllKeys();
+```
+
+```csharp
+IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+IEnumerable<string> keys = await client.GetAllKeysAsync();
+```
+
+## `GetAllValues()`, `GetAllValuesAsync()`
+Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
+
+```csharp
+IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+IDictionary<string, object> settingValues = client.GetAllValues();
+
+// invoke with user object
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+IEnumerable<string> settingValuesTargeting = client.GetAllValues(userObject);
+```
+
+```csharp
+IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+IDictionary<string, object> settingValues = await client.GetAllValuesAsync();
+
+// invoke with user object
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+IEnumerable<string> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
 ```
 
 ## Using ConfigCat behind a proxy

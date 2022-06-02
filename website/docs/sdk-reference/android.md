@@ -130,7 +130,7 @@ client.getValueAsync(
 })
 ```
 
-### User Object
+## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ```kotlin
 val user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")   
@@ -152,16 +152,9 @@ val user = User.newBuilder()
     .build("435170f4-8a8b-4b67-a723-505ac7cdea92")
 ```
 
-## `getAllKeys()`
-You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
-
-```kotlin
-val client = ConfigCatClient("#YOUR-SDK-KEY#")
-val keys = client.getAllKeys()
-```
-
 ## Polling Modes
-The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+[More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
@@ -241,6 +234,43 @@ val map = hashMapOf(
 val client = ConfigCatClient.newBuilder()
     .flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY)
     .build("localhost")
+```
+
+## `getAllKeys()`, `getAllKeysAsync()`
+You can get all the setting keys from your configuration by calling the `getAllKeys()` or `getAllKeysAsync()` method of the `ConfigCatClient`.
+
+```kotlin
+val client = ConfigCatClient("#YOUR-SDK-KEY#")
+val keys = client.getAllKeys()
+```
+
+```kotlin
+val client = ConfigCatClient("#YOUR-SDK-KEY#")
+client.getAllKeysAsync().thenAccept({ keys -> 
+})
+```
+
+## `getAllValues()`, `getAllValuesAsync()`
+Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
+
+```kotlin
+val client = ConfigCatClient("#YOUR-SDK-KEY#")
+val settingValues = client.getAllValues()
+
+// invoke with user object
+val user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
+val settingValues = client.getAllValues(user)
+```
+
+```kotlin
+val client = new ConfigCatClient("#YOUR-SDK-KEY#")
+client.getAllValuesAsync().thenAccept({ settingValues -> 
+})
+
+// invoke with user object
+val user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
+client.getAllValuesAsync(user).thenAccept({ settingValuesTargeting ->
+})
 ```
 
 ## Custom cache

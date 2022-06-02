@@ -79,7 +79,7 @@ value = configcat_client.get_value(
 );
 ```
 
-### User Object
+## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ``` ruby
 user_object = ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92")
@@ -100,7 +100,8 @@ user_object = ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92", email:
 ```
 
 ## Polling Modes
-The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+[More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
@@ -370,17 +371,6 @@ configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
 keys = configcat_client.get_all_keys()
 ```
 
-## Using ConfigCat behind a proxy
-Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
-
-```ruby
-configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-SDK-KEY#",
-                                                           proxy_address: "127.0.0.1",
-                                                           proxy_port: 8080,
-                                                           proxy_user: "user",
-                                                           proxy_pass: "password")
-```
-
 ## `get_all_values()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
@@ -391,7 +381,18 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 ```ruby
 configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
-all_values = configcat_client.get_all_values(ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92"))  # Optional User Object
+setting_values = configcat_client.get_all_values(ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92"))  # Optional User Object
+```
+
+## Using ConfigCat behind a proxy
+Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
+
+```ruby
+configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-SDK-KEY#",
+                                                           proxy_address: "127.0.0.1",
+                                                           proxy_port: 8080,
+                                                           proxy_user: "user",
+                                                           proxy_pass: "password")
 ```
 
 ## Sample Applications
