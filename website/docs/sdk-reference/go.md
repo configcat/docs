@@ -230,7 +230,7 @@ client := configcat.NewCustomClient(configcat.Config{
     SDKKey: "localhost",
     FlagOverrides: &configcat.FlagOverrides{
         FilePath: "path/to/local_flags.json",
-        Behavior: LocalOnly,
+        Behavior: configcat.LocalOnly,
     },
 })
 ```
@@ -333,7 +333,7 @@ client := configcat.NewCustomClient(configcat.Config{
 			"doubleSetting":   3.14,
 			"stringSetting":   "test",
 		},
-        Behavior: LocalOnly,
+        Behavior: configcat.LocalOnly,
     },
 })
 ```
