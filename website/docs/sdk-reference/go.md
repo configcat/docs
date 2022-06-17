@@ -66,12 +66,13 @@ Available configuration options:
 | `BaseUrl`                 | `string`                   | *Obsolete* Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
 | `Cache `                  | `ConfigCache`              | Sets a custom cache implementation for the client. [See below](#custom-cache).  |
 | `NoWaitForRefresh`        | `bool`                     | Defaults to `false`. When it's `true` the typed get methods (`Get[TYPE]Value()`) will never wait for a configuration refresh to complete before returning. When it's `false` and `PollingMode` is `AutoPoll`, the first request may block, when `PollingMode` is `Lazy`, any request may block. |
-| `HttpTimeout`             | `time.Duration`            | Sets the maximum wait time for a HTTP response. |
+| `HttpTimeout`             | `time.Duration`            | Sets the maximum wait time for a HTTP response. [More about the HTTP timeout](#http-timeout) |
 | `Transport`               | `http.RoundTripper`        | Sets the transport options for the underlying HTTP calls. |
-| `Logger`                  | `configcat.Logger`         | Sets the `Logger` implementation used by the SDK for logging. |
-| `PollingMode`             | `configcat.PollingMode`    | Defaults to `AutoPoll`. Sets the polling mode for the client. [See below](#polling-modes). |
-| `PollInterval`                  | `time.Duration`            | Sets after how much time a configuration is considered stale. When `PollingMode` is `AutoPoll` this value is used as the polling rate. |
+| `Logger`                  | `configcat.Logger`         | Sets the `Logger` implementation used by the SDK for logging. [More about logging](#logging) |
+| `PollingMode`             | `configcat.PollingMode`    | Defaults to `AutoPoll`. Sets the polling mode for the client. [More about polling modes](#polling-modes). |
+| `PollInterval`            | `time.Duration`            | Sets after how much time a configuration is considered stale. When `PollingMode` is `AutoPoll` this value is used as the polling rate. |
 | `ChangeNotify`            | `func()`                   | An optional callback to invoke when a new configuration has fetched. |
+| `FlagOverrides`           | `*configcat.FlagOverrides` | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 
 Then you can pass it to the `NewCustomClient()` method:
 ```go
@@ -190,6 +191,153 @@ client.Refresh()
 ## `GetAllKeys()`
 You can get all the setting keys by calling the `GetAllKeys()` method of the *ConfigCat Client*.
 
+```go
+client := configcat.NewClient("#YOUR-SDK-KEY#")
+keys := client.GetAllKeys()
+```
+
+## `GetAllValues()`
+Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
+
+```go
+client := configcat.NewClient("#YOUR-SDK-KEY#")
+settingValues := client.GetAllValues(nil)
+
+// invoke with user object
+user := &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
+settingValuesTargeting := client.GetAllValues(user)
+```
+
+## Flag Overrides
+
+With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
+
+- **Local/Offline mode** (`LocalOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+
+- **Local over remote** (`LocalOverRemote`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
+
+- **Remote over local** (`RemoteOverLocal`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
+
+You can load your feature flag & setting overrides from a file or from a simple `map[string]interface{}` structure.
+
+### JSON File
+
+The SDK can be configured to load your feature flag & setting overrides from a file.
+
+```go
+client := configcat.NewCustomClient(configcat.Config{
+    SDKKey: "localhost",
+    FlagOverrides: &configcat.FlagOverrides{
+        FilePath: "path/to/local_flags.json",
+        Behavior: LocalOnly,
+    },
+})
+```
+
+#### JSON File Structure
+The SDK supports 2 types of JSON structures to describe feature flags & settings.
+
+##### 1. Simple (key-value) structure
+```json
+{
+  "flags": {
+    "enabledFeature": true,
+    "disabledFeature": false,
+    "intSetting": 5,
+    "doubleSetting": 3.14,
+    "stringSetting": "test"
+  }
+}
+```
+
+##### 2. Complex (full-featured) structure
+This is the same format that the SDK downloads from the ConfigCat CDN. 
+It allows the usage of all features you can do on the ConfigCat Dashboard.
+
+You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+
+The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings: 
+
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+
+```json
+{
+    "f": { // list of feature flags & settings
+        "isFeatureEnabled": { // key of a particular flag
+            "v": false, // default value, served when no rules are defined
+            "i": "430bded3", // variation id (for analytical purposes)
+            "t": 0, // feature flag's type, possible values: 
+                    // 0 -> BOOLEAN 
+                    // 1 -> STRING
+                    // 2 -> INT
+                    // 3 -> DOUBLE
+            "p": [ // list of percentage rules
+                { 
+                    "o": 0, // rule's order
+                    "v": true, // value served when the rule is selected during evaluation
+                    "p": 10, // % value
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                },
+                {
+                    "o": 1, // rule's order
+                    "v": false, // value served when the rule is selected during evaluation
+                    "p": 90, // % value
+                    "i": "bddac6ae" // variation id (for analytical purposes)
+                }
+            ],
+            "r": [ // list of targeting rules
+                {
+                    "o": 0, // rule's order
+                    "a": "Identifier", // comparison attribute
+                    "t": 2, // comparator, possible values:
+                        // 0  -> 'IS ONE OF',
+                        // 1  -> 'IS NOT ONE OF',
+                        // 2  -> 'CONTAINS',
+                        // 3  -> 'DOES NOT CONTAIN',
+                        // 4  -> 'IS ONE OF (SemVer)',
+                        // 5  -> 'IS NOT ONE OF (SemVer)',
+                        // 6  -> '< (SemVer)',
+                        // 7  -> '<= (SemVer)',
+                        // 8  -> '> (SemVer)',
+                        // 9  -> '>= (SemVer)',
+                        // 10 -> '= (Number)',
+                        // 11 -> '<> (Number)',
+                        // 12 -> '< (Number)',
+                        // 13 -> '<= (Number)',
+                        // 14 -> '> (Number)',
+                        // 15 -> '>= (Number)',
+                        // 16 -> 'IS ONE OF (Sensitive)',
+                        // 17 -> 'IS NOT ONE OF (Sensitive)'
+                    "c": "@example.com", // comparison value
+                    "v": true, // value served when the rule is selected during evaluation
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                }
+            ]
+        },
+    }
+}
+```
+
+### Map
+You can set up the SDK to load your feature flag & setting overrides from a `map[string]interface{}`.
+```go
+client := configcat.NewCustomClient(configcat.Config{
+    SDKKey: "localhost",
+    FlagOverrides: &configcat.FlagOverrides{
+        Values: map[string]interface{}{
+			"enabledFeature":  true,
+			"disabledFeature": false,
+			"intSetting":      5,
+			"doubleSetting":   3.14,
+			"stringSetting":   "test",
+		},
+        Behavior: LocalOnly,
+    },
+})
+```
+
 ## Snapshots
 A `Snapshot` represents an immutable state of the given User's current setting values. Because of the immutability they are suitable for sharing between components that rely more on a consistent data state rather than maintaining their own states with individual get setting value calls.
 
@@ -206,16 +354,6 @@ boolSettingDescriptor := configcat.Bool("keyOfMyBoolSetting" /* Setting Key */, 
 Then you can use the descriptor to retrieve the setting's value from a snapshot:
 ```go
 boolValue := boolSettingDescriptor.Get(snapshot)
-```
-
-Also, because of the immutability, snapshots allow safe iterative operations over their setting values avoiding the possibility of data change - caused by e.g. a new configuration download initiated by a get value call - within a loop.
-
-For example, evaluating all setting values for every key could be done safely in the following way:
-```go
-keys := snapshot.GetAllKeys()
-for _, key := range keys {
-    valueForKey := snapshot.GetValue(key)
-}
 ```
 
 ## Custom Cache
@@ -238,7 +376,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KE
     Cache: CustomCache{}})
 ```
 
-### Force refresh
+## Force refresh
 Any time you want to refresh the cached configuration with the latest one, you can call the `Refresh()` method of the library, which will initiate a new fetch and will update the local cache.
 
 You can also use the `RefreshIfOlder()` variant when you want to add expiration time windows for local cache updates.
@@ -249,28 +387,28 @@ You can use the `Transport` config option to set up http transport related (like
 proxyURL, _ := url.Parse("<PROXY-URL>")
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
     Transport: &http.Transport{
-	        Proxy: http.ProxyURL(proxyURL),
-        }
-    })
+	    Proxy: http.ProxyURL(proxyURL),
+    }
+})
+```
+
+## HTTP Timeout
+You can set the maximum wait time for a ConfigCat HTTP response.
+```go
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
+    HTTPTimeout: time.Second * 10
+})
 ```
 
 ## Logging
 The default logger used by the SDK is [logrus](https://github.com/sirupsen/logrus), but you have the option to override it with your logger via the `Logger` config option, it only has to satisfy the [Logger](https://github.com/configcat/go-sdk/blob/master/logger.go) interface:
-```go
-import {
-	"github.com/configcat/go-sdk"
-	"github.com/sirupsen/logrus"
-}
-
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
-    Logger: logrus.New()})
-```
 
 ### Setting log levels
 
+#### Using `logrus`
 ```go
 import {
-	"github.com/configcat/go-sdk"
+	"github.com/configcat/go-sdk/v7"
 	"github.com/sirupsen/logrus"
 }
 
@@ -281,12 +419,23 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KE
     Logger: logger})
 ```
 
+#### Using the default logger
+```go
+import {
+	"github.com/configcat/go-sdk/v7"
+	"github.com/sirupsen/logrus"
+}
+
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
+    Logger: configcat.DefaultLogger(configcat.LogLevelInfo)})
+```
+
 Available log levels:
 
 | Level      | Description                                             |
 | ---------- | ------------------------------------------------------- |
 | ErrorLevel | Only error level events are logged.                     |
-| WarnLevel  | Errors and Warnings are logged.                         |
+| WarnLevel  | Default, Errors and Warnings are logged.                |
 | InfoLevel  | Errors, Warnings and feature flag evaluation is logged. |
 | DebugLevel | All of the above plus debug info is logged.             |
 
