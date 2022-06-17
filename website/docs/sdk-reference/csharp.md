@@ -384,7 +384,7 @@ IDictionary<string, object> settingValues = client.GetAllValues();
 
 // invoke with user object
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
-IEnumerable<string> settingValuesTargeting = client.GetAllValues(userObject);
+IDictionary<string, object> settingValuesTargeting = client.GetAllValues(userObject);
 ```
 
 ```csharp
@@ -393,7 +393,7 @@ IDictionary<string, object> settingValues = await client.GetAllValuesAsync();
 
 // invoke with user object
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
-IEnumerable<string> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
+IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
 ```
 
 ## Using ConfigCat behind a proxy
