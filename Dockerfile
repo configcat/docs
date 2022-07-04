@@ -3,7 +3,8 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY ./start.sh start.sh
 COPY ./nginx/nginx.conf.template /etc/nginx/conf.d/nginx.conf.template
 
-FROM node:16.13 AS builder
+# If you update node version, please also update the node version in the .nvmrc file.
+FROM node:16.15 AS builder
 COPY ./website/package.json /app/website/package.json
 COPY ./website/package-lock.json /app/website/package-lock.json
 WORKDIR /app/website
