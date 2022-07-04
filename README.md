@@ -43,12 +43,32 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 <script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(NetSchema) }}></script>
 ```
 
+## Run locally using Docker
+
+1. Have [Docker](https://www.docker.com) CLI installed
+
+2. Crate container
+   ```bash
+   docker build -t home-page:latest .
+   ```
+3. Run container (you might need to replace environment variables)
+   ```bash
+   docker run -i --publish 8000:80 --name home home-page:latest
+   ```
+4. Open `http://localhost:8000`
+
 # Contributions
 
 Contributions are welcome via PR.
 
 # Troubleshooting
-If you face any strange errors when trying to run locally, please check if you have the latest LTS version of [Node.js](https://nodejs.org/).
+### Make sure you have the proper Node.js version installed
+You might run into errors caused by the wrong version of Node.js. To make sure you are using the recommended Node.js version follow these steps.
+
+1. Have nvm (Node Version Manager - https://github.com/nvm-sh/nvm ) installed:
+1. Run `nvm install`. This will use the compatible version of Node.js.
+1. Run `nvm use`. This will use the compatible version of Node.js.
+1. Your local Node.js version (`node -v`) should be the same as in the `.nvmrc` file. 
 
 # Questions & Support
 
