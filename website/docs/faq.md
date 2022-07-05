@@ -199,4 +199,3 @@ Yes, it is possible. All you have to do is to create a text setting and apply th
 Yes there is. We have a public management API at https://api.configcat.com.
 
 
-
