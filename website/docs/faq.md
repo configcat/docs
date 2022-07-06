@@ -12,11 +12,7 @@ A collection of frequently asked questions.
 
 ## General
 ### Learning how ConfigCat can work with your product
-You can book a free demo session [here](https://calendly.com/configcat), where we'll show you how to use ConfigCat, as well as answer your questions.
-
-### Is it possible to rename a product or config?
-Yes! You can rename your product or Config from their respective settings pop-up, which you can reach from the left-side sidebar, by clicking the vertical three dots next to their name.
-
+You can book a free demo session [here](https://calendly.com/configcat/demo), where we'll show you how to use ConfigCat, as well as answer your questions.
 
 ## Billing, Payments & Subscriptions
 
@@ -29,17 +25,17 @@ All the invoices we issued are available for download from the [Billing & Invoic
 You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Billing & Invoices page.
 
 ### Is it possible to pay via wire transfer?
-Credit card via ChargeBee is preferred, but wire transfer is also an option for those who want it. Contact us directly for this process. 
+Using a credit card via the ConfigCat Dashboard is the preferred way of payment, but a wire transfer is also an option in our larger subscription plans. [Contact us](https://configcat.com/support/) directly for this process. 
 
 ### How do I upgrade / downgrade my billing plan?
 You can change your billing plan on the [Plans](https://app.configcat.com/organization/plans) page.
 You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Plans page.
 
 ### Can I get a discounted rate?
-This is possible if you join our partnership program. Contact us directly for more information.
+This is possible if you join our partnership program or via [referrals](https://configcat.com/referrals/). [Contact us](https://configcat.com/support/) directly for more information.
 
 ### How do I change the billing email address the way I receive my invoices?
-Go to the [Billing & Invoices page.](https://app.configcat.com/organization/billing) and click the `Update billing details` link.
+Go to the [Billing & Invoices page.](https://app.configcat.com/organization/billing) And click the `Update billing details` link.
 You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Billing & Invoices page.
 
 ### How do I change my payment method or billing information?
@@ -47,7 +43,7 @@ Go to the [Billing & Invoices page.](https://app.configcat.com/organization/bill
 You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Billing & Invoices page.
 
 ### The ChargeBee payment gets stuck | Throws an error
-If you're using Firefox, try switching to a Chromium-based browser that has extensions turned off. If this doesn't work, contact us for help. 
+If you're using Firefox, try switching to a Chromium-based browser that has extensions turned off. If this doesn't work, [contact us](https://configcat.com/support/) for help. 
 
 ### How do I cancel my account?
 Go to the [Plans](https://app.configcat.com/organization/plans) page and click the `Switch Plan` button under the Free plan.
@@ -59,7 +55,7 @@ You need to have a [Billing Manager](organization.md#billing-manager-role) role 
 
 ## Security
 ### Are you ISO certified? 
-We can proudly say that as of 2022 May 31, ConfigCat has achieved the ISO/IEC 27001:2013 certification for Information Security Management Systems (ISMS).
+We can proudly say that as of 2022 May 31, ConfigCat has achieved the ISO/IEC 27001:2013 certification for Information Security Management Systems (ISMS). Click [here](https://configcat.com/iso/) to learn more.
 
 ### I'm configuring my firewall, which addresses should I whitelist?
 If possible, you can allow the whole "configcat.com" domain. Alternatively, you can manually whitelist the following addresses:
@@ -67,7 +63,6 @@ If possible, you can allow the whole "configcat.com" domain. Alternatively, you 
 - EU CDN: https://cdn-eu.configcat.com
 - The Public Management API: https://api.configcat.com
 - The Dashboard URL: https://app.configcat.com
-- API that serves the Dashboard: https://dashboard-api.configcat.com
 
 ### I can't log in to ConfigCat, because I forgot my 2FA (Two-factor authentication) code.
 
@@ -100,11 +95,8 @@ Yes, we have no trouble signing a data processing agreement (DPA).
 ### Which data do you process | store from browsers accessing the CDN to pull feature toggles?
 We don't store anything from browsers. The data flow is one directional - the SDKs are only downloading the config.json files and the feature flag evaluation happens in the SDK. ConfigCat doesn't know anything about your users, only those data which you set in your targeting rules.
 
-### Where are you processing and saving this data?
-We are using DigitalOcean and Linode.
-
 ### Is data hosted only within the EU?
-Our main infrastructure and database is in the EU, but CDN servers are located both in the EU and globally.
+Our main infrastructure and database is in the EU, but CDN servers are located both in the EU and globally. You can set where you want us to keep your data, so its always within reach for your needs.
 
 You can read more [here](https://configcat.com/docs/advanced/data-governance).
 
@@ -165,7 +157,7 @@ Zombie (Stale) flags are feature flags that are not changed in the last (configu
 The [Zombie (Stale) Flags Report](https://app.configcat.com/my-account/zombie-flags-report) is a list of all feature flags that are not changed in the last (configurable) number of days. You can use this report to identify and remove stale feature flags from your source code. This report is weekly emailed to you. You can set your [email preferences here](https://app.configcat.com/my-account/zombie-flags-report).
 
 ### I am not getting the Zombie Feature Flag email report. What am I doing wrong?
-You can change the frequency, criteria and scope of the ZFFR from the dashboard. 
+You can change the frequency, criteria and scope of the Zombie Feature Flag report from the dashboard. 
 
 **Note:** Please be aware that feature flags are only treated as zombie flags if they haven't been modified (with save & publish) in the past configured timeframe. It currently doesn't have any connection with your real usage in your code. 
 
@@ -181,11 +173,15 @@ Yes, you can see the state of all your Feature Flags across all your environment
 Invitations are valid for 14 days by default, but you can re-send them anytime to extend their expiration.
 
 ### I can't see the organization that I just joined
-If you created a new account before joining an organization via an invite (like that's send by your company via email), then ConfigCat automatically created a free organization for you.
+If you created a new account before joining an organization via an invite (like that's send by your company via email), then it is likely that a duplicate organization is created for you by ConfigCat.
 
-You can still join other organizations, but in case you're not using the free organization that comes with your new account, it's best that you delete the free org to eliminate confusion.
+Once you find the proper organization where you are supposed to be, we recommend deleting the duplicate from [here](https://app.configcat.com/organization/preferences), but please make sure that you don't accidentally delete the one that you want to keep.
 
 ## Technical Ones
+
+### Is it possible to rename a product or config?
+Yes, you can rename almost everything within ConfigCat. Organizations, products, configs, environments, tags and feature flags can all be renamed. What you can't rename is feature flag keys, as that could cause a tsunami of reference error messages in your applications.
+
 ### Can I change my Feature Flag based on a date
 There is no explicit way to do this in ConfigCat, but you can create a text setting anytime with some your desired start date as a value and in your code you can filter for it. This [guide](https://configcat.com/blog/2020/11/04/enable-my-feature-automatically/) should help get things started rolling in the right direction.
 
