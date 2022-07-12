@@ -1,6 +1,6 @@
 ---
 id: bitrise-step
-title: Bitrise
+title: Bitrise - Scan your source code for feature flags
 ---
 
 This section describes how to use ConfigCat's <a target="_blank" href="https://www.bitrise.io/integrations/steps/configcat-feature-flag-sync">Bitrise Step</a>
