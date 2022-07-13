@@ -361,10 +361,13 @@ map = %{
 
 In the *ConfigCat SDK*, we use the default Elixir's [Logger](https://hexdocs.pm/logger/Logger.html) so you can customise as you like.
 
+Info level logging helps to inspect how a feature flag was evaluated:
+
 ```bash
-[info]  Fetching configuration from ConfigCat
-[info]  ConfigCat configuration json fetch response code: 200 Cached: "xxxxx-xxx"
-[debug] Evaluating get_value('show_contact_phone_number').
+[info]  Evaluating get_value('isPOCFeatureEnabled').
+[info]  User object: %ConfigCat.User{country: nil, custom: %{}, email: "configcat@example.com", identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
+[info]  Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@something.com] => no match
+[info]  Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@example.com] => match, returning: true
 ```
 
 ## `get_all_keys()`
@@ -376,7 +379,6 @@ keys = ConfigCat.get_all_keys()
 ```
 
 ## `get_all_values()`
-
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
