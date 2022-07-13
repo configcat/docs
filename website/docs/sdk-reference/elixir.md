@@ -237,7 +237,7 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 
 - **Remote over local** (`:remote_over_local`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
 
-You can set up the SDK to load your feature flag & setting overrides from a file or a hash.
+You can set up the SDK to load your feature flag & setting overrides from a file or a map.
 
 ### JSON File
 
@@ -339,8 +339,8 @@ The URL to your current config.json is based on your [Data Governance](advanced/
 }
 ```
 
-### Hash
-You can set up the SDK to load your feature flag & setting overrides from a hash.
+### Map
+You can set up the SDK to load your feature flag & setting overrides from a map.
 
 ```elixir
 map = %{
