@@ -21,7 +21,7 @@ description: ConfigCat Elixir SDK Reference. This is a step-by-step guide on how
 ```elixir
 def deps do
   [
-    {:configcat, "~> 1.0.0"}
+    {:configcat, "~> 2.0.0"}
   ]
 end
 ```
@@ -68,6 +68,9 @@ end
 | `cache_policy` | `CachePolicy.auto/1`, `CachePolicy.lazy/1` and `CachePolicy.manual/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details. |
 | `cache` | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`. |
 | `http_proxy` | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`. |
+| `connect_timeout`| Timeout for establishing a TCP or SSL connection, in milliseconds. Default is 8000.
+| `read_timeout` | Timeout for receiving an HTTP response from the socket, in milliseconds. Default is 5000.
+| `flag_overrides` | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)
 | `name` | A unique identifier for this instance of `ConfigCat`. Defaults to `ConfigCat`.  Must be provided if you need to run more than one instance of `ConfigCat` in the same application. If you provide a `name`, you must then pass that name to all of the API functions using the `client` option. |
 
 ## Anatomy of `get_value()`
@@ -166,7 +169,7 @@ Available options:
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```elixir
-ConfigCat.force_refresh();
+ConfigCat.force_refresh()
 ```
 
 > `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
@@ -223,14 +226,148 @@ ConfigCat.get_value("setting", "default", client: :first)
 ConfigCat.get_value("setting", "default", client: :second)
 ```
 
+## Flag Overrides
+
+With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
+
+- **Local/Offline mode** (`:local_only`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+
+- **Local over remote** (`:local_over_remote`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
+
+- **Remote over local** (`:remote_over_local`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
+
+You can set up the SDK to load your feature flag & setting overrides from a file or a map.
+
+### JSON File
+
+The SDK can be configured to load your feature flag & setting overrides from a file. 
+
+#### File
+```elixir
+{ConfigCat, [
+    sdk_key: "YOUR SDK KEY",
+    flag_overrides: ConfigCat.LocalFileDataSource.new(
+      "path/to/the/local_flags.json",  # path to the file
+      :local_only  # local/offline mode
+    )
+]}
+```
+
+#### JSON File Structure
+The SDK supports 2 types of JSON structures to describe feature flags & settings.
+
+##### 1. Simple (key-value) structure
+```json
+{
+  "flags": {
+    "enabledFeature": true,
+    "disabledFeature": false,
+    "intSetting": 5,
+    "doubleSetting": 3.14,
+    "stringSetting": "test"
+  }
+}
+```
+
+##### 2. Complex (full-featured) structure
+This is the same format that the SDK downloads from the ConfigCat CDN. 
+It allows the usage of all features you can do on the ConfigCat Dashboard.
+
+You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+
+The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings: 
+
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+
+```json
+{
+    "f": { // list of feature flags & settings
+        "isFeatureEnabled": { // key of a particular flag
+            "v": false, // default value, served when no rules are defined
+            "i": "430bded3", // variation id (for analytical purposes)
+            "t": 0, // feature flag's type, possible values: 
+                    // 0 -> BOOLEAN 
+                    // 1 -> STRING
+                    // 2 -> INT
+                    // 3 -> DOUBLE
+            "p": [ // list of percentage rules
+                { 
+                    "o": 0, // rule's order
+                    "v": true, // value served when the rule is selected during evaluation
+                    "p": 10, // % value
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                },
+                {
+                    "o": 1, // rule's order
+                    "v": false, // value served when the rule is selected during evaluation
+                    "p": 90, // % value
+                    "i": "bddac6ae" // variation id (for analytical purposes)
+                }
+            ],
+            "r": [ // list of targeting rules
+                {
+                    "o": 0, // rule's order
+                    "a": "Identifier", // comparison attribute
+                    "t": 2, // comparator, possible values:
+                        // 0  -> 'IS ONE OF',
+                        // 1  -> 'IS NOT ONE OF',
+                        // 2  -> 'CONTAINS',
+                        // 3  -> 'DOES NOT CONTAIN',
+                        // 4  -> 'IS ONE OF (SemVer)',
+                        // 5  -> 'IS NOT ONE OF (SemVer)',
+                        // 6  -> '< (SemVer)',
+                        // 7  -> '<= (SemVer)',
+                        // 8  -> '> (SemVer)',
+                        // 9  -> '>= (SemVer)',
+                        // 10 -> '= (Number)',
+                        // 11 -> '<> (Number)',
+                        // 12 -> '< (Number)',
+                        // 13 -> '<= (Number)',
+                        // 14 -> '> (Number)',
+                        // 15 -> '>= (Number)',
+                        // 16 -> 'IS ONE OF (Sensitive)',
+                        // 17 -> 'IS NOT ONE OF (Sensitive)'
+                    "c": "@example.com", // comparison value
+                    "v": true, // value served when the rule is selected during evaluation
+                    "i": "bcfb84a7" // variation id (for analytical purposes)
+                }
+            ]
+        },
+    }
+}
+```
+
+### Map
+You can set up the SDK to load your feature flag & setting overrides from a map.
+
+```elixir
+map = %{
+    "enabledFeature" => true,
+    "disabledFeature" => false,
+    "intSetting" => 5,
+    "doubleSetting" => 3.14,
+    "stringSetting" => "test"
+}
+
+{ConfigCat, [
+    sdk_key: "YOUR SDK KEY",
+    flag_overrides: ConfigCat.LocalMapDataSource.new(map, :local_only)
+]}
+```
+
 ## Logging
 
 In the *ConfigCat SDK*, we use the default Elixir's [Logger](https://hexdocs.pm/logger/Logger.html) so you can customise as you like.
 
+Info level logging helps to inspect how a feature flag was evaluated:
+
 ```bash
-[info]  Fetching configuration from ConfigCat
-[info]  ConfigCat configuration json fetch response code: 200 Cached: "xxxxx-xxx"
-[debug] Evaluating get_value('show_contact_phone_number').
+[info]  Evaluating get_value('isPOCFeatureEnabled').
+[info]  User object: %ConfigCat.User{country: nil, custom: %{}, email: "configcat@example.com", identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
+[info]  Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@something.com] => no match
+[info]  Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@example.com] => match, returning: true
 ```
 
 ## `get_all_keys()`
@@ -239,6 +376,16 @@ You can query the keys from your configuration in the SDK with the `get_all_keys
 
 ```elixir
 keys = ConfigCat.get_all_keys()
+```
+
+## `get_all_values()`
+
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
+```elixir
+values = ConfigCat.get_all_values(
+  ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92")  # Optional User Object
+)
 ```
 
 ## Using ConfigCat behind a proxy
