@@ -21,7 +21,7 @@ description: ConfigCat Elixir SDK Reference. This is a step-by-step guide on how
 ```elixir
 def deps do
   [
-    {:configcat, "~> 1.0.0"}
+    {:configcat, "~> 2.0.0"}
   ]
 end
 ```
