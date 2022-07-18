@@ -11,7 +11,7 @@ Turn features On / Off right from a linked item on your monday.com board with th
 
 1. Install <a href="https://monday.com/marketplace/10000079" target="_blank">ConfigCat Feature Flags</a> monday.com app to your monday account.
 2. Open one of your boards in monday and click on an item.
-3. Add the ConfigCat Feature Flags monday app to your item.
+3. Add the [ConfigCat Feature Flags monday app](https://monday.com/marketplace/10000079) to your item.
 4. In order to use ConfigCat Feature Flags you have to authorize first with your ConfigCat Public API credentials.
 5. Get your ConfigCat Public API credentials: https://app.configcat.com/my-account/public-api-credentials
 6. Click authorize.
