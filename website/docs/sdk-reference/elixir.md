@@ -364,10 +364,10 @@ In the *ConfigCat SDK*, we use the default Elixir's [Logger](https://hexdocs.pm/
 Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-[info]  Evaluating get_value('isPOCFeatureEnabled').
-[info]  User object: %ConfigCat.User{country: nil, custom: %{}, email: "configcat@example.com", identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
-[info]  Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@something.com] => no match
-[info]  Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@example.com] => match, returning: true
+[debug]  Evaluating get_value('isPOCFeatureEnabled').
+[debug]  User object: %ConfigCat.User{country: nil, custom: %{}, email: "configcat@example.com", identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
+[debug]  Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@something.com] => no match
+[debug]  Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@example.com] => match, returning: true
 ```
 
 ## `get_all_keys()`
