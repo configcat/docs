@@ -126,7 +126,7 @@ client.getValue(
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
 ```swift
-let value = await client.getValueAsync(
+let value = await client.getValue(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
     user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
