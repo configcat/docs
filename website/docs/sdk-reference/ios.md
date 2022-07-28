@@ -286,7 +286,13 @@ let client = ConfigCatClient(
     refreshMode: PollingModes.manualPoll()
 )
 
-client.refresh()
+// Completion callback
+client.refresh() {
+    // The client uses the latest configuration
+}
+
+// Async/await
+await client.refresh()
 ```
 > `getValue()` returns `defaultValue` if the cache is empty. Call `refresh()` to update the cache.
 
@@ -338,7 +344,7 @@ Then use your custom cache implementation:
 let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>", configCache: MyCustomCache())
 ```
 
-#### Force refresh
+## Force refresh
 Any time you want to refresh the cached configuration with the latest one, you can call the `refresh()` method of the library, which will initiate a new fetch and will update the local cache.
 
 ## Using ConfigCat behind a proxy
