@@ -41,7 +41,7 @@ Add the SDK to your `Package.swift`.
 dependencies: [
     .package(
         url: "https://github.com/configcat/swift-sdk", 
-        from: "8.0.0"
+        from: "9.0.0"
     )
 ]
 ```
@@ -56,8 +56,17 @@ let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>")
 ```
 ### 4. Get your setting value
 ```swift
-let isMyAwesomeFeatureEnabled = client.getValue(for: "key-of-my-awesome-feature", defaultValue: false)
-if(isMyAwesomeFeatureEnabled) {
+client.getValue(for: "isMyAwesomeFeatureEnabled", defaultValue: false) { isMyAwesomeFeatureEnabled in
+    if isMyAwesomeFeatureEnabled {
+        doTheNewThing()
+    } else {
+        doTheOldThing()
+    }
+}
+
+// Or with async/await
+let isMyAwesomeFeatureEnabled = await client.getValue(for: "isMyAwesomeFeatureEnabled", defaultValue: false)
+if isMyAwesomeFeatureEnabled {
     doTheNewThing()
 } else {
     doTheOldThing()
@@ -94,24 +103,9 @@ If you want to use multiple SDK Keys in the same application, create only one `C
 | `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
-```swift
-let value = client.getValue(
-    for: "keyOfMySetting", // Setting Key
-    defaultValue: false, // Default value
-    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
-)
-```
-
-## Anatomy of `getValueAsync()`
-| Parameters     | Description                                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
-| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 | `completion`   | **REQUIRED.** Callback function to call, when the result is ready.                                           |
-
 ```swift
-client.getValueAsync(
+client.getValue(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
     user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
@@ -122,6 +116,21 @@ client.getValueAsync(
         doTheOldThing()
     }
 }
+```
+
+## Anatomy of asynchronous `getValue()`
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
+```swift
+let value = await client.getValue(
+    for: "keyOfMySetting", // Setting Key
+    defaultValue: false, // Default value
+    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+)
 ```
 
 ## User Object
@@ -179,15 +188,22 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no matc
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: Optional(true)
 ```
 
-## `getAllKeys()`, `getAllKeysAsync()`
-You can get all the setting keys from your configuration by calling the `getAllKeys()` or `getAllKeysAsync()` method of the `ConfigCatClient`.
+## `getAllKeys()`
+You can get all the setting keys from your configuration by calling the `getAllKeys()` method of the `ConfigCatClient`.
 
 ```swift
 let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>")
-let keys = client.getAllKeys()
+
+// Completion callback
+client.getAllKeys() { keys in 
+    // use keys
+}
+
+// Async/await
+let keys = await client.getAllKeys()
 ```
 
-## `getAllValues()`, `getAllValuesAsync()`
+## `getAllValues()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
@@ -197,7 +213,16 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 ```swift
 let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>")
-let allValues = client.getAllValues(
+
+// Completion callback
+client.getAllValues(
+    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+) { allValues in
+    // use allValues
+}
+
+// Async/await
+let allValues = await client.getAllValues(
     user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
 )
 ```
@@ -246,36 +271,30 @@ let client = ConfigCatClient(
     refreshMode: PollingModes.lazyLoad(cacheRefreshIntervalInSeconds: 120 /* the cache will expire in 120 seconds */)
 )
 ```
-Use the `asyncRefresh` option parameter of the `PollingModes.lazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a `getValue()` call is made while the cache is expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
-```swift
-let client = ConfigCatClient(
-    sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
-    refreshMode: PollingModes.lazyLoad(
-        cacheRefreshIntervalInSeconds: 120, // the cache will expire in 120 seconds
-        useAsyncRefresh: true // the refresh will be executed asynchronously
-    )
-)
-```
-If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
 
 Available options:
 
 | Option Parameter                | Description                  | Default |
 | ------------------------------- | ---------------------------- | ------- |
 | `cacheRefreshIntervalInSeconds` | Cache TTL.                   | 60      |
-| `useAsyncRefresh`               | Asynchronously refresh.      | false   |
 
 ### Manual polling
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `refresh()` is your application's responsibility.
 ```swift
 let client = ConfigCatClient(
     sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
     refreshMode: PollingModes.manualPoll()
 )
 
-client.forceRefresh()
+// Completion callback
+client.refresh() {
+    // The client uses the latest configuration
+}
+
+// Async/await
+await client.refresh()
 ```
-> `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
+> `getValue()` returns `defaultValue` if the cache is empty. Call `refresh()` to update the cache.
 
 ## Flag Overrides
 
@@ -325,8 +344,8 @@ Then use your custom cache implementation:
 let client = ConfigCatClient(sdkKey: "<PLACE-YOUR-SDK-KEY-HERE>", configCache: MyCustomCache())
 ```
 
-#### Force refresh
-Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
+## Force refresh
+Any time you want to refresh the cached configuration with the latest one, you can call the `refresh()` method of the library, which will initiate a new fetch and will update the local cache.
 
 ## Using ConfigCat behind a proxy
 Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by adding a *ProxyDictionary* to the ConfigCat's `URLSessionConfiguration`.
