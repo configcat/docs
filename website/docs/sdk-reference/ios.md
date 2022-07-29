@@ -41,7 +41,7 @@ Add the SDK to your `Package.swift`.
 dependencies: [
     .package(
         url: "https://github.com/configcat/swift-sdk", 
-        from: "9.0.0"
+        from: "9.0.1"
     )
 ]
 ```
