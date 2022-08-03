@@ -145,7 +145,7 @@ Also, consider the following:
 [More on stickiness and consistency](advanced/targeting.md/#stickiness--consistency)
 
 ### How to use targeting rules based on sensitive data?
-If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Sensitive text comparators](advanced/targeting.md/#sensitive-text-comparators).
+If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Confidential text comparators](advanced/targeting.md/#confidential-text-comparators).
 
 
 

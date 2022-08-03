@@ -44,35 +44,35 @@ The following comparators assume that *Attribute* and *Comparison value* contain
 > In case **attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), targeting rule **evaluation will be skipped**.
 
 :::caution
-Consider using Sensitive text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
+Consider using Confidential text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
 :::
 
-| Comparator       | Description                                                                                                         |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF        | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list. |
-| IS NOT ONE OF    | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
-| CONTAINS         | True if the *Attribute* contains the *Comparison value*.                                                            |
-| DOES NOT CONTAIN | True if the *Attribute* doesn't contain the *Comparison value*.                                                     |
+| Comparator                   | Description                                                                                                         |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| IS ONE OF (cleartext)        | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list. |
+| IS NOT ONE OF (cleartext)    | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
+| CONTAINS (cleartext)         | True if the *Attribute* contains the *Comparison value*.                                                            |
+| DOES NOT CONTAIN (cleartext) | True if the *Attribute* doesn't contain the *Comparison value*.                                                     |
 
-#### Sensitive text comparators
+#### Confidential text comparators
 
-We recommend sensitive text comparators in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
+We recommend confidential text comparators in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
 In this case, the feature flag evaluation is based on the secure hashes of the comparison values.
 
 | Comparator                | Description                                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF (Sensitive)     | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list. |
-| IS NOT ONE OF (Sensitive) | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
+| IS ONE OF (hashed)        | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list. |
+| IS NOT ONE OF (hashed)    | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
 
-Since sensitive text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example of how to target users from the same company. Which used to be handled by a rule like:
+Since confidential text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example of how to target users from the same company. Which used to be handled by a rule like:
 
-![Sensitive](/assets/sensitive2.png)
+![Confidential](/assets/sensitive2.png)
 
 
-You can add a custom attribute called `domain` and use only sensitive comparators in the targeting rule.
+You can add a custom attribute called `domain` and use only confidential comparators in the targeting rule.
 
 On the Dashboard:
-![Sensitive](/assets/sensitive1.png)
+![Confidential](/assets/sensitive1.png)
 
 In your code:
 ```js
@@ -84,7 +84,7 @@ const userObject = {
 }
 const value = configCatClient.getValue(key, defaultValue, callback, userObject);
 ```
-Sensitive comparators are supported from these SDK versions:
+Confidential comparators are supported from these SDK versions:
 
 | SDK     | Version |
 | ------- | ------- |
