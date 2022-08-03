@@ -299,8 +299,8 @@ The URL to your current config.json is based on your [Data Governance](advanced/
                         // 13 -> '<= (Number)',
                         // 14 -> '> (Number)',
                         // 15 -> '>= (Number)',
-                        // 16 -> 'IS ONE OF (Sensitive)',
-                        // 17 -> 'IS NOT ONE OF (Sensitive)'
+                        // 16 -> 'IS ONE OF (Hashed)',
+                        // 17 -> 'IS NOT ONE OF (Hashed)'
                     "c": "@example.com", // comparison value
                     "v": true, // value served when the rule is selected during evaluation
                     "i": "bcfb84a7" // variation id (for analytical purposes)
