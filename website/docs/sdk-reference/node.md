@@ -187,7 +187,7 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 
 | Option Parameter      | Description                                                                                                                | Default        |
 | --------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `pollIntervalSeconds` | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                     | 60             |
+| `pollIntervalSeconds` | Polling interval. Range: `[1, Number.MAX_SAFE_INTEGER]`                                                                     | 60             |
 | `configChanged`       | Callback to get notified about changes.                                                                                    | -              |
 | `logger`              | Custom logger. See below for details.                                                                                      | Console logger |
 | `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
