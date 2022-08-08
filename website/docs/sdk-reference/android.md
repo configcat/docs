@@ -13,23 +13,10 @@ description: ConfigCat Android (Kotlin) SDK Reference. This is a step-by-step gu
 
 <a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android SDK on GitHub</a>  
 
-### Minimum requirements:
-- [Android 4.3 (API level 18)](https://developer.android.com/studio/releases/platforms#4.3) - Jelly Bean
-- Java 1.8
-
-```
-android {
-    defaultConfig {
-        //...
-        minSdkVersion 18
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-}
-```
+### Compatibility
+The minimum supported Android SDK version is 21 (Lollipop).
+### R8 (ProGuard)
+When you use R8 or ProGuard, the aar artifact automatically applies the [included rules](https://github.com/configcat/android-sdk/blob/master/configcat-proguard-rules.pro) for the SDK.
 
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
@@ -46,12 +33,14 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#")
 ```
 ### 4. Get your setting value
 ```kotlin
-val isMyAwesomeFeatureEnabled = client.getValue(Boolean::class.java, "<key-of-my-awesome-feature>", false)
-if(isMyAwesomeFeatureEnabled) {
-    doTheNewThing()
-} else {
-    doTheOldThing()
-}
+client.getValueAsync(Boolean::class.java, "isMyAwesomeFeatureEnabled", false)
+    .thenAccept { isMyAwesomeFeatureEnabled ->
+        if (isMyAwesomeFeatureEnabled) {
+            doTheNewThing()
+        } else {
+            doTheOldThing()
+        }
+    }
 ```
 
 ### 5. Stop *ConfigCat* client
