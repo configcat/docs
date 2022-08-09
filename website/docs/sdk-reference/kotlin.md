@@ -278,14 +278,15 @@ val client = ConfigCatClient("<PLACE-YOUR-SDK-KEY-HERE>") {
 ## HTTP Engine
 The ConfigCat SDK internally uses <a href="https://ktor.io" target="_blank">Ktor</a> to download the latest configuration over HTTP. For each platform the SDK includes a specific <a href="https://ktor.io/docs/http-client-engines.html#limitations" target="_blank">HTTP engine</a>: 
 
-- Android / JVM: `ktor-client-okhttp`
-- macOS / iOS / tvOS / watchOS: `ktor-client-darwin`
-- JavaScript / Node.js: `ktor-client-js`
-- Windows / Linux: It is possible to use Ktor's <a href="https://ktor.io/docs/http-client-engines.html#curl" target="_blank">`Curl` engine</a>.
+- **Android / JVM**: `ktor-client-okhttp`
+- **macOS / iOS / tvOS / watchOS**: `ktor-client-darwin`
+- **JavaScript / Node.js**: `ktor-client-js`
+- **Windows / Linux**: It is possible to use Ktor's <a href="https://ktor.io/docs/http-client-engines.html#curl" target="_blank">Curl engine</a>.
 
 You can set/override the HTTP engine like the following:
 ```kotlin
 // this example configures the SDK to use the Curl engine for HTTP communication.
+import com.configcat.*
 import io.ktor.client.engine.curl.*
 
 val client = ConfigCatClient("<PLACE-YOUR-SDK-KEY-HERE>") {
@@ -302,16 +303,16 @@ val client = ConfigCatClient("<PLACE-YOUR-SDK-KEY-HERE>") {
     requestTimeoutMs = 10_000
 }
 ```
-> Default request timeout is 30 seconds.
+> The default request timeout is 30 seconds.
 
 ### HTTP Proxy
 If your application runs behind a proxy you can do the following:
 ```kotlin
 val client = ConfigCatClient("<PLACE-YOUR-SDK-KEY-HERE>") { 
-    httpProxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("proxy-server", proxyPort))
+    httpProxy = ProxyBuilder.http("http://proxy-server:1234/")
 }
 ```
-You can check tha availability of the proxy configuration in specific HTTP engines <a href="https://ktor.io/docs/proxy.html" target="_blank">here</a>.
+> You can check tha availability of the proxy configuration in specific HTTP engines <a href="https://ktor.io/docs/proxy.html" target="_blank">here</a>.
 
 ## Force refresh
 Any time you want to refresh the cached configuration with the latest one, you can call the `refresh()` method of the library, which initiates a new download and updates the local cache.
