@@ -4,6 +4,7 @@ title: Kotlin Multiplatform SDK Reference
 description: ConfigCat Kotlin Multiplatform SDK Reference. This is a step-by-step guide on how to use feature flags in your Kotlin Multiplatform apps.
 ---
 
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/kotlin-sdk.svg?style=social)](https://github.com/configcat/kotlin-sdk/stargazers)
 [![Kotlin CI](https://github.com/configcat/kotlin-sdk/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/configcat/kotlin-sdk/actions/workflows/ci.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.configcat/configcat-kotlin-client?label=maven%20central)](https://search.maven.org/artifact/com.configcat/configcat-kotlin-client/)
 ![Snapshot](https://img.shields.io/nexus/s/com.configcat/configcat-kotlin-client?label=snapshot&server=https%3A%2F%2Foss.sonatype.org)
@@ -11,10 +12,10 @@ description: ConfigCat Kotlin Multiplatform SDK Reference. This is a step-by-ste
 [![SonarCloud Coverage](https://img.shields.io/sonar/coverage/configcat_kotlin-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=configcat_kotlin-sdk)
 [![Kotlin](https://img.shields.io/badge/kotlin-1.7-blueviolet.svg?logo=kotlin)](http://kotlinlang.org)
 
-<a href="https://github.com/ConfigCat/kotlin-sdk" target="_blank">ConfigCat Kotlin Multiplatform SDK on GitHub</a>
-<a href="https://configcat.github.io/kotlin-sdk/" target="_blank">API Documentation</a>
+- <a href="https://github.com/ConfigCat/kotlin-sdk" target="_blank">ConfigCat Kotlin Multiplatform SDK on GitHub</a>
+- <a href="https://configcat.github.io/kotlin-sdk/" target="_blank">API Documentation</a>
 
-## Getting Started
+## Getting started
 ### 1. Install the ConfigCat SDK
 ```kotlin
 val configcat_version: String by project
@@ -82,7 +83,8 @@ ConfigCatClient.close(client) // closes a specific client
 | `logger`                    | Optional, sets the internal logger. [More about logging](#logging). |
 | `logLevel`                  | Optional, defaults to `LogLevel.WARNING`. Sets the internal log level. [More about logging](#logging). |
 | `override`                  | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
-| `httpEngine`                | Optional, configures the underlying `ktor` HTTP engine. [More about HTTP engines](#httpclient). |
+| `httpEngine`                | Optional, configures the underlying `Ktor` HTTP engine. [More about HTTP engines](#http-engine). |
+| `httpProxy`                 | Optional, configures HTTP proxy for the underlying `Ktor` HTTP engine. [More about HTTP proxy](#http-proxy). |
 
 ```kotlin
 val client = ConfigCatClient("#YOUR-SDK-KEY#") {
@@ -115,10 +117,10 @@ val value = client.getValue(
 ## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ```kotlin
-val user = ConfigCatUser(identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92");   
+val user = ConfigCatUser(identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92")  
 ```
 ```kotlin
-val user = ConfigCatUser(identifier = "john@example.com");   
+val user = ConfigCatUser(identifier = "john@example.com")   
 ```
 
 ### Customized user object creation:
@@ -137,7 +139,7 @@ val user = ConfigCatUser(
         "SubscriptionType" to "Pro", 
         "UserRole" to "Admin"
     )
-);
+)
 ```
 
 ## Polling Modes
@@ -175,7 +177,7 @@ Available options:
 | `maxInitWaitTimeSeconds`   | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
 | `onConfigChanged`          | Callback to get notified about changes.  | -       |
 
-### Lazy Loading
+### Lazy loading
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
 
 Use the `cacheRefreshIntervalSeconds` option parameter of the `lazyLoad()` to set cache lifetime.
@@ -193,14 +195,14 @@ Available options:
 | ------------------------------- | ---------------------------- | ------- |
 | `cacheRefreshIntervalSeconds`   | Cache TTL.                   | 60      |
 
-### Manual Polling
+### Manual polling
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `refresh()` is your application's responsibility.
-```dart
+```kotlin
 val client = ConfigCatClient("<PLACE-YOUR-SDK-KEY-HERE>") {
     pollingMode = manualPoll()
 }
 
-client.refresh();
+client.refresh()
 ```
 > `getValue()` returns `defaultValue` if the cache is empty. Call `refresh()` to update the cache.
 
@@ -216,7 +218,7 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 - **Remote over local** (`OverrideBehavior.REMOTE_OVER_LOCAL`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
 
 You can set up the SDK to load your feature flag & setting overrides from a `Map<String, Any>`.
-```dart
+```kotlin
 val client = ConfigCatClient("localhost") {
     flagOverrides = {
         behavior = OverrideBehavior.LOCAL_ONLY
@@ -238,7 +240,7 @@ You can query the keys of each feature flag and setting with the `getAllKeys()` 
 
 ```kotlin
 val client = ConfigCatClient("#YOUR-SDK-KEY#")
-val keys = client.getAllKeys();
+val keys = client.getAllKeys()
 ```
 
 ## `getAllValues()`
@@ -246,11 +248,11 @@ Evaluates and returns the values of all feature flags and settings. Passing a Us
 
 ```kotlin
 val client = ConfigCatClient("#YOUR-SDK-KEY#")
-val settingValues = client.getAllValues();
+val settingValues = client.getAllValues()
 
 // invoke with user object
 val user = ConfigCatUser(identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92")
-val settingValuesTargeting = client.getAllValues(user);
+val settingValuesTargeting = client.getAllValues(user)
 ```
 
 ## Custom Cache
@@ -273,7 +275,7 @@ val client = ConfigCatClient("<PLACE-YOUR-SDK-KEY-HERE>") {
 }
 ```
 
-## HttpClient
+## HTTP Engine
 The ConfigCat SDK internally uses <a href="https://ktor.io" target="_blank">Ktor</a> to download the latest configuration over HTTP. For each platform the SDK includes a specific <a href="https://ktor.io/docs/http-client-engines.html#limitations" target="_blank">HTTP engine</a>: 
 
 - Android / JVM: `ktor-client-okhttp`
@@ -305,8 +307,11 @@ val client = ConfigCatClient("<PLACE-YOUR-SDK-KEY-HERE>") {
 ### HTTP Proxy
 If your application runs behind a proxy you can do the following:
 ```kotlin
-// TODO
+val client = ConfigCatClient("<PLACE-YOUR-SDK-KEY-HERE>") { 
+    httpProxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("proxy-server", proxyPort))
+}
 ```
+You can check tha availability of the proxy configuration in specific HTTP engines <a href="https://ktor.io/docs/proxy.html" target="_blank">here</a>.
 
 ## Force refresh
 Any time you want to refresh the cached configuration with the latest one, you can call the `refresh()` method of the library, which initiates a new download and updates the local cache.
@@ -338,7 +343,7 @@ Available log levels:
 
 Info level logging helps to inspect how a feature flag was evaluated:
 ```bash
-2022-08-09 15:58:54 UTC [INFO]: ConfigCat - Evaluating getValue(isPOCFeatureEnabled)
+2022-08-09 15:58:54 UTC [INFO]: ConfigCat - Evaluating 'isPOCFeatureEnabled'
 User object: {Identifier: 435170f4-8a8b-4b67-a723-505ac7cdea92, Email: john@example.com}
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: true

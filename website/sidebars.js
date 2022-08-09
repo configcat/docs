@@ -63,6 +63,7 @@ module.exports = {
         { type: "doc", id: "sdk-reference/node", label: "Node.js" },
         { type: "doc", id: "sdk-reference/android", label: "Android (Kotlin)" },
         { type: "doc", id: "sdk-reference/ios", label: "iOS (Swift)" },
+        { type: "doc", id: "sdk-reference/kotlin", label: "Kotlin Multiplatform" },
         { type: "doc", id: "sdk-reference/python", label: "Python" },
         { type: "doc", id: "sdk-reference/go", label: "Go" },
         { type: "doc", id: "sdk-reference/php", label: "PHP" },

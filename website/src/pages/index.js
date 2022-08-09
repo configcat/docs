@@ -60,6 +60,7 @@ const features = [
       { url: "sdk-reference/node", title: "Node.js" },
       { url: "sdk-reference/android", title: "Android (Kotlin)" },
       { url: "sdk-reference/ios", title: "iOS (Swift)" },
+      { url: "sdk-reference/kotlin", title: "Kotlin Multiplatform" },
       { url: "sdk-reference/python", title: "Python" },
       { url: "sdk-reference/go", title: "Go" },
       { url: "sdk-reference/php", title: "PHP" },

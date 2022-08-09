@@ -28,6 +28,9 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ### iOS (Swift)
 - [Documentation](sdk-reference/ios.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/swift-sdk" target="_blank">GitHub repository of the ConfigCat Swift SDK.</a>
+### Kotlin Multiplatform
+- [Documentation](sdk-reference/kotlin.md) on how to connect your application.
+- <a href="https://github.com/configcat/kotlin-sdk" target="_blank">GitHub repository of the ConfigCat Kotlin Multiplatform SDK.</a>
 ### Python
 - [Documentation](sdk-reference/python.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/python-sdk" target="_blank">GitHub repository of the ConfigCat Python SDK.</a>
