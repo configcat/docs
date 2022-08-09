@@ -147,7 +147,7 @@ final client = ConfigCatClient.get(
     )
 );
 ```
-Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
+Adding a callback to `onConfigChanged` option parameter will get you notified about changes.
 ```dart
 final client = ConfigCatClient.get(
     sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
