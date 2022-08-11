@@ -76,7 +76,7 @@ ConfigCatClient.close(client) // closes a specific client
 | --------------------------- | ----------- |
 | `dataGovernance`            | Optional, defaults to `DataGovernance.GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.GLOBAL`, `DataGovernance.EU_ONLY`. |
 | `baseUrl`                   | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
-| `requestTimeoutMs`          | Optional, defaults to `30s`. Sets the underlying HTTP client's request timeout. [More about the HTTP Client](#httpclient). |
+| `requestTimeoutMs`          | Optional, defaults to `30s`. Sets the underlying HTTP client's request timeout. [More about HTTP Timeout](#http-timeout). |
 | `configCache`               | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
 | `pollingMode`               | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `logger`                    | Optional, sets the internal logger. [More about logging](#logging). |
