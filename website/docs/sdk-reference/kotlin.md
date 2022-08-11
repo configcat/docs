@@ -11,7 +11,7 @@ description: ConfigCat Kotlin Multiplatform SDK Reference. This is a step-by-ste
 [![Quality Gate Status](https://img.shields.io/sonar/quality_gate/configcat_kotlin-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=configcat_kotlin-sdk)
 [![SonarCloud Coverage](https://img.shields.io/sonar/coverage/configcat_kotlin-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=configcat_kotlin-sdk)
 
-- <a href="https://github.com/ConfigCat/kotlin-sdk" target="_blank">ConfigCat Kotlin Multiplatform SDK on GitHub</a>
+- <a href="https://github.com/configcat/kotlin-sdk" target="_blank">ConfigCat Kotlin Multiplatform SDK on GitHub</a>
 - <a href="https://configcat.github.io/kotlin-sdk/" target="_blank">API Documentation</a>
 
 ## Getting started
@@ -357,6 +357,6 @@ Check out our Sample Applications how they use the ConfigCat SDK
 - <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/node-js" target="_blank">Node.js app</a>
 
 ## Look Under the Hood
-- <a href="https://github.com/ConfigCat/kotlin-sdk" target="_blank">ConfigCat Kotlin Multiplatform SDK's repository on GitHub</a>
+- <a href="https://github.com/configcat/kotlin-sdk" target="_blank">ConfigCat Kotlin Multiplatform SDK's repository on GitHub</a>
 - <a href="https://configcat.github.io/kotlin-sdk/" target="_blank">ConfigCat Kotlin Multiplatform SDK's API documentation</a>
-- <a href="https://search.maven.org/artifact/com.configcat/configcat-java-client" target="_blank">ConfigCat Java SDK on Maven Central</a>
+- <a href="https://search.maven.org/artifact/com.configcat/configcat-kotlin-client" target="_blank">ConfigCat Kotlin Multiplatform SDK on Maven Central</a>
