@@ -81,7 +81,7 @@ ConfigCatClient.close(client) // closes a specific client
 | `pollingMode`               | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `logger`                    | Optional, sets the internal logger. [More about logging](#logging). |
 | `logLevel`                  | Optional, defaults to `LogLevel.WARNING`. Sets the internal log level. [More about logging](#logging). |
-| `override`                  | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `flagOverrides`             | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 | `httpEngine`                | Optional, configures the underlying `Ktor` HTTP engine. [More about HTTP engines](#http-engine). |
 | `httpProxy`                 | Optional, configures HTTP proxy for the underlying `Ktor` HTTP engine. [More about HTTP proxy](#http-proxy). |
 
