@@ -29,7 +29,7 @@ kotlin {
     }
 }
 ```
-### 2. Import *com.configcat.** in your application code
+### 2. Import the ConfigCat SDK
 ```kotlin
 import com.configcat.*
 ```
