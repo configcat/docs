@@ -33,7 +33,7 @@ kotlin {
 ```kotlin
 import com.configcat.*
 ```
-### 3. Create a *ConfigCat* client instance
+### 3. Create the ConfigCat client with your SDK Key
 ```kotlin
 import com.configcat.*
 
