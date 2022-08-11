@@ -4,6 +4,7 @@ title: Dart (Flutter) SDK Reference
 description: ConfigCat Dart (Flutter) SDK Reference. This is a step-by-step guide on how to use feature flags in your Dart (Flutter) apps.
 ---
 
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/dart-sdk.svg?style=social)](https://github.com/configcat/dart-sdk/stargazers)
 [![pub package](https://img.shields.io/pub/v/configcat_client.svg)](https://pub.dev/packages/configcat_client)
 [![Dart CI](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml/badge.svg?branch=main)](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml)
 
@@ -147,7 +148,7 @@ final client = ConfigCatClient.get(
     )
 );
 ```
-Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
+Adding a callback to `onConfigChanged` option parameter will get you notified about changes.
 ```dart
 final client = ConfigCatClient.get(
     sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
