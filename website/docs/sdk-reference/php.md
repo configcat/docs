@@ -311,12 +311,12 @@ You can use the following caching options:
   ```php
   class CustomCache extends \ConfigCat\Cache\ConfigCache
   { 
-      protected function get($key)
+      protected function get($key): ?string
       {
           // load from cache
       } 
     
-      protected function set($key, $value)
+      protected function set($key, $value): void
       {
           // save into cache
       }
