@@ -17,52 +17,61 @@ Using this feature you will be able to set different setting values for differen
 
 ## Anatomy of a Targeting Rule
 
-By adding a rule, you specify a group of your users and what feature flag or setting value they should get. A rule consists of an **Attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses), and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
+By adding a rule, you specify a group of your users and what feature flag or setting value they should get. A rule consists of a **Comparison attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses), and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
 
-### Attribute
+![Confidential](/assets/sensitive2.png)
+
+| Field                | Purpose                                                                                                                                              |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Comparison attribute | The attribute that the targeting rule is based on. Could be "User ID", "Email", "Country" or any custom attribute.                                   |
+| Comparator           | The comparison operator. Holds the connection between the attribute and the value.                                                                   |
+| Comparison value     | The value that the attribute is compared to. Could be a string, a number, a semantic version or a comma-separated list, depending on the comparator. |
+
+
+### Comparison attribute
 
 A property of your user (e.g. *email address*, *geographic location*). Your application should pass the attribute values (e.g. *jane@example.com*, *Europe*) to ConfigCat for comparison.
 
 There are 3 predefined attributes. Additionally, you can define your ***custom attributes*** as well:
 
-| Attribute Name | Description                                                                        |
-| -------------- | ---------------------------------------------------------------------------------- |
-| `Email`        | The e-mail address of your user.                                                   |
-| `Identifier`   | Usually a unique user identifier in your application.                              |
-| `Country`      | Might come useful for testing a new feature only in one country.                   |
-| `Custom`       | ***Define any attribute (e.g. `OS version`), by typing its name to the textbox.*** |
+| Comparison attribute name | Description                                                                        |
+| ------------------------- | ---------------------------------------------------------------------------------- |
+| `Email`                   | The e-mail address of your user.                                                   |
+| `Identifier`              | Usually a unique user identifier in your application.                              |
+| `Country`                 | Might come useful for testing a new feature only in one country.                   |
+| `Custom`                  | ***Define any attribute (e.g. `OS version`), by typing its name to the textbox.*** |
 
 ### Comparison value
 
-Any string, number, or comma-separated list. Will be compared to the selected *Attribute* using the *Comparator*. **Max Length: 65535 chars**.
+Any string, number, or comma-separated list. Will be compared to the selected *Comparison attribute* using the *Comparator*. **Max Length: 65535 chars**.
 
 ### Comparator
 
 #### Text comparators
 
-The following comparators assume that *Attribute* and *Comparison value* contain string/text.
+The following comparators assume that *Comparison attribute* and *Comparison value* contain string/text.
 > In case **attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), targeting rule **evaluation will be skipped**.
 
 :::caution
 Consider using Confidential text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
 :::
 
-| Comparator                   | Description                                                                                                         |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF (cleartext)        | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list. |
-| IS NOT ONE OF (cleartext)    | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
-| CONTAINS (cleartext)         | True if the *Attribute* contains the *Comparison value*.                                                            |
-| DOES NOT CONTAIN (cleartext) | True if the *Attribute* doesn't contain the *Comparison value*.                                                     |
+| Comparator                   | Description                                                                                                                    |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| IS ONE OF (cleartext)        | Checks if the *Comparison attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list. |
+| IS NOT ONE OF (cleartext)    | True if the *Comparison attribute* is not listed in the *Comparison value*.                                                    |
+| CONTAINS (cleartext)         | True if the *Comparison attribute* contains the *Comparison value*.                                                            |
+| DOES NOT CONTAIN (cleartext) | True if the *Comparison attribute* doesn't contain the *Comparison value*.                                                     |
 
 #### Confidential text comparators
 
 We recommend confidential text comparators in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
 In this case, the feature flag evaluation is based on the secure hashes of the comparison values.
 
-| Comparator                | Description                                                                                                         |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF (hashed)        | Checks if the *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list. |
-| IS NOT ONE OF (hashed)    | True if the *Attribute* is not listed in the *Comparison value*.                                                    |
+| Comparator             | Description                                                                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| IS ONE OF (hashed)     | Checks if the *Comparison attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list. |
+| IS NOT ONE OF (hashed) | True if the *Comparison attribute* is not listed in the *Comparison value*.                                                    |
 
 Since confidential text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example of how to target users from the same company. Which used to be handled by a rule like:
 
@@ -101,34 +110,34 @@ Confidential comparators are supported from these SDK versions:
 
 #### Semantic version comparators
 
-The following comparators assume that *Attribute* and *Comparison value* contain semantic versions.
+The following comparators assume that *Comparison attribute* and *Comparison value* contain semantic versions.
 Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer Semantic Version Specification</a>.
 
-| Comparator             | Description                                                                                                                        |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF (Semver)     | True if *Attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list of semantic versions. |
-| IS NOT ONE OF (Semver) | True if the *Attribute* is not listed in the *Comparison value*.                                                                   |
-| < (Semver)             | True if *Attribute* is a smaller version number than *Comparison value*.                                                           |
-| <= (Semver)            | True if *Attribute* is smaller than or equals *Comparison value*.                                                                  |
-| \> (Semver)            | True if *Attribute* is a larger version number than *Comparison value*.                                                            |
-| \>= (Semver)           | True if *Attribute* is larger than or equals *Comparison value*.                                                                   |
+| Comparator             | Description                                                                                                                                   |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| IS ONE OF (Semver)     | True if *Comparison attribute* is listed in the *Comparison value*. *Comparison value* should be a comma-separated list of semantic versions. |
+| IS NOT ONE OF (Semver) | True if the *Comparison attribute* is not listed in the *Comparison value*.                                                                   |
+| < (Semver)             | True if *Comparison attribute* is a smaller version number than *Comparison value*.                                                           |
+| <= (Semver)            | True if *Comparison attribute* is smaller than or equals *Comparison value*.                                                                  |
+| \> (Semver)            | True if *Comparison attribute* is a larger version number than *Comparison value*.                                                            |
+| \>= (Semver)           | True if *Comparison attribute* is larger than or equals *Comparison value*.                                                                   |
 
-All semantic version comparators return `false` if either *Attribute* or *Comparison value* is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
+All semantic version comparators return `false` if either *Comparison attribute* or *Comparison value* is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
 
 #### Number comparators
 
-The following comparators assume that *Attribute* and *Comparison value* contain numbers. 
+The following comparators assume that *Comparison attribute* and *Comparison value* contain numbers. 
 
-| Comparator   | Description                                                      |
-| ------------ | ---------------------------------------------------------------- |
-| = (Number)   | True if *Attribute* equals *Comparison value*.                   |
-| <&#8203;> (Number)  | True if *Attribute* does not equal *Comparison value*.           |
-| < (Number)   | True if *Attribute* is less than *Comparison value*.             |
-| <= (Number)  | True if *Attribute* is less than or equals *Comparison value*.   |
-| \> (Number)  | True if *Attribute* is a larger than *Comparison value*.         |
-| \>= (Number) | True if *Attribute* is larger than or equals *Comparison value*. |
+| Comparator         | Description                                                                 |
+| ------------------ | --------------------------------------------------------------------------- |
+| = (Number)         | True if *Comparison attribute* equals *Comparison value*.                   |
+| <&#8203;> (Number) | True if *Comparison attribute* does not equal *Comparison value*.           |
+| < (Number)         | True if *Comparison attribute* is less than *Comparison value*.             |
+| <= (Number)        | True if *Comparison attribute* is less than or equals *Comparison value*.   |
+| \> (Number)        | True if *Comparison attribute* is a larger than *Comparison value*.         |
+| \>= (Number)       | True if *Comparison attribute* is larger than or equals *Comparison value*. |
 
-All number comparators return `false` if either *Attribute* or *Comparison value* is not a valid number.
+All number comparators return `false` if either *Comparison attribute* or *Comparison value* is not a valid number.
 
 ### Served value
 
@@ -138,7 +147,7 @@ The exact value that will be served to the users who match the targeting rule. D
 | -------------- | ------------ | ----------------------------------------------- |
 | On/Off Toggle  | Boolean      | true/false, usually the state of a feature flag |
 | Text           | String       | any string, max. 65535 characters               |
-| Whole Number   | Integer      | any whole number within the range of `int32`      |
+| Whole Number   | Integer      | any whole number within the range of `int32`    |
 | Decimal Number | Double       | any decimal number within the range of `double` |
 
 ### Multiple targeting rules and ordering
@@ -154,10 +163,10 @@ By adding multiple targeting rules you can create more complex rule sets.
 
 *Enable a feature only to users within your company except for the sales team (Susan and Simon) by adding two targeting rules:*
 
-| #   | Attribute | Comparator | Comparison value                           | Served value |
-| --- | --------- | ---------- | ------------------------------------------ | ------------ |
-| 1   | Email     | CONTAINS   | `susan@mycompany.com, simon@mycompany.com` | OFF          |
-| 2   | Email     | CONTAINS   | `@mycompany.com`                           | ON           |
+| #   | Comparison attribute | Comparator | Comparison value                           | Served value |
+| --- | -------------------- | ---------- | ------------------------------------------ | ------------ |
+| 1   | Email                | CONTAINS   | `susan@mycompany.com, simon@mycompany.com` | OFF          |
+| 2   | Email                | CONTAINS   | `@mycompany.com`                           | ON           |
 All other cases: OFF
 
 ### To all other users, serve
@@ -192,7 +201,7 @@ The exact value that will be served to the users that fall into that fraction. D
 | -------------- | ------------ | ----------------------------------------------- |
 | On/Off Toggle  | Boolean      | true/false, usually the state of a feature flag |
 | Text           | String       | any `string`, max. 65535 characters             |
-| Whole Number   | Integer      | any whole number within the range of `Int32`      |
+| Whole Number   | Integer      | any whole number within the range of `Int32`    |
 | Decimal Number | Double       | any decimal number within the range of `double` |
 
 ## Stickiness & Consistency
@@ -215,24 +224,24 @@ As the evaluation happens in the SDKs, your User's sensitive information will ne
 
 Let's say you have two users and two different Feature Flags with percentage-based targeting.  
 
-|  | isTwitterSharingEnabled | isFacebookSharingEnabled |
-| - | - | - |
+|      | isTwitterSharingEnabled                                                                 | isFacebookSharingEnabled                                                                   |
+| ---- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Jane | `hash('Jane' + 'isTwitterSharingEnabled') mod 100` <br/>-> The assigned number is **8** | `hash('Jane' + 'isFacebookSharingEnabled') mod 100`  <br/>-> The assigned number is **64** |
-| Joe | `hash('Joe' + 'isTwitterSharingEnabled') mod 100` <br/>-> The assigned number is **32** | `hash('Joe' + 'isFacebookSharingEnabled') mod 100` <br/>-> The assigned number is **12** |
+| Joe  | `hash('Joe' + 'isTwitterSharingEnabled') mod 100` <br/>-> The assigned number is **32** | `hash('Joe' + 'isFacebookSharingEnabled') mod 100` <br/>-> The assigned number is **12**   |
 
 1. Let's start with both Feature Flags set to **0% ON / 100% OFF**.
 
-|  | isTwitterSharingEnabled <br/> 0% ON / 100% OFF | isFacebookSharingEnabled <br/> 0% ON / 100% OFF |
-| - | - | - |
-| Jane | 8 >= 0 <br/>-> **OFF** | 64 >= 0 <br/>-> **OFF** |
-| Joe | 32 >= 0 <br/>-> **OFF** | 12 >= 0 <br/>-> **OFF** |
+|      | isTwitterSharingEnabled <br/> 0% ON / 100% OFF | isFacebookSharingEnabled <br/> 0% ON / 100% OFF |
+| ---- | ---------------------------------------------- | ----------------------------------------------- |
+| Jane | 8 >= 0 <br/>-> **OFF**                         | 64 >= 0 <br/>-> **OFF**                         |
+| Joe  | 32 >= 0 <br/>-> **OFF**                        | 12 >= 0 <br/>-> **OFF**                         |
 
 2. Let's set both Feature Flags to **10% ON / 90% OFF**.
 
-|  | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
-| - | - | - |
-| Jane | 8 < 10 <br/>-> **ON** | 64 >= 10 <br/>-> **OFF** |
-| Joe | 32 >= 10 <br/>-> **OFF** | 12 >= 10 <br/>-> **OFF** |
+|      | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
+| ---- | ---------------------------------------------- | ----------------------------------------------- |
+| Jane | 8 < 10 <br/>-> **ON**                          | 64 >= 10 <br/>-> **OFF**                        |
+| Joe  | 32 >= 10 <br/>-> **OFF**                       | 12 >= 10 <br/>-> **OFF**                        |
 
 :::caution
 Although both Feature Flags are set to 10% ON / 90% OFF, Jane is only evaluated to **ON** for the `isTwitterSharingEnabled` Feature Flag.
@@ -240,26 +249,26 @@ Although both Feature Flags are set to 10% ON / 90% OFF, Jane is only evaluated 
 
 3. The Twitter Sharing Feature seems alright, so let's increase the `isTwitterSharingEnabled` to **40% ON / 60% OFF**.
 
-|  | isTwitterSharingEnabled <br/> 40% ON / 60% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
-| - | - | - |
-| Jane | 8 < 40 <br/>-> **ON** | 64 >= 10 <br/>-> **OFF** |
-| Joe | 32 < 40 <br/>-> **ON** | 12 >= 10 <br/>-> **OFF** |
+|      | isTwitterSharingEnabled <br/> 40% ON / 60% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
+| ---- | ---------------------------------------------- | ----------------------------------------------- |
+| Jane | 8 < 40 <br/>-> **ON**                          | 64 >= 10 <br/>-> **OFF**                        |
+| Joe  | 32 < 40 <br/>-> **ON**                         | 12 >= 10 <br/>-> **OFF**                        |
 
 4. Something seems strange with the Twitter Sharing Feature, so let's rollback to the safe **10% ON / 90% OFF**.
 
-|  | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
-| - | - | - |
-| Jane | 8 < 10 <br/>-> **ON** | 64 >= 10 <br/>-> **OFF** |
-| Joe | 32 >= 10 <br/>-> **OFF** | 12 >= 10 <br/>-> **OFF** |
+|      | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
+| ---- | ---------------------------------------------- | ----------------------------------------------- |
+| Jane | 8 < 10 <br/>-> **ON**                          | 64 >= 10 <br/>-> **OFF**                        |
+| Joe  | 32 >= 10 <br/>-> **OFF**                       | 12 >= 10 <br/>-> **OFF**                        |
 
 > As percentage-based targeting is sticky, the same user base is evaluated to **ON** like in the 2. step.
 
 5. If everything seems alright, we can safely increase both Feature Flags to **100% ON / 0% OFF**.
 
-|  | isTwitterSharingEnabled <br/> 100% ON / 0% OFF | isFacebookSharingEnabled <br/> 100% ON / 0% OFF |
-| - | - | - |
-| Jane | 8 < 100 <br/>-> **ON** | 64 < 100 <br/>-> **ON** |
-| Joe | 32 < 100 <br/>-> **ON** | 12 < 100 <br/>-> **ON** |
+|      | isTwitterSharingEnabled <br/> 100% ON / 0% OFF | isFacebookSharingEnabled <br/> 100% ON / 0% OFF |
+| ---- | ---------------------------------------------- | ----------------------------------------------- |
+| Jane | 8 < 100 <br/>-> **ON**                         | 64 < 100 <br/>-> **ON**                         |
+| Joe  | 32 < 100 <br/>-> **ON**                        | 12 < 100 <br/>-> **ON**                         |
 
 ## Multiple options
 
