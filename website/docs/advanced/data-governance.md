@@ -12,16 +12,12 @@ To ensure high availability and low response times all around the globe ConfigCa
 data centers at multiple global locations. All of the data centers have multiple CDN nodes
 to guarantee proper redundancy.
 
-![config cat data center locations map](/assets/data-governance-globe.svg)
-
 ### ConfigCat Data Center locations
-- EU: Amsterdam, Frankfurt
-- USA: Newark, New York City, Fremont, San Francisco
-- Asia & Oceania: Singapore, Sydney
+ConfigCat uses Cloudflare Edge Cache Network to deliver the configuration JSONs to the SDKs. Read more about Cloudflare data centers [here](https://www.cloudflare.com/network/).
 
-# How to govern the data?
+## How to govern the data?
 
-## Available geographical areas
+Currently available geographical areas:
 
 ### Global [Default]
 Provides geo-location based load balancing on all nodes around the globe to ensure the lowest response times.
