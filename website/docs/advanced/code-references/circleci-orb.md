@@ -19,7 +19,7 @@ You can find more information about CircleCI Orbs <a target="_blank" href="https
     version: 2.1
 
     orbs:
-      configcat: configcat/scan-repository@1.3.2
+      configcat: configcat/scan-repository@1.4.0
 
     workflows:
       main:

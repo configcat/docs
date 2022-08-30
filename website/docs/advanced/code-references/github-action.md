@@ -23,9 +23,9 @@ You can find more information about GitHub Actions <a target="_blank" href="http
         name: Scan repository for code references
         steps:
         - name: Checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
         - name: Scan & upload
-          uses: configcat/scan-repository@v1
+          uses: configcat/scan-repository@v2
           with:
             api-user: ${{ secrets.CONFIGCAT_API_USER }}
             api-pass: ${{ secrets.CONFIGCAT_API_PASS }}

@@ -18,7 +18,7 @@ to automatically scan your source code for feature flag and setting usages and u
     configcat-scan-repository:
       stage: deploy # the job will run in the deploy phase, but you can choose from any other phases you have
       image:
-        name: configcat/cli:1.3.0
+        name: configcat/cli:1.6.0
         entrypoint: [""]
       script:
         - configcat scan $CI_PROJECT_DIR 

@@ -16,7 +16,7 @@ You can find more information about Bitbucket Pipelines <a target="_blank" href=
 3. Add the following snippet to the script section of your `bitbucket-pipelines.yml` file.
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
     ```yaml
-    - pipe: configcat/scan-repository-pipe:1.1.2
+    - pipe: configcat/scan-repository-pipe:1.2.1
       variables:
         CONFIG_ID: 'PASTE-YOUR-CONFIG-ID-HERE'
     ```
