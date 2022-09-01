@@ -299,7 +299,6 @@ Manual polling gives you full control over when the `config.json` (with the sett
     ...
 </ConfigCatProvider>
 ```
-
 ```tsx
 const client = useConfigCatClient();
 useEffect(() => client.forceRefresh(() => { setRefreshed(true) }));
