@@ -1,8 +1,10 @@
+require('dotenv').config();
+
 module.exports = {
   title: 'ConfigCat Docs',
   tagline: 'Learn more on how to use ConfigCat Feature Flags.',
   url: 'https://configcat.com',
-  baseUrl: '/docs/',
+  baseUrl: process.env.PAGE_BASE_URL || '/docs/',
   onBrokenLinks: 'throw',
   trailingSlash: true,
   favicon: 'img/favicon.png',
