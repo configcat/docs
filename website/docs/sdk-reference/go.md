@@ -137,11 +137,11 @@ user := &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
 
 ### Other options to create a user object:
 
-The *ConfigCat SDK* uses reflection to determine what attributes are available on a user object. Your can either implement the `UserAttributes` interface - then its `GetAttribute(string) string` method will be used to retrieve the attributes - or use a struct type where each public field is treated as a possible comparison attribute.
+The *ConfigCat SDK* uses reflection to determine what attributes are available on a user object. You can either implement the `UserAttributes` interface - which's `GetAttribute(string) string` method will be used to retrieve the attributes - or use a pointer to a struct type which's public fields are treated as possible comparison attributes.
 
-If a field's type implements a `String() string` method, the field will be treated as a textual and the `String()` method will be called to determine the value.
+If a field's type implements a `String() string` method, the field will be treated as textual and its `String()` method will be called to determine the value.
 
-If a field's type is `map[string]string`, the map value is used to look up any custom attribute not found directly in the struct. There should be at most one of these fields.
+If a field's type is `map[string]string`, the map is used to look up any custom attribute not found directly in the struct. There should be at most one of these fields.
 
 Otherwise, a field type must be a numeric type, a `string`, a `[]byte` or a `github.com/blang/semver.Version`.
 
