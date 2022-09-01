@@ -351,7 +351,7 @@ Available log levels:
 | ----- | ----- | ------------------------------------------------------- |
 | -1    | Off   | Nothing gets logged.                                    |
 | 1     | Error | Only error level events are logged.                     |
-| 2     | Warn  | Errors and Warnings are logged.                         |
+| 2     | Warn  | Default. Errors and Warnings are logged.                         |
 | 3     | Info  | Errors, Warnings and feature flag evaluation is logged. |
 | 4     | Debug | All of the above plus debug info is logged.             |
 
