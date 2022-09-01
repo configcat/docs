@@ -11,7 +11,7 @@ You can find more information about CircleCI Orbs <a target="_blank" href="https
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in <a target="_blank" href="https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project">CircleCI Environment Variables</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
     <img class="bordered" src="/docs/assets/cli/scan/cco_secrets.png" alt="CircleCI Orb secrets" />
 
-2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
+2. Get your selected [Config's ID](/advanced/code-references/overview#config-id).
 
 3. Create a new CircleCI YAML config in your repository under the `.circleci` folder, and put the following snippet into it. 
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.

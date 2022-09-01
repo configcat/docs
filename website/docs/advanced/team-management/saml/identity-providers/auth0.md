@@ -106,4 +106,4 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 
 ### 5. Next Steps
 
-- Configure the [auto-assignment of users](/docs/advanced/team-management/auto-assign-users).
+- Configure the [auto-assignment of users](/advanced/team-management/auto-assign-users).

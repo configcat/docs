@@ -3,21 +3,21 @@ id: manual
 title: CLI - Add to CI/CD pipelines manually
 ---
 
-This section describes how to use the [ConfigCat CLI](/docs/advanced/cli)
+This section describes how to use the [ConfigCat CLI](/advanced/cli)
 to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat.
 
 ## Prerequisites
 
-- [Install](/docs/advanced/cli#installation) the CLI in your CI/CD or local environment.
-- [Configure](/docs/advanced/cli#configuration) the CLI with your ConfigCat Manangement API credentials.
-- Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
+- [Install](/advanced/cli#installation) the CLI in your CI/CD or local environment.
+- [Configure](/advanced/cli#configuration) the CLI with your ConfigCat Manangement API credentials.
+- Get your selected [Config's ID](/advanced/code-references/overview#config-id).
 
 ## Scan & Upload
 
 To initiate the scanning with uploading the results, you can use the `scan` command with the `--upload` option.
 
 ### With Git VCS
-The scan command detects when it's being executed on a Git repository and automatically [extracts additional information](/docs/advanced/code-references/overview#scanning-git-repositories).  
+The scan command detects when it's being executed on a Git repository and automatically [extracts additional information](/advanced/code-references/overview#scanning-git-repositories).  
 The following snippet shows a minimal example that uses only the required parameters in the case of a Git repository.
 ```bash
 configcat scan /path/to/your/repo \
@@ -57,7 +57,7 @@ configcat scan /path/to/your/repo \
 ```
 
 ### Docker
-After [installing](/docs/advanced/cli#installation) the ConfigCat CLI with Docker, you can scan your repository by mounting its folder as a volume and setting the ConfigCat Management API credentials as environment variables on the executing container.
+After [installing](/advanced/cli#installation) the ConfigCat CLI with Docker, you can scan your repository by mounting its folder as a volume and setting the ConfigCat Management API credentials as environment variables on the executing container.
 ```bash
 docker run --rm \
     -v /path/to/your/repo:/repository \ # mount the repository as volume

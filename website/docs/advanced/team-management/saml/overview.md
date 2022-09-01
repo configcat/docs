@@ -13,19 +13,19 @@ organization admin to do this.
 
 
 ### Prerequisites
-- [Verified domain](/docs/advanced/team-management/domain-verification)  
+- [Verified domain](/advanced/team-management/domain-verification)  
   In order to configure SAML, you have to verify the ownership of the domain that your company uses for email addresses. This step is required, because at the beginning of the login process, we use the user's email domain to select the appropriate SAML Identity Provider. 
 - Identity Provider that supports SAML 2.0
 
 ### Configure a SAML Identity Provider
 
 We tested and validated the following SAML Identity Providers:
-- [Azure AD](/docs/advanced/team-management/saml/identity-providers/azure-ad)
-- [ADFS](/docs/advanced/team-management/saml/identity-providers/adfs)
-- [Google](/docs/advanced/team-management/saml/identity-providers/google)
-- [Okta](/docs/advanced/team-management/saml/identity-providers/okta)
-- [Auth0](/docs/advanced/team-management/saml/identity-providers/auth0)
-- [OneLogin](/docs/advanced/team-management/saml/identity-providers/onelogin)
+- [Azure AD](/advanced/team-management/saml/identity-providers/azure-ad)
+- [ADFS](/advanced/team-management/saml/identity-providers/adfs)
+- [Google](/advanced/team-management/saml/identity-providers/google)
+- [Okta](/advanced/team-management/saml/identity-providers/okta)
+- [Auth0](/advanced/team-management/saml/identity-providers/auth0)
+- [OneLogin](/advanced/team-management/saml/identity-providers/onelogin)
 
 :::info
 Other Identity Providers might also work with ConfigCat, if they support the SAML 2.0 protocol.

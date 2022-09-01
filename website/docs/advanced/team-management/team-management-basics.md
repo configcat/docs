@@ -42,13 +42,13 @@ Enforce 2FA for your team members to increase the security of your organization.
 
 ### Auto-assign users
 
-All new users who sign up with a [verified email domain](/docs/advanced/team-management/domain-verification) can be automatically added to your organization.
+All new users who sign up with a [verified email domain](/advanced/team-management/domain-verification) can be automatically added to your organization.
 Furthermore, you can also set which Organization roles / Product permissions they should get upon on-boarding.
 
-Read more about [Auto-assigning users](/docs/advanced/team-management/auto-assign-users).
+Read more about [Auto-assigning users](/advanced/team-management/auto-assign-users).
 
 ### SSO (Single Sign-On)
 
 You can let your organization members sign in to ConfigCat using 3rd party SSO (Single Sign-On) providers.
 
-Read more about [SSO](/docs/advanced/team-management/single-sign-on-sso/).
+Read more about [SSO](/advanced/team-management/single-sign-on-sso/).

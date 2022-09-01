@@ -5,7 +5,7 @@ title: Scan & Upload Code References Overview
 
 import CodeRefIntro from './_intro.mdx'
 
-<CodeRefIntro linkText="CLI" linkUrl="/docs/advanced/cli" linkTarget="_self" />
+<CodeRefIntro linkText="CLI" linkUrl="/advanced/cli" linkTarget="_self" />
 
 You can integrate the CLI into your CI/CD pipeline or use it with other execution mechanisms like scheduled jobs or VCS push triggered workflows.
 
@@ -176,15 +176,15 @@ When the scan is executed on a Git repository, the CLI attaches the currently ac
 
 ### CI/CD Integrations
 We prepared the following integrations to simplify the usage of the scanner in your CI/CD workflow:
-- [GitHub Action](/docs/advanced/code-references/github-action)
-- [CircleCI Orb](/docs/advanced/code-references/circleci-orb)
-- [GitLab CI/CD](/docs/advanced/code-references/gitlab-ci)
-- [Azure DevOps](/docs/advanced/code-references/azure-devops)
-- [Bitbucket Pipe](/docs/advanced/code-references/bitbucket-pipe)
-- [Bitrise Step](/docs/advanced/code-references/bitrise-step)
+- [GitHub Action](/advanced/code-references/github-action)
+- [CircleCI Orb](/advanced/code-references/circleci-orb)
+- [GitLab CI/CD](/advanced/code-references/gitlab-ci)
+- [Azure DevOps](/advanced/code-references/azure-devops)
+- [Bitbucket Pipe](/advanced/code-references/bitbucket-pipe)
+- [Bitrise Step](/advanced/code-references/bitrise-step)
 
 ### Manual Integration
-If your workflow doesn't have an integration, you can follow the instructions [here](/docs/advanced/code-references/manual) to configure scan executions directly with the ConfigCat CLI.
+If your workflow doesn't have an integration, you can follow the instructions [here](/advanced/code-references/manual) to configure scan executions directly with the ConfigCat CLI.
 
 ## Ignore Files
 

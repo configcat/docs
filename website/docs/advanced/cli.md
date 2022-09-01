@@ -212,7 +212,7 @@ You can change the output format of several command's result to JSON with the `-
 :::
 
 ## Scan & Upload Code References
-The CLI has the ability to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. You can read more about this feature [here](/docs/advanced/code-references/overview).
+The CLI has the ability to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. You can read more about this feature [here](/advanced/code-references/overview).
 
 ## Examples
 Here are a few examples showing the true power of the CLI.

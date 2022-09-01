@@ -99,4 +99,4 @@ The next step will guide you on how to configure the Google App with details pro
 
 ### 5. Next Steps
 
-- Configure the [auto-assignment of users](/docs/advanced/team-management/auto-assign-users).
+- Configure the [auto-assignment of users](/advanced/team-management/auto-assign-users).

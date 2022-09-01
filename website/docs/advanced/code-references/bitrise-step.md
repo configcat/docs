@@ -11,7 +11,7 @@ to automatically scan your source code for feature flag and setting usages and u
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in secure pipeline variables with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
     <img class="bordered" src="/docs/assets/cli/scan/bitrise_secrets.png" alt="Bitrise secrets" />
 
-2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
+2. Get your selected [Config's ID](/advanced/code-references/overview#config-id).
 
 3. Add the following step to the workflows section of your `bitrise.yml` file.
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.

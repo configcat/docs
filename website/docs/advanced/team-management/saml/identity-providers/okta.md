@@ -119,4 +119,4 @@ To let users authenticate via SAML, you need to assign individual users or group
 
 ### 6. Next Steps
 
-- Configure the [auto-assignment of users](/docs/advanced/team-management/auto-assign-users).
+- Configure the [auto-assignment of users](/advanced/team-management/auto-assign-users).

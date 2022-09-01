@@ -9,6 +9,6 @@ import BitriseStep from '/docs/advanced/code-references/bitrise-step.md'
 
 <CodeRefIntro linkText="Bitrise Step" linkUrl="https://www.bitrise.io/integrations/steps/configcat-feature-flag-sync" linkTarget="_blank" />
 
-[Here](/docs/advanced/code-references/overview) you can find more details about how this feature works.
+[Here](/advanced/code-references/overview) you can find more details about how this feature works.
 
 <BitriseStep />
