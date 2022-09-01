@@ -153,7 +153,7 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} ConfigCat.`,
     },
     prism: {
-      additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir', 'dart'],
+      additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir', 'dart', 'tsx'],
     },
     algolia: {
       appId: '2KJV4BA55F',

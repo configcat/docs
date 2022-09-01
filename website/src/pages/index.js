@@ -57,6 +57,7 @@ const features = [
       { url: "sdk-reference/java", title: "Java" },
       { url: "sdk-reference/js", title: "JavaScript" },
       { url: "sdk-reference/js-ssr", title: "JavaScript (SSR)" },
+      { url: "sdk-reference/react", title: "React" },
       { url: "sdk-reference/node", title: "Node.js" },
       { url: "sdk-reference/android", title: "Android (Kotlin)" },
       { url: "sdk-reference/ios", title: "iOS (Swift)" },
