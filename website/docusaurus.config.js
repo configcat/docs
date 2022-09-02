@@ -18,7 +18,7 @@ module.exports = {
       },
       items: [
         {
-          href: 'https://configcat.com/docs/search',
+          href: '/search',
           label: 'Docs Search',
           position: "left"
         },

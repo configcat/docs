@@ -98,7 +98,7 @@ We don't store anything from browsers. The data flow is one directional - the SD
 ### Is data hosted only within the EU?
 Our main infrastructure and database is in the EU, but CDN servers are located both in the EU and globally. You can set where you want us to keep your data, so its always within reach for your needs.
 
-You can read more [here](https://configcat.com/docs/advanced/data-governance).
+You can read more [here](/advanced/data-governance).
 
 ### Is it possible to export the feature flags?
 Yes! You can export and download your current product as a standard JSON file anytime you want. The export will include:
