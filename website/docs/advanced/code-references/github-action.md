@@ -30,6 +30,12 @@ You can find more information about GitHub Actions <a target="_blank" href="http
             api-user: ${{ secrets.CONFIGCAT_API_USER }}
             api-pass: ${{ secrets.CONFIGCAT_API_PASS }}
             config-id: PASTE-YOUR-CONFIG-ID-HERE
+            # line-count: 5             # optional
+            # sub-folder: src           # optional
+            # exclude-keys: >           # optional
+            #   flag_key_to_exclue_1
+            #   flag_key_to_exclue_2
+            # verbose: true             # optional
     ```
 
 4. Commit & push your action.
@@ -39,12 +45,13 @@ Scan reports are uploaded for each branch of your repository that triggers the w
 
 ## Available Options
 
-| Parameter     | Description                                                                | Required   | Default             |
-| ------------- | -------------------------------------------------------------------------- | ---------- | ------------------- |
-| `config-id`   | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
-| `api-user`    | <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication username</a>.                    | &#9745;    |                     |
-| `api-pass`    | <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication password</a>.                    | &#9745;    |                     |
-| `api-host`    | ConfigCat Management API host.                                             |            | `api.configcat.com` |
-| `line-count`  | Context line count before and after the reference line. (min: 1, max: 10)  |            | 4                   |
-| `sub-folder`  | Sub-folder to scan, relative to the repository root folder.                |            |                     |
-| `verbose`     | Turns on detailed logging.                                                 |            | false               |
+| Parameter      | Description                                                                | Required   | Default             |
+| -------------- | -------------------------------------------------------------------------- | ---------- | ------------------- |
+| `config-id`    | ID of the ConfigCat config to scan against.                                | &#9745;    |                     |
+| `api-user`     | <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication username</a>. | &#9745;    |    |
+| `api-pass`     | <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication password</a>. | &#9745;    |    |
+| `api-host`     | ConfigCat Management API host.                                             |            | `api.configcat.com` |
+| `line-count`   | Context line count before and after the reference line. (min: 1, max: 10)  |            | 4                   |
+| `sub-folder`   | Sub-folder to scan, relative to the repository root folder.                |            |                     |
+| `exclude-keys` | List of feature flag keys that must be excluded from the scan report.      |            |                     |
+| `verbose`      | Turns on detailed logging.                                                 |            | false               |

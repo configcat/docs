@@ -16,9 +16,15 @@ You can find more information about Bitbucket Pipelines <a target="_blank" href=
 3. Add the following snippet to the script section of your `bitbucket-pipelines.yml` file.
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
     ```yaml
-    - pipe: configcat/scan-repository-pipe:1.2.1
+    - pipe: configcat/scan-repository-pipe:1.3.0
       variables:
         CONFIG_ID: 'PASTE-YOUR-CONFIG-ID-HERE'
+        # LINE_COUNT: '3'         # optional
+        # SUB_FOLDER: '/src'      # optional
+        # EXCLUDE_KEYS: >         # optional
+        #   flag_key_to_exclue_1
+        #   flag_key_to_exclue_2
+        # VERBOSE: 'true'         # optional
     ```
 
 4. Commit & push your changes.
@@ -33,5 +39,6 @@ Scan reports are uploaded for each branch of your repository that triggers the j
 | `CONFIGCAT_API_HOST`  | ConfigCat Management API host.                                             |            | `api.configcat.com` |
 | `LINE_COUNT`          | Context line count before and after the reference line. (min: 1, max: 10)  |            | 4                   |
 | `SUB_FOLDER`          | Sub-folder to scan, relative to the repository root folder.                |            |                     |
+| `EXCLUDE_KEYS`        | List of feature flag keys that must be excluded from the scan report.      |            |                     |
 | `VERBOSE`             | Turns on detailed logging.                                                 |            | false               |
 
