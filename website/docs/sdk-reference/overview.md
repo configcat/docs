@@ -19,6 +19,9 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ### JavaScript for Server-Side Rendered apps
 - [Documentation](sdk-reference/js-ssr.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/js-ssr-sdk" target="_blank">GitHub repository of the ConfigCat JS SSR SDK.</a>
+### React
+- [Documentation](sdk-reference/react.md) on how to connect your application.
+- <a href="https://github.com/ConfigCat/react-sdk" target="_blank">GitHub repository of the ConfigCat React SDK.</a>
 ### Node.js
 - [Documentation](sdk-reference/node.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/node-sdk" target="_blank">GitHub repository of the ConfigCat Node SDK.</a>
