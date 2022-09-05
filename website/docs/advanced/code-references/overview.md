@@ -23,6 +23,23 @@ configcat scan . --print
   
 See the `scan` command's <a target="_blank" href="https://configcat.github.io/cli/configcat-scan.html">reference documentation</a> for all available command parameters.
 
+### Deleted Flags
+
+As part of the scanning operation, the CLI gathers each deleted feature flag and setting from the last 180 days and look for their usages
+in your source code. When it finds a reference for a deleted feature flag or setting, it prints out a warning that lists their keys.
+
+```bash                                                       
+[warning]: 5 deleted feature flag/setting reference(s) found in 4 file(s). Keys: [featureThatWasDeleted1, featureThatWasDeleted2]
+```
+
+### Exclude Flags from Scanning
+
+There's an option to exclude feature flags or settings from the scanning operation by their keys.
+
+```bash
+configcat scan <dir> --exclude-flag-keys featureFlagToExclude1 featureFlagToExclude2
+```
+
 ## Config ID
 
 In non-interactive environments, like in a CI/CD pipeline, you have to pass the ID of your ConfigCat Config that you want to scan against. The scanner will use this ID to determine which feature flags & settings to search for in your source code.
