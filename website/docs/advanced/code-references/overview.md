@@ -25,7 +25,7 @@ See the `scan` command's <a target="_blank" href="https://configcat.github.io/cl
 
 ### Deleted Flags
 
-As part of the scanning operation, the CLI gathers each deleted feature flag and setting from the last 180 days and look for their usages
+As part of the scanning operation, the CLI gathers each deleted feature flag and setting from the last 180 days and looks for their usages
 in your source code. When it finds a reference for a deleted feature flag or setting, it prints out a warning that lists their keys.
 
 ```bash                                                       
