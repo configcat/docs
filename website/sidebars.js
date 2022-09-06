@@ -60,6 +60,7 @@ module.exports = {
         { type: "doc", id: "sdk-reference/java", label: "Java" },
         { type: "doc", id: "sdk-reference/js", label: "JavaScript" },
         { type: "doc", id: "sdk-reference/js-ssr", label: "JavaScript (SSR)" },
+        { type: "doc", id: "sdk-reference/react", label: "React" },
         { type: "doc", id: "sdk-reference/node", label: "Node.js" },
         { type: "doc", id: "sdk-reference/android", label: "Android (Kotlin)" },
         { type: "doc", id: "sdk-reference/ios", label: "iOS (Swift)" },
