@@ -13,7 +13,7 @@ You can set the polling interval to any number between 1 second and int max.
 
 ### Lazy loading
 In lazy loading mode, the ConfigCat SDK downloads the latest setting values only if they are not present in the cache, or if the cache has expired.
-You can set the cache Time To Leave (TTL) to any number also.
+You can set the cache Time To Live (TTL) to any number also.
 
 ### Manual polling
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded.
