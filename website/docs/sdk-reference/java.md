@@ -20,9 +20,13 @@ Maven:
   <version>[7.0.0,)</version>
 </dependency>
 ```
-Gradle:
+Old Gradle versions:
 ```bash
 compile group: 'com.configcat', name: 'configcat-java-client', version: '7.+'
+```
+Gradle 7 and above:
+```bash
+implementation group: 'com.configcat', name: 'configcat-java-client', version: '7.+'
 ```
 ### 2. Import the ConfigCat SDK
 ```java
