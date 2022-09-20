@@ -87,7 +87,7 @@ final client = ConfigCatClient.get(
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
 The `ConfigCatClient` constructs singleton client instances for your SDK keys with its `ConfigCatClient.get(sdkKey: <sdkKey>)` static factory method.
-These clients can be closed all at once with the `ConfigCatClient.closeAll()` or individually with `client.close()`.
+These clients can be closed all at once with the `ConfigCatClient.closeAll()` method or individually with `client.close()`.
 :::
 
 ## Anatomy of `getValue()`
