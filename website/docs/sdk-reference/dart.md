@@ -277,7 +277,7 @@ With the following hooks you can subscribe particular events sent by the SDK:
 When it's using auto polling, the ready state is reached when the SDK has a valid configuration loaded into memory either from cache or from HTTP. When the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
 - `onConfigChanged(Map<string, Setting>)`: This event is sent when the SDK loads a valid configuration into memory from cache, and each subsequent time when the loaded configuration changes via HTTP.
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
-- `error(String)`: This event is sent when an error occurs in the SDK's functioning.
+- `error(String)`: This event is sent when an error occurs within the ConfigCat SDK.
 
 You can subscribe to these events either on SDK initialization: 
 ```dart
