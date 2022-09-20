@@ -178,7 +178,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client.setDefaultUser(ConfigCatUser(identifier: 'john@example.com'));
 ```
 
-If the default user is set, the SDK will use it's value every time when the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an other user object.
+If the default user is set, the SDK will use it every time when the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without passing a user object to them.
 
 ```dart
 final user = ConfigCatUser(identifier: 'john@example.com');
