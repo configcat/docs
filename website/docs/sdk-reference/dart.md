@@ -23,7 +23,7 @@ flutter pub add configcat_client
 Or put the following directly to your `pubspec.yml` and run `dart pub get` or `flutter pub get`.
 ```yaml
 dependencies:
-  configcat_client: ^1.1.0
+  configcat_client: ^2.0.0
 ```
 ### 2. Import the ConfigCat SDK
 ```dart
