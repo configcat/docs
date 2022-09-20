@@ -163,7 +163,7 @@ final user = ConfigCatUser(
 
 There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has usually a single user only, or rarely switches users.
 
-You can set the default user either on SDK initialization:
+You can set the default user object either on SDK initialization:
 
 ```dart
 final client = ConfigCatClient.get(
