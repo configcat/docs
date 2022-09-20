@@ -123,7 +123,6 @@ final details = await client.getValueDetails(
 // Details holds the following information:
 details.value;                              // The evaluated value of the feature flag or setting.
 details.key;                                // The key of the evaluated feature flag or setting.
-details.variationId;                        // The variation ID.
 details.isDefaultValue;                     // True when the default value passed to getValueDetails() is returned due to an error.
 details.error;                              // In case of an error this field will contain its message.
 details.matchedEvaluationPercentageRule;    // When the evaluation was based on a percentage rule, this field will contain that specific rule.
