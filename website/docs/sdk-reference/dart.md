@@ -46,9 +46,9 @@ if(isMyAwesomeFeatureEnabled) {
 ### 5. Close *ConfigCat* client​
 You can safely shut down all clients at once or individually and release all associated resources on application exit.
 ```dart
-ConfigCatClient.close(); // closes all clients
+ConfigCatClient.closeAll(); // closes all clients
 
-ConfigCatClient.close(client: client); // closes a specific client
+client.close(); // closes the specific client
 ```
 
 ## Configuring the *ConfigCat Client*
@@ -71,6 +71,8 @@ ConfigCatClient.close(client: client); // closes a specific client
 | `mode`                      | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `logger`                    | Optional, sets the internal logger and log level. [More about logging](#logging). |
 | `override`                  | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `defaultUser`               | Optional, configures the default user. [More about default user](#default-user). |
+| `hooks`                     | Optional, configures events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
 
 ```dart
 final client = ConfigCatClient.get(
@@ -85,7 +87,7 @@ final client = ConfigCatClient.get(
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
 The `ConfigCatClient` constructs singleton client instances for your SDK keys with its `ConfigCatClient.get(sdkKey: <sdkKey>)` static factory method.
-These clients can be closed all at once or individually with the `ConfigCatClient.close()` method.
+These clients can be closed all at once with the `ConfigCatClient.closeAll()` or individually with `client.close()`.
 :::
 
 ## Anatomy of `getValue()`
@@ -100,6 +102,33 @@ final value = await client.getValue(
     defaultValue: false,
     user: ConfigCatUser(identifier: '#USER-IDENTIFIER#'), // Optional User Object
 );
+```
+
+## Anatomy of `getValueDetails()`
+
+`getValueDetails()` is similar to `getValue()` but instead of returning only the evaluated value it gives more detailed information about the evaluation result.
+
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+```dart
+final details = await client.getValueDetails(
+    key: 'keyOfMySetting', 
+    defaultValue: false,
+    user: ConfigCatUser(identifier: '#USER-IDENTIFIER#'), // Optional User Object
+);
+
+// Details holds the following information:
+details.value;                              // The evaluated value of the feature flag or setting.
+details.key;                                // The key of the evaluated feature flag or setting.
+details.variationId;                        // The variation ID.
+details.isDefaultValue;                     // True when the default value passed to getValueDetails() is returned due to an error.
+details.error;                              // In case of an error this field will contain its message.
+details.matchedEvaluationPercentageRule;    // When the evaluation was based on a percentage rule, this field will contain that specific rule.
+details.matchedEvaluationRule;              // When the evaluation was based on an targeting rule, this field will contain that specific rule.
+details.fetchTime;                          // The last download time of the current config.
 ```
 
 ## User Object
@@ -130,6 +159,54 @@ final user = ConfigCatUser(
 );
 ```
 
+### Default user
+
+There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has usually a single user only, or rarely switches users.
+
+You can set the default user either on SDK initialization:
+
+```dart
+final client = ConfigCatClient.get(
+    sdkKey: '#YOUR-SDK-KEY#',
+    options: ConfigCatOptions(
+        defaultUser: ConfigCatUser(identifier: 'john@example.com')
+    )
+);
+```
+or with the `setDefaultUser()` method of the ConfigCat client.
+```dart
+client.setDefaultUser(ConfigCatUser(identifier: 'john@example.com'));
+```
+
+If the default user is set, the SDK will use it's value every time when the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an other user object.
+
+```dart
+final user = ConfigCatUser(identifier: 'john@example.com');
+client.setDefaultUser(user);
+
+// The default user will be used at the evaluation process.
+final value = await client.getValue(key: 'keyOfMySetting', defaultValue: false); 
+
+```
+
+When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+
+```dart
+final user = ConfigCatUser(identifier: 'john@example.com');
+client.setDefaultUser(user);
+
+final otherUser = ConfigCatUser(identifier: 'brian@example.com');
+
+// otherUser will be used at the evaluation process.
+final value = await client.getValue(key: 'keyOfMySetting', defaultValue: false, user: otherUser); 
+
+```
+
+For deleting the default user, you can do the following:
+```dart
+client.clearDefaultUser();
+```
+
 ## Polling Modes
 The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](/advanced/caching/)
@@ -148,20 +225,6 @@ final client = ConfigCatClient.get(
     )
 );
 ```
-Adding a callback to `onConfigChanged` option parameter will get you notified about changes.
-```dart
-final client = ConfigCatClient.get(
-    sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
-    options: ConfigCatOptions(
-        mode: PollingMode.autoPoll(
-            autoPollInterval: Duration(seconds: 100),
-            onConfigChanged: () {
-                // here you can subscribe to configuration changes 
-            }
-        ),
-    )
-);
-```
 
 Available options:
 
@@ -169,7 +232,6 @@ Available options:
 | ----------------------- | ---------------------------------------- | ------- |
 | `autoPollInterval`      | Polling interval.                        | 60      |
 | `maxInitWaitTime`       | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
-| `onConfigChanged`       | Callback to get notified about changes.  | -       |
 
 ### Lazy Loading
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
@@ -207,12 +269,54 @@ client.forceRefresh();
 ```
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
 
+## Hooks
+
+With the following hooks you can subscribe particular events sent by the SDK:
+
+- `onClientReady()`: This event is sent when the SDK reaches the ready state. When the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
+When it's using auto polling, the ready state is reached when the SDK has a valid configuration loaded into memory either from cache or from HTTP. When the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
+- `onConfigChanged(Map<string, Setting>)`: This event is sent when the SDK loads a valid configuration into memory from cache, and each subsequent time when the loaded configuration changes via HTTP.
+- `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
+- `error(String)`: This event is sent when an error occurs in the SDK's functioning.
+
+You can subscribe to these events either on SDK initialization: 
+```dart
+final client = ConfigCatClient.get(
+    sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
+    options: ConfigCatOptions(
+        mode: PollingMode.manualPoll(),
+        hooks: Hooks(
+            onFlagEvaluated: (details) => /* handle the event */
+        )
+    )
+);
+```
+or with the `hooks` property of the ConfigCat client:
+```dart
+client.hooks.addOnFlagEvaluated((details) => /* handle the event */);
+```
+
+## Online / Offline mode
+
+In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
+```dart
+client.setOffline();
+```
+In offline mode the SDK won't initiate HTTP requests and will work only from its cache.
+
+To put the SDK back in online mode, you can do the following:
+```dart
+client.setOnline();
+```
+
+> With `client.isOffline()` you can check whether the SDK is in offline mode or not.
+
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
-- **Local/Offline mode** (`OverrideBehaviour.localOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+- **Local** (`OverrideBehaviour.localOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
 - **Local over remote** (`OverrideBehaviour.localOverRemote`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
 
