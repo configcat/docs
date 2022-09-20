@@ -63,16 +63,16 @@ client.close(); // closes the specific client
 | Properties                  | Description |
 | --------------------------- | ----------- |
 | `dataGovernance`            | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`. |
-| `baseUrl`                   | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
+| `baseUrl`                   | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json. |
 | `connectTimeout`            | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's connect timeout. [More about the HTTP Client](#httpclient). |
 | `receiveTimeout`            | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's receive timeout. [More about the HTTP Client](#httpclient). |
 | `sendTimeout`               | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's send timeout. [More about the HTTP Client](#httpclient). |
 | `cache`                     | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
 | `mode`                      | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `logger`                    | Optional, sets the internal logger and log level. [More about logging](#logging). |
-| `override`                  | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
-| `defaultUser`               | Optional, configures the default user. [More about default user](#default-user). |
-| `hooks`                     | Optional, configures events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
+| `override`                  | Optional, sets local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `defaultUser`               | Optional, sets the default user. [More about default user](#default-user). |
+| `hooks`                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
 
 ```dart
 final client = ConfigCatClient.get(
@@ -274,8 +274,8 @@ client.forceRefresh();
 With the following hooks you can subscribe particular events sent by the SDK:
 
 - `onClientReady()`: This event is sent when the SDK reaches the ready state. When the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
-When it's using auto polling, the ready state is reached when the SDK has a valid configuration loaded into memory either from cache or from HTTP. When the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
-- `onConfigChanged(Map<string, Setting>)`: This event is sent when the SDK loads a valid configuration into memory from cache, and each subsequent time when the loaded configuration changes via HTTP.
+When it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. When the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
+- `onConfigChanged(Map<string, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 - `error(String)`: This event is sent when an error occurs within the ConfigCat SDK.
 
@@ -384,7 +384,7 @@ final client = ConfigCatClient.get(
 ```
 
 ## HttpClient
-The ConfigCat SDK internally uses a <a href="https://github.com/flutterchina/dio" target="_blank">Dio HTTP client</a> instance to download the latest configuration over HTTP. You have the option to customize the internal HTTP client. 
+The ConfigCat SDK internally uses a <a href="https://github.com/flutterchina/dio" target="_blank">Dio HTTP client</a> instance to download the latest config.json over HTTP. You have the option to customize the internal HTTP client. 
 
 ### HTTP Timeout
 You can set the maximum wait time for a ConfigCat HTTP response by using Dio's timeouts.
@@ -418,7 +418,7 @@ import 'package:dio/adapter.dart';
 ```
 
 ## Force refresh
-Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
+Any time you want to refresh the cached config.json with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
 
 ## Logging
 The default logger used by the SDK is the <a href="https://pub.dev/packages/logger" target="_blank">logger</a> package, but you can override it with your implementation via the `logger` client option. The custom implementation must satisfy the <a href="https://github.com/configcat/dart-sdk/blob/main/lib/src/log/logger.dart" target="_blank">Logger</a> abstract class.
