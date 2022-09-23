@@ -106,7 +106,7 @@ final value = await client.getValue(
 
 ## Anatomy of `getValueDetails()`
 
-`getValueDetails()` is similar to `getValue()` but instead of returning only the evaluated value it gives more detailed information about the evaluation result.
+`getValueDetails()` is similar to `getValue()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -119,16 +119,19 @@ final details = await client.getValueDetails(
     defaultValue: false,
     user: ConfigCatUser(identifier: '#USER-IDENTIFIER#'), // Optional User Object
 );
-
-// Details holds the following information:
-details.value;                              // The evaluated value of the feature flag or setting.
-details.key;                                // The key of the evaluated feature flag or setting.
-details.isDefaultValue;                     // True when the default value passed to getValueDetails() is returned due to an error.
-details.error;                              // In case of an error this field will contain its message.
-details.matchedEvaluationPercentageRule;    // When the evaluation was based on a percentage rule, this field will contain that specific rule.
-details.matchedEvaluationRule;              // When the evaluation was based on an targeting rule, this field will contain that specific rule.
-details.fetchTime;                          // The last download time of the current config.
 ```
+
+The `details` result contains the following information:
+
+| Field                                     | Type      | Description                                                                              |
+| ----------------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
+| `value`                                   | `Bool` / `String` / `Int` / `Double` | The evaluated value of the feature flag or setting.           |
+| `key`                                     | `String`  | The key of the evaluated feature flag or setting.                                        |
+| `isDefaultValue`                          | `Bool`    | True when the default value passed to getValueDetails() is returned due to an error.     |
+| `error`                                   | `String`  | In case of an error, this field contains the error message.                              |
+| `matchedEvaluationPercentageRule`         | `PercentageRule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `matchedEvaluationRule`                   | `RolloutRule` | If the evaluation was based on a targeting rule, this field contains that specific rule. |
+| `fetchTime`                               | `DateTime` | The last download time of the current config.                                           |
 
 ## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
@@ -160,7 +163,7 @@ final user = ConfigCatUser(
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has usually a single user only, or rarely switches users.
+There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
 You can set the default user object either on SDK initialization:
 
@@ -177,7 +180,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client.setDefaultUser(ConfigCatUser(identifier: 'john@example.com'));
 ```
 
-If the default user is set, the SDK will use it every time when the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without passing a user object to them.
+Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
 ```dart
 final user = ConfigCatUser(identifier: 'john@example.com');
@@ -270,10 +273,10 @@ client.forceRefresh();
 
 ## Hooks
 
-With the following hooks you can subscribe particular events sent by the SDK:
+With the following hooks you can subscribe to particular events fired by the SDK:
 
-- `onClientReady()`: This event is sent when the SDK reaches the ready state. When the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
-When it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. When the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
+- `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
+If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
 - `onConfigChanged(Map<string, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 - `error(String)`: This event is sent when an error occurs within the ConfigCat SDK.
@@ -281,7 +284,7 @@ When it's using auto polling, the ready state is reached when the SDK has a vali
 You can subscribe to these events either on SDK initialization: 
 ```dart
 final client = ConfigCatClient.get(
-    sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
+    sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(
         mode: PollingMode.manualPoll(),
         hooks: Hooks(
@@ -301,7 +304,7 @@ In cases when you'd want to prevent the SDK from making HTTP calls, you can put 
 ```dart
 client.setOffline();
 ```
-In offline mode the SDK won't initiate HTTP requests and will work only from its cache.
+In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
 
 To put the SDK back in online mode, you can do the following:
 ```dart
