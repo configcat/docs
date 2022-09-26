@@ -155,11 +155,14 @@ module.exports = {
     prism: {
       additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir', 'dart', 'tsx'],
     },
-    algolia: {
-      appId: '2KJV4BA55F',
-      apiKey: '893560578e902fe2755446f51c96d895',
+    algolia: { // The search crawling repo can be found here: https://github.com/configcat/docsearch
+      appId: '0MLXBNIK0Q',
+      apiKey: '6484bd6c163502bacf229cb8d22024ab',
       indexName: 'configcat',
-      searchParameters: {}
+      contextualSearch: false,
+      searchPagePath: 'search',
+      searchParameters: {},
+      externalUrlRegex: 'configcat\\.com/blog',
     },
   },
   presets: [
@@ -186,8 +189,6 @@ module.exports = {
       },
     ],
   ],
-  scripts: [
-    'https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js'
-  ],
-  stylesheets: ['https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css']
+  scripts: [],
+  stylesheets: []
 };
