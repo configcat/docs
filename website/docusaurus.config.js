@@ -155,7 +155,7 @@ module.exports = {
     prism: {
       additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir', 'dart', 'tsx'],
     },
-    algolia: {
+    algolia: { // The search crawling repo can be found here: https://github.com/configcat/docsearch
       appId: '0MLXBNIK0Q',
       apiKey: '6484bd6c163502bacf229cb8d22024ab',
       indexName: 'configcat',
