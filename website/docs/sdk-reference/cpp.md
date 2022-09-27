@@ -84,8 +84,8 @@ ConfigCatClient::close(client); // closes a specific client
 | --------------------------- | ----------- |
 | `baseUrl`                   | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
 | `dataGovernance`            | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
-| `connectTimeout`            | Optional, defaults to `8000ms`. Sets the number of milliseconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). |
-| `readTimeout`               | Optional, defaults to `5000ms`. Sets the number of milliseconds to wait for the server to respond before giving up. |
+| `connectTimeoutMs`          | Optional, defaults to `8000ms`. Sets the amount of milliseconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). `0` means it never times out during transfer |
+| `readTimeoutMs`             | Optional, defaults to `5000ms`. Sets the amount of milliseconds to wait for the server to respond before giving up. `0` means it never times out during transfer. |
 | `mode`                      | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `cache`                     | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
 | `override`                  | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
@@ -390,13 +390,13 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
 
 ## Changing the default HTTP timeout 
 
-Set the maximum wait time for a ConfigCat HTTP response by changing the *connectTimeout* or *readTimeout* in the `ConfigCatOptions`.
-The default *connectTimeout* is 8 seconds. The default *readTimeout* is 5 seconds.
+Set the maximum wait time for a ConfigCat HTTP response by changing the *connectTimeoutMs* or *readTimeoutMs* in the `ConfigCatOptions`.
+The default *connectTimeoutMs* is 8 seconds. The default *readTimeoutMs* is 5 seconds.
 
 ```cpp
 ConfigCatOptions options;
-options.connectTimeout = 10000; // Timeout in milliseconds for establishing a HTTP connection with the server
-options.readTimeout = 8000; // Timeout in milliseconds for reading the server's HTTP response
+options.connectTimeoutMs = 10000; // Timeout in milliseconds for establishing a HTTP connection with the server
+options.readTimeoutMs = 8000; // Timeout in milliseconds for reading the server's HTTP response
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
 ```
 
