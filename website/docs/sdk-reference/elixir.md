@@ -361,7 +361,7 @@ map = %{
 
 In the *ConfigCat SDK*, we use the default Elixir's [Logger](https://hexdocs.pm/logger/Logger.html) so you can customise as you like.
 
-Info level logging helps to inspect how a feature flag was evaluated:
+Debug level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
 [debug]  Evaluating get_value('isPOCFeatureEnabled').
