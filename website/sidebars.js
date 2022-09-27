@@ -71,6 +71,7 @@ module.exports = {
         { type: "doc", id: "sdk-reference/elixir", label: "Elixir" },
         { type: "doc", id: "sdk-reference/dart", label: "Dart (Flutter)" },
         { type: "doc", id: "sdk-reference/kotlin", label: "Kotlin Multiplatform" },
+        { type: "doc", id: "sdk-reference/cpp", label: "C++" },
       ],
       "Integrations": [
         { type: "doc", id: "integrations/overview", label: "Overview" },
