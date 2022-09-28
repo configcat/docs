@@ -29,7 +29,7 @@ With **[Vcpkg](https://github.com/microsoft/vcpkg)**
   .\vcpkg\vcpkg integrate install
   ```
 
-  After this, you can now create a New non-CMake Project (or open an existing one).
+  After this, you can create a New non-CMake Project (or open an existing one).
   All installed libraries are immediately ready to be `#include`'d and used
   in your project without additional configuration.
 
