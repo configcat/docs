@@ -171,6 +171,7 @@ let details = await client.getValueDetails(
     user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
 ```
 The details result contains the following information:
+
 | Field                                     | Type      | Description                                                                              |
 | ----------------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
 | `value`                                   | `Bool` / `String` / `Int` / `Double` | The evaluated value of the feature flag or setting.           |
