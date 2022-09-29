@@ -128,9 +128,10 @@ The `details` result contains the following information:
 | `value`                                   | `Bool` / `String` / `Int` / `Double` | The evaluated value of the feature flag or setting.           |
 | `key`                                     | `String`  | The key of the evaluated feature flag or setting.                                        |
 | `isDefaultValue`                          | `Bool`    | True when the default value passed to getValueDetails() is returned due to an error.     |
-| `error`                                   | `String`  | In case of an error, this field contains the error message.                              |
-| `matchedEvaluationPercentageRule`         | `PercentageRule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `matchedEvaluationRule`                   | `RolloutRule` | If the evaluation was based on a targeting rule, this field contains that specific rule. |
+| `error`                                   | `String?` | In case of an error, this field contains the error message.                              |
+| `user`                                    | `ConfigCatUser?`  | The user object that was used for evaluation.                                    |
+| `matchedEvaluationPercentageRule`         | `PercentageRule?` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `matchedEvaluationRule`                   | `RolloutRule?` | If the evaluation was based on a targeting rule, this field contains that specific rule. |
 | `fetchTime`                               | `DateTime` | The last download time of the current config.                                           |
 
 ## User Object
