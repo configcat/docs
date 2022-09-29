@@ -68,6 +68,7 @@ const features = [
       { url: "sdk-reference/elixir", title: "Elixir" },
       { url: "sdk-reference/dart", title: "Dart (Flutter)" },
       { url: "sdk-reference/kotlin", title: "Kotlin Multiplatform" },
+      { url: "sdk-reference/cpp", title: "C++" },
     ]
   },
   {
