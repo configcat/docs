@@ -22,6 +22,6 @@ You can (and should) update the cache manually, by calling a `forceRefresh()` - 
 
 This animation explains the different polling modes:
 
-<figure class="video-container">
+<figure className="video-container">
 <iframe width="100%" src="https://www.youtube.com/embed/_LWPjR4_GqA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </figure>

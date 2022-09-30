@@ -11,14 +11,14 @@ Furthermore, you can also set which Organization roles / Product permissions the
 
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
-  <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" alt="Authentication settings" />
+  <img className="saml-tutorial-img" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" alt="Authentication settings" />
 
 - Select which domain you want to configure, and click `RE-CONFIGURE` (or just `CONFIGURE` if you didn't configure it yet) under the `Auto-assign status`.
 
-  <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/auto_assign_config.png" alt="Auto-assign configuration" />
+  <img className="saml-tutorial-img" src="/docs/assets/saml/dashboard/auto_assign_config.png" alt="Auto-assign configuration" />
 
 - On the appearing dialog, you can select which `Organization roles` and `Product permissions` should be assigned to the newly registered users.
 
-  <img class="saml-tutorial-img" src="/docs/assets/saml/dashboard/auto_assign_set.png" alt="Auto-assign setup" />
+  <img className="saml-tutorial-img" src="/docs/assets/saml/dashboard/auto_assign_set.png" alt="Auto-assign setup" />
 
 - When you are ready with your configuration, just hit `Save`.
