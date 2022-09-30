@@ -65,8 +65,12 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
   <TabItem value="metadataUrl" label="Metadata URL" default>
     <ul>
       <li>
-        <p>Select the <code>Sign On</code> tab, and copy the URL of <code>Identity Provide metadata</code>.</p>
-        <img class="saml-tutorial-img" src="/docs/assets/saml/okta/metadata_url.png" alt="Okta metadata url" />
+        <p>Select the <code>Sign On</code> tab.</p>
+        <img class="saml-tutorial-img" src="/docs/assets/saml/okta/metadata_url1.png" alt="Okta sign on tab" />
+      </li>
+      <li>
+        <p>Copy the URL of <code>View IdP metadata</code>.</p>
+        <img class="saml-tutorial-img" src="/docs/assets/saml/okta/metadata_url2.png" alt="Okta metadata url" />
       </li>
       <li>
         <p>Paste the copied value into the <code>Metadata URL</code> field at ConfigCat.</p>
@@ -80,7 +84,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
   <TabItem value="manual" label="Manual Configuration">
     <ul>
       <li>
-        <p>Select the <code>Sign On</code> tab, and click on <code>View Setup Instructions</code>.</p>
+        <p>Select the <code>Sign On</code> tab, and click on <code>View SAML setup instructions</code>.</p>
         <img class="saml-tutorial-img" src="/docs/assets/saml/okta/setup.png" alt="Okta SAML setup" />
       </li>
       <li>
