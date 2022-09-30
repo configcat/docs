@@ -85,7 +85,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
     <ul>
       <li>
         <p>Select the <code>Sign On</code> tab, and click on <code>View SAML setup instructions</code>.</p>
-        <img className="saml-tutorial-img" src="/docs/assets/saml/okta/setup.png" alt="Okta SAML setup" />
+        <img className="saml-tutorial-img" src="/docs/assets/saml/okta/manual_setup.png" alt="Okta SAML setup" />
       </li>
       <li>
         <p>Copy the value of the <code>Identity Provider Single Sign-On URL</code> and <code>X.509 Certificate</code> fields and paste them into the Configuration dialog at ConfigCat.</p>
