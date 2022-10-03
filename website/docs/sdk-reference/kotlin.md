@@ -58,9 +58,9 @@ suspend fun main() {
 ### 5. Close the client on application exit
 You can safely shut down all clients at once or individually and release all associated resources on application exit.
 ```kotlin
-ConfigCatClient.close() // closes all clients
+ConfigCatClient.closeAll() // closes all clients
 
-ConfigCatClient.close(client) // closes a specific client
+client.close() // closes a specific client
 ```
 
 ## Configuring the *ConfigCat Client*
@@ -72,18 +72,20 @@ ConfigCatClient.close(client) // closes a specific client
 
 `ConfigCatClient(<sdkKey>)` returns a client with default options.
 
-| Properties                  | Description |
-| --------------------------- | ----------- |
-| `dataGovernance`            | Optional, defaults to `DataGovernance.GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.GLOBAL`, `DataGovernance.EU_ONLY`. |
-| `baseUrl`                   | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
-| `requestTimeoutMs`          | Optional, defaults to `30s`. Sets the underlying HTTP client's request timeout. [More about HTTP Timeout](#http-timeout). |
-| `configCache`               | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
-| `pollingMode`               | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
-| `logger`                    | Optional, sets the internal logger. [More about logging](#logging). |
-| `logLevel`                  | Optional, defaults to `LogLevel.WARNING`. Sets the internal log level. [More about logging](#logging). |
-| `flagOverrides`             | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
-| `httpEngine`                | Optional, configures the underlying `Ktor` HTTP engine. [More about HTTP engines](#http-engine). |
-| `httpProxy`                 | Optional, configures HTTP proxy for the underlying `Ktor` HTTP engine. [More about HTTP proxy](#http-proxy). |
+| Properties                  | Type                | Description |
+| --------------------------- | ------------------- | ----------- |
+| `dataGovernance`            | `DataGovernance`    | Optional, defaults to `DataGovernance.GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.GLOBAL`, `DataGovernance.EU_ONLY`. |
+| `baseUrl`                   | `String`            | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
+| `requestTimeout`            | `Duration`          | Optional, defaults to `30s`. Sets the underlying HTTP client's request timeout. [More about HTTP Timeout](#http-timeout). |
+| `configCache`               | `ConfigCache`       | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
+| `pollingMode`               | `PollingMode`       | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
+| `logger`                    | `Logger`            | Optional, sets the internal logger. [More about logging](#logging). |
+| `logLevel`                  | `LogLevel`          | Optional, defaults to `LogLevel.WARNING`. Sets the internal log level. [More about logging](#logging). |
+| `flagOverrides`             | `(FlagOverrides.() -> Unit)?` | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `httpEngine`                | `HttpClientEngine?` | Optional, configures the underlying `Ktor` HTTP engine. [More about HTTP engines](#http-engine). |
+| `httpProxy`                 | `ProxyConfig?`      | Optional, configures HTTP proxy for the underlying `Ktor` HTTP engine. [More about HTTP proxy](#http-proxy). |
+| `defaultUser`               | `ConfigCatUser?`    | Optional, sets the default user. [More about default user.](#default-user). |
+| `hooks`                     | `Hooks`             | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
 
 ```kotlin
 val client = ConfigCatClient("#YOUR-SDK-KEY#") {
