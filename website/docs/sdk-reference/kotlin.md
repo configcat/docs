@@ -281,6 +281,7 @@ If it's using auto polling, the ready state is reached when the SDK has a valid 
 - `onConfigChanged(Map<String, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 - `error(String)`: This event is sent when an error occurs within the ConfigCat SDK.
+
 You can subscribe to these events either on SDK initialization: 
 ```kotlin
 val client = ConfigCatClient("#YOUR-SDK-KEY#") {
