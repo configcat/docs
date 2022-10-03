@@ -136,7 +136,7 @@ The details result contains the following information:
 
 | Field                                     | Type      | Description                                                                              |
 | ----------------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
-| `value`                                   | `Bool` / `String` / `Int` / `Double` | The evaluated value of the feature flag or setting.           |
+| `value`                                   | `Boolean` / `String` / `Int` / `Double` | The evaluated value of the feature flag or setting.           |
 | `key`                                     | `String`  | The key of the evaluated feature flag or setting.                                        |
 | `isDefaultValue`                          | `Boolean` | True when the default value passed to getValueDetails() is returned due to an error.     |
 | `error`                                   | `String?` | In case of an error, this field contains the error message.                              |
