@@ -90,17 +90,17 @@ client.close() // closes the specific client
 
 `ConfigCatClient.get(sdkKey: <sdkKey>)` returns a client with default options.
 
-| Arguments                          | Type                    |                                |
-| ---------------------------------- | ----------------------- | ------------------------------ |
-| `dataGovernance`                   | DataGovernance          | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`. |
-| `configCache`                      | ConfigCache?            | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
-| `refreshMode`                      | PollingMode?            | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
-| `sessionConfiguration`             | URLSessionConfiguration | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls. |
-| `baseUrl`                          | String                  | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json. |
-| `flagOverrides`                    | OverrideDataSource?     | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
-| `logLevel`                         | LogLevel                | Optional, sets the internal log level. [More about logging.](#logging). |
-| `defaultUser`                      | ConfigCatUser?          | Optional, sets the default user. [More about default user.](#default-user). |
-| `hooks`                            | LogLevel                | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
+| Arguments                          | Type                      | Description                    |
+| ---------------------------------- | ------------------------- | ------------------------------ |
+| `dataGovernance`                   | `DataGovernance`          | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`. |
+| `configCache`                      | `ConfigCache?`            | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
+| `refreshMode`                      | `PollingMode?`            | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
+| `sessionConfiguration`             | `URLSessionConfiguration` | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls. |
+| `baseUrl`                          | `String`                  | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json. |
+| `flagOverrides`                    | `OverrideDataSource?`     | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `logLevel`                         | `LogLevel`                | Optional, sets the internal log level. [More about logging.](#logging). |
+| `defaultUser`                      | `ConfigCatUser?`          | Optional, sets the default user. [More about default user.](#default-user). |
+| `hooks`                            | `Hooks`                   | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
 
 ```swift
 let options = ClientOptions.default
