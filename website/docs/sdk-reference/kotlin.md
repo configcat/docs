@@ -264,7 +264,7 @@ Available options:
 | `cacheRefreshInterval`   | Cache TTL.                   | `60.seconds` |
 
 ### Manual polling
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `refresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 ```kotlin
 val client = ConfigCatClient("#YOUR-SDK-KEY#") {
     pollingMode = manualPoll()
