@@ -457,6 +457,15 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no matc
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: true
 ```
 
+## Sensitive information handling
+
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config.json](/requests/) file from ConfigCat's CDN servers. The URL path for this config.json file contains your SDK key, so the SDK key and the content of your config.json file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users. 
+This SDK key is read-only, it only allows downloading your config.json file, but nobody can make any changes with it in your ConfigCat account.
+
+If you do not want to expose the SDK key or the content of the config.json file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
+
+Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
+
 ## Sample Apps
 Check out our Sample Applications how they use the ConfigCat SDK
 - <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/kmm" target="_blank">Kotlin Multiplatform Mobile app</a>
