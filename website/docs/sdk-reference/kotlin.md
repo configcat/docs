@@ -270,7 +270,7 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
     pollingMode = manualPoll()
 }
 
-client.refresh()
+client.forceRefresh()
 ```
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
 
