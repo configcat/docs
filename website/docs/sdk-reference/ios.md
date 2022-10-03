@@ -376,13 +376,13 @@ client.hooks.addOnFlagEvaluated { details in
 
 In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
 ```swift
-client.setOffline();
+client.setOffline()
 ```
 In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
 
 To put the SDK back in online mode, you can do the following:
 ```swift
-client.setOnline();
+client.setOnline()
 ```
 
 > With `client.isOffline` you can check whether the SDK is in offline mode or not.
@@ -474,7 +474,7 @@ The default *timeoutIntervalForRequest* is 60 seconds.
 
 ```swift
 let sessionConfiguration = URLSessionConfiguration.default
-sessionConfiguration.timeoutIntervalForRequest = 10; // Timeout in seconds 
+sessionConfiguration.timeoutIntervalForRequest = 10 // Timeout in seconds 
 
 let options = ClientOptions.default
 options.sessionConfiguration = sessionConfiguration
