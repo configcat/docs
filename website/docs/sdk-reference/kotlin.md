@@ -288,14 +288,14 @@ If it's using auto polling, the ready state is reached when the SDK has a valid 
 You can subscribe to these events either on SDK initialization: 
 ```kotlin
 val client = ConfigCatClient("#YOUR-SDK-KEY#") {
-    hooks.onFlagEvaluated.add { details -> {
+    hooks.addOnFlagEvaluated { details ->
         /* handle the event */
     } 
 }
 ```
 or with the `hooks` property of the ConfigCat client:
 ```kotlin
-client.hooks.onFlagEvaluated.add { details ->
+client.hooks.addOnFlagEvaluated { details ->
     /* handle the event */
 }
 ```
