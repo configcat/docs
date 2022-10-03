@@ -133,6 +133,7 @@ val details = client.getValueDetails(
 ```
 
 The details result contains the following information:
+
 | Field                                     | Type      | Description                                                                              |
 | ----------------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
 | `value`                                   | `Bool` / `String` / `Int` / `Double` | The evaluated value of the feature flag or setting.           |
