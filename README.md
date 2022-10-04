@@ -66,7 +66,7 @@ Contributions are welcome via PR.
 You might run into errors caused by the wrong version of Node.js. To make sure you are using the recommended Node.js version follow these steps.
 
 1. Have nvm (Node Version Manager - https://github.com/nvm-sh/nvm ) installed:
-1. Run `nvm install`. This will use the compatible version of Node.js.
+1. Run `nvm install`. This will install the compatible version of Node.js.
 1. Run `nvm use`. This will use the compatible version of Node.js.
 1. Your local Node.js version (`node -v`) should be the same as in the `.nvmrc` file. 
 
