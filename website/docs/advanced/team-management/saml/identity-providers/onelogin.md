@@ -130,7 +130,7 @@ To let users authenticate via SAML, you need to assign the newly created applica
   <img className="saml-tutorial-img" src="/docs/assets/saml/onelogin/app_details.png" alt="OneLogin application details"/>
 
 ### 5. Sign In
-- Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMAPNY ACCOUNT - SAML`.
+- Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
   
   <img className="saml-tutorial-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
 

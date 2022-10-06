@@ -45,4 +45,4 @@ in your application code when it is being initialized.
 The ConfigCat backend will take the Dashboard preference as primary. Having `EU Only` selected on the Dashboard but forgot to pass the proper `dataGovernance` parameter to the SDK. In this case your config JSONs will only published to the EU CDN nodes. And every config.json download made from your application to any node outside the EU, the request will be redirected automatically to the EU CDN. Recommended to deploy a fix with the correct `dataGovernance` param, since response times will be significantly longer.
 
 #### `Warning: Your dataGovernance parameter at ConfigCatClient initialization is not in sync with your preferences...`
-**You worry do not.** Your feature flags are served. See above example.
+**Don't you worry.** Your feature flags are served. See above example.
