@@ -66,7 +66,7 @@ ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
 
 (Place this code at the startup of your application, **before** any instances of `ConfigCatClient` is created.)
 
-For more details, see https://stackoverflow.com/a/58195987/8656352.
+[Read more for more details](https://stackoverflow.com/a/58195987/8656352).
 :::
 
 ### 5. Dispose *ConfigCat* client
