@@ -45,6 +45,30 @@ else
 }
 ```
 
+:::caution
+ConfigCat CDN servers are configured to require TLS 1.2 or newer security protocol for communication.
+As for allowed security protocols, please keep in mind that newer .NET runtimes rely on operating system settings,
+older versions, however, may need additional configuration to make secure communication with the CDN servers work.
+
+| Runtime Version | Default Protocols |
+|-----------------|-------------------|
+| .NET Framework 4.5 and earlier | SSL 3.0, TLS 1.0 |
+| .NET Framework 4.6 | TLS 1.0, 1.1, 1.2, 1.3 |
+| .NET Framework 4.7+, .NET Core 1.0+, .NET 5+ | System (OS) Defaults |
+
+As shown in the table above, if your application runs on .NET Framework 4.5, by default it will fail to establish a connection to the CDN servers.
+The best solution to the problem is to upgrade your application to target a newer runtime but in case that is not possible, you can use the
+following workaround:
+
+```csharp
+ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+```
+
+(Place this code at the startup of your application, **before** any instances of `ConfigCatClient` is created.)
+
+For more details, see https://stackoverflow.com/a/58195987/8656352.
+:::
+
 ### 5. Dispose *ConfigCat* client
 You can safely `Dispose()` the client instance and release all associated resources on application exit.
 ```csharp
