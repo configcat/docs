@@ -430,7 +430,7 @@ The default timeout is 30 seconds.
 When the ConfigCat SDK does not work as expected in your application, please check for the following potential problems:
 
 * **Symptom:** Instead of the actual value, the default one is constantly returned by `GetValue()`/`GetValueAsync()` and
-  the log contains the following message (if logging of errors are enabled as described above):
+  the log contains the following message (provided that the client is configured to log error level events as described [here](#logging)):
   "Secure connection could not be established. Please make sure that your application is enabled to use TLS 1.2+."
 
   **Problem:** ConfigCat CDN servers are configured to require TLS 1.2 or newer security protocol for communication.
