@@ -429,7 +429,7 @@ The default timeout is 30 seconds.
 ## Troubleshooting
 When the ConfigCat SDK does not work as expected in your application, please check for the following potential problems:
 
-* **Symptom:** Instead of the actual value, the default one is constantly returned by `GetValue`/`GetValueDefault` and
+* **Symptom:** Instead of the actual value, the default one is constantly returned by `GetValue()`/`GetValueAsync()` and
   the log contains the following message (if logging of errors are enabled as described above):
   "Secure connection could not be established. Please make sure that your application is enabled to use TLS 1.2+."
 
