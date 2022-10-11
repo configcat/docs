@@ -8,7 +8,7 @@ The purpose of the SDKs are to download, cache feature flag values and to evalua
 Check out our language specific<a href="https://app.configcat.com/sdkkey" target="_blank"> Getting Started Guide</a> on how to connect your applications.
 
 ### .NET, .NET Core
-- [Documentation](sdk-reference/csharp.md) on how to connect your application.
+- [Documentation](sdk-reference/dotnet.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">GitHub repository of the ConfigCat .NET SDK.</a>
 ### Java
 - [Documentation](sdk-reference/java.md) on how to connect your application.

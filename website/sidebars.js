@@ -56,7 +56,7 @@ module.exports = {
       ],
       "SDK References": [
         { type: "doc", id: "sdk-reference/overview", label: "Overview" },
-        { type: "doc", id: "sdk-reference/csharp", label: ".Net, .Net Core" },
+        { type: "doc", id: "sdk-reference/dotnet", label: ".Net, .Net Core" },
         { type: "doc", id: "sdk-reference/java", label: "Java" },
         { type: "doc", id: "sdk-reference/js", label: "JavaScript" },
         { type: "doc", id: "sdk-reference/js-ssr", label: "JavaScript (SSR)" },
