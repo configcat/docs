@@ -3,12 +3,12 @@ id: troubleshooting
 title: Troubleshooting
 description: This section helps you troubleshoot your issues. It's a good idea to double check these before contacting support. 
 ---
-The following issues were reported by customers. We collected what we learned and possible solutions.
+The following issues were reported by customers. We collected what we learned and the possible solutions.
 
 ## Long response times and connection issues
 
 
-First, you can verify on the [Service Status Monitor](https://status.configcat.com) that ConfigCat is up and running or if there is planned maintenance.
+First, you can verify on the [Service Status Monitor](https://status.configcat.com) whether ConfigCat is up and running or there is a planned maintenance.
 ### General SDK Checklist
 1. It might be a good idea to update the ConfigCat SDK to the latest version.
 1. Check if you configured the [Data Governance](/advanced/data-governance) functionality properly.
@@ -27,8 +27,8 @@ Please, **do not load test** the ConfigCat production infrastructure without our
 1. You might need to whitelist the following addresses in your firewall: `cdn.configcat.com`, `cdn-eu.configcat.com`, `cdn-global.configcat.com`.
 ---
 ## Too many requests error in Angular
-The problem was with Angular's Hot Module Replacement functionality during development. The wrapper class, which contained the auto polling ConfigCat SDK was edited, and the Hot Module Replacement reinitialized the whole class without releasing the old, replaced module's Auto Polling timer.
+The problem was caused by Angular's Hot Module Replacement functionality during development. The wrapper class, which contained the auto polling ConfigCat SDK was edited, and the Hot Module Replacement reinitialized the whole class without releasing the old, replaced module's Auto Polling timer.
 We believe that this is a really rare case, it could happen only during development.
 
 ## Python Auto polling issue with uWSGI web server
-The Python SDK's Auto polling mode utilizes its polling job in a `threading.Thread` object. If you are running your application behind an uWSGI web server, the auto polling mode may not work as expected, because the uWSGI web server disables Python's threading by default. Please [enable threading](https://uwsgi-docs.readthedocs.io/en/latest/Options.html#enable-threads) or switch to another polling mode in this case.
+The Python SDK's Auto polling mode utilizes its polling job in a `threading.Thread` object. If you are running your application behind an uWSGI web server, the auto polling mode may not work as expected because the uWSGI web server disables Python's threading by default. Please [enable threading](https://uwsgi-docs.readthedocs.io/en/latest/Options.html#enable-threads) or switch to another polling mode in this case.

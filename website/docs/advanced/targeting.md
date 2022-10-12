@@ -38,8 +38,8 @@ There are 3 predefined attributes. Additionally, you can define your ***custom a
 | ------------------------- | ---------------------------------------------------------------------------------- |
 | `Email`                   | The e-mail address of your user.                                                   |
 | `Identifier`              | Usually a unique user identifier in your application.                              |
-| `Country`                 | Might come useful for testing a new feature only in one country.                   |
-| `Custom`                  | ***Define any attribute (e.g. `OS version`), by typing its name to the textbox.*** |
+| `Country`                 | Might come in useful for testing a new feature only in one country.                   |
+| `Custom`                  | ***Define any attribute (e.g. `OS version`), by typing its name into the textbox.*** |
 
 ### Comparison value
 

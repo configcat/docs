@@ -14,7 +14,7 @@ organization admin to do this.
 
 ### Prerequisites
 - [Verified domain](/docs/advanced/team-management/domain-verification)  
-  In order to configure SAML, you have to verify the ownership of the domain that your company uses for email addresses. This step is required, because at the beginning of the login process, we use the user's email domain to select the appropriate SAML Identity Provider. 
+  In order to configure SAML, you have to verify the ownership of the domain that your company uses for email addresses. This step is required because, at the beginning of the login process, we use the user's email domain to select the appropriate SAML Identity Provider. 
 - Identity Provider that supports SAML 2.0
 
 ### Configure a SAML Identity Provider
