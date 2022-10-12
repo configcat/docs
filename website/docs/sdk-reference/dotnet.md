@@ -426,6 +426,34 @@ IConfigCatClient client = new ConfigCatClient(options =>
 ```
 The default timeout is 30 seconds.
 
+## Troubleshooting
+When the ConfigCat SDK does not work as expected in your application, please check for the following potential problems:
+
+* **Symptom:** Instead of the actual value, the default one is constantly returned by `GetValue()`/`GetValueAsync()` and
+  the log contains the following message (provided that the client is configured to log error level events as described [here](#logging)):
+  "Secure connection could not be established. Please make sure that your application is enabled to use TLS 1.2+."
+
+  **Problem:** ConfigCat CDN servers are configured to require TLS 1.2 or newer security protocol for communication.
+  As for allowed security protocols, please keep in mind that newer .NET runtimes rely on operating system settings,
+  older versions, however, may need additional configuration to make secure communication with the CDN servers work.
+
+  | Runtime Version | Default Protocols |
+  |-----------------|-------------------|
+  | .NET Framework 4.5 and earlier | SSL 3.0, TLS 1.0 |
+  | .NET Framework 4.6 | TLS 1.0, 1.1, 1.2, 1.3 |
+  | .NET Framework 4.7+, .NET Core 1.0+, .NET 5+ | System (OS) Defaults |
+
+  As shown in the table above, if your application runs on .NET Framework 4.5, by default it will fail to establish a connection to the CDN servers.
+  Read [this](https://stackoverflow.com/a/58195987/8656352) for more details.
+
+  **Solution**: The best solution to the problem is to upgrade your application to target a newer runtime but in case that is not possible, you can use the following workaround:
+
+  ```csharp
+  ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+  ```
+
+  (Place this code at the startup of your application, **before** any instances of `ConfigCatClient` is created.)
+
 ## Sample Applications
 Check out our Sample Applications how they use the ConfigCat SDK:
 * <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
