@@ -66,16 +66,17 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
     .build(<sdkkey>);
 ```
 
-| Builder options                         | Description |
-| --------------------------------------- | ----------- |
-| `build(<sdkkey>)`                       | **REQUIRED.** Waits for the SDK Key to access your feature flags and settings. Get it from *ConfigCat Dashboard*. |
-| `dataGovernance(DataGovernance)`        | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
-| `baseUrl(string)`                       | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
-| `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient). |
-| `cache(ConfigCache)`                    | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
-| `mode(PollingMode)`                     | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
-| `logLevel(LogLevel)`                    | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging). |
-| `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| Builder options                                               | Description                                                                                                                                                                                                                                                                                        |
+|---------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `build(<sdkkey>)`                                             | **REQUIRED.** Waits for the SDK Key to access your feature flags and settings. Get it from *ConfigCat Dashboard*.                                                                                                                                                                                  |
+| `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
+| `baseUrl(string)`                                             | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                            |
+| `httpClient(OkHttpClient)`                                    | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient).                                                                                                                                                 |
+| `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
+| `mode(PollingMode)`                                           | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
+| `logLevel(LogLevel)`                                          | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging).                                                                                                                                                                                                      |
+| `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                 |
+| `defaultUser(User)`                                           | Optional, sets default user. [More about default user](#default-user).                                                                                                                                                                                                                             |
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
@@ -144,6 +145,44 @@ User user = User.newBuilder()
     .country("United Kingdom")
     .custom(customAttributes)
     .build("435170f4-8a8b-4b67-a723-505ac7cdea92");
+```
+### Default User
+There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+
+You can set the default user object either with the ConfigCatClient builder:
+```java
+    ConfigCatClient client = ConfigCatClient.newBuilder()
+        .mode(PollingModes.manualPoll())
+        .baseUrl(server.url("/").toString())
+        .defaultUser(User.newBuilder().build("defaultUser"))
+        .build(APIKEY);
+```
+
+or with the `setDefaultUser()` method of the ConfigCat client.
+```java
+client.setDefaultUser(User.newBuilder().build("defaultUser"))
+```
+
+Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+
+```java
+client.setDefaultUser(User.newBuilder().build("defaultUser"))
+// The default user will be used at the evaluation process.
+boolean value = client.getValue(Boolean.class, "keyOfMySetting", false)
+```
+
+When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+
+```java
+client.setDefaultUser(User.newBuilder().build("defaultUser"))
+User otherUser = User.newBuilder().build("user")
+// otherUser will be used at the evaluation process.
+boolean value =  client.getValue(Boolean.class, "keyOfMySetting", false, otherUser)
+```
+
+For deleting the default user, you can do the following:
+```java
+client.clearDefaultUser()
 ```
 
 ## Polling Modes
