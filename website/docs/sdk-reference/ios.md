@@ -100,6 +100,7 @@ client.close() // closes the specific client
 | `flagOverrides`                    | `OverrideDataSource?`     | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 | `logLevel`                         | `LogLevel`                | Optional, sets the internal log level. [More about logging.](#logging). |
 | `defaultUser`                      | `ConfigCatUser?`          | Optional, sets the default user. [More about default user.](#default-user). |
+| `offline`                          | `Bool`                    | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode). |
 | `hooks`                            | `Hooks`                   | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
 
 ```swift
