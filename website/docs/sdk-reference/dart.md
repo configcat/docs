@@ -23,7 +23,7 @@ flutter pub add configcat_client
 Or put the following directly to your `pubspec.yml` and run `dart pub get` or `flutter pub get`.
 ```yaml
 dependencies:
-  configcat_client: ^2.0.2
+  configcat_client: ^2.2.0
 ```
 ### 2. Import the ConfigCat SDK
 ```dart
@@ -72,6 +72,7 @@ client.close(); // closes the specific client
 | `logger`                    | Optional, sets the internal logger and log level. [More about logging](#logging). |
 | `override`                  | Optional, sets local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 | `defaultUser`               | Optional, sets the default user. [More about default user](#default-user). |
+| `offline`                   | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode). |
 | `hooks`                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
 
 ```dart
@@ -128,9 +129,10 @@ The `details` result contains the following information:
 | `value`                                   | `Bool` / `String` / `Int` / `Double` | The evaluated value of the feature flag or setting.           |
 | `key`                                     | `String`  | The key of the evaluated feature flag or setting.                                        |
 | `isDefaultValue`                          | `Bool`    | True when the default value passed to getValueDetails() is returned due to an error.     |
-| `error`                                   | `String`  | In case of an error, this field contains the error message.                              |
-| `matchedEvaluationPercentageRule`         | `PercentageRule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `matchedEvaluationRule`                   | `RolloutRule` | If the evaluation was based on a targeting rule, this field contains that specific rule. |
+| `error`                                   | `String?` | In case of an error, this field contains the error message.                              |
+| `user`                                    | `ConfigCatUser?`  | The user object that was used for evaluation.                                    |
+| `matchedEvaluationPercentageRule`         | `PercentageRule?` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `matchedEvaluationRule`                   | `RolloutRule?` | If the evaluation was based on a targeting rule, this field contains that specific rule. |
 | `fetchTime`                               | `DateTime` | The last download time of the current config.                                           |
 
 ## User Object
@@ -277,8 +279,11 @@ With the following hooks you can subscribe to particular events fired by the SDK
 
 - `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
 If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
+
 - `onConfigChanged(Map<string, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
+
 - `error(String)`: This event is sent when an error occurs within the ConfigCat SDK.
 
 You can subscribe to these events either on SDK initialization: 
