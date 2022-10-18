@@ -53,7 +53,7 @@ team on exact requirements and performance.
 
 ## config.json downloads
 The ConfigCat SDK - which you import into your applications - downloads your feature flags and settings in the 
-form of a config.json file from the ConfigCat CDN and caches locally.
+form of a config.json file from the ConfigCat CDN and caches it locally.
 
 ## `GetValue()` call is NOT a config.json download
 Reading feature flag and setting values from cache with `GetValue()` is not considered as a config.json download.
@@ -97,7 +97,7 @@ the default polling interval down to 1 second. In this case we are calculating w
 ## How to lower the monthly config.json download count?
 
 ### Use the ConfigCat Client as a Singleton 
-Make sure that the you use the *ConfigCat Client* as a Singleton object in your application code.
+Make sure that you use the *ConfigCat Client* as a Singleton object in your application code.
 If you want to use multiple SDK Keys in the same application, create only one *ConfigCat Client* per SDK Key.
 
 ### Increase the polling interval

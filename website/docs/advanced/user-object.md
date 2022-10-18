@@ -66,7 +66,7 @@ Country|**OPTIONAL** Fill this for location or country-based targeting. e.g: Tur
 Custom|**OPTIONAL** This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role, Device type, App version number, etc.
 
 ### Identifier property
-Unique identifier of a user in your application.. This is a **REQUIRED** property which enables ConfigCat to differentiate your users from each other and to evaluate the setting values for percentage-based targeting.
+Unique identifier of a user in your application. This is a **REQUIRED** property which enables ConfigCat to differentiate your users from each other and to evaluate the setting values for percentage-based targeting.
 
 Our recommendation as an identifier:
 - User ID - If you have one in your application you can use the same User ID with ConfigCat.

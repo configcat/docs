@@ -28,7 +28,7 @@
         },
         {
             "@type": "Question",
-            "name": "I can't login to ConfigCat, because I was asked a 2FA (Two-factor authentication) code that I don't know.",
+            "name": "I can't login to ConfigCat because I was asked a 2FA (Two-factor authentication) code that I don't know.",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Solution 1: There might be an authenticator app on your phone that you can use to log in to ConfigCat.  Solution 2: Contact your Organization Admin, and ask them to disable 2FA for your account until you set it up again.  Solution 3: Use the recovery codes that you received when you first set your 2FA up."
@@ -44,7 +44,7 @@
         },
         {
             "@type": "Question",
-            "name": "How can I be sure, that my data is safe at ConfigCat?",
+            "name": "How can I be sure that my data is safe at ConfigCat?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.  See ConfigCat's architecture explained here: https://configcat.com/architecture/."

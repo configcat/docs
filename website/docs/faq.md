@@ -64,7 +64,7 @@ If possible, you can allow the whole "configcat.com" domain. Alternatively, you 
 - The Public Management API: https://api.configcat.com
 - The Dashboard URL: https://app.configcat.com
 
-### I can't log in to ConfigCat, because I forgot my 2FA (Two-factor authentication) code.
+### I can't log in to ConfigCat because I forgot my 2FA (Two-factor authentication) code.
 
 *Solution 1:* There might be an authenticator app on your phone that you can use to log in to ConfigCat.
 
@@ -74,7 +74,7 @@ If possible, you can allow the whole "configcat.com" domain. Alternatively, you 
 
 
 ### The Audit log doesn't show old operations
-There is a 7-day log retention in the free plan and a longer, 35 day in the all the other plans.
+There is a 7-day log retention in the free plan and a longer, 35 day in all the other plans.
 
 ### Is there a way to allow a group access to only one config rather than all of them?
 Config access can't be specified in one Product, but you can split your configs into multiple products, each with the necessary permission settings.
@@ -83,7 +83,7 @@ Config access can't be specified in one Product, but you can split your configs 
 Browser extensions can interfere with this. Please disable all browser extensions and try again. 
 
 ## Privacy
-### How can I be sure, that my data is safe?
+### How can I be sure that my data is safe?
 The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.
 
 See our the architecture explained [here](https://configcat.com/architecture/).
@@ -182,8 +182,8 @@ Once you find the proper organization where you are supposed to be, we recommend
 ### Is it possible to rename a product or config?
 Yes, you can rename almost everything within ConfigCat. Organizations, products, configs, environments, tags and feature flags can all be renamed. What you can't rename is feature flag keys, as that could cause a tsunami of reference error messages in your applications.
 
-### Can I change my Feature Flag based on a date
-There is no explicit way to do this in ConfigCat, but you can create a text setting anytime with some your desired start date as a value and in your code you can filter for it. This [guide](https://configcat.com/blog/2020/11/04/enable-my-feature-automatically/) should help get things started rolling in the right direction.
+### Can I change my Feature Flag based on a date?
+There is no explicit way to do this in ConfigCat, but you can create a text setting anytime with your desired start date as a value and in your code you can use it as a filter. This [guide](https://configcat.com/blog/2020/11/04/enable-my-feature-automatically/) should help get things started rolling in the right direction.
 
 ### Does ConfigCat guarantee % distribution?
 ConfigCat guarantees % distribution across all SDKs, and it guarantees that each user will receive the same experience every time.

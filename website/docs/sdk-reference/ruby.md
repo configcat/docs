@@ -384,6 +384,9 @@ configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
 setting_values = configcat_client.get_all_values(ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92"))  # Optional User Object
 ```
 
+## Force refresh
+Any time you want to refresh the cached configuration with the latest one, you can call the `force_refresh()` method of the library, which initiates a new download and updates the local cache.
+
 ## Using ConfigCat behind a proxy
 Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
 

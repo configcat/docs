@@ -120,7 +120,7 @@ curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install
 
 By default, the script downloads the OS specific artifact from the latest <a target="_blank" href="https://github.com/configcat/cli/releases">GitHub Release</a> with `curl` and moves it into the `/usr/local/bin` directory.
 
-It might happen, that you don't have permissions to write into `/usr/local/bin`, then you should execute the install script with `sudo`.
+It might happen that you don't have permissions to write into `/usr/local/bin`, then you should execute the install script with `sudo`.
 
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | sudo bash
@@ -204,7 +204,7 @@ configcat flag create \
 ```
 
 :::info
-Each `create` command writes the newly created resource's ID to the standard output, that you can save for further operations.
+Each `create` command writes the newly created resource's ID to the standard output so you can save that for further operations.
 :::
 
 :::info

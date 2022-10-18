@@ -39,21 +39,21 @@
             "@type": "HowToStep",
             "text": "Import package",
             "name": "Import",
-            "url": "https://configcat.com/docs/sdk-reference/csharp/#2-import-package",
+            "url": "https://configcat.com/docs/sdk-reference/dotnet/#2-import-package",
             "image": "https://configcat.com/images/shared/home.png"
         },
         {
             "@type": "HowToStep",
             "text": "Create the *ConfigCat* client with your *SDK Key*",
             "name": "Initialization",
-            "url": "https://configcat.com/docs/sdk-reference/csharp/#3-create-the-configcat-client-with-your-sdk-key",
+            "url": "https://configcat.com/docs/sdk-reference/dotnet/#3-create-the-configcat-client-with-your-sdk-key",
             "image": "https://configcat.com/images/shared/home.png"
         },
         {
             "@type": "HowToStep",
             "text": "Get your feature flag's value",
             "name": "Evaluation",
-            "url": "https://configcat.com/docs/sdk-reference/csharp/#4-get-your-setting-value",
+            "url": "https://configcat.com/docs/sdk-reference/dotnet/#4-get-your-setting-value",
             "image": "https://configcat.com/images/shared/home.png"
         }
     ]

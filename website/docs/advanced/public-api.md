@@ -5,7 +5,7 @@ description: The Public Management API allows you to manage ConfigCat resources 
 ---
 
 To access the ConfigCat platform programmatically. Its purpose is to provide the same functionality 
-as the Dashboard UI only for tests, tools, or scripts. 
+as the Dashboard UI but for tests, tools or scripts. 
 
 You can **Create**, **Read**, **Update** and **Delete** your **Feature Flags, Configs, Environments** or **Products** within ConfigCat. 
 
