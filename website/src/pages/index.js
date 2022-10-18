@@ -59,7 +59,8 @@ const features = [
       { url: "sdk-reference/js-ssr", title: "JavaScript (SSR)" },
       { url: "sdk-reference/react", title: "React" },
       { url: "sdk-reference/node", title: "Node.js" },
-      { url: "sdk-reference/android", title: "Android (Kotlin)" },
+      { url: "sdk-reference/android", title: "Android" },
+      { url: "sdk-reference/kotlin", title: "Kotlin Multiplatform" },
       { url: "sdk-reference/ios", title: "iOS (Swift)" },
       { url: "sdk-reference/python", title: "Python" },
       { url: "sdk-reference/go", title: "Go" },
@@ -67,7 +68,6 @@ const features = [
       { url: "sdk-reference/ruby", title: "Ruby" },
       { url: "sdk-reference/elixir", title: "Elixir" },
       { url: "sdk-reference/dart", title: "Dart (Flutter)" },
-      { url: "sdk-reference/kotlin", title: "Kotlin Multiplatform" },
       { url: "sdk-reference/cpp", title: "C++" },
     ]
   },

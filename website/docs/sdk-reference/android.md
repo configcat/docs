@@ -1,7 +1,7 @@
 ---
 id: android
-title: Android (Kotlin) SDK Reference
-description: ConfigCat Android (Kotlin) SDK Reference. This is a step-by-step guide on how to use feature flags in your Android (Kotlin) application.
+title: Android SDK Reference
+description: ConfigCat Android SDK Reference. This is a step-by-step guide on how to use feature flags in your Android Java application.
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/android-sdk.svg?style=social)](https://github.com/configcat/android-sdk/stargazers)
 [![Android CI](https://github.com/configcat/android-sdk/actions/workflows/android-ci.yml/badge.svg?branch=master)](https://github.com/configcat/android-sdk/actions/workflows/android-ci.yml)
@@ -10,8 +10,12 @@ description: ConfigCat Android (Kotlin) SDK Reference. This is a step-by-step gu
 [![Javadocs](https://javadoc.io/badge/com.configcat/configcat-android-client.svg)](https://javadoc.io/doc/com.configcat/configcat-android-client)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=configcat_android-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=configcat_android-sdk)
 
+:::info
+You may want to check our [Kotlin Multiplatform SDK](/sdk-reference/kotlin) for a more modern Android development experience.
+:::
 
 <a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android SDK on GitHub</a>  
+
 
 ### Compatibility
 The minimum supported Android SDK version is 21 (Lollipop).
@@ -21,32 +25,42 @@ When you use R8 or ProGuard, the aar artifact automatically applies the [include
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
 ```
-implementation 'com.configcat:configcat-android-client:7.+'
+implementation 'com.configcat:configcat-android-client:8.+'
 ```
 ### 2. Import the ConfigCat SDK:
-```kotlin
-import com.configcat.*
+```java
+import com.configcat.*;
 ```
 ### 3. Create the *ConfigCat* client with your *SDK Key*
-```kotlin
-val client = ConfigCatClient("#YOUR-SDK-KEY#")
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 ```
 ### 4. Get your setting value
-```kotlin
-client.getValueAsync(Boolean::class.java, "isMyAwesomeFeatureEnabled", false)
-    .thenAccept { isMyAwesomeFeatureEnabled ->
-        if (isMyAwesomeFeatureEnabled) {
-            doTheNewThing()
+```java
+boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "<key-of-my-awesome-feature>", false);
+if(isMyAwesomeFeatureEnabled) {
+    doTheNewThing();
+} else {
+    doTheOldThing();
+}
+
+// Or asynchronously
+client.getValueAsync(Boolean.class, "<key-of-my-awesome-feature>", false).
+    thenAccept(isMyAwesomeFeatureEnabled -> {
+        if(isMyAwesomeFeatureEnabled) {
+            doTheNewThing();
         } else {
-            doTheOldThing()
+            doTheOldThing();
         }
-    }
+    });
 ```
 
 ### 5. Stop *ConfigCat* client
-You can safely shut down the client instance and release all associated resources on application exit.
-```kotlin
-client.close()
+You can safely shut down all clients at once or individually and release all associated resources on application exit.
+```java
+ConfigCatClient.closeAll(); // closes all clients
+
+client.close(); // closes a specific client
 ```
 
 ## Creating the *ConfigCat Client*
@@ -55,30 +69,34 @@ client.close()
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
-`ConfigCatClient("#YOUR-SDK-KEY#")` returns a client with default options.
-
-### Builder
-```kotlin
-val client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.autoPoll(60))
-    .build(<sdkkey>)
-```
+`ConfigCatClient.get("#YOUR-SDK-KEY#")` returns a client with default options.
 
 
-| Builder options                         | Description |
+| Client options                          | Description |
 | --------------------------------------- | ----------- |
 | `build(<sdkkey>)`                       | **REQUIRED.** Waits for the SDK Key to access your feature flags and settings. Get it from *ConfigCat Dashboard*. |
 | `dataGovernance(DataGovernance)`        | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
-| `baseUrl(string)`                       | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
+| `baseUrl(string)`                       | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json. |
 | `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient). |
 | `cache(ConfigCache)`                    | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
 | `mode(PollingMode)`                     | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `logLevel(LogLevel)`                    | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging). |
 | `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `defaultUser(User)`                     | Optional, sets the default user. [More about default user.](#default-user). |
+| `offline(boolean)`                      | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode). |
+| `hooks()`                               | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
+
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.mode(PollingModes.manualPoll());
+    options.logLevel(LogLevel.INFO);
+});
+```
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
-If you want to use multiple SDK Keys in the same application, create only one `ConfigCatClient` per SDK Key.
+The `ConfigCatClient.get("#YOUR-SDK-KEY#")` static factory method constructs singleton client instances for your SDK keys.
+These clients can be closed all at once with the `ConfigCatClient.closeAll()` method or individually with `client.close()`.
 :::
 
 ## Anatomy of `getValue()`
@@ -88,13 +106,13 @@ If you want to use multiple SDK Keys in the same application, create only one `C
 | `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-```kotlin
-val value = client.getValue(
-    Boolean::class.java, // Setting type
+```java
+boolean value = client.getValue(
+    Boolean.class, // Setting type
     "keyOfMySetting", // Setting Key
     User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
     false // Default value
-)
+);
 ```
 
 ## Anatomy of `getValueAsync()`
@@ -104,28 +122,70 @@ val value = client.getValue(
 | `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-```kotlin
+```java
 client.getValueAsync(
-    Boolean::class.java, // Setting type
+    Boolean.class, // Setting type
     "keyOfMySetting", // Setting Key
     User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
     false // Default value
-).thenAccept({ isMyAwesomeFeatureEnabled ->
+).thenAccept(isMyAwesomeFeatureEnabled -> {
     if(isMyAwesomeFeatureEnabled) {
-        doTheNewThing()
+        doTheNewThing();
     } else {
-        doTheOldThing()
+        doTheOldThing();
     }
-})
+});
 ```
+
+## Anatomy of `getValueDetails()`
+
+`getValueDetails()` is similar to `getValue()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
+
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
+| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+
+```java
+EvaluationDetails<Boolean> details = client.getValueDetails(
+    Boolean.class, // Setting type
+    "keyOfMySetting", // Setting Key
+    User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
+    false // Default value
+);
+
+// Or asynchronously
+client.getValueDetailsAsync(
+    Boolean.class, // Setting type
+    "keyOfMySetting", // Setting Key
+    User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
+    false // Default value
+).thenAccept(details -> {
+    // Use the details result
+});
+```
+The details result contains the following information:
+
+| Property                                  | Type      | Description                                                                              |
+| ----------------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
+| `getValue()`                              | `boolean` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.        |
+| `getKey()`                                | `String`  | The key of the evaluated feature flag or setting.                                        |
+| `isDefaultValue()`                        | `boolean`    | True when the default value passed to getValueDetails() is returned due to an error.  |
+| `getError()`                              | `String` | In case of an error, this field contains the error message.                               |
+| `getUser()`                               | `User`  | The user object that was used for evaluation.                                              |
+| `getMatchedEvaluationPercentageRule()`    | `PercentageRule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `getMatchedEvaluationRule()`              | `RolloutRule` | If the evaluation was based on a targeting rule, this field contains that specific rule. |
+| `getFetchTimeUnixMilliseconds()`          | `long`    | The last download time of the current config in unix milliseconds format.                |
 
 ## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
-```kotlin
-val user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")   
+```java
+User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92");   
 ```
-```kotlin
-val user = User.newBuilder().build("john@example.com")   
+```java
+User user = User.newBuilder().build("john@example.com");   
 ```
 | Builder options | Description                                                                                                                     |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -133,12 +193,61 @@ val user = User.newBuilder().build("john@example.com")
 | `email()`       | Optional parameter for easier targeting rule definitions.                                                                       |
 | `country()`     | Optional parameter for easier targeting rule definitions.                                                                       |
 | `custom()`      | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
-```kotlin
-val user = User.newBuilder()
+``` java
+java.util.Map<String,String> customAttributes = new java.util.HashMap<String,String>();
+    customAttributes.put("SubscriptionType", "Pro");
+    customAttributes.put("UserRole", "Admin");
+
+User user = User.newBuilder()
     .email("john@example.com")
     .country("United Kingdom")
-    .custom(hashMapOf("SubscriptionType" to "Pro", "UserRole" to "Admin"))
-    .build("435170f4-8a8b-4b67-a723-505ac7cdea92")
+    .custom(customAttributes)
+    .build("435170f4-8a8b-4b67-a723-505ac7cdea92");
+```
+
+### Default user
+There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+
+You can set the default user object either on SDK initialization:
+```java
+
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.defaultUser(User.newBuilder().build("john@example.com"));
+});
+```
+
+or with the `setDefaultUser()` method of the ConfigCat client.
+```java
+client.setDefaultUser(User.newBuilder().build("john@example.com"));
+```
+
+Whenever the `getValue[Async]()`, `getValueDetails[Async]()`, `getAllValues[Async]()`, or `getAllVariationIds[Async]()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.defaultUser(User.newBuilder().build("john@example.com"));
+});
+
+// The default user will be used at the evaluation process.
+boolean value = client.getValue(Boolean.class, "keyOfMySetting", false);
+```
+
+When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.defaultUser(User.newBuilder().build("john@example.com"));
+});
+
+User otherUser = User.newBuilder().build("brian@example.com");
+
+// otherUser will be used at the evaluation process.
+boolean value = client.getValue(Boolean.class, "keyOfMySetting", otherUser, false);
+```
+
+For deleting the default user, you can do the following:
+```java
+client.clearDefaultUser();
 ```
 
 ## Polling Modes
@@ -149,61 +258,98 @@ The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setti
 The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
 
 Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.autoPoll()` to change the polling interval.
-```kotlin
-val client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.autoPoll(120 /* polling interval in seconds */))
-    .build("#YOUR-SDK-KEY#")
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.mode(PollingModes.autoPoll(60 /* polling interval in seconds */));
+});
 ```
-Adding a callback to `configurationChangeListener` option parameter will get you notified about changes.
-```kotlin
-val client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.autoPoll(
-        120 /* polling interval in seconds */,
-        {
-            // here you can subscribe to configuration changes
-        })
-    )
-    .build("#YOUR-SDK-KEY#")
-```
+
+Available options:
+
+| Option Parameter                    | Description                              | Default |
+| ----------------------------------- | ---------------------------------------- | ------- |
+| `autoPollIntervalInSeconds`         | Polling interval.                        | 60      |
+| `maxInitWaitTimeSeconds`            | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
+
 
 ### Lazy loading
 When calling `getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
 
 Use the `cacheRefreshIntervalInSeconds` parameter of the `PollingModes.lazyLoad()` to set cache lifetime.
 ```java
-val client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.lazyLoad(120 /* the cache will expire in 120 seconds */))
-    .build("#YOUR-SDK-KEY#")
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.mode(PollingModes.lazyLoad(60 /* the cache will expire in 120 seconds */));
+});
 ```
-Use the `asyncRefresh` option parameter of the `PollingModes.lazyLoad()` to define how do you want to handle the expiration of the cached configuration. If you choose asynchronous refresh then when a `getValue()` call is made while the cache is expired, the previous value will be returned immediately until the fetching of the new configuration is completed.
-```kotlin
-val client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.lazyLoad(
-        120, // the cache will expire in 120 seconds
-        true // the refresh will be executed asynchronously
-        )
-    )
-    .build("#YOUR-SDK-KEY#")
-```
-If you set the `asyncRefresh` to `false`, the refresh operation will be awaited until the fetching of the new configuration is completed.
+
+Available options:
+
+| Option Parameter                | Description                  | Default |
+| ------------------------------- | ---------------------------- | ------- |
+| `cacheRefreshIntervalInSeconds` | Cache TTL.                   | 60      |
 
 ### Manual polling
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
-```kotlin
-val client = ConfigCatClient.newBuilder()
-    .mode(PollingModes.manualPoll())
-    .build("#YOUR-SDK-KEY#")
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.mode(PollingModes.manualPoll());
+});
 
-client.forceRefresh()
+client.forceRefresh();
 ```
 > `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
+
+
+## Hooks
+
+With the following hooks you can subscribe to particular events fired by the SDK:
+
+- `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
+If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeSeconds` is reached.
+
+- `onConfigChanged(Map<String, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+
+- `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
+
+- `error(String)`: This event is sent when an error occurs within the ConfigCat SDK.
+
+You can subscribe to these events either on SDK initialization: 
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        /* handle the event */
+    });
+});
+```
+or with the `getHooks()` property of the ConfigCat client:
+```java
+client.getHooks().addOnFlagEvaluated(details -> {
+    /* handle the event */
+});
+```
+
+## Online / Offline mode
+
+In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
+```java
+client.setOffline();
+```
+In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
+
+To put the SDK back in online mode, you can do the following:
+```java
+client.setOnline();
+```
+
+> With `client.isOffline()` you can check whether the SDK is in offline mode or not.
+
 
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
-- **Local/Offline mode** (`OverrideBehaviour.LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+- **Local mode** (`OverrideBehaviour.LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
 - **Local over remote** (`OverrideBehaviour.LOCAL_OVER_REMOTE`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
 
@@ -211,111 +357,108 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 
 You can load your feature flag & setting overrides from a `Map<String, Object>` structure.
 
-```kotlin
-val map = hashMapOf(
-    "enabledFeature" to true, 
-    "disabledFeature" to false,
-    "intSetting" to 5,
-    "doubleSetting" to 3.14,
-    "stringSetting" to "test",
-)
+```java
+Map<String, Object> map = new HashMap<>();
+map.put("enabledFeature", true);
+map.put("disabledFeature", false);
+map.put("intSetting", 5);
+map.put("doubleSetting", 3.14);
+map.put("stringSetting", "test");
 
-val client = ConfigCatClient.newBuilder()
-    .flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY)
-    .build("localhost")
+ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
+    options.flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY);
+});
 ```
 
 ## `getAllKeys()`, `getAllKeysAsync()`
-You can get all the setting keys from your configuration by calling the `getAllKeys()` or `getAllKeysAsync()` method of the `ConfigCatClient`.
+You can get all the setting keys from your config.json by calling the `getAllKeys()` or `getAllKeysAsync()` method of the `ConfigCatClient`.
 
-```kotlin
-val client = ConfigCatClient("#YOUR-SDK-KEY#")
-val keys = client.getAllKeys()
+```java
+ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+java.util.Collection<String> keys = client.getAllKeys();
 ```
-
-```kotlin
-val client = ConfigCatClient("#YOUR-SDK-KEY#")
-client.getAllKeysAsync().thenAccept({ keys -> 
-})
-```
+```java
+ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+client.getAllKeysAsync().thenAccept(keys -> {
+    // use the keys
+});
 
 ## `getAllValues()`, `getAllValuesAsync()`
 Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
 
-```kotlin
-val client = ConfigCatClient("#YOUR-SDK-KEY#")
-val settingValues = client.getAllValues()
+```java
+ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+Map<String, Object> settingValues = client.getAllValues();
 
 // invoke with user object
-val user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
-val settingValues = client.getAllValues(user)
+User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
+Map<String, Object> settingValuesTargeting = client.getAllValues(user);
 ```
 
-```kotlin
-val client = new ConfigCatClient("#YOUR-SDK-KEY#")
-client.getAllValuesAsync().thenAccept({ settingValues -> 
-})
+```java
+ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+client.getAllValuesAsync().thenAccept(settingValues -> { });
 
 // invoke with user object
-val user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
-client.getAllValuesAsync(user).thenAccept({ settingValuesTargeting ->
-})
+User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
+client.getAllValuesAsync(user).thenAccept(settingValuesTargeting -> { });
 ```
 
 ## Custom cache
 
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the ConfigCache abstract class:
-
-```kotlin
-class MyCustomCache : ConfigCache() {
-    override fun read(key: String) : String {
+```java
+public class MyCustomCache extends ConfigCache {
+    
+    @Override
+    public String read(String key) {
         // here you have to return with the cached value
     }
 
-    override fun write(key: String, value: String) {
+    @Override
+    public void write(String key, String value) {
         // here you have to store the new value in the cache
     }
 }
 ```
-
 Then use your custom cache implementation:
-
-```kotlin
-val client = ConfigCatClient.newBuilder()
-    .cache(MyCustomCache()) // inject your custom cache
-    .build("#YOUR-SDK-KEY#")
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.cache(new MyCustomCache()); // inject your custom cache
+});
 ```
 
 ## HttpClient
 
-The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to fetch the latest configuration over HTTP. You have the option to override the internal Http client with your customized one. 
+The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to fetch the latest config.json over HTTP. You have the option to override the internal Http client with your customized one. 
 
 ### HTTP Proxy
 If your application runs behind a proxy you can do the following:
-```kotlin
-val proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("proxyHost", proxyPort))
-val client = ConfigCatClient.newBuilder()
-    .httpClient(OkHttpClient.Builder()
+```java
+Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxyHost", proxyPort));
+
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.httpClient(new OkHttpClient.Builder()
                 .proxy(proxy)
-                .build())
-    .build("#YOUR-SDK-KEY#")
+                .build());
+});
 ```
 
 ### HTTP Timeout
 You can set the maximum wait time for a ConfigCat HTTP response by using OkHttpClient's timeouts.
-```kotlin
-val client = ConfigCatClient.newBuilder()
-    .httpClient(OkHttpClient.Builder()
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    .httpClient(new OkHttpClient.Builder()
                 .readTimeout(2, TimeUnit.SECONDS) // set the read timeout to 2 seconds
-                .build())
-    .build("#YOUR-SDK-KEY#")
+                .build());
+});
 ```
 OkHttpClient's default timeout is 10 seconds.
 
 > As the ConfigCatClient SDK maintains the whole lifetime of the internal http client, it's being closed simultaneously with the ConfigCatClient, refrain from closing the http client manually.
 
 ### Force refresh
-Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
+Any time you want to refresh the cached config.json with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
 
 ## Logging
 As the SDK uses the facade of [slf4j](https://www.slf4j.org) for logging, so you can use any of the slf4j implementation packages.
@@ -325,10 +468,10 @@ dependencies {
 }
 ```
 You can change the verbosity of the logs by passing a `LogLevel` parameter to the ConfigCatClientBuilder's `logLevel` function.
-```kotlin
-val client = ConfigCatClient.newBuilder()
-    .logLevel(LogLevel.INFO)
-    .build("#YOUR-SDK-KEY#")
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.logLevel(LogLevel.INFO);
+});
 ```
 
 Available log levels:
