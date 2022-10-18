@@ -104,10 +104,10 @@ client.close() // closes the specific client
 | `hooks`                            | `Hooks`                   | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
 
 ```swift
-let options = ConfigCatOptions.default
-options.pollingMode = PollingModes.manualPoll()
-options.logLevel = .info
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#", options: options)
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.pollingMode = PollingModes.manualPoll()
+    options.logLevel = .info
+}
 ```
 
 :::caution
@@ -214,10 +214,9 @@ There's an option to set a default user object that will be used at feature flag
 
 You can set the default user object either on SDK initialization:
 ```swift
-let options = ConfigCatOptions.default
-options.defaultUser = ConfigCatUser(identifier: "john@example.com")
-
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#", options: options)
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.defaultUser = ConfigCatUser(identifier: "john@example.com")
+}
 ```
 
 or with the `setDefaultUser()` method of the ConfigCat client.
@@ -301,10 +300,9 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 
 Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.autoPoll()` to change the polling interval.
 ```swift
-let options = ConfigCatOptions.default
-options.pollingMode = PollingModes.autoPoll(autoPollIntervalInSeconds: 120 /* polling interval in seconds */)
-
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#", options: options)
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.pollingMode = PollingModes.autoPoll(autoPollIntervalInSeconds: 120 /* polling interval in seconds */)
+}
 ```
 
 Available options:
@@ -320,10 +318,9 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 
 Use the `cacheRefreshIntervalInSeconds` option parameter of the `PollingModes.lazyLoad()` to set cache lifetime.
 ```swift
-let options = ConfigCatOptions.default
-options.pollingMode = PollingModes.lazyLoad(cacheRefreshIntervalInSeconds: 120 /* the cache will expire in 120 seconds */)
-
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#", options: options)
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.pollingMode = PollingModes.lazyLoad(cacheRefreshIntervalInSeconds: 120 /* the cache will expire in 120 seconds */)
+}
 ```
 
 Available options:
@@ -335,10 +332,9 @@ Available options:
 ### Manual polling
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `refresh()` is your application's responsibility.
 ```swift
-let options = ConfigCatOptions.default
-options.pollingMode = PollingModes.manualPoll()
-
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#", options: options)
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.pollingMode = PollingModes.manualPoll()
+}
 
 // Completion callback
 client.forceRefresh() { _ in
@@ -365,12 +361,11 @@ If it's using auto polling, the ready state is reached when the SDK has a valid 
 
 You can subscribe to these events either on SDK initialization: 
 ```swift
-let options = ConfigCatOptions.default
-options.hooks.addOnFlagEvaluated { details in
-    /* handle the event */
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.hooks.addOnFlagEvaluated { details in
+        /* handle the event */
+    }
 }
-
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#", options: options)
 ```
 or with the `hooks` property of the ConfigCat client:
 ```swift
@@ -416,10 +411,9 @@ let dictionary:[String: Any] = [
     "stringSetting": "test"
 ]
 
-let options = ConfigCatOptions.default
-options.flagOverrides = LocalDictionaryDataSource(source: dictionary, behaviour: .localOnly)
-
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#", options: options)
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.flagOverrides = LocalDictionaryDataSource(source: dictionary, behaviour: .localOnly)
+}
 ```
 
 ## Custom cache
@@ -439,10 +433,9 @@ public class MyCustomCache : ConfigCache {
 ```
 Then use your custom cache implementation:
 ```swift
-let options = ConfigCatOptions.default
-options.configCache = MyCustomCache()
-
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#", options: options)
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.configCache = MyCustomCache()
+}
 ```
 
 ## Force refresh
@@ -468,10 +461,9 @@ sessionConfiguration.connectionProxyDictionary = [
     kCFProxyPasswordKey: proxyPassword // Optional
 ]
 
-let options = ConfigCatOptions.default
-options.sessionConfiguration = sessionConfiguration
-
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#", options: options)
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.sessionConfiguration = sessionConfiguration
+}
 ```
 
 ## Changing the default HTTP timeout 
@@ -483,10 +475,9 @@ The default *timeoutIntervalForRequest* is 60 seconds.
 let sessionConfiguration = URLSessionConfiguration.default
 sessionConfiguration.timeoutIntervalForRequest = 10 // Timeout in seconds 
 
-let options = ConfigCatOptions.default
-options.sessionConfiguration = sessionConfiguration
-
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#", options: options)
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.sessionConfiguration = sessionConfiguration
+}
 ```
 
 ## Logging
@@ -497,9 +488,9 @@ or check <a href="https://developer.apple.com/videos/play/wwdc2016/721" target="
 ### Log level
 You can change the verbosity of the logs by passing a `logLevel` parameter to the ConfigCatClient's `init` function.
 ```swift
-let options = ConfigCatOptions.default
-options.logLevel = .info
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#", options: options)
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.logLevel = .info
+}
 ```
 
 Available log levels:
