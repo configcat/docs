@@ -23,7 +23,7 @@ flutter pub add configcat_client
 Or put the following directly to your `pubspec.yml` and run `dart pub get` or `flutter pub get`.
 ```yaml
 dependencies:
-  configcat_client: ^2.2.0
+  configcat_client: ^2.3.0
 ```
 ### 2. Import the ConfigCat SDK
 ```dart
@@ -68,7 +68,7 @@ client.close(); // closes the specific client
 | `receiveTimeout`            | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's receive timeout. [More about the HTTP Client](#httpclient). |
 | `sendTimeout`               | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's send timeout. [More about the HTTP Client](#httpclient). |
 | `cache`                     | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
-| `mode`                      | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
+| `pollingMode`               | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `logger`                    | Optional, sets the internal logger and log level. [More about logging](#logging). |
 | `override`                  | Optional, sets local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 | `defaultUser`               | Optional, sets the default user. [More about default user](#default-user). |
@@ -223,7 +223,7 @@ Use the the `autoPollInterval` option parameter of the `PollingMode.autoPoll()` 
 final client = ConfigCatClient.get(
     sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
     options: ConfigCatOptions(
-        mode: PollingMode.autoPoll(
+        pollingMode: PollingMode.autoPoll(
             autoPollInterval: Duration(seconds: 100),
         ),
     )
@@ -245,7 +245,7 @@ Use the `cacheRefreshInterval` option parameter of the `PollingMode.lazyLoad()` 
 final client = ConfigCatClient.get(
     sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
     options: ConfigCatOptions(
-        mode: PollingMode.lazyLoad(
+        pollingMode: PollingMode.lazyLoad(
             // the cache will expire in 100 seconds
             cacheRefreshInterval: Duration(seconds: 100), 
         ),
@@ -265,7 +265,7 @@ Manual polling gives you full control over when the `config.json` (with the sett
 final client = ConfigCatClient.get(
     sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
     options: ConfigCatOptions(
-        mode: PollingMode.manualPoll(),
+        pollingMode: PollingMode.manualPoll(),
     )
 );
 
