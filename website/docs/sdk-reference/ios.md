@@ -3,6 +3,10 @@ id: ios
 title: iOS (Swift) SDK Reference
 description: ConfigCat iOS (Swift) SDK Reference. This is a step-by-step guide on how to use feature flags in your iOS mobile application.
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/swift-sdk.svg?style=social)](https://github.com/configcat/swift-sdk/stargazers)
 [![Build Status](https://github.com/configcat/swift-sdk/actions/workflows/swift-ci.yml/badge.svg?branch=master)](https://github.com/configcat/swift-sdk/actions/workflows/swift-ci.yml)
 [![Coverage Status](https://img.shields.io/codecov/c/github/ConfigCat/swift-sdk.svg)](https://codecov.io/gh/ConfigCat/swift-sdk)
@@ -47,13 +51,44 @@ dependencies: [
 ```
 
 ### 2. Import the ConfigCat SDK:
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
 ```swift
 import ConfigCat
  ```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec
+@import ConfigCat;
+ ```
+
+</TabItem>
+</Tabs>
+
 ### 3. Create the *ConfigCat* client with your *SDK Key*
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
 ```swift
 let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#")
 ```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#" options:NULL];
+ ```
+
+</TabItem>
+</Tabs>
+
+
 ### 4. Get your setting value
 ```swift
 client.getValue(for: "isMyAwesomeFeatureEnabled", defaultValue: false) { isMyAwesomeFeatureEnabled in
