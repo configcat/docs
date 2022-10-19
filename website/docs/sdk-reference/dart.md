@@ -4,6 +4,9 @@ title: Dart (Flutter) SDK Reference
 description: ConfigCat Dart (Flutter) SDK Reference. This is a step-by-step guide on how to use feature flags in your Dart (Flutter) apps.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/dart-sdk.svg?style=social)](https://github.com/configcat/dart-sdk/stargazers)
 [![pub package](https://img.shields.io/pub/v/configcat_client.svg)](https://pub.dev/packages/configcat_client)
 [![Dart CI](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml/badge.svg?branch=main)](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml)
@@ -12,16 +15,26 @@ description: ConfigCat Dart (Flutter) SDK Reference. This is a step-by-step guid
 
 ## Getting Started
 ### 1. Add the ConfigCat SDK to your project
-With Dart:
+
+<Tabs>
+<TabItem value="dart" label="Dart" default>
+
 ```bash
 dart pub add configcat_client
 ```
-With Flutter:
+
+</TabItem>
+<TabItem value="flutter" label="Flutter">
+
 ```bash
 flutter pub add configcat_client
 ```
+
+</TabItem>
+</Tabs>
+
 Or put the following directly to your `pubspec.yml` and run `dart pub get` or `flutter pub get`.
-```yaml
+```yaml title="pubspec.yml"
 dependencies:
   configcat_client: ^2.3.0
 ```

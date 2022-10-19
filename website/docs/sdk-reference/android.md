@@ -24,7 +24,7 @@ When you use R8 or ProGuard, the aar artifact automatically applies the [include
 
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
-```
+```groovy title="Gradle"
 implementation 'com.configcat:configcat-android-client:8.+'
 ```
 ### 2. Import the ConfigCat SDK:
@@ -45,8 +45,8 @@ if(isMyAwesomeFeatureEnabled) {
 }
 
 // Or asynchronously
-client.getValueAsync(Boolean.class, "<key-of-my-awesome-feature>", false).
-    thenAccept(isMyAwesomeFeatureEnabled -> {
+client.getValueAsync(Boolean.class, "<key-of-my-awesome-feature>", false)
+    .thenAccept(isMyAwesomeFeatureEnabled -> {
         if(isMyAwesomeFeatureEnabled) {
             doTheNewThing();
         } else {
