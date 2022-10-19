@@ -63,7 +63,7 @@ import ConfigCat
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-#import "ConfigCat-Swift.h"
+@import ConfigCat;
 ```
 
 </TabItem>
@@ -962,8 +962,8 @@ public class MyCustomCache : ConfigCache {
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec title="MyCustomCache.h"
-#import <Foundation/Foundation.h>
-#import "ConfigCat-Swift.h"
+@import Foundation;
+@import ConfigCat;
 
 @interface MyCustomCache : NSObject <ConfigCache>
 
