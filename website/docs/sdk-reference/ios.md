@@ -63,7 +63,7 @@ import ConfigCat
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-@import ConfigCat;
+#import "ConfigCat-Swift.h"
 ```
 
 </TabItem>
@@ -942,12 +942,14 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 
 ## Custom cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCache` open class:
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
 ```swift
 public class MyCustomCache : ConfigCache {
     public func read(key: String) throws -> String {
         // here you have to return with the cached value
-        // you can access the latest cached value in case 
-        // of a failure like: super.inMemoryValue
     }
     
     public func write(key: String, value: String) throws {
@@ -955,12 +957,62 @@ public class MyCustomCache : ConfigCache {
     }
 }
 ```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec title="MyCustomCache.h"
+#import <Foundation/Foundation.h>
+#import "ConfigCat-Swift.h"
+
+@interface MyCustomCache : NSObject <ConfigCache>
+
+@end
+```
+
+```objectivec title="MyCustomCache.m"
+#import "MyCustomCache.h"
+
+@implementation MyCustomCache
+
+- (NSString *)readFor:(NSString *)key error:(NSError * __autoreleasing *)error {
+    // here you have to return with the cached value
+}
+
+- (BOOL)writeFor:(NSString *)key value:(NSString *)value error:(NSError * __autoreleasing *)error {
+    // here you have to store the new value in the cache
+}
+
+@end
+```
+
+</TabItem>
+</Tabs>
+
 Then use your custom cache implementation:
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
 ```swift
 let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
     options.configCache = MyCustomCache()
 }
 ```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
+                                            configurator:^(ConfigCatOptions* options) {
+    
+    options.configCache = [MyCustomCache alloc];
+}];
+```
+
+</TabItem>
+</Tabs>
 
 ## Force refresh
 Any time you want to refresh the cached config.json with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
