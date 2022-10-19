@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 ### 1. Add the ConfigCat SDK to your project
 
 **CocoaPods**
-```
+```ruby title="Podfile"
 target '<YOUR TARGET>' do
 pod 'ConfigCat'
 end
@@ -31,7 +31,7 @@ pod install
 ```
 
 **Carthage**
-```
+```swift title="Cartfile"
 github "configcat/swift-sdk"
 ```
 
@@ -41,7 +41,7 @@ Then, run the carthage update command and then follow the Carthage integration s
 
 Add the SDK to your `Package.swift`.
 
-```
+```swift title="Package.swift"
 dependencies: [
     .package(
         url: "https://github.com/configcat/swift-sdk", 
