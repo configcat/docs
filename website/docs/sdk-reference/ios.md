@@ -201,7 +201,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ"
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
                                             configurator:^(ConfigCatOptions* options) {
     options.pollingMode = [PollingModes manualPoll];
     options.logLevel = LogLevelInfo;
@@ -445,7 +445,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"PKDVCLf-Hq-h-kCzMp-L7Q/HhOWfwVtZ0mb30i9wi17GQ"
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
                                             configurator:^(ConfigCatOptions* options) {
     
     options.defaultUser = [[ConfigCatUser alloc]initWithIdentifier:@"john@example.com"
