@@ -153,7 +153,7 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} ConfigCat.`,
     },
     prism: {
-      additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir', 'dart', 'tsx'],
+      additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir', 'dart', 'tsx', 'clike', 'c', 'objectivec'],
     },
     algolia: { // The search crawling repo can be found here: https://github.com/configcat/docsearch
       appId: '0MLXBNIK0Q',
