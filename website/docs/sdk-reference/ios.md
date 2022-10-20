@@ -178,7 +178,7 @@ client.close() // closes the specific client
 | ---------------------------------- | ------------------------- | ------------------------------ |
 | `dataGovernance`                   | `DataGovernance`          | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`. |
 | `configCache`                      | `ConfigCache?`            | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
-| `pollingMode`                      | `PollingMode?`            | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
+| `pollingMode`                      | `PollingMode`            | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `sessionConfiguration`             | `URLSessionConfiguration` | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls. |
 | `baseUrl`                          | `String`                  | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json. |
 | `flagOverrides`                    | `OverrideDataSource?`     | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
