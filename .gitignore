@@ -16,3 +16,4 @@ website/i18n/*
 /.vs/slnx.sqlite
 /.vs/configcat.docs/v15/.suo
 /.vs/config/applicationhost.config
+.dccache

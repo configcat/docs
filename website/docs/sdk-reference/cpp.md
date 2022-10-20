@@ -452,7 +452,7 @@ Also, we recommend using [confidential targeting comparators](/advanced/targetin
 
 ## Sample Applications
 Check out our Sample Application how they use the ConfigCat SDK
-* <a href="https://github.com/configcat/cpp-sdk/tree/main/example/" target="_blank">ConfigCat C++ Console Sample App</a>
+* <a href="https://github.com/configcat/cpp-sdk/tree/main/samples/" target="_blank">ConfigCat C++ Console Sample App</a>
 
 ## Look Under the Hood
 - <a href="https://github.com/ConfigCat/cpp-sdk" target="_blank">ConfigCat C++ SDK's repository on GitHub</a>
