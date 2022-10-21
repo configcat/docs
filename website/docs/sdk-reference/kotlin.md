@@ -16,7 +16,7 @@ description: ConfigCat Kotlin Multiplatform SDK Reference. This is a step-by-ste
 
 ## Getting started
 ### 1. Install the ConfigCat SDK
-```kotlin
+```kotlin title="build.bradle.kts"
 val configcat_version: String by project
 
 kotlin {
