@@ -75,7 +75,7 @@ client.close() // closes a specific client
 | Properties                  | Type                | Description |
 | --------------------------- | ------------------- | ----------- |
 | `dataGovernance`            | `DataGovernance`    | Optional, defaults to `DataGovernance.GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.GLOBAL`, `DataGovernance.EU_ONLY`. |
-| `baseUrl`                   | `String`            | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
+| `baseUrl`                   | `String`            | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config.json. |
 | `requestTimeout`            | `Duration`          | Optional, defaults to `30s`. Sets the underlying HTTP client's request timeout. [More about HTTP Timeout](#http-timeout). |
 | `configCache`               | `ConfigCache`       | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
 | `pollingMode`               | `PollingMode`       | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
@@ -387,7 +387,7 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
 ```
 
 ## HTTP Engine
-The ConfigCat SDK internally uses <a href="https://ktor.io" target="_blank">Ktor</a> to download the latest configuration over HTTP. For each platform the SDK includes a specific <a href="https://ktor.io/docs/http-client-engines.html#limitations" target="_blank">HTTP engine</a>: 
+The ConfigCat SDK internally uses <a href="https://ktor.io" target="_blank">Ktor</a> to download the latest config.json over HTTP. For each platform the SDK includes a specific <a href="https://ktor.io/docs/http-client-engines.html#limitations" target="_blank">HTTP engine</a>: 
 
 - **Android / JVM**: `ktor-client-okhttp`
 - **macOS / iOS / tvOS / watchOS**: `ktor-client-darwin`
@@ -429,7 +429,7 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
 > You can check tha availability of the proxy configuration in specific HTTP engines <a href="https://ktor.io/docs/proxy.html" target="_blank">here</a>.
 
 ## Force refresh
-Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
+Any time you want to refresh the cached config.json with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
 
 ## Logging
 The default logger used by the SDK is simply using `println()` to log messages, but you can override it with your custom logger implementation via the `logger` client option. The custom implementation must satisfy the <a href="https://github.com/configcat/kotlin-sdk/blob/main/src/commonMain/kotlin/com/configcat/log/Logger.kt" target="_blank">Logger</a> interface.
