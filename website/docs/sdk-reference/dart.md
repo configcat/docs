@@ -482,8 +482,8 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## Sample Apps
 Check out our Sample Applications how they use the ConfigCat SDK
-- <a href="https://github.com/configcat/dart-sdk/tree/main/samples/lib" target="_blank">Console Application</a>
-- <a href="https://github.com/configcat/dart-sdk/tree/main/samples/flutter" target="_blank">Flutter Application</a>
+- <a href="https://github.com/configcat/dart-sdk/tree/main/example/lib" target="_blank">Console Application</a>
+- <a href="https://github.com/configcat/dart-sdk/tree/main/example/flutter" target="_blank">Flutter Application</a>
 
 ## Look Under the Hood
 - <a href="https://github.com/ConfigCat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK's repository on GitHub</a>
