@@ -1,6 +1,6 @@
 ---
 id: android
-title: Android SDK Reference
+title: Android (Java) SDK Reference
 description: ConfigCat Android SDK Reference. This is a step-by-step guide on how to use feature flags in your Android Java application.
 ---
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/android-sdk.svg?style=social)](https://github.com/configcat/android-sdk/stargazers)
@@ -11,10 +11,10 @@ description: ConfigCat Android SDK Reference. This is a step-by-step guide on ho
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=configcat_android-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=configcat_android-sdk)
 
 :::info
-You may want to check our [Kotlin Multiplatform SDK](/sdk-reference/kotlin) for a more modern Android development experience.
+This SDK is mainly for Java-based Android applications. For a more modern Android development experience, check our [Kotlin Multiplatform SDK](/sdk-reference/kotlin).
 :::
 
-<a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android SDK on GitHub</a>  
+<a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android (Java) SDK on GitHub</a>  
 
 
 ### Compatibility
