@@ -18,18 +18,25 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 
 ## Getting started
 ### 1. Install *ConfigCat SDK* [Nuget](https://www.nuget.org/packages/ConfigCat.Client) package
+
+Using Powershell / NuGet Package Manager Console:
 ```powershell
 Install-Package ConfigCat.Client
 ```
 
+Using .NET CLI:
+```
+dotnet add package ConfigCat.Client
+```
+
 ### 2. Import package
 ```csharp
-using ConfigCat.Client
+using ConfigCat.Client;
 ```
 
 ### 3. Create the *ConfigCat* client with your *SDK Key*
 ```csharp
-var client = new ConfigCatClient("#YOUR-SDK-KEY#");
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 ```
 
 ### 4. Get your setting value
@@ -46,9 +53,11 @@ else
 ```
 
 ### 5. Dispose *ConfigCat* client
-You can safely `Dispose()` the client instance and release all associated resources on application exit.
+You can safely shut down all clients at once or individually and release all associated resources on application exit.
 ```csharp
-client.Dispose();
+ConfigCatClient.DisposeAll(); // closes all clients
+// -or-
+client.Dispose(); // closes a specific client
 ```
 
 ## Creating the *ConfigCat Client*
@@ -57,29 +66,48 @@ client.Dispose();
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
-`new ConfigCatClient()` creates a client with default options.
+`ConfigCatClient.Get(sdkKey: "<sdkKey>")` returns a client with default options.
+
+The `Get` method has an optional callback parameter, which can be used to configure the client via a `ConfigCatClientOptions` object:
 
 | Properties          | Description | Default |
 | ------------------- | ----------- | ------- |
-| `SdkKey`            | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. | |
 | `PollingMode`       | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). | `PollingModes.AutoPoll()` |
 | `ConfigCache`       | Optional, [`IConfigCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/IConfigCache.cs) instance for cache the config. | [`InMemoryConfigCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/InMemoryConfigCache.cs) |
 | `Logger`            | Optional, [`ILogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/ILogger.cs) instance for tracing. | [`ConsoleLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/ConsoleLogger.cs) (with WARNING level) |
+| `BaseUrl`           | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config.json. | |
 | `HttpClientHandler` | Optional, `HttpClientHandler` to provide network credentials and proxy settings. [More about the proxy settings](##using-configcat-behind-a-proxy). | built-in HttpClientHandler |
 | `HttpTimeout`       | Optional, sets the underlying HTTP client's timeout. [More about the HTTP timeout](#http-timeout). | `TimeSpan.FromSeconds(30)` |
 | `FlagOverrides`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). | |
 | `DataGovernance`    | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly` | `Global` |
+| `DefaultUser`       | Optional, sets the default user. [More about default user](#default-user). | `null` (none) |
+| `Offline`           | Optional, determines whether the client should be initialized to offline mode or not. [More about offline mode](#online--offline-mode). | `false` |
+
+Via the events provided by `ConfigCatClientOptions` you can also subscribe to the hooks (events) of the SDK at configuration time. [More about hooks](#hooks).
+
+For example:
+
+```csharp
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+{
+    options.PollingMode = PollingModes.ManualPoll;
+    options.Logger = new ConsoleLogger(LogLevel.Info);
+    options.ClientReady += (s, e) => Debug.WriteLine("Client is ready!");
+});
+```
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
-If you want to use multiple SDK Keys in the same application, create only one `ConfigCatClient` per SDK Key.
+You can acquire singleton client instances for your SDK keys using the `ConfigCatClient.Get(sdkKey: <sdkKey>)` static factory method.
+(However, please keep in mind that subsequent calls to `ConfigCatClient.Get()` with the *same SDK Key* return a *shared* client instance, which is configured by the first call.)
+These clients can be closed all at once with the `ConfigCatClient.DisposeAll()` method or individually with `client.Dispose()`.
 :::
 
 ## Anatomy of `GetValue()`, `GetValueAsync()`
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
+| `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on *ConfigCat Dashboard* for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
@@ -92,6 +120,40 @@ var value = client.GetValue("keyOfMySetting", false, userObject);
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 var value = await client.GetValueAsync("keyOfMySetting", false, userObject);
 ```
+
+## Anatomy of `GetValueDetails()`, `GetValueDetailsAsync()`
+
+`GetValueDetails()`/`GetValueDetailsAsync()` are similar to `GetValue()`/`GetValueAsync()` but instead of returning the evaluated value only, they provide more detailed information about the evaluation result.
+
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on *ConfigCat Dashboard* for each setting.  |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
+```csharp
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+var details = client.GetValueDetails("keyOfMySetting", false, userObject);
+```
+
+```csharp
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+var details = await client.GetValueDetailsAsync("keyOfMySetting", false, userObject);
+```
+
+The `details` result contains the following information:
+
+| Field                                     | Type      | Description                                                                              |
+| ----------------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
+| `Key`                                     | `string`  | The key of the evaluated feature flag or setting.                                        |
+| `Value`                                   | `bool` / `string` / `int` / `double` | The evaluated value of the feature flag or setting.           |
+| `User`                                    | `User`    | The user object used for the evaluation.                                                 |
+| `IsDefaultValue`                          | `bool`    | True when the default value passed to `GetValueDetails()`/`GetValueDetailsAsync()` is returned due to an error. |
+| `ErrorMessage`                            | `string`  | In case of an error, this field contains the error message.                              |
+| `ErrorException`                          | `Exception` | In case of an error, this field contains the related exception object (if any).        |
+| `MatchedEvaluationRule`                   | `RolloutRule` | If the evaluation was based on a targeting rule, this field contains that specific rule. |
+| `MatchedEvaluationPercentageRule`         | `RolloutPercentageItem` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `FetchTime`                               | `DateTime` | The last download time (UTC) of the current config.                                     |
 
 ## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
@@ -108,13 +170,56 @@ User userObject = new User("john@example.com");
 | `Country`  | Optional parameter for easier targeting rule definitions.                                                                       |
 | `Custom`   | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 ``` csharp
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92") {
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92")
+{
     Email = "john@example.com",
     Country = "United Kingdom",
     Custom = new Dictionary<string, string> {
         {"SubscriptionType", "Pro"}, 
         {"UserRole", "Admin"}}
 };
+```
+
+### Default user
+
+It's possible to set a default user object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
+
+You can set the default user object either on SDK initialization:
+```csharp
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+    options.DefaultUser = new User(identifier: "john@example.com"));
+```
+
+...or using the `SetDefaultUser()` method of the `ConfigCatClient` object:
+```csharp
+client.SetDefaultUser(new User(identifier: "john@example.com"));
+```
+
+Whenever the evaluation methods like `GetValue()`, `GetValueAsync()`, etc. are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+
+```csharp
+var user = new User(identifier: "john@example.com");
+client.SetDefaultUser(user);
+
+// The default user will be used at the evaluation process.
+var value = await client.GetValueAsync(key: "keyOfMySetting", defaultValue: false); 
+```
+
+When a user object parameter is passed to the evaluation methods, it takes precedence over the default user.
+
+```csharp
+var user = new User(identifier: "john@example.com");
+client.SetDefaultUser(user);
+
+var otherUser = new User(identifier: "brian@example.com");
+
+// otherUser will be used at the evaluation process.
+var value = await client.GetValueAsync(key: "keyOfMySetting", defaultValue: false, user: otherUser);
+```
+
+You can also remove the default user by doing the following:
+```csharp
+client.ClearDefaultUser();
 ```
 
 ## Polling Modes
@@ -126,24 +231,9 @@ The *ConfigCat SDK* downloads and stores the latest values automatically every 6
 
 Use the `pollInterval` option parameter to change the polling interval.
 ```csharp
-IConfigCatClient client = new ConfigCatClient(options => 
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options => 
 {
-    options.SdkKey = "#YOUR-SDK-KEY#";
     options.PollingMode = PollingModes.AutoPoll(pollInterval: TimeSpan.FromSeconds(95));
-});
-```
-
-Subscribing to the `OnConfigurationChanged` event will get you notified about changes.
-```csharp
-IConfigCatClient client = new ConfigCatClient(options => 
-{
-    options.SdkKey = "#YOUR-SDK-KEY#";
-    var autoPoll = PollingModes.AutoPoll();
-    autoPoll.OnConfigurationChanged += (sender, args) => 
-    {
-        Console.WriteLine("Your config has been changed!");
-    };
-    options.PollingMode = autoPoll;
 });
 ```
 
@@ -159,9 +249,8 @@ When calling `GetValue()` or `GetValueAsync()` the *ConfigCat SDK* downloads the
 
 Use `cacheTimeToLive` parameter to manage configuration lifetime.
 ```csharp
-IConfigCatClient client = new ConfigCatClient(options => 
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options => 
 {
-    options.SdkKey = "#YOUR-SDK-KEY#";
     options.PollingMode = PollingModes.LazyLoad(cacheTimeToLive: TimeSpan.FromSeconds(600));
 });
 ```
@@ -176,9 +265,8 @@ Available options:
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
 
 ```csharp
-IConfigCatClient client = new ConfigCatClient(options => 
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options => 
 {
-    options.SdkKey = "#YOUR-SDK-KEY#";
     options.PollingMode = PollingModes.ManualPoll;
 });
 
@@ -188,9 +276,8 @@ client.ForceRefresh();
 > `GetValue()` returns `defaultValue` if the cache is empty. Call `ForceRefresh()` to update the cache.
 
 ```csharp
-IConfigCatClient client = new ConfigCatClient(options => 
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options => 
 {
-    options.SdkKey = "#YOUR-SDK-KEY#";
     options.PollingMode = PollingModes.ManualPoll;
 });
 
@@ -199,12 +286,54 @@ client.ForceRefresh();
 Console.WriteLine(client.GetValue("key", "my default value")); // console: "value from server"
 ```
 
+## Hooks
+
+The SDK provides several hooks (events), by means of which you can get notified of its actions.
+Via the following events you can subscribe to particular events raised by the client:
+
+- `event EventHandler ClientReady`: This event is raised when the SDK reaches the ready state. If the SDK is configured to use lazy load or manual polling, it's considered ready right after instantiation.
+If auto polling is used, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `ClientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
+- `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config.json into memory from cache, then each time afterwards when a config.json with changed content is downloaded via HTTP.
+- `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetails()`/``GetValueDetailsAsync()``](#anatomy-of-getvaluedetails).
+- `event EventHandler<ConfigCatClientErrorEventArgs> Error`: This event is raised when an error occurs within the ConfigCat SDK.
+- `event EventHandler BeforeClientDispose`: This event is raised before the client gets closed by a `Dispose()` call.
+
+You can subscribe to these events either on initialization: 
+```csharp
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+{
+    options.PollingMode = PollingModes.ManualPoll;
+    options.FlagEvaluated += (s, e) => { /* handle the event */ };
+});
+```
+
+...or directly on the `ConfigCatClient` instance:
+```csharp
+client.FlagEvaluated += (s, e) => { /* handle the event */ };
+```
+
+## Online / Offline mode
+
+In cases where you want to prevent the SDK from making HTTP calls, you can switch it to offline mode:
+```csharp
+client.SetOffline();
+```
+
+In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
+
+To switch the SDK back to online mode, do the following:
+```csharp
+client.SetOnline();
+```
+
+Using the `client.IsOffline` property you can check whether the SDK is in offline mode or not.
+
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
-- **Local/Offline mode** (`OverrideBehaviour.LocalOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+- **Local only** (`OverrideBehaviour.LocalOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
 - **Local over remote** (`OverrideBehaviour.LocalOverRemote`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
 
@@ -218,9 +347,8 @@ The SDK can load your feature flag & setting overrides from a file.
 You can also specify whether the file should be reloaded when it gets modified.
 #### File
 ```csharp
-IConfigCatClient client = new ConfigCatClient(options =>
+IConfigCatClient client = ConfigCatClient.Get("localhost", options =>
 {
-    options.SdkKey = "localhost";
     options.FlagOverrides = FlagOverrides.LocalFile(
         "path/to/local_flags.json", // path to the file
         true, // reload the file when it gets modified
@@ -326,9 +454,8 @@ var dictionary = new Dictionary<string, object>
     {"stringSetting", "test"},
 };
 
-IConfigCatClient client = new ConfigCatClient(options =>
+IConfigCatClient client = ConfigCatClient.Get("localhost", options =>
 {
-    options.SdkKey = "localhost";
     options.FlagOverrides = FlagOverrides.LocalDictionary(dictionary, OverrideBehaviour.LocalOnly);
 });
 ```
@@ -336,7 +463,7 @@ IConfigCatClient client = new ConfigCatClient(options =>
 ## Logging
 ### Setting log level
 ```csharp
-IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 
 client.LogLevel = LogLevel.Info;
 ```
@@ -362,16 +489,18 @@ ConfigCat - Info -  Evaluate 'isPOCFeatureEnabled'
 
 Sample code on how to create a basic file logger implementation for ConfigCat client: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/FileLoggerSample.cs" target="_blank">See Sample Code</a>
 
+Another sample which shows how to implement an adapter to [the built-in logging framework](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging) of .NET Core/.NET 5+: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/ASP.NETCore/WebApplication/Adapters/ConfigCatToMSLoggerAdapter.cs" target="_blank">See Sample Code</a>
+
 ## `GetAllKeys()`, `GetAllKeysAsync()`
 You can get all the setting keys from your configuration by calling the `GetAllKeys()` or `GetAllKeysAsync()` method of the `ConfigCatClient`.
 
 ```csharp
-IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IEnumerable<string> keys = client.GetAllKeys();
 ```
 
 ```csharp
-IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IEnumerable<string> keys = await client.GetAllKeysAsync();
 ```
 
@@ -379,7 +508,7 @@ IEnumerable<string> keys = await client.GetAllKeysAsync();
 Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
 
 ```csharp
-IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IDictionary<string, object> settingValues = client.GetAllValues();
 
 // invoke with user object
@@ -388,7 +517,7 @@ IDictionary<string, object> settingValuesTargeting = client.GetAllValues(userObj
 ```
 
 ```csharp
-IConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IDictionary<string, object> settingValues = await client.GetAllValuesAsync();
 
 // invoke with user object
@@ -408,9 +537,8 @@ var myProxySettings = new WebProxy(proxyHost, proxyPort)
 
 var myHttpClientHandler = new HttpClientHandler { Proxy = myProxySettings };
 
-IConfigCatClient client = new ConfigCatClient(options =>
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
-    options.SdkKey = "#YOUR-SDK-KEY#";
     options.HttpClientHandler = myHttpClientHandler;
 });
 ```
@@ -418,9 +546,8 @@ IConfigCatClient client = new ConfigCatClient(options =>
 ## HTTP Timeout
 You can set the maximum wait time for a ConfigCat HTTP response.
 ```csharp
-IConfigCatClient client = new ConfigCatClient(options =>
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
-    options.SdkKey = "#YOUR-SDK-KEY#";
     options.HttpTimeout = TimeSpan.FromSeconds(10);
 });
 ```
