@@ -164,15 +164,15 @@ You can download the executables directly from <a target="_blank" href="https://
 
 </details>
 
-### Configuration
-After a successful installation, the CLI must be configured with your <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credentials</a>.
+### Setup
+After a successful installation, the CLI must be set up with your <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credentials</a>.
 
 You can do this by using the `configcat setup` command.
 
 ![interactive](/assets/cli/setup.gif)
 
 #### Environment Variables
-Besides the configuration command above, the CLI can read your credentials from the following environment variables.
+Besides the `setup` command above, the CLI can read your credentials from the following environment variables.
 
 Name | Description |
 --------- | ----------- |

@@ -75,7 +75,7 @@ ConfigCatClient client = ConfigCatClient.newBuilder()
 | `cache(ConfigCache)`                    | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
 | `mode(PollingMode)`                     | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `logLevel(LogLevel)`                    | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging). |
-| `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
@@ -233,7 +233,7 @@ You can load your feature flag & setting overrides from a file or from a simple 
 
 ### JSON File
 
-The SDK can be configured to load your feature flag & setting overrides from a file or classpath resource. 
+The SDK can be set up to load your feature flag & setting overrides from a file or classpath resource. 
 You can also specify whether the file should be reloaded when it gets modified.
 #### File
 ```java

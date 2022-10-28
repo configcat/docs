@@ -6,16 +6,16 @@ description: ConfigCat Integrations Overview. List of the available integrations
 Integrate ConfigCat with your technology stack and leverage all the benefits of Feature flags within your workflows.
 
 ### Slack
-Get updated via a Slack Channel message when someone changes a feature flag.
+Get notified in Slack when a feature flag changes.
 [Documentation](integrations/slack.md)
 ### Jira
-Turn features On / Off right from a linked Issue on your Jira board. Also you can add Targeting or Percentage Rules just as easily.
+Manage feature flags right from your Jira board.
 [Documentation](integrations/jira.md)
 ### Trello
-Turn features On / Off right from a linked Card on your Trello board. Also you can add Targeting or Percentage Rules just as easily.
+Turn features On / Off right from a linked Card on your Trello board.
 [Documentation](integrations/trello.md)
 ### monday
-Turn features On / Off right from a linked item on your monday board. Also you can add Targeting or Percentage Rules just as easily.
+Turn features On / Off right from a linked item on your monday board.
 [Documentation](integrations/monday.md)
 ### DataDog
 Ensure that every setting change in ConfigCat is sent to DataDog as an Event.
@@ -39,8 +39,9 @@ Discover feature flag usages in your source code and upload the found code refer
 Discover feature flag usages in your source code and upload the found code references to ConfigCat.
 [Documentation](integrations/bitrise.md)
 ### Terraform
-Configure and access ConfigCat resources via ConfigCat Public Management API with Terraform.
+Manage feature flags directly from Terraform HCL scripts.
+
 [Documentation](integrations/terraform.md)
 ### Amplitude
-Annotate your Amplitude charts with feature flag changes.
+Annotate your Amplitude charts when a feature flag changes.
 [Documentation](integrations/amplitude.md)

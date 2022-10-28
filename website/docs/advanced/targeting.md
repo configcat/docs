@@ -209,11 +209,11 @@ The exact value that will be served to the users that fall into that fraction. D
 The percentage-based targeting is sticky by design and consistent across all SDKs.
 
 Percentage-based targeting is based on the identifier of the `User Object` passed to the SDK's `getValue()` methods.
-The SDKs are hashing the concatenated value of the `User Object's` `identifier` and the requested Feature Flag's `Key`. Then they assign a 0-99 number to the User for a specific Feature Flag. This number is used to evaluate a particular Feature Flag's value based on it's configured rules.  
+The SDKs are hashing the concatenated value of the `User Object's` `identifier` and the requested feature flag's `Key`. Then they assign a 0-99 number to the User for a specific feature flag. This number is used to evaluate a particular feature flag's value based on the targeting rules.  
 This number is fix and consistent for each User across all SDKs. The SDKs check if the assigned number is greater or less than the percentage set on the ConfigCat Dashboard.
 
 :::caution
-As not only the User's identifier is hashed but the User's identifier concatenated with the evaluated Feature Flag's key, we can ensure that you won't test on the same userbase for all of your Feature Flags.
+As not only the User's identifier is hashed but the User's identifier concatenated with the evaluated feature flag's key, we can ensure that you won't test on the same userbase for all of your feature flags.
 :::
 
 :::info
@@ -222,21 +222,21 @@ As the evaluation happens in the SDKs, your User's sensitive information will ne
 
 ### Example
 
-Let's say you have two users and two different Feature Flags with percentage-based targeting.  
+Let's say you have two users and two different feature flags with percentage-based targeting.  
 
 |      | isTwitterSharingEnabled                                                                 | isFacebookSharingEnabled                                                                   |
 | ---- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Jane | `hash('Jane' + 'isTwitterSharingEnabled') mod 100` <br/>-> The assigned number is **8** | `hash('Jane' + 'isFacebookSharingEnabled') mod 100`  <br/>-> The assigned number is **64** |
 | Joe  | `hash('Joe' + 'isTwitterSharingEnabled') mod 100` <br/>-> The assigned number is **32** | `hash('Joe' + 'isFacebookSharingEnabled') mod 100` <br/>-> The assigned number is **12**   |
 
-1. Let's start with both Feature Flags set to **0% ON / 100% OFF**.
+1. Let's start with both feature flags set to **0% ON / 100% OFF**.
 
 |      | isTwitterSharingEnabled <br/> 0% ON / 100% OFF | isFacebookSharingEnabled <br/> 0% ON / 100% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |
 | Jane | 8 >= 0 <br/>-> **OFF**                         | 64 >= 0 <br/>-> **OFF**                         |
 | Joe  | 32 >= 0 <br/>-> **OFF**                        | 12 >= 0 <br/>-> **OFF**                         |
 
-2. Let's set both Feature Flags to **10% ON / 90% OFF**.
+2. Let's set both feature flags to **10% ON / 90% OFF**.
 
 |      | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |
@@ -244,7 +244,7 @@ Let's say you have two users and two different Feature Flags with percentage-bas
 | Joe  | 32 >= 10 <br/>-> **OFF**                       | 12 >= 10 <br/>-> **OFF**                        |
 
 :::caution
-Although both Feature Flags are set to 10% ON / 90% OFF, Jane is only evaluated to **ON** for the `isTwitterSharingEnabled` Feature Flag.
+Although both feature flags are set to 10% ON / 90% OFF, Jane is only evaluated to **ON** for the `isTwitterSharingEnabled` feature flag.
 :::
 
 3. The Twitter Sharing Feature seems alright, so let's increase the `isTwitterSharingEnabled` to **40% ON / 60% OFF**.
@@ -263,7 +263,7 @@ Although both Feature Flags are set to 10% ON / 90% OFF, Jane is only evaluated 
 
 > As percentage-based targeting is sticky, the same user base is evaluated to **ON** like in the 2. step.
 
-5. If everything seems alright, we can safely increase both Feature Flags to **100% ON / 0% OFF**.
+5. If everything seems alright, we can safely increase both feature flags to **100% ON / 0% OFF**.
 
 |      | isTwitterSharingEnabled <br/> 100% ON / 0% OFF | isFacebookSharingEnabled <br/> 100% ON / 0% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |

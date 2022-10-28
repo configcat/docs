@@ -67,7 +67,7 @@ client.Dispose();
 | `Logger`            | Optional, [`ILogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/ILogger.cs) instance for tracing. | [`ConsoleLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/ConsoleLogger.cs) (with WARNING level) |
 | `HttpClientHandler` | Optional, `HttpClientHandler` to provide network credentials and proxy settings. [More about the proxy settings](##using-configcat-behind-a-proxy). | built-in HttpClientHandler |
 | `HttpTimeout`       | Optional, sets the underlying HTTP client's timeout. [More about the HTTP timeout](#http-timeout). | `TimeSpan.FromSeconds(30)` |
-| `FlagOverrides`     | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). | |
+| `FlagOverrides`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). | |
 | `DataGovernance`    | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly` | `Global` |
 
 :::caution
@@ -214,7 +214,7 @@ You can load your feature flag & setting overrides from a file or from a simple 
 
 ### JSON File
 
-The SDK can be configured to load your feature flag & setting overrides from a file. 
+The SDK can be set up to load your feature flag & setting overrides from a file. 
 You can also specify whether the file should be reloaded when it gets modified.
 #### File
 ```csharp
@@ -397,7 +397,7 @@ IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAs
 ```
 
 ## Using ConfigCat behind a proxy
-Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by injecting a HttpClientHandler instance into the ConfigCatClient's configuration.
+Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by injecting a HttpClientHandler instance into the ConfigCatClient's initialization call.
 
 ```csharp
 var myProxySettings = new WebProxy(proxyHost, proxyPort)
@@ -430,12 +430,12 @@ The default timeout is 30 seconds.
 When the ConfigCat SDK does not work as expected in your application, please check for the following potential problems:
 
 * **Symptom:** Instead of the actual value, the default one is constantly returned by `GetValue()`/`GetValueAsync()` and
-  the log contains the following message (provided that the client is configured to log error level events as described [here](#logging)):
+  the log contains the following message (provided that the client is set up to log error level events as described [here](#logging)):
   "Secure connection could not be established. Please make sure that your application is enabled to use TLS 1.2+."
 
-  **Problem:** ConfigCat CDN servers are configured to require TLS 1.2 or newer security protocol for communication.
+  **Problem:** ConfigCat CDN servers are set up to require TLS 1.2 or newer security protocol for communication.
   As for allowed security protocols, please keep in mind that newer .NET runtimes rely on operating system settings,
-  older versions, however, may need additional configuration to make secure communication with the CDN servers work.
+  older versions, however, may need additional set up to make secure communication with the CDN servers work.
 
   | Runtime Version | Default Protocols |
   |-----------------|-------------------|

@@ -181,7 +181,7 @@ client.close() // closes the specific client
 | `pollingMode`                      | `PollingMode`            | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `sessionConfiguration`             | `URLSessionConfiguration` | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls. |
 | `baseUrl`                          | `String`                  | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json. |
-| `flagOverrides`                    | `OverrideDataSource?`     | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `flagOverrides`                    | `OverrideDataSource?`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 | `logLevel`                         | `LogLevel`                | Optional, sets the internal log level. [More about logging.](#logging). |
 | `defaultUser`                      | `ConfigCatUser?`          | Optional, sets the default user. [More about default user.](#default-user). |
 | `offline`                          | `Bool`                    | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode). |
@@ -782,7 +782,7 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 
 With the following hooks you can subscribe to particular events fired by the SDK:
 
-- `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
+- `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling it's considered ready right after instantiation.
 If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeInSeconds` is reached.
 
 - `onConfigChanged([String: Setting])`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.

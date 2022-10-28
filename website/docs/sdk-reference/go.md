@@ -53,11 +53,11 @@ client.Close()
 | --------- | ------------------------------------------------------------------------------------------- |
 | `sdkKey`  | SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
-### Custom configuration options
-`configcat.NewCustomClient(config)` returns a client with custom configuration. The `config` parameter is a stucture which 
+### Custom client configuration options
+`configcat.NewCustomClient(config)` returns a client with custom configuration. The `config` parameter is a structure which 
 contains the custom configuration.
 
-Available configuration options:
+Available options:
 
 | Properties | Type | Description |
 | ---------- | ---- | ----------- |
@@ -72,7 +72,7 @@ Available configuration options:
 | `PollingMode`             | `configcat.PollingMode`    | Defaults to `AutoPoll`. Sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `PollInterval`            | `time.Duration`            | Sets after how much time a configuration is considered stale. When `PollingMode` is `AutoPoll` this value is used as the polling rate. |
 | `ChangeNotify`            | `func()`                   | An optional callback to invoke when a new configuration has fetched. |
-| `FlagOverrides`           | `*configcat.FlagOverrides` | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `FlagOverrides`           | `*configcat.FlagOverrides` | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 
 Then you can pass it to the `NewCustomClient()` method:
 ```go
@@ -158,7 +158,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KE
     PollingMode: configcat.AutoPoll,
     PollInterval: time.Second * 120 /* polling interval in seconds */})
 ```
-You have the option to configure a `ChangeNotify` callback that will be notified when a new configuration is fetched. The policy calls the given method only, when the new configuration is differs from the cached one.
+You have the option to set up a `ChangeNotify` callback that will be notified when a new configuration is fetched. The policy calls the given method only, when the new configuration differs from the cached one.
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", 
     PollingMode: configcat.AutoPoll,
@@ -223,7 +223,7 @@ You can load your feature flag & setting overrides from a file or from a simple 
 
 ### JSON File
 
-The SDK can be configured to load your feature flag & setting overrides from a file.
+The SDK can be set up to load your feature flag & setting overrides from a file.
 
 ```go
 client := configcat.NewCustomClient(configcat.Config{
