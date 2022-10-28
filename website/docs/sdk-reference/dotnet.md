@@ -53,11 +53,11 @@ else
 ```
 
 ### 5. Dispose *ConfigCat* client
-You can safely shut down all clients at once or individually and release all associated resources on application exit.
+You can safely dispose all clients at once or individually and release all associated resources on application exit.
 ```csharp
-ConfigCatClient.DisposeAll(); // closes all clients
+ConfigCatClient.DisposeAll(); // disposes all clients
 // -or-
-client.Dispose(); // closes a specific client
+client.Dispose(); // disposes a specific client
 ```
 
 ## Creating the *ConfigCat Client*
@@ -68,7 +68,7 @@ client.Dispose(); // closes a specific client
 
 `ConfigCatClient.Get(sdkKey: "<sdkKey>")` returns a client with default options.
 
-The `Get` method has an optional callback parameter, which can be used to configure the client via a `ConfigCatClientOptions` object:
+The `Get` method has an optional callback parameter, which can be used to set up the client via a `ConfigCatClientOptions` object:
 
 | Properties          | Description | Default |
 | ------------------- | ----------- | ------- |
@@ -83,7 +83,7 @@ The `Get` method has an optional callback parameter, which can be used to config
 | `DefaultUser`       | Optional, sets the default user. [More about default user](#default-user). | `null` (none) |
 | `Offline`           | Optional, determines whether the client should be initialized to offline mode or not. [More about offline mode](#online--offline-mode). | `false` |
 
-Via the events provided by `ConfigCatClientOptions` you can also subscribe to the hooks (events) of the SDK at configuration time. [More about hooks](#hooks).
+Via the events provided by `ConfigCatClientOptions` you can also subscribe to the hooks (events) of the SDK at initialization time. [More about hooks](#hooks).
 
 For example:
 
@@ -99,8 +99,8 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
 You can acquire singleton client instances for your SDK keys using the `ConfigCatClient.Get(sdkKey: <sdkKey>)` static factory method.
-(However, please keep in mind that subsequent calls to `ConfigCatClient.Get()` with the *same SDK Key* return a *shared* client instance, which is configured by the first call.)
-These clients can be closed all at once with the `ConfigCatClient.DisposeAll()` method or individually with `client.Dispose()`.
+(However, please keep in mind that subsequent calls to `ConfigCatClient.Get()` with the *same SDK Key* return a *shared* client instance, which was set up by the first call.)
+You can close all open clients at once using the `ConfigCatClient.DisposeAll()` method or do it individually using the `client.Dispose()` method.
 :::
 
 ## Anatomy of `GetValue()`, `GetValueAsync()`
@@ -201,7 +201,7 @@ Whenever the evaluation methods like `GetValue()`, `GetValueAsync()`, etc. are c
 var user = new User(identifier: "john@example.com");
 client.SetDefaultUser(user);
 
-// The default user will be used at the evaluation process.
+// The default user will be used in the evaluation process.
 var value = await client.GetValueAsync(key: "keyOfMySetting", defaultValue: false); 
 ```
 
@@ -213,7 +213,7 @@ client.SetDefaultUser(user);
 
 var otherUser = new User(identifier: "brian@example.com");
 
-// otherUser will be used at the evaluation process.
+// otherUser will be used in the evaluation process.
 var value = await client.GetValueAsync(key: "keyOfMySetting", defaultValue: false, user: otherUser);
 ```
 
@@ -291,7 +291,7 @@ Console.WriteLine(client.GetValue("key", "my default value")); // console: "valu
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
 Via the following events you can subscribe to particular events raised by the client:
 
-- `event EventHandler ClientReady`: This event is raised when the SDK reaches the ready state. If the SDK is configured to use lazy load or manual polling, it's considered ready right after instantiation.
+- `event EventHandler ClientReady`: This event is raised when the SDK reaches the ready state. If the SDK is set up to use lazy load or manual polling, it's considered ready right after instantiation.
 If auto polling is used, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `ClientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
 - `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config.json into memory from cache, then each time afterwards when a config.json with changed content is downloaded via HTTP.
 - `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetails()`/``GetValueDetailsAsync()``](#anatomy-of-getvaluedetails).
