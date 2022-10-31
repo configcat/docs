@@ -241,7 +241,7 @@ You can set up the SDK to load your feature flag & setting overrides from a file
 
 ### JSON File
 
-The SDK can be set up to load your feature flag & setting overrides from a file. 
+The SDK can load your feature flag & setting overrides from a file. 
 
 #### File
 ```elixir
