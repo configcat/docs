@@ -397,7 +397,7 @@ IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAs
 ```
 
 ## Using ConfigCat behind a proxy
-Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by injecting a HttpClientHandler instance into the ConfigCatClient's initialization call.
+Provide your own network credentials (username/password) and proxy server settings (proxy server/port) by injecting a HttpClientHandler instance into the ConfigCatClient's initialization call.
 
 ```csharp
 var myProxySettings = new WebProxy(proxyHost, proxyPort)
