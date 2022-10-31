@@ -80,7 +80,7 @@ end
 | `key`           | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`          | Optional, *ConfigCat.User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
-| `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name you set for the instance you want to access. |
+| `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name of the instance which you want to access. |
 
 ```elixir
 value = ConfigCat.get_value(
