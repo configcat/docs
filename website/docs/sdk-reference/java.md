@@ -233,7 +233,7 @@ You can load your feature flag & setting overrides from a file or from a simple 
 
 ### JSON File
 
-The SDK can be set up to load your feature flag & setting overrides from a file or classpath resource. 
+The SDK can load your feature flag & setting overrides from a file or classpath resource. 
 You can also specify whether the file should be reloaded when it gets modified.
 #### File
 ```java
