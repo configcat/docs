@@ -8,6 +8,9 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.
+  plugins: [
+    'plugin-image-zoom'
+  ],
   themeConfig: {
     image: '/img/docs-cover.png',
     navbar: {
