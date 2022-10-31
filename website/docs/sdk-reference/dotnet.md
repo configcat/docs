@@ -435,7 +435,7 @@ When the ConfigCat SDK does not work as expected in your application, please che
 
   **Problem:** ConfigCat CDN servers require TLS 1.2 or newer security protocol for communication.
   As for allowed security protocols, please keep in mind that newer .NET runtimes rely on operating system settings,
-  older versions, however, may need additional set up to make secure communication with the CDN servers work.
+  older versions, however, may need additional setup to make secure communication with the CDN servers work.
 
   | Runtime Version | Default Protocols |
   |-----------------|-------------------|
