@@ -9,7 +9,7 @@ Integrate ConfigCat with your technology stack and leverage all the benefits of 
 Get a Slack notification when a feature flag changes.
 [Documentation](integrations/slack.md)
 ### Jira
-Manage feature flags right from your Jira board.
+Turn features On / Off right from a linked Issue on your Jira board.
 [Documentation](integrations/jira.md)
 ### Trello
 Turn features On / Off right from a linked Card on your Trello board.
@@ -43,5 +43,5 @@ Manage feature flags directly from Terraform HCL scripts.
 
 [Documentation](integrations/terraform.md)
 ### Amplitude
-Annotate your Amplitude charts when a feature flag changes.
+Annotate your Amplitude charts with feature flag changes.
 [Documentation](integrations/amplitude.md)
