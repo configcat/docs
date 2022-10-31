@@ -6,7 +6,7 @@ description: ConfigCat Integrations Overview. List of the available integrations
 Integrate ConfigCat with your technology stack and leverage all the benefits of Feature flags within your workflows.
 
 ### Slack
-Get notified in Slack when a feature flag changes.
+Get a Slack notification when a feature flag changes.
 [Documentation](integrations/slack.md)
 ### Jira
 Manage feature flags right from your Jira board.
