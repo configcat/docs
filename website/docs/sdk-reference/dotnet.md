@@ -433,7 +433,7 @@ When the ConfigCat SDK does not work as expected in your application, please che
   the log contains the following message (provided that the client is set up to log error level events as described [here](#logging)):
   "Secure connection could not be established. Please make sure that your application is enabled to use TLS 1.2+."
 
-  **Problem:** ConfigCat CDN servers are set up to require TLS 1.2 or newer security protocol for communication.
+  **Problem:** ConfigCat CDN servers require TLS 1.2 or newer security protocol for communication.
   As for allowed security protocols, please keep in mind that newer .NET runtimes rely on operating system settings,
   older versions, however, may need additional set up to make secure communication with the CDN servers work.
 
