@@ -63,7 +63,7 @@ ConfigCatClient.closeAll() // closes all clients
 client.close() // closes a specific client
 ```
 
-## Configuring the *ConfigCat Client*
+## Setting up the *ConfigCat Client*
 
 *ConfigCat Client* is responsible for:
 - managing the communication between your application and ConfigCat servers.
@@ -81,9 +81,9 @@ client.close() // closes a specific client
 | `pollingMode`               | `PollingMode`       | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `logger`                    | `Logger`            | Optional, sets the internal logger. [More about logging](#logging). |
 | `logLevel`                  | `LogLevel`          | Optional, defaults to `LogLevel.WARNING`. Sets the internal log level. [More about logging](#logging). |
-| `flagOverrides`             | `(FlagOverrides.() -> Unit)?` | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
-| `httpEngine`                | `HttpClientEngine?` | Optional, configures the underlying `Ktor` HTTP engine. [More about HTTP engines](#http-engine). |
-| `httpProxy`                 | `ProxyConfig?`      | Optional, configures HTTP proxy for the underlying `Ktor` HTTP engine. [More about HTTP proxy](#http-proxy). |
+| `flagOverrides`             | `(FlagOverrides.() -> Unit)?` | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `httpEngine`                | `HttpClientEngine?` | Optional, sets the underlying `Ktor` HTTP engine. [More about HTTP engines](#http-engine). |
+| `httpProxy`                 | `ProxyConfig?`      | Optional, sets up the HTTP proxy for the underlying `Ktor` HTTP engine. [More about HTTP proxy](#http-proxy). |
 | `defaultUser`               | `ConfigCatUser?`    | Optional, sets the default user. [More about default user.](#default-user). |
 | `offline`                   | `Bool`              | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode). |
 | `hooks`                     | `Hooks`             | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
@@ -280,7 +280,7 @@ client.forceRefresh()
 
 ## Hooks
 With the following hooks you can subscribe to particular events fired by the SDK:
-- `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
+- `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling it's considered ready right after instantiation.
 If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
 
 - `onConfigChanged(Map<String, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
@@ -396,13 +396,13 @@ The ConfigCat SDK internally uses <a href="https://ktor.io" target="_blank">Ktor
 
 You can set/override the HTTP engine like the following:
 ```kotlin
-// this example configures the SDK to use the Curl engine for HTTP communication.
+// this example sets up the SDK to use the Curl engine for HTTP communication.
 import com.configcat.*
 import io.ktor.client.engine.curl.*
 
 val client = ConfigCatClient("#YOUR-SDK-KEY#") {
     httpEngine = Curl.create {
-        // additional engine configuration
+        // additional engine setup
     }
 }
 ```
@@ -426,7 +426,7 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
     httpProxy = ProxyBuilder.http("http://proxy-server:1234/")
 }
 ```
-> You can check tha availability of the proxy configuration in specific HTTP engines <a href="https://ktor.io/docs/proxy.html" target="_blank">here</a>.
+> You can check the availability of the proxy configuration in specific HTTP engines <a href="https://ktor.io/docs/proxy.html" target="_blank">here</a>.
 
 ## Force refresh
 Any time you want to refresh the cached config.json with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.

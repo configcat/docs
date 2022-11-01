@@ -201,7 +201,7 @@ We prepared the following integrations to simplify the usage of the scanner in y
 - [Bitrise Step](/docs/advanced/code-references/bitrise-step)
 
 ### Manual Integration
-If your workflow doesn't have an integration, you can follow the instructions [here](/docs/advanced/code-references/manual) to configure scan executions directly with the ConfigCat CLI.
+If your workflow doesn't have an integration, you can follow the instructions [here](/docs/advanced/code-references/manual) to set scan executions directly with the ConfigCat CLI.
 
 ## Ignore Files
 

@@ -9,7 +9,7 @@ to scan your source code for feature flag and setting usages and upload the foun
 ## Prerequisites
 
 - [Install](/docs/advanced/cli#installation) the CLI in your CI/CD or local environment.
-- [Configure](/docs/advanced/cli#configuration) the CLI with your ConfigCat Manangement API credentials.
+- [Setup](/docs/advanced/cli#setup) the CLI with your ConfigCat Management API credentials.
 - Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 
 ## Scan & Upload

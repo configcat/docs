@@ -57,7 +57,7 @@ You need to have a [Billing Manager](organization.md#billing-manager-role) role 
 ### Are you ISO certified? 
 We can proudly say that as of 2022 May 31, ConfigCat has achieved the ISO/IEC 27001:2013 certification for Information Security Management Systems (ISMS). Click [here](https://configcat.com/iso/) to learn more.
 
-### I'm configuring my firewall, which addresses should I whitelist?
+### I'm setting up my firewall, which addresses should I whitelist?
 If possible, you can allow the whole "configcat.com" domain. Alternatively, you can manually whitelist the following addresses:
 - Global CDN: https://cdn-global.configcat.com
 - EU CDN: https://cdn-eu.configcat.com
@@ -159,7 +159,7 @@ The [Zombie (Stale) Flags Report](https://app.configcat.com/my-account/zombie-fl
 ### I am not getting the Zombie Feature Flag email report. What am I doing wrong?
 You can change the frequency, criteria and scope of the Zombie Feature Flag report from the dashboard. 
 
-**Note:** Please be aware that feature flags are only treated as zombie flags if they haven't been modified (with save & publish) in the past configured timeframe. It currently doesn't have any connection with your real usage in your code. 
+**Note:** Please be aware that feature flags are only treated as zombie flags if they haven't been modified (with save & publish) in the past given timeframe. It currently doesn't have any connection with your real usage in your code. 
 
 ### How to avoid technical debt caused by feature flags?
 The [ConfigCat CLI](/advanced/code-references/overview) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
