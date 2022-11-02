@@ -21,11 +21,6 @@ module.exports = {
       },
       items: [
         {
-          href: '/search',
-          label: 'Docs Search',
-          position: "left"
-        },
-        {
           href: 'https://configcat.com/',
           label: 'configcat.com',
           position: "left"
@@ -41,18 +36,23 @@ module.exports = {
           position: "left"
         },
         {
-          href: 'https://status.configcat.com',
-          label: 'Service Status Monitor',
-          position: "left"
-        },
-        {
           href: 'https://configcat.com/blog/',
           label: 'Blog',
           position: "left"
         },
         {
+          href: 'https://status.configcat.com',
+          label: 'Service Status',
+          position: "right"
+        },
+        {
           href: 'https://api.configcat.com/docs/',
-          label: 'Public Management API',
+          label: 'API',
+          position: "right"
+        },
+        {
+          href: '/search',
+          label: 'Search',
           position: "right"
         },
       ],
