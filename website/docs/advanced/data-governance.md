@@ -31,7 +31,7 @@ Open <a href="https://app.configcat.com/organization/data-governance">Data Gover
 
 > Only team members with Organization Admin role can access Data Governance preferences.
 
-## Configure ConfigCat SDK in your application code
+## Set up the ConfigCat SDK in your application code
 
 Make sure the `dataGovernance` parameter is passed to the ConfigCat SDK
 in your application code when it is being initialized.

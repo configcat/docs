@@ -51,7 +51,7 @@ else
 end
 ```
 
-## Configuring the *ConfigCat Client*
+## Setting up the *ConfigCat Client*
 
 *ConfigCat Client* is responsible for:
 
@@ -80,7 +80,7 @@ end
 | `key`           | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`          | Optional, *ConfigCat.User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
-| `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name you configured for the instance you want to access. |
+| `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name of the instance which you want to access. |
 
 ```elixir
 value = ConfigCat.get_value(
@@ -241,7 +241,7 @@ You can set up the SDK to load your feature flag & setting overrides from a file
 
 ### JSON File
 
-The SDK can be configured to load your feature flag & setting overrides from a file. 
+The SDK can load your feature flag & setting overrides from a file. 
 
 #### File
 ```elixir

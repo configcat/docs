@@ -8,6 +8,9 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.
+  plugins: [
+    'plugin-image-zoom'
+  ],
   themeConfig: {
     image: '/img/docs-cover.png',
     navbar: {
@@ -17,11 +20,6 @@ module.exports = {
         src: 'img/cat.svg',
       },
       items: [
-        {
-          href: '/search',
-          label: 'Docs Search',
-          position: "left"
-        },
         {
           href: 'https://configcat.com/',
           label: 'configcat.com',
@@ -38,18 +36,23 @@ module.exports = {
           position: "left"
         },
         {
-          href: 'https://status.configcat.com',
-          label: 'Service Status Monitor',
-          position: "left"
-        },
-        {
           href: 'https://configcat.com/blog/',
           label: 'Blog',
           position: "left"
         },
         {
+          href: 'https://status.configcat.com',
+          label: 'Service Status',
+          position: "right"
+        },
+        {
           href: 'https://api.configcat.com/docs/',
-          label: 'Public Management API',
+          label: 'API',
+          position: "right"
+        },
+        {
+          href: '/search',
+          label: 'Search',
           position: "right"
         },
       ],
@@ -153,7 +156,7 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} ConfigCat.`,
     },
     prism: {
-      additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir', 'dart', 'tsx'],
+      additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir', 'dart', 'tsx', 'clike', 'c', 'objectivec'],
     },
     algolia: { // The search crawling repo can be found here: https://github.com/configcat/docsearch
       appId: '0MLXBNIK0Q',

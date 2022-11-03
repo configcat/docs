@@ -30,8 +30,8 @@ With **[Vcpkg](https://github.com/microsoft/vcpkg)**
   ```
 
   After this, you can create a New non-CMake Project (or open an existing one).
-  All installed libraries are immediately ready to be `#include`'d and used
-  in your project without additional configuration.
+  All installed libraries are immediately ready to be `#include`d and used
+  in your project without additional setup.
 
 
 - On Linux/Mac:
@@ -71,7 +71,7 @@ ConfigCatClient::closeAll(); // closes all clients
 ConfigCatClient::close(client); // closes a specific client
 ```
 
-## Configuring the *ConfigCat Client*
+## Setting up the *ConfigCat Client*
 
 *ConfigCat Client* is responsible for:
 - managing the communication between your application and ConfigCat servers.
@@ -88,7 +88,7 @@ ConfigCatClient::close(client); // closes a specific client
 | `readTimeoutMs`             | Optional, defaults to `5000ms`. Sets the amount of milliseconds to wait for the server to respond before giving up. `0` means it never times out during transfer. |
 | `mode`                      | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `cache`                     | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
-| `override`                  | Optional, configures local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `override`                  | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 
 ```cpp
 ConfigCatOptions options;
@@ -221,7 +221,7 @@ You can set up the SDK to load your feature flag & setting overrides from a file
 
 ### JSON File
 
-The SDK can be configured to load your feature flag & setting overrides from a file. 
+The SDK can be set up to load your feature flag & setting overrides from a file. 
 
 #### File
 ```cpp
@@ -452,7 +452,7 @@ Also, we recommend using [confidential targeting comparators](/advanced/targetin
 
 ## Sample Applications
 Check out our Sample Application how they use the ConfigCat SDK
-* <a href="https://github.com/configcat/cpp-sdk/tree/main/example/" target="_blank">ConfigCat C++ Console Sample App</a>
+* <a href="https://github.com/configcat/cpp-sdk/tree/main/samples/" target="_blank">ConfigCat C++ Console Sample App</a>
 
 ## Look Under the Hood
 - <a href="https://github.com/ConfigCat/cpp-sdk" target="_blank">ConfigCat C++ SDK's repository on GitHub</a>

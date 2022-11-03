@@ -64,7 +64,7 @@ ConfigCatClient.closeAll(); // closes all clients
 client.close(); // closes the specific client
 ```
 
-## Configuring the *ConfigCat Client*
+## Setting up the *ConfigCat Client*
 
 *ConfigCat Client* is responsible for:
 - managing the communication between your application and ConfigCat servers.
@@ -290,7 +290,7 @@ client.forceRefresh();
 
 With the following hooks you can subscribe to particular events fired by the SDK:
 
-- `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
+- `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling, it's considered ready right after instantiation.
 If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
 
 - `onConfigChanged(Map<string, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.

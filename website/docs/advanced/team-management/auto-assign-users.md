@@ -21,4 +21,4 @@ Furthermore, you can also set which Organization roles / Product permissions the
 
   <img className="saml-tutorial-img" src="/docs/assets/saml/dashboard/auto_assign_set.png" alt="Auto-assign setup" />
 
-- When you are ready with your configuration, just hit `Save`.
+- When you are ready, just hit `Save`.

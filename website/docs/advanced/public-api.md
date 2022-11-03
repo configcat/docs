@@ -55,7 +55,7 @@ The JSON Hypertext Application Language (HAL) is a standard which
    links, with JSON 
 
 ### Public API clients
-You can create clients easily using <a href="https://github.com/swagger-api/swagger-codegen" target="_blank">Swagger Codegen</a>.
+You can create clients easily using <a href="https://github.com/OpenAPITools/openapi-generator" target="_blank">OpenAPI Generator</a>.
 
 #### Sample client
 <a href="https://github.com/configcat/ng-configcat-publicapi" target="_blank">ConfigCat Public API client for Angular</a>

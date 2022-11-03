@@ -211,7 +211,7 @@ You can set up the SDK to load your feature flag & setting overrides from a file
 
 ### JSON File
 
-The SDK can be configured to load your feature flag & setting overrides from a file. 
+The SDK can load your feature flag & setting overrides from a file. 
 
 #### File
 ```python
@@ -328,7 +328,7 @@ configcat_client = ConfigCatClient(
 ```
 
 ## Logging
-In the *ConfigCat SDK* there is a default logger writes logs to the standard output. The following example shows how to configure the *Log Level* of the default logger. 
+In the *ConfigCat SDK* there is a default logger writes logs to the standard output. The following example shows how to set the *Log Level* of the default logger. 
 
 ```python
 import logging
