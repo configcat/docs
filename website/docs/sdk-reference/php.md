@@ -59,6 +59,7 @@ Available options:
 | `flag-overrides`         | [\ConfigCat\Override\FlagOverrides](https://github.com/configcat/php-sdk/blob/master/src/Override/FlagOverrides.php) | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 | `exceptions-to-ignore`   | `array`                        | Optional, sets an array of exception classes that should be ignored from logs. |
 | `base-url`               | `string`                       | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the feature flags and settings. |
+| `default-user`           | [`\ConfigCat\User`](https://github.com/configcat/php-sdk/blob/master/src/User.php) | Optional, sets the default user. [More about default user](#default-user). |
 | `offline`                | `bool`                         | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode). |
 
 :::info
