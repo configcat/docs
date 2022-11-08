@@ -154,7 +154,7 @@ You can set the default user object either on SDK initialization:
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
     \ConfigCat\ClientOptions::DEFAULT_USER => new \ConfigCat\User("john@example.com"),
- ]);
+]);
 ```
 or with the `setDefaultUser()` method of the ConfigCat client.
 ```php
