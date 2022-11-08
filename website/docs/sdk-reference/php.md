@@ -149,8 +149,14 @@ $user = new \ConfigCat\User(
 
 There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object with the `setDefaultUser()` method of the ConfigCat client.
+You can set the default user object either on SDK initialization:
 
+```php
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
+    \ConfigCat\ClientOptions::DEFAULT_USER => new \ConfigCat\User("john@example.com"),
+ ]);
+```
+or with the `setDefaultUser()` method of the ConfigCat client.
 ```php
 $client->setDefaultUser(new \ConfigCat\User("john@example.com"));
 ```
