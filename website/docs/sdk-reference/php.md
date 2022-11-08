@@ -71,7 +71,7 @@ Example:
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
     \ConfigCat\ClientOptions::CACHE => new \ConfigCat\Cache\LaravelCache(Cache::store()),
     \ConfigCat\ClientOptions::CACHE_REFRESH_INTERVAL => 5
- ]);
+]);
 ```
 
 
