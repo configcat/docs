@@ -129,6 +129,8 @@ $user = new \ConfigCat\User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 $user = new \ConfigCat\User("john@example.com");
 ```
 
+### Customized user object creation
+
 | Parameters   | Description                                                                                                                |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                    |
