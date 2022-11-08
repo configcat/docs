@@ -80,7 +80,7 @@ client.close(); // closes a specific client
 | `baseUrl(string)`                       | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json. |
 | `httpClient(OkHttpClient)`              | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient). |
 | `cache(ConfigCache)`                    | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache). |
-| `pollingmode(PollingMode)`              | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
+| `pollingMode(PollingMode)`              | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes). |
 | `logLevel(LogLevel)`                    | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging). |
 | `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 | `defaultUser(User)`                     | Optional, sets the default user. [More about default user.](#default-user). |
@@ -89,7 +89,7 @@ client.close(); // closes a specific client
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-    options.mode(PollingModes.manualPoll());
+    options.pollingMode(PollingModes.manualPoll());
     options.logLevel(LogLevel.INFO);
 });
 ```
@@ -188,6 +188,9 @@ User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92");
 ```java
 User user = User.newBuilder().build("john@example.com");   
 ```
+
+### Customized user object creation
+
 | Builder options | Description                                                                                                                     |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier()`  | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
@@ -261,7 +264,7 @@ The *ConfigCat SDK* downloads the latest values and stores them automatically ev
 Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.autoPoll()` to change the polling interval.
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-    options.mode(PollingModes.autoPoll(60 /* polling interval in seconds */));
+    options.pollingMode(PollingModes.autoPoll(60 /* polling interval in seconds */));
 });
 ```
 
@@ -279,7 +282,7 @@ When calling `getValue()` the *ConfigCat SDK* downloads the latest setting value
 Use the `cacheRefreshIntervalInSeconds` parameter of the `PollingModes.lazyLoad()` to set cache lifetime.
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-    options.mode(PollingModes.lazyLoad(60 /* the cache will expire in 120 seconds */));
+    options.pollingMode(PollingModes.lazyLoad(60 /* the cache will expire in 120 seconds */));
 });
 ```
 
@@ -293,7 +296,7 @@ Available options:
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-    options.mode(PollingModes.manualPoll());
+    options.pollingMode(PollingModes.manualPoll());
 });
 
 client.forceRefresh();
