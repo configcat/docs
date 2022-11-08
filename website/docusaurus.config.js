@@ -177,7 +177,7 @@ module.exports = {
           sidebarCollapsible: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/configcat/docs/edit/master/website/',
+            'https://github.com/configcat/docs/tree/master/website',
           routeBasePath: '/'
         },
         gtag: {
