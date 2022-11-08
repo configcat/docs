@@ -59,8 +59,8 @@ We can proudly say that as of 2022 May 31, ConfigCat has achieved the ISO/IEC 27
 
 ### I'm setting up my firewall, which addresses should I whitelist?
 If possible, you can allow the whole "configcat.com" domain. Alternatively, you can manually whitelist the following addresses:
-- Global CDN: https://cdn-global.configcat.com
-- EU CDN: https://cdn-eu.configcat.com
+- Global CDN: `https://cdn-global.configcat.com`
+- EU CDN: `https://cdn-eu.configcat.com`
 - The Public Management API: https://api.configcat.com
 - The Dashboard URL: https://app.configcat.com
 
