@@ -59,6 +59,7 @@ Available options:
 | `flag-overrides`         | [\ConfigCat\Override\FlagOverrides](https://github.com/configcat/php-sdk/blob/master/src/Override/FlagOverrides.php) | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
 | `exceptions-to-ignore`   | `array`                        | Optional, sets an array of exception classes that should be ignored from logs. |
 | `base-url`               | `string`                       | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the feature flags and settings. |
+| `offline`                | `bool`                         | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode). |
 
 :::info
 Each option name is available through constants of the [\ConfigCat\ClientOptions](https://github.com/configcat/php-sdk/blob/master/src/ClientOptions.php) class.
@@ -88,6 +89,36 @@ $value = $client->getValue(
 );
 ```
 
+## Anatomy of `getValueDetails()`
+
+`getValueDetails()` is similar to `getValue()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
+
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on *ConfigCat Dashboard* for each setting.                           |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+```php
+$details = $client->getValueDetails(
+    "keyOfMySetting", # Setting Key
+    false, # Default value
+    new \ConfigCat\User('435170f4-8a8b-4b67-a723-505ac7cdea92') # Optional User Object
+);
+```
+
+The `details` result contains the following information:
+
+| Property                                  | Type      | Description                                                                              |
+| ----------------------------------------- | --------- | ---------------------------------------------------------------------------------------- |
+| `getValue()`                              | `bool` / `string` / `int` / `double` | The evaluated value of the feature flag or setting.           |
+| `getKey()`                                | `string`  | The key of the evaluated feature flag or setting.                                        |
+| `isDefaultValue()`                        | `bool`    | True when the default value passed to getValueDetails() is returned due to an error.     |
+| `getError()`                              | `string`  | In case of an error, this property returns the error message.                              |
+| `getUser()`                               | `User`    | The user object that was used for evaluation.                                            |
+| `getMatchedEvaluationPercentageRule()`    | `array`   | If the evaluation was based on a percentage rule, this property returns that specific rule. |
+| `getMatchedEvaluationRule()`              | `array`   | If the evaluation was based on a targeting rule, this property returns that specific rule. |
+| `getFetchTimeUnixSeconds()`               | `int`     | The last download time of the current config in unix seconds format.                     |
+
 ## User Object
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
 ```php
@@ -114,6 +145,44 @@ $user = new \ConfigCat\User(
     ]);
 ```
 
+### Default user
+
+There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+
+You can set the default user object with the `setDefaultUser()` method of the ConfigCat client.
+
+```php
+$client->setDefaultUser(new \ConfigCat\User("john@example.com"));
+```
+
+Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+
+```php
+$user = new \ConfigCat\User("john@example.com");
+$client->setDefaultUser($user);
+
+// The default user will be used at the evaluation process.
+$value = $client->getValue("keyOfMySetting", false); 
+```
+
+When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+
+```php
+$user = new \ConfigCat\User("john@example.com");
+$client->setDefaultUser($user);
+
+$otherUser = new \ConfigCat\User("brian@example.com");
+
+// $otherUser will be used at the evaluation process.
+$value = $client->getValue("keyOfMySetting", false, $otherUser); 
+```
+
+For deleting the default user, you can do the following:
+```php
+$client->clearDefaultUser();
+```
+
+
 ## `getAllKeys()`
 You can query the keys of each feature flag and setting with the `getAllKeys()` method.
 
@@ -133,6 +202,38 @@ $settingValues = $client->getAllValues();
 $user = new \ConfigCat\User("john@example.com");
 $settingValuesTargeting = $client->getAllValues($user);
 ```
+
+## Hooks
+
+With the following hooks you can subscribe to particular events fired by the SDK:
+
+- `onConfigChanged([key => setting])`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+
+- `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
+
+- `error(string)`: This event is sent when an error occurs within the ConfigCat SDK.
+
+You can subscribe to these events with the `hooks` property of the ConfigCat client: 
+```php
+$client->hooks()->addOnFlagEvaluated(function (EvaluationDetails $details) {
+    /* handle the event */
+});
+```
+
+## Online / Offline mode
+
+In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
+```php
+$client->setOffline();
+```
+In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
+
+To put the SDK back in online mode, you can do the following:
+```php
+$client->setOnline();
+```
+
+> With `$client->isOffline()` you can check whether the SDK is in offline mode or not.
 
 ## Flag Overrides
 

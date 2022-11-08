@@ -190,7 +190,6 @@ client.setDefaultUser(user);
 
 // The default user will be used at the evaluation process.
 final value = await client.getValue(key: 'keyOfMySetting', defaultValue: false); 
-
 ```
 
 When the user object parameter is specified on the requesting method, it takes precedence over the default user.
@@ -203,7 +202,6 @@ final otherUser = ConfigCatUser(identifier: 'brian@example.com');
 
 // otherUser will be used at the evaluation process.
 final value = await client.getValue(key: 'keyOfMySetting', defaultValue: false, user: otherUser); 
-
 ```
 
 For deleting the default user, you can do the following:
