@@ -53,11 +53,10 @@ client.Close()
 | --------- | ------------------------------------------------------------------------------------------- |
 | `sdkKey`  | SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
 
-### Custom client configuration options
-`configcat.NewCustomClient(config)` returns a client with custom configuration. The `config` parameter is a structure which 
-contains the custom configuration.
+### Custom client options
+`configcat.NewCustomClient(options)` returns a customized client. The `options` parameter is a structure which contains the optional properties.
 
-Available options:
+Available optional properties:
 
 | Properties | Type | Description |
 | ---------- | ---- | ----------- |
