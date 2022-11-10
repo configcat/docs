@@ -14,7 +14,7 @@ Use the  <a href="https://configcat.com/calculator/" target="_blank">Plan Calcul
 
 Keep track of the number of config.json downloads your apps are making on the <a href="https://app.configcat.com/product/statistics" target="_blank">statistics page.</a> 
 
-![ConfigCat Statistics](/assets/stats.png)
+<img src="/docs/assets/stats.png" className="zoomable" alt="ConfigCat Statistics" />
 
 
 # Current config.json download limits

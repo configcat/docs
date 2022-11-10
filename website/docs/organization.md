@@ -8,7 +8,7 @@ an *Organization*. Like billing information, authentication rules or data privac
 
 *Organization Menu* is only available for **Organization Admins** and **Billing Managers**.
 
-![Organization-menu](/assets/organization-menu.png)
+<img src="/docs/assets/organization-menu.png" className="zoomable" alt="Organization-menu" />
 
 ## Organization Admin role
 *Organization Admins* have unrestricted access to the complete organization and products within ConfigCat. 
