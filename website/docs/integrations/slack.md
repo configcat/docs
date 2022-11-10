@@ -8,7 +8,7 @@ description: ConfigCat Feature Flags Slack App. This is a step-by-step guide on 
 
 Get updated via a Slack Channel message when someone changes a feature flag with the <a href="https://configcat.slack.com/apps/A011CN2QZJB-configcat-feature-flags" target="_blank">ConfigCat Feature Flags Slack App</a>.
 
-![slack_notification](/assets/slack/notification.png)
+<img src="/docs/assets/slack/notification.png" className="zoomable" alt="slack_notification" />
 
 ## Installation
 

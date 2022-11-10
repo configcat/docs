@@ -9,7 +9,7 @@ You can find more information about GitHub Actions <a target="_blank" href="http
 
 ## Setup
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in your repository's <a target="_blank" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">GitHub Secrets</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
-    <img className="bordered" src="/docs/assets/cli/scan/gh_secrets.png" alt="Github Action secrets" />
+    <img className="bordered zoomable" src="/docs/assets/cli/scan/gh_secrets.png" alt="Github Action secrets" />
 
 2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 

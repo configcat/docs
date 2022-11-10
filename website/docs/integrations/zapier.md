@@ -20,16 +20,16 @@ Each Zap has one app as the **Trigger**, where your information comes from and w
 
 3. Now click on "Connect a new account..." and search for "ConfigCat"
 
-![zapier_signin](/assets/zapier_signin.png)
+<img src="/docs/assets/zapier_signin.png" className="zoomable" alt="zapier_signin" />
 
 1. Generate a Public API credential at <a href="https://app.configcat.com/my-account/public-api-credentials" target="_blank">ConfigCat Dashboard</a>. 
    Use the generated `Basic auth user name` and `Basic auth password` to connect your ConfigCat account to Zapier.
 
-![zapier_auth](/assets/zapier_auth.png)
+<img src="/docs/assets/zapier_auth.png" className="zoomable" alt="zapier_auth" />
 
 1. You should select the [Product](/main-concepts#product) in which you want to get notified about the Feature Flag or Setting value changes and optionally you can filter these notifications by specific [Configs](/main-concepts#config) or [Environments](/main-concepts#environment).
 
-![zapier_customize](/assets/zapier_customize.png)
+<img src="/docs/assets/zapier_customize.png" className="zoomable" alt="zapier_customize" />
 
 1. Once that's done you can start creating an automation! Use a pre-made Zap or create your own with the Zap Editor. Creating a Zap requires no coding knowledge and you'll be walked step-by-step through the setup. 
 
@@ -46,10 +46,10 @@ Available fields to include in your flow:
 
 ## Example Slack notification setup
 ### Configuration in Zapier:
-![zapier_config](/assets/zapier_config.png)
+<img src="/docs/assets/zapier_config.png" className="zoomable" alt="zapier_config" />
 
 ### Result in Slack:
-![zapier_slack](/assets/zapier_slack.png)
+<img src="/docs/assets/zapier_slack.png" className="zoomable" alt="zapier_slack" />
 
 ## Need help?
 <a href="https://configcat.com/support/" target="_blank">Contact us</a> if you need any help or you have any awesome improvement ideas for this Zap.
