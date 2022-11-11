@@ -8,13 +8,13 @@ description: ConfigCat Datadog integration. This is a step-by-step guide on how 
 
 Ensures that every setting change in ConfigCat is sent to Datadog as an Event.
 
-![datadog_event](/assets/datadog_event.png)
+<img src="/docs/assets/datadog_event.png" className="zoomable" alt="datadog_event" />
 
 ## Installation
 
 1. Have a <a href="https://www.datadoghq.com/" target="_blank">Datadog subscription.</a>
 2. Get a <a href="https://docs.datadoghq.com/account_management/api-app-keys/#api-keys" target="_blank">Datadog API Key.</a>
-![datadog_event](/assets/datadog_apikey.png)
+<img src="/docs/assets/datadog_apikey.png" className="zoomable" alt="datadog_event" />
 3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
 4. Click on Datadog's CONNECT button and set your Datadog API key.
 5. OPTIONAL - Set the proper site of your Datadog account. [More about Datadog site](https://docs.datadoghq.com/getting_started/site/).
@@ -34,4 +34,4 @@ Every event sent to Datadog by ConfigCat has a *source* property of `configcat` 
 
 For example here is how to search for events that happened in the production environment: ```sources:configcat production```
 
-![datadog_filtering](/assets/datadog_filtering.png)
+<img src="/docs/assets/datadog_filtering.png" className="zoomable" alt="datadog_filtering" />

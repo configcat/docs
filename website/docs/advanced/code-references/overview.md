@@ -13,7 +13,7 @@ You can integrate the CLI into your CI/CD pipeline or use it with other executio
 
 The following example shows a simple scan execution that prints the scan result to the console. The `scan` command searches for every feature flag and setting key defined within a selected Config.
 
-![flag-percentage-add](/assets/cli/scan.gif)
+<img src="/docs/assets/cli/scan.gif" className="zoomable" alt="flag-percentage-add" />
 
 If you want to see this in action on your project, run the following command in its root folder:
 
@@ -47,11 +47,11 @@ In non-interactive environments, like in a CI/CD pipeline, you have to pass the 
 To get the ID of a Config, follow the steps below:
 1. Go to your <a target="_blank" href="https://app.configcat.com">ConfigCat Dashboard</a>, select the desired Config, and click the code references icon on one of your feature flags.
 
-    <img className="bordered" src="/docs/assets/cli/scan/code_ref.png" alt="ConfigCat code references button" />
+    <img className="bordered zoomable" src="/docs/assets/cli/scan/code_ref.png" alt="ConfigCat code references button" />
 
 2. Copy the Config ID from the highlighted box.
 
-    <img className="bordered" src="/docs/assets/cli/scan/config_id.png" alt="ConfigCat Config ID"  />
+    <img className="bordered zoomable" src="/docs/assets/cli/scan/config_id.png" alt="ConfigCat Config ID"  />
 
 
 ## How Scanning Works
@@ -154,7 +154,7 @@ You have the option to upload scan reports for each branch of your repository to
 Each scan report is associated to one of these branches.
 
 The following screenshot shows how an uploaded report looks like.
-<img src="/docs/assets/cli/scan/scan_report.png" alt="ConfigCat code references report" />
+<img className="zoomable" src="/docs/assets/cli/scan/scan_report.png" alt="ConfigCat code references report" />
 
 ### Scanning Git Repositories
 The `scan` command automatically detects when it's being executed on a git repository. It collects additional information from Git like the current **branch

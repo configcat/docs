@@ -15,7 +15,7 @@
             "name": "What if I exceed the config.json download limit of my ConfigCat plan?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Don't worry, we will keep serving your data and feature flags. Someone from our team will contact you to discuss your options."
+                "text": "Don't worry, ConfigCat will keep serving your data and feature flags. Someone from the support team will contact you to discuss your options. You can always check your usage & quota on the ConfigCat Dashboard: https://app.configcat.com/organization/usage."
             }
         },
         {
@@ -23,7 +23,7 @@
             "name": "Where can I find and download my ConfigCat invoices?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "All the invoices we issued are available for download from the Billing & Invoices page: https://app.configcat.com/organization/billing"
+                "text": "With a Billing Manager role, you can access and download the invoices issued by ConfigCat from the Billing & Invoices page: https://app.configcat.com/organization/billing." 
             }
         },
         {

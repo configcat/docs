@@ -7,7 +7,7 @@ description: ConfigCat monday app. This is a step-by-step guide on how to connec
 Turn features On / Off right from a linked item on your monday.com board with the <a href="https://monday.com/marketplace/10000079" target="_blank">ConfigCat Feature Flags</a> monday.com app. Also you can add targeting or percentage rules just as easily.
 
 ## Installation
-![Installation of the ConfigCat Feature Flags monday app](/assets/monday/monday_auth.gif)
+<img src="/docs/assets/monday/monday_auth.gif" className="zoomable" alt="Installation of the ConfigCat Feature Flags monday app" />
 
 1. Install <a href="https://monday.com/marketplace/10000079" target="_blank">ConfigCat Feature Flags</a> monday.com app to your monday account.
 2. Open one of your boards in monday and click on an item.
@@ -19,7 +19,7 @@ Turn features On / Off right from a linked item on your monday.com board with th
 ## Usage
 
 ### Linking existing feature flags
-![Linking feature flags with the ConfigCat Feature Flags monday.com app](/assets/monday/monday_link.gif)
+<img src="/docs/assets/monday/monday_link.gif" className="zoomable" alt="Linking feature flags with the ConfigCat Feature Flags monday.com app" />
 
 1. Open any item on your monday.com board.
 2. Push `Link existing feature flag`
@@ -28,7 +28,7 @@ Turn features On / Off right from a linked item on your monday.com board with th
 5. View linked monday.com items next to your Feature Flags in ConfigCat and jump to the monday.com item directly.
 
 ### Creating new feature flags
-![Create feature flags with the ConfigCat Feature Flags monday app](/assets/monday/monday_create.gif)
+<img src="/docs/assets/monday/monday_create.gif" className="zoomable" alt="Create feature flags with the ConfigCat Feature Flags monday app" />
 
 1. Open any item on your monday.com board.
 2. Push `Create and link feature flag`

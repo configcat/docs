@@ -203,7 +203,6 @@ client.setDefaultUser(user);
 
 // The default user will be used at the evaluation process.
 final value = await client.getValue(key: 'keyOfMySetting', defaultValue: false); 
-
 ```
 
 When the user object parameter is specified on the requesting method, it takes precedence over the default user.
@@ -216,7 +215,6 @@ final otherUser = ConfigCatUser(identifier: 'brian@example.com');
 
 // otherUser will be used at the evaluation process.
 final value = await client.getValue(key: 'keyOfMySetting', defaultValue: false, user: otherUser); 
-
 ```
 
 For deleting the default user, you can do the following:
@@ -297,7 +295,7 @@ If it's using auto polling, the ready state is reached when the SDK has a valid 
 
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
-- `error(String)`: This event is sent when an error occurs within the ConfigCat SDK.
+- `onError(String)`: This event is sent when an error occurs within the ConfigCat SDK.
 
 You can subscribe to these events either on SDK initialization: 
 ```dart

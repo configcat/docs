@@ -13,13 +13,13 @@ Using this feature you will be able to set different setting values for differen
 2. Go to **Feature Flags & Settings**
 3. Select **TARGET SPECIFIC USERS** after clicking the actions icon.
 
-![targeting-1](/assets/targeting-1.png)
+<img src="/docs/assets/targeting-1.png" className="zoomable" alt="targeting-1" />
 
 ## Anatomy of a Targeting Rule
 
 By adding a rule, you specify a group of your users and what feature flag or setting value they should get. A rule consists of a **Comparison attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses), and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
 
-![Confidential](/assets/sensitive2.png)
+<img src="/docs/assets/sensitive2.png" className="zoomable" alt="Confidential" />
 
 | Field                | Purpose                                                                                                                                              |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -75,13 +75,13 @@ In this case, the feature flag evaluation is based on the secure hashes of the c
 
 Since confidential text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example of how to target users from the same company. Which used to be handled by a rule like:
 
-![Confidential](/assets/sensitive2.png)
+<img src="/docs/assets/sensitive2.png" className="zoomable" alt="Confidential" />
 
 
 You can add a custom attribute called `domain` and use only confidential comparators in the targeting rule.
 
 On the Dashboard:
-![Confidential](/assets/sensitive1.png)
+<img src="/docs/assets/sensitive1.png" className="zoomable" alt="Confidential" />
 
 In your code:
 ```js
@@ -183,7 +183,7 @@ With percentage-based user targeting, you can specify a randomly selected fracti
 2. Go to **Feature Flags & Settings**
 3. Select **TARGET % OF USERS** after clicking the actions icon.
 
-![targeting-2](/assets/targeting-2.png)
+<img src="/docs/assets/targeting-2.png" className="zoomable" alt="targeting-2" />
 
 ## Anatomy of the percentage-based targeting
 

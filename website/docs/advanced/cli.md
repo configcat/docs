@@ -169,7 +169,7 @@ After a successful installation, the CLI must be set up with your <a target="_bl
 
 You can do this by using the `configcat setup` command.
 
-![interactive](/assets/cli/setup.gif)
+<img src="/docs/assets/cli/setup.gif" className="zoomable" alt="interactive" />
 
 #### Environment Variables
 Besides the `setup` command above, the CLI can read your credentials from the following environment variables.
@@ -189,7 +189,7 @@ The CLI supports both interactive and argument driven execution. When no argumen
 
 ### Interactive
 
-![interactive](/assets/cli/teaser.gif)
+<img src="/docs/assets/cli/teaser.gif" className="zoomable" alt="interactive" />
 
 ### With Arguments
 The same operation with command arguments would look like this:
@@ -220,19 +220,19 @@ Here are a few examples showing the true power of the CLI.
 ### Create a Feature Flag
 The following example shows how you can create a Feature Flag in a specific Config.
 
-![create-flag](/assets/cli/create-flag.gif)
+<img src="/docs/assets/cli/create-flag.gif" className="zoomable" alt="create flag" />
 
 ### Value update
 The following example shows how you can update the value of a Feature Flag in a specific Environment.
 
-![flag-value-update](/assets/cli/flag-value-update.gif)
+<img src="/docs/assets/cli/flag-value-update.gif" className="zoomable" alt="flag value update" />
 
 ### Add targeting rules
 The following example shows how you can add targeting rules to a Feature Flag.
 
-![flag-targeting-add](/assets/cli/flag-targeting-add.gif)
+<img src="/docs/assets/cli/flag-targeting-add.gif" className="zoomable" alt="flag targeting add" />
 
 ### Add percentage rules
 The following example shows how you can set percentage rules on a Feature Flag.
 
-![flag-percentage-add](/assets/cli/flag-percentage-add.gif)
+<img src="/docs/assets/cli/flag-percentage-add.gif" className="zoomable" alt="flag percentage add" />

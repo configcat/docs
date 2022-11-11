@@ -18,7 +18,7 @@ then you can **connect your application** to the ConfigCat service to access you
 1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to the *Dashboard*
 2. Click *ADD FEATURE FLAG* and give it a name.
 
-![getting-started](/assets/getting-started-1.png)
+<img src="/docs/assets/getting-started-1.png" className="zoomable" alt="getting-started" />
 
 ## Connect your application
 
