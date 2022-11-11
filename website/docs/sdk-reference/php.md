@@ -220,7 +220,7 @@ With the following hooks you can subscribe to particular events fired by the SDK
 
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
-- `error(string)`: This event is sent when an error occurs within the ConfigCat SDK.
+- `onError(string)`: This event is sent when an error occurs within the ConfigCat SDK.
 
 You can subscribe to these events with the `hooks` property of the ConfigCat client: 
 ```php
