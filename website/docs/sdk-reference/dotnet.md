@@ -4,10 +4,11 @@ title: .NET, .NET Core SDK Reference
 description: ConfigCat .NET, .NET Core SDK Reference. This is a step-by-step guide on how to use feature flags in your .NET, .NET Core application.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json');
 
 <script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(NetSchema) }}></script>
-
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/.net-sdk.svg?style=social)](https://github.com/configcat/.net-sdk/stargazers)
 [![Build status](https://ci.appveyor.com/api/projects/status/3kygp783vc2uv9xr?svg=true)](https://ci.appveyor.com/project/ConfigCat/net-sdk) [![NuGet Version](https://buildstats.info/nuget/ConfigCat.Client)](https://www.nuget.org/packages/ConfigCat.Client/)
@@ -19,15 +20,22 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 ## Getting started
 ### 1. Install *ConfigCat SDK* [Nuget](https://www.nuget.org/packages/ConfigCat.Client) package
 
-Using Powershell / NuGet Package Manager Console:
+<Tabs groupId="dotnet-install">
+<TabItem value="Powershell / NuGet Package Manager Console" label="Powershell / NuGet Package Manager Console">
+
 ```powershell
 Install-Package ConfigCat.Client
 ```
 
-Using .NET CLI:
+</TabItem>
+<TabItem value=".NET CLI" label=".NET CLI">
+
 ```
 dotnet add package ConfigCat.Client
 ```
+
+</TabItem>
+</Tabs>
 
 ### 2. Import package
 ```csharp

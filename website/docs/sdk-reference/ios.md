@@ -19,7 +19,9 @@ import TabItem from '@theme/TabItem';
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
 
-**CocoaPods**
+<Tabs groupId="ios-install">
+<TabItem value="CocoaPods" label="CocoaPods">
+
 ```ruby title="Podfile"
 target '<YOUR TARGET>' do
 pod 'ConfigCat'
@@ -30,14 +32,17 @@ Then, run the following command to install your dependencies:
 pod install
 ```
 
-**Carthage**
+</TabItem>
+<TabItem value="Carthage" label="Carthage">
+
 ```swift title="Cartfile"
 github "configcat/swift-sdk"
 ```
 
 Then, run the carthage update command and then follow the Carthage integration steps to link the framework with your project.
 
-**Swift Package Manager**
+</TabItem>
+<TabItem value="Swift Package Manager" label="Swift Package Manager">
 
 Add the SDK to your `Package.swift`.
 
@@ -49,6 +54,9 @@ dependencies: [
     )
 ]
 ```
+
+</TabItem>
+</Tabs>
 
 ### 2. Import the ConfigCat SDK:
 
