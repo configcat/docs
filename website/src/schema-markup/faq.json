@@ -23,7 +23,7 @@
             "name": "Is it possible to pay ConfigCat via wire transfer?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Using a credit card via the ConfigCat Dashboard is the preferred way of payment, but a wire transfer is also an option in larger subscription plans. For this process, contact us directly: https://configcat.com/support"
+                "text": "Using a credit card via the ConfigCat Dashboard is the preferred way of payment, but a wire transfer is also an option in larger subscription plans. For this process, contact ConfigCat directly: https://configcat.com/support"
             }
         },
         {
@@ -48,6 +48,46 @@
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "This is possible if you join ConfigCat's partnership program or via referrals: https://configcat.com/referrals"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I change the billing email address on my ConfigCat invoices?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I change my payment method on ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I change my billing information on ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "The ChargeBee payment gets stuck on ConfigCat",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you're using Firefox, try switching to a Chromium-based browser that has extensions turned off. If this doesn't work, contact ConfigCat for help: https://configcat.com/support"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "The ChargeBee payment throws an error on ConfigCat",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you're using Firefox, try switching to a Chromium-based browser that has extensions turned off. If this doesn't work, contact ConfigCat for help: https://configcat.com/support"
             }
         },
         {
