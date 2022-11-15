@@ -4,14 +4,6 @@
     "mainEntity": [
         {
             "@type": "Question",
-            "name": "How to use targeting rules in ConfigCat based on sensitive data?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the Confidential text comparators: https://configcat.com/docs/advanced/targeting/#confidential-text-comparators."
-            }
-        },
-        {
-            "@type": "Question",
             "name": "What if I exceed the config.json download limit of my ConfigCat plan?",
             "acceptedAnswer": {
                 "@type": "Answer",
@@ -28,6 +20,46 @@
         },
         {
             "@type": "Question",
+            "name": "Is it possible to pay ConfigCat via wire transfer?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Using a credit card via the ConfigCat Dashboard is the preferred way of payment, but a wire transfer is also an option in larger subscription plans. For this process, contact us directly: https://configcat.com/support"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I upgrade my ConfigCat billing plan?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "With a Billing Manager role, you can change your billing plan on the Plans page: https://app.configcat.com/organization/plans"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I downgrade my ConfigCat billing plan?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "With a Billing Manager role, you can change your billing plan on the Plans page: https://app.configcat.com/organization/plans"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How can I use ConfigCat at a discounted rate?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "This is possible if you join ConfigCat's partnership program or via referrals: https://configcat.com/referrals"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How to use targeting rules in ConfigCat based on sensitive data?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the Confidential text comparators: https://configcat.com/docs/advanced/targeting/#confidential-text-comparators."
+            }
+        },
+        {
+            "@type": "Question",
             "name": "I can't log in to ConfigCat because I forgot my 2FA (Two-factor authentication) code.",
             "acceptedAnswer": {
                 "@type": "Answer",
@@ -40,6 +72,14 @@
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.  Also, consider the following:  - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)  - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)  More on stickiness and consistency: https://configcat.com/docs/advanced/targeting/#stickiness--consistency"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How can I be sure that my data is safe at ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.  See ConfigCat's architecture explained here: https://configcat.com/architecture/."
             }
         },
         {
