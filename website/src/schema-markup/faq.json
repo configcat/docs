@@ -60,7 +60,7 @@
         },
         {
             "@type": "Question",
-            "name": "How do I change my payment method on ConfigCat?",
+            "name": "How do I change my payment method in ConfigCat?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
