@@ -52,7 +52,7 @@
         },
         {
             "@type": "Question",
-            "name": "How do I change the billing email address on my ConfigCat invoices?",
+            "name": "How do I change the billing email address where the ConfigCat invoices should be sent?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
