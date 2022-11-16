@@ -68,7 +68,7 @@
         },
         {
             "@type": "Question",
-            "name": "How do I change my billing information on ConfigCat?",
+            "name": "How do I change my billing information in ConfigCat?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
