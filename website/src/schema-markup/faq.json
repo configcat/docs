@@ -15,7 +15,7 @@
             "name": "Where can I find and download my ConfigCat invoices?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "With a Billing Manager role, you can access and download the invoices issued by ConfigCat from the Billing & Invoices page: https://app.configcat.com/organization/billing." 
+                "text": "With a Billing Manager role, you can access and download the invoices issued by ConfigCat from the Billing & Invoices page: https://app.configcat.com/organization/billing."
             }
         },
         {
@@ -124,18 +124,42 @@
         },
         {
             "@type": "Question",
-            "name": "How to use targeting rules in ConfigCat based on sensitive data?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the Confidential text comparators: https://configcat.com/docs/advanced/targeting/#confidential-text-comparators."
-            }
-        },
-        {
-            "@type": "Question",
             "name": "I can't log in to ConfigCat because I forgot my 2FA (Two-factor authentication) code.",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Solution 1: There might be an authenticator app on your phone that you can use to log in to ConfigCat.  Solution 2: Contact your Organization Admin, and ask them to disable 2FA for your account until you set it up again.  Solution 3: Use your recovery codes that you received when you first set your 2FA up."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "The Audit log in ConfigCat does not show old operations.",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "There is a 7-day log retention in the free plan and a longer, 35 day in all the other plans."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is there a way to allow group access to only one config in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Config access can't be specified in one Product, but you can split your configs into multiple products, each with the necessary permission settings."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "I cannot access my ConfigCat account using google sign-in.",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Browser extensions can interfere with this. Please disable all browser extensions and try again."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How to use targeting rules in ConfigCat based on sensitive data?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the Confidential text comparators: https://configcat.com/docs/advanced/targeting/#confidential-text-comparators."
             }
         },
         {
