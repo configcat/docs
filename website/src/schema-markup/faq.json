@@ -92,6 +92,38 @@
         },
         {
             "@type": "Question",
+            "name": "How do I cancel my ConfigCat account?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can do this with a Billing Manager role by clicking the Switch Plan button under the Free plan on the Plans page: https://app.configcat.com/organization/plans"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I change my currency in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can do this with a Billing Manager role by using the currency toggle to Switch between USD and EUR on the Plans page: https://app.configcat.com/organization/plans"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is ConfigCat ISO certified?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "As of 2022 May 31, ConfigCat has achieved the ISO/IEC 27001:2013 certification for Information Security Management Systems (ISMS). Learn more here: https://configcat.com/iso/"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Which addresses should I whitelist for ConfigCat when setting up my firewall?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If possible, you can allow the whole 'configcat.com' domain. Alternatively, you can manually whitelist the following addresses: Global CDN: https://cdn-global.configcat.com, EU CDN: https://cdn-eu.configcat.com, The Public Management API: https://api.configcat.com/, The Dashboard URL: https://app.configcat.com/"
+            }
+        },
+        {
+            "@type": "Question",
             "name": "How to use targeting rules in ConfigCat based on sensitive data?",
             "acceptedAnswer": {
                 "@type": "Answer",
