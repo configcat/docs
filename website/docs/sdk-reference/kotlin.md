@@ -370,7 +370,7 @@ val settingValuesTargeting = client.getAllValues(user)
 You have the option to inject your custom cache implementation into the client. All you have to do is to implement the `ConfigCache` interface:
 ```kotlin
 class MyCustomCache : ConfigCache {
-    override suspend fun read(key: String): String {
+    override suspend fun read(key: String): String? {
         // here you have to return with the cached value
     }
 
