@@ -11,7 +11,7 @@ The following guide provides an overview of how to manage your team in ConfigCat
 ### Invite others to collaborate
 
 1. Click the `Invite Team Members` button on the sidebar.  
-![Invite Button](/assets/invite.png)
+<img src="/docs/assets/invite.png" className="zoomable" alt="Invite Button" />
 1. Enter the invitees' email addresses (comma separated list).
 1. Select a *Permission group* and click on **SEND INVITATION EMAIL**.
 2. An invitation will be sent to the invitees' email addresses.

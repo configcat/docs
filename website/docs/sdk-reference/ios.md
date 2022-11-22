@@ -19,7 +19,9 @@ import TabItem from '@theme/TabItem';
 ## Getting Started:
 ### 1. Add the ConfigCat SDK to your project
 
-**CocoaPods**
+<Tabs groupId="ios-install">
+<TabItem value="CocoaPods" label="CocoaPods">
+
 ```ruby title="Podfile"
 target '<YOUR TARGET>' do
 pod 'ConfigCat'
@@ -30,14 +32,17 @@ Then, run the following command to install your dependencies:
 pod install
 ```
 
-**Carthage**
+</TabItem>
+<TabItem value="Carthage" label="Carthage">
+
 ```swift title="Cartfile"
 github "configcat/swift-sdk"
 ```
 
 Then, run the carthage update command and then follow the Carthage integration steps to link the framework with your project.
 
-**Swift Package Manager**
+</TabItem>
+<TabItem value="Swift Package Manager" label="Swift Package Manager">
 
 Add the SDK to your `Package.swift`.
 
@@ -49,6 +54,9 @@ dependencies: [
     )
 ]
 ```
+
+</TabItem>
+</Tabs>
 
 ### 2. Import the ConfigCat SDK:
 
@@ -789,7 +797,7 @@ If it's using auto polling, the ready state is reached when the SDK has a valid 
 
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
-- `error(String)`: This event is sent when an error occurs within the ConfigCat SDK.
+- `onError(String)`: This event is sent when an error occurs within the ConfigCat SDK.
 
 You can subscribe to these events either on SDK initialization: 
 

@@ -122,7 +122,7 @@ IF Country IS ONE OF Germany THEN feature is ON
 ELSE IF Email CONTAINS @mycompany.com THEN feature is ON
 To all other users the feature is OFF
 ```
-![OR example](/assets/faq/or-example.png)
+<img src="/docs/assets/faq/or-example.png" className="zoomable" alt="OR example" />
 
 #### AND Example
 Turn a feature `ON` if a user is in `Germany` `AND` logged in with an account from `@mycompany.com`.
@@ -131,7 +131,7 @@ IF Country IS NOT ONE OF Germany THEN feature is OFF
 ELSE IF Email DOES NOT CONTAIN @mycompany.com THEN feature is OFF
 To all other users the feature is ON
 ```
-![AND example](/assets/faq/and-example.png)
+<img src="/docs/assets/faq/and-example.png" className="zoomable" alt="AND example" />
 
 [Here is an example in our blog.](https://configcat.com/blog/2019/10/23/user-segmentation-and-targeting/#everyone-in-my-company-plus-android-users-from-germany-above-v53)
 
@@ -163,7 +163,7 @@ You can change the frequency, criteria and scope of the Zombie Feature Flag repo
 
 ### How to avoid technical debt caused by feature flags?
 The [ConfigCat CLI](/advanced/code-references/overview) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
-![Code references screenshot](/assets/cli/code-refs.png)
+<img src="/docs/assets/cli/code-refs.png" className="zoomable" alt="Code references screenshot" />
 
 ### Is there a way to compare flag statuses between two or more environments?
 Yes, you can see the state of all your Feature Flags across all your environments in our simplified [overview](https://app.configcat.com/overview).

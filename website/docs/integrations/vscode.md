@@ -9,7 +9,7 @@ description: ConfigCat Visual Studio Code extension. This is a step-by-step guid
 
 ## Feature overview
 
-![Usage of ConfigCat Feature Flags Visual Studio Code Extension](/assets/vscode/usage.gif)
+<img src="/docs/assets/vscode/usage.gif" className="zoomable" alt="Usage of ConfigCat Feature Flags Visual Studio Code Extension" />
 
 ### List of Features
 - Turn features On / Off right from Visual Studio Code.
@@ -42,7 +42,7 @@ description: ConfigCat Visual Studio Code extension. This is a step-by-step guid
 ## Configure extension
 ### Authentication
 
-![Installation of ConfigCat Feature Flags Visual Studio Code Extension](/assets/vscode/auth.gif)
+<img src="/docs/assets/vscode/auth.gif" className="zoomable" alt="Installation of ConfigCat Feature Flags Visual Studio Code Extension" />
 
 1. Get your ConfigCat Public API credentials from [ConfigCat Dashboard/Public Management API credentials](https://app.configcat.com/my-account/public-api-credentials).
 1. Authenticate ConfigCat in Visual Studio Code by

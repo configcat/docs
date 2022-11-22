@@ -287,7 +287,7 @@ If it's using auto polling, the ready state is reached when the SDK has a valid 
 
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
-- `error(String)`: This event is sent when an error occurs within the ConfigCat SDK.
+- `onError(String)`: This event is sent when an error occurs within the ConfigCat SDK.
 
 You can subscribe to these events either on SDK initialization: 
 ```kotlin
@@ -370,7 +370,7 @@ val settingValuesTargeting = client.getAllValues(user)
 You have the option to inject your custom cache implementation into the client. All you have to do is to implement the `ConfigCache` interface:
 ```kotlin
 class MyCustomCache : ConfigCache {
-    override suspend fun read(key: String): String {
+    override suspend fun read(key: String): String? {
         // here you have to return with the cached value
     }
 

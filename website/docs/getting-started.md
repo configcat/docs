@@ -20,11 +20,11 @@ then you can **connect your application** to the ConfigCat service to access you
 1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to the _Dashboard_
 2. Click _ADD FEATURE FLAG_ and give it a name.
 
-![getting-started](/assets/getting-started-1.png)
+<img src="/docs/assets/getting-started-1.png" className="zoomable" alt="getting-started" />
 
 ## Connect your application
 
-There are ready to use code snippets for `.NET`, `Java`, `Android (Kotlin)`, `iOS`, `Node`, `JavaScript`, `Python`, `Go`, `PHP`, `Elixir` on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, just scroll down to the **SDK Key and steps to connect your application** section.
+There are ready to use code snippets for `.NET`, `Java`, `Android (Java)`, `Kotlin`, `iOS`, `Dart (Flutter)`, `Node`, `JavaScript`, `Python`, `Go`, `PHP`, `Elixir`, `C++` on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, just scroll down to the **SDK Key and steps to connect your application** section.
 
 All the ConfigCat SDKs are open-source and available on <a href="https://github.com/configcat" target="_blank">GitHub</a>.
 

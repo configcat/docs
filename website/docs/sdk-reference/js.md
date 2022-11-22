@@ -3,6 +3,10 @@ id: "js"
 title: JavaScript SDK Reference
 description: ConfigCat JavaScript SDK Reference. This is a step-by-step guide on how to use feature flags in your JavaScript applications.
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/js-sdk.svg?style=social)](https://github.com/configcat/js-sdk/stargazers)
 [![JS CI](https://github.com/configcat/js-sdk/actions/workflows/js-ci.yml/badge.svg?branch=master)](https://github.com/configcat/js-sdk/actions/workflows/js-ci.yml) 
 [![codecov](https://codecov.io/gh/configcat/js-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/js-sdk) 
@@ -10,7 +14,9 @@ description: ConfigCat JavaScript SDK Reference. This is a step-by-step guide on
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=configcat_js-sdk&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=configcat_js-sdk) 
 [![JSDELIVR](https://data.jsdelivr.com/v1/package/npm/configcat-js/badge)](https://www.jsdelivr.com/package/npm/configcat-js)  
 
-*For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](js-ssr.md)*
+:::info
+For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](js-ssr.md).
+:::
 
 <a href="https://github.com/configcat/js-sdk" target="_blank">ConfigCat JavaScript SDK on GitHub</a>
 
@@ -18,7 +24,9 @@ description: ConfigCat JavaScript SDK Reference. This is a step-by-step guide on
 
 ### 1. Install and import package
 
-*via NPM:*
+<Tabs groupId="js-install">
+<TabItem value="NPM" label="NPM">
+
 ```bash
 npm i configcat-js
 ```
@@ -26,10 +34,15 @@ npm i configcat-js
 import * as configcat from "configcat-js";
 ```
 
-*via CDN:*
+</TabItem>
+<TabItem value="CDN" label="CDN">
+
 ```html
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/configcat-js@latest/dist/configcat.min.js"></script>
 ```
+
+</TabItem>
+</Tabs>
 
 ### 2. Create the *ConfigCat* client with your SDK Key:
 

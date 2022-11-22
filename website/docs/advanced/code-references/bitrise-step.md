@@ -9,7 +9,7 @@ to automatically scan your source code for feature flag and setting usages and u
 
 ## Setup
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in secure pipeline variables with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
-    <img className="bordered" src="/docs/assets/cli/scan/bitrise_secrets.png" alt="Bitrise secrets" />
+    <img className="bordered zoomable" src="/docs/assets/cli/scan/bitrise_secrets.png" alt="Bitrise secrets" />
 
 2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 

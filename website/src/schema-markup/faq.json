@@ -4,6 +4,126 @@
     "mainEntity": [
         {
             "@type": "Question",
+            "name": "What if I exceed the config.json download limit of my ConfigCat plan?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Don't worry, ConfigCat will keep serving your data and feature flags. Someone from the support team will contact you to discuss your options. You can always check your usage & quota on the ConfigCat Dashboard: https://app.configcat.com/organization/usage."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Where can I find and download my ConfigCat invoices?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "With a Billing Manager role, you can access and download the invoices issued by ConfigCat from the Billing & Invoices page: https://app.configcat.com/organization/billing." 
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is it possible to pay ConfigCat via wire transfer?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Using a credit card via the ConfigCat Dashboard is the preferred way of payment, but a wire transfer is also an option in larger subscription plans. For this process, contact ConfigCat directly: https://configcat.com/support"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I upgrade my ConfigCat billing plan?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "With a Billing Manager role, you can change your billing plan on the Plans page: https://app.configcat.com/organization/plans"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I downgrade my ConfigCat billing plan?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "With a Billing Manager role, you can change your billing plan on the Plans page: https://app.configcat.com/organization/plans"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How can I use ConfigCat at a discounted rate?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "This is possible if you join ConfigCat's partnership program or via referrals: https://configcat.com/referrals"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I change the billing email address where the ConfigCat invoices should be sent?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I change my payment method in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I change my billing information in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "The ChargeBee payment gets stuck when trying to subscribe for a paid ConfigCat plan.",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you're using Firefox, try switching to a Chromium-based browser that has extensions turned off. If this doesn't work, contact ConfigCat for help: https://configcat.com/support"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "The ChargeBee payment throws an error when trying to subscribe for a paid ConfigCat plan.",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you're using Firefox, try switching to a Chromium-based browser that has extensions turned off. If this doesn't work, contact ConfigCat for help: https://configcat.com/support"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I cancel my ConfigCat account?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can do this with a Billing Manager role by clicking the Switch Plan button under the Free plan on the Plans page: https://app.configcat.com/organization/plans"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I change my currency in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can do this with a Billing Manager role by using the currency toggle to Switch between USD and EUR on the Plans page: https://app.configcat.com/organization/plans"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is ConfigCat ISO certified?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "As of 2022 May 31, ConfigCat has achieved the ISO/IEC 27001:2013 certification for Information Security Management Systems (ISMS). Learn more here: https://configcat.com/iso/"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Which addresses should I whitelist for ConfigCat when setting up my firewall?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If possible, you can allow the whole 'configcat.com' domain. Alternatively, you can manually whitelist the following addresses: Global CDN: https://cdn-global.configcat.com, EU CDN: https://cdn-eu.configcat.com, The Public Management API: https://api.configcat.com/, The Dashboard URL: https://app.configcat.com/"
+            }
+        },
+        {
+            "@type": "Question",
             "name": "How to use targeting rules in ConfigCat based on sensitive data?",
             "acceptedAnswer": {
                 "@type": "Answer",
@@ -12,26 +132,10 @@
         },
         {
             "@type": "Question",
-            "name": "What if I exceed the config.json download limit of my ConfigCat plan?",
+            "name": "I can't log in to ConfigCat because I forgot my 2FA (Two-factor authentication) code.",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Don't worry, we will keep serving your data and feature flags. Someone from our team will contact you to discuss your options."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Where can I find and download my ConfigCat invoices?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "All the invoices we issued are available for download from the Billing & Invoices page: https://app.configcat.com/organization/billing"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "I can't login to ConfigCat because I was asked a 2FA (Two-factor authentication) code that I don't know.",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Solution 1: There might be an authenticator app on your phone that you can use to log in to ConfigCat.  Solution 2: Contact your Organization Admin, and ask them to disable 2FA for your account until you set it up again.  Solution 3: Use the recovery codes that you received when you first set your 2FA up."
+                "text": "Solution 1: There might be an authenticator app on your phone that you can use to log in to ConfigCat.  Solution 2: Contact your Organization Admin, and ask them to disable 2FA for your account until you set it up again.  Solution 3: Use your recovery codes that you received when you first set your 2FA up."
             }
         },
         {
@@ -40,6 +144,14 @@
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.  Also, consider the following:  - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)  - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)  More on stickiness and consistency: https://configcat.com/docs/advanced/targeting/#stickiness--consistency"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How can I be sure that my data is safe at ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.  See ConfigCat's architecture explained here: https://configcat.com/architecture/."
             }
         },
         {
