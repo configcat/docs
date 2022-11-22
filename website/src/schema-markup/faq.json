@@ -156,6 +156,54 @@
         },
         {
             "@type": "Question",
+            "name": "How can I be sure that my data is safe at ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system. See ConfigCat's architecture explained here: https://configcat.com/architecture/."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I sign a data processing agreement with ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, ConfigCat have no trouble signing a data processing agreement (DPA)"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Which data is processed and stored from browsers accessing ConfigCat's CDN to pull feature toggles?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ConfigCat don't store anything from browsers. The data flow is one directional - the SDKs are only downloading the config.json files and the feature flag evaluation happens in the SDK. ConfigCat doesn't know anything about your users, only those data which you set in your targeting rules."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is ConfigCat's data only hosted within the EU?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our main infrastructure and database is in the EU, but CDN servers are located both in the EU and globally. You can set where you want us to keep your data, so its always within reach for your needs. You can read more here: https://configcat.com/docs/advanced/data-governance/"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is it possible to export feature flags in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! You can export and download your current product as a standard JSON file anytime you want. The export will include: All feature flags and settings together with their values, targeting rules, % options, segments, tags, All configs, All environments, All tags and All segments."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How can I use AND operators in my targeting rules in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Although there is no direct support for AND operators in the UI, you can use the AND operator with a combination of OR and NOT operators. Read more here: https://configcat.com/docs/faq/#can-i-use-and-operators-in-my-targeting-rules"
+            }
+        },
+        {
+            "@type": "Question",
             "name": "How to use targeting rules in ConfigCat based on sensitive data?",
             "acceptedAnswer": {
                 "@type": "Answer",
@@ -168,22 +216,6 @@
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.  Also, consider the following:  - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)  - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)  More on stickiness and consistency: https://configcat.com/docs/advanced/targeting/#stickiness--consistency"
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "How can I be sure that my data is safe at ConfigCat?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.  See ConfigCat's architecture explained here: https://configcat.com/architecture/."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "How can I be sure that my data is safe at ConfigCat?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.  See ConfigCat's architecture explained here: https://configcat.com/architecture/."
             }
         }
     ]
