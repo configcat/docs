@@ -92,7 +92,7 @@ client.close(); // closes the specific client
 final client = ConfigCatClient.get(
     sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(
-        mode: PollingMode.manualPoll(),
+        pollingMode: PollingMode.manualPoll(),
         logger: ConfigCatLogger(level: LogLevel.info)
     )
 );
@@ -302,7 +302,7 @@ You can subscribe to these events either on SDK initialization:
 final client = ConfigCatClient.get(
     sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(
-        mode: PollingMode.manualPoll(),
+        pollingMode: PollingMode.manualPoll(),
         hooks: Hooks(
             onFlagEvaluated: (details) => /* handle the event */
         )
