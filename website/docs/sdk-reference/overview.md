@@ -25,12 +25,18 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ### Node.js
 - [Documentation](sdk-reference/node.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/node-sdk" target="_blank">GitHub repository of the ConfigCat Node SDK.</a>
-### Android (Kotlin)
+### Android (Java)
 - [Documentation](sdk-reference/android.md) on how to connect your application.
-- <a href="https://github.com/configcat/android-sdk" target="_blank">GitHub repository of the ConfigCat Android SDK.</a>
+- <a href="https://github.com/configcat/android-sdk" target="_blank">GitHub repository of the ConfigCat Android (Java) SDK.</a>
+### Kotlin Multiplatform
+- [Documentation](sdk-reference/kotlin.md) on how to connect your application.
+- <a href="https://github.com/configcat/kotlin-sdk" target="_blank">GitHub repository of the ConfigCat Kotlin Multiplatform SDK.</a>
 ### iOS (Swift)
 - [Documentation](sdk-reference/ios.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/swift-sdk" target="_blank">GitHub repository of the ConfigCat Swift SDK.</a>
+### Dart (Flutter)
+- [Documentation](sdk-reference/dart.md) on how to connect your application.
+- <a href="https://github.com/configcat/dart-sdk" target="_blank">GitHub repository of the ConfigCat Dart (Flutter) SDK.</a>
 ### Python
 - [Documentation](sdk-reference/python.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/python-sdk" target="_blank">GitHub repository of the ConfigCat Python SDK.</a>
@@ -46,11 +52,5 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ### Elixir
 - [Documentation](sdk-reference/elixir.md) on how to connect your application.
 - <a href="https://github.com/configcat/elixir-sdk" target="_blank">GitHub repository of the ConfigCat Elixir SDK.</a>
-### Dart (Flutter)
-- [Documentation](sdk-reference/dart.md) on how to connect your application.
-- <a href="https://github.com/configcat/dart-sdk" target="_blank">GitHub repository of the ConfigCat Dart (Flutter) SDK.</a>
-### Kotlin Multiplatform
-- [Documentation](sdk-reference/kotlin.md) on how to connect your application.
-- <a href="https://github.com/configcat/kotlin-sdk" target="_blank">GitHub repository of the ConfigCat Kotlin Multiplatform SDK.</a>
 ### Deno (Community maintained)
 - <a href="https://github.com/sigewuzhere/configcat-deno" target="_blank">GitHub repository of the ConfigCat Deno SDK.</a>

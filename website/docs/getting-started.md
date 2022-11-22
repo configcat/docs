@@ -24,7 +24,7 @@ then you can **connect your application** to the ConfigCat service to access you
 
 
 
-There are ready to use code snippets for `.NET`, `Java`, `Android (Kotlin)`, `iOS`, `Node`, `JavaScript`, `Python`, `Go`, `PHP`, `Elixir` on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, just scroll down to the **SDK Key and steps to connect your application** section.
+There are ready to use code snippets for `.NET`, `Java`, `Android (Java)`, `Kotlin`, `iOS`, `Dart (Flutter)`, `Node`, `JavaScript`, `Python`, `Go`, `PHP`, `Elixir`, `C++` on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, just scroll down to the **SDK Key and steps to connect your application** section.
 
 All the ConfigCat SDKs are open-source and available on <a href="https://github.com/configcat" target="_blank">GitHub</a>.
 
