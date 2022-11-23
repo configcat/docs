@@ -215,7 +215,7 @@
             "name": "Are ConfigCat percentage targeting options sticky?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.  Also, consider the following:  - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)  - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)  More on stickiness and consistency: https://configcat.com/docs/advanced/targeting/#stickiness--consistency"
+                "text": "Yes. The percentage-based targeting is sticky by design and consistent across all SDKs. More on stickiness and consistency: https://configcat.com/docs/advanced/targeting/#stickiness--consistency"
             }
         }
     ]
