@@ -12,7 +12,7 @@ You can use it with many similar techniques such as feature flags/toggles, canar
 
 # The birth of a Feature Flag
 
-rFirst, **add a feature flag** on the _ConfigCat Dashboard_,
+First, **add a feature flag** on the _ConfigCat Dashboard_,
 then you can **connect your application** to the ConfigCat service to access your feature flag.
 
 ## Create a feature flag on the _ConfigCat Dashboard_
