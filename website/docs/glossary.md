@@ -9,7 +9,9 @@ An alphabetical list of terms used around feature management and software develo
 ## B
 ## C
 ## D
-[DevOps Engineer](glossary/devops-engineer.md)
+#### [DevOps Engineer](glossary/devops-engineer.md)
+The DevOps Engineer is responsible for the development and maintenance of the infrastructure and the deployment of the software. The DevOps Engineer is also responsible for the monitoring and maintenance of the software and the infrastructure.  
+[Read more](glossary/devops-engineer.md)
 ## E
 ## F
 ## G
