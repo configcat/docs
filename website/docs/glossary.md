@@ -24,6 +24,9 @@ The DevOps Engineer is responsible for the development and maintenance of the in
 ## N
 ## O
 ## P
+#### [Progressive Delivery](https://configcat.com/blog/2022/01/14/progressive-delivery/)
+A progressive delivery approach to DevOps combines the principles of Continuous Integration and Continuous Delivery (CI/CD) with modern software development practices, facilitating faster code deployment, reducing risk, and improving user experiences.  
+[Read more](https://configcat.com/blog/2022/01/14/progressive-delivery/)
 ## Q
 ## R
 ## S
