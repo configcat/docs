@@ -17,6 +17,7 @@ const features = [
       { url: 'purchase', title: 'Plans, Purchase & Billing' },
       { url: 'organization', title: 'Organization & Roles' },
       { url: 'faq', title: 'FAQ' },
+      { url: 'glossary', title: 'Glossary' },
     ],
   },
   {
