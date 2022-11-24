@@ -8,6 +8,9 @@ An alphabetical list of terms used around feature management and software develo
 ## A
 ## B
 ## C
+#### [Canary Release](https://configcat.com/blog/2022/01/14/progressive-delivery/#canary-releases)
+A canary release is a type of progressive delivery where a small percentage of users are exposed to a new feature. If the feature works as expected, the percentage of users exposed to the feature is increased. If the feature does not work as expected, the feature is rolled back.  
+[Read more](https://configcat.com/blog/2022/01/14/progressive-delivery/#canary-releases)
 ## D
 #### [DevOps Engineer](glossary/devops-engineer.md)
 The DevOps Engineer is responsible for the development and maintenance of the infrastructure and the deployment of the software. The DevOps Engineer is also responsible for the monitoring and maintenance of the software and the infrastructure.  
