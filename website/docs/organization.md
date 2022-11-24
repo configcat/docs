@@ -16,7 +16,7 @@ _Organization Menu_ is only available for **Organization Admins** and **Billing 
 _Organization Admins_ have unrestricted access to the complete organization and products within ConfigCat.
 They can manage members, enforce security measures, modify sign-in methods, add/delete products, feature flags and environments.
 
-alaq*Organization Admins* have no access to payment, billing and subscription management.
+_Organization Admins_ have no access to payment, billing and subscription management.
 
 Only _Organization Admins_ can grant (or take away) _Organization Admin_ role to other members.
 
