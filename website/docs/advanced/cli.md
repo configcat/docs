@@ -1,6 +1,6 @@
 ---
 id: cli
-title:  Command Line Interface (CLI)
+title: Command Line Interface (CLI)
 description: The ConfigCat Command Line Interface (CLI) connect and match feature flags in your source code with feature flags in the Dashboard.
 ---
 
@@ -41,18 +41,22 @@ Use "configcat [command] -?" for more information about a command.
 ```
 
 ## Reference
+
 See the <a target="_blank" href="https://configcat.github.io/cli/">command reference documentation</a> for more information about each available command.
 
 ## Getting Started
+
 The following instructions will guide you through the first steps to start using this tool.
 
 ### Installation
+
 You can install the CLI on multiple operating systems using the following sources.
 
 <details>
   <summary><strong>Homebrew (macOS / Linux)</strong></summary>
 
 Install the CLI with <a target="_blank" href="https://brew.sh">Homebrew</a> from <a target="_blank" href="https://github.com/configcat/homebrew-tap">ConfigCat's tap</a> by executing the following command:
+
 ```bash
 brew tap configcat/tap
 brew install configcat
@@ -64,6 +68,7 @@ brew install configcat
   <summary><strong>Snap (Linux)</strong></summary>
 
 Install the CLI with <a target="_blank" href="https://snapcraft.io">Snapcraft</a> by executing the following command:
+
 ```bash
 sudo snap install configcat
 ```
@@ -74,6 +79,7 @@ sudo snap install configcat
   <summary><strong>Scoop (Windows)</strong></summary>
 
 Install the CLI with <a target="_blank" href="https://scoop.sh">Scoop</a> from <a target="_blank" href="https://github.com/configcat/scoop-configcat">ConfigCat's bucket</a> by executing the following command:
+
 ```bash
 scoop bucket add configcat https://github.com/configcat/scoop-configcat
 scoop install configcat
@@ -85,6 +91,7 @@ scoop install configcat
   <summary><strong>Chocolatey (Windows)</strong></summary>
 
 Install the CLI with <a target="_blank" href="https://chocolatey.org/">Chocolatey</a> by executing the following command:
+
 ```powershell
 choco install configcat
 ```
@@ -95,10 +102,13 @@ choco install configcat
   <summary><strong>Docker</strong></summary>
 
 The CLI can be executed from a <a target="_blank" href="https://www.docker.com/">Docker</a> image.
+
 ```bash
 docker pull configcat/cli
 ```
+
 An example of how to scan a repository for feature flag & setting references with the docker image.
+
 ```bash
 docker run --rm \
     --env CONFIGCAT_API_HOST=<API-HOST> \
@@ -114,6 +124,7 @@ docker run --rm \
   <summary><strong>Install Script</strong></summary>
 
 On Unix platforms, you can install the CLI by executing an install script.
+
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash
 ```
@@ -128,11 +139,11 @@ curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install
 
 The script accepts the following input parameters:
 
-Parameter | Description | Default value
---------- | ----------- | -------------
-`-d`, `--dir` | The directory where the CLI should be installed. | `/usr/local/bin`
-`-v`, `--version` | The desired version to install. | `latest`
-`-a`, `--arch` | The desired architecture to install. | `x64`
+| Parameter         | Description                                      | Default value    |
+| ----------------- | ------------------------------------------------ | ---------------- |
+| `-d`, `--dir`     | The directory where the CLI should be installed. | `/usr/local/bin` |
+| `-v`, `--version` | The desired version to install.                  | `latest`         |
+| `-a`, `--arch`    | The desired architecture to install.             | `x64`            |
 
 Available **architecture** values for Linux: `x64`, `musl-x64`, `arm`, `arm64`.
 
@@ -140,17 +151,20 @@ Available **architecture** values for macOS: `x64`, `arm64`.
 
 **Script usage examples**:
 
-*Custom installation directory*:
+_Custom installation directory_:
+
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash -s -- -d=/path/to/install
 ```
 
-*Install a different version*:
+_Install a different version_:
+
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash -s -- -v=1.4.2
 ```
 
-*Install with custom architecture*:
+_Install with custom architecture_:
+
 ```bash
 curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash -s -- -a=arm
 ```
@@ -165,6 +179,7 @@ You can download the executables directly from <a target="_blank" href="https://
 </details>
 
 ### Setup
+
 After a successful installation, the CLI must be set up with your <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credentials</a>.
 
 You can do this by using the `configcat setup` command.
@@ -172,19 +187,21 @@ You can do this by using the `configcat setup` command.
 <img src="/docs/assets/cli/setup.gif" className="zoomable" alt="interactive" />
 
 #### Environment Variables
+
 Besides the `setup` command above, the CLI can read your credentials from the following environment variables.
 
-Name | Description |
---------- | ----------- |
-`CONFIGCAT_API_HOST` | The Management API host. (default: api.configcat.com) | 
-`CONFIGCAT_API_USER` | The Management API basic authentication username. |
-`CONFIGCAT_API_PASS` | The Management API basic authentication password. | 
+| Name                 | Description                                           |
+| -------------------- | ----------------------------------------------------- |
+| `CONFIGCAT_API_HOST` | The Management API host. (default: api.configcat.com) |
+| `CONFIGCAT_API_USER` | The Management API basic authentication username.     |
+| `CONFIGCAT_API_PASS` | The Management API basic authentication password.     |
 
 :::caution
 When any of these environment variables are set, the CLI will use them over the local values set by the `configcat setup` command.
 :::
 
 ## Modes
+
 The CLI supports both interactive and argument driven execution. When no arguments provided for a command and user input is enabled (stdout is not redirected), the CLI automatically activates interactive mode.
 
 ### Interactive
@@ -192,10 +209,12 @@ The CLI supports both interactive and argument driven execution. When no argumen
 <img src="/docs/assets/cli/teaser.gif" className="zoomable" alt="interactive" />
 
 ### With Arguments
+
 The same operation with command arguments would look like this:
+
 ```bash
 configcat flag create \
-  --config-id <config-id> \ 
+  --config-id <config-id> \
   --name "My awesome feature" \
   --hint "This is my awesome feature" \
   --key my_awesome_feature
@@ -212,27 +231,33 @@ You can change the output format of several command's result to JSON with the `-
 :::
 
 ## Scan & Upload Code References
+
 The CLI has the ability to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. You can read more about this feature [here](/docs/advanced/code-references/overview).
 
 ## Examples
+
 Here are a few examples showing the true power of the CLI.
 
 ### Create a Feature Flag
+
 The following example shows how you can create a Feature Flag in a specific Config.
 
 <img src="/docs/assets/cli/create-flag.gif" className="zoomable" alt="create flag" />
 
 ### Value update
+
 The following example shows how you can update the value of a Feature Flag in a specific Environment.
 
 <img src="/docs/assets/cli/flag-value-update.gif" className="zoomable" alt="flag value update" />
 
 ### Add targeting rules
+
 The following example shows how you can add targeting rules to a Feature Flag.
 
 <img src="/docs/assets/cli/flag-targeting-add.gif" className="zoomable" alt="flag targeting add" />
 
 ### Add percentage rules
+
 The following example shows how you can set percentage rules on a Feature Flag.
 
 <img src="/docs/assets/cli/flag-percentage-add.gif" className="zoomable" alt="flag percentage add" />
