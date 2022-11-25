@@ -421,13 +421,15 @@ ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
 java.util.Collection<String> keys = client.getAllKeys();
 ```
 
-````java
+```java
 ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
 client.getAllKeysAsync().thenAccept(keys -> {
     // use the keys
 });
+```
 
 ## `getAllValues()`, `getAllValuesAsync()`
+
 Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
 
 ```java
@@ -437,7 +439,7 @@ Map<String, Object> settingValues = client.getAllValues();
 // invoke with user object
 User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
 Map<String, Object> settingValuesTargeting = client.getAllValues(user);
-````
+```
 
 ```java
 ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
