@@ -90,10 +90,10 @@ See our the architecture explained [here](https://configcat.com/architecture/).
 
 
 ### Can we sign a data processing agreement with you?
-Yes, we have no trouble signing a data processing agreement (DPA).
+Yes, ConfigCat is happy to sign a data processing agreement (DPA).
 
-### Which data do you process | store from browsers accessing the CDN to pull feature toggles?
-We don't store anything from browsers. The data flow is one directional - the SDKs are only downloading the config.json files and the feature flag evaluation happens in the SDK. ConfigCat doesn't know anything about your users, only those data which you set in your targeting rules.
+### What data is stored or processed from browsers accessing the CDN when pulling feature toggles?
+We don't store any browser data. The data flow is one directional - the SDKs are only downloading the config.json files and the feature flag evaluation happens in the SDK. ConfigCat doesn't know anything about your users, only those data which you set in your targeting rules.
 
 ### Is data hosted only within the EU?
 Our main infrastructure and database is in the EU, but CDN servers are located both in the EU and globally. You can set where you want us to keep your data, so its always within reach for your needs.
