@@ -7,6 +7,9 @@ An alphabetical list of terms used around feature management and software develo
 
 ## A
 ## B
+#### [A/B Testing](https://configcat.com/blog/2022/05/02/what-is-ab-testing/)
+A/B testing is a method of comparing two versions of a product or feature to determine which one performs better. A/B testing is a form of controlled experimentation.
+[Read more](https://configcat.com/blog/2022/05/02/what-is-ab-testing/)
 ## C
 #### [Canary Release](https://configcat.com/blog/2022/01/14/progressive-delivery/#canary-releases)
 A canary release is a type of progressive delivery where a small percentage of users are exposed to a new feature. If the feature works as expected, the percentage of users exposed to the feature is increased. If the feature does not work as expected, the feature is rolled back.  
