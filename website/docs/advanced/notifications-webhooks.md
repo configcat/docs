@@ -93,18 +93,21 @@ const contentToSign = `${webhookId}${timestamp}${body}`
 | `body`                  | The raw body of the received webhook request. If the webhook doesn't have a request body it can be left out.      |
 
 :::caution
-The signature calculation is sensitive to any changes in the signed content, so it's important to not change the request body before the verification. 
+The signature calculation is sensitive to any changes on the signed content, so it's important to not change the request body before the verification. 
 Otherwise, the calculated signature could be completely different from the value received in the  
 `X-ConfigCat-Webhook-Signature-V1` header.
 :::
 
-### Calculate signature
+### Calculating signature
 ConfigCat uses `HMAC` with `SHA-256` to sign webhooks. You can retrieve the **signing key(s)** required for the signature calculation from the <a href="https://app.configcat.com/product/webhooks" target="_blank">ConfigCat Dashboard's webhook section</a>.
 
 <img src="/docs/assets/whsk.png" className="zoomable bottom-spaced" alt="signing keys" />  
 
 :::info
-For **key rotation** purposes, you can generate a secondary signing key. In this case ConfigCat sends two signatures (one signed with the *primary* and one signed with the *secondary* key) in the `X-ConfigCat-Webhook-Signature-V1` header separated by a comma (`,`).
+For **key rotation** purposes, you can generate a secondary signing key. In this case ConfigCat sends two signatures (one signed with the *primary* and one signed with the *secondary* key) in the `X-ConfigCat-Webhook-Signature-V1` header separated by a comma (`,`): 
+```
+X-ConfigCat-Webhook-Signature-V1: RoO/UMvSRqzJ0OolMMuhHBbM8/Vjn+nTh+SKyLcQf0M=,heIrGPw6aylAZEX6xmSLrxIWVif5injeBCxWQ+0+b2U=
+```
 :::
 
 <Tabs>
@@ -168,6 +171,102 @@ print(calculated_signature.decode() == received_signature) # must be true
 ```
 
 </TabItem>
+<TabItem value="whsk-ruby" label="Ruby" default>
+
+```ruby
+require 'openssl'
+require 'base64'
+
+# retrieved from ConfigCat Dashboard
+signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+
+# retrieved from X-ConfigCat-Webhook-Signature-V1
+received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+
+# retrieved from X-ConfigCat-Webhook-ID
+request_id = "b616ca659d154a5fb907dd8475792eeb"
+
+# retrieved from X-ConfigCat-Webhook-Timestamp
+timestamp = 1669629035 
+
+# the webhook request's raw body
+body = "examplebody" 
+
+content_to_sign = "#{request_id}#{timestamp}#{body}"
+
+calculated_signature = Base64.strict_encode64(OpenSSL::HMAC.digest("sha256", signing_key, content_to_sign))
+
+puts calculated_signature == received_signature # must be true
+```
+
+</TabItem>
+<TabItem value="whsk-php" label="PHP" default>
+
+```php
+<?php
+
+// retrieved from ConfigCat Dashboard
+$signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=";
+
+// retrieved from X-ConfigCat-Webhook-Signature-V1
+$received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
+
+// retrieved from X-ConfigCat-Webhook-ID
+$request_id = "b616ca659d154a5fb907dd8475792eeb";
+
+// retrieved from X-ConfigCat-Webhook-Timestamp
+$timestamp = 1669629035;
+
+// the webhook request's raw body
+$body = "examplebody";
+
+$content_to_sign = "{$request_id}{$timestamp}{$body}";
+
+$calculated_signature = base64_encode(hash_hmac("sha256", $content_to_sign, $signing_key, true));
+
+echo hash_equals($calculated_signature, $received_signature); // must be true
+```
+
+</TabItem>
+<TabItem value="whsk-go" label="Go" default>
+
+```go
+package main
+import (
+  "fmt"
+  "crypto/hmac"
+  "crypto/sha256"
+  "encoding/base64"
+)
+
+func main() {
+  // retrieved from ConfigCat Dashboard
+  signingKey := "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+
+  // retrieved from X-ConfigCat-Webhook-Signature-V1
+  receivedSignature := "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+
+  // retrieved from X-ConfigCat-Webhook-ID
+  requestId := "b616ca659d154a5fb907dd8475792eeb"
+
+  // retrieved from X-ConfigCat-Webhook-Timestamp
+  timestamp := 1669629035 
+
+  // the webhook request's raw body
+  body := "examplebody" 
+
+  contentToSign := fmt.Sprintf("%s%d%s", requestId, timestamp, body)
+
+  hasher := hmac.New(sha256.New, []byte(signingKey))
+  hasher.Write([]byte(contentToSign))
+
+  calculatedSignature := base64.StdEncoding.EncodeToString(hasher.Sum(nil))
+
+  fmt.Println(calculatedSignature == receivedSignature) // must be true
+}
+```
+
+</TabItem>
 <TabItem value="whsk-dotnet" label=".NET" default>
 
 ```csharp
@@ -197,6 +296,46 @@ using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(signingKey)))
 	var calculatedSignature = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(contentToSign)));
 
 	Console.WriteLine(calculatedSignature == receivedSignature); // must be true
+}
+```
+
+</TabItem>
+<TabItem value="whsk-java" label="Java" default>
+
+```java
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.security.InvalidKeyException;
+
+public class Main {
+  public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
+    // retrieved from ConfigCat Dashboard
+    String signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="; 
+
+    // retrieved from X-ConfigCat-Webhook-Signature-V1
+    String receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
+
+    // retrieved from X-ConfigCat-Webhook-ID
+    String requestId = "b616ca659d154a5fb907dd8475792eeb";
+
+    // retrieved from X-ConfigCat-Webhook-Timestamp
+    int timestamp = 1669629035;
+
+    // the webhook request's raw body
+    String body = "examplebody"; 
+
+    String contentToSign = requestId + timestamp + body;
+
+    Mac mac = Mac.getInstance("HmacSHA256");
+    SecretKeySpec secretKeySpec = new SecretKeySpec(signingKey.getBytes("UTF-8"), "HmacSHA256");
+    mac.init(secretKeySpec);
+    String calculatedSignature = Base64.getEncoder().encodeToString(mac.doFinal(contentToSign.getBytes("UTF-8")));
+
+    System.out.println(calculatedSignature.equals(receivedSignature)); // must be true
+  }
 }
 ```
 
