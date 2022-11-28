@@ -3,6 +3,10 @@ id: notifications-webhooks
 title: Notifications - Webhooks
 description: Webhooks are a way to send notifications to your applications about feature flag value changes so you can react to changes quickly.
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Your application can be notified about Setting value changes in real-time. ConfigCat enables this by calling a public URL of your system (a so-called Webhook). You can add your Webhook URLs in the *Dashboard*.
 
 ## Adding Webhook
@@ -47,7 +51,162 @@ The structure of the JSON array injected into the **##ChangeDetails##** looks li
 2. Click **SAVE & PUBLISH SETTINGS**.
 3. Check if your Webhook was called correctly.
 
-> **Developer Tip:** Running your Webhook on `localhost`? Expose it to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your local development environment.
+:::info
+**Developer Tip:** Running your Webhook on `localhost`? Expose it to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your local development environment.
+:::
+
+## Verifying Webhook requests
+To ensure the requests you receive are actually sent by ConfigCat, we highly recommend to verify
+the signature sent in the request headers by comparing it with your own calculated signature.
+
+Each webhook request contains the following headers:
+
+| Header                             | Description                                                                                         |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `X-ConfigCat-Webhook-ID`           | The webhook request's unique identifier.                                                            |
+| `X-ConfigCat-Webhook-Timestamp`    | The time the webhook was sent in unix timestamp format. (seconds since epoch)                       |
+| `X-ConfigCat-Webhook-Signature-V1` | The list of the `base64` encoded HMAC-SHA-256 signatures. (comma delimited, 1 for each signing key) |
+
+Currently the latest (and the only) signature header version is `V1`. If the signing process is going to be changed in the future, more headers will be added with incremented version postfix.
+
+Example request:
+
+```
+POST /path HTTP/1.1
+Host: <your-host>
+X-ConfigCat-Webhook-ID: b616ca659d154a5fb907dd8475792eeb
+X-ConfigCat-Webhook-Timestamp: 1669580020
+X-ConfigCat-Webhook-Signature-V1: RoO/UMvSRqzJ0OolMMuhHBbM8/Vjn+nTh+SKyLcQf0M=,heIrGPw6aylAZEX6xmSLrxIWVif5injeBCxWQ+0+b2U=
+```
+
+### Content to sign
+The signature is calculated from the content constructed by concatenating the webhook's `id`, `timestamp`, and raw `body` together.
+
+```js
+const contentToSign = `${webhookId}${timestamp}${body}`
+```
+
+| Content part            | Description                                                                                                       |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `webhookId`             | The webhook's identifier received in the `X-ConfigCat-Webhook-ID` request header.                                 |
+| `timestamp`             | The timestamp value received in the `X-ConfigCat-Webhook-Timestamp` request header.                                       |
+| `body`                  | The raw body of the received webhook request. If the webhook doesn't have a request body it can be left out.      |
+
+:::caution
+The signature calculation is sensitive to any changes in the signed content, so it's important to not change the request body before the verification. 
+Otherwise, the calculated signature could be completely different from the value received in the  
+`X-ConfigCat-Webhook-Signature-V1` header.
+:::
+
+### Calculate signature
+ConfigCat uses `HMAC` with `SHA-256` to sign webhooks. You can retrieve the **signing key(s)** required for the signature calculation from the <a href="https://app.configcat.com/product/webhooks" target="_blank">ConfigCat Dashboard's webhook section</a>.
+
+<img src="/docs/assets/whsk.png" className="zoomable bottom-spaced" alt="signing keys" />  
+
+:::info
+For **key rotation** purposes, you can generate a secondary signing key. In this case ConfigCat sends two signatures (one signed with the *primary* and one signed with the *secondary* key) in the `X-ConfigCat-Webhook-Signature-V1` header separated by a comma (`,`).
+:::
+
+<Tabs>
+<TabItem value="whsk-nodejs" label="Node.js" default>
+
+```js
+const crypto = require("crypto");
+
+// retrieved from ConfigCat Dashboard
+const signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+
+// retrieved from X-ConfigCat-Webhook-Signature-V1
+const receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+
+// retrieved from X-ConfigCat-Webhook-ID
+const requestId = "b616ca659d154a5fb907dd8475792eeb" 
+
+// retrieved from X-ConfigCat-Webhook-Timestamp
+const timestamp = 1669629035 
+
+// the webhook request's raw body
+const body = "examplebody" 
+
+const contentToSign = `${requestId}${timestamp}${body}`
+
+const calculatedSignature = crypto.createHmac('sha256', signingKey)
+  .update(contentToSign)
+  .digest('base64')
+
+console.log(calculatedSignature == receivedSignature) // must be true
+```
+
+</TabItem>
+<TabItem value="whsk-python" label="Python" default>
+
+```python
+import hmac
+import base64
+
+# retrieved from ConfigCat Dashboard
+signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+
+# retrieved from X-ConfigCat-Webhook-Signature-V1
+received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+
+# retrieved from X-ConfigCat-Webhook-ID
+request_id = "b616ca659d154a5fb907dd8475792eeb"
+
+# retrieved from X-ConfigCat-Webhook-Timestamp
+timestamp = 1669629035 
+
+# the webhook request's raw body
+body = "examplebody" 
+
+content_to_sign = request_id+str(timestamp)+body
+
+signing_key_bytes = bytes(signing_key, 'utf-8')
+calculated_signature = base64.b64encode(hmac.new(signing_key_bytes, bytes(content_to_sign, 'utf-8'), 'sha256').digest())
+
+print(calculated_signature.decode() == received_signature) # must be true
+```
+
+</TabItem>
+<TabItem value="whsk-dotnet" label=".NET" default>
+
+```csharp
+using System;
+using System.Security.Cryptography;
+using System.Text;
+
+// retrieved from ConfigCat Dashboard
+var signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="; 
+
+// retrieved from X-ConfigCat-Webhook-Signature-V1
+var receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
+
+// retrieved from X-ConfigCat-Webhook-ID
+var requestId = "b616ca659d154a5fb907dd8475792eeb";
+
+// retrieved from X-ConfigCat-Webhook-Timestamp
+var timestamp = 1669629035;
+
+// the webhook request's raw body
+var body = "examplebody"; 
+
+var contentToSign = $"{requestId}{timestamp}{body}";
+
+using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(signingKey)))
+{
+	var calculatedSignature = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(contentToSign)));
+
+	Console.WriteLine(calculatedSignature == receivedSignature); // must be true
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Timestamp validation
+To prevent replay attacks, you can determine whether the request is within your timeframe tolerance by comparing the timestamp value received in the `X-ConfigCat-Webhook-Timestamp` header with your system's actual timestamp. If the signature is valid but the timestamp is too old, you can reject the request.
+  
+Also, as the timestamp is part of the signed content, an attacker can't change it without breaking the signature.
 
 ## Connecting to Slack
 A few steps to set up Slack and get a message when a setting changes:
