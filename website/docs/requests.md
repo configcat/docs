@@ -81,14 +81,14 @@ In this example, we have 15,000 active users who usually spend 5 hours on your w
 The ConfigCat SDK is set to Auto polling mode with 60 seconds polling interval.
 
 > **18,000** _(5 hours in seconds)_ / **60** _polling interval_ = **300 config.json downloads/user/month**  
-> **15,000** _(users)_ _ **300** _(config.json downloads/user/month)\* = **4,500,000 config.json downloads / month**
+> **15,000** _(users)_ × **300** _(config.json downloads/user/month)_ = **4,500,000 config.json downloads / month**
 
 #### Example: A mobile application running on 5k devices 24/7
 
 Having a mobile app which runs on the devices as a background process. The ConfigCat SDK is set to Auto polling mode with 1 hour polling interval.  
 Your application runs on 5,000 devices.
 
-> **5,000** _(devices)_ _ **730** _(hours in a month)\* = **3,650,000 config.json downloads / month**
+> **5,000** _(devices)_ × **730** _(hours in a month)_ = **3,650,000 config.json downloads / month**
 
 ### Backend applications
 
@@ -99,14 +99,14 @@ Backend applications typically have a lower number of instances than frontend ap
 Let’s say you have an API for your frontend application and you have 4 instances of them behind a load balancer.
 All these 4 instances use ConfigCat SDK in auto polling mode with a 1-minute polling interval.
 
-> **4** _(instances)_ _ **43,800** _(minutes in a month)\* = **175,200 config.json downloads / month**
+> **4** _(instances)_ × **43,800** _(minutes in a month)_ = **175,200 config.json downloads / month**
 
 #### Example: High frequency polling in 10 instances
 
 If you want your system to react faster after changing a feature flag in ConfigCat, you can decrease
 the default polling interval down to 1 second. In this case we are calculating with 10 running instances.
 
-> **10** _(instances)_ _ **2,592,000** _(seconds in a month)\* = **25,920,000 config.json downloads / month**
+> **10** _(instances)_ × **2,592,000** _(seconds in a month)_ = **25,920,000 config.json downloads / month**
 
 ## How to lower the monthly config.json download count?
 
