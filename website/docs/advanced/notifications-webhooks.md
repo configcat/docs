@@ -119,13 +119,13 @@ const crypto = require("crypto");
 // retrieved from the ConfigCat Dashboard
 const signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
 
-// retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
+// retrieved from the the X-ConfigCat-Webhook-Signature-V1 request header
 const receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
 
-// retrieved from the X-ConfigCat-Webhook-ID request header
+// retrieved from the the X-ConfigCat-Webhook-ID request header
 const requestId = "b616ca659d154a5fb907dd8475792eeb" 
 
-// retrieved from the X-ConfigCat-Webhook-Timestamp request header
+// retrieved from the the X-ConfigCat-Webhook-Timestamp request header
 const timestamp = 1669629035 
 
 // the webhook request's raw body
@@ -150,13 +150,13 @@ import base64
 # retrieved from ConfigCat Dashboard
 signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
 
-# retrieved from X-ConfigCat-Webhook-Signature-V1
+# retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
 received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
 
-# retrieved from X-ConfigCat-Webhook-ID
+# retrieved from the X-ConfigCat-Webhook-ID request header
 request_id = "b616ca659d154a5fb907dd8475792eeb"
 
-# retrieved from X-ConfigCat-Webhook-Timestamp
+# retrieved from the X-ConfigCat-Webhook-Timestamp request header
 timestamp = 1669629035 
 
 # the webhook request's raw body
@@ -180,13 +180,13 @@ require 'base64'
 # retrieved from ConfigCat Dashboard
 signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
 
-# retrieved from X-ConfigCat-Webhook-Signature-V1
+# retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
 received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
 
-# retrieved from X-ConfigCat-Webhook-ID
+# retrieved from the X-ConfigCat-Webhook-ID request header
 request_id = "b616ca659d154a5fb907dd8475792eeb"
 
-# retrieved from X-ConfigCat-Webhook-Timestamp
+# retrieved from the X-ConfigCat-Webhook-Timestamp request header
 timestamp = 1669629035 
 
 # the webhook request's raw body
@@ -208,13 +208,13 @@ puts calculated_signature == received_signature # must be true
 // retrieved from ConfigCat Dashboard
 $signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=";
 
-// retrieved from X-ConfigCat-Webhook-Signature-V1
+// retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
 $received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
 
-// retrieved from X-ConfigCat-Webhook-ID
+// retrieved from the X-ConfigCat-Webhook-ID request header
 $request_id = "b616ca659d154a5fb907dd8475792eeb";
 
-// retrieved from X-ConfigCat-Webhook-Timestamp
+// retrieved from the X-ConfigCat-Webhook-Timestamp request header
 $timestamp = 1669629035;
 
 // the webhook request's raw body
@@ -243,13 +243,13 @@ func main() {
   // retrieved from ConfigCat Dashboard
   signingKey := "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
 
-  // retrieved from X-ConfigCat-Webhook-Signature-V1
+  // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
   receivedSignature := "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
 
-  // retrieved from X-ConfigCat-Webhook-ID
+  // retrieved from the X-ConfigCat-Webhook-ID request header
   requestId := "b616ca659d154a5fb907dd8475792eeb"
 
-  // retrieved from X-ConfigCat-Webhook-Timestamp
+  // retrieved from the X-ConfigCat-Webhook-Timestamp request header
   timestamp := 1669629035 
 
   // the webhook request's raw body
@@ -277,13 +277,13 @@ using System.Text;
 // retrieved from ConfigCat Dashboard
 var signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="; 
 
-// retrieved from X-ConfigCat-Webhook-Signature-V1
+// retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
 var receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
 
-// retrieved from X-ConfigCat-Webhook-ID
+// retrieved from the X-ConfigCat-Webhook-ID request header
 var requestId = "b616ca659d154a5fb907dd8475792eeb";
 
-// retrieved from X-ConfigCat-Webhook-Timestamp
+// retrieved from the X-ConfigCat-Webhook-Timestamp request header
 var timestamp = 1669629035;
 
 // the webhook request's raw body
@@ -315,13 +315,13 @@ public class Main {
     // retrieved from ConfigCat Dashboard
     String signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="; 
 
-    // retrieved from X-ConfigCat-Webhook-Signature-V1
+    // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
     String receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
 
-    // retrieved from X-ConfigCat-Webhook-ID
+    // retrieved from the X-ConfigCat-Webhook-ID request header
     String requestId = "b616ca659d154a5fb907dd8475792eeb";
 
-    // retrieved from X-ConfigCat-Webhook-Timestamp
+    // retrieved from the X-ConfigCat-Webhook-Timestamp request header
     int timestamp = 1669629035;
 
     // the webhook request's raw body
