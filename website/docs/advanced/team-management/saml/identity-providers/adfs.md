@@ -10,9 +10,11 @@ import TabItem from '@theme/TabItem';
 Connect ConfigCat with Active Directory Federation Services (ADFS) via SAML.
 
 ### Introduction
+
 Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with ADFS as a SAML Identity Provider.
 
 ### 1. Collect SAML Metadata from ConfigCat
+
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
@@ -22,8 +24,9 @@ Each SSO Identity Provider requires specific information to configure a SAML int
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/domains.png" alt="ConfigCat SAML SSO status" />
 
 - From the appearing dialog, copy the following values and save them for further use.
-    - `Entity ID`
-    - `Assertion Consumer Service`
+
+  - `Entity ID`
+  - `Assertion Consumer Service`
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_config.png" alt="ConfigCat SAML configuration" />
 
@@ -83,10 +86,11 @@ Click `Add rule`.
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/adfs/13_ldap_claims.png" alt="ADFS LDAP claims" />
 
 - Apply the following, and click `Finish`.
-    - Add a descriptive `Claim rule name`.
-    - Select `Active Directory` as `Attribute store`.
-    - Select `User-Principal-Name` as `LDAP Attribute`.
-    - Select `Name ID` as `Outgoing Claim Type`.
+
+  - Add a descriptive `Claim rule name`.
+  - Select `Active Directory` as `Attribute store`.
+  - Select `User-Principal-Name` as `LDAP Attribute`.
+  - Select `Name ID` as `Outgoing Claim Type`.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/adfs/14_unc_to_nameid.png" alt="ADFS unc to nameid" />
 
@@ -161,8 +165,9 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 </Tabs>
 
 ### 5. Sign In
+
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
-  
+
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
 
 - Sign in with your company email address.

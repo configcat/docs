@@ -17,6 +17,7 @@ const features = [
       { url: 'purchase', title: 'Plans, Purchase & Billing' },
       { url: 'organization', title: 'Organization & Roles' },
       { url: 'faq', title: 'FAQ' },
+      { url: 'glossary', title: 'Glossary' },
     ],
   },
   {
@@ -140,7 +141,7 @@ function Home() {
             <Link
               className={clsx(
                 'button button--secondary button--lg',
-                styles.getStarted
+                styles.getStarted,
               )}
               to={useBaseUrl('getting-started')}
             >

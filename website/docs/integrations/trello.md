@@ -7,6 +7,7 @@ description: ConfigCat Trello Power-Up. This is a step-by-step guide on how to c
 Turn features On / Off right from a linked Card on your Trello board with <a href="https://trello.com/power-ups/5e694b66d2511a3601ebd0fb" target="_blank">ConfigCat's Trello Power-Up</a>. Also you can add Targeting or Percentage Rules just as easily.
 
 ## Installation
+
 <img src="/docs/assets/trello_enable.gif" className="zoomable" alt="Installation of the ConfigCat Feature Flags Trello Power-Up" />
 
 1. Add <a href="https://trello.com/power-ups/5e694b66d2511a3601ebd0fb" target="_blank">ConfigCat Power-Up</a> to your board.
@@ -15,6 +16,7 @@ Turn features On / Off right from a linked Card on your Trello board with <a hre
 4. Click authorize.
 
 ## Usage
+
 <img src="/docs/assets/trello_use.gif" className="zoomable" alt="Usage of the ConfigCat Feature Flags Trello Power-Up" />
 
 1. Open any Card on your Trello board.

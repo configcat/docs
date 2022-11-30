@@ -1,60 +1,60 @@
 {
-    "@context": "https://schema.org/",
-    "@type": "HowTo",
-    "name": "How to use feature flags in .NET, .NET Core, C#?",
-    "description": "How to use feature flags in .NET, .NET Core, C# using ConfigCat Feature Flags. https://configcat.com",
+  "@context": "https://schema.org/",
+  "@type": "HowTo",
+  "name": "How to use feature flags in .NET, .NET Core, C#?",
+  "description": "How to use feature flags in .NET, .NET Core, C# using ConfigCat Feature Flags. https://configcat.com",
+  "image": "https://configcat.com/images/shared/home.png",
+  "totalTime": "PT10M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "tool": {
+    "@type": "HowToTool",
+    "name": "ConfigCat Feature Flags - https://configcat.com"
+  },
+  "supply": {
+    "@type": "HowToSupply",
+    "name": "ConfigCat",
     "image": "https://configcat.com/images/shared/home.png",
-    "totalTime": "PT10M",
-    "estimatedCost": {
-        "@type": "MonetaryAmount",
-        "currency": "USD",
-        "value": "0"
+    "url": "https://configcat.com"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "text": "Register a free account at ConfigCat.",
+      "name": "Registration",
+      "url": "https://configcat.com",
+      "image": "https://configcat.com/images/shared/home.png"
     },
-    "tool": {
-        "@type": "HowToTool",
-        "name": "ConfigCat Feature Flags - https://configcat.com"
+    {
+      "@type": "HowToStep",
+      "text": "Install ConfigCat SDK Nuget package",
+      "name": "Installation",
+      "url": "https://www.nuget.org/packages/ConfigCat.Client",
+      "image": "https://configcat.com/images/shared/home.png"
     },
-    "supply": {
-        "@type": "HowToSupply",
-        "name": "ConfigCat",
-        "image": "https://configcat.com/images/shared/home.png",
-        "url": "https://configcat.com"
-      },
-    "step": [
-        {
-            "@type": "HowToStep",
-            "text": "Register a free account at ConfigCat.",
-            "name": "Registration",
-            "url": "https://configcat.com",
-            "image": "https://configcat.com/images/shared/home.png"
-        },
-        {
-            "@type": "HowToStep",
-            "text": "Install ConfigCat SDK Nuget package",
-            "name": "Installation",
-            "url": "https://www.nuget.org/packages/ConfigCat.Client",
-            "image": "https://configcat.com/images/shared/home.png"
-        },
-        {
-            "@type": "HowToStep",
-            "text": "Import package",
-            "name": "Import",
-            "url": "https://configcat.com/docs/sdk-reference/dotnet/#2-import-package",
-            "image": "https://configcat.com/images/shared/home.png"
-        },
-        {
-            "@type": "HowToStep",
-            "text": "Create the *ConfigCat* client with your *SDK Key*",
-            "name": "Initialization",
-            "url": "https://configcat.com/docs/sdk-reference/dotnet/#3-create-the-configcat-client-with-your-sdk-key",
-            "image": "https://configcat.com/images/shared/home.png"
-        },
-        {
-            "@type": "HowToStep",
-            "text": "Get your feature flag's value",
-            "name": "Evaluation",
-            "url": "https://configcat.com/docs/sdk-reference/dotnet/#4-get-your-setting-value",
-            "image": "https://configcat.com/images/shared/home.png"
-        }
-    ]
+    {
+      "@type": "HowToStep",
+      "text": "Import package",
+      "name": "Import",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/#2-import-package",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Create the *ConfigCat* client with your *SDK Key*",
+      "name": "Initialization",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/#3-create-the-configcat-client-with-your-sdk-key",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Get your feature flag's value",
+      "name": "Evaluation",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/#4-get-your-setting-value",
+      "image": "https://configcat.com/images/shared/home.png"
+    }
+  ]
 }

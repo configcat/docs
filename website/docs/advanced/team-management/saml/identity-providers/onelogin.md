@@ -10,6 +10,7 @@ import TabItem from '@theme/TabItem';
 Connect ConfigCat with OneLogin via SAML.
 
 ### Introduction
+
 Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with OneLogin as a SAML Identity Provider.
 
 ### 1. Create an Application in OneLogin
@@ -33,6 +34,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 The next step will guide you on how to collect the information required for the appearing `Configuration` page.
 
 ### 2. Configure SAML for the OneLogin Application
+
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
@@ -42,18 +44,20 @@ The next step will guide you on how to collect the information required for the 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/domains.png" alt="ConfigCat SAML SSO status" />
 
 - From the appearing dialog, copy the following values and paste them into the OneLogin application's configuration page.
-    - Copy `Entity ID` and paste it into the `Audience (EntityID)` field.
-    - Copy `Assertion Consumer Service` and paste it into the `ACS (Consumer) URL` field.
-    - Paste the same `Assertion Consumer Service` into the `ACS (Consumer) URL Validator` field in regex format e.g. `^https:\/\/dashboard\-api\.configcat\.com\/saml\/acs\/08d97769\-fed5\-4fd4\-8a09\-0a38bb951177$`
+
+  - Copy `Entity ID` and paste it into the `Audience (EntityID)` field.
+  - Copy `Assertion Consumer Service` and paste it into the `ACS (Consumer) URL` field.
+  - Paste the same `Assertion Consumer Service` into the `ACS (Consumer) URL Validator` field in regex format e.g. `^https:\/\/dashboard\-api\.configcat\.com\/saml\/acs\/08d97769\-fed5\-4fd4\-8a09\-0a38bb951177$`
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_config.png" alt="ConfigCat SAML configuration" />
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/saml_config.png" alt="OneLogin SML configuration" />
 
 - Scroll down a bit on this page and configure the following:
-    - Select `OneLogin` as `SAML Initiator`.
-    - Select `Email` as `SAML nameID format`.
-    - Select `Both` as `SAML signature element`.
+
+  - Select `OneLogin` as `SAML Initiator`.
+  - Select `Email` as `SAML nameID format`.
+  - Select `Both` as `SAML signature element`.
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/saml_config2.png" alt="OneLogin SAML initiator" />
 
@@ -107,6 +111,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 </Tabs>
 
 ### 4. Assign the OneLogin Application to Users
+
 To let users authenticate via SAML, you need to assign the newly created application to them.
 
 - Select `Users`.
@@ -130,8 +135,9 @@ To let users authenticate via SAML, you need to assign the newly created applica
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/app_details.png" alt="OneLogin application details"/>
 
 ### 5. Sign In
+
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
-  
+
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
 
 - Sign in with your company email address assigned to the OneLogin application.
