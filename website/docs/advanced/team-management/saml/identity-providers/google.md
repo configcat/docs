@@ -10,6 +10,7 @@ import TabItem from '@theme/TabItem';
 Connect ConfigCat with Google via SAML.
 
 ### Introduction
+
 Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with Google as a SAML Identity Provider.
 
 ### 1. Create a SAML Application in Google
@@ -53,16 +54,18 @@ The next step will guide you on how to configure ConfigCat with appearing inform
 The next step will guide you on how to configure the Google App with details provided by ConfigCat.
 
 ### 3. Configure the Google Application with Service Provider Details from ConfigCat
+
 - Select `1. Set up your Identity Provider` step on the ConfigCat configuration dialog, and copy the following values to the Google App.
-    - `Entity ID` -> `Entity ID`
-    - `Assertion Consumer Service` -> `ACS URL`
+
+  - `Entity ID` -> `Entity ID`
+  - `Assertion Consumer Service` -> `ACS URL`
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/google/cc_saml_config.png" alt="Google acs url" />
 
-    - Make sure the `Signed response` option is checked.
-    - Select `EMAIL` as `Name ID format`.
-    - Select `Basic Information > Primary email` as `Name ID`.
-    - Click `CONTINUE`.
+  - Make sure the `Signed response` option is checked.
+  - Select `EMAIL` as `Name ID format`.
+  - Select `Basic Information > Primary email` as `Name ID`.
+  - Click `CONTINUE`.
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/google/sp_data.png" alt="Google meta data" />
 
@@ -72,19 +75,20 @@ The next step will guide you on how to configure the Google App with details pro
 
 - Click `Save` on the ConfigCat SAML configuration dialog.
 
-
 ### 4. Give Users Access to the Application
+
 - Click on `View details` under the `User access` section.
-  
+
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/google/user_access.png" alt="Google user access" />
 
 - Select `ON for everyone`, then click `SAVE`.
-  
+
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/google/on_for_everyone.png" alt="Google ON for everyone"/>
 
 ### 5. Sign In
+
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
-  
+
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
 
 - Sign in with your company email address used in Google.

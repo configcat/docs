@@ -4,7 +4,7 @@ title: GitHub Action - Scan source code for unused feature flags
 description: ConfigCat GitHub Action. This is a step-by-step guide on how to use the ConfigCat GitHub Action to eliminate tech debt in your project.
 ---
 
-import CodeRefIntro from '/docs/advanced/code-references/_intro.mdx'
+import CodeRefIntro from '/docs/advanced/code-references/\_intro.mdx'
 import GitHubAction from '/docs/advanced/code-references/github-action.md'
 
 <CodeRefIntro linkText="GitHub Action" linkUrl="https://github.com/marketplace/actions/configcat-scan-repository" linkTarget="_blank" />

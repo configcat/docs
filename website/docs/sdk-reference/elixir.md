@@ -3,6 +3,7 @@ id: elixir
 title: Elixir SDK Reference
 description: ConfigCat Elixir SDK Reference. This is a step-by-step guide on how to use feature flags in your Elixir project.
 ---
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/elixir-sdk.svg?style=social)](https://github.com/configcat/elixir-sdk/stargazers)
 [![Elixir CI](https://github.com/configcat/elixir-sdk/actions/workflows/elixir-ci.yml/badge.svg?branch=main)](https://github.com/configcat/elixir-sdk/actions/workflows/elixir-ci.yml)
 [![Coverage Status](https://codecov.io/github/configcat/elixir-sdk/badge.svg?branch=main)](https://codecov.io/github/configcat/elixir-sdk?branch=main)
@@ -51,9 +52,9 @@ else
 end
 ```
 
-## Setting up the *ConfigCat Client*
+## Setting up the _ConfigCat Client_
 
-*ConfigCat Client* is responsible for:
+_ConfigCat Client_ is responsible for:
 
 - managing the communication between your application and ConfigCat servers.
 - caching your setting values and feature flags.
@@ -61,25 +62,25 @@ end
 
 `{ConfigCat, options}` returns a client with default options.
 
-| Properties | Description                                                                                               |
-| ---------- | --------------------------------------------------------------------------------------------------------- |
-| `sdk_key`  | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. |
-| `data_governance`  | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](advanced/data-governance.md). Available options: `:global`, `:eu_only`. |
-| `cache_policy` | `CachePolicy.auto/1`, `CachePolicy.lazy/1` and `CachePolicy.manual/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details. |
-| `cache` | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`. |
-| `http_proxy` | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`. |
-| `connect_timeout`| Timeout for establishing a TCP or SSL connection, in milliseconds. Default is 8000.
-| `read_timeout` | Timeout for receiving an HTTP response from the socket, in milliseconds. Default is 5000.
-| `flag_overrides` | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)
-| `name` | A unique identifier for this instance of `ConfigCat`. Defaults to `ConfigCat`.  Must be provided if you need to run more than one instance of `ConfigCat` in the same application. If you provide a `name`, you must then pass that name to all of the API functions using the `client` option. |
+| Properties        | Description                                                                                                                                                                                                                                                                                    |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sdk_key`         | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                                                                                                                                                                                      |
+| `data_governance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](advanced/data-governance.md). Available options: `:global`, `:eu_only`.   |
+| `cache_policy`    | `CachePolicy.auto/1`, `CachePolicy.lazy/1` and `CachePolicy.manual/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details.                                                                                                                                          |
+| `cache`           | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`.                                                                                                                                                                                                            |
+| `http_proxy`      | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`.                                          |
+| `connect_timeout` | Timeout for establishing a TCP or SSL connection, in milliseconds. Default is 8000.                                                                                                                                                                                                            |
+| `read_timeout`    | Timeout for receiving an HTTP response from the socket, in milliseconds. Default is 5000.                                                                                                                                                                                                      |
+| `flag_overrides`  | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)                                                                                                                                                                                                   |
+| `name`            | A unique identifier for this instance of `ConfigCat`. Defaults to `ConfigCat`. Must be provided if you need to run more than one instance of `ConfigCat` in the same application. If you provide a `name`, you must then pass that name to all of the API functions using the `client` option. |
 
 ## Anatomy of `get_value()`
 
-| Parameters      | Description                                                                                                  |
-| --------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`           | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
-| `default_value` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`          | Optional, *ConfigCat.User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| Parameters      | Description                                                                                                                                                    |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `key`           | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                                                                             |
+| `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                                                                 |
+| `user`          | Optional, _ConfigCat.User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md)                                         |
 | `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name of the instance which you want to access. |
 
 ```elixir
@@ -99,11 +100,11 @@ user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92")
 user_object = ConfigCat.User.new("john@example.com")
 ```
 
-| Parameters   | Description                                                                                                                     |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
+| Parameters   | Description                                                                                                                |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                    |
+| `email`      | Optional parameter for easier targeting rule definitions.                                                                  |
+| `country`    | Optional parameter for easier targeting rule definitions.                                                                  |
 | `custom`     | Optional `Map` for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```elixir
@@ -113,12 +114,12 @@ user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92", email: 
 
 ## Polling Modes
 
-The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
 
-The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
+The _ConfigCat SDK_ downloads the latest values and stores them automatically every 60 seconds.
 
 Use the `poll_interval_seconds` option parameter to change the polling interval.
 
@@ -140,14 +141,14 @@ Adding a callback to `on_changed` option parameter will get you notified about c
 
 Available options:
 
-| Option Parameter                    | Description                                                                                          | Default |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
-| `poll_interval_seconds`             | Polling interval.                                                                                    | 60      |
-| `on_changed` | A 0-arity function to be called about configuration changes. Needs to run on a separate proccess. Any exceptions raised by `on_changed` are caught and logged. | -       |
+| Option Parameter        | Description                                                                                                                                                    | Default |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `poll_interval_seconds` | Polling interval.                                                                                                                                              | 60      |
+| `on_changed`            | A 0-arity function to be called about configuration changes. Needs to run on a separate proccess. Any exceptions raised by `on_changed` are caught and logged. | -       |
 
 ### Lazy loading
 
-When calling `get_value()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
+When calling `get_value()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
 
 Use `cache_expiry_seconds` option parameter to set cache lifetime.
 
@@ -160,13 +161,13 @@ Use `cache_expiry_seconds` option parameter to set cache lifetime.
 
 Available options:
 
-| Option Parameter             | Description                                                                                   | Default |
-| ---------------------------- | --------------------------------------------------------------------------------------------- | ------- |
-| `cache_expiry_seconds` | Cache TTL.                                                                                    | 60      |
+| Option Parameter       | Description | Default |
+| ---------------------- | ----------- | ------- |
+| `cache_expiry_seconds` | Cache TTL.  | 60      |
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `force_refresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```elixir
 ConfigCat.force_refresh()
@@ -241,9 +242,10 @@ You can set up the SDK to load your feature flag & setting overrides from a file
 
 ### JSON File
 
-The SDK can load your feature flag & setting overrides from a file. 
+The SDK can load your feature flag & setting overrides from a file.
 
 #### File
+
 ```elixir
 {ConfigCat, [
     sdk_key: "YOUR SDK KEY",
@@ -255,9 +257,11 @@ The SDK can load your feature flag & setting overrides from a file.
 ```
 
 #### JSON File Structure
+
 The SDK supports 2 types of JSON structures to describe feature flags & settings.
 
 ##### 1. Simple (key-value) structure
+
 ```json
 {
   "flags": {
@@ -271,75 +275,81 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ```
 
 ##### 2. Complex (full-featured) structure
-This is the same format that the SDK downloads from the ConfigCat CDN. 
+
+This is the same format that the SDK downloads from the ConfigCat CDN.
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
 You can download your current config.json from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings: 
+The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 
 ```json
 {
-    "f": { // list of feature flags & settings
-        "isFeatureEnabled": { // key of a particular flag
-            "v": false, // default value, served when no rules are defined
-            "i": "430bded3", // variation id (for analytical purposes)
-            "t": 0, // feature flag's type, possible values: 
-                    // 0 -> BOOLEAN 
-                    // 1 -> STRING
-                    // 2 -> INT
-                    // 3 -> DOUBLE
-            "p": [ // list of percentage rules
-                { 
-                    "o": 0, // rule's order
-                    "v": true, // value served when the rule is selected during evaluation
-                    "p": 10, // % value
-                    "i": "bcfb84a7" // variation id (for analytical purposes)
-                },
-                {
-                    "o": 1, // rule's order
-                    "v": false, // value served when the rule is selected during evaluation
-                    "p": 90, // % value
-                    "i": "bddac6ae" // variation id (for analytical purposes)
-                }
-            ],
-            "r": [ // list of targeting rules
-                {
-                    "o": 0, // rule's order
-                    "a": "Identifier", // comparison attribute
-                    "t": 2, // comparator, possible values:
-                        // 0  -> 'IS ONE OF',
-                        // 1  -> 'IS NOT ONE OF',
-                        // 2  -> 'CONTAINS',
-                        // 3  -> 'DOES NOT CONTAIN',
-                        // 4  -> 'IS ONE OF (SemVer)',
-                        // 5  -> 'IS NOT ONE OF (SemVer)',
-                        // 6  -> '< (SemVer)',
-                        // 7  -> '<= (SemVer)',
-                        // 8  -> '> (SemVer)',
-                        // 9  -> '>= (SemVer)',
-                        // 10 -> '= (Number)',
-                        // 11 -> '<> (Number)',
-                        // 12 -> '< (Number)',
-                        // 13 -> '<= (Number)',
-                        // 14 -> '> (Number)',
-                        // 15 -> '>= (Number)',
-                        // 16 -> 'IS ONE OF (Hashed)',
-                        // 17 -> 'IS NOT ONE OF (Hashed)'
-                    "c": "@example.com", // comparison value
-                    "v": true, // value served when the rule is selected during evaluation
-                    "i": "bcfb84a7" // variation id (for analytical purposes)
-                }
-            ]
+  "f": {
+    // list of feature flags & settings
+    "isFeatureEnabled": {
+      // key of a particular flag
+      "v": false, // default value, served when no rules are defined
+      "i": "430bded3", // variation id (for analytical purposes)
+      "t": 0, // feature flag's type, possible values:
+      // 0 -> BOOLEAN
+      // 1 -> STRING
+      // 2 -> INT
+      // 3 -> DOUBLE
+      "p": [
+        // list of percentage rules
+        {
+          "o": 0, // rule's order
+          "v": true, // value served when the rule is selected during evaluation
+          "p": 10, // % value
+          "i": "bcfb84a7" // variation id (for analytical purposes)
         },
+        {
+          "o": 1, // rule's order
+          "v": false, // value served when the rule is selected during evaluation
+          "p": 90, // % value
+          "i": "bddac6ae" // variation id (for analytical purposes)
+        }
+      ],
+      "r": [
+        // list of targeting rules
+        {
+          "o": 0, // rule's order
+          "a": "Identifier", // comparison attribute
+          "t": 2, // comparator, possible values:
+          // 0  -> 'IS ONE OF',
+          // 1  -> 'IS NOT ONE OF',
+          // 2  -> 'CONTAINS',
+          // 3  -> 'DOES NOT CONTAIN',
+          // 4  -> 'IS ONE OF (SemVer)',
+          // 5  -> 'IS NOT ONE OF (SemVer)',
+          // 6  -> '< (SemVer)',
+          // 7  -> '<= (SemVer)',
+          // 8  -> '> (SemVer)',
+          // 9  -> '>= (SemVer)',
+          // 10 -> '= (Number)',
+          // 11 -> '<> (Number)',
+          // 12 -> '< (Number)',
+          // 13 -> '<= (Number)',
+          // 14 -> '> (Number)',
+          // 15 -> '>= (Number)',
+          // 16 -> 'IS ONE OF (Hashed)',
+          // 17 -> 'IS NOT ONE OF (Hashed)'
+          "c": "@example.com", // comparison value
+          "v": true, // value served when the rule is selected during evaluation
+          "i": "bcfb84a7" // variation id (for analytical purposes)
+        }
+      ]
     }
+  }
 }
 ```
 
 ### Map
+
 You can set up the SDK to load your feature flag & setting overrides from a map.
 
 ```elixir
@@ -359,7 +369,7 @@ map = %{
 
 ## Logging
 
-In the *ConfigCat SDK*, we use the default Elixir's [Logger](https://hexdocs.pm/logger/Logger.html) so you can customise as you like.
+In the _ConfigCat SDK_, we use the default Elixir's [Logger](https://hexdocs.pm/logger/Logger.html) so you can customise as you like.
 
 Debug level logging helps to inspect how a feature flag was evaluated:
 

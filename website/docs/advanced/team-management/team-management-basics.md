@@ -4,41 +4,42 @@ title: Team Management Basics
 description: ConfigCat provides an unlimited number of team members for every subscription plan, even the free one. Here is how to manage your team.
 ---
 
-*Team members* are your friends, colleagues, and clients who work on the same *Product*. You can invite as many of them to your *Product* as many you want.
+_Team members_ are your friends, colleagues, and clients who work on the same _Product_. You can invite as many of them to your _Product_ as many you want.
 
 The following guide provides an overview of how to manage your team in ConfigCat.
 
 ### Invite others to collaborate
 
 1. Click the `Invite Team Members` button on the sidebar.  
-<img src="/docs/assets/invite.png" className="zoomable" alt="Invite Button" />
+   <img src="/docs/assets/invite.png" className="zoomable" alt="Invite Button" />
 1. Enter the invitees' email addresses (comma separated list).
-1. Select a *Permission group* and click on **SEND INVITATION EMAIL**.
-2. An invitation will be sent to the invitees' email addresses.
+1. Select a _Permission group_ and click on **SEND INVITATION EMAIL**.
+1. An invitation will be sent to the invitees' email addresses.
 
 You can modify their permission group later anytime.
 
 ### Managing Team Members (Product level)
+
 You can manage your team on the <a href="https://app.configcat.com/product/members" target="_blank">Team Members page</a> of every Product.
 
-*Organization Admins* have unlimited access to every Product under an Organization, their permissions can't be edited under the product. [Read more on Organization Management](/organization.md)
+_Organization Admins_ have unlimited access to every Product under an Organization, their permissions can't be edited under the product. [Read more on Organization Management](/organization.md)
 
 ### Managing Team Members (Organization level)
-Only *Organization Admins* can manage Organization level permissions.
+
+Only _Organization Admins_ can manage Organization level permissions.
 
 To manage organization members, go to:
 [Organization Members & Roles page.](https://app.configcat.com/organization/members)
 
 ### Permissions & Permission Groups (Product level)
 
-*Permission groups* are collections of permissions. They help you organize the permissions into groups that are meaningful to you. You can control your *Team members* permissions by assigning them to *Permission groups*. 
+_Permission groups_ are collections of permissions. They help you organize the permissions into groups that are meaningful to you. You can control your _Team members_ permissions by assigning them to _Permission groups_.
 
-Manage *Permission Groups* on the [Permission Groups page](https://app.configcat.com/product/permission-groups) of every Product.
+Manage _Permission Groups_ on the [Permission Groups page](https://app.configcat.com/product/permission-groups) of every Product.
 
 ### 2FA (Two-Factor Authentication)
 
 Enforce 2FA for your team members to increase the security of your organization. Go to the [Authentication Preferences](https://app.configcat.com/organization/authentication/) page to enable 2FA. You need to be an organization admin to do this.
-
 
 ### Auto-assign users
 
