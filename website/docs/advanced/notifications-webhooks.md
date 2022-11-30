@@ -63,9 +63,9 @@ Each webhook request contains the following headers:
 
 | Header                             | Description                                                                                         |
 | ---------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `X-ConfigCat-Webhook-ID`           | The webhook request's unique identifier.                                                            |
+| `X-ConfigCat-Webhook-ID`           | The webhook request's unique identifier. Different in every request. |
 | `X-ConfigCat-Webhook-Timestamp`    | The time the webhook was sent in unix timestamp format. (seconds since epoch)                       |
-| `X-ConfigCat-Webhook-Signature-V1` | The list of the `base64` encoded HMAC-SHA-256 signatures. (comma delimited, 1 for each signing key) |
+| `X-ConfigCat-Webhook-Signature-V1` | The list of the `base64` encoded HMAC-SHA-256 signatures. (comma delimited, 1 signature for each signing key) |
 
 Currently the latest (and the only) signature header version is `V1`. If the signing process is going to be changed in the future, more headers will be added with incremented version postfix.
 
@@ -99,7 +99,7 @@ Otherwise, the calculated signature could be completely different from the value
 :::
 
 ### Calculating signature
-ConfigCat uses `HMAC` with `SHA-256` to sign webhooks. You can retrieve the **signing key(s)** required for the signature calculation from the <a href="https://app.configcat.com/product/webhooks" target="_blank">ConfigCat Dashboard's webhook section</a>.
+ConfigCat uses `HMAC` with `SHA-256` to sign webhooks. You can retrieve the **signing key(s)** required for the signature calculation from the <a href="https://app.configcat.com/product/webhooks" target="_blank">ConfigCat Dashboard's webhook page</a>.
 
 <img src="/docs/assets/whsk.png" className="zoomable bottom-spaced" alt="signing keys" />  
 
@@ -116,16 +116,16 @@ X-ConfigCat-Webhook-Signature-V1: RoO/UMvSRqzJ0OolMMuhHBbM8/Vjn+nTh+SKyLcQf0M=,h
 ```js
 const crypto = require("crypto");
 
-// retrieved from ConfigCat Dashboard
+// retrieved from the ConfigCat Dashboard
 const signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
 
-// retrieved from X-ConfigCat-Webhook-Signature-V1
+// retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
 const receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
 
-// retrieved from X-ConfigCat-Webhook-ID
+// retrieved from the X-ConfigCat-Webhook-ID request header
 const requestId = "b616ca659d154a5fb907dd8475792eeb" 
 
-// retrieved from X-ConfigCat-Webhook-Timestamp
+// retrieved from the X-ConfigCat-Webhook-Timestamp request header
 const timestamp = 1669629035 
 
 // the webhook request's raw body
