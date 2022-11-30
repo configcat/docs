@@ -10,6 +10,7 @@ import TabItem from '@theme/TabItem';
 Connect ConfigCat with Auth0 via SAML.
 
 ### Introduction
+
 Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with Auth0 as a SAML Identity Provider.
 
 ### 1. Create an Application in Auth0
@@ -29,6 +30,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 The next step will guide you on how to collect the information required for the appearing configuration dialog.
 
 ### 2. Configure SAML for the Auth0 Application
+
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
@@ -38,22 +40,24 @@ The next step will guide you on how to collect the information required for the 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/domains.png" alt="ConfigCat SAML SSO status" />
 
 - From the appearing dialog, copy the following values and paste them into the Auth0 configuration dialog.
-    - `Assertion Consumer Service` -> `Application Callback URL`
-    - For `Settings`, use the following JSON value:
-    ```
-    {
-        "signatureAlgorithm": "rsa-sha256",
-        "nameIdentifierProbes": [
-            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
-        ]
-    }
-    ```
+
+  - `Assertion Consumer Service` -> `Application Callback URL`
+  - For `Settings`, use the following JSON value:
+
+  ```
+  {
+      "signatureAlgorithm": "rsa-sha256",
+      "nameIdentifierProbes": [
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+      ]
+  }
+  ```
 
    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/cc_idp.png"  alt="ConfigCat ACS configuration" />
 
    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/acs_url.png" alt="Auth0 ACS configuration"/>
 
-    - Click on `Save`.
+  - Click on `Save`.
 
 ### 3. Configure ConfigCat with SAML Details from Auth0
 
@@ -90,8 +94,9 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 </Tabs>
 
 ### 4. Sign In
+
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
-  
+
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
 
 - Sign in with your company email address assigned to the Auth0 application.

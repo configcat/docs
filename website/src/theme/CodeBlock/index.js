@@ -4,7 +4,7 @@ import React from 'react';
 export default function CodeBlockWrapper(props) {
   return (
     <>
-      <CodeBlock {...props} showLineNumbers/>
+      <CodeBlock {...props} showLineNumbers />
     </>
   );
 }

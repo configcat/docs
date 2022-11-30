@@ -3,30 +3,37 @@ id: notifications-webhooks
 title: Notifications - Webhooks
 description: Webhooks are a way to send notifications to your applications about feature flag value changes so you can react to changes quickly.
 ---
-Your application can be notified about Setting value changes in real-time. ConfigCat enables this by calling a public URL of your system (a so-called Webhook). You can add your Webhook URLs in the *Dashboard*.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Your application can be notified about Setting value changes in real-time. ConfigCat enables this by calling a public URL of your system (a so-called Webhook). You can add your Webhook URLs in the _Dashboard_.
 
 ## Adding Webhook
+
 1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab.
 2. Set the Url and the HttpMethod.
 3. Optionally, you can add additional HTTP headers and a body to the request.
 
 ## Request body with variables
-You can specify a Request body that will be sent as the payload of the HTTP request. 
+
+You can specify a Request body that will be sent as the payload of the HTTP request.
 
 ConfigCat will replace the following variables in the request body:
 
-| Variable                   | The values it gets replaced with                             |
-| -------------------------- | ------------------------------------------------------------ |
-| **##ConfigName##**         | The name of the Config your setting belongs to.              |
-| **##ConfigId##**           | ID of the Config.                                            |
-| **##EnvironmentName##**    | The name of the Environment where the Setting value changed. |
-| **##EnvironmentId##**      | ID of the Environment.                                       |
-| **##URL##**                | A direct link to the Config in the *ConfigCat Dashboard.*    |
-| **##ChangeNotes##**        | The **Mandatory notes** added to the actual changeset.       |
-| **##ChangeDetails##**      | Details of the change in JSON format including setting name, old, new values and targeting rules.  |
-| **##ChangeDetailsTeams##** | Details of the change in MS Teams format.                    |
+| Variable                   | The values it gets replaced with                                                                  |
+| -------------------------- | ------------------------------------------------------------------------------------------------- |
+| **##ConfigName##**         | The name of the Config your setting belongs to.                                                   |
+| **##ConfigId##**           | ID of the Config.                                                                                 |
+| **##EnvironmentName##**    | The name of the Environment where the Setting value changed.                                      |
+| **##EnvironmentId##**      | ID of the Environment.                                                                            |
+| **##URL##**                | A direct link to the Config in the _ConfigCat Dashboard._                                         |
+| **##ChangeNotes##**        | The **Mandatory notes** added to the actual changeset.                                            |
+| **##ChangeDetails##**      | Details of the change in JSON format including setting name, old, new values and targeting rules. |
+| **##ChangeDetailsTeams##** | Details of the change in MS Teams format.                                                         |
 
 The structure of the JSON array injected into the **##ChangeDetails##** looks like the following:
+
 ```
 [
   {
@@ -43,19 +50,317 @@ The structure of the JSON array injected into the **##ChangeDetails##** looks li
 ```
 
 ## Testing your Webhook
-1. Change some of your settings in the *ConfigCat Dashboard.* 
+
+1. Change some of your settings in the _ConfigCat Dashboard._
 2. Click **SAVE & PUBLISH SETTINGS**.
 3. Check if your Webhook was called correctly.
 
-> **Developer Tip:** Running your Webhook on `localhost`? Expose it to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your local development environment.
+:::info
+**Developer Tip:** Running your Webhook on `localhost`? Expose it to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your local development environment.
+:::
+
+## Verifying Webhook requests
+To ensure the requests you receive are actually sent by ConfigCat, we highly recommend to verify
+the signature sent in the request headers by comparing it with your own calculated signature.
+
+Each webhook request contains the following headers:
+
+| Header                             | Description                                                                                         |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `X-ConfigCat-Webhook-ID`           | The webhook request's unique identifier. Different in every request. |
+| `X-ConfigCat-Webhook-Timestamp`    | The time the webhook was sent in unix timestamp format. (seconds since epoch)                       |
+| `X-ConfigCat-Webhook-Signature-V1` | The list of the `base64` encoded HMAC-SHA-256 signatures. (comma delimited, 1 signature for each signing key) |
+
+Currently the latest (and the only) signature header version is `V1`. If the signing process is going to be changed in the future, more headers will be added with incremented version postfix.
+
+Example request:
+
+```
+POST /path HTTP/1.1
+Host: <your-host>
+X-ConfigCat-Webhook-ID: b616ca659d154a5fb907dd8475792eeb
+X-ConfigCat-Webhook-Timestamp: 1669580020
+X-ConfigCat-Webhook-Signature-V1: RoO/UMvSRqzJ0OolMMuhHBbM8/Vjn+nTh+SKyLcQf0M=,heIrGPw6aylAZEX6xmSLrxIWVif5injeBCxWQ+0+b2U=
+```
+
+### Content to sign
+The signature is calculated from the content constructed by concatenating the webhook's `id`, `timestamp`, and raw `body` together.
+
+```js
+const contentToSign = `${webhookId}${timestamp}${body}`
+```
+
+| Content part            | Description                                                                                                       |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `webhookId`             | The webhook's identifier received in the `X-ConfigCat-Webhook-ID` request header.                                 |
+| `timestamp`             | The timestamp value received in the `X-ConfigCat-Webhook-Timestamp` request header.                                       |
+| `body`                  | The raw body of the received webhook request. If the webhook doesn't have a request body it can be left out.      |
+
+:::caution
+The signature calculation is sensitive to any changes on the signed content, so it's important to not change the request body before the verification. 
+Otherwise, the calculated signature could be completely different from the value received in the  
+`X-ConfigCat-Webhook-Signature-V1` header.
+:::
+
+### Calculating signature
+ConfigCat uses `HMAC` with `SHA-256` to sign webhooks. You can retrieve the **signing key(s)** required for the signature calculation from the <a href="https://app.configcat.com/product/webhooks" target="_blank">ConfigCat Dashboard's webhook page</a>.
+
+<img src="/docs/assets/whsk.png" className="zoomable bottom-spaced" alt="signing keys" />  
+
+:::info
+For **key rotation** purposes, you can generate a secondary signing key. In this case ConfigCat sends two signatures (one signed with the *primary* and one signed with the *secondary* key) in the `X-ConfigCat-Webhook-Signature-V1` header separated by a comma (`,`): 
+```
+X-ConfigCat-Webhook-Signature-V1: RoO/UMvSRqzJ0OolMMuhHBbM8/Vjn+nTh+SKyLcQf0M=,heIrGPw6aylAZEX6xmSLrxIWVif5injeBCxWQ+0+b2U=
+```
+:::
+
+<Tabs>
+<TabItem value="whsk-nodejs" label="Node.js" default>
+
+```js
+const crypto = require("crypto");
+
+// retrieved from the ConfigCat Dashboard
+const signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+
+// retrieved from the the X-ConfigCat-Webhook-Signature-V1 request header
+const receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+
+// retrieved from the the X-ConfigCat-Webhook-ID request header
+const requestId = "b616ca659d154a5fb907dd8475792eeb" 
+
+// retrieved from the the X-ConfigCat-Webhook-Timestamp request header
+const timestamp = 1669629035 
+
+// the webhook request's raw body
+const body = "examplebody" 
+
+const contentToSign = `${requestId}${timestamp}${body}`
+
+const calculatedSignature = crypto.createHmac('sha256', signingKey)
+  .update(contentToSign)
+  .digest('base64')
+
+console.log(calculatedSignature == receivedSignature) // must be true
+```
+
+</TabItem>
+<TabItem value="whsk-python" label="Python" default>
+
+```python
+import hmac
+import base64
+
+# retrieved from the ConfigCat Dashboard
+signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+
+# retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
+received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+
+# retrieved from the X-ConfigCat-Webhook-ID request header
+request_id = "b616ca659d154a5fb907dd8475792eeb"
+
+# retrieved from the X-ConfigCat-Webhook-Timestamp request header
+timestamp = 1669629035 
+
+# the webhook request's raw body
+body = "examplebody" 
+
+content_to_sign = request_id+str(timestamp)+body
+
+signing_key_bytes = bytes(signing_key, 'utf-8')
+calculated_signature = base64.b64encode(hmac.new(signing_key_bytes, bytes(content_to_sign, 'utf-8'), 'sha256').digest())
+
+print(calculated_signature.decode() == received_signature) # must be true
+```
+
+</TabItem>
+<TabItem value="whsk-ruby" label="Ruby" default>
+
+```ruby
+require 'openssl'
+require 'base64'
+
+# retrieved from the ConfigCat Dashboard
+signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+
+# retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
+received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+
+# retrieved from the X-ConfigCat-Webhook-ID request header
+request_id = "b616ca659d154a5fb907dd8475792eeb"
+
+# retrieved from the X-ConfigCat-Webhook-Timestamp request header
+timestamp = 1669629035 
+
+# the webhook request's raw body
+body = "examplebody" 
+
+content_to_sign = "#{request_id}#{timestamp}#{body}"
+
+calculated_signature = Base64.strict_encode64(OpenSSL::HMAC.digest("sha256", signing_key, content_to_sign))
+
+puts calculated_signature == received_signature # must be true
+```
+
+</TabItem>
+<TabItem value="whsk-php" label="PHP" default>
+
+```php
+<?php
+
+// retrieved from the ConfigCat Dashboard
+$signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=";
+
+// retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
+$received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
+
+// retrieved from the X-ConfigCat-Webhook-ID request header
+$request_id = "b616ca659d154a5fb907dd8475792eeb";
+
+// retrieved from the X-ConfigCat-Webhook-Timestamp request header
+$timestamp = 1669629035;
+
+// the webhook request's raw body
+$body = "examplebody";
+
+$content_to_sign = "{$request_id}{$timestamp}{$body}";
+
+$calculated_signature = base64_encode(hash_hmac("sha256", $content_to_sign, $signing_key, true));
+
+echo hash_equals($calculated_signature, $received_signature); // must be true
+```
+
+</TabItem>
+<TabItem value="whsk-go" label="Go" default>
+
+```go
+package main
+import (
+  "fmt"
+  "crypto/hmac"
+  "crypto/sha256"
+  "encoding/base64"
+)
+
+func main() {
+  // retrieved from the ConfigCat Dashboard
+  signingKey := "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+
+  // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
+  receivedSignature := "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+
+  // retrieved from the X-ConfigCat-Webhook-ID request header
+  requestId := "b616ca659d154a5fb907dd8475792eeb"
+
+  // retrieved from the X-ConfigCat-Webhook-Timestamp request header
+  timestamp := 1669629035 
+
+  // the webhook request's raw body
+  body := "examplebody" 
+
+  contentToSign := fmt.Sprintf("%s%d%s", requestId, timestamp, body)
+
+  hasher := hmac.New(sha256.New, []byte(signingKey))
+  hasher.Write([]byte(contentToSign))
+
+  calculatedSignature := base64.StdEncoding.EncodeToString(hasher.Sum(nil))
+
+  fmt.Println(calculatedSignature == receivedSignature) // must be true
+}
+```
+
+</TabItem>
+<TabItem value="whsk-dotnet" label=".NET" default>
+
+```csharp
+using System;
+using System.Security.Cryptography;
+using System.Text;
+
+// retrieved from the ConfigCat Dashboard
+var signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="; 
+
+// retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
+var receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
+
+// retrieved from the X-ConfigCat-Webhook-ID request header
+var requestId = "b616ca659d154a5fb907dd8475792eeb";
+
+// retrieved from the X-ConfigCat-Webhook-Timestamp request header
+var timestamp = 1669629035;
+
+// the webhook request's raw body
+var body = "examplebody"; 
+
+var contentToSign = $"{requestId}{timestamp}{body}";
+
+using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(signingKey)))
+{
+	var calculatedSignature = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(contentToSign)));
+
+	Console.WriteLine(calculatedSignature == receivedSignature); // must be true
+}
+```
+
+</TabItem>
+<TabItem value="whsk-java" label="Java" default>
+
+```java
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.security.InvalidKeyException;
+
+public class Main {
+  public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
+    // retrieved from the ConfigCat Dashboard
+    String signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="; 
+
+    // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
+    String receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
+
+    // retrieved from the X-ConfigCat-Webhook-ID request header
+    String requestId = "b616ca659d154a5fb907dd8475792eeb";
+
+    // retrieved from the X-ConfigCat-Webhook-Timestamp request header
+    int timestamp = 1669629035;
+
+    // the webhook request's raw body
+    String body = "examplebody"; 
+
+    String contentToSign = requestId + timestamp + body;
+
+    Mac mac = Mac.getInstance("HmacSHA256");
+    SecretKeySpec secretKeySpec = new SecretKeySpec(signingKey.getBytes("UTF-8"), "HmacSHA256");
+    mac.init(secretKeySpec);
+    String calculatedSignature = Base64.getEncoder().encodeToString(mac.doFinal(contentToSign.getBytes("UTF-8")));
+
+    System.out.println(calculatedSignature.equals(receivedSignature)); // must be true
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Timestamp validation
+To prevent replay attacks, you can determine whether the request is within your timeframe tolerance by comparing the timestamp value received in the `X-ConfigCat-Webhook-Timestamp` header with your system's actual timestamp. If the signature is valid but the timestamp is too old, you can reject the request.
+  
+Also, as the timestamp is part of the signed content, an attacker can't change it without breaking the signature.
 
 ## Connecting to Slack
+
 A few steps to set up Slack and get a message when a setting changes:
+
 1. Define a <a href="https://api.slack.com/incoming-webhooks" target="_blank">Slack Incoming Webhook</a> and copy the Webhook URL.
-2. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the *ConfigCat Dashboard.* 
+2. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the _ConfigCat Dashboard._
 3. Create a Webhook and add your Slack URL.
 4. Select POST as HTTP method.
 5. Add a request body like so:
+
 ```
 {
   "text": "<##URL##|##ConfigName## - ##EnvironmentName##> changed in ConfigCat."
@@ -63,14 +368,17 @@ A few steps to set up Slack and get a message when a setting changes:
 ```
 
 ## Connecting to Microsoft Teams
+
 A few steps to set up Microsoft Teams and get a message when a setting changes:
+
 1. Define an <a href="https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#create-incoming-webhook-1" target="_blank">Incoming Webhook connector in Microsoft Teams</a> and copy the Webhook URL.
-2. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the *ConfigCat Dashboard.* 
+2. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the _ConfigCat Dashboard._
 3. Create a Webhook and add your Teams URL.
 4. Select POST as the HTTP method.
 5. Add a request body similar to the one below.
 
-Sample request body of the Webhook: 
+Sample request body of the Webhook:
+
 ```
 {
   "@context": "https://schema.org/extensions",

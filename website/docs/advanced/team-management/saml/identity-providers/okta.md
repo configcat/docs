@@ -10,6 +10,7 @@ import TabItem from '@theme/TabItem';
 Connect ConfigCat with Okta via SAML.
 
 ### Introduction
+
 Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with Okta as a SAML Identity Provider.
 
 ### 1. Create an Application in Okta
@@ -33,6 +34,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 The next step will guide you on how to collect the information required for the appearing `Configure SAML` section.
 
 ### 2. Configure SAML for the Okta Application
+
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
@@ -42,8 +44,9 @@ The next step will guide you on how to collect the information required for the 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/domains.png" alt="ConfigCat SAML SSO status" />
 
 - From the appearing dialog, copy the following values and paste them into the Okta application.
-    - `Entity ID` -> `Audience URI (SP Entity ID)`
-    - `Assertion Consumer Service` -> `Single sign on URL`
+
+  - `Entity ID` -> `Audience URI (SP Entity ID)`
+  - `Assertion Consumer Service` -> `Single sign on URL`
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_config.png" alt="ConfigCat SAML configuration" />
 
@@ -100,6 +103,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 </Tabs>
 
 ### 4. Assign Users to Okta Application
+
 To let users authenticate via SAML, you need to assign individual users or groups to the Okta application.
 
 - Select the `Assignments` tab, and select either the `Assign to People` or the `Assign to Groups` option.
@@ -107,8 +111,9 @@ To let users authenticate via SAML, you need to assign individual users or group
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/okta/assign.png" alt="Okta assign to groups" />
 
 ### 5. Sign In
+
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
-  
+
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
 
 - Sign in with your company email address assigned to the Okta application.

@@ -3,6 +3,7 @@ id: zoho-flow
 title: Zoho Flow - Automate tasks and build feature flag based workflows
 description: ConfigCat Zoho Flow integration. This is a step-by-step guide on how to use the ConfigCat Zoho Flow integration to manage features using Zoho Flow apps.
 ---
+
 ## Connect ConfigCat to 500+ apps with Zoho Flow
 
 <a href="https://www.zoho.com/flow/apps/configcat/integrations" target="_blank">ConfigCat's Zoho Flow integration</a> helps you connect ConfigCat to 500+ other web apps without any code. It helps you automate day-to-day tasks and build complex business workflows within minutes.
@@ -10,7 +11,6 @@ description: ConfigCat Zoho Flow integration. This is a step-by-step guide on ho
 You can set **triggers**, add **actions**, use **Delays and Decisions** to create your entire workflow on an easy to use builder.
 
 <a href="https://www.zoho.com/flow/apps/configcat/integrations" target="_blank">ConfigCat's Zoho Flow integration</a> can notify you about Feature Flags or Settings changes in ConfigCat, so for example you can set it up with Slack to send a message about the feature flag changes in ConfigCat.
-
 
 ## Setup
 
@@ -36,7 +36,7 @@ You can set **triggers**, add **actions**, use **Delays and Decisions** to creat
 
 <img src="/docs/assets/zoho/connect.png" className="zoomable" alt="zoho_connect" />
       
-8. Generate a Public API credential at <a href="https://app.configcat.com/my-account/public-api-credentials" target="_blank">ConfigCat Dashboard</a>. 
+8. Generate a Public API credential at <a href="https://app.configcat.com/my-account/public-api-credentials" target="_blank">ConfigCat Dashboard</a>.
 
 9. Use the generated `Basic auth user name` and `Basic auth password` to connect your ConfigCat account to Zoho Flow.
 
@@ -64,4 +64,5 @@ You can set **triggers**, add **actions**, use **Delays and Decisions** to creat
 <img src="/docs/assets/zoho/slack_message.png" className="zoomable" alt="zoho_slack_config" />
 
 ## Need help?
+
 <a href="https://configcat.com/support/" target="_blank">Contact us</a> if you have questions or any improvement ideas for this app.

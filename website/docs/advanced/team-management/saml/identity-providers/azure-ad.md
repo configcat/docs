@@ -10,6 +10,7 @@ import TabItem from '@theme/TabItem';
 Connect ConfigCat with Azure Active Directory via SAML.
 
 ### Introduction
+
 Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with Azure Active Directory as a SAML Identity Provider.
 
 ### 1. Create an Azure AD Enterprise Application
@@ -37,6 +38,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 The next step will guide you on how to collect the information required for Configuring SAML in the application.
 
 ### 2. Configure SAML for the Azure Enterprise Application
+
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings"/>
@@ -46,8 +48,9 @@ The next step will guide you on how to collect the information required for Conf
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/domains.png" alt="ConfigCat SAML SSO status" />
 
 - From the appearing dialog, copy the following values and paste them into the Enterprise application.
-    - `Entity ID` -> `Identifier (Entity ID)`
-    - `Assertion Consumer Service` -> `Reply URL (Assertion Consumer Service URL)`
+
+  - `Entity ID` -> `Identifier (Entity ID)`
+  - `Assertion Consumer Service` -> `Reply URL (Assertion Consumer Service URL)`
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_config.png" alt="ConfigCat SAML configuration" />
 
@@ -103,8 +106,9 @@ To let users authenticate via SAML, you need to assign individual users or group
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/azure-ad/add_users.png" alt="Azure AD add user/group" />
 
 ### 5. Sign In
+
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
-  
+
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login"  />
 
 - Sign in with your company email address assigned to the Enterprise application.
