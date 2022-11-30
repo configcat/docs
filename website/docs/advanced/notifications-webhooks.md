@@ -147,7 +147,7 @@ console.log(calculatedSignature == receivedSignature) // must be true
 import hmac
 import base64
 
-# retrieved from ConfigCat Dashboard
+# retrieved from the ConfigCat Dashboard
 signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
 
 # retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
@@ -177,7 +177,7 @@ print(calculated_signature.decode() == received_signature) # must be true
 require 'openssl'
 require 'base64'
 
-# retrieved from ConfigCat Dashboard
+# retrieved from the ConfigCat Dashboard
 signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
 
 # retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
@@ -205,7 +205,7 @@ puts calculated_signature == received_signature # must be true
 ```php
 <?php
 
-// retrieved from ConfigCat Dashboard
+// retrieved from the ConfigCat Dashboard
 $signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=";
 
 // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
@@ -240,7 +240,7 @@ import (
 )
 
 func main() {
-  // retrieved from ConfigCat Dashboard
+  // retrieved from the ConfigCat Dashboard
   signingKey := "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
 
   // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
@@ -274,7 +274,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-// retrieved from ConfigCat Dashboard
+// retrieved from the ConfigCat Dashboard
 var signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="; 
 
 // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
@@ -312,7 +312,7 @@ import java.security.InvalidKeyException;
 
 public class Main {
   public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
-    // retrieved from ConfigCat Dashboard
+    // retrieved from the ConfigCat Dashboard
     String signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="; 
 
     // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
