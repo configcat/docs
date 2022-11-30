@@ -172,10 +172,10 @@
         },
         {
             "@type": "Question",
-            "name": "What data is stored or processed from browsers accessing ConfigCat's CDN when pulling feature toggles?",
+            "name": "What browser data is collected, processed or stored by the ConfigCat SDK when pulling feature flag data from the ConfigCat CDN?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "ConfigCat doesn't store any browser data. The data flow is one directional - the SDKs are only downloading the config.json files and the feature flag evaluation happens in the SDK. ConfigCat doesn't know anything about your users, only those data which you set in your targeting rules."
+                "text": "ConfigCat doesn't collect, store or process any browser data. The data flow is one directional - the SDKs are only downloading the config.json files and the feature flag evaluation happens in the SDK. ConfigCat doesn't collect any information about the customer's users."
             }
         },
         {
