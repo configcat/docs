@@ -10,19 +10,19 @@ This page is an overview and a short guide on how to get started.
 
 You can use it with many similar techniques such as feature flags/toggles, canary releases, soft launches, A-B testing, remote configuration management, and phased rollouts. Configure your application and features even after deployment.
 
-# The birth of a Feature Flag
+## The birth of a Feature Flag
 
 First, **add a feature flag** on the _ConfigCat Dashboard_,
 then you can **connect your application** to the ConfigCat service to access your feature flag.
 
-## Create a feature flag on the _ConfigCat Dashboard_
+### Create a feature flag on the _ConfigCat Dashboard_
 
 1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to the _Dashboard_
 2. Click _ADD FEATURE FLAG_ and give it a name.
 
 <img src="/docs/assets/getting-started-1.png" className="zoomable" alt="getting-started" />
 
-## Connect your application
+### Connect your application
 
 There are ready to use code snippets for `.NET`, `Java`, `Android (Java)`, `Kotlin`, `iOS`, `Dart (Flutter)`, `Node`, `JavaScript`, `Python`, `Go`, `PHP`, `Elixir`, `C++` on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, just scroll down to the **SDK Key and steps to connect your application** section.
 
