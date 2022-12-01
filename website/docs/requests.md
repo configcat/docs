@@ -16,9 +16,9 @@ Keep track of the number of config.json downloads your apps are making on the <a
 
 <img src="/docs/assets/stats.png" className="zoomable" alt="ConfigCat Statistics" />
 
-# Current config.json download limits
+## Current config.json download limits
 
-## Shared infrastructure
+### Shared infrastructure
 
 The following plans run on shared infrastructure. So all customers use the same API nodes and Config Delivery Network (CDN).
 
@@ -35,11 +35,11 @@ Use the <a href="https://configcat.com/calculator/" target="_blank">Plan Calcula
 If you hit this limit, we will keep your application up and running. However, you can expect us to contact you on how we can meet your needs.
 :::
 
-## Dedicated infrastructure
+### Dedicated infrastructure
 
 The following plans include dedicated API and CDN nodes.
 
-### Hosted
+#### Hosted
 
 Runs on dedicated servers provided by ConfigCat.
 The basic package includes:
@@ -52,7 +52,7 @@ The basic package includes:
 | **Basic package**             |   6,000,000,000 |        ~2400 |            ~4800 |
 | **Every additional CDN node** | + 1,000,000,000 |         ~400 |             ~800 |
 
-### On-Premise (Self-hosted)
+#### On-Premise (Self-hosted)
 
 Runs on the customer's own servers. We suggest <a href="https://configcat.com/support/" target="_blank">contacting ConfigCat's engineering</a>
 team on exact requirements and performance.
