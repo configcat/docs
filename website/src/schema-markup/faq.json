@@ -204,6 +204,14 @@
         },
         {
             "@type": "Question",
+            "name": "Are ConfigCat percentage targeting options sticky?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The percentage-based targeting is sticky by design and consistent across all SDKs. More on stickiness and consistency: https://configcat.com/docs/advanced/targeting/#stickiness--consistency"
+            }
+        },
+        {
+            "@type": "Question",
             "name": "How to use targeting rules in ConfigCat based on sensitive data?",
             "acceptedAnswer": {
                 "@type": "Answer",
@@ -212,10 +220,26 @@
         },
         {
             "@type": "Question",
-            "name": "Are ConfigCat percentage targeting options sticky?",
+            "name": "What are Zombie Flags in ConfigCat?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. The percentage-based targeting is sticky by design and consistent across all SDKs. More on stickiness and consistency: https://configcat.com/docs/advanced/targeting/#stickiness--consistency"
+                "text": "Zombie (Stale) flags are feature flags that are not changed in the last configurable number of days. Most often, if a feature flag isn't changed for a long time, it's time to remove it from your source code and from the ConfigCat Dashboard to avoid technical debt."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What is the Zombie Flags Report in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Zombie (Stale) Flags Report is a list of all feature flags that have not ben changed in the last (configurable) number of days. This report can help you identify and remove stale feature flags from your source code. Based on your email preferences, this report is emailed to you every week. You can find more information here: https://app.configcat.com/my-account/zombie-flags-report"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "I am not getting the Zombie Feature Flag email report from ConfigCat",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can change the frequency, criteria, and scope of the Zombie Feature Flag report from the dashboard. Please be aware that feature flags are only considered zombie flags if they have not been modified (with save & publish) within the past given timeframe. Currently, it has no connection with your actual usage in your code."
             }
         }
     ]
