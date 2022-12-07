@@ -223,7 +223,7 @@
             "name": "What are Zombie Flags in ConfigCat?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Zombie (Stale) flags are feature flags that are not changed in the last configurable number of days. Most often, if a feature flag isn't changed for a long time, it's time to remove it from your source code and from the ConfigCat Dashboard to avoid technical debt."
+                "text": "Zombie (Stale) flags are feature flags that have not been changed in the last configurable number of days. Most often, A feature flag that has not been changed for a long time should be removed from your source code and the ConfigCat Dashboard to avoid technical debt."
             }
         },
         {
@@ -231,7 +231,7 @@
             "name": "What is the Zombie Flags Report in ConfigCat?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The Zombie (Stale) Flags Report is a list of all feature flags that have not ben changed in the last (configurable) number of days. This report can help you identify and remove stale feature flags from your source code. Based on your email preferences, this report is emailed to you every week. You can find more information here: https://app.configcat.com/my-account/zombie-flags-report"
+                "text": "The Zombie (Stale) Flags Report is a list of all feature flags that have not been changed in the last configurable number of days. This report can help you identify and remove stale feature flags from your source code. Based on your email preferences, this report is emailed to you every week. You can find more information here: https://app.configcat.com/my-account/zombie-flags-report"
             }
         },
         {
@@ -239,7 +239,7 @@
             "name": "I am not getting the Zombie Feature Flag email report from ConfigCat",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "You can change the frequency, criteria, and scope of the Zombie Feature Flag report from the dashboard. Please be aware that feature flags are only considered zombie flags if they have not been modified (with save & publish) within the past given timeframe. Currently, it has no connection with your actual usage in your code."
+                "text": "You can change the frequency, criteria, and scope of the Zombie Feature Flag report from the dashboard. Please be aware that feature flags are only considered zombie flags if they have not been modified (with save & publish) within the past given timeframe. Currently, it has no connection to the actual usage in your code."
             }
         }
     ]
