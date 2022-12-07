@@ -241,6 +241,38 @@
                 "@type": "Answer",
                 "text": "You can change the frequency, criteria, and scope of the Zombie Feature Flag report from the dashboard. Please be aware that feature flags are only considered zombie flags if they have not been modified (with save & publish) within the past given timeframe. Currently, it has no connection to the actual usage in your code."
             }
+        },
+        {
+            "@type": "Question",
+            "name": "How to avoid technical debt caused by feature flags in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The ConfigCat CLI can scan your code, upload code references to the ConfigCat Dashboard and notify you about stale feature flags. You can find more information here: https://configcat.com/docs/advanced/code-references/overview/"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is there a way to compare flag statuses between two or more environments in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, you can see the state of all your Feature Flags across all your environments on the overview page in the dashboard: https://app.configcat.com/overview"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is there an expiration date for sent invitations to join an organization in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Invitations are valid for 14 days by default, but you can re-send them anytime to extend their expiration."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "I can't see the organization that I just joined in ConfigCat",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "When you create a new account before joining an organization via an invite (such as the one sent by your company via email), ConfigCat will likely create a duplicate organization for you. If you find the organization where you are supposed to be, please delete the duplicate, but make sure you don't accidentally delete the one you want to keep: https://app.configcat.com/organization/preferences"
+            }
         }
     ]
 }
