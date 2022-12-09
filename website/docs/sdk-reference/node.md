@@ -466,6 +466,13 @@ const configCatClient = configcat.createClientWithAutoPoll(
 - [Sample Console App](https://github.com/configcat/node-sdk/blob/master/samples/console)
 - [Sample Console App with custom cache](https://github.com/configcat/node-sdk/tree/master/samples/customcache)
 
+## Guides
+
+See the guides on how to use ConfigCat's Node SDK with the following libraries and frameworks:
+
+- <a href="https://configcat.com/blog/2022/08/19/how-to-use-feature-flags-in-nestjs/" target="_blank">NestJS</a>
+- <a href="https://configcat.com/blog/2022/09/02/how-to-use-feature-flag-in-expressjs/" target="_blank">Express</a>
+
 ## Look under the hood
 
 - [ConfigCat Node.js SDK on GitHub](https://github.com/configcat/node-sdk)

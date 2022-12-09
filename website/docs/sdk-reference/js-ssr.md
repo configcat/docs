@@ -466,6 +466,14 @@ You can view a sample run [here](https://github.com/configcat/js-ssr-sdk/actions
 
 - <a href="https://github.com/configcat/js-ssr-sdk/tree/master/samples/nuxt-ssr" target="_blank">NuxtJS</a>
 
+## Guides
+
+See the guides on how to use ConfigCat's JavaScript SSR SDK with the following libraries and frameworks:
+
+- <a href="https://configcat.com/blog/2022/07/01/how-to-use-feature-flags-in-nuxtjs/" target="_blank">NuxtJS</a>
+- <a href="https://configcat.com/blog/2022/04/22/how-to-use-feature-flags-in-nextjs/" target="_blank">NextJS</a>
+- <a href="https://configcat.com/blog/2022/04/01/feature-flags-in-remix/" target="_blank">Remix</a>
+
 ## Look under the hood
 
 - <a href="https://github.com/configcat/js-ssr-sdk" target="_blank">ConfigCat JavaScript (SSR) SDK on GitHub</a>
