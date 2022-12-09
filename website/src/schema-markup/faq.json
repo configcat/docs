@@ -292,7 +292,7 @@
         },
         {
             "@type": "Question",
-            "name": "Does ConfigCat guarantee percentage distribution",
+            "name": "Does ConfigCat guarantee percentage distribution?",
             "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "ConfigCat guarantees percentage distribution across all SDKs, ensuring that each user receives the same experience every time."
