@@ -273,6 +273,46 @@
                 "@type": "Answer",
                 "text": "When you create a new account before joining an organization via an invite (such as the one sent by your company via email), ConfigCat will likely create a duplicate organization for you. If you find the organization where you are supposed to be, please delete the duplicate, but make sure you don't accidentally delete the one you want to keep: https://app.configcat.com/organization/preferences"
             }
+        },
+        {
+            "@type": "Question",
+            "name": "Is it possible to rename a product or config in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, you can rename almost everything within ConfigCat. Organizations, products, configs, environments, tags, and feature flags can all be renamed except for feature flag keys."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I change my Feature Flag based on a date in ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "While there is no explicit way to do this, you can create a text setting with your desired start date as a value which can be used as a filter in your code: https://configcat.com/blog/2020/11/04/enable-my-feature-automatically"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does ConfigCat guarantee percentage distribution",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ConfigCat guarantees percentage distribution across all SDKs, ensuring that each user receives the same experience every time."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is it possible to set up an ABC test distribution with ConfigCat?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, it is possible. All you have to do is create a text setting and apply the percentage rules. With a normal feature flag, you have only two options - true or false, but with a text setting you can apply as many A/B/n options as you want with the percentages."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is there a way to create feature flags via ConfigCat's API?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes there is. You can find the public management API at: https://api.configcat.com"
+            }
         }
     ]
 }
