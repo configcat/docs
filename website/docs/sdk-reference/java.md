@@ -559,6 +559,10 @@ Check out our Sample Applications how they use the ConfigCat SDK
 - <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/console" target="_blank">Simple Console Application</a>
 - <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/web" target="_blank">Spring Boot Web Application</a>
 
+## Guides
+
+See <a href="https://configcat.com/blog/2022/10/28/using-feature-flags-in-java/" target="_blank">this</a> guide on how to use ConfigCat's Java SDK.
+
 ## Look Under the Hood
 
 - <a href="https://github.com/ConfigCat/java-sdk" target="_blank">ConfigCat Java SDK's repository on GitHub</a>

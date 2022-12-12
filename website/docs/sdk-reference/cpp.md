@@ -499,6 +499,10 @@ Check out our Sample Application how they use the ConfigCat SDK
 
 - <a href="https://github.com/configcat/cpp-sdk/tree/main/samples/" target="_blank">ConfigCat C++ Console Sample App</a>
 
+## Guides
+
+See <a href="https://configcat.com/blog/2022/10/21/configcat-cpp-sdk-announcement/" target="_blank">this</a> guide on how to use ConfigCat's C++ SDK.
+
 ## Look Under the Hood
 
 - <a href="https://github.com/ConfigCat/cpp-sdk" target="_blank">ConfigCat C++ SDK's repository on GitHub</a>

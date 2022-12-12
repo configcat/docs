@@ -549,6 +549,10 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
 
 - [Sample Laravel App](https://github.com/configcat/php-sdk/tree/master/samples/laravel)
 
+## Guides
+
+See <a href="https://configcat.com/blog/2022/09/16/how-to-use-feature-flags-in-php/" target="_blank">this</a> guide on how to use ConfigCat's PHP SDK.
+
 ## Look under the hood
 
 - [ConfigCat PHP SDK's repository on GitHub](https://github.com/configcat/php-sdk)

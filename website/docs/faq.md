@@ -109,9 +109,11 @@ The feature flag evaluation is done on the client-side in the ConfigCat SDK. So 
 See our the architecture explained [here](https://configcat.com/architecture/).
 
 ### Can we sign a data processing agreement with you?
+
 Yes, ConfigCat is happy to sign a data processing agreement (DPA).
 
 ### What browser data is collected, processed or stored by the ConfigCat SDK when pulling feature flag data from the ConfigCat CDN?
+
 ConfigCat doesn't collect, store or process any browser data. The data flow is one directional - the SDKs are only downloading the config.json files and the feature flag evaluation happens in the SDK. ConfigCat doesn't collect any information about the customer's users.
 
 ### Is data hosted only within the EU?

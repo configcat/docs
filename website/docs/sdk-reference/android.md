@@ -565,6 +565,10 @@ Also, we recommend using [confidential targeting comparators](/advanced/targetin
 
 <a href="https://github.com/configcat/android-sdk/tree/master/samples/android" target="_blank">Android App with auto polling and change listener</a>
 
+## Guides
+
+See <a href="https://configcat.com/blog/2022/01/24/feature-flags-in-android/" target="_blank">this</a> guide on how to use ConfigCat's Android SDK.
+
 ## Look under the hood
 
 - <a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android SDK's repository on GitHub</a>
