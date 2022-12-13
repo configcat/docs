@@ -8,6 +8,7 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.
+  plugins: [require.resolve('docusaurus-plugin-image-zoom')],
   themeConfig: {
     image: '/img/docs-cover.png',
     navbar: {
@@ -18,39 +19,39 @@ module.exports = {
       },
       items: [
         {
-          href: '/search',
-          label: 'Docs Search',
-          position: "left"
-        },
-        {
           href: 'https://configcat.com/',
           label: 'configcat.com',
-          position: "left"
+          position: 'left',
         },
         {
           href: 'https://configcat.com/pricing/',
           label: 'Pricing',
-          position: "left"
+          position: 'left',
         },
         {
           href: 'https://configcat.com/architecture/',
           label: 'Architecture',
-          position: "left"
-        },
-        {
-          href: 'https://status.configcat.com',
-          label: 'Service Status Monitor',
-          position: "left"
+          position: 'left',
         },
         {
           href: 'https://configcat.com/blog/',
           label: 'Blog',
-          position: "left"
+          position: 'left',
+        },
+        {
+          href: 'https://status.configcat.com',
+          label: 'Service Status',
+          position: 'right',
         },
         {
           href: 'https://api.configcat.com/docs/',
-          label: 'Public Management API',
-          position: "right"
+          label: 'API',
+          position: 'right',
+        },
+        {
+          href: '/search',
+          label: 'Search',
+          position: 'right',
         },
       ],
     },
@@ -153,9 +154,25 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} ConfigCat.`,
     },
     prism: {
-      additionalLanguages: ['hcl', 'csharp', 'kotlin', 'java', 'powershell', 'swift', 'php', 'ruby', 'elixir', 'dart', 'tsx'],
+      additionalLanguages: [
+        'hcl',
+        'csharp',
+        'kotlin',
+        'java',
+        'powershell',
+        'swift',
+        'php',
+        'ruby',
+        'elixir',
+        'dart',
+        'tsx',
+        'clike',
+        'c',
+        'objectivec',
+      ],
     },
-    algolia: { // The search crawling repo can be found here: https://github.com/configcat/docsearch
+    algolia: {
+      // The search crawling repo can be found here: https://github.com/configcat/docsearch
       appId: '0MLXBNIK0Q',
       apiKey: '6484bd6c163502bacf229cb8d22024ab',
       indexName: 'configcat',
@@ -163,6 +180,13 @@ module.exports = {
       searchPagePath: 'search',
       searchParameters: {},
       externalUrlRegex: 'configcat\\.com/blog',
+    },
+    zoom: {
+      selector: '.markdown img.zoomable',
+      background: {
+        light: 'rgb(255, 255, 255)',
+        dark: 'rgb(50, 50, 50)',
+      },
     },
   },
   presets: [
@@ -173,22 +197,21 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           sidebarCollapsible: true,
           // Please change this to your repo.
-          editUrl:
-            'https://github.com/configcat/docs/edit/master/website/',
-          routeBasePath: '/'
+          editUrl: 'https://github.com/configcat/docs/tree/master/website',
+          routeBasePath: '/',
         },
         gtag: {
-          trackingID: "G-VNVQ03TVR2"
+          trackingID: 'G-VNVQ03TVR2',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
         blog: {
-          archiveBasePath: null
-        }
+          archiveBasePath: null,
+        },
       },
     ],
   ],
   scripts: [],
-  stylesheets: []
+  stylesheets: [],
 };

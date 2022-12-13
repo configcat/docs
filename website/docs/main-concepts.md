@@ -1,41 +1,49 @@
 ---
 id: main-concepts
 title: Main Concepts
-description: This page explains the basics of feature flags and how to use them. Displays how configs, products and settings are organized within the feature flag service. 
+description: This page explains the basics of feature flags and how to use them. Displays how configs, products and settings are organized within the feature flag service.
 ---
+
 ## Feature Flag or Setting
-A *Setting* is an essential bit of *ConfigCat*. It can be of multiple types like on/off switch (bool), number (int, double) or any text (string) your application requires to be modified without the need of a new deployment.
 
-A *Feature Flag* is a *Setting* of type Bool.
+A _Setting_ is an essential bit of _ConfigCat_. It can be of multiple types like on/off switch (bool), number (int, double) or any text (string) your application requires to be modified without the need of a new deployment.
 
-### Anatomy of a *Feature Flag* or *Setting*
-Properties|Description
----|---
-Name|A human readable name that differentiates the *Setting* on the *ConfigCat Dashboard*. e.g., `My Cool Feature enabled`.
-Key|A variable name within your code. e.g., `isCoolFeatureEnabled`.
-Type|Type of information you'd like to keep in the *Setting*. e.g., On/Off Toggle, Text, Number
-Value|The actual value of your *Setting*. e.g., `true`, `false`. Can be different in each environment.
+A _Feature Flag_ is a _Setting_ of type Bool.
 
-### About *Setting* types:
-Setting Kind|Setting Type|Description
----|---|---
-On/Off Toggle|Boolean|true/false, usually referenced as Feature Flag, Feature Toggle or Feature switch.
-Text|String|any string, max. 65535 characters
-Whole Number|Integer|any whole number within the range of `Int32`
-Decimal Number|Double|any decimal number within the range of `double`
+### Anatomy of a _Feature Flag_ or _Setting_
+
+| Properties | Description                                                                                                            |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Name       | A human readable name that differentiates the _Setting_ on the _ConfigCat Dashboard_. e.g., `My Cool Feature enabled`. |
+| Key        | A variable name within your code. e.g., `isCoolFeatureEnabled`.                                                        |
+| Type       | Type of information you'd like to keep in the _Setting_. e.g., On/Off Toggle, Text, Number                             |
+| Value      | The actual value of your _Setting_. e.g., `true`, `false`. Can be different in each environment.                       |
+
+### About _Setting_ types:
+
+| Setting Kind   | Setting Type | Description                                                                       |
+| -------------- | ------------ | --------------------------------------------------------------------------------- |
+| On/Off Toggle  | Boolean      | true/false, usually referenced as Feature Flag, Feature Toggle or Feature switch. |
+| Text           | String       | any string, max. 65535 characters                                                 |
+| Whole Number   | Integer      | any whole number within the range of `Int32`                                      |
+| Decimal Number | Double       | any decimal number within the range of `double`                                   |
 
 ## Config
-A *Config* is a collection of *Settings*. *Configs* help you organize settings around topics, or around your software components. A *Config* is like an online version of a traditional config file.
+
+A _Config_ is a collection of _Settings_. _Configs_ help you organize settings around topics, or around your software components. A _Config_ is like an online version of a traditional config file.
 
 ## Environment
+
 An environment in ConfigCat represents an environment in your development lifecycle (like production, staging, development etc.). Different environments have the same settings but can have different values.
 :::info
 Each environment-config pair has its own SDK Key which must be used to initialize the ConfigCat SDK within your application.
 :::
 
 ## Product
-A collection of *Configs*, *Environments* and *Team members*. A *Product* typically represents your application (or your service) and the people working on it. It might be a good idea to invite others to your *Product* to collaborate.
+
+A collection of _Configs_, _Environments_ and _Team members_. A _Product_ typically represents your application (or your service) and the people working on it. It might be a good idea to invite others to your _Product_ to collaborate.
 
 ## Organization
-An *Organization* represents a collection of preferences that are valid for all the *Products* and *Members* who belong to
-an *Organization*. Like billing information, authentication rules or data privacy preferences.
+
+An _Organization_ represents a collection of preferences that are valid for all the _Products_ and _Members_ who belong to
+an _Organization_. Like billing information, authentication rules or data privacy preferences.

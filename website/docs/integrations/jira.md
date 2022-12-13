@@ -7,7 +7,8 @@ description: ConfigCat Jira Cloud Plugin. This is a step-by-step guide on how to
 Turn features On / Off right from a linked Issue on your Jira board with <a href="https://marketplace.atlassian.com/1222421" target="_blank">ConfigCat Feature Flags Jira Cloud Plugin</a>. Also you can add Targeting or Percentage Rules just as easily.
 
 ## Installation
-![Installation of the ConfigCat Feature Flags Jira Cloud Plugin](/assets/jira/authorize.png)
+
+<img src="/docs/assets/jira/authorize.png" className="zoomable" alt="Installation of the ConfigCat Feature Flags Jira Cloud Plugin" />
 
 1. Add <a href="https://marketplace.atlassian.com/1222421" target="_blank">ConfigCat Feature Flags</a> to your Jira Cloud instance.
 2. Select `Configure`.
@@ -20,9 +21,9 @@ Turn features On / Off right from a linked Issue on your Jira board with <a href
 
 1. Open any Issue on your Jira board.
 2. Push `Link ConfigCat Feature Flag`
-![Link ConfigCat Feature Flag](/assets/jira/link.png)
+   <img src="/docs/assets/jira/link.png" className="zoomable" alt="Link ConfigCat Feature Flag" />
 3. Select a Product, Config, Environment and a Feature Flag to be linked to your card.
 4. When linked, you can turn your features On / Off right from this Issue.  
-![Use ConfigCat Feature Flags in Jira](/assets/jira/use.png)
+   <img src="/docs/assets/jira/use.png" className="zoomable" alt="Use ConfigCat Feature Flags in Jira" />
 5. View linked issues next to your Feature Flags in ConfigCat and jump to the Jira Issue directly.  
-![View linked issues in ConfigCat Dashboard](/assets/jira/jump.png)
+   <img src="/docs/assets/jira/jump.png" className="zoomable" alt="View linked issues in ConfigCat Dashboard" />

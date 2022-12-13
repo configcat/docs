@@ -3,23 +3,26 @@ id: organization
 title: Organization & Roles
 description: You can invite an unlimited number of people to your organization in ConfigCat. Learn how to manage your organization and its roles.
 ---
-An *Organization* represents a collection of preferences that are valid for all the *Products* and *Members* who belong to
-an *Organization*. Like billing information, authentication rules or data privacy preferences.
 
-*Organization Menu* is only available for **Organization Admins** and **Billing Managers**.
+An _Organization_ represents a collection of preferences that are valid for all the _Products_ and _Members_ who belong to
+an _Organization_. Like billing information, authentication rules or data privacy preferences.
 
-![Organization-menu](/assets/organization-menu.png)
+_Organization Menu_ is only available for **Organization Admins** and **Billing Managers**.
+
+<img src="/docs/assets/organization-menu.png" className="zoomable" alt="Organization-menu" />
 
 ## Organization Admin role
-*Organization Admins* have unrestricted access to the complete organization and products within ConfigCat. 
-They can manage members, enforce security measures, modify sign-in methods, add/delete products, feature flags and environments. 
 
-*Organization Admins* have no access to payment, billing and subscription management. 
+_Organization Admins_ have unrestricted access to the complete organization and products within ConfigCat.
+They can manage members, enforce security measures, modify sign-in methods, add/delete products, feature flags and environments.
 
-Only *Organization Admins* can grant (or take away) *Organization Admin* role to other members.
+_Organization Admins_ have no access to payment, billing and subscription management.
+
+Only _Organization Admins_ can grant (or take away) _Organization Admin_ role to other members.
 
 ## Billing Manager role
-Only *Billing Managers* can see, manage billing information, can change the current subscription and add/remove 
-the *Billing Manager* role to any *Team Member*.
 
-*Billing Managers* have no access to products, configs, environments or feature flags.
+Only _Billing Managers_ can see, manage billing information, can change the current subscription and add/remove
+the _Billing Manager_ role to any _Team Member_.
+
+_Billing Managers_ have no access to products, configs, environments or feature flags.

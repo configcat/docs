@@ -1,14 +1,15 @@
 ---
-id: "react"
+id: 'react'
 title: React SDK Reference
 description: ConfigCat React SDK Reference. This is a step-by-step guide on how to use feature flags in your React applications.
 ---
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/react-sdk.svg?style=social)](https://github.com/configcat/react-sdk/stargazers)
 [![REACT CI](https://github.com/configcat/react-sdk/actions/workflows/react-ci.yml/badge.svg)](https://github.com/configcat/react-sdk/actions/workflows/react-ci.yml)
 [![codecov](https://codecov.io/gh/configcat/react-sdk/branch/main/graph/badge.svg?token=X9kFVT7xXL)](https://codecov.io/gh/configcat/react-sdk)
-[![Known Vulnerabilities](https://snyk.io/test/github/configcat/react-sdk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/configcat/react-sdk?targetFile=package.json) 
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=configcat_react-sdk&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=configcat_react-sdk) 
-[![JSDELIVR](https://data.jsdelivr.com/v1/package/npm/configcat-react/badge)](https://www.jsdelivr.com/package/npm/configcat-react)  
+[![Known Vulnerabilities](https://snyk.io/test/github/configcat/react-sdk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/configcat/react-sdk?targetFile=package.json)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=configcat_react-sdk&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=configcat_react-sdk)
+[![JSDELIVR](https://data.jsdelivr.com/v1/package/npm/configcat-react/badge)](https://www.jsdelivr.com/package/npm/configcat-react)
 
 <a href="https://github.com/configcat/react-sdk" target="_blank">ConfigCat React SDK on GitHub</a>
 
@@ -16,7 +17,8 @@ description: ConfigCat React SDK Reference. This is a step-by-step guide on how 
 
 ### 1. Install package
 
-*via [NPM package](https://npmjs.com/package/configcat-react):*
+_via [NPM package](https://npmjs.com/package/configcat-react):_
+
 ```bash
 npm i configcat-react
 ```
@@ -26,8 +28,8 @@ npm i configcat-react
 In most cases you should wrap your root component with `ConfigCatProvider` to access ConfigCat features in child components with Context API.
 
 ```tsx
-import React from "react";
-import { ConfigCatProvider } from "configcat-react";
+import React from 'react';
+import { ConfigCatProvider } from 'configcat-react';
 
 function App() {
   return (
@@ -43,81 +45,100 @@ export default App;
 ### 3. Get your setting value
 
 The React hooks (`useFeatureFlag`) way:
+
 ```tsx
 function ButtonComponent() {
-  const { value: isAwesomeFeatureEnabled, loading } = useFeatureFlag("isAwesomeFeatureEnabled", false);
+  const { value: isAwesomeFeatureEnabled, loading } = useFeatureFlag(
+    'isAwesomeFeatureEnabled',
+    false,
+  );
 
-  return loading ? (<div>Loading...</div>) : (
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <div>Feature flag value: {isAwesomeFeatureEnabled ? 'ON' : 'OFF'}</div>
   );
 }
 ```
 
 The React HOC (`WithConfigCatClientProps`) way:
+
 ```tsx
 class TestHOCComponent extends React.Component<
-    WithConfigCatClientProps,
-    { isAwesomeFeatureEnabled: string }
+  WithConfigCatClientProps,
+  { isAwesomeFeatureEnabled: string }
 > {
-    constructor(props: WithConfigCatClientProps) {
-        super(props);
+  constructor(props: WithConfigCatClientProps) {
+    super(props);
 
-        this.state = { isAwesomeFeatureEnabled: false, loading: true };
-    }
+    this.state = { isAwesomeFeatureEnabled: false, loading: true };
+  }
 
-    componentDidMount() {
-        this.evaluateFeatureFlag();
-    }
+  componentDidMount() {
+    this.evaluateFeatureFlag();
+  }
 
-    componentDidUpdate(prevProps: any) {
-      // To achieve hot reload on config.json updates.
-      if (prevProps?.lastUpdated !== this.props.lastUpdated) {
-        this.evaluateFeatureFlag();
-      }
+  componentDidUpdate(prevProps: any) {
+    // To achieve hot reload on config.json updates.
+    if (prevProps?.lastUpdated !== this.props.lastUpdated) {
+      this.evaluateFeatureFlag();
     }
+  }
 
-    evaluateFeatureFlag(){
-        this.props
-            .getValue("isAwesomeFeatureEnabled", false)
-            .then((v: boolean) => this.setState({ isAwesomeFeatureEnabled: v, loading: false }));
-    }
-    
-    render() {
-        return loading ? (<div>Loading...</div>) : (
-            <div>Feature flag value: {this.state.isAwesomeFeatureEnabled ? 'ON' : 'OFF'}</div>
-        );
-    }
+  evaluateFeatureFlag() {
+    this.props
+      .getValue('isAwesomeFeatureEnabled', false)
+      .then((v: boolean) =>
+        this.setState({ isAwesomeFeatureEnabled: v, loading: false }),
+      );
+  }
+
+  render() {
+    return loading ? (
+      <div>Loading...</div>
+    ) : (
+      <div>
+        Feature flag value: {this.state.isAwesomeFeatureEnabled ? 'ON' : 'OFF'}
+      </div>
+    );
+  }
 }
 ```
 
-## Creating the *ConfigCat* Client
+## Creating the _ConfigCat_ Client
 
-*ConfigCat Client* is responsible for:
+_ConfigCat Client_ is responsible for:
+
 - managing the communication between your application and ConfigCat servers.
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
 `<ConfigCatProvider sdkKey="#YOUR_SDK_KEY#"  pollingMode={PollingMode.AutoPoll} options={{ ... }}>` initializes a client.
 
-| Properties | Description                                                                                               | Default |
-| ---------- | --------------------------------------------------------------------------------------------------------- | --- |
-| `sdkKey`   | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from *ConfigCat Dashboard*. | - |
-| `pollingMode`  | Optional. [More about polling modes](#polling-modes). | `PollingMode.AutoPoll` |
-| `options`  | Optional.  [More about polling options](#polling-modes). | - |
+| Properties    | Description                                                                                               | Default                |
+| ------------- | --------------------------------------------------------------------------------------------------------- | ---------------------- |
+| `sdkKey`      | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_. | -                      |
+| `pollingMode` | Optional. [More about polling modes](#polling-modes).                                                     | `PollingMode.AutoPoll` |
+| `options`     | Optional. [More about polling options](#polling-modes).                                                   | -                      |
 
 ## Anatomy of `useFeatureFlag()`
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
+| `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
 ```tsx
 function ButtonComponent() {
-  const { value: isAwesomeFeatureEnabled, loading } = useFeatureFlag("isAwesomeFeatureEnabled", false);
+  const { value: isAwesomeFeatureEnabled, loading } = useFeatureFlag(
+    'isAwesomeFeatureEnabled',
+    false,
+  );
 
-  return loading ? (<div>Loading...</div>) : (
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <div>Feature flag value: {isAwesomeFeatureEnabled ? 'ON' : 'OFF'}</div>
   );
 }
@@ -127,60 +148,69 @@ function ButtonComponent() {
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** Setting-specific key. Set on *ConfigCat Dashboard* for each setting.                           |
+| `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, *User Object*. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
 ```tsx
 class TestHOCComponent extends React.Component<
-    WithConfigCatClientProps,
-    { isAwesomeFeatureEnabled: string }
+  WithConfigCatClientProps,
+  { isAwesomeFeatureEnabled: string }
 > {
-    constructor(props: WithConfigCatClientProps) {
-        super(props);
+  constructor(props: WithConfigCatClientProps) {
+    super(props);
 
-        this.state = { isAwesomeFeatureEnabled: false, loading: true };
-    }
+    this.state = { isAwesomeFeatureEnabled: false, loading: true };
+  }
 
-    componentDidMount() {
-        this.evaluateFeatureFlag();
-    }
+  componentDidMount() {
+    this.evaluateFeatureFlag();
+  }
 
-    componentDidUpdate(prevProps: any) {
-      // To achieve hot reload on config.json updates.
-      if (prevProps?.lastUpdated !== this.props.lastUpdated) {
-        this.evaluateFeatureFlag();
-      }
+  componentDidUpdate(prevProps: any) {
+    // To achieve hot reload on config.json updates.
+    if (prevProps?.lastUpdated !== this.props.lastUpdated) {
+      this.evaluateFeatureFlag();
     }
+  }
 
-    evaluateFeatureFlag(){
-        this.props
-            .getValue("isAwesomeFeatureEnabled", false)
-            .then((v: boolean) => this.setState({ isAwesomeFeatureEnabled: v, loading: false }));
-    }
-    
-    render() {
-        return loading ? (<div>Loading...</div>) : (
-            <div>Feature flag value: {this.state.isAwesomeFeatureEnabled ? 'ON' : 'OFF'}</div>
-        );
-    }
+  evaluateFeatureFlag() {
+    this.props
+      .getValue('isAwesomeFeatureEnabled', false)
+      .then((v: boolean) =>
+        this.setState({ isAwesomeFeatureEnabled: v, loading: false }),
+      );
+  }
+
+  render() {
+    return loading ? (
+      <div>Loading...</div>
+    ) : (
+      <div>
+        Feature flag value: {this.state.isAwesomeFeatureEnabled ? 'ON' : 'OFF'}
+      </div>
+    );
+  }
 }
 ```
 
 ## User Object
 
-The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature. 
+The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 For simple targeting:
+
 ```tsx
 var userObject = {
-    identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92"
-};   
+  identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92',
+};
 ```
+
 or
+
 ```tsx
 var userObject = {
-    identifier : "john@example.com"
-};   
+  identifier: 'john@example.com',
+};
 ```
 
 | Parameters   | Description                                                                                                                     |
@@ -191,23 +221,30 @@ var userObject = {
 | `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 For advanced targeting:
+
 ```tsx
 var userObject = {
-    identifier : "435170f4-8a8b-4b67-a723-505ac7cdea92",
-    email : "john@example.com",
-    country : "United Kingdom",
-    custom : {
-        "SubscriptionType": "Pro",
-        "UserRole": "Admin"
-    }
+  identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92',
+  email: 'john@example.com',
+  country: 'United Kingdom',
+  custom: {
+    SubscriptionType: 'Pro',
+    UserRole: 'Admin',
+  },
 };
 ```
 
 ```tsx
 function ButtonComponent() {
-  const { value: isAwesomeFeatureEnabled, loading } = useFeatureFlag("isAwesomeFeatureEnabled", false, userObject);
+  const { value: isAwesomeFeatureEnabled, loading } = useFeatureFlag(
+    'isAwesomeFeatureEnabled',
+    false,
+    userObject,
+  );
 
-  return loading ? (<div>Loading...</div>) : (
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <div>Feature flag value: {isAwesomeFeatureEnabled ? 'ON' : 'OFF'}</div>
   );
 }
@@ -215,38 +252,46 @@ function ButtonComponent() {
 
 ## Polling Modes
 
-The *ConfigCat SDK* supports 3 different polling mechanisms to acquire the setting values from *ConfigCat*. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
 
-The *ConfigCat SDK* downloads the latest values and stores them automatically every 60 seconds.
+The _ConfigCat SDK_ downloads the latest values and stores them automatically every 60 seconds.
 
 #### Initialization
 
 ```html
-<ConfigCatProvider sdkKey="YOUR_SDK_KEY", options={{...}})>
-    ...
-</ConfigCatProvider>
-```
-or
-```html
-<ConfigCatProvider sdkKey="YOUR_SDK_KEY", pollingMode={PollingMode.AutoPoll} options={{...}})>
-    ...
+<ConfigCatProvider sdkKey="YOUR_SDK_KEY" , options="{{...}})">
+  ...
 </ConfigCatProvider>
 ```
 
-| Option Parameter      | Description                                                                                                                | Default        |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `pollIntervalSeconds` | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                     | 60             |
-| `configChanged`       | Callback to get notified about changes.                                                                                    | -              |
-| `logger`              | Custom logger. See below for details.                                                                                      | Console logger |
-| `requestTimeoutMs`    | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
-| `dataGovernance`      | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
-| `maxInitWaitTimeSeconds` | Maximum waiting time between the client initialization and the first config acquisition in seconds.                     | 5              |
-| `flagOverrides`       | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                              | -              |
+or
+
+```html
+<ConfigCatProvider
+  sdkKey="YOUR_SDK_KEY"
+  ,
+  pollingMode="{PollingMode.AutoPoll}"
+  options="{{...}})"
+>
+  ...
+</ConfigCatProvider>
+```
+
+| Option Parameter         | Description                                                                                                                                                                                                                                                                                      | Default                 |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
+| `pollIntervalSeconds`    | Polling interval. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                                                                                                                                                                                           | 60                      |
+| `configChanged`          | Callback to get notified about changes.                                                                                                                                                                                                                                                          | -                       |
+| `logger`                 | Custom logger. See below for details.                                                                                                                                                                                                                                                            | Console logger          |
+| `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                       | 30000                   |
+| `dataGovernance`         | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
+| `maxInitWaitTimeSeconds` | Maximum waiting time between the client initialization and the first config acquisition in seconds.                                                                                                                                                                                              | 5                       |
+| `flagOverrides`          | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                    | -                       |
 
 Use the `pollIntervalSeconds` option parameter to change the polling interval.
+
 ```html
 <ConfigCatProvider sdkKey="YOUR_SDK_KEY", pollingMode={PollingMode.AutoPoll} options={{ pollIntervalSeconds: 95 }})>
     ...
@@ -255,53 +300,76 @@ Use the `pollIntervalSeconds` option parameter to change the polling interval.
 
 ### Lazy loading
 
-When calling `useFeatureFlag()` or `WithConfigCatClientProps.getValue()` the *ConfigCat SDK* downloads the latest setting values if they are not present or expired in the cache. 
+When calling `useFeatureFlag()` or `WithConfigCatClientProps.getValue()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache.
 
 #### Initialization
 
 ```html
-<ConfigCatProvider sdkKey="YOUR_SDK_KEY", pollingMode={PollingMode.LazyLoad} options={{...}})>
-    ...
+<ConfigCatProvider
+  sdkKey="YOUR_SDK_KEY"
+  ,
+  pollingMode="{PollingMode.LazyLoad}"
+  options="{{...}})"
+>
+  ...
 </ConfigCatProvider>
 ```
 
-| Option Parameter         | Description                                                                                                                | Default        |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                            | 60             |
-| `logger`                 | Custom logger. See below for details.                                                                                      | Console logger |
-| `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
-| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
-| `flagOverrides`       | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                 | -              |
-
+| Option Parameter         | Description                                                                                                                                                                                                                                                                                      | Default                 |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
+| `cacheTimeToLiveSeconds` | Cache TTL. Range: `1 - Number.MAX_SAFE_INTEGER`                                                                                                                                                                                                                                                  | 60                      |
+| `logger`                 | Custom logger. See below for details.                                                                                                                                                                                                                                                            | Console logger          |
+| `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                       | 30000                   |
+| `dataGovernance`         | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
+| `flagOverrides`          | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                    | -                       |
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
 ```html
-<ConfigCatProvider sdkKey="YOUR_SDK_KEY", pollingMode={PollingMode.LazyLoad} options={{cacheTimeToLiveSeconds: 600}})>
-    ...
+<ConfigCatProvider
+  sdkKey="YOUR_SDK_KEY"
+  ,
+  pollingMode="{PollingMode.LazyLoad}"
+  options="{{cacheTimeToLiveSeconds:"
+  600}})
+>
+  ...
 </ConfigCatProvider>
 ```
 
 ### Manual polling
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. *ConfigCat SDK* will not update them automatically. Calling `forceRefresh()` or `forceRefreshAsync()` is your application's responsibility.
+
+Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `forceRefresh()` or `forceRefreshAsync()` is your application's responsibility.
 
 #### Initialization
 
-| Option Parameter   | Description                                                                                                                | Default        |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `logger`           | Custom logger. See below for details.                                                                                      | Console logger |
-| `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000          |
-| `dataGovernance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
-| `flagOverrides`       | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                           | -              |
+| Option Parameter   | Description                                                                                                                                                                                                                                                                                      | Default                 |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
+| `logger`           | Custom logger. See below for details.                                                                                                                                                                                                                                                            | Console logger          |
+| `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                       | 30000                   |
+| `dataGovernance`   | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
+| `flagOverrides`    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                    | -                       |
 
 ```html
-<ConfigCatProvider sdkKey="YOUR_SDK_KEY", pollingMode={PollingMode.ManualPoll} options={{ ... }})>
-    ...
+<ConfigCatProvider
+  sdkKey="YOUR_SDK_KEY"
+  ,
+  pollingMode="{PollingMode.ManualPoll}"
+  options="{{"
+  ...
+  }})
+>
+  ...
 </ConfigCatProvider>
 ```
+
 ```tsx
 const client = useConfigCatClient();
-useEffect(() => client.forceRefresh(() => { setRefreshed(true) }));
+useEffect(() =>
+  client.forceRefresh(() => {
+    setRefreshed(true);
+  }),
+);
 ```
 
 ## Flag Overrides
@@ -316,6 +384,7 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 - **Remote over local** (`OverrideBehaviour.RemoteOverLocal`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
 
 You can set up the SDK to load your feature flag & setting overrides from a `{ [name: string]: any }` map.
+
 ```tsx
 const flagOverrides: configcat.createFlagOverridesFromMap({
     enabledFeature: true,
@@ -323,12 +392,18 @@ const flagOverrides: configcat.createFlagOverridesFromMap({
     intSetting: 5,
     doubleSetting: 3.14,
     stringSetting: "test"
-}, 
+},
 configcat.OverrideBehaviour.LocalOnly);
 ```
+
 ```html
-<ConfigCatProvider sdkKey="YOUR_SDK_KEY", pollingMode={PollingMode.ManualPoll} options={{flagOverrides}})>
-    ...
+<ConfigCatProvider
+  sdkKey="YOUR_SDK_KEY"
+  ,
+  pollingMode="{PollingMode.ManualPoll}"
+  options="{{flagOverrides}})"
+>
+  ...
 </ConfigCatProvider>
 ```
 
@@ -339,9 +414,15 @@ configcat.OverrideBehaviour.LocalOnly);
 ```tsx
 const logger = configcat.createConsoleLogger(3); // Setting log level to 3 (= Info)
 ```
+
 ```html
-<ConfigCatProvider sdkKey="YOUR_SDK_KEY", pollingMode={PollingMode.ManualPoll} options={{logger}})>
-    ...
+<ConfigCatProvider
+  sdkKey="YOUR_SDK_KEY"
+  ,
+  pollingMode="{PollingMode.ManualPoll}"
+  options="{{logger}})"
+>
+  ...
 </ConfigCatProvider>
 ```
 
@@ -351,7 +432,7 @@ Available log levels:
 | ----- | ----- | ------------------------------------------------------- |
 | -1    | Off   | Nothing gets logged.                                    |
 | 1     | Error | Only error level events are logged.                     |
-| 2     | Warn  | Default. Errors and Warnings are logged.                         |
+| 2     | Warn  | Default. Errors and Warnings are logged.                |
 | 3     | Info  | Errors, Warnings and feature flag evaluation is logged. |
 | 4     | Debug | All of the above plus debug info is logged.             |
 
@@ -363,8 +444,8 @@ import { LogLevel } from 'configcat-common';
 const logger = configcat.createConsoleLogger(LogLevel.Info);
 ```
 
-
 Info level logging helps to inspect the feature flag evaluation process:
+
 ```bash
 ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
  User : {"identifier":"#SOME-USER-ID#","email":"configcat@example.com"}
@@ -378,34 +459,38 @@ ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
 Config's data stored in a cache, it is efficiency increases in retrieval of data and performance of the client. If you would like to use your cache solution (for example your system uses external or distributed cache) you can implement those function and set to `cache` parameters in the setting.
 
 ```tsx
-function myCustomCache() { }
+function myCustomCache() {}
 
-myCustomCache.prototype.get = function(key) {
-    // `key` [string] - a unique cachekey
+myCustomCache.prototype.get = function (key) {
+  // `key` [string] - a unique cachekey
+  // insert here your cache read logic
+};
 
-    // insert here your cache read logic
-
-}
-
-myCustomCache.prototype.set = function(key, item) {
-    // `key` [string] - a unique cachekey
-    // `item` [object] - configcat's cache config item
-
-    // insert here your cache write logic
-}
+myCustomCache.prototype.set = function (key, item) {
+  // `key` [string] - a unique cachekey
+  // `item` [object] - configcat's cache config item
+  // insert here your cache write logic
+};
 
 // set the `myCustomCache` when create a client instance
 ```
+
 ```html
-<ConfigCatProvider sdkKey="YOUR_SDK_KEY", pollingMode={PollingMode.ManualPoll} options={{cache: new myCustomCache()}})>
-    ...
+<ConfigCatProvider
+  sdkKey="YOUR_SDK_KEY"
+  ,
+  pollingMode="{PollingMode.ManualPoll}"
+  options="{{cache:"
+  new
+  myCustomCache()}})
+>
+  ...
 </ConfigCatProvider>
 ```
 
-
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config.json](/requests/) file from ConfigCat's CDN servers. The URL path for this config.json file contains your SDK key, so the SDK key and the content of your config.json file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users. 
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config.json](/requests/) file from ConfigCat's CDN servers. The URL path for this config.json file contains your SDK key, so the SDK key and the content of your config.json file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config.json file, but nobody can make any changes with it in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config.json file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
@@ -416,7 +501,11 @@ Also, we recommend using [confidential targeting comparators](/advanced/targetin
 
 - <a href="https://github.com/configcat/react-sdk/tree/main/samples/react-sdk-sample" target="_blank">React</a>
 
+## Guides
+
+See <a href="https://configcat.com/blog/2022/09/22/configcat-react-sdk-announcement/" target="_blank">this</a> guide on how to use ConfigCat's React SDK.
+
 ## Look under the hood
 
-* <a href="https://github.com/configcat/react-sdk" target="_blank">ConfigCat React SDK on GitHub</a>
-* <a href="https://www.npmjs.com/package/configcat-react" target="_blank">ConfigCat React SDK in NPM</a>
+- <a href="https://github.com/configcat/react-sdk" target="_blank">ConfigCat React SDK on GitHub</a>
+- <a href="https://www.npmjs.com/package/configcat-react" target="_blank">ConfigCat React SDK in NPM</a>

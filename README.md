@@ -3,16 +3,19 @@
 A public repository for the ConfigCat documentation. https://configcat.com/docs
 
 ## About ConfigCat
+
 ConfigCat is a feature flag, feature toggle, and configuration management service. That lets you launch new features and change your software configuration remotely without actually (re)deploying code. ConfigCat even helps you do controlled roll-outs like canary releases and blue-green deployments. https://configcat.com
 
 # Prerequisites
+
 Latest LTS version of [Node.js](https://nodejs.org/).
 
 ## Quick start
+
 1. Open Terminal/CMD/PowerShell and change directory to `/website`
-    ```
-    cd website
-    ```
+   ```
+   cd website
+   ```
 2. Install packages
    ```
    npm install
@@ -28,19 +31,24 @@ Latest LTS version of [Node.js](https://nodejs.org/).
 https://docusaurus.io/
 
 # Guide for Schema markups
-Schema markups helps improving the SEO of the page. There are lots of schema markup types. 
-Currently, we are using the `FAQ Page` and `How-to` types. 
+
+Schema markups helps improving the SEO of the page. There are lots of schema markup types.
+Currently, we are using the `FAQ Page` and `How-to` types.
 
 1. Generation
-You can generate schema markups at e.g.: https://technicalseo.com/tools/schema-markup-generator  
-After generating the schema markup, you should copy and paste the json content from the generated script to a .json file. Only the .json part should be copied, the script tag will be inserted when we use it later.  
-The .json file's location should be under the website/src/schema-markup/... folder. Please use the same directory structure just like at the docs part.
+   You can generate schema markups at e.g.: https://technicalseo.com/tools/schema-markup-generator  
+   After generating the schema markup, you should copy and paste the json content from the generated script to a .json file. Only the .json part should be copied, the script tag will be inserted when we use it later.  
+   The .json file's location should be under the website/src/schema-markup/... folder. Please use the same directory structure just like at the docs part.
 
 2. Usage
-In the .md files you can inject the schema markup with a similar code:  
-``` javascript
+   In the .md files you can inject the schema markup with a similar code:
+
+```javascript
 export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json');
-<script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(NetSchema) }}></script>
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(NetSchema) }}
+></script>;
 ```
 
 ## Run locally using Docker
@@ -62,13 +70,20 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 Contributions are welcome via PR.
 
 # Troubleshooting
+
 ### Make sure you have the proper Node.js version installed
+
 You might run into errors caused by the wrong version of Node.js. To make sure you are using the recommended Node.js version follow these steps.
 
 1. Have nvm (Node Version Manager - https://github.com/nvm-sh/nvm ) installed:
 1. Run `nvm install`. This will install the compatible version of Node.js.
 1. Run `nvm use`. This will use the compatible version of Node.js.
-1. Your local Node.js version (`node -v`) should be the same as in the `.nvmrc` file. 
+1. Your local Node.js version (`node -v`) should be the same as in the `.nvmrc` file.
+
+# Code style and formatting
+It is recommended to use the [Prettier](https://prettier.io/) extension in your editor to format the code.
+
+We're using Prettier combined with a Husky pre-commit hook in order to always have clean code on every commit, so if you see any automatic changes after you commit - they're for the better! Read more: https://prettier.io/docs/en/install.html#git-hooks
 
 # Questions & Support
 
