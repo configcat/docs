@@ -643,6 +643,13 @@ Check out our Sample Applications how they use the ConfigCat SDK:
 - <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
 - <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Web App</a>
 
+## Guides
+
+See the following guides on how to use ConfigCat's .NET SDK:
+
+- <a href="https://configcat.com/blog/2022/11/25/feature-flags-in-net6/" target="_blank">.NET6</a>
+- <a href="https://configcat.com/blog/2021/10/10/aspnetcore-options-pattern/" target="_blank">.NET Core</a>
+
 ## Look under the hood
 
 - <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .Net SDK on GitHub</a>

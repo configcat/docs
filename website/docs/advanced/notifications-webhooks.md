@@ -60,15 +60,16 @@ The structure of the JSON array injected into the **##ChangeDetails##** looks li
 :::
 
 ## Verifying Webhook requests
+
 To ensure the requests you receive are actually sent by ConfigCat, we highly recommend to verify
 the signature sent in the request headers by comparing it with your own calculated signature.
 
 Each webhook request contains the following headers:
 
-| Header                             | Description                                                                                         |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `X-ConfigCat-Webhook-ID`           | The webhook request's unique identifier. Different in every request. |
-| `X-ConfigCat-Webhook-Timestamp`    | The time the webhook was sent in unix timestamp format. (seconds since epoch)                       |
+| Header                             | Description                                                                                                   |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `X-ConfigCat-Webhook-ID`           | The webhook request's unique identifier. Different in every request.                                          |
+| `X-ConfigCat-Webhook-Timestamp`    | The time the webhook was sent in unix timestamp format. (seconds since epoch)                                 |
 | `X-ConfigCat-Webhook-Signature-V1` | The list of the `base64` encoded HMAC-SHA-256 signatures. (comma delimited, 1 signature for each signing key) |
 
 Currently the latest (and the only) signature header version is `V1`. If the signing process is going to be changed in the future, more headers will be added with incremented version postfix.
@@ -84,64 +85,70 @@ X-ConfigCat-Webhook-Signature-V1: RoO/UMvSRqzJ0OolMMuhHBbM8/Vjn+nTh+SKyLcQf0M=,h
 ```
 
 ### Content to sign
+
 The signature is calculated from the content constructed by concatenating the webhook's `id`, `timestamp`, and raw `body` together.
 
 ```js
-const contentToSign = `${webhookId}${timestamp}${body}`
+const contentToSign = `${webhookId}${timestamp}${body}`;
 ```
 
-| Content part            | Description                                                                                                       |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `webhookId`             | The webhook's identifier received in the `X-ConfigCat-Webhook-ID` request header.                                 |
-| `timestamp`             | The timestamp value received in the `X-ConfigCat-Webhook-Timestamp` request header.                                       |
-| `body`                  | The raw body of the received webhook request. If the webhook doesn't have a request body it can be left out.      |
+| Content part | Description                                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------------------------ |
+| `webhookId`  | The webhook's identifier received in the `X-ConfigCat-Webhook-ID` request header.                            |
+| `timestamp`  | The timestamp value received in the `X-ConfigCat-Webhook-Timestamp` request header.                          |
+| `body`       | The raw body of the received webhook request. If the webhook doesn't have a request body it can be left out. |
 
 :::caution
-The signature calculation is sensitive to any changes on the signed content, so it's important to not change the request body before the verification. 
+The signature calculation is sensitive to any changes on the signed content, so it's important to not change the request body before the verification.
 Otherwise, the calculated signature could be completely different from the value received in the  
 `X-ConfigCat-Webhook-Signature-V1` header.
 :::
 
 ### Calculating signature
+
 ConfigCat uses `HMAC` with `SHA-256` to sign webhooks. You can retrieve the **signing key(s)** required for the signature calculation from the <a href="https://app.configcat.com/product/webhooks" target="_blank">ConfigCat Dashboard's webhook page</a>.
 
-<img src="/docs/assets/whsk.png" className="zoomable bottom-spaced" alt="signing keys" />  
+<img src="/docs/assets/whsk.png" className="zoomable bottom-spaced" alt="signing keys" />
 
 :::info
-For **key rotation** purposes, you can generate a secondary signing key. In this case ConfigCat sends two signatures (one signed with the *primary* and one signed with the *secondary* key) in the `X-ConfigCat-Webhook-Signature-V1` header separated by a comma (`,`): 
+For **key rotation** purposes, you can generate a secondary signing key. In this case ConfigCat sends two signatures (one signed with the _primary_ and one signed with the _secondary_ key) in the `X-ConfigCat-Webhook-Signature-V1` header separated by a comma (`,`):
+
 ```
 X-ConfigCat-Webhook-Signature-V1: RoO/UMvSRqzJ0OolMMuhHBbM8/Vjn+nTh+SKyLcQf0M=,heIrGPw6aylAZEX6xmSLrxIWVif5injeBCxWQ+0+b2U=
 ```
+
 :::
 
 <Tabs>
 <TabItem value="whsk-nodejs" label="Node.js" default>
 
 ```js
-const crypto = require("crypto");
+const crypto = require('crypto');
 
 // retrieved from the ConfigCat Dashboard
-const signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+const signingKey =
+  'configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=';
 
 // retrieved from the the X-ConfigCat-Webhook-Signature-V1 request header
-const receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+const receivedSignature = 'Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=';
 
 // retrieved from the the X-ConfigCat-Webhook-ID request header
-const requestId = "b616ca659d154a5fb907dd8475792eeb" 
+const requestId = 'b616ca659d154a5fb907dd8475792eeb';
 
 // retrieved from the the X-ConfigCat-Webhook-Timestamp request header
-const timestamp = 1669629035 
+const timestamp = 1669629035;
 
 // the webhook request's raw body
-const body = "examplebody" 
+const body = 'examplebody';
 
-const contentToSign = `${requestId}${timestamp}${body}`
+const contentToSign = `${requestId}${timestamp}${body}`;
 
-const calculatedSignature = crypto.createHmac('sha256', signingKey)
+const calculatedSignature = crypto
+  .createHmac('sha256', signingKey)
   .update(contentToSign)
-  .digest('base64')
+  .digest('base64');
 
-console.log(calculatedSignature == receivedSignature) // must be true
+console.log(calculatedSignature == receivedSignature); // must be true
 ```
 
 </TabItem>
@@ -152,19 +159,19 @@ import hmac
 import base64
 
 # retrieved from the ConfigCat Dashboard
-signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="
 
 # retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
-received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="
 
 # retrieved from the X-ConfigCat-Webhook-ID request header
 request_id = "b616ca659d154a5fb907dd8475792eeb"
 
 # retrieved from the X-ConfigCat-Webhook-Timestamp request header
-timestamp = 1669629035 
+timestamp = 1669629035
 
 # the webhook request's raw body
-body = "examplebody" 
+body = "examplebody"
 
 content_to_sign = request_id+str(timestamp)+body
 
@@ -182,19 +189,19 @@ require 'openssl'
 require 'base64'
 
 # retrieved from the ConfigCat Dashboard
-signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="
 
 # retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
-received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="
 
 # retrieved from the X-ConfigCat-Webhook-ID request header
 request_id = "b616ca659d154a5fb907dd8475792eeb"
 
 # retrieved from the X-ConfigCat-Webhook-Timestamp request header
-timestamp = 1669629035 
+timestamp = 1669629035
 
 # the webhook request's raw body
-body = "examplebody" 
+body = "examplebody"
 
 content_to_sign = "#{request_id}#{timestamp}#{body}"
 
@@ -213,7 +220,7 @@ puts calculated_signature == received_signature # must be true
 $signing_key = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=";
 
 // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
-$received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
+$received_signature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=";
 
 // retrieved from the X-ConfigCat-Webhook-ID request header
 $request_id = "b616ca659d154a5fb907dd8475792eeb";
@@ -245,19 +252,19 @@ import (
 
 func main() {
   // retrieved from the ConfigCat Dashboard
-  signingKey := "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=" 
+  signingKey := "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="
 
   // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
-  receivedSignature := "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=" 
+  receivedSignature := "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="
 
   // retrieved from the X-ConfigCat-Webhook-ID request header
   requestId := "b616ca659d154a5fb907dd8475792eeb"
 
   // retrieved from the X-ConfigCat-Webhook-Timestamp request header
-  timestamp := 1669629035 
+  timestamp := 1669629035
 
   // the webhook request's raw body
-  body := "examplebody" 
+  body := "examplebody"
 
   contentToSign := fmt.Sprintf("%s%d%s", requestId, timestamp, body)
 
@@ -279,10 +286,10 @@ using System.Security.Cryptography;
 using System.Text;
 
 // retrieved from the ConfigCat Dashboard
-var signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="; 
+var signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=";
 
 // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
-var receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
+var receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=";
 
 // retrieved from the X-ConfigCat-Webhook-ID request header
 var requestId = "b616ca659d154a5fb907dd8475792eeb";
@@ -291,7 +298,7 @@ var requestId = "b616ca659d154a5fb907dd8475792eeb";
 var timestamp = 1669629035;
 
 // the webhook request's raw body
-var body = "examplebody"; 
+var body = "examplebody";
 
 var contentToSign = $"{requestId}{timestamp}{body}";
 
@@ -317,10 +324,10 @@ import java.security.InvalidKeyException;
 public class Main {
   public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
     // retrieved from the ConfigCat Dashboard
-    String signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88="; 
+    String signingKey = "configcat_whsk_VN3juirnVh5pNvCKd81RYRYchxUX4j3NykbZG2fAy88=";
 
     // retrieved from the X-ConfigCat-Webhook-Signature-V1 request header
-    String receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA="; 
+    String receivedSignature = "Ks3cYsu9Lslfo+hVxNC3oQWnsF9e5d73TI5t94D9DRA=";
 
     // retrieved from the X-ConfigCat-Webhook-ID request header
     String requestId = "b616ca659d154a5fb907dd8475792eeb";
@@ -329,7 +336,7 @@ public class Main {
     int timestamp = 1669629035;
 
     // the webhook request's raw body
-    String body = "examplebody"; 
+    String body = "examplebody";
 
     String contentToSign = requestId + timestamp + body;
 
@@ -347,8 +354,9 @@ public class Main {
 </Tabs>
 
 ### Timestamp validation
+
 To prevent replay attacks, you can determine whether the request is within your timeframe tolerance by comparing the timestamp value received in the `X-ConfigCat-Webhook-Timestamp` header with your system's actual timestamp. If the signature is valid but the timestamp is too old, you can reject the request.
-  
+
 Also, as the timestamp is part of the signed content, an attacker can't change it without breaking the signature.
 
 ## Connecting to Slack

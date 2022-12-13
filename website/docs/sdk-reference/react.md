@@ -501,6 +501,10 @@ Also, we recommend using [confidential targeting comparators](/advanced/targetin
 
 - <a href="https://github.com/configcat/react-sdk/tree/main/samples/react-sdk-sample" target="_blank">React</a>
 
+## Guides
+
+See <a href="https://configcat.com/blog/2022/09/22/configcat-react-sdk-announcement/" target="_blank">this</a> guide on how to use ConfigCat's React SDK.
+
 ## Look under the hood
 
 - <a href="https://github.com/configcat/react-sdk" target="_blank">ConfigCat React SDK on GitHub</a>

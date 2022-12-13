@@ -436,6 +436,10 @@ configcat_client = configcatclient.create_client_with_auto_poll('#YOUR-SDK-KEY#'
 - <a href="https://github.com/configcat/python-sdk/tree/master/samples/consolesample" target="_blank">Sample Console App</a>
 - <a href="https://github.com/configcat/python-sdk/tree/master/samples/webappsample" target="_blank">Django Web App</a>
 
+## Guides
+
+See <a href="https://configcat.com/blog/2022/08/12/how-to-use-feature-flag-with-flask/" target="_blank">this</a> guide on how to use ConfigCat's Python SDK in a Flask application.
+
 ## Look under the hood
 
 - <a href="https://github.com/configcat/python-sdk" target="_blank">ConfigCat's Python SDK on GitHub</a>

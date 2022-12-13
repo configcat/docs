@@ -491,6 +491,18 @@ You can view a sample run [here](https://github.com/configcat/js-sdk/actions/run
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/react-sample" target="_blank">React</a>
 - <a href="https://github.com/configcat/js-sdk/tree/master/samples/html" target="_blank">Pure HTML + JS</a>
 
+## Guides
+
+See the guides on how to use ConfigCat's JavaScript SDK with the following libraries and frameworks:
+
+- <a href="https://configcat.com/blog/2021/12/13/feature-flags-in-react/" target="_blank">React</a>
+- <a href="https://configcat.com/blog/2022/08/09/using-feature-flags-in-angular/" target="_blank">Angular</a>
+- <a href="https://configcat.com/blog/2022/01/28/how-to-use-feature-flag-in-vuejs/" target="_blank">VueJS</a>
+- <a href="https://configcat.com/blog/2022/07/29/how-to-use-feature-flags-in-ionic-js/" target="_blank">Ionic</a>
+- <a href="https://configcat.com/blog/2022/02/04/feature-flags-in-phaser/" target="_blank">Phaser</a>
+- <a href="https://configcat.com/blog/2022/11/11/how-to-use-feature-flags-in-solidjs/" target="_blank">Solid.js</a>
+- <a href="https://configcat.com/blog/2022/02/19/feature-flags-in-melonjs/" target="_blank">melonJS</a>
+
 ## Look under the hood
 
 - <a href="https://github.com/configcat/js-sdk" target="_blank">ConfigCat JavaScript SDK on GitHub</a>
