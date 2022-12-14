@@ -142,7 +142,7 @@ Returns a Promise with the value.
 const value = await configCatClient.getValueAsync(
   'keyOfMySetting', // Setting Key
   false, // Default value
-  { identifier: '#UNIQUE-USER-IDENTIFIER#' }, // Optional User Object
+  new configcat.User('#UNIQUE-USER-IDENTIFIER#') // Optional User Object
 );
 ```
 
@@ -153,8 +153,8 @@ configCatClient
   .getValueAsync(
     'keyOfMySetting', // Setting Key
     false, // Default value
-    { identifier: '#UNIQUE-USER-IDENTIFIER#' },
-  ) // Optional User Object
+    new configcat.User('#UNIQUE-USER-IDENTIFIER#') // Optional User Object
+  )
   .then((value) => {
     console.log(value);
   });
@@ -174,7 +174,7 @@ configCatClient
 const details = await configCatClient.getValueDetailsAsync(
   'keyOfMySetting', // Setting Key
   false, // Default value
-  { identifier: '#UNIQUE-USER-IDENTIFIER#' }, // Optional User Object
+  new configcat.User('#UNIQUE-USER-IDENTIFIER#') // Optional User Object
 );
 ```
 
@@ -185,8 +185,8 @@ configCatClient
   .getValueDetailsAsync(
     'keyOfMySetting', // Setting Key
     false, // Default value
-    { identifier: '#UNIQUE-USER-IDENTIFIER#' },
-  ) // Optional User Object
+    new configcat.User('#UNIQUE-USER-IDENTIFIER#') // Optional User Object
+  )
   .then((details) => {
     console.log(details);
   });
@@ -473,7 +473,7 @@ settingValues.forEach((i) =>
 );
 
 // invoke with user object
-const userObject = { identifier: 'john@example.com' };
+const userObject = new configcat.User('john@example.com');
 
 settingValues = await configCatClient.getAllValuesAsync(userObject);
 settingValues.forEach((i) =>
@@ -494,7 +494,7 @@ settingValues.forEach((details) =>
 );
 
 // invoke with user object
-const userObject = { identifier: 'john@example.com' };
+const userObject = new configcat.User('john@example.com');
 
 settingValues = await configCatClient.getAllValueDetailsAsync(userObject);
 settingValues.forEach((details) =>
