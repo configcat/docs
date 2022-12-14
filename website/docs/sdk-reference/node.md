@@ -53,7 +53,7 @@ if (value) {
 }
 ```
 
-(Please note that top-level awaits are available only if your application is [set up to use the ECMAScript module system](https://nodejs.org/api/esm.html). Otherwise you will need either to take the Promise way or to wrap your code in an async function as shown [here](https://github.com/configcat/node-sdk/blob/master/samples/console/index.js).)
+(Please note that [top-level await in modules](https://exploringjs.com/impatient-js/ch_modules.html#top-level-await) is available only if your project is [set up to use the ECMAScript module system](https://nodejs.org/api/esm.html). Otherwise you will need either to take the Promise way or to wrap your code in an async function as shown [here](https://github.com/configcat/node-sdk/blob/master/samples/console/index.js).)
 
 The Promise way:
 
@@ -91,8 +91,8 @@ _ConfigCat Client_ is responsible for:
 
 The `getClient` function has optional parameters, which can be used to adjust the behavior of the client.
 
-| Parameters | Description                                                                                               | Default |
-| ---------- | --------------------------------------------------------------------------------------------------------- | ------- |
+| Parameters    | Description                                                                                               | Default |
+| ------------- | --------------------------------------------------------------------------------------------------------- | ------- |
 | `sdkKey`      | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_. | - |
 | `pollingMode` | Optional. The polling mode to use to acquire the setting values from the ConfigCat servers. [More about polling modes](#polling-modes). | `PollingMode.AutoPoll` |
 | `options`     | Optional. The options object. See the table below. | - |
@@ -209,6 +209,8 @@ The `details` result contains the following information:
 ## User Object
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+
+For simple targeting:
 
 ```js
 let userObject = new configcat.User('#UNIQUE-USER-IDENTIFIER#');
@@ -352,14 +354,13 @@ console.log(value);
 ## Hooks
 
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
-Via the following events you can subscribe to particular events emitted by the client:
+You can subscribe to the following events emitted by the client:
 
 - `clientReady`: This event is emitted when the SDK reaches the ready state. If the SDK is set up to use lazy load or manual polling, it's considered ready right after instantiation.
 If auto polling is used, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
 - `configChanged`: This event is emitted first when the SDK loads a valid config.json into memory from cache, then each time afterwards when a config.json with changed content is downloaded via HTTP.
 - `flagEvaluated`: This event is emitted each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`getValueDetailsAsync()`](#anatomy-of-getvaluedetailsasync).
 - `clientError`: This event is emitted when an error occurs within the ConfigCat SDK.
-- `beforeClientDispose`: This event is emitted before the client gets closed by a `dispose()` call.
 
 You can subscribe to these events either on initialization:
 ```js
@@ -387,7 +388,7 @@ To switch the SDK back to online mode, do the following:
 configCatClient.setOnline();
 ```
 
-Using the `client.isOffline` property you can check whether the SDK is in offline mode or not.
+Using the `configCatClient.isOffline` property you can check whether the SDK is in offline mode or not.
 
 ## Flag Overrides
 
@@ -435,7 +436,7 @@ Available log levels:
 | ----- | ------------------------------------------------------- |
 | Off   | Nothing gets logged.                                    |
 | Error | Only error level events are logged.                     |
-| Warn  | Errors and Warnings are logged.                         |
+| Warn  | Default. Errors and Warnings are logged.                |
 | Info  | Errors, Warnings and feature flag evaluation is logged. |
 | Debug | All of the above plus debug info is logged.             |
 
