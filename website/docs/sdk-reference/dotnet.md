@@ -326,7 +326,6 @@ Via the following events you can subscribe to particular events raised by the cl
 - `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config.json into memory from cache, then each time afterwards when a config.json with changed content is downloaded via HTTP.
 - `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetails()`/`GetValueDetailsAsync()`](#anatomy-of-getvaluedetails).
 - `event EventHandler<ConfigCatClientErrorEventArgs> Error`: This event is raised when an error occurs within the ConfigCat SDK.
-- `event EventHandler BeforeClientDispose`: This event is raised before the client gets closed by a `Dispose()` call.
 
 You can subscribe to these events either on initialization:
 
