@@ -356,7 +356,6 @@ If auto polling is used, the ready state is reached when the SDK has a valid con
 - `configChanged`: This event is emitted first when the SDK loads a valid config.json into memory from cache, then each time afterwards when a config.json with changed content is downloaded via HTTP.
 - `flagEvaluated`: This event is emitted each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`getValueDetailsAsync()`](#anatomy-of-getvaluedetailsasync).
 - `clientError`: This event is emitted when an error occurs within the ConfigCat SDK.
-- `beforeClientDispose`: This event is emitted before the client gets closed by a `dispose()` call.
 
 You can subscribe to these events either on initialization:
 ```js
