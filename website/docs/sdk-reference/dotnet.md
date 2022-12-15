@@ -554,7 +554,7 @@ IEnumerable<string> keys = await client.GetAllKeysAsync();
 
 ## `GetAllValues()`, `GetAllValuesAsync()`
 
-Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
@@ -572,6 +572,28 @@ IDictionary<string, object> settingValues = await client.GetAllValuesAsync();
 // invoke with user object
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
+```
+
+## `GetAllValueDetails()`, `GetAllValueDetailsAsync()`
+
+Evaluates and returns the values along with evaluation details of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
+```csharp
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+IReadOnlyList<EvaluationDetails> settingValues = client.GetAllValueDetails();
+
+// invoke with user object
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+IReadOnlyList<EvaluationDetails> settingValuesTargeting = client.GetAllValueDetails(userObject);
+```
+
+```csharp
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+IReadOnlyList<EvaluationDetails> settingValues = await client.GetAllValueDetailsAsync();
+
+// invoke with user object
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+IReadOnlyList<EvaluationDetails> settingValuesTargeting = await client.GetAllValueDetailsAsync(userObject);
 ```
 
 ## Using ConfigCat behind a proxy
