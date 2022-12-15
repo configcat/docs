@@ -60,7 +60,7 @@ You can safely shut down the client instance and release all associated resource
 ```java
 client.close()
 ```
-You can close all singleton client instance and release all associated resources on application exit.
+You can close all singleton client instances and release all associated resources on application exit.
 
 ```java
 ConfigCatClient.closeAll();
@@ -323,8 +323,6 @@ With the following hooks you can subscribe to particular events fired by the SDK
 - `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
   If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeSeconds` is reached.
 
-- `onBeforeClientClosed()`: This event is sent when a client is closed in the SDK.
-
 - `onConfigChanged(Map<String, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
 
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
@@ -552,7 +550,7 @@ User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
 client.getAllValuesAsync(user).thenAccept(settingValuesTargeting -> { });
 ```
 
-## `getAllValuesDetails()`, `getAllValuesDetailsAsync()`
+## `getAllValueDetails()`, `getAllValueDetailsAsync()`
 
 Evaluates and returns the detailed values of all feature flags and settings. Passing a User Object is optional.
 
@@ -560,14 +558,14 @@ Evaluates and returns the detailed values of all feature flags and settings. Pas
 User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92");
 
 ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
-List<EvaluationDetails<?>> allValuesDetails = cl.getAllValuesDetails(user);
+List<EvaluationDetails<?>> allValueDetails = cl.getAllValueDetails(user);
 ```
 
 ```java
 User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92");
 
 ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
-        client.getAllValuesDetailsAsync(user).thenAccept(allValuesDetails -> { });
+        client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
 ```
 
 ## Custom Cache
