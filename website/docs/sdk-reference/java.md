@@ -65,7 +65,6 @@ You can close all singleton client instances and release all associated resource
 ```java
 ConfigCatClient.closeAll();
 ```
-This method has no effect on client's created with the deprecated constructor.
 
 ## Java compatibility
 
@@ -99,8 +98,7 @@ _ConfigCat Client_ is responsible for:
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
 The `ConfigCatClient.get("#YOUR-SDK-KEY#")` static factory method constructs singleton client instances for your SDK keys. 
-These clients can be closed all at once with the `ConfigCatClient.closeAll()` method or individually with `client.close()`.
-The ConfigCatClient constructor ` new ConfigCatClient("#YOUR-SDK-KEY#")` is deprecated, if you use it to create a client, you must close it individually with `client.close()`. The `ConfigCatClient.closeAll()` method has no effect on it.  
+These clients can be closed all at once with the `ConfigCatClient.closeAll()` method or individually with `client.close()`. 
 :::
 
 ## Anatomy of `getValue()`
