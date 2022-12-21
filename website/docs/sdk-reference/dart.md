@@ -433,7 +433,7 @@ The SDK caches the downloaded `config.json` only in memory by default. In case y
 It's based on the [shared_preferences](https://pub.dev/packages/shared_preferences) package that uses the following storage locations by platform:
 
 - **Web**: Browser `LocalStorage`.
-- **iOS/macOS**: `NSUserDefaults`.
+- **iOS / macOS**: `NSUserDefaults`.
 - **Android**: `SharedPreferences`.
 - **Linux**: File in `XDG_DATA_HOME` directory.
 - **Windows**: File in roaming `AppData` directory.
