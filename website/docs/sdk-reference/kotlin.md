@@ -416,8 +416,9 @@ The SDK uses platform specific caching to store the downloaded `config.json`.
 These are the storage locations by platform:
 
 - **Android**: `SharedPreferences`. It has a dependency on `android.content.Context`, so it won't be enabled by default, but it can be explicitly set by providing an appropriate `Context`. ([Here](https://github.com/configcat/kotlin-sdk/blob/main/samples/android/app/src/main/java/com/example/configcat_android/MainActivity.kt#L23) is an example) 
-- **iOS/macOS/tvOS/watchOS**: `NSUserDefaults`.
-- **JS (browser only)**: `localStorage`.
+- **iOS / macOS / tvOS / watchOS**: `NSUserDefaults`.
+- **JS (browser only)**: Browser `localStorage`.
+- On other platforms the SDK uses a memory-only cache.
 
 If you want to turn off the default behavior, you can set the SDK's cache to `null` or to your own cache implementation.
 
