@@ -20,7 +20,7 @@ Currently supported SSO providers:
 Under the `Login / Sign up methods` section you can enable / disable SSO providers one by one. These are organization level preferences. Your selection
 will be applied to all members of your organization.
 
-### SAML SSO
+## SAML SSO
 
 SAML SSO allows your team members to sign up and log in to ConfigCat via their company accounts using your own Identity Provider (IdP)
 Read more about [SAML SSO](/advanced/team-management/saml/saml-overview/).
