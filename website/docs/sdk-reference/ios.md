@@ -959,8 +959,36 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 </TabItem>
 </Tabs>
 
-## Custom cache
+## Cache
 
+The SDK uses `UserDefaults` as the default cache to store the downloaded `config.json`.
+
+If you want to turn off the default behavior, you can set the SDK's cache to `nil` or to your own cache implementation.
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
+```swift
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.configCache = nil
+}
+```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
+                                            configurator:^(ConfigCatOptions* options) {
+    
+    options.configCache = NULL;
+}];
+```
+
+</TabItem>
+</Tabs>
+
+### Custom cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCache` open class:
 
 <Tabs groupId="ios-languages">
