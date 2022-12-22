@@ -59,7 +59,9 @@ If you're using the SDK in a Flutter application, it's recommended to use the [F
 
 ```dart
 import 'package:configcat_preferences_cache/configcat_preferences_cache.dart';
+```
 
+```dart
 final client = ConfigCatClient.get(
     sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(cache: ConfigCatPreferencesCache()));
