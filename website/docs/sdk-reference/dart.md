@@ -55,7 +55,7 @@ final client = ConfigCatClient.get(sdkKey: '#YOUR-SDK-KEY#');
 
 ### 4. (Optional) Set up Flutter caching
 
-If you're using the SDK in a Flutter application, we recommend to use our [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) for caching. It uses the [shared_preferences](https://pub.dev/packages/shared_preferences) package to store the downloaded `config.json`.
+If you're using the SDK in a Flutter application, it's recommended to use the [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) implementation for caching. It stores the downloaded `config.json` using the [shared_preferences](https://pub.dev/packages/shared_preferences) package.
 
 ```dart
 final client = ConfigCatClient.get(
@@ -429,7 +429,7 @@ final settingValuesTargeting = await client.getAllValues(user);
 
 ## Cache
 
-The SDK caches the downloaded `config.json` only in memory by default. In case you have a Flutter application, you can use our [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) for caching.  
+The SDK caches the downloaded `config.json` only in memory by default. In case you have a Flutter application, you can use the [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) for caching.  
 It's based on the [shared_preferences](https://pub.dev/packages/shared_preferences) package that uses the following storage locations by platform:
 
 - **Web**: Browser `LocalStorage`.
