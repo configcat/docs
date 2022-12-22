@@ -58,6 +58,8 @@ final client = ConfigCatClient.get(sdkKey: '#YOUR-SDK-KEY#');
 If you're using the SDK in a Flutter application, it's recommended to use the [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) implementation for caching. It stores the downloaded `config.json` using the [shared_preferences](https://pub.dev/packages/shared_preferences) package.
 
 ```dart
+import 'package:configcat_preferences_cache/configcat_preferences_cache.dart';
+
 final client = ConfigCatClient.get(
     sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(cache: ConfigCatPreferencesCache()));
@@ -65,7 +67,7 @@ final client = ConfigCatClient.get(
 
 ### 5. Get your setting value
 ```dart
-final isMyAwesomeFeatureEnabled = await client.getValue(key: '<key-of-my-awesome-feature>', defaultValue: false);
+final isMyAwesomeFeatureEnabled = await client.getValue(key: 'isMyAwesomeFeatureEnabled', defaultValue: false);
 if(isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
