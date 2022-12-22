@@ -9,11 +9,11 @@ import TabItem from '@theme/TabItem';
 
 Connect ConfigCat with OneLogin via SAML.
 
-### Introduction
+## Introduction
 
 Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with OneLogin as a SAML Identity Provider.
 
-### 1. Create an Application in OneLogin
+## 1. Create an Application in OneLogin
 
 - Log in to <a href="https://app.onelogin.com/login" target="_blank">OneLogin</a>, and select `Applications`.
 
@@ -33,7 +33,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 The next step will guide you on how to collect the information required for the appearing `Configuration` page.
 
-### 2. Configure SAML for the OneLogin Application
+## 2. Configure SAML for the OneLogin Application
 
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
@@ -69,7 +69,7 @@ The next step will guide you on how to collect the information required for the 
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/sso_signing_algo.png" alt="OneLogin SAML Signature Algorithm"  />
 
-### 3. Configure ConfigCat with SAML Details from OneLogin
+## 3. Configure ConfigCat with SAML Details from OneLogin
 
 You can choose one of the following options to configure ConfigCat with SAML Identity Provider metadata.
 
@@ -110,7 +110,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
   </TabItem>
 </Tabs>
 
-### 4. Assign the OneLogin Application to Users
+## 4. Assign the OneLogin Application to Users
 
 To let users authenticate via SAML, you need to assign the newly created application to them.
 
@@ -134,7 +134,7 @@ To let users authenticate via SAML, you need to assign the newly created applica
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/app_details.png" alt="OneLogin application details"/>
 
-### 5. Sign In
+## 5. Sign In
 
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
@@ -150,6 +150,6 @@ To let users authenticate via SAML, you need to assign the newly created applica
 
 - You should be redirected to ConfigCat signed in with your company account.
 
-### 6. Next Steps
+## 6. Next Steps
 
 - Configure the [auto-assignment of users](/docs/advanced/team-management/auto-assign-users).

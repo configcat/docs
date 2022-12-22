@@ -9,11 +9,11 @@ import TabItem from '@theme/TabItem';
 
 Connect ConfigCat with Active Directory Federation Services (ADFS) via SAML.
 
-### Introduction
+## Introduction
 
 Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with ADFS as a SAML Identity Provider.
 
-### 1. Collect SAML Metadata from ConfigCat
+## 1. Collect SAML Metadata from ConfigCat
 
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
@@ -30,7 +30,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_config.png" alt="ConfigCat SAML configuration" />
 
-### 2. Configure a Relying Party Trust
+## 2. Configure a Relying Party Trust
 
 - Open the ADFS Management console, and click `Add Relying Party Trust`.
 
@@ -74,7 +74,7 @@ Then, click `Next`.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/adfs/11_finish_party.png" alt="ADFS finish configuration" />
 
-### 3. Configure Claims Issuance Policy
+## 3. Configure Claims Issuance Policy
 
 - After adding the Relying Party Trust, the following dialog should appear.  
 Click `Add rule`.
@@ -98,7 +98,7 @@ Click `Add rule`.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/adfs/15_finish_claims.png" alt="ADFS finish claims" />
 
-### 4. Configure ConfigCat with SAML Details from ADFS
+## 4. Configure ConfigCat with SAML Details from ADFS
 
 You can choose one of the following options to configure ConfigCat with SAML Identity Provider metadata.
 
@@ -164,7 +164,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
   </TabItem>
 </Tabs>
 
-### 5. Sign In
+## 5. Sign In
 
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
@@ -180,6 +180,6 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 
 - You should be redirected to ConfigCat signed in with your company account.
 
-### 6. Next Steps
+## 6. Next Steps
 
 - Configure the [auto-assignment of users](/docs/advanced/team-management/auto-assign-users).
