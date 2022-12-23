@@ -201,7 +201,7 @@ For simple targeting:
 
 ```tsx
 var userObject = {
-  identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92',
+  identifier: '#UNIQUE-USER-IDENTIFIER#',
 };
 ```
 
@@ -224,7 +224,7 @@ For advanced targeting:
 
 ```tsx
 var userObject = {
-  identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92',
+  identifier: '#UNIQUE-USER-IDENTIFIER#',
   email: 'john@example.com',
   country: 'United Kingdom',
   custom: {

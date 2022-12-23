@@ -180,7 +180,7 @@ The `details` result contains the following information:
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```dart
-final user = ConfigCatUser(identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92');
+final user = ConfigCatUser(identifier: '#UNIQUE-USER-IDENTIFIER#');
 ```
 
 ```dart
@@ -198,7 +198,7 @@ final user = ConfigCatUser(identifier: 'john@example.com');
 
 ```dart
 final user = ConfigCatUser(
-    identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92',
+    identifier: '#UNIQUE-USER-IDENTIFIER#',
     email: 'john@example.com',
     country: 'United Kingdom',
     custom: {
@@ -427,7 +427,7 @@ final client = ConfigCatClient.get(sdkKey: '#YOUR-SDK-KEY#');
 final settingValues = await client.getAllValues();
 
 // invoke with user object
-final user = ConfigCatUser(identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92');
+final user = ConfigCatUser(identifier: '#UNIQUE-USER-IDENTIFIER#');
 final settingValuesTargeting = await client.getAllValues(user);
 ```
 

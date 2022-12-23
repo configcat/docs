@@ -169,7 +169,7 @@ The details result contains the following information:
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```kotlin
-val user = ConfigCatUser(identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92")
+val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")
 ```
 
 ```kotlin
@@ -187,7 +187,7 @@ val user = ConfigCatUser(identifier = "john@example.com")
 
 ```kotlin
 val user = ConfigCatUser(
-    identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92",
+    identifier = "#UNIQUE-USER-IDENTIFIER#",
     email = "john@example.com",
     country = "United Kingdom",
     custom = mapOf(
@@ -406,7 +406,7 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#")
 val settingValues = client.getAllValues()
 
 // invoke with user object
-val user = ConfigCatUser(identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92")
+val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")
 val settingValuesTargeting = client.getAllValues(user)
 ```
 
