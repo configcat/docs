@@ -462,7 +462,7 @@ List<EvaluationDetails<?>> allValueDetails = cl.getAllValueDetails(user);
 
 ```java
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
         client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
 ```
 
