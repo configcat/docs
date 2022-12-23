@@ -36,7 +36,7 @@ implementation 'com.configcat:configcat-java-client:8.+'
 import com.configcat.*;
 ```
 
-### 3. Create and get the _ConfigCat_ client with your _SDK Key_
+### 3. Create and get the _ConfigCat_ client for your _SDK Key_
 
 ```java
 ConfigCatClient client =  ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
