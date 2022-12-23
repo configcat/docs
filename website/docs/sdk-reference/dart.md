@@ -38,7 +38,7 @@ Or put the following directly to your `pubspec.yml` and run `dart pub get` or `f
 
 ```yaml title="pubspec.yml"
 dependencies:
-  configcat_client: ^2.3.0
+  configcat_client: ^2.4.0
 ```
 
 ### 2. Import the ConfigCat SDK
