@@ -187,7 +187,7 @@ final user = ConfigCatUser(identifier: '#UNIQUE-USER-IDENTIFIER#');
 final user = ConfigCatUser(identifier: 'john@example.com');
 ```
 
-### Customized user object creation:
+### Customized user object creation
 
 | Argument     | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
