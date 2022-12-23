@@ -127,8 +127,6 @@ intValue := client.GetIntValue(
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
-### Simple user object creation:
-
 ```go
 user = &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
 ```
@@ -137,7 +135,7 @@ user = &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
 user = &configcat.UserData{Identifier: "john@example.com"}
 ```
 
-### Customized user object creation:
+### Customized user object creation
 
 | Arguments    | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -156,7 +154,7 @@ user := &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#",
             Custom: custom}
 ```
 
-### Other options to create a user object:
+### Other options to create a user object
 
 The _ConfigCat SDK_ uses reflection to determine what attributes are available on a user object. You can either implement the `UserAttributes` interface - which's `GetAttribute(string) string` method will be used to retrieve the attributes - or use a pointer to a struct type which's public fields are treated as possible comparison attributes.
 
