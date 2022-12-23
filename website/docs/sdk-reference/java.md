@@ -234,7 +234,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client.setDefaultUser(User.newBuilder().build("john@example.com"))
 ```
 
-Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
 ```java
 client.setDefaultUser(User.newBuilder().build("john@example.com"))
