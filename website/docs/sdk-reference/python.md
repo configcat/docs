@@ -110,7 +110,7 @@ user_object = User('john@example.com')
 | `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
 | `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
-```javascript
+```python
 user_object = User(
   '#UNIQUE-USER-IDENTIFIER#',
   'john@example',

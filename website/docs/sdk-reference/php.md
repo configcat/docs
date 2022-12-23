@@ -508,7 +508,7 @@ Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
 [2022-01-06T18:34:16.846039+00:00] ConfigCat.INFO: Evaluating getValue(isPOCFeatureEnabled).
-User object: {"Identifier":"#UNIQUE-USER-IDENTIFIER#","Email":"john@example.com"}
+User object: {"Identifier":"435170f4-8a8b-4b67-a723-505ac7cdea92","Email":"john@example.com"}
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match.
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: true.
 ```
