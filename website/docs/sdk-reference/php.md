@@ -94,7 +94,7 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
 $value = $client->getValue(
     "keyOfMySetting", # Setting Key
     false, # Default value
-    new \ConfigCat\User('435170f4-8a8b-4b67-a723-505ac7cdea92') # Optional User Object
+    new \ConfigCat\User('#UNIQUE-USER-IDENTIFIER#') # Optional User Object
 );
 ```
 
@@ -112,7 +112,7 @@ $value = $client->getValue(
 $details = $client->getValueDetails(
     "keyOfMySetting", # Setting Key
     false, # Default value
-    new \ConfigCat\User('435170f4-8a8b-4b67-a723-505ac7cdea92') # Optional User Object
+    new \ConfigCat\User('#UNIQUE-USER-IDENTIFIER#') # Optional User Object
 );
 ```
 
@@ -134,7 +134,7 @@ The `details` result contains the following information:
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```php
-$user = new \ConfigCat\User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+$user = new \ConfigCat\User("#UNIQUE-USER-IDENTIFIER#");
 ```
 
 ```php
@@ -152,7 +152,7 @@ $user = new \ConfigCat\User("john@example.com");
 
 ```php
 $user = new \ConfigCat\User(
-    '435170f4-8a8b-4b67-a723-505ac7cdea92',
+    '#UNIQUE-USER-IDENTIFIER#',
     'john@example',
     'United Kingdom',
     [

@@ -5,7 +5,7 @@ description: ConfigCat C++ SDK Reference. This is a step-by-step guide on how to
 ---
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/cpp-sdk.svg?style=social)](https://github.com/configcat/cpp-sdk/stargazers)
-[![Build Status](https://img.shields.io/github/workflow/status/configcat/cpp-sdk/C++%20CI?logo=GitHub&label=windows%20%2F%20macos%20%2F%20linux)](https://github.com/configcat/cpp-sdk/actions/workflows/cpp-ci.yml)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/configcat/cpp-sdk/cpp-ci.yml?logo=GitHub&label=windows%20%2F%20macos%20%2F%20linux&branch=main)](https://github.com/configcat/cpp-sdk/actions/workflows/cpp-ci.yml)
 [![Coverage Status](https://codecov.io/gh/configcat/cpp-sdk/branch/main/graph/badge.svg?token=cvUgfof8k7)](https://codecov.io/gh/configcat/cpp-sdk)
 
 <a href="https://github.com/ConfigCat/cpp-sdk" target="_blank">ConfigCat C++ SDK on GitHub</a>
@@ -131,14 +131,14 @@ auto value = client->getValue(
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```cpp
-auto user = ConfigCatUser("435170f4-8a8b-4b67-a723-505ac7cdea92");
+auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 ```
 
 ```cpp
 auto user = ConfigCatUser("john@example.com");
 ```
 
-### Customized user object creation:
+### Customized user object creation
 
 | Argument  | Description                                                                                                                     |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -149,7 +149,7 @@ auto user = ConfigCatUser("john@example.com");
 
 ```cpp
 auto user = ConfigCatUser(
-    "435170f4-8a8b-4b67-a723-505ac7cdea92", // id
+    "#UNIQUE-USER-IDENTIFIER#", // userID
     "john@example.com", // email
     "United Kingdom", // country
     {
@@ -383,7 +383,7 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
 auto settingValues = client->getAllValues();
 
 // invoke with user object
-auto user = ConfigCatUser("435170f4-8a8b-4b67-a723-505ac7cdea92");
+auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 auto settingValuesTargeting = client->getAllValues(&user);
 ```
 

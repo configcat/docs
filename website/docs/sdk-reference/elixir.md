@@ -87,7 +87,7 @@ _ConfigCat Client_ is responsible for:
 value = ConfigCat.get_value(
     "keyOfMySetting", # Setting Key
     false, # Default value
-    ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92") # Optional User Object
+    ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#") # Optional User Object
 );
 ```
 
@@ -96,7 +96,7 @@ value = ConfigCat.get_value(
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```elixir
-user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92")
+user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#")
 user_object = ConfigCat.User.new("john@example.com")
 ```
 
@@ -108,7 +108,7 @@ user_object = ConfigCat.User.new("john@example.com")
 | `custom`     | Optional `Map` for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```elixir
-user_object = ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92", email: "john@example", country: "United Kingdom",
+user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#", email: "john@example", country: "United Kingdom",
                 custom: %{SubscriptionType: "Pro", UserRole: "Admin"})
 ```
 
@@ -394,7 +394,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 ```elixir
 values = ConfigCat.get_all_values(
-  ConfigCat.User.new("435170f4-8a8b-4b67-a723-505ac7cdea92")  # Optional User Object
+  ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#")  # Optional User Object
 )
 ```
 
