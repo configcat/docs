@@ -158,14 +158,14 @@ client.getValueAsync(
 EvaluationDetails<Boolean> details = client.getValueDetails(
     Boolean.class, // Setting type
     "keyOfMySetting", // Setting Key
-    User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
+    User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"), // Optional User Object
     false // Default value
 );
 // Or asynchronously
 client.getValueDetailsAsync(
     Boolean.class, // Setting type
     "keyOfMySetting", // Setting Key
-    User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
+    User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"), // Optional User Object
     false // Default value
 ).thenAccept(details -> {
     // Use the details result
@@ -224,20 +224,20 @@ You can set the default user object either with the ConfigCatClient builder:
     ConfigCatClient client = ConfigCatClient.get(APIKEY, options -> {
             options.mode(PollingModes.manualPoll());
             options.baseUrl(server.url("/").toString());
-            options.defaultUser(User.newBuilder().build("defaultUser"));
+            options.defaultUser(User.newBuilder().build("john@example.com"));
         });
 ```
 
 or with the `setDefaultUser()` method of the ConfigCat client.
 
 ```java
-client.setDefaultUser(User.newBuilder().build("defaultUser"))
+client.setDefaultUser(User.newBuilder().build("john@example.com"))
 ```
 
 Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
 ```java
-client.setDefaultUser(User.newBuilder().build("defaultUser"))
+client.setDefaultUser(User.newBuilder().build("john@example.com"))
 // The default user will be used at the evaluation process.
 boolean value = client.getValue(Boolean.class, "keyOfMySetting", false)
 ```
@@ -245,7 +245,8 @@ boolean value = client.getValue(Boolean.class, "keyOfMySetting", false)
 When the user object parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```java
-client.setDefaultUser(User.newBuilder().build("defaultUser"))
+client.setDefaultUser(User.newBuilder().build("john@example.com"))
+
 User otherUser = User.newBuilder().build("user")
 // otherUser will be used at the evaluation process.
 boolean value =  client.getValue(Boolean.class, "keyOfMySetting", false, otherUser)
@@ -553,14 +554,14 @@ client.getAllValuesAsync(user).thenAccept(settingValuesTargeting -> { });
 Evaluates and returns the detailed values of all feature flags and settings. Passing a User Object is optional.
 
 ```java
-User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92");
+User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
 
 ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
 List<EvaluationDetails<?>> allValueDetails = cl.getAllValueDetails(user);
 ```
 
 ```java
-User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92");
+User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
 
 ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
         client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
