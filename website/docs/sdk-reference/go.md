@@ -111,7 +111,7 @@ Basically all of the value evaluator methods share the same signature, they only
 boolValue := client.GetBoolValue(
     "keyOfMyBoolSetting", // Setting Key
     false, // Default value
-    &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"} // User Object
+    &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"} // User Object
 )
 ```
 
@@ -119,7 +119,7 @@ boolValue := client.GetBoolValue(
 intValue := client.GetIntValue(
     "keyOfMyIntSetting", // Setting Key
     0, // Default value
-    &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"} // User Object
+    &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"} // User Object
 )
 ```
 
@@ -130,7 +130,7 @@ The [User Object](../advanced/user-object.md) is essential if you'd like to use 
 ### Simple user object creation:
 
 ```go
-user = &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
+user = &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
 ```
 
 ```go
@@ -150,7 +150,7 @@ user = &configcat.UserData{Identifier: "john@example.com"}
 custom := map[string]string{}
 custom["SubscriptionType"] = "Pro"
 custom["UserRole"] = "Admin"
-user := &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
+user := &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#",
             Email: "john@example.com",
             Company: "United Kingdom",
             Custom: custom}
@@ -237,7 +237,7 @@ client := configcat.NewClient("#YOUR-SDK-KEY#")
 settingValues := client.GetAllValues(nil)
 
 // invoke with user object
-user := &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
+user := &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
 settingValuesTargeting := client.GetAllValues(user)
 ```
 

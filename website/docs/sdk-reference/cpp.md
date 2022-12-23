@@ -131,7 +131,7 @@ auto value = client->getValue(
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```cpp
-auto user = ConfigCatUser("435170f4-8a8b-4b67-a723-505ac7cdea92");
+auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 ```
 
 ```cpp
@@ -149,7 +149,7 @@ auto user = ConfigCatUser("john@example.com");
 
 ```cpp
 auto user = ConfigCatUser(
-    "435170f4-8a8b-4b67-a723-505ac7cdea92", // id
+    "#UNIQUE-USER-IDENTIFIER#", // userID
     "john@example.com", // email
     "United Kingdom", // country
     {
@@ -383,7 +383,7 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
 auto settingValues = client->getAllValues();
 
 // invoke with user object
-auto user = ConfigCatUser("435170f4-8a8b-4b67-a723-505ac7cdea92");
+auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 auto settingValuesTargeting = client->getAllValues(&user);
 ```
 
