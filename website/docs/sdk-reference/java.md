@@ -114,7 +114,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 boolean value = client.getValue(
     Boolean.class, // Setting type
     "keyOfMySetting", // Setting Key
-    User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
+    User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"), // Optional User Object
     false // Default value
 );
 ```
@@ -132,7 +132,7 @@ boolean value = client.getValue(
 client.getValueAsync(
     Boolean.class, // Setting type
     "keyOfMySetting", // Setting Key
-    User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92"), // Optional User Object
+    User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"), // Optional User Object
     false // Default value
 ).thenAccept(isMyAwesomeFeatureEnabled -> {
     if(isMyAwesomeFeatureEnabled) {
@@ -189,7 +189,7 @@ The details result contains the following information:
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```java
-User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92");
+User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
 ```
 
 ```java
@@ -212,7 +212,7 @@ User user = User.newBuilder()
     .email("john@example.com")
     .country("United Kingdom")
     .custom(customAttributes)
-    .build("435170f4-8a8b-4b67-a723-505ac7cdea92");
+    .build("#UNIQUE-USER-IDENTIFIER#");
 ```
 ### Default User
 
@@ -535,7 +535,7 @@ ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
 Map<String, Object> settingValues = client.getAllValues();
 
 // invoke with user object
-User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
+User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#")
 Map<String, Object> settingValuesTargeting = client.getAllValues(user);
 ```
 
@@ -544,7 +544,7 @@ ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
 client.getAllValuesAsync().thenAccept(settingValues -> { });
 
 // invoke with user object
-User user = User.newBuilder().build("435170f4-8a8b-4b67-a723-505ac7cdea92")
+User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#")
 client.getAllValuesAsync(user).thenAccept(settingValuesTargeting -> { });
 ```
 

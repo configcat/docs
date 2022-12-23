@@ -169,7 +169,7 @@ The details result contains the following information:
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```kotlin
-val user = ConfigCatUser(identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92")
+val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")
 ```
 
 ```kotlin
@@ -187,7 +187,7 @@ val user = ConfigCatUser(identifier = "john@example.com")
 
 ```kotlin
 val user = ConfigCatUser(
-    identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92",
+    identifier = "#UNIQUE-USER-IDENTIFIER#",
     email = "john@example.com",
     country = "United Kingdom",
     custom = mapOf(
@@ -406,12 +406,29 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#")
 val settingValues = client.getAllValues()
 
 // invoke with user object
-val user = ConfigCatUser(identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92")
+val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")
 val settingValuesTargeting = client.getAllValues(user)
 ```
 
-## Custom Cache
+## Cache
 
+The SDK uses platform specific caching to store the downloaded `config.json`.  
+These are the storage locations by platform:
+
+- **Android**: `SharedPreferences`. It has a dependency on `android.content.Context`, so it won't be enabled by default, but it can be explicitly set by providing an appropriate `Context`. ([Here](https://github.com/configcat/kotlin-sdk/blob/main/samples/android/app/src/main/java/com/example/configcat_android/MainActivity.kt#L23) is an example) 
+- **iOS / macOS / tvOS / watchOS**: `NSUserDefaults`.
+- **JS (browser only)**: Browser `localStorage`.
+- On other platforms the SDK uses a memory-only cache.
+
+If you want to turn off the default behavior, you can set the SDK's cache to `null` or to your own cache implementation.
+
+```kotlin
+val client = ConfigCatClient("#YOUR-SDK-KEY#") {
+    configCache = null
+}
+```
+
+### Custom Cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to implement the `ConfigCache` interface:
 
 ```kotlin

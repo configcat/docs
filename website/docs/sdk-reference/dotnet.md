@@ -128,12 +128,12 @@ You can close all open clients at once using the `ConfigCatClient.DisposeAll()` 
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
 ```csharp
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+User userObject = new User("#UNIQUE-USER-IDENTIFIER#");  // Optional User Object
 var value = client.GetValue("keyOfMySetting", false, userObject);
 ```
 
 ```csharp
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
 var value = await client.GetValueAsync("keyOfMySetting", false, userObject);
 ```
 
@@ -148,12 +148,12 @@ var value = await client.GetValueAsync("keyOfMySetting", false, userObject);
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
 ```csharp
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
 var details = client.GetValueDetails("keyOfMySetting", false, userObject);
 ```
 
 ```csharp
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
 var details = await client.GetValueDetailsAsync("keyOfMySetting", false, userObject);
 ```
 
@@ -176,7 +176,7 @@ The `details` result contains the following information:
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```csharp
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
 ```
 
 ```csharp
@@ -191,7 +191,7 @@ User userObject = new User("john@example.com");
 | `Custom`   | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```csharp
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92")
+User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
 {
     Email = "john@example.com",
     Country = "United Kingdom",
@@ -562,7 +562,7 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IDictionary<string, object> settingValues = client.GetAllValues();
 
 // invoke with user object
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 IDictionary<string, object> settingValuesTargeting = client.GetAllValues(userObject);
 ```
 
@@ -571,7 +571,7 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IDictionary<string, object> settingValues = await client.GetAllValuesAsync();
 
 // invoke with user object
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
 ```
 

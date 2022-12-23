@@ -53,7 +53,7 @@ Add the SDK to your `Package.swift`.
 dependencies: [
     .package(
         url: "https://github.com/configcat/swift-sdk",
-        from: "9.2.3"
+        from: "9.3.0"
     )
 ]
 ```
@@ -246,7 +246,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 client.getValue(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
-    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+    user: ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#") // Optional User Object
 ) { isMyAwesomeFeatureEnabled in
     if isMyAwesomeFeatureEnabled {
         doTheNewThing()
@@ -259,7 +259,7 @@ client.getValue(
 let isMyAwesomeFeatureEnabled = await client.getValue(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
-    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+    user: ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#") // Optional User Object
 
 if isMyAwesomeFeatureEnabled {
     doTheNewThing()
@@ -272,7 +272,7 @@ if isMyAwesomeFeatureEnabled {
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"435170f4-8a8b-4b67-a723-505ac7cdea92"
+ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
                                                          email:NULL country:NULL custom:NULL];
 
 [client getBoolValueFor:@"keyOfMySetting" // Setting Key
@@ -318,7 +318,7 @@ if (isMyAwesomeFeatureEnabled) {
 client.getValueDetails(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
-    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+    user: ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#") // Optional User Object
 ) { details in
     // Use the details result
 }
@@ -327,14 +327,14 @@ client.getValueDetails(
 let details = await client.getValueDetails(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
-    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+    user: ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#") // Optional User Object
 ```
 
 </TabItem>
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"435170f4-8a8b-4b67-a723-505ac7cdea92"
+ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
                                                          email:NULL country:NULL custom:NULL];
 
 [client getBoolValueDetailsFor:@"keyOfMySetting" // Setting Key
@@ -375,14 +375,14 @@ The [User Object](../advanced/user-object.md) is essential if you'd like to use 
 <TabItem value="swift" label="Swift">
 
 ```swift
-let user = ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92")
+let user = ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#")
 ```
 
 </TabItem>
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"435170f4-8a8b-4b67-a723-505ac7cdea92"
+ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
                                                          email:NULL
                                                        country:NULL
                                                         custom:NULL];
@@ -422,7 +422,7 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"john@example.co
 <TabItem value="swift" label="Swift">
 
 ```swift
-let user = ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
+let user = ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#",
     email: "john@example.com",
     country: "United Kingdom",
     custom: ["SubscriptionType":"Pro", "UserRole":"Admin"])
@@ -432,7 +432,7 @@ let user = ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"435170f4-8a8b-4b67-a723-505ac7cdea92"
+ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
                                                          email:@"john@example.com"
                                                        country:@"United Kingdom"
                                                         custom:@{@"SubscriptionType": @"Pro", @"UserRole": @"Admin"}];
@@ -637,7 +637,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 ```swift
 let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#")
-let user = ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92")
+let user = ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#")
 
 // Completion callback
 client.getAllValues(
@@ -658,7 +658,7 @@ let allValues = await client.getAllValues(
 ```objectivec
 ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#" options:NULL];
 
-ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"435170f4-8a8b-4b67-a723-505ac7cdea92"
+ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
                                                          email:NULL
                                                        country:NULL
                                                         custom:NULL];
@@ -959,8 +959,36 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 </TabItem>
 </Tabs>
 
-## Custom cache
+## Cache
 
+The SDK uses `UserDefaults` as the default cache to store the downloaded `config.json`.
+
+If you want to turn off the default behavior, you can set the SDK's cache to `nil` or to your own cache implementation.
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
+```swift
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.configCache = nil
+}
+```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
+                                            configurator:^(ConfigCatOptions* options) {
+    
+    options.configCache = NULL;
+}];
+```
+
+</TabItem>
+</Tabs>
+
+### Custom cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCache` open class:
 
 <Tabs groupId="ios-languages">
@@ -1198,7 +1226,7 @@ Example log entries:
 ```bash
 [main] Evaluating getValue(isPOCFeatureEnabled).
 User object: {
-  "Identifier" : "435170f4-8a8b-4b67-a723-505ac7cdea92",
+  "Identifier" : "#UNIQUE-USER-IDENTIFIER#",
   "Email" : "john@example.com"
 }.
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
