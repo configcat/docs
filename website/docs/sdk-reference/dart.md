@@ -38,7 +38,7 @@ Or put the following directly to your `pubspec.yml` and run `dart pub get` or `f
 
 ```yaml title="pubspec.yml"
 dependencies:
-  configcat_client: ^2.3.0
+  configcat_client: ^2.4.0
 ```
 
 ### 2. Import the ConfigCat SDK
@@ -53,10 +53,23 @@ import 'package:configcat_client/configcat_client.dart';
 final client = ConfigCatClient.get(sdkKey: '#YOUR-SDK-KEY#');
 ```
 
-### 4. Get your setting value
+### 4. (Optional) Set up Flutter caching
+
+If you're using the SDK in a Flutter application, it's recommended to use the [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) implementation for caching. It stores the downloaded `config.json` using the [shared_preferences](https://pub.dev/packages/shared_preferences) package.
 
 ```dart
-final isMyAwesomeFeatureEnabled = await client.getValue(key: '<key-of-my-awesome-feature>', defaultValue: false);
+import 'package:configcat_preferences_cache/configcat_preferences_cache.dart';
+```
+
+```dart
+final client = ConfigCatClient.get(
+    sdkKey: '#YOUR-SDK-KEY#',
+    options: ConfigCatOptions(cache: ConfigCatPreferencesCache()));
+```
+
+### 5. Get your setting value
+```dart
+final isMyAwesomeFeatureEnabled = await client.getValue(key: 'isMyAwesomeFeatureEnabled', defaultValue: false);
 if(isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
@@ -64,7 +77,7 @@ if(isMyAwesomeFeatureEnabled) {
 }
 ```
 
-### 5. Close _ConfigCat_ client​
+### 6. Close _ConfigCat_ client​
 
 You can safely shut down all clients at once or individually and release all associated resources on application exit.
 
@@ -418,8 +431,24 @@ final user = ConfigCatUser(identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92');
 final settingValuesTargeting = await client.getAllValues(user);
 ```
 
-## Custom Cache
+## Cache
 
+The SDK caches the downloaded `config.json` only in memory by default. In case you have a Flutter application, you can use the [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) for caching.  
+It's based on the [shared_preferences](https://pub.dev/packages/shared_preferences) package that uses the following storage locations by platform:
+
+- **Web**: Browser `LocalStorage`.
+- **iOS / macOS**: `NSUserDefaults`.
+- **Android**: `SharedPreferences`.
+- **Linux**: File in `XDG_DATA_HOME` directory.
+- **Windows**: File in roaming `AppData` directory.
+
+```dart
+final client = ConfigCatClient.get(
+    sdkKey: '#YOUR-SDK-KEY#',
+    options: ConfigCatOptions(cache: ConfigCatPreferencesCache()));
+```
+
+### Custom Cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCatCache` abstract class:
 
 ```dart
