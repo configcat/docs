@@ -556,6 +556,7 @@ Also, we recommend using [confidential targeting comparators](/advanced/targetin
 Check out our Sample Applications how they use the ConfigCat SDK
 
 - <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/kmm" target="_blank">Kotlin Multiplatform Mobile app</a>
+- <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/android" target="_blank">Android app</a>
 - <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/kotlin" target="_blank">Kotlin app</a>
 - <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/js" target="_blank">React app</a>
 - <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/node-js" target="_blank">Node.js app</a>
