@@ -557,7 +557,7 @@ Evaluates and returns the detailed values of all feature flags and settings. Pas
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
 
 ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
-List<EvaluationDetails<?>> allValueDetails = cl.getAllValueDetails(user);
+List<EvaluationDetails<Object>> allValueDetails = client.getAllValueDetails(user);
 ```
 
 ```java
