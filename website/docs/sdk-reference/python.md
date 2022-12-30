@@ -560,11 +560,11 @@ class InMemoryConfigCache(ConfigCache):
         self._value = {}
 
     def get(self, key):
-        # here you have to return with the cached value
+        # you should return the cached value
         return self._value.get(key)
 
     def set(self, key, value):
-        # here you have to store the new value in the cache
+        # you should cache the new value
         self._value[key] = value
 ```
 
