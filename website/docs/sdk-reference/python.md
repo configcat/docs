@@ -539,6 +539,15 @@ client = configcatclient.get('#YOUR-SDK-KEY#')
 all_values = client.get_all_values(User('435170f4-8a8b-4b67-a723-505ac7cdea92'))  # Optional User Object
 ```
 
+## `get_all_value_details()`
+
+Evaluates and returns the detailed values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
+```python
+client = configcatclient.get('#YOUR-SDK-KEY#')
+all_value_details = client.get_all_value_details(User('435170f4-8a8b-4b67-a723-505ac7cdea92'))  # Optional User Object
+```
+
 ## Custom cache
 
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the ConfigCache abstract class:
