@@ -39,13 +39,13 @@ import com.configcat.*;
 ### 3. Create and get the _ConfigCat_ client for your _SDK Key_
 
 ```java
-ConfigCatClient client =  ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
+ConfigCatClient client =  ConfigCatClient.get("#YOUR-SDK-KEY#");
 ```
 
 ### 4. Get your setting value
 
 ```java
-boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "<key-of-my-awesome-feature>", false);
+boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "isMyAwesomeFeatureEnabled", false);
 if(isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
@@ -58,7 +58,7 @@ if(isMyAwesomeFeatureEnabled) {
 You can safely shut down the client instance and release all associated resources on application exit.
 
 ```java
-client.close()
+client.close();
 ```
 You can close all singleton client instances and release all associated resources on application exit.
 
@@ -94,6 +94,12 @@ _ConfigCat Client_ is responsible for:
 | `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).|
 | `hooks()`                                                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).|
 
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.pollingMode(PollingModes.autoPoll());
+    options.logLevel(LogLevel.INFO);
+});
+```
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
@@ -221,40 +227,40 @@ There's an option to set a default user object that will be used at feature flag
 You can set the default user object either with the ConfigCatClient builder:
 
 ```java
-    ConfigCatClient client = ConfigCatClient.get(APIKEY, options -> {
-            options.mode(PollingModes.manualPoll());
-            options.baseUrl(server.url("/").toString());
-            options.defaultUser(User.newBuilder().build("john@example.com"));
-        });
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.mode(PollingModes.manualPoll());
+    options.baseUrl(server.url("/").toString());
+    options.defaultUser(User.newBuilder().build("john@example.com"));
+});
 ```
 
 or with the `setDefaultUser()` method of the ConfigCat client.
 
 ```java
-client.setDefaultUser(User.newBuilder().build("john@example.com"))
+client.setDefaultUser(User.newBuilder().build("john@example.com"));
 ```
 
 Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
 ```java
-client.setDefaultUser(User.newBuilder().build("john@example.com"))
+client.setDefaultUser(User.newBuilder().build("john@example.com"));
 // The default user will be used at the evaluation process.
-boolean value = client.getValue(Boolean.class, "keyOfMySetting", false)
+boolean value = client.getValue(Boolean.class, "keyOfMySetting", false);
 ```
 
 When the user object parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```java
-client.setDefaultUser(User.newBuilder().build("john@example.com"))
+client.setDefaultUser(User.newBuilder().build("john@example.com"));
 
-User otherUser = User.newBuilder().build("user")
+User otherUser = User.newBuilder().build("user");
 // otherUser will be used at the evaluation process.
-boolean value =  client.getValue(Boolean.class, "keyOfMySetting", false, otherUser)
+boolean value =  client.getValue(Boolean.class, "keyOfMySetting", false, otherUser);
 ```
 
 For deleting the default user, you can do the following:
 ```java
-client.clearDefaultUser()
+client.clearDefaultUser();
 ```
 
 ## Polling Modes
@@ -269,9 +275,9 @@ The _ConfigCat SDK_ downloads the latest values and stores them automatically ev
 Use the the `autoPollIntervalInSeconds` option parameter of the `PollingModes.autoPoll()` to change the polling interval.
 
 ```java
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>", options -> {
-        options.pollingMode(PollingModes.autoPoll(60 /* polling interval in seconds */));
-        });
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.pollingMode(PollingModes.autoPoll(60 /* polling interval in seconds */));
+});
 ```
 
 Available options:
@@ -288,7 +294,7 @@ When calling `getValue()` the _ConfigCat SDK_ downloads the latest setting value
 Use the `cacheRefreshIntervalInSeconds` option parameter of the `PollingModes.lazyLoad()` to set cache lifetime.
 
 ```java
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>", options -> {
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
         options.pollingMode(PollingModes.lazyLoad(60 /* the cache will expire in 120 seconds */));
 });
 ```
@@ -306,7 +312,7 @@ Available options:
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 
 ```java
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>", options ->{
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options ->{
         options.pollingMode(PollingModes.manualPoll());
 });
 
@@ -330,7 +336,7 @@ With the following hooks you can subscribe to particular events fired by the SDK
 
 You can subscribe to these events either on SDK initialization:
 ```java
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>", options -> {
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.hooks().addOnFlagEvaluated(details -> {
         /* handle the event */
     });
@@ -381,26 +387,26 @@ You can also specify whether the file should be reloaded when it gets modified.
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
-        options.flagOverrides(OverrideDataSourceBuilder.localFile(
-                    "path/to/the/local_flags.json", // path to the file
-                    true // reload the file when it gets modified
-                ),
-                OverrideBehaviour.LOCAL_ONLY // local/offline mode
-        );
-    });
+    options.flagOverrides(OverrideDataSourceBuilder.localFile(
+            "path/to/the/local_flags.json", // path to the file
+            true // reload the file when it gets modified
+        ),
+        OverrideBehaviour.LOCAL_ONLY // local/offline mode
+    );
+});
 ```
 
 #### Classpath Resource
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
-        options.flagOverrides(OverrideDataSourceBuilder.classPathResource(
-                    "local_flags.json", // name of the resource
-                    true // reload the resource when it gets modified
-                ),
-                OverrideBehaviour.LOCAL_ONLY // local/offline mode
-        );
-    });
+    options.flagOverrides(OverrideDataSourceBuilder.classPathResource(
+            "local_flags.json", // name of the resource
+            true // reload the resource when it gets modified
+        ),
+        OverrideBehaviour.LOCAL_ONLY // local/offline mode
+    );
+});
 ```
 
 #### JSON File Structure
@@ -517,12 +523,12 @@ ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
 You can query the keys of each feature flag and setting with the `getAllKeys()` or `getAllKeysAsync()` method.
 
 ```java
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 java.util.Collection<String> keys = client.getAllKeys();
 ```
 
 ```java
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 client.getAllKeysAsync().thenAccept(keys -> {
 });
 ```
@@ -532,7 +538,7 @@ client.getAllKeysAsync().thenAccept(keys -> {
 Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
 
 ```java
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 Map<String, Object> settingValues = client.getAllValues();
 
 // invoke with user object
@@ -541,7 +547,7 @@ Map<String, Object> settingValuesTargeting = client.getAllValues(user);
 ```
 
 ```java
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 client.getAllValuesAsync().thenAccept(settingValues -> { });
 
 // invoke with user object
@@ -556,15 +562,15 @@ Evaluates and returns the detailed values of all feature flags and settings. Pas
 ```java
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
 
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 List<EvaluationDetails<Object>> allValueDetails = client.getAllValueDetails(user);
 ```
 
 ```java
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
 
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>");
-        client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
+client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
 ```
 
 ## Custom Cache
@@ -589,8 +595,8 @@ public class MyCustomCache extends ConfigCache {
 Then use your custom cache implementation:
 
 ```java
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>", options -> {
-        options.cache(new MyCustomCache()) // inject your custom cache
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.cache(new MyCustomCache()) // inject your custom cache
 });
 ```
 
@@ -608,10 +614,10 @@ import java.net.Proxy;
 
 Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxyHost", proxyPort));
 
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>", options -> {
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.httpClient(new OkHttpClient.Builder()
-                .proxy(proxy)
-                .build())
+            .proxy(proxy)
+            .build())
 });
 ```
 
@@ -620,10 +626,10 @@ ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>", option
 You can set the maximum wait time for a ConfigCat HTTP response by using OkHttpClient's timeouts.
 
 ```java
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>", options -> {
-        options.httpClient(new OkHttpClient.Builder()
-                .readTimeout(2, TimeUnit.SECONDS) // set the read timeout to 2 seconds
-                .build())
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.httpClient(new OkHttpClient.Builder()
+            .readTimeout(2, TimeUnit.SECONDS) // set the read timeout to 2 seconds
+            .build())
 });
 ```
 
@@ -648,7 +654,7 @@ dependencies {
 You can change the verbosity of the logs by passing a `LogLevel` parameter to the ConfigCatClientBuilder's `logLevel` function.
 
 ```java
-ConfigCatClient client = ConfigCatClient.get("<PLACE-YOUR-SDK-KEY-HERE>", options -> {
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.logLevel(LogLevel.INFO);
 });
 ```
