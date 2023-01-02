@@ -111,7 +111,7 @@ Basically all of the value evaluator methods share the same signature, they only
 boolValue := client.GetBoolValue(
     "keyOfMyBoolSetting", // Setting Key
     false, // Default value
-    &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"} // User Object
+    &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"} // User Object
 )
 ```
 
@@ -119,7 +119,7 @@ boolValue := client.GetBoolValue(
 intValue := client.GetIntValue(
     "keyOfMyIntSetting", // Setting Key
     0, // Default value
-    &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"} // User Object
+    &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"} // User Object
 )
 ```
 
@@ -127,17 +127,15 @@ intValue := client.GetIntValue(
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
-### Simple user object creation:
-
 ```go
-user = &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
+user = &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
 ```
 
 ```go
 user = &configcat.UserData{Identifier: "john@example.com"}
 ```
 
-### Customized user object creation:
+### Customized user object creation
 
 | Arguments    | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -150,13 +148,13 @@ user = &configcat.UserData{Identifier: "john@example.com"}
 custom := map[string]string{}
 custom["SubscriptionType"] = "Pro"
 custom["UserRole"] = "Admin"
-user := &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
+user := &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#",
             Email: "john@example.com",
             Company: "United Kingdom",
             Custom: custom}
 ```
 
-### Other options to create a user object:
+### Other options to create a user object
 
 The _ConfigCat SDK_ uses reflection to determine what attributes are available on a user object. You can either implement the `UserAttributes` interface - which's `GetAttribute(string) string` method will be used to retrieve the attributes - or use a pointer to a struct type which's public fields are treated as possible comparison attributes.
 
@@ -237,7 +235,7 @@ client := configcat.NewClient("#YOUR-SDK-KEY#")
 settingValues := client.GetAllValues(nil)
 
 // invoke with user object
-user := &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
+user := &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
 settingValuesTargeting := client.GetAllValues(user)
 ```
 

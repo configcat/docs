@@ -124,7 +124,7 @@ object with more detailed information about the evaluation result.
 details = client.get_value_details(
     'keyOfMySetting', # Setting Key
     False, # Default value
-    User('435170f4-8a8b-4b67-a723-505ac7cdea92') # Optional User Object
+    User('#UNIQUE-USER-IDENTIFIER#') # Optional User Object
 )
 ```
 
@@ -147,7 +147,7 @@ The details result contains the following information:
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```python
-user_object = User('435170f4-8a8b-4b67-a723-505ac7cdea92')
+user_object = User('#UNIQUE-USER-IDENTIFIER#')
 ```
 
 ```python
@@ -165,7 +165,7 @@ user_object = User('john@example.com')
 
 ```python
 user_object = User(
-  '435170f4-8a8b-4b67-a723-505ac7cdea92',
+  '#UNIQUE-USER-IDENTIFIER#',
   'john@example',
   'United Kingdom',
   { SubscriptionType: 'Pro', UserRole: 'Admin' },
@@ -510,7 +510,7 @@ Info level logging helps to inspect the feature flag evaluation process:
 INFO -- : Evaluating get_value('isPOCFeatureEnabled').
 User object:
 {
-    "Identifier" : "435170f4-8a8b-4b67-a723-505ac7cdea92",
+    "Identifier" : "#UNIQUE-USER-IDENTIFIER#",
     "Email" : "john@example.com"
 }
 Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
@@ -536,7 +536,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#')
-all_values = client.get_all_values(User('435170f4-8a8b-4b67-a723-505ac7cdea92'))  # Optional User Object
+all_values = client.get_all_values(User('#UNIQUE-USER-IDENTIFIER#'))  # Optional User Object
 ```
 
 ## `get_all_value_details()`

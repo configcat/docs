@@ -9,11 +9,11 @@ import TabItem from '@theme/TabItem';
 
 Connect ConfigCat with Google via SAML.
 
-### Introduction
+## Introduction
 
 Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with Google as a SAML Identity Provider.
 
-### 1. Create a SAML Application in Google
+## 1. Create a SAML Application in Google
 
 - Log in to <a href="https://admin.google.com/" target="_blank">Google Admin console</a>, select `Apps` from the side menu, then select `Web and mobile apps`.
 
@@ -29,7 +29,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 The next step will guide you on how to configure ConfigCat with appearing information.
 
-### 2. Configure ConfigCat with SAML Details from Google
+## 2. Configure ConfigCat with SAML Details from Google
 
 - Copy the value of `SSO URL` and `Certificate` fields and save them for further use.
 
@@ -53,7 +53,7 @@ The next step will guide you on how to configure ConfigCat with appearing inform
 
 The next step will guide you on how to configure the Google App with details provided by ConfigCat.
 
-### 3. Configure the Google Application with Service Provider Details from ConfigCat
+## 3. Configure the Google Application with Service Provider Details from ConfigCat
 
 - Select `1. Set up your Identity Provider` step on the ConfigCat configuration dialog, and copy the following values to the Google App.
 
@@ -75,7 +75,7 @@ The next step will guide you on how to configure the Google App with details pro
 
 - Click `Save` on the ConfigCat SAML configuration dialog.
 
-### 4. Give Users Access to the Application
+## 4. Give Users Access to the Application
 
 - Click on `View details` under the `User access` section.
 
@@ -85,7 +85,7 @@ The next step will guide you on how to configure the Google App with details pro
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/google/on_for_everyone.png" alt="Google ON for everyone"/>
 
-### 5. Sign In
+## 5. Sign In
 
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
@@ -101,6 +101,6 @@ The next step will guide you on how to configure the Google App with details pro
 
 - You should be redirected to ConfigCat signed in with your company account.
 
-### 5. Next Steps
+## 5. Next Steps
 
 - Configure the [auto-assignment of users](/docs/advanced/team-management/auto-assign-users).

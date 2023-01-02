@@ -9,11 +9,11 @@ import TabItem from '@theme/TabItem';
 
 Connect ConfigCat with Auth0 via SAML.
 
-### Introduction
+## Introduction
 
 Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with Auth0 as a SAML Identity Provider.
 
-### 1. Create an Application in Auth0
+## 1. Create an Application in Auth0
 
 - Log in to <a href="https://auth0.com/auth/login" target="_blank">Auth0</a>, select `Applications` from the menu, then click `Create Application`.
 
@@ -29,7 +29,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 The next step will guide you on how to collect the information required for the appearing configuration dialog.
 
-### 2. Configure SAML for the Auth0 Application
+## 2. Configure SAML for the Auth0 Application
 
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
@@ -59,7 +59,7 @@ The next step will guide you on how to collect the information required for the 
 
   - Click on `Save`.
 
-### 3. Configure ConfigCat with SAML Details from Auth0
+## 3. Configure ConfigCat with SAML Details from Auth0
 
 You can choose one of the following options to configure ConfigCat with SAML Identity Provider metadata.
 
@@ -93,7 +93,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
   </TabItem>
 </Tabs>
 
-### 4. Sign In
+## 4. Sign In
 
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
@@ -109,6 +109,6 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 
 - You should be redirected to ConfigCat signed in with your company account.
 
-### 5. Next Steps
+## 5. Next Steps
 
 - Configure the [auto-assignment of users](/docs/advanced/team-management/auto-assign-users).

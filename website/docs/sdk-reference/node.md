@@ -114,7 +114,7 @@ configCatClient.getValue(
   (value) => {
     console.log(value);
   }, // Callback function
-  { identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92' }, // Optional User Object
+  { identifier: '#UNIQUE-USER-IDENTIFIER#' }, // Optional User Object
 );
 ```
 
@@ -132,7 +132,7 @@ Returns a Promise with the value.
 const value = await configCatClient.getValueAsync(
   'keyOfMySetting', // Setting Key
   false, // Default value
-  { identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92' }, // Optional User Object
+  { identifier: '#UNIQUE-USER-IDENTIFIER#' }, // Optional User Object
 );
 ```
 
@@ -143,7 +143,7 @@ configCatClient
   .getValueAsync(
     'keyOfMySetting', // Setting Key
     false, // Default value
-    { identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92' },
+    { identifier: '#UNIQUE-USER-IDENTIFIER#' },
   ) // Optional User Object
   .then((value) => {
     console.log(value);
@@ -156,7 +156,7 @@ The [User Object](../advanced/user-object.md) is essential if you'd like to use 
 
 ```javascript
 let userObject = {
-  identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92',
+  identifier: '#UNIQUE-USER-IDENTIFIER#',
 };
 ```
 
@@ -177,7 +177,7 @@ For advanced targeting:
 
 ```javascript
 let userObject = {
-  identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92',
+  identifier: '#UNIQUE-USER-IDENTIFIER#',
   email: 'john@example.com',
   country: 'United Kingdom',
   custom: {

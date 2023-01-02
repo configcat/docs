@@ -86,7 +86,7 @@ If you want to use multiple SDK Keys in the same application, create only one _C
 value = configcat_client.get_value(
     "keyOfMySetting", # Setting Key
     false, # Default value
-    ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92") # Optional User Object
+    ConfigCat::User.new("#UNIQUE-USER-IDENTIFIER#") # Optional User Object
 );
 ```
 
@@ -95,7 +95,7 @@ value = configcat_client.get_value(
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```ruby
-user_object = ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92")
+user_object = ConfigCat::User.new("#UNIQUE-USER-IDENTIFIER#")
 ```
 
 ```ruby
@@ -110,7 +110,7 @@ user_object = ConfigCat::User.new("john@example.com")
 | `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```ruby
-user_object = ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92", email: 'john@example', country: 'United Kingdom',
+user_object = ConfigCat::User.new("#UNIQUE-USER-IDENTIFIER#", email: 'john@example', country: 'United Kingdom',
                 custom: {'SubscriptionType': 'Pro', 'UserRole': 'Admin'})
 ```
 
@@ -386,7 +386,7 @@ Info level logging helps to inspect the feature flag evaluation process:
 INFO -- : Evaluating get_value('isPOCFeatureEnabled').
 User object:
 {
-    "Identifier" : "435170f4-8a8b-4b67-a723-505ac7cdea92",
+    "Identifier" : "#UNIQUE-USER-IDENTIFIER#",
     "Email" : "john@example.com"
 }
 Evaluating rule: [Email] [CONTAINS] [@something.com] => no match
@@ -418,7 +418,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 ```ruby
 configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
-setting_values = configcat_client.get_all_values(ConfigCat::User.new("435170f4-8a8b-4b67-a723-505ac7cdea92"))  # Optional User Object
+setting_values = configcat_client.get_all_values(ConfigCat::User.new("#UNIQUE-USER-IDENTIFIER#"))  # Optional User Object
 ```
 
 ## Force refresh

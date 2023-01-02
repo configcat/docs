@@ -7,7 +7,7 @@ description: New users will be automatically added to your organization if you h
 All new users who sign up with a [verified email domain](/docs/advanced/team-management/domain-verification) will be automatically added to your organization.
 Furthermore, you can also set which Organization roles / Product permissions they should get upon on-boarding.
 
-#### Steps to configure:
+## Steps to configure:
 
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 

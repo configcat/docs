@@ -134,7 +134,7 @@ configCatClient.getValue(
   function (value) {
     console.log(value);
   }, // Callback function
-  { identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92' }, // Optional User Object
+  { identifier: '#UNIQUE-USER-IDENTIFIER#' }, // Optional User Object
 );
 ```
 
@@ -152,7 +152,7 @@ Returns a Promise with the value.
 const value = await configCatClient.getValueAsync(
   'keyOfMySetting', // Setting Key
   false, // Default value
-  { identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92' }, // Optional User Object
+  { identifier: '#UNIQUE-USER-IDENTIFIER#' }, // Optional User Object
 );
 ```
 
@@ -163,7 +163,7 @@ configCatClient
   .getValueAsync(
     'keyOfMySetting', // Setting Key
     false, // Default value
-    { identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92' },
+    { identifier: '#UNIQUE-USER-IDENTIFIER#' },
   ) // Optional User Object
   .then((value) => {
     console.log(value);
@@ -177,7 +177,7 @@ For simple targeting:
 
 ```javascript
 var userObject = {
-  identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92',
+  identifier: '#UNIQUE-USER-IDENTIFIER#',
 };
 ```
 
@@ -200,7 +200,7 @@ For advanced targeting:
 
 ```javascript
 var userObject = {
-  identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92',
+  identifier: '#UNIQUE-USER-IDENTIFIER#',
   email: 'john@example.com',
   country: 'United Kingdom',
   custom: {
