@@ -326,7 +326,6 @@ Via the following events you can subscribe to particular events raised by the cl
 - `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config.json into memory from cache, then each time afterwards when a config.json with changed content is downloaded via HTTP.
 - `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetails()`/`GetValueDetailsAsync()`](#anatomy-of-getvaluedetails).
 - `event EventHandler<ConfigCatClientErrorEventArgs> Error`: This event is raised when an error occurs within the ConfigCat SDK.
-- `event EventHandler BeforeClientDispose`: This event is raised before the client gets closed by a `Dispose()` call.
 
 You can subscribe to these events either on initialization:
 
@@ -555,7 +554,7 @@ IEnumerable<string> keys = await client.GetAllKeysAsync();
 
 ## `GetAllValues()`, `GetAllValuesAsync()`
 
-Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
+Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
@@ -573,6 +572,28 @@ IDictionary<string, object> settingValues = await client.GetAllValuesAsync();
 // invoke with user object
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
+```
+
+## `GetAllValueDetails()`, `GetAllValueDetailsAsync()`
+
+Evaluates and returns the values along with evaluation details of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
+```csharp
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+IReadOnlyList<EvaluationDetails> settingValues = client.GetAllValueDetails();
+
+// invoke with user object
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+IReadOnlyList<EvaluationDetails> settingValuesTargeting = client.GetAllValueDetails(userObject);
+```
+
+```csharp
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+IReadOnlyList<EvaluationDetails> settingValues = await client.GetAllValueDetailsAsync();
+
+// invoke with user object
+User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+IReadOnlyList<EvaluationDetails> settingValuesTargeting = await client.GetAllValueDetailsAsync(userObject);
 ```
 
 ## Using ConfigCat behind a proxy
