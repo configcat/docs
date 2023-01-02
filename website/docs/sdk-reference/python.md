@@ -89,7 +89,7 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 
 :::caution
 We strongly recommend you to use the _ConfigCat Client_ as a Singleton object in your application.
-The `configcatclient.get("#YOUR-SDK-KEY#")` static factory method constructs singleton client instances for your SDK keys.
+The `configcatclient.get()` static factory method constructs singleton client instances for your SDK keys.
 These clients can be closed all at once with the `configcatclient.close_all()` method or individually with `client.close()`.
 :::
 
@@ -301,7 +301,7 @@ value = client.get_value('key', 'my default value') # Returns "value from server
 
 With the following hooks you can subscribe to particular events fired by the SDK:
 
-- `on_client_ready()`: This event is sent when the SDK reaches the ready state. If the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
+- `on_client_ready()`: This event is sent when the SDK reaches the ready state. If the SDK is set up with lazy load or manual polling it's considered ready right after instantiation.
 If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `on_client_ready` event fires when the auto polling's `max_init_wait_time_seconds` is reached.
 
 - `on_config_changed(config: dict)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
