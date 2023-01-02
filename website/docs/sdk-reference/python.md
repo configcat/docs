@@ -105,7 +105,7 @@ These clients can be closed all at once with the `configcatclient.close_all()` m
 value = client.get_value(
     'keyOfMySetting', # Setting Key
     False, # Default value
-    User('435170f4-8a8b-4b67-a723-505ac7cdea92') # Optional User Object
+    User('#UNIQUE-USER-IDENTIFIER#') # Optional User Object
 )
 ```
 
@@ -322,7 +322,7 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
     )
 )
 ```
-or with the `get_hooks()` property of the ConfigCat client:
+or with the `get_hooks()` method of the ConfigCat client:
 ```python
 client.get_hooks().add_on_flag_evaluated(on_flag_evaluated)
 ```
@@ -545,7 +545,7 @@ Evaluates and returns the detailed values of all feature flags and settings. Pas
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#')
-all_value_details = client.get_all_value_details(User('435170f4-8a8b-4b67-a723-505ac7cdea92'))  # Optional User Object
+all_value_details = client.get_all_value_details(User('#UNIQUE-USER-IDENTIFIER#'))  # Optional User Object
 ```
 
 ## Custom cache
