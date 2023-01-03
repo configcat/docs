@@ -84,7 +84,20 @@ _ConfigCat Client_ is responsible for:
 
 `ConfigCatClient.Get(sdkKey: "<sdkKey>")` returns a client with default options.
 
-The `Get` method has an optional callback parameter, which can be used to set up the client via a `ConfigCatClientOptions` object:
+### Customizing the _ConfigCat Client_
+
+To customize the SDK's behavior, you can pass an additional `Action<ConfigCatClientOptions>` parameter to the `Get()` static 
+factory method where the `ConfigCatClientOptions` class is used to set up the _ConfigCat Client_.
+
+```csharp
+IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+{
+    options.PollingMode = PollingModes.ManualPoll;
+    options.Logger = new ConsoleLogger(LogLevel.Info);
+});
+```
+
+These are the available options on the `ConfigCatClientOptions` class:
 
 | Properties          | Description                                                                                                                                                                                                                                                                                       | Default                                                                                                                                |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -106,8 +119,6 @@ For example:
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
-    options.PollingMode = PollingModes.ManualPoll;
-    options.Logger = new ConsoleLogger(LogLevel.Info);
     options.ClientReady += (s, e) => Debug.WriteLine("Client is ready!");
 });
 ```

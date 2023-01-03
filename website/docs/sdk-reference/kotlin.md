@@ -84,7 +84,23 @@ _ConfigCat Client_ is responsible for:
 
 `ConfigCatClient(<sdkKey>)` returns a client with default options.
 
-An optional second parameter a `ClientOptions` object can be used to set up the client with custom options.
+### Customizing the _ConfigCat Client_
+
+To customize the SDK's behavior, you can pass an additional `ConfigCatOptions.() -> Unit` parameter 
+to the `ConfigCatClient()` method where the `ConfigCatOptions` class is used to set up the _ConfigCat Client_.
+
+```kotlin
+import com.configcat.*
+import kotlin.time.Duration.Companion.seconds
+
+val client = ConfigCatClient("#YOUR-SDK-KEY#") {
+    pollingMode = autoPoll()
+    logLevel = LogLevel.INFO
+    requestTimeout = 10.seconds
+}
+```
+
+These are the available options on the `ConfigCatOptions` class:
 
 | Properties       | Type                          | Description                                                                                                                                                                                                                                                                                                                                      |
 | ---------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -102,20 +118,10 @@ An optional second parameter a `ClientOptions` object can be used to set up the 
 | `offline`        | `Bool`                        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).                                                                                                                                                                                        |
 | `hooks`          | `Hooks`                       | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                                                                         |
 
-```kotlin
-import com.configcat.*
-import kotlin.time.Duration.Companion.seconds
-
-val client = ConfigCatClient("#YOUR-SDK-KEY#") {
-    pollingMode = autoPoll()
-    logLevel = LogLevel.INFO
-    requestTimeout = 10.seconds
-}
-```
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
-The `ConfigCatClient(sdkKey: <sdkKey>)` static factory method constructs singleton client instances for your SDK keys.
+The `ConfigCatClient(sdkKey: <sdkKey>)` method constructs singleton client instances for your SDK keys.
 These clients can be closed all at once with the `ConfigCatClient.closeAll()` method or individually with `client.close()`.
 :::
 

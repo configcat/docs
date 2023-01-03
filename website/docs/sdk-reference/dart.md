@@ -97,6 +97,23 @@ _ConfigCat Client_ is responsible for:
 
 `ConfigCatClient.get(sdkKey: <sdkKey>)` returns a client with default options.
 
+### Customizing the _ConfigCat Client_
+
+To customize the SDK's behavior, you can pass an additional `ConfigCatOptions` parameter to the `get()` static 
+factory method where the `ConfigCatOptions` class is used to set up the _ConfigCat Client_.
+
+```dart
+final client = ConfigCatClient.get(
+    sdkKey: '#YOUR-SDK-KEY#',
+    options: ConfigCatOptions(
+        pollingMode: PollingMode.manualPoll(),
+        logger: ConfigCatLogger(level: LogLevel.info)
+    )
+);
+```
+
+These are the available options on the `ConfigCatOptions` class:
+
 | Properties       | Description                                                                                                                                                                                                                                                                                        |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataGovernance` | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`. |
@@ -112,19 +129,10 @@ _ConfigCat Client_ is responsible for:
 | `offline`        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).                                                                                                                                          |
 | `hooks`          | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
 
-```dart
-final client = ConfigCatClient.get(
-    sdkKey: '#YOUR-SDK-KEY#',
-    options: ConfigCatOptions(
-        pollingMode: PollingMode.manualPoll(),
-        logger: ConfigCatLogger(level: LogLevel.info)
-    )
-);
-```
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
-The `ConfigCatClient` constructs singleton client instances for your SDK keys with its `ConfigCatClient.get(sdkKey: <sdkKey>)` static factory method.
+The `ConfigCatClient.get(sdkKey: <sdkKey>)` static factory method constructs singleton client instances for your SDK keys.
 These clients can be closed all at once with the `ConfigCatClient.closeAll()` method or individually with `client.close()`.
 :::
 
