@@ -80,6 +80,7 @@ _ConfigCat Client_ is responsible for:
 
 `ConfigCatClient.get(<sdkKey>)` returns a client with default options.
 
+The `get` method has an optional callback parameter, which can be used to set up the client via a `Options` object:
 
 | Client options                                                | Description                                                                                                                                                                                                                                                                                       |
 |---------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

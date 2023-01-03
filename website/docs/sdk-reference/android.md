@@ -88,6 +88,8 @@ _ConfigCat Client_ is responsible for:
 
 `ConfigCatClient.get("#YOUR-SDK-KEY#")` returns a client with default options.
 
+The `get` method has an optional callback parameter, which can be used to set up the client via a `Options` object:
+
 | Client options                                                | Description                                                                                                                                                                                                                                                                                        |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
