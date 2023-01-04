@@ -530,11 +530,11 @@ class MyCustomCache {
   set(key, config) {
     // `key` [string] - a unique cache key
     // `config` [object (ProjectConfig)] - configcat's cache config item
-    // insert here your cache write logic
+    // insert your cache write logic here
   }
   get(key) {
     // `key` [string] - a unique cache key
-    // insert here your cache read logic
+    // insert your cache read logic here
   }
 }
 ```
@@ -547,11 +547,11 @@ function MyCustomCache() { }
 MyCustomCache.prototype.set = function (key, config) {
   // `key` [string] - a unique cache key
   // `config` [object (ProjectConfig)] - configcat's cache config item
-  // insert here your cache write logic
+  // insert your cache write logic here
 };
 MyCustomCache.prototype.get = function (key) {
   // `key` [string] - a unique cache key
-  // insert here your cache read logic (make sure you return null if )
+  // insert your cache read logic here
 };
 ```
 
