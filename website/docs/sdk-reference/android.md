@@ -457,6 +457,23 @@ User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#")
 client.getAllValuesAsync(user).thenAccept(settingValuesTargeting -> { });
 ```
 
+## `getAllValueDetails()`, `getAllValueDetailsAsync()`
+
+Evaluates and returns the detailed values of all feature flags and settings. Passing a User Object is optional.
+
+```java
+User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
+List<EvaluationDetails<?>> allValueDetails = client.getAllValueDetails(user);
+```
+
+```java
+User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
+        client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
+```
+
+
 ## Custom cache
 
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the ConfigCache abstract class:
