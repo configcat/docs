@@ -478,7 +478,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 ```
 ### Platform specific cache
 
-The SDK provides he `ConfigCatPreferencesCache` as platform specific cache. The cache uses the Android `SharedPreferences` to store the downloaded `config.json`.
+The SDK provides the `ConfigCatPreferencesCache` as platform specific cache. The cache uses the Android `SharedPreferences` to store the downloaded `config.json`.
 
 It has a dependency on `android.content.Context`, so it won't be enabled by default, but it can be explicitly set by providing an appropriate `Context`.
 
