@@ -68,7 +68,7 @@ if (value) {
 }
 ```
 
-(Please note that [top-level await in modules](https://exploringjs.com/impatient-js/ch_modules.html#top-level-await) may not be available [in older browsers](https://caniuse.com/mdn-javascript_operators_await_top_level). If you need to target such browser versions, you will need to take the Promise way or to wrap your code in an async function or to configure your build tools to downlevel this language feature.)
+(Please note that [top-level await in modules](https://exploringjs.com/impatient-js/ch_modules.html#top-level-await) may not be available [in older browsers](https://caniuse.com/mdn-javascript_operators_await_top_level). If you need to target such browser versions, you will need to use Promises or wrap your code in an async function or configure your build tools to downlevel this language feature.)
 
 The Promise way:
 
