@@ -1,4 +1,3 @@
-
 ---
 id: node
 title: Node.js SDK Reference
