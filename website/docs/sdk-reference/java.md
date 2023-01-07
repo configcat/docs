@@ -50,7 +50,7 @@ import com.configcat.*;
 ### 3. Create and get the _ConfigCat_ client for your _SDK Key_
 
 ```java
-ConfigCatClient client =  ConfigCatClient.get("#YOUR-SDK-KEY#");
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 ```
 
 ### 4. Get your setting value
