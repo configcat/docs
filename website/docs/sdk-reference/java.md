@@ -4,6 +4,9 @@ title: Java SDK reference
 description: ConfigCat Java SDK Reference. This is a step-by-step guide on how to use feature flags in your Java application.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/java-sdk.svg?style=social)](https://github.com/configcat/java-sdk/stargazers)
 [![Java CI](https://github.com/configcat/java-sdk/actions/workflows/java-ci.yml/badge.svg?branch=master)](https://github.com/configcat/java-sdk/actions/workflows/java-ci.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-java-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-java-client)
@@ -15,9 +18,19 @@ description: ConfigCat Java SDK Reference. This is a step-by-step guide on how t
 
 ### 1. Add the ConfigCat SDK to your project
 
-Maven:
+<Tabs>
+<TabItem value="Gradle" label="Gradle">
 
+```groovy title="build.gradle"
+dependencies {
+    implementation 'com.configcat:configcat-java-client:8.+'
+}
 ```
+
+</TabItem>
+<TabItem value="Maven" label="Maven">
+
+```xml title="pom.xml"
 <dependency>
   <groupId>com.configcat</groupId>
   <artifactId>configcat-java-client</artifactId>
@@ -25,11 +38,8 @@ Maven:
 </dependency>
 ```
 
-Gradle:
-
-```bash
-implementation 'com.configcat:configcat-java-client:8.+'
-```
+</TabItem>
+</Tabs>
 
 ### 2. Import the ConfigCat SDK
 
