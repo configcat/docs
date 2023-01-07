@@ -450,7 +450,21 @@ User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#")
 client.getAllValuesAsync(user).thenAccept(settingValuesTargeting -> { });
 ```
 
-## Custom cache
+## Cache
+
+The SDK by default uses a memory-only cache.
+If you want to change the default behavior, you can set your own cache implementation.
+
+The SDK provides the `ConfigCatPreferencesCache` as platform specific cache. The cache uses the Android `SharedPreferences` to store the downloaded `config.json`.
+The `ConfigCatPreferencesCache` has a dependency on `android.content.Context`, so it won't be enabled by default. The cache can be explicitly set by providing an appropriate `Context`.
+
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+        options.cache(new ConfigCatPreferencesCache(getApplicationContext())); // Use ConfigCat's shared preferences cache. 
+});
+```
+
+### Custom cache
 
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the ConfigCache abstract class:
 
@@ -474,17 +488,6 @@ Then use your custom cache implementation:
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.cache(new MyCustomCache()); // inject your custom cache
-});
-```
-### Platform specific cache
-
-The SDK provides the `ConfigCatPreferencesCache` as platform specific cache. The cache uses the Android `SharedPreferences` to store the downloaded `config.json`.
-
-It has a dependency on `android.content.Context`, so it won't be enabled by default, but it can be explicitly set by providing an appropriate `Context`.
-
-```java
-ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-    options.cache(ConfigCatPreferencesCache(this@MainActivity)) // in this case the MainActivity is the context 
 });
 ```
 
