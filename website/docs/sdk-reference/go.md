@@ -83,13 +83,18 @@ Available optional properties:
 | `Logger`           | `configcat.Logger`         | Sets the `Logger` implementation used by the SDK for logging. [More about logging](#logging)                                                                                                                                                                                                    |
 | `PollingMode`      | `configcat.PollingMode`    | Defaults to `AutoPoll`. Sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                       |
 | `PollInterval`     | `time.Duration`            | Sets after how much time a configuration is considered stale. When `PollingMode` is `AutoPoll` this value is used as the polling rate.                                                                                                                                                          |
-| `ChangeNotify`     | `func()`                   | An optional callback to invoke when a new configuration has fetched.                                                                                                                                                                                                                            |
-| `FlagOverrides`    | `*configcat.FlagOverrides` | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                |
+| `ChangeNotify`     | `func()`                   | **Deprecated**. An optional callback to invoke when a new configuration has fetched.                                                                                                                                                                                                                            |
+| `FlagOverrides`    | `*configcat.FlagOverrides` | Sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                |
+| `DefaultUser`      | `configcat.User`           | Sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                                                                      |
+| `Offline`          | `bool`                     | Defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#offline-mode).                                                                                                                                                                                        |
+| `Hooks`            | `*configcat.Hooks`         | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).
 
 Then you can pass it to the `NewCustomClient()` method:
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#", PollingMode: configcat.Manual })
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#", 
+        PollingMode: configcat.Manual,
+        Logger: configcat.DefaultLogger(configcat.LogLevelInfo)})
 ```
 
 :::caution
