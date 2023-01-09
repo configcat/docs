@@ -184,7 +184,7 @@ val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")
 val user = ConfigCatUser(identifier = "john@example.com")
 ```
 
-### Customized user object creation:
+### Customized user object creation
 
 | Argument     | Description                                                                                                              |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------ |
