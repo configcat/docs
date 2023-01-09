@@ -455,12 +455,12 @@ client.getAllValuesAsync(user).thenAccept(settingValuesTargeting -> { });
 The SDK by default uses a memory-only cache.
 If you want to change the default behavior, you can set your own cache implementation.
 
-The SDK provides the `ConfigCatPreferencesCache` as platform specific cache. The cache uses the Android `SharedPreferences` to store the downloaded `config.json`.
-The `ConfigCatPreferencesCache` has a dependency on `android.content.Context`, so it won't be enabled by default. The cache can be explicitly set by providing an appropriate `Context`.
+The SDK provides the `SharedPreferencesCache` as platform specific cache. The cache uses the Android `SharedPreferences` to store the downloaded `config.json`.
+The `SharedPreferencesCache` has a dependency on `android.content.Context`, so it won't be enabled by default. The cache can be explicitly set by providing an appropriate `Context`.
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-        options.cache(new ConfigCatPreferencesCache(getApplicationContext())); // Use ConfigCat's shared preferences cache. 
+        options.cache(new SharedPreferencesCache(getApplicationContext())); // Use ConfigCat's shared preferences cache. 
 });
 ```
 
