@@ -476,10 +476,10 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 ## Cache
 
 The SDK by default uses a memory-only cache.
-If you want to change the default behavior, you can set your own cache implementation.
+If you want to change the default behavior, you can either use the built-in `SharedPreferencesCache` or your custom cache implementation.
 
-The SDK provides the `SharedPreferencesCache` as platform specific cache. The cache uses the Android `SharedPreferences` to store the downloaded `config.json`.
-The `SharedPreferencesCache` has a dependency on `android.content.Context`, so it won't be enabled by default. The cache can be explicitly set by providing an appropriate `Context`.
+The `SharedPreferencesCache` implementation uses the Android `SharedPreferences` to store the downloaded `config.json`.
+`SharedPreferencesCache` has a dependency on `android.content.Context`, so it won't be enabled by default. The cache can be explicitly set by providing an appropriate `Context`.
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
