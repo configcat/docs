@@ -4,19 +4,33 @@ title: Java SDK reference
 description: ConfigCat Java SDK Reference. This is a step-by-step guide on how to use feature flags in your Java application.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/java-sdk.svg?style=social)](https://github.com/configcat/java-sdk/stargazers)
 [![Java CI](https://github.com/configcat/java-sdk/actions/workflows/java-ci.yml/badge.svg?branch=master)](https://github.com/configcat/java-sdk/actions/workflows/java-ci.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-java-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-java-client)
-[![Coverage Status](https://img.shields.io/codecov/c/github/ConfigCat/java-sdk.svg)](https://codecov.io/gh/ConfigCat/java-sdk)
-[![Javadocs](https://javadoc.io/badge/com.configcat/configcat-java-client.svg)](https://javadoc.io/doc/com.configcat/configcat-java-client)
+[![Javadocs](http://javadoc.io/badge/com.configcat/configcat-java-client.svg)](http://javadoc.io/doc/com.configcat/configcat-java-client)
+[![Coverage Status](https://img.shields.io/sonar/coverage/configcat_java-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=configcat_java-sdk)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=configcat_java-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=configcat_java-sdk)
 
 ## Getting Started
 
 ### 1. Add the ConfigCat SDK to your project
 
-Maven:
+<Tabs>
+<TabItem value="Gradle" label="Gradle">
 
+```groovy title="build.gradle"
+dependencies {
+    implementation 'com.configcat:configcat-java-client:8.+'
+}
 ```
+
+</TabItem>
+<TabItem value="Maven" label="Maven">
+
+```xml title="pom.xml"
 <dependency>
   <groupId>com.configcat</groupId>
   <artifactId>configcat-java-client</artifactId>
@@ -24,11 +38,8 @@ Maven:
 </dependency>
 ```
 
-Gradle:
-
-```bash
-implementation 'com.configcat:configcat-java-client:8.+'
-```
+</TabItem>
+</Tabs>
 
 ### 2. Import the ConfigCat SDK
 
@@ -39,7 +50,7 @@ import com.configcat.*;
 ### 3. Create and get the _ConfigCat_ client for your _SDK Key_
 
 ```java
-ConfigCatClient client =  ConfigCatClient.get("#YOUR-SDK-KEY#");
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 ```
 
 ### 4. Get your setting value
@@ -80,8 +91,21 @@ _ConfigCat Client_ is responsible for:
 
 `ConfigCatClient.get(<sdkKey>)` returns a client with default options.
 
+### Customizing the _ConfigCat Client_
 
-| Client options                                                | Description                                                                                                                                                                                                                                                                                       |
+To customize the SDK's behavior, you can pass an additional `Consumer<Options>` parameter to the `get()` static 
+factory method where the `Options` class is used to set up the _ConfigCat Client_.
+
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.pollingMode(PollingModes.autoPoll());
+    options.logLevel(LogLevel.INFO);
+});
+```
+
+These are the available options on the `Options` class:
+
+| Option                                                | Description                                                                                                                                                                                                                                                                                       |
 |---------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
 | `baseUrl(string)`                                             | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                           |
@@ -93,13 +117,6 @@ _ConfigCat Client_ is responsible for:
 | `defaultUser(User)`                                           | Optional, sets default user. [More about default user](#default-user).                                                                                                                                                                                                                            |
 | `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).|
 | `hooks()`                                                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).|
-
-```java
-ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-    options.pollingMode(PollingModes.autoPoll());
-    options.logLevel(LogLevel.INFO);
-});
-```
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
