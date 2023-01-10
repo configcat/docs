@@ -66,7 +66,7 @@ The React HOC (`WithConfigCatClientProps`) way:
 ```tsx
 class TestHOCComponent extends React.Component<
   WithConfigCatClientProps,
-  { isAwesomeFeatureEnabled: string }
+  { isAwesomeFeatureEnabled: boolean, loading: boolean }
 > {
   constructor(props: WithConfigCatClientProps) {
     super(props);
@@ -103,6 +103,9 @@ class TestHOCComponent extends React.Component<
     );
   }
 }
+
+const ConfigCatTestHOCComponent = withConfigCatClient(TestHOCComponent);
+
 ```
 
 ## Creating the _ConfigCat_ Client
@@ -148,6 +151,12 @@ For example:
 </ConfigCatProvider>
 ```
 
+### Acquire the ConfigCat instance
+
+The SDK supports two options to acquire the initialized instance of ConfigCat:
+ - Custom hook `useConfigCatClient()` (from React v16.8)
+ - High order components `withConfigCatClient()`
+
 ## Anatomy of `useFeatureFlag()`
 
 | Parameters     | Description                                                                                                  |
@@ -171,7 +180,101 @@ function ButtonComponent() {
 }
 ```
 
-## Anatomy of `WithConfigCatClientProps.getValue()`
+## Anatomy of `useConfigCatClient()`
+
+This custom hook returns the ConfigCat instance from the context API. You have to wrap your parent element with `ConfigCatProvider` to ensure a `ConfigCatContextData`.
+
+```tsx
+export const FlagDetailsComponent = () => {
+  const client = useConfigCatClient();
+
+  const [flagDetails, setFlagDetails] = useState<IEvaluationDetails<boolean> | null>(null);
+
+  useEffect(() => {client.getValueDetailsAsync('isAwesomeFeatureEnabled', false).then(v => setFlagDetails(v))}, [client]);
+
+  return (
+  <>
+    {flagDetails && 
+      <p>
+        FlagDetails: {JSON.stringify(flagDetails)}
+      </p>
+    }
+  </>);
+}
+```
+
+## Anatomy of `withConfigCatClient()`
+
+It is higher-order component that can take your react component and will return the component with the injected ConfigCat related props (`WithConfigCatClientProps`).
+
+These props are the following:
+
+```tsx
+export interface WithConfigCatClientProps {
+  configCatClient: IConfigCatClient;
+  getValue: GetValueType;
+  lastUpdated?: Date;
+}
+```
+
+Sample declaration of class component with ConfigCat SDK's higher-order component:
+```tsx
+class MyComponent extends React.Component<
+  { myProp: string } & WithConfigCatClientProps
+> {
+  constructor(props: { myProp: string } & WithConfigCatClientProps) {
+    super(props);
+
+    // props.configCatClient - use any method on the instance
+    // props.getValue - helper function for flag evaluation
+  }
+
+  ...
+}
+
+// HOC declaration
+const ConfigCatMyComponent = withConfigCatClient(MyComponent);
+
+// Usage of the wrapped component
+<ConfigCatMyComponent myProp='ConfigCat <3 React' />
+```
+
+### Props - `configCatClient`
+
+It is a ConfigCat client instance (`IConfigCatClient`) to access all features of the ConfigCat.
+
+In this example the component can invoke the `forceRefreshAsync` method on the injected ConfigCat instance.
+```tsx
+class ManualRefreshComponent extends React.Component<
+  { featureFlagKey: string } & WithConfigCatClientProps,
+  { refreshAt: string | null}
+> {
+  constructor(props: { featureFlagKey: string } & WithConfigCatClientProps) {
+    super(props);
+
+    this.state = { refreshAt: '-'};
+  }
+
+  refresh(){
+    this.props.configCatClient.forceRefreshAsync().then(() => this.setState({refreshAt: new Date().toLocaleTimeString()}))
+  }
+
+  render() {
+    return (
+        <div>
+          <button onClick={() => this.refresh()}>Refresh</button>
+          <p>Last manual refresh: {this.state.refreshAt}</p>
+        </div>
+    );
+  }
+}
+
+const ConfigCatManualRefreshComponent = withConfigCatClient(ManualRefreshComponent);
+```
+
+### Props - `getValue`
+
+It is a helper function to get feature flag value.
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -221,6 +324,10 @@ class TestHOCComponent extends React.Component<
 }
 ```
 
+### Props - `lastUpdated`
+
+It is the timestamp of the last config update's event.
+
 ## User Object
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
@@ -228,13 +335,13 @@ The [User Object](../advanced/user-object.md) is essential if you'd like to use 
 For simple targeting:
 
 ```tsx
-let userObject =  new User('435170f4-8a8b-4b67-a723-505ac7cdea92');
+const userObject =  new User('435170f4-8a8b-4b67-a723-505ac7cdea92');
 ```
 
 or
 
 ```tsx
-let userObject = new User('john@example.com');
+const userObject = new User('john@example.com');
 ```
 
 | Parameters   | Description                                                                                                                     |
@@ -289,19 +396,80 @@ You can set the default user object either on SDK initialization:
 </ConfigCatProvider>
 ```
 
-...or using the `setDefaultUser()` method of the `configCatClient` object:
-[TODO: example]
+...or using the `setDefaultUser()` method of the `configCatClient` instance:
+
+```tsx
+const CurrentUser: User = new User('john@example.com');
+
+export const SetConfigCatUserComponent = () => {
+  const client = useConfigCatClient();
+
+  const [user] = useState(CurrentUser);
+
+  useEffect(() => {client.setDefaultUser(user)}, [client, user]);
+
+  return (null);
+}
+```
 
 Whenever the evaluation methods like `getValueAsync()`, `getValueDetailsAsync()`, etc. are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
-[TODO: example]
+```tsx
+export const FlagValueDetailsComponent = () => {
+  const client = useConfigCatClient();
+  
+  const [flagDetails, setFlagDetails] = useState<IEvaluationDetails<boolean> | null>(null);
+
+  // invoke getValueDetailsAsync method WITHOUT User object
+  useEffect(() => {client.getValueDetailsAsync('args.featureFlagKey', false).then(v => setFlagDetails(v))}, [client]);
+
+  return (
+  <>
+    {flagDetails && 
+      <p>
+        FlagDetails: {JSON.stringify(flagDetails)}
+      </p>
+    }
+  </>);
+};
+```
 
 When a user object parameter is passed to the evaluation methods, it takes precedence over the default user.
 
-[TODO: example]
+```tsx
+const CurrentUser: User = new User('john@example.com');
+
+export const FlagValueDetailsComponent = () => {
+  const client = useConfigCatClient();
+  
+  const [flagDetails, setFlagDetails] = useState<IEvaluationDetails<boolean> | null>(null);
+  const [user] = useState(CurrentUser);
+
+  // invoke getValueDetailsAsync method WITH User object
+  useEffect(() => {client.getValueDetailsAsync('args.featureFlagKey', false, user).then(v => setFlagDetails(v))}, [client, user]);
+
+  return (
+  <>
+    {flagDetails && 
+      <p>
+        FlagDetails: {JSON.stringify(flagDetails)}
+      </p>
+    }
+  </>);
+};
+```
 
 You can also remove the default user by doing the following:
-[TODO: example]
+
+```tsx
+export const ClearConfigCatUserComponent = () => {
+  const client = useConfigCatClient();
+
+  useEffect(() => {client.clearDefaultUser() }, [client]);
+
+  return (null);
+}
+```
 
 ## Polling Modes
 
@@ -393,12 +561,14 @@ Manual polling gives you full control over when the `config.json` (with the sett
 const client = useConfigCatClient();
 useEffect(() => {
   client.forceRefreshAsync().then(() => {
-    setRefreshed(true);
+    console.log('forceRefreshAsync() invoked');
   });
 });
 ```
 
 ## Hooks
+
+> ** ConfigCat SDK hooks are a different things than React Hooks. **
 
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
 You can subscribe to the following events emitted by the client:
@@ -421,19 +591,111 @@ You can subscribe to these events either on initialization:
 ```
 
 ...or directly on the `ConfigCatClient` instance:
-[TODO: example]
+
+```tsx
+export const ConfigCatWithHookComponent = () => {
+  const client = useConfigCatClient();
+
+  const [configChangedAt, setConfigChanged] = useState('-');
+
+  useEffect(() => {
+    
+    function hookLogic() {
+      const t = new Date().toISOString();
+      setConfigChanged(t);
+      console.log(t)
+    };
+    
+    client.on('configChanged', hookLogic);
+    
+    return () => {
+      client.off('configChanged', hookLogic)
+    }
+  });
+
+  return (    
+      <p>
+      configChangedAt: {configChangedAt}
+      </p>
+    );
+}
+```
+
+With higher-order component:
+
+```tsx
+class ConfigChangedComponent extends React.Component<
+  WithConfigCatClientProps,
+  { refreshAt: string | null}
+> {
+  constructor(props: WithConfigCatClientProps) {
+    super(props);
+
+    this.state = { refreshAt: '-'};
+  }
+
+  componentDidMount() {
+    this.props.configCatClient.on('configChanged', () => this.myHookLogic());
+  }
+
+  componentWillUnmount() {
+    this.props.configCatClient.off('configChanged', () => this.myHookLogic());
+  }
+
+  myHookLogic() {
+    this.setState({refreshAt: new Date().toISOString()});
+  };
+
+  render() {
+    return (
+        <div>
+          <p>configChangedAt: {this.state.refreshAt}</p>
+        </div>
+    );
+  }
+}
+
+const ConfigCatManualRefreshComponent = withConfigCatClient(ConfigChangedComponent);
+
+```
 
 ## Online / Offline mode
 
 In cases where you want to prevent the SDK from making HTTP calls, you can switch it to offline mode:
-[TODO: example]
+
+```tsx
+export const ConfigCatIsOfflineComponent = () => {
+  const client = useConfigCatClient();
+
+  const [isOffline, setIsOffline] = useState(false);
+
+  function setMode() {
+    if (isOffline){
+      client.setOnline();
+    }
+    else{
+      client.setOffline();
+    }
+
+    setIsOffline(client.isOffline);
+  }
+
+  return (
+  <>
+    <p>
+        ConfigCat mode: {isOffline ? 'Offline' : 'Online'}
+    </p>
+    <button onClick={() => { setMode() }} >Set {isOffline ? 'Online' : 'Offline'}</button>
+    
+  </>);
+}
+```
 
 In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
 
-To switch the SDK back to online mode, do the following:
-[TODO: example]
+To switch the SDK back to online mode, invoke `setOnline()` method.
 
-Using the [TODO: how to access the isOffline] property you can check whether the SDK is in offline mode or not.
+Using the `isOffline` property you can check whether the SDK is in offline mode or not.
 
 ## Flag Overrides
 
