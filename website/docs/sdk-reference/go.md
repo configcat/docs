@@ -86,7 +86,7 @@ Available optional properties:
 | `ChangeNotify`     | `func()`                   | **Deprecated**. Replaced by the `OnConfigChanged()` [hook](#hooks).                                                                                                                                                                                                                            |
 | `FlagOverrides`    | `*configcat.FlagOverrides` | Sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                |
 | `DefaultUser`      | `configcat.User`           | Sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                                                                      |
-| `Offline`          | `bool`                     | Defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#offline-mode).                                                                                                                                                                                        |
+| `Offline`          | `bool`                     | Defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                                                        |
 | `Hooks`            | `*configcat.Hooks`         | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).
 
 Then you can pass it to the `NewCustomClient()` method:
@@ -314,7 +314,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     }})
 ```
 
-## Offline mode
+## Online / Offline mode
 
 In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
 
