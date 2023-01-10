@@ -7,8 +7,8 @@ description: ConfigCat Android SDK Reference. This is a step-by-step guide on ho
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/android-sdk.svg?style=social)](https://github.com/configcat/android-sdk/stargazers)
 [![Android CI](https://github.com/configcat/android-sdk/actions/workflows/android-ci.yml/badge.svg?branch=master)](https://github.com/configcat/android-sdk/actions/workflows/android-ci.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-android-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-android-client)
-[![Javadocs](http://javadoc.io/badge/com.configcat/configcat-android-client.svg)](http://javadoc.io/doc/com.configcat/configcat-android-client)
-[![Coverage Status](https://img.shields.io/sonar/coverage/configcat_android-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=configcat_android-sdk)
+[![Coverage Status](https://img.shields.io/codecov/c/github/ConfigCat/android-sdk.svg)](https://codecov.io/gh/ConfigCat/android-sdk)
+[![Javadocs](https://javadoc.io/badge/com.configcat/configcat-android-client.svg)](https://javadoc.io/doc/com.configcat/configcat-android-client)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=configcat_android-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=configcat_android-sdk)
 
 :::info
@@ -473,8 +473,21 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
         client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
 ```
 
+## Cache
 
-## Custom cache
+The SDK by default uses a memory-only cache.
+If you want to change the default behavior, you can either use the built-in `SharedPreferencesCache` or your custom cache implementation.
+
+The `SharedPreferencesCache` implementation uses the Android `SharedPreferences` to store the downloaded `config.json`.
+`SharedPreferencesCache` has a dependency on `android.content.Context`, so it won't be enabled by default. The cache can be explicitly set by providing an appropriate `Context`.
+
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+        options.cache(new SharedPreferencesCache(getApplicationContext())); // Use ConfigCat's shared preferences cache. 
+});
+```
+
+### Custom cache
 
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the ConfigCache abstract class:
 
