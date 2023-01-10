@@ -316,13 +316,19 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
 
 ## Offline mode
 
-In cases when you'd want to prevent the SDK from making HTTP calls, you can initialize it in offline mode:
+In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#", Offline: true})
+client.SetOffline()
 ```
 
 In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
+
+To put the SDK back in online mode, you can do the following:
+
+```go
+client.SetOnline()
+```
 
 > With `client.IsOffline()` you can check whether the SDK is in offline mode or not.
 
