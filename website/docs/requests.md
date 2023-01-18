@@ -12,7 +12,7 @@ See an <a href="https://configcat.com/architecture/" target="_blank">overview of
 
 Use the <a href="https://configcat.com/calculator/" target="_blank">Plan Calculator</a> to get your estimated config.json downloads.
 
-Keep track of the number of config.json downloads your apps are making on the <a href="https://app.configcat.com/product/statistics" target="_blank">statistics page.</a>
+Keep track of the number of config.json downloads your apps are making on the <a href="https://app.configcat.com/product/usage" target="_blank">Usage & Quota page.</a>
 
 <img src="/docs/assets/stats.png" className="zoomable" alt="ConfigCat Statistics" />
 
