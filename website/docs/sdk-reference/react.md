@@ -153,9 +153,9 @@ For example:
 
 ### Acquire the ConfigCat instance
 
-The SDK supports two options to acquire the initialized instance of ConfigCat:
- - Custom hook `useConfigCatClient()` (from React v16.8)
- - High order components `withConfigCatClient()`
+The SDK supports two options to acquire the initialized ConfigCat instance:
+ - Custom hook: `useConfigCatClient()` (from React v16.8)
+ - Higher-order component: `withConfigCatClient()`
 
 ## Anatomy of `useFeatureFlag()`
 
@@ -205,7 +205,7 @@ export const FlagDetailsComponent = () => {
 
 ## Anatomy of `withConfigCatClient()`
 
-It is higher-order component that can take your react component and will return the component with the injected ConfigCat related props (`WithConfigCatClientProps`).
+This is a higher-order component that can take your React component and will return the component with the injected ConfigCat related props (`WithConfigCatClientProps`).
 
 These props are the following:
 
@@ -241,7 +241,7 @@ const ConfigCatMyComponent = withConfigCatClient(MyComponent);
 
 ### Props - `configCatClient`
 
-It is a ConfigCat client instance (`IConfigCatClient`) to access all features of the ConfigCat.
+The ConfigCat client instance (`IConfigCatClient`) to access all features of the _ConfigCat SDK_.
 
 In this example the component can invoke the `forceRefreshAsync` method on the injected ConfigCat instance.
 ```tsx
@@ -274,7 +274,7 @@ const ConfigCatManualRefreshComponent = withConfigCatClient(ManualRefreshCompone
 
 ### Props - `getValue`
 
-It is a helper function to get feature flag value.
+A helper function to get the value of a feature flag.
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -326,7 +326,7 @@ class TestHOCComponent extends React.Component<
 
 ### Props - `lastUpdated`
 
-It is the timestamp of the last config update's event.
+The timestamp of the last config update's event.
 
 ## User Object
 
@@ -354,7 +354,7 @@ const userObject = new User('john@example.com');
 For advanced targeting:
 
 ```tsx
-let userObject = new User(
+const userObject = new User(
   /* identifier: */ '435170f4-8a8b-4b67-a723-505ac7cdea92',
   /*      email: */ 'john@example.com',
   /*    country: */ 'United Kingdom',
@@ -421,7 +421,7 @@ export const FlagValueDetailsComponent = () => {
   const [flagDetails, setFlagDetails] = useState<IEvaluationDetails<boolean> | null>(null);
 
   // invoke getValueDetailsAsync method WITHOUT User object
-  useEffect(() => {client.getValueDetailsAsync('args.featureFlagKey', false).then(v => setFlagDetails(v))}, [client]);
+  useEffect(() => {client.getValueDetailsAsync('featureFlagKey', false).then(v => setFlagDetails(v))}, [client]);
 
   return (
   <>
@@ -446,7 +446,7 @@ export const FlagValueDetailsComponent = () => {
   const [user] = useState(CurrentUser);
 
   // invoke getValueDetailsAsync method WITH User object
-  useEffect(() => {client.getValueDetailsAsync('args.featureFlagKey', false, user).then(v => setFlagDetails(v))}, [client, user]);
+  useEffect(() => {client.getValueDetailsAsync('featureFlagKey', false, user).then(v => setFlagDetails(v))}, [client, user]);
 
   return (
   <>
@@ -568,7 +568,7 @@ useEffect(() => {
 
 ## Hooks
 
-> ** ConfigCat SDK hooks are a different things than React Hooks. **
+> ** ConfigCat SDK hooks are different things than React Hooks. **
 
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
 You can subscribe to the following events emitted by the client:
@@ -778,11 +778,11 @@ class MyCustomCache {
   set(key, config) {
     // `key` [string] - a unique cache key
     // `config` [object (ProjectConfig)] - configcat's cache config item
-    // insert here your cache write logic
+    // insert your cache write logic here
   }
   get(key) {
     // `key` [string] - a unique cache key
-    // insert here your cache read logic
+    // insert your cache read logic here
   }
 }
 ```
