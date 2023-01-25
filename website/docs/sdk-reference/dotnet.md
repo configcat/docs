@@ -110,9 +110,9 @@ These are the available options on the `ConfigCatClientOptions` class:
 | `FlagOverrides`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                  |                                                                                                                                        |
 | `DataGovernance`    | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly` | `Global`                                                                                                                               |
 | `DefaultUser`       | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                        | `null` (none)                                                                                                                          |
-| `Offline`           | Optional, determines whether the client should be initialized to offline mode or not. [More about offline mode](#online--offline-mode).                                                                                                                                                           | `false`                                                                                                                                |
+| `Offline`           | Optional, determines whether the client should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                           | `false`                                                                                                                                |
 
-Via the events provided by `ConfigCatClientOptions` you can also subscribe to the hooks (events) of the SDK at initialization time. [More about hooks](#hooks).
+Via the events provided by `ConfigCatClientOptions` you can also subscribe to the hooks (events) at the time of initialization. [More about hooks](#hooks).
 
 For example:
 
@@ -370,7 +370,7 @@ To switch the SDK back to online mode, do the following:
 client.SetOnline();
 ```
 
-Using the `client.IsOffline` property you can check whether the SDK is in offline mode or not.
+Using the `client.IsOffline` property you can check whether the SDK is in offline mode.
 
 ## Flag Overrides
 

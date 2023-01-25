@@ -330,7 +330,7 @@ To put the SDK back in online mode, you can do the following:
 client.SetOnline()
 ```
 
-> With `client.IsOffline()` you can check whether the SDK is in offline mode or not.
+> With `client.IsOffline()` you can check whether the SDK is in offline mode.
 
 ## `GetAllKeys()`
 

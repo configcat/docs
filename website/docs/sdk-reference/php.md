@@ -67,7 +67,7 @@ Available options:
 | `exceptions-to-ignore`   | `array`                                                                                                              | Optional, sets an array of exception classes that should be ignored from logs.                                                                                                                                                                                                                                                          |
 | `base-url`               | `string`                                                                                                             | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the feature flags and settings.                                                                                                                                                                                                |
 | `default-user`           | [`\ConfigCat\User`](https://github.com/configcat/php-sdk/blob/master/src/User.php)                                   | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                                                              |
-| `offline`                | `bool`                                                                                                               | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).                                                                                                                                                                               |
+| `offline`                | `bool`                                                                                                               | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                                               |
 
 :::info
 Each option name is available through constants of the [\ConfigCat\ClientOptions](https://github.com/configcat/php-sdk/blob/master/src/ClientOptions.php) class.
@@ -263,7 +263,7 @@ To put the SDK back in online mode, you can do the following:
 $client->setOnline();
 ```
 
-> With `$client->isOffline()` you can check whether the SDK is in offline mode or not.
+> With `$client->isOffline()` you can check whether the SDK is in offline mode.
 
 ## Flag Overrides
 

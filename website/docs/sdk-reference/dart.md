@@ -126,7 +126,7 @@ These are the available options on the `ConfigCatOptions` class:
 | `logger`         | Optional, sets the internal logger and log level. [More about logging](#logging).                                                                                                                                                                                                                  |
 | `override`       | Optional, sets local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                       |
 | `defaultUser`    | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                         |
-| `offline`        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).                                                                                                                                          |
+| `offline`        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                          |
 | `hooks`          | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
 
 
@@ -384,7 +384,7 @@ To put the SDK back in online mode, you can do the following:
 client.setOnline();
 ```
 
-> With `client.isOffline()` you can check whether the SDK is in offline mode or not.
+> With `client.isOffline()` you can check whether the SDK is in offline mode.
 
 ## Flag Overrides
 

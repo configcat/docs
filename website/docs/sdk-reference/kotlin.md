@@ -115,7 +115,7 @@ These are the available options on the `ConfigCatOptions` class:
 | `httpEngine`     | `HttpClientEngine?`           | Optional, sets the underlying `Ktor` HTTP engine. [More about HTTP engines](#http-engine).                                                                                                                                                                                                                                                       |
 | `httpProxy`      | `ProxyConfig?`                | Optional, sets up the HTTP proxy for the underlying `Ktor` HTTP engine. [More about HTTP proxy](#http-proxy).                                                                                                                                                                                                                                    |
 | `defaultUser`    | `ConfigCatUser?`              | Optional, sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                                                                      |
-| `offline`        | `Bool`                        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).                                                                                                                                                                                        |
+| `offline`        | `Bool`                        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                                                        |
 | `hooks`          | `Hooks`                       | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                                                                         |
 
 
@@ -364,7 +364,7 @@ To put the SDK back in online mode, you can do the following:
 client.setOnline()
 ```
 
-> With `client.isOffline` you can check whether the SDK is in offline mode or not.
+> With `client.isOffline` you can check whether the SDK is in offline mode.
 
 ## Flag Overrides
 
