@@ -135,9 +135,9 @@ The available options depends on the chosen polling mode. However, there are som
 | `cache`                  | Cache implementation for config cache. | `InMemoryCache` |
 | `flagOverrides`          | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). | - |
 | `defaultUser`            | Sets the default user. [More about default user](#default-user). | `undefined` (none) |
-| `offline`                | Determines whether the client should be initialized to offline mode or not. [More about offline mode](#online--offline-mode). | `false` |
+| `offline`                | Determines whether the client should be initialized in offline mode. [More about offline mode](#online--offline-mode). | `false` |
 
-Options also include a property named `setupHook`, which you can use to subscribe to the hooks (events) of the SDK at initialization time. [More about hooks](#hooks).
+Options also include a property named `setupHook`, which you can use to subscribe to the hooks (events) at the time of initialization. [More about hooks](#hooks).
 
 For example:
 
