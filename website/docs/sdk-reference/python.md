@@ -254,12 +254,12 @@ Auto polling mode utilizes its polling job in a `threading.Thread` object. If yo
 
 When calling `get_value()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
 
-Use `cache_time_to_live_seconds` option parameter to set cache lifetime.
+Use `cache_refresh_interval_seconds` option parameter to set cache lifetime.
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#',
     ConfigCatOptions(
-        polling_mode=PollingMode.lazy_load(cache_time_to_live_seconds=600)
+        polling_mode=PollingMode.lazy_load(cache_refresh_interval_seconds=600)
     )
 )
 ```
