@@ -84,6 +84,24 @@ _ConfigCat Client_ is responsible for:
 
 `ConfigCatClient(<sdkKey>)` returns a client with default options.
 
+### Customizing the _ConfigCat Client_
+
+To customize the SDK's behavior, you can pass an additional `ConfigCatOptions.() -> Unit` parameter 
+to the `ConfigCatClient()` method where the `ConfigCatOptions` class is used to set up the _ConfigCat Client_.
+
+```kotlin
+import com.configcat.*
+import kotlin.time.Duration.Companion.seconds
+
+val client = ConfigCatClient("#YOUR-SDK-KEY#") {
+    pollingMode = autoPoll()
+    logLevel = LogLevel.INFO
+    requestTimeout = 10.seconds
+}
+```
+
+These are the available options on the `ConfigCatOptions` class:
+
 | Properties       | Type                          | Description                                                                                                                                                                                                                                                                                                                                      |
 | ---------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `dataGovernance` | `DataGovernance`              | Optional, defaults to `DataGovernance.GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.GLOBAL`, `DataGovernance.EU_ONLY`. |
@@ -100,20 +118,10 @@ _ConfigCat Client_ is responsible for:
 | `offline`        | `Bool`                        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).                                                                                                                                                                                        |
 | `hooks`          | `Hooks`                       | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                                                                         |
 
-```kotlin
-import com.configcat.*
-import kotlin.time.Duration.Companion.seconds
-
-val client = ConfigCatClient("#YOUR-SDK-KEY#") {
-    pollingMode = autoPoll()
-    logLevel = LogLevel.INFO
-    requestTimeout = 10.seconds
-}
-```
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
-The `ConfigCatClient(sdkKey: <sdkKey>)` static factory method constructs singleton client instances for your SDK keys.
+The `ConfigCatClient(sdkKey: <sdkKey>)` method constructs singleton client instances for your SDK keys.
 These clients can be closed all at once with the `ConfigCatClient.closeAll()` method or individually with `client.close()`.
 :::
 
@@ -169,14 +177,14 @@ The details result contains the following information:
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```kotlin
-val user = ConfigCatUser(identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92")
+val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")
 ```
 
 ```kotlin
 val user = ConfigCatUser(identifier = "john@example.com")
 ```
 
-### Customized user object creation:
+### Customized user object creation
 
 | Argument     | Description                                                                                                              |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------ |
@@ -187,7 +195,7 @@ val user = ConfigCatUser(identifier = "john@example.com")
 
 ```kotlin
 val user = ConfigCatUser(
-    identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92",
+    identifier = "#UNIQUE-USER-IDENTIFIER#",
     email = "john@example.com",
     country = "United Kingdom",
     custom = mapOf(
@@ -363,7 +371,7 @@ client.setOnline()
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
-- **Local** (`OverrideBehavior.LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+- **Local only** (`OverrideBehavior.LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
 - **Local over remote** (`OverrideBehavior.LOCAL_OVER_REMOTE`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
 
@@ -406,12 +414,29 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#")
 val settingValues = client.getAllValues()
 
 // invoke with user object
-val user = ConfigCatUser(identifier = "435170f4-8a8b-4b67-a723-505ac7cdea92")
+val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")
 val settingValuesTargeting = client.getAllValues(user)
 ```
 
-## Custom Cache
+## Cache
 
+The SDK uses platform specific caching to store the downloaded `config.json`.  
+These are the storage locations by platform:
+
+- **Android**: `SharedPreferences`. It has a dependency on `android.content.Context`, so it won't be enabled by default, but it can be explicitly set by providing an appropriate `Context`. ([Here](https://github.com/configcat/kotlin-sdk/blob/main/samples/android/app/src/main/java/com/example/configcat_android/MainActivity.kt#L23) is an example) 
+- **iOS / macOS / tvOS / watchOS**: `NSUserDefaults`.
+- **JS (browser only)**: Browser `localStorage`.
+- On other platforms the SDK uses a memory-only cache.
+
+If you want to turn off the default behavior, you can set the SDK's cache to `null` or to your own cache implementation.
+
+```kotlin
+val client = ConfigCatClient("#YOUR-SDK-KEY#") {
+    configCache = null
+}
+```
+
+### Custom Cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to implement the `ConfigCache` interface:
 
 ```kotlin
@@ -539,6 +564,7 @@ Also, we recommend using [confidential targeting comparators](/advanced/targetin
 Check out our Sample Applications how they use the ConfigCat SDK
 
 - <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/kmm" target="_blank">Kotlin Multiplatform Mobile app</a>
+- <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/android" target="_blank">Android app</a>
 - <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/kotlin" target="_blank">Kotlin app</a>
 - <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/js" target="_blank">React app</a>
 - <a href="https://github.com/configcat/kotlin-sdk/tree/main/samples/node-js" target="_blank">Node.js app</a>

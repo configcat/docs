@@ -9,11 +9,11 @@ import TabItem from '@theme/TabItem';
 
 Connect ConfigCat with Azure Active Directory via SAML.
 
-### Introduction
+## Introduction
 
 Each SSO Identity Provider requires specific information to configure a SAML integration. The following guide will walk you through on how you can connect ConfigCat with Azure Active Directory as a SAML Identity Provider.
 
-### 1. Create an Azure AD Enterprise Application
+## 1. Create an Azure AD Enterprise Application
 
 - Log in to the <a href="https://portal.azure.com/" target="_blank">Azure Portal</a>, go to the `Azure Active Directory` resource, and select `Enterprise applications`.
 
@@ -37,7 +37,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 The next step will guide you on how to collect the information required for Configuring SAML in the application.
 
-### 2. Configure SAML for the Azure Enterprise Application
+## 2. Configure SAML for the Azure Enterprise Application
 
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
 
@@ -58,7 +58,7 @@ The next step will guide you on how to collect the information required for Conf
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/azure-ad/ad_urls.png" alt="Azure AD URLs" />
 
-### 3. Configure ConfigCat with SAML Details from Azure
+## 3. Configure ConfigCat with SAML Details from Azure
 
 You can choose one of the following options to configure ConfigCat with SAML Identity Provider metadata.
 
@@ -93,7 +93,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
   </TabItem>
 </Tabs>
 
-### 4. Assign Users to the Enterprise Application
+## 4. Assign Users to the Enterprise Application
 
 To let users authenticate via SAML, you need to assign individual users or groups to the Enterprise application.
 
@@ -105,7 +105,7 @@ To let users authenticate via SAML, you need to assign individual users or group
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/azure-ad/add_users.png" alt="Azure AD add user/group" />
 
-### 5. Sign In
+## 5. Sign In
 
 - Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
@@ -121,6 +121,6 @@ To let users authenticate via SAML, you need to assign individual users or group
 
 - You should be redirected to ConfigCat signed in with your company account.
 
-### 6. Next Steps
+## 6. Next Steps
 
 - Configure the [auto-assignment of users](/docs/advanced/team-management/auto-assign-users).

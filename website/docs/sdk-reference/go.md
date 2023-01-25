@@ -29,13 +29,13 @@ import "github.com/configcat/go-sdk/v7"
 ### 3. Create the _ConfigCat_ client with your _SDK Key_
 
 ```go
-client := configcat.NewClient("<PLACE-YOUR-SDK-KEY-HERE>")
+client := configcat.NewClient("#YOUR-SDK-KEY#")
 ```
 
 ### 4. Get your setting value
 
 ```go
-isMyAwesomeFeatureEnabled := client.GetBoolValue("key-of-my-awesome-feature", false, nil)
+isMyAwesomeFeatureEnabled := client.GetBoolValue("isMyAwesomeFeatureEnabled", false, nil)
 if isMyAwesomeFeatureEnabled {
     doTheNewThing()
 } else {
@@ -83,13 +83,18 @@ Available optional properties:
 | `Logger`           | `configcat.Logger`         | Sets the `Logger` implementation used by the SDK for logging. [More about logging](#logging)                                                                                                                                                                                                    |
 | `PollingMode`      | `configcat.PollingMode`    | Defaults to `AutoPoll`. Sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                       |
 | `PollInterval`     | `time.Duration`            | Sets after how much time a configuration is considered stale. When `PollingMode` is `AutoPoll` this value is used as the polling rate.                                                                                                                                                          |
-| `ChangeNotify`     | `func()`                   | An optional callback to invoke when a new configuration has fetched.                                                                                                                                                                                                                            |
-| `FlagOverrides`    | `*configcat.FlagOverrides` | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                |
+| `ChangeNotify`     | `func()`                   | **Deprecated**. Replaced by the `OnConfigChanged()` [hook](#hooks).                                                                                                                                                                                                                            |
+| `FlagOverrides`    | `*configcat.FlagOverrides` | Sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                |
+| `DefaultUser`      | `configcat.User`           | Sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                                                                      |
+| `Offline`          | `bool`                     | Defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                                                        |
+| `Hooks`            | `*configcat.Hooks`         | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).
 
 Then you can pass it to the `NewCustomClient()` method:
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>", PollingMode: configcat.Manual })
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#", 
+        PollingMode: configcat.Manual,
+        Logger: configcat.DefaultLogger(configcat.LogLevelInfo)})
 ```
 
 :::caution
@@ -111,7 +116,7 @@ Basically all of the value evaluator methods share the same signature, they only
 boolValue := client.GetBoolValue(
     "keyOfMyBoolSetting", // Setting Key
     false, // Default value
-    &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"} // User Object
+    &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"} // User Object
 )
 ```
 
@@ -119,25 +124,63 @@ boolValue := client.GetBoolValue(
 intValue := client.GetIntValue(
     "keyOfMyIntSetting", // Setting Key
     0, // Default value
-    &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"} // User Object
+    &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"} // User Object
 )
 ```
+
+## Anatomy of `Get[TYPE]ValueDetails()`
+
+`GetValueDetails()` is similar to `GetValue()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
+
+| Parameters     | Description                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------- |
+| `key`          | Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                               |
+| `defaultValue` | This value will be returned in case of an error.                                                   |
+| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
+```go
+details := client.GetBoolValueDetails(
+    "keyOfMyBoolSetting", // Setting Key
+    false, // Default value
+    &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"} // User Object
+)
+```
+
+```go
+details := client.GetIntValueDetails(
+    "keyOfMyIntSetting", // Setting Key
+    0, // Default value
+    &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"} // User Object
+)
+```
+
+The `details` result contains the following information:
+
+| Field                                  | Type                                  | Description                                                                               |
+| -------------------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `Value`                                | `bool` / `string` / `int` / `float64` | The evaluated value of the feature flag or setting.                                       |
+| `Data.Key`                             | `string`                              | The key of the evaluated feature flag or setting.                                         |
+| `Data.IsDefaultValue`                  | `bool`                                | True when the default value passed to getValueDetails() is returned due to an error.      |
+| `Data.Error`                           | `error`                               | In case of an error, this field contains the error message.                               |
+| `Data.User`                            | `User`                                | The user object that was used for evaluation.                                             |
+| `Data.MatchedEvaluationPercentageRule` | `*PercentageRule`                     | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `Data.MatchedEvaluationRule`           | `*RolloutRule`                        | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `Data.FetchTime`                       | `time.Time`                           | The last download time of the current config.                                             |
+
 
 ## User Object
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
-### Simple user object creation:
-
 ```go
-user = &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
+user = &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
 ```
 
 ```go
 user = &configcat.UserData{Identifier: "john@example.com"}
 ```
 
-### Customized user object creation:
+### Customized user object creation
 
 | Arguments    | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -150,13 +193,13 @@ user = &configcat.UserData{Identifier: "john@example.com"}
 custom := map[string]string{}
 custom["SubscriptionType"] = "Pro"
 custom["UserRole"] = "Admin"
-user := &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
+user := &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#",
             Email: "john@example.com",
             Company: "United Kingdom",
             Custom: custom}
 ```
 
-### Other options to create a user object:
+### Other options to create a user object
 
 The _ConfigCat SDK_ uses reflection to determine what attributes are available on a user object. You can either implement the `UserAttributes` interface - which's `GetAttribute(string) string` method will be used to retrieve the attributes - or use a pointer to a struct type which's public fields are treated as possible comparison attributes.
 
@@ -165,6 +208,39 @@ If a field's type implements a `String() string` method, the field will be treat
 If a field's type is `map[string]string`, the map is used to look up any custom attribute not found directly in the struct. There should be at most one of these fields.
 
 Otherwise, a field type must be a numeric type, a `string`, a `[]byte` or a `github.com/blang/semver.Version`.
+
+### Default user
+
+There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+
+You can set the default user object on SDK initialization:
+
+```go
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#", 
+        DefaultUser: &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}})
+```
+
+Whenever the `Get[TYPE]Value()`, `Get[TYPE]ValueDetails()`, `GetAllValues()`, or `GetAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+
+```go
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#", 
+        DefaultUser: &configcat.UserData{Identifier: "john@example.com"}})
+
+// The default user will be used at the evaluation process.
+value := client.GetBoolValue("keyOfMyBoolSetting", false, nil)
+```
+
+When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+
+```go
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#", 
+        DefaultUser: &configcat.UserData{Identifier: "john@example.com"}})
+
+otherUser = &configcat.UserData{Identifier: "brian@example.com"}
+
+// otherUser will be used at the evaluation process.
+value := client.GetBoolValue("keyOfMyBoolSetting", false, otherUser)
+```
 
 ## Polling Modes
 
@@ -178,7 +254,7 @@ The _ConfigCat SDK_ downloads the latest values and stores them automatically ev
 Use the the `PollInterval` option parameter of the _ConfigCat Client_ to change the polling interval.
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>",
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     PollingMode: configcat.AutoPoll,
     PollInterval: time.Second * 120 /* polling interval in seconds */})
 ```
@@ -186,7 +262,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KE
 You have the option to set up a `ChangeNotify` callback that will be notified when a new configuration is fetched. The policy calls the given method only, when the new configuration differs from the cached one.
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>",
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     PollingMode: configcat.AutoPoll,
     PollInterval: time.Second * 120, /* polling interval in seconds */
     ChangeNotify: func() {
@@ -201,7 +277,7 @@ When calling `GetBoolValue()`, `GetIntValue()`, `GetFloatValue()` or `GetStringV
 Use the `PollInterval` option parameter of the _ConfigCat Client_ to set the cache TTL.
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>",
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     PollingMode: configcat.Lazy,
     PollInterval: time.Second * 120 /* cache TTL in seconds */})
 ```
@@ -211,13 +287,50 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KE
 Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `Refresh()` is your application's responsibility.
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>",
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     PollingMode: configcat.Manual})
 
 client.Refresh()
 ```
 
 > The setting value retrieval methods will return `defaultValue` if the cache is empty. Call `Refresh()` to update the cache.
+
+## Hooks
+
+With the following hooks you can subscribe to particular events fired by the SDK:
+
+- `OnConfigChanged()`: This event is sent when the SDK loads a new config.json into memory from cache or via HTTP.
+
+- `OnFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`Get[TYPE]ValueDetails()`](#anatomy-of-gettypevaluedetails).
+
+- `OnError(error)`: This event is sent when an error occurs within the ConfigCat SDK.
+
+You can subscribe to these events on SDK initialization:
+
+```go
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
+        /* handle the event */
+    }})
+```
+
+## Online / Offline mode
+
+In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
+
+```go
+client.SetOffline()
+```
+
+In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
+
+To put the SDK back in online mode, you can do the following:
+
+```go
+client.SetOnline()
+```
+
+> With `client.IsOffline()` you can check whether the SDK is in offline mode or not.
 
 ## `GetAllKeys()`
 
@@ -237,7 +350,7 @@ client := configcat.NewClient("#YOUR-SDK-KEY#")
 settingValues := client.GetAllValues(nil)
 
 // invoke with user object
-user := &configcat.UserData{Identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
+user := &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
 settingValuesTargeting := client.GetAllValues(user)
 ```
 
@@ -246,7 +359,7 @@ settingValuesTargeting := client.GetAllValues(user)
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
-- **Local/Offline mode** (`LocalOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+- **Local only** (`LocalOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
 - **Local over remote** (`LocalOverRemote`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
 
@@ -422,7 +535,7 @@ func (cache *CustomCache) Set(ctx context.Context, key string, value []byte) err
 Then use your custom cache implementation:
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>",
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     Cache: CustomCache{}})
 ```
 
@@ -438,7 +551,7 @@ You can use the `Transport` config option to set up http transport related (like
 
 ```go
 proxyURL, _ := url.Parse("<PROXY-URL>")
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>",
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     Transport: &http.Transport{
 	    Proxy: http.ProxyURL(proxyURL),
     }
@@ -450,7 +563,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KE
 You can set the maximum wait time for a ConfigCat HTTP response.
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>",
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     HTTPTimeout: time.Second * 10
 })
 ```
@@ -472,7 +585,7 @@ import {
 logger := logrus.New()
 logger.SetLevel(logrus.InfoLevel)
 
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>",
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     Logger: logger})
 ```
 
@@ -484,7 +597,7 @@ import {
 	"github.com/sirupsen/logrus"
 }
 
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "<PLACE-YOUR-SDK-KEY-HERE>",
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     Logger: configcat.DefaultLogger(configcat.LogLevelInfo)})
 ```
 

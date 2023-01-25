@@ -53,7 +53,7 @@ Add the SDK to your `Package.swift`.
 dependencies: [
     .package(
         url: "https://github.com/configcat/swift-sdk",
-        from: "9.2.3"
+        from: "9.3.0"
     )
 ]
 ```
@@ -187,18 +187,10 @@ _ConfigCat Client_ is responsible for:
 
 `ConfigCatClient.get(sdkKey: <sdkKey>)` returns a client with default options.
 
-| Arguments              | Type                      | Description                                                                                                                                                                                                                                                                                        |
-| ---------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dataGovernance`       | `DataGovernance`          | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`. |
-| `configCache`          | `ConfigCache?`            | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
-| `pollingMode`          | `PollingMode`             | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
-| `sessionConfiguration` | `URLSessionConfiguration` | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                                                                                                                                                                                                          |
-| `baseUrl`              | `String`                  | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json.                                                                                                                                                                          |
-| `flagOverrides`        | `OverrideDataSource?`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
-| `logLevel`             | `LogLevel`                | Optional, sets the internal log level. [More about logging.](#logging).                                                                                                                                                                                                                            |
-| `defaultUser`          | `ConfigCatUser?`          | Optional, sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                        |
-| `offline`              | `Bool`                    | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).                                                                                                                                          |
-| `hooks`                | `Hooks`                   | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
+### Customizing the _ConfigCat Client_
+
+To customize the SDK's behavior, you can pass an additional `(ConfigCatOptions) -> ()` parameter to the `get()` static 
+factory method where the `ConfigCatOptions` class is used to set up the _ConfigCat Client_.
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -224,6 +216,21 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 </TabItem>
 </Tabs>
 
+These are the available options on the `ConfigCatOptions` class:
+
+| Arguments              | Type                      | Description                                                                                                                                                                                                                                                                                        |
+| ---------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dataGovernance`       | `DataGovernance`          | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`. |
+| `configCache`          | `ConfigCache?`            | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
+| `pollingMode`          | `PollingMode`             | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
+| `sessionConfiguration` | `URLSessionConfiguration` | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                                                                                                                                                                                                          |
+| `baseUrl`              | `String`                  | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json.                                                                                                                                                                          |
+| `flagOverrides`        | `OverrideDataSource?`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
+| `logLevel`             | `LogLevel`                | Optional, sets the internal log level. [More about logging.](#logging).                                                                                                                                                                                                                            |
+| `defaultUser`          | `ConfigCatUser?`          | Optional, sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                        |
+| `offline`              | `Bool`                    | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).                                                                                                                                          |
+| `hooks`                | `Hooks`                   | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
+
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
 The `ConfigCatClient.get(sdkKey: <sdkKey>)` static factory method constructs singleton client instances for your SDK keys.
@@ -246,7 +253,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 client.getValue(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
-    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+    user: ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#") // Optional User Object
 ) { isMyAwesomeFeatureEnabled in
     if isMyAwesomeFeatureEnabled {
         doTheNewThing()
@@ -259,7 +266,7 @@ client.getValue(
 let isMyAwesomeFeatureEnabled = await client.getValue(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
-    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+    user: ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#") // Optional User Object
 
 if isMyAwesomeFeatureEnabled {
     doTheNewThing()
@@ -272,7 +279,7 @@ if isMyAwesomeFeatureEnabled {
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"435170f4-8a8b-4b67-a723-505ac7cdea92"
+ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
                                                          email:NULL country:NULL custom:NULL];
 
 [client getBoolValueFor:@"keyOfMySetting" // Setting Key
@@ -318,7 +325,7 @@ if (isMyAwesomeFeatureEnabled) {
 client.getValueDetails(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
-    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+    user: ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#") // Optional User Object
 ) { details in
     // Use the details result
 }
@@ -327,14 +334,14 @@ client.getValueDetails(
 let details = await client.getValueDetails(
     for: "keyOfMySetting", // Setting Key
     defaultValue: false, // Default value
-    user: ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92") // Optional User Object
+    user: ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#") // Optional User Object
 ```
 
 </TabItem>
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"435170f4-8a8b-4b67-a723-505ac7cdea92"
+ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
                                                          email:NULL country:NULL custom:NULL];
 
 [client getBoolValueDetailsFor:@"keyOfMySetting" // Setting Key
@@ -375,14 +382,14 @@ The [User Object](../advanced/user-object.md) is essential if you'd like to use 
 <TabItem value="swift" label="Swift">
 
 ```swift
-let user = ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92")
+let user = ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#")
 ```
 
 </TabItem>
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"435170f4-8a8b-4b67-a723-505ac7cdea92"
+ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
                                                          email:NULL
                                                        country:NULL
                                                         custom:NULL];
@@ -422,7 +429,7 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"john@example.co
 <TabItem value="swift" label="Swift">
 
 ```swift
-let user = ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
+let user = ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#",
     email: "john@example.com",
     country: "United Kingdom",
     custom: ["SubscriptionType":"Pro", "UserRole":"Admin"])
@@ -432,7 +439,7 @@ let user = ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92",
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"435170f4-8a8b-4b67-a723-505ac7cdea92"
+ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
                                                          email:@"john@example.com"
                                                        country:@"United Kingdom"
                                                         custom:@{@"SubscriptionType": @"Pro", @"UserRole": @"Admin"}];
@@ -637,7 +644,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 ```swift
 let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#")
-let user = ConfigCatUser(identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92")
+let user = ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#")
 
 // Completion callback
 client.getAllValues(
@@ -658,7 +665,7 @@ let allValues = await client.getAllValues(
 ```objectivec
 ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#" options:NULL];
 
-ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"435170f4-8a8b-4b67-a723-505ac7cdea92"
+ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
                                                          email:NULL
                                                        country:NULL
                                                         custom:NULL];
@@ -911,7 +918,7 @@ client.setOnline()
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
-- **Local** (`OverrideBehaviour.localOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+- **Local only** (`OverrideBehaviour.localOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
 - **Local over remote** (`OverrideBehaviour.localOverRemote`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
 
@@ -959,8 +966,36 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 </TabItem>
 </Tabs>
 
-## Custom cache
+## Cache
 
+The SDK uses `UserDefaults` as the default cache to store the downloaded `config.json`.
+
+If you want to turn off the default behavior, you can set the SDK's cache to `nil` or to your own cache implementation.
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
+```swift
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.configCache = nil
+}
+```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
+                                            configurator:^(ConfigCatOptions* options) {
+    
+    options.configCache = NULL;
+}];
+```
+
+</TabItem>
+</Tabs>
+
+### Custom cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCache` open class:
 
 <Tabs groupId="ios-languages">
@@ -1198,7 +1233,7 @@ Example log entries:
 ```bash
 [main] Evaluating getValue(isPOCFeatureEnabled).
 User object: {
-  "Identifier" : "435170f4-8a8b-4b67-a723-505ac7cdea92",
+  "Identifier" : "#UNIQUE-USER-IDENTIFIER#",
   "Email" : "john@example.com"
 }.
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match

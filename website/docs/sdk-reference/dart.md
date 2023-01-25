@@ -38,7 +38,7 @@ Or put the following directly to your `pubspec.yml` and run `dart pub get` or `f
 
 ```yaml title="pubspec.yml"
 dependencies:
-  configcat_client: ^2.3.0
+  configcat_client: ^2.4.0
 ```
 
 ### 2. Import the ConfigCat SDK
@@ -53,10 +53,23 @@ import 'package:configcat_client/configcat_client.dart';
 final client = ConfigCatClient.get(sdkKey: '#YOUR-SDK-KEY#');
 ```
 
-### 4. Get your setting value
+### 4. (Optional) Set up Flutter caching
+
+If you're using the SDK in a Flutter application, it's recommended to use the [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) implementation for caching. It stores the downloaded `config.json` using the [shared_preferences](https://pub.dev/packages/shared_preferences) package.
 
 ```dart
-final isMyAwesomeFeatureEnabled = await client.getValue(key: '<key-of-my-awesome-feature>', defaultValue: false);
+import 'package:configcat_preferences_cache/configcat_preferences_cache.dart';
+```
+
+```dart
+final client = ConfigCatClient.get(
+    sdkKey: '#YOUR-SDK-KEY#',
+    options: ConfigCatOptions(cache: ConfigCatPreferencesCache()));
+```
+
+### 5. Get your setting value
+```dart
+final isMyAwesomeFeatureEnabled = await client.getValue(key: 'isMyAwesomeFeatureEnabled', defaultValue: false);
 if(isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
@@ -64,7 +77,7 @@ if(isMyAwesomeFeatureEnabled) {
 }
 ```
 
-### 5. Close _ConfigCat_ client​
+### 6. Close _ConfigCat_ client​
 
 You can safely shut down all clients at once or individually and release all associated resources on application exit.
 
@@ -84,6 +97,23 @@ _ConfigCat Client_ is responsible for:
 
 `ConfigCatClient.get(sdkKey: <sdkKey>)` returns a client with default options.
 
+### Customizing the _ConfigCat Client_
+
+To customize the SDK's behavior, you can pass an additional `ConfigCatOptions` parameter to the `get()` static 
+factory method where the `ConfigCatOptions` class is used to set up the _ConfigCat Client_.
+
+```dart
+final client = ConfigCatClient.get(
+    sdkKey: '#YOUR-SDK-KEY#',
+    options: ConfigCatOptions(
+        pollingMode: PollingMode.manualPoll(),
+        logger: ConfigCatLogger(level: LogLevel.info)
+    )
+);
+```
+
+These are the available options on the `ConfigCatOptions` class:
+
 | Properties       | Description                                                                                                                                                                                                                                                                                        |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataGovernance` | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`. |
@@ -99,19 +129,10 @@ _ConfigCat Client_ is responsible for:
 | `offline`        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).                                                                                                                                          |
 | `hooks`          | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
 
-```dart
-final client = ConfigCatClient.get(
-    sdkKey: '#YOUR-SDK-KEY#',
-    options: ConfigCatOptions(
-        pollingMode: PollingMode.manualPoll(),
-        logger: ConfigCatLogger(level: LogLevel.info)
-    )
-);
-```
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
-The `ConfigCatClient` constructs singleton client instances for your SDK keys with its `ConfigCatClient.get(sdkKey: <sdkKey>)` static factory method.
+The `ConfigCatClient.get(sdkKey: <sdkKey>)` static factory method constructs singleton client instances for your SDK keys.
 These clients can be closed all at once with the `ConfigCatClient.closeAll()` method or individually with `client.close()`.
 :::
 
@@ -167,14 +188,14 @@ The `details` result contains the following information:
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```dart
-final user = ConfigCatUser(identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92');
+final user = ConfigCatUser(identifier: '#UNIQUE-USER-IDENTIFIER#');
 ```
 
 ```dart
 final user = ConfigCatUser(identifier: 'john@example.com');
 ```
 
-### Customized user object creation:
+### Customized user object creation
 
 | Argument     | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -185,7 +206,7 @@ final user = ConfigCatUser(identifier: 'john@example.com');
 
 ```dart
 final user = ConfigCatUser(
-    identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92',
+    identifier: '#UNIQUE-USER-IDENTIFIER#',
     email: 'john@example.com',
     country: 'United Kingdom',
     custom: {
@@ -370,7 +391,7 @@ client.setOnline();
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
-- **Local** (`OverrideBehaviour.localOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+- **Local only** (`OverrideBehaviour.localOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
 - **Local over remote** (`OverrideBehaviour.localOverRemote`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
 
@@ -414,12 +435,28 @@ final client = ConfigCatClient.get(sdkKey: '#YOUR-SDK-KEY#');
 final settingValues = await client.getAllValues();
 
 // invoke with user object
-final user = ConfigCatUser(identifier: '435170f4-8a8b-4b67-a723-505ac7cdea92');
+final user = ConfigCatUser(identifier: '#UNIQUE-USER-IDENTIFIER#');
 final settingValuesTargeting = await client.getAllValues(user);
 ```
 
-## Custom Cache
+## Cache
 
+The SDK caches the downloaded `config.json` only in memory by default. In case you have a Flutter application, you can use the [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) for caching.  
+It's based on the [shared_preferences](https://pub.dev/packages/shared_preferences) package that uses the following storage locations by platform:
+
+- **Web**: Browser `LocalStorage`.
+- **iOS / macOS**: `NSUserDefaults`.
+- **Android**: `SharedPreferences`.
+- **Linux**: File in `XDG_DATA_HOME` directory.
+- **Windows**: File in roaming `AppData` directory.
+
+```dart
+final client = ConfigCatClient.get(
+    sdkKey: '#YOUR-SDK-KEY#',
+    options: ConfigCatOptions(cache: ConfigCatPreferencesCache()));
+```
+
+### Custom Cache
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCatCache` abstract class:
 
 ```dart
