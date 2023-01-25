@@ -153,7 +153,7 @@ For example:
 
 ### Acquire the ConfigCat instance
 
-The SDK supports two options to acquire the initialized ConfigCat instance:
+The SDK supports two ways to acquire the initialized ConfigCat instance:
  - Custom hook: `useConfigCatClient()` (from React v16.8)
  - Higher-order component: `withConfigCatClient()`
 
@@ -326,7 +326,7 @@ class TestHOCComponent extends React.Component<
 
 ### Props - `lastUpdated`
 
-The timestamp of the last config update's event.
+The timestamp of when the config was last updated.
 
 ## User Object
 
@@ -335,7 +335,7 @@ The [User Object](../advanced/user-object.md) is essential if you'd like to use 
 For simple targeting:
 
 ```tsx
-const userObject =  new User('435170f4-8a8b-4b67-a723-505ac7cdea92');
+const userObject =  new User('#UNIQUE-USER-IDENTIFIER#');
 ```
 
 or
@@ -355,7 +355,7 @@ For advanced targeting:
 
 ```tsx
 const userObject = new User(
-  /* identifier: */ '435170f4-8a8b-4b67-a723-505ac7cdea92',
+  /* identifier: */ '#UNIQUE-USER-IDENTIFIER#',
   /*      email: */ 'john@example.com',
   /*    country: */ 'United Kingdom',
   /*     custom: */ {
@@ -566,9 +566,9 @@ useEffect(() => {
 });
 ```
 
-## Hooks
+## SDK Hooks (not React Hooks)
 
-> ** ConfigCat SDK hooks are different things than React Hooks. **
+> ** ConfigCat SDK hooks are different than React Hooks. **
 
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
 You can subscribe to the following events emitted by the client:
@@ -621,7 +621,7 @@ export const ConfigCatWithHookComponent = () => {
 }
 ```
 
-With higher-order component:
+Using higher-order component (HOC):
 
 ```tsx
 class ConfigChangedComponent extends React.Component<
