@@ -15,7 +15,7 @@ steps:
     command: build
     Dockerfile: Dockerfile
     buildContext: '$(System.DefaultWorkingDirectory)'
-    arguments: '--build-arg SONAR_TOKEN=73b248d53280af686395552b77e88f498b25b2ba  --network=host'
+    arguments: '--build-arg SONAR_TOKEN=$(sonar_token) --network=host'
 
 - task: Docker@2
   displayName: push
