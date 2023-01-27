@@ -445,9 +445,11 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
 
 ## Logging
 
-In the ConfigCat SDK there is a `ConsoleLogger` writes logs to the standard output.
-You can define a logger with the `setLogger` function.
-You can override it with your implementation. The custom implementation must satisfy the `ILogger` abstract class.
+In the ConfigCat SDK, a `ConsoleLogger` writes logs to the standard output.
+You can override it with your own logger implementation.
+The custom implementation must satisfy the `ILogger` abstract class.
+You can set the logger with the `setLogger` function.
+
 
 ```cpp
 #include <configcat/configcat.h>

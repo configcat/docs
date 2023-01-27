@@ -365,7 +365,7 @@ configcat_client = ConfigCat::ConfigCatClient.new(
 
 ## Logging
 
-In the _ConfigCat SDK_ there is a default logger writes logs to the standard output. The following example shows how to set the _Log Level_ of the default logger.
+In the _ConfigCat SDK_, a default logger writes logs to the standard output. The following example shows how to set the _Log Level_ of the default logger.
 
 ```ruby
 ConfigCat.logger.level = Logger::INFO
