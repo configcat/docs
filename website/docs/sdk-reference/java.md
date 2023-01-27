@@ -115,7 +115,7 @@ These are the available options on the `Options` class:
 | `logLevel(LogLevel)`                                          | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging).                                                                                                                                                                                                     |
 | `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional,  sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                |
 | `defaultUser(User)`                                           | Optional, sets default user. [More about default user](#default-user).                                                                                                                                                                                                                            |
-| `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode or not. [More about offline mode.](#online--offline-mode).|
+| `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).|
 | `hooks()`                                                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).|
 
 :::caution
@@ -379,7 +379,7 @@ To put the SDK back in online mode, you can do the following:
 client.setOnline();
 ```
 
-> With `client.isOffline()` you can check whether the SDK is in offline mode or not.
+> With `client.isOffline()` you can check whether the SDK is in offline mode.
 
 
 ## Flag Overrides
