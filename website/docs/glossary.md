@@ -8,12 +8,24 @@ An alphabetical list of terms used around feature management and software develo
 
 ## A
 
-## B
-
 #### [A/B Testing](https://configcat.com/blog/2022/05/02/what-is-ab-testing/)
 
 A/B testing is a method of comparing two versions of a product or feature to determine which one performs better. A/B testing is a form of controlled experimentation.
 [Read more](https://configcat.com/blog/2022/05/02/what-is-ab-testing/)
+
+#### Alpha testing
+
+Alpha testing is the first end-to-end testing of a product to ensure it meets the business requirements and it has the desired functionality.
+
+## B
+
+#### Beta testing
+
+Beta testing is an opportunity for real users to use a product in a production environment to uncover any bugs or issues before a general release.
+
+#### Blue/Green Deployment
+
+Blue/green deployments offer near-zero downtime and rollback capabilities. The fundamental idea behind blue/green deployment is shifting traffic between two identical environments that are running different versions of your application.
 
 ## C
 
