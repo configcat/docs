@@ -8,9 +8,10 @@ An alphabetical list of terms used around feature management and software develo
 
 ## A
 
-#### [A/B Testing](https://configcat.com/blog/2022/05/02/what-is-ab-testing/)
+#### A/B Testing
 
 A/B testing is a method of comparing two versions of a product or feature to determine which one performs better. A/B testing is a form of controlled experimentation.
+
 [Read more](https://configcat.com/blog/2022/05/02/what-is-ab-testing/)
 
 #### Alpha Testing
@@ -29,9 +30,10 @@ Blue/Green deployments offer near-zero downtime and rollback capabilities. The c
 
 ## C
 
-#### [Canary Release](https://configcat.com/blog/2022/01/14/progressive-delivery/#canary-releases)
+#### Canary Release
 
-A Canary Release is a type of progressive delivery where a small percentage of users are exposed to a new feature. If the feature works as expected, the percentage of users exposed to the feature is increased. If the feature does not work as expected, the feature is rolled back.  
+A Canary Release is a type of progressive delivery where a small percentage of users are exposed to a new feature. If the feature works as expected, the percentage of users exposed to the feature is increased. If the feature does not work as expected, the feature is rolled back.
+
 [Read more](https://configcat.com/blog/2022/01/14/progressive-delivery/#canary-releases)
 
 #### CI/CD Pipeline
@@ -42,9 +44,13 @@ A Continuous Integration and Continuous Deployment pipeline (CI/CD) is a set of 
 
 A continuous delivery process enables changes - including new features, configuration changes, bug fixes and experiments - to be released into production in a safe and timely manner while maintaining sustainability.
 
+[Read More](https://configcat.com/blog/2022/06/13/decoupling-feature-releases-from-deployment/)
+
 #### Continuous Deployment
 
 Continuous Deployment is a process where any code changes brought to an application are released automatically into the production environment.
+
+[Read More](https://configcat.com/blog/2022/06/13/decoupling-feature-releases-from-deployment/)
 
 #### Continuous Integration
 
@@ -138,9 +144,11 @@ A release manager is an IT professional responsible for defining and executing t
 
 Remote configuration is a software development technique that allows you to modify certain features of an app remotely without having to deploy a new version of the app.
 
-#### Ring Deployment --rewrite,stolen
+#### Ring Deployment
 
 Ring deployment is a form of gradual rollout where new features are released gradually to different groups of users to mitigate risk.
+
+[Read more](https://configcat.com/blog/2022/01/14/progressive-delivery/#ring-deployment)
 
 ## S
 
