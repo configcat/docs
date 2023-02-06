@@ -13,52 +13,52 @@ An alphabetical list of terms used around feature management and software develo
 A/B testing is a method of comparing two versions of a product or feature to determine which one performs better. A/B testing is a form of controlled experimentation.
 [Read more](https://configcat.com/blog/2022/05/02/what-is-ab-testing/)
 
-#### Alpha testing
+#### Alpha Testing
 
-Alpha testing is the first end-to-end testing of a product to ensure it meets the business requirements and it has the desired functionality.
+Alpha testing examines a product's functionality and compliance with the business requirements through the initial end-to-end testing.
 
 ## B
 
-#### Beta testing
+#### Beta Testing
 
-Beta testing is an opportunity for real users to use a product in a production environment to uncover any bugs or issues before a general release.
+Testing in the beta phase allows users to discover any issues or bugs before a general release by using a product in a real-world environment.
 
 #### Blue/Green Deployment
 
-Blue/green deployments offer near-zero downtime and rollback capabilities. The fundamental idea behind blue/green deployment is shifting traffic between two identical environments that are running different versions of your application.
+Blue/Green deployments offer near-zero downtime and rollback capabilities. The concept of a blue/green deployment involves switching traffic between two identical environments running different versions of your application.
 
 ## C
 
 #### [Canary Release](https://configcat.com/blog/2022/01/14/progressive-delivery/#canary-releases)
 
-A canary release is a type of progressive delivery where a small percentage of users are exposed to a new feature. If the feature works as expected, the percentage of users exposed to the feature is increased. If the feature does not work as expected, the feature is rolled back.  
+A Canary Release is a type of progressive delivery where a small percentage of users are exposed to a new feature. If the feature works as expected, the percentage of users exposed to the feature is increased. If the feature does not work as expected, the feature is rolled back.  
 [Read more](https://configcat.com/blog/2022/01/14/progressive-delivery/#canary-releases)
 
 #### CI/CD Pipeline
 
-A continuous integration and continuous deployment (CI/CD) pipeline is a series of steps that must be performed in order to deliver a new version of software.
+A Continuous Integration and Continuous Deployment pipeline (CI/CD) is a set of steps that must be followed to deliver a new software version to customers.
 
 #### Continuous Delivery
 
-Continuous delivery is the ability to get changes of all types—including new features, configuration changes, bug fixes and experiments—into production, or into the hands of users, safely and quickly in a sustainable way.
+A continuous delivery process enables changes - including new features, configuration changes, bug fixes and experiments - to be released into production in a safe and timely manner while maintaining sustainability.
 
 #### Continuous Deployment
 
-Continuous deployment is a strategy in software development where code changes to an application are released automatically into the production environment.
+Continuous Deployment is a process where any code changes brought to an application are released automatically into the production environment.
 
 #### Continuous Integration
 
-Continuous integration is a DevOps software development practice where developers regularly merge their code changes into a central repository, after which automated builds and tests are run.
+Continual Integration refers to the regular merging of code changes into a central repository, followed by automated builds and tests.
 
 ## D
 
 #### Dark Launch
 
-A dark launch or dark release is a term that refers to releasing your features to a subset of users to gather their feedback and improve your new features accordingly.
+Dark launches or dark releases are releases of new features to a small group of users for feedback and improvements.
 
 #### Developer Advocate
 
-A developer advocate is someone whose job is to help developers be successful with a platform or a technology. A Developer Advocate's role is also to act as a bridge between the engineering team and the developer community.
+A developer advocate is someone whose job is to help developers be successful with a platform or a technology. A Developer Advocate also acts as a bridge between engineers and developers.
 
 #### [DevOps Engineer](glossary/devops-engineer.md)
 
