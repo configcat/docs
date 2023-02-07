@@ -62,14 +62,15 @@ Continuous Integration refers to the regular merging of code changes into a cent
 
 A Dark Launch is rolled out stealthily by first releasing a feature to a subset of users before a full release to see how they react to it.
 
+[Read more](https://configcat.com/blog/2022/06/13/decoupling-feature-releases-from-deployment/#feature-release-with-dark-launch)
+
 #### Developer Advocate
 
 A Developer Advocate is a person whose job is to help developers be successful with a platform or a technology and to speak (or write) on their behalf.
 
-#### [DevOps Engineer](glossary/devops-engineer.md)
+#### DevOps Engineer
 
-The DevOps Engineer is responsible for the development and maintenance of the infrastructure and the deployment of the software. The DevOps Engineer is also responsible for the monitoring and maintenance of the software and the infrastructure.  
-[Read more](glossary/devops-engineer.md)
+The DevOps Engineer is responsible for the development and maintenance of the infrastructure and the deployment of the software. The DevOps Engineer is also responsible for the monitoring and maintenance of the software and the infrastructure.
 
 ## E
 
@@ -87,6 +88,8 @@ A feature branch is a copy of the main codebase where an individual or team of s
 
 A feature flag is a toggle used to activate or deactivate specific features you may have in your application without redeploying code.
 
+[Read more](https://configcat.com/featureflags/)
+
 #### Feature Testing
 
 An experiment to determine which version of a feature offers the best user experience is called a Feature Test.
@@ -94,6 +97,8 @@ An experiment to determine which version of a feature offers the best user exper
 #### Feature Toggle
 
 A feature toggle is a switch that allows to enable or disable certain features or functionalities of an application, without the need for code changes.
+
+[Read more](https://configcat.com/featureflags/)
 
 ## G
 
@@ -108,6 +113,8 @@ A feature toggle is a switch that allows to enable or disable certain features o
 #### Kill Switch
 
 A kill switch is a mechanism that can be used to quickly disable a feature or an entire application in case of an emergency.
+
+[Read more](https://configcat.com/blog/2022/03/24/how-kantan-successfully-uses-configcat-in-its-ci-pipeline/#retiring-feature-flags-or-keeping-them-as-emergency-kill-switches)
 
 ## L
 
@@ -127,9 +134,10 @@ The Multi-Armed Bandit (MAB) is a machine learning framework that involves an ag
 
 The role of a product lifecycle manager is to supervise the project team and ensure timely completion of each stage in the lifecycle of a project.
 
-#### [Progressive Delivery](https://configcat.com/blog/2022/01/14/progressive-delivery/)
+#### Progressive Delivery
 
-A progressive delivery approach to DevOps combines the principles of Continuous Integration and Continuous Delivery (CI/CD) with modern software development practices, facilitating faster code deployment, reducing risk, and improving user experiences.  
+A progressive delivery approach to DevOps combines the principles of Continuous Integration and Continuous Delivery (CI/CD) with modern software development practices, facilitating faster code deployment, reducing risk, and improving user experiences.
+
 [Read more](https://configcat.com/blog/2022/01/14/progressive-delivery/)
 
 ## Q
