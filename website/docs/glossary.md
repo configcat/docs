@@ -8,11 +8,9 @@ An alphabetical list of terms used around feature management and software develo
 
 ## A
 
-#### A/B Testing
+#### [A/B Testing](https://configcat.com/blog/2022/05/02/what-is-ab-testing/)
 
 A/B testing is a method of comparing two versions of a product or feature to determine which one performs better. A/B testing is a form of controlled experimentation.
-
-[Read more](https://configcat.com/blog/2022/05/02/what-is-ab-testing/)
 
 #### Alpha Testing
 
@@ -30,27 +28,21 @@ Blue/Green deployments offer near-zero downtime and rollback capabilities. The c
 
 ## C
 
-#### Canary Release
+#### [Canary Release](https://configcat.com/blog/2022/01/14/progressive-delivery/#canary-releases)
 
 A Canary Release is a type of progressive delivery where a small percentage of users are exposed to a new feature. If the feature works as expected, the percentage of users exposed to the feature is increased. If the feature does not work as expected, the feature is rolled back.
-
-[Read more](https://configcat.com/blog/2022/01/14/progressive-delivery/#canary-releases)
 
 #### CI/CD Pipeline
 
 A Continuous Integration and Continuous Deployment pipeline (CI/CD) is a set of steps that must be followed to deliver a new software version to customers.
 
-#### Continuous Delivery
+#### [Continuous Delivery](https://configcat.com/blog/2022/06/13/decoupling-feature-releases-from-deployment/)
 
 A continuous delivery process enables changes - including new features, configuration changes, bug fixes and experiments - to be released into production in a safe and timely manner while maintaining sustainability.
 
-[Read More](https://configcat.com/blog/2022/06/13/decoupling-feature-releases-from-deployment/)
-
-#### Continuous Deployment
+#### [Continuous Deployment](https://configcat.com/blog/2022/06/13/decoupling-feature-releases-from-deployment/)
 
 Continuous Deployment is a process where any code changes brought to an application are released automatically into the production environment.
-
-[Read More](https://configcat.com/blog/2022/06/13/decoupling-feature-releases-from-deployment/)
 
 #### Continuous Integration
 
@@ -58,11 +50,9 @@ Continuous Integration refers to the regular merging of code changes into a cent
 
 ## D
 
-#### Dark Launch
+#### [Dark Launch](https://configcat.com/blog/2022/06/13/decoupling-feature-releases-from-deployment/#feature-release-with-dark-launch)
 
 A Dark Launch is rolled out stealthily by first releasing a feature to a subset of users before a full release to see how they react to it.
-
-[Read more](https://configcat.com/blog/2022/06/13/decoupling-feature-releases-from-deployment/#feature-release-with-dark-launch)
 
 #### Developer Advocate
 
@@ -84,21 +74,13 @@ Fake Door Testing is a technique used to assess the market demand for a product 
 
 A feature branch is a copy of the main codebase where an individual or team of software developers can work on a new feature until it is complete.
 
-#### Feature Flag
+#### [Feature Flag](https://configcat.com/featureflags/)
 
 A feature flag is a toggle used to activate or deactivate specific features you may have in your application without redeploying code.
-
-[Read more](https://configcat.com/featureflags/)
 
 #### Feature Testing
 
 An experiment to determine which version of a feature offers the best user experience is called a Feature Test.
-
-#### Feature Toggle
-
-A feature toggle is a switch that allows to enable or disable certain features or functionalities of an application, without the need for code changes.
-
-[Read more](https://configcat.com/featureflags/)
 
 ## G
 
@@ -110,11 +92,9 @@ A feature toggle is a switch that allows to enable or disable certain features o
 
 ## K
 
-#### Kill Switch
+#### [Kill Switch](https://configcat.com/blog/2022/03/24/how-kantan-successfully-uses-configcat-in-its-ci-pipeline/#retiring-feature-flags-or-keeping-them-as-emergency-kill-switches)
 
 A kill switch is a mechanism that can be used to quickly disable a feature or an entire application in case of an emergency.
-
-[Read more](https://configcat.com/blog/2022/03/24/how-kantan-successfully-uses-configcat-in-its-ci-pipeline/#retiring-feature-flags-or-keeping-them-as-emergency-kill-switches)
 
 ## L
 
@@ -134,11 +114,9 @@ The Multi-Armed Bandit (MAB) is a machine learning framework that involves an ag
 
 The role of a product lifecycle manager is to supervise the project team and ensure timely completion of each stage in the lifecycle of a project.
 
-#### Progressive Delivery
+#### [Progressive Delivery](https://configcat.com/blog/2022/01/14/progressive-delivery/)
 
 A progressive delivery approach to DevOps combines the principles of Continuous Integration and Continuous Delivery (CI/CD) with modern software development practices, facilitating faster code deployment, reducing risk, and improving user experiences.
-
-[Read more](https://configcat.com/blog/2022/01/14/progressive-delivery/)
 
 ## Q
 
@@ -152,11 +130,9 @@ A release manager is an IT professional responsible for defining and executing t
 
 Remote configuration is a software development technique that allows you to modify certain features of an app remotely without having to deploy a new version of the app.
 
-#### Ring Deployment
+#### [Ring Deployment](https://configcat.com/blog/2022/01/14/progressive-delivery/#ring-deployment)
 
 Ring deployment is a form of gradual rollout where new features are released gradually to different groups of users to mitigate risk.
-
-[Read more](https://configcat.com/blog/2022/01/14/progressive-delivery/#ring-deployment)
 
 ## S
 
