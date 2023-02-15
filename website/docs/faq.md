@@ -183,6 +183,8 @@ If you want to use targeting rules based on email address, phone number, or othe
 
 ### What are Zombie (Stale) Flags?
 
+<img src="/docs/assets/faq/zombie.svg" alt="Zombie cat" width="200"/>
+
 Zombie (Stale) flags are feature flags that are not changed in the last (configurable) number of days. Most of the time if a feature flag isn't changed for a long time it means it is time to be removed from your source code and from the [ConfigCat Dashboard](https://app.configcat.com/) as well to avoid technical debt.
 
 ### What is the Zombie (Stale) Flags Report?
