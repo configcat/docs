@@ -408,7 +408,7 @@ ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
             "path/to/the/local_flags.json", // path to the file
             true // reload the file when it gets modified
         ),
-        OverrideBehaviour.LOCAL_ONLY // local/offline mode
+        OverrideBehaviour.LOCAL_ONLY
     );
 });
 ```
@@ -421,7 +421,7 @@ ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
             "local_flags.json", // name of the resource
             true // reload the resource when it gets modified
         ),
-        OverrideBehaviour.LOCAL_ONLY // local/offline mode
+        OverrideBehaviour.LOCAL_ONLY
     );
 });
 ```

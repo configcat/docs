@@ -28,26 +28,28 @@ require 'configcat'
 ### 3. Create the _ConfigCat_ client with your _SDK Key_
 
 ```ruby
-configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
+client = ConfigCat.get('#YOUR-SDK-KEY#')
 ```
 
 ### 4. Get your setting value
 
 ```ruby
-isMyAwesomeFeatureEnabled = configcat_client.get_value("isMyAwesomeFeatureEnabled", false)
-if isMyAwesomeFeatureEnabled
-    do_the_new_thing()
+is_my_awesome_feature_enabled = client.get_value('isMyAwesomeFeatureEnabled', false)
+if is_my_awesome_feature_enabled
+    do_the_new_thing
 else
-    do_the_old_thing()
+    do_the_old_thing
 end
 ```
 
 ### 5. Stop _ConfigCat_ client
 
-You can safely shut down the client instance and release all associated resources on application exit.
+You can safely shut down all clients at once or individually and release all associated resources on application exit.
 
 ```ruby
-configcat_client.stop()
+ConfigCat.close_all # closes all clients
+
+client.close # closes a specific client
 ```
 
 ## Creating the _ConfigCat Client_
@@ -58,23 +60,42 @@ _ConfigCat Client_ is responsible for:
 - caching your setting values and feature flags.
 - serving values quickly in a failsafe way.
 
-`create_client()` returns a client with default options.
+`ConfigCat.get('#YOUR-SDK-KEY#')` returns a client with default options.
 
-| Properties        | Description                                                                                                                                                                                                                                                                                                         |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sdk_key`         | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                                                                                                                                                                                                           |
-| `data_governance` | Optional, defaults to `DataGovernance::GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `GLOBAL`, `EU_ONLY`. |
 
-`create_client_with_auto_poll()`, `create_client_with_lazy_load()`, `create_client_with_manual_poll()`  
-Creating the client is different for each polling mode.
-[See below](#polling-modes) for details.
+| Client options            | Description                                                                                                                | Default |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `base_url`                | *Obsolete*, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json. | nil |
+| `polling_mode`            | Sets the polling mode for the client. [More about polling modes](#polling-modes). | PollingMode.auto_poll |
+| `config_cache`            | Sets a custom config cache implementation for the client. [More about cache](#custom-cache). | nil |
+| `proxy_address`           | Sets custom proxy address for the client. [More about proxy](#using-configcat-behind-a-proxy). | nil |
+| `proxy_port`              | Sets custom proxy port for the client. [More about proxy](#using-configcat-behind-a-proxy). | nil |
+| `proxy_user`              | Sets custom proxy user for the client. [More about proxy](#using-configcat-behind-a-proxy). | nil |
+| `proxy_pass`              | Sets custom proxy password for the client. [More about proxy](#using-configcat-behind-a-proxy). | nil |
+| `open_timeout_seconds`    | The number of seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10      |
+| `read_timeout_seconds`    | The number of seconds to wait for the server to respond before giving up.                                                   | 30      |
+| `flag_overrides`          | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)                                | nil    |
+| `data_governance`         | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `GLOBAL`, `EU_ONLY`. | `GLOBAL`|
+| `default_user`            | Sets the default user. [More about default user](#default-user). | nil |
+| `hooks`                   | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). | nil |
+| `offline`                 | Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode). | false |
+
+
+```ruby
+client = ConfigCat.get('#YOUR-SDK-KEY#',
+    ConfigCat::ConfigCatOptions.new(
+        polling_mode: ConfigCat::PollingMode.auto_poll
+    )
+)
+```
 
 :::caution
 We strongly recommend you to use the _ConfigCat Client_ as a Singleton object in your application.
-If you want to use multiple SDK Keys in the same application, create only one _ConfigCat Client_ per SDK Key.
+The `ConfigCat.get` static factory method constructs singleton client instances for your SDK keys.
+These clients can be closed all at once with the `ConfigCat.close_all` method or individually with `client.close`.
 :::
 
-## Anatomy of `get_value()`
+## Anatomy of `get_value`
 
 | Parameters      | Description                                                                                                  |
 | --------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -83,24 +104,58 @@ If you want to use multiple SDK Keys in the same application, create only one _C
 | `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
 ```ruby
-value = configcat_client.get_value(
-    "keyOfMySetting", # Setting Key
+value = client.get_value(
+    'keyOfMySetting', # Setting Key
     false, # Default value
-    ConfigCat::User.new("#UNIQUE-USER-IDENTIFIER#") # Optional User Object
+    ConfigCat::User.new('#UNIQUE-USER-IDENTIFIER#') # Optional User Object
 );
 ```
+
+## Anatomy of `get_value_details`
+
+`get_value_details` is similar to `get_value` but instead of returning the evaluated value only, it gives an _EvaluationDetails_ 
+object with more detailed information about the evaluation result.
+
+| Parameters      | Description                                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------------------------------ |
+| `key`           | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
+| `default_value` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
+```ruby
+details = client.get_value_details(
+    'keyOfMySetting', # Setting Key
+    false, # Default value
+    ConfigCat::User.new('#UNIQUE-USER-IDENTIFIER#') # Optional User Object
+);
+```
+
+The details result contains the following information:
+
+| Property                             | Description                                                                               |
+| ------------------------------------ | ----------------------------------------------------------------------------------------- |
+| `value`                              | The evaluated value of the feature flag or setting.                                       |
+| `key`                                | The key of the evaluated feature flag or setting.                                         |
+| `is_default_value`                   | True when the default value passed to get_value_details() is returned due to an error.    |
+| `error`                              | In case of an error, this field contains the error message.                               |
+| `user`                               | The user object that was used for evaluation.                                             |
+| `matched_evaluation_percentage_rule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `matched_evaluation_rule`            | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `fetch_time`                         | The last download time (UTC _Time_) of the current config.                                |
 
 ## User Object
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```ruby
-user_object = ConfigCat::User.new("#UNIQUE-USER-IDENTIFIER#")
+user_object = ConfigCat::User.new('#UNIQUE-USER-IDENTIFIER#')
 ```
 
 ```ruby
-user_object = ConfigCat::User.new("john@example.com")
+user_object = ConfigCat::User.new('john@example.com')
 ```
+
+### Customized user object creation
 
 | Parameters   | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -110,8 +165,56 @@ user_object = ConfigCat::User.new("john@example.com")
 | `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```ruby
-user_object = ConfigCat::User.new("#UNIQUE-USER-IDENTIFIER#", email: 'john@example', country: 'United Kingdom',
+user_object = ConfigCat::User.new('#UNIQUE-USER-IDENTIFIER#', email: 'john@example', country: 'United Kingdom',
                 custom: {'SubscriptionType': 'Pro', 'UserRole': 'Admin'})
+```
+
+### Default user
+
+There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+
+You can set the default user object either on SDK initialization:
+```ruby
+client = ConfigCat.get('#YOUR-SDK-KEY#',
+    ConfigCat::ConfigCatOptions.new(
+        default_user: ConfigCat::User.new('john@example.com')
+    )
+)
+```
+
+or with the `set_default_user` method of the ConfigCat client.
+```ruby
+client.set_default_user(ConfigCat::User.new('john@example.com'))
+```
+
+Whenever the `get_value`, `get_value_details`, `get_variation_id`, `get_all_variation_ids`, or `get_all_values` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+
+```ruby
+client = ConfigCat.get('#YOUR-SDK-KEY#',
+    ConfigCat::ConfigCatOptions.new(
+        default_user: ConfigCat::User.new('john@example.com')
+    )
+)
+# The default user will be used at the evaluation process.
+value = client.get_value('keyOfMySetting', false)
+```
+
+When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+
+```ruby
+client = ConfigCat.get('#YOUR-SDK-KEY#',
+    ConfigCat::ConfigCatOptions.new(
+        default_user: ConfigCat::User.new('john@example.com')
+    )
+)
+other_user = ConfigCat::User.new('brian@example.com')
+# otherUser will be used at the evaluation process.
+value = client.get_value('keyOfMySetting', false, other_user)
+```
+
+For deleting the default user, you can do the following:
+```ruby
+client.clear_default_user
 ```
 
 ## Polling Modes
@@ -126,18 +229,11 @@ The _ConfigCat SDK_ downloads the latest values and stores them automatically ev
 Use the `poll_interval_seconds` option parameter to change the polling interval.
 
 ```ruby
-ConfigCat.create_client_with_auto_poll(
-    "#YOUR-SDK-KEY#", poll_interval_seconds: 95);
-```
-
-Adding a callback to `on_configuration_changed_callback` option parameter will get you notified about changes.
-
-```ruby
-def configuration_changed_callback()
-    # Configuration changed.
-end
-
-ConfigCat.create_client_with_auto_poll("#YOUR-SDK-KEY#", on_configuration_changed_callback: method(:configuration_changed_callback));
+client = ConfigCat.get('#YOUR-SDK-KEY#', 
+    ConfigCat::ConfigCatOptions.new(
+      polling_mode: ConfigCat::PollingMode.auto_poll(poll_interval_seconds: 95)
+    )
+)
 ```
 
 Available options:
@@ -146,89 +242,105 @@ Available options:
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
 | `poll_interval_seconds`             | Polling interval.                                                                                    | 60      |
 | `max_init_wait_time_seconds`        | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
-| `on_configuration_changed_callback` | Callback to get notified about changes.                                                              | -       |
-| `config_cache_class`                | Custom cache implementation.                                                                         | nil     |
-| `base_url`                          | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations.        | nil     |
-| `open_timeout`                      | The number of seconds to wait for the server to make the initial connection.                         | 10      |
-| `read_timeout`                      | The number of seconds to wait for the server to respond before giving up.                            | 30      |
-| `flag_overrides`                    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)         | nil     |
 
 ### Lazy loading
 
-When calling `get_value()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
+When calling `get_value` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value` will return the setting value after the cache is updated.
 
-Use `cache_time_to_live_seconds` option parameter to set cache lifetime.
-
-```ruby
-ConfigCat.create_client_with_lazy_load(
-    "#YOUR-SDK-KEY#", cache_time_to_live_seconds: 600);
-```
-
-Use a custom `config_cache_class` option parameter.
+Use `cache_refresh_interval_seconds` option parameter to set cache lifetime.
 
 ```ruby
-class InMemoryConfigCache < ConfigCat::ConfigCache
-    def initialize()
-        @_value = {}
-    end
-
-    def get(key)
-       return @_value.fetch(key, nil)
-    end
-
-    def set(key, value)
-       @_value[key] = value
-    end
-end
-
-ConfigCat.create_client_with_lazy_load("#YOUR-SDK-KEY#", config_cache_class: InMemoryConfigCache);
+client = ConfigCat.get('#YOUR-SDK-KEY#', 
+    ConfigCat::ConfigCatOptions.new(
+      polling_mode: ConfigCat::PollingMode.lazy_load(cache_refresh_interval_seconds: 600)
+    )
+)
 ```
 
 Available options:
 
-| Option Parameter             | Description                                                                                   | Default |
-| ---------------------------- | --------------------------------------------------------------------------------------------- | ------- |
-| `cache_time_to_live_seconds` | Cache TTL.                                                                                    | 60      |
-| `config_cache_class`         | Custom cache implementation.                                                                  | nil     |
-| `base_url`                   | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
-| `open_timeout`               | The number of seconds to wait for the server to make the initial connection.                  | 10      |
-| `read_timeout`               | The number of seconds to wait for the server to respond before giving up.                     | 30      |
-| `flag_overrides`             | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)  | nil     |
+| Option Parameter                 | Description                  | Default |
+| -------------------------------- | ---------------------------- | ------- |
+| `cache_refresh_interval_seconds` | Cache TTL.                   | 60      |
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh` is your application's responsibility.
 
 ```ruby
-configcat_client = ConfigCat.create_client_with_manual_poll("#YOUR-SDK-KEY#");
-configcat_client.force_refresh();
+client = ConfigCat.get('#YOUR-SDK-KEY#', 
+    ConfigCat::ConfigCatOptions.new(
+      polling_mode: ConfigCat::PollingMode.manual_poll
+    )
+)
+client.force_refresh
 ```
 
-Available options:
-
-| Option Parameter     | Description                                                                                   | Default |
-| -------------------- | --------------------------------------------------------------------------------------------- | ------- |
-| `config_cache_class` | Custom cache implementation.                                                                  | nil     |
-| `base_url`           | Obsolete Optional, sets the CDN base url from where the sdk will download the configurations. | nil     |
-| `open_timeout`       | The number of seconds to wait for the server to make the initial connection.                  | 10      |
-| `read_timeout`       | The number of seconds to wait for the server to respond before giving up.                     | 30      |
-| `flag_overrides`     | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)  | nil     |
-
-> `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
+> `get_value` returns `default_value` if the cache is empty. Call `force_refresh` to update the cache.
 
 ```ruby
-configcat_client = ConfigCat.create_client_with_manual_poll("#YOUR-SDK-KEY#");
-value = configcat_client.get_value("key", "my default value") # Returns "my default value"
-configcat_client.force_refresh();
-value = configcat_client.get_value("key", "my default value") # Returns "value from server"
+client = ConfigCat.get('#YOUR-SDK-KEY#', 
+    ConfigCat::ConfigCatOptions.new(
+      polling_mode: ConfigCat::PollingMode.manual_poll
+    )
+)
+
+value = client.get_value("key", "my default value") # Returns "my default value"
+client.force_refresh
+value = client.get_value("key", "my default value") # Returns "value from server"
 ```
+
+## Hooks
+
+With the following hooks you can subscribe to particular events fired by the SDK:
+
+- `on_client_ready`: This event is sent when the SDK reaches the ready state. If the SDK is set up with lazy load or manual polling it's considered ready right after instantiation.
+If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `on_client_ready` event fires when the auto polling's `max_init_wait_time_seconds` is reached.
+
+- `on_config_changed(config: Hash)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+
+- `on_flag_evaluated(evaluation_details: EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`get_value_details`](#anatomy-of-getvaluedetails).
+
+- `on_error(error: String)`: This event is sent when an error occurs within the ConfigCat SDK.
+
+You can subscribe to these events either on SDK initialization: 
+```ruby
+def on_flag_evaluated(evaluation_details):
+    # handle the event
+end
+
+client = ConfigCat.get('#YOUR-SDK-KEY#',
+    ConfigCat::ConfigCatOptions.new(
+        hooks: ConfigCat::Hooks.new(on_flag_evaluated: method(:on_flag_evaluated))
+    )
+)
+```
+or with the `hooks` property of the ConfigCat client:
+```ruby
+client.hooks.add_on_flag_evaluated(method(:on_flag_evaluated))
+```
+
+## Online / Offline mode
+
+In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
+```ruby
+client.set_offline
+```
+In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
+
+To put the SDK back in online mode, you can do the following:
+```ruby
+client.set_online
+```
+
+> With `client.offline?` you can check whether the SDK is in offline mode.
 
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
-- **Local/Offline mode** (`ConfigCat::OverrideBehaviour::LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+- **Local only** (`ConfigCat::OverrideBehaviour::LOCAL_ONLY`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
 - **Local over remote** (`ConfigCat::OverrideBehaviour::LOCAL_OVER_REMOTE`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
 
@@ -243,11 +355,12 @@ The SDK can be load your feature flag & setting overrides from a file.
 #### File
 
 ```ruby
-configcat_client = ConfigCat::ConfigCatClient.new(
-    "#YOUR-SDK-KEY#",
-    flag_overrides: ConfigCat::LocalFileDataSource.new(
-        "path/to/the/local_flags.json",  # path to the file
-        ConfigCat::OverrideBehaviour::LOCAL_ONLY  # local/offline mode
+client = ConfigCat.get('#YOUR-SDK-KEY#',
+    ConfigCat::ConfigCatOptions.new(
+        flag_overrides: ConfigCat::LocalFileFlagOverrides.new(
+            'path/to/the/local_flags.json',  # path to the file
+            ConfigCat::OverrideBehaviour::LOCAL_ONLY
+        )
     )
 )
 ```
@@ -357,9 +470,10 @@ dictionary = {
     "stringSetting" => "test"
 }
 
-configcat_client = ConfigCat::ConfigCatClient.new(
-    "#YOUR-SDK-KEY#",
-    flag_overrides: ConfigCat::LocalDictionaryDataSource.new(dictionary, ConfigCat::OverrideBehaviour::LOCAL_ONLY)
+client = ConfigCat.get('#YOUR-SDK-KEY#',
+    ConfigCat::ConfigCatOptions.new(
+        flag_overrides: ConfigCat::LocalDictionaryFlagOverrides.new(dictionary, ConfigCat::OverrideBehaviour::LOCAL_ONLY)
+    )
 )
 ```
 
@@ -399,16 +513,16 @@ You can easily replace the default logger with your own one. The following examp
 ConfigCat.logger = Logger.new('log.txt')
 ```
 
-## `get_all_keys()`
+## `get_all_keys`
 
-You can query the keys from your configuration in the SDK with the `get_all_keys()` method.
+You can query the keys from your config.json in the SDK with the `get_all_keys` method.
 
 ```ruby
-configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
-keys = configcat_client.get_all_keys()
+client = ConfigCat.get('#YOUR-SDK-KEY#')
+keys = client.get_all_keys
 ```
 
-## `get_all_values()`
+## `get_all_values`
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
@@ -417,24 +531,69 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 | `user`     | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
 ```ruby
-configcat_client = ConfigCat.create_client("#YOUR-SDK-KEY#")
-setting_values = configcat_client.get_all_values(ConfigCat::User.new("#UNIQUE-USER-IDENTIFIER#"))  # Optional User Object
+client = ConfigCat.get('#YOUR-SDK-KEY#')
+setting_values = client.get_all_values(ConfigCat::User.new('#UNIQUE-USER-IDENTIFIER#'))  # Optional User Object
+```
+
+## `get_all_value_details`
+
+Evaluates and returns the detailed values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
+```ruby
+client = ConfigCat.get('#YOUR-SDK-KEY#')
+all_value_details = client.get_all_value_details(ConfigCat::User.new('#UNIQUE-USER-IDENTIFIER#'))  # Optional User Object
+```
+
+## Custom cache
+
+You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the ConfigCache abstract class:
+
+```ruby
+class InMemoryConfigCache < ConfigCat::ConfigCache
+    attr_reader :value
+    def initialize
+        @value = {}
+    end
+  
+    def get(key)
+        # you should return the cached value
+        return @value.fetch(key, nil)
+    end
+  
+    def set(key, value)
+        # you should cache the new value
+        @value[key] = value
+    end
+end
+```
+
+Then use your custom cache implementation:
+
+```ruby
+client = ConfigCat.get('#YOUR-SDK-KEY#',
+      ConfigCat::ConfigCatOptions.new(
+        config_cache: InMemoryConfigCache.new
+    )
+)
 ```
 
 ## Force refresh
 
-Any time you want to refresh the cached configuration with the latest one, you can call the `force_refresh()` method of the library, which initiates a new download and updates the local cache.
+Any time you want to refresh the cached configuration with the latest one, you can call the `force_refresh` method of the library, which initiates a new download and updates the local cache.
 
 ## Using ConfigCat behind a proxy
 
 Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
 
 ```ruby
-configcat_client = ConfigCat::create_client_with_auto_poll("#YOUR-SDK-KEY#",
-                                                           proxy_address: "127.0.0.1",
-                                                           proxy_port: 8080,
-                                                           proxy_user: "user",
-                                                           proxy_pass: "password")
+configcat_client = ConfigCat.get("#YOUR-SDK-KEY#",
+    ConfigCat::ConfigCatOptions.new(
+        proxy_address: "127.0.0.1",
+        proxy_port: 8080,
+        proxy_user: "user",
+        proxy_pass: "password"
+    )
+)
 ```
 
 ## Sample Applications
