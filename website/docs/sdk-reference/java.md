@@ -656,7 +656,7 @@ OkHttpClient's default timeout is 10 seconds.
 
 ## Force refresh
 
-Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
+Call the `forceRefresh()` method on the client to download the latest config.json and update the cache.
 
 ## Logging
 

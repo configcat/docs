@@ -579,7 +579,7 @@ client = ConfigCat.get('#YOUR-SDK-KEY#',
 
 ## Force refresh
 
-Any time you want to refresh the cached configuration with the latest one, you can call the `force_refresh` method of the library, which initiates a new download and updates the local cache.
+Call the `force_refresh` method on the client to download the latest config.json and update the cache.
 
 ## Using ConfigCat behind a proxy
 

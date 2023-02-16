@@ -1071,7 +1071,7 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 
 ## Force refresh
 
-Any time you want to refresh the cached config.json with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
+Call the `forceRefresh()` method on the client to download the latest config.json and update the cache.
 
 ## Using ConfigCat behind a proxy
 
