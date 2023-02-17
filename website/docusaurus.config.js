@@ -200,14 +200,19 @@ module.exports = {
           editUrl: 'https://github.com/configcat/docs/tree/master/website',
           routeBasePath: '/',
         },
-        gtag: {
-          trackingID: 'G-VNVQ03TVR2',
-        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
         blog: {
           archiveBasePath: null,
+        },
+      },
+    ],
+    [
+      '@docusaurus/plugin-google-tag-manager',
+      {
+        googleTagManager: {
+          containerId: 'GTM-K2RKTZS',
         },
       },
     ],
