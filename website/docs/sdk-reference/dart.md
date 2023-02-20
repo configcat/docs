@@ -55,7 +55,7 @@ final client = ConfigCatClient.get(sdkKey: '#YOUR-SDK-KEY#');
 
 ### 4. (Optional) Set up Flutter caching
 
-If you're using the SDK in a Flutter application, it's recommended to use the [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) implementation for caching. It stores the downloaded `config.json` using the [shared_preferences](https://pub.dev/packages/shared_preferences) package.
+If you're using the SDK in a Flutter application, it's recommended to use the [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) implementation for caching. It stores the downloaded `config JSON` using the [shared_preferences](https://pub.dev/packages/shared_preferences) package.
 
 ```dart
 import 'package:configcat_preferences_cache/configcat_preferences_cache.dart';
@@ -117,7 +117,7 @@ These are the available options on the `ConfigCatOptions` class:
 | Properties       | Description                                                                                                                                                                                                                                                                                        |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataGovernance` | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`. |
-| `baseUrl`        | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json.                                                                                                                                                                          |
+| `baseUrl`        | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                                                          |
 | `connectTimeout` | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's connect timeout. [More about the HTTP Client](#httpclient).                                                                                                                      |
 | `receiveTimeout` | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's receive timeout. [More about the HTTP Client](#httpclient).                                                                                                                      |
 | `sendTimeout`    | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's send timeout. [More about the HTTP Client](#httpclient).                                                                                                                         |
@@ -320,7 +320,7 @@ Available options:
 
 ### Manual Polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 
 ```dart
 final client = ConfigCatClient.get(
@@ -340,9 +340,9 @@ client.forceRefresh();
 With the following hooks you can subscribe to particular events fired by the SDK:
 
 - `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling, it's considered ready right after instantiation.
-  If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
+  If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
 
-- `onConfigChanged(Map<string, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+- `onConfigChanged(Map<string, Setting>)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
@@ -441,7 +441,7 @@ final settingValuesTargeting = await client.getAllValues(user);
 
 ## Cache
 
-The SDK caches the downloaded `config.json` only in memory by default. In case you have a Flutter application, you can use the [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) for caching.  
+The SDK caches the downloaded `config JSON` only in memory by default. In case you have a Flutter application, you can use the [Flutter Preferences Cache](https://github.com/configcat/flutter-preferences-cache) for caching.  
 It's based on the [shared_preferences](https://pub.dev/packages/shared_preferences) package that uses the following storage locations by platform:
 
 - **Web**: Browser `LocalStorage`.
@@ -483,7 +483,7 @@ final client = ConfigCatClient.get(
 
 ## HttpClient
 
-The ConfigCat SDK internally uses a <a href="https://github.com/flutterchina/dio" target="_blank">Dio HTTP client</a> instance to download the latest config.json over HTTP. You have the option to customize the internal HTTP client.
+The ConfigCat SDK internally uses a <a href="https://github.com/flutterchina/dio" target="_blank">Dio HTTP client</a> instance to download the latest config JSON over HTTP. You have the option to customize the internal HTTP client.
 
 ### HTTP Timeout
 
@@ -523,7 +523,7 @@ import 'package:dio/adapter.dart';
 
 ## Force refresh
 
-Any time you want to refresh the cached config.json with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
+Any time you want to refresh the cached config JSON with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
 
 ## Logging
 

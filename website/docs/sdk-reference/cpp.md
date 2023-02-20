@@ -219,7 +219,7 @@ Available options:
 
 ### Manual Polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 
 ```cpp
 ConfigCatOptions options;
@@ -278,9 +278,9 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 This is the same format that the SDK downloads from the ConfigCat CDN.
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
-You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings:
+The URL to your current config JSON is based on your [Data Governance](advanced/data-governance.md) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
@@ -488,10 +488,10 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config.json](/requests/) file from ConfigCat's CDN servers. The URL path for this config.json file contains your SDK key, so the SDK key and the content of your config.json file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
-This SDK key is read-only, it only allows downloading your config.json file, but nobody can make any changes with it in your ConfigCat account.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
-If you do not want to expose the SDK key or the content of the config.json file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
+If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
 Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
 

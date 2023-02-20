@@ -197,7 +197,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```ruby
 configcat_client = ConfigCat.create_client_with_manual_poll("#YOUR-SDK-KEY#");
@@ -275,9 +275,9 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 This is the same format that the SDK downloads from the ConfigCat CDN.
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
-You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings:
+The URL to your current config JSON is based on your [Data Governance](advanced/data-governance.md) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`

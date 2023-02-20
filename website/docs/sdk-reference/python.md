@@ -65,7 +65,7 @@ _ConfigCat Client_ is responsible for:
 
 | Client options            | Description                                                                                                                | Default |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `base_url`                | *Obsolete*, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json. | None |
+| `base_url`                | *Obsolete*, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON. | None |
 | `polling_mode`            | Sets the polling mode for the client. [More about polling modes](#polling-modes). | PollingMode.auto_poll() |
 | `config_cache`            | Sets a custom config cache implementation for the client. [More about cache](#custom-cache). | None |
 | `proxies`                 | Sets custom proxies for the client. [More about proxy](#using-configcat-behind-a-proxy). | None |
@@ -273,7 +273,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#',
@@ -302,9 +302,9 @@ value = client.get_value('key', 'my default value') # Returns "value from server
 With the following hooks you can subscribe to particular events fired by the SDK:
 
 - `on_client_ready()`: This event is sent when the SDK reaches the ready state. If the SDK is set up with lazy load or manual polling it's considered ready right after instantiation.
-If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `on_client_ready` event fires when the auto polling's `max_init_wait_time_seconds` is reached.
+If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `on_client_ready` event fires when the auto polling's `max_init_wait_time_seconds` is reached.
 
-- `on_config_changed(config: dict)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+- `on_config_changed(config: dict)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
 - `on_flag_evaluated(evaluation_details: EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`get_value_details()`](#anatomy-of-getvaluedetails).
 
@@ -396,9 +396,9 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 This is the same format that the SDK downloads from the ConfigCat CDN.
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
-You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings:
+The URL to your current config JSON is based on your [Data Governance](advanced/data-governance.md) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
@@ -519,7 +519,7 @@ Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: True
 
 ## `get_all_keys()`
 
-You can query the keys from your config.json in the SDK with the `get_all_keys()` method.
+You can query the keys from your config JSON in the SDK with the `get_all_keys()` method.
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#')

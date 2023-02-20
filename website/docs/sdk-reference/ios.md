@@ -224,7 +224,7 @@ These are the available options on the `ConfigCatOptions` class:
 | `configCache`          | `ConfigCache?`            | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
 | `pollingMode`          | `PollingMode`             | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
 | `sessionConfiguration` | `URLSessionConfiguration` | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                                                                                                                                                                                                          |
-| `baseUrl`              | `String`                  | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json.                                                                                                                                                                          |
+| `baseUrl`              | `String`                  | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                                                          |
 | `flagOverrides`        | `OverrideDataSource?`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
 | `logLevel`             | `LogLevel`                | Optional, sets the internal log level. [More about logging.](#logging).                                                                                                                                                                                                                            |
 | `defaultUser`          | `ConfigCatUser?`          | Optional, sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                        |
@@ -596,7 +596,7 @@ client.clearDefaultUser()
 
 ## `getAllKeys()`
 
-You can get all the setting keys from your config.json by calling the `getAllKeys()` method of the `ConfigCatClient`.
+You can get all the setting keys from your config JSON by calling the `getAllKeys()` method of the `ConfigCatClient`.
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -761,7 +761,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `refresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `refresh()` is your application's responsibility.
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -773,7 +773,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 
 // Completion callback
 client.forceRefresh() { _ in
-    // The client uses the latest config.json
+    // The client uses the latest config JSON
 }
 
 // Async/await
@@ -792,7 +792,7 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 
 // Completion callback
 [client forceRefreshWithCompletion:^(RefreshResult* result) {
-    // The client uses the latest config.json
+    // The client uses the latest config JSON
 }];
 
 // Or synchronously
@@ -809,9 +809,9 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 With the following hooks you can subscribe to particular events fired by the SDK:
 
 - `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling it's considered ready right after instantiation.
-  If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeInSeconds` is reached.
+  If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeInSeconds` is reached.
 
-- `onConfigChanged([String: Setting])`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+- `onConfigChanged([String: Setting])`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
@@ -968,7 +968,7 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 
 ## Cache
 
-The SDK uses `UserDefaults` as the default cache to store the downloaded `config.json`.
+The SDK uses `UserDefaults` as the default cache to store the downloaded `config JSON`.
 
 If you want to turn off the default behavior, you can set the SDK's cache to `nil` or to your own cache implementation.
 
@@ -1071,7 +1071,7 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 
 ## Force refresh
 
-Any time you want to refresh the cached config.json with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
+Any time you want to refresh the cached config JSON with the latest one, you can call the `forceRefresh()` method of the library, which will initiate a new fetch and will update the local cache.
 
 ## Using ConfigCat behind a proxy
 
@@ -1242,10 +1242,10 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config.json](/requests/) file from ConfigCat's CDN servers. The URL path for this config.json file contains your SDK key, so the SDK key and the content of your config.json file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
-This SDK key is read-only, it only allows downloading your config.json file, but nobody can make any changes with it in your ConfigCat account.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
-If you do not want to expose the SDK key or the content of the config.json file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
+If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
 Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
 

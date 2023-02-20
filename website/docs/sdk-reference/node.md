@@ -102,7 +102,7 @@ The available options depends on the chosen polling mode. However, there are som
 | ------------------------ |------------ | ------- |
 | `logger`                 | Custom logger. [More about logging](#logging). | Console logger |
 | `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000 |
-| `baseUrl`                | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config.json. | |
+| `baseUrl`                | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON. | |
 | `proxy`                  | Proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy). | |
 | `dataGovernance`         | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
 | `cache`                  | Cache implementation for config cache. | `InMemoryCache` |
@@ -327,7 +327,7 @@ Available options (in addition to the [common ones](#creating-the-configcat-clie
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `forceRefreshAsync()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `forceRefreshAsync()` is your application's responsibility.
 
 ```js
 const configCatClient = configcat.getClient('#YOUR-SDK-KEY#', configcat.PollingMode.ManualPoll);
@@ -356,8 +356,8 @@ The SDK provides several hooks (events), by means of which you can get notified 
 You can subscribe to the following events emitted by the client:
 
 - `clientReady`: This event is emitted when the SDK reaches the ready state. If the SDK is set up to use lazy load or manual polling, it's considered ready right after instantiation.
-If auto polling is used, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
-- `configChanged`: This event is emitted first when the SDK loads a valid config.json into memory from cache, then each time afterwards when a config.json with changed content is downloaded via HTTP.
+If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
+- `configChanged`: This event is emitted first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
 - `flagEvaluated`: This event is emitted each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`getValueDetailsAsync()`](#anatomy-of-getvaluedetailsasync).
 - `clientError`: This event is emitted when an error occurs within the ConfigCat SDK.
 
