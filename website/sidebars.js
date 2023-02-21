@@ -150,7 +150,7 @@ module.exports = {
         { type: 'doc', id: 'integrations/amplitude', label: 'Amplitude' },
         { type: 'doc', id: 'integrations/vscode', label: 'Visual Studio Code' },
       ],
-      'Packages - Libraries': [
+      'Community maintained': [
         { type: 'doc', id: 'sdk-reference/laravel', label: 'Laravel' },
       ],
       'Service Status': ['service/status'],
