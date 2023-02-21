@@ -10,6 +10,10 @@ description: ConfigCat package for Laravel. Implement feature flags within your 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/Pod-Point/laravel-configcat/blob/main/LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/pod-point/laravel-configcat.svg?style=flat-square)](https://packagist.org/packages/pod-point/laravel-configcat)
 
+:::caution
+As this is a community maintained SDK, ConfigCat can't guarantee it's stability, safety and can't provide official customer support.
+:::
+
 <a href="https://github.com/Pod-Point/laravel-configcat" target="_blank">ConfigCat package for Laravel on GitHub</a>
 
 Implement feature flags within your Laravel application using [ConfigCat](https://configcat.com).
@@ -121,7 +125,7 @@ The following view content will only be rendered if the feature flag is truthy:
 
 The [User Object](https://configcat.com/docs/sdk-reference/php/#user-object) is essential if you'd like to use ConfigCat's [Targeting](https://configcat.com/docs/advanced/targeting) feature.
 
-ConfigCat needs to understand the representation of your users from your application. To do so, you will need to map your user into a `ConfigCat\User` object. This can be done directly from the [`config/configcat.php`](config/configcat.php) file. Here is an example:
+ConfigCat needs to understand the representation of your users from your application. To do so, you will need to map your user into a `ConfigCat\User` object. This can be done directly from the [`config/configcat.php`](https://github.com/Pod-Point/laravel-configcat/blob/main/config/configcat.php) file. Here is an example:
 
 ```php
 'user' => function (\App\Models\User $user) {

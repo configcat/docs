@@ -130,8 +130,11 @@ module.exports = {
         { type: 'doc', id: 'sdk-reference/go', label: 'Go' },
         { type: 'doc', id: 'sdk-reference/php', label: 'PHP' },
         { type: 'doc', id: 'sdk-reference/ruby', label: 'Ruby' },
-        { type: 'doc', id: 'sdk-reference/elixir', label: 'Elixir' },
         { type: 'doc', id: 'sdk-reference/cpp', label: 'C++' },
+      ],
+      'SDK References (Community maintained)': [
+        { type: 'doc', id: 'sdk-reference/elixir', label: 'Elixir' },
+        { type: 'doc', id: 'sdk-reference/laravel', label: 'Laravel' },
       ],
       Integrations: [
         { type: 'doc', id: 'integrations/overview', label: 'Overview' },

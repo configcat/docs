@@ -13,6 +13,10 @@ description: ConfigCat Elixir SDK Reference. This is a step-by-step guide on how
 [![Hex.pm](https://img.shields.io/hexpm/l/configcat.svg)](https://hex.pm/packages/configcat)
 [![Last Updated](https://img.shields.io/github/last-commit/configcat/elixir-sdk.svg)](https://github.com/configcat/elixir-sdk/commits/main)
 
+:::caution
+As this is a community maintained SDK, ConfigCat can't guarantee it's stability, safety and can't provide official customer support.
+:::
+
 <a href="https://github.com/configcat/elixir-sdk" target="_blank">ConfigCat Elixir SDK on GitHub</a>
 
 ## Getting started
