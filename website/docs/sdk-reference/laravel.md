@@ -22,17 +22,15 @@ You can install the package via composer:
 composer require pod-point/laravel-configcat
 ```
 
-### Publishing the config file
-
-The configuration for this package comes with sensible defaults but there is one mandatory entry you will need to configure, which is your [ConfigCat SDK key](https://app.configcat.com/sdkkey). To do so, publish the configuration file for this package by running:
+Next, you should publish the Laravel package configuration file using the `vendor:publish` Artisan command. It will be placed in your application's config directory:
 
 ```bash
 php artisan vendor:publish --provider="PodPoint\ConfigCat\ConfigCatServiceProvider"
 ```
 
-You will then be able to specify you SDK `key` within the freshly published configuration file under `config/configcat.php`.
+Don't forget to specify your [ConfigCat SDK `key`](https://app.configcat.com/sdkkey) within the freshly published Laravel configuration file under `config/configcat.php`.
 
-See [`config/configcat.php`](config/configcat.php) for more details.
+The Laravel configuration for this package comes with sensible defaults. See [`config/configcat.php`](https://github.com/Pod-Point/laravel-configcat/blob/main/config/configcat.php) for more details.
 
 ## Usage
 
@@ -163,7 +161,7 @@ configcat('new_registration_flow', $user);
 
 This package supports native Laravel caching and logging capabilities in order to cache the feature flag values from ConfigCat's CDN as well as log any information when resolving feature flags. We've setup some sensible defaults but various levels of caching and logging can be configured.
 
-See [`config/configcat.php`](config/configcat.php) for more info.
+See [`config/configcat.php`](https://github.com/Pod-Point/laravel-configcat/blob/main/config/configcat.php) for more info.
 
 ### Test support: mock, fake & overrides
 
@@ -201,9 +199,9 @@ ConfigCat::fake(['new_registration_flow' => true]);
 
 When running tests within a browser which doesn't share the same instance of the application, using mocks or fakes is not applicable. This is why we provide some overrides through ConfigCat SDK which will make the client under the hood localhost only and will use a locally generated `json` file in order to read the feature flags for the system under test.
 
-First of all, you will need to make sure to enable `overrides` from [`config/configcat.php`](config/configcat.php). You could also optionally configure the file path for the `json` file if you wish to. The file will be automatically created for you when using overrides.
+First of all, you will need to make sure to enable `overrides` from [`config/configcat.php`](https://github.com/Pod-Point/laravel-configcat/blob/main/config/configcat.php). You could also optionally tweak the file path for the `json` file if you wish to. The file will be automatically created for you when using overrides.
 
-Similarly to `ConfigCat::fake()` you can configure some predefined feature flags which will be saved into a `json` file:
+Similarly to `ConfigCat::fake()` you can come up with some predefined feature flags which will be saved into a `json` file:
 
 ```php
 use PodPoint\ConfigCat\Facades\ConfigCat;
