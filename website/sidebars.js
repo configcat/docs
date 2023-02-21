@@ -151,7 +151,7 @@ module.exports = {
         { type: 'doc', id: 'integrations/vscode', label: 'Visual Studio Code' },
       ],
       'Community maintained': [
-        { type: 'doc', id: 'sdk-reference/laravel', label: 'Laravel' },
+        { type: 'doc', id: 'sdk-reference/laravel', label: 'Package for Laravel' },
       ],
       'Service Status': ['service/status'],
     },
