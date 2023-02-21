@@ -11,7 +11,7 @@ description: ConfigCat package for Laravel. Implement feature flags within your 
 [![Total Downloads](https://img.shields.io/packagist/dt/pod-point/laravel-configcat.svg?style=flat-square)](https://packagist.org/packages/pod-point/laravel-configcat)
 
 :::caution
-As this is a community maintained SDK, ConfigCat can't guarantee it's stability, safety and can't provide official customer support.
+As this is a community maintained package, ConfigCat can't guarantee it's stability, safety and can't provide official customer support.
 :::
 
 <a href="https://github.com/Pod-Point/laravel-configcat" target="_blank">ConfigCat package for Laravel on GitHub</a>
