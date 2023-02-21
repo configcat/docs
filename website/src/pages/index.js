@@ -70,7 +70,6 @@ const features = [
       { url: 'sdk-reference/ruby', title: 'Ruby' },
       { url: 'sdk-reference/cpp', title: 'C++' },
       { url: 'sdk-reference/elixir', title: 'Elixir' },
-      { url: 'sdk-reference/laravel', title: 'Laravel (Community maintained)' },
     ],
   },
   {

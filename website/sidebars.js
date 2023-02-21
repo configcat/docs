@@ -133,9 +133,6 @@ module.exports = {
         { type: 'doc', id: 'sdk-reference/elixir', label: 'Elixir' },
         { type: 'doc', id: 'sdk-reference/cpp', label: 'C++' },
       ],
-      'Libraries': [
-        { type: 'doc', id: 'sdk-reference/laravel', label: 'Laravel' },
-      ],
       Integrations: [
         { type: 'doc', id: 'integrations/overview', label: 'Overview' },
         { type: 'doc', id: 'integrations/slack', label: 'Slack' },
@@ -152,6 +149,9 @@ module.exports = {
         { type: 'doc', id: 'integrations/terraform', label: 'Terraform' },
         { type: 'doc', id: 'integrations/amplitude', label: 'Amplitude' },
         { type: 'doc', id: 'integrations/vscode', label: 'Visual Studio Code' },
+      ],
+      'Packages - Libraries': [
+        { type: 'doc', id: 'sdk-reference/laravel', label: 'Laravel' },
       ],
       'Service Status': ['service/status'],
     },
