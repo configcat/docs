@@ -398,7 +398,7 @@ IConfigCatClient client = ConfigCatClient.Get("localhost", options =>
     options.FlagOverrides = FlagOverrides.LocalFile(
         "path/to/local_flags.json", // path to the file
         true, // reload the file when it gets modified
-        OverrideBehaviour.LocalOnly // local/offline mode
+        OverrideBehaviour.LocalOnly
     );
 });
 ```

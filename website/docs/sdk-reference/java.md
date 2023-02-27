@@ -408,7 +408,7 @@ ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
             "path/to/the/local_flags.json", // path to the file
             true // reload the file when it gets modified
         ),
-        OverrideBehaviour.LOCAL_ONLY // local/offline mode
+        OverrideBehaviour.LOCAL_ONLY
     );
 });
 ```
@@ -421,7 +421,7 @@ ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
             "local_flags.json", // name of the resource
             true // reload the resource when it gets modified
         ),
-        OverrideBehaviour.LOCAL_ONLY // local/offline mode
+        OverrideBehaviour.LOCAL_ONLY
     );
 });
 ```
@@ -656,7 +656,7 @@ OkHttpClient's default timeout is 10 seconds.
 
 ## Force refresh
 
-Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
+Call the `forceRefresh()` method on the client to download the latest config.json and update the cache.
 
 ## Logging
 

@@ -169,7 +169,7 @@ user_object = User(
   'john@example',
   'United Kingdom',
   { SubscriptionType: 'Pro', UserRole: 'Admin' },
-);
+)
 ```
 
 ### Default user
@@ -187,7 +187,7 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 
 or with the `set_default_user()` method of the ConfigCat client.
 ```python
-client.set_default_user(User('john@example.com'));
+client.set_default_user(User('john@example.com'))
 ```
 
 Whenever the `get_value()`, `get_value_details()`, `get_variation_id()`, `get_all_variation_ids()`, or `get_all_values()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
@@ -266,9 +266,9 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 
 Available options:
 
-| Option Parameter             | Description                  | Default |
-| ---------------------------- | ---------------------------- | ------- |
-| `cache_time_to_live_seconds` | Cache TTL.                   | 60      |
+| Option Parameter                 | Description                  | Default |
+| -------------------------------- | ---------------------------- | ------- |
+| `cache_refresh_interval_seconds` | Cache TTL.                   | 60      |
 
 
 ### Manual polling
@@ -367,7 +367,7 @@ client = configcatclient.get(
     ConfigCatOptions(
         flag_overrides=LocalFileFlagOverrides(
             file_path='path/to/the/local_flags.json',  # path to the file
-            override_behaviour=OverrideBehaviour.LocalOnly  # local/offline mode
+            override_behaviour=OverrideBehaviour.LocalOnly
         )
     )
 )

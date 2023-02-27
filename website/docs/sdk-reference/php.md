@@ -287,7 +287,7 @@ You can also specify whether the file should be reloaded when it gets modified.
 $client = new \ConfigCat\ConfigCatClient("localhost", [
   \ConfigCat\ClientOptions::FLAG_OVERRIDES => \ConfigCat\Override\FlagOverrides(
     \ConfigCat\Override\OverrideDataSource::localFile("path/to/the/local_flags.json"), // path to the file
-    \ConfigCat\Override\OverrideBehaviour::LOCAL_ONLY // local/offline mode
+    \ConfigCat\Override\OverrideBehaviour::LOCAL_ONLY
   ),
 ]);
 ```
