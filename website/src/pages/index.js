@@ -45,7 +45,7 @@ const features = [
       { url: 'advanced/troubleshooting', title: 'Troubleshooting' },
       { url: 'advanced/cli', title: 'Command Line Interface (CLI)' },
       {
-        url: 'advanced/code-references/overview',
+        url: 'advanced/code-references/index',
         title: 'Scan & Upload Code References',
       },
     ],

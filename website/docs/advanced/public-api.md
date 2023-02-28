@@ -13,7 +13,7 @@ The API is based on HTTP REST, uses resource-oriented URLs, status codes and sup
 
 :::caution
 Please avoid using the Management API for feature flag evaluation, it is not designed to handle massive loads.
-For that, we have the CDN and the [SDKs instead](sdk-reference/overview.md).
+For that, we have the CDN and the [SDKs instead](sdk-reference/index.md).
 :::
 
 ## Endpoints
@@ -66,7 +66,7 @@ You can create clients easily using <a href="https://github.com/OpenAPITools/ope
 ## Throttling and rate limits
 
 > Do not use this API for accessing and evaluating feature flag values. Use the
-> [SDKs instead](sdk-reference/overview.md).
+> [SDKs instead](sdk-reference/index.md).
 
 `HTTP 429 - Too many requests` status is returned in case throttling gets activated, along
 with a reason message with details.

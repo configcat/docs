@@ -11,9 +11,9 @@ to automatically scan your source code for feature flag and setting usages and u
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in Azure DevOps <a target="_blank" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables">Pipeline Variables</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
    <img className="bordered zoomable" src="/docs/assets/cli/scan/azure_secrets.png" alt="Azure secrets" />
 
-2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
+2. Get your selected [Config's ID](/docs/advanced/code-references/index#config-id).
 
-3. Create a new or open your existing `azure-pipelines.yml` file, and add the following <a target="_blank" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema#job">job</a> to your `jobs` definition.  
+3. Create a new or open your existing `azure-pipelines.yml` file, and add the following <a target="_blank" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema#job">job</a> to your `jobs` definition.
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
    ```yaml
    - job: configcat_scan_and_upload

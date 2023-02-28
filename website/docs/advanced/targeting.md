@@ -175,7 +175,7 @@ All other cases: OFF
 
 ### To all other users, serve
 
-This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) is not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
+This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) is not passed to the [ConfigCat SDK](sdk-reference/index.md) correctly within your application.
 
 ## Targeting a percentage of users
 
@@ -213,7 +213,7 @@ The exact value that will be served to the users that fall into that fraction. D
 The percentage-based targeting is sticky by design and consistent across all SDKs.
 
 Percentage-based targeting is based on the identifier of the `User Object` passed to the SDK's `getValue()` methods.
-The SDKs are hashing the concatenated value of the `User Object's` `identifier` and the requested feature flag's `Key`. Then they assign a 0-99 number to the User for a specific feature flag. This number is used to evaluate a particular feature flag's value based on the targeting rules.  
+The SDKs are hashing the concatenated value of the `User Object's` `identifier` and the requested feature flag's `Key`. Then they assign a 0-99 number to the User for a specific feature flag. This number is used to evaluate a particular feature flag's value based on the targeting rules.
 This number is fix and consistent for each User across all SDKs. The SDKs check if the assigned number is greater or less than the percentage set on the ConfigCat Dashboard.
 
 :::caution
@@ -288,4 +288,4 @@ When the Setting Kind is _Text_, _Whole Number_, or _Decimal Number_ the maximum
 
 ### All other cases
 
-This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
+This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) was not passed to the [ConfigCat SDK](sdk-reference/index.md) correctly within your application.

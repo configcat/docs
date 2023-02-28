@@ -69,7 +69,7 @@ module.exports = {
           'Scan & Upload Code References': [
             {
               type: 'doc',
-              id: 'advanced/code-references/overview',
+              id: 'advanced/code-references/index',
               label: 'Overview',
             },
             {
@@ -111,7 +111,7 @@ module.exports = {
         },
       ],
       'SDK References': [
-        { type: 'doc', id: 'sdk-reference/overview', label: 'Overview' },
+        { type: 'doc', id: 'sdk-reference/index', label: 'Overview' },
         { type: 'doc', id: 'sdk-reference/dotnet', label: '.Net, .Net Core' },
         { type: 'doc', id: 'sdk-reference/java', label: 'Java' },
         { type: 'doc', id: 'sdk-reference/js', label: 'JavaScript' },
@@ -134,7 +134,7 @@ module.exports = {
         { type: 'doc', id: 'sdk-reference/cpp', label: 'C++' },
       ],
       Integrations: [
-        { type: 'doc', id: 'integrations/overview', label: 'Overview' },
+        { type: 'doc', id: 'integrations/index', label: 'Overview' },
         { type: 'doc', id: 'integrations/slack', label: 'Slack' },
         { type: 'doc', id: 'integrations/jira', label: 'Jira Cloud Plugin' },
         { type: 'doc', id: 'integrations/trello', label: 'Trello Power-Up' },
