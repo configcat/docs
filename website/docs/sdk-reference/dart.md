@@ -68,6 +68,7 @@ final client = ConfigCatClient.get(
 ```
 
 ### 5. Get your setting value
+
 ```dart
 final isMyAwesomeFeatureEnabled = await client.getValue(key: 'isMyAwesomeFeatureEnabled', defaultValue: false);
 if(isMyAwesomeFeatureEnabled) {
@@ -99,7 +100,7 @@ _ConfigCat Client_ is responsible for:
 
 ### Customizing the _ConfigCat Client_
 
-To customize the SDK's behavior, you can pass an additional `ConfigCatOptions` parameter to the `get()` static 
+To customize the SDK's behavior, you can pass an additional `ConfigCatOptions` parameter to the `get()` static
 factory method where the `ConfigCatOptions` class is used to set up the _ConfigCat Client_.
 
 ```dart
@@ -126,9 +127,8 @@ These are the available options on the `ConfigCatOptions` class:
 | `logger`         | Optional, sets the internal logger and log level. [More about logging](#logging).                                                                                                                                                                                                                  |
 | `override`       | Optional, sets local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                       |
 | `defaultUser`    | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                         |
-| `offline`        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                          |
+| `offline`        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                 |
 | `hooks`          | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
-
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
@@ -457,6 +457,7 @@ final client = ConfigCatClient.get(
 ```
 
 ### Custom Cache
+
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCatCache` abstract class:
 
 ```dart

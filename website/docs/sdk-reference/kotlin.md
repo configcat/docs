@@ -86,7 +86,7 @@ _ConfigCat Client_ is responsible for:
 
 ### Customizing the _ConfigCat Client_
 
-To customize the SDK's behavior, you can pass an additional `ConfigCatOptions.() -> Unit` parameter 
+To customize the SDK's behavior, you can pass an additional `ConfigCatOptions.() -> Unit` parameter
 to the `ConfigCatClient()` method where the `ConfigCatOptions` class is used to set up the _ConfigCat Client_.
 
 ```kotlin
@@ -115,9 +115,8 @@ These are the available options on the `ConfigCatOptions` class:
 | `httpEngine`     | `HttpClientEngine?`           | Optional, sets the underlying `Ktor` HTTP engine. [More about HTTP engines](#http-engine).                                                                                                                                                                                                                                                       |
 | `httpProxy`      | `ProxyConfig?`                | Optional, sets up the HTTP proxy for the underlying `Ktor` HTTP engine. [More about HTTP proxy](#http-proxy).                                                                                                                                                                                                                                    |
 | `defaultUser`    | `ConfigCatUser?`              | Optional, sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                                                                      |
-| `offline`        | `Bool`                        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                                                        |
+| `offline`        | `Bool`                        | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                                                               |
 | `hooks`          | `Hooks`                       | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                                                                         |
-
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
@@ -423,7 +422,7 @@ val settingValuesTargeting = client.getAllValues(user)
 The SDK uses platform specific caching to store the downloaded `config.json`.  
 These are the storage locations by platform:
 
-- **Android**: `SharedPreferences`. It has a dependency on `android.content.Context`, so it won't be enabled by default, but it can be explicitly set by providing an appropriate `Context`. ([Here](https://github.com/configcat/kotlin-sdk/blob/main/samples/android/app/src/main/java/com/example/configcat_android/MainActivity.kt#L23) is an example) 
+- **Android**: `SharedPreferences`. It has a dependency on `android.content.Context`, so it won't be enabled by default, but it can be explicitly set by providing an appropriate `Context`. ([Here](https://github.com/configcat/kotlin-sdk/blob/main/samples/android/app/src/main/java/com/example/configcat_android/MainActivity.kt#L23) is an example)
 - **iOS / macOS / tvOS / watchOS**: `NSUserDefaults`.
 - **JS (browser only)**: Browser `localStorage`.
 - On other platforms the SDK uses a memory-only cache.
@@ -437,6 +436,7 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
 ```
 
 ### Custom Cache
+
 You have the option to inject your custom cache implementation into the client. All you have to do is to implement the `ConfigCache` interface:
 
 ```kotlin

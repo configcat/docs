@@ -450,7 +450,6 @@ You can override it with your own logger implementation.
 The custom implementation must satisfy the `ILogger` abstract class.
 You can set the logger with the `setLogger` function.
 
-
 ```cpp
 #include <configcat/configcat.h>
 #include <configcat/consolelogger.h>

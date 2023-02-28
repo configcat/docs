@@ -189,7 +189,7 @@ _ConfigCat Client_ is responsible for:
 
 ### Customizing the _ConfigCat Client_
 
-To customize the SDK's behavior, you can pass an additional `(ConfigCatOptions) -> ()` parameter to the `get()` static 
+To customize the SDK's behavior, you can pass an additional `(ConfigCatOptions) -> ()` parameter to the `get()` static
 factory method where the `ConfigCatOptions` class is used to set up the _ConfigCat Client_.
 
 <Tabs groupId="ios-languages">
@@ -228,7 +228,7 @@ These are the available options on the `ConfigCatOptions` class:
 | `flagOverrides`        | `OverrideDataSource?`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
 | `logLevel`             | `LogLevel`                | Optional, sets the internal log level. [More about logging.](#logging).                                                                                                                                                                                                                            |
 | `defaultUser`          | `ConfigCatUser?`          | Optional, sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                        |
-| `offline`              | `Bool`                    | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                          |
+| `offline`              | `Bool`                    | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                 |
 | `hooks`                | `Hooks`                   | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
 
 :::caution
@@ -987,7 +987,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 ```objectivec
 ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
                                             configurator:^(ConfigCatOptions* options) {
-    
+
     options.configCache = NULL;
 }];
 ```
@@ -996,6 +996,7 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 </Tabs>
 
 ### Custom cache
+
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCache` open class:
 
 <Tabs groupId="ios-languages">
