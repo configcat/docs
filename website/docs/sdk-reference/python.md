@@ -490,8 +490,8 @@ client = configcatclient.get(
 
 The _ConfigCat SDK_ uses Python's built-in <a href="https://docs.python.org/3/library/logging.html" target="_blank">logging library</a>. 
 
-With `logging.basicConfig()` method you can configure the logging system.
-The folowing example shows how to configure the default root logger to writes logs to the standard output with `INFO` log level.
+With the `logging.basicConfig()` method, you can set up the logging system.
+The following example shows how to set the default root logger to write logs to the standard output with `INFO` log level.
 
 ```python
 import logging
