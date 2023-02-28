@@ -16,8 +16,6 @@ As this is a community maintained package, ConfigCat can't guarantee it's stabil
 
 <a href="https://github.com/Pod-Point/laravel-configcat" target="_blank">ConfigCat package for Laravel on GitHub</a>
 
-Implement feature flags within your Laravel application using [ConfigCat](https://configcat.com).
-
 ## Installation
 
 You can install the package via composer:
@@ -25,6 +23,8 @@ You can install the package via composer:
 ```bash
 composer require pod-point/laravel-configcat
 ```
+
+### Publishing the config file
 
 Next, you should publish the Laravel package configuration file using the `vendor:publish` Artisan command. It will be placed in your application's config directory:
 
@@ -52,7 +52,17 @@ $flag = configcat('new_registration_flow');
 
 > **Note:** You can define the actual value of a feature flag to be `bool(true)` or `bool(false)` on ConfigCat but not only, it can also be [a number or a text setting](https://configcat.com/docs/main-concepts/#about-setting-types).
 
-If the feature flag is undefined or something went wrong, `bool(false)` will be returned by default.
+If the feature flag is undefined or something went wrong, `bool(false)` will be returned by default, however you can change this by specifying a default value **only when using the Facade or the global helper** to retrieve the feature flag value using:
+
+```php
+use PodPoint\ConfigCat\Facades\ConfigCat;
+$flag = ConfigCat::get('new_registration_flow', true);
+$flag = configcat('new_registration_flow', true);
+```
+
+You can also globally sepcify a default value from the [`config/configcat.php`](https://github.com/Pod-Point/laravel-configcat/blob/main/config/configcat.php) file.
+
+:warning: **Only** `boolean`, `string`, `integer` or `float` default value types are supported as these are the only [setting types](https://configcat.com/docs/main-concepts/#about-setting-types) available from ConfigCat.
 
 ### Validation rule
 
@@ -144,13 +154,13 @@ use App\Models\User;
 use PodPoint\ConfigCat\Facades\ConfigCat;
 
 $user = User::where('email', 'taylor@laravel.com')->firstOrFail();
-ConfigCat::get('new_registration_flow', $user);
+ConfigCat::get('new_registration_flow', $default, $user);
 ```
 
 This is also applicable for the global helper and the Blade directive:
 
 ```php
-configcat('new_registration_flow', $user);
+configcat('new_registration_flow', $default, $user);
 ```
 
 ```blade
