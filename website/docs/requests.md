@@ -80,12 +80,13 @@ Web apps run in the browser, so for each user there will be a different ConfigCa
 In this example, we have 15,000 active users who usually spend 5 hours on your web application per month.
 The ConfigCat SDK is set to Auto polling mode with 60 seconds polling interval.
 
-> **18,000** _(5 hours in seconds)_ / **60** _polling interval_ = **300 config.json downloads/user/month**  
+> **18,000** _(5 hours in seconds)_ / **60** _polling interval_ = **300 config.json downloads/user/month**
+>
 > **15,000** _(users)_ × **300** _(config.json downloads/user/month)_ = **4,500,000 config.json downloads / month**
 
 #### Example: A mobile application running on 5k devices 24/7
 
-Having a mobile app which runs on the devices as a background process. The ConfigCat SDK is set to Auto polling mode with 1 hour polling interval.  
+Having a mobile app which runs on the devices as a background process. The ConfigCat SDK is set to Auto polling mode with 1 hour polling interval.
 Your application runs on 5,000 devices.
 
 > **5,000** _(devices)_ × **730** _(hours in a month)_ = **3,650,000 config.json downloads / month**
