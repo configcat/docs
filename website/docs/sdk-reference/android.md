@@ -90,7 +90,7 @@ _ConfigCat Client_ is responsible for:
 
 ### Customizing the _ConfigCat Client_
 
-To customize the SDK's behavior, you can pass an additional `Consumer<Options>` parameter to the `get()` static 
+To customize the SDK's behavior, you can pass an additional `Consumer<Options>` parameter to the `get()` static
 factory method where the `Options` class is used to set up the _ConfigCat Client_.
 
 ```java
@@ -102,7 +102,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 
 These are the available options on the `Options` class:
 
-| Options                                                | Description                                                                                                                                                                                                                                                                                        |
+| Options                                                       | Description                                                                                                                                                                                                                                                                                        |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
 | `baseUrl(string)`                                             | _Obsolete_ Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json.                                                                                                                                                               |
@@ -112,7 +112,7 @@ These are the available options on the `Options` class:
 | `logLevel(LogLevel)`                                          | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging).                                                                                                                                                                                                      |
 | `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
 | `defaultUser(User)`                                           | Optional, sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                        |
-| `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                          |
+| `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                 |
 | `hooks()`                                                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
 
 :::caution
@@ -483,7 +483,7 @@ The `SharedPreferencesCache` implementation uses the Android `SharedPreferences`
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-        options.cache(new SharedPreferencesCache(getApplicationContext())); // Use ConfigCat's shared preferences cache. 
+        options.cache(new SharedPreferencesCache(getApplicationContext())); // Use ConfigCat's shared preferences cache.
 });
 ```
 
