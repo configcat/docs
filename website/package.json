@@ -9,7 +9,7 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "configure-husky": "cd .. && npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
+    "configure-husky": "cd .. && npx husky install"
   },
   "dependencies": {
     "@docusaurus/core": "2.1.0",

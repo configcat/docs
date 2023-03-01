@@ -85,7 +85,7 @@ The ConfigCat SDK is set to Auto polling mode with 60 seconds polling interval.
 
 #### Example: A mobile application running on 5k devices 24/7
 
-Having a mobile app which runs on the devices as a background process. The ConfigCat SDK is set to Auto polling mode with 1 hour polling interval.  
+Having a mobile app which runs on the devices as a background process. The ConfigCat SDK is set to Auto polling mode with 1 hour polling interval.
 Your application runs on 5,000 devices.
 
 > **5,000** _(devices)_ × **730** _(hours in a month)_ = **3,650,000 config JSON downloads / month**

@@ -414,7 +414,7 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
 
 ## Force refresh
 
-Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
+Call the `forceRefresh()` method on the client to download the latest config.json and update the cache.
 
 ## Using ConfigCat behind a proxy
 
@@ -449,7 +449,6 @@ In the ConfigCat SDK, a `ConsoleLogger` writes logs to the standard output.
 You can override it with your own logger implementation.
 The custom implementation must satisfy the `ILogger` abstract class.
 You can set the logger with the `setLogger` function.
-
 
 ```cpp
 #include <configcat/configcat.h>

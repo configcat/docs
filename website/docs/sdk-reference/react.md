@@ -66,7 +66,7 @@ The React HOC (`WithConfigCatClientProps`) way:
 ```tsx
 class TestHOCComponent extends React.Component<
   WithConfigCatClientProps,
-  { isAwesomeFeatureEnabled: boolean, loading: boolean }
+  { isAwesomeFeatureEnabled: boolean; loading: boolean }
 > {
   constructor(props: WithConfigCatClientProps) {
     super(props);
@@ -105,7 +105,6 @@ class TestHOCComponent extends React.Component<
 }
 
 const ConfigCatTestHOCComponent = withConfigCatClient(TestHOCComponent);
-
 ```
 
 ## Creating the _ConfigCat_ Client
@@ -118,24 +117,24 @@ _ConfigCat Client_ is responsible for:
 
 `<ConfigCatProvider sdkKey="#YOUR_SDK_KEY#"  pollingMode={PollingMode.AutoPoll} options={{ ... }}>` initializes a client.
 
-| Attributes    | Description                                                                                               | Default |
-| ------------- | --------------------------------------------------------------------------------------------------------- | ------- |
-| `sdkKey`      | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_. | - |
+| Attributes    | Description                                                                                                                             | Default                |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| `sdkKey`      | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                               | -                      |
 | `pollingMode` | Optional. The polling mode to use to acquire the setting values from the ConfigCat servers. [More about polling modes](#polling-modes). | `PollingMode.AutoPoll` |
-| `options`     | Optional. The options object. See the table below. | - |
+| `options`     | Optional. The options object. See the table below.                                                                                      | -                      |
 
 The available options depends on the chosen polling mode. However, there are some common options which can be set in the case of every polling mode:
 
-| Option Parameter         | Description | Default |
-| ------------------------ |------------ | ------- |
-| `logger`                 | Custom logger. [More about logging](#logging). | Console logger |
-| `requestTimeoutMs`       | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache. | 30000 |
-| `baseUrl`                | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON. | |
-| `dataGovernance`         | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
-| `cache`                  | Cache implementation for config cache. | `InMemoryCache` |
-| `flagOverrides`          | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). | - |
-| `defaultUser`            | Sets the default user. [More about default user](#default-user). | `undefined` (none) |
-| `offline`                | Determines whether the client should be initialized in offline mode. [More about offline mode](#online--offline-mode). | `false` |
+| Option Parameter   | Description                                                                                                                                                                                                                                                                                      | Default                 |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
+| `logger`           | Custom logger. [More about logging](#logging).                                                                                                                                                                                                                                                   | Console logger          |
+| `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                       | 30000                   |
+| `baseUrl`          | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config.json.                                                                                                                                                                                  |                         |
+| `dataGovernance`   | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
+| `cache`            | Cache implementation for config cache.                                                                                                                                                                                                                                                           | `InMemoryCache`         |
+| `flagOverrides`    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                    | -                       |
+| `defaultUser`      | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                                 | `undefined` (none)      |
+| `offline`          | Determines whether the client should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                                           | `false`                 |
 
 Options also include a property named `setupHook`, which you can use to subscribe to the hooks (events) at the time of initialization. [More about hooks](#hooks).
 
@@ -145,7 +144,10 @@ For example:
 <ConfigCatProvider
   sdkKey="YOUR_SDK_KEY"
   pollingMode={PollingMode.AutoPoll}
-  options={{ setupHooks: hooks => hooks.on('clientReady', () => console.log('Client is ready!')) }}
+  options={{
+    setupHooks: (hooks) =>
+      hooks.on('clientReady', () => console.log('Client is ready!')),
+  }}
 >
   ...
 </ConfigCatProvider>
@@ -154,8 +156,9 @@ For example:
 ### Acquire the ConfigCat instance
 
 The SDK supports two ways to acquire the initialized ConfigCat instance:
- - Custom hook: `useConfigCatClient()` (from React v16.8)
- - Higher-order component: `withConfigCatClient()`
+
+- Custom hook: `useConfigCatClient()` (from React v16.8)
+- Higher-order component: `withConfigCatClient()`
 
 ## Anatomy of `useFeatureFlag()`
 
@@ -188,19 +191,19 @@ This custom hook returns the ConfigCat instance from the context API. You have t
 export const FlagDetailsComponent = () => {
   const client = useConfigCatClient();
 
-  const [flagDetails, setFlagDetails] = useState<IEvaluationDetails<boolean> | null>(null);
+  const [flagDetails, setFlagDetails] =
+    useState<IEvaluationDetails<boolean> | null>(null);
 
-  useEffect(() => {client.getValueDetailsAsync('isAwesomeFeatureEnabled', false).then(v => setFlagDetails(v))}, [client]);
+  useEffect(() => {
+    client
+      .getValueDetailsAsync('isAwesomeFeatureEnabled', false)
+      .then((v) => setFlagDetails(v));
+  }, [client]);
 
   return (
-  <>
-    {flagDetails && 
-      <p>
-        FlagDetails: {JSON.stringify(flagDetails)}
-      </p>
-    }
-  </>);
-}
+    <>{flagDetails && <p>FlagDetails: {JSON.stringify(flagDetails)}</p>}</>
+  );
+};
 ```
 
 ## Anatomy of `withConfigCatClient()`
@@ -218,6 +221,7 @@ export interface WithConfigCatClientProps {
 ```
 
 Sample declaration of class component with ConfigCat SDK's higher-order component:
+
 ```tsx
 class MyComponent extends React.Component<
   { myProp: string } & WithConfigCatClientProps
@@ -244,32 +248,39 @@ const ConfigCatMyComponent = withConfigCatClient(MyComponent);
 The ConfigCat client instance (`IConfigCatClient`) to access all features of the _ConfigCat SDK_.
 
 In this example the component can invoke the `forceRefreshAsync` method on the injected ConfigCat instance.
+
 ```tsx
 class ManualRefreshComponent extends React.Component<
   { featureFlagKey: string } & WithConfigCatClientProps,
-  { refreshAt: string | null}
+  { refreshAt: string | null }
 > {
   constructor(props: { featureFlagKey: string } & WithConfigCatClientProps) {
     super(props);
 
-    this.state = { refreshAt: '-'};
+    this.state = { refreshAt: '-' };
   }
 
-  refresh(){
-    this.props.configCatClient.forceRefreshAsync().then(() => this.setState({refreshAt: new Date().toLocaleTimeString()}))
+  refresh() {
+    this.props.configCatClient
+      .forceRefreshAsync()
+      .then(() =>
+        this.setState({ refreshAt: new Date().toLocaleTimeString() }),
+      );
   }
 
   render() {
     return (
-        <div>
-          <button onClick={() => this.refresh()}>Refresh</button>
-          <p>Last manual refresh: {this.state.refreshAt}</p>
-        </div>
+      <div>
+        <button onClick={() => this.refresh()}>Refresh</button>
+        <p>Last manual refresh: {this.state.refreshAt}</p>
+      </div>
     );
   }
 }
 
-const ConfigCatManualRefreshComponent = withConfigCatClient(ManualRefreshComponent);
+const ConfigCatManualRefreshComponent = withConfigCatClient(
+  ManualRefreshComponent,
+);
 ```
 
 ### Props - `getValue`
@@ -335,7 +346,7 @@ The [User Object](../advanced/user-object.md) is essential if you'd like to use 
 For simple targeting:
 
 ```tsx
-const userObject =  new User('#UNIQUE-USER-IDENTIFIER#');
+const userObject = new User('#UNIQUE-USER-IDENTIFIER#');
 ```
 
 or
@@ -361,7 +372,7 @@ const userObject = new User(
   /*     custom: */ {
     SubscriptionType: 'Pro',
     UserRole: 'Admin',
-  }
+  },
 );
 ```
 
@@ -386,6 +397,7 @@ function ButtonComponent() {
 It's possible to set a default user object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
 
 You can set the default user object either on SDK initialization:
+
 ```tsx
 <ConfigCatProvider
   sdkKey="YOUR_SDK_KEY"
@@ -406,10 +418,12 @@ export const SetConfigCatUserComponent = () => {
 
   const [user] = useState(CurrentUser);
 
-  useEffect(() => {client.setDefaultUser(user)}, [client, user]);
+  useEffect(() => {
+    client.setDefaultUser(user);
+  }, [client, user]);
 
-  return (null);
-}
+  return null;
+};
 ```
 
 Whenever the evaluation methods like `getValueAsync()`, `getValueDetailsAsync()`, etc. are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
@@ -417,20 +431,20 @@ Whenever the evaluation methods like `getValueAsync()`, `getValueDetailsAsync()`
 ```tsx
 export const FlagValueDetailsComponent = () => {
   const client = useConfigCatClient();
-  
-  const [flagDetails, setFlagDetails] = useState<IEvaluationDetails<boolean> | null>(null);
+
+  const [flagDetails, setFlagDetails] =
+    useState<IEvaluationDetails<boolean> | null>(null);
 
   // invoke getValueDetailsAsync method WITHOUT User object
-  useEffect(() => {client.getValueDetailsAsync('featureFlagKey', false).then(v => setFlagDetails(v))}, [client]);
+  useEffect(() => {
+    client
+      .getValueDetailsAsync('featureFlagKey', false)
+      .then((v) => setFlagDetails(v));
+  }, [client]);
 
   return (
-  <>
-    {flagDetails && 
-      <p>
-        FlagDetails: {JSON.stringify(flagDetails)}
-      </p>
-    }
-  </>);
+    <>{flagDetails && <p>FlagDetails: {JSON.stringify(flagDetails)}</p>}</>
+  );
 };
 ```
 
@@ -441,21 +455,21 @@ const CurrentUser: User = new User('john@example.com');
 
 export const FlagValueDetailsComponent = () => {
   const client = useConfigCatClient();
-  
-  const [flagDetails, setFlagDetails] = useState<IEvaluationDetails<boolean> | null>(null);
+
+  const [flagDetails, setFlagDetails] =
+    useState<IEvaluationDetails<boolean> | null>(null);
   const [user] = useState(CurrentUser);
 
   // invoke getValueDetailsAsync method WITH User object
-  useEffect(() => {client.getValueDetailsAsync('featureFlagKey', false, user).then(v => setFlagDetails(v))}, [client, user]);
+  useEffect(() => {
+    client
+      .getValueDetailsAsync('featureFlagKey', false, user)
+      .then((v) => setFlagDetails(v));
+  }, [client, user]);
 
   return (
-  <>
-    {flagDetails && 
-      <p>
-        FlagDetails: {JSON.stringify(flagDetails)}
-      </p>
-    }
-  </>);
+    <>{flagDetails && <p>FlagDetails: {JSON.stringify(flagDetails)}</p>}</>
+  );
 };
 ```
 
@@ -465,10 +479,12 @@ You can also remove the default user by doing the following:
 export const ClearConfigCatUserComponent = () => {
   const client = useConfigCatClient();
 
-  useEffect(() => {client.clearDefaultUser() }, [client]);
+  useEffect(() => {
+    client.clearDefaultUser();
+  }, [client]);
 
-  return (null);
-}
+  return null;
+};
 ```
 
 ## Polling Modes
@@ -510,10 +526,10 @@ Use the `pollIntervalSeconds` option parameter to change the polling interval.
 
 Available options (in addition to the [common ones](#creating-the-configcat-client)):
 
-| Option Parameter         | Description | Default |
-| ------------------------ | ----------- | ------- |
-| `pollIntervalSeconds`    | Polling interval. Range: `[1, Number.MAX_SAFE_INTEGER]` | 60 |
-| `maxInitWaitTimeSeconds` | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5 |
+| Option Parameter         | Description                                                                                         | Default |
+| ------------------------ | --------------------------------------------------------------------------------------------------- | ------- |
+| `pollIntervalSeconds`    | Polling interval. Range: `[1, Number.MAX_SAFE_INTEGER]`                                             | 60      |
+| `maxInitWaitTimeSeconds` | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
 
 ### Lazy loading
 
@@ -533,7 +549,7 @@ Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 <ConfigCatProvider
   sdkKey="YOUR_SDK_KEY"
   pollingMode="{PollingMode.LazyLoad}"
-  options={{ cacheTimeToLiveSeconds: 600}}
+  options={{ cacheTimeToLiveSeconds: 600 }}
 >
   ...
 </ConfigCatProvider>
@@ -541,9 +557,9 @@ Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
 Available options (in addition to the [common ones](#creating-the-configcat-client)):
 
-| Option Parameter         | Description | Default |
-| ------------------------ | ----------- | ------- |
-| `cacheTimeToLiveSeconds` | Cache TTL. Range: `[1, Number.MAX_SAFE_INTEGER]` | 60 |
+| Option Parameter         | Description                                      | Default |
+| ------------------------ | ------------------------------------------------ | ------- |
+| `cacheTimeToLiveSeconds` | Cache TTL. Range: `[1, Number.MAX_SAFE_INTEGER]` | 60      |
 
 ### Manual polling
 
@@ -574,17 +590,23 @@ The SDK provides several hooks (events), by means of which you can get notified 
 You can subscribe to the following events emitted by the client:
 
 - `clientReady`: This event is emitted when the SDK reaches the ready state. If the SDK is set up to use lazy load or manual polling, it's considered ready right after instantiation.
-If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
-- `configChanged`: This event is emitted first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
+  If auto polling is used, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
+- `configChanged`: This event is emitted first when the SDK loads a valid config.json into memory from cache, then each time afterwards when a config.json with changed content is downloaded via HTTP.
 - `flagEvaluated`: This event is emitted each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from `getValueDetailsAsync()`.
 - `clientError`: This event is emitted when an error occurs within the ConfigCat SDK.
 
 You can subscribe to these events either on initialization:
+
 ```tsx
 <ConfigCatProvider
   sdkKey="YOUR_SDK_KEY"
   pollingMode={PollingMode.ManualPoll}
-  options={{ setupHooks: hooks => hooks.on('flagEvaluated', () => { /* handle the event */ }) }}
+  options={{
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', () => {
+        /* handle the event */
+      }),
+  }}
 >
   ...
 </ConfigCatProvider>
@@ -599,26 +621,21 @@ export const ConfigCatWithHookComponent = () => {
   const [configChangedAt, setConfigChanged] = useState('-');
 
   useEffect(() => {
-    
     function hookLogic() {
       const t = new Date().toISOString();
       setConfigChanged(t);
-      console.log(t)
-    };
-    
-    client.on('configChanged', hookLogic);
-    
-    return () => {
-      client.off('configChanged', hookLogic)
+      console.log(t);
     }
+
+    client.on('configChanged', hookLogic);
+
+    return () => {
+      client.off('configChanged', hookLogic);
+    };
   });
 
-  return (    
-      <p>
-      configChangedAt: {configChangedAt}
-      </p>
-    );
-}
+  return <p>configChangedAt: {configChangedAt}</p>;
+};
 ```
 
 Using higher-order component (HOC):
@@ -626,12 +643,12 @@ Using higher-order component (HOC):
 ```tsx
 class ConfigChangedComponent extends React.Component<
   WithConfigCatClientProps,
-  { refreshAt: string | null}
+  { refreshAt: string | null }
 > {
   constructor(props: WithConfigCatClientProps) {
     super(props);
 
-    this.state = { refreshAt: '-'};
+    this.state = { refreshAt: '-' };
   }
 
   componentDidMount() {
@@ -643,20 +660,21 @@ class ConfigChangedComponent extends React.Component<
   }
 
   myHookLogic() {
-    this.setState({refreshAt: new Date().toISOString()});
-  };
+    this.setState({ refreshAt: new Date().toISOString() });
+  }
 
   render() {
     return (
-        <div>
-          <p>configChangedAt: {this.state.refreshAt}</p>
-        </div>
+      <div>
+        <p>configChangedAt: {this.state.refreshAt}</p>
+      </div>
     );
   }
 }
 
-const ConfigCatManualRefreshComponent = withConfigCatClient(ConfigChangedComponent);
-
+const ConfigCatManualRefreshComponent = withConfigCatClient(
+  ConfigChangedComponent,
+);
 ```
 
 ## Online / Offline mode
@@ -670,10 +688,9 @@ export const ConfigCatIsOfflineComponent = () => {
   const [isOffline, setIsOffline] = useState(false);
 
   function setMode() {
-    if (isOffline){
+    if (isOffline) {
       client.setOnline();
-    }
-    else{
+    } else {
       client.setOffline();
     }
 
@@ -681,14 +698,18 @@ export const ConfigCatIsOfflineComponent = () => {
   }
 
   return (
-  <>
-    <p>
-        ConfigCat mode: {isOffline ? 'Offline' : 'Online'}
-    </p>
-    <button onClick={() => { setMode() }} >Set {isOffline ? 'Online' : 'Offline'}</button>
-    
-  </>);
-}
+    <>
+      <p>ConfigCat mode: {isOffline ? 'Offline' : 'Online'}</p>
+      <button
+        onClick={() => {
+          setMode();
+        }}
+      >
+        Set {isOffline ? 'Online' : 'Offline'}
+      </button>
+    </>
+  );
+};
 ```
 
 In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
@@ -725,7 +746,7 @@ OverrideBehaviour.LocalOnly);
 <ConfigCatProvider
   sdkKey="YOUR_SDK_KEY"
   pollingMode={PollingMode.ManualPoll}
-  options={{flagOverrides}}
+  options={{ flagOverrides }}
 >
   ...
 </ConfigCatProvider>
@@ -743,7 +764,7 @@ const logger = createConsoleLogger(LogLevel.Info); // Setting log level to Info
 <ConfigCatProvider
   sdkKey="YOUR_SDK_KEY"
   pollingMode={PollingMode.ManualPoll}
-  options={{logger}}
+  options={{ logger }}
 >
   ...
 </ConfigCatProvider>
@@ -790,7 +811,7 @@ class MyCustomCache {
 or
 
 ```tsx
-function MyCustomCache() { }
+function MyCustomCache() {}
 
 MyCustomCache.prototype.set = function (key, config) {
   // `key` [string] - a unique cache key
@@ -809,7 +830,7 @@ then
 <ConfigCatProvider
   sdkKey="YOUR_SDK_KEY"
   pollingMode={PollingMode.ManualPoll}
-  options={{cache: new MyCustomCache()}}
+  options={{ cache: new MyCustomCache() }}
 >
   ...
 </ConfigCatProvider>

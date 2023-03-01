@@ -86,7 +86,7 @@ _ConfigCat Client_ is responsible for:
 
 ### Customizing the _ConfigCat Client_
 
-To customize the SDK's behavior, you can pass an additional `Action<ConfigCatClientOptions>` parameter to the `Get()` static 
+To customize the SDK's behavior, you can pass an additional `Action<ConfigCatClientOptions>` parameter to the `Get()` static
 factory method where the `ConfigCatClientOptions` class is used to set up the _ConfigCat Client_.
 
 ```csharp
@@ -110,7 +110,7 @@ These are the available options on the `ConfigCatClientOptions` class:
 | `FlagOverrides`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                  |                                                                                                                                        |
 | `DataGovernance`    | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly` | `Global`                                                                                                                               |
 | `DefaultUser`       | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                        | `null` (none)                                                                                                                          |
-| `Offline`           | Optional, determines whether the client should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                           | `false`                                                                                                                                |
+| `Offline`           | Optional, determines whether the client should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                                  | `false`                                                                                                                                |
 
 Via the events provided by `ConfigCatClientOptions` you can also subscribe to the hooks (events) at the time of initialization. [More about hooks](#hooks).
 
@@ -398,7 +398,7 @@ IConfigCatClient client = ConfigCatClient.Get("localhost", options =>
     options.FlagOverrides = FlagOverrides.LocalFile(
         "path/to/local_flags.json", // path to the file
         true, // reload the file when it gets modified
-        OverrideBehaviour.LocalOnly // local/offline mode
+        OverrideBehaviour.LocalOnly
     );
 });
 ```

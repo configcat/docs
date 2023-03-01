@@ -83,16 +83,16 @@ Available optional properties:
 | `Logger`           | `configcat.Logger`         | Sets the `Logger` implementation used by the SDK for logging. [More about logging](#logging)                                                                                                                                                                                                    |
 | `PollingMode`      | `configcat.PollingMode`    | Defaults to `AutoPoll`. Sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                       |
 | `PollInterval`     | `time.Duration`            | Sets after how much time a configuration is considered stale. When `PollingMode` is `AutoPoll` this value is used as the polling rate.                                                                                                                                                          |
-| `ChangeNotify`     | `func()`                   | **Deprecated**. Replaced by the `OnConfigChanged()` [hook](#hooks).                                                                                                                                                                                                                            |
-| `FlagOverrides`    | `*configcat.FlagOverrides` | Sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                |
-| `DefaultUser`      | `configcat.User`           | Sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                                                                      |
-| `Offline`          | `bool`                     | Defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                                                        |
-| `Hooks`            | `*configcat.Hooks`         | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).
+| `ChangeNotify`     | `func()`                   | **Deprecated**. Replaced by the `OnConfigChanged()` [hook](#hooks).                                                                                                                                                                                                                             |
+| `FlagOverrides`    | `*configcat.FlagOverrides` | Sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                          |
+| `DefaultUser`      | `configcat.User`           | Sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                               |
+| `Offline`          | `bool`                     | Defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                        |
+| `Hooks`            | `*configcat.Hooks`         | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                                  |
 
 Then you can pass it to the `NewCustomClient()` method:
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#", 
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
         PollingMode: configcat.Manual,
         Logger: configcat.DefaultLogger(configcat.LogLevelInfo)})
 ```
@@ -167,7 +167,6 @@ The `details` result contains the following information:
 | `Data.MatchedEvaluationRule`           | `*RolloutRule`                        | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
 | `Data.FetchTime`                       | `time.Time`                           | The last download time of the current config.                                             |
 
-
 ## User Object
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
@@ -216,14 +215,14 @@ There's an option to set a default user object that will be used at feature flag
 You can set the default user object on SDK initialization:
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#", 
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
         DefaultUser: &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}})
 ```
 
 Whenever the `Get[TYPE]Value()`, `Get[TYPE]ValueDetails()`, `GetAllValues()`, or `GetAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#", 
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
         DefaultUser: &configcat.UserData{Identifier: "john@example.com"}})
 
 // The default user will be used at the evaluation process.
@@ -233,7 +232,7 @@ value := client.GetBoolValue("keyOfMyBoolSetting", false, nil)
 When the user object parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#", 
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
         DefaultUser: &configcat.UserData{Identifier: "john@example.com"}})
 
 otherUser = &configcat.UserData{Identifier: "brian@example.com"}
@@ -541,7 +540,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
 
 ## Force refresh
 
-Any time you want to refresh the cached configuration with the latest one, you can call the `Refresh()` method of the library, which will initiate a new fetch and will update the local cache.
+Call the `Refresh()` method on the client to download the latest config.json and update the cache.
 
 You can also use the `RefreshIfOlder()` variant when you want to add expiration time windows for local cache updates.
 

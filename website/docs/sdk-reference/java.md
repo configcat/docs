@@ -71,6 +71,7 @@ You can safely shut down the client instance and release all associated resource
 ```java
 client.close();
 ```
+
 You can close all singleton client instances and release all associated resources on application exit.
 
 ```java
@@ -93,7 +94,7 @@ _ConfigCat Client_ is responsible for:
 
 ### Customizing the _ConfigCat Client_
 
-To customize the SDK's behavior, you can pass an additional `Consumer<Options>` parameter to the `get()` static 
+To customize the SDK's behavior, you can pass an additional `Consumer<Options>` parameter to the `get()` static
 factory method where the `Options` class is used to set up the _ConfigCat Client_.
 
 ```java
@@ -105,23 +106,23 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 
 These are the available options on the `Options` class:
 
-| Option                                                | Description                                                                                                                                                                                                                                                                                       |
-|---------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Option                                                        | Description                                                                                                                                                                                                                                                                                        |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
-| `baseUrl(string)`                                             | *Obsolete* Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                           |
-| `httpClient(OkHttpClient)`                                    | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient).                                                                                                                                                |
-| `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                   |
-| `pollingMode(PollingMode)`                                    | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                       |
-| `logLevel(LogLevel)`                                          | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging).                                                                                                                                                                                                     |
-| `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional,  sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                |
-| `defaultUser(User)`                                           | Optional, sets default user. [More about default user](#default-user).                                                                                                                                                                                                                            |
-| `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).|
-| `hooks()`                                                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).|
+| `baseUrl(string)`                                             | _Obsolete_ Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                            |
+| `httpClient(OkHttpClient)`                                    | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient).                                                                                                                                                 |
+| `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
+| `pollingMode(PollingMode)`                                    | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
+| `logLevel(LogLevel)`                                          | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging).                                                                                                                                                                                                      |
+| `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
+| `defaultUser(User)`                                           | Optional, sets default user. [More about default user](#default-user).                                                                                                                                                                                                                             |
+| `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                 |
+| `hooks()`                                                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
-The `ConfigCatClient.get("#YOUR-SDK-KEY#")` static factory method constructs singleton client instances for your SDK keys. 
-These clients can be closed all at once with the `ConfigCatClient.closeAll()` method or individually with `client.close()`. 
+The `ConfigCatClient.get("#YOUR-SDK-KEY#")` static factory method constructs singleton client instances for your SDK keys.
+These clients can be closed all at once with the `ConfigCatClient.closeAll()` method or individually with `client.close()`.
 :::
 
 ## Anatomy of `getValue()`
@@ -171,7 +172,7 @@ client.getValueAsync(
 `getValueDetails()` is similar to `getValue()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
 
 | Parameters     | Description                                                                                                  |
-| -------------- |--------------------------------------------------------------------------------------------------------------|
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
@@ -194,18 +195,19 @@ client.getValueDetailsAsync(
     // Use the details result
 });
 ```
+
 The details result contains the following information:
 
-| Property                               | Type                                    | Description                                                                              |
-| -------------------------------------- |-----------------------------------------| ---------------------------------------------------------------------------------------- |
-| `getValue()`                           | `boolean` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.        |
-| `getKey()`                             | `String`                                | The key of the evaluated feature flag or setting.                                        |
-| `isDefaultValue()`                     | `boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.  |
+| Property                               | Type                                    | Description                                                                               |
+| -------------------------------------- | --------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `getValue()`                           | `boolean` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                       |
+| `getKey()`                             | `String`                                | The key of the evaluated feature flag or setting.                                         |
+| `isDefaultValue()`                     | `boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
 | `getError()`                           | `String`                                | In case of an error, this field contains the error message.                               |
-| `getUser()`                            | `User`                                  | The user object that was used for evaluation.                                              |
+| `getUser()`                            | `User`                                  | The user object that was used for evaluation.                                             |
 | `getMatchedEvaluationPercentageRule()` | `PercentageRule`                        | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `getMatchedEvaluationRule()`           | `RolloutRule`                           | If the evaluation was based on a targeting rule, this field contains that specific rule. |
-| `getFetchTimeUnixMilliseconds()`       | `long`                                  | The last download time of the current config in unix milliseconds format.                |
+| `getMatchedEvaluationRule()`           | `RolloutRule`                           | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `getFetchTimeUnixMilliseconds()`       | `long`                                  | The last download time of the current config in unix milliseconds format.                 |
 
 ## User Object
 
@@ -237,6 +239,7 @@ User user = User.newBuilder()
     .custom(customAttributes)
     .build("#UNIQUE-USER-IDENTIFIER#");
 ```
+
 ### Default User
 
 There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
@@ -276,6 +279,7 @@ boolean value =  client.getValue(Boolean.class, "keyOfMySetting", false, otherUs
 ```
 
 For deleting the default user, you can do the following:
+
 ```java
 client.clearDefaultUser();
 ```
@@ -299,10 +303,10 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 
 Available options:
 
-| Option Parameter              | Description                                                                                         | Default |
-| ----------------------------- | --------------------------------------------------------------------------------------------------- | ------- |
-| `autoPollIntervalInSeconds`   | Polling interval.                                                                                   | 60      |
-| `maxInitWaitTimeSeconds`      | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
+| Option Parameter            | Description                                                                                         | Default |
+| --------------------------- | --------------------------------------------------------------------------------------------------- | ------- |
+| `autoPollIntervalInSeconds` | Polling interval.                                                                                   | 60      |
+| `maxInitWaitTimeSeconds`    | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
 
 ### Lazy Loading
 
@@ -320,9 +324,9 @@ If you set the `asyncRefresh` to `false`, the refresh operation will be awaited 
 
 Available options:
 
-| Option Parameter                | Description           | Default |
-| ------------------------------- | --------------------- | ------- |
-| `cacheRefreshIntervalInSeconds` | Cache TTL.            | 60      |
+| Option Parameter                | Description | Default |
+| ------------------------------- | ----------- | ------- |
+| `cacheRefreshIntervalInSeconds` | Cache TTL.  | 60      |
 
 ### Manual Polling
 
@@ -352,6 +356,7 @@ With the following hooks you can subscribe to particular events fired by the SDK
 - `onError(String)`: This event is sent when an error occurs within the ConfigCat SDK.
 
 You can subscribe to these events either on SDK initialization:
+
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.hooks().addOnFlagEvaluated(details -> {
@@ -359,7 +364,9 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     });
 });
 ```
+
 or with the `getHooks()` property of the ConfigCat client:
+
 ```java
 client.getHooks().addOnFlagEvaluated(details -> {
     /* handle the event */
@@ -369,18 +376,20 @@ client.getHooks().addOnFlagEvaluated(details -> {
 ## Online / Offline mode
 
 In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
+
 ```java
 client.setOffline();
 ```
+
 In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
 
 To put the SDK back in online mode, you can do the following:
+
 ```java
 client.setOnline();
 ```
 
 > With `client.isOffline()` you can check whether the SDK is in offline mode.
-
 
 ## Flag Overrides
 
@@ -408,7 +417,7 @@ ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
             "path/to/the/local_flags.json", // path to the file
             true // reload the file when it gets modified
         ),
-        OverrideBehaviour.LOCAL_ONLY // local/offline mode
+        OverrideBehaviour.LOCAL_ONLY
     );
 });
 ```
@@ -421,7 +430,7 @@ ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
             "local_flags.json", // name of the resource
             true // reload the resource when it gets modified
         ),
-        OverrideBehaviour.LOCAL_ONLY // local/offline mode
+        OverrideBehaviour.LOCAL_ONLY
     );
 });
 ```
@@ -656,7 +665,7 @@ OkHttpClient's default timeout is 10 seconds.
 
 ## Force refresh
 
-Any time you want to refresh the cached configuration with the latest one, you can call the `forceRefresh()` method of the library, which initiates a new download and updates the local cache.
+Call the `forceRefresh()` method on the client to download the latest config.json and update the cache.
 
 ## Logging
 
