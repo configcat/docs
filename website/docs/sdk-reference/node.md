@@ -9,6 +9,7 @@ description: ConfigCat Node.js SDK Reference. This is a step-by-step guide on ho
 [![codecov](https://codecov.io/gh/configcat/node-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/node-sdk)
 [![Known Vulnerabilities](https://snyk.io/test/github/configcat/node-sdk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/configcat/node-sdk?targetFile=package.json)
 ![License](https://img.shields.io/github/license/configcat/node-sdk.svg)
+[![Node.JS](https://img.shields.io/node/v/configcat-node)](https://img.shields.io/node/v/configcat-node)
 
 :::info
 For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](js-ssr.md).
