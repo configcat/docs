@@ -15,5 +15,7 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: website/package-lock.json
-      - run: cd website && npm ci
-      - run: cd website && npm run build
+      - working-directory: website
+        run: npm ci
+      - working-directory: website
+        run: npm run build
