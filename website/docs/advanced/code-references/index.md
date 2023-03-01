@@ -1,5 +1,6 @@
 ---
-id: overview
+id: index
+original_id: overview
 title: Scan & Upload Code References Overview
 ---
 
@@ -82,7 +83,7 @@ if (configCatClient.GetValue(FeatureFlagKeys.MyAwesomeFeature, false))
 ```
 
 :::info
-The alias recognition **adapts to the characteristics of different languages**.  
+The alias recognition **adapts to the characteristics of different languages**.
 For example, it can find aliases in `Go` constants/variable assignments:
 
 ```go
@@ -183,22 +184,22 @@ If you are not using Git as VCS, you have to set at least the `--branch` paramet
 The `scan` command's `--file-url-template` and `--commit-url-template` parameters are used for generating links to your repository.
 Based on the information available during the scanning, the CLI replaces the corresponding template parameters to generate the actual links.
 
-- **File URL template**: Used to generate VCS file links.  
+- **File URL template**: Used to generate VCS file links.
   Available template parameters:
 
   - `commitHash`
   - `filePath`
   - `lineNumber`
 
-  With the following example template URL: `https://github.com/my/repo/blob/{commitHash}/{filePath}#L{lineNumber}`  
+  With the following example template URL: `https://github.com/my/repo/blob/{commitHash}/{filePath}#L{lineNumber}`
   For the file `src/example.js`, the result is: `https://github.com/my/repo/blob/4451d61b63a4b4499ed5c607be6c40ce9eeadb9c/src/example.js#L69`
 
-- **Commit URL template**: Used to generate VCS commit links.  
+- **Commit URL template**: Used to generate VCS commit links.
   Available template parameters:
 
   - `commitHash`
 
-  With the following example template URL: `https://github.com/my/repo/commit/{commitHash}`  
+  With the following example template URL: `https://github.com/my/repo/commit/{commitHash}`
   For the commit hash `4451d61b63a4b4499ed5c607be6c40ce9eeadb9c`, the result is: `https://github.com/my/repo/commit/4451d61b63a4b4499ed5c607be6c40ce9eeadb9c`
 
 :::info
