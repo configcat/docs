@@ -1,6 +1,5 @@
 ---
-id: index
-original_id: overview
+id: overview
 title: ConfigCat SDK Overview
 description: List of all supported technologies like .NET, .NET Core, Java, JavaScript, PHP, Python, Ruby, Go, Node.js, Android, iOS, Elixir, Dart, React, Angular, Vue.js.
 ---

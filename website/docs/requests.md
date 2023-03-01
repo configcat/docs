@@ -118,7 +118,7 @@ If you want to use multiple SDK Keys in the same application, create only one _C
 
 ### Increase the polling interval
 
-You can lower the frequency your application downloads the `config.json` by setting larger polling intervals or using a different [polling mode](/advanced/caching) other than the default auto polling. See the [SDK References for more.](/sdk-reference/index)
+You can lower the frequency your application downloads the `config.json` by setting larger polling intervals or using a different [polling mode](/advanced/caching) other than the default auto polling. See the [SDK References for more.](/sdk-reference/overview)
 
 ### Use webhooks
 

@@ -247,7 +247,7 @@
       "name": "How to avoid technical debt caused by feature flags in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The ConfigCat CLI can scan your code, upload code references to the ConfigCat Dashboard and notify you about stale feature flags. You can find more information here: https://configcat.com/docs/advanced/code-references/index/"
+        "text": "The ConfigCat CLI can scan your code, upload code references to the ConfigCat Dashboard and notify you about stale feature flags. You can find more information here: https://configcat.com/docs/advanced/code-references/overview/"
       }
     },
     {

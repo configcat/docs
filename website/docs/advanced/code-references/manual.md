@@ -10,7 +10,7 @@ to scan your source code for feature flag and setting usages and upload the foun
 
 - [Install](/docs/advanced/cli#installation) the CLI in your CI/CD or local environment.
 - [Setup](/docs/advanced/cli#setup) the CLI with your ConfigCat Management API credentials.
-- Get your selected [Config's ID](/docs/advanced/code-references/index#config-id).
+- Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
 
 ## Scan & Upload
 
@@ -18,7 +18,7 @@ To initiate the scanning with uploading the results, you can use the `scan` comm
 
 ### With Git VCS
 
-The scan command detects when it's being executed on a Git repository and automatically [extracts additional information](/docs/advanced/code-references/index#scanning-git-repositories).
+The scan command detects when it's being executed on a Git repository and automatically [extracts additional information](/docs/advanced/code-references/overview#scanning-git-repositories).
 The following snippet shows a minimal example that uses only the required parameters in the case of a Git repository.
 
 ```bash

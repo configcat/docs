@@ -1,6 +1,5 @@
 ---
-id: index
-original_id: overview
+id: overview
 title: Integrations Overview
 description: ConfigCat Integrations Overview. List of the available integrations like Datadog, GitHub, CircleCI, Bitbucket, Bitrise, Slack, Trello, Zapier, Jira, Terraform, Amplitude
 ---

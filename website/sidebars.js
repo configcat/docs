@@ -69,7 +69,7 @@ module.exports = {
           'Scan & Upload Code References': [
             {
               type: 'doc',
-              id: 'advanced/code-references/index',
+              id: 'advanced/code-references/overview',
               label: 'Overview',
             },
             {
@@ -111,7 +111,7 @@ module.exports = {
         },
       ],
       'SDK References': [
-        { type: 'doc', id: 'sdk-reference/index', label: 'Overview' },
+        { type: 'doc', id: 'sdk-reference/overview', label: 'Overview' },
         { type: 'doc', id: 'sdk-reference/dotnet', label: '.Net' },
         { type: 'doc', id: 'sdk-reference/cpp', label: 'C++' },
         { type: 'doc', id: 'sdk-reference/dart', label: 'Dart (Flutter)' },
@@ -136,7 +136,7 @@ module.exports = {
         { type: 'doc', id: 'sdk-reference/ios', label: 'Swift (iOS)' },
       ],
       Integrations: [
-        { type: 'doc', id: 'integrations/index', label: 'Overview' },
+        { type: 'doc', id: 'integrations/overview', label: 'Overview' },
         { type: 'doc', id: 'integrations/amplitude', label: 'Amplitude' },
         { type: 'doc', id: 'integrations/bitbucket', label: 'Bitbucket Pipe' },
         { type: 'doc', id: 'integrations/bitrise', label: 'Bitrise Step' },

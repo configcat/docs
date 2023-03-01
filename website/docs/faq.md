@@ -199,7 +199,7 @@ You can change the frequency, criteria and scope of the Zombie Feature Flag repo
 
 ### How to avoid technical debt caused by feature flags?
 
-The [ConfigCat CLI](/advanced/code-references/index) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
+The [ConfigCat CLI](/advanced/code-references/overview) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
 <img src="/docs/assets/cli/code-refs.png" className="zoomable" alt="Code references screenshot" />
 
 ### Is there a way to compare flag statuses between two or more environments?

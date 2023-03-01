@@ -98,7 +98,7 @@ var userObject = {
 };
 ```
 
-_The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](sdk-reference/index.md)_
+_The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](sdk-reference/overview.md)_
 
 On the Dashboard a targeting rule for the custom property `EyeColor` would look like:
 <img src="/docs/assets/custom-property-ui.png" className="zoomable" alt="customPropertyUsageDashboard" />

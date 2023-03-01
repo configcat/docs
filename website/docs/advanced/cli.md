@@ -6,7 +6,7 @@ description: The ConfigCat Command Line Interface (CLI) connect and match featur
 
 The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> allows you to interact with the [Public Management API](advanced/public-api.md) via the command line. It supports most functionality found on the ConfigCat Dashboard. You can manage ConfigCat resources like Feature Flags, Targeting / Percentage rules, Products, Configs, Environments, and more.
 
-The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> has the ability to [scan your source code](/advanced/code-references/index.md) for feature flag and setting usages and upload the found code references to ConfigCat.
+The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> has the ability to [scan your source code](/advanced/code-references/overview.md) for feature flag and setting usages and upload the found code references to ConfigCat.
 
 ```
 configcat
@@ -232,7 +232,7 @@ You can change the output format of several command's result to JSON with the `-
 
 ## Scan & Upload Code References
 
-The CLI has the ability to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. You can read more about this feature [here](/docs/advanced/code-references/index).
+The CLI has the ability to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. You can read more about this feature [here](/docs/advanced/code-references/overview).
 
 ## Examples
 

@@ -9,6 +9,6 @@ import CircleCIOrb from '/docs/advanced/code-references/circleci-orb.md'
 
 <CodeRefIntro linkText="CircleCI Orb" linkUrl="https://circleci.com/developer/orbs/orb/configcat/scan-repository" linkTarget="_blank" />
 
-[Here](/docs/advanced/code-references/index) you can find more details about how this feature works.
+[Here](/docs/advanced/code-references/overview) you can find more details about how this feature works.
 
 <CircleCIOrb />
