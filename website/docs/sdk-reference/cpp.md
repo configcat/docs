@@ -414,7 +414,7 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
 
 ## Force refresh
 
-Call the `forceRefresh()` method on the client to download the latest config.json and update the cache.
+Call the `forceRefresh()` method on the client to download the latest config JSON and update the cache.
 
 ## Using ConfigCat behind a proxy
 

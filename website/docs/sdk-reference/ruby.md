@@ -64,7 +64,7 @@ _ConfigCat Client_ is responsible for:
 
 | Client options         | Description                                                                                                                                                                                                                                                         | Default               |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| `base_url`             | _Obsolete_, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json.                                                                                                                                         | nil                   |
+| `base_url`             | _Obsolete_, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                         | nil                   |
 | `polling_mode`         | Sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                   | PollingMode.auto_poll |
 | `config_cache`         | Sets a custom config cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                        | nil                   |
 | `proxy_address`        | Sets custom proxy address for the client. [More about proxy](#using-configcat-behind-a-proxy).                                                                                                                                                                      | nil                   |
@@ -266,7 +266,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh` is your application's responsibility.
 
 ```ruby
 client = ConfigCat.get('#YOUR-SDK-KEY#',
@@ -296,9 +296,9 @@ value = client.get_value("key", "my default value") # Returns "value from server
 With the following hooks you can subscribe to particular events fired by the SDK:
 
 - `on_client_ready`: This event is sent when the SDK reaches the ready state. If the SDK is set up with lazy load or manual polling it's considered ready right after instantiation.
-  If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `on_client_ready` event fires when the auto polling's `max_init_wait_time_seconds` is reached.
+  If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `on_client_ready` event fires when the auto polling's `max_init_wait_time_seconds` is reached.
 
-- `on_config_changed(config: Hash)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+- `on_config_changed(config: Hash)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
 - `on_flag_evaluated(evaluation_details: EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`get_value_details`](#anatomy-of-getvaluedetails).
 
@@ -522,7 +522,7 @@ ConfigCat.logger = Logger.new('log.txt')
 
 ## `get_all_keys`
 
-You can query the keys from your config.json in the SDK with the `get_all_keys` method.
+You can query the keys from your config JSON in the SDK with the `get_all_keys` method.
 
 ```ruby
 client = ConfigCat.get('#YOUR-SDK-KEY#')
@@ -586,7 +586,7 @@ client = ConfigCat.get('#YOUR-SDK-KEY#',
 
 ## Force refresh
 
-Call the `force_refresh` method on the client to download the latest config.json and update the cache.
+Call the `force_refresh` method on the client to download the latest config JSON and update the cache.
 
 ## Using ConfigCat behind a proxy
 

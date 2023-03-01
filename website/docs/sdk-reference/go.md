@@ -540,7 +540,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
 
 ## Force refresh
 
-Call the `Refresh()` method on the client to download the latest config.json and update the cache.
+Call the `Refresh()` method on the client to download the latest config JSON and update the cache.
 
 You can also use the `RefreshIfOlder()` variant when you want to add expiration time windows for local cache updates.
 
