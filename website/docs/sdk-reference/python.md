@@ -345,7 +345,7 @@ client.set_online()
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
-Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviors are supported:
 
 - **Local only** (`OverrideBehaviour.LocalOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
