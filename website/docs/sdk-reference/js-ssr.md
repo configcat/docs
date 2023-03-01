@@ -52,7 +52,7 @@ if (value) {
 }
 ```
 
-(Please note that [top-level await in modules](https://exploringjs.com/impatient-js/ch_modules.html#top-level-await) is available only if your project is [set up to use the ECMAScript module system](https://nodejs.org/api/esm.html). Otherwise you will need either to use Promises or wrap your code in an async function as shown [here](https://github.com/configcat/node-sdk/blob/master/samples/console/overview.js).)
+(Please note that [top-level await in modules](https://exploringjs.com/impatient-js/ch_modules.html#top-level-await) is available only if your project is [set up to use the ECMAScript module system](https://nodejs.org/api/esm.html). Otherwise you will need either to use Promises or wrap your code in an async function as shown [here](https://github.com/configcat/node-sdk/blob/master/samples/console/index.js).)
 
 The Promise way:
 
