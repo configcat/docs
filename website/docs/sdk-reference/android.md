@@ -105,7 +105,7 @@ These are the available options on the `Options` class:
 | Options                                                       | Description                                                                                                                                                                                                                                                                                        |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
-| `baseUrl(string)`                                             | _Obsolete_ Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json.                                                                                                                                                               |
+| `baseUrl(string)`                                             | _Obsolete_ Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                                               |
 | `httpClient(OkHttpClient)`                                    | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient).                                                                                                                                                 |
 | `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
 | `pollingMode(PollingMode)`                                    | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
@@ -332,7 +332,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
@@ -349,9 +349,9 @@ client.forceRefresh();
 With the following hooks you can subscribe to particular events fired by the SDK:
 
 - `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
-  If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeSeconds` is reached.
+  If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeSeconds` is reached.
 
-- `onConfigChanged(Map<String, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+- `onConfigChanged(Map<String, Setting>)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
@@ -421,7 +421,7 @@ ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
 
 ## `getAllKeys()`, `getAllKeysAsync()`
 
-You can get all the setting keys from your config.json by calling the `getAllKeys()` or `getAllKeysAsync()` method of the `ConfigCatClient`.
+You can get all the setting keys from your config JSON by calling the `getAllKeys()` or `getAllKeysAsync()` method of the `ConfigCatClient`.
 
 ```java
 ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
@@ -478,7 +478,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 The SDK by default uses a memory-only cache.
 If you want to change the default behavior, you can either use the built-in `SharedPreferencesCache` or your custom cache implementation.
 
-The `SharedPreferencesCache` implementation uses the Android `SharedPreferences` to store the downloaded `config.json`.
+The `SharedPreferencesCache` implementation uses the Android `SharedPreferences` to store the downloaded `config JSON`.
 `SharedPreferencesCache` has a dependency on `android.content.Context`, so it won't be enabled by default. The cache can be explicitly set by providing an appropriate `Context`.
 
 ```java
@@ -516,7 +516,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 
 ## HttpClient
 
-The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to fetch the latest config.json over HTTP. You have the option to override the internal Http client with your customized one.
+The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to fetch the latest config JSON over HTTP. You have the option to override the internal Http client with your customized one.
 
 ### HTTP Proxy
 
@@ -550,7 +550,7 @@ OkHttpClient's default timeout is 10 seconds.
 
 ### Force refresh
 
-Call the `forceRefresh()` method on the client to download the latest config.json and update the cache.
+Call the `forceRefresh()` method on the client to download the latest config JSON and update the cache.
 
 ## Logging
 
@@ -591,10 +591,10 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config.json](/requests/) file from ConfigCat's CDN servers. The URL path for this config.json file contains your SDK key, so the SDK key and the content of your config.json file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
-This SDK key is read-only, it only allows downloading your config.json file, but nobody can make any changes with it in your ConfigCat account.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
-If you do not want to expose the SDK key or the content of the config.json file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
+If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
 Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
 

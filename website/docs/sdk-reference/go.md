@@ -283,7 +283,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `Refresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `Refresh()` is your application's responsibility.
 
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
@@ -298,7 +298,7 @@ client.Refresh()
 
 With the following hooks you can subscribe to particular events fired by the SDK:
 
-- `OnConfigChanged()`: This event is sent when the SDK loads a new config.json into memory from cache or via HTTP.
+- `OnConfigChanged()`: This event is sent when the SDK loads a new config JSON into memory from cache or via HTTP.
 
 - `OnFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`Get[TYPE]ValueDetails()`](#anatomy-of-gettypevaluedetails).
 
@@ -403,9 +403,9 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 This is the same format that the SDK downloads from the ConfigCat CDN.
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
-You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings:
+The URL to your current config JSON is based on your [Data Governance](advanced/data-governance.md) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
@@ -540,7 +540,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
 
 ## Force refresh
 
-Call the `Refresh()` method on the client to download the latest config.json and update the cache.
+Call the `Refresh()` method on the client to download the latest config JSON and update the cache.
 
 You can also use the `RefreshIfOlder()` variant when you want to add expiration time windows for local cache updates.
 

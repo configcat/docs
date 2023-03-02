@@ -19,9 +19,9 @@ You can set the cache Time To Live (TTL) to any number also.
 
 ## Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded.
-The ConfigCat SDK will not download the `config.json` automatically.
-You can (and should) update the cache manually, by calling a `forceRefresh()` - this will download the latest `config.json` and update the cache.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded.
+The ConfigCat SDK will not download the `config JSON` automatically.
+You can (and should) update the cache manually, by calling a `forceRefresh()` - this will download the latest `config JSON` and update the cache.
 
 This animation explains the different polling modes:
 

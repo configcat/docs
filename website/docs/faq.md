@@ -18,7 +18,7 @@ You can book a free demo session [here](https://calendly.com/configcat/demo), wh
 
 ## Billing, Payments & Subscriptions
 
-### What if I exceed the [config.json download](/requests) limit of my plan?
+### What if I exceed the [config JSON download](/requests) limit of my plan?
 
 Don't worry, we will keep serving your data and feature flags. Someone from our team will contact you to discuss your options.
 You can always check your Usage & Quota [here](https://app.configcat.com/organization/usage).
@@ -114,7 +114,7 @@ Yes, ConfigCat is happy to sign a data processing agreement (DPA).
 
 ### What browser data is collected, processed or stored by the ConfigCat SDK when pulling feature flag data from the ConfigCat CDN?
 
-ConfigCat doesn't collect, store or process any browser data. The data flow is one directional - the SDKs are only downloading the config.json files and the feature flag evaluation happens in the SDK. ConfigCat doesn't collect any information about the customer's users.
+ConfigCat doesn't collect, store or process any browser data. The data flow is one directional - the SDKs are only downloading the config JSON files and the feature flag evaluation happens in the SDK. ConfigCat doesn't collect any information about the customer's users.
 
 ### Is data hosted only within the EU?
 

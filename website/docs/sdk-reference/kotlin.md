@@ -105,7 +105,7 @@ These are the available options on the `ConfigCatOptions` class:
 | Properties       | Type                          | Description                                                                                                                                                                                                                                                                                                                                      |
 | ---------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `dataGovernance` | `DataGovernance`              | Optional, defaults to `DataGovernance.GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.GLOBAL`, `DataGovernance.EU_ONLY`. |
-| `baseUrl`        | `String`                      | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config.json.                                                                                                                                                                                                                        |
+| `baseUrl`        | `String`                      | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                                                        |
 | `requestTimeout` | `Duration`                    | Optional, defaults to `30s`. Sets the underlying HTTP client's request timeout. [More about HTTP Timeout](#http-timeout).                                                                                                                                                                                                                        |
 | `configCache`    | `ConfigCache`                 | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                                                                  |
 | `pollingMode`    | `PollingMode`                 | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                                                                      |
@@ -304,7 +304,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 
 ```kotlin
 val client = ConfigCatClient("#YOUR-SDK-KEY#") {
@@ -321,9 +321,9 @@ client.forceRefresh()
 With the following hooks you can subscribe to particular events fired by the SDK:
 
 - `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling it's considered ready right after instantiation.
-  If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
+  If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTime` is reached.
 
-- `onConfigChanged(Map<String, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+- `onConfigChanged(Map<String, Setting>)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
@@ -419,7 +419,7 @@ val settingValuesTargeting = client.getAllValues(user)
 
 ## Cache
 
-The SDK uses platform specific caching to store the downloaded `config.json`.  
+The SDK uses platform specific caching to store the downloaded `config JSON`.  
 These are the storage locations by platform:
 
 - **Android**: `SharedPreferences`. It has a dependency on `android.content.Context`, so it won't be enabled by default, but it can be explicitly set by providing an appropriate `Context`. ([Here](https://github.com/configcat/kotlin-sdk/blob/main/samples/android/app/src/main/java/com/example/configcat_android/MainActivity.kt#L23) is an example)
@@ -461,7 +461,7 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
 
 ## HTTP Engine
 
-The ConfigCat SDK internally uses <a href="https://ktor.io" target="_blank">Ktor</a> to download the latest config.json over HTTP. For each platform the SDK includes a specific <a href="https://ktor.io/docs/http-client-engines.html#limitations" target="_blank">HTTP engine</a>:
+The ConfigCat SDK internally uses <a href="https://ktor.io" target="_blank">Ktor</a> to download the latest config JSON over HTTP. For each platform the SDK includes a specific <a href="https://ktor.io/docs/http-client-engines.html#limitations" target="_blank">HTTP engine</a>:
 
 - **Android / JVM**: `ktor-client-okhttp`
 - **macOS / iOS / tvOS / watchOS**: `ktor-client-darwin`
@@ -511,7 +511,7 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
 
 ## Force refresh
 
-Call the `forceRefresh()` method on the client to download the latest config.json and update the cache.
+Call the `forceRefresh()` method on the client to download the latest config JSON and update the cache.
 
 ## Logging
 
@@ -552,10 +552,10 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config.json](/requests/) file from ConfigCat's CDN servers. The URL path for this config.json file contains your SDK key, so the SDK key and the content of your config.json file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
-This SDK key is read-only, it only allows downloading your config.json file, but nobody can make any changes with it in your ConfigCat account.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
-If you do not want to expose the SDK key or the content of the config.json file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
+If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
 Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
 

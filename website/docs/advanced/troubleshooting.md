@@ -17,7 +17,7 @@ First, you can verify on the [Service Status Monitor](https://status.configcat.c
 1. Singleton: We strongly recommend using the ConfigCat SDK as a Singleton. Initializing the SDK over and over again can cause serious performance issues in production. If you want to use multiple SDK Keys in the same application, create only one _ConfigCat Client_ per SDK Key.
 1. Are you using the proper polling mode for your use case? Details on polling modes in the [SDK Docs](/sdk-reference/overview.md).
 1. Might be a too frequent `Auto Polling` interval. Please check the [SDK Docs](/sdk-reference/overview.md).
-1. In `Manual Polling` mode, it could be a too frequent `forceRefresh()` call in your code, making the SDK download the config.json often.
+1. In `Manual Polling` mode, it could be a too frequent `forceRefresh()` call in your code, making the SDK download the config JSON often.
 1. You can try one of our lightweight sample applications to rule out local issues. Find in the [repository of each SDK](https://github.com/configcat).
 
 ### Network Checklist

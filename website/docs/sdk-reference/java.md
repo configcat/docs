@@ -330,7 +330,7 @@ Available options:
 
 ### Manual Polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options ->{
@@ -347,9 +347,9 @@ client.forceRefresh();
 With the following hooks you can subscribe to particular events fired by the SDK:
 
 - `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is configured with lazy load or manual polling it's considered ready right after instantiation.
-  If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeSeconds` is reached.
+  If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeSeconds` is reached.
 
-- `onConfigChanged(Map<String, Setting>)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+- `onConfigChanged(Map<String, Setting>)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
@@ -458,9 +458,9 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 This is the same format that the SDK downloads from the ConfigCat CDN.
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
-You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings:
+The URL to your current config JSON is based on your [Data Governance](advanced/data-governance.md) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
@@ -665,7 +665,7 @@ OkHttpClient's default timeout is 10 seconds.
 
 ## Force refresh
 
-Call the `forceRefresh()` method on the client to download the latest config.json and update the cache.
+Call the `forceRefresh()` method on the client to download the latest config JSON and update the cache.
 
 ## Logging
 

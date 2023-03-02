@@ -104,7 +104,7 @@ These are the available options on the `ConfigCatClientOptions` class:
 | `PollingMode`       | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                       | `PollingModes.AutoPoll()`                                                                                                              |
 | `ConfigCache`       | Optional, [`IConfigCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/IConfigCache.cs) instance for cache the config.                                                                                                                                            | [`InMemoryConfigCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/InMemoryConfigCache.cs)            |
 | `Logger`            | Optional, [`ILogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/ILogger.cs) instance for tracing.                                                                                                                                                             | [`ConsoleLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/ConsoleLogger.cs) (with WARNING level) |
-| `BaseUrl`           | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config.json.                                                                                                                                                                         |                                                                                                                                        |
+| `BaseUrl`           | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                         |                                                                                                                                        |
 | `HttpClientHandler` | Optional, `HttpClientHandler` to provide network credentials and proxy settings. [More about the proxy settings](##using-configcat-behind-a-proxy).                                                                                                                                               | built-in HttpClientHandler                                                                                                             |
 | `HttpTimeout`       | Optional, sets the underlying HTTP client's timeout. [More about the HTTP timeout](#http-timeout).                                                                                                                                                                                                | `TimeSpan.FromSeconds(30)`                                                                                                             |
 | `FlagOverrides`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                  |                                                                                                                                        |
@@ -303,7 +303,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
@@ -333,8 +333,8 @@ The SDK provides several hooks (events), by means of which you can get notified 
 Via the following events you can subscribe to particular events raised by the client:
 
 - `event EventHandler ClientReady`: This event is raised when the SDK reaches the ready state. If the SDK is set up to use lazy load or manual polling, it's considered ready right after instantiation.
-  If auto polling is used, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `ClientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
-- `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config.json into memory from cache, then each time afterwards when a config.json with changed content is downloaded via HTTP.
+  If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `ClientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
+- `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
 - `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetails()`/`GetValueDetailsAsync()`](#anatomy-of-getvaluedetails).
 - `event EventHandler<ConfigCatClientErrorEventArgs> Error`: This event is raised when an error occurs within the ConfigCat SDK.
 
@@ -426,9 +426,9 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 This is the same format that the SDK downloads from the ConfigCat CDN.
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
-You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings:
+The URL to your current config JSON is based on your [Data Governance](advanced/data-governance.md) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`

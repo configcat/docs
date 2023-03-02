@@ -63,20 +63,21 @@ _ConfigCat Client_ is responsible for:
 
 `configcatclient.get('#YOUR-SDK-KEY#')` returns a client with default options.
 
-| Client options            | Description                                                                                                                                                                                                                                                        | Default                 |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
-| `base_url`                | _Obsolete_, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config.json.                                                                                                                                        | None                    |
-| `polling_mode`            | Sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                  | PollingMode.auto_poll() |
-| `config_cache`            | Sets a custom config cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                       | None                    |
-| `proxies`                 | Sets custom proxies for the client. [More about proxy](#using-configcat-behind-a-proxy).                                                                                                                                                                           | None                    |
-| `proxy_auth`              | Sets proxy authentication for the custom proxies. [More about proxy](#using-configcat-behind-a-proxy).                                                                                                                                                             | None                    |
-| `connect_timeout_seconds` | The number of seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake).                                                                                                                                        | 10                      |
-| `read_timeout_seconds`    | The number of seconds to wait for the server to respond before giving up.                                                                                                                                                                                          | 30                      |
-| `flag_overrides`          | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)                                                                                                                                                                       | None                    |
-| `data_governance`         | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global`                |
-| `default_user`            | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                   | None                    |
-| `hooks`                   | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                     | None                    |
-| `offline`                 | Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                | False                   |
+| Client options            | Description                                                                                                                | Default |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `base_url`                | *Obsolete*, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON. | None |
+| `polling_mode`            | Sets the polling mode for the client. [More about polling modes](#polling-modes). | PollingMode.auto_poll() |
+| `config_cache`            | Sets a custom config cache implementation for the client. [More about cache](#custom-cache). | None |
+| `proxies`                 | Sets custom proxies for the client. [More about proxy](#using-configcat-behind-a-proxy). | None |
+| `proxy_auth`              | Sets proxy authentication for the custom proxies. [More about proxy](#using-configcat-behind-a-proxy). | None |
+| `connect_timeout_seconds` | The number of seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10      |
+| `read_timeout_seconds`    | The number of seconds to wait for the server to respond before giving up.                                                   | 30      |
+| `flag_overrides`          | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)                                | None    |
+| `data_governance`         | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global`|
+| `default_user`            | Sets the default user. [More about default user](#default-user). | None |
+| `hooks`                   | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). | None |
+| `offline`                 | Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode). | False |
+
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#',
@@ -110,7 +111,7 @@ value = client.get_value(
 
 ## Anatomy of `get_value_details()`
 
-`get_value_details()` is similar to `get_value()` but instead of returning the evaluated value only, it gives an _EvaluationDetails_
+`get_value_details()` is similar to `get_value()` but instead of returning the evaluated value only, it gives an _EvaluationDetails_ 
 object with more detailed information about the evaluation result.
 
 | Parameters     | Description                                                                                                  |
@@ -140,6 +141,7 @@ The details result contains the following information:
 | `matched_evaluation_rule`            | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
 | `fetch_time`                         | The last download time (UTC _datetime_) of the current config.                            |
 
+
 ## User Object
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
@@ -167,7 +169,7 @@ user_object = User(
   'john@example',
   'United Kingdom',
   { SubscriptionType: 'Pro', UserRole: 'Admin' },
-)
+);
 ```
 
 ### Default user
@@ -175,7 +177,6 @@ user_object = User(
 There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
 You can set the default user object either on SDK initialization:
-
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#',
     ConfigCatOptions(
@@ -185,9 +186,8 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 ```
 
 or with the `set_default_user()` method of the ConfigCat client.
-
 ```python
-client.set_default_user(User('john@example.com'))
+client.set_default_user(User('john@example.com'));
 ```
 
 Whenever the `get_value()`, `get_value_details()`, `get_variation_id()`, `get_all_variation_ids()`, or `get_all_values()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
@@ -216,7 +216,6 @@ value = client.get_value('keyOfMySetting', False, other_user)
 ```
 
 For deleting the default user, you can do the following:
-
 ```python
 client.clear_default_user()
 ```
@@ -242,9 +241,9 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 
 Available options:
 
-| Option Parameter             | Description                                                                                         | Default |
-| ---------------------------- | --------------------------------------------------------------------------------------------------- | ------- |
-| `poll_interval_seconds`      | Polling interval.                                                                                   | 60      |
+| Option Parameter             | Description                              | Default |
+| ---------------------------- | ---------------------------------------- | ------- |
+| `poll_interval_seconds`      | Polling interval.                        | 60      |
 | `max_init_wait_time_seconds` | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
 
 :::caution
@@ -267,13 +266,14 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 
 Available options:
 
-| Option Parameter                 | Description | Default |
-| -------------------------------- | ----------- | ------- |
-| `cache_refresh_interval_seconds` | Cache TTL.  | 60      |
+| Option Parameter             | Description                  | Default |
+| ---------------------------- | ---------------------------- | ------- |
+| `cache_time_to_live_seconds` | Cache TTL.                   | 60      |
+
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config.json` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#',
@@ -302,16 +302,15 @@ value = client.get_value('key', 'my default value') # Returns "value from server
 With the following hooks you can subscribe to particular events fired by the SDK:
 
 - `on_client_ready()`: This event is sent when the SDK reaches the ready state. If the SDK is set up with lazy load or manual polling it's considered ready right after instantiation.
-  If it's using auto polling, the ready state is reached when the SDK has a valid config.json loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `on_client_ready` event fires when the auto polling's `max_init_wait_time_seconds` is reached.
+If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `on_client_ready` event fires when the auto polling's `max_init_wait_time_seconds` is reached.
 
-- `on_config_changed(config: dict)`: This event is sent when the SDK loads a valid config.json into memory from cache, and each subsequent time when the loaded config.json changes via HTTP.
+- `on_config_changed(config: dict)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
 - `on_flag_evaluated(evaluation_details: EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`get_value_details()`](#anatomy-of-getvaluedetails).
 
 - `on_error(error: str)`: This event is sent when an error occurs within the ConfigCat SDK.
 
-You can subscribe to these events either on SDK initialization:
-
+You can subscribe to these events either on SDK initialization: 
 ```python
 def on_flag_evaluated(evaluation_details):
     # handle the event
@@ -323,9 +322,7 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
     )
 )
 ```
-
 or with the `get_hooks()` method of the ConfigCat client:
-
 ```python
 client.get_hooks().add_on_flag_evaluated(on_flag_evaluated)
 ```
@@ -333,15 +330,12 @@ client.get_hooks().add_on_flag_evaluated(on_flag_evaluated)
 ## Online / Offline mode
 
 In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
-
 ```python
 client.set_offline()
 ```
-
 In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
 
 To put the SDK back in online mode, you can do the following:
-
 ```python
 client.set_online()
 ```
@@ -351,7 +345,7 @@ client.set_online()
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
-Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviors are supported:
 
 - **Local only** (`OverrideBehaviour.LocalOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
@@ -373,7 +367,7 @@ client = configcatclient.get(
     ConfigCatOptions(
         flag_overrides=LocalFileFlagOverrides(
             file_path='path/to/the/local_flags.json',  # path to the file
-            override_behaviour=OverrideBehaviour.LocalOnly
+            override_behaviour=OverrideBehaviour.LocalOnly  # local/offline mode
         )
     )
 )
@@ -402,9 +396,9 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 This is the same format that the SDK downloads from the ConfigCat CDN.
 It allows the usage of all features you can do on the ConfigCat Dashboard.
 
-You can download your current config.json from ConfigCat's CDN and use it as a baseline.
+You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config.json is based on your [Data Governance](advanced/data-governance.md) settings:
+The URL to your current config JSON is based on your [Data Governance](advanced/data-governance.md) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
@@ -494,22 +488,11 @@ client = configcatclient.get(
 
 ## Logging
 
-The _ConfigCat SDK_ uses Python's built-in <a href="https://docs.python.org/3/library/logging.html" target="_blank">logging library</a>.
-
-With the `logging.basicConfig()` method, you can set up the logging system.
-The following example shows how to set the default root logger to write logs to the standard output with `INFO` log level.
+In the _ConfigCat SDK_, a default logger writes logs to the standard output. The following example shows how to set the _Log Level_ of the default logger.
 
 ```python
 import logging
 logging.basicConfig(level=logging.INFO)
-```
-
-The _ConfigCat SDK_ specifies an internal logger called `'configcat'`.
-The following example shows how to set the _Log Level_ on the internal _ConfigCat_ logger.
-
-```python
-logger = logging.getLogger('configcat')
-logger.setLevel(logging.INFO)
 ```
 
 Available log levels:
@@ -536,7 +519,7 @@ Evaluating rule: [Email] [CONTAINS] [@example.com] => match, returning: True
 
 ## `get_all_keys()`
 
-You can query the keys from your config.json in the SDK with the `get_all_keys()` method.
+You can query the keys from your config JSON in the SDK with the `get_all_keys()` method.
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#')

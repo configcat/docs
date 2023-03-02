@@ -4,7 +4,7 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What if I exceed the config.json download limit of my ConfigCat plan?",
+      "name": "What if I exceed the config JSON download limit of my ConfigCat plan?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Don't worry, ConfigCat will keep serving your data and feature flags. Someone from the support team will contact you to discuss your options. You can always check your usage & quota on the ConfigCat Dashboard: https://app.configcat.com/organization/usage."
@@ -175,7 +175,7 @@
       "name": "What browser data is collected, processed or stored by the ConfigCat SDK when pulling feature flag data from the ConfigCat CDN?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "ConfigCat doesn't collect, store or process any browser data. The data flow is one directional - the SDKs are only downloading the config.json files and the feature flag evaluation happens in the SDK. ConfigCat doesn't collect any information about the customer's users."
+        "text": "ConfigCat doesn't collect, store or process any browser data. The data flow is one directional - the SDKs are only downloading the config JSON files and the feature flag evaluation happens in the SDK. ConfigCat doesn't collect any information about the customer's users."
       }
     },
     {
