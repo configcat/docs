@@ -103,8 +103,8 @@ _ConfigCat Client_ is responsible for:
 
 ```cpp
 ConfigCatOptions options;
-options.mode = PollingMode::manualPoll();
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+options.pollingMode = PollingMode::manualPoll();
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 :::caution
@@ -204,7 +204,7 @@ You can set the default user object either on SDK initialization:
 ```cpp
 ConfigCatOptions options;
 options.defaultUser = make_shared<ConfigCatUser>("john@example.com");
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 or with the `setDefaultUser()` method of the ConfigCat client.
@@ -255,8 +255,8 @@ Use the `autoPollIntervalInSeconds` option parameter of the `PollingMode::autoPo
 ```cpp
 auto autoPollIntervalInSeconds = 100;
 ConfigCatOptions options;
-options.mode = PollingMode::autoPoll(autoPollIntervalInSeconds);
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+options.pollingMode = PollingMode::autoPoll(autoPollIntervalInSeconds);
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 Available options:
@@ -275,8 +275,8 @@ Use the `cacheRefreshIntervalInSeconds` option parameter of the `PollingMode::la
 ```cpp
 auto cacheRefreshIntervalInSeconds = 100;
 ConfigCatOptions options;
-options.mode = PollingMode::lazyLoad(cacheRefreshIntervalInSeconds);
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+options.pollingMode = PollingMode::lazyLoad(cacheRefreshIntervalInSeconds);
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 Available options:
@@ -291,8 +291,8 @@ Manual polling gives you full control over when the `config JSON` (with the sett
 
 ```cpp
 ConfigCatOptions options;
-options.mode = PollingMode::manualPoll();
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+options.pollingMode = PollingMode::manualPoll();
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 client->forceRefresh();
 ```
 
@@ -315,14 +315,14 @@ You can subscribe to these events either on SDK initialization:
 
 ```cpp
 ConfigCatOptions options;
-options.mode = PollingMode::manualPoll();
+options.pollingMode = PollingMode::manualPoll();
 options.hooks = make_shared<Hooks>(
     []() { /* onClientReady callback */ },
     [](shared_ptr<Settings> config) { /* onConfigChanged callback */ },
     [](const EvaluationDetails& details) { /* onFlagEvaluated callback */ },
     [](const string& error) { /* onError callback */ }
 );
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 or with the  `getHooks()` method of the ConfigCat client:
@@ -371,7 +371,7 @@ The SDK can be set up to load your feature flag & setting overrides from a file.
 ```cpp
 ConfigCatOptions options;
 options.flagOverrides = make_shared<FileFlagOverrides>("path/to/the/local_flags.json", LocalOnly);
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 #### JSON File Structure
@@ -481,7 +481,7 @@ const std::unordered_map<std::string, Value>& map = {
 
 ConfigCatOptions options;
 options.flagOverrides = make_shared<MapFlagOverrides>(map, LocalOnly);
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 ## `getAllKeys()`
@@ -540,7 +540,7 @@ Then use your custom cache implementation:
 ```cpp
 ConfigCatOptions options;
 options.configCache = make_shared<MyCustomCache>();
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 ## Force refresh
@@ -557,7 +557,7 @@ options.proxies = {{"http", "http://www.fake_auth_proxy.com"}}; // Protocol, Pro
 options.proxyAuthentications = {
     {"http", ProxyAuthentication{"user", "password"}} // Protocol, ProxyAuthentication
 };
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 ## Changing the default HTTP timeout
@@ -569,7 +569,7 @@ The default _connectTimeoutMs_ is 8 seconds. The default _readTimeoutMs_ is 5 se
 ConfigCatOptions options;
 options.connectTimeoutMs = 10000; // Timeout in milliseconds for establishing a HTTP connection with the server
 options.readTimeoutMs = 8000; // Timeout in milliseconds for reading the server's HTTP response
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 ## Logging
@@ -586,7 +586,7 @@ The custom implementation must satisfy the `ILogger` abstract class.
 auto logger = make_shared<ConsoleLogger>(LOG_LEVEL_WARNING);
 ConfigCatOptions options;
 options.logger = logger;
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", options);
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 
 You can change the verbosity of the logs by setting the `LogLevel`.
 
