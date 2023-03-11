@@ -138,7 +138,7 @@ We keep organization data as long as we see activity in that organization.
 After several months of inactivity, we send you a series of email notifications about or plans to delete your organization and all associated data.
 We consider an organization inactive if it meets all of the following criteria:
 - no audit log events are generated in the organization,
-- no valid REST API calls are made to the organization,
+- no valid calls are made to the organization via the Public Management API,
 - config JSONs aren't downloaded from the ConfigCat CDN,
 - the organization does not have an active paid subscription.
 
