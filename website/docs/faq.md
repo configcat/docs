@@ -132,7 +132,7 @@ Yes! You can export and download your current product as a standard JSON file an
 - All tags
 - All segments
 
-### How long do you keep my data?
+### How long does ConfigCat keep my data?
 
 We keep organization data as long as we see activity in that organization.
 After several months of inactivity, we send you a series of email notifications about or plans to delete your organization and all associated data.
