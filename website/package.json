@@ -12,9 +12,9 @@
     "configure-husky": "cd .. && npx husky install"
   },
   "dependencies": {
-    "@docusaurus/core": "2.1.0",
+    "@docusaurus/core": "^2.3.1",
     "@docusaurus/plugin-google-tag-manager": "^2.3.1",
-    "@docusaurus/preset-classic": "2.1.0",
+    "@docusaurus/preset-classic": "^2.3.1",
     "@mdx-js/react": "^1.6.22",
     "@svgr/webpack": "^6.4.0",
     "clsx": "^1.2.1",
