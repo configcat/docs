@@ -213,14 +213,6 @@ module.exports = {
         },
       },
     ],
-    [
-      '@docusaurus/plugin-google-tag-manager',
-      {
-        googleTagManager: {
-          containerId: 'GTM-K2RKTZS',
-        },
-      },
-    ],
   ],
   scripts: [],
   stylesheets: [],
