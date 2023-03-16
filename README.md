@@ -61,7 +61,7 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
    ```
 3. Run container (you might need to replace environment variables)
    ```bash
-   docker run -i --publish 8000:80 --name home docs:latest
+   docker run -i --publish 8000:80 --name docs docs:latest
    ```
 4. Open `http://localhost:8000`
 
