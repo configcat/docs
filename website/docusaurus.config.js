@@ -8,7 +8,12 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.
-  plugins: [require.resolve('docusaurus-plugin-image-zoom')],
+  plugins: [require.resolve('docusaurus-plugin-image-zoom'), [
+      '@docusaurus/plugin-google-tag-manager',
+      {
+        containerId: 'GTM-K2RKTZS',
+      },
+    ],],
   themeConfig: {
     image: '/img/docs-cover.png',
     navbar: {
@@ -205,14 +210,6 @@ module.exports = {
         },
         blog: {
           archiveBasePath: null,
-        },
-      },
-    ],
-    [
-      '@docusaurus/plugin-google-tag-manager',
-      {
-        googleTagManager: {
-          containerId: 'GTM-K2RKTZS',
         },
       },
     ],
