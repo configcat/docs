@@ -196,6 +196,14 @@
     },
     {
       "@type": "Question",
+      "name": "How long does ConfigCat keep my data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ConfigCat keeps your organization data as long as activity is seen in that organization. After several months of inactivity, you'll receive email notifications about or plans to delete your organization and all associated data. An organization is considered inactive if it meets the following criteria: no audit log events are generated in the organization, no valid calls are made to the organization via the Public Management API, config JSONs aren't downloaded from the ConfigCat CDN, the organization does not have an active paid subscription."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "How can I use AND operators in my targeting rules in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
