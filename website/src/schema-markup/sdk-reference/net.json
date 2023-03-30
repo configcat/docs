@@ -23,16 +23,16 @@
   "step": [
     {
       "@type": "HowToStep",
-      "text": "Register a free account at ConfigCat.",
+      "text": "Sign up for a free ConfigCat account",
       "name": "Registration",
-      "url": "https://configcat.com",
+      "url": "https://app.configcat.com/signup",
       "image": "https://configcat.com/images/shared/home.png"
     },
     {
       "@type": "HowToStep",
       "text": "Install ConfigCat SDK Nuget package",
       "name": "Installation",
-      "url": "https://www.nuget.org/packages/ConfigCat.Client",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/#1-install-configcat-sdk-nuget-package",
       "image": "https://configcat.com/images/shared/home.png"
     },
     {
@@ -51,9 +51,16 @@
     },
     {
       "@type": "HowToStep",
-      "text": "Get your feature flag's value",
+      "text": "Get your setting value",
       "name": "Evaluation",
       "url": "https://configcat.com/docs/sdk-reference/dotnet/#4-get-your-setting-value",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Dispose ConfigCat client",
+      "name": "Dispose",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/#5-dispose-configcat-client",
       "image": "https://configcat.com/images/shared/home.png"
     }
   ]
