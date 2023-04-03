@@ -12,7 +12,9 @@
   },
   "supply": {
     "@type": "HowToSupply",
-    "name": "ConfigCat"
+    "name": "ConfigCat",
+    "image": "https://configcat.com/images/shared/home.png",
+    "url": "https://configcat.com"
   },
   "tool": {
     "@type": "HowToTool",
