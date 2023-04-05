@@ -4,6 +4,10 @@ title: Android (Java) SDK Reference
 description: ConfigCat Android SDK Reference. This is a step-by-step guide on how to use feature flags in your Android Java application.
 ---
 
+export const AndroidSchema = require('@site/src/schema-markup/sdk-reference/android.json');
+
+<script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(AndroidSchema) }}></script>
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/android-sdk.svg?style=social)](https://github.com/configcat/android-sdk/stargazers)
 [![Android CI](https://github.com/configcat/android-sdk/actions/workflows/android-ci.yml/badge.svg?branch=master)](https://github.com/configcat/android-sdk/actions/workflows/android-ci.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-android-client/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.configcat/configcat-android-client)
