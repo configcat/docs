@@ -2,7 +2,7 @@
   "@context": "https://schema.org/", 
   "@type": "HowTo", 
   "name": "How to use feature flags in C++?",
-  "description": "How to use feature flags in C++ using Configcat Feature Flags.",
+  "description": "How to use feature flags in C++ using ConfigCat Feature Flags.",
   "image": "https://configcat.com/images/shared/home.png",
   "totalTime": "PT10M",
   "estimatedCost": {
