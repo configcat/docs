@@ -704,6 +704,12 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no matc
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning "true"
 ```
 
+### Logging Implementation
+
+You can use any slf4j implementation for logging. Some available logger implementations doesn't show debug level messages by default. In these cases, you have to set up the logger configuration to receive all log message from the ConfigCat SDK.
+
+You can find <a href="https://github.com/configcat/java-sdk/blob/master/samples/console/src/main/resources/simplelogger.properties" target="_blank">slf4j-simple</a> and <a href="https://github.com/configcat/java-sdk/blob/master/samples/web/src/main/resources/logback.xml" target="_blank">logback</a> configuration examples in the [Sample Apps](#sample-apps).
+
 ## Sample Apps
 
 Check out our Sample Applications how they use the ConfigCat SDK
