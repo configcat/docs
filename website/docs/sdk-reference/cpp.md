@@ -4,6 +4,13 @@ title: C++ SDK Reference
 description: ConfigCat C++ SDK Reference. This is a step-by-step guide on how to use feature flags in your C++ application.
 ---
 
+export const CPPSchema = require('@site/src/schema-markup/sdk-reference/cpp.json');
+
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(CPPSchema) }}
+></script>;
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/cpp-sdk.svg?style=social)](https://github.com/configcat/cpp-sdk/stargazers)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/configcat/cpp-sdk/cpp-ci.yml?logo=GitHub&label=windows%20%2F%20macos%20%2F%20linux&branch=main)](https://github.com/configcat/cpp-sdk/actions/workflows/cpp-ci.yml)
 [![Coverage Status](https://codecov.io/gh/configcat/cpp-sdk/branch/main/graph/badge.svg?token=cvUgfof8k7)](https://codecov.io/gh/configcat/cpp-sdk)
