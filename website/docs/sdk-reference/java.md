@@ -706,9 +706,9 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ### Logging Implementation
 
-You can use any slf4j implementation for logging. Some available logger implementations doesn't show debug level messages by default. In these cases, you have to set up the logger configuration to receive all log message from the ConfigCat SDK.
+You have the flexibility to use any slf4j implementation for logging with ConfigCat. However, some logger implementations may not display debug level messages by default. In these cases, you simply need to adjust the logger configuration to receive all log messages from the ConfigCat SDK.
 
-You can find <a href="https://github.com/configcat/java-sdk/blob/master/samples/console/src/main/resources/simplelogger.properties" target="_blank">slf4j-simple</a> and <a href="https://github.com/configcat/java-sdk/blob/master/samples/web/src/main/resources/logback.xml" target="_blank">logback</a> configuration examples in the [Sample Apps](#sample-apps).
+Examples fo <a href="https://github.com/configcat/java-sdk/blob/master/samples/console/src/main/resources/simplelogger.properties" target="_blank">slf4j-simple</a> and <a href="https://github.com/configcat/java-sdk/blob/master/samples/web/src/main/resources/logback.xml" target="_blank">logback</a> are available under the [Sample Apps](#sample-apps) section.
 
 ## Sample Apps
 

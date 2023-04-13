@@ -595,9 +595,9 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ### Logging Implementation
 
-You can use any slf4j implementation for logging. Some available logger implementations doesn't show debug level messages by default. In these cases, you have to set up the logger configuration to receive all log message from the ConfigCat SDK.
+You have the flexibility to use any slf4j implementation for logging with ConfigCat. However, some logger implementations may not display debug level messages by default. In these cases, you simply need to adjust the logger configuration to receive all log messages from the ConfigCat SDK.
 
-You can find <a href="https://github.com/configcat/android-sdk/blob/master/samples/android-kotlin/app/src/android-logger.properties" target="_blank">android-logger</a> and <a href="https://github.com/configcat/android-sdk/blob/master/samples/android-java/app/src/main/assets/logback.xml" target="_blank">logback</a> configuration examples in the [Sample Apps](#sample-apps).
+Examples for <a href="https://github.com/configcat/android-sdk/blob/master/samples/android-kotlin/app/src/android-logger.properties" target="_blank">android-logger</a> and <a href="https://github.com/configcat/android-sdk/blob/master/samples/android-java/app/src/main/assets/logback.xml" target="_blank">logback</a> are available under the [Sample Apps](#sample-apps) section.
 
 ## Sensitive information handling
 
