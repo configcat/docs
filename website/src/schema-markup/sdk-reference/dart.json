@@ -1,7 +1,7 @@
 {
   "@context": "https://schema.org/", 
   "@type": "HowTo", 
-  "name": "How to use feature flags in Dart Flutter",
+  "name": "How to use feature flags in Dart Flutter?",
   "description": "How to use feature flags in Dart (Flutter) using ConfigCat Feature Flags.",
   "image": "https://configcat.com/images/shared/home.png",
   "totalTime": "PT10M",
