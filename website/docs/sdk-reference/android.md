@@ -593,6 +593,12 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no matc
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning "true"
 ```
 
+### Logging Implementation
+
+You have the flexibility to use any slf4j implementation for logging with ConfigCat. However, some logger implementations may not display debug level messages by default. In these cases, you simply need to adjust the logger configuration to receive all log messages from the ConfigCat SDK.
+
+Examples for <a href="https://github.com/configcat/android-sdk/blob/master/samples/android-kotlin/app/src/android-logger.properties" target="_blank">android-logger</a> and <a href="https://github.com/configcat/android-sdk/blob/master/samples/android-java/app/src/main/assets/logback.xml" target="_blank">logback</a> are available under the [Sample Apps](#sample-apps) section.
+
 ## Sensitive information handling
 
 The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
