@@ -139,6 +139,11 @@ module.exports = {
               id: 'sdk-reference/community/laravel',
               label: 'PHP (Laravel)',
             },
+            {
+              type: 'doc',
+              id: 'sdk-reference/community/deno',
+              label: 'TypeScript (Deno)',
+            },
           ],
         },
       ],

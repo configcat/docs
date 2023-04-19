@@ -48,8 +48,10 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 - [Documentation](sdk-reference/js.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/js-sdk" target="_blank">GitHub repository of the ConfigCat JavaScript SDK.</a>
 
-<!-- ## JavaScript (Deno) - Community maintained
-- <a href="https://github.com/sigewuzhere/configcat-deno" target="_blank">GitHub repository of the ConfigCat Deno SDK.</a> -->
+## JavaScript (Deno) - Community maintained
+
+- [Documentation](sdk-reference/community/deno.md) on how to connect your application.
+- <a href="https://github.com/sigewuzhere/configcat-deno" target="_blank">GitHub repository of the ConfigCat Deno SDK.</a>
 
 ## JavaScript (React)
 
