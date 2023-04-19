@@ -78,7 +78,7 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 
 ## PHP (Laravel) - Community maintained
 
-- [Documentation](sdk-reference/laravel.md) on how to connect your application.
+- [Documentation](sdk-reference/community/laravel.md) on how to connect your application.
 - <a href="https://github.com/pod-point/laravel-configcat" target="_blank">GitHub repository of the Laravel ConfigCat package.</a>
 
 ## Python

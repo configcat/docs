@@ -120,7 +120,6 @@ module.exports = {
         { type: 'doc', id: 'sdk-reference/java', label: 'Java' },
         { type: 'doc', id: 'sdk-reference/android', label: 'Java (Android)' },
         { type: 'doc', id: 'sdk-reference/js', label: 'JavaScript' },
-        // { type: 'doc', id: 'sdk-reference/deno', label: 'Deno' },
         { type: 'doc', id: 'sdk-reference/react', label: 'JavaScript (React)' },
         { type: 'doc', id: 'sdk-reference/js-ssr', label: 'JavaScript (SSR)' },
         {
@@ -130,10 +129,18 @@ module.exports = {
         },
         { type: 'doc', id: 'sdk-reference/node', label: 'Node.js' },
         { type: 'doc', id: 'sdk-reference/php', label: 'PHP' },
-        { type: 'doc', id: 'sdk-reference/laravel', label: 'PHP (Laravel)' },
         { type: 'doc', id: 'sdk-reference/python', label: 'Python' },
         { type: 'doc', id: 'sdk-reference/ruby', label: 'Ruby' },
         { type: 'doc', id: 'sdk-reference/ios', label: 'Swift (iOS)' },
+        {
+          'Community Maintained': [
+            {
+              type: 'doc',
+              id: 'sdk-reference/community/laravel',
+              label: 'PHP (Laravel)',
+            },
+          ],
+        },
       ],
       Integrations: [
         { type: 'doc', id: 'integrations/overview', label: 'Overview' },

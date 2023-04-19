@@ -67,6 +67,7 @@ const features = [
       { url: 'sdk-reference/python', title: 'Python' },
       { url: 'sdk-reference/go', title: 'Go' },
       { url: 'sdk-reference/php', title: 'PHP' },
+      { url: 'sdk-reference/community/laravel', title: 'PHP (Laravel)' },
       { url: 'sdk-reference/ruby', title: 'Ruby' },
       { url: 'sdk-reference/cpp', title: 'C++' },
       { url: 'sdk-reference/elixir', title: 'Elixir' },
