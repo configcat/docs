@@ -6,6 +6,9 @@ description: ConfigCat Dart (Flutter) SDK Reference. This is a step-by-step guid
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+export const DartSchema = require('@site/src/schema-markup/sdk-reference/dart.json');
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(DartSchema) }}></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/dart-sdk.svg?style=social)](https://github.com/configcat/dart-sdk/stargazers)
 [![pub package](https://img.shields.io/pub/v/configcat_client.svg)](https://pub.dev/packages/configcat_client)
