@@ -18,7 +18,7 @@ To initiate the scanning with uploading the results, you can use the `scan` comm
 
 ### With Git VCS
 
-The scan command detects when it's being executed on a Git repository and automatically [extracts additional information](/docs/advanced/code-references/overview#scanning-git-repositories).  
+The scan command detects when it's being executed on a Git repository and automatically [extracts additional information](/docs/advanced/code-references/overview#scanning-git-repositories).
 The following snippet shows a minimal example that uses only the required parameters in the case of a Git repository.
 
 ```bash
