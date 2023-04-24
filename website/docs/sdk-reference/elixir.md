@@ -4,6 +4,13 @@ title: Elixir SDK Reference
 description: ConfigCat Elixir SDK Reference. This is a step-by-step guide on how to use feature flags in your Elixir project.
 ---
 
+export const ElixirSchema = require('@site/src/schema-markup/sdk-reference/elixir.json');
+
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(ElixirSchema) }}
+></script>;
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/elixir-sdk.svg?style=social)](https://github.com/configcat/elixir-sdk/stargazers)
 [![Elixir CI](https://github.com/configcat/elixir-sdk/actions/workflows/elixir-ci.yml/badge.svg?branch=main)](https://github.com/configcat/elixir-sdk/actions/workflows/elixir-ci.yml)
 [![Coverage Status](https://codecov.io/github/configcat/elixir-sdk/badge.svg?branch=main)](https://codecov.io/github/configcat/elixir-sdk?branch=main)
