@@ -9,7 +9,7 @@ export const ElixirSchema = require('@site/src/schema-markup/sdk-reference/elixi
 <script
   type="application/ld+json"
   dangerouslySetInnerHTML={{ __html: JSON.stringify(ElixirSchema) }}
-></script>;
+></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/elixir-sdk.svg?style=social)](https://github.com/configcat/elixir-sdk/stargazers)
 [![Elixir CI](https://github.com/configcat/elixir-sdk/actions/workflows/elixir-ci.yml/badge.svg?branch=main)](https://github.com/configcat/elixir-sdk/actions/workflows/elixir-ci.yml)
