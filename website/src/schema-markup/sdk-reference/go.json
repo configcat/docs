@@ -1,0 +1,60 @@
+{
+  "@context": "https://schema.org/", 
+  "@type": "HowTo", 
+  "name": "How to use feature flags in Go?",
+  "description": "How to use feature flags in Go using ConfigCat Feature Flags",
+  "image": "https://configcat.com/images/shared/home.png",
+  "totalTime": "PT10M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "supply": {
+    "@type": "HowToSupply",
+    "name": "ConfigCat",
+		"image": "https://configcat.com/images/shared/home.png",
+    "url": "https://configcat.com"
+  },
+  "tool": {
+    "@type": "HowToTool",
+    "name": "ConfigCat Feature Flags - https://configcat.com"
+  },
+  "step": [{
+    "@type": "HowToStep",
+    "text": "Sign up for a free ConfigCat account",
+    "image": "https://configcat.com/images/shared/home.png",
+    "name": "Registration",
+    "url": "https://app.configcat.com/signup"
+  },{
+    "@type": "HowToStep",
+    "text": "Get the SDK with go",
+    "image": "https://configcat.com/images/shared/home.png",
+    "name": "Installation",
+    "url": "https://configcat.com/docs/sdk-reference/go/#1-get-the-sdk-with-go"
+  },{
+    "@type": "HowToStep",
+    "text": "Import the ConfigCat package",
+    "image": "https://configcat.com/images/shared/home.png",
+    "name": "Import",
+    "url": "https://configcat.com/docs/sdk-reference/go/#2-import-the-configcat-package"
+  },{
+    "@type": "HowToStep",
+    "text": "Create the ConfigCat client with your SDK Key",
+    "image": "https://configcat.com/images/shared/home.png",
+    "name": "Initialization",
+    "url": "https://configcat.com/docs/sdk-reference/go/#3-create-the-configcat-client-with-your-sdk-key"
+  },{
+    "@type": "HowToStep",
+    "text": "Get your setting value",
+    "image": "https://configcat.com/images/shared/home.png",
+    "name": "Evaluation",
+    "url": "https://configcat.com/docs/sdk-reference/go/#4-get-your-setting-value"
+  },{
+    "@type": "HowToStep",
+    "text": "Stop ConfigCat client",
+    "image": "https://configcat.com/images/shared/home.png",
+    "name": "Stop",
+    "url": "https://configcat.com/docs/sdk-reference/go/#5-stop-configcat-client"
+  }]    
+}
