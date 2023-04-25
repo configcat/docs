@@ -1,0 +1,48 @@
+{
+  "@context": "https://schema.org/", 
+  "@type": "HowTo", 
+  "name": "How to use feature flags in Elixir?",
+  "description": "How to use feature flags in Elixir using ConfigCat Feature Flags.",
+  "image": "https://configcat.com/images/shared/home.png",
+  "totalTime": "PT10M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "supply": {
+    "@type": "HowToSupply",
+    "name": "ConfigCat",
+    "image": "https://configcat.com/images/shared/home.png",
+    "url": "https://configcat.com"
+  },
+  "tool": {
+    "@type": "HowToTool",
+    "name": "ConfigCat Feature Flags - https://configcat.com"
+  },
+  "step": [{
+    "@type": "HowToStep",
+    "text": "Sign up for a free ConfigCat account",
+    "image": "https://configcat.com/images/shared/home.png",
+    "name": "Registration",
+    "url": "https://app.configcat.com/signup"
+  },{
+    "@type": "HowToStep",
+    "text": "Add configcat to your list of dependencies in mix.exs",
+    "image": "https://configcat.com/images/shared/home.png",
+    "name": "Installation",
+    "url": "https://configcat.com/docs/sdk-reference/elixir/#1-add-configcat-to-your-list-of-dependencies-in-mixexs"
+  },{
+    "@type": "HowToStep",
+    "text": "Add ConfigCat to your application Supervisor tree",
+    "image": "https://configcat.com/images/shared/home.png",
+    "name": "Initialization",
+    "url": "https://configcat.com/docs/sdk-reference/elixir/#2-add-configcat-to-your-application-supervisor-tree"
+  },{
+    "@type": "HowToStep",
+    "text": "Get your setting value",
+    "image": "https://configcat.com/images/shared/home.png",
+    "name": "Evaluation",
+    "url": "https://configcat.com/docs/sdk-reference/elixir/#3-get-your-setting-value"
+  }]    
+}
