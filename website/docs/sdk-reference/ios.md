@@ -6,6 +6,12 @@ description: ConfigCat iOS (Swift) SDK Reference. This is a step-by-step guide o
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+export const IosSchema = require('@site/src/schema-markup/sdk-reference/ios.json');
+
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(IosSchema) }}
+></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/swift-sdk.svg?style=social)](https://github.com/configcat/swift-sdk/stargazers)
 [![Build Status](https://github.com/configcat/swift-sdk/actions/workflows/swift-ci.yml/badge.svg?branch=master)](https://github.com/configcat/swift-sdk/actions/workflows/swift-ci.yml)
