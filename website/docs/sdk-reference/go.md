@@ -4,6 +4,13 @@ title: Go SDK Reference
 description: ConfigCat Go SDK Reference. This is a step-by-step guide on how to use feature flags in your Go applications.
 ---
 
+export const GoSchema = require('@site/src/schema-markup/sdk-reference/go.json');
+
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(GoSchema) }}
+></script>
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/go-sdk.svg?style=social)](https://github.com/configcat/go-sdk/stargazers)
 [![Build Status](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml/badge.svg?branch=master)](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/configcat/go-sdk)](https://goreportcard.com/report/github.com/configcat/go-sdk)
