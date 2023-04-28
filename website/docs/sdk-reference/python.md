@@ -168,8 +168,8 @@ user_object = User(
   '#UNIQUE-USER-IDENTIFIER#',
   'john@example',
   'United Kingdom',
-  { SubscriptionType: 'Pro', UserRole: 'Admin' },
-);
+  { SubscriptionType: 'Pro', UserRole: 'Admin' }
+)
 ```
 
 ### Default user
@@ -187,7 +187,7 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 
 or with the `set_default_user()` method of the ConfigCat client.
 ```python
-client.set_default_user(User('john@example.com'));
+client.set_default_user(User('john@example.com'))
 ```
 
 Whenever the `get_value()`, `get_value_details()`, `get_variation_id()`, `get_all_variation_ids()`, or `get_all_values()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
@@ -266,9 +266,9 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 
 Available options:
 
-| Option Parameter             | Description                  | Default |
-| ---------------------------- | ---------------------------- | ------- |
-| `cache_time_to_live_seconds` | Cache TTL.                   | 60      |
+| Option Parameter                 | Description                  | Default |
+| -------------------------------- | ---------------------------- | ------- |
+| `cache_refresh_interval_seconds` | Cache TTL.                   | 60      |
 
 
 ### Manual polling
@@ -345,7 +345,7 @@ client.set_online()
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
-Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviors are supported:
+Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
 - **Local only** (`OverrideBehaviour.LocalOnly`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
@@ -367,7 +367,7 @@ client = configcatclient.get(
     ConfigCatOptions(
         flag_overrides=LocalFileFlagOverrides(
             file_path='path/to/the/local_flags.json',  # path to the file
-            override_behaviour=OverrideBehaviour.LocalOnly  # local/offline mode
+            override_behaviour=OverrideBehaviour.LocalOnly
         )
     )
 )
@@ -488,11 +488,22 @@ client = configcatclient.get(
 
 ## Logging
 
-In the _ConfigCat SDK_, a default logger writes logs to the standard output. The following example shows how to set the _Log Level_ of the default logger.
+The _ConfigCat SDK_ uses Python's built-in <a href="https://docs.python.org/3/library/logging.html" target="_blank">logging library</a>.
+
+With the `logging.basicConfig()` method, you can set up the logging system.
+The following example shows how to set the default root logger to write logs to the standard output with `INFO` log level.
 
 ```python
 import logging
 logging.basicConfig(level=logging.INFO)
+```
+
+The _ConfigCat SDK_ specifies an internal logger called `'configcat'`.
+The following example shows how to set the _Log Level_ on the internal _ConfigCat_ logger.
+
+```python
+logger = logging.getLogger('configcat')
+logger.setLevel(logging.INFO)
 ```
 
 Available log levels:
