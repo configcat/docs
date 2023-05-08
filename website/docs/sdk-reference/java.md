@@ -6,6 +6,9 @@ description: ConfigCat Java SDK Reference. This is a step-by-step guide on how t
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+export const JavaSchema = require('@site/src/schema-markup/sdk-reference/java.json');
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JavaSchema) }}></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/java-sdk.svg?style=social)](https://github.com/configcat/java-sdk/stargazers)
 [![Java CI](https://github.com/configcat/java-sdk/actions/workflows/java-ci.yml/badge.svg?branch=master)](https://github.com/configcat/java-sdk/actions/workflows/java-ci.yml)
