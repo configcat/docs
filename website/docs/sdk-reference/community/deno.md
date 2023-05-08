@@ -10,7 +10,7 @@ As this is a community maintained package, ConfigCat can't guarantee it's stabil
 
 <a href="https://github.com/sigewuzhere/configcat-deno" target="_blank">ConfigCat SDK for Deno on GitHub</a>
 
-# Usage
+## Usage
 
 Import package
 
@@ -32,10 +32,10 @@ const isAwesomeFeatureEnabled = await configCatClient.getValueAsync(
 console.warn('isAwesomeFeatureEnabled: ' + isAwesomeFeatureEnabled);
 ```
 
-# Contributions
+## Contributions
 
 Contributions are welcome
 
-# License
+## License
 
 MIT
