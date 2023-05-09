@@ -25,7 +25,7 @@ Turn features On / Off right from a linked Issue on your Jira board with <a href
 
 1. Open any Issue on your Jira board.
 2. Push `Link/Create ConfigCat Feature Flag`
-3. On the `Link existing` tab select a Product, Config, Environment and a Feature Flag to be linked to your issue.
+3. On the `Link existing` tab select a ConfigCat Product, Config, Environment and a Feature Flag to be linked to your issue.
 4. When linked, you can turn your features On / Off right from this Issue.
 
 ### Creating new feature flags
