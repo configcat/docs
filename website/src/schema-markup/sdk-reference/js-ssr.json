@@ -1,7 +1,7 @@
 {
   "@context": "https://schema.org/",
   "@type": "HowTo",
-  "name": "How to use feature flags in JavaScript (SSR)?",
+  "name": "How to use feature flags in Server-Side Rendered JavaScript applications?",
   "description": "How to use feature flags in JavaScript (SSR) using ConfigCat Feature Flags.",
   "image": "https://configcat.com/images/shared/home.png",
   "totalTime": "PT10M",
