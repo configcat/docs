@@ -4,6 +4,10 @@ title: JavaScript (SSR) SDK Reference
 description: ConfigCat JavaScript (SSR) SDK Reference. This is a step-by-step guide on how to use feature flags in your Server-Side-Rendered (SSR) JavaScript application.
 ---
 
+export const JavaScriptSSRSchema = require('@site/src/schema-markup/sdk-reference/js-ssr.json');
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JavaScriptSSRSchema) }}></script>
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/js-ssr-sdk.svg?style=social)](https://github.com/configcat/js-ssr-sdk/stargazers)
 [![JS-SSR CI](https://github.com/configcat/js-ssr-sdk/actions/workflows/js-ssr-ci.yml/badge.svg?branch=master)](https://github.com/configcat/js-ssr-sdk/actions/workflows/js-ssr-ci.yml)
 [![codecov](https://codecov.io/gh/configcat/js-ssr-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/js-ssr-sdk)
