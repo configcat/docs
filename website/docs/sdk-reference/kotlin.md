@@ -4,6 +4,10 @@ title: Kotlin Multiplatform SDK Reference
 description: ConfigCat Kotlin Multiplatform SDK Reference. This is a step-by-step guide on how to use feature flags in your Kotlin Multiplatform apps.
 ---
 
+export const KotlinSchema = require('@site/src/schema-markup/sdk-reference/kotlin.json');
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify( KotlinSchema ) }}></script>
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/kotlin-sdk.svg?style=social)](https://github.com/configcat/kotlin-sdk/stargazers)
 [![Kotlin CI](https://github.com/configcat/kotlin-sdk/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/configcat/kotlin-sdk/actions/workflows/ci.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.configcat/configcat-kotlin-client?label=maven%20central)](https://search.maven.org/artifact/com.configcat/configcat-kotlin-client/)
