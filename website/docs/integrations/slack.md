@@ -1,12 +1,12 @@
 ---
 id: slack
 title: Slack - Get notified when a feature flag changes
-description: ConfigCat Feature Flags Slack App. This is a step-by-step guide on how to connect the ConfigCat feature flag service to Slack.
+description: ConfigCat Feature Flags app for Slack. This is a step-by-step guide on how to connect the ConfigCat feature flag service to Slack.
 ---
 
 ## Overview
 
-Get updated via a Slack Channel message when someone changes a feature flag with the <a href="https://configcat.slack.com/apps/A011CN2QZJB-configcat-feature-flags" target="_blank">ConfigCat Feature Flags Slack App</a>.
+Get updated via a Slack Channel message when someone changes a feature flag with the <a href="https://configcat.slack.com/apps/A011CN2QZJB-configcat-feature-flags" target="_blank">ConfigCat Feature Flags app for Slack</a>.
 
 <img src="/docs/assets/slack/notification.png" className="zoomable" alt="slack_notification" />
 
