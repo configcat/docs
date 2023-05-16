@@ -4,6 +4,10 @@ title: PHP SDK Reference
 description: ConfigCat PHP SDK Reference. This is a step-by-step guide on how to use feature flags in your PHP application.
 ---
 
+export const PHPSchema = require('@site/src/schema-markup/sdk-reference/php.json');
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PHPSchema) }}></script>
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/php-sdk.svg?style=social)](https://github.com/configcat/php-sdk/stargazers)
 [![Build Status](https://github.com/configcat/php-sdk/actions/workflows/php-ci.yml/badge.svg?branch=master)](https://github.com/configcat/php-sdk/actions/workflows/php-ci.yml)
 [![Coverage Status](https://img.shields.io/codecov/c/github/ConfigCat/php-sdk.svg)](https://codecov.io/gh/ConfigCat/php-sdk)
