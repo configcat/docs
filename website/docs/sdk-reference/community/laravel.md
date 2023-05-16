@@ -56,7 +56,9 @@ If the feature flag is undefined or something went wrong, `bool(false)` will be 
 
 ```php
 use PodPoint\ConfigCat\Facades\ConfigCat;
+
 $flag = ConfigCat::get('new_registration_flow', true);
+
 $flag = configcat('new_registration_flow', true);
 ```
 
@@ -135,15 +137,25 @@ The following view content will only be rendered if the feature flag is truthy:
 
 The [User Object](https://configcat.com/docs/sdk-reference/php/#user-object) is essential if you'd like to use ConfigCat's [Targeting](https://configcat.com/docs/advanced/targeting) feature.
 
-ConfigCat needs to understand the representation of your users from your application. To do so, you will need to map your user into a `ConfigCat\User` object. This can be done directly from the [`config/configcat.php`](https://github.com/Pod-Point/laravel-configcat/blob/main/config/configcat.php) file. Here is an example:
+ConfigCat needs to understand the representation of your users from your application. To do so, you will need to transform your user into a `ConfigCat\User` object. This can be done directly from the [`config/configcat.php`](https://github.com/Pod-Point/laravel-configcat/blob/main/config/configcat.php) file. Here is an example:
 
 ```php
-'user' => function (\App\Models\User $user) {
-    return new \ConfigCat\User($user->id, $user->email);
-},
+'user' => \PodPoint\ConfigCat\Support\DefaultUserTransformer::class,
 ```
 
-Type hinting `$user` with `\App\Models\User` is completely optional. Feel free to use any other type or not use any at all.
+Which will be using a sensible default transformer:
+
+```php
+class DefaultUserTransformer
+{
+    public function __invoke(\Illuminate\Foundation\Auth\User $user)
+    {
+        return new \ConfigCat\User($user->getKey(), $user->email);
+    }
+}
+```
+
+Feel free to create your own transformer class and use it instead, just **remember** that it needs to be **callable** with the `__invoke()` function.
 
 > **Note:** for security reasons, all of the logic computation for the user targeting is executed on your application side of things using ConfigCat's SDK. No user details will be leaving your application in order find out wether or not a user should have a feature flag enabled or not.
 
