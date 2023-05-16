@@ -4,6 +4,10 @@ title: Node.js SDK Reference
 description: ConfigCat Node.js SDK Reference. This is a step-by-step guide on how to use feature flags in your Node.js applications.
 ---
 
+export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.json');
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(NodeSchema) }}></script>
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/node-sdk.svg?style=social)](https://github.com/configcat/node-sdk/stargazers)
 [![Node CI](https://github.com/configcat/node-sdk/actions/workflows/node-ci.yml/badge.svg?branch=master)](https://github.com/configcat/node-sdk/actions/workflows/node-ci.yml)
 [![codecov](https://codecov.io/gh/configcat/node-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/node-sdk)
