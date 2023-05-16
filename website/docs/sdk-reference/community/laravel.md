@@ -261,11 +261,3 @@ Please see [CONTRIBUTING](https://github.com/Pod-Point/laravel-configcat/blob/ma
 ## License
 
 The MIT License (MIT). Please see [License File](https://github.com/Pod-Point/laravel-configcat/blob/main/LICENSE.md) for more information.
-
----
-
-<img src="https://d3h256n3bzippp.cloudfront.net/pod-point-logo.svg" align="right" />
-
-Travel shouldn't damage the earth 🌍
-
-Made with ❤️&nbsp;&nbsp;at [Pod Point](https://pod-point.com)
