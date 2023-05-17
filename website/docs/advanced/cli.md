@@ -15,7 +15,7 @@ configcat
   For more information, see the documentation here: https://configcat.com/docs/advanced/cli
 
 Usage:
-  configcat [options] [command]
+  configcat [command] [options]
 
 Options:
   -v, --verbose           Print detailed execution information
@@ -31,7 +31,7 @@ Commands:
   e, environment        Manage Environments
   f, flag, s, setting   Manage Feature Flags & Settings
   seg, segment          Manage Segments
-  pg, permission-group  Manage Permission Groups
+  permission-group, pg  Manage Permission Groups
   m, member             Manage Members
   t, tag                Manage Tags
   k, sdk-key            List SDK Keys
