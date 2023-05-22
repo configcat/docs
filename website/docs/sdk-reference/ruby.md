@@ -6,7 +6,7 @@ description: ConfigCat Ruby SDK Reference. This is a step-by-step guide on how t
 
 export const RubySchema = require('@site/src/schema-markup/sdk-reference/ruby.json');
 
-<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify( RubySchema ) }}></script>
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(RubySchema) }}></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/ruby-sdk.svg?style=social)](https://github.com/configcat/ruby-sdk/stargazers)
 [![Ruby CI](https://github.com/configcat/ruby-sdk/actions/workflows/ruby-ci.yml/badge.svg?branch=master)](https://github.com/configcat/ruby-sdk/actions/workflows/ruby-ci.yml)
