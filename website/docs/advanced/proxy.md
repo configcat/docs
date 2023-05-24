@@ -16,7 +16,7 @@ The Proxy provides the following:
 - **Reliability**: The Proxy can store the downloaded `config.json` files in an external [cache](#cache). It can fall back to operating on the cached `config.json` if the ConfigCat CDN network becomes inaccessible.
 - **Security**: The Proxy can act as a *[server side flag evaluation](#api)* component. Using like that can prevent the exposure of `config.json` files to frontend and mobile applications.
 - **Scalability**: Horizontal scaling allows you to align with the load coming from your applications accordingly.
-- **Streaming**: The Proxy provides real-time feature flag change notifications via [Server Sent Events (SSE)](#sse) and [GRPC](#grpc-1).
+- **Streaming**: The Proxy provides real-time feature flag change notifications via [Server-Sent Events (SSE)](#sse) and [GRPC](#grpc-1).
 
 ## Architecture
 
@@ -2099,7 +2099,7 @@ This endpoint returns with all feature flag keys belonging to the given [SDK ide
 
 ### SSE
 
-The SSE endpoint allows you to subscribe for feature flag value changes through a Server Sent Events connection.
+The SSE endpoint allows you to subscribe for feature flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
 
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/&#123;data&#125;</span></summary> 
