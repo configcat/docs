@@ -4,6 +4,10 @@ title: React SDK Reference
 description: ConfigCat React SDK Reference. This is a step-by-step guide on how to use feature flags in your React applications.
 ---
 
+export const ReactSchema = require('@site/src/schema-markup/sdk-reference/react.json');
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ReactSchema) }}></script>
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/react-sdk.svg?style=social)](https://github.com/configcat/react-sdk/stargazers)
 [![REACT CI](https://github.com/configcat/react-sdk/actions/workflows/react-ci.yml/badge.svg)](https://github.com/configcat/react-sdk/actions/workflows/react-ci.yml)
 [![codecov](https://codecov.io/gh/configcat/react-sdk/branch/main/graph/badge.svg?token=X9kFVT7xXL)](https://codecov.io/gh/configcat/react-sdk)
