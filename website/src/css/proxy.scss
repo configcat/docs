@@ -1,21 +1,20 @@
 .proxy-arg-table {
   li[role='tab'] {
     font-weight: 500;
-    font-size: 13px;
+    font-size: 12px;
     padding: 0 .5rem;
-    opacity: .6;
   }
 
   li[role='tab'][aria-selected='true'] {
-    border: 1px solid var(--ifm-color-primary);
-    transition: border .2s;
+    opacity: .6;
+    border: 0px;
     border-radius: var(--ifm-global-radius);
   }
 
   li[role='tab'][aria-selected='false'] {
-    opacity: .8;
+    opacity: .6;
     transition: opacity .2s;
-    border: 1px solid var(--ifm-color-emphasis-200)
+    border: 0px
   }
 
   li[role='tab']:not(:first-of-type) {
@@ -87,6 +86,10 @@
   .proxy-arg-table {
     li[role='tab'] {
       opacity: .8;
+    }
+
+    li[role='tab'][aria-selected='false'] {
+      opacity: .6;
     }
   }
 
