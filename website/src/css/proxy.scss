@@ -6,8 +6,10 @@
   }
 
   li[role='tab'][aria-selected='true'] {
-    opacity: .6;
+    opacity: .8;
     border: 0px;
+    color: white;
+    background-color: var(--ifm-color-primary-light);
     border-radius: var(--ifm-global-radius);
   }
 
@@ -22,7 +24,7 @@
   }
 
   td:nth-child(1) {
-    max-width: 550px;
+    max-width: 500px;
   }
 }
 
@@ -85,11 +87,15 @@
 [data-theme='dark'] {
   .proxy-arg-table {
     li[role='tab'] {
-      opacity: .8;
+      opacity: .9;
     }
 
     li[role='tab'][aria-selected='false'] {
       opacity: .6;
+    }
+
+    li[role='tab'][aria-selected='true'] {
+      background-color: var(--ifm-color-primary-darkest);
     }
   }
 
