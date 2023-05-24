@@ -109,6 +109,7 @@ module.exports = {
             },
           ],
         },
+        'advanced/proxy',
       ],
       'SDK References': [
         { type: 'doc', id: 'sdk-reference/overview', label: 'Overview' },

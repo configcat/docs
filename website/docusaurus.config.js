@@ -8,12 +8,15 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.
-  plugins: [require.resolve('docusaurus-plugin-image-zoom'), [
+  plugins: [require.resolve('docusaurus-plugin-image-zoom'), 
+    [
       '@docusaurus/plugin-google-tag-manager',
       {
         containerId: 'GTM-K2RKTZS',
       },
-    ],],
+    ],
+    'docusaurus-plugin-sass',
+  ],
   themeConfig: {
     image: '/img/docs-cover.png',
     navbar: {
@@ -159,6 +162,8 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} ConfigCat.`,
     },
     prism: {
+      theme: require('prism-react-renderer/themes/github'),
+      darkTheme: require('prism-react-renderer/themes/palenight'),
       additionalLanguages: [
         'hcl',
         'csharp',
@@ -206,7 +211,7 @@ module.exports = {
           routeBasePath: '/',
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve('./src/css/custom.scss'),
         },
         blog: {
           archiveBasePath: null,
