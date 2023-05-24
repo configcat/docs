@@ -4,6 +4,10 @@ title: Python SDK Reference
 description: ConfigCat Python SDK Reference. This is a step-by-step guide on how to use feature flags in your Python application.
 ---
 
+export const PythonSchema = require('@site/src/schema-markup/sdk-reference/python.json');
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PythonSchema) }}></script>
+
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/python-sdk.svg?style=social)](https://github.com/configcat/python-sdk/stargazers)
 [![Python CI](https://github.com/configcat/python-sdk/actions/workflows/python-ci.yml/badge.svg?branch=master)](https://github.com/configcat/python-sdk/actions/workflows/python-ci.yml)
 [![codecov](https://codecov.io/gh/ConfigCat/python-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/ConfigCat/python-sdk)
