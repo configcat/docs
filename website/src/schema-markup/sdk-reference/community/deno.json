@@ -1,0 +1,46 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "HowTo",
+  "name": "How to use feature flags in Deno?",
+  "description": "How to use feature flags in Deno using ConfigCat Feature Flags.",
+  "image": "https://configcat.com/images/shared/home.png",
+  "totalTime": "PT10M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "supply": {
+    "@type": "HowToSupply",
+    "name": "ConfigCat",
+    "image": "https://configcat.com/images/shared/home.png",
+    "url": "https://configcat.com"
+  },
+  "tool": {
+    "@type": "HowToTool",
+    "name": "ConfigCat Feature Flags - https://configcat.com"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "text": "Sign up for a free ConfigCat account",
+      "image": "https://configcat.com/images/shared/home.png",
+      "name": "Registration",
+      "url": "https://app.configcat.com/signup"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Import package",
+      "image": "https://configcat.com/images/shared/home.png",
+      "name": "Import",
+      "url": "https://configcat.com/docs/sdk-reference/community/deno/#usage"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Create ConfigCat client and access feature flags",
+      "image": "https://configcat.com/images/shared/home.png",
+      "name": "Initialize and Evaluate",
+      "url": "https://configcat.com/docs/sdk-reference/community/deno/#usage"
+    }
+  ]
+}
