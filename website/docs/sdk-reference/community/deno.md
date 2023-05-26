@@ -4,6 +4,10 @@ title: ConfigCat SDK for Deno
 description: Unofficial Deno SDK for ConfigCat Feature Flags. Based on ConfigCat's Node.js SDK.
 ---
 
+export const DenoSchema = require('@site/src/schema-markup/sdk-reference/community/deno.json');
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(DenoSchema) }}></script>
+
 :::caution
 As this is a community maintained package, ConfigCat can't guarantee it's stability, safety and can't provide official customer support.
 :::
