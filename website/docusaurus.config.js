@@ -179,6 +179,7 @@ module.exports = {
         'clike',
         'c',
         'objectivec',
+        'protobuf',
       ],
     },
     algolia: {

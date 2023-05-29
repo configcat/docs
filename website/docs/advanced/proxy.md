@@ -16,7 +16,7 @@ The Proxy provides the following:
 - **Reliability**: The Proxy can store the downloaded `config.json` files in an external [cache](#cache). It can fall back to operating on the cached `config.json` if the ConfigCat CDN network becomes inaccessible.
 - **Security**: The Proxy can act as a *[server side flag evaluation](#api)* component. Using like that can prevent the exposure of `config.json` files to frontend and mobile applications.
 - **Scalability**: Horizontal scaling allows you to align with the load coming from your applications accordingly.
-- **Streaming**: The Proxy provides real-time feature flag change notifications via [Server-Sent Events (SSE)](#sse) and [GRPC](#grpc-1).
+- **Streaming**: The Proxy provides real-time feature flag change notifications via [Server-Sent Events (SSE)](#sse) and [gRPC](#grpc-1).
 
 ## Architecture
 
@@ -45,7 +45,7 @@ There are three ways how the Proxy is informed about the availability of new fea
 These are the ports used by the Proxy by default:
 - **8050**: for standard HTTP communication. ([API](#api), [CDN proxy](#cdn-proxy), [Webhook](#webhook), [SSE](#sse), [Status](#status))
 - **8051**: for providing [prometheus metrics](#prometheus-metrics).
-- **50051**: for [GRPC](#grpc-1) communication.
+- **50051**: for [gRPC](#grpc-1) communication.
 
 ## Installation
 
@@ -1595,11 +1595,125 @@ CONFIGCAT_HTTP_PROXY_URL="<proxy-url>"
 </tbody>
 </table>
 
+### gRPC
+
+The following <a href="#grpc-1">gRPC</a> related options are available:
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml title="options.yml"
+grpc:
+  enabled: <true|false>
+  port: 50051
+  log:
+    level: "<error|warn|info|debug>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+```shell
+CONFIGCAT_GRPC_ENABLED=<true|false>
+CONFIGCAT_GRPC_PORT=50051
+CONFIGCAT_GRPC_LOG_LEVEL="<error|warn|info|debug>"
+```
+
+</TabItem>
+</Tabs>
+
+Here's the explanation for each option:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+grpc:
+  enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_GRPC_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Enables or disables the ability to communicate with the Proxy through <a href="#grpc-1">gRPC</a>.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+grpc:
+  port: 50051
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_GRPC_PORT=50051
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>50051</code></td>
+<td>The port used for <a href="#grpc-1">gRPC</a> communication.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+grpc:
+  log:
+    level: "<error|warn|info|debug>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_GRPC_LOG_LEVEL="<error|warn|info|debug>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>warn</code></td>
+<td>The verbosity of the <a href="#grpc-1">gRPC</a> related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code> or <code>debug</code>.</td>
+</tr>
+
+</tbody>
+</table>
+
 ### TLS
 
 For securing direct communication to the ConfigCat Proxy, you have the option to set up TLS. Another option would be to use a full-featured reverse proxy that secures the communication and forwards each request to the Proxy.
 
-The following options are for the first scenario where you secure the direct HTTP and GRPC communication.
+The following options are for the first scenario where you secure the direct HTTP and gRPC communication.
 
 <Tabs groupId="yaml-env">
 <TabItem value="yaml" label="YAML" default>
@@ -1712,120 +1826,6 @@ CONFIGCAT_TLS_CERTIFICATES='[{"key":"<path-to-key>","cert":"<path-to-cert>"}]'
 </tbody>
 </table>
 
-### GRPC
-
-The following <a href="#grpc-1">GRPC</a> related options are available:
-
-<Tabs groupId="yaml-env">
-<TabItem value="yaml" label="YAML" default>
-
-```yaml title="options.yml"
-grpc:
-  enabled: <true|false>
-  port: 50051
-  log:
-    level: "<error|warn|info|debug>"
-```
-
-</TabItem>
-<TabItem value="env-vars" label="Environment variables">
-
-```shell
-CONFIGCAT_GRPC_ENABLED=<true|false>
-CONFIGCAT_GRPC_PORT=50051
-CONFIGCAT_GRPC_LOG_LEVEL="<error|warn|info|debug>"
-```
-
-</TabItem>
-</Tabs>
-
-Here's the explanation for each option:
-
-<table className="proxy-arg-table">
-<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td>
-
-<Tabs groupId="yaml-env">
-<TabItem value="yaml" label="YAML" default>
-
-```yaml
-grpc:
-  enabled: <true|false>
-```
-
-</TabItem>
-<TabItem value="env-vars" label="Environment variable">
-
-```shell
-CONFIGCAT_GRPC_ENABLED=<true|false>
-```
-
-</TabItem>
-</Tabs>
-
-</td>
-<td><code>true</code></td>
-<td>Enables or disables the ability to communicate with the Proxy through <a href="#grpc-1">GRPC</a>.</td>
-</tr>
-
-<tr>
-<td>
-
-<Tabs groupId="yaml-env">
-<TabItem value="yaml" label="YAML" default>
-
-```yaml
-grpc:
-  port: 50051
-```
-
-</TabItem>
-<TabItem value="env-vars" label="Environment variable">
-
-```shell
-CONFIGCAT_GRPC_PORT=50051
-```
-
-</TabItem>
-</Tabs>
-
-</td>
-<td><code>50051</code></td>
-<td>The port used for <a href="#grpc-1">GRPC</a> communication.</td>
-</tr>
-
-<tr>
-<td>
-
-<Tabs groupId="yaml-env">
-<TabItem value="yaml" label="YAML" default>
-
-```yaml
-grpc:
-  log:
-    level: "<error|warn|info|debug>"
-```
-
-</TabItem>
-<TabItem value="env-vars" label="Environment variable">
-
-```shell
-CONFIGCAT_GRPC_LOG_LEVEL="<error|warn|info|debug>"
-```
-
-</TabItem>
-</Tabs>
-
-</td>
-<td><code>warn</code></td>
-<td>The verbosity of the <a href="#grpc-1">GRPC</a> related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code> or <code>debug</code>.</td>
-</tr>
-
-</tbody>
-</table>
-
 ### Metrics
 
 <table className="proxy-arg-table">
@@ -1854,7 +1854,7 @@ CONFIGCAT_METRICS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables exposing <a href="#prometheus-metrics">Prometheus metrics</a>.</td>
+<td>Enables or disables <a href="#prometheus-metrics">Prometheus metrics</a>.</td>
 </tr>
 
 <tr>
@@ -1963,7 +1963,7 @@ The API endpoints are for server side feature flag evaluation.
 <details>
   <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/eval</span></summary>
 
-This endpoint evaluates a single feature flag identified by a `key` and the given [user object](/advanced/user-object). 
+This endpoint evaluates a single feature flag identified by a `key` with the given [user object](/advanced/user-object). 
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
@@ -2068,7 +2068,7 @@ This endpoint commands the underlying SDK to download the latest available `conf
 <details>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/keys</span></summary>
 
-This endpoint returns with all feature flag keys belonging to the given [SDK identifier](#sdk-identifier--sdk-key). 
+This endpoint returns all feature flag keys belonging to the given [SDK identifier](#sdk-identifier--sdk-key). 
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
@@ -2101,8 +2101,10 @@ This endpoint returns with all feature flag keys belonging to the given [SDK ide
 
 The SSE endpoint allows you to subscribe for feature flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
 
-<details open>
-  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/&#123;data&#125;</span></summary> 
+<details>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval/&#123;data&#125;</span></summary> 
+
+This endpoint subscribes to a single flag's changes. Every time the watched flag's value change the Proxy sends the new value to each connected client.
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
@@ -2111,17 +2113,21 @@ The SSE endpoint allows you to subscribe for feature flag value changes through 
 **Responses**:
 <ul className="responses">
 <li className="success"><span className="status">200</span>: The SSE connection established successfully.</li>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "value": <evaluated-value>,
+  "variationId": "<variation-id>"
+}
+```
+
 <li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
 <li className="error"><span className="status">400</span>: The <code>sdkId</code>, <code>data</code>, or the <code>key</code> attribute of <code>data</code> is missing.</li>
 <li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
 </ul>
 
-</details>
-
-> [More about each available SSE option](#sse-options).
-
-#### Usage Example
-
+**Example**:
 ```js title="example.js"
 const rawData = {
   key: "<feature-flag-key>",
@@ -2134,11 +2140,67 @@ const rawData = {
 }
 
 const data = btoa(JSON.stringify(rawData))
-const evtSource = new EventSource("http(s)://localhost:8050/sse/my_sdk/" + data);
+const evtSource = new EventSource("http(s)://localhost:8050/sse/my_sdk/eval/" + data);
 evtSource.onmessage = (event) => {
-  console.log(event.data);
+  console.log(event.data); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
 };
 ```
+
+</details>
+
+<details>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval-all/&#123;data&#125;</span></summary> 
+
+This endpoint subscribes to all feature flags' changes behind the given [SDK identifier](#sdk-identifier--sdk-key). When any of the watched flag's value change the Proxy sends their new value to each connected client.
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `data`: **Optional**. The `base64` encoded input data for feature flag evaluation that contains a [user object](/advanced/user-object).
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The SSE connection established successfully.</li>
+<div className="response-body">Response body:</div>
+
+```json
+[
+  "feature-flag-key-1": {
+    "value": <evaluated-value>,
+    "variationId": "<variation-id>"
+  },
+  "feature-flag-key-2": {
+    "value": <evaluated-value>,
+    "variationId": "<variation-id>"
+  }
+]
+```
+
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+**Example**:
+```js title="example.js"
+const rawData = {
+  user: {
+    Identifier: "<user-id>",
+    Email: "<user-email>",
+    Country: "<user-country>",
+    // any other attribute
+  }
+}
+
+const data = btoa(JSON.stringify(rawData))
+const evtSource = new EventSource("http(s)://localhost:8050/sse/my_sdk/eval-all/" + data);
+evtSource.onmessage = (event) => {
+  console.log(event.data); // {"feature-flag-key":{"value":<evaluated-value>,"variationId":"<variation-id>"}}
+};
+```
+
+</details>
+
+> [More about each available SSE option](#sse-options).
 
 ### Webhook
 
@@ -2167,10 +2229,279 @@ You can set up webhooks to invoke the Proxy on the <a target="blank" href="https
 
 <img className="bordered zoomable" src="/docs/assets/proxy/webhook.png" alt="Webhook" />
 
-## GRPC
+## gRPC
+
+The ConfigCat Proxy is able to communicate via <a target="blank" href="https://grpc.io">gRPC</a>, an open-source, high performance RPC framework which has client support in several languages.
+
+To communicate with the Proxy over gRPC, you'll need the protobuf and gRPC <a target="blank" href="https://github.com/configcat/configcat-proxy/blob/main/grpc/proto/flag_service.proto">service definition</a>. It's required to generate clients for your <a target="blank" href="https://protobuf.dev/reference/">desired platform</a> with <a target="blank" href="https://protobuf.dev/downloads/">`protoc`</a>. 
+
+```protobuf title="flag_service.proto"
+syntax = "proto3";
+
+package configcat;
+
+import "google/protobuf/empty.proto";
+
+// Service that contains feature flag evaluation procedures.
+service FlagService {
+  // Stream for getting notified when a feature flag's value changes.
+  rpc EvalFlagStream(EvalRequest) returns (stream EvalResponse) {}
+  // Stream for getting notified when any feature flag's value changes.
+  rpc EvalAllFlagsStream(EvalRequest) returns (stream EvalAllResponse) {}
+
+  // Evaluates a feature flag.
+  rpc EvalFlag(EvalRequest) returns (EvalResponse) {}
+  // Evaluates each feature flag.
+  rpc EvalAllFlags(EvalRequest) returns (EvalAllResponse) {}
+  // Requests the keys of each feature flag.
+  rpc GetKeys(KeysRequest) returns (KeysResponse) {}
+  // Commands the underlying SDK to refresh its evaluation data.
+  rpc Refresh(RefreshRequest) returns (google.protobuf.Empty) {}
+}
+
+// Feature flag evaluation request message.
+message EvalRequest {
+  // The SDK identifier.
+  string sdk_id = 1;
+  // The feature flag's key to evaluate.
+  string key = 2;
+  // The user object.
+  map<string, string> user = 3;
+}
+
+// Feature flag evaluation response message.
+message EvalResponse {
+  // The evaluated value.
+  oneof value {
+    int32 int_value = 1;
+    double double_value = 2;
+    string string_value = 3;
+    bool bool_value = 4;
+  }
+  // The variation ID.
+  string variation_id = 5;
+}
+
+// Response message that contains the evaluation result of each feature flag.
+message EvalAllResponse {
+  // The evaluated value of each feature flag.
+  map<string, EvalResponse> values = 1;
+}
+
+// Request message for getting each available feature flag's key.
+message KeysRequest {
+  // The SDK identifier.
+  string sdk_id = 1;
+}
+
+// Response message that contains each available feature flag's key.
+message KeysResponse {
+  // The keys of each feature flag.
+  repeated string keys = 1;
+}
+
+// Request message for the given SDK to refresh its evaluation data.
+message RefreshRequest {
+  // The SDK identifier.
+  string sdk_id = 1;
+}
+```
+
+In order to secure the gRPC communication with the Proxy, set up [TLS](#tls).
+
+> [More about each available gRPC option](#grpc).
+
+### Client Usage
+
+The following example uses the generated Go client, but gRPC clients generated for other languages are working as well.
+
+```go title="example.go"
+opts := []grpc.DialOption{
+    grpc.WithBlock(),
+    grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{
+        // Any TLS options
+    })),
+}
+
+conn, err := grpc.DialContext(context.Background(), 
+    // highlight-next-line
+    "localhost:50051", // Proxy host and gRPC port
+    opts...)
+if err != nil {
+    panic(err)
+}
+
+defer func() {
+    _ = conn.Close()
+}()
+
+client := proto.NewFlagServiceClient(conn)
+
+ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+defer cancel()
+
+resp, err := client.EvalFlag(ctx, &proto.EvalRequest{
+    SdkId: "my_sdk", 
+    Key: "<flag-key>", 
+    User: map[string]string{"Identifier": "<user-id>"}
+})
+if err != nil {
+    panic(err)
+}
+
+fmt.Printf("Evaluation result: %v", resp.GetBoolValue())
+```
 
 ## Monitoring
 
-### Prometheus Metrics
+This section will go through the ConfigCat Proxy's monitoring possibilities.
 
 ### Status
+
+The Proxy provides status (health check) information about the underlying components on the following endpoint:
+
+<details open>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/status</span></summary>
+
+The Proxy regularly checks whether the underlying SDKs can communicate with their configured source and with the cache. This endpoint returns the actual state of these checks.
+
+If everything is operational, each `status` node will show the value `healthy`. If an SDK could not connect to its source, it'll put an error to its `records` collection. 
+If a component's last two records are errors, its `status` will switch to `degraded`. 
+If a component becomes operational again it'll put an `[ok]` to the `records` and will switch to `healthy` again. 
+
+The root `status` is `healthy` if all of the SDKs are `healthy`. If any of the SDKs become `degraded`, the root will also switch to `degraded`.
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The status returned successfully.</li>
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+</ul>
+
+**Example Response**:
+```json
+{
+  "status": "healthy",
+  "sdks": {
+    "my_sdk": {
+      "key": "****************************************hwTYg",
+      "mode": "online",
+      "source": {
+        "type": "remote",
+        "status": "healthy",
+        "records": [
+          "Mon, 29 May 2023 16:36:40 UTC: [ok] config fetched"
+        ]
+      }
+    },
+    "another_sdk": {
+      "key": "****************************************ovVnQ",
+      "mode": "offline",
+      "source": {
+        "type": "cache",
+        "status": "healthy",
+        "records": [
+          "Mon, 29 May 2023 16:36:40 UTC: [ok] reload from cache succeeded",
+          "Mon, 29 May 2023 16:36:45 UTC: [ok] config from cache not modified"
+        ]
+      }
+    }
+  },
+  "cache": {
+    "status": "healthy",
+    "records": [
+      "Mon, 29 May 2023 16:36:40 UTC: [ok] cache read succeeded",
+      "Mon, 29 May 2023 16:36:40 UTC: [ok] cache write succeeded",
+      "Mon, 29 May 2023 16:36:40 UTC: [ok] cache read succeeded",
+      "Mon, 29 May 2023 16:36:45 UTC: [ok] cache read succeeded"
+    ]
+  }
+}
+```
+
+</details>
+
+### Prometheus Metrics
+
+You can set up the Proxy to export metrics about its internal state in Prometheus format. These metrics are served via the `/metrics` endpoint on a specific port, so you can separate it from the public HTTP communication. The default port is `8051`.
+
+The Proxy exports metrics about the Go environment like `go_goroutines` or `go_memstats_alloc_bytes` and process related stats like `process_cpu_seconds_total`.
+
+The Proxy specific metrics are the following:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+
+`configcat_http_request_duration_seconds`
+
+</td>
+<td>
+Histogram
+</td>
+<td>
+Histogram of Proxy HTTP response time in seconds.<br/><br/>
+Tags:
+
+- `route`: The request's URL path.
+- `method`: The request's HTTP method.
+- `status`: The response's HTTP status.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`configcat_sdk_http_request_duration_seconds`
+
+</td>
+<td>
+Histogram
+</td>
+<td>
+Histogram of ConfigCat CDN HTTP response time in seconds.<br/><br/>
+Tags:
+
+- `sdk`: The SDK's identifier that initiated the request.
+- `route`: The request's URL path.
+- `status`: The response's HTTP status.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`configcat_stream_connections`
+
+</td>
+<td>
+Gauge
+</td>
+<td>
+Number of active client connections per stream.<br/><br/>
+Tags:
+
+- `sdk`: The SDK's identifier that handles the connection.
+- `type`: `sse` or `grpc`.
+- `flag`: The feature flag's key.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+To integrate with Prometheus, put the following scrape config that points to the Proxy into your Prometheus configuration:
+
+```yaml
+scrape_configs:
+  - job_name: configcat_proxy
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - localhost:8051
+```
+
+> [More about each available metrics option](#metrics).

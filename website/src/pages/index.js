@@ -48,6 +48,10 @@ const features = [
         url: 'advanced/code-references/overview',
         title: 'Scan & Upload Code References',
       },
+      {
+        url: 'advanced/proxy',
+        title: 'ConfigCat Proxy',
+      },
     ],
   },
   {
