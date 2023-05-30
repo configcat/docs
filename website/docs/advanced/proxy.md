@@ -37,7 +37,7 @@ With the combination of the above modes you can construct a cluster of proxies w
 
 ### Communication
 
-There are three ways how the Proxy is informed about the availability of new feature flag changes:
+There are three ways how the Proxy is informed about the availability of new feature flag evaluation data:
 - **Polling**: The ConfigCat SDKs within the Proxy are regularly polling the ConfigCat CDN for new `config.json` versions.
 - **Webhook**: The Proxy has [webhook endpoints](#webhook) (for each underlying SDK) which can be set on the <a target="_blank" href="https://app.configcat.com/product/webhooks">ConfigCat Dashboard</a> to be invoked when someone saves & publishes new feature flag changes.
 - **Cache polling / file watching**: In [offline mode](#offline-mode), the Proxy can regularly poll a cache or watch a file for new `config.json` versions.
@@ -2204,7 +2204,7 @@ evtSource.onmessage = (event) => {
 
 ### Webhook
 
-Through the webhook endpoint, you can notify the Proxy about the new feature flag evaluation data. Also, with the appropriate [SDK options](#additional-sdk-options), the Proxy can [validate the signature](/advanced/notifications-webhooks/#verifying-webhook-requests) of each incoming webhook request.
+Through the webhook endpoint, you can notify the Proxy about the availability of new feature flag evaluation data. Also, with the appropriate [SDK options](#additional-sdk-options), the Proxy can [validate the signature](/advanced/notifications-webhooks/#verifying-webhook-requests) of each incoming webhook request.
 
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method blue">POST</span>/hook/&#123;sdkId&#125;</span></summary>
