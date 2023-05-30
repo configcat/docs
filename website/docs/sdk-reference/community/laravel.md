@@ -4,6 +4,10 @@ title: ConfigCat package for Laravel
 description: ConfigCat package for Laravel. Implement feature flags within your PHP Laravel application using ConfigCat.
 ---
 
+export const LaravelSchema = require('@site/src/schema-markup/sdk-reference/community/laravel.json');
+
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(LaravelSchema) }}></script>
+
 [![Star on GitHub](https://img.shields.io/github/stars/pod-point/laravel-configcat.svg?style=social)](https://github.com/pod-point/laravel-configcat/stargazers)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/pod-point/laravel-configcat.svg?style=flat-square)](https://packagist.org/packages/pod-point/laravel-configcat)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/pod-point/laravel-configcat/run-tests.yml?branch=main&label=tests)
