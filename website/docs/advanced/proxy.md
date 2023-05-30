@@ -675,7 +675,7 @@ The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier-
 <Tabs groupId="yaml-env">
 <TabItem value="yaml" label="YAML" default>
 
-This is the whole YAML section of the Cache specific options.
+This is the whole YAML section of the cache specific options.
 ```yaml title="options.yml"
 cache:
   redis:
@@ -696,7 +696,7 @@ cache:
 </TabItem>
 <TabItem value="env-vars" label="Environment variables">
 
-These are the Cache specific environment variables.
+These are the cache specific environment variables.
 ```shell
 CONFIGCAT_CACHE_REDIS_ENABLED=<true|false>
 CONFIGCAT_CACHE_REDIS_DB=0
@@ -2104,7 +2104,7 @@ The SSE endpoint allows you to subscribe for feature flag value changes through 
 <details>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval/&#123;data&#125;</span></summary> 
 
-This endpoint subscribes to a single flag's changes. Every time the watched flag's value change the Proxy sends the new value to each connected client.
+This endpoint subscribes to a single flag's changes. Whenever the watched flag's value changes, the Proxy sends the new value to each connected client.
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
@@ -2151,7 +2151,7 @@ evtSource.onmessage = (event) => {
 <details>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval-all/&#123;data&#125;</span></summary> 
 
-This endpoint subscribes to all feature flags' changes behind the given [SDK identifier](#sdk-identifier--sdk-key). When any of the watched flag's value change the Proxy sends their new value to each connected client.
+This endpoint subscribes to all feature flags' changes behind the given [SDK identifier](#sdk-identifier--sdk-key). When any of the watched flags' value change, the Proxy sends its new value to each connected client.
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
@@ -2204,7 +2204,7 @@ evtSource.onmessage = (event) => {
 
 ### Webhook
 
-Through the webhook endpoint you can notify the Proxy about the availability of new feature flag evaluation data. Also, with the appropriate [SDK options](#additional-sdk-options) the Proxy can [validate the signature](/advanced/notifications-webhooks/#verifying-webhook-requests) of each incoming webhook request.
+Through the webhook endpoint, you can notify the Proxy about the new feature flag evaluation data. Also, with the appropriate [SDK options](#additional-sdk-options), the Proxy can [validate the signature](/advanced/notifications-webhooks/#verifying-webhook-requests) of each incoming webhook request.
 
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method blue">POST</span>/hook/&#123;sdkId&#125;</span></summary>
@@ -2231,9 +2231,9 @@ You can set up webhooks to invoke the Proxy on the <a target="blank" href="https
 
 ## gRPC
 
-The ConfigCat Proxy is able to communicate via <a target="blank" href="https://grpc.io">gRPC</a>, an open-source, high performance RPC framework which has client support in several languages.
+The ConfigCat Proxy can communicate over <a target="blank" href="https://grpc.io">gRPC</a>, an open-source, high-performance RPC framework with client support in several languages.
 
-To communicate with the Proxy over gRPC, you'll need the protobuf and gRPC <a target="blank" href="https://github.com/configcat/configcat-proxy/blob/main/grpc/proto/flag_service.proto">service definition</a>. It's required to generate clients for your <a target="blank" href="https://protobuf.dev/reference/">desired platform</a> with <a target="blank" href="https://protobuf.dev/downloads/">`protoc`</a>. 
+To establish gRPC connections, you'll need the protobuf and the gRPC <a target="blank" href="https://github.com/configcat/configcat-proxy/blob/main/grpc/proto/flag_service.proto">service definition</a>. It's required to generate clients with <a target="blank" href="https://protobuf.dev/downloads/">`protoc`</a> for your <a target="blank" href="https://protobuf.dev/reference/">desired platform</a>. 
 
 ```protobuf title="flag_service.proto"
 syntax = "proto3";
@@ -2313,7 +2313,7 @@ In order to secure the gRPC communication with the Proxy, set up [TLS](#tls).
 
 ### Client Usage
 
-The following example uses the generated Go client, but gRPC clients generated for other languages are working as well.
+The following example uses a generated Go client, but gRPC clients generated for other languages are working as well.
 
 ```go title="example.go"
 opts := []grpc.DialOption{
@@ -2354,18 +2354,18 @@ fmt.Printf("Evaluation result: %v", resp.GetBoolValue())
 
 ## Monitoring
 
-This section will go through the ConfigCat Proxy's monitoring possibilities.
+This section will go through the monitoring possibilities.
 
 ### Status
 
-The Proxy provides status (health check) information about the underlying components on the following endpoint:
+The Proxy provides health status information about its components on the following endpoint:
 
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/status</span></summary>
 
 The Proxy regularly checks whether the underlying SDKs can communicate with their configured source and with the cache. This endpoint returns the actual state of these checks.
 
-If everything is operational, each `status` node will show the value `healthy`. If an SDK could not connect to its source, it'll put an error to its `records` collection. 
+If everything is operational, each `status` node shows the value `healthy`. If an SDK could not connect to its source, it'll put an error to its `records` collection. 
 If a component's last two records are errors, its `status` will switch to `degraded`. 
 If a component becomes operational again it'll put an `[ok]` to the `records` and will switch to `healthy` again. 
 
@@ -2424,9 +2424,7 @@ The root `status` is `healthy` if all of the SDKs are `healthy`. If any of the S
 
 You can set up the Proxy to export metrics about its internal state in Prometheus format. These metrics are served via the `/metrics` endpoint on a specific port, so you can separate it from the public HTTP communication. The default port is `8051`.
 
-The Proxy exports metrics about the Go environment like `go_goroutines` or `go_memstats_alloc_bytes` and process related stats like `process_cpu_seconds_total`.
-
-The Proxy specific metrics are the following:
+The following metrics are exported:
 
 <table className="proxy-arg-table">
 <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
@@ -2493,7 +2491,11 @@ Tags:
 </tbody>
 </table>
 
-To integrate with Prometheus, put the following scrape config that points to the Proxy into your Prometheus configuration:
+:::info
+The Proxy also exports metrics about the Go environment, e.g., `go_goroutines` or `go_memstats_alloc_bytes`, and process-related stats, e.g., `process_cpu_seconds_total`.
+:::
+
+To integrate with Prometheus, put the following scrape config into your Prometheus configuration that points to the Proxy:
 
 ```yaml
 scrape_configs:
@@ -2501,7 +2503,7 @@ scrape_configs:
     metrics_path: /metrics
     static_configs:
       - targets:
-          - localhost:8051
+          - <proxy-host>:8051
 ```
 
 > [More about each available metrics option](#metrics).
