@@ -104,7 +104,7 @@ You can download the executables directly from <a target="_blank" href="https://
 
 </details>
 
-You can then check the status endpoint of the Proxy to ensure it's working correctly: `http(s)://localhost:8050/status`
+You can then check the [status endpoint](#status) of the Proxy to ensure it's working correctly: `http(s)://localhost:8050/status`
 
 ## Configuration Options
 
