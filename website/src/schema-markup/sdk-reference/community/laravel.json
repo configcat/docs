@@ -1,8 +1,8 @@
 {
   "@context": "https://schema.org/",
   "@type": "HowTo",
-  "name": "How to use feature flags in Swift iOS?",
-  "description": "How to use feature flags in Swift iOS using ConfigCat Feature Flags",
+  "name": "How to use feature flags in Laravel",
+  "description": "How to use feature flags in Laravel (PHP) using ConfigCat Feature Flags.",
   "image": "https://configcat.com/images/shared/home.png",
   "totalTime": "PT10M",
   "estimatedCost": {
@@ -30,38 +30,31 @@
     },
     {
       "@type": "HowToStep",
-      "text": "Add the ConfigCat SDK to your project",
+      "text": "Install the package via composer",
       "image": "https://configcat.com/images/shared/home.png",
       "name": "Installation",
-      "url": "https://configcat.com/docs/sdk-reference/ios/#1-add-the-configcat-sdk-to-your-project"
+      "url": "https://configcat.com/docs/sdk-reference/community/laravel/#installation"
     },
     {
       "@type": "HowToStep",
-      "text": "Import the ConfigCat SDK",
+      "text": "Publish the config file with your SDK key",
       "image": "https://configcat.com/images/shared/home.png",
-      "name": "Import",
-      "url": "https://configcat.com/docs/sdk-reference/ios/#2-import-the-configcat-sdk"
+      "name": "Publish and Initialize",
+      "url": "https://configcat.com/docs/sdk-reference/community/laravel/#publishing-the-config-file"
     },
     {
       "@type": "HowToStep",
-      "text": "Create the ConfigCat client with your SDK Key",
-      "image": "https://configcat.com/images/shared/home.png",
-      "name": "Initialization",
-      "url": "https://configcat.com/docs/sdk-reference/ios/#3-create-the-configcat-client-with-your-sdk-key"
-    },
-    {
-      "@type": "HowToStep",
-      "text": "Get your setting value",
+      "text": "Use the ConfigCat facade or the global helper to retrieve your feature flag value",
       "image": "https://configcat.com/images/shared/home.png",
       "name": "Evaluation",
-      "url": "https://configcat.com/docs/sdk-reference/ios/#4-get-your-setting-value"
+      "url": "https://configcat.com/docs/sdk-reference/community/laravel/#facade--global-helper"
     },
     {
       "@type": "HowToStep",
-      "text": "Close ConfigCat client",
+      "text": "Use the feature flag in your blade template",
       "image": "https://configcat.com/images/shared/home.png",
-      "name": "Close",
-      "url": "https://configcat.com/docs/sdk-reference/ios/#5-close-configcat-client"
+      "name": "Blade directive",
+      "url": "https://configcat.com/docs/sdk-reference/community/laravel/#blade-directive"
     }
   ]
 }
