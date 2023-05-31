@@ -149,8 +149,8 @@ var value = await client.GetValueAsync("keyOfMyFeatureFlag", false, userObject);
 ```
 
 :::caution
-Please keep in mind that you need to supply an argument for the `defaultValue` parameter (more precisely, the `T` generic type parameter)
-whose type corresponds to the kind of the feature flag or setting to evaluate as described by the following table.
+It is important to provide an argument for the `defaultValue` parameter, specifically for the `T` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to the following table for the corresponding types.
 :::
 
 <div id="setting-type-mapping"></div>
@@ -162,22 +162,20 @@ whose type corresponds to the kind of the feature flag or setting to evaluate as
 | Whole Number   | `int` / `int?` / `long` / `long?` |
 | Decimal Number | `double` / `double?`              |
 
-Besides the types above, you can also use `object` / `object?` regardless of the setting kind. This, however, is not recommended as
-it may involve [boxing](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/types/boxing-and-unboxing).
+In addition to the types mentioned above, you also have the option to provide `object` or `object?` for the type parameter regardless of the setting kind.
+However, this approach is not recommended as it may involve [boxing](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/types/boxing-and-unboxing).
 
-Using any other type will result in `ArgumentException`.
+It's important to note that providing any other type for the type parameter will result in an `ArgumentException`.
+If you specify an allowed type but it mismatches the setting kind, an error message will be logged and `defaultValue` will be returned.
 
-In case you specify an allowed type but it mismatches the setting kind, an error message will be logged and `defaultValue` will be returned.
-Please pay attention to this behavior when you don't explicitly specify the type argument but rely on type inference because
-that may lead to subtle type mismatch issues, especially in the case of number types:
+When relying on type inference and not explicitly specifying the type parameter, be mindful of potential type mismatch issues, especially with number types.
+For example, `client.GetValue("keyOfMyDecimalSetting", 0)` will return `defaultValue` (`0`) instead of the actual value of the decimal setting because
+the compiler infers the type as `int` instead of `double`, that is, the call is equivalent to `client.GetValue<int>("keyOfMyDecimalSetting", 0)`,
+which is a type mismatch.
+
+To correctly evaluate a decimal setting, you should use:
 
 ```csharp
-// The following call will return defaultValue (0) because the C# compiler infers the type of
-// the generic type parameter as int while the expected type is double. In other words, this call is
-// equivalent to client.GetValue<int>("keyOfMyDecimalSetting", 0), which is a type mismatch.
-var value = client.GetValue("keyOfMyDecimalSetting", 0);
-
-// The correct way to evaluate a decimal setting is as follows:
 var value = client.GetValue("keyOfMyDecimalSetting", 0.0);
 // -or-
 var value = client.GetValue("keyOfMyDecimalSetting", 0d);
@@ -206,8 +204,8 @@ var details = await client.GetValueDetailsAsync("keyOfMyFeatureFlag", false, use
 ```
 
 :::caution
-Please keep in mind that you need to supply an argument for the `defaultValue` parameter (more precisely, the `T` generic type parameter)
-whose type corresponds to the kind of the feature flag or setting to evaluate as described by [this table](#setting-type-mapping).
+It is important to provide an argument for the `defaultValue` parameter, specifically for the `T` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to [this table](#setting-type-mapping) for the corresponding types.
 :::
 
 The `details` result contains the following information:
