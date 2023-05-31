@@ -385,7 +385,7 @@ CONFIGCAT_MY_SDK_DATA_GOVERNANCE="<global|eu>"
 
 </td>
 <td><code>global</code></td>
-<td>Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. <a href="/advanced/data-governance.md">More about Data Governance</a>.</td>
+<td>Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. <a href="/advanced/data-governance">More about Data Governance</a>.</td>
 </tr>
 
 <tr>
