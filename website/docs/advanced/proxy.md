@@ -1912,10 +1912,6 @@ This endpoint is mainly used by ConfigCat SDKs to retreive all required data for
   <li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
 </ul>
 
-</details>
-
-> [More about each available CDN proxy option](#cdn-proxy-options).
-
 #### SDK Usage
 
 In order to let a ConfigCat SDK use the Proxy, you have to set the SDK's `baseUrl` parameter to point to the Proxy's host.
@@ -1955,6 +1951,10 @@ var configCatClient = configcat.getClient(
   { baseUrl: "http(s)://localhost:8050" } // Proxy URL
 );
 ```
+
+</details>
+
+> [More about each available CDN proxy option](#cdn-proxy-options).
 
 ### API
 
@@ -2221,13 +2221,15 @@ Notifies the Proxy that the SDK with the given [SDK identifier](#sdk-identifier-
 <li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
 </ul>
 
-</details>
-
-> [More about each available webhook option](#webhook-options).
+**Setup**:
 
 You can set up webhooks to invoke the Proxy on the <a target="blank" href="https://app.configcat.com/product/webhooks">Webhooks page</a> of the ConfigCat Dashboard.
 
 <img className="bordered zoomable" src="/docs/assets/proxy/webhook.png" alt="Webhook" />
+
+</details>
+
+> [More about each available webhook option](#webhook-options).
 
 ## gRPC
 
