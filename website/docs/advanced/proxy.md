@@ -191,6 +191,30 @@ configcat-proxy
 
 The following sections will go through each available option in detail.
 
+### Logging
+
+The Proxy supports the following log levels: `debug`, `info`, `warn`, and `error`. The default is `warn`.
+
+You can specify the log level either globally or for each individual component. If you don't set a component's log level explicitly, it will inherit the global level's value.
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+log:
+  level: "<error|warn|info|debug>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+```shell
+CONFIGCAT_LOG_LEVEL="<error|warn|info|debug>"
+```
+
+</TabItem>
+</Tabs>
+
 ### SDK
 
 In order to make the Proxy work properly it must be set up with one or more <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a>. It will instantiate one SDK instance for each SDK key.
@@ -463,7 +487,7 @@ CONFIGCAT_MY_SDK_LOG_LEVEL="<error|warn|info|debug>"
 
 </td>
 <td><code>warn</code></td>
-<td>The verbosity of the SDK related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code> or <code>debug</code>.</td>
+<td>The verbosity of the SDK related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code>, or <code>debug</code>.</td>
 </tr>
 
 </tbody>
@@ -474,7 +498,7 @@ CONFIGCAT_MY_SDK_LOG_LEVEL="<error|warn|info|debug>"
 The following options are specific to the SDK's offline mode. In offline mode, there's two ways the Proxy can get the required feature flag evaluation data for the underlying SDKs.
 
 - **Polling a cache**: The Proxy can poll a cache for feature flag changes. It can use the same cache that an **online** Proxy instance writes. <a href="#cache">More about the cache option</a>.
-- **Watching / polling a file**: The Proxy can watch or poll for modifications in a file that contains the evaluation data of feature flags. For watching, the Proxy uses the <a target="blank" href="https://github.com/fsnotify/fsnotify">fsnotify</a> library. It can happen that it doesn't send the modification events properly on some platforms, in that case, you can change to file polling.
+- **Watching / polling a file**: The Proxy can watch or poll for modifications in a file that contains the evaluation data of feature flags. For watching, the Proxy uses the <a target="blank" href="https://github.com/fsnotify/fsnotify">fsnotify</a> library.
 
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
@@ -1110,7 +1134,7 @@ CONFIGCAT_HTTP_LOG_LEVEL="<error|warn|info|debug>"
 
 </td>
 <td><code>warn</code></td>
-<td>The verbosity of the HTTP related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code> or <code>debug</code>.</td>
+<td>The verbosity of the HTTP related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code>, or <code>debug</code>. When <code>debug</code> is set, the Proxy will log every HTTP request it receives.</td>
 </tr>
 
 </tbody>
