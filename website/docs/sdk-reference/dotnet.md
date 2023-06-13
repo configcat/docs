@@ -689,6 +689,14 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 });
 ```
 
+When providing your own cache solution, you even have the option to use the cache with other SDKs in a shared way as
+caching has been standardized across all the ConfigCat SDKs.
+
+:::info
+The .NET SDK supports shared caching since v8.1.0. As for other SDKs, please check their docs for the minumum versions
+required for participate in shared caching.
+:::
+
 ## Using ConfigCat behind a proxy
 
 Provide your own network credentials (username/password) and proxy server settings (proxy server/port) by setting the
