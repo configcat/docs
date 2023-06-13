@@ -112,7 +112,7 @@ module.exports = {
       ],
       'SDK References': [
         { type: 'doc', id: 'sdk-reference/overview', label: 'Overview' },
-        { type: 'doc', id: 'sdk-reference/dotnet', label: '.Net' },
+        { type: 'doc', id: 'sdk-reference/dotnet', label: '.NET' },
         { type: 'doc', id: 'sdk-reference/cpp', label: 'C++' },
         { type: 'doc', id: 'sdk-reference/dart', label: 'Dart (Flutter)' },
         { type: 'doc', id: 'sdk-reference/elixir', label: 'Elixir' },
