@@ -707,7 +707,7 @@ cache:
     db: 0
     user: "<user>"
     password: "<pass>"
-    addresses: ["<addr1>", "<addr1>"]
+    addresses: ["<addr1>", "<addr2>"]
     tls: 
       enabled: <true|false>
       min_version: <1.0|1.1|1.2|1.3>
@@ -726,7 +726,7 @@ CONFIGCAT_CACHE_REDIS_ENABLED=<true|false>
 CONFIGCAT_CACHE_REDIS_DB=0
 CONFIGCAT_CACHE_REDIS_USER="<user>"
 CONFIGCAT_CACHE_REDIS_PASSWORD="<pass>"
-CONFIGCAT_CACHE_REDIS_ADDRESSES='["<addr1>", "<addr1>"]'
+CONFIGCAT_CACHE_REDIS_ADDRESSES='["<addr1>", "<addr2>"]'
 CONFIGCAT_CACHE_REDIS_TLS_ENABLED=<true|false>
 CONFIGCAT_CACHE_REDIS_TLS_MIN_VERSION=<1.0|1.1|1.2|1.3>
 CONFIGCAT_CACHE_REDIS_TLS_SERVER_NAME="<server-name>"
@@ -860,14 +860,14 @@ CONFIGCAT_CACHE_REDIS_PASSWORD="<pass>"
 ```yaml
 cache:
   redis:
-    addresses: ["<addr1>", "<addr1>"]
+    addresses: ["<addr1>", "<addr2>"]
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_CACHE_REDIS_ADDRESSES='["<addr1>", "<addr1>"]'
+CONFIGCAT_CACHE_REDIS_ADDRESSES='["<addr1>", "<addr2>"]'
 ```
 
 </TabItem>
