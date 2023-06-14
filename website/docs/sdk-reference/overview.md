@@ -4,7 +4,7 @@ title: ConfigCat SDK Overview
 description: List of all supported technologies like .NET, .NET Core, Java, JavaScript, PHP, Python, Ruby, Go, Node.js, Android, iOS, Elixir, Dart, React, Angular, Vue.js.
 ---
 
-The purpose of the SDKs are to download, cache feature flag values and to evaluate targeting rules. All SDKs provide a simple interface to access your feature flags from your application.
+The purpose of the SDKs is to download and cache feature flag values and to evaluate targeting rules. All SDKs provide a simple interface for accessing your feature flags from your application.
 
 Check out our language specific<a href="https://app.configcat.com/sdkkey" target="_blank"> Getting Started Guide</a> on how to connect your applications.
 
