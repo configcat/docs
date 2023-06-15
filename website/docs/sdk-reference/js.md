@@ -622,6 +622,11 @@ const configCatClient = configcat.getClient(
 );
 ```
 
+:::info
+The JavaScript SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v8.0.0. As for other SDKs, please check their docs for the minumum versions
+required for participate in shared caching.
+:::
+
 ## Sensitive information handling
 
 The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.

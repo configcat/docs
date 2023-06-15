@@ -76,6 +76,11 @@ configCatClient
   });
 ```
 
+:::info
+The Node.js SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v10.0.0. As for other SDKs, please check their docs for the minumum versions
+required for participate in shared caching.
+:::
+
 ### 5. Dispose _ConfigCat_ client
 
 You can safely dispose all clients at once or individually and release all associated resources on application exit.
