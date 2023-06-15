@@ -200,7 +200,7 @@ However, if you do so, the type of `value` returned by the `useFeatureFlag` meth
 * `boolean | string | number | null` when `defaultValue` is `null` or
 * `boolean | string | number | undefined` when `defaultValue` is `undefined`.
 
-This is because in these cases the exact return type cannot be determined at compile-time as the TypeScript compiler has no information on the setting type.
+This is because in these cases the exact return type cannot be determined at compile-time as the TypeScript compiler has no information about the setting type.
 
 It's important to note that providing any other type for the `defaultValue` parameter will result in a `TypeError`.
 
