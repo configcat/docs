@@ -601,7 +601,7 @@ const configCatClient = configcat.getClient(
 ```
 
 :::info
-The JavaScript (SSR) SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v7.0.0. As for other SDKs, please check their docs for the minumum versions
+The JavaScript (SSR) SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v7.0.0. As for other SDKs, please check their docs for the minimum versions
 required for participate in shared caching.
 :::
 
