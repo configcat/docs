@@ -690,7 +690,7 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 ```
 
 :::info
-The .NET SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v8.1.0. As for other SDKs, please check their docs for the minumum versions
+The .NET SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v8.1.0. As for other SDKs, please check their docs for the minimum versions
 required for participate in shared caching.
 :::
 
