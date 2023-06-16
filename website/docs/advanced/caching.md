@@ -58,5 +58,5 @@ As of certain versions, ConfigCat SDKs support using a shared cache. To achieve 
 Mixing this behavior with [offline mode](#offline-mode), you can have a centralized shared cache that serves many SDKs regardless of what platform they run on.
 
 :::info
-See the [SDK specific docs](/docs/sdk-reference/overview) of your desired platform for the minumum version that supports shared caching.
+See the [SDK specific docs](/docs/sdk-reference/overview) of your desired platform for the minimum version that supports shared caching.
 :::

@@ -841,7 +841,7 @@ then
 ```
 
 :::info
-The React SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v3.0.0. As for other SDKs, please check their docs for the minumum versions
+The React SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v3.0.0. As for other SDKs, please check their docs for the minimum versions
 required for participate in shared caching.
 :::
 
