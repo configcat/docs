@@ -463,6 +463,11 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
 }
 ```
 
+:::info
+The Kotlin SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v2.0.0. As for other SDKs, please check their docs for the minimum versions
+required for participate in shared caching.
+:::
+
 ## HTTP Engine
 
 The ConfigCat SDK internally uses <a href="https://ktor.io" target="_blank">Ktor</a> to download the latest config JSON over HTTP. For each platform the SDK includes a specific <a href="https://ktor.io/docs/http-client-engines.html#limitations" target="_blank">HTTP engine</a>:

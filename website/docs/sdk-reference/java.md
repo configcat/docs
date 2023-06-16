@@ -629,6 +629,11 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 });
 ```
 
+:::info
+The Java SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v9.0.0. As for other SDKs, please check their docs for the minimum versions
+required for participate in shared caching.
+:::
+
 ## HttpClient
 
 The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to download the latest configuration over HTTP. You have the option to override the internal Http client with your customized one.
