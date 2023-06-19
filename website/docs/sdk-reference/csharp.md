@@ -1,7 +1,7 @@
 ---
 id: csharp
-title: .NET, .NET Core SDK Reference
-description: ConfigCat .NET, .NET Core SDK Reference. This is a step-by-step guide on how to use feature flags in your .NET, .NET Core application.
+title: C# SDK Reference
+description: ConfigCat C# SDK Reference. This is a step-by-step guide on how to use feature flags in your C# application.
 ---
 
 This page is outdated, please see the [ConfigCat .NET SDK Reference here](dotnet.md)
