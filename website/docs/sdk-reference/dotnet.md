@@ -166,6 +166,7 @@ In addition to the types mentioned above, you also have the option to provide `o
 However, this approach is not recommended as it may involve [boxing](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/types/boxing-and-unboxing).
 
 It's important to note that providing any other type for the type parameter will result in an `ArgumentException`.
+
 If you specify an allowed type but it mismatches the setting kind, an error message will be logged and `defaultValue` will be returned.
 
 When relying on type inference and not explicitly specifying the type parameter, be mindful of potential type mismatch issues, especially with number types.
@@ -583,7 +584,6 @@ ConfigCat.INFO  [5000] Evaluating 'isPOCFeatureEnabled'
     - rule: [IF User.Email CONTAINS '@something.com' THEN False] => no match
     - rule: [IF User.Email CONTAINS '@example.com' THEN True] => MATCH, applying rule
   Returning 'True' (VariationId: '9f21c24c').
-isPOCFeatureEnabled: True
 ```
 
 Sample code on how to create a basic file logger implementation for ConfigCat client: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/FileLoggerSample.cs" target="_blank">See Sample Code</a>
