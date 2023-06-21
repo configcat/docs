@@ -226,7 +226,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client.setDefaultUser(ConfigCatUser(identifier = "john@example.com"))
 ```
 
-Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue()`, `getValueDetails()`, or `getAllValues()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
 ```kotlin
 val user = ConfigCatUser(identifier = "john@example.com")
