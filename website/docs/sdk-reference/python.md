@@ -593,6 +593,11 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 )
 ```
 
+:::info
+The Python SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v8.0.0. As for other SDKs, please check their docs for the minimum versions
+required for participate in shared caching.
+:::
+
 ## Using ConfigCat behind a proxy
 
 Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
