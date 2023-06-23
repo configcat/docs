@@ -95,19 +95,25 @@ const userObject = {
 const value = configCatClient.getValue(key, defaultValue, callback, userObject);
 ```
 
-Confidential comparators are supported from these SDK versions:
+Support for confidential comparators was introduced in these SDK versions:
 
 | SDK     | Version |
 | ------- | ------- |
+| .NET    | v4.0.0  |
+| C++     | v1.0.0  |
+| Dart    | v1.0.0  |
+| Elixir  | v1.0.0  |
+| Go      | v4.0.2  |
+| Java    | v4.0.1  |
+| Android | v4.0.0  |
 | JS      | v3.0.0  |
+| JS SSR  | v1.0.0  |
+| React   | v1.0.0  |
+| Kotlin  | v1.0.0  |
 | Node    | v4.0.0  |
 | PHP     | v3.0.2  |
 | Python  | v3.0.2  |
 | Ruby    | v2.0.3  |
-| Go      | v4.0.2  |
-| Java    | v4.0.1  |
-| Android | v4.0.0  |
-| .NET    | v4.0.0  |
 | Swift   | v4.0.0  |
 
 #### Semantic version comparators

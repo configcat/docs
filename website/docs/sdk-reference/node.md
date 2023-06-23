@@ -77,8 +77,7 @@ configCatClient
 ```
 
 :::info
-The Node.js SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v10.0.0. As for other SDKs, please check their docs for the minimum versions
-required for participate in shared caching.
+The Node.js SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 :::
 
 ### 5. Dispose _ConfigCat_ client

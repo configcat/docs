@@ -630,8 +630,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 ```
 
 :::info
-The Java SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v8.2.0. As for other SDKs, please check their docs for the minimum versions
-required for participate in shared caching.
+The Java SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 :::
 
 ## HttpClient

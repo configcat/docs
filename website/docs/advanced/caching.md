@@ -57,6 +57,23 @@ As of certain versions, ConfigCat SDKs support using a shared cache. To achieve 
 
 Mixing this behavior with [offline mode](#offline-mode), you can have a centralized shared cache that serves many SDKs regardless of what platform they run on.
 
-:::info
-See the [SDK specific docs](/docs/sdk-reference/overview) of your desired platform for the minimum version that supports shared caching.
-:::
+Support for shared caching was introduced in these SDK versions:
+
+| SDK     | Version |
+| ------- | ------- |
+| .NET    | v8.1.0  |
+| C++     | TBA     |
+| Dart    | TBA     |
+| Elixir  | TBA     |
+| Go      | TBA     |
+| Java    | v8.2.0  |
+| Android | v9.0.0  |
+| JS      | v8.0.0  |
+| JS SSR  | v7.0.0  |
+| React   | v3.0.0  |
+| Kotlin  | v2.0.0  |
+| Node    | v10.0.0 |
+| PHP     | TBA     |
+| Python  | v8.0.0  |
+| Ruby    | TBA     |
+| Swift   | TBA     |

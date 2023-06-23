@@ -594,8 +594,7 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 ```
 
 :::info
-The Python SDK supports [shared caching](/docs/advanced/caching/#shared-cache) since v8.0.0. As for other SDKs, please check their docs for the minimum versions
-required for participate in shared caching.
+The Python SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 :::
 
 ## Using ConfigCat behind a proxy
