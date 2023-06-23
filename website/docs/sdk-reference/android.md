@@ -35,7 +35,7 @@ When you use R8 or ProGuard, the aar artifact automatically applies the [include
 
 ```groovy title="build.gradle"
 dependencies {
-    implementation 'com.configcat:configcat-android-client:8.+'
+    implementation 'com.configcat:configcat-android-client:9.+'
 }
 ```
 
@@ -262,7 +262,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client.setDefaultUser(User.newBuilder().build("john@example.com"));
 ```
 
-Whenever the `getValue[Async]()`, `getValueDetails[Async]()`, `getAllValues[Async]()`, or `getAllVariationIds[Async]()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue[Async]()`, `getValueDetails[Async]()`, or `getAllValues[Async]()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
@@ -595,7 +595,7 @@ Available log levels:
 Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-INFO com.configcat.ConfigCatClient - Evaluating getValue(isPOCFeatureEnabled).
+INFO com.configcat.ConfigCatClient - [5000] Evaluating getValue(isPOCFeatureEnabled).
 User object: User{Identifier=435170f4-8a8b-4b67-a723-505ac7cdea92, Email=john@example.com}
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning "true"

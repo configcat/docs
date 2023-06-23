@@ -226,7 +226,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client.setDefaultUser(ConfigCatUser(identifier = "john@example.com"))
 ```
 
-Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue()`, `getValueDetails()`, or `getAllValues()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
 ```kotlin
 val user = ConfigCatUser(identifier = "john@example.com")
@@ -556,7 +556,7 @@ Available log levels:
 Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-2022-08-09 15:58:54 UTC [INFO]: ConfigCat - Evaluating 'isPOCFeatureEnabled'
+2022-08-09 15:58:54 UTC [INFO]: ConfigCat - [5000] Evaluating 'isPOCFeatureEnabled'
 User object: {Identifier: 435170f4-8a8b-4b67-a723-505ac7cdea92, Email: john@example.com}
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: true
