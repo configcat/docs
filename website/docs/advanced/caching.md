@@ -59,21 +59,21 @@ Mixing this behavior with [offline mode](#offline-mode), you can have a centrali
 
 Support for shared caching was introduced in these SDK versions:
 
-| SDK     | Version |
-| ------- | ------- |
-| .NET    | v8.1.0  |
-| C++     | TBA     |
-| Dart    | TBA     |
-| Elixir  | TBA     |
-| Go      | TBA     |
-| Java    | v8.2.0  |
-| Android | v9.0.0  |
-| JS      | v8.0.0  |
-| JS SSR  | v7.0.0  |
-| React   | v3.0.0  |
-| Kotlin  | v2.0.0  |
-| Node    | v10.0.0 |
-| PHP     | TBA     |
-| Python  | v8.0.0  |
-| Ruby    | TBA     |
-| Swift   | TBA     |
+| SDK     | Version                                                                |
+| ------- | ---------------------------------------------------------------------- |
+| .NET    | [v8.1.0](https://github.com/configcat/.net-sdk/releases/tag/v8.1.0)    |
+| C++     | TBA                                                                    |
+| Dart    | TBA                                                                    |
+| Elixir  | TBA                                                                    |
+| Go      | TBA                                                                    |
+| Java    | [v8.2.0](https://github.com/configcat/java-sdk/releases/tag/v8.2.0)    |
+| Android | [v9.0.0](https://github.com/configcat/android-sdk/releases/tag/v9.0.0) |
+| JS      | [v8.0.0](https://github.com/configcat/js-sdk/releases/tag/v8.0.0)      |
+| JS SSR  | [v7.0.0](https://github.com/configcat/js-ssr-sdk/releases/tag/v7.0.0)  |
+| React   | [v3.0.0](https://github.com/configcat/react-sdk/releases/tag/v3.0.0)   |
+| Kotlin  | [v2.0.0](https://github.com/configcat/kotlin-sdk/releases/tag/2.0.0)   |
+| Node    | [v10.0.0](https://github.com/configcat/node-sdk/releases/tag/v10.0.0)  |
+| PHP     | TBA                                                                    |
+| Python  | TBA                                                                    |
+| Ruby    | TBA                                                                    |
+| Swift   | TBA                                                                    |
