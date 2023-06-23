@@ -41,7 +41,7 @@ Or put the following directly to your `pubspec.yml` and run `dart pub get` or `f
 
 ```yaml title="pubspec.yml"
 dependencies:
-  configcat_client: ^2.4.0
+  configcat_client: ^2.5.2
 ```
 
 ### 2. Import the ConfigCat SDK
@@ -531,28 +531,13 @@ Call the `forceRefresh()` method on the client to download the latest config JSO
 
 ## Logging
 
-The default logger used by the SDK is the <a href="https://pub.dev/packages/logger" target="_blank">logger</a> package, but you can override it with your implementation via the `logger` client option. The custom implementation must satisfy the <a href="https://github.com/configcat/dart-sdk/blob/main/lib/src/log/logger.dart" target="_blank">Logger</a> abstract class.
+The default logger used by the SDK simply outputs the log messages with `print()`, but you can override it with your implementation via the `logger` client option. The custom implementation must satisfy the <a href="https://github.com/configcat/dart-sdk/blob/main/lib/src/log/logger.dart" target="_blank">Logger</a> abstract class.
 
 ```dart
 final client = ConfigCatClient.get(
     sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
     options: ConfigCatOptions(
         logger: ConfigCatLogger(internalLogger: MyCustomLogger()),
-    )
-);
-```
-
-You can customize the internally used <a href="https://pub.dev/packages/logger" target="_blank">logger</a> instance.
-
-```dart
-import 'package:logger/logger.dart' as extlog;
-
-final client = ConfigCatClient.get(
-    sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
-    options: ConfigCatOptions(
-        logger: ConfigCatLogger(
-            internalLogger: DefaultLogger(internalLogger: extlog.Logger(/* customization of the logger package */))
-        ),
     )
 );
 ```
@@ -581,7 +566,7 @@ Available log levels:
 Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-[I] TIME: 2022-01-20T18:22:02.313703 ConfigCat - Evaluating getValue(isPOCFeatureEnabled)
+[INFO] 2022-01-20T18:22:02.313703 ConfigCat - Evaluating getValue(isPOCFeatureEnabled)
 User object: {Identifier: 435170f4-8a8b-4b67-a723-505ac7cdea92, Email: john@example.com}
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: true

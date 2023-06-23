@@ -44,10 +44,7 @@ const configCatClient = configcat.getClient('#YOUR-SDK-KEY#');
 The async/await way:
 
 ```js
-const value = await configCatClient.getValueAsync(
-  'isMyAwesomeFeatureEnabled',
-  false,
-);
+const value = await configCatClient.getValueAsync('isMyAwesomeFeatureEnabled', false);
 
 if (value) {
   do_the_new_thing();
@@ -72,7 +69,7 @@ configCatClient
   });
 ```
 
-### 4. Dispose _ConfigCat_ client
+### 4. Dispose the _ConfigCat_ client
 
 You can safely dispose all clients at once or individually and release all associated resources on application exit.
 
@@ -104,14 +101,14 @@ The available options depends on the chosen polling mode. However, there are som
 
 | Option Parameter   | Description                                                                                                                                                                                                                                                                                      | Default                 |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
-| `logger`           | Custom logger. [More about logging](#logging).                                                                                                                                                                                                                                                   | Console logger          |
+| `logger`           | Custom [`IConfigCatLogger`](https://github.com/configcat/common-js/blob/master/src/ConfigCatLogger.ts) implementation for tracing.                                                                                                                                                               | [`ConfigCatConsoleLogger`](https://github.com/configcat/common-js/blob/master/src/ConfigCatLogger.ts) (with WARN level) |
 | `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                       | 30000                   |
 | `baseUrl`          | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                  |                         |
 | `dataGovernance`   | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
-| `cache`            | Cache implementation for config cache.                                                                                                                                                                                                                                                           | `InMemoryCache`         |
+| `cache`            | Custom [`IConfigCatCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) implementation for caching the downloaded config.                                                                                                                                           | [`InMemoryConfigCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) |
 | `flagOverrides`    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                    | -                       |
 | `defaultUser`      | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                                 | `undefined` (none)      |
-| `offline`          | Determines whether the client should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                                           | `false`                 |
+| `offline`          | Determines whether the client should be initialized to offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                                           | `false`                 |
 
 Options also include a property named `setupHook`, which you can use to subscribe to the hooks (events) at the time of initialization. [More about hooks](#hooks).
 
@@ -128,10 +125,10 @@ const configCatClient = configcat.getClient(
 );
 ```
 
-:::caution
-We strongly recommend you to use the _ConfigCat Client_ as a Singleton object in your application.
-You can acquire singleton client instances for your SDK keys using the `configcat.getClient('<sdkKey>')` function.
+:::info
+You can acquire singleton client instances for your SDK keys using the `configcat.getClient(sdkKey: "<sdkKey>")` factory function.
 (However, please keep in mind that subsequent calls to `getClient()` with the _same SDK Key_ return a _shared_ client instance, which was set up by the first call.)
+
 You can close all open clients at once using the `configcat.disposeAllClients()` function or do it individually using the `configCatClient.dispose()` method.
 :::
 
@@ -147,7 +144,7 @@ Returns a Promise with the value.
 
 ```js
 const value = await configCatClient.getValueAsync(
-  'keyOfMySetting', // Setting Key
+  'keyOfMyFeatureFlag', // Setting Key
   false, // Default value
   new configcat.User('#UNIQUE-USER-IDENTIFIER#'), // Optional User Object
 );
@@ -158,7 +155,7 @@ or
 ```js
 configCatClient
   .getValueAsync(
-    'keyOfMySetting', // Setting Key
+    'keyOfMyFeatureFlag', // Setting Key
     false, // Default value
     new configcat.User('#UNIQUE-USER-IDENTIFIER#'), // Optional User Object
   )
@@ -166,6 +163,31 @@ configCatClient
     console.log(value);
   });
 ```
+
+:::caution
+It is important to provide an argument for the `defaultValue` parameter that matches the type of the feature flag or setting you are evaluating.
+Please refer to the following table for the corresponding types.
+:::
+
+<div id="setting-type-mapping"></div>
+
+| Setting Kind   | `typeof defaultValue` |
+| -------------- | ----------------------|
+| On/Off Toggle  | `boolean`             |
+| Text           | `string`              |
+| Whole Number   | `number`              |
+| Decimal Number | `number`              |
+
+In addition to the types mentioned above, you also have the option to provide `null` or `undefined` for the `defaultValue` parameter regardless of the setting kind.
+However, if you do so, the return type of the `getValue` method will be
+* `boolean | string | number | null` when `defaultValue` is `null` or
+* `boolean | string | number | undefined` when `defaultValue` is `undefined`.
+
+This is because in these cases the exact return type cannot be determined at compile-time as the TypeScript compiler has no information about the setting type.
+
+It's important to note that providing any other type for the `defaultValue` parameter will result in a `TypeError`.
+
+If you specify an allowed type but it mismatches the setting kind, an error message will be logged and `defaultValue` will be returned.
 
 ## Anatomy of `getValueDetailsAsync()`
 
@@ -179,7 +201,7 @@ configCatClient
 
 ```js
 const details = await configCatClient.getValueDetailsAsync(
-  'keyOfMySetting', // Setting Key
+  'keyOfMyFeatureFlag', // Setting Key
   false, // Default value
   new configcat.User('#UNIQUE-USER-IDENTIFIER#'), // Optional User Object
 );
@@ -190,7 +212,7 @@ or
 ```js
 configCatClient
   .getValueDetailsAsync(
-    'keyOfMySetting', // Setting Key
+    'keyOfMyFeatureFlag', // Setting Key
     false, // Default value
     new configcat.User('#UNIQUE-USER-IDENTIFIER#'), // Optional User Object
   )
@@ -198,6 +220,11 @@ configCatClient
     console.log(details);
   });
 ```
+
+:::caution
+It is important to provide an argument for the `defaultValue` parameter that matches the type of the feature flag or setting you are evaluating.
+Please refer to [this table](#setting-type-mapping) for the corresponding types.
+:::
 
 The `details` result contains the following information:
 
@@ -277,7 +304,7 @@ const user = new configcat.User('john@example.com');
 configCatClient.setDefaultUser(user);
 
 // The default user will be used in the evaluation process.
-const value = await configCatClient.getValueAsync('keyOfMySetting', false);
+const value = await configCatClient.getValueAsync('keyOfMyFeatureFlag', false);
 ```
 
 When a user object parameter is passed to the evaluation methods, it takes precedence over the default user.
@@ -289,11 +316,7 @@ configCatClient.setDefaultUser(user);
 const otherUser = new configcat.User('brian@example.com');
 
 // otherUser will be used in the evaluation process.
-const value = await configCatClient.getValueAsync(
-  'keyOfMySetting',
-  false,
-  otherUser,
-);
+const value = await configCatClient.getValueAsync('keyOfMyFeatureFlag', false, otherUser);
 ```
 
 You can also remove the default user by doing the following:
@@ -304,7 +327,7 @@ configCatClient.clearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `getValueAsync()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache then all `getValueAsync()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 [More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
@@ -327,8 +350,8 @@ Available options (in addition to the [common ones](#creating-the-configcat-clie
 
 | Option Parameter         | Description                                                                                         | Default |
 | ------------------------ | --------------------------------------------------------------------------------------------------- | ------- |
-| `pollIntervalSeconds`    | Polling interval. Range: `[1, Number.MAX_SAFE_INTEGER]`                                             | 60      |
-| `maxInitWaitTimeSeconds` | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
+| `pollIntervalSeconds`    | Polling interval in seconds.                                                                        | 60s     |
+| `maxInitWaitTimeSeconds` | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5s      |
 
 ### Lazy loading
 
@@ -348,13 +371,13 @@ const configCatClient = configcat.getClient(
 
 Available options (in addition to the [common ones](#creating-the-configcat-client)):
 
-| Option Parameter         | Description                                      | Default |
-| ------------------------ | ------------------------------------------------ | ------- |
-| `cacheTimeToLiveSeconds` | Cache TTL. Range: `[1, Number.MAX_SAFE_INTEGER]` | 60      |
+| Option Parameter         | Description           | Default |
+| ------------------------ | ----------------------| ------- |
+| `cacheTimeToLiveSeconds` | Cache TTL in seconds. | 60s     |
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `forceRefreshAsync()` is your application's responsibility.
+Manual polling gives you full control over when the config JSON (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `forceRefreshAsync()` is your application's responsibility.
 
 ```js
 const configCatClient = configcat.getClient(
@@ -363,7 +386,7 @@ const configCatClient = configcat.getClient(
 );
 
 await configCatClient.forceRefreshAsync();
-let value = await configCatClient.getValueAsync('key', 'my default value');
+let value = await configCatClient.getValueAsync('keyOfMyTextSetting', 'my default value');
 console.log(value);
 ```
 
@@ -375,11 +398,11 @@ const configCatClient = configcat.getClient(
   configcat.PollingMode.ManualPoll,
 );
 
-let value = await configCatClient.getValueAsync('key', 'my default value');
+let value = await configCatClient.getValueAsync('keyOfMyTextSetting', 'my default value');
 console.log(value); // console: "my default value"
 
 await configCatClient.forceRefreshAsync();
-value = await configCatClient.getValueAsync('key', 'my default value');
+value = await configCatClient.getValueAsync('keyOfMyTextSetting', 'my default value');
 console.log(value);
 ```
 
@@ -496,7 +519,7 @@ Available log levels:
 Info level logging helps to inspect the feature flag evaluation process:
 
 ```bash
-ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
+ConfigCat - INFO - [5000] Evaluate 'isPOCFeatureEnabled'
  User : {"identifier":"#SOME-USER-ID#","email":"configcat@example.com"}
  Evaluating rule: 'configcat@example.com' CONTAINS '@something.com' => no match
  Evaluating rule: 'configcat@example.com' CONTAINS '@example.com' => MATCH
@@ -556,15 +579,13 @@ settingValues.forEach((details) => console.log(details));
 
 Config data is stored in a cache for reducing network traffic and for improving performance of the client. If you would like to use your own cache solution (for example when your system uses external or distributed cache) you can implement the [`ICache` interface](https://github.com/configcat/common-js/blob/master/src/Cache.ts) and set the `cache` parameter in the options.
 
-```js
-class MyCustomCache {
-  set(key, config) {
-    // `key` [string] - a unique cache key
-    // `config` [object (ProjectConfig)] - configcat's cache config item
+```ts
+class MyCustomCache implements IConfigCatCache {
+  set(key: string, value: string): Promise<void> | void {
     // insert your cache write logic here
   }
-  get(key) {
-    // `key` [string] - a unique cache key
+
+  get(key: string): Promise<string | null | undefined> | string | null | undefined {
     // insert your cache read logic here
   }
 }
@@ -573,15 +594,12 @@ class MyCustomCache {
 or
 
 ```js
-function MyCustomCache() {}
+function MyCustomCache() { }
 
-MyCustomCache.prototype.set = function (key, config) {
-  // `key` [string] - a unique cache key
-  // `config` [object (ProjectConfig)] - configcat's cache config item
+MyCustomCache.prototype.set = function (key, value) {
   // insert your cache write logic here
 };
 MyCustomCache.prototype.get = function (key) {
-  // `key` [string] - a unique cache key
   // insert your cache read logic here
 };
 ```
