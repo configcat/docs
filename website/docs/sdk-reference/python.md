@@ -565,7 +565,11 @@ all_value_details = client.get_all_value_details(User('#UNIQUE-USER-IDENTIFIER#'
 
 ## Custom cache
 
-You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the ConfigCache abstract class:
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can implement the [`ConfigCache`](https://github.com/configcat/python-sdk/blob/master/configcatclient/interfaces.py) interface
+and set the `config_cache` parameter in the options passed to `configcatclient.get`.
+This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
 ```python
 from configcatclient.interfaces import ConfigCache
