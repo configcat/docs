@@ -441,7 +441,11 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
 
 ### Custom Cache
 
-You have the option to inject your custom cache implementation into the client. All you have to do is to implement the `ConfigCache` interface:
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can implement the [`ConfigCache`](https://github.com/configcat/kotlin-sdk/blob/main/src/commonMain/kotlin/com/configcat/ConfigCache.kt) interface
+and set the `configCache` parameter in the setup callback of `ConfigCatClient`.
+This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
 ```kotlin
 class MyCustomCache : ConfigCache {
@@ -462,6 +466,10 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
     configCache = MyCustomCache()
 }
 ```
+
+:::info
+The Kotlin SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 ## HTTP Engine
 
