@@ -166,7 +166,7 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 
 ## 5. Sign In
 
-- Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
+- Go to the <a href="https://app.configcat.com/auth/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
 
