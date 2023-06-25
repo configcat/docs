@@ -48,7 +48,7 @@ const features = [
         url: 'advanced/code-references/overview',
         title: 'Scan & Upload Code References',
       },
-      { url: 'advanced/config-v2-migration-guide', title: 'Config V2 Migration Guide' },
+      // { url: 'advanced/config-v2-migration-guide', title: 'Config V2 Migration Guide' },
     ],
   },
   {
