@@ -65,6 +65,7 @@ module.exports = {
         'advanced/notifications-webhooks',
         'advanced/troubleshooting',
         'advanced/cli',
+        'advanced/config-v2-migration-guide',
         {
           'Scan & Upload Code References': [
             {
