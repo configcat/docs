@@ -47,7 +47,7 @@ The next step will guide you on how to collect the information required for the 
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/idp_name.png" alt="ConfigCat Name Identity Provider" />
 
-- From the next section of the dialog, copy the following values and save them for further use.
+- From the next section of the dialog, copy the following values and paste them into the Okta application.
 
   - `Entity ID` -> `Audience URI (SP Entity ID)`
   - `Assertion Consumer Service` -> `Single sign on URL`
