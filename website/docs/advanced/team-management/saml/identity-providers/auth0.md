@@ -35,11 +35,15 @@ The next step will guide you on how to collect the information required for the 
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
 
-- Select the domain you want to configure with SAML, and click `Set` under the `SAML SSO status`.
+- Click `ADD SAML IDENTITY PROVIDER`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/domains.png" alt="ConfigCat SAML SSO status" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" />
 
-- From the appearing dialog, copy the following values and paste them into the Auth0 configuration dialog.
+- Give a name for your Identity Provider, and click `Create`.
+
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/idp_name.png" alt="ConfigCat Name Identity Provider" />
+
+- From the next section of the dialog, copy the following values and paste them into the Auth0 configuration dialog.
 
   - `Assertion Consumer Service` -> `Application Callback URL`
   - For `Settings`, use the following JSON value:
@@ -53,7 +57,7 @@ The next step will guide you on how to collect the information required for the 
   }
   ```
 
-   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/cc_idp.png"  alt="ConfigCat ACS configuration" />
+   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/acs_only.png"  alt="ConfigCat ACS configuration" />
 
    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/acs_url.png" alt="Auth0 ACS configuration"/>
 
@@ -72,7 +76,11 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
       </li>
       <li>
         <p>Paste the copied value into the <code>Metadata URL</code> field at ConfigCat.</p>
-        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/cc_metadata_url.png" alt="ConfigCat metadata URL"/>
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/cc_metadata_url_new.png" alt="ConfigCat metadata URL"/>
+      </li>
+      <li>
+        <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -84,7 +92,11 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
       <li>
         <p>Copy the value of <code>Identity Provider Login URL</code> and download the <code>Identity Provider Certificate</code>, then paste them into the Configuration dialog at ConfigCat.</p>
         <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/manual.png" alt="Auth0 manual configuration" />
-        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/cc_manual.png" alt="ConfigCat manual configuration"/>
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/cc_manual_new.png" alt="ConfigCat manual configuration"/>
+      </li>
+      <li>
+        <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
       </li>
       <li>
         Click on <code>Save</code>.

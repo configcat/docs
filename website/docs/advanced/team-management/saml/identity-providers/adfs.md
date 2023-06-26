@@ -19,16 +19,20 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
 
-- Select the domain you want to configure with SAML, and click `Set` under the `SAML SSO status`.
+- Click `ADD SAML IDENTITY PROVIDER`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/domains.png" alt="ConfigCat SAML SSO status" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" />
 
-- From the appearing dialog, copy the following values and save them for further use.
+- Give a name for your Identity Provider, and click `Create`.
+
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/idp_name.png" alt="ConfigCat Name Identity Provider" />
+
+- From the next section of the dialog, copy the following values and save them for further use.
 
   - `Entity ID`
   - `Assertion Consumer Service`
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_config.png" alt="ConfigCat SAML configuration" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_idp_config.png" alt="ConfigCat SAML configuration" />
 
 ## 2. Configure a Relying Party Trust
 
@@ -111,7 +115,11 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
       </li>
       <li>
         <p>Type the URL into the <code>Metadata URL</code> field at ConfigCat in the following format: <code>https://[ADFS-DOMAIN]/[FEDERATION-METADATA-URL-PATH]</code>.</p>
-        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/adfs/cc_metadata.png" alt="ADFS metadata url" />
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/adfs/cc_metadata_new.png" alt="ADFS metadata url" />
+      </li>
+      <li>
+        <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -155,7 +163,11 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
       <li>
         <p>Type the <code>SAML 2.0/WS-Federation</code> endpoint into the <code>Sign-on URL</code> field in the following format: <code>https://[ADFS-DOMAIN]/[WS-FEDERATION-URL-PATH]</code>.
         Then, paste the exported <code>Token Signing</code> certificate into the <code>X.509 Certificate</code> field.</p>
-        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/adfs/cc_manual.png" alt="ConfigCat manual configuration" />
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/adfs/cc_manual_new.png" alt="ConfigCat manual configuration" />
+      </li>
+      <li>
+        <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
       </li>
       <li>
         Click on <code>Save</code>.
