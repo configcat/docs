@@ -15,10 +15,10 @@ Furthermore, you can also set which Organization roles / Product permissions the
 
 - Select which domain you want to configure, and click `RE-CONFIGURE` (or just `CONFIGURE` if you didn't configure it yet) under the `Auto-assign status`.
 
-  <img className="saml-tutorial-img zoomable zoomable" src="/docs/assets/saml/dashboard/auto_assign_config.png" alt="Auto-assign configuration" />
+  <img className="saml-tutorial-img zoomable zoomable" src="/docs/assets/saml/dashboard/auto_assign_config_new.png" alt="Auto-assign configuration" />
 
 - On the appearing dialog, you can select which `Organization roles` and `Product permissions` should be assigned to the newly registered users.
 
-  <img className="saml-tutorial-img zoomable zoomable" src="/docs/assets/saml/dashboard/auto_assign_set.png" alt="Auto-assign setup" />
+  <img className="saml-tutorial-img zoomable zoomable" src="/docs/assets/saml/dashboard/auto_assign_set_new.png" alt="Auto-assign setup" />
 
 - When you are ready, just hit `Save`.
