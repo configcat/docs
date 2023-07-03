@@ -420,7 +420,7 @@ You can subscribe to the following events emitted by the client:
   If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
 - `configChanged`: This event is emitted first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
 - `flagEvaluated`: This event is emitted each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`getValueDetailsAsync()`](#anatomy-of-getvaluedetailsasync).
-- `clientError`: This event is emitted when an error occurs within the ConfigCat SDK.
+- `clientError`: This event is emitted when an error occurs within the _ConfigCat SDK_.
 
 You can subscribe to these events either on initialization:
 
@@ -596,7 +596,11 @@ const configCatClient = configcat.getClient(
 
 ## Using custom cache implementation
 
-Config data is stored in a cache for reducing network traffic and for improving performance of the client. If you would like to use your own cache solution (for example when your system uses external or distributed cache) you can implement the [`ICache` interface](https://github.com/configcat/common-js/blob/master/src/Cache.ts) and set the `cache` parameter in the options.
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can implement the [`IConfigCatCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) interface
+and set the `cache` property in the options passed to `getClient`.
+This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
 ```ts
 class MyCustomCache implements IConfigCatCache {
@@ -640,6 +644,10 @@ const configCatClient = configcat.getClient(
 > In some cases (eg: fs) you may have to use [promisify](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original) to create promises from callback-style functions.
 
 [See implementation of Redis cache.](https://github.com/configcat/node-sdk/tree/master/samples/customcache)
+
+:::info
+The Node.js SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 ## Sample Application
 

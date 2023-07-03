@@ -226,7 +226,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client.setDefaultUser(ConfigCatUser(identifier = "john@example.com"))
 ```
 
-Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue()`, `getValueDetails()`, or `getAllValues()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
 ```kotlin
 val user = ConfigCatUser(identifier = "john@example.com")
@@ -441,7 +441,11 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
 
 ### Custom Cache
 
-You have the option to inject your custom cache implementation into the client. All you have to do is to implement the `ConfigCache` interface:
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can implement the [`ConfigCache`](https://github.com/configcat/kotlin-sdk/blob/main/src/commonMain/kotlin/com/configcat/ConfigCache.kt) interface
+and set the `configCache` parameter in the setup callback of `ConfigCatClient`.
+This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
 ```kotlin
 class MyCustomCache : ConfigCache {
@@ -462,6 +466,10 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
     configCache = MyCustomCache()
 }
 ```
+
+:::info
+The Kotlin SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 ## HTTP Engine
 
@@ -548,7 +556,7 @@ Available log levels:
 Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-2022-08-09 15:58:54 UTC [INFO]: ConfigCat - Evaluating 'isPOCFeatureEnabled'
+2022-08-09 15:58:54 UTC [INFO]: ConfigCat - [5000] Evaluating 'isPOCFeatureEnabled'
 User object: {Identifier: 435170f4-8a8b-4b67-a723-505ac7cdea92, Email: john@example.com}
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: true

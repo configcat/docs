@@ -10,7 +10,7 @@ Using this feature you will be able to set different setting values for differen
 
 ### Enable feature
 
-1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to access the _Dashboard_
+1. <a href="https://app.configcat.com/auth/login" target="_blank">Log in</a> to access the _Dashboard_
 2. Go to **Feature Flags & Settings**
 3. Select **TARGET SPECIFIC USERS** after clicking the actions icon.
 
@@ -95,20 +95,26 @@ const userObject = {
 const value = configCatClient.getValue(key, defaultValue, callback, userObject);
 ```
 
-Confidential comparators are supported from these SDK versions:
+Support for confidential comparators was introduced in these SDK versions:
 
-| SDK     | Version |
-| ------- | ------- |
-| JS      | v3.0.0  |
-| Node    | v4.0.0  |
-| PHP     | v3.0.2  |
-| Python  | v3.0.2  |
-| Ruby    | v2.0.3  |
-| Go      | v4.0.2  |
-| Java    | v4.0.1  |
-| Android | v4.0.0  |
-| .NET    | v4.0.0  |
-| Swift   | v4.0.0  |
+| SDK     | Version                                                                |
+| ------- | ---------------------------------------------------------------------- |
+| .NET    | [v4.0.0](https://github.com/configcat/.net-sdk/releases/tag/v4.0.0)    |
+| C++     | [v1.0.0](https://github.com/configcat/cpp-sdk/releases/tag/v1.0.0)     |
+| Dart    | [v1.0.0](https://github.com/configcat/dart-sdk/releases/tag/1.0.0)     |
+| Elixir  | [v1.0.0](https://github.com/configcat/elixir-sdk/releases/tag/v1.0.0)  |
+| Go      | [v4.0.2](https://github.com/configcat/go-sdk/releases/tag/v4.0.2)      |
+| Java    | [v4.0.1](https://github.com/configcat/java-sdk/releases/tag/v4.0.1)    |
+| Android | [v4.0.0](https://github.com/configcat/android-sdk/releases/tag/v4.0.0) |
+| JS      | [v3.0.0](https://github.com/configcat/js-sdk/releases/tag/v3.0.0)      |
+| JS SSR  | [v1.0.1](https://github.com/configcat/js-ssr-sdk/releases/tag/v1.0.1)  |
+| React   | [v1.0.0](https://github.com/configcat/react-sdk/releases/tag/v1.0.0)   |
+| Kotlin  | [v1.0.0](https://github.com/configcat/kotlin-sdk/releases/tag/1.0.0)   |
+| Node    | [v4.0.0](https://github.com/configcat/node-sdk/releases/tag/v4.0.0)    |
+| PHP     | [v3.0.2](https://github.com/configcat/php-sdk/releases/tag/v3.0.2)     |
+| Python  | [v3.0.2](https://github.com/configcat/python-sdk/releases/tag/v3.0.2)  |
+| Ruby    | [v2.0.3](https://github.com/configcat/ruby-sdk/releases/tag/v2.0.3)    |
+| Swift   | [v4.0.0](https://github.com/configcat/swift-sdk/releases/tag/4.0.0)    |
 
 #### Semantic version comparators
 
@@ -183,7 +189,7 @@ With percentage-based user targeting, you can specify a randomly selected fracti
 
 ### Enable feature
 
-1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to access the _Dashboard_
+1. <a href="https://app.configcat.com/auth/login" target="_blank">Log in</a> to access the _Dashboard_
 2. Go to **Feature Flags & Settings**
 3. Select **TARGET % OF USERS** after clicking the actions icon.
 

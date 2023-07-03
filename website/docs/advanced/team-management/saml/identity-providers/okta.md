@@ -39,16 +39,20 @@ The next step will guide you on how to collect the information required for the 
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
 
-- Select the domain you want to configure with SAML, and click `Set` under the `SAML SSO status`.
+- Click `ADD SAML IDENTITY PROVIDER`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/domains.png" alt="ConfigCat SAML SSO status" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" />
 
-- From the appearing dialog, copy the following values and paste them into the Okta application.
+- Give a name for your Identity Provider, and click `Create`.
+
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/idp_name.png" alt="ConfigCat Name Identity Provider" />
+
+- From the next section of the dialog, copy the following values and paste them into the Okta application.
 
   - `Entity ID` -> `Audience URI (SP Entity ID)`
   - `Assertion Consumer Service` -> `Single sign on URL`
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_config.png" alt="ConfigCat SAML configuration" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_idp_config.png" alt="ConfigCat SAML configuration" />
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/okta/saml_url_eid.png" alt="Okta SAML url EID" />
 
@@ -77,7 +81,11 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
       </li>
       <li>
         <p>Paste the copied value into the <code>Metadata URL</code> field at ConfigCat.</p>
-        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/okta/cc_metadata.png" alt="ConfigCat metadata url" />
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/okta/cc_metadata_new.png" alt="ConfigCat metadata url" />
+      </li>
+      <li>
+        <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -93,7 +101,11 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
       <li>
         <p>Copy the value of the <code>Identity Provider Single Sign-On URL</code> and <code>X.509 Certificate</code> fields and paste them into the Configuration dialog at ConfigCat.</p>
         <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/okta/manual.png" alt="Okta manual configuration" />
-        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/okta/manual_cc.png" alt="ConfigCat manual configuration"  />
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/okta/manual_cc_new.png" alt="ConfigCat manual configuration"  />
+      </li>
+      <li>
+        <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -112,7 +124,7 @@ To let users authenticate via SAML, you need to assign individual users or group
 
 ## 5. Sign In
 
-- Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
+- Go to the <a href="https://app.configcat.com/auth/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
 

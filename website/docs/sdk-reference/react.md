@@ -243,7 +243,7 @@ export interface WithConfigCatClientProps {
 }
 ```
 
-Sample declaration of class component with ConfigCat SDK's higher-order component:
+Sample declaration of class component with _ConfigCat SDK_'s higher-order component:
 
 ```tsx
 class MyComponent extends React.Component<
@@ -612,7 +612,7 @@ useEffect(() => {
 
 ## SDK Hooks (not React Hooks)
 
-> ** ConfigCat SDK hooks are different than React Hooks. **
+> ** _ConfigCat SDK_ hooks are different than React Hooks. **
 
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
 You can subscribe to the following events emitted by the client:
@@ -621,7 +621,7 @@ You can subscribe to the following events emitted by the client:
   If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
 - `configChanged`: This event is emitted first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
 - `flagEvaluated`: This event is emitted each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from `getValueDetailsAsync()`.
-- `clientError`: This event is emitted when an error occurs within the ConfigCat SDK.
+- `clientError`: This event is emitted when an error occurs within the _ConfigCat SDK_.
 
 You can subscribe to these events either on initialization:
 
@@ -820,7 +820,11 @@ ConfigCat - INFO - [5000] Evaluate 'isPOCFeatureEnabled'
 
 ## Using custom cache implementation
 
-Config data is stored in a cache for reducing network traffic and for improving performance of the client. If you would like to use your own cache solution (for example when your system uses external or distributed cache) you can implement the [`ICache` interface](https://github.com/configcat/common-js/blob/master/src/Cache.ts) and set the `cache` parameter in the options.
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can implement the [`IConfigCatCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) interface
+and set the `cache` property in the options passed to `ConfigCatProvider`.
+This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
 ```ts
 class MyCustomCache implements IConfigCatCache {
@@ -859,12 +863,16 @@ then
 </ConfigCatProvider>
 ```
 
+:::info
+The React SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
+
 ## Sensitive information handling
 
 The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/docs/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
-If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
+If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the _ConfigCat SDK_  that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
 Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
 

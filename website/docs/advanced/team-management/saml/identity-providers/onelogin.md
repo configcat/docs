@@ -39,17 +39,21 @@ The next step will guide you on how to collect the information required for the 
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
 
-- Select the domain you want to configure with SAML, and click `Set` under the `SAML SSO status`.
+- Click `ADD SAML IDENTITY PROVIDER`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/domains.png" alt="ConfigCat SAML SSO status" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" />
 
-- From the appearing dialog, copy the following values and paste them into the OneLogin application's configuration page.
+- Give a name for your Identity Provider, and click `Create`.
+
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/idp_name.png" alt="ConfigCat Name Identity Provider" />
+
+- From the next section of the dialog, copy the following values and paste them into the OneLogin application's configuration page.
 
   - Copy `Entity ID` and paste it into the `Audience (EntityID)` field.
   - Copy `Assertion Consumer Service` and paste it into the `ACS (Consumer) URL` field.
   - Paste the same `Assertion Consumer Service` into the `ACS (Consumer) URL Validator` field in regex format e.g. `^https:\/\/dashboard\-api\.configcat\.com\/saml\/acs\/08d97769\-fed5\-4fd4\-8a09\-0a38bb951177$`
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_config.png" alt="ConfigCat SAML configuration" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_idp_config.png" alt="ConfigCat SAML configuration" />
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/saml_config.png" alt="OneLogin SML configuration" />
 
@@ -82,7 +86,11 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
       </li>
       <li>
         <p>Paste the copied value into the <code>Metadata URL</code> field at ConfigCat.</p>
-        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/cc_meta_url.png" alt="ConfigCat SAML configuration" />
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/cc_meta_url_new.png" alt="ConfigCat SAML configuration" />
+      </li>
+      <li>
+        <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -101,7 +109,11 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
       </li>
       <li>
         <p>Paste the value of the <code>SAML 2.0 Endpoint (HTTP)</code> and the <code>X.509 Certificate</code> into the Configuration dialog at ConfigCat</p>
-        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/cc_manual.png" alt="ConfigCat manual configuration" />
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/cc_manual_new.png" alt="ConfigCat manual configuration" />
+      </li>
+      <li>
+        <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
+        <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -136,7 +148,7 @@ To let users authenticate via SAML, you need to assign the newly created applica
 
 ## 5. Sign In
 
-- Go to the <a href="https://app.configcat.com/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
+- Go to the <a href="https://app.configcat.com/auth/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
 
