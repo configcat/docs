@@ -604,7 +604,11 @@ client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
 
 ## Custom Cache
 
-You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCache` abstract class:
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can subclass the [`ConfigCache`](https://github.com/configcat/java-sdk/blob/master/src/main/java/com/configcat/ConfigCache.java) abstract class
+and call the `cache` method with your implementation in the setup callback of `ConfigCatClient.get`.
+This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
 ```java
 public class MyCustomCache extends ConfigCache {
@@ -628,6 +632,10 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.cache(new MyCustomCache()) // inject your custom cache
 });
 ```
+
+:::info
+The Java SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 ## HttpClient
 
@@ -701,7 +709,7 @@ Available log levels:
 Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-INFO com.configcat.ConfigCatClient - Evaluating getValue(isPOCFeatureEnabled).
+INFO com.configcat.ConfigCatClient - [5000] Evaluating getValue(isPOCFeatureEnabled).
 User object: User{Identifier=435170f4-8a8b-4b67-a723-505ac7cdea92, Email=john@example.com}
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning "true"

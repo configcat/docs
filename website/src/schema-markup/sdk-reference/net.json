@@ -25,7 +25,7 @@
       "@type": "HowToStep",
       "text": "Sign up for a free ConfigCat account",
       "name": "Registration",
-      "url": "https://app.configcat.com/signup",
+      "url": "https://app.configcat.com/auth/signup",
       "image": "https://configcat.com/images/shared/home.png"
     },
     {

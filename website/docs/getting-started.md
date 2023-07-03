@@ -17,7 +17,7 @@ then you can **connect your application** to the ConfigCat service to access you
 
 ### Create a feature flag on the _ConfigCat Dashboard_
 
-1. <a href="https://app.configcat.com/login" target="_blank">Log in</a> to the _Dashboard_
+1. <a href="https://app.configcat.com/auth/login" target="_blank">Log in</a> to the _Dashboard_
 2. Click _ADD FEATURE FLAG_ and give it a name.
 
 <img src="/docs/assets/getting-started-1.png" className="zoomable" alt="getting-started" />

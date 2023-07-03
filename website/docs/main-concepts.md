@@ -24,9 +24,9 @@ A _Feature Flag_ is a _Setting_ of type Bool.
 | Setting Kind   | Setting Type | Description                                                                       |
 | -------------- | ------------ | --------------------------------------------------------------------------------- |
 | On/Off Toggle  | Boolean      | true/false, usually referenced as Feature Flag, Feature Toggle or Feature switch. |
-| Text           | String       | any string, max. 65535 characters                                                 |
-| Whole Number   | Integer      | any whole number within the range of `Int32`                                      |
-| Decimal Number | Double       | any decimal number within the range of `double`                                   |
+| Text           | String       | Any string, max. 100000 characters, can't be empty.                                |
+| Whole Number   | Integer      | Any whole number within the range of `Int32`.                                      |
+| Decimal Number | Double       | Any decimal number within the range of `double`.                                   |
 
 ## Config
 

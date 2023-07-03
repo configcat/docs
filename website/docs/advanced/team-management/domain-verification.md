@@ -14,12 +14,12 @@ In order to use the [SAML Single Sign-On](/docs/advanced/team-management/saml/sa
 
 - Click `ADD & VERIFY DOMAIN`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/add_domain.png" alt="ConfigCat add & verify domain" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/add_domain_new.png" alt="ConfigCat add & verify domain" />
 
 - Type your domain name, then click `ADD`
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/domain_name.png" alt="ConfigCat add domain"  />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/domain_name_new.png" alt="ConfigCat add domain"  />
 
 - Follow the instructions on the appearing dialog to verify your domain.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/verify_domain.png" alt="ConfigCat verify domain" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/verify_domain_new.png" alt="ConfigCat verify domain" />
