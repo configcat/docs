@@ -74,6 +74,6 @@ Support for shared caching was introduced in these SDK versions:
 | Kotlin  | [v2.0.0](https://github.com/configcat/kotlin-sdk/releases/tag/2.0.0)   |
 | Node    | [v10.0.0](https://github.com/configcat/node-sdk/releases/tag/v10.0.0)  |
 | PHP     | TBA                                                                    |
-| Python  | TBA                                                                    |
+| Python  | [v8.0.0](https://github.com/configcat/python-sdk/releases/tag/v8.0.0)  |
 | Ruby    | TBA                                                                    |
 | Swift   | TBA                                                                    |
