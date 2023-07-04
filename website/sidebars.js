@@ -110,7 +110,30 @@ module.exports = {
             },
           ],
         },
-        'advanced/proxy',
+        {
+          'ConfigCat Proxy': [
+            {
+              type: 'doc',
+              id: 'advanced/proxy/proxy-overview',
+              label: 'Overview',
+            },
+            {
+              type: 'doc',
+              id: 'advanced/proxy/endpoints',
+              label: 'Endpoints',
+            },
+            {
+              type: 'doc',
+              id: 'advanced/proxy/grpc',
+              label: 'gRPC',
+            },
+            {
+              type: 'doc',
+              id: 'advanced/proxy/monitoring',
+              label: 'Monitoring',
+            },
+          ]
+        },
       ],
       'SDK References': [
         { type: 'doc', id: 'sdk-reference/overview', label: 'Overview' },
