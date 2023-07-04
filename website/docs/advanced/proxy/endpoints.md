@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-The Proxy accepts HTTP requests on the following endpoints:
+The Proxy accepts HTTP requests on the following endpoints.
 
 ## CDN Proxy
 
