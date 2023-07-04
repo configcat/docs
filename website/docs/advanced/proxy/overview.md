@@ -1245,11 +1245,3 @@ CONFIGCAT_TLS_CERTIFICATES='[{"key":"<path-to-key>","cert":"<path-to-cert>"}]'
 </tr>
 </tbody>
 </table>
-
-### gRPC
-
-The gRPC related configuration options are available int the [gRPC section](/advanced/proxy/grpc).
-
-### Metrics
-
-The metrics related configuration options are available in the [Monitoring section](/advanced/proxy/monitoring).
