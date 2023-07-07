@@ -15,7 +15,7 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 [![Sonar Coverage](https://img.shields.io/sonar/coverage/net-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=net-sdk)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
 
-<a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .Net SDK on GitHub</a>
+<a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
 
 ## Getting started
 
@@ -166,6 +166,7 @@ In addition to the types mentioned above, you also have the option to provide `o
 However, this approach is not recommended as it may involve [boxing](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/types/boxing-and-unboxing).
 
 It's important to note that providing any other type for the type parameter will result in an `ArgumentException`.
+
 If you specify an allowed type but it mismatches the setting kind, an error message will be logged and `defaultValue` will be returned.
 
 When relying on type inference and not explicitly specifying the type parameter, be mindful of potential type mismatch issues, especially with number types.
@@ -343,7 +344,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the config JSON (with the setting values) is downloaded. ConfigCat SDK_ will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the config JSON (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
@@ -376,7 +377,7 @@ Via the following events you can subscribe to particular events raised by the cl
   If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `ClientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
 - `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
 - `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetails()`/`GetValueDetailsAsync()`](#anatomy-of-getvaluedetails).
-- `event EventHandler<ConfigCatClientErrorEventArgs> Error`: This event is raised when an error occurs within the ConfigCat SDK.
+- `event EventHandler<ConfigCatClientErrorEventArgs> Error`: This event is raised when an error occurs within the _ConfigCat SDK_.
 
 You can subscribe to these events either on initialization:
 
@@ -583,7 +584,6 @@ ConfigCat.INFO  [5000] Evaluating 'isPOCFeatureEnabled'
     - rule: [IF User.Email CONTAINS '@something.com' THEN False] => no match
     - rule: [IF User.Email CONTAINS '@example.com' THEN True] => MATCH, applying rule
   Returning 'True' (VariationId: '9f21c24c').
-isPOCFeatureEnabled: True
 ```
 
 Sample code on how to create a basic file logger implementation for ConfigCat client: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/FileLoggerSample.cs" target="_blank">See Sample Code</a>
@@ -650,10 +650,11 @@ IReadOnlyList<EvaluationDetails> settingValuesTargeting = await client.GetAllVal
 
 ## Using custom cache implementation
 
-Config data is stored in a cache for reducing network traffic and for improving performance of the client.
-If you would like to use your own cache solution (for example when your system uses external or distributed cache),
-you can implement the [`IConfigCatCache` interface](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/IConfigCatCache.cs) and
-set the `ConfigCache` parameter in the setup callback of `ConfigCatClient.Get`.
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can implement the [`IConfigCatCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/IConfigCatCache.cs) interface
+and set the `ConfigCache` parameter in the setup callback of `ConfigCatClient.Get`.
+This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
 ```csharp
 public class MyCustomCache : IConfigCatCache
@@ -688,6 +689,10 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
     options.ConfigCache = new MyCustomCache()
 });
 ```
+
+:::info
+The .NET SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 ## Using ConfigCat behind a proxy
 
@@ -724,7 +729,7 @@ The default timeout is 30 seconds.
 
 ## Troubleshooting
 
-When the ConfigCat SDK does not work as expected in your application, please check for the following potential problems:
+When the _ConfigCat SDK_ does not work as expected in your application, please check for the following potential problems:
 
 - **Symptom:** Instead of the actual value, the default one is constantly returned by `GetValue()`/`GetValueAsync()` and
   the log contains the following message (provided that the client is set up to log error level events as described [here](#logging)):
@@ -753,7 +758,7 @@ When the ConfigCat SDK does not work as expected in your application, please che
 
 ## Sample Applications
 
-Check out our Sample Applications how they use the ConfigCat SDK:
+Check out our Sample Applications how they use the _ConfigCat SDK_:
 
 - <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
 - <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Web App</a>
@@ -767,5 +772,5 @@ See the following guides on how to use ConfigCat's .NET SDK:
 
 ## Look under the hood
 
-- <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .Net SDK on GitHub</a>
-- <a href="https://www.nuget.org/packages/ConfigCat.Client" target="_blank">ConfigCat .Net SDK on nuget.org</a>
+- <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+- <a href="https://www.nuget.org/packages/ConfigCat.Client" target="_blank">ConfigCat .NET SDK on nuget.org</a>
