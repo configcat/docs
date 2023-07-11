@@ -54,7 +54,7 @@ Continuous Integration refers to the regular merging of code changes into a cent
 
 A Dark Launch is rolled out stealthily by first releasing a feature to a subset of users before a full release to see how they react to it.
 
-#### Developer Advocate
+#### [Developer Advocate](https://configcat.com/blog/2023/07/11/role-of-developer-advocates/)
 
 A Developer Advocate is a person whose job is to help developers be successful with a platform or a technology and to speak (or write) on their behalf.
 
