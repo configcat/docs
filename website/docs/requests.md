@@ -126,3 +126,23 @@ In a backend application, you might want to try using [Webhooks.](/advanced/noti
 ### Call your backend instead of the ConfigCat CDN
 
 In the case of a frontend application, you can lower the number of calls made towards the ConfigCat CDN by moving the evaluation logic from the frontend application to your backend.
+
+## How to lower the monthly network traffic?
+
+Generally speaking the network traffic is proportional to the size of the `config JSON` and the number of `config JSON` downloads per month.
+
+### Delete the old feature flags and unused targeting rules
+
+If you have a lot of feature flags and targeting rules in a config, you can lower the size of the `config JSON` by deleting the old ones.
+
+### Avoid keeping lots of data in the comparison value of targeting rules or segments
+
+The comparison value of a targeting rule or segment is stored in the `config JSON` and downloaded by the SDKs. If you have a lot of targeting rules or segments with long comparison values, you can lower the size of the `config JSON` by shortening them.
+
+### Consider the amount of text you keep in a text setting's value
+
+Similarly to the comparison value of targeting rules or segments, the value of a text setting is stored in the `config JSON` and downloaded by the SDKs. If you have a lot of text settings with long values, you can lower the size of the `config JSON` by shortening them.
+
+### Separate your feature flags into multiple configs
+
+If you have a lot of feature flags, you can lower the size of the `config JSON` by separating them into multiple configs. This way the payload of each download will be smaller.
