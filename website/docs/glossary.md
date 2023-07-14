@@ -66,11 +66,11 @@ The DevOps Engineer is responsible for the development and maintenance of the in
 
 ## F
 
-#### Fake Door Testing
+#### [Fake Door Testing](https://configcat.com/fake-door-testing/)
 
 Fake Door Testing is a technique used to assess the market demand for a product prior to investing in its development.
 
-#### Feature Branch
+#### [Feature Branch](https://configcat.com/feature-branch/)
 
 A feature branch is a copy of the main codebase where an individual or team of software developers can work on a new feature until it is complete.
 
@@ -130,7 +130,7 @@ A release manager is an IT professional responsible for defining and executing t
 
 Remote configuration is a software development technique that allows you to modify certain features of an app remotely without having to deploy a new version of the app.
 
-#### [Ring Deployment](https://configcat.com/blog/2022/01/14/progressive-delivery/#ring-deployment)
+#### [Ring Deployment](https://configcat.com/ring-deployment/)
 
 Ring deployment is a form of gradual rollout where new features are released gradually to different groups of users to mitigate risk.
 
@@ -144,7 +144,7 @@ A site reliability engineer (SRE) is a professional in the field of information 
 
 Smoke testing is a type of testing done early in the software development process to confirm that the most critical features of an application are functioning correctly.
 
-#### Soak Testing
+#### [Soak Testing](https://configcat.com/soak-testing/)
 
 Soak testing is a type of non-functional testing that assesses a software application's performance under a high volume of load over an extended period of time.
 
