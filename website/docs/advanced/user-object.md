@@ -86,6 +86,8 @@ First, you need to pass a User Object to the ConfigCat SDK containing the `custo
 
 > In case **a custom property is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), the corresponding targeting rule **evaluation will be skipped**.
 
+> Please ensure that **the custom property value is a string** when working with dynamically-typed languages such as JavaScript, PHP, Python, Elixir, or Ruby. If a different data type is used, the SDK will automatically convert it to a string and log a WARNING message.
+
 Example:
 
 ```javascript
