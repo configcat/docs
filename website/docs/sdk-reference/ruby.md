@@ -557,6 +557,12 @@ all_value_details = client.get_all_value_details(ConfigCat::User.new('#UNIQUE-US
 
 ## Custom cache
 
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can implement the [`ConfigCache`](https://github.com/configcat/ruby-sdk/blob/master/lib/configcat/interfaces.rb) interface
+and set the `config_cache` parameter in the options passed to `ConfigCat.get`.
+This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
+
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the ConfigCache abstract class:
 
 ```ruby
@@ -587,6 +593,10 @@ client = ConfigCat.get('#YOUR-SDK-KEY#',
     )
 )
 ```
+
+:::info
+The Ruby SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 ## Force refresh
 
