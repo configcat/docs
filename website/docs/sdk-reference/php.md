@@ -147,12 +147,12 @@ $user = new \ConfigCat\User("john@example.com");
 
 ### Customized user object creation
 
-| Parameters   | Description                                                                                                                |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                    |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                  |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                  |
-| `custom`     | Optional array for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| Parameters   | Description                                                                                                                                                          |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
+| `email`      | Optional parameter for easier targeting rule definitions.                                                                                                            |
+| `country`    | Optional parameter for easier targeting rule definitions.                                                                                                            |
+| `custom`     | Optional `array of strings` representing the custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. The value's type of the array must be a `string`. |
 
 ```php
 $user = new \ConfigCat\User(

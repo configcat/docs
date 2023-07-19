@@ -159,12 +159,12 @@ user_object = ConfigCat::User.new('john@example.com')
 
 ### Customized user object creation
 
-| Parameters   | Description                                                                                                                     |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| Parameters   | Description                                                                                                                                                          |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
+| `email`      | Optional parameter for easier targeting rule definitions.                                                                                                            |
+| `country`    | Optional parameter for easier targeting rule definitions.                                                                                                            |
+| `custom`     | Optional `dictionary of strings` representing the custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```ruby
 user_object = ConfigCat::User.new('#UNIQUE-USER-IDENTIFIER#', email: 'john@example', country: 'United Kingdom',
