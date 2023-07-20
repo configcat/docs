@@ -75,5 +75,5 @@ Support for shared caching was introduced in these SDK versions:
 | Node    | [v10.0.0](https://github.com/configcat/node-sdk/releases/tag/v10.0.0)  |
 | PHP     | TBA                                                                    |
 | Python  | [v8.0.0](https://github.com/configcat/python-sdk/releases/tag/v8.0.0)  |
-| Ruby    | TBA                                                                    |
+| Ruby    | [v7.0.0](https://github.com/configcat/ruby-sdk/releases/tag/v7.0.0)    |
 | Swift   | TBA                                                                    |
