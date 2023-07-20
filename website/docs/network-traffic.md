@@ -1,15 +1,29 @@
 ---
 id: network-traffic
-title: What is considered as Network Traffic?
+title: Network Traffic
 description: Network Traffic refers to the data transmitted between your applications and ConfigCat servers.
 ---
 Network Traffic refers to the data transmitted between your applications and ConfigCat CDN. It includes the requests made to fetch feature flags and settings.
+
+Generally speaking the Network Traffic is proportional to 
+- the size of the `config JSON`, 
+- the number of clients connecting to ConfigCat,
+- and the frequency of changes in the `config JSON`.
+
+#### Size of the `config JSON`
+Affected by the number of feature flags, settings, targeting rules, segments, and the length of their values.
+
+#### Number of clients connecting to ConfigCat
+Each time a client downloads the `config JSON` it counts as a Network Traffic.
+
+#### Frequency of changes in the `config JSON`
+The `config JSON` is cached on the ConfigCat CDN. If there is no change the ConfigCat CDN will reply with a `304 Not Modified` response. If there is a change the ConfigCat CDN will reply with a `200 OK` response and the new `config JSON` will be downloaded.
 
 ### Shared infrastructure
 
 The following plans run on shared infrastructure. So all customers use the same API nodes and Config Delivery Network (CDN).
 
-| Plan           | GB /month |
+| Plan           | GB / month |
 | -------------- | --------: |
 | **Free**       |        20 |
 | **Pro**        |       100 |
@@ -30,18 +44,16 @@ Runs on dedicated servers provided by ConfigCat. The basic package includes:
 - 1x API node
 - 6x CDN nodes
 
-|                               | GB /month |
+|                               | GB / month |
 | ----------------------------- | --------: |
 | **Basic package**             |        24 |
 | **Every additional CDN node** |       + 4 |
 
 #### On-Premise (Self-hosted)
 
-Runs on the customer's own servers. We suggest <a href="https://configcat.com/support/" target="_blank">contacting ConfigCat's engineering</a>team on exact requirements and performance.
+Runs on the customer's own servers. We suggest <a href="https://configcat.com/support/" target="_blank">contacting ConfigCat's engineering</a> team on exact requirements and performance.
 
 ## How to reduce the monthly Network Traffic?
-
-Generally speaking the Network Traffic is proportional to the size of the `config JSON` and the number of `config JSON` downloads per month.
 
 ### Delete the old feature flags and unused targeting rules
 
