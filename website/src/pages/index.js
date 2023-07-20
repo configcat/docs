@@ -14,6 +14,7 @@ const features = [
       { url: 'getting-started', title: 'Getting started' },
       { url: 'main-concepts', title: 'Main Concepts' },
       { url: 'requests', title: 'What is a config JSON download?' },
+      { url: 'network-traffic', title: 'Network traffic' },
       { url: 'purchase', title: 'Plans, Purchase & Billing' },
       { url: 'organization', title: 'Organization & Roles' },
       { url: 'faq', title: 'FAQ' },
