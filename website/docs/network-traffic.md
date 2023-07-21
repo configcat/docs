@@ -17,7 +17,7 @@ Affected by the number of feature flags, settings, targeting rules, segments, an
 Every time a client downloads the config JSON, it contributes to the overall Network Traffic.
 
 #### Frequency of changes in the `config JSON`
-The `config JSON` is cached on the ConfigCat CDN. If there is no change the ConfigCat CDN will reply with a `304 Not Modified` response. If there is a change the ConfigCat CDN will reply with a `200 OK` response and the new `config JSON` will be downloaded.
+The `config JSON` is cached on the ConfigCat CDN. If there is no change, the ConfigCat CDN will reply with a `304 Not Modified` response. If there is a change, the ConfigCat CDN will reply with a `200 OK` response and the new `config JSON` will be downloaded.
 
 ### Shared infrastructure
 
