@@ -45,7 +45,6 @@ Runs on dedicated servers provided by ConfigCat.
 |                               | Data / month |
 | ----------------------------- | -----------: |
 | **Basic package**             |        24 TB |
-| **Every additional CDN node** |      + 4  TB |
 
 #### On-Premise (Self-hosted)
 
