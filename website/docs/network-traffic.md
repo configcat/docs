@@ -23,12 +23,12 @@ The `config JSON` is cached on the ConfigCat CDN. If there is no change the Conf
 
 The following plans run on shared infrastructure. So all customers use the same API nodes and Config Delivery Network (CDN).
 
-| Plan           | GB / month |
-| -------------- | --------: |
-| **Free**       |        20 |
-| **Pro**        |       100 |
-| **Smart**      |      1000 |
-| **Enterprise** |     24000 |
+| Plan           | Data / month |
+| -------------- | -----------: |
+| **Free**       |        20 GB |
+| **Pro**        |       100 GB |
+| **Smart**      |         1 TB |
+| **Enterprise** |         4 TB |
 
 :::info
 If you hit this limit, we will keep your application up and running. However, you can expect us to contact you on how we can meet your needs.
@@ -40,14 +40,12 @@ The following plans include dedicated API and CDN nodes.
 
 #### Hosted
 
-Runs on dedicated servers provided by ConfigCat. The basic package includes:
-- 1x API node
-- 6x CDN nodes
+Runs on dedicated servers provided by ConfigCat.
 
-|                               | GB / month |
-| ----------------------------- | --------: |
-| **Basic package**             |        24 |
-| **Every additional CDN node** |       + 4 |
+|                               | Data / month |
+| ----------------------------- | -----------: |
+| **Basic package**             |        24 TB |
+| **Every additional CDN node** |      + 4  TB |
 
 #### On-Premise (Self-hosted)
 
