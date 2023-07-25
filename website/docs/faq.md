@@ -80,13 +80,13 @@ If possible, you can allow the whole "configcat.com" domain. Alternatively, you 
 - The Public Management API: https://api.configcat.com
 - The Dashboard URL: https://app.configcat.com
 
-### I can't log in to ConfigCat because I forgot my 2FA (Two-factor authentication) code.
+### I can't log in to ConfigCat using two-factor (2FA) authentication.
 
 _Solution 1:_ There might be an authenticator app on your phone that you can use to log in to ConfigCat.
 
-_Solution 2:_ Contact your `Organization Admin`, and ask them to disable 2FA for your account until you set it up again. After he re-enables the 2FA, new recovery codes will also be (re)generated.
+_Solution 2:_ Use your recovery codes that you received when you first set your 2FA up.
 
-_Solution 3:_ Use your recovery codes that you received when you first set your 2FA up.
+_Solution 3:_ Contact your `Organization Admin`, and ask them to disable 2FA for your account until you set it up again. `Organization Admins` can disable 2FA on the [Members & Roles](https://app.configcat.com/organization/members) page. After you re-enable the 2FA, new recovery codes will also be (re)generated. It might be a good idea to save them to avoid such issues in the future.
 
 ### The Audit log doesn't show old operations
 
