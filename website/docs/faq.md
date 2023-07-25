@@ -80,7 +80,7 @@ If possible, you can allow the whole "configcat.com" domain. Alternatively, you 
 - The Public Management API: https://api.configcat.com
 - The Dashboard URL: https://app.configcat.com
 
-### I can't log in using two-factor (2FA) authentication.
+### I can't log in to ConfigCat using two-factor (2FA) authentication.
 
 _Solution 1:_ There might be an authenticator app on your phone that you can use to log in to ConfigCat.
 
