@@ -112,7 +112,7 @@ module.exports = {
           ],
         },
         {
-          'ConfigCat Proxy': [
+          'ConfigCat Proxy (Beta)': [
             {
               type: 'doc',
               id: 'advanced/proxy/proxy-overview',

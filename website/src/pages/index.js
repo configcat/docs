@@ -51,7 +51,7 @@ const features = [
       },
       {
         url: 'advanced/proxy/proxy-overview',
-        title: 'ConfigCat Proxy',
+        title: 'ConfigCat Proxy (Beta)',
       },
       // { url: 'advanced/config-v2-migration-guide', title: 'Config V2 Migration Guide' },
     ],

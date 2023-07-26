@@ -1,12 +1,16 @@
 ---
 id: proxy-overview
-title: ConfigCat Proxy
+title: ConfigCat Proxy (Beta)
 description: The ConfigCat Proxy allows you to host a feature flag evaluation service in your own infrastructure.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
+
+:::info
+This ConfigCat Proxy is in a public beta phase. If you have feedback or questions, please [contact us](https://configcat.com/support).
+:::
 
 The <a target="_blank" href="https://github.com/configcat/configcat-proxy">ConfigCat Proxy</a> allows you to host a feature flag evaluation service in your own infrastructure. It's a small Go application that communicates with ConfigCat's CDN network and caches/proxies *config JSON* files for your frontend and backend applications. The *config JSON* contains all the data that needed for ConfigCat SDKs to evaluate feature flags.
 
@@ -694,6 +698,10 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_POLL_INTERVAL=5
 
 You have the option to cache feature flag evaluation data in an external cache. Currently, the only available option is <a target="blank" href="https://redis.io">Redis</a>.  
 The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
+
+:::info
+The ConfigCat Proxy supports *shared caching*. This means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 <Tabs groupId="yaml-env">
 <TabItem value="yaml" label="YAML" default>
