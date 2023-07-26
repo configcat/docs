@@ -12,12 +12,12 @@ import CodeBlock from '@theme/CodeBlock';
 The ConfigCat Proxy is in a public beta phase. If you have feedback or questions, please [contact us](https://configcat.com/support).
 :::
 
-The <a target="_blank" href="https://github.com/configcat/configcat-proxy">ConfigCat Proxy</a> allows you to host a feature flag evaluation service in your own infrastructure. It's a small Go application that communicates with ConfigCat's CDN network and caches/proxies *config JSON* files for your frontend and backend applications. The *config JSON* contains all the data that needed for ConfigCat SDKs to evaluate feature flags.
+The <a target="_blank" href="https://github.com/configcat/configcat-proxy">ConfigCat Proxy</a> allows you to host a feature flag evaluation service in your own infrastructure. It's a small Go application that communicates with ConfigCat's CDN network and caches/proxies *config JSON* files for your frontend and backend applications. The *config JSON* contains all the data that is needed for ConfigCat SDKs to evaluate feature flags.
 
 The Proxy provides the following:
 - **Performance**: The Proxy can be deployed close to your applications and can serve the downloaded *config JSON* files from memory. ConfigCat SDKs then can operate on the [proxied *config JSON*](/advanced/proxy/endpoints#cdn-proxy). This can reduce the duration of feature flag evaluation for stateless or short lived applications.
 - **Reliability**: The Proxy can store the downloaded *config JSON* files in an external [cache](#cache). It can fall back to operating on the cached *config JSON* if the ConfigCat CDN network becomes inaccessible.
-- **Security**: The Proxy can act as a [server side flag evaluation](/advanced/proxy/endpoints#api) component. Using like that can prevent the exposure of *config JSON* files to frontend and mobile applications.
+- **Security**: The Proxy can act as a [server side flag evaluation](/advanced/proxy/endpoints#api) component. Using it like that can prevent the exposure of *config JSON* files to frontend and mobile applications.
 - **Scalability**: Horizontal scaling allows you to align with the load coming from your applications accordingly.
 - **Streaming**: The Proxy provides real-time feature flag change notifications via [Server-Sent Events (SSE)](/advanced/proxy/endpoints#sse) and [gRPC](/advanced/proxy/grpc).
 
