@@ -12,10 +12,10 @@ export const GoSchema = require('@site/src/schema-markup/sdk-reference/go.json')
 ></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/go-sdk.svg?style=social)](https://github.com/configcat/go-sdk/stargazers)
-[![Build Status](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml/badge.svg?branch=master)](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/configcat/go-sdk)](https://goreportcard.com/report/github.com/configcat/go-sdk)
-[![codecov](https://codecov.io/gh/configcat/go-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/go-sdk)
-[![GoDoc](https://godoc.org/github.com/configcat/go-sdk?status.svg)](https://pkg.go.dev/github.com/configcat/go-sdk/v7)
+[![Build Status](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml/badge.svg?branch=v8)](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/configcat/go-sdk/v8)](https://goreportcard.com/report/github.com/configcat/go-sdk/v8)
+[![codecov](https://codecov.io/gh/configcat/go-sdk/branch/v8/graph/badge.svg)](https://codecov.io/gh/configcat/go-sdk)
+[![GoDoc](https://godoc.org/github.com/configcat/go-sdk?status.svg)](https://pkg.go.dev/github.com/configcat/go-sdk/v8)
 
 <a href="https://github.com/configcat/go-sdk" target="_blank">ConfigCat Go SDK on GitHub</a>
 
@@ -24,13 +24,13 @@ export const GoSchema = require('@site/src/schema-markup/sdk-reference/go.json')
 ### 1. Get the SDK with `go`
 
 ```bash
-go get github.com/configcat/go-sdk/v7
+go get github.com/configcat/go-sdk/v8
 ```
 
 ### 2. Import the ConfigCat package
 
 ```go
-import "github.com/configcat/go-sdk/v7"
+import "github.com/configcat/go-sdk/v8"
 ```
 
 ### 3. Create the _ConfigCat_ client with your _SDK Key_
@@ -90,7 +90,6 @@ Available optional properties:
 | `Logger`           | `configcat.Logger`         | Sets the `Logger` implementation used by the SDK for logging. [More about logging](#logging)                                                                                                                                                                                                    |
 | `PollingMode`      | `configcat.PollingMode`    | Defaults to `AutoPoll`. Sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                       |
 | `PollInterval`     | `time.Duration`            | Sets after how much time a configuration is considered stale. When `PollingMode` is `AutoPoll` this value is used as the polling rate.                                                                                                                                                          |
-| `ChangeNotify`     | `func()`                   | **Deprecated**. Replaced by the `OnConfigChanged()` [hook](#hooks).                                                                                                                                                                                                                             |
 | `FlagOverrides`    | `*configcat.FlagOverrides` | Sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                          |
 | `DefaultUser`      | `configcat.User`           | Sets the default user. [More about default user.](#default-user).                                                                                                                                                                                                                               |
 | `Offline`          | `bool`                     | Defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                        |
@@ -263,17 +262,6 @@ Use the the `PollInterval` option parameter of the _ConfigCat Client_ to change 
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     PollingMode: configcat.AutoPoll,
     PollInterval: time.Second * 120 /* polling interval in seconds */})
-```
-
-You have the option to set up a `ChangeNotify` callback that will be notified when a new configuration is fetched. The policy calls the given method only, when the new configuration differs from the cached one.
-
-```go
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
-    PollingMode: configcat.AutoPoll,
-    PollInterval: time.Second * 120, /* polling interval in seconds */
-    ChangeNotify: func() {
-		// here you can subscribe to configuration changes
-	}})
 ```
 
 ### Lazy loading
@@ -523,7 +511,9 @@ boolValue := boolSettingDescriptor.Get(snapshot)
 
 ## Custom Cache
 
-You have the option to inject your custom cache implementation into the client. All you have to do is to satisfy the `ConfigCache` interface:
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can implement the [`ConfigCache`](https://github.com/configcat/go-sdk/blob/v8/configcat_client.go#L106) interface.
 
 ```go
 type CustomCache struct {
@@ -544,6 +534,10 @@ Then use your custom cache implementation:
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     Cache: CustomCache{}})
 ```
+
+:::info
+The Go SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 ## Force refresh
 
@@ -584,7 +578,7 @@ The default logger used by the SDK is [logrus](https://github.com/sirupsen/logru
 
 ```go
 import {
-	"github.com/configcat/go-sdk/v7"
+	"github.com/configcat/go-sdk/v8"
 	"github.com/sirupsen/logrus"
 }
 
@@ -599,7 +593,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
 
 ```go
 import {
-	"github.com/configcat/go-sdk/v7"
+	"github.com/configcat/go-sdk/v8"
 	"github.com/sirupsen/logrus"
 }
 
