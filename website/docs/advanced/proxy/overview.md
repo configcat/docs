@@ -701,6 +701,9 @@ The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier-
 
 :::info
 The ConfigCat Proxy supports *shared caching*. This means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+
+<img className="bordered zoomable" src="/docs/assets/proxy/shared_cache.png" alt="Shared cache architecture" />
+
 :::
 
 <Tabs groupId="yaml-env">
