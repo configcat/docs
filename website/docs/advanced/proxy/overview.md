@@ -31,8 +31,8 @@ The following diagram shows the high level architecture of the Proxy.
 The Proxy wraps one or more SDK instances for handling feature flag evaluation requests. It also serves the related *config JSON* files that can be consumed by other ConfigCat SDKs running in your applications. 
 
 Within the Proxy, the underlying SDK instances can run in the following modes:
-- **Online**: In this mode the underlying SDK has an active connection to the ConfigCat CDN network through the internet.
-- **Offline**: In [this mode](#offline-mode) the underlying SDK doesn't have an active connection to ConfigCat. Instead, it uses the configured cache or a file as a source of its *config JSON*.
+- **Online**: In this mode, the underlying SDK has an active connection to the ConfigCat CDN network through the internet.
+- **Offline**: In [this mode](#offline-mode), the underlying SDK doesn't have an active connection to ConfigCat. Instead, it uses the configured cache or a file as a source of its *config JSON*.
 
 With the combination of the above modes you can construct a cluster of proxies where only one node is responsible for the communication with ConfigCat and all the other nodes are working from a central cache.
 
