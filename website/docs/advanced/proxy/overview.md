@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
 :::info
-This ConfigCat Proxy is in a public beta phase. If you have feedback or questions, please [contact us](https://configcat.com/support).
+The ConfigCat Proxy is in a public beta phase. If you have feedback or questions, please [contact us](https://configcat.com/support).
 :::
 
 The <a target="_blank" href="https://github.com/configcat/configcat-proxy">ConfigCat Proxy</a> allows you to host a feature flag evaluation service in your own infrastructure. It's a small Go application that communicates with ConfigCat's CDN network and caches/proxies *config JSON* files for your frontend and backend applications. The *config JSON* contains all the data that needed for ConfigCat SDKs to evaluate feature flags.
