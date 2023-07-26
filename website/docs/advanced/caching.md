@@ -65,7 +65,7 @@ Support for shared caching was introduced in these SDK versions:
 | C++     | [v3.0.0](https://github.com/configcat/cpp-sdk/releases/tag/v3.0.0)     |
 | Dart    | TBA                                                                    |
 | Elixir  | TBA                                                                    |
-| Go      | TBA                                                                    |
+| Go      | [v8.0.0](https://github.com/configcat/go-sdk/releases/tag/v8.0.0)      |
 | Java    | [v8.2.0](https://github.com/configcat/java-sdk/releases/tag/v8.2.0)    |
 | Android | [v9.0.0](https://github.com/configcat/android-sdk/releases/tag/v9.0.0) |
 | JS      | [v8.0.0](https://github.com/configcat/js-sdk/releases/tag/v8.0.0)      |
