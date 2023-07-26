@@ -527,6 +527,12 @@ auto allValueDetails = client->getAllValueDetails(&user)
 
 ## Custom Cache
 
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can implement the [`ConfigCache`](https://github.com/configcat/cpp-sdk/blob/main/include/configcat/configcache.h#L8) interface
+and set the `configCache` parameter in the options passed to `ConfigCatClient::get`.
+This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
+
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCatCache` abstract class:
 
 ```cpp
@@ -549,6 +555,10 @@ ConfigCatOptions options;
 options.configCache = make_shared<MyCustomCache>();
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
+
+:::info
+The C++ SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 ## Force refresh
 

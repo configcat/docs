@@ -32,6 +32,10 @@ Blue/Green deployments offer near-zero downtime and rollback capabilities. The c
 
 A Canary Release is a type of progressive delivery where a small percentage of users are exposed to a new feature. If the feature works as expected, the percentage of users exposed to the feature is increased. If the feature does not work as expected, the feature is rolled back.
 
+#### [Canary Testing](https://configcat.com/canary-testing/)
+
+Canary testing is a software deployment technique where updates or new features are rolled out to a small, carefully selected subset of users before being released to the entire user base, to test and ensure their effectiveness and safety.
+
 #### CI/CD Pipeline
 
 A Continuous Integration and Continuous Deployment pipeline (CI/CD) is a set of steps that must be followed to deliver a new software version to customers.
@@ -54,7 +58,7 @@ Continuous Integration refers to the regular merging of code changes into a cent
 
 A Dark Launch is rolled out stealthily by first releasing a feature to a subset of users before a full release to see how they react to it.
 
-#### Developer Advocate
+#### [Developer Advocate](https://configcat.com/blog/2023/07/11/role-of-developer-advocates/)
 
 A Developer Advocate is a person whose job is to help developers be successful with a platform or a technology and to speak (or write) on their behalf.
 
@@ -66,11 +70,11 @@ The DevOps Engineer is responsible for the development and maintenance of the in
 
 ## F
 
-#### Fake Door Testing
+#### [Fake Door Testing](https://configcat.com/fake-door-testing/)
 
 Fake Door Testing is a technique used to assess the market demand for a product prior to investing in its development.
 
-#### Feature Branch
+#### [Feature Branch](https://configcat.com/feature-branch/)
 
 A feature branch is a copy of the main codebase where an individual or team of software developers can work on a new feature until it is complete.
 
@@ -81,6 +85,29 @@ A feature flag is a toggle used to activate or deactivate specific features you 
 #### Feature Testing
 
 An experiment to determine which version of a feature offers the best user experience is called a Feature Test.
+
+#### [Feature Flag Framework](https://configcat.com/feature-flag-framework-explained/)
+
+A feature flag framework is a system that allows developers to enable or disable specific functionalities of an application, enabling testing, gradual rollouts, and easy adjustments without redeploying the whole software.
+
+
+#### [Feature Flagging Tools](https://configcat.com/feature-flagging-tools/)
+
+Feature flagging tools are software utilities that enable developers to control the visibility and operational state of individual features in a software product, allowing for selective exposure and A/B testing without requiring system-wide updates or redeployments.
+
+#### [Feature Flags as a Service](https://configcat.com/feature-flag-as-a-service/)
+
+Providing feature flags as a service involves delivering (under a subscription model) a cloud solution for managing software features, enhancing development efficiency, risk control, and user experience.
+
+
+#### [Feature Toggles](https://configcat.com/feature-toggles/)
+
+Feature toggles, also known as feature flags, are a software development technique that allows the enabling or disabling of specific functionalities within an application, facilitating testing, incremental rollouts, and feature control without redeploying the software.
+
+
+#### [Feature Toggle Management](https://configcat.com/feature-toggle-management/)
+
+Feature toggle management refers to the process of controlling and coordinating the use of feature flags or toggles in software development, enabling developers to switch on or off certain functionalities for testing, deployment, or user experience customization.
 
 ## G
 
@@ -122,6 +149,14 @@ A progressive delivery approach to DevOps combines the principles of Continuous 
 
 ## R
 
+#### [Rails Feature Flags](https://configcat.com/rails-feature-flag/)
+
+Rails feature flags are conditional coding elements used in Ruby on Rails applications that enable or disable specific features dynamically, facilitating controlled release, A/B testing, and gradual rollout of software functionalities.
+
+#### [React Feature Flags](https://configcat.com/react-feature-flag/)
+
+React feature flags are conditional codes used in React.js applications to enable or disable certain features dynamically, allowing for controlled release, testing, and customization of software functionalities.
+
 #### Release Manager
 
 A release manager is an IT professional responsible for defining and executing the software release process within a company, ensuring smooth deployment and high quality releases.
@@ -130,7 +165,7 @@ A release manager is an IT professional responsible for defining and executing t
 
 Remote configuration is a software development technique that allows you to modify certain features of an app remotely without having to deploy a new version of the app.
 
-#### [Ring Deployment](https://configcat.com/blog/2022/01/14/progressive-delivery/#ring-deployment)
+#### [Ring Deployment](https://configcat.com/ring-deployment/)
 
 Ring deployment is a form of gradual rollout where new features are released gradually to different groups of users to mitigate risk.
 
@@ -144,13 +179,19 @@ A site reliability engineer (SRE) is a professional in the field of information 
 
 Smoke testing is a type of testing done early in the software development process to confirm that the most critical features of an application are functioning correctly.
 
-#### Soak Testing
+#### [Soak Testing](https://configcat.com/soak-testing/)
 
 Soak testing is a type of non-functional testing that assesses a software application's performance under a high volume of load over an extended period of time.
 
 #### Software Development Life Cycle
 
 The Software Development Life Cycle (SDLC) is a systematic approach aimed at producing high-quality, low-cost software efficiently and within a shorter timeframe.
+
+#### [Software as a Service](https://configcat.com/feature-flag-saas/)
+
+Software as a Service (SaaS) is a cloud-based delivery model where applications are hosted and maintained by a service provider and accessed by users over the internet, typically on a subscription basis.
+
+
 
 ## T
 

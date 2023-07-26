@@ -62,7 +62,7 @@ Support for shared caching was introduced in these SDK versions:
 | SDK     | Version                                                                |
 | ------- | ---------------------------------------------------------------------- |
 | .NET    | [v8.1.0](https://github.com/configcat/.net-sdk/releases/tag/v8.1.0)    |
-| C++     | TBA                                                                    |
+| C++     | [v3.0.0](https://github.com/configcat/cpp-sdk/releases/tag/v3.0.0)     |
 | Dart    | TBA                                                                    |
 | Elixir  | TBA                                                                    |
 | Go      | TBA                                                                    |
@@ -75,5 +75,5 @@ Support for shared caching was introduced in these SDK versions:
 | Node    | [v10.0.0](https://github.com/configcat/node-sdk/releases/tag/v10.0.0)  |
 | PHP     | TBA                                                                    |
 | Python  | [v8.0.0](https://github.com/configcat/python-sdk/releases/tag/v8.0.0)  |
-| Ruby    | TBA                                                                    |
+| Ruby    | [v7.0.0](https://github.com/configcat/ruby-sdk/releases/tag/v7.0.0)    |
 | Swift   | TBA                                                                    |

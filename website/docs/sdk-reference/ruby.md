@@ -159,12 +159,12 @@ user_object = ConfigCat::User.new('john@example.com')
 
 ### Customized user object creation
 
-| Parameters   | Description                                                                                                                     |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| Parameters   | Description                                                                                                                                                          |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
+| `email`      | Optional parameter for easier targeting rule definitions.                                                                                                            |
+| `country`    | Optional parameter for easier targeting rule definitions.                                                                                                            |
+| `custom`     | Optional `dictionary of strings` representing the custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```ruby
 user_object = ConfigCat::User.new('#UNIQUE-USER-IDENTIFIER#', email: 'john@example', country: 'United Kingdom',
@@ -557,6 +557,12 @@ all_value_details = client.get_all_value_details(ConfigCat::User.new('#UNIQUE-US
 
 ## Custom cache
 
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can implement the [`ConfigCache`](https://github.com/configcat/ruby-sdk/blob/master/lib/configcat/interfaces.rb) interface
+and set the `config_cache` parameter in the options passed to `ConfigCat.get`.
+This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
+
 You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the ConfigCache abstract class:
 
 ```ruby
@@ -587,6 +593,10 @@ client = ConfigCat.get('#YOUR-SDK-KEY#',
     )
 )
 ```
+
+:::info
+The Ruby SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 ## Force refresh
 

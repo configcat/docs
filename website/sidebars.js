@@ -6,6 +6,7 @@ module.exports = {
         'main-concepts',
         'purchase',
         'requests',
+        'network-traffic',
         'organization',
       ],
       Guides: [

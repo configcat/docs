@@ -5,6 +5,7 @@ description: ConfigCat .NET, .NET Core SDK Reference. This is a step-by-step gui
 ---
 
 <head>
+    <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://configcat.com/docs/sdk-reference/dotnet/" />
 </head>
 
