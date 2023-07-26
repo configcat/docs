@@ -34,7 +34,7 @@ Within the Proxy, the underlying SDK instances can run in the following modes:
 - **Online**: In this mode, the underlying SDK has an active connection to the ConfigCat CDN network through the internet.
 - **Offline**: In [this mode](#offline-mode), the underlying SDK doesn't have an active connection to ConfigCat. Instead, it uses the configured cache or a file as a source of its *config JSON*.
 
-With the combination of the above modes you can construct a cluster of proxies where only one node is responsible for the communication with ConfigCat and all the other nodes are working from a central cache.
+With the combination of the above modes, you can construct a cluster of proxies where only one node is responsible for the communication with ConfigCat, and all the other nodes are working from a central cache.
 
 <img className="bordered zoomable" src="/docs/assets/proxy/load_balanced.png" alt="Load balanced Proxy architecture" />
 
@@ -220,20 +220,20 @@ CONFIGCAT_LOG_LEVEL="<error|warn|info|debug>"
 
 ### SDK
 
-In order to make the Proxy work properly it must be set up with one or more <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a>. It will instantiate one SDK instance for each SDK key.
-In case of environment variables the SDK keys can be specified in a **JSON key-value** format where the **key is the identifier** of a specific SDK and the **value is the actual SDK key**.
+In order to make the Proxy work properly, it must be set up with one or more <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a>. It will instantiate one SDK instance for each SDK key.
+In case of environment variables, the SDK keys can be specified in a **JSON key-value** format, where the **key is the identifier** of a specific SDK and the **value is the actual SDK key**.
 The **SDK identifier** part is later used in [endpoint route variables](/advanced/proxy/endpoints) to recognize which SDK must serve the given flag evaluation request.
 
-Furthermore, when the Proxy is configured **via environment variables**, the identifier becomes a **part in the SDK specific environment variable's name** using the following format: `CONFIGCAT_<SDK_ID>_<OPTION>`.
+Furthermore, when configuring the Proxy **via environment variables**, the identifier becomes a **part of the SDK specific environment variable's name** using the following format: `CONFIGCAT_<SDK_ID>_<OPTION>`.
 
-For example, given the following SDK key-value option: `CONFIGCAT_SDKS={"my-sdk":"<your-sdk-key>"}`.  
-The environment variable that will set the SDK's poll interval will be named like: `CONFIGCAT_MY_SDK_POLL_INTERVAL`.
+For example, suppose we have the following SDK key-value option: `CONFIGCAT_SDKS={"my-sdk":"<your-sdk-key>"}`.  
+In this case, the environment variable that sets the SDK's poll interval will be named as follows: `CONFIGCAT_MY_SDK_POLL_INTERVAL`.
 
 :::info
 The SDK identifier part of the environment variables is always transformed to uppercase and each hyphen (`-`) character is replaced with underscore (`_`).
 :::
 
-In case of a YAML file the **SDK identifier** is the property name set under the `sdks` node.
+In case of a YAML file, the **SDK identifier** is the property name set under the `sdks` node.
 
 ```yaml title="options.yml"
 sdks:
@@ -700,7 +700,7 @@ You have the option to cache feature flag evaluation data in an external cache. 
 The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
 
 :::info
-The ConfigCat Proxy supports *shared caching*. This means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The ConfigCat Proxy supports *shared caching*, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 
 <img className="bordered zoomable" src="/docs/assets/proxy/shared_cache.png" alt="Shared cache architecture" />
 
@@ -778,7 +778,7 @@ CONFIGCAT_CACHE_REDIS_ADDRESSES='["<addr1>", "<addr2>"]'
 
 </td>
 <td><code>["localhost:6379"]</code></td>
-<td>The addresses of the Redis instances. The Proxy uses <a target="blank" href="https://redis.uptrace.dev/guide/universal.html">Universal Redis clients</a>, so if the array contains multiple addresses it will use <code>ClusterClient</code> instances.</td>
+<td>The addresses of the Redis instances. The Proxy uses <a target="blank" href="https://redis.uptrace.dev/guide/universal.html">Universal Redis clients</a>, so if the array contains multiple addresses, it will use <code>ClusterClient</code> instances.</td>
 </tr>
 
 <tr>
