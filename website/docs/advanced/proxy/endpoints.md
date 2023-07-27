@@ -18,7 +18,7 @@ The CDN proxy endpoint's purpose is to forward the underlying *config JSON* to o
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/&#123;sdkId&#125;/&#123;config-json-file&#125;</span></summary>
 
-This endpoint is mainly used by ConfigCat SDKs to retreive all required data for feature flag evaluation. 
+This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for feature flag evaluation. 
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.

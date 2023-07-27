@@ -498,7 +498,7 @@ CONFIGCAT_MY_SDK_LOG_LEVEL="<error|warn|info|debug>"
 
 #### Offline Mode
 
-The following options are specific to the SDK's offline mode. In offline mode, there's two ways the Proxy can get the required feature flag evaluation data for the underlying SDKs.
+The following options are specific to the SDK's offline mode. In offline mode, there are two ways the Proxy can get the required feature flag evaluation data for the underlying SDKs.
 
 - **Polling a cache**: The Proxy can poll a cache for feature flag changes. It can use the same cache that an **online** Proxy instance writes. <a href="#cache">More about the cache option</a>.
 - **Watching / polling a file**: The Proxy can watch or poll for modifications in a file that contains the evaluation data of feature flags. For watching, the Proxy uses the <a target="blank" href="https://github.com/fsnotify/fsnotify">fsnotify</a> library.
