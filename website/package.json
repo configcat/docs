@@ -15,6 +15,7 @@
     "@docusaurus/core": "^2.4.0",
     "@docusaurus/plugin-google-tag-manager": "^2.4.0",
     "@docusaurus/preset-classic": "^2.4.0",
+    "docusaurus-plugin-sass": "^0.2.2",
     "@mdx-js/react": "^1.6.22",
     "@svgr/webpack": "^6.4.0",
     "clsx": "^1.2.1",

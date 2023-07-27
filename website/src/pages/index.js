@@ -49,6 +49,10 @@ const features = [
         url: 'advanced/code-references/overview',
         title: 'Scan & Upload Code References',
       },
+      {
+        url: 'advanced/proxy/proxy-overview',
+        title: 'ConfigCat Proxy (Beta)',
+      },
       // { url: 'advanced/config-v2-migration-guide', title: 'Config V2 Migration Guide' },
     ],
   },
