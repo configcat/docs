@@ -597,6 +597,44 @@ settingValues = await configCatClient.getAllValueDetailsAsync(userObject);
 settingValues.forEach((details) => console.log(details));
 ```
 
+## Snapshots and synchronous feature flag evaluation
+
+On JavaScript platforms, the _ConfigCat_ client provides only asynchronous methods for evaluating feature flags and settings
+because these operations may involve network communication (downloading config data from the ConfigCat CDN servers),
+which is necessarily an asynchronous operation in JavaScript.
+
+However, there may be use cases where synchronous evaluation is preferable, thus, since v8.1.0, the JavaScript SDK provides a way
+to synchronously evaluate feature flags and settings via *snapshots*.
+
+Using the `snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
+and you can use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
+
+```js
+const configCatClient = configcat.getClient("#YOUR-SDK-KEY#", configcat.PollingMode.ManualPoll);
+
+// Make sure that the latest config data is available locally.
+await configCatClient.forceRefreshAsync();
+
+const snapshot = configCatClient.snapshot();
+
+const user = new configcat.User('#UNIQUE-USER-IDENTIFIER#');
+for (const key of snapshot.getAllKeys()) {
+  const value = snapshot.getValue(key, null, user);
+  console.log(`${key}: ${value}`);
+}
+```
+
+In Auto Poll mode, you can use the `waitForReady` method to wait for that latest config data to become available locally:
+
+```js
+const configCatClient = configcat.getClient("#YOUR-SDK-KEY#", configcat.PollingMode.AutoPoll);
+
+// Make sure that the latest config data is available locally.
+await configCatClient.waitForReady();
+
+const snapshot = configCatClient.snapshot();
+```
+
 ## Using custom cache implementation
 
 The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
