@@ -45,21 +45,23 @@ The next step will guide you on how to collect the information required for the 
 
 - From the next section of the dialog, copy the following values and paste them into the Auth0 configuration dialog.
 
+  - `Entity ID` -> `"audience": "<entity-id>"` in the configuration JSON below.
   - `Assertion Consumer Service` -> `Application Callback URL`
   - For `Settings`, use the following JSON value:
 
   ```
   {
-      "signatureAlgorithm": "rsa-sha256",
-      "nameIdentifierProbes": [
-          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
-      ]
+    "audience": "<paste-your-entity-id-here>",
+    "signatureAlgorithm": "rsa-sha256",
+    "nameIdentifierProbes": [
+      "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+    ]
   }
   ```
 
-   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/acs_only.png"  alt="ConfigCat ACS configuration" />
+   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_idp_config.png"  alt="ConfigCat ACS configuration" />
 
-   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/acs_url.png" alt="Auth0 ACS configuration"/>
+   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/acs_url_new.png" alt="Auth0 ACS configuration"/>
 
   - Click on `Save`.
 
