@@ -49,18 +49,18 @@ The next step will guide you on how to collect the information required for Conf
 
 - Give a name for your Identity Provider, and click `Create`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/idp_name.png" alt="ConfigCat Name Identity Provider" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/aad_name.png" alt="ConfigCat Name Identity Provider" />
 
 - From the next section of the dialog, copy the following values and paste them into the Enterprise application.
 
   - `Entity ID` -> `Identifier (Entity ID)`
   - `Assertion Consumer Service` -> `Reply URL (Assertion Consumer Service URL)`
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_idp_config.png" alt="ConfigCat SAML configuration" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/acs_entity_id_1.png" alt="ConfigCat SAML configuration" />
 
     <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/azure-ad/saml_urls.png" alt="Azure AD URL configuration" />
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/azure-ad/ad_urls.png" alt="Azure AD URLs" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/azure-ad/aad_acs_eid.png" alt="Azure AD URLs" />
 
 ## 3. Configure ConfigCat with SAML Details from Azure
 
