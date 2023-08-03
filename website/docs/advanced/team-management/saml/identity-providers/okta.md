@@ -45,20 +45,20 @@ The next step will guide you on how to collect the information required for the 
 
 - Give a name for your Identity Provider, and click `Create`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/idp_name.png" alt="ConfigCat Name Identity Provider" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/okta_name.png" alt="ConfigCat Name Identity Provider" />
 
 - From the next section of the dialog, copy the following values and paste them into the Okta application.
 
   - `Entity ID` -> `Audience URI (SP Entity ID)`
   - `Assertion Consumer Service` -> `Single sign on URL`
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_idp_config.png" alt="ConfigCat SAML configuration" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/acs_entity_id_1.png" alt="ConfigCat SAML configuration" />
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/okta/saml_url_eid.png" alt="Okta SAML url EID" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/okta/okta_acs_eid.png" alt="Okta SAML url EID" />
 
 - Set the `Name ID format` to `EmailAddress`, then click `Next`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/okta/saml_nameid.png" alt="Okta SAML nameid" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/okta/okta_name_id.png" alt="Okta SAML nameid" />
 
 - Select `I'm an Okta customer adding an internal app`. Complete the form with any comments and click `Finish`.
 

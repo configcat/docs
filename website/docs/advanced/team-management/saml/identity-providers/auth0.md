@@ -41,7 +41,7 @@ The next step will guide you on how to collect the information required for the 
 
 - Give a name for your Identity Provider, and click `Create`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/idp_name.png" alt="ConfigCat Name Identity Provider" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/auth0_name.png" alt="ConfigCat Name Identity Provider" />
 
 - From the next section of the dialog, copy the following values and paste them into the Auth0 configuration dialog.
 
@@ -59,9 +59,9 @@ The next step will guide you on how to collect the information required for the 
   }
   ```
 
-   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_idp_config.png"  alt="ConfigCat ACS configuration" />
+   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/acs_entity_id_1.png"  alt="ConfigCat ACS configuration" />
 
-   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/acs_url_new.png" alt="Auth0 ACS configuration"/>
+   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/auth0/auth0_acs_eid.png" alt="Auth0 ACS configuration"/>
 
   - Click on `Save`.
 

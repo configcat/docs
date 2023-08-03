@@ -45,7 +45,7 @@ The next step will guide you on how to configure ConfigCat with appearing inform
 
 - Give a name for your Identity Provider, and click `Create`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/idp_name.png" alt="ConfigCat Name Identity Provider" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/google_name.png" alt="ConfigCat Name Identity Provider" />
 
 - Select the `3. Set up ConfigCat` step, click `Manual Configuration`, then paste the copied values into the appearing fields.
 
@@ -64,14 +64,14 @@ The next step will guide you on how to configure the Google App with details pro
   - `Entity ID` -> `Entity ID`
   - `Assertion Consumer Service` -> `ACS URL`
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/google/cc_saml_config_new.png" alt="Google acs url" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/acs_entity_id_2.png" alt="Google acs url" />
 
   - Make sure the `Signed response` option is checked.
   - Select `EMAIL` as `Name ID format`.
   - Select `Basic Information > Primary email` as `Name ID`.
   - Click `CONTINUE`.
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/google/sp_data.png" alt="Google meta data" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/google/google_acs_eid.png" alt="Google meta data" />
 
 - Click `FINISH`.
 

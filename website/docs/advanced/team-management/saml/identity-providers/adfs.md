@@ -25,14 +25,14 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 - Give a name for your Identity Provider, and click `Create`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/idp_name.png" alt="ConfigCat Name Identity Provider" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/adfs_name.png" alt="ConfigCat Name Identity Provider" />
 
 - From the next section of the dialog, copy the following values and save them for further use.
 
   - `Entity ID`
   - `Assertion Consumer Service`
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_idp_config.png" alt="ConfigCat SAML configuration" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/acs_entity_id_1.png" alt="ConfigCat SAML configuration" />
 
 ## 2. Configure a Relying Party Trust
 

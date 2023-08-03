@@ -45,17 +45,17 @@ The next step will guide you on how to collect the information required for the 
 
 - Give a name for your Identity Provider, and click `Create`.
 
-  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/idp_name.png" alt="ConfigCat Name Identity Provider" />
+  <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/onelogin_name.png" alt="ConfigCat Name Identity Provider" />
 
 - From the next section of the dialog, copy the following values and paste them into the OneLogin application's configuration page.
 
   - Copy `Entity ID` and paste it into the `Audience (EntityID)` field.
   - Copy `Assertion Consumer Service` and paste it into the `ACS (Consumer) URL` field.
-  - Paste the same `Assertion Consumer Service` into the `ACS (Consumer) URL Validator` field in regex format e.g. `^https:\/\/dashboard\-api\.configcat\.com\/saml\/acs\/08d97769\-fed5\-4fd4\-8a09\-0a38bb951177$`
+  - Paste the same `Assertion Consumer Service` into the `ACS (Consumer) URL Validator` field in regex format e.g. `^https:\/\/dashboard\-api\.configcat\.com\/saml\/acs\/08db93fc\-c4e7\-441f\-834f\-17c804385c29$`
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/saml_idp_config.png" alt="ConfigCat SAML configuration" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/acs_entity_id_1.png" alt="ConfigCat SAML configuration" />
 
-    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/saml_config.png" alt="OneLogin SML configuration" />
+    <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/onelogin/onelogin_acs_eid.png" alt="OneLogin SML configuration" />
 
 - Scroll down a bit on this page and configure the following:
 
