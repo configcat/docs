@@ -27,6 +27,7 @@ We tested and validated the following SAML Identity Providers:
 - [Okta](/docs/advanced/team-management/saml/identity-providers/okta)
 - [Auth0](/docs/advanced/team-management/saml/identity-providers/auth0)
 - [OneLogin](/docs/advanced/team-management/saml/identity-providers/onelogin)
+- [Cloudflare Zero Trust](/docs/advanced/team-management/saml/identity-providers/cloudflare)
 
 :::info
 Other Identity Providers might also work with ConfigCat, if they support the SAML 2.0 protocol.

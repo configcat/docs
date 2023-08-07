@@ -56,6 +56,11 @@ module.exports = {
                       id: 'advanced/team-management/saml/identity-providers/onelogin',
                       label: 'OneLogin',
                     },
+                    {
+                      type: 'doc',
+                      id: 'advanced/team-management/saml/identity-providers/cloudflare',
+                      label: 'Cloudflare Zero Trust',
+                    },
                   ],
                 },
               ],
