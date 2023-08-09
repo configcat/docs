@@ -41,6 +41,15 @@ You need to have a [Billing Manager](organization.md/#billing-manager-role) role
 
 This is possible if you join our partnership program or via [referrals](https://configcat.com/referrals/). [Contact us](https://configcat.com/support/) directly for more information.
 
+### Can I change the email address associated with my account?
+
+Currently, there's no direct way to change the email address of an account. However, you can:
+
+- Invite the New Email: Add the new email address to your account.
+- Delete the Old Email: Remove the old email. If you lack privileges for this, contact your organization admin or a team management member.
+
+Please note: Switching emails means you'll lose preferences from your old account, such as permissions, API keys, and Zombie flag settings. Transfer essential settings first.
+
 ### How do I change the billing email address the way I receive my invoices?
 
 Go to the [Billing & Invoices page.](https://app.configcat.com/organization/billing) And click the `Update billing details` link.
