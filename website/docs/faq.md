@@ -45,8 +45,11 @@ This is possible if you join our partnership program or via [referrals](https://
 
 Currently, there's no direct way to change the email address of an account. However, you can:
 
-- Invite the New Email: Add the new email address to your account.
-- Delete the Old Email: Remove the old email. If you lack privileges for this, contact your organization admin or a team management member.
+- Invite the new email to join your ConfigCat organization; this will create a fresh ConfigCat account.
+- Grant all the necessary permissions to the new account.
+- Proceed with deleting your old account from [here](https://app.configcat.com/my-account).
+
+If you lack privileges for this, contact your organization admin or a team management member.
 
 Please note: Switching emails means you'll lose preferences from your old account, such as permissions, API keys, and Zombie flag settings. Transfer essential settings first.
 
