@@ -100,7 +100,7 @@ docker-compose up -f docker-compose.yml -d
 
 </details>
 
-<details>
+<details open>
   <summary><strong>Standalone executable</strong></summary>
 
 You can download the executables directly from <a target="_blank" href="https://github.com/configcat/configcat-proxy/releases">GitHub Releases</a> for your desired platform.
@@ -130,14 +130,27 @@ docker run -d --name configcat-proxy \
 
 </details>
 
-<details>
+<details open>
   <summary><strong>Standalone executable</strong></summary>
 
 Running the Proxy as a standalone executable, you can pass the YAML file via the `-c` argument.
 
+<Tabs groupId="yaml-env-win">
+<TabItem value="unix" label="macOS / Linux" default>
+
 ```shell
-configcat-proxy -c /path-to-file/options.yml
+./configcat-proxy -c /path-to-file/options.yml
 ```
+
+</TabItem>
+<TabItem value="win" label="Windows">
+
+```powershell
+.\configcat-proxy.exe -c \path-to-file\options.yml
+```
+
+</TabItem>
+</Tabs>
 
 </details>
 
@@ -158,10 +171,10 @@ docker run -d --name configcat-proxy \
 
 </details>
 
-<details>
+<details open>
   <summary><strong>Standalone executable</strong></summary>
 
-Make sure the related environment variables are available for the Proxy's hosting process. For example:
+Make sure the related environment variables are available for the Proxy's hosting process.
 
 
 <Tabs>
@@ -171,6 +184,12 @@ Make sure the related environment variables are available for the Proxy's hostin
 export CONFIGCAT_SDKS='{"<sdk-identifier>":"<your-sdk-key>"}'
 ```
 
+Then start the Proxy:
+
+```shell
+./configcat-proxy
+```
+
 </TabItem>
 <TabItem value="powershell" label="PowerShell">
 
@@ -178,14 +197,14 @@ export CONFIGCAT_SDKS='{"<sdk-identifier>":"<your-sdk-key>"}'
 $Env:CONFIGCAT_SDKS='{"<sdk-identifier>":"<your-sdk-key>"}'
 ```
 
-</TabItem>
-</Tabs>
-
 Then start the Proxy:
 
-```shell
-configcat-proxy
+```powershell
+.\configcat-proxy.exe
 ```
+
+</TabItem>
+</Tabs>
 
 </details>
 
