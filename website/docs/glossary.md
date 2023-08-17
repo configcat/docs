@@ -141,6 +141,10 @@ The Multi-Armed Bandit (MAB) is a machine learning framework that involves an ag
 
 The role of a product lifecycle manager is to supervise the project team and ensure timely completion of each stage in the lifecycle of a project.
 
+#### [Platform Engineering](https://configcat.com/platform-engineering/)
+
+Platform engineering is the design and maintenance of the foundational infrastructure and tools that support software development teams in building, deploying, and operating applications at scale. It combines elements of systems and software engineering with automation to provide standardized environments and CI/CD pipelines, enabling developers to focus on code while minimizing infrastructure complexity.
+
 #### [Progressive Delivery](https://configcat.com/blog/2022/01/14/progressive-delivery/)
 
 A progressive delivery approach to DevOps combines the principles of Continuous Integration and Continuous Delivery (CI/CD) with modern software development practices, facilitating faster code deployment, reducing risk, and improving user experiences.
@@ -171,7 +175,7 @@ Ring deployment is a form of gradual rollout where new features are released gra
 
 ## S
 
-#### Site Reliability Engineer
+#### [Site Reliability Engineer](https://configcat.com/site-reliability-engineers/)
 
 A site reliability engineer (SRE) is a professional in the field of information technology who uses automation tools to monitor the reliability of software in a live production environment.
 
@@ -183,7 +187,7 @@ Smoke testing is a type of testing done early in the software development proces
 
 Soak testing is a type of non-functional testing that assesses a software application's performance under a high volume of load over an extended period of time.
 
-#### Software Development Life Cycle
+#### [Software Development Life Cycle](https://configcat.com/software-development-lifecycle/)
 
 The Software Development Life Cycle (SDLC) is a systematic approach aimed at producing high-quality, low-cost software efficiently and within a shorter timeframe.
 
@@ -195,17 +199,21 @@ Software as a Service (SaaS) is a cloud-based delivery model where applications 
 
 ## T
 
+#### [Testing in Production](https://configcat.com/testing-in-production/)
+
+Testing in production is the practice of evaluating software in its live environment, with real users and real-world conditions. Unlike traditional testing in controlled settings, this approach exposes the software to actual usage scenarios, uncovering issues that may be missed otherwise. However, it requires vigilant monitoring and quick problem resolution to minimize user impact.
+
 #### Type I and Type II Errors
 
 A Type I error occurs when the null hypothesis is incorrectly rejected while it is actually true, while a Type II error occurs when the null hypothesis is wrongly not rejected while it is actually false.
 
-#### Trunk Based Development
+#### [Trunk Based Development](https://configcat.com/trunk-based-development/)
 
 Trunk-based development is a version control technique where developers regularly merge small updates into a central "trunk" or main branch.
 
 ## U
 
-#### User Acceptance Testing
+#### [User Acceptance Testing](https://configcat.com/user-acceptance-testing/)
 
 User Acceptance Testing (UAT) is a stage in software development where the software is tested in a simulated real-world environment by its intended users or business representatives.
 
