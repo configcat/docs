@@ -262,14 +262,14 @@ Yes, it is possible. All you have to do is to create a text setting and apply th
 
 Yes there is. We have a public management API at https://api.configcat.com.
 
-## Domain verification
+### How to resolve Domain verification issues?
 
-### TXT record not verifying.
+**TXT record not verifying**
 
-**Solution 1:** Check the 'Host' field in your DNS settings. One common cause of verification failure is an incorrectly set 'Host' field. Make sure that it is set to '@' or left empty. To check this setting, you will need to log into your domain provider's management console. Locate the DNS settings, and ensure that the 'Host' field for the TXT record is set to '@' or left empty.
+**Solution 1:** Check the 'Host' field in your DNS settings. One common cause of verification failure is an incorrectly set 'Host' field. Make sure that it is set to '@' or left empty. To check this setting, you will need to log into your domain provider's management console. 
 
-**Solution 2:** Allow for DNS propagation. After you've added the TXT record to your DNS settings, it may take some time for the changes to propagate through the DNS system. If you have recently added or updated the TXT record, it's possible that the verification hasn't completed due to DNS caching. It is recommended to wait a few hours and then try verifying the domain again.
+**Solution 2:** After you've added the TXT record to your DNS settings, it may take some time for the changes to propagate through the DNS system. If you have recently added or updated the TXT record, it's possible that the verification hasn't been completed due to DNS caching. Sometimes you even need to wait a few hours before trying to verify the domain again.
 
-### Unable to verify domain using File-Based Verification
+**Unable to verify domain using File-Based Verification**
 
-If you're having trouble verifying your domain with ConfigCat's file-based verification method, make sure you've downloaded the verification file from [here](https://app.configcat.com/organization/authentication) and placed it in the correct directory on your server.
+If you're having trouble verifying your domain with the file-based verification method, make sure you've uploaded the file to the proper directory, and you can download it from our domain.
