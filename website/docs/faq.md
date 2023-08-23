@@ -261,3 +261,15 @@ Yes, it is possible. All you have to do is to create a text setting and apply th
 ### Is there a way to create feature flags via the API?
 
 Yes there is. We have a public management API at https://api.configcat.com.
+
+### How to resolve Domain verification issues?
+
+**Txt record-based verification**
+
+**Solution 1:** Check the 'Host' field in your DNS settings. One common cause of verification failure is an incorrectly set 'Host' field. Make sure that it is set to '@' or left empty. To check this setting, you will need to log into your domain provider's management console. 
+
+**Solution 2:** After you've added the TXT record to your DNS settings, it may take some time for the changes to propagate through the DNS system. If you have recently added or updated the TXT record, it's possible that the verification hasn't been completed due to DNS caching. Sometimes you even need to wait a few hours before trying to verify the domain again.
+
+**File-Based verification**
+
+If you're having trouble verifying your domain with the file-based verification method, make sure you've uploaded the file to the proper directory, and you can download it from under your domain.
