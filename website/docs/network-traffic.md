@@ -10,6 +10,43 @@ Generally speaking, the Network Traffic is proportional to:
 - the number of clients connecting to ConfigCat,
 - and the frequency of changes in the `config JSON`.
 
+Here are a few examples of config JSON file sizes:
+
+<table>
+    <thead>
+      <tr>
+        <th colspan="2">Config JSON complexity</th>
+        <th colspan="2">Network Traffic</th>
+      </tr>
+      <tr>
+        <th># of feature flags</th>
+        <th>targeting rules</th>
+        <th>first download size</th>
+        <th>no change <br/> <code> 304 - Not Modified </code> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>11</td>
+        <td>none</td>
+        <td>0.5 kB</td>
+        <td>65 B</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td>few</td>
+        <td>1.6 kB</td>
+        <td>65 B</td>
+      </tr>
+      <tr>
+        <td>370</td>
+        <td>many</td>
+        <td>159 kB</td>
+        <td>65 B</td>
+      </tr>
+    </tbody>
+  </table>
+
 #### Size of the `config JSON`
 Affected by the number of feature flags, settings, targeting rules, segments, and the length of their values.
 
@@ -42,9 +79,9 @@ The following plans include dedicated API and CDN nodes.
 
 Runs on dedicated servers provided by ConfigCat.
 
-|                               | Data / month |
-| ----------------------------- | -----------: |
-| **Basic package**             |        24 TB |
+|                   | Data / month |
+| ----------------- | -----------: |
+| **Basic package** |        24 TB |
 
 #### On-Premise (Self-hosted)
 
