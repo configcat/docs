@@ -523,8 +523,9 @@ CONFIGCAT_MY_SDK_WEBHOOK_SIGNATURE_VALID_FOR=300
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-default_user_attributes:
-  attribute_key: "<attribute_value>"
+my_sdk:
+  default_user_attributes:
+    attribute_key: "<attribute_value>"
 ```
 
 </TabItem>
@@ -549,8 +550,9 @@ CONFIGCAT_MY_SDK_DEFAULT_USER_ATTRIBUTES='{"attribute_key":"<attribute_value>"}'
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-log:
-  level: "<error|warn|info|debug>"
+my_sdk:
+  log:
+    level: "<error|warn|info|debug>"
 ```
 
 </TabItem>
@@ -588,8 +590,9 @@ The following options are specific to the SDK's offline mode. In offline mode, t
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  enabled: <true|false>
+my_sdk:
+  offline:
+    enabled: <true|false>
 ```
 
 </TabItem>
@@ -614,8 +617,9 @@ CONFIGCAT_MY_SDK_OFFLINE_ENABLED=<true|false>
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  use_cache: <true|false>
+my_sdk:
+  offline:
+    use_cache: <true|false>
 ```
 
 </TabItem>
@@ -640,8 +644,9 @@ CONFIGCAT_MY_SDK_OFFLINE_USE_CACHE=<true|false>
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  cache_poll_interval: 5
+my_sdk:
+  offline:
+    cache_poll_interval: 5
 ```
 
 </TabItem>
@@ -666,9 +671,10 @@ CONFIGCAT_MY_SDK_OFFLINE_CACHE_POLL_INTERVAL=5
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  log:
-    level: "<error|warn|info|debug>"
+my_sdk:
+  offline:
+    log:
+      level: "<error|warn|info|debug>"
 ```
 
 </TabItem>
@@ -693,9 +699,10 @@ CONFIGCAT_MY_SDK_OFFLINE_LOG_LEVEL="<error|warn|info|debug>"
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  local:
-    file_path: "./path/local.json"
+my_sdk:
+  offline:
+    local:
+      file_path: "./path/local.json"
 ```
 
 </TabItem>
@@ -720,9 +727,10 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_FILE_PATH="./path/local.json"
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  local:
-    polling: <true|false>
+my_sdk:
+  offline:
+    local:
+      polling: <true|false>
 ```
 
 </TabItem>
@@ -747,9 +755,10 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_POLLING=<true|false>
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  local:
-    poll_interval: 5
+my_sdk:
+  offline:
+    local:
+      poll_interval: 5
 ```
 
 </TabItem>
