@@ -531,7 +531,7 @@ default_user_attributes:
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_DEFAULT_USER_ATTRIBUTES='{"attribute_key":"<attribute_value>"}'
+CONFIGCAT_MY_SDK_DEFAULT_USER_ATTRIBUTES='{"attribute_key":"<attribute_value>"}'
 ```
 
 </TabItem>
