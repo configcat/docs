@@ -237,7 +237,7 @@ This endpoint evaluates all feature flags with the given [user object](/advanced
 <div className="response-body">Response body:</div>
 
 ```json
-[
+{
   "feature-flag-key-1": {
     "value": <evaluated-value>,
     "variationId": "<variation-id>"
@@ -246,7 +246,7 @@ This endpoint evaluates all feature flags with the given [user object](/advanced
     "value": <evaluated-value>,
     "variationId": "<variation-id>"
   }
-]
+}
 ```
 
 </li>

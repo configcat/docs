@@ -237,6 +237,33 @@ CONFIGCAT_LOG_LEVEL="<error|warn|info|debug>"
 </TabItem>
 </Tabs>
 
+### Default User Attributes
+
+There's an option to predefine [user object](/advanced/user-object) attributes with default values. Whenever the Proxy receives an evaluation request it will automatically attach these predefined attributes to the request. If the evaluation request contains a different value for an attribute you previously defined, the request's value will take precedence.
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+default_user_attributes:
+  attribute_key1: "<attribute_value1>"
+  attribute_key2: "<attribute_value2>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+```shell
+CONFIGCAT_DEFAULT_USER_ATTRIBUTES='{"attribute_key1":"<attribute_value1>","attribute_key2":"<attribute_value2>"}'
+```
+
+</TabItem>
+</Tabs>
+
+:::info
+It's also possible to set default user attributes at the SDK level. See the [SDK options](#sdk) section below for more details.
+:::
+
 ### SDK
 
 In order to make the Proxy work properly, it must be set up with one or more <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a>. It will instantiate one SDK instance for each SDK key.
@@ -274,6 +301,8 @@ sdks:
     data_governance: <"eu"|"global">
     webhook_signing_key: "<key>"
     webhook_signature_valid_for: 300
+    default_user_attributes:
+      attribute_key: "<attribute_value>"
     log:
       level: "<error|warn|info|debug>"
     offline:
@@ -309,6 +338,7 @@ CONFIGCAT_MY_SDK_OFFLINE_USE_CACHE=<true|false>
 CONFIGCAT_MY_SDK_OFFLINE_CACHE_POLL_INTERVAL=5
 CONFIGCAT_MY_SDK_WEBHOOK_SIGNING_KEY="<key>"
 CONFIGCAT_MY_SDK_WEBHOOK_SIGNATURE_VALID_FOR=300
+CONFIGCAT_DEFAULT_USER_ATTRIBUTES='{"attribute_key":"<attribute_value>"}'
 
 CONFIGCAT_ANOTHER_SDK_POLL_INTERVAL=15
 ...
@@ -484,6 +514,32 @@ CONFIGCAT_MY_SDK_WEBHOOK_SIGNATURE_VALID_FOR=300
 </td>
 <td><code>300</code></td>
 <td>The time period within the webhook requests are considered valid. <a href="/advanced/proxy/endpoints#webhook">More about the webhook endpoint</a>.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+default_user_attributes:
+  attribute_key: "<attribute_value>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DEFAULT_USER_ATTRIBUTES='{"attribute_key":"<attribute_value>"}'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Additional SDK specific <a href="#default-user-attributes">default user attributes</a>. The Proxy will use these attributes when an evaluation request doesn't contain a value for the predefined attribute.<br />When there's a default value defined for the same attribute at both SDK and global level, the one at the SDK level will take precedence.</td>
 </tr>
 
 <tr>
