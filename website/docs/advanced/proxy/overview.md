@@ -237,6 +237,33 @@ CONFIGCAT_LOG_LEVEL="<error|warn|info|debug>"
 </TabItem>
 </Tabs>
 
+### Default User Attributes
+
+There's an option to predefine [user object](/advanced/user-object) attributes with default values. Whenever the Proxy receives an evaluation request it will automatically attach these predefined attributes to the request. If the evaluation request contains a different value for an attribute you previously defined, the request's value will take precedence.
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+default_user_attributes:
+  attribute_key1: "<attribute_value1>"
+  attribute_key2: "<attribute_value2>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+```shell
+CONFIGCAT_DEFAULT_USER_ATTRIBUTES='{"attribute_key1":"<attribute_value1>","attribute_key2":"<attribute_value2>"}'
+```
+
+</TabItem>
+</Tabs>
+
+:::info
+It's also possible to set default user attributes at the SDK level. See the [SDK options](#sdk) section below for more details.
+:::
+
 ### SDK
 
 In order to make the Proxy work properly, it must be set up with one or more <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a>. It will instantiate one SDK instance for each SDK key.
@@ -274,6 +301,8 @@ sdks:
     data_governance: <"eu"|"global">
     webhook_signing_key: "<key>"
     webhook_signature_valid_for: 300
+    default_user_attributes:
+      attribute_key: "<attribute_value>"
     log:
       level: "<error|warn|info|debug>"
     offline:
@@ -309,6 +338,7 @@ CONFIGCAT_MY_SDK_OFFLINE_USE_CACHE=<true|false>
 CONFIGCAT_MY_SDK_OFFLINE_CACHE_POLL_INTERVAL=5
 CONFIGCAT_MY_SDK_WEBHOOK_SIGNING_KEY="<key>"
 CONFIGCAT_MY_SDK_WEBHOOK_SIGNATURE_VALID_FOR=300
+CONFIGCAT_DEFAULT_USER_ATTRIBUTES='{"attribute_key":"<attribute_value>"}'
 
 CONFIGCAT_ANOTHER_SDK_POLL_INTERVAL=15
 ...
@@ -493,8 +523,36 @@ CONFIGCAT_MY_SDK_WEBHOOK_SIGNATURE_VALID_FOR=300
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-log:
-  level: "<error|warn|info|debug>"
+my_sdk:
+  default_user_attributes:
+    attribute_key: "<attribute_value>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_MY_SDK_DEFAULT_USER_ATTRIBUTES='{"attribute_key":"<attribute_value>"}'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Additional SDK specific <a href="#default-user-attributes">default user attributes</a>. The Proxy will use these attributes when an evaluation request doesn't contain a value for the predefined attribute.<br />When there's a default value defined for the same attribute at both SDK and global level, the one at the SDK level will take precedence.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+my_sdk:
+  log:
+    level: "<error|warn|info|debug>"
 ```
 
 </TabItem>
@@ -532,8 +590,9 @@ The following options are specific to the SDK's offline mode. In offline mode, t
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  enabled: <true|false>
+my_sdk:
+  offline:
+    enabled: <true|false>
 ```
 
 </TabItem>
@@ -558,8 +617,9 @@ CONFIGCAT_MY_SDK_OFFLINE_ENABLED=<true|false>
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  use_cache: <true|false>
+my_sdk:
+  offline:
+    use_cache: <true|false>
 ```
 
 </TabItem>
@@ -584,8 +644,9 @@ CONFIGCAT_MY_SDK_OFFLINE_USE_CACHE=<true|false>
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  cache_poll_interval: 5
+my_sdk:
+  offline:
+    cache_poll_interval: 5
 ```
 
 </TabItem>
@@ -610,9 +671,10 @@ CONFIGCAT_MY_SDK_OFFLINE_CACHE_POLL_INTERVAL=5
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  log:
-    level: "<error|warn|info|debug>"
+my_sdk:
+  offline:
+    log:
+      level: "<error|warn|info|debug>"
 ```
 
 </TabItem>
@@ -637,9 +699,10 @@ CONFIGCAT_MY_SDK_OFFLINE_LOG_LEVEL="<error|warn|info|debug>"
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  local:
-    file_path: "./path/local.json"
+my_sdk:
+  offline:
+    local:
+      file_path: "./path/local.json"
 ```
 
 </TabItem>
@@ -664,9 +727,10 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_FILE_PATH="./path/local.json"
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  local:
-    polling: <true|false>
+my_sdk:
+  offline:
+    local:
+      polling: <true|false>
 ```
 
 </TabItem>
@@ -691,9 +755,10 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_POLLING=<true|false>
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-offline:
-  local:
-    poll_interval: 5
+my_sdk:
+  offline:
+    local:
+      poll_interval: 5
 ```
 
 </TabItem>
