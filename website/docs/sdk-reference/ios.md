@@ -415,7 +415,7 @@ The possible `state` values:
 - `hasCachedFlagDataOnly`: The SDK has feature flag data only from the cache. This can happen when the SDK is configured with `manualPoll()` and there wasn't a `client.forceRefresh()` call yet. Another example could be an SDK configured with `autoPoll()`, but it can't reach the ConfigCat CDN so it falls back to the cache.
 - `hasUpToDateFlagData`: The SDK is initialized with up-to-date feature flag data.
 
-The SDK's state is also accessable via the `waitForReady()` awaitable method, which asynchronously waits for the `onClientReady` hook to fire and returns with the SDK's initialization state.
+The SDK's state is also accessible via the `waitForReady()` awaitable method, which asynchronously waits for the `onClientReady` hook to fire and returns with the SDK's initialization state.
 
 ```swift
 let state = await client.waitForReady()
