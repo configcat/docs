@@ -480,6 +480,10 @@ You can use the following caching options:
   }
   ```
 
+:::info
+The PHP SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
+
 ## Logging
 
 The SDK uses the PSR-3 `LoggerInterface` for logging, so you can use any implementor package like [Monolog](https://github.com/Seldaek/monolog).

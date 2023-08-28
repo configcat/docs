@@ -41,7 +41,7 @@ Or put the following directly to your `pubspec.yml` and run `dart pub get` or `f
 
 ```yaml title="pubspec.yml"
 dependencies:
-  configcat_client: ^2.5.2
+  configcat_client: ^3.0.0
 ```
 
 ### 2. Import the ConfigCat SDK
@@ -484,6 +484,10 @@ final client = ConfigCatClient.get(
     sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
     options: ConfigCatOptions(cache: MyCustomCache()));
 ```
+
+:::info
+The Dart (Flutter) SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 ## HttpClient
 

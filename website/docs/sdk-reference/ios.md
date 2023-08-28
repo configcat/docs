@@ -56,7 +56,7 @@ Add the SDK to your `Package.swift`.
 dependencies: [
     .package(
         url: "https://github.com/configcat/swift-sdk",
-        from: "9.3.0"
+        from: "10.0.0"
     )
 ]
 ```
@@ -140,16 +140,6 @@ if isMyAwesomeFeatureEnabled {
         // do the old thing
     }
 }];
-
-// Or synchronously
-BOOL isMyAwesomeFeatureEnabled = [client getBoolValueSyncFor:@"isMyAwesomeFeatureEnabled"
-                                                defaultValue:false
-                                                        user:NULL];
-if (isMyAwesomeFeatureEnabled) {
-    // do the new thing
-} else {
-    // do the old thing
-}
 ```
 
 </TabItem>
@@ -295,17 +285,6 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-ID
         // do the old thing
     }
 }];
-
-// Or synchronously
-BOOL isMyAwesomeFeatureEnabled = [client getBoolValueSyncFor:@"keyOfMySetting" // Setting Key
-                                                defaultValue:false  // Default value
-                                                        user:user // Optional User Object
-];
-if (isMyAwesomeFeatureEnabled) {
-    // do the new thing
-} else {
-    // do the old thing
-}
 ```
 
 </TabItem>
@@ -353,12 +332,6 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-ID
                     completion:^(BoolEvaluationDetails* details) {
     // Use the details result
 }];
-
-// Or synchronously
-BoolEvaluationDetails* details = [client getBoolValueDetailsSyncFor:@"keyOfMySetting" // Setting Key
-                                                       defaultValue:false // Default value
-                                                               user:user // Optional User Object
-];
 ```
 
 </TabItem>
@@ -376,6 +349,77 @@ The details result contains the following information:
 | `matchedEvaluationPercentageRule` | `PercentageRule?`                    | If the evaluation was based on a percentage rule, this field contains that specific rule. |
 | `matchedEvaluationRule`           | `RolloutRule?`                       | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
 | `fetchTime`                       | `Date`                               | The last download time of the current config.                                             |
+
+## Snapshots and synchronous feature flag evaluation
+
+The _ConfigCat_ client provides only asynchronous methods for evaluating feature flags and settings
+because these operations may involve network communication (downloading config data from the ConfigCat CDN servers),
+which is necessarily an asynchronous operation.
+
+However, there may be use cases where synchronous evaluation is preferable, thus, since `v10.0.0`, the Swift SDK provides a way
+to synchronously evaluate feature flags and settings via **Snapshots**.
+
+Using the `snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
+and you can use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
+```swift
+let snapshot = configCatClient.snapshot()
+
+let isMyFeatureEnabled = snapshot.getValue(for: "isMyFeatureEnabled", defaultValue: false)
+```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec
+ConfigCatSnapshot* snapshot = [client snapshot];
+        
+BOOL isMyFeatureEnabled = [snapshot getBoolValueFor:@"isMyFeatureEnabled" 
+                                       defaultValue:false
+                                               user:NULL];
+```
+
+</TabItem>
+</Tabs>
+
+Snapshots are created from the actual state of the SDK; therefore it's crucial to know whether the SDK has valid feature flag data to work on. To determine whether it's safe to create snapshots, the SDK provides an `onClientReady` [hook](#hooks). It accepts a state enum parameter to give details about the SDK's initialization state.
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
+```swift
+client.hooks.addOnReady { state in
+    // the state parameter tells what is the SDK's initialization state
+}
+```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec
+[client.hooks addOnReadyWithHandler:^(enum ClientReadyState state) {
+    // the state parameter tells what is the SDK's initialization state
+}];
+```
+
+</TabItem>
+</Tabs>
+
+The possible `state` values:
+
+- `noFlagData`: The SDK has no feature flag data to work on (it didn't get anything from the cache or from the network)
+- `hasLocalOverrideFlagDataOnly`: The SDK was initialized with `localOnly` [flag overrides](#flag-overrides).
+- `hasCachedFlagDataOnly`: The SDK has feature flag data only from the cache. This can happen when the SDK is configured with `manualPoll()` and there wasn't a `client.forceRefresh()` call yet. Another example could be an SDK configured with `autoPoll()`, but it can't reach the ConfigCat CDN so it falls back to the cache.
+- `hasUpToDateFlagData`: The SDK is initialized with up-to-date feature flag data.
+
+The SDK's state is also accessable via the `waitForReady()` awaitable method, which asynchronously waits for the `onClientReady` hook to fire and returns with the SDK's initialization state.
+
+```swift
+let state = await client.waitForReady()
+```
 
 ## User Object
 
@@ -530,9 +574,12 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"john@example.co
 [client setDefaultUserWithUser:user];
 
 // The default user will be used at the evaluation process.
-BOOL value = [client getBoolValueSyncFor:@"keyOfMySetting"
-                            defaultValue:false
-                                    user:NULL];
+[client getBoolValueFor:@"keyOfMySetting"
+           defaultValue:false 
+                   user:NULL 
+             completion:^(BOOL value) {
+    // You can use the evaluation's result here.
+}];
 ```
 
 </TabItem>
@@ -570,9 +617,12 @@ ConfigCatUser* otherUser = [[ConfigCatUser alloc]initWithIdentifier:@"brian@exam
                                                              custom:NULL];
 
 // otherUser will be used at the evaluation process.
-BOOL value = [client getBoolValueSyncFor:@"keyOfMySetting"
-                            defaultValue:false
-                                    user:otherUser];
+[client getBoolValueFor:@"keyOfMySetting"
+           defaultValue:false 
+                   user:otherUser 
+             completion:^(BOOL value) {
+    // You can use the evaluation's result here.
+}];
 ```
 
 </TabItem>
@@ -622,13 +672,9 @@ let keys = await client.getAllKeys()
 ```objectivec
 ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#" options:NULL];
 
-// Completion callback
 [client getAllKeysWithCompletion:^(NSArray<NSString*>* keys) {
     // use keys
 }];
-
-// Or synchronously
-NSArray<NSString*>* keys = [client getAllKeysSync];
 ```
 
 </TabItem>
@@ -673,13 +719,9 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-ID
                                                        country:NULL
                                                         custom:NULL];
 
-// Completion callback
 [client getAllValuesWithUser:user completion:^(NSDictionary<NSString*,id>* values) {
     // use values
 }];
-
-// Or synchronously
-NSDictionary<NSString*,id>* values = [client getAllValuesSyncWithUser:user];
 ```
 
 </TabItem>
@@ -725,7 +767,6 @@ Available options:
 | --------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
 | `autoPollIntervalInSeconds` | Polling interval.                                                                                    | 60      |
 | `maxInitWaitTimeInSeconds`  | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
-| `onConfigChanged`           | **DEPRECATED** Callback to get notified about changes.                                               | -       |
 
 ### Lazy loading
 
@@ -793,13 +834,9 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
     options.pollingMode = [PollingModes manualPoll];
 }];
 
-// Completion callback
 [client forceRefreshWithCompletion:^(RefreshResult* result) {
     // The client uses the latest config JSON
 }];
-
-// Or synchronously
-[client forceRefreshSync];
 ```
 
 </TabItem>
@@ -1072,6 +1109,10 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 
 </TabItem>
 </Tabs>
+
+:::info
+The Swift SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
 
 ## Force refresh
 
