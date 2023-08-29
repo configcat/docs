@@ -63,7 +63,7 @@ Support for shared caching was introduced in these SDK versions:
 | ------- | ---------------------------------------------------------------------- |
 | .NET    | [v8.1.0](https://github.com/configcat/.net-sdk/releases/tag/v8.1.0)    |
 | C++     | [v3.0.0](https://github.com/configcat/cpp-sdk/releases/tag/v3.0.0)     |
-| Dart    | TBA                                                                    |
+| Dart    | [v3.0.0](https://github.com/configcat/dart-sdk/releases/tag/3.0.0)     |
 | Elixir  | TBA                                                                    |
 | Go      | [v8.0.0](https://github.com/configcat/go-sdk/releases/tag/v8.0.0)      |
 | Java    | [v8.2.0](https://github.com/configcat/java-sdk/releases/tag/v8.2.0)    |
@@ -73,7 +73,7 @@ Support for shared caching was introduced in these SDK versions:
 | React   | [v3.0.0](https://github.com/configcat/react-sdk/releases/tag/v3.0.0)   |
 | Kotlin  | [v2.0.0](https://github.com/configcat/kotlin-sdk/releases/tag/2.0.0)   |
 | Node    | [v10.0.0](https://github.com/configcat/node-sdk/releases/tag/v10.0.0)  |
-| PHP     | TBA                                                                    |
+| PHP     | [v8.0.0](https://github.com/configcat/php-sdk/releases/tag/v8.0.0)     |
 | Python  | [v8.0.0](https://github.com/configcat/python-sdk/releases/tag/v8.0.0)  |
 | Ruby    | [v7.0.0](https://github.com/configcat/ruby-sdk/releases/tag/v7.0.0)    |
-| Swift   | TBA                                                                    |
+| Swift   | [v10.0.0](https://github.com/configcat/swift-sdk/releases/tag/10.0.0)  |
