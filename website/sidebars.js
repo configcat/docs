@@ -11,8 +11,18 @@ module.exports = {
       ],
       Guides: [
         'advanced/data-governance',
-        'advanced/targeting',
-        'advanced/segments',
+        {
+          'Targeting': [
+            {
+              'User Targeting': [
+                'advanced/targeting/targeting',
+                'advanced/targeting/percentage',
+              ],
+            },
+            'advanced/targeting/segments',
+            'advanced/targeting/prerequisite',
+          ],
+        },
         'advanced/user-object',
         'advanced/public-api',
         'advanced/caching',
