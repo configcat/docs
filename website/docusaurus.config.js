@@ -16,6 +16,17 @@ module.exports = {
       },
     ],
     'docusaurus-plugin-sass',
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/sdk-reference/dotnet',
+            from: '/sdk-reference/csharp',
+          }
+        ],
+      },
+    ],
   ],
   themeConfig: {
     image: '/img/docs-cover.png',
