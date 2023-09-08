@@ -111,7 +111,7 @@ You can then check the [status endpoint](/advanced/proxy/monitoring#status) of t
 
 ## Available Options
 
-You can specify options for the Proxy either via a YAML file or with environment variables.
+You can specify options for the Proxy either via a YAML file or with environment variables. When an option is defined in both places, the environment variable's value takes precedence.
 
 <Tabs groupId="yaml-env">
 <TabItem value="yaml" label="YAML" default>
