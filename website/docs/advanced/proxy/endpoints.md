@@ -328,7 +328,7 @@ http:
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_HTTP_API_PROXY_ENABLED=<true|false>
+CONFIGCAT_HTTP_API_ENABLED=<true|false>
 ```
 
 </TabItem>
@@ -491,7 +491,7 @@ This endpoint subscribes to all feature flags' changes behind the given [SDK ide
 <div className="response-body">Response body:</div>
 
 ```json
-[
+{
   "feature-flag-key-1": {
     "value": <evaluated-value>,
     "variationId": "<variation-id>"
@@ -500,7 +500,7 @@ This endpoint subscribes to all feature flags' changes behind the given [SDK ide
     "value": <evaluated-value>,
     "variationId": "<variation-id>"
   }
-]
+}
 ```
 
 <li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
@@ -698,7 +698,7 @@ http:
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_HTTP_WEBHOOK_PROXY_ENABLED=<true|false>
+CONFIGCAT_HTTP_WEBHOOK_ENABLED=<true|false>
 ```
 
 </TabItem>
