@@ -780,8 +780,9 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_POLL_INTERVAL=5
 
 ### Cache
 
-You have the option to cache feature flag evaluation data in an external cache. Currently, the only available option is <a target="blank" href="https://redis.io">Redis</a>.  
-The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
+The Proxy in its default setup stores all the information it needs for feature flag evaluation in memory. This behavior is extendable with an external cache that you can use for pointing the underlying SDKs to your own data storage.
+
+Currently, the only available option is <a target="blank" href="https://redis.io">Redis</a>. The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
 
 :::info
 The ConfigCat Proxy supports *shared caching*, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).

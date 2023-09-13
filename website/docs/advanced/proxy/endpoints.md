@@ -60,7 +60,7 @@ CONFIGCAT_SDKS={"my_sdk":"<your-sdk-key>"}
 </TabItem>
 </Tabs>
 
-The initialization of the SDK that should work with the Proxy will look like this:
+The SDK's initialization that works with the Proxy will look like this:
 
 ```js title="example.js"
 import * as configcat from "configcat-js";
@@ -650,7 +650,7 @@ CONFIGCAT_HTTP_SSE_LOG_LEVEL="<error|warn|info|debug>"
 
 ## Webhook
 
-Through the webhook endpoint, you can notify the Proxy about the availability of new feature flag evaluation data. Also, with the appropriate [SDK options](#additional-sdk-options), the Proxy can [validate the signature](/advanced/notifications-webhooks/#verifying-webhook-requests) of each incoming webhook request.
+Through the webhook endpoint, you can notify the Proxy about the availability of new feature flag evaluation data. Also, with the appropriate [SDK options](/advanced/proxy/proxy-overview/#additional-sdk-options), the Proxy can [validate the signature](/advanced/notifications-webhooks/#verifying-webhook-requests) of each incoming webhook request.
 
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method blue">POST</span>/hook/&#123;sdkId&#125;</span></summary>
