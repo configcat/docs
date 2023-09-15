@@ -146,7 +146,6 @@ FString TargetValue = ConfigCat->GetStringValue(TEXT("targetValue"), TEXT(""), U
 | `DefaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `User`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
-
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
@@ -166,73 +165,92 @@ FConfigCatEvaluationDetails Details = ConfigCat->GetStringValueDetails(TEXT("myF
 </TabItem>
 </Tabs>
 
--- TODO BELOW --
-
 The `Details` result contains the following information:
 
-| Field                             | Type                                 | Description                                                                               |
-| --------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------- |
-| `value`                           | `variant<bool, string, int, double>` | The evaluated value of the feature flag or setting.                                       |
-| `key`                             | `string`                             | The key of the evaluated feature flag or setting.                                         |
-| `isDefaultValue`                  | `bool`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
-| `error`                           | `string`                             | In case of an error, this field contains the error message.                               |
-| `user`                            | `ConfigCatUser*`                     | The user object that was used for evaluation.                                             |
-| `matchedEvaluationPercentageRule` | `optional<RolloutPercentageItem>`    | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `matchedEvaluationRule`           | `optional<RolloutRule>`              | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
-| `fetchTime`                       | `chrono::time_point`                 | The last download time of the current config.                                             |
+| Field                             | Description                                                                               |
+| --------------------------------- | ----------------------------------------------------------------------------------------- |
+| `Value`                           | The evaluated value of the feature flag or setting.                                       |
+| `Key`                             | The key of the evaluated feature flag or setting.                                         |
+| `IsDefaultValue`                  | True when the default value passed to getValueDetails() is returned due to an error.      |
+| `Error`                           | In case of an error, this field contains the error message.                               |
+| `User`                            | The user object that was used for evaluation.                                             |
+| `MatchedEvaluationPercentageRule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `MatchedEvaluationRule`           | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `FetchTime`                       | The last download time of the current config.                                             |
 
 ## User Object
 
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
-```cpp
-auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
-```
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprints-create-user zoomable" src="/docs/assets/unreal/blueprints-create-user.png" alt="Unreal Engine Create User" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
 
 ```cpp
-auto user = ConfigCatUser("john@example.com");
+FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"));
 ```
+
+</TabItem>
+</Tabs>
 
 ### Customized user object creation
 
 | Argument  | Description                                                                                                                     |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `id`      | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email`   | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country` | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom`  | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| `Id`      | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
+| `Email`   | Optional parameter for easier targeting rule definitions.                                                                       |
+| `Country` | Optional parameter for easier targeting rule definitions.                                                                       |
+| `Custom`  | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprints-create-user-custom zoomable" src="/docs/assets/unreal/blueprints-create-user-custom.png" alt="Unreal Engine Create User Custom" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
 
 ```cpp
-auto user = ConfigCatUser(
-    "#UNIQUE-USER-IDENTIFIER#", // userID
-    "john@example.com", // email
-    "United Kingdom", // country
-    {
-        {"SubscriptionType": "Pro"},
-        {"UserRole": "Admin"}
-    } // custom
-);
+TMap<FString, FString> Attributes;
+Attributes.Emplace(TEXT("SubscriptionType"), TEXT("Pro"));
+Attributes.Emplace(TEXT("UserRole"), TEXT("Admin"));
+FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"), TEXT("john@example.com"), 
+  TEXT("United Kingdom"), Attributes);
 ```
+
+</TabItem>
+</Tabs>
 
 ### Default user
 
 There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default user object with the `setDefaultUser()` method of the ConfigCat client.
+
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprints-set-default-user zoomable" src="/docs/assets/unreal/blueprints-set-default-user.png" alt="Unreal Engine Set Default User" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
 
 ```cpp
-ConfigCatOptions options;
-options.defaultUser = make_shared<ConfigCatUser>("john@example.com");
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"));
+ConfigCat->SetDefaultUser(User);
 ```
 
-or with the `setDefaultUser()` method of the ConfigCat client.
+</TabItem>
+</Tabs>
 
-```cpp
-client->setDefaultUser(make_shared<ConfigCatUser>("john@example.com"));
-```
+Whenever the `GetValue()`, `GetValueDetails()`, `GetAllValues()`, or `GetAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
-Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+-- TODO BELOW --
 
 ```cpp
 auto user = make_shared<ConfigCatUser>("john@example.com");
