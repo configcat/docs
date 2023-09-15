@@ -384,7 +384,7 @@ You can subscribe to these events either on SDK initialization:
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprint-event-delegates zoomable" src="/docs/assets/unreal/blueprints-blueprint-event-delegates.png" alt="Unreal Engine Blueprint Event Delegates" />
+<img className="unreal-blueprint-event-delegates zoomable" src="/docs/assets/unreal/blueprint-event-delegates.png" alt="Unreal Engine Blueprint Event Delegates" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -401,25 +401,36 @@ ConfigCat->OnError.AddWeakLambda(this, [](const FString& Error){ /* OnError call
 </TabItem>
 </Tabs>
 
--- TODO BELOW --
-
 ## Online / Offline mode
 
-In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
-
-```cpp
-client->setOffline();
-```
+In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode with `SetOffline`.
 
 In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
 
-To put the SDK back in online mode, you can do the following:
+To put the SDK back in online mode, you can use `SetOnline`; 
+
+> With `IsOffline` you can check whether the SDK is in offline mode.
+
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprint-offline-functionality zoomable" src="/docs/assets/unreal/blueprint-offline-functionality.png" alt="Unreal Engine Blueprint Offline Functionality" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
 
 ```cpp
-client->setOnline();
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+
+ConfigCat->SetOffline();
+ConfigCat->SetOnline();
+bool bIsOffline = ConfigCat->IsOffline();
 ```
 
-> With `client->isOffline()` you can check whether the SDK is in offline mode.
+</TabItem>
+</Tabs>
+
+-- TODO BELOW --
 
 ## Flag Overrides
 
