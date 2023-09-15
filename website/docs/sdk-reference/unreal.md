@@ -270,25 +270,49 @@ bool bMySetting = ConfigCat->GetBoolValue(TEXT("keyOfMySetting"), false);
 </TabItem>
 </Tabs>
 
--- TODO BELOW --
-
 When the user object parameter is specified on the requesting method, it takes precedence over the default user.
 
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprints-other-user-example zoomable" src="/docs/assets/unreal/blueprints-other-user-example.png" alt="Unreal Engine Other User Example" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
+
 ```cpp
-auto user = make_shared<ConfigCatUser>("john@example.com");
-client->setDefaultUser(user);
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"));
+ConfigCat->SetDefaultUser(User);
 
-auto otherUser = make_shared<ConfigCatUser>("brian@example.com");
+FConfigCatUser OtherUser = FConfigCatUser(TEXT("#OTHER-UNIQUE-USER-IDENTIFIER#"));
 
-// otherUser will be used at the evaluation process.
-auto value = client->getValue("keyOfMySetting", false, otherUser.get());
+// OtherUser will be used at the evaluation process.
+bool bMySetting = ConfigCat->GetBoolValue(TEXT("keyOfMySetting"), false, OtherUser);
 ```
+
+</TabItem>
+</Tabs>
 
 For deleting the default user, you can do the following:
 
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprints-clear-default-user zoomable" src="/docs/assets/unreal/blueprints-clear-default-user.png" alt="Unreal Engine Clear Default User" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
+
 ```cpp
-client->clearDefaultUser();
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+ConfigCat->ClearDefaultUser();
 ```
+
+</TabItem>
+</Tabs>
+
+-- TODO BELOW --
 
 ## Polling Modes
 
