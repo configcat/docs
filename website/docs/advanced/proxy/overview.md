@@ -780,7 +780,7 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_POLL_INTERVAL=5
 
 #### Global Offline Mode
 
-It is possible to turn on offline mode globally for a whole Proxy instance. When it's turned on, each underlying SDK switches to work from the configured [cache](#cache). When an SDK has its offline option set, that will override the global offline option.
+It is possible to turn on offline mode globally for a whole Proxy instance. When it's turned on, each underlying SDK switches to work from the configured [cache](#cache).
 
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
@@ -865,6 +865,10 @@ CONFIGCAT_OFFLINE_LOG_LEVEL="<error|warn|info|debug>"
 </tr>
 </tbody>
 </table>
+
+:::note
+When an SDK also has its offline option set, that will override what it would inherit from the global offline option.
+:::
 
 ### Cache
 
