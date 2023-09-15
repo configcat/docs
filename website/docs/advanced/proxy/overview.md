@@ -778,6 +778,98 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_POLL_INTERVAL=5
 </tbody>
 </table>
 
+#### Global Offline Mode
+
+It is possible to turn on offline mode globally for a whole Proxy instance. When it's turned on, each underlying SDK switches to work from the configured [cache](#cache).
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+offline:
+  enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_OFFLINE_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>false</code></td>
+<td>Enables or disables the global offline mode.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+offline:
+  cache_poll_interval: 5
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_OFFLINE_CACHE_POLL_INTERVAL=5
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>5</code></td>
+<td>The cache polling interval in seconds. <a href="#cache">More about the cache option</a>.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+offline:
+  log:
+    level: "<error|warn|info|debug>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_OFFLINE_LOG_LEVEL="<error|warn|info|debug>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>warn</code></td>
+<td>The verbosity of the offline mode related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code> or <code>debug</code>.</td>
+</tr>
+</tbody>
+</table>
+
+:::note
+When an SDK also has its offline option set, that will override what it would inherit from the global offline option.
+:::
+
 ### Cache
 
 The Proxy in its default setup stores all the information it needs for feature flag evaluation in memory. This behavior is extendable with an external cache that you can use for pointing the underlying SDKs to your own data storage.
