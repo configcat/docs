@@ -6,11 +6,11 @@ description: ConfigCat Zoho Flow integration. This is a step-by-step guide on ho
 
 ## Connect ConfigCat to 500+ apps with Zoho Flow
 
-<a href="https://www.zoho.com/flow/apps/configcat/integrations" target="_blank">ConfigCat's Zoho Flow integration</a> helps you connect ConfigCat to 500+ other web apps without any code. It helps you automate day-to-day tasks and build complex business workflows within minutes.
+<a href="https://www.zohoflow.com/apps/configcat/integrations/" target="_blank">ConfigCat's Zoho Flow integration</a> helps you connect ConfigCat to 500+ other web apps without any code. It helps you automate day-to-day tasks and build complex business workflows within minutes.
 
 You can set **triggers**, add **actions**, use **Delays and Decisions** to create your entire workflow on an easy to use builder.
 
-<a href="https://www.zoho.com/flow/apps/configcat/integrations" target="_blank">ConfigCat's Zoho Flow integration</a> can notify you about Feature Flags or Settings changes in ConfigCat, so for example you can set it up with Slack to send a message about the feature flag changes in ConfigCat.
+<a href="https://www.zohoflow.com/apps/configcat/integrations/" target="_blank">ConfigCat's Zoho Flow integration</a> can notify you about Feature Flags or Settings changes in ConfigCat, so for example you can set it up with Slack to send a message about the feature flag changes in ConfigCat.
 
 ## Setup
 
