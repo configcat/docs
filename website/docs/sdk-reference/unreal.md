@@ -366,40 +366,42 @@ ConfigCat->ForceRefresh();
 
 > `GetValue()` returns `DefaultValue` if the cache is empty. Call `ForceRefresh()` to update the cache.
 
--- TODO BELOW --
+## Delegates 
 
-## Hooks
+With the following delegates you can subscribe to particular events fired by the SDK:
 
-With the following hooks you can subscribe to particular events fired by the SDK:
-
-- `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling, it's considered ready right after instantiation.
+- `OnClientReady`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling, it's considered ready right after instantiation.
   If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeInSeconds` is reached.
 
-- `onConfigChanged(std::shared_ptr<Settings>)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
+- `OnConfigChanged`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
-- `onFlagEvaluated(const EvaluationDetails&)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
+- `OnFlagEvaluated`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
-- `onError(const string&)`: This event is sent when an error occurs within the ConfigCat SDK.
+- `OnError`: This event is sent when an error occurs within the ConfigCat SDK.
 
 You can subscribe to these events either on SDK initialization:
 
-```cpp
-ConfigCatOptions options;
-options.pollingMode = PollingMode::manualPoll();
-options.hooks = make_shared<Hooks>(
-    []() { /* onClientReady callback */ },
-    [](shared_ptr<Settings> config) { /* onConfigChanged callback */ },
-    [](const EvaluationDetails& details) { /* onFlagEvaluated callback */ },
-    [](const string& error) { /* onError callback */ }
-);
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
-```
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
 
-or with the  `getHooks()` method of the ConfigCat client:
+<img className="unreal-blueprint-event-delegates zoomable" src="/docs/assets/unreal/blueprints-blueprint-event-delegates.png" alt="Unreal Engine Blueprint Event Delegates" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
 
 ```cpp
-client->getHooks->addOnFlagEvaluated([](const EvaluationDetails& details) { /* onFlagEvaluated callback */ });
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+
+ConfigCat->OnClientReady.AddWeakLambda(this, [](){ /* OnClientReady callback */ });
+ConfigCat->OnConfigChanged.AddWeakLambda(this, [](const FConfigCatConfig& Config){ /* OnConfigChanged callback */ });
+ConfigCat->OnFlagEvaluated.AddWeakLambda(this, [](const FConfigCatEvaluationDetails& Details){ /* OnFlagEvaluated callback */ });
+ConfigCat->OnError.AddWeakLambda(this, [](const FString& Error){ /* OnError callback */ });
 ```
+
+</TabItem>
+</Tabs>
+
+-- TODO BELOW --
 
 ## Online / Offline mode
 
