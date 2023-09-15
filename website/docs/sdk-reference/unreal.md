@@ -250,15 +250,27 @@ ConfigCat->SetDefaultUser(User);
 
 Whenever the `GetValue()`, `GetValueDetails()`, `GetAllValues()`, or `GetAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
 
--- TODO BELOW --
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprints-default-user-example zoomable" src="/docs/assets/unreal/blueprints-default-user-example.png" alt="Unreal Engine Default User Example" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
 
 ```cpp
-auto user = make_shared<ConfigCatUser>("john@example.com");
-client->setDefaultUser(user);
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"));
+ConfigCat->SetDefaultUser(User);
 
 // The default user will be used at the evaluation process.
-auto value = client->getValue("keyOfMySetting", false);
+bool bMySetting = ConfigCat->GetBoolValue(TEXT("keyOfMySetting"), false);
 ```
+
+</TabItem>
+</Tabs>
+
+-- TODO BELOW --
 
 When the user object parameter is specified on the requesting method, it takes precedence over the default user.
 
