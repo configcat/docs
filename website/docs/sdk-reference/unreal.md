@@ -316,7 +316,7 @@ ConfigCat->ClearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `GetValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](/advanced/caching/)
 
 ### Auto polling (default)
@@ -655,36 +655,28 @@ options.readTimeoutMs = 8000; // Timeout in milliseconds for reading the server'
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
+-- TODO ABOVE --
+
 ## Logging
 
-The default logger used by the ConfigCat SDK is the <a href="https://pub.dev/packages/logger" target="_blank">logger</a> package, but you can override it with your implementation via the `logger` client option. The custom implementation must satisfy the <a href="https://github.com/configcat/dart-sdk/blob/main/lib/src/log/logger.dart" target="_blank">Logger</a> abstract class.
+All ConfigCat logs are inside the `LogConfigCat` category. By default the verbosity is set to `Log`, but it can be changed to any [Verbosity Level](https://docs.unrealengine.com/5.3/en-US/logging-in-unreal-engine/#logverbosity).
 
-In the ConfigCat SDK, a default `ConsoleLogger` writes logs to the standard output, but you can override it with your implementation via the `logger` client option.
-The custom implementation must satisfy the `ILogger` abstract class.
+The verbosity can be changed:
 
-```cpp
-#include <configcat/configcat.h>
-#include <configcat/consolelogger.h>
+Via [Command line arguments]:
 
-auto logger = make_shared<ConsoleLogger>(LOG_LEVEL_WARNING);
-ConfigCatOptions options;
-options.logger = logger;
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
+Run the executable with `-LogCmds="LogConfigCat VerbosityLevel"`. For example: `-LogCmds="LogConfigCat Warning"` to only show warnings and above.
 
-You can change the verbosity of the logs by setting the `LogLevel`.
+Via [DefaultEngine.ini]:
 
-```cpp
-logger->setLogLevel(LOG_LEVEL_INFO);
+In the `[Core.Log]` category add `LogConfigCat=VerbosityLevel` inside the `DefaultEngine.ini`. For example:
+
+```
+[Core.Log]
+LogConfigCat=Warning ;to only show warnings and above
 ```
 
-Available log levels:
-
-| Level               | Description                                                                             |
-| ------------------- | --------------------------------------------------------------------------------------- |
-| `LOG_LEVEL_ERROR`   | Only error level events are logged.                                                     |
-| `LOG_LEVEL_WARNING` | Default. Errors and Warnings are logged.                                                |
-| `LOG_LEVEL_INFO`    | Errors, Warnings and feature flag evaluation is logged.                                 |
-| `LOG_LEVEL_DEBUG`   | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
+Note: Since the Unreal Engine SDK is a wrapper of the CPP SDK, all logs coming from the CPP SDK are tagged wtih `[CPP-SDK]`.
 
 Info level logging helps to inspect how a feature flag was evaluated:
 
