@@ -312,8 +312,6 @@ ConfigCat->ClearDefaultUser();
 </TabItem>
 </Tabs>
 
--- TODO BELOW --
-
 ## Polling Modes
 
 The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `GetValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
@@ -323,34 +321,20 @@ The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setti
 
 The _ConfigCat SDK_ downloads the latest values and stores them automatically every 60 seconds.
 
-Use the `autoPollIntervalInSeconds` option parameter of the `PollingMode::autoPoll()` to change the polling interval.
-
-```cpp
-auto autoPollIntervalInSeconds = 100;
-ConfigCatOptions options;
-options.pollingMode = PollingMode::autoPoll(autoPollIntervalInSeconds);
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
-```
+<img className="unreal-blueprints-settings-polling-mode-auto zoomable" src="/docs/assets/unreal/settings-polling-mode-auto.png" alt="Unreal Engine Polling Mode Auto" />
 
 Available options:
 
 | Option Parameter            | Description                                                                                         | Default |
 | --------------------------- | --------------------------------------------------------------------------------------------------- | ------- |
-| `autoPollIntervalInSeconds` | Polling interval.                                                                                   | 60      |
-| `maxInitWaitTimeInSeconds`  | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
+| `AutoPollIntervalInSeconds` | Polling interval.                                                                                   | 60      |
+| `MaxInitWaitTimeInSeconds`  | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
 
 ### Lazy Loading
 
 When calling `getValue()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
 
-Use the `cacheRefreshIntervalInSeconds` option parameter of the `PollingMode::lazyLoad()` to set cache lifetime.
-
-```cpp
-auto cacheRefreshIntervalInSeconds = 100;
-ConfigCatOptions options;
-options.pollingMode = PollingMode::lazyLoad(cacheRefreshIntervalInSeconds);
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
-```
+<img className="unreal-settings-polling-mode-lazy zoomable" src="/docs/assets/unreal/settings-polling-mode-lazy.png" alt="Unreal Engine Polling Mode Lazy" />
 
 Available options:
 
@@ -360,16 +344,29 @@ Available options:
 
 ### Manual Polling
 
-Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
+
+<img className="unreal-settings-polling-mode-manual zoomable" src="/docs/assets/unreal/settings-polling-mode-manual.png" alt="Unreal Engine Polling Mode Manual" />
+
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprints-manual-force-refresh zoomable" src="/docs/assets/unreal/blueprints-manual-force-refresh.png" alt="Unreal Engine Manual Force Refresh" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
 
 ```cpp
-ConfigCatOptions options;
-options.pollingMode = PollingMode::manualPoll();
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
-client->forceRefresh();
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+ConfigCat->ForceRefresh();
 ```
 
-> `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
+</TabItem>
+</Tabs>
+
+> `GetValue()` returns `DefaultValue` if the cache is empty. Call `ForceRefresh()` to update the cache.
+
+-- TODO BELOW --
 
 ## Hooks
 
