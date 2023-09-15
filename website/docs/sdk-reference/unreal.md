@@ -4,6 +4,8 @@ title: Unreal Engine SDK Reference
 description: ConfigCat Unreal Engine SDK Reference. This is a step-by-step guide on how to use feature flags in your Unreal Engine project.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 export const CPPSchema = require('@site/src/schema-markup/sdk-reference/cpp.json');
 
 <script
@@ -12,113 +14,91 @@ export const CPPSchema = require('@site/src/schema-markup/sdk-reference/cpp.json
 ></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/unreal-engine-sdk.svg?style=social)](https://github.com/configcat/unreal-engine-sdk/stargazers)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/configcat/unreal-engine-sdk/cpp-ci.yml?logo=GitHub&label=windows%20%2F%20macos%20%2F%20linux&branch=main)](https://github.com/configcat/unreal-engine-sdk/actions/workflows/cpp-ci.yml)
-[![Coverage Status](https://codecov.io/gh/configcat/unreal-engine-sdk/branch/main/graph/badge.svg?token=cvUgfof8k7)](https://codecov.io/gh/configcat/unreal-engine-sdk)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/configcat/unreal-engine-sdk/plugin-ci.yml?logo=GitHub&label=Unreal&branch=main)](https://github.com/configcat/unreal-engine-sdk/actions/workflows/plugin-ci.yml)
 
 <a href="https://github.com/ConfigCat/unreal-engine-sdk" target="_blank">ConfigCat Unreal SDK on GitHub</a>
 
 ## Getting Started:
 
-### 1. Add the ConfigCat SDK to your project
+### 1. Installing the ConfigCat plugin to your project
 
-With **[Vcpkg](https://github.com/microsoft/vcpkg)**
+Via **[Unreal Marketplace](TODO)**
 
-- On Windows:
+** Currently work in progress **
 
-  ```cmd
-  git clone https://github.com/microsoft/vcpkg
-  .\vcpkg\bootstrap-vcpkg.bat
-  .\vcpkg\vcpkg install configcat
-  ```
+Via **[Github clone](https://github.com/configcat/unreal-engine-sdk)**
 
-  In order to use vcpkg with Visual Studio,
-  run the following command (may require administrator elevation):
+Prequesities to cloning manually:
+- you are working in a [C++ project](https://docs.unrealengine.com/5.2/en-US/compiling-game-projects-in-unreal-engine-using-cplusplus/)
+- you've completed the [Visual Studio](https://docs.unrealengine.com/5.2/en-US/setting-up-visual-studio-development-environment-for-cplusplus-projects-in-unreal-engine/) or [Visual Studio Code](https://docs.unrealengine.com/5.2/en-US/setting-up-visual-studio-code-for-unreal-engine/) setup
 
-  ```cmd
-  .\vcpkg\vcpkg integrate install
-  ```
+Run the following commands in the root folder of your project (where the `.uproject` file is located):
 
-  After this, you can create a New non-CMake Project (or open an existing one).
-  All installed libraries are immediately ready to be `#include`d and used
-  in your project without additional setup.
-
-- On Linux/Mac:
-  ```bash
-  git clone https://github.com/microsoft/vcpkg
-  ./vcpkg/bootstrap-vcpkg.sh
-  ./vcpkg/vcpkg install configcat
-  ```
-
-### 2. Include _configcat.h_ header in your application code:
-
-```cpp
-#include <configcat/configcat.h>
-
-using namespace configcat;
+```cmd
+mkdir -p Plugins
+cd Plugins
+git clone https://github.com/configcat/unreal-engine-sdk ConfigCat
 ```
 
-### 3. Create the _ConfigCat_ client with your _SDK Key_
+### 2. Enable the ConfigCat plugin in your project
 
-```cpp
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
-```
+<img className="unreal-enable-plugin zoomable" src="/docs/assets/unreal/enable-plugin.png" alt="Unreal Engine enable plugin" />
+
+Navigate to `Edit -> Plugins` and perform the following steps:
+1. Find the `Config Cat` plugin and **tick** the enable checkbox.
+1. Press `Restart` to load up the editor.
+
+Note: if you are using a locally built plugin, you will need to rebuild from source manually.
+
+### 3. Set up the _ConfigCat_ settings with your _SDK Key_
+
+<img className="unreal-plugin-settings zoomable" src="/docs/assets/unreal/plugin-settings.png" alt="Unreal Engine plugin settings" />
+
+| Properties              | Description                                                                                                                                                                                                                                                                                         |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SdkKey`                | SDK Key to access your feature flags and configurations. Get it from ConfigCat Dashboard.                                                                                                                                                                                                           |
+| `BaseUrl`               | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                                        |
+| `DataGovernance`        | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`.  |
+| `ConnectTimeoutMs`      | Optional, defaults to `8000ms`. Sets the amount of milliseconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). `0` means it never times out during transfer                                                                                  |
+| `ReadTimeoutMs`         | Optional, defaults to `5000ms`. Sets the amount of milliseconds to wait for the server to respond before giving up. `0` means it never times out during transfer.                                                                                                                                   |
+| `PollingMode`           | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                         |
+| `AutoPollInterval`      | For PollingMode == Custom, sets at least how often this policy should fetch the latest configuration and refresh the cache.                                                                                                                                                                         |
+| `MaxInitWaitTime`       | For PollingMode == Custom, sets the maximum waiting time between initialization and the first config acquisition in seconds.                                                                                                                                                                        |
+| `CacheRefreshInterval`  | For PollingMode == LazyLoad, sets how long the cache will store its value before fetching the latest from the network again.                                                                                                                                                                        |
+| `Proxies`               | Optional, sets proxy addresses. e.g. { "https": "your_proxy_ip:your_proxy_port" } on each http request                                                                                                                                                                                              |
+| `ProxyAuthentications`  | Optional, sets proxy authentication on each http request.                                                                                                                                                                                                                                           |
+| `bStartOffline`         | Optional, sets the SDK ot be initialized in offline mode.                                                                                                                                                                                                                                           |
 
 ### 4. Get your setting value
 
-```cpp
-bool isMyAwesomeFeatureEnabled = client->getValue("isMyAwesomeFeatureEnabled", false);
-if (isMyAwesomeFeatureEnabled) {
-    doTheNewThing();
-} else {
-    doTheOldThing();
-}
-```
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
 
-### 5. Close _ConfigCat_ client​
+<img className="unreal-blueprints-get-value zoomable" src="/docs/assets/unreal/blueprints-get-value.png" alt="Unreal Engine Get Value" />
 
-You can safely shut down all clients at once or individually and release all associated resources on application exit.
+</TabItem>
+<TabItem value="cpp" label="C++">
+
+Add Depedency to your `.Build.cs` file:
 
 ```cpp
-ConfigCatClient::closeAll(); // closes all clients
-
-ConfigCatClient::close(client); // closes a specific client
+PrivateDependencyModuleNames.AddRange(new string[]
+{
+  "ConfigCat"
+});
 ```
 
-## Setting up the _ConfigCat Client_
-
-_ConfigCat Client_ is responsible for:
-
-- managing the communication between your application and ConfigCat servers.
-- caching your setting values and feature flags.
-- serving values quickly in a failsafe way.
-
-`ConfigCatClient::get("#YOUR-SDK-KEY#")` returns a client with default options.
-
-| Properties         | Description                                                                                                                                                                                                                                                                                        |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `baseUrl`          | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                                       |
-| `dataGovernance`   | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
-| `connectTimeoutMs` | Optional, defaults to `8000ms`. Sets the amount of milliseconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). `0` means it never times out during transfer                                                                                 |
-| `readTimeoutMs`    | Optional, defaults to `5000ms`. Sets the amount of milliseconds to wait for the server to respond before giving up. `0` means it never times out during transfer.                                                                                                                                  |
-| `pollingMode`      | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
-| `configCache`      | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
-| `logger`           | Optional, sets the internal logger and log level. [More about logging](#logging).                                                                                                                                                                                                                  |
-| `flagOverrides`    | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
-| `defaultUser`      | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                         |
-| `offline`          | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                 |
-| `hooks`            | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
-
+Access feature flags:
 ```cpp
-ConfigCatOptions options;
-options.pollingMode = PollingMode::manualPoll();
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+bool bIsMyAwesomeFeatureEnabled = ConfigCat->GetBoolValue(TEXT("isMyAwesomeFeatureEnabled"), false);
+SetMyAwesomeFeatureEnabled(bIsMyAwesomeFeatureEnabled);
 ```
 
-:::caution
-We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
-The `ConfigCatClient` constructs singleton client instances for your SDK keys with its `ConfigCatClient::get(<sdkKey>)` static factory method.
-These clients can be closed all at once with `ConfigCatClient::closeAll()` method or individually with the `ConfigCatClient::close(client)`.
-:::
+</TabItem>
+</Tabs>
+
+-- TODO BELOW --
 
 ## Anatomy of `getValue()`
 
