@@ -24,7 +24,7 @@ export const CPPSchema = require('@site/src/schema-markup/sdk-reference/cpp.json
 
 Via **[Unreal Marketplace](TODO)**
 
-** Currently work in progress **
+** TODO: ** Currently work in progress
 
 Via **[Github clone](https://github.com/configcat/unreal-engine-sdk)**
 
@@ -98,45 +98,77 @@ SetMyAwesomeFeatureEnabled(bIsMyAwesomeFeatureEnabled);
 </TabItem>
 </Tabs>
 
+## Anatomy of `GetValue`
+
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
+| `DefaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `User`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprints-get-value-overloads zoomable" src="/docs/assets/unreal/blueprints-get-value-overloads.png" alt="Unreal Engine Get Value Overloads" />
+<img className="unreal-blueprints-get-value-targeted zoomable" src="/docs/assets/unreal/blueprints-get-value-targeted.png" alt="Unreal Engine Get Values Targeted" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
+
+Access value depending on type:
+```cpp
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+
+bool bMyFirstFeatureFlag = ConfigCat->GetBoolValue(TEXT("myFirstFeatureFlag"), false);
+int MySecondFeatureFlag = ConfigCat->GetIntValue(TEXT("mySecondFeatureFlag"), 0);
+double MyThirdFeatureFlag = ConfigCat->GetDoubleValue(TEXT("myThirdFeatureFlag"), 0.0);
+FString MyFourthFeatureFlag = ConfigCat->GetStringValue(TEXT("myForthFeatureFlag"), TEXT(""));
+```
+
+Access value depending on type targeting an user:
+```cpp
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+
+FConfigCatUser User = FConfigCatUser(TEXT("#USER-IDENTIFIER#"));
+FString TargetValue = ConfigCat->GetStringValue(TEXT("targetValue"), TEXT(""), User);
+```
+
+</TabItem>
+</Tabs>
+
+## Anatomy of `GetValueDetails()`
+
+`GetValueDetails()` is similar to `GetValue()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
+
+| Parameters     | Description                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
+| `DefaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `User`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+
+
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprints-get-value-details zoomable" src="/docs/assets/unreal/blueprints-get-value-details.png" alt="Unreal Engine Get Value Details" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
+
+```cpp
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+
+FConfigCatUser User = FConfigCatUser(TEXT("#USER-IDENTIFIER#"));
+FConfigCatEvaluationDetails Details = ConfigCat->GetStringValueDetails(TEXT("myFeatureFlag"),
+  TEXT(""), User);
+```
+
+</TabItem>
+</Tabs>
+
 -- TODO BELOW --
 
-## Anatomy of `getValue()`
-
-| Parameters     | Description                                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
-| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
-
-```cpp
-auto user = ConfigCatUser("#USER-IDENTIFIER#");
-auto value = client->getValue(
-    "keyOfMySetting", // key
-    false, // defaultValue
-    &user, // Optional User Object
-);
-```
-
-## Anatomy of `getValueDetails()`
-
-`getValueDetails()` is similar to `getValue()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
-
-| Parameters     | Description                                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
-| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
-
-```cpp
-auto user = ConfigCatUser("#USER-IDENTIFIER#");
-auto details = client->getValueDetails(
-    "keyOfMySetting", // key
-    false, // defaultValue
-    &user, // Optional User Object
-);
-```
-
-The `details` result contains the following information:
+The `Details` result contains the following information:
 
 | Field                             | Type                                 | Description                                                                               |
 | --------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------- |
@@ -623,14 +655,18 @@ Also, we recommend using [confidential targeting comparators](/advanced/targetin
 
 ## Sample Applications
 
+TODO: Create one for Unreal: 
+
 Check out our Sample Application how they use the ConfigCat SDK
 
 - <a href="https://github.com/configcat/cpp-sdk/tree/main/samples/" target="_blank">ConfigCat C++ Console Sample App</a>
 
 ## Guides
 
+TODO: Create one for Unreal: 
+
 See <a href="https://configcat.com/blog/2022/10/21/configcat-cpp-sdk-announcement/" target="_blank">this</a> guide on how to use ConfigCat's C++ SDK.
 
 ## Look Under the Hood
 
-- <a href="https://github.com/ConfigCat/cpp-sdk" target="_blank">ConfigCat C++ SDK's repository on GitHub</a>
+- <a href="https://github.com/ConfigCat/unreal-engine-sdk" target="_blank">ConfigCat Unreal Engine SDK's repository on GitHub</a>
