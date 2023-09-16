@@ -578,20 +578,30 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
 auto keys = client->getAllKeys();
 ```
 
+-- TODO ABOVE --
+
 ## `GetAllValues()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
 
-```cpp
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
-auto settingValues = client->getAllValues();
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
 
-// invoke with user object
-auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
-auto settingValuesTargeting = client->getAllValues(&user);
+<img className="unreal-blueprints-get-all-values zoomable" src="/docs/assets/unreal/blueprints-get-all-values.png" alt="Unreal Engine Get All Values" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
+
+```cpp
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+TMap<FString, FConfigCatValue> SettingValues = ConfigCat->GetAllValues(); 
+	
+FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"));
+TMap<FString, FConfigCatValue> SettingValuesTargeting = ConfigCat->GetAllValues(User);
 ```
 
--- TODO ABOVE --
+</TabItem>
+</Tabs>
 
 ## `GetAllValueDetails`
 
