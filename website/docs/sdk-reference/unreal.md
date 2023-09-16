@@ -569,7 +569,7 @@ options.flagOverrides = make_shared<MapFlagOverrides>(map, LocalOnly);
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
-## `getAllKeys()`
+## `GetAllKeys()`
 
 You can query the keys of each feature flag and setting with the `getAllKeys()` method.
 
@@ -578,7 +578,7 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
 auto keys = client->getAllKeys();
 ```
 
-## `getAllValues()`
+## `GetAllValues()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a User Object is optional.
 
@@ -591,19 +591,29 @@ auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 auto settingValuesTargeting = client->getAllValues(&user);
 ```
 
-## `getAllValueDetails`
+-- TODO ABOVE --
+
+## `GetAllValueDetails`
 
 Evaluates and returns the detailed values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
-```cpp
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
 
-// invoke with user object
-auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
-auto allValueDetails = client->getAllValueDetails(&user)
+<img className="unreal-blueprints-get-all-value-details zoomable" src="/docs/assets/unreal/blueprints-get-all-value-details.png" alt="Unreal Engine Get All Value Details" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
+
+```cpp
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"));
+
+TArray<FConfigCatEvaluationDetails> AllValueDetails = ConfigCat->GetAllValueDetails(User);
 ```
 
--- TODO ABOVE --
+</TabItem>
+</Tabs>
 
 ## Custom Cache
 
