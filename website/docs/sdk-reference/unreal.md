@@ -52,6 +52,8 @@ Note: if you are using a locally built plugin, you will need to rebuild from sou
 
 ### 3. Set up the _ConfigCat_ settings with your _SDK Key_
 
+You can configure all ConfigCat related settings inside the `ProjectSettings -> Feature Flags -> ConfigCat`.
+
 <img className="unreal-plugin-settings zoomable" src="/docs/assets/unreal/plugin-settings.png" alt="Unreal Engine plugin settings" />
 
 | Properties              | Description                                                                                                                                                                                                                                                                                         |
@@ -640,32 +642,20 @@ The C++ SDK supports *shared caching*. You can read more about this feature and 
 
 Call the `forceRefresh()` method on the client to download the latest config JSON and update the cache.
 
+-- TODO ABOVE --
+
 ## Using ConfigCat behind a proxy
 
-Provide your own network credentials (username/password), and proxy server settings (proxy server/port) in the `ConfigCatOptions`.
+Provide your own network credentials (username/password), and proxy server settings (proxy server/port) in the ConfigCat `ProjectSettings`.
 
-```cpp
-ConfigCatOptions options;
-options.proxies = {{"http", "http://www.fake_auth_proxy.com"}}; // Protocol, Proxy url
-options.proxyAuthentications = {
-    {"http", ProxyAuthentication{"user", "password"}} // Protocol, ProxyAuthentication
-};
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
-```
+<img className="unreal-settings-proxy zoomable" src="/docs/assets/unreal/settings-proxy.png" alt="Unreal Engine Settings Proxy" />
 
 ## Changing the default HTTP timeout
 
-Set the maximum wait time for a ConfigCat HTTP response by changing the _connectTimeoutMs_ or _readTimeoutMs_ in the `ConfigCatOptions`.
-The default _connectTimeoutMs_ is 8 seconds. The default _readTimeoutMs_ is 5 seconds.
+Set the maximum wait time for a ConfigCat HTTP response by changing the _ConnectTimeoutMs_ or _ReadTimeoutMs_ in the ConfigCat `ProjectSettings`.
+The default _ConnectTimeoutMs_ is 8 seconds. The default _ReadTimeoutMs_ is 5 seconds.
 
-```cpp
-ConfigCatOptions options;
-options.connectTimeoutMs = 10000; // Timeout in milliseconds for establishing a HTTP connection with the server
-options.readTimeoutMs = 8000; // Timeout in milliseconds for reading the server's HTTP response
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
-```
-
--- TODO ABOVE --
+<img className="unreal-settings-http-timeout zoomable" src="/docs/assets/unreal/settings-http-timeout.png" alt="Unreal Engine Settings Http Timeout" />
 
 ## Logging
 
