@@ -569,16 +569,28 @@ options.flagOverrides = make_shared<MapFlagOverrides>(map, LocalOnly);
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
+-- TODO ABOVE --
+
 ## `GetAllKeys()`
 
 You can query the keys of each feature flag and setting with the `getAllKeys()` method.
 
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprints-get-all-keys zoomable" src="/docs/assets/unreal/blueprints-get-all-keys.png" alt="Unreal Engine Get All Keys" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
+
 ```cpp
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
-auto keys = client->getAllKeys();
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+
+TArray<FString> Keys = ConfigCat->GetAllKeys();
 ```
 
--- TODO ABOVE --
+</TabItem>
+</Tabs>
 
 ## `GetAllValues()`
 
