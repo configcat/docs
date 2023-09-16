@@ -603,46 +603,38 @@ auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 auto allValueDetails = client->getAllValueDetails(&user)
 ```
 
+-- TODO ABOVE --
+
 ## Custom Cache
 
 The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
-If you prefer to use your own cache solution, such as an external or distributed cache in your system,
-you can implement the [`ConfigCache`](https://github.com/configcat/cpp-sdk/blob/main/include/configcat/configcache.h#L8) interface
-and set the `configCache` parameter in the options passed to `ConfigCatClient::get`.
-This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
-You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCatCache` abstract class:
-
-```cpp
-class MyCustomCache : public ConfigCatCache {
-public:
-    const std::string& read(const std::string& key) override {
-        // here you have to return with the cached value
-    }
-
-    void write(const std::string& key, const std::string& value) override {
-        // here you have to store the new value in the cache
-    }
-};
-```
-
-Then use your custom cache implementation:
-
-```cpp
-ConfigCatOptions options;
-options.configCache = make_shared<MyCustomCache>();
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
-```
+TODO: Link GitHub issue for this.
 
 :::info
-The C++ SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The Unreal Engine SDK doesn't support custom cache implementations currently.
 :::
 
 ## Force refresh
 
 Call the `forceRefresh()` method on the client to download the latest config JSON and update the cache.
 
--- TODO ABOVE --
+<Tabs groupId="unreal-languages">
+<TabItem value="blueprints" label="Blueprints">
+
+<img className="unreal-blueprints-force-refresh zoomable" src="/docs/assets/unreal/blueprints-force-refresh.png" alt="Unreal Engine Blueprint Force Refresh" />
+
+</TabItem>
+<TabItem value="cpp" label="C++">
+
+```cpp
+UConfigCatSubsystem* ConfigCat = UConfigCatSubsystem::Get(this);
+
+ConfigCat->ForceRefresh();
+```
+
+</TabItem>
+</Tabs>
 
 ## Using ConfigCat behind a proxy
 
