@@ -432,8 +432,6 @@ bool bIsOffline = ConfigCat->IsOffline();
 </TabItem>
 </Tabs>
 
--- TODO BELOW --
-
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
@@ -447,17 +445,17 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 
 You can set up the SDK to load your feature flag & setting overrides from a file or a map.
 
+<img className="unreal-settings-overrides zoomable" src="/docs/assets/unreal/settings-overrides.png" alt="Unreal Engine Settings Overrides" />
+
 ### JSON File
 
 The SDK can be set up to load your feature flag & setting overrides from a file.
 
 #### File
 
-```cpp
-ConfigCatOptions options;
-options.flagOverrides = make_shared<FileFlagOverrides>("path/to/the/local_flags.json", LocalOnly);
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
-```
+If specified the SDK will load the JSON data `%PROJECT_ROOT/Content/ConfigCat/flags.json` file. This file needs to be created manually in the specified folder to ensure it gets packaged in the final executable. 
+
+Note: This file needs to be created in your file explorer and cannot be done within Unreal.
 
 #### JSON File Structure
 
@@ -555,21 +553,11 @@ The URL to your current config JSON is based on your [Data Governance](advanced/
 
 You can set up the SDK to load your feature flag & setting overrides from a map.
 
-```cpp
-const std::unordered_map<std::string, Value>& map = {
-    { "enabledFeature", true },
-    { "disabledFeature", false },
-    { "intSetting", 5 },
-    { "doubleSetting", 3.14 },
-    { "stringSetting", "test" }
-};
+TODO: Link GitHub issue for this.
 
-ConfigCatOptions options;
-options.flagOverrides = make_shared<MapFlagOverrides>(map, LocalOnly);
-auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
-```
-
--- TODO ABOVE --
+:::info
+The Unreal Engine SDK doesn't support programmatically setting a flag map override currently.
+:::
 
 ## `GetAllKeys()`
 
