@@ -29,7 +29,7 @@ export const ElixirSchema = require('@site/src/schema-markup/sdk-reference/elixi
 ```elixir
 def deps do
   [
-    {:configcat, "~> 2.0.0"}
+    {:configcat, "~> 3.0.0"}
   ]
 end
 ```
@@ -39,7 +39,7 @@ end
 ```elixir
 def start(_type, _args) do
   children = [
-    {ConfigCat, [sdk_key: "YOUR SDK KEY"]},
+    {ConfigCat, [sdk_key: "#YOUR-SDK-KEY#"]},
     MyApp
   ]
 
@@ -53,9 +53,9 @@ end
 ```elixir
 isMyAwesomeFeatureEnabled = ConfigCat.get_value("isMyAwesomeFeatureEnabled", false)
 if isMyAwesomeFeatureEnabled do
-    do_the_new_thing()
+  do_the_new_thing()
 else
-    do_the_old_thing()
+  do_the_old_thing()
 end
 ```
 
@@ -69,34 +69,70 @@ _ConfigCat Client_ is responsible for:
 
 `{ConfigCat, options}` returns a client with default options.
 
-| Properties        | Description                                                                                                                                                                                                                                                                                    |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sdk_key`         | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                                                                                                                                                                                      |
-| `data_governance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](advanced/data-governance.md). Available options: `:global`, `:eu_only`.   |
-| `cache_policy`    | `CachePolicy.auto/1`, `CachePolicy.lazy/1` and `CachePolicy.manual/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details.                                                                                                                                          |
-| `cache`           | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`.                                                                                                                                                                                                            |
-| `http_proxy`      | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`.                                          |
-| `connect_timeout` | Timeout for establishing a TCP or SSL connection, in milliseconds. Default is 8000.                                                                                                                                                                                                            |
-| `read_timeout`    | Timeout for receiving an HTTP response from the socket, in milliseconds. Default is 5000.                                                                                                                                                                                                      |
-| `flag_overrides`  | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)                                                                                                                                                                                                   |
-| `name`            | A unique identifier for this instance of `ConfigCat`. Defaults to `ConfigCat`. Must be provided if you need to run more than one instance of `ConfigCat` in the same application. If you provide a `name`, you must then pass that name to all of the API functions using the `client` option. |
+| Properties                     | Description                                                                                                                                                                                                                                                                                    |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sdk_key`                      | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                                                                                                                                                                                      |
+| `base_url`                     | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                |
+| `data_governance`              | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](advanced/data-governance.md). Available options: `:global`, `:eu_only`.   |
+| `cache_policy`                 | `CachePolicy.auto/1`, `CachePolicy.lazy/1` and `CachePolicy.manual/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details.                                                                                                                                          |
+| `cache`                        | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`.                                                                                                                                                                                                            |
+| `http_proxy`                   | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`.                                          |
+| `connect_timeout_milliseconds` | Timeout for establishing a TCP or SSL connection, in milliseconds. Default is 8000.                                                                                                                                                                                                            |
+| `read_timeout_milliseconds`    | Timeout for receiving an HTTP response from the socket, in milliseconds. Default is 5000.                                                                                                                                                                                                      |
+| `flag_overrides`               | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)                                                                                                                                                                                                   |
+| `default_user`                 | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                               |
+| `offline`                      | Defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                       |
+| `hooks`                        | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                                 |
+| `name`                         | A unique identifier for this instance of `ConfigCat`. Defaults to `ConfigCat`. Must be provided if you need to run more than one instance of `ConfigCat` in the same application. If you provide a `name`, you must then pass that name to all of the API functions using the `client` option. [More about multiple instances](#multiple-instances) |
 
 ## Anatomy of `get_value()`
 
 | Parameters      | Description                                                                                                                                                    |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `key`           | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                                                                             |
+| `key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                                                    |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                                                                 |
 | `user`          | Optional, _ConfigCat.User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md)                                         |
 | `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name of the instance which you want to access. |
 
 ```elixir
 value = ConfigCat.get_value(
-    "keyOfMySetting", # Setting Key
-    false, # Default value
-    ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#") # Optional User Object
-);
+  "keyOfMySetting", # Setting Key
+  false, # Default value
+  ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#") # Optional User Object
+)
 ```
+
+## Anatomy of `get_value_details()`
+
+`get_value_details()` is similar to `get_value()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
+
+| Parameters      | Description                                                                                                                                                    |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                                                    |
+| `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                                                                 |
+| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md)                                                   |
+| `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name of the instance which you want to access. |
+
+```elixir
+details = ConfigCat.get_value_details(
+  "keyOfMySetting", # Setting Key
+  false, # Default value
+  ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#") # Optional User Object
+)
+```
+
+The `details` result contains the following information:
+
+| Field                                | Description                                                                               |
+| ------------------------------------ | ----------------------------------------------------------------------------------------- |
+| `value`                              | The evaluated value of the feature flag or setting.                                       |
+| `key`                                | The key of the evaluated feature flag or setting.                                         |
+| `default_value?`                     | True when the default value passed to get_value_details() is returned due to an error.    |
+| `error`                              | In case of an error, this field contains the error message.                               |
+| `user`                               | The user object that was used for evaluation.                                             |
+| `matched_evaluation_percentage_rule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `matched_evaluation_rule`            | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `fetch_time`                         | The last download time (UTC DateTime) of the current config.                              |
 
 ## User Object
 
@@ -119,6 +155,52 @@ user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#", email: "john@exampl
                 custom: %{SubscriptionType: "Pro", UserRole: "Admin"})
 ```
 
+### Default user
+
+There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+
+You can set the default user object either on SDK initialization:
+
+```elixir
+{ConfigCat, [
+  sdk_key: "#YOUR-SDK-KEY#",
+  default_user: ConfigCat.User.new("john@example.com")
+]}
+```
+
+or with the `set_default_user` method of the ConfigCat client.
+
+```elixir
+ConfigCat.set_default_user(ConfigCat.User.new("john@example.com"))
+```
+
+Whenever the `get_value`, `get_value_details`, `get_variation_id`, `get_all_variation_ids`, or `get_all_values` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+
+```elixir
+{ConfigCat, [
+  sdk_key: "#YOUR-SDK-KEY#",
+  default_user: ConfigCat.User.new("john@example.com")
+]}
+```
+```elixir
+# The default user will be used at the evaluation process.
+value = ConfigCat.get_value("keyOfMySetting", false)
+```
+
+When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+
+```elixir
+other_user = ConfigCat.User.new("brian@example.com")
+# otherUser will be used at the evaluation process.
+value = ConfigCat.get_value("keyOfMySetting", false, other_user)
+```
+
+For deleting the default user, you can do the following:
+
+```elixir
+ConfigCat.clear_default_user()
+```
+
 ## Polling Modes
 
 The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
@@ -132,8 +214,8 @@ Use the `poll_interval_seconds` option parameter to change the polling interval.
 
 ```elixir
 {ConfigCat, [
-    sdk_key: "YOUR SDK KEY",
-    cache_policy: ConfigCat.CachePolicy.auto(poll_interval_seconds: 60)
+  sdk_key: "#YOUR-SDK-KEY#",
+  cache_policy: ConfigCat.CachePolicy.auto(poll_interval_seconds: 60)
 ]},
 ```
 
@@ -141,8 +223,8 @@ Adding a callback to `on_changed` option parameter will get you notified about c
 
 ```elixir
 {ConfigCat, [
-    sdk_key: "YOUR SDK KEY",
-    cache_policy: ConfigCat.CachePolicy.auto(on_changed: callback)
+  sdk_key: "#YOUR-SDK-KEY#",
+  cache_policy: ConfigCat.CachePolicy.auto(on_changed: callback)
 ]}
 ```
 
@@ -161,8 +243,8 @@ Use `cache_expiry_seconds` option parameter to set cache lifetime.
 
 ```elixir
 {ConfigCat, [
-    sdk_key: "YOUR SDK KEY",
-    cache_policy: ConfigCat.CachePolicy.lazy(cache_expiry_seconds: 300)
+  sdk_key: "#YOUR-SDK-KEY#",
+  cache_policy: ConfigCat.CachePolicy.lazy(cache_expiry_seconds: 300)
 ]}
 ```
 
@@ -184,11 +266,17 @@ ConfigCat.force_refresh()
 
 ```elixir
 value = ConfigCat.get_value("key", "my default value") # Returns "my default value"
-ConfigCat.force_refresh();
+ConfigCat.force_refresh()
 value = ConfigCat.get_value("key", "my default value") # Returns "value from server"
 ```
 
 ### Custom cache behaviour with `cache:` option parameter
+
+The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
+If you prefer to use your own cache solution, such as an external or distributed cache in your system,
+you can implement the [`ConfigCache`](https://github.com/configcat/elixir-sdk/blob/main/include/configcat/configcache.h#L8) behaviour
+and set the `configCache` parameter in the options passed to `ConfigCatClient::get`.
+This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
 To be able to customize the caching layer you need to implement the following behaviour:
 
@@ -207,39 +295,154 @@ end
 - You must implement (either explicitly or implicitly) the ConfigCache behaviour
 - It is the responsibility of the calling application to supervise the cache if it needs to be supervised.
 
+:::info
+The Elixir SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+:::
+
 ### Multiple `ConfigCat` instances
 
-If you need to run more than one instance of `ConfigCat`, you can add multiple
-`ConfigCat` children. You will need to give `ConfigCat` a unique `name` option
-for each, as well as using `Supervisor.child_spec/2` to provide a unique `id`
-for each instance.
+If you need to run more than one instance of `ConfigCat`, there are two ways
+you can do it.
+
+#### Module-Based
+
+You can create a module that `use`s `ConfigCat` and then call the ConfigCat
+API functions on that module. This is the recommended option, as it makes the
+calling code a bit clearer and simpler.
+You can pass any of the options listed above as arguments to `use ConfigCat`
+or specify them in your supervisor. Arguments specified by the supervisor take
+precedence over those provided to `use ConfigCat`.
+
+```elixir
+# lib/my_app/first_flags.ex
+defmodule MyApp.FirstFlags do
+  use ConfigCat, sdk_key: "sdk_key_1"
+end
+
+# lib/my_app/second_flags.ex
+defmodule MyApp.SecondFlags do
+  use ConfigCat, sdk_key: "sdk_key_2"
+end
+
+# lib/my_app/application.ex
+def start(_type, _args) do
+  children = [
+    # ... other children ...
+    FirstFlags,
+    SecondFlags,
+  ]
+
+  opts = [strategy: :one_for_one, name: MyApp.Supervisor]
+  Supervisor.start_link(children, opts)
+end
+
+# Calling code:
+FirstFlags.get_value("someKey", "default value")
+SecondFlags.get_value("otherKey", "other default")
+```
+
+#### Explicit Client
+
+If you prefer not to use the module-based solution, you can instead add
+multiple `ConfigCat` children to your application's supervision tree. You will
+need to give `ConfigCat` a unique `name` option for each, as well as using
+`Supervisor.child_spec/2` to provide a unique `id` for each instance.
+When calling the ConfigCat API functions, you'll pass a `client:` keyword
+argument with the unique `name` you gave to that instance.
 
 ```elixir
 # lib/my_app/application.ex
 def start(_type, _args) do
   children = [
     # ... other children ...
-    Supervisor.child_spec({ConfigCat, [sdk_key: "sdk_key_1", name: :first]}),
-    Supervisor.child_spec({ConfigCat, [sdk_key: "sdk_key_2", name: :second]}),
+    Supervisor.child_spec({ConfigCat, [sdk_key: "sdk_key_1", name: :first]}, id: :config_cat_1),
+    Supervisor.child_spec({ConfigCat, [sdk_key: "sdk_key_2", name: :second]}, id: :config_cat_2),
   ]
+
   opts = [strategy: :one_for_one, name: MyApp.Supervisor]
   Supervisor.start_link(children, opts)
 end
+
+# Calling code:
+ConfigCat.get_value("someKey", "default value", client: :first)
+ConfigCat.get_value("otherKey", "other default", client: :second)
 ```
 
-Then you can call `.get_value/4` like this:
+## Hooks
+
+With the following hooks you can subscribe to particular events fired by the SDK:
+
+- `on_client_ready`: This event is sent when the SDK reaches the ready state. If the SDK is set up with lazy load or manual polling it's considered ready right after instantiation.
+  If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `on_client_ready` event fires when the auto polling's `max_init_wait_time_seconds` is reached.
+
+- `on_config_changed(config: map())`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
+
+- `on_flag_evaluated(evaluation_details: EvaluationDetails.t())`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`get_value_details`](#anatomy-of-getvaluedetails).
+
+- `on_error(error: String.t())`: This event is sent when an error occurs within the ConfigCat SDK.
+
+You can subscribe to these events either on SDK initialization:
 
 ```elixir
-ConfigCat.get_value("setting", "default", client: :first)
-ConfigCat.get_value("setting", "default", client: :second)
+def on_flag_evaluated(evaluation_details) do
+  # handle the event
+end
+
+{ConfigCat, [
+  sdk_key: "#YOUR-SDK-KEY#",
+  hooks: [on_flag_evaluated: {__MODULE__, :on_flag_evaluated, []}]
+]}
 ```
+
+or with the `Hooks` property of the ConfigCat client:
+
+```Elixir
+ConfigCat.Hooks.add_on_flag_evaluated({__MODULE__, :on_flag_evaluated, []})
+```
+
+A module/function name/extra arguments tuple representing a callback function.
+Each callback passes specific arguments. These specific arguments are
+prepended to the extra arguments provided in the tuple (if any).
+For example, you might want to define a callback that sends a message to
+another process which the config changes. You can pass the pid of that process
+as an extra argument:
+
+```elixir
+def MyModule do
+  def subscribe_to_config_changes(subscriber_pid) do
+    ConfigCat.hooks()
+    |> ConfigCat.Hooks.add_on_config_changed({__MODULE__, :on_config_changed, [subscriber_pid]})
+  end
+  def on_config_changed(config, pid) do
+    send pid, {:config_changed, config}
+  end
+end
+```
+
+## Online / Offline mode
+
+In cases when you'd want to prevent the SDK from making HTTP calls, you can put it in offline mode:
+
+```elixir
+ConfigCat.set_offline()
+```
+
+In offline mode, the SDK won't initiate HTTP requests and will work only from its cache.
+
+To put the SDK back in online mode, you can do the following:
+
+```elixir
+ConfigCat.set_online()
+```
+
+> With `ConfigCat.offline?` you can check whether the SDK is in offline mode.
 
 ## Flag Overrides
 
 With flag overrides you can overwrite the feature flags & settings downloaded from the ConfigCat CDN with local values.
 Moreover, you can specify how the overrides should apply over the downloaded values. The following 3 behaviours are supported:
 
-- **Local/Offline mode** (`:local_only`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
+- **Local only** (`:local_only`): When evaluating values, the SDK will not use feature flags & settings from the ConfigCat CDN, but it will use all feature flags & settings that are loaded from local-override sources.
 
 - **Local over remote** (`:local_over_remote`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the local-override version will take precedence.
 
@@ -255,11 +458,11 @@ The SDK can load your feature flag & setting overrides from a file.
 
 ```elixir
 {ConfigCat, [
-    sdk_key: "YOUR SDK KEY",
-    flag_overrides: ConfigCat.LocalFileDataSource.new(
-      "path/to/the/local_flags.json",  # path to the file
-      :local_only  # local/offline mode
-    )
+  sdk_key: "#YOUR-SDK-KEY#",
+  flag_overrides: ConfigCat.LocalFileDataSource.new(
+    "path/to/the/local_flags.json",  # path to the file
+    :local_only  # local/offline mode
+  )
 ]}
 ```
 
@@ -361,16 +564,16 @@ You can set up the SDK to load your feature flag & setting overrides from a map.
 
 ```elixir
 map = %{
-    "enabledFeature" => true,
-    "disabledFeature" => false,
-    "intSetting" => 5,
-    "doubleSetting" => 3.14,
-    "stringSetting" => "test"
+  "enabledFeature" => true,
+  "disabledFeature" => false,
+  "intSetting" => 5,
+  "doubleSetting" => 3.14,
+  "stringSetting" => "test"
 }
 
 {ConfigCat, [
-    sdk_key: "YOUR SDK KEY",
-    flag_overrides: ConfigCat.LocalMapDataSource.new(map, :local_only)
+  sdk_key: "#YOUR-SDK-KEY#",
+  flag_overrides: ConfigCat.LocalMapDataSource.new(map, :local_only)
 ]}
 ```
 
@@ -382,9 +585,20 @@ Debug level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
 [debug]  Evaluating get_value('isPOCFeatureEnabled').
-[debug]  User object: %ConfigCat.User{country: nil, custom: %{}, email: "configcat@example.com", identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
-[debug]  Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@something.com] => no match
-[debug]  Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@example.com] => match, returning: true
+User object: %ConfigCat.User{country: nil, custom: %{}, email: "configcat@example.com", identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
+Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@something.com] => no match
+Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@example.com] => match, returning: true
+```
+
+The following example shows how to set the _Log Level_ on the internal _ConfigCat_ logger.
+put the following code into your application.ex file and runs it on start:
+
+```elixir
+defp set_config_cat_log_level do
+  :configcat
+  |> Application.spec(:modules)
+  |> Logger.put_module_level(:debug)
+end
 ```
 
 ## `get_all_keys()`
@@ -405,13 +619,23 @@ values = ConfigCat.get_all_values(
 )
 ```
 
+## `get_all_value_details()`
+
+Evaluates and returns the detailed values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
+
+```elixir
+all_value_details = ConfigCat.get_all_value_details(
+  ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#")  # Optional User Object
+)
+```
+
 ## Using ConfigCat behind a proxy
 
 Provide your own network credentials (username/password), and proxy server settings (proxy server/port) by passing the proxy details to the creator method.
 
 ```elixir
 {ConfigCat, [
-    sdk_key: "YOUR SDK KEY",
+    sdk_key: "#YOUR-SDK-KEY#",
     http_proxy: "https://user@pass:yourproxy.com"
 ]}
 ```
