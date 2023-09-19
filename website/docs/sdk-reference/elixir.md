@@ -219,32 +219,23 @@ Use the `poll_interval_seconds` option parameter to change the polling interval.
 ]},
 ```
 
-Adding a callback to `on_changed` option parameter will get you notified about changes.
-
-```elixir
-{ConfigCat, [
-  sdk_key: "#YOUR-SDK-KEY#",
-  cache_policy: ConfigCat.CachePolicy.auto(on_changed: callback)
-]}
-```
-
 Available options:
 
-| Option Parameter        | Description                                                                                                                                                    | Default |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `poll_interval_seconds` | Polling interval.                                                                                                                                              | 60      |
-| `on_changed`            | A 0-arity function to be called about configuration changes. Needs to run on a separate proccess. Any exceptions raised by `on_changed` are caught and logged. | -       |
+| Option Parameter             | Description                                                                                          | Default |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
+| `poll_interval_seconds`      | Polling interval.                                                                                    | 60      |
+| `max_init_wait_time_seconds` | Maximum waiting time between the client initialization and the first config acquisition in secconds. | 5       |
 
 ### Lazy loading
 
 When calling `get_value()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
 
-Use `cache_expiry_seconds` option parameter to set cache lifetime.
+Use `cache_refresh_interval_seconds` option parameter to set cache lifetime.
 
 ```elixir
 {ConfigCat, [
   sdk_key: "#YOUR-SDK-KEY#",
-  cache_policy: ConfigCat.CachePolicy.lazy(cache_expiry_seconds: 300)
+  cache_policy: ConfigCat.CachePolicy.lazy(cache_refresh_interval_seconds: 300)
 ]}
 ```
 
@@ -252,7 +243,7 @@ Available options:
 
 | Option Parameter       | Description | Default |
 | ---------------------- | ----------- | ------- |
-| `cache_expiry_seconds` | Cache TTL.  | 60      |
+| `cache_refresh_interval_seconds` | Cache TTL.  | 60      |
 
 ### Manual polling
 
