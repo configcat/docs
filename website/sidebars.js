@@ -138,7 +138,7 @@ module.exports = {
               id: 'advanced/proxy/monitoring',
               label: 'Monitoring',
             },
-          ]
+          ],
         },
       ],
       'SDK References': [
@@ -197,6 +197,7 @@ module.exports = {
       ],
       'Service Status': ['service/status'],
     },
+    { type: 'doc', id: 'news', label: 'News' },
     { type: 'doc', id: 'faq', label: 'FAQ' },
   ],
 };
