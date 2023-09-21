@@ -84,20 +84,6 @@ We're pleased to announce the arrival of "Test with User" for feature flags!
 
 With "Test with User," you can now test your feature flags before deploying them to production. Wondering how your flags will perform for specific users? This feature allows you to see the evaluation results based on a given user object.
 
-## ConfigCat Stickers
-
-#### Feb 13, 2023
-
-We just had a bunch of ConfigCat stickers printed. And we're happy to send you a pack in return for a short review on one of the following review sites:
-
-- [G2 Crowd](https://www.g2.com/products/configcat/take_survey)
-- [TrustRadius](https://www.trustradius.com/welcome/configcat)
-- [TrustPilot](https://www.trustpilot.com/evaluate/configcat.com)
-- [Capterra](https://reviews.capterra.com/new/187099)
-- [Alternative.me](https://alternative.me/configcat#ConfigCat_Reviews)
-
-[Ask for your pack here](https://forms.gle/uFn4CawYgwGc3m716)
-
 ## Chromium Extension SDK (Beta)
 
 #### Dec 3, 2022
