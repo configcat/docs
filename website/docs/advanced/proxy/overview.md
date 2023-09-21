@@ -119,7 +119,7 @@ The Proxy is able to read the options YAML from the following default locations:
 - **macOS**: `/Library/Application Support/configcat/proxy/options.yml`
 - **Linux**: `/etc/configcat/proxy/options.yml`
 
-When the default location is not suitable, you can also specify a custom location for your options YAML file via the `-c` argument.
+When the default location is not suitable, you can specify a custom location for your options YAML file via the `-c` argument.
 
 <Tabs groupId="yaml-env">
 <TabItem value="yaml" label="YAML" default>
