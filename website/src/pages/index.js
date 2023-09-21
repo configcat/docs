@@ -17,7 +17,7 @@ const features = [
       { url: 'network-traffic', title: 'Network Traffic' },
       { url: 'purchase', title: 'Plans, Purchase & Billing' },
       { url: 'organization', title: 'Organization & Roles' },
-      { url: 'news', title: 'News' },
+      { url: 'news', title: 'News & Product Updates' },
       { url: 'faq', title: 'FAQ' },
       { url: 'glossary', title: 'Glossary' },
     ],

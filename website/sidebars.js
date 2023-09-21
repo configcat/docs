@@ -197,7 +197,7 @@ module.exports = {
       ],
       'Service Status': ['service/status'],
     },
-    { type: 'doc', id: 'news', label: 'News' },
+    { type: 'doc', id: 'news', label: 'News & Product Updates' },
     { type: 'doc', id: 'faq', label: 'FAQ' },
   ],
 };
