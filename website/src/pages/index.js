@@ -92,6 +92,7 @@ const features = [
       { url: 'integrations/datadog', title: 'DataDog' },
       { url: 'integrations/zapier', title: 'Zapier' },
       { url: 'integrations/github', title: 'GitHub Action' },
+      { url: 'advanced/code-references/gitlab-ci/', title: 'GitLab (via CLI)' },
       { url: 'integrations/circleci', title: 'CircleCI Orb' },
       { url: 'integrations/bitbucket', title: 'Bitbucket Pipe' },
       { url: 'integrations/bitrise', title: 'Bitrise Step' },
