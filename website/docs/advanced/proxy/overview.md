@@ -113,18 +113,35 @@ You can then check the [status endpoint](/advanced/proxy/monitoring#status) of t
 
 You can specify options for the Proxy either via a YAML file or with environment variables. When an option is defined in both places, the environment variable's value takes precedence.
 
+The Proxy is able to read the options YAML from the following default locations:
+
+- **Windows**: `%PROGRAMDATA%\configcat\proxy\options.yml`, usually `C:\ProgramData\configcat\proxy\options.yml`
+- **macOS**: `/Library/Application Support/configcat/proxy/options.yml`
+- **Linux**: `/etc/configcat/proxy/options.yml`
+
+When the default location is not suitable, you can also specify a custom location for your options YAML file via the `-c` argument.
+
 <Tabs groupId="yaml-env">
 <TabItem value="yaml" label="YAML" default>
 
 <details open>
   <summary><strong>Docker</strong></summary>
 
-When running the Proxy in docker, you can mount the YAML file as a volume.
+When running the Proxy in docker, you can mount the options YAML file as a volume.
+```shell
+docker run -d --name configcat-proxy \ 
+  -p 8050:8050 -p 8051:8051 -p 50051:50051 \
+  // highlight-next-line
+  -v <path-to-file>/options.yml:/etc/configcat/proxy/options.yml
+```
+
+(Optional) With the `-c` argument to specify a custom path for your options YAML file:
 ```shell
 docker run -d --name configcat-proxy \ 
   -p 8050:8050 -p 8051:8051 -p 50051:50051 \
   // highlight-next-line
   -v <path-to-file>/options.yml:/cnf/options.yml \
+  // highlight-next-line
   configcat/proxy -c /cnf/options.yml
 ```
 
@@ -133,7 +150,26 @@ docker run -d --name configcat-proxy \
 <details open>
   <summary><strong>Standalone executable</strong></summary>
 
-Running the Proxy as a standalone executable, you can pass the YAML file via the `-c` argument.
+Run the Proxy as a standalone executable with the options YAML file in its default location:
+
+<Tabs groupId="yaml-env-win">
+<TabItem value="unix" label="macOS / Linux" default>
+
+```shell
+./configcat-proxy
+```
+
+</TabItem>
+<TabItem value="win" label="Windows">
+
+```powershell
+.\configcat-proxy.exe
+```
+
+</TabItem>
+</Tabs>
+
+(Optional) With the `-c` argument to specify a custom path for your options YAML file:
 
 <Tabs groupId="yaml-env-win">
 <TabItem value="unix" label="macOS / Linux" default>
