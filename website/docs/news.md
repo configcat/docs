@@ -199,7 +199,7 @@ To make organization level user management more convenient we added a bunch of n
 - Team members can send join requests to admins if they want to join a product.
 - Whenever someone signs up to ConfigCat using a verified email domain, they could be automatically assigned to products.
 - SAML Single Sign-On supporting all of the major identity providers.
-- Improved layout for admins to [manage organization members](/organization/members).
+- Improved layout for admins to [manage organization members](https://app.configcat.com/) on our Dashboard page.
 
 _Only team members with Organization Admin role can access these features._
 
