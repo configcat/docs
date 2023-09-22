@@ -266,7 +266,7 @@ value = ConfigCat.get_value("key", "my default value") # Returns "value from ser
 The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
 If you prefer to use your own cache solution, such as an external or distributed cache in your system,
 you can implement the [`ConfigCache`](https://github.com/configcat/elixir-sdk/blob/main/include/configcat/configcache.h#L8) behaviour
-and set the `configCache` parameter in the options passed to `ConfigCatClient::get`.
+and provide the `cache` option when initializing the SDK.
 This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
 To be able to customize the caching layer you need to implement the following behaviour:
@@ -391,8 +391,8 @@ or with the `Hooks` property of the ConfigCat client:
 ConfigCat.Hooks.add_on_flag_evaluated({__MODULE__, :on_flag_evaluated, []})
 ```
 
-A module/function name/extra arguments tuple representing a callback function.
-Each callback passes specific arguments. These specific arguments are
+A hook callback is either an anonymous function or a module/function name/extra_arguments tuple.
+Each callback is passed specific arguments. These specific arguments are
 prepended to the extra arguments provided in the tuple (if any).
 For example, you might want to define a callback that sends a message to
 another process which the config changes. You can pass the pid of that process
@@ -582,7 +582,7 @@ Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@example.com] => matc
 ```
 
 The following example shows how to set the _Log Level_ on the internal _ConfigCat_ logger.
-put the following code into your application.ex file and runs it on start:
+Put the following code into your application.ex file and run it on start:
 
 ```elixir
 defp set_config_cat_log_level do
