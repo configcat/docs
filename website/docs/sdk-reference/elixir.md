@@ -582,6 +582,7 @@ Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@example.com] => matc
 ```
 
 The following example shows how to set the _Log Level_ on the internal _ConfigCat_ logger.
+Set the log level of the module with [put_module_level/2](https://hexdocs.pm/logger/1.15.6/Logger.html#put_module_level/2) function.
 Put the following code into your application.ex file and run it on start:
 
 ```elixir
@@ -591,6 +592,9 @@ defp set_config_cat_log_level do
   |> Logger.put_module_level(:debug)
 end
 ```
+
+On Elixir 1.13 or later you can use [put_application_level/2](https://hexdocs.pm/logger/1.15.6/Logger.html#put_application_level/2) function
+which is equivalent to the code above.
 
 ## `get_all_keys()`
 
