@@ -80,7 +80,7 @@ _ConfigCat Client_ is responsible for:
 | `data_governance`         | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global`|
 | `default_user`            | Sets the default user. [More about default user](#default-user). | None |
 | `hooks`                   | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). | None |
-| `offline`                 | Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode). | False |
+| `offline`                 | Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode). | False |
 
 
 ```python
