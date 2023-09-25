@@ -183,7 +183,7 @@ Whenever the `get_value`, `get_value_details`, `get_variation_id`, `get_all_vari
 ]}
 ```
 ```elixir
-# The default user will be used at the evaluation process.
+# The default user will be used in the evaluation process.
 value = ConfigCat.get_value("keyOfMySetting", false)
 ```
 
@@ -191,7 +191,7 @@ When the user object parameter is specified on the requesting method, it takes p
 
 ```elixir
 other_user = ConfigCat.User.new("brian@example.com")
-# otherUser will be used at the evaluation process.
+# otherUser will be used in the evaluation process.
 value = ConfigCat.get_value("keyOfMySetting", false, other_user)
 ```
 
@@ -269,7 +269,7 @@ you can implement the [`ConfigCache`](https://github.com/configcat/elixir-sdk/bl
 and provide the `cache` option when initializing the SDK.
 This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
-To be able to customize the caching layer you need to implement the `ConfigCat.ConfigCache` behaviour:
+To be able to customize the caching layer, you need to implement the `ConfigCat.ConfigCache` behaviour:
 
 ```elixir
 defmodule MyApp.CustomConfigCache do
