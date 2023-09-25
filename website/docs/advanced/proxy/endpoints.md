@@ -117,14 +117,15 @@ CONFIGCAT_HTTP_CDN_PROXY_ENABLED=<true|false>
 ```yaml
 http:
   cdn_proxy:
-    allow_cors: <true|false>
+    cors:
+      enabled: <true|false>
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_HTTP_CDN_PROXY_ALLOW_CORS=<true|false>
+CONFIGCAT_HTTP_CDN_PROXY_CORS_ENABLED=<true|false>
 ```
 
 </TabItem>
@@ -132,7 +133,38 @@ CONFIGCAT_HTTP_CDN_PROXY_ALLOW_CORS=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. The default allowed origin is set to <code>*</code>, but you can override it with the <code>CONFIGCAT_HTTP_CDN_PROXY_HEADERS</code> option.</td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the next (<code>allowed_origins</code>) option.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  cdn_proxy:
+    cors:
+      allowed_origins: 
+        - https://domain1.com
+        - https://domain2.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://domain2.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
 </tr>
 
 <tr>
@@ -145,14 +177,14 @@ CONFIGCAT_HTTP_CDN_PROXY_ALLOW_CORS=<true|false>
 http:
   cdn_proxy:
     headers:
-      Access-Control-Allow-Origin: "https://yourdomain.com"
+      Custom-Header-Name: "<header-value>"
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_HTTP_CDN_PROXY_HEADERS='{"Access-Control-Allow-Origin":"https://yourdomain.com"}'
+CONFIGCAT_HTTP_CDN_PROXY_HEADERS='{"Custom-Header-Name":"<header-value>"}'
 ```
 
 </TabItem>
@@ -348,14 +380,15 @@ CONFIGCAT_HTTP_API_ENABLED=<true|false>
 ```yaml
 http:
   api:
-    allow_cors: <true|false>
+    cors:
+      enabled: <true|false>
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_HTTP_API_ALLOW_CORS=<true|false>
+CONFIGCAT_HTTP_API_CORS_ENABLED=<true|false>
 ```
 
 </TabItem>
@@ -363,7 +396,38 @@ CONFIGCAT_HTTP_API_ALLOW_CORS=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. The default allowed origin is set to <code>*</code>, but you can override it with the <code>CONFIGCAT_HTTP_API_HEADERS</code> option.</td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the next (<code>allowed_origins</code>) option.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    cors:
+      allowed_origins: 
+        - https://domain1.com
+        - https://domain2.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://domain2.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
 </tr>
 
 <tr>
@@ -376,14 +440,14 @@ CONFIGCAT_HTTP_API_ALLOW_CORS=<true|false>
 http:
   api:
     headers:
-      Access-Control-Allow-Origin: "https://yourdomain.com"
+      Custom-Header-Name: "<header-value>"
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_HTTP_API_HEADERS='{"Access-Control-Allow-Origin":"https://yourdomain.com"}'
+CONFIGCAT_HTTP_API_HEADERS='{"Custom-Header-Name":"<header-value>"}'
 ```
 
 </TabItem>
@@ -571,14 +635,15 @@ CONFIGCAT_HTTP_SSE_ENABLED=<true|false>
 ```yaml
 http:
   sse:
-    allow_cors: <true|false>
+    cors:
+      enabled: <true|false>
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_HTTP_SSE_ALLOW_CORS=<true|false>
+CONFIGCAT_HTTP_SSE_CORS_ENABLED=<true|false>
 ```
 
 </TabItem>
@@ -586,7 +651,38 @@ CONFIGCAT_HTTP_SSE_ALLOW_CORS=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. The default allowed origin is set to <code>*</code>, but you can override it with the <code>CONFIGCAT_HTTP_SSE_HEADERS</code> option.</td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the next (<code>allowed_origins</code>) option.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    cors:
+      allowed_origins: 
+        - https://domain1.com
+        - https://domain2.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://domain2.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
 </tr>
 
 <tr>
@@ -599,14 +695,14 @@ CONFIGCAT_HTTP_SSE_ALLOW_CORS=<true|false>
 http:
   sse:
     headers:
-      Access-Control-Allow-Origin: "https://yourdomain.com"
+      Custom-Header-Name: "<header-value>"
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_HTTP_SSE_HEADERS='{"Access-Control-Allow-Origin":"https://yourdomain.com"}'
+CONFIGCAT_HTTP_SSE_HEADERS='{"Custom-Header-Name":"<header-value>"}'
 ```
 
 </TabItem>
