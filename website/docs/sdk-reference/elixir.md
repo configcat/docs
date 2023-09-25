@@ -75,7 +75,7 @@ _ConfigCat Client_ is responsible for:
 | `base_url`                     | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                                                                                |
 | `data_governance`              | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](advanced/data-governance.md). Available options: `:global`, `:eu_only`.                                                                   |
 | `cache_policy`                 | `CachePolicy.auto/1`, `CachePolicy.lazy/1` and `CachePolicy.manual/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details.                                                                                                                                                                                                          |
-| `cache`                        | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`.                                                                                                                                                                                                                                                                            |
+| `cache`                        | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`. [More about cache](#custom-cache-behaviour-with-cache-option-parameter).                                                                                                                                                                                                                                         |
 | `http_proxy`                   | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`.                                                                                                          |
 | `connect_timeout_milliseconds` | Timeout for establishing a TCP or SSL connection, in milliseconds. Default is 8000.                                                                                                                                                                                                                                                                            |
 | `read_timeout_milliseconds`    | Timeout for receiving an HTTP response from the socket, in milliseconds. Default is 5000.                                                                                                                                                                                                                                                                      |
@@ -241,8 +241,8 @@ Use `cache_refresh_interval_seconds` option parameter to set cache lifetime.
 
 Available options:
 
-| Option Parameter       | Description | Default |
-| ---------------------- | ----------- | ------- |
+| Option Parameter                 | Description | Default |
+| -------------------------------- | ----------- | ------- |
 | `cache_refresh_interval_seconds` | Cache TTL.  | 60      |
 
 ### Manual polling
@@ -265,22 +265,37 @@ value = ConfigCat.get_value("key", "my default value") # Returns "value from ser
 
 The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
 If you prefer to use your own cache solution, such as an external or distributed cache in your system,
-you can implement the [`ConfigCache`](https://github.com/configcat/elixir-sdk/blob/main/include/configcat/configcache.h#L8) behaviour
+you can implement the [`ConfigCache`](https://github.com/configcat/elixir-sdk/blob/main/lib/config_cat/config_cache.ex) behaviour
 and provide the `cache` option when initializing the SDK.
 This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
 
-To be able to customize the caching layer you need to implement the following behaviour:
+To be able to customize the caching layer you need to implement the `ConfigCat.ConfigCache` behaviour:
 
 ```elixir
-defmodule ConfigCat.ConfigCache do
-  alias ConfigCat.Config
+defmodule MyApp.CustomConfigCache do
+  alias ConfigCat.ConfigCache
 
-  @type key :: String.t()
-  @type result :: {:ok, Config.t()} | {:error, :not_found}
+  @behaviour ConfigCache
 
-  @callback get(key) :: {:ok, Config.t()} | {:error, :not_found}
-  @callback set(key, Config.t()) :: :ok
+  @impl ConfigCache
+  def get(cache_key) do
+    # here you have to return with the cached value
+  end
+
+  @impl ConfigCache
+  def set(cache_key, value) do
+    # here you have to store the new value in the cache
+  end
 end
+```
+
+Then use your custom cache implementation:
+
+```elixir
+{ConfigCat, [
+  sdk_key: "#YOUR-SDK-KEY#",
+  cache: MyApp.CustomConfigCache
+]}
 ```
 
 - You must implement (either explicitly or implicitly) the ConfigCache behaviour
