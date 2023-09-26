@@ -298,9 +298,6 @@ Then use your custom cache implementation:
 ]}
 ```
 
-- You must implement (either explicitly or implicitly) the ConfigCache behaviour
-- It is the responsibility of the calling application to supervise the cache if it needs to be supervised.
-
 :::info
 The Elixir SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 :::
@@ -312,9 +309,9 @@ you can do it.
 
 #### Module-Based
 
-You can create a module that `use`s `ConfigCat` and then call the ConfigCat
+You can create a module that uses ConfigCat and then call the ConfigCat
 API functions on that module. This is the recommended option, as it makes the
-calling code a bit clearer and simpler.
+calling code a bit clearer and simpler.  
 You can pass any of the options listed above as arguments to `use ConfigCat`
 or specify them in your supervisor. Arguments specified by the supervisor take
 precedence over those provided to `use ConfigCat`.
