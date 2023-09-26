@@ -142,7 +142,7 @@ You can copy feature flag values (including segment, targeting, percentage rules
 
 Segments let you group your users based on any of their properties (e.g: Beta Testers). You can target the same segment with multiple feature flags.
 
-[Go to segments on our Dashboard](https://app.configcat.com/)
+[Go to segments on our Dashboard](https://app.configcat.com/product/segments)
 
 ## TV Mode
 
@@ -150,7 +150,7 @@ Segments let you group your users based on any of their properties (e.g: Beta Te
 
 Display your feature flags on the TVs around the office!
 
-[Config overview on our Dashboard](https://app.configcat.com/)
+[Config overview on our Dashboard](https://app.configcat.com/overview)
 
 ## Config Overview
 
@@ -160,7 +160,7 @@ Introducing a new overview to track your feature flag values in all your environ
 
 Open the environment menu to access the overview.
 
-[Open config overview on our Dashboard](https://app.configcat.com/)
+[Open config overview on our Dashboard](https://app.configcat.com/overview)
 
 ## "Which projects are using this flag?"
 
@@ -187,7 +187,7 @@ Just updated the UX on the product overview page and added a few small features.
 - You can choose from a number of colors for your environments.
 - Also adding descriptions helps teammates to find their way around environments and configs.
 
-[Set your colors and add descriptions on the product overview page on our Dashboard](https://app.configcat.com/)
+[Set your colors and add descriptions on the product overview page on our Dashboard](https://app.configcat.com/product)
 
 ## Send less invitations using SAML SSO, Auto-assign users and product join requests
 
@@ -199,11 +199,11 @@ To make organization level user management more convenient we added a bunch of n
 - Team members can send join requests to admins if they want to join a product.
 - Whenever someone signs up to ConfigCat using a verified email domain, they could be automatically assigned to products.
 - SAML Single Sign-On supporting all of the major identity providers.
-- Improved layout for admins to [manage organization members](https://app.configcat.com/) on our Dashboard page.
+- Improved layout for admins to [manage organization members](https://app.configcat.com/organization/members) on our Dashboard page.
 
 _Only team members with Organization Admin role can access these features._
 
-[Set up user provisioning and SAML Single Sign-On on our Dashboard](https://app.configcat.com/)
+[Set up user provisioning and SAML Single Sign-On on our Dashboard](https://app.configcat.com/organization/authentication)
 
 ## New Organization Admin functionalities
 
@@ -214,7 +214,7 @@ _Only team members with Organization Admin role can access these features._
 
 _Only team members with Organization Admin role can access these features._
 
-[Open Organization Members & Roles page on our Dashboard](https://app.configcat.com/)
+[Open Organization Members & Roles page on our Dashboard](https://app.configcat.com/organization/members)
 
 ## Disable Two-factor authentication
 
@@ -224,7 +224,7 @@ Disable Two-factor authentication for your team members. This feature is useful 
 
 _Only team members with Organization Admin role can disable Two-factor authentication._
 
-[Open Organization Members & Roles page on our Dashboard](https://app.configcat.com/)
+[Open Organization Members & Roles page on our Dashboard](https://app.configcat.com/organization/members)
 
 ## Export / Import
 
@@ -232,7 +232,7 @@ _Only team members with Organization Admin role can disable Two-factor authentic
 
 Export (download), and import (upload) Configs, Environments, and Feature Flags from, and to file.
 
-[Open Export / Import page on our Dashboard](https://app.configcat.com/)
+[Open Export / Import page on our Dashboard](https://app.configcat.com/product/exportimport)
 
 ## Dashboard v3 released!
 
@@ -279,7 +279,7 @@ Permission Groups can be customized in more advanced levels:
 - Integration management permission
 - SDK Key View/Rotate permissions
 
-- [Fine-tune Permission Groups on our Dashboard](https://app.configcat.com/)
+- [Fine-tune Permission Groups on our Dashboard](https://app.configcat.com/product/permission-groups)
 
 ## Zombie Flags (Stale Flags) Report via email
 
@@ -287,7 +287,7 @@ Permission Groups can be customized in more advanced levels:
 
 Feature flags have a tendency to multiply rapidly. In order to keep the tech-debt low, we recommend removing the flags no longer needed. You can now set up a regular email report with a list of these zombie or stale flags.
 
-- [Set up the Zombie Flags Report on our Dashboard](https://app.configcat.com/)
+- [Set up the Zombie Flags Report on our Dashboard](https://app.configcat.com/zombie-flags-report)
 
 ## Invoice download
 
@@ -295,7 +295,7 @@ Feature flags have a tendency to multiply rapidly. In order to keep the tech-deb
 
 You can download all your current and previous invoices from the Billing & Invoices page.
 
-- [Open Billing & Invoices on our Dashboard](https://app.configcat.com/)
+- [Open Billing & Invoices on our Dashboard](https://app.configcat.com/organization/billing)
 
 ## Accepting USD payments
 
@@ -303,7 +303,7 @@ You can download all your current and previous invoices from the Billing & Invoi
 
 We are accepting payments in USD from now on.
 
-- [See plans on our Dashboard](https://app.configcat.com/)
+- [See plans on our Dashboard](https://app.configcat.com/organization/plans)
 
 ## ConfigCat & Zoho Flow
 
@@ -415,19 +415,19 @@ Turn your features On / Off right from a Trello Card.
 
 #### March 21, 2020
 
-Connect the apps you use everyday and be more productive. Check out the [Integrations tab](https://app.configcat.com/) in our Dashboard.
+Connect the apps you use everyday and be more productive. Check out the [Integrations tab](https://app.configcat.com/product/integrations) in our Dashboard.
 
 ## View SDK Key permission
 
 #### March 21, 2020
 
-Visibility of information that is normally useful for developers only - like SDK Keys and code examples - can be set for [Permission Groups](https://app.configcat.com/) on our Dashboard.
+Visibility of information that is normally useful for developers only - like SDK Keys and code examples - can be set for [Permission Groups](https://app.configcat.com/product/permission-groups) on our Dashboard.
 
 ## Audit log improvements
 
 #### March 20, 2020
 
-User friendly Feature Flag or Setting value changes in the [Audit log on our Dashboard](https://app.configcat.com/) to improve readability.
+User friendly Feature Flag or Setting value changes in the [Audit log on our Dashboard](https://app.configcat.com/auditlog) to improve readability.
 
 ## Long text improvements
 
@@ -441,7 +441,7 @@ Feature Flag or Setting text values and Targeting comparison values can be viewe
 
 Besides "camelCase" and "lower_case" we have added an "UPPER_CASE" key generation mode to preferences.
 
-- [Open Preferenceson in our Dashboard](https://app.configcat.com/)
+- [Open Preferences on in our Dashboard](https://app.configcat.com/product/preferences)
 
 ## Statistics
 
@@ -449,7 +449,7 @@ Besides "camelCase" and "lower_case" we have added an "UPPER_CASE" key generatio
 
 See detailed statistics about the number of config.json downloads made towards ConfigCat CDN. Also a pie-chart of the SDK types and versions being used.
 
-- [Open Stats on our Dashboard](https://app.configcat.com/)
+- [Open Stats on our Dashboard](https://app.configcat.com/product/statistics)
 
 ## ConfigCat Zap
 
