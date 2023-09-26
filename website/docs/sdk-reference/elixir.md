@@ -267,7 +267,7 @@ The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimi
 If you prefer to use your own cache solution, such as an external or distributed cache in your system,
 you can implement the [`ConfigCache`](https://github.com/configcat/elixir-sdk/blob/main/lib/config_cat/config_cache.ex) behaviour
 and provide the `cache` option when initializing the SDK.
-This allows you to seamlessly integrate ConfigCat with your existing caching infrastructure.
+This allows you to integrate ConfigCat with your existing caching infrastructure seamlessly.
 
 To be able to customize the caching layer, you need to implement the `ConfigCat.ConfigCache` behaviour:
 
