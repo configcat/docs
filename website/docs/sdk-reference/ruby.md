@@ -81,7 +81,7 @@ _ConfigCat Client_ is responsible for:
 | `data_governance`      | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `GLOBAL`, `EU_ONLY`. | `GLOBAL`              |
 | `default_user`         | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                    | nil                   |
 | `hooks`                | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                      | nil                   |
-| `offline`              | Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                 | false                 |
+| `offline`              | Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                  | false                 |
 
 ```ruby
 client = ConfigCat.get('#YOUR-SDK-KEY#',
