@@ -8,7 +8,8 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.
-  plugins: [require.resolve('docusaurus-plugin-image-zoom'), 
+  plugins: [
+    require.resolve('docusaurus-plugin-image-zoom'),
     [
       '@docusaurus/plugin-google-tag-manager',
       {
@@ -23,7 +24,7 @@ module.exports = {
           {
             to: '/sdk-reference/dotnet',
             from: '/sdk-reference/csharp',
-          }
+          },
         ],
       },
     ],
@@ -116,6 +117,10 @@ module.exports = {
             {
               label: 'Blog',
               href: 'https://configcat.com/blog/',
+            },
+            {
+              label: 'Limitations',
+              href: '/limitations/',
             },
           ],
         },
