@@ -524,7 +524,7 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## HTTP Client
 
-The SDK by default uses [Guzzle](https://docs.guzzlephp.org/en/stable/index.html) for the underlying HTTP calls. Its configurable through the `\ConfigCat\Http\GuzzleFetchClient::create()` method at the SDK's initialization.
+The SDK by default uses [Guzzle](https://docs.guzzlephp.org/en/stable/index.html) for the underlying HTTP calls. The default HTTP client is customizable through the `\ConfigCat\Http\GuzzleFetchClient::create()` method at the SDK's initialization. To learn more about Guzzle's customization options see the [official documentaion](https://docs.guzzlephp.org/en/stable/request-options.html).
 
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
