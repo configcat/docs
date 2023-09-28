@@ -537,14 +537,14 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
 Through the `\ConfigCat\ClientOptions::FETCH_CLIENT` option you can pass your own HTTP client by providing a `\ConfigCat\Http\FetchClientInterface` implementation.
 
 ```php
-class CustomFetchClient implements FetchClientInterface
+class CustomFetchClient implements \ConfigCat\Http\FetchClientInterface
 {
-    public function getClient(): ClientInterface
+    public function getClient(): \Psr\Http\Client\ClientInterface
     {
         // return with a \Psr\Http\Client\ClientInterface implementation.
     }
 
-    public function createRequest(string $method, string $uri): RequestInterface
+    public function createRequest(string $method, string $uri): \Psr\Http\Message\RequestInterface
     {
         // return with a \Psr\Http\Message\RequestInterface implementation
     }
