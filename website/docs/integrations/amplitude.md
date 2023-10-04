@@ -13,7 +13,7 @@ Every feature flag change in ConfigCat is annotated on the Amplitude charts as a
 ## Installation
 
 1. Have an <a href="https://www.amplitude.com/" target="_blank">Amplitude subscription.</a>
-2. Get an <a href="https://help.amplitude.com/hc/en-us/articles/360035522372#h_52731f6f-5c45-4c28-b1e1-5c0074f83ee5" target="_blank">Amplitude API Key and Secret Key.</a>
+2. Get an <a href="https://www.docs.developers.amplitude.com/analytics/find-api-credentials/" target="_blank">Amplitude API Key and Secret Key.</a>
    <img src="/docs/assets/amplitude_apikey_secretkey.png" className="zoomable" alt="amplitude_apikey_secretkey" />
 3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
 4. Click on Amplitude's CONNECT button and set your Amplitude API key and Secret key.

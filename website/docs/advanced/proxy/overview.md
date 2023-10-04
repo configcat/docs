@@ -111,7 +111,15 @@ You can then check the [status endpoint](/advanced/proxy/monitoring#status) of t
 
 ## Available Options
 
-You can specify options for the Proxy either via a YAML file or with environment variables.
+You can specify options for the Proxy either via a YAML file or with environment variables. When an option is defined in both places, the environment variable's value takes precedence.
+
+The Proxy is able to read the options YAML from the following default locations:
+
+- **Windows**: `%PROGRAMDATA%\configcat\proxy\options.yml`, usually `C:\ProgramData\configcat\proxy\options.yml`
+- **macOS**: `/Library/Application Support/configcat/proxy/options.yml`
+- **Linux**: `/etc/configcat/proxy/options.yml`
+
+When the default location is not suitable, you can specify a custom location for your options YAML file via the `-c` argument.
 
 <Tabs groupId="yaml-env">
 <TabItem value="yaml" label="YAML" default>
@@ -119,12 +127,21 @@ You can specify options for the Proxy either via a YAML file or with environment
 <details open>
   <summary><strong>Docker</strong></summary>
 
-When running the Proxy in docker, you can mount the YAML file as a volume.
+When running the Proxy in docker, you can mount the options YAML file as a volume.
+```shell
+docker run -d --name configcat-proxy \ 
+  -p 8050:8050 -p 8051:8051 -p 50051:50051 \
+  // highlight-next-line
+  -v <path-to-file>/options.yml:/etc/configcat/proxy/options.yml
+```
+
+(Optional) With the `-c` argument to specify a custom path for your options YAML file:
 ```shell
 docker run -d --name configcat-proxy \ 
   -p 8050:8050 -p 8051:8051 -p 50051:50051 \
   // highlight-next-line
   -v <path-to-file>/options.yml:/cnf/options.yml \
+  // highlight-next-line
   configcat/proxy -c /cnf/options.yml
 ```
 
@@ -133,7 +150,26 @@ docker run -d --name configcat-proxy \
 <details open>
   <summary><strong>Standalone executable</strong></summary>
 
-Running the Proxy as a standalone executable, you can pass the YAML file via the `-c` argument.
+Run the Proxy as a standalone executable with the options YAML file in its default location:
+
+<Tabs groupId="yaml-env-win">
+<TabItem value="unix" label="macOS / Linux" default>
+
+```shell
+./configcat-proxy
+```
+
+</TabItem>
+<TabItem value="win" label="Windows">
+
+```powershell
+.\configcat-proxy.exe
+```
+
+</TabItem>
+</Tabs>
+
+(Optional) With the `-c` argument to specify a custom path for your options YAML file:
 
 <Tabs groupId="yaml-env-win">
 <TabItem value="unix" label="macOS / Linux" default>
@@ -338,7 +374,7 @@ CONFIGCAT_MY_SDK_OFFLINE_USE_CACHE=<true|false>
 CONFIGCAT_MY_SDK_OFFLINE_CACHE_POLL_INTERVAL=5
 CONFIGCAT_MY_SDK_WEBHOOK_SIGNING_KEY="<key>"
 CONFIGCAT_MY_SDK_WEBHOOK_SIGNATURE_VALID_FOR=300
-CONFIGCAT_DEFAULT_USER_ATTRIBUTES='{"attribute_key":"<attribute_value>"}'
+CONFIGCAT_MY_SDK_DEFAULT_USER_ATTRIBUTES='{"attribute_key":"<attribute_value>"}'
 
 CONFIGCAT_ANOTHER_SDK_POLL_INTERVAL=15
 ...
@@ -778,10 +814,103 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_POLL_INTERVAL=5
 </tbody>
 </table>
 
+#### Global Offline Mode
+
+It is possible to turn on offline mode globally for a whole Proxy instance. When it's turned on, each underlying SDK switches to work from the configured [cache](#cache).
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+offline:
+  enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_OFFLINE_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>false</code></td>
+<td>Enables or disables the global offline mode.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+offline:
+  cache_poll_interval: 5
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_OFFLINE_CACHE_POLL_INTERVAL=5
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>5</code></td>
+<td>The cache polling interval in seconds. <a href="#cache">More about the cache option</a>.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+offline:
+  log:
+    level: "<error|warn|info|debug>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_OFFLINE_LOG_LEVEL="<error|warn|info|debug>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>warn</code></td>
+<td>The verbosity of the offline mode related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code> or <code>debug</code>.</td>
+</tr>
+</tbody>
+</table>
+
+:::note
+When an SDK also has its offline option set, that will override what it would inherit from the global offline option.
+:::
+
 ### Cache
 
-You have the option to cache feature flag evaluation data in an external cache. Currently, the only available option is <a target="blank" href="https://redis.io">Redis</a>.  
-The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
+The Proxy in its default setup stores all the information it needs for feature flag evaluation in memory. This behavior is extendable with an external cache that you can use for pointing the underlying SDKs to your own data storage.
+
+Currently, the only available option is <a target="blank" href="https://redis.io">Redis</a>. The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
 
 :::info
 The ConfigCat Proxy supports *shared caching*, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).

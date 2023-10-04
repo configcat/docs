@@ -59,19 +59,20 @@ Constructor parameters:
 
 Available options:
 
-| Name                     | Type                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                             |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data-governance`        | `int`                                                                                                                | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `GLOBAL_`, `EU_ONLY`.                   |
-| `logger`                 | [\Psr\Log\LoggerInterface](https://github.com/php-fig/log/blob/master/src/LoggerInterface.php)                       | Optional, sets the logger for errors and warnings produced by the SDK, defaults to [Monolog](https://github.com/Seldaek/monolog). [More about logging](#logging).                                                                                                                                                                       |
-| `log-level`              | `int`                                                                                                                | Optional, defaults to `LogLevel::WARNING`. Sets the internal log level. [More about log levels](#logging).                                                                                                                                                                                                                              |
-| `cache`                  | [\ConfigCat\Cache\ConfigCache](https://github.com/configcat/php-sdk/blob/master/src/Cache/ConfigCache.php)           | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the latest feature flag and setting values. [More about cache](#cache). You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache).                                                            |
-| `cache-refresh-interval` | `int`                                                                                                                | Optional, sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a [config JSON download](/requests). Defaults to 60.                                                                                                  |
-| `request-options`        | `array`                                                                                                              | Optional, sets the request options (e.g. [HTTP Timeout](#http-timeout), [HTTP Proxy](#http-proxy)) for the underlying `Guzzle` HTTP client used for [downloading the config JSON](/requests) files. See Guzzle's [official documentation](https://docs.guzzlephp.org/en/stable/request-options.html) for the available request options. |
-| `flag-overrides`         | [\ConfigCat\Override\FlagOverrides](https://github.com/configcat/php-sdk/blob/master/src/Override/FlagOverrides.php) | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                                        |
-| `exceptions-to-ignore`   | `array`                                                                                                              | Optional, sets an array of exception classes that should be ignored from logs.                                                                                                                                                                                                                                                          |
-| `base-url`               | `string`                                                                                                             | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the feature flags and settings.                                                                                                                                                                                                |
-| `default-user`           | [`\ConfigCat\User`](https://github.com/configcat/php-sdk/blob/master/src/User.php)                                   | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                                                              |
-| `offline`                | `bool`                                                                                                               | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode.](#online--offline-mode).                                                                                                                                                                                      |
+| Name                     | Type  | Description  |
+| ------------------------ | ----- | ------------ |
+| `data-governance`        | `int` | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `GLOBAL_`, `EU_ONLY`. |
+| `logger`                 | [`\Psr\Log\LoggerInterface`](https://github.com/php-fig/log/blob/master/src/LoggerInterface.php) | Optional, sets the logger for errors and warnings produced by the SDK, defaults to [Monolog](https://github.com/Seldaek/monolog). [More about logging](#logging). |
+| `log-level`              | `int` | Optional, defaults to `LogLevel::WARNING`. Sets the internal log level. [More about log levels](#logging).   |
+| `cache`                  | [`\ConfigCat\Cache\ConfigCache`](https://github.com/configcat/php-sdk/blob/master/src/Cache/ConfigCache.php) | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the latest feature flag and setting values. [More about cache](#cache). You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache). |
+| `cache-refresh-interval` | `int` | Optional, sets the refresh interval of the cache in seconds, after the initial cached value is set this value will be used to determine how much time must pass before initiating a [config JSON download](/requests). Defaults to 60. |
+| `request-options`        | `array` | *(Deprecated)* Optional, sets the request options (e.g. [HTTP Timeout](#http-timeout), [HTTP Proxy](#http-proxy)) for the underlying `Guzzle` HTTP client used for [downloading the config JSON](/requests) files. See Guzzle's [official documentation](https://docs.guzzlephp.org/en/stable/request-options.html) for the available request options. |
+| `fetch-client`           | [`\ConfigCat\Http\FetchClientInterface`](https://github.com/configcat/php-sdk/blob/master/src/Http/FetchClientInterface.php) | Custom fetch client that wraps an actual HTTP client used to make HTTP requests towards ConfigCat. When it's not set, [`\ConfigCat\Http\GuzzleFetchClient`](https://github.com/configcat/php-sdk/blob/master/src/Http/GuzzleFetchClient.php) is used by default. |
+| `flag-overrides`         | [`\ConfigCat\Override\FlagOverrides`](https://github.com/configcat/php-sdk/blob/master/src/Override/FlagOverrides.php) | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `exceptions-to-ignore`   | `array` | Optional, sets an array of exception classes that should be ignored from logs. |
+| `base-url`               | `string` | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the feature flags and settings. |
+| `default-user`           | [`\ConfigCat\User`](https://github.com/configcat/php-sdk/blob/master/src/User.php) | Optional, sets the default user. [More about default user](#default-user). |
+| `offline`                | `bool` | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode). |
 
 :::info
 Each option name is available through constants of the [\ConfigCat\ClientOptions](https://github.com/configcat/php-sdk/blob/master/src/ClientOptions.php) class.
@@ -523,7 +524,38 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## HTTP Client
 
-The SDK uses [Guzzle](https://docs.guzzlephp.org/en/stable/index.html) for the underlying HTTP calls and its request options are available to customize through SDK options.
+The SDK by default uses [Guzzle](https://docs.guzzlephp.org/en/stable/index.html) for the underlying HTTP calls. The default HTTP client is customizable through the `\ConfigCat\Http\GuzzleFetchClient::create()` method at the SDK's initialization. To learn more about Guzzle's customization options see the [official documentaion](https://docs.guzzlephp.org/en/stable/request-options.html).
+
+```php
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
+     \ConfigCat\ClientOptions::FETCH_CLIENT => \ConfigCat\Http\GuzzleFetchClient::create([
+         \GuzzleHttp\RequestOptions::CONNECT_TIMEOUT => 5,
+     ]),
+]);
+```
+
+Through the `\ConfigCat\ClientOptions::FETCH_CLIENT` option you can pass your own HTTP client by providing a `\ConfigCat\Http\FetchClientInterface` implementation.
+
+```php
+class CustomFetchClient implements \ConfigCat\Http\FetchClientInterface
+{
+    public function getClient(): \Psr\Http\Client\ClientInterface
+    {
+        // return with a \Psr\Http\Client\ClientInterface implementation.
+    }
+
+    public function createRequest(string $method, string $uri): \Psr\Http\Message\RequestInterface
+    {
+        // return with a \Psr\Http\Message\RequestInterface implementation
+    }
+}
+```
+
+```php
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
+     \ConfigCat\ClientOptions::FETCH_CLIENT => new CustomFetchClient(),
+]);
+```
 
 ### HTTP Proxy
 
