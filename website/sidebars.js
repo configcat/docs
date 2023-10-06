@@ -21,6 +21,7 @@ module.exports = {
             },
             'advanced/targeting/segments',
             'advanced/targeting/prerequisite',
+            'advanced/targeting/evaluation-sequence',
           ],
         },
         'advanced/user-object',
