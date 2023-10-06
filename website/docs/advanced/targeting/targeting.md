@@ -159,6 +159,10 @@ All number comparators return `false` if either _Comparison attribute_ or _Compa
 
 The following comparators assume that _Comparison attribute_ and _Comparison value_ contain date and time values.
 
+:::tip
+The ConfigCat SDKs don't provide date and time values. You have to pass them to the SDKs as custom attributes in UNIX timestamp format.
+:::
+
 | Comparator | Description                                                  |
 | ---------- | ------------------------------------------------------------ |
 | BEFORE     | True if _Comparison attribute_ is before _Comparison value_. |
