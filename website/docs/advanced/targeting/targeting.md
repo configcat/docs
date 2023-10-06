@@ -71,8 +71,16 @@ In this case, the feature flag evaluation is based on the secure hashes of the c
 
 | Comparator             | Description                                                                                                                    |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+|EQUALS| True if the _Comparison attribute_ equals the _Comparison value_.                                                                |
+| NOT EQUALS             | True if the _Comparison attribute_ does not equal the _Comparison value_.                                                       |
 | IS ONE OF (hashed)     | Checks if the _Comparison attribute_ is listed in the _Comparison value_. _Comparison value_ should be a comma-separated list. |
 | IS NOT ONE OF (hashed) | True if the _Comparison attribute_ is not listed in the _Comparison value_.                                                    |
+|STARTS WITH ANY OF| True if the _Comparison attribute_ starts with any of the values in _Comparison value_.                                         |
+| ENDS WITH ANY OF       | True if the _Comparison attribute_ ends with any of the values in _Comparison value_.                                           |
+|NOT STARTS WITH ANY OF| True if the _Comparison attribute_ does not start with any of the values in _Comparison value_.                                 |
+| NOT ENDS WITH ANY OF   | True if the _Comparison attribute_ does not end with any of the values in _Comparison value_.                                   |
+| CONTAINS ANY OF        | True if the _Comparison attribute_ contains any of the values in _Comparison value_.                                            |
+| NOT CONTAINS ANY OF    | True if the _Comparison attribute_ does not contain any of the values in _Comparison value_.                                    |
 
 Since confidential text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example of how to target users from the same company. Which used to be handled by a rule like:
 
@@ -147,6 +155,24 @@ The following comparators assume that _Comparison attribute_ and _Comparison val
 
 All number comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid number.
 
+#### Date and time comparators
+
+The following comparators assume that _Comparison attribute_ and _Comparison value_ contain date and time values.
+
+| Comparator | Description                                                  |
+| ---------- | ------------------------------------------------------------ |
+| BEFORE     | True if _Comparison attribute_ is before _Comparison value_. |
+| AFTER      | True if _Comparison attribute_ is after _Comparison value_.  |
+
+#### Array comparators
+
+The following comparators assume that _Comparison attribute_ and _Comparison value_ contain arrays.
+
+| Comparator                | Description                                                                              |
+| ------------------------- | ---------------------------------------------------------------------------------------- |
+| ARRAY CONTAINS ANY OF     | True if _Comparison attribute_ contains any of the values in _Comparison value_.         |
+| ARRAY NOT CONTAINS ANY OF | True if _Comparison attribute_ does not contain any of the values in _Comparison value_. |
+
 ### Served value
 
 The exact value that will be served to the users who match the targeting rule. Depending on the kind of your setting this could be:
@@ -154,7 +180,7 @@ The exact value that will be served to the users who match the targeting rule. D
 | Setting Kind   | Setting Type | Description                                     |
 | -------------- | ------------ | ----------------------------------------------- |
 | On/Off Toggle  | Boolean      | true/false, usually the state of a feature flag |
-| Text           | String       | any string, max. 100000 characters               |
+| Text           | String       | any string, max. 100000 characters              |
 | Whole Number   | Integer      | any whole number within the range of `int32`    |
 | Decimal Number | Double       | any decimal number within the range of `double` |
 
