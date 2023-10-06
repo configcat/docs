@@ -168,6 +168,20 @@ The ConfigCat SDKs don't provide date and time values. You have to pass them to 
 | BEFORE     | True if _Comparison attribute_ is before _Comparison value_. |
 | AFTER      | True if _Comparison attribute_ is after _Comparison value_.  |
 
+##### Example
+If you want to target users who registered before a certain date, you have to pass the registration date to the SDK as a custom attribute in UNIX timestamp format.
+
+```js
+```cs
+var user = new User(appUserData.Identifier)
+{
+    Custom =
+    {
+        ["RegisteredAt"] = User.AttributeValueFrom(appUserData.RegistrationTime),
+    }
+};
+```
+
 #### Array comparators
 
 The following comparators assume that _Comparison attribute_ and _Comparison value_ contain arrays.
@@ -188,29 +202,10 @@ The exact value that will be served to the users who match the targeting rule. D
 | Whole Number   | Integer      | any whole number within the range of `int32`    |
 | Decimal Number | Double       | any decimal number within the range of `double` |
 
-### Multiple targeting rules and ordering
+### Multiple targeting rules, ordering and evaluation sequence
 
-Add new rule by clicking on the _Actions_ icon.
+See the [Targeting Rule Evaluation Sequence](/docs/advanced/targeting/evaluation-sequence) page.
 
-By adding multiple targeting rules you can create more complex rule sets.
 
-> Rule sets are evaluated one by one, from top to bottom direction.
-
-> Change the order of targeting rules by drag n' drop.
-
-#### Example
-
-_Enable a feature only to users within your company except for the sales team (Susan and Simon) by adding two targeting rules:_
-
-| #   | Comparison attribute | Comparator | Comparison value                           | Served value |
-| --- | -------------------- | ---------- | ------------------------------------------ | ------------ |
-| 1   | Email                | CONTAINS   | `susan@mycompany.com, simon@mycompany.com` | OFF          |
-| 2   | Email                | CONTAINS   | `@mycompany.com`                           | ON           |
-
-All other cases: OFF
-
-### To all other users, serve
-
-This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) is not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
 
 
