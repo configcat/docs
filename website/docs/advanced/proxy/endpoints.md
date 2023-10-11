@@ -179,15 +179,15 @@ http:
     cors:
       allowed_origins_regex:
         patterns:
-          - .*domain1\.com
-          - .*domain2\.com
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='[".*domain1\\.com",".*domain2\\.com"]'
+CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
 ```
 
 </TabItem>
@@ -505,15 +505,15 @@ http:
     cors:
       allowed_origins_regex:
         patterns:
-          - .*domain1\.com
-          - .*domain2\.com
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='[".*domain1\\.com",".*domain2\\.com"]'
+CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
 ```
 
 </TabItem>
@@ -823,15 +823,15 @@ http:
     cors:
       allowed_origins_regex:
         patterns:
-          - .*domain1\.com
-          - .*domain2\.com
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='[".*domain1\\.com",".*domain2\\.com"]'
+CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
 ```
 
 </TabItem>
