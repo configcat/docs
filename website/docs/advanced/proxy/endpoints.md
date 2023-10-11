@@ -196,7 +196,9 @@ CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='[".*domain1\\.com"
 </td>
 <td>-</td>
 <td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
-When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.</td>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.
+</td>
 </tr>
 
 <tr>
@@ -520,7 +522,9 @@ CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='[".*domain1\\.com",".*do
 </td>
 <td>-</td>
 <td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
-When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.</td>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.
+</td>
 </tr>
 
 <tr>
@@ -836,7 +840,7 @@ CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='[".*domain1\\.com",".*do
 </td>
 <td>-</td>
 <td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
-When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.</td>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.<br/>The <code>if_no_match</code> option is mandatory if this option is used.</td>
 </tr>
 
 <tr>
