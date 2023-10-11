@@ -195,7 +195,7 @@ CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='[".*domain1\\.com"
 
 </td>
 <td>-</td>
-<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the the request's <code>Origin</code> with the given patterns and when there's a successful match it will set that origin in the <code>Access-Control-Allow-Origin</code> header.<br/>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
 When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.</td>
 </tr>
 
@@ -519,7 +519,7 @@ CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='[".*domain1\\.com",".*do
 
 </td>
 <td>-</td>
-<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the the request's <code>Origin</code> with the given patterns and when there's a successful match it will set that origin in the <code>Access-Control-Allow-Origin</code> header.<br/>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
 When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.</td>
 </tr>
 
@@ -773,7 +773,7 @@ CONFIGCAT_HTTP_SSE_CORS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
 </tr>
 
 <tr>
@@ -835,7 +835,7 @@ CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='[".*domain1\\.com",".*do
 
 </td>
 <td>-</td>
-<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the the request's <code>Origin</code> with the given patterns and when there's a successful match it will set that origin in the <code>Access-Control-Allow-Origin</code> header.<br/>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
 When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.</td>
 </tr>
 
