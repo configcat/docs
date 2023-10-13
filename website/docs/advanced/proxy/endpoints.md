@@ -133,7 +133,7 @@ CONFIGCAT_HTTP_CDN_PROXY_CORS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the next (<code>allowed_origins</code>) option.</td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
 </tr>
 
 <tr>
@@ -164,7 +164,70 @@ CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://d
 </td>
 <td>-</td>
 <td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
-When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+When there's no matching request origin and the <code>allowed_origins_regex</code> option is not set, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  cdn_proxy:
+    cors:
+      allowed_origins_regex:
+        patterns:
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.
+</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  cdn_proxy:
+    cors:
+      allowed_origins_regex:
+        if_no_match: https://domain1.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1.com"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Required when the previous <code>patterns</code> option is set. It's value is used in the <code>Access-Control-Allow-Origin</code> header when an incoming request's <code>Origin</code> doesn't match with any previously configured regex patterns.</td>
 </tr>
 
 <tr>
@@ -396,7 +459,7 @@ CONFIGCAT_HTTP_API_CORS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the next (<code>allowed_origins</code>) option.</td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
 </tr>
 
 <tr>
@@ -427,7 +490,70 @@ CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://domain2
 </td>
 <td>-</td>
 <td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
-When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+When there's no matching request origin and the <code>allowed_origins_regex</code> option is not set, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    cors:
+      allowed_origins_regex:
+        patterns:
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.
+</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    cors:
+      allowed_origins_regex:
+        if_no_match: https://domain1.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1.com"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Required when the previous <code>patterns</code> option is set. It's value is used in the <code>Access-Control-Allow-Origin</code> header when an incoming request's <code>Origin</code> doesn't match with any previously configured regex patterns.</td>
 </tr>
 
 <tr>
@@ -651,7 +777,7 @@ CONFIGCAT_HTTP_SSE_CORS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the next (<code>allowed_origins</code>) option.</td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
 </tr>
 
 <tr>
@@ -682,7 +808,68 @@ CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://domain2
 </td>
 <td>-</td>
 <td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
-When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+When there's no matching request origin and the <code>allowed_origins_regex</code> option is not set, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    cors:
+      allowed_origins_regex:
+        patterns:
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.<br/>The <code>if_no_match</code> option is mandatory if this option is used.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    cors:
+      allowed_origins_regex:
+        if_no_match: https://domain1.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1.com"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Required when the previous <code>patterns</code> option is set. It's value is used in the <code>Access-Control-Allow-Origin</code> header when an incoming request's <code>Origin</code> doesn't match with any previously configured regex patterns.</td>
 </tr>
 
 <tr>
