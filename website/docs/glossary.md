@@ -12,7 +12,7 @@ An alphabetical list of terms used around feature management and software develo
 
 A/B testing is a method of comparing two versions of a product or feature to determine which one performs better. A/B testing is a form of controlled experimentation.
 
-#### Alpha Testing
+#### [Alpha Testing](/glossary/alpha-testing/)
 
 Alpha testing examines a product's functionality and compliance with the business requirements through the initial end-to-end testing.
 
