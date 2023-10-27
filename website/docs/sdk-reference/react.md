@@ -52,7 +52,10 @@ The React hooks (`useFeatureFlag`) way:
 
 ```tsx
 function ButtonComponent() {
-  const { value: isAwesomeFeatureEnabled, loading } = useFeatureFlag('isAwesomeFeatureEnabled', false);
+  const { value: isAwesomeFeatureEnabled, loading } = useFeatureFlag(
+    'isAwesomeFeatureEnabled',
+    false,
+  );
 
   return loading ? (
     <div>Loading...</div>
@@ -126,16 +129,16 @@ _ConfigCat Client_ is responsible for:
 
 The available options depends on the chosen polling mode. However, there are some common options which can be set in the case of every polling mode:
 
-| Option Parameter   | Description                                                                                                                                                                                                                                                                                      | Default                 |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
+| Option Parameter   | Description                                                                                                                                                                                                                                                                                      | Default                                                                                                                 |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
 | `logger`           | Custom [`IConfigCatLogger`](https://github.com/configcat/common-js/blob/master/src/ConfigCatLogger.ts) implementation for tracing.                                                                                                                                                               | [`ConfigCatConsoleLogger`](https://github.com/configcat/common-js/blob/master/src/ConfigCatLogger.ts) (with WARN level) |
-| `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                       | 30000                   |
-| `baseUrl`          | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                  |                         |
-| `dataGovernance`   | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
-| `cache`            | Custom [`IConfigCatCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) implementation for caching the downloaded config.                                                                                                                                           | [`InMemoryConfigCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) |
-| `flagOverrides`    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                    | -                       |
-| `defaultUser`      | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                                 | `undefined` (none)      |
-| `offline`          | Determines whether the client should be initialized to offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                                           | `false`                 |
+| `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                       | 30000                                                                                                                   |
+| `baseUrl`          | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                  |                                                                                                                         |
+| `dataGovernance`   | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global`                                                                                                 |
+| `cache`            | Custom [`IConfigCatCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) implementation for caching the downloaded config.                                                                                                                                           | [`InMemoryConfigCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts)                       |
+| `flagOverrides`    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                    | -                                                                                                                       |
+| `defaultUser`      | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                                 | `undefined` (none)                                                                                                      |
+| `offline`          | Determines whether the client should be initialized to offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                                           | `false`                                                                                                                 |
 
 Options also include a property named `setupHook`, which you can use to subscribe to the hooks (events) at the time of initialization. [More about hooks](#hooks).
 
@@ -171,7 +174,10 @@ The SDK supports two ways to acquire the initialized ConfigCat instance:
 
 ```tsx
 function ButtonComponent() {
-  const { value: isAwesomeFeatureEnabled, loading } = useFeatureFlag('isAwesomeFeatureEnabled', false);
+  const { value: isAwesomeFeatureEnabled, loading } = useFeatureFlag(
+    'isAwesomeFeatureEnabled',
+    false,
+  );
 
   return loading ? (
     <div>Loading...</div>
@@ -189,7 +195,7 @@ Please refer to the following table for the corresponding types.
 <div id="setting-type-mapping"></div>
 
 | Setting Kind   | `typeof defaultValue` |
-| -------------- | ----------------------|
+| -------------- | --------------------- |
 | On/Off Toggle  | `boolean`             |
 | Text           | `string`              |
 | Whole Number   | `number`              |
@@ -197,8 +203,9 @@ Please refer to the following table for the corresponding types.
 
 In addition to the types mentioned above, you also have the option to provide `null` or `undefined` for the `defaultValue` parameter regardless of the setting kind.
 However, if you do so, the type of `value` returned by the `useFeatureFlag` method will be
-* `boolean | string | number | null` when `defaultValue` is `null` or
-* `boolean | string | number | undefined` when `defaultValue` is `undefined`.
+
+- `boolean | string | number | null` when `defaultValue` is `null` or
+- `boolean | string | number | undefined` when `defaultValue` is `undefined`.
 
 This is because in these cases the exact return type cannot be determined at compile-time as the TypeScript compiler has no information about the setting type.
 
@@ -383,11 +390,11 @@ or
 const userObject = new User('john@example.com');
 ```
 
-| Parameters   | Description                                                                                                                                                          |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                                                            |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                                                            |
+| Parameters   | Description                                                                                                                                               |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                          |
+| `email`      | Optional parameter for easier targeting rule definitions.                                                                                                 |
+| `country`    | Optional parameter for easier targeting rule definitions.                                                                                                 |
 | `custom`     | Optional `dictionary of strings` representing the custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 For advanced targeting:
@@ -586,7 +593,7 @@ Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 Available options (in addition to the [common ones](#creating-the-configcat-client)):
 
 | Option Parameter         | Description           | Default |
-| ------------------------ | ----------------------| ------- |
+| ------------------------ | --------------------- | ------- |
 | `cacheTimeToLiveSeconds` | Cache TTL in seconds. | 60s     |
 
 ### Manual polling
@@ -832,7 +839,9 @@ class MyCustomCache implements IConfigCatCache {
     // insert your cache write logic here
   }
 
-  get(key: string): Promise<string | null | undefined> | string | null | undefined {
+  get(
+    key: string,
+  ): Promise<string | null | undefined> | string | null | undefined {
     // insert your cache read logic here
   }
 }
@@ -841,7 +850,7 @@ class MyCustomCache implements IConfigCatCache {
 or
 
 ```js
-function MyCustomCache() { }
+function MyCustomCache() {}
 
 MyCustomCache.prototype.set = function (key, value) {
   // insert your cache write logic here
@@ -864,7 +873,7 @@ then
 ```
 
 :::info
-The React SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The React SDK supports _shared caching_. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 :::
 
 ## Sensitive information handling
@@ -872,7 +881,7 @@ The React SDK supports *shared caching*. You can read more about this feature an
 The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/docs/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
-If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the _ConfigCat SDK_  that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
+If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the _ConfigCat SDK_ that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
 Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
 

@@ -376,8 +376,8 @@ let isMyFeatureEnabled = snapshot.getValue(for: "isMyFeatureEnabled", defaultVal
 
 ```objectivec
 ConfigCatSnapshot* snapshot = [client snapshot];
-        
-BOOL isMyFeatureEnabled = [snapshot getBoolValueFor:@"isMyFeatureEnabled" 
+
+BOOL isMyFeatureEnabled = [snapshot getBoolValueFor:@"isMyFeatureEnabled"
                                        defaultValue:false
                                                user:NULL];
 ```
@@ -575,8 +575,8 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"john@example.co
 
 // The default user will be used at the evaluation process.
 [client getBoolValueFor:@"keyOfMySetting"
-           defaultValue:false 
-                   user:NULL 
+           defaultValue:false
+                   user:NULL
              completion:^(BOOL value) {
     // You can use the evaluation's result here.
 }];
@@ -618,8 +618,8 @@ ConfigCatUser* otherUser = [[ConfigCatUser alloc]initWithIdentifier:@"brian@exam
 
 // otherUser will be used at the evaluation process.
 [client getBoolValueFor:@"keyOfMySetting"
-           defaultValue:false 
-                   user:otherUser 
+           defaultValue:false
+                   user:otherUser
              completion:^(BOOL value) {
     // You can use the evaluation's result here.
 }];
@@ -1111,7 +1111,7 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 </Tabs>
 
 :::info
-The Swift SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The Swift SDK supports _shared caching_. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 :::
 
 ## Force refresh

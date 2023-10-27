@@ -149,6 +149,7 @@ Yes! You can export and download your current product as a standard JSON file an
 We keep organization data as long as we see activity in that organization.
 After several months of inactivity, we send you a series of email notifications about or plans to delete your organization and all associated data.
 We consider an organization inactive if it meets all of the following criteria:
+
 - no audit log events are generated in the organization,
 - no valid calls are made to the organization via the Public Management API,
 - config JSONs aren't downloaded from the ConfigCat CDN,
@@ -266,7 +267,7 @@ Yes there is. We have a public management API at https://api.configcat.com.
 
 **Txt record-based verification**
 
-**Solution 1:** Check the 'Host' field in your DNS settings. One common cause of verification failure is an incorrectly set 'Host' field. Make sure that it is set to '@' or left empty. To check this setting, you will need to log into your domain provider's management console. 
+**Solution 1:** Check the 'Host' field in your DNS settings. One common cause of verification failure is an incorrectly set 'Host' field. Make sure that it is set to '@' or left empty. To check this setting, you will need to log into your domain provider's management console.
 
 **Solution 2:** After you've added the TXT record to your DNS settings, it may take some time for the changes to propagate through the DNS system. If you have recently added or updated the TXT record, it's possible that the verification hasn't been completed due to DNS caching. Sometimes you even need to wait a few hours before trying to verify the domain again.
 

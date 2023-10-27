@@ -11,7 +11,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 The ConfigCat Proxy can communicate over <a target="blank" href="https://grpc.io">gRPC</a>, an open-source, high-performance RPC framework with client support in several languages.
 
-To establish gRPC connections, you'll need the protobuf and the gRPC <a target="blank" href="https://github.com/configcat/configcat-proxy/blob/main/grpc/proto/flag_service.proto">service definition</a>. It's required to generate clients with <a target="blank" href="https://protobuf.dev/downloads/">`protoc`</a> for your <a target="blank" href="https://protobuf.dev/reference/">desired platform</a>. 
+To establish gRPC connections, you'll need the protobuf and the gRPC <a target="blank" href="https://github.com/configcat/configcat-proxy/blob/main/grpc/proto/flag_service.proto">service definition</a>. It's required to generate clients with <a target="blank" href="https://protobuf.dev/downloads/">`protoc`</a> for your <a target="blank" href="https://protobuf.dev/reference/">desired platform</a>.
 
 ```protobuf title="flag_service.proto"
 syntax = "proto3";
@@ -99,7 +99,7 @@ opts := []grpc.DialOption{
     })),
 }
 
-conn, err := grpc.DialContext(context.Background(), 
+conn, err := grpc.DialContext(context.Background(),
     // highlight-next-line
     "localhost:50051", // Proxy host and gRPC port
     opts...)
@@ -117,8 +117,8 @@ ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 defer cancel()
 
 resp, err := client.EvalFlag(ctx, &proto.EvalRequest{
-    SdkId: "my_sdk", 
-    Key: "<flag-key>", 
+    SdkId: "my_sdk",
+    Key: "<flag-key>",
     User: map[string]string{"Identifier": "<user-id>"}
 })
 if err != nil {
@@ -140,7 +140,7 @@ grpc:
   enabled: <true|false>
   port: 50051
   log:
-    level: "<error|warn|info|debug>"
+    level: '<error|warn|info|debug>'
 ```
 
 </TabItem>
@@ -221,7 +221,7 @@ CONFIGCAT_GRPC_PORT=50051
 ```yaml
 grpc:
   log:
-    level: "<error|warn|info|debug>"
+    level: '<error|warn|info|debug>'
 ```
 
 </TabItem>

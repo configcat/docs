@@ -468,7 +468,7 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
 ```
 
 :::info
-The Kotlin SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The Kotlin SDK supports _shared caching_. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 :::
 
 ## HTTP Engine

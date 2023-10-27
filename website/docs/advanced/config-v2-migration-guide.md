@@ -26,4 +26,3 @@ In your application, update the ConfigCat SDK Key to the one that belongs to the
 ### Step 4: Clean up
 
 After you've updated all your applications to use the V2 config, you can delete the V1 config. You can check the config JSON download trends page to see if there are any applications that still access the V1 config.
-

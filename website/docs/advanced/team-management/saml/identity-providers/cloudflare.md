@@ -82,7 +82,7 @@ To let users authenticate via SAML, you need to assign groups to the Cloudflare 
 ## 5. Select Trusted Domains on the SAML Configuration Dialog
 
 - Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.
-  
+
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
 
 - Click `Save`.

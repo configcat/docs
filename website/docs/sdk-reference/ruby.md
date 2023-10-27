@@ -159,11 +159,11 @@ user_object = ConfigCat::User.new('john@example.com')
 
 ### Customized user object creation
 
-| Parameters   | Description                                                                                                                                                          |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                                                            |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                                                            |
+| Parameters   | Description                                                                                                                                               |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                          |
+| `email`      | Optional parameter for easier targeting rule definitions.                                                                                                 |
+| `country`    | Optional parameter for easier targeting rule definitions.                                                                                                 |
 | `custom`     | Optional `dictionary of strings` representing the custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```ruby
@@ -595,7 +595,7 @@ client = ConfigCat.get('#YOUR-SDK-KEY#',
 ```
 
 :::info
-The Ruby SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The Ruby SDK supports _shared caching_. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 :::
 
 ## Force refresh

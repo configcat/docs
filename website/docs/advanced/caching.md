@@ -43,7 +43,7 @@ See the [SDK specific docs](/docs/sdk-reference/overview) of your desired platfo
 
 ### Offline mode
 
-ConfigCat SDKs has the capability to go offline. In offline mode they work only from the configured cache and never communicate with ConfigCat over HTTP. 
+ConfigCat SDKs has the capability to go offline. In offline mode they work only from the configured cache and never communicate with ConfigCat over HTTP.
 
 This allows you to set up a centralized cache that only one online ConfigCat SDK writes, but serves many offline ones.
 

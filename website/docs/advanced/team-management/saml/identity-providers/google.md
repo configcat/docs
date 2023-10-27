@@ -80,7 +80,7 @@ The next step will guide you on how to configure the Google App with details pro
 ## 4. Select Trusted Domains on the SAML Configuration Dialog
 
 - Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.
-  
+
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
 
 - Click `Save`.

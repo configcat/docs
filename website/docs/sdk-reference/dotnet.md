@@ -318,10 +318,10 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 
 Available options:
 
-| Option Parameter  | Description                                                                                         | Default |
-| ----------------- | --------------------------------------------------------------------------------------------------- | ------- |
-| `pollInterval`    | Polling interval.                                                                                   | 60s     |
-| `maxInitWaitTime` | Maximum waiting time between the client initialization and the first config acquisition.            | 5s      |
+| Option Parameter  | Description                                                                              | Default |
+| ----------------- | ---------------------------------------------------------------------------------------- | ------- |
+| `pollInterval`    | Polling interval.                                                                        | 60s     |
+| `maxInitWaitTime` | Maximum waiting time between the client initialization and the first config acquisition. | 5s      |
 
 ### Lazy loading
 
@@ -691,7 +691,7 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 ```
 
 :::info
-The .NET SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The .NET SDK supports _shared caching_. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 :::
 
 ## Using ConfigCat behind a proxy

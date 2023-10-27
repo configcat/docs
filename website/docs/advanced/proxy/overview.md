@@ -12,12 +12,13 @@ import CodeBlock from '@theme/CodeBlock';
 The ConfigCat Proxy is in a public beta phase. If you have feedback or questions, please [contact us](https://configcat.com/support).
 :::
 
-The <a target="_blank" href="https://github.com/configcat/configcat-proxy">ConfigCat Proxy</a> allows you to host a feature flag evaluation service in your own infrastructure. It's a small Go application that communicates with ConfigCat's CDN network and caches/proxies *config JSON* files for your frontend and backend applications. The *config JSON* contains all the data that is needed for ConfigCat SDKs to evaluate feature flags.
+The <a target="_blank" href="https://github.com/configcat/configcat-proxy">ConfigCat Proxy</a> allows you to host a feature flag evaluation service in your own infrastructure. It's a small Go application that communicates with ConfigCat's CDN network and caches/proxies _config JSON_ files for your frontend and backend applications. The _config JSON_ contains all the data that is needed for ConfigCat SDKs to evaluate feature flags.
 
 The Proxy provides the following:
-- **Performance**: The Proxy can be deployed close to your applications and can serve the downloaded *config JSON* files from memory. ConfigCat SDKs then can operate on the [proxied *config JSON*](/advanced/proxy/endpoints#cdn-proxy). This can reduce the duration of feature flag evaluation for stateless or short lived applications.
-- **Reliability**: The Proxy can store the downloaded *config JSON* files in an external [cache](#cache). It can fall back to operating on the cached *config JSON* if the ConfigCat CDN network becomes inaccessible.
-- **Security**: The Proxy can act as a [server side flag evaluation](/advanced/proxy/endpoints#api) component. Using it like that can prevent the exposure of *config JSON* files to frontend and mobile applications.
+
+- **Performance**: The Proxy can be deployed close to your applications and can serve the downloaded _config JSON_ files from memory. ConfigCat SDKs then can operate on the [proxied _config JSON_](/advanced/proxy/endpoints#cdn-proxy). This can reduce the duration of feature flag evaluation for stateless or short lived applications.
+- **Reliability**: The Proxy can store the downloaded _config JSON_ files in an external [cache](#cache). It can fall back to operating on the cached _config JSON_ if the ConfigCat CDN network becomes inaccessible.
+- **Security**: The Proxy can act as a [server side flag evaluation](/advanced/proxy/endpoints#api) component. Using it like that can prevent the exposure of _config JSON_ files to frontend and mobile applications.
 - **Scalability**: Horizontal scaling allows you to align with the load coming from your applications accordingly.
 - **Streaming**: The Proxy provides real-time feature flag change notifications via [Server-Sent Events (SSE)](/advanced/proxy/endpoints#sse) and [gRPC](/advanced/proxy/grpc).
 
@@ -28,11 +29,13 @@ The following diagram shows the high level architecture of the Proxy.
 <img className="bordered zoomable" src="/docs/assets/proxy/proxy_arch.png" alt="High level Proxy architecture" />
 
 ### How It Works
-The Proxy wraps one or more SDK instances for handling feature flag evaluation requests. It also serves the related *config JSON* files that can be consumed by other ConfigCat SDKs running in your applications. 
+
+The Proxy wraps one or more SDK instances for handling feature flag evaluation requests. It also serves the related _config JSON_ files that can be consumed by other ConfigCat SDKs running in your applications.
 
 Within the Proxy, the underlying SDK instances can run in the following modes:
+
 - **Online**: In this mode, the underlying SDK has an active connection to the ConfigCat CDN network through the internet.
-- **Offline**: In [this mode](#offline-mode), the underlying SDK doesn't have an active connection to ConfigCat. Instead, it uses the configured cache or a file as a source of its *config JSON*.
+- **Offline**: In [this mode](#offline-mode), the underlying SDK doesn't have an active connection to ConfigCat. Instead, it uses the configured cache or a file as a source of its _config JSON_.
 
 With the combination of the above modes, you can construct a cluster of proxies where only one node is responsible for the communication with ConfigCat, and all the other nodes are working from a central cache.
 
@@ -41,11 +44,13 @@ With the combination of the above modes, you can construct a cluster of proxies 
 ### Communication
 
 There are three ways how the Proxy is informed about the availability of new feature flag evaluation data:
-- **Polling**: The ConfigCat SDKs within the Proxy are regularly polling the ConfigCat CDN for new *config JSON* versions.
+
+- **Polling**: The ConfigCat SDKs within the Proxy are regularly polling the ConfigCat CDN for new _config JSON_ versions.
 - **Webhook**: The Proxy has [webhook endpoints](/advanced/proxy/endpoints#webhook) (for each underlying SDK) which can be set on the <a target="_blank" href="https://app.configcat.com/product/webhooks">ConfigCat Dashboard</a> to be invoked when someone saves & publishes new feature flag changes.
-- **Cache polling / file watching**: In [offline mode](#offline-mode), the Proxy can regularly poll a cache or watch a file for new *config JSON* versions.
+- **Cache polling / file watching**: In [offline mode](#offline-mode), the Proxy can regularly poll a cache or watch a file for new _config JSON_ versions.
 
 These are the ports used by the Proxy by default:
+
 - **8050**: for standard HTTP communication. ([API](/advanced/proxy/endpoints#api), [CDN proxy](/advanced/proxy/endpoints#cdn-proxy), [Webhook](/advanced/proxy/endpoints#webhook), [SSE](/advanced/proxy/endpoints#sse), [Status](/advanced/proxy/monitoring#status))
 - **8051**: for providing [prometheus metrics](/advanced/proxy/monitoring#prometheus-metrics).
 - **50051**: for [gRPC](/advanced/proxy/grpc) communication.
@@ -63,13 +68,15 @@ The docker image is available on DockerHub. You can run the image either as a st
 <TabItem value="standalone" label="Standalone" default>
 
 Pull the latest image:
+
 ```shell
 docker pull configcat/proxy:latest
 ```
 
 Run the ConfigCat Proxy:
+
 ```shell
-docker run -d --name configcat-proxy \ 
+docker run -d --name configcat-proxy \
   -p 8050:8050 -p 8051:8051 -p 50051:50051 \
   -e CONFIGCAT_SDKS='{"<sdk-identifier>":"<your-sdk-key>"}' \
   configcat/proxy
@@ -85,12 +92,13 @@ services:
     environment:
       - CONFIGCAT_SDKS={"<sdk-identifier>":"<your-sdk-key>"}
     ports:
-      - "8050:8050"
-      - "8051:8051"
-      - "50051:50051"
+      - '8050:8050'
+      - '8051:8051'
+      - '50051:50051'
 ```
 
 To start docker services, execute the following command:
+
 ```shell
 docker-compose up -f docker-compose.yml -d
 ```
@@ -128,16 +136,18 @@ When the default location is not suitable, you can specify a custom location for
   <summary><strong>Docker</strong></summary>
 
 When running the Proxy in docker, you can mount the options YAML file as a volume.
+
 ```shell
-docker run -d --name configcat-proxy \ 
+docker run -d --name configcat-proxy \
   -p 8050:8050 -p 8051:8051 -p 50051:50051 \
   // highlight-next-line
   -v <path-to-file>/options.yml:/etc/configcat/proxy/options.yml
 ```
 
 (Optional) With the `-c` argument to specify a custom path for your options YAML file:
+
 ```shell
-docker run -d --name configcat-proxy \ 
+docker run -d --name configcat-proxy \
   -p 8050:8050 -p 8051:8051 -p 50051:50051 \
   // highlight-next-line
   -v <path-to-file>/options.yml:/cnf/options.yml \
@@ -197,8 +207,9 @@ Run the Proxy as a standalone executable with the options YAML file in its defau
   <summary><strong>Docker</strong></summary>
 
 When running the Proxy in docker, you can pass environment variables for the executing container.
+
 ```shell
-docker run -d --name configcat-proxy \ 
+docker run -d --name configcat-proxy \
   -p 8050:8050 -p 8051:8051 -p 50051:50051 \
   // highlight-next-line
   -e CONFIGCAT_SDKS='{"<sdk-identifier>":"<your-sdk-key>"}' \
@@ -211,7 +222,6 @@ docker run -d --name configcat-proxy \
   <summary><strong>Standalone executable</strong></summary>
 
 Make sure the related environment variables are available for the Proxy's hosting process.
-
 
 <Tabs>
 <TabItem value="shell" label="shell">
@@ -260,7 +270,7 @@ You can specify the log level either globally or for each individual component. 
 
 ```yaml
 log:
-  level: "<error|warn|info|debug>"
+  level: '<error|warn|info|debug>'
 ```
 
 </TabItem>
@@ -282,8 +292,8 @@ There's an option to predefine [user object](/advanced/user-object) attributes w
 
 ```yaml
 default_user_attributes:
-  attribute_key1: "<attribute_value1>"
-  attribute_key2: "<attribute_value2>"
+  attribute_key1: '<attribute_value1>'
+  attribute_key2: '<attribute_value2>'
 ```
 
 </TabItem>
@@ -328,37 +338,38 @@ sdks:
 <TabItem value="yaml" label="YAML" default>
 
 This is the whole YAML section of the SDK specific options.
+
 ```yaml title="options.yml"
 sdks:
   my_sdk:
-    key: "<your-sdk-key>"
-    base_url: "<base-url>"
+    key: '<your-sdk-key>'
+    base_url: '<base-url>'
     poll_interval: 30
     data_governance: <"eu"|"global">
-    webhook_signing_key: "<key>"
+    webhook_signing_key: '<key>'
     webhook_signature_valid_for: 300
     default_user_attributes:
-      attribute_key: "<attribute_value>"
+      attribute_key: '<attribute_value>'
     log:
-      level: "<error|warn|info|debug>"
+      level: '<error|warn|info|debug>'
     offline:
       log:
-        level: "<error|warn|info|debug>"
+        level: '<error|warn|info|debug>'
       enabled: <true|false>
       use_cache: <true|false>
       cache_poll_interval: 5
       local:
-        file_path: "./path/local.json"
+        file_path: './path/local.json'
         polling: <true|false>
         poll_interval: 5
-  another_sdk:
-    ...
+  another_sdk: ...
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variables">
 
 These are the SDK specific environment variables.
+
 ```shell
 CONFIGCAT_SDKS='{"my-sdk":"<your-sdk-key>","another-sdk":"<another-sdk-key>"}'
 CONFIGCAT_MY_SDK_BASE_URL="<base-url>"
@@ -398,7 +409,7 @@ Here's the explanation for each option:
 
 ```yaml
 my_sdk:
-  key: "<your-sdk-key>"
+  key: '<your-sdk-key>'
 ```
 
 </TabItem>
@@ -430,7 +441,7 @@ CONFIGCAT_SDKS={"my_sdk":"<your-sdk-key>"}
 
 ```yaml
 my_sdk:
-  base_url: "<base-url>"
+  base_url: '<base-url>'
 ```
 
 </TabItem>
@@ -482,7 +493,7 @@ CONFIGCAT_MY_SDK_POLL_INTERVAL=30
 
 ```yaml
 my_sdk:
-  data_governance: "<global|eu>"
+  data_governance: '<global|eu>'
 ```
 
 </TabItem>
@@ -508,7 +519,7 @@ CONFIGCAT_MY_SDK_DATA_GOVERNANCE="<global|eu>"
 
 ```yaml
 my_sdk:
-  webhook_signing_key: "<key>"
+  webhook_signing_key: '<key>'
 ```
 
 </TabItem>
@@ -561,7 +572,7 @@ CONFIGCAT_MY_SDK_WEBHOOK_SIGNATURE_VALID_FOR=300
 ```yaml
 my_sdk:
   default_user_attributes:
-    attribute_key: "<attribute_value>"
+    attribute_key: '<attribute_value>'
 ```
 
 </TabItem>
@@ -588,7 +599,7 @@ CONFIGCAT_MY_SDK_DEFAULT_USER_ATTRIBUTES='{"attribute_key":"<attribute_value>"}'
 ```yaml
 my_sdk:
   log:
-    level: "<error|warn|info|debug>"
+    level: '<error|warn|info|debug>'
 ```
 
 </TabItem>
@@ -710,7 +721,7 @@ CONFIGCAT_MY_SDK_OFFLINE_CACHE_POLL_INTERVAL=5
 my_sdk:
   offline:
     log:
-      level: "<error|warn|info|debug>"
+      level: '<error|warn|info|debug>'
 ```
 
 </TabItem>
@@ -738,7 +749,7 @@ CONFIGCAT_MY_SDK_OFFLINE_LOG_LEVEL="<error|warn|info|debug>"
 my_sdk:
   offline:
     local:
-      file_path: "./path/local.json"
+      file_path: './path/local.json'
 ```
 
 </TabItem>
@@ -882,7 +893,7 @@ CONFIGCAT_OFFLINE_CACHE_POLL_INTERVAL=5
 ```yaml
 offline:
   log:
-    level: "<error|warn|info|debug>"
+    level: '<error|warn|info|debug>'
 ```
 
 </TabItem>
@@ -913,7 +924,7 @@ The Proxy in its default setup stores all the information it needs for feature f
 Currently, the only available option is <a target="blank" href="https://redis.io">Redis</a>. The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
 
 :::info
-The ConfigCat Proxy supports *shared caching*, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The ConfigCat Proxy supports _shared caching_, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 
 <img className="bordered zoomable" src="/docs/assets/proxy/shared_cache.png" alt="Shared cache architecture" />
 
@@ -923,27 +934,29 @@ The ConfigCat Proxy supports *shared caching*, which means it can feed an extern
 <TabItem value="yaml" label="YAML" default>
 
 This is the whole YAML section of the cache specific options.
+
 ```yaml title="options.yml"
 cache:
   redis:
     enabled: <true|false>
     db: 0
-    user: "<user>"
-    password: "<pass>"
-    addresses: ["<addr1>", "<addr2>"]
-    tls: 
+    user: '<user>'
+    password: '<pass>'
+    addresses: ['<addr1>', '<addr2>']
+    tls:
       enabled: <true|false>
       min_version: <1.0|1.1|1.2|1.3>
-      server_name: "<server-name>"
+      server_name: '<server-name>'
       certificates:
-        - cert: "<path-to-cert>"
-          key: "<path-to-key>"
+        - cert: '<path-to-cert>'
+          key: '<path-to-key>'
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variables">
 
 These are the cache specific environment variables.
+
 ```shell
 CONFIGCAT_CACHE_REDIS_ENABLED=<true|false>
 CONFIGCAT_CACHE_REDIS_DB=0
@@ -976,7 +989,7 @@ Here's the explanation for each option:
 ```yaml
 cache:
   redis:
-    addresses: ["<addr1>", "<addr2>"]
+    addresses: ['<addr1>', '<addr2>']
 ```
 
 </TabItem>
@@ -1057,7 +1070,7 @@ CONFIGCAT_CACHE_REDIS_DB=0
 ```yaml
 cache:
   redis:
-    user: "<user>"
+    user: '<user>'
 ```
 
 </TabItem>
@@ -1084,7 +1097,7 @@ CONFIGCAT_CACHE_REDIS_USER="<user>"
 ```yaml
 cache:
   redis:
-    password: "<pass>"
+    password: '<pass>'
 ```
 
 </TabItem>
@@ -1118,7 +1131,7 @@ The following options are related to securing the connection to Redis with TLS.
 ```yaml
 cache:
   redis:
-    tls: 
+    tls:
       enabled: <true|false>
 ```
 
@@ -1146,7 +1159,7 @@ CONFIGCAT_CACHE_REDIS_TLS_ENABLED=<true|false>
 ```yaml
 cache:
   redis:
-    tls: 
+    tls:
       min_version: <1.0|1.1|1.2|1.3>
 ```
 
@@ -1174,8 +1187,8 @@ CONFIGCAT_CACHE_REDIS_TLS_MIN_VERSION=<1.0|1.1|1.2|1.3>
 ```yaml
 cache:
   redis:
-    tls: 
-      server_name: "<server-name>"
+    tls:
+      server_name: '<server-name>'
 ```
 
 </TabItem>
@@ -1203,8 +1216,8 @@ CONFIGCAT_CACHE_REDIS_TLS_SERVER_NAME="<server-name>"
 cache:
   redis:
     certificates:
-      - cert: "<path-to-cert>"
-        key: "<path-to-key>"
+      - cert: '<path-to-cert>'
+        key: '<path-to-key>'
 ```
 
 </TabItem>
@@ -1234,11 +1247,11 @@ The following HTTP and HTTP Proxy related options are available:
 ```yaml title="options.yml"
 http:
   port: 8050
-  log: 
-    level: "<error|warn|info|debug>"
+  log:
+    level: '<error|warn|info|debug>'
 
 http_proxy:
-  url: "<proxy-url>"
+  url: '<proxy-url>'
 ```
 
 </TabItem>
@@ -1294,7 +1307,7 @@ CONFIGCAT_HTTP_PORT=8050
 ```yaml
 http:
   log:
-    level: "<error|warn|info|debug>"
+    level: '<error|warn|info|debug>'
 ```
 
 </TabItem>
@@ -1328,7 +1341,7 @@ CONFIGCAT_HTTP_LOG_LEVEL="<error|warn|info|debug>"
 
 ```yaml
 http_proxy:
-  url: "<proxy-url>"
+  url: '<proxy-url>'
 ```
 
 </TabItem>
@@ -1363,12 +1376,12 @@ The following options are for the first scenario where you secure the direct HTT
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml title="options.yml"
-tls: 
+tls:
   enabled: <true|false>
   min_version: <1.0|1.1|1.2|1.3>
   certificates:
-    - cert: "<path-to-cert>"
-      key: "<path-to-key>"
+    - cert: '<path-to-cert>'
+      key: '<path-to-key>'
 ```
 
 </TabItem>
@@ -1395,7 +1408,7 @@ Here's the explanation for each option:
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-tls: 
+tls:
   enabled: <true|false>
 ```
 
@@ -1421,7 +1434,7 @@ CONFIGCAT_TLS_ENABLED=<true|false>
 <TabItem value="yaml" label="YAML" default>
 
 ```yaml
-tls: 
+tls:
   min_version: <1.0|1.1|1.2|1.3>
 ```
 
@@ -1449,8 +1462,8 @@ CONFIGCAT_TLS_MIN_VERSION=<1.0|1.1|1.2|1.3>
 ```yaml
 tls:
   certificates:
-    - cert: "<path-to-cert>"
-      key: "<path-to-key>"
+    - cert: '<path-to-cert>'
+      key: '<path-to-key>'
 ```
 
 </TabItem>

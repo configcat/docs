@@ -20,19 +20,21 @@ The Proxy provides status information (health check) about its components on the
 
 The Proxy regularly checks whether the underlying SDKs can communicate with their configured source and with the cache. This endpoint returns the actual state of these checks.
 
-If everything is operational, each `status` node shows the value `healthy`. If an SDK could not connect to its source, it'll put an error to its `records` collection. 
-If a component's last two records are errors, its `status` will switch to `degraded`. 
-If a component becomes operational again it'll put an `[ok]` to the `records` and will switch to `healthy` again. 
+If everything is operational, each `status` node shows the value `healthy`. If an SDK could not connect to its source, it'll put an error to its `records` collection.
+If a component's last two records are errors, its `status` will switch to `degraded`.
+If a component becomes operational again it'll put an `[ok]` to the `records` and will switch to `healthy` again.
 
 The root `status` is `healthy` if all of the SDKs are `healthy`. If any of the SDKs become `degraded`, the root will also switch to `degraded`.
 
 **Responses**:
+
 <ul className="responses">
 <li className="success"><span className="status">200</span>: The status returned successfully.</li>
 <li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
 </ul>
 
 **Example Response**:
+
 ```json
 {
   "status": "healthy",
@@ -43,9 +45,7 @@ The root `status` is `healthy` if all of the SDKs are `healthy`. If any of the S
       "source": {
         "type": "remote",
         "status": "healthy",
-        "records": [
-          "Mon, 29 May 2023 16:36:40 UTC: [ok] config fetched"
-        ]
+        "records": ["Mon, 29 May 2023 16:36:40 UTC: [ok] config fetched"]
       }
     },
     "another_sdk": {

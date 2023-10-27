@@ -3,10 +3,12 @@ id: network-traffic
 title: Network Traffic
 description: Network Traffic refers to the data transmitted between your applications and ConfigCat servers.
 ---
+
 Network Traffic refers to the data transmitted between your applications and ConfigCat CDN. It includes the requests made to fetch feature flags and settings.
 
 Generally speaking, the Network Traffic is proportional to:
-- the size of the `config JSON`, 
+
+- the size of the `config JSON`,
 - the number of clients connecting to ConfigCat,
 - and the frequency of changes in the `config JSON`.
 
@@ -48,12 +50,15 @@ Here are a few examples of config JSON file sizes:
   </table>
 
 #### Size of the `config JSON`
+
 Affected by the number of feature flags, settings, targeting rules, segments, and the length of their values.
 
 #### Number of clients connecting to ConfigCat
+
 Every time a client downloads the config JSON, it contributes to the overall Network Traffic.
 
 #### Frequency of changes in the `config JSON`
+
 The `config JSON` is cached on the ConfigCat CDN. If there is no change, the ConfigCat CDN will reply with a `304 Not Modified` response. If there is a change, the ConfigCat CDN will reply with a `200 OK` response and the new `config JSON` will be downloaded.
 
 ### Shared infrastructure

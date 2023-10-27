@@ -75,7 +75,7 @@ _ConfigCat Client_ is responsible for:
 | `base_url`                     | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                                                                                |
 | `data_governance`              | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](advanced/data-governance.md). Available options: `:global`, `:eu_only`.                                                                   |
 | `cache_policy`                 | `CachePolicy.auto/1`, `CachePolicy.lazy/1` and `CachePolicy.manual/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details.                                                                                                                                                                                                          |
-| `cache`                        | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`. [More about cache](#custom-cache-behaviour-with-cache-option-parameter).                                                                                                                                                                                                                                         |
+| `cache`                        | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`. [More about cache](#custom-cache-behaviour-with-cache-option-parameter).                                                                                                                                                                                                   |
 | `http_proxy`                   | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`.                                                                                                          |
 | `connect_timeout_milliseconds` | Timeout for establishing a TCP or SSL connection, in milliseconds. Default is 8000.                                                                                                                                                                                                                                                                            |
 | `read_timeout_milliseconds`    | Timeout for receiving an HTTP response from the socket, in milliseconds. Default is 5000.                                                                                                                                                                                                                                                                      |
@@ -143,12 +143,12 @@ user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#")
 user_object = ConfigCat.User.new("john@example.com")
 ```
 
-| Parameters   | Description                                                                                                                                                          |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                                                            |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                                                            |
-| `custom`     | Optional `Map of strings` representing the custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type.|
+| Parameters   | Description                                                                                                                                        |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                   |
+| `email`      | Optional parameter for easier targeting rule definitions.                                                                                          |
+| `country`    | Optional parameter for easier targeting rule definitions.                                                                                          |
+| `custom`     | Optional `Map of strings` representing the custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```elixir
 user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#", email: "john@example", country: "United Kingdom",
@@ -182,6 +182,7 @@ Whenever the `get_value`, `get_value_details`, `get_variation_id`, `get_all_vari
   default_user: ConfigCat.User.new("john@example.com")
 ]}
 ```
+
 ```elixir
 # The default user will be used in the evaluation process.
 value = ConfigCat.get_value("keyOfMySetting", false)
@@ -299,7 +300,7 @@ Then use your custom cache implementation:
 ```
 
 :::info
-The Elixir SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The Elixir SDK supports _shared caching_. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 :::
 
 ### Multiple `ConfigCat` instances

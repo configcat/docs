@@ -332,7 +332,7 @@ options.hooks = make_shared<Hooks>(
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
-or with the  `getHooks()` method of the ConfigCat client:
+or with the `getHooks()` method of the ConfigCat client:
 
 ```cpp
 client->getHooks->addOnFlagEvaluated([](const EvaluationDetails& details) { /* onFlagEvaluated callback */ });
@@ -557,7 +557,7 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 :::info
-The C++ SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The C++ SDK supports _shared caching_. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 :::
 
 ## Force refresh
@@ -596,7 +596,7 @@ The default logger used by the ConfigCat SDK is the <a href="https://pub.dev/pac
 In the ConfigCat SDK, a default `ConsoleLogger` writes logs to the standard output, but you can override it with your implementation via the `logger` client option.
 The custom implementation must satisfy the `ILogger` abstract class.
 
-```cpp
+````cpp
 #include <configcat/configcat.h>
 #include <configcat/consolelogger.h>
 
@@ -609,7 +609,7 @@ You can change the verbosity of the logs by setting the `LogLevel`.
 
 ```cpp
 logger->setLogLevel(LOG_LEVEL_INFO);
-```
+````
 
 Available log levels:
 
