@@ -16,7 +16,7 @@ description: A limitations table where every technical and business limitation i
 | Products                                                 | 1     | 3     | **1000** | **1000**   | **1000**  | 3       | 1000    |
 | Environments (per product)                               | 2     | 3     | **50**   | **50**     | **50**    | 3       | 2       |
 | Segments (per product)                                   | 2     | 3     | **500**  | **1000**   | **1000**  | 3       | 3       |
-| Feature flags / Settings                                 | 10    | 100   | **500**  | **500**    | **500**   | 1000    | 10      |
+| Feature flags / Settings (per product)                                | 10    | 100   | **500**  | **500**    | **500**   | 1000    | 10      |
 | % options (per feature flag)                             | 4     | 8     | **500**  | **500**    | **500**   | 8       | 4       |
 | Targeting rules (per feature flag)                       | 4     | 8     | **500**  | **500**    | **500**   | 8       | 4       |
 | Targeting rule comparison value length (chars)           | 65535 | 65535 | 65535    | 65535      | 65535     | 65535   | 65535   |
