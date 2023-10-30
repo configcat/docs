@@ -9,6 +9,8 @@ description: This page explains how to purchase ConfigCat plans, how to manage y
 ConfigCat is a feature flag service with unlimited team size, awesome support, and a reasonable price tag. You can use ConfigCat by subscribing with an email address which is free forever. Additionally, we offer three more plans
 with fewer limitations and more additional features. For a detailed comparison <a href="https://configcat.com/pricing/" target="_blank">check out the pricing table</a>.
 
+If you need a comprehensive table of all the business and technical limitations of each plan, see the [limitations table](limitations.md).
+
 ### Shared vs Dedicated infrastructure
 
 **Free, Pro, Smart, Enterprise plans** run on shared infrastructure. So all the customers are using the same API and Config Delivery Network.
