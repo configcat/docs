@@ -20,7 +20,7 @@ description: A limitations table where every technical and business limitation i
 | % options (per feature flag)                             | 4     | 8     | **500**  | **500**    | **500**   | 8       | 4       |
 | Targeting rules (per feature flag)                       | 4     | 8     | **500**  | **500**    | **500**   | 8       | 4       |
 | Targeting rule comparison value length (chars)           | 65535 | 65535 | 65535    | 65535      | 65535     | 65535   | 65535   |
-| Targeting rule comparison value list length              | 15000 | 15000 | 15000    | 15000      | 15000     | 15000   | 15000   |
+| Targeting rule comparison value list length              | 100 | 1000 | 15000    | 15000      | 15000     | 1000   | 1000   |
 | Targeting rule comparison value list item length (chars) | 255   | 255   | 255      | 255        | 255       | 255     | 255     |
 | Webhooks (per environment)                               | 1     | 3     | **200**  | **200**    | **200**   | 3       | 1       |
 | Permission groups (per product)                          | 1     | 2     | **100**  | **100**    | **100**   | 2       | 3       |
