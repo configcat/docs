@@ -13,20 +13,18 @@ The Proxy accepts HTTP requests on the following endpoints.
 
 ## CDN Proxy
 
-The CDN proxy endpoint's purpose is to forward the underlying _config JSON_ to other ConfigCat SDKs used by your application.
+The CDN proxy endpoint's purpose is to forward the underlying *config JSON* to other ConfigCat SDKs used by your application.  
 
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/&#123;sdkId&#125;/&#123;config-json-file&#125;</span></summary>
 
-This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for feature flag evaluation.
+This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for feature flag evaluation. 
 
 **Route parameters**:
-
 - `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
-- `config-json-file`: It's set by the ConfigCat SDK, it determines which _config JSON_ schema must be used.
+- `config-json-file`: It's set by the ConfigCat SDK, it determines which *config JSON* schema must be used.  
 
 **Responses**:
-
 <ul className="responses">
   <li className="success"><span className="status">200</span>: The <code>config.json</code> file is downloaded successfully.</li>
   <li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
@@ -49,7 +47,7 @@ So, let's assume you set up the Proxy with the following SDK option:
 ```yaml title="options.yml"
 sdks:
   my_sdk:
-    key: '<your-sdk-key>'
+    key: "<your-sdk-key>"
 ```
 
 </TabItem>
@@ -65,14 +63,14 @@ CONFIGCAT_SDKS={"my_sdk":"<your-sdk-key>"}
 The SDK's initialization that works with the Proxy will look like this:
 
 ```js title="example.js"
-import * as configcat from 'configcat-js';
+import * as configcat from "configcat-js";
 
 var configCatClient = configcat.getClient(
   // highlight-next-line
-  'my_sdk', // SDK identifier as SDK key
+  "my_sdk", // SDK identifier as SDK key
   configcat.PollingMode.AutoPoll,
   // highlight-next-line
-  { baseUrl: 'http(s)://localhost:8050' }, // Proxy URL
+  { baseUrl: "http(s)://localhost:8050" } // Proxy URL
 );
 ```
 
@@ -148,7 +146,7 @@ CONFIGCAT_HTTP_CDN_PROXY_CORS_ENABLED=<true|false>
 http:
   cdn_proxy:
     cors:
-      allowed_origins:
+      allowed_origins: 
         - https://domain1.com
         - https://domain2.com
 ```
@@ -242,7 +240,7 @@ CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1
 http:
   cdn_proxy:
     headers:
-      Custom-Header-Name: '<header-value>'
+      Custom-Header-Name: "<header-value>"
 ```
 
 </TabItem>
@@ -270,28 +268,25 @@ The API endpoints are for server side feature flag evaluation.
 <details>
   <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/eval</span></summary>
 
-This endpoint evaluates a single feature flag identified by a `key` with the given [user object](/advanced/user-object).
+This endpoint evaluates a single feature flag identified by a `key` with the given [user object](/advanced/user-object). 
 
 **Route parameters**:
-
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 
 **Request body**:
-
 ```json
 {
   "key": "<feature-flag-key>",
   "user": {
     "Identifier": "<user-id>",
     "Email": "<user-email>",
-    "Country": "<user-country>"
+    "Country": "<user-country>",
     // any other attribute
   }
 }
 ```
 
 **Responses**:
-
 <ul className="responses">
 <li className="success"><span className="status">200</span>: The feature flag evaluation finished successfully.<br/>
 <div className="response-body">Response body:</div>
@@ -314,27 +309,24 @@ This endpoint evaluates a single feature flag identified by a `key` with the giv
 <details>
   <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/eval-all</span></summary>
 
-This endpoint evaluates all feature flags with the given [user object](/advanced/user-object).
+This endpoint evaluates all feature flags with the given [user object](/advanced/user-object). 
 
 **Route parameters**:
-
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 
 **Request body**:
-
 ```json
 {
   "user": {
     "Identifier": "<user-id>",
     "Email": "<user-email>",
-    "Country": "<user-country>"
+    "Country": "<user-country>",
     // any other attribute
   }
 }
 ```
 
 **Responses**:
-
 <ul className="responses">
 <li className="success"><span className="status">200</span>: The evaluation of all feature flags finished successfully.<br/>
 <div className="response-body">Response body:</div>
@@ -363,14 +355,12 @@ This endpoint evaluates all feature flags with the given [user object](/advanced
 <details>
   <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/refresh</span></summary>
 
-This endpoint commands the underlying SDK to download the latest available _config JSON_.
+This endpoint commands the underlying SDK to download the latest available *config JSON*. 
 
 **Route parameters**:
-
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 
 **Responses**:
-
 <ul className="responses">
 <li className="success"><span className="status">200</span>: The refresh was successful.</li>
 <li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
@@ -383,21 +373,22 @@ This endpoint commands the underlying SDK to download the latest available _conf
 <details>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/keys</span></summary>
 
-This endpoint returns all feature flag keys belonging to the given [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key).
+This endpoint returns all feature flag keys belonging to the given [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key). 
 
 **Route parameters**:
-
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 
 **Responses**:
-
 <ul className="responses">
 <li className="success"><span className="status">200</span>: The keys are returned successfully.<br/>
 <div className="response-body">Response body:</div>
 
 ```json
 {
-  "keys": ["feature-flag-key-1", "feature-flag-key-1"]
+  "keys": [
+    "feature-flag-key-1",
+    "feature-flag-key-1"
+  ]
 }
 ```
 
@@ -481,7 +472,7 @@ CONFIGCAT_HTTP_API_CORS_ENABLED=<true|false>
 http:
   api:
     cors:
-      allowed_origins:
+      allowed_origins: 
         - https://domain1.com
         - https://domain2.com
 ```
@@ -575,7 +566,7 @@ CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1.com"
 http:
   api:
     headers:
-      Custom-Header-Name: '<header-value>'
+      Custom-Header-Name: "<header-value>"
 ```
 
 </TabItem>
@@ -603,7 +594,7 @@ CONFIGCAT_HTTP_API_HEADERS='{"Custom-Header-Name":"<header-value>"}'
 http:
   api:
     auth_headers:
-      X-API-KEY: '<auth-value>'
+      X-API-KEY: "<auth-value>"
 ```
 
 </TabItem>
@@ -629,17 +620,15 @@ CONFIGCAT_HTTP_API_AUTH_HEADERS='{"X-API-KEY":"<auth-value>"}'
 The SSE endpoint allows you to subscribe for feature flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
 
 <details>
-  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval/&#123;data&#125;</span></summary>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval/&#123;data&#125;</span></summary> 
 
 This endpoint subscribes to a single flag's changes. Whenever the watched flag's value changes, the Proxy sends the new value to each connected client.
 
 **Route parameters**:
-
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 - `data`: The `base64` encoded input data for feature flag evaluation that must contain the feature flag's key and a [user object](/advanced/user-object).
 
 **Responses**:
-
 <ul className="responses">
 <li className="success"><span className="status">200</span>: The SSE connection established successfully.</li>
 <div className="response-body">Response body:</div>
@@ -657,22 +646,19 @@ This endpoint subscribes to a single flag's changes. Whenever the watched flag's
 </ul>
 
 **Example**:
-
 ```js title="example.js"
 const rawData = {
-  key: '<feature-flag-key>',
+  key: "<feature-flag-key>",
   user: {
-    Identifier: '<user-id>',
-    Email: '<user-email>',
-    Country: '<user-country>',
+    Identifier: "<user-id>",
+    Email: "<user-email>",
+    Country: "<user-country>",
     // any other attribute
-  },
-};
+  }
+}
 
-const data = btoa(JSON.stringify(rawData));
-const evtSource = new EventSource(
-  'http(s)://localhost:8050/sse/my_sdk/eval/' + data,
-);
+const data = btoa(JSON.stringify(rawData))
+const evtSource = new EventSource("http(s)://localhost:8050/sse/my_sdk/eval/" + data);
 evtSource.onmessage = (event) => {
   console.log(event.data); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
 };
@@ -681,17 +667,15 @@ evtSource.onmessage = (event) => {
 </details>
 
 <details>
-  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval-all/&#123;data&#125;</span></summary>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval-all/&#123;data&#125;</span></summary> 
 
 This endpoint subscribes to all feature flags' changes behind the given [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key). When any of the watched flags' value change, the Proxy sends its new value to each connected client.
 
 **Route parameters**:
-
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 - `data`: **Optional**. The `base64` encoded input data for feature flag evaluation that contains a [user object](/advanced/user-object).
 
 **Responses**:
-
 <ul className="responses">
 <li className="success"><span className="status">200</span>: The SSE connection established successfully.</li>
 <div className="response-body">Response body:</div>
@@ -715,21 +699,18 @@ This endpoint subscribes to all feature flags' changes behind the given [SDK ide
 </ul>
 
 **Example**:
-
 ```js title="example.js"
 const rawData = {
   user: {
-    Identifier: '<user-id>',
-    Email: '<user-email>',
-    Country: '<user-country>',
+    Identifier: "<user-id>",
+    Email: "<user-email>",
+    Country: "<user-country>",
     // any other attribute
-  },
-};
+  }
+}
 
-const data = btoa(JSON.stringify(rawData));
-const evtSource = new EventSource(
-  'http(s)://localhost:8050/sse/my_sdk/eval-all/' + data,
-);
+const data = btoa(JSON.stringify(rawData))
+const evtSource = new EventSource("http(s)://localhost:8050/sse/my_sdk/eval-all/" + data);
 evtSource.onmessage = (event) => {
   console.log(event.data); // {"feature-flag-key":{"value":<evaluated-value>,"variationId":"<variation-id>"}}
 };
@@ -809,7 +790,7 @@ CONFIGCAT_HTTP_SSE_CORS_ENABLED=<true|false>
 http:
   sse:
     cors:
-      allowed_origins:
+      allowed_origins: 
         - https://domain1.com
         - https://domain2.com
 ```
@@ -901,7 +882,7 @@ CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1.com"
 http:
   sse:
     headers:
-      Custom-Header-Name: '<header-value>'
+      Custom-Header-Name: "<header-value>"
 ```
 
 </TabItem>
@@ -929,7 +910,7 @@ CONFIGCAT_HTTP_SSE_HEADERS='{"Custom-Header-Name":"<header-value>"}'
 http:
   sse:
     log:
-      level: '<error|warn|info|debug>'
+      level: "<error|warn|info|debug>"
 ```
 
 </TabItem>
@@ -957,14 +938,12 @@ Through the webhook endpoint, you can notify the Proxy about the availability of
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method blue">POST</span>/hook/&#123;sdkId&#125;</span></summary>
 
-Notifies the Proxy that the SDK with the given [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) must refresh its _config JSON_ to the latest version.
+Notifies the Proxy that the SDK with the given [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) must refresh its *config JSON* to the latest version. 
 
 **Route parameters**:
-
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 
 **Responses**:
-
 <ul className="responses">
 <li className="success"><span className="status">200</span>: The Proxy accepted the notification.</li>
 <li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing or the <a href="/advanced/notifications-webhooks/#verifying-webhook-requests">webhook signature validation</a> failed.</li>
@@ -1023,7 +1002,7 @@ CONFIGCAT_HTTP_WEBHOOK_ENABLED=<true|false>
 http:
   webhook:
     auth:
-      user: '<auth-user>'
+      user: "<auth-user>"
 ```
 
 </TabItem>
@@ -1051,7 +1030,7 @@ CONFIGCAT_HTTP_WEBHOOK_AUTH_USER="<auth-user>"
 http:
   webhook:
     auth:
-      password: '<auth-pass>'
+      password: "<auth-pass>"
 ```
 
 </TabItem>
@@ -1079,7 +1058,7 @@ CONFIGCAT_HTTP_WEBHOOK_AUTH_PASSWORD="<auth-pass>"
 http:
   webhook:
     auth_headers:
-      X-API-KEY: '<auth-value>'
+      X-API-KEY: "<auth-value>"
 ```
 
 </TabItem>
