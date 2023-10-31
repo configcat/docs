@@ -13,14 +13,15 @@ module.exports = {
         'advanced/data-governance',
         {
           'Targeting': [
+            'advanced/targeting/overview',
+            'advanced/targeting/percentage',
             {
-              'User Targeting': [
+              'Condition-based Targeting': [
                 'advanced/targeting/targeting',
-                'advanced/targeting/percentage',
+                'advanced/targeting/prerequisite',
+                'advanced/targeting/segments',
               ],
             },
-            'advanced/targeting/segments',
-            'advanced/targeting/prerequisite',
             'advanced/targeting/evaluation-sequence',
           ],
         },
