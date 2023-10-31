@@ -5,7 +5,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
-import { features } from './features';
+import { features } from '../utils';
 
 function Feature({ imageUrl, title, description, links }) {
   const imgUrl = useBaseUrl(imageUrl);
