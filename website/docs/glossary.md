@@ -192,6 +192,10 @@ The Software Development Life Cycle (SDLC) is a systematic approach aimed at pro
 
 Software as a Service (SaaS) is a cloud-based delivery model where applications are hosted and maintained by a service provider and accessed by users over the internet, typically on a subscription basis.
 
+#### [Staging Environment](glossary/what-is-a-staging-environment.md)
+
+A staging environment is a dry run for your code under the closest possible parameters to its real-world application. It is a near-perfect replica of the servers, infrastructure, architecture, and application of the actual use environment of your code. The key difference is that it is completely walled off from the front-facing actual environment.
+
 ## T
 
 #### [Testing in Production](https://configcat.com/testing-in-production/)
