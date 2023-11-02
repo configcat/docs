@@ -12,7 +12,7 @@ module.exports = {
     [
       '@docusaurus/plugin-google-tag-manager',
       {
-        containerId: 'GTM-K2RKTZS',
+        containerId: 'GTM-5LP6XWS5',
       },
     ],
     'docusaurus-plugin-sass',
