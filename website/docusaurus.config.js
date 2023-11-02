@@ -119,7 +119,7 @@ module.exports = {
               href: 'https://configcat.com/blog/',
             },
             {
-              label: 'Limitations',
+              label: 'Plan Limitations',
               href: '/limitations/',
             },
           ],
