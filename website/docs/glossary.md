@@ -18,7 +18,7 @@ Alpha testing examines a product's functionality and compliance with the busines
 
 ## B
 
-#### Beta Testing
+#### [Beta Testing](/glossary/beta-testing/)
 
 Testing in the beta phase allows users to discover any issues or bugs before a general release by using a product in a real-world environment.
 
