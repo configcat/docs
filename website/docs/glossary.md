@@ -36,7 +36,7 @@ A Canary Release is a type of progressive delivery where a small percentage of u
 
 Canary testing is a software deployment technique where updates or new features are rolled out to a small, carefully selected subset of users before being released to the entire user base, to test and ensure their effectiveness and safety.
 
-#### CI/CD Pipeline
+#### [CI/CD Pipeline](/glossary/ci-cd-pipeline)
 
 A Continuous Integration and Continuous Deployment pipeline (CI/CD) is a set of steps that must be followed to deliver a new software version to customers.
 
