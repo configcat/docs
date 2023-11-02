@@ -22,7 +22,7 @@ Alpha testing examines a product's functionality and compliance with the busines
 
 Testing in the beta phase allows users to discover any issues or bugs before a general release by using a product in a real-world environment.
 
-#### Blue/Green Deployment
+#### [Blue/Green Deployment](/glossary/blue-green-deployment/)
 
 Blue/Green deployments offer near-zero downtime and rollback capabilities. The concept of a blue/green deployment involves switching traffic between two identical environments running different versions of your application.
 
