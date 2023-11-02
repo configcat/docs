@@ -62,7 +62,7 @@ A Dark Launch is rolled out stealthily by first releasing a feature to a subset 
 
 A Developer Advocate is a person whose job is to help developers be successful with a platform or a technology and to speak (or write) on their behalf.
 
-#### DevOps Engineer
+#### [DevOps Engineer](/glossary/devops-engineer/)
 
 The DevOps Engineer is responsible for the development and maintenance of the infrastructure and the deployment of the software. The DevOps Engineer is also responsible for the monitoring and maintenance of the software and the infrastructure.
 
