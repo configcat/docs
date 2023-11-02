@@ -48,7 +48,7 @@ A continuous delivery process enables changes - including new features, configur
 
 Continuous Deployment is a process where any code changes brought to an application are released automatically into the production environment.
 
-#### Continuous Integration
+#### [Continuous Integration](/glossary/continuous-integration/)
 
 Continuous Integration refers to the regular merging of code changes into a central repository, followed by automated builds and tests.
 
