@@ -161,7 +161,7 @@ Rails feature flags are conditional coding elements used in Ruby on Rails applic
 
 React feature flags are conditional codes used in React.js applications to enable or disable certain features dynamically, allowing for controlled release, testing, and customization of software functionalities.
 
-#### Release Manager
+#### [Release Manager](/glossary/release-manager/)
 
 A release manager is an IT professional responsible for defining and executing the software release process within a company, ensuring smooth deployment and high quality releases.
 
