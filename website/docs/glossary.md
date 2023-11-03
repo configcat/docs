@@ -221,7 +221,7 @@ User Acceptance Testing (UAT) is a stage in software development where the softw
 
 ## V
 
-#### Version Control
+#### [Version Control](/glossary/version-control/)
 
 Version control, also referred to as source control or revision control, is a crucial software development practice that tracks and manages changes to code and other files, and is closely linked to source code management.
 
