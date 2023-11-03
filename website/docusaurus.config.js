@@ -119,8 +119,8 @@ module.exports = {
               href: 'https://configcat.com/blog/',
             },
             {
-              label: 'Plan Limitations',
-              href: '/limitations/',
+              label: 'Subscription Plan Limits',
+              href: '/subscription-plan-limits/',
             },
           ],
         },
