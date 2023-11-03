@@ -165,7 +165,7 @@ React feature flags are conditional codes used in React.js applications to enabl
 
 A release manager is an IT professional responsible for defining and executing the software release process within a company, ensuring smooth deployment and high quality releases.
 
-#### Remote Configuration
+#### [Remote Configuration](/glossary/remote-configuration/)
 
 Remote configuration is a software development technique that allows you to modify certain features of an app remotely without having to deploy a new version of the app.
 
@@ -179,7 +179,7 @@ Ring deployment is a form of gradual rollout where new features are released gra
 
 A site reliability engineer (SRE) is a professional in the field of information technology who uses automation tools to monitor the reliability of software in a live production environment.
 
-#### Smoke Test
+#### [Smoke Testing](/glossary/smoke-testing/)
 
 Smoke testing is a type of testing done early in the software development process to confirm that the most critical features of an application are functioning correctly.
 
