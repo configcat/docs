@@ -57,30 +57,34 @@ The following comparators assume that _Comparison attribute_ and _Comparison val
 Consider using Confidential text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
 :::
 
-| Comparator                   | Description                                                                                                                    |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| IS ONE OF (cleartext)        | Checks if the _Comparison attribute_ is listed in the _Comparison value_. _Comparison value_ should be a comma-separated list. |
-| IS NOT ONE OF (cleartext)    | True if the _Comparison attribute_ is not listed in the _Comparison value_.                                                    |
-| CONTAINS (cleartext)         | True if the _Comparison attribute_ contains the _Comparison value_.                                                            |
-| DOES NOT CONTAIN (cleartext) | True if the _Comparison attribute_ doesn't contain the _Comparison value_.                                                     |
+| Comparator                         | Description                                                                                |
+| ---------------------------------- | ------------------------------------------------------------------------------------------ |
+| EQUALS (cleartext)                 | It matches when the comparison attribute is equal to the comparison value.                 |
+| NOT EQUALS (cleartext)             | It matches when the comparison attribute is not equal to the comparison value.             |
+| IS ONE OF (cleartext)              | It matches when the comparison attribute is equal to any of the comparison values          |
+| IS NOT ONE OF (cleartext)          | It matches when the comparison attribute is not equal to any of the comparison values.     |
+| STARTS WITH ANY OF (cleartext)     | It matches when the comparison attribute starts with any of the comparison values.         |
+| ENDS WITH ANY OF (cleartext)       | It matches when the comparison attribute ends with any of the comparison values.           |
+| NOT STARTS WITH ANY OF (cleartext) | It matches when the comparison attribute does not start with any of the comparison values. |
+| NOT ENDS WITH ANY OF (cleartext)   | It matches when the comparison attribute does not end with any of the comparison values.   |
 
 #### Confidential text comparators
 
-We recommend confidential text comparators in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
-In this case, the feature flag evaluation is based on the secure hashes of the comparison values.
+We recommend using confidential text comparators especially in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
+In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed.
 
-| Comparator             | Description                                                                                                                    |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-|EQUALS| True if the _Comparison attribute_ equals the _Comparison value_.                                                                |
-| NOT EQUALS             | True if the _Comparison attribute_ does not equal the _Comparison value_.                                                       |
-| IS ONE OF (hashed)     | Checks if the _Comparison attribute_ is listed in the _Comparison value_. _Comparison value_ should be a comma-separated list. |
-| IS NOT ONE OF (hashed) | True if the _Comparison attribute_ is not listed in the _Comparison value_.                                                    |
-|STARTS WITH ANY OF| True if the _Comparison attribute_ starts with any of the values in _Comparison value_.                                         |
-| ENDS WITH ANY OF       | True if the _Comparison attribute_ ends with any of the values in _Comparison value_.                                           |
-|NOT STARTS WITH ANY OF| True if the _Comparison attribute_ does not start with any of the values in _Comparison value_.                                 |
-| NOT ENDS WITH ANY OF   | True if the _Comparison attribute_ does not end with any of the values in _Comparison value_.                                   |
-| CONTAINS ANY OF        | True if the _Comparison attribute_ contains any of the values in _Comparison value_.                                            |
-| NOT CONTAINS ANY OF    | True if the _Comparison attribute_ does not contain any of the values in _Comparison value_.                                    |
+| Comparator                      | Description                                                                                     |
+| ------------------------------- | ----------------------------------------------------------------------------------------------- |
+| EQUALS (hashed)                 | It matches when the comparison attribute is equal to the comparison value.                      |
+| NOT EQUALS (hashed)             | It matches when the comparison attribute is not equal to the comparison value.                  |
+| IS ONE OF (hashed)              | It matches when the comparison attribute is equal to any of the comparison values               |
+| IS NOT ONE OF (hashed)          | It matches when the comparison attribute is not equal to any of the comparison values.          |
+| STARTS WITH ANY OF (hashed)     | It matches when the comparison attribute starts with any of the comparison values.              |
+| ENDS WITH ANY OF (hashed)       | It matches when the comparison attribute ends with any of the comparison values.                |
+| NOT STARTS WITH ANY OF (hashed) | It matches when the comparison attribute does not start with any of the comparison values.      |
+| NOT ENDS WITH ANY OF (hashed)   | It matches when the comparison attribute does not end with any of the comparison values.        |
+| CONTAINS ANY OF (hashed)        | It matches when the comparison attribute contains any comparison values as a substring.         |
+| NOT CONTAINS ANY OF (hashed)    | It matches when the comparison attribute does not contain any comparison values as a substring. |
 
 Since confidential text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example of how to target users from the same company. Which used to be handled by a rule like:
 
@@ -129,14 +133,14 @@ Support for confidential comparators was introduced in these SDK versions:
 The following comparators assume that _Comparison attribute_ and _Comparison value_ contain semantic versions.
 Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer Semantic Version Specification</a>.
 
-| Comparator             | Description                                                                                                                                   |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF (Semver)     | True if _Comparison attribute_ is listed in the _Comparison value_. _Comparison value_ should be a comma-separated list of semantic versions. |
-| IS NOT ONE OF (Semver) | True if the _Comparison attribute_ is not listed in the _Comparison value_.                                                                   |
-| < (Semver)             | True if _Comparison attribute_ is a smaller version number than _Comparison value_.                                                           |
-| <= (Semver)            | True if _Comparison attribute_ is smaller than or equals _Comparison value_.                                                                  |
-| \> (Semver)            | True if _Comparison attribute_ is a larger version number than _Comparison value_.                                                            |
-| \>= (Semver)           | True if _Comparison attribute_ is larger than or equals _Comparison value_.                                                                   |
+| Comparator             | Description                                                                                                                  |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| IS ONE OF (Semver)     | It matches when the comparison attribute interpreted as a semantic version is equal to any of the comparison values.         |
+| IS NOT ONE OF (Semver) | It matches when the comparison attribute interpreted as a semantic version is not equal to any of the comparison values.     |
+| < (Semver)             | It matches when the comparison attribute interpreted as a semantic version is less than the comparison value.                |
+| <= (Semver)            | It matches when the comparison attribute interpreted as a semantic version is less than or equal to the comparison value.    |
+| \> (Semver)            | It matches when the comparison attribute interpreted as a semantic version is greater than the comparison value.             |
+| \>= (Semver)           | It matches when the comparison attribute interpreted as a semantic version is greater than or equal to the comparison value. |
 
 All semantic version comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
 
@@ -144,14 +148,14 @@ All semantic version comparators return `false` if either _Comparison attribute_
 
 The following comparators assume that _Comparison attribute_ and _Comparison value_ contain numbers.
 
-| Comparator         | Description                                                                 |
-| ------------------ | --------------------------------------------------------------------------- |
-| = (Number)         | True if _Comparison attribute_ equals _Comparison value_.                   |
-| <&#8203;> (Number) | True if _Comparison attribute_ does not equal _Comparison value_.           |
-| < (Number)         | True if _Comparison attribute_ is less than _Comparison value_.             |
-| <= (Number)        | True if _Comparison attribute_ is less than or equals _Comparison value_.   |
-| \> (Number)        | True if _Comparison attribute_ is a larger than _Comparison value_.         |
-| \>= (Number)       | True if _Comparison attribute_ is larger than or equals _Comparison value_. |
+| Comparator         | Description                                                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| = (Number)         | It matches when the comparison attribute interpreted as a decimal number is equal to the comparison value.                 |
+| <&#8203;> (Number) | It matches when the comparison attribute interpreted as a decimal number is not equal to the comparison value.             |
+| < (Number)         | It matches when the comparison attribute interpreted as a decimal number is less than the comparison value.                |
+| <= (Number)        | It matches when the comparison attribute interpreted as a decimal number is less than or equal to the comparison value.    |
+| \> (Number)        | It matches when the comparison attribute interpreted as a decimal number is greater than the comparison value.             |
+| \>= (Number)       | It matches when the comparison attribute interpreted as a decimal number is greater than or equal to the comparison value. |
 
 All number comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid number.
 
@@ -163,15 +167,19 @@ The following comparators assume that _Comparison attribute_ and _Comparison val
 The ConfigCat SDKs don't provide date and time values. You have to pass them to the SDKs as custom attributes in UNIX timestamp format.
 :::
 
-| Comparator | Description                                                  |
-| ---------- | ------------------------------------------------------------ |
-| BEFORE     | True if _Comparison attribute_ is before _Comparison value_. |
-| AFTER      | True if _Comparison attribute_ is after _Comparison value_.  |
+:::info
+You cannot store date and time values directly in User Object attributes. You have to pass them to the SDKs as second-based [UNIX timestamps](https://en.wikipedia.org/wiki/Unix_time), converted to string. (Most SDKs provide a helper method named like `User.AttributeValueFrom` to convert a date and time value to the expected string representation.)
+:::
+
+
+| Comparator | Description                                                                                                                                                                                    |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BEFORE     | It matches when the comparison attribute interpreted as the seconds elapsed since <a href="https://en.wikipedia.org/wiki/Unix_time">Unix Epoch</a> is less than the comparison value.          |
+| AFTER      | It matches when the comparison attribute interpreted as the seconds elapsed since <a href="https://en.wikipedia.org/wiki/Unix_time">Unix Epoch</a> is greater than the comparison value.value. |
 
 ##### Example
-If you want to target users who registered before a certain date, you have to pass the registration date to the SDK as a custom attribute in UNIX timestamp format.
+If you want to target users who registered before a certain date, you have to pass the registration date to the SDK as a custom attribute in [UNIX timestamp](https://en.wikipedia.org/wiki/Unix_time) format.
 
-```js
 ```cs
 var user = new User(appUserData.Identifier)
 {
@@ -186,10 +194,10 @@ var user = new User(appUserData.Identifier)
 
 The following comparators assume that _Comparison attribute_ and _Comparison value_ contain arrays.
 
-| Comparator                | Description                                                                              |
-| ------------------------- | ---------------------------------------------------------------------------------------- |
-| ARRAY CONTAINS ANY OF     | True if _Comparison attribute_ contains any of the values in _Comparison value_.         |
-| ARRAY NOT CONTAINS ANY OF | True if _Comparison attribute_ does not contain any of the values in _Comparison value_. |
+| Comparator                | Description                                                                                                                  |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| ARRAY CONTAINS ANY OF     | It matches when the comparison attribute interpreted as a comma-separated list contains any of the comparison values.        |
+| ARRAY NOT CONTAINS ANY OF | It matches when the comparison attribute interpreted as a comma-separated list does not contain any of the comparison values |
 
 ### Served value
 
