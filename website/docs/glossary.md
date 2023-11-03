@@ -82,7 +82,7 @@ A feature branch is a copy of the main codebase where an individual or team of s
 
 A feature flag is a toggle used to activate or deactivate specific features you may have in your application without redeploying code.
 
-#### Feature Testing
+#### [Feature Testing](/glossary/feature-testing/)
 
 An experiment to determine which version of a feature offers the best user experience is called a Feature Test.
 
