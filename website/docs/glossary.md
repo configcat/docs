@@ -127,7 +127,7 @@ A kill switch is a mechanism that can be used to quickly disable a feature or an
 
 ## M
 
-#### Multi Armed Bandit
+#### [Multi Armed Bandit](/glossary/multi-armed-bandit/)
 
 The Multi-Armed Bandit (MAB) is a machine learning framework that involves an agent making selections, referred to as "arms," with the goal of maximizing its long-term cumulative reward
 
@@ -137,7 +137,7 @@ The Multi-Armed Bandit (MAB) is a machine learning framework that involves an ag
 
 ## P
 
-#### Product Lifecycle Manager
+#### [Product Lifecycle Manager](/glossary/product-lifecycle-manager/)
 
 The role of a product lifecycle manager is to supervise the project team and ensure timely completion of each stage in the lifecycle of a project.
 
