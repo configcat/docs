@@ -205,7 +205,7 @@ A staging environment is a dry run for your code under the closest possible para
 
 Testing in production is the practice of evaluating software in its live environment, with real users and real-world conditions. Unlike traditional testing in controlled settings, this approach exposes the software to actual usage scenarios, uncovering issues that may be missed otherwise. However, it requires vigilant monitoring and quick problem resolution to minimize user impact.
 
-#### Type I and Type II Errors
+#### [Type I and Type II Errors](/glossary/type-i-and-type-ii-errors/)
 
 A Type I error occurs when the null hypothesis is incorrectly rejected while it is actually true, while a Type II error occurs when the null hypothesis is wrongly not rejected while it is actually false.
 
