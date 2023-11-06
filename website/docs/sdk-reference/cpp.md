@@ -570,9 +570,9 @@ Provide your own network credentials (username/password), and proxy server setti
 
 ```cpp
 ConfigCatOptions options;
-options.proxies = {{"http", "http://www.fake_auth_proxy.com"}}; // Protocol, Proxy url
+options.proxies = {{"https", "proxyhost:port"}}; // Protocol, Proxy
 options.proxyAuthentications = {
-    {"http", ProxyAuthentication{"user", "password"}} // Protocol, ProxyAuthentication
+    {"https", ProxyAuthentication{"user", "password"}} // Protocol, ProxyAuthentication
 };
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
