@@ -1,0 +1,13 @@
+﻿name: Mention UX Team
+
+on:
+  pull_request:
+    types:
+      - labeled
+
+jobs:
+  stale:
+    uses: configcat/.github/.github/workflows/ux-label-mention.yml@master
+    with:
+      id: ${{ github.event.pull_request.number }}
+    secrets: inherit
