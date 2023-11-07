@@ -240,6 +240,15 @@ configcat flag create \
 
 :::info
 Each `create` command writes the newly created resource's ID to the standard output so you can save that for further operations.
+
+Example:
+```bash
+#!/bin/bash
+
+ORGANIZATION_ID="<your-organization-id>"
+PRODUCT_ID=$(configcat product create -o $ORGANIZATION_ID -n "<product-name>")
+CONFIG_ID=$(configcat config create -p $PRODUCT_ID -n "<config-name>")
+```
 :::
 
 :::info
