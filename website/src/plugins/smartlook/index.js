@@ -1,4 +1,4 @@
-module.exports = async function myPlugin(context, options) {
+module.exports = async function smartlook(context, options) {
     const { smartlookKey } = options || {};
     return {
         name: 'smartlook',
