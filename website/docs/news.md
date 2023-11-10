@@ -511,4 +511,4 @@ It is out!
 
 - [Ruby SDK Docs](https://configcat.com/docs/sdk-reference/ruby/)
 - [GitHub repo](https://github.com/configcat/ruby-sdk)
-- [Blog post](https://configcat.com/blog/2019/10/29/ruby/)
+- [Blog post](https://configcat.com/blog/2019/10/29/ruby-sdk/)
