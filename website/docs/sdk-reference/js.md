@@ -706,7 +706,7 @@ The SDK is [tested](https://github.com/configcat/js-sdk/blob/master/.github/work
 - Firefox (latest, latest-beta, 84.0).
 
 These tests are running on each pull request, before each deploy, and on a daily basis.
-You can view a sample run [here](https://github.com/configcat/js-sdk/actions/runs/2420592907).
+You can view a sample run [here](https://github.com/configcat/js-sdk/actions/runs/6399980215).
 
 ## Sample Applications
 
