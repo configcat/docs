@@ -1,4 +1,4 @@
-﻿name: Mention UX Team
+name: Mention Teams
 
 on:
   pull_request:
@@ -6,8 +6,10 @@ on:
       - labeled
 
 jobs:
-  stale:
+  react-to-labels:
     uses: configcat/.github/.github/workflows/ux-label-mention.yml@master
     with:
       id: ${{ github.event.pull_request.number }}
-    secrets: inherit
+      repo: ${{ github.repository }}
+    secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
