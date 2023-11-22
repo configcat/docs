@@ -219,8 +219,8 @@ The `details` result contains the following information:
 | `IsDefaultValue`                  | `bool`                               | True when the default value passed to `GetValueDetails()`/`GetValueDetailsAsync()` is returned due to an error. |
 | `ErrorMessage`                    | `string`                             | In case of an error, this field contains the error message.                                                     |
 | `ErrorException`                  | `Exception`                          | In case of an error, this field contains the related exception object (if any).                                 |
-| `MatchedEvaluationRule`           | `RolloutRule`                        | If the evaluation was based on a targeting rule, this field contains that specific rule.                        |
-| `MatchedEvaluationPercentageRule` | `RolloutPercentageItem`              | If the evaluation was based on a percentage rule, this field contains that specific rule.                       |
+| `MatchedTargetingRule`            | `ITargetingRule`                     | The targeting rule which was used to select the evaluated value (if any).                                       |
+| `MatchedPercentageOption`         | `IPercentageOption`                  | The percentage option which was used to select the evaluated value (if any).                                    |
 | `FetchTime`                       | `DateTime`                           | The last download time (UTC) of the current config.                                                             |
 
 ## User Object
@@ -228,7 +228,7 @@ The `details` result contains the following information:
 The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
+User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 ```
 
 ```csharp
@@ -240,18 +240,65 @@ User userObject = new User("john@example.com");
 | `Id`       | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |
 | `Email`    | Optional parameter for easier targeting rule definitions.                                                                       |
 | `Country`  | Optional parameter for easier targeting rule definitions.                                                                       |
-| `Custom`   | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| `Custom`   | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. E.g. User role, Subscription type. |
 
 ```csharp
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
 {
     Email = "john@example.com",
     Country = "United Kingdom",
-    Custom = new Dictionary<string, string> {
-        {"SubscriptionType", "Pro"},
-        {"UserRole", "Admin"}}
+    Custom =
+    {
+        ["SubscriptionType"] = "Pro",
+        ["UserRole"] = "Admin"
+    }
 };
 ```
+
+The `Custom` dictionary also allows attribute values other than `string` values:
+
+```csharp
+User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
+{
+    Custom =
+    {
+        ["Rating"] = 4.5,
+        ["RegisteredAt"] = DateTimeOffset.Parse("2023-11-22 12:34:56 +00:00", CultureInfo.InvariantCulture),
+        ["Roles"] = new[] { "Role1", "Role2" }
+    }
+};
+```
+
+The set of allowed attribute values depends on the comparison type of the condition which references the User Object attribute.
+`string` values are supported by all comparison types (in some cases they need to be provided in a specific format though).
+Some of the comparison types work with other types of values, as described below.
+
+**Text-based comparisons** (EQUALS, IS ONE OF, etc.)
+* accept `string` values,
+* all other values are automatically converted to `string` (a warning will be logged but evaluation will continue as normal).
+
+**SemVer-based comparisons** (IS ONE OF, &lt;, &gt;=, etc.)
+* accept `string` values containing a properly formatted, valid semver value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**Number-based comparisons** (=, &lt;, &gt;=, etc.)
+* accept `double` values and all other numeric values which can safely be converted to `double`,
+* accept `string` values containing a properly formatted, valid `double` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+  
+**Date time-based comparisons** (BEFORE / AFTER - available only in the new config model, *Config V2*)
+* accept `DateTime` or `DateTimeOffset` values, which are automatically converted to a second-based Unix timestamp,
+* accept `double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `double`,
+* accept `string` values containing a properly formatted, valid `double` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+  
+**String array-based comparisons** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF - available only in the new config model, *Config V2*)
+* accept arrays of `string`,
+* accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+It is also worth mentioning that in case a non-string attribute value needs to be converted to `string` during evaluation,
+it will always be done using the same format which is accepted by the comparisons.
 
 ### Default user
 
@@ -465,76 +512,156 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 
 This is the same format that the SDK downloads from the ConfigCat CDN.
-It allows the usage of all features you can do on the ConfigCat Dashboard.
+It allows the usage of all features you can access on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config JSON is based on your [Data Governance](advanced/data-governance.md) settings:
+A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
+and execute the following command:
 
-- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
-- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+```bash
+configcat config-json get -p {YOUR-SDK-KEY} > config.json
+```
+
+(Depending on your [Data Governance](advanced/data-governance.md) settings, you may need to add the `--eu` switch.)
+
+Alternatively, you can download the config JSON manually, based on your [Data Governance](advanced/data-governance.md) settings:
+
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
 
 ```json
 {
-  "f": {
-    // list of feature flags & settings
-    "isFeatureEnabled": {
-      // key of a particular flag
-      "v": false, // default value, served when no rules are defined
-      "i": "430bded3", // variation id (for analytical purposes)
-      "t": 0, // feature flag's type, possible values:
-      // 0 -> BOOLEAN
-      // 1 -> STRING
-      // 2 -> INT
-      // 3 -> DOUBLE
-      "p": [
-        // list of percentage rules
+  "p": {
+    // hash salt, required only when sensitive text comparator(s) are used
+    "s": "80xCU/SlDz1lCiWFaxIBjyJeJecWjq46T4eu6GtozkM="
+  },
+  "s": [ // array of segments
+    {
+      "n": "Beta Users", // segment name
+      "r": [ // array of user conditions (there is a logical AND relation between the elements)
         {
-          "o": 0, // rule's order
-          "v": true, // value served when the rule is selected during evaluation
-          "p": 10, // % value
-          "i": "bcfb84a7" // variation id (for analytical purposes)
-        },
-        {
-          "o": 1, // rule's order
-          "v": false, // value served when the rule is selected during evaluation
-          "p": 90, // % value
-          "i": "bddac6ae" // variation id (for analytical purposes)
-        }
-      ],
-      "r": [
-        // list of targeting rules
-        {
-          "o": 0, // rule's order
-          "a": "Identifier", // comparison attribute
-          "t": 2, // comparator, possible values:
-          // 0  -> 'IS ONE OF',
-          // 1  -> 'IS NOT ONE OF',
-          // 2  -> 'CONTAINS',
-          // 3  -> 'DOES NOT CONTAIN',
-          // 4  -> 'IS ONE OF (SemVer)',
-          // 5  -> 'IS NOT ONE OF (SemVer)',
-          // 6  -> '< (SemVer)',
-          // 7  -> '<= (SemVer)',
-          // 8  -> '> (SemVer)',
-          // 9  -> '>= (SemVer)',
-          // 10 -> '= (Number)',
-          // 11 -> '<> (Number)',
-          // 12 -> '< (Number)',
-          // 13 -> '<= (Number)',
-          // 14 -> '> (Number)',
-          // 15 -> '>= (Number)',
-          // 16 -> 'IS ONE OF (Hashed)',
-          // 17 -> 'IS NOT ONE OF (Hashed)'
-          "c": "@example.com", // comparison value
-          "v": true, // value served when the rule is selected during evaluation
-          "i": "bcfb84a7" // variation id (for analytical purposes)
+          "a": "Email", // comparison attribute
+          "c": 0, // comparator (see below)
+          "l": [ // comparison value (see below)
+            "john@example.com", "jane@example.com"
+          ]
         }
       ]
+    }
+  ],
+  "f": { // key-value map of feature flags & settings
+    "isFeatureEnabled": { // key of a particular flag / setting
+      "t": 0, // setting type, possible values:
+              // 0 -> on/off setting (feature flag)
+              // 1 -> text setting
+              // 2 -> whole number setting
+              // 3 -> decimal number setting
+      "r": [ // array of targeting rules (there is a logical OR relation between the elements)
+        {
+          "c": [ // array of conditions (there is a logical AND relation between the elements)
+            {
+              "u": { // user condition
+                "a": "Email", // comparison attribute
+                "c": 2, // comparator, possible values and required comparison value types:
+                        // 0  -> IS ONE OF (cleartext) + string array comparison value ("l")
+                        // 1  -> IS NOT ONE OF (cleartext) + string array comparison value ("l")
+                        // 2  -> CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 3  -> NOT CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 4  -> IS ONE OF (semver) + semver string array comparison value ("l")
+                        // 5  -> IS NOT ONE OF (semver) + semver string array comparison value ("l")
+                        // 6  -> < (semver) + semver string comparison value ("s")
+                        // 7  -> <= (semver + semver string comparison value ("s")
+                        // 8  -> > (semver) + semver string comparison value ("s")
+                        // 9  -> >= (semver + semver string comparison value ("s")
+                        // 10 -> = (number) + number comparison value ("d")
+                        // 11 -> <> (number + number comparison value ("d")
+                        // 12 -> < (number) + number comparison value ("d")
+                        // 13 -> <= (number + number comparison value ("d")
+                        // 14 -> > (number) + number comparison value ("d")
+                        // 15 -> >= (number) + number comparison value ("d")
+                        // 16 -> IS ONE OF (hashed) + string array comparison value ("l")
+                        // 17 -> IS NOT ONE OF (hashed) + string array comparison value ("l")
+                        // 18 -> BEFORE (UTC datetime) + second-based Unix timestamp number comparison value ("d")
+                        // 19 -> AFTER (UTC datetime) + second-based Unix timestamp number comparison value ("d")
+                        // 20 -> EQUALS (hashed) + string comparison value ("s")
+                        // 21 -> NOT EQUALS (hashed) + string comparison value ("s")
+                        // 22 -> STARTS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 23 -> NOT STARTS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 24 -> ENDS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 25 -> NOT ENDS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 26 -> ARRAY CONTAINS ANY OF (hashed) + string array comparison value ("l")
+                        // 27 -> ARRAY NOT CONTAINS ANY OF (hashed) + string array comparison value ("l")
+                        // 28 -> EQUALS (cleartext) + string comparison value ("s")
+                        // 29 -> NOT EQUALS (cleartext) + string comparison value ("s")
+                        // 30 -> STARTS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 31 -> NOT STARTS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 32 -> ENDS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 33 -> NOT ENDS WITH ANY OF (cleartext + string array comparison value ("l")
+                        // 34 -> ARRAY CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 35 -> ARRAY NOT CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                "l": [ // comparison value - depending on the comparator, another type of value may need
+                       // to be specified (see above):
+                       // "s": string
+                       // "d": number
+                  "@example.com"
+                ]
+              }
+            },
+            {
+              "p": { // prerequisite flag condition
+                "f": "mainIntFlag", // key of prerequisite flag
+                "c": 0, // comparator, possible values: 0 -> EQUALS, 1 -> NOT EQUALS
+                "v": { // comparison value (value's type must match the prerequisite flag's type)
+                  "i": 42
+                }
+              }
+            },
+            {
+              "s": { // segment condition
+                "s": 0, // segment index, a valid index into the top-level segment array ("s")
+                "c": 1 // comparator, possible values: 0 -> IS IN SEGMENT, 1 -> IS NOT IN SEGMENT
+              }
+            }
+          ],
+          "s": { // alternatively, an array of percentage options ("p", see below) can also be specified
+            "v": { // the value served when the rule is selected during evaluation
+              "b": true
+            },
+            "i": "bcfb84a7"
+          }
+        }
+      ],
+      "p": [ // array of percentage options
+        {
+          "p": 10, // % value
+          "v": { // the value served when the percentage option is selected during evaluation
+            "b": true
+          },
+          "i": "bcfb84a7"
+        },
+        {
+          "p": 90,
+          "v": {
+            "b": false
+          },
+          "i": "bddac6ae"
+        }
+      ],
+      "v": { // fallback value, served when none of the targeting rules match,
+             // no percentage options are defined or evaluation of these is not possible
+        "b": false // depending on the setting type, another type of value may need to be specified:
+                   // text setting -> "s": string
+                   // whole number setting -> "i": number
+                   // decimal number setting -> "d": number
+      },
+      "i": "430bded3" // variation id (for analytical purposes)
     }
   }
 }
 ```
+
+For a more comprehensive specification of the config JSON v6 format, you may refer to [this JSON schema document](https://github.com/configcat/config-json/blob/main/V6/config.schema.json).
 
 ### Dictionary
 
@@ -579,11 +706,11 @@ Available log levels:
 Info level logging helps to inspect the feature flag evaluation process:
 
 ```bash
-ConfigCat.INFO  [5000] Evaluating 'isPOCFeatureEnabled'
-  Applying the first targeting rule that matches the User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","Custom":{"SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}}':
-    - rule: [IF User.Email CONTAINS '@something.com' THEN False] => no match
-    - rule: [IF User.Email CONTAINS '@example.com' THEN True] => MATCH, applying rule
-  Returning 'True' (VariationId: '9f21c24c').
+ConfigCat.INFO  [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
+  Evaluating targeting rules and applying the first match if any:
+  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'False' => no match
+  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'True' => MATCH, applying rule
+  Returning 'True'.
 ```
 
 Sample code on how to create a basic file logger implementation for ConfigCat client: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/FileLoggerSample.cs" target="_blank">See Sample Code</a>
