@@ -12,7 +12,7 @@ Every value marked with a \* in the table marks a technical limit. If you hit a 
 
 |                                                | Free    | Pro     | Smart   | Enterprise | Dedicated | Student | Teacher |
 | ---------------------------------------------- | ------- | ------- | ------- | ---------- | --------- | ------- | ------- |
-| Config JSON downloads (million)                | 5       | 25      | 250     | 1000       | 5000      | 25      | 5       |
+| Config JSON downloads (million)                | 5       | 25      | 250     | 1000       | 6000      | 25      | 5       |
 | Network traffic (per month)                    | 20GB    | 100GB   | 1TB     | 4TB        | 24TB      | 100GB   | 100GB   |
 | Products                                       | 1       | 3       | 1000\*  | 1000\*     | 1000\*    | 3       | 1000    |
 | Environments (per product)                     | 2       | 3       | 50\*    | 50\*       | 50\*      | 3       | 2       |
