@@ -219,8 +219,8 @@ The `details` result contains the following information:
 | `IsDefaultValue`                  | `bool`                               | True when the default value passed to `GetValueDetails()`/`GetValueDetailsAsync()` is returned due to an error. |
 | `ErrorMessage`                    | `string`                             | In case of an error, this field contains the error message.                                                     |
 | `ErrorException`                  | `Exception`                          | In case of an error, this field contains the related exception object (if any).                                 |
-| `MatchedTargetingRule`            | `ITargetingRule`                     | The targeting rule which was used to select the evaluated value (if any).                                       |
-| `MatchedPercentageOption`         | `IPercentageOption`                  | The percentage option which was used to select the evaluated value (if any).                                    |
+| `MatchedTargetingRule`            | `ITargetingRule`                     | The targeting rule (if any) that matched during the evaluation and was used to return the evaluated value.      |
+| `MatchedPercentageOption`         | `IPercentageOption`                  | The percentage option (if any) that was used to select the evaluated value.                                     |
 | `FetchTime`                       | `DateTime`                           | The last download time (UTC) of the current config.                                                             |
 
 ## User Object
