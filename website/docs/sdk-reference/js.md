@@ -258,8 +258,8 @@ The `details` result contains the following information:
 | `isDefaultValue`                  | `boolean`                       | True when the default value passed to `getValueDetailsAsync()` is returned due to an error. |
 | `errorMessage`                    | `string`                        | In case of an error, this field contains the error message.                                 |
 | `errorException`                  | `any`                           | In case of an error, this field contains the related exception object (if any).             |
-| `matchedEvaluationRule`           | `RolloutRule`                   | If the evaluation was based on a targeting rule, this field contains that specific rule.    |
-| `matchedEvaluationPercentageRule` | `RolloutPercentageItem`         | If the evaluation was based on a percentage rule, this field contains that specific rule.   |
+| `matchedTargetingRule`            | `ITargetingRule`                | The targeting rule (if any) that matched during the evaluation and was used to return the evaluated value. |
+| `matchedPercentageOption`         | `IPercentageOption`             | The percentage option (if any) that was used to select the evaluated value.                 |
 | `fetchTime`                       | `Date`                          | The last download time (UTC) of the current config.                                         |
 
 ## User Object
@@ -276,12 +276,12 @@ let userObject = new configcat.User('#UNIQUE-USER-IDENTIFIER#');
 let userObject = new configcat.User('john@example.com');
 ```
 
-| Parameters   | Description                                                                                                                                                          |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                                                            |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                                                            |
-| `custom`     | Optional `dictionary of strings` representing the custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| Parameters   | Description                                                                                                                     |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |
+| `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
+| `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
+| `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. E.g. User role, Subscription type. |
 
 For advanced targeting:
 
@@ -296,6 +296,46 @@ let userObject = new configcat.User(
   },
 );
 ```
+
+The `custom` dictionary also allows attribute values other than `string` values:
+
+```js
+let userObject = new configcat.User("#UNIQUE-USER-IDENTIFIER#");
+userObject.custom = {
+  Rating: 4.5,
+  RegisteredAt: new Date("2023-11-22T12:34:56.000Z"),
+  Roles: ["Role1", "Role2"]
+};
+```
+
+### User Object Attribute Types
+
+All comparators support `string` values as User Object attribute (in some cases they need to be provided in a specific format though, see below),
+but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
+
+**Text-based comparators** (EQUALS, IS ONE OF, etc.)
+* accept `string` values,
+* all other values are automatically converted to `string` (a warning will be logged but evaluation will continue as normal).
+
+**SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
+* accept `string` values containing a properly formatted, valid semver value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**Number-based comparators** (=, &lt;, &gt;=, etc.)
+* accept `number` values,
+* accept `string` values containing a properly formatted, valid `number` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**Date time-based comparators** (BEFORE / AFTER)
+* accept `Date` values, which are automatically converted to a second-based Unix timestamp,
+* accept `number` values representing a second-based Unix timestamp,
+* accept `string` values containing a properly formatted, valid `number` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
+* accept arrays of `string`,
+* accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
 
 ### Default user
 
@@ -517,13 +557,11 @@ const configCatClient = configcat.getClient(
 ### Setting log levels
 
 ```js
-const logger = configcat.createConsoleLogger(configcat.LogLevel.Info); // Setting log level to Info
-
 const configCatClient = configcat.getClient(
   '#YOUR-SDK-KEY#',
   configcat.PollingMode.AutoPoll,
   {
-    logger: logger,
+    logger: configcat.createConsoleLogger(configcat.LogLevel.Info) // Setting log level to Info
   },
 );
 ```
@@ -541,11 +579,11 @@ Available log levels:
 Info level logging helps to inspect the feature flag evaluation process:
 
 ```bash
-ConfigCat - INFO - [5000] Evaluate 'isPOCFeatureEnabled'
- User : {"identifier":"#SOME-USER-ID#","email":"configcat@example.com"}
- Evaluating rule: 'configcat@example.com' CONTAINS '@something.com' => no match
- Evaluating rule: 'configcat@example.com' CONTAINS '@example.com' => MATCH
- Returning value : true
+ConfigCat - INFO - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"#SOME-USER-ID#","Email":"configcat@example.com"}'
+  Evaluating targeting rules and applying the first match if any:
+  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'false' => no match
+  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'true' => MATCH, applying rule
+  Returning 'true'.
 ```
 
 ## `getAllKeysAsync()`
@@ -600,7 +638,7 @@ settingValues.forEach((details) => console.log(details));
 ## Snapshots and synchronous feature flag evaluation
 
 On JavaScript platforms, the _ConfigCat_ client provides only asynchronous methods for evaluating feature flags and settings
-because these operations may involve network communication (downloading config data from the ConfigCat CDN servers),
+because these operations may involve network communication (e.g. downloading config data from the ConfigCat CDN servers),
 which is necessarily an asynchronous operation in JavaScript.
 
 However, there may be use cases where synchronous evaluation is preferable, thus, since v8.1.0, the JavaScript SDK provides a way
@@ -623,6 +661,14 @@ for (const key of snapshot.getAllKeys()) {
   console.log(`${key}: ${value}`);
 }
 ```
+
+:::caution
+Please be aware that creating and using a snapshot will not update the local cache when the cached config data is expired.
+Also, if you use [shared caching](/docs/advanced/caching/#shared-cache), it will not make the SDK synchronize with
+the external cache either (since snapshots capture the config instance that is kept in the memory by the client).
+Because of this, it is best to use snapshots combined with Auto Polling mode. In this case the SDK takes care of refreshing
+the local cache in the background. In other polling modes, you need to manually refresh it by calling `forceRefreshAsync`.
+:::
 
 In Auto Poll mode, you can use the `waitForReady` method to wait for that latest config data to become available locally:
 
