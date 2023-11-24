@@ -269,9 +269,9 @@ User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
 };
 ```
 
-The set of allowed attribute values depends on the comparison type of the condition which references the User Object attribute.
-`string` values are supported by all comparison types (in some cases they need to be provided in a specific format though).
-Some of the comparison types work with other types of values, as described below.
+### User Object Attribute Types
+
+All comparators support `string` values as User Object attribute, but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
 
 **Text-based comparisons** (EQUALS, IS ONE OF, etc.)
 * accept `string` values,
