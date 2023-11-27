@@ -663,11 +663,11 @@ for (const key of snapshot.getAllKeys()) {
 ```
 
 :::caution
-Please be aware that creating and using a snapshot will not update the local cache when the cached config data is expired.
-Also, if you use [shared caching](/docs/advanced/caching/#shared-cache), it will not make the SDK synchronize with
-the external cache either (since snapshots capture the config instance that is kept in the memory by the client).
-Because of this, it is best to use snapshots combined with Auto Polling mode. In this case the SDK takes care of refreshing
-the local cache in the background. In other polling modes, you need to manually refresh it by calling `forceRefreshAsync`.
+Please note that when you create and utilize a snapshot, it won't refresh your local cache once the cached config data expires.
+Additionally, when working with [shared caching](/docs/advanced/caching/#shared-cache), creating a snapshot also doesn't
+trigger a sync with the external cache, since the snapshot only captures the config instance stored in the client's memory.
+Therefore, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically updates the local cache
+in the background. For other polling modes, you'll need to manually initiate a cache refresh by invoking `forceRefreshAsync`.
 :::
 
 In Auto Poll mode, you can use the `waitForReady` method to wait for that latest config data to become available locally:
