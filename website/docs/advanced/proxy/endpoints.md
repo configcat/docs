@@ -74,6 +74,31 @@ var configCatClient = configcat.getClient(
 );
 ```
 
+### Supported SDK Versions
+
+The following SDK versions are supported by the Proxy's CDN endpoint:
+
+|  SDK   | Version                                               |
+| ------ | ----------------------------------------------------- |
+| .NET   | [`<=v8.2.0`](https://github.com/configcat/.net-sdk/releases/tag/v8.2.0) ([`>=v9.0.0`](https://github.com/configcat/.net-sdk/releases/tag/v9.0.0) is not supported yet.) |
+| JS     | [`<=v8.1.1`](https://github.com/configcat/js-sdk/releases/tag/v8.1.1) ([`>=v9.0.0`](https://github.com/configcat/js-sdk/releases/tag/v9.0.0) is not supported yet.) |
+| JS SSR | [`<=v7.1.1`](https://github.com/configcat/js-ssr-sdk/releases/tag/v7.1.1) ([`>=v8.0.0`](https://github.com/configcat/js-ssr-sdk/releases/tag/v8.0.0) is not supported yet.) |
+| React  | [`<=v3.1.1`](https://github.com/configcat/react-sdk/releases/tag/v3.1.1) ([`>=v4.0.0`](https://github.com/configcat/react-sdk/releases/tag/v4.0.0) is not supported yet.) |
+| Node   | [`<=v10.1.1`](https://github.com/configcat/node-sdk/releases/tag/v10.1.1) ([`>=v11.0.0`](https://github.com/configcat/node-sdk/releases/tag/v11.0.0) is not supported yet.) |
+| Python | [`<=v9.0.0`](https://github.com/configcat/python-sdk/releases/tag/v9.0.0) ([`>=v10.0.0`](https://github.com/configcat/python-sdk/releases/tag/v10.0.0) is not supported yet.) |
+| C++     | [`<=v3.1.1`](https://github.com/configcat/cpp-sdk/releases/tag/v3.1.1)     |
+| Dart    | [`<=v3.0.0`](https://github.com/configcat/dart-sdk/releases/tag/3.0.0)     |
+| Elixir  | [`<=v3.0.0`](https://github.com/configcat/elixir-sdk/releases/tag/v3.0.0)  |
+| Go      | [`<=v8.0.1`](https://github.com/configcat/go-sdk/releases/tag/v8.0.1)      |
+| Java    | [`<=v8.4.0`](https://github.com/configcat/java-sdk/releases/tag/v8.4.0)    |
+| Android | [`<=v9.1.1`](https://github.com/configcat/android-sdk/releases/tag/v9.1.1) |
+| Kotlin  | [`<=2.0.0`](https://github.com/configcat/kotlin-sdk/releases/tag/2.0.0)    |
+| PHP     | [`<=v8.1.0`](https://github.com/configcat/php-sdk/releases/tag/v8.1.0)     |
+| Ruby    | [`<=v7.0.0`](https://github.com/configcat/ruby-sdk/releases/tag/v7.0.0)    |
+| Swift   | [`<=v10.0.0`](https://github.com/configcat/swift-sdk/releases/tag/v10.0.0) |
+
+We are continously working on the support of all new SDK versions.
+
 ### Available Options
 
 The following CDN Proxy related options are available:
