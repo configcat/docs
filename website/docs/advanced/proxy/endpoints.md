@@ -78,14 +78,14 @@ var configCatClient = configcat.getClient(
 
 The following SDK versions are supported by the Proxy's CDN endpoint:
 
-|  SDK   | Version                                               |
-| ------ | ----------------------------------------------------- |
-| .NET   | [`<=v8.2.0`](https://github.com/configcat/.net-sdk/releases/tag/v8.2.0) ([`>=v9.0.0`](https://github.com/configcat/.net-sdk/releases/tag/v9.0.0) is not supported yet.) |
-| JS     | [`<=v8.1.1`](https://github.com/configcat/js-sdk/releases/tag/v8.1.1) ([`>=v9.0.0`](https://github.com/configcat/js-sdk/releases/tag/v9.0.0) is not supported yet.) |
-| JS SSR | [`<=v7.1.1`](https://github.com/configcat/js-ssr-sdk/releases/tag/v7.1.1) ([`>=v8.0.0`](https://github.com/configcat/js-ssr-sdk/releases/tag/v8.0.0) is not supported yet.) |
-| React  | [`<=v3.1.1`](https://github.com/configcat/react-sdk/releases/tag/v3.1.1) ([`>=v4.0.0`](https://github.com/configcat/react-sdk/releases/tag/v4.0.0) is not supported yet.) |
-| Node   | [`<=v10.1.1`](https://github.com/configcat/node-sdk/releases/tag/v10.1.1) ([`>=v11.0.0`](https://github.com/configcat/node-sdk/releases/tag/v11.0.0) is not supported yet.) |
-| Python | [`<=v9.0.0`](https://github.com/configcat/python-sdk/releases/tag/v9.0.0) ([`>=v10.0.0`](https://github.com/configcat/python-sdk/releases/tag/v10.0.0) is not supported yet.) |
+|  SDK    | Version                                               |
+| ------- | ----------------------------------------------------- |
+| .NET    | [`<=v8.2.0`](https://github.com/configcat/.net-sdk/releases/tag/v8.2.0) ([`>=v9.0.0`](https://github.com/configcat/.net-sdk/releases/tag/v9.0.0) is not supported yet.) |
+| JS      | [`<=v8.1.1`](https://github.com/configcat/js-sdk/releases/tag/v8.1.1) ([`>=v9.0.0`](https://github.com/configcat/js-sdk/releases/tag/v9.0.0) is not supported yet.) |
+| JS SSR  | [`<=v7.1.1`](https://github.com/configcat/js-ssr-sdk/releases/tag/v7.1.1) ([`>=v8.0.0`](https://github.com/configcat/js-ssr-sdk/releases/tag/v8.0.0) is not supported yet.) |
+| React   | [`<=v3.1.1`](https://github.com/configcat/react-sdk/releases/tag/v3.1.1) ([`>=v4.0.0`](https://github.com/configcat/react-sdk/releases/tag/v4.0.0) is not supported yet.) |
+| Node    | [`<=v10.1.1`](https://github.com/configcat/node-sdk/releases/tag/v10.1.1) ([`>=v11.0.0`](https://github.com/configcat/node-sdk/releases/tag/v11.0.0) is not supported yet.) |
+| Python  | [`<=v8.0.1`](https://github.com/configcat/python-sdk/releases/tag/v8.0.1) ([`>=v9.0.0`](https://github.com/configcat/python-sdk/releases/tag/v9.0.0) is not supported yet.) |
 | C++     | [`<=v3.1.1`](https://github.com/configcat/cpp-sdk/releases/tag/v3.1.1)     |
 | Dart    | [`<=v3.0.0`](https://github.com/configcat/dart-sdk/releases/tag/3.0.0)     |
 | Elixir  | [`<=v3.0.0`](https://github.com/configcat/elixir-sdk/releases/tag/v3.0.0)  |
