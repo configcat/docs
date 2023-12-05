@@ -6,6 +6,10 @@ description: With percentage-based user targeting is a technique used in softwar
 
 Percentage-based targeting, also known as percentage rollouts or feature rollouts, is a technique used in software development and feature management to gradually release a new feature to a subset of users. Instead of releasing a feature to all users at once, a specific percentage of users are selected to receive access to the feature. This allows developers to control and monitor the impact of the new feature in a controlled manner.
 
+> mi ez?
+> miert jo?
+> pelda, vagy peldak
+
 ### Enable feature
 
 1. <a href="https://app.configcat.com/auth/login" target="_blank">Log in</a> to access the _Dashboard_
@@ -50,6 +54,8 @@ As the evaluation happens in the SDKs, your User's sensitive information will ne
 :::
 
 ### Example
+
+> ez legyen mashol valami advanced reszen
 
 Let's say you have two users and two different feature flags with percentage-based targeting.
 

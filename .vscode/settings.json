@@ -16,5 +16,6 @@
     "grammarly.userWords": [
         "ConfigCat",
         "authorTitle"
-    ]
+    ],
+    "editor.inlineSuggest.showToolbar": "onHover"
 }
