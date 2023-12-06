@@ -68,6 +68,9 @@ The following comparators assume that _Comparison attribute_ and _Comparison val
 Consider using Confidential text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
 :::
 
+> a comparatorkhoz kene pelda
+> es el kene magyarazni hogy a hashed az nagyobb config.json meretet eredmenyez, es nagyobb network trafficot. ha nem szenzitiv inkabb ne ezt hasznald.
+
 | Comparator                         | Description                                                                                |
 | ---------------------------------- | ------------------------------------------------------------------------------------------ |
 | EQUALS (cleartext)                 | It matches when the comparison attribute is equal to the comparison value.                 |
