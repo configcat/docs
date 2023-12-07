@@ -4,6 +4,27 @@ title: Segmentation & Segments
 description: Segments help you define user segments and assign them to your feature flags. Ideal for beta testing on a certain group of users.
 ---
 
+## What is a segment condition?
+
+A segment condition is a condition that is based on the evaluation of a segment. It is used to determine whether a targeting rule is a match or not for a specific user.
+
+## How does it work?
+
+The segment condition is evaluated with the same [User Object](TODO). The segment's value is then compared to the comparison value that you set on the Dashboard. If the segment's value is equal to the comparison value, the targeting rule is a match. Otherwise, the targeting rule is not a match.
+
+## How to add a segment condition?
+
+> TODO add steps and screenshot
+
+## Example
+
+> TODO add screenshot and explanation
+
+---
+> TODISCUSS talan az alabbi reszt egy kulon oldalon kene targyalni
+
+## What is a segment?
+
 Segments allow you to group your users based on any of their properties. This way you can
 define segments of your users and then assign them to specific feature flags. If you update a segment definition, it will update all
 feature flags that are assigned to it. You can think of segments as reusable targeting rules. If you have groups of users that you want to target regularly with
@@ -11,9 +32,13 @@ different features, it's a good idea to define a segment for each group.
 
 _For example, you can define a segment called "Beta Users" and assign that segment to all future features that you want to be available for beta users._
 
-You can define your segments on the [ConfigCat Dashboard](https://app.configcat.com/product/segments).
-
 One segment belongs to one product and can be used in multiple feature flags within the same product.
+
+## Where can I define segments?
+
+You can define your segments on the [ConfigCat Dashboard under the Segments tab](https://app.configcat.com/product/segments).
+
+> TODO add screenshot
 
 ## Anatomy of a Segment
 
