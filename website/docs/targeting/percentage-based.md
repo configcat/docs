@@ -4,11 +4,18 @@ title: Percentage-based Targeting
 description: With percentage-based user targeting is a technique used in software development and feature management to gradually release a new feature to a subset of users.
 ---
 
+```
+mi az a % alapú targetálás alias “% options”, mire jó, mit lehet vele elérni? - “…a specific percentage of users are selected to receive access to the feature. This allows developers to control and monitor the impact of the new feature in a controlled manner.”
+hol tud % options-t hozzáadni egy ff-hez a dashboardon
+hogyan működik nagy vonalakban? - csak amennyire egy product managernek értenie kell, kb:
+a csoportosítás egy user objectben beadott attibútumon alapul (defaultból ez a User.Identifier, de át lehet állítani ff szinten + hol lehet átállítani screenshottal)
+a csoportosítás véletlenszerű, de sticky (az, hogy a stickységet technikailag hogyan érjük el, az nem ide tartozik, max. egy link lenne a technikai leírásra)
+mi történik, ha nem adják be a % options kiértékeléséhez szükséges user attribútumot? (ilyenkor ff végén lévő fallback value lesz az eredmény)
+példa - dashboard screenshot egy feltétel nélküli % optionös ff-ről, rövid szöveges magyarázattal, pl. “ha a User.Identifierben ezt az X értéket adják be, akkor ebbe a csoportba kerül, ha azt az Y értéket, akkor meg abba a csoportba”
+```
+
 Percentage-based targeting, also known as percentage rollouts or feature rollouts, is a technique used in software development and feature management to gradually release a new feature to a subset of users. Instead of releasing a feature to all users at once, a specific percentage of users are selected to receive access to the feature. This allows developers to control and monitor the impact of the new feature in a controlled manner.
 
-> mi ez?
-> miert jo?
-> pelda, vagy peldak
 
 ### Enable feature
 

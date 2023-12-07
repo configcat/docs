@@ -4,52 +4,58 @@ title: Evaluation Sequence
 description: The evaluation sequence of the targeting rules.
 ---
 
-> Nev: Evaluation process, details of evaluation
->
-> mi tortenik amikor egy getValuet()-t meghiv valaki
-> linkeljuk a fogalmakat az overview-ben
->
-> ez technnikai resz, lehet bonyolultabb
-> 
-> peldakon keresztul mutassuk be a kiertekelest
->
-> 1. Boolean FF
-> Ha erre getvaluet hivsz akkor mi tortenik
-> ha hiba torenik akkor a default value megy vissza
-> (a tipusegyeztetes fontos: default value type -> ugyanaz mint a ff type)
->
-> https://docs.google.com/document/d/12DGGPe6r6HTEh25c33j0Raj322JyRIsAvpa0ljX0XdA/edit#heading=h.fb3lgx7nv9hl
->
-> https://docs.google.com/document/d/18zUhtRUeX8IR1cDyKygVi7n_nwKR8GkZjqqqljOjqjc/edit#heading=h.gjdgxs
->
->
-> 
+# Evaluation of a Setting
 
-Targeting rules are evaluated in the order they are defined in the ConfigCat Dashboard.
+This page provides a detailed description of how a setting is evaluated, that is, the steps and rules the SDK applies when determining the value of a setting during a `GetValue` call.
 
-Conditions and targeting rules are evaluated one by one, from top to bottom direction.
+The descriptions here are based on the fundamental concepts of [targeting](link-to-Targeting-Overview-page), so familiarity with these is necessary for understanding.
 
-:::tip
-You can change the order of targeting rules by dragging and dropping them in the ConfigCat Dashboard.
-:::
+The value of a setting is dependent on the following inputs:
+* Rules set on the dashboard,
+* The [User Object](link-to-User-Object-page) provided to the `GetValue` function, and
+* The default value given to the `GetValue` function.
 
-#### AND conditions
-To have a match in an AND condition, all the conditions must be met.
+The value of a setting is always supplied by precisely one rule according to the following algorithm:
 
-#### OR conditions
-If a targeting rule doesn't match, the evaluation will continue with the next targeting rule.
+1. If the setting contains targeting rules, the SDK examines each targeting rule in order, from top to bottom, to see if it matches, i.e., if the conditions specified in its IF part are met.
+   * If so, the THEN part determines the value of the setting and returns it. (In cases of a Percentage option in the THEN part, it might be impossible to determine the value if the user attribute used for the percentage is not provided. In such cases, even if the targeting rule matches, the SDK moves to the next targeting rule, or to point 2, and continues the evaluation.)
+   * If not, the SDK moves to the next targeting rule, or if there are no more, to point 2.
+2. If the setting contains a % option rule, the SDK determines the setting value according to the algorithm described in [Evaluation of percentage options](#link), and then returns it. (Here too, if the user attribute used for the percentage is not provided, the SDK jumps to point 3 and continues the evaluation.)
+3. When the evaluation process reaches this point, only one "rule" remains: the simple value specified at the end of the setting. Thus, the evaluation concludes, and the SDK returns this value.
 
-### Served value
-The value defined in the targeting rule will be served if the targeting rule matches. You can add percentage-based values to the targeting rules.
+In cases where any unexpected error occurs during the evaluation, the result will be the default value provided to the `GetValue` function.
 
-### To all other
+## Evaluation of a Targeting Rule
 
-This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) is not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
+The SDK examines each targeting rule in order, from top to bottom, to see if the conditions specified in its IF part are met. A condition's evaluation can have three possible outcomes: true, false, or cannot evaluate.
 
+Cannot evaluate occurs when the user attribute referenced in the condition is not provided (either no User Object is given to the `GetValue` function, or the User Object does not contain the specified attribute) or if the user attribute contains an invalid/incorrectly formatted value. (The SDK also notifies about such cases through warning-level log messages.)
 
+A targeting rule matches only if every condition's result is true. In all other cases, the targeting rule does not match.
 
+### Evaluation of a User Condition
 
+The SDK takes the attribute specified by the comparison attribute from the User Object, then performs the comparison operation as defined by the selected comparator on the obtained value and the comparison value set on the dashboard. This operation results in a true/false logical value. This is the result of the condition.
 
+However, if the user attribute referenced by the comparison attribute is not provided or contains a value not matching the expected type/format of the comparator, the comparison operation cannot be performed, resulting in a cannot evaluate outcome.
+
+### Evaluation of a Prerequisite Condition
+
+The SDK first evaluates the selected prerequisite flag as if it were a separate setting. It uses the same User Object for this evaluation as was provided for the evaluation of the dependent setting.
+
+This evaluation always provides a result, which the SDK compares with the comparison value set on the dashboard according to the selected comparator. This operation results in a true/false logical value. This is the result of the condition.
+
+(If an unexpected error occurs during the evaluation of the prerequisite flag, the entire evaluation process is halted, and the SDK will return the default value.)
+
+### Evaluation of a Segment Condition
+
+The SDK first takes the condition specified in the segment. Essentially, this is a user condition, which is evaluated in the same way as a regular user condition.
+
+If the result of the user condition is true and the selected comparator is IS IN SEGENT, or the user condition result is false and the comparator is IS NOT IN SEGMENT, then the result of the segment condition will be true.
+
+If the result of the user condition is false and the selected comparator is IS IN SEGMENT, or the user condition result is true and the comparator is IS NOT IN SEGMENT, then the result of the segment condition will be false.
+
+Otherwise, if the result of the user condition is cannot evaluate, then the result of the segment condition will also be cannot evaluate.
 
 
 ---

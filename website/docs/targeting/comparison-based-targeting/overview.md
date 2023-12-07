@@ -4,6 +4,19 @@ title: Overview
 description: Targeting allows you to define targeting rules for feature flags. This way you can target a specific user group with a specific feature.
 ---
 
+Comparison-based Targeting
+Overview
+- mi az az összehasonlítás alapú targetálás alias “targeting rule”, mire jó, mit lehet vele elérni? - “Using this feature you will be able to set different setting values for different users in your application [based on the conditions you specify]…”
+- hol tud targeting rule-t hozzáadni egy ff-hez a dashboardon
+- hogyan működik nagy vonalakban? - csak amennyire egy product managernek értenie kell, kb:
+  - OR kapcsolat van közöttük, azaz felülről lefelé az első match fog érvényesülni
+  - két része van: IF és THEN
+    - az IF részben vannak a conditionök, amik között AND kapcsolat van, azaz mindegyiknek igazra kell kiértékelődni, hogy a targeting rule matcheljen
+    - a THEN rész mondja meg, hogy milyen értéket kap a user, amikor matchel rá a targeting rule (lehet egyszerű érték, vagy % options + hol lehet % options-t hozzáadni a targeting rule-hoz a dashboardon)
+  - mi történik, ha nem adják be a targeting rule kiértékeléséhez szükséges user attribútumot? (ilyenkor ugrunk a köv. rule-ra, ill. ha nincs több, akkor a feltétel nélküli % optionsre, ill. ha nincs olyan, akkor a ff végén lévő fallback value lesz az eredmény)
+- hogyan lehet átrendezni a sorrendet (“Multiple targeting rules and ordering” rész a jelenlegi doksiban)
+- példa - dashboard screenshot egy legalább 2 targeting rule-os ff-ről (jó, ha AND condition is van benne), rövid szöveges magyarázattal, pl. “ha a User.Emailben ezt az X értéket adják be, akkor ez a targeting rule matchel, és ez lesz az kiszolgált érték, ha ezt az Y értéket, akkor pedig az a targeting rule matchel, …”
+
 > ezt mar user condition nek hivjuk
 > condition based targeting
 > targetig rule overview - IF resze , THEN resze
