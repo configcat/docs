@@ -13,19 +13,19 @@ module.exports = {
         'advanced/data-governance',
         {
           'Targeting': [
-            'advanced/targeting/overview',
-            'advanced/targeting/percentage',
+            'targeting/overview',
+            'user-object',
+            'targeting/percentage-based',
             {
-              'Condition-based Targeting': [
-                'advanced/targeting/targeting',
-                'advanced/targeting/prerequisite',
-                'advanced/targeting/segments',
+              'Comparison-based Targeting': [
+                'targeting/targeting',
+                'targeting/prerequisite',
+                'targeting/segments',
               ],
             },
-            'advanced/targeting/evaluation-sequence',
+            'targeting/evaluation-sequence',
           ],
         },
-        'advanced/user-object',
         'advanced/public-api',
         'advanced/caching',
         {
