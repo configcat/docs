@@ -12,7 +12,7 @@ The descriptions here are based on the fundamental concepts of [targeting](link-
 
 The value of a setting is dependent on the following inputs:
 * Rules set on the dashboard,
-* The [User Object](link-to-User-Object-page) provided to the `GetValue` function, and
+* The [User Object](TODO) provided to the `GetValue` function, and
 * The default value given to the `GetValue` function.
 
 The value of a setting is always supplied by precisely one rule according to the following algorithm:
@@ -57,7 +57,93 @@ If the result of the user condition is false and the selected comparator is IS I
 
 Otherwise, if the result of the user condition is cannot evaluate, then the result of the segment condition will also be cannot evaluate.
 
+## Evaluation of Percentage Options
 
+The percentage-based targeting is sticky by design and consistent across all SDKs.
+
+Percentage-based targeting by default is based on the identifier of the `User Object` passed to the SDK's `getValue()` methods.
+The SDKs are hashing the concatenated value of the `User Object's` `identifier` and the requested feature flag's `Key`. Then they assign a 0-99 number to the User for a specific feature flag. This number is used to evaluate a particular feature flag's value based on the targeting rules.
+This number is fix and consistent for each User across all SDKs. The SDKs check if the assigned number is greater or less than the percentage set on the ConfigCat Dashboard.
+
+:::caution
+As not only the User's identifier is hashed but the User's identifier concatenated with the evaluated feature flag's key, we can ensure that you won't test on the same user base for all of your feature flags.
+:::
+
+:::info
+As the evaluation happens in the SDKs, your User's sensitive information will never leave your system. The data flow is unidirectional (only from ConfigCat CDN servers to your SDKs), and ConfigCat doesn't receive or store any of the User Object's attributes passed to the SDKs.
+:::
+
+### Example for percentage-based targeting
+
+Let's say you have two users and two different feature flags with percentage-based targeting.
+
+|      | isTwitterSharingEnabled                                                                 | isFacebookSharingEnabled                                                                  |
+| ---- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Jane | `hash('Jane' + 'isTwitterSharingEnabled') mod 100` <br/>-> The assigned number is **8** | `hash('Jane' + 'isFacebookSharingEnabled') mod 100` <br/>-> The assigned number is **64** |
+| Joe  | `hash('Joe' + 'isTwitterSharingEnabled') mod 100` <br/>-> The assigned number is **32** | `hash('Joe' + 'isFacebookSharingEnabled') mod 100` <br/>-> The assigned number is **12**  |
+
+1. Let's start with both feature flags set to **0% ON / 100% OFF**.
+
+|      | isTwitterSharingEnabled <br/> 0% ON / 100% OFF | isFacebookSharingEnabled <br/> 0% ON / 100% OFF |
+| ---- | ---------------------------------------------- | ----------------------------------------------- |
+| Jane | 8 >= 0 <br/>-> **OFF**                         | 64 >= 0 <br/>-> **OFF**                         |
+| Joe  | 32 >= 0 <br/>-> **OFF**                        | 12 >= 0 <br/>-> **OFF**                         |
+
+2. Let's set both feature flags to **10% ON / 90% OFF**.
+
+|      | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
+| ---- | ---------------------------------------------- | ----------------------------------------------- |
+| Jane | 8 < 10 <br/>-> **ON**                          | 64 >= 10 <br/>-> **OFF**                        |
+| Joe  | 32 >= 10 <br/>-> **OFF**                       | 12 >= 10 <br/>-> **OFF**                        |
+
+:::caution
+Although both feature flags are set to 10% ON / 90% OFF, Jane is only evaluated to **ON** for the `isTwitterSharingEnabled` feature flag.
+:::
+
+3. The Twitter Sharing Feature seems alright, so let's increase the `isTwitterSharingEnabled` to **40% ON / 60% OFF**.
+
+|      | isTwitterSharingEnabled <br/> 40% ON / 60% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
+| ---- | ---------------------------------------------- | ----------------------------------------------- |
+| Jane | 8 < 40 <br/>-> **ON**                          | 64 >= 10 <br/>-> **OFF**                        |
+| Joe  | 32 < 40 <br/>-> **ON**                         | 12 >= 10 <br/>-> **OFF**                        |
+
+4. Something seems strange with the Twitter Sharing Feature, so let's rollback to the safe **10% ON / 90% OFF**.
+
+|      | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
+| ---- | ---------------------------------------------- | ----------------------------------------------- |
+| Jane | 8 < 10 <br/>-> **ON**                          | 64 >= 10 <br/>-> **OFF**                        |
+| Joe  | 32 >= 10 <br/>-> **OFF**                       | 12 >= 10 <br/>-> **OFF**                        |
+
+> As percentage-based targeting is sticky, the same user base is evaluated to **ON** like in the 2. step.
+
+5. If everything seems alright, we can safely increase both feature flags to **100% ON / 0% OFF**.
+
+|      | isTwitterSharingEnabled <br/> 100% ON / 0% OFF | isFacebookSharingEnabled <br/> 100% ON / 0% OFF |
+| ---- | ---------------------------------------------- | ----------------------------------------------- |
+| Jane | 8 < 100 <br/>-> **ON**                         | 64 < 100 <br/>-> **ON**                         |
+| Joe  | 32 < 100 <br/>-> **ON**                        | 12 < 100 <br/>-> **ON**                         |
+
+# Examples
+
+## Simple feature flag
+
+[Egy kőegyszerű ff kiértékelésének bemutatása]
+
+## Percentage options
+
+[Egy egyszerű percentage optionsös ff-en a %-os elosztás működésének bemutatása - ide jöhetne ez: https://configcat.com/docs/advanced/targeting/#example-1]
+
+## Targeting rules with AND conditions
+
+[Egy egyszerűbb, 2 targeting rule-os ff-en az OR és AND kapcsolatok működésének bemutatása]
+
+## Segment condition
+
+[Segment condition kiértékelésének bemutatása]
+
+## Prerequisite flag condition
+
+[Prerequisite flag condition kiértékelésének bemutatása]
 ---
 
 
@@ -141,30 +227,3 @@ Ha a user condition eredménye false és a kiválasztott comparator IS IN SEGMEN
 a kiválasztott comparator IS NOT IN SEGMENT, akkor a segment condition eredménye false lesz.
 
 Egyébként, ha a user condition eredménye cannot evaluate, akkor a segment condition eredménye is cannot evaluate lesz.
-
-## Evaluation of percentage options
-
-[Ide jönne a % alapú csoportba osztás algoritmusának leírása (https://configcat.com/docs/advanced/targeting/#stickiness--consistency)
-azzal a kiegészítéssel, hogy a %-olás alapja most már lehet más is, nem csak a User.Identifier]
-
-# Examples
-
-## Simple feature flag
-
-[Egy kőegyszerű ff kiértékelésének bemutatása]
-
-## Percentage options
-
-[Egy egyszerű percentage optionsös ff-en a %-os elosztás működésének bemutatása - ide jöhetne ez: https://configcat.com/docs/advanced/targeting/#example-1]
-
-## Targeting rules with AND conditions
-
-[Egy egyszerűbb, 2 targeting rule-os ff-en az OR és AND kapcsolatok működésének bemutatása]
-
-## Segment condition
-
-[Segment condition kiértékelésének bemutatása]
-
-## Prerequisite flag condition
-
-[Prerequisite flag condition kiértékelésének bemutatása]
