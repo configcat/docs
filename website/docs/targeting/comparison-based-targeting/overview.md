@@ -1,6 +1,6 @@
 ---
-id: targeting
-title: Comparison-based Targeting Overview (Targeting Rules)
+id: overview
+title: Overview
 description: Targeting allows you to define targeting rules for feature flags. This way you can target a specific user group with a specific feature.
 ---
 
@@ -14,8 +14,6 @@ description: Targeting allows you to define targeting rules for feature flags. T
 > ebben legyen h OR kapcsolat van koztuk
 >
 > IF reszben legyen leirva hogy ezek kozott AND kapcsolat van
-
-Using this feature you will be able to set different setting values for different users in your application. Let's say you would like to enable a feature only for the users within your company or only to a small percentage of your users before releasing it to the entire world.
 
 ## Targeting specific users
 

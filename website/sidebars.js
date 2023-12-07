@@ -14,13 +14,14 @@ module.exports = {
         {
           'Targeting': [
             'targeting/overview',
-            'user-object',
+            'targeting/user-object',
             'targeting/percentage-based',
             {
               'Comparison-based Targeting': [
-                'targeting/targeting',
-                'targeting/prerequisite',
-                'targeting/segments',
+                'targeting/comparison-based-targeting/overview',
+                'targeting/comparison-based-targeting/user-targeting',
+                'targeting/comparison-based-targeting/prerequisite',
+                'targeting/comparison-based-targeting/segments',
               ],
             },
             'targeting/evaluation-sequence',

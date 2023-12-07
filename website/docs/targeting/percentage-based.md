@@ -1,5 +1,5 @@
 ---
-id: percentage
+id: percentage-based
 title: Percentage-based Targeting
 description: With percentage-based user targeting is a technique used in software development and feature management to gradually release a new feature to a subset of users.
 ---

@@ -1,6 +1,6 @@
 ---
 id: evaluation-sequence
-title: Targeting Rule Evaluation Sequence
+title: Evaluation Sequence
 description: The evaluation sequence of the targeting rules.
 ---
 
