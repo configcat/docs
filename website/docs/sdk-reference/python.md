@@ -409,8 +409,7 @@ The SDK can load your feature flag & setting overrides from a file.
 #### File
 
 ```python
-client = configcatclient.get(
-    sdk_key='#YOUR-SDK-KEY#',
+client = configcatclient.get('#YOUR-SDK-KEY#',
     ConfigCatOptions(
         flag_overrides=LocalFileFlagOverrides(
             file_path='path/to/the/local_flags.json',  # path to the file
@@ -690,8 +689,7 @@ dictionary = {
     'stringSetting': 'test'
 }
 
-client = configcatclient.get(
-    sdk_key='#YOUR-SDK-KEY#',
+client = configcatclient.get('#YOUR-SDK-KEY#',
     ConfigCatOptions(
         flag_overrides=LocalDictionaryFlagOverrides(source=dictionary, override_behaviour=OverrideBehaviour.LocalOnly)
     )
