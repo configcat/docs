@@ -24,7 +24,7 @@ module.exports = {
                 'targeting/comparison-based-targeting/segments',
               ],
             },
-            'targeting/evaluation-sequence',
+            'targeting/setting-evaluation',
           ],
         },
         'advanced/public-api',
