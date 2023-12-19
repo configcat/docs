@@ -4,13 +4,6 @@ title: Targeting Overview
 description: Overview of the ConfigCat targeting feature with examples.
 ---
 
-```
-alapfogalmak, linkekkel a részletesebb leírásokra - User Object + a feature flag felépítése (l. Catnip terminology doksi: https://docs.google.com/document/d/1_ebnJRu16dd90RsMrr_C3HOWdTtXWZ-e0t2qyoBjggU)
-
-hogy néz ki egy targetinges feature flag a dashboardon? + screenshot segítségével megmutatni, hogy a fogalmakhoz kapcsolódó dolgokat hol találja a dashboardon
-egy pár mondat arról, hogy programozói oldalon mit kell csinálni, hogy működjön a targeting (ill. ha ez már le van írva máshol részletesebben, átlinkelni oda) + vsz. érdemes lenne egy dashboard screenshotos példát is adni hozzá: “ha van egy ilyen X ff-ed a dashboardon, akkor a programozóidnak ezeknek az Y user attribútumoknak a beadásáról kell gondoskodnia”
-```
-
 Using this feature you will be able to set different setting values for different users in your application. Let's say you would like to enable a feature only for the users within your company or only to a small percentage of your users before releasing it to the entire world.
 
 ## How does it work?
@@ -20,6 +13,7 @@ Using this feature you will be able to set different setting values for differen
 3. ConfigCat will use the User Object and the Targeting Rule to determine which features are enabled for the user.
 
 ## What is what?
+*TODO - new screenshot*
 ![Targeting Overview](../../static/assets/targeting/targeting.png)
 
 ### Feature Flag / Setting
@@ -48,7 +42,18 @@ A percentage option is a value that is served to a specific percentage of users.
 
 A fallback value is a value that is served to users who are not matched by any targeting rule. Or serves as a fallback value if a [User Object](TODO) is not given. More about fallback values [here](TODO).
 
+### User Object
+
+A user object is a collection of user attributes that can be used to target users. More about user objects [here](TODO).
+
+
+
 ## Examples
+
+*TODO - come up with new examples and screenshots*
+
+*TODO - Have a code example in parallel with the screenshots*
+
 This is the simplest feature flag you can create. It is enabled for everyone.
 ![Basic Feature Flag](../../static/assets/targeting/basic.png)
 
@@ -57,5 +62,3 @@ This feature flag is enabled for everyone whose email address ends with `@exampl
 
 This is a more complex feature flag. It is enabled for everyone whose email address ends with `@example.com` AND the OS is `iOS or Android`. This flag is also enabled for everyone who is among the `Beta Users` segment. Read more about segments [here](segments.md).
 ![Complex Feature Flag](../../static/assets/targeting/complex.png)
-
-> 
