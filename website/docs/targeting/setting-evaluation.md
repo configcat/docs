@@ -1,10 +1,10 @@
 ---
-id: evaluation-sequence
-title: Evaluation Sequence
-description: The evaluation sequence of the targeting rules.
+id: setting-evaluation
+title: Setting Evaluation
+description: This document offers an in-depth guide on how the SDK determines the value of a setting.
 ---
 
-# Evaluation of a Setting
+# Setting Evaluation
 
 This document offers an in-depth guide on how the SDK determines the value of a setting when the `GetValue` call is made. Understanding this process requires prior knowledge of targeting concepts.
 
