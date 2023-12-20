@@ -380,6 +380,8 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 
 - **Remote over local** (`OverrideBehavior.REMOTE_OVER_LOCAL`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
 
+### Map
+
 You can set up the SDK to load your feature flag & setting overrides from a `Map<String, Any>`.
 
 ```kotlin
@@ -398,6 +400,43 @@ val client = ConfigCatClient("localhost") {
     }
 }
 ```
+
+### Settings
+
+You can set up the SDK to load your feature flag & setting overrides from a `Map<String, Setting>`.
+
+```kotlin
+val client = ConfigCatClient("localhost") {
+    flagOverrides = {
+        behavior = OverrideBehavior.LOCAL_ONLY
+        dataSource = OverrideDataSource.settings(
+          mapOf(
+            "noRuleOverride" to Setting("noRule", 1, emptyList(), emptyList(), "myVariationId"),
+            "ruleOverride" to Setting(
+              "noMatch",
+              1,
+              emptyList(),
+              listOf(
+                RolloutRule("ruleMatch", "Identifier", 2, "@example", "ruleVariationId")
+              ),
+              "myVariationId"
+            ),
+            "percentageOverride" to Setting(
+              "noMatch",
+              1,
+              listOf(
+                PercentageRule("A", 75.0, "percentageAVariationID"),
+                PercentageRule("B", 25.0, "percentageAVariationID")
+              ),
+              emptyList(),
+              "myVariationId"
+            )
+          )
+        )
+    }
+}
+```
+
 
 ## `getAllKeys()`
 
