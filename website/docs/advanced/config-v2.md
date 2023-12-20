@@ -6,14 +6,7 @@ description: Config V2 is the next generation of ConfigCat. It comes with a new 
 
 Config V2 is a new version of ConfigCat. It comes with a new dashboard, API, SDKs, and features.
 
-[Here](TODO) is how to migrate from Config V1 to Config V2.
-
-## What's new in Config V2?
-
-AND conditions: add more complex targeting rule sets to your feature flags.
-Prerequisite flags: feature flags are now able to depend on each other.
-Targeting rule notes: add notes to targeting rules to navigate better in complex rule sets.
-New comparators: create date based targeting rules and schedule releases, compare arrays etc. - see the docs
+[See the detailed guide on how to migrate from Config V1 to Config V2.](TODO)
 
 ## AND conditions
 
@@ -32,3 +25,9 @@ With prerequisite flags, you can create feature flags that depend on other featu
 With targeting rule hints, you can add hints to targeting rules to navigate better in complex rule sets.
 
 > TODO add screenshot
+
+## New comparators
+
+With the new comparators, you can create date based targeting rules and schedule releases, compare arrays etc.
+
+> TODO list new comparators

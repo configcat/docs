@@ -6,6 +6,8 @@ description: A detailed guide on how to migrate from Config V1 to Config V2.
 
 This guide will help you migrate from Config V1 to Config V2.
 
+[See the supported SDK versions.](TODO)
+
 > legyen kulona config v2 leiras es a migracios doksi
 
 > mi az a Config V2?
