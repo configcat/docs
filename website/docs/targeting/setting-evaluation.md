@@ -58,7 +58,7 @@ If the user condition is `indeterminable (cannot evaluate)`, so is the segment c
 
 Percentage options are designed to be consistent and sticky across all SDKs, ensuring a reliable experience.
 
-This approach primarily relies by default on the identifier (this can be changed to any attribute) from the [User Object](TODO) provided to the SDK's `getValue()` function. Here's how it works:
+This approach primarily relies by default on the identifier ([this can be changed to any attribute](TODO)) from the [User Object](TODO) provided to the SDK's `getValue()` function. Here's how it works:
 - The SDKs create a hash from the combination of the [User Object](TODO)'s attribute and the specific feature flag's `Key`.
 - This hash process assigns a unique 0-99 number to each User for a specific feature flag.
 - The assigned number determines the user's eligibility for a feature flag based on the percentage options set on the Dashboard.

@@ -46,8 +46,6 @@ A fallback value is a value that is served to users who are not matched by any t
 
 A user object is a collection of user attributes that can be used to target users. More about user objects [here](TODO).
 
-
-
 ## Examples
 
 *TODO - come up with new examples and screenshots*
