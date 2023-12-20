@@ -4,7 +4,36 @@ title: News & Product Updates
 description: Instead of spamming your mailbox, we're posting news and product updates here.
 ---
 
-Instead of spamming your mailbox, we're posting news and product updates here.
+Here, you'll find all the latest updates, enhancements, and new features we've added to our service. Stay tuned to this page to keep up with all the latest news from ConfigCat!
+
+<!-- This page must be in sync with the news page in the dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html -->
+
+## ConfigCat Proxy Beta
+
+#### Nov 17, 2023
+
+We're happy to share that the ConfigCat Proxy is now in the Beta phase and we need your help to make it even better!
+
+📚 Want to learn more about the ConfigCat Proxy? Get all the details <a href="https://configcat.com/docs/advanced/proxy/proxy-overview" target="_blank" rel="noopener noreferrer">here</a>.
+
+🔧 We'd like to invite you to participate in the beta testing. If you're interested, join the dedicated **#configcat-proxy-beta** channel in our <a href="https://configcat.com/slack" target="_blank" rel="noopener noreferrer">Slack Community</a>. 
+Share your experiences, ask questions, and collaborate with our team and fellow community members.
+
+## New cleartext comparators in Segments
+
+#### Oct 26, 2023
+
+ConfigCat now supports two new cleartext comparators: IS ONE OF and IS NOT ONE OF.
+
+![New cleartext comparators](/assets/news/isoneofcleartext.png)
+
+These new comparators allow you to check if a given value is part of a list or not. This is in addition to the hashed confidential versions that were previously available.
+
+## Unique tag names
+
+#### Oct 4, 2023
+
+Now, tag names within a product must be unique. This new feature ensures better organization and avoids any potential confusion with colliding tag names.
 
 ## Manage Permission Groups with Terraform
 
@@ -493,4 +522,4 @@ It is out!
 
 - [Ruby SDK Docs](https://configcat.com/docs/sdk-reference/ruby/)
 - [GitHub repo](https://github.com/configcat/ruby-sdk)
-- [Blog post](https://configcat.com/blog/2019/10/29/ruby/)
+- [Blog post](https://configcat.com/blog/2019/10/29/ruby-sdk/)

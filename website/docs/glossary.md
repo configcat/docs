@@ -12,17 +12,17 @@ An alphabetical list of terms used around feature management and software develo
 
 A/B testing is a method of comparing two versions of a product or feature to determine which one performs better. A/B testing is a form of controlled experimentation.
 
-#### Alpha Testing
+#### [Alpha Testing](/glossary/alpha-testing/)
 
 Alpha testing examines a product's functionality and compliance with the business requirements through the initial end-to-end testing.
 
 ## B
 
-#### Beta Testing
+#### [Beta Testing](/glossary/beta-testing/)
 
 Testing in the beta phase allows users to discover any issues or bugs before a general release by using a product in a real-world environment.
 
-#### Blue/Green Deployment
+#### [Blue/Green Deployment](/glossary/blue-green-deployment/)
 
 Blue/Green deployments offer near-zero downtime and rollback capabilities. The concept of a blue/green deployment involves switching traffic between two identical environments running different versions of your application.
 
@@ -36,7 +36,7 @@ A Canary Release is a type of progressive delivery where a small percentage of u
 
 Canary testing is a software deployment technique where updates or new features are rolled out to a small, carefully selected subset of users before being released to the entire user base, to test and ensure their effectiveness and safety.
 
-#### CI/CD Pipeline
+#### [CI/CD Pipeline](/glossary/ci-cd-pipeline)
 
 A Continuous Integration and Continuous Deployment pipeline (CI/CD) is a set of steps that must be followed to deliver a new software version to customers.
 
@@ -48,7 +48,7 @@ A continuous delivery process enables changes - including new features, configur
 
 Continuous Deployment is a process where any code changes brought to an application are released automatically into the production environment.
 
-#### Continuous Integration
+#### [Continuous Integration](/glossary/continuous-integration/)
 
 Continuous Integration refers to the regular merging of code changes into a central repository, followed by automated builds and tests.
 
@@ -62,7 +62,7 @@ A Dark Launch is rolled out stealthily by first releasing a feature to a subset 
 
 A Developer Advocate is a person whose job is to help developers be successful with a platform or a technology and to speak (or write) on their behalf.
 
-#### DevOps Engineer
+#### [DevOps Engineer](/glossary/devops-engineer/)
 
 The DevOps Engineer is responsible for the development and maintenance of the infrastructure and the deployment of the software. The DevOps Engineer is also responsible for the monitoring and maintenance of the software and the infrastructure.
 
@@ -82,7 +82,7 @@ A feature branch is a copy of the main codebase where an individual or team of s
 
 A feature flag is a toggle used to activate or deactivate specific features you may have in your application without redeploying code.
 
-#### Feature Testing
+#### [Feature Testing](/glossary/feature-testing/)
 
 An experiment to determine which version of a feature offers the best user experience is called a Feature Test.
 
@@ -127,7 +127,7 @@ A kill switch is a mechanism that can be used to quickly disable a feature or an
 
 ## M
 
-#### Multi Armed Bandit
+#### [Multi Armed Bandit](/glossary/multi-armed-bandit/)
 
 The Multi-Armed Bandit (MAB) is a machine learning framework that involves an agent making selections, referred to as "arms," with the goal of maximizing its long-term cumulative reward
 
@@ -137,7 +137,7 @@ The Multi-Armed Bandit (MAB) is a machine learning framework that involves an ag
 
 ## P
 
-#### Product Lifecycle Manager
+#### [Product Lifecycle Manager](/glossary/product-lifecycle-manager/)
 
 The role of a product lifecycle manager is to supervise the project team and ensure timely completion of each stage in the lifecycle of a project.
 
@@ -161,11 +161,11 @@ Rails feature flags are conditional coding elements used in Ruby on Rails applic
 
 React feature flags are conditional codes used in React.js applications to enable or disable certain features dynamically, allowing for controlled release, testing, and customization of software functionalities.
 
-#### Release Manager
+#### [Release Manager](/glossary/release-manager/)
 
 A release manager is an IT professional responsible for defining and executing the software release process within a company, ensuring smooth deployment and high quality releases.
 
-#### Remote Configuration
+#### [Remote Configuration](/glossary/remote-configuration/)
 
 Remote configuration is a software development technique that allows you to modify certain features of an app remotely without having to deploy a new version of the app.
 
@@ -179,7 +179,7 @@ Ring deployment is a form of gradual rollout where new features are released gra
 
 A site reliability engineer (SRE) is a professional in the field of information technology who uses automation tools to monitor the reliability of software in a live production environment.
 
-#### Smoke Test
+#### [Smoke Testing](/glossary/smoke-testing/)
 
 Smoke testing is a type of testing done early in the software development process to confirm that the most critical features of an application are functioning correctly.
 
@@ -195,7 +195,9 @@ The Software Development Life Cycle (SDLC) is a systematic approach aimed at pro
 
 Software as a Service (SaaS) is a cloud-based delivery model where applications are hosted and maintained by a service provider and accessed by users over the internet, typically on a subscription basis.
 
+#### [Staging Environment](glossary/what-is-a-staging-environment.md)
 
+A staging environment is a dry run for your code under the closest possible parameters to its real-world application. It is a near-perfect replica of the servers, infrastructure, architecture, and application of the actual use environment of your code. The key difference is that it is completely walled off from the front-facing actual environment.
 
 ## T
 
@@ -203,7 +205,7 @@ Software as a Service (SaaS) is a cloud-based delivery model where applications 
 
 Testing in production is the practice of evaluating software in its live environment, with real users and real-world conditions. Unlike traditional testing in controlled settings, this approach exposes the software to actual usage scenarios, uncovering issues that may be missed otherwise. However, it requires vigilant monitoring and quick problem resolution to minimize user impact.
 
-#### Type I and Type II Errors
+#### [Type I and Type II Errors](/glossary/type-i-and-type-ii-errors/)
 
 A Type I error occurs when the null hypothesis is incorrectly rejected while it is actually true, while a Type II error occurs when the null hypothesis is wrongly not rejected while it is actually false.
 
@@ -219,7 +221,7 @@ User Acceptance Testing (UAT) is a stage in software development where the softw
 
 ## V
 
-#### Version Control
+#### [Version Control](/glossary/version-control/)
 
 Version control, also referred to as source control or revision control, is a crucial software development practice that tracks and manages changes to code and other files, and is closely linked to source code management.
 

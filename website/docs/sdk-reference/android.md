@@ -618,7 +618,7 @@ Also, we recommend using [confidential targeting comparators](/advanced/targetin
 
 ## Sample App
 
-<a href="https://github.com/configcat/android-sdk/tree/master/samples/android" target="_blank">Android App with auto polling and change listener</a>
+<a href="https://github.com/configcat/android-sdk/tree/master/samples" target="_blank">Android App with auto polling and change listener</a>
 
 ## Guides
 

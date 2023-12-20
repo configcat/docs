@@ -74,6 +74,31 @@ var configCatClient = configcat.getClient(
 );
 ```
 
+### Supported SDK Versions
+
+The following SDK versions are supported by the Proxy's CDN endpoint:
+
+|  SDK    | Version                                               |
+| ------- | ----------------------------------------------------- |
+| .NET    | [`<=v8.2.0`](https://github.com/configcat/.net-sdk/releases/tag/v8.2.0) ([`>=v9.0.0`](https://github.com/configcat/.net-sdk/releases/tag/v9.0.0) is not supported yet.) |
+| JS      | [`<=v8.1.1`](https://github.com/configcat/js-sdk/releases/tag/v8.1.1) ([`>=v9.0.0`](https://github.com/configcat/js-sdk/releases/tag/v9.0.0) is not supported yet.) |
+| JS SSR  | [`<=v7.1.1`](https://github.com/configcat/js-ssr-sdk/releases/tag/v7.1.1) ([`>=v8.0.0`](https://github.com/configcat/js-ssr-sdk/releases/tag/v8.0.0) is not supported yet.) |
+| React   | [`<=v3.1.1`](https://github.com/configcat/react-sdk/releases/tag/v3.1.1) ([`>=v4.0.0`](https://github.com/configcat/react-sdk/releases/tag/v4.0.0) is not supported yet.) |
+| Node    | [`<=v10.1.1`](https://github.com/configcat/node-sdk/releases/tag/v10.1.1) ([`>=v11.0.0`](https://github.com/configcat/node-sdk/releases/tag/v11.0.0) is not supported yet.) |
+| Python  | [`<=v8.0.1`](https://github.com/configcat/python-sdk/releases/tag/v8.0.1) ([`>=v9.0.0`](https://github.com/configcat/python-sdk/releases/tag/v9.0.0) is not supported yet.) |
+| C++     | [`<=v3.1.1`](https://github.com/configcat/cpp-sdk/releases/tag/v3.1.1)     |
+| Dart    | [`<=v3.0.0`](https://github.com/configcat/dart-sdk/releases/tag/3.0.0)     |
+| Elixir  | [`<=v3.0.0`](https://github.com/configcat/elixir-sdk/releases/tag/v3.0.0)  |
+| Go      | [`<=v8.0.1`](https://github.com/configcat/go-sdk/releases/tag/v8.0.1)      |
+| Java    | [`<=v8.4.0`](https://github.com/configcat/java-sdk/releases/tag/v8.4.0)    |
+| Android | [`<=v9.1.1`](https://github.com/configcat/android-sdk/releases/tag/v9.1.1) |
+| Kotlin  | [`<=2.0.0`](https://github.com/configcat/kotlin-sdk/releases/tag/2.0.0)    |
+| PHP     | [`<=v8.1.0`](https://github.com/configcat/php-sdk/releases/tag/v8.1.0)     |
+| Ruby    | [`<=v7.0.0`](https://github.com/configcat/ruby-sdk/releases/tag/v7.0.0)    |
+| Swift   | [`<=v10.0.0`](https://github.com/configcat/swift-sdk/releases/tag/v10.0.0) |
+
+We are continously working on the support of all new SDK versions.
+
 ### Available Options
 
 The following CDN Proxy related options are available:
@@ -133,7 +158,7 @@ CONFIGCAT_HTTP_CDN_PROXY_CORS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the next (<code>allowed_origins</code>) option.</td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
 </tr>
 
 <tr>
@@ -164,7 +189,70 @@ CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://d
 </td>
 <td>-</td>
 <td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
-When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+When there's no matching request origin and the <code>allowed_origins_regex</code> option is not set, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  cdn_proxy:
+    cors:
+      allowed_origins_regex:
+        patterns:
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.
+</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  cdn_proxy:
+    cors:
+      allowed_origins_regex:
+        if_no_match: https://domain1.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1.com"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Required when the previous <code>patterns</code> option is set. It's value is used in the <code>Access-Control-Allow-Origin</code> header when an incoming request's <code>Origin</code> doesn't match with any previously configured regex patterns.</td>
 </tr>
 
 <tr>
@@ -396,7 +484,7 @@ CONFIGCAT_HTTP_API_CORS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the next (<code>allowed_origins</code>) option.</td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
 </tr>
 
 <tr>
@@ -427,7 +515,70 @@ CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://domain2
 </td>
 <td>-</td>
 <td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
-When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+When there's no matching request origin and the <code>allowed_origins_regex</code> option is not set, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    cors:
+      allowed_origins_regex:
+        patterns:
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.
+</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    cors:
+      allowed_origins_regex:
+        if_no_match: https://domain1.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1.com"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Required when the previous <code>patterns</code> option is set. It's value is used in the <code>Access-Control-Allow-Origin</code> header when an incoming request's <code>Origin</code> doesn't match with any previously configured regex patterns.</td>
 </tr>
 
 <tr>
@@ -651,7 +802,7 @@ CONFIGCAT_HTTP_SSE_CORS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the next (<code>allowed_origins</code>) option.</td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
 </tr>
 
 <tr>
@@ -682,7 +833,68 @@ CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://domain2
 </td>
 <td>-</td>
 <td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
-When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+When there's no matching request origin and the <code>allowed_origins_regex</code> option is not set, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    cors:
+      allowed_origins_regex:
+        patterns:
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.<br/>The <code>if_no_match</code> option is mandatory if this option is used.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    cors:
+      allowed_origins_regex:
+        if_no_match: https://domain1.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1.com"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Required when the previous <code>patterns</code> option is set. It's value is used in the <code>Access-Control-Allow-Origin</code> header when an incoming request's <code>Origin</code> doesn't match with any previously configured regex patterns.</td>
 </tr>
 
 <tr>

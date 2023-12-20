@@ -8,11 +8,12 @@ module.exports = {
   favicon: 'img/favicon.png',
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.
-  plugins: [require.resolve('docusaurus-plugin-image-zoom'), 
+  plugins: [
+    require.resolve('docusaurus-plugin-image-zoom'),
     [
       '@docusaurus/plugin-google-tag-manager',
       {
-        containerId: 'GTM-K2RKTZS',
+        containerId: 'GTM-5LP6XWS5',
       },
     ],
     'docusaurus-plugin-sass',
@@ -23,10 +24,15 @@ module.exports = {
           {
             to: '/sdk-reference/dotnet',
             from: '/sdk-reference/csharp',
-          }
+          },
         ],
       },
     ],
+    // ['./src/plugins/smartlook',
+    //   {
+    //     smartlookKey: '05d0e4ca90c61150955104a9d4b76ab16a0b2380',
+    //   }
+    // ],
   ],
   themeConfig: {
     image: '/img/docs-cover.png',
@@ -116,6 +122,10 @@ module.exports = {
             {
               label: 'Blog',
               href: 'https://configcat.com/blog/',
+            },
+            {
+              label: 'Subscription Plan Limits',
+              href: '/subscription-plan-limits/',
             },
           ],
         },
