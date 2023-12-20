@@ -11,7 +11,7 @@ This table shows which SDK versions already support Config V2.
 | .NET                            | v9.0.0  | https://github.com/configcat/.net-sdk/releases                  |
 | C++                             | -       | https://github.com/configcat/cpp-sdk/releases                   |
 | Dart (Flutter)                  | -       | https://github.com/configcat/dart-sdk/releases                  |
-| Elixir                          | -       | https://github.com/configcat/elixir-sdk                         |
+| Elixir                          | -       | https://github.com/configcat/elixir-sdk/releases                |
 | Go                              | -       | https://github.com/configcat/go-sdk/releases                    |
 | Java                            | -       | https://github.com/configcat/java-sdk/releases                  |
 | Java (Android)                  | -       | https://github.com/configcat/android-sdk/releases               |
@@ -19,9 +19,9 @@ This table shows which SDK versions already support Config V2.
 | JavaScript (Chromium Extension) | v2.0.0  | https://github.com/configcat/js-chromium-extension-sdk/releases |
 | JavaScript (React)              | v4.0.0  | https://github.com/configcat/react-sdk/releases                 |
 | JavaScript (SSR)                | v8.0.0  | https://github.com/configcat/js-ssr-sdk/releases                |
-| Kotlin Multiplatform            | -       | https://github.com/configcat/kotlin-sdk                         |
+| Kotlin Multiplatform            | -       | https://github.com/configcat/kotlin-sdk/releases                |
 | Node.js                         | v11.0.0 | https://github.com/configcat/node-sdk/releases                  |
 | PHP                             | -       | https://github.com/configcat/php-sdk/releases                   |
 | Python                          | v9.0.0  | https://github.com/configcat/python-sdk/releases                |
 | Ruby                            | -       | https://github.com/configcat/ruby-sdk/releases                  |
-| Swift (iOS)                     | -       | https://github.com/configcat/swift-sdk                          |
+| Swift (iOS)                     | -       | https://github.com/configcat/swift-sdk/releases                 |
