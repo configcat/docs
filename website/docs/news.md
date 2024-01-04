@@ -8,6 +8,16 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 <!-- This page must be in sync with the news page in the dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html -->
 
+## ConfigCat OpenFeature Providers available
+
+#### Jan 5, 2024
+
+OpenFeature now supports ConfigCat via dedicated providers for their SDKs. So if you prefer using ConfigCat via the OpenFeature API, you can now do so with the following providers:
+
+- [ConfigCat OpenFeature Provider for Java](https://github.com/open-feature/java-sdk-contrib/tree/main/providers/configcat)
+- [ConfigCat OpenFeature Provider for Go](https://github.com/open-feature/go-sdk-contrib/tree/main/providers/configcat)
+- [ConfigCat OpenFeature Provider for JavaScript](https://github.com/open-feature/js-sdk-contrib/tree/main/libs/providers/config-cat)
+
 ## ConfigCat Proxy Beta
 
 #### Nov 17, 2023
