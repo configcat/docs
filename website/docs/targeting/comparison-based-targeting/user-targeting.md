@@ -52,7 +52,7 @@ There are 3 predefined attributes. Additionally, you can define your **_custom a
 | `Email`                   | The e-mail address of your user.                                                     |
 | `Identifier`              | Usually a unique user identifier in your application.                                |
 | `Country`                 | Might come in useful for testing a new feature only in one country.                  |
-| `Custom`                  | **_Define any attribute (e.g. `OS version`), by typing its name into the textbox._** |
+| `Custom`                  | Define any attribute (e.g. `OS version`), by typing its name into the textbox. |
 
 ### Comparison value
 
@@ -123,7 +123,7 @@ const userObject = {
 const value = configCatClient.getValue(key, defaultValue, callback, userObject);
 ```
 
-Support for confidential comparators was introduced in these SDK versions:
+Support for confidential comparators was introduced in the following SDK versions:
 
 | SDK     | Version                                                                |
 | ------- | ---------------------------------------------------------------------- |

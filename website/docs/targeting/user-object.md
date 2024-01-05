@@ -8,7 +8,9 @@ The _User Object_ is an optional parameter when getting a feature flag or settin
 It allows you to pass potential [Targeting rule](advanced/targeting.md) variables to the ConfigCat SDK.
 And represents a user in your application.
 
-> The _User Object_ is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+:::info
+The _User Object_ is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+:::
 
 ## The relationship between User Object and Targeting rules
 
@@ -54,10 +56,9 @@ var isEnabled = client.GetValue("myAwesomeFeature", false, user);
 
 Keeping your user data safe was one of our main goals when designing ConfigCat. The main concept here is that the ConfigCat SDK which connects your application to our servers never pushes any data to the ConfigCat servers. It pulls only configs and targeting rules.
 
-> Feature Flag and Setting **evaluation is on the Client** side within the ConfigCat SDK. This means that your **user data will never leave your system**.
-
-This allows you to create targeting rules based on sensitive data.
-You can double-check the above since all the <a href="https://github.com/configcat" target="_blank">ConfigCat SDKs are open source and on GitHub.</a>
+:::info
+Feature Flag and Setting **evaluation is on the Client** side within the [ConfigCat SDKs](https://github.com/configcat). This means that **any sensitive data passed to ConfigCat will never leave your system**.
+:::
 
 ## User Object's structure
 

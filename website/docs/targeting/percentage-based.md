@@ -27,11 +27,13 @@ The grouping is random and based on the [User Object](TODO)'s identifier by defa
 - **Sticky** means that the same user will always get the same value for a specific feature flag.
 - **Consistent** means that the same user will always get the same value for a specific feature flag across all SDKs.
 
-If the required attribute is not present in the [User Object](TODO), the fallback value will be served.
+If the required attribute is not present in the [User Object](TODO), the [fallback value](TODO) will be served.
 
 Read more about the technical details of the [percentage evaluation here](TODO).
 
 Percentage-based targeting consists of **% value** and the **Served value** pairs.
+
+*TODO - add screenshot*
 
 ### % value
 
@@ -59,7 +61,7 @@ When the Setting Kind is _Text_, _Whole Number_, or _Decimal Number_ the maximum
 
 ### All other cases
 
-This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
+This value will be served as a fallback if none of the above rules apply or a [User Object](advanced/user-object.md) was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
 
 ## Percentage options based on other User Attributes
 
