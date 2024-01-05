@@ -234,4 +234,4 @@ The exact value that will be served to the users who match the targeting rule. D
 
 ### Multiple targeting rules, ordering and evaluation sequence
 
-See the [Targeting Rule Evaluation Sequence](TODO) page.
+See the [Setting Evaluation](TODO) page.

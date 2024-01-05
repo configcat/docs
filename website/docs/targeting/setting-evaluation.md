@@ -12,7 +12,7 @@ The setting's value is influenced by:
 
 - Rules established on the Dashboard,
 - The [User Object](TODO) provided to the `GetValue` function, and
-- The default value assigned in the `GetValue` function.
+- The `default value` assigned in the `GetValue` function.
 
 The setting's value is derived from exactly one rule, following this algorithm:
 
@@ -80,7 +80,9 @@ The default attribute used for percentage evaluation is the [User Object](TODO)'
 
 ### Example Scenarios for Percentage-Based Targeting
 
-Imagine you have two users, Jane and Joe, and you're experimenting with two different feature flags that use percentage-based targeting.
+Imagine you have two users, Jane and Joe, and you're experimenting with two different feature flags (`isTwitterSharingEnabled` and `isFacebookSharingEnabled`) that use percentage-based targeting. In these scenarios, we see how percentage-based targeting allows for a controlled and gradual rollout of features, ensuring a smooth transition for users like Jane and Joe.
+
+First, the users are assigned a number between 0-99 based on the hash of their identifier and the feature flag's key. This number determines their eligibility for a feature flag based on the percentage options set on the Dashboard.
 
 |      | isTwitterSharingEnabled                                                   | isFacebookSharingEnabled                                                    |
 | ---- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
@@ -95,17 +97,18 @@ Imagine you have two users, Jane and Joe, and you're experimenting with two diff
 | Joe  | 32 >= 0 <br/>-> **OFF**                        | 12 >= 0 <br/>-> **OFF**                         |
 
 2. **Adjustment to 10% ON / 90% OFF**
+In this case both feature flags are enabled for only 10% of users.
 
 |      | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |
 | Jane | 8 < 10 <br/>-> **ON**                          | 64 >= 10 <br/>-> **OFF**                        |
 | Joe  | 32 >= 10 <br/>-> **OFF**                       | 12 >= 10 <br/>-> **OFF**                        |
 
-:::caution
-Notice how, despite both feature flags being set to 10% ON / 90% OFF, Jane is only enabled for the `isTwitterSharingEnabled` feature flag.
+:::info
+Despite both feature flags being set to 10% ON / 90% OFF, Jane is only enabled for the `isTwitterSharingEnabled` feature flag. Because Jane and Joe have different identifiers, they're assigned different numbers, which determines their eligibility for each feature flag.
 :::
 
-3. **Increasing `isTwitterSharingEnabled` to 40% ON / 60% OFF**
+1. **Increasing `isTwitterSharingEnabled` to 40% ON / 60% OFF**
 
 |      | isTwitterSharingEnabled <br/> 40% ON / 60% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |
@@ -113,22 +116,22 @@ Notice how, despite both feature flags being set to 10% ON / 90% OFF, Jane is on
 | Joe  | 32 < 40 <br/>-> **ON**                         | 12 >= 10 <br/>-> **OFF**                        |
 
 4. **Rolling Back to a Safer 10% ON / 90% OFF**
+> Same setup as in Step 2.
+There are cases when you want to roll back a feature flag to a safer state. In this case, you can simply change the percentage options to 10% ON / 90% OFF. The sticky nature of percentage-based targeting ensures that the same user base is served **ON** as in Step 2, not another random 10% of users.
 
 |      | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |
 | Jane | 8 < 10 <br/>-> **ON**                          | 64 >= 10 <br/>-> **OFF**                        |
 | Joe  | 32 >= 10 <br/>-> **OFF**                       | 12 >= 10 <br/>-> **OFF**                        |
 
-> The sticky nature of percentage-based targeting ensures that the same user base is toggled **ON** as in step 2.
-
 5. **Final Step: Moving to 100% ON / 0% OFF**
+
+After testing the feature flags, you can safely move them to 100% ON. This ensures that all users are receiving the features.
 
 |      | isTwitterSharingEnabled <br/> 100% ON / 0% OFF | isFacebookSharingEnabled <br/> 100% ON / 0% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |
 | Jane | 8 < 100 <br/>-> **ON**                         | 64 < 100 <br/>-> **ON**                         |
 | Joe  | 32 < 100 <br/>-> **ON**                        | 12 < 100 <br/>-> **ON**                         |
-
-In these scenarios, we see how percentage-based targeting allows for a controlled and gradual rollout of features, ensuring a smooth transition for users like Jane and Joe.
 
 
 # Examples - TODO
