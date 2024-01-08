@@ -16,9 +16,12 @@ To establish gRPC connections, you'll need the protobuf and the gRPC <a target="
 ```protobuf title="flag_service.proto"
 syntax = "proto3";
 
+option go_package = "github.com/configcat/configcat-proxy/grpc/proto";
+
 package configcat;
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 
 // Service that contains feature flag evaluation procedures.
 service FlagService {
@@ -44,7 +47,7 @@ message EvalRequest {
   // The feature flag's key to evaluate.
   string key = 2;
   // The user object.
-  map<string, string> user = 3;
+  map<string, UserValue> user = 3;
 }
 
 // Feature flag evaluation response message.
@@ -83,6 +86,21 @@ message RefreshRequest {
   // The SDK identifier.
   string sdk_id = 1;
 }
+
+// Defines the possible values that can be set in the `user` map.
+message UserValue {
+  oneof value {
+    double number_value = 1;
+    string string_value = 2;
+    google.protobuf.Timestamp time_value = 3;
+    StringList string_list_value = 4;
+  }
+}
+
+// Represents a list of strings.
+message StringList {
+  repeated string values = 1;
+}
 ```
 
 In order to secure the gRPC communication with the Proxy, set up [TLS](/advanced/proxy/proxy-overview#tls).
@@ -119,7 +137,7 @@ defer cancel()
 resp, err := client.EvalFlag(ctx, &proto.EvalRequest{
     SdkId: "my_sdk", 
     Key: "<flag-key>", 
-    User: map[string]string{"Identifier": "<user-id>"}
+    User: map[string]*proto.UserValue{"Identifier": {Value: &proto.UserValue_StringValue{StringValue: "<user-id>"}}}
 })
 if err != nil {
     panic(err)

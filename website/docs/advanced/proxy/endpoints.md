@@ -317,7 +317,7 @@ CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*do
 <td>-</td>
 <td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
 When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
-<br/>The <code>if_no_match</code> option is mandatory if this option is used.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.<br/>When using the environment variable, the regex escape character must be doubled (<code>\\</code>) because it's parsed as a JSON list and <code>\</code> is also a JSON escape character.
 </td>
 </tr>
 
@@ -399,12 +399,14 @@ This endpoint evaluates a single feature flag identified by a `key` with the giv
   "key": "<feature-flag-key>",
   "user": {
     "Identifier": "<user-id>",
-    "Email": "<user-email>",
-    "Country": "<user-country>",
+    "Rating": 4.5,
+    "Roles": ["Role1","Role2"],
     // any other attribute
   }
 }
 ```
+
+The type of the `user` object's fields can only be `string`, `number`, or `string[]`.
 
 **Responses**:
 <ul className="responses">
@@ -437,14 +439,17 @@ This endpoint evaluates all feature flags with the given [user object](/advanced
 **Request body**:
 ```json
 {
+  "key": "<feature-flag-key>",
   "user": {
     "Identifier": "<user-id>",
-    "Email": "<user-email>",
-    "Country": "<user-country>",
+    "Rating": 4.5,
+    "Roles": ["Role1","Role2"],
     // any other attribute
   }
 }
 ```
+
+The type of the `user` object's fields can only be `string`, `number`, or `string[]`.
 
 **Responses**:
 <ul className="responses">
@@ -643,7 +648,7 @@ CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\
 <td>-</td>
 <td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
 When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
-<br/>The <code>if_no_match</code> option is mandatory if this option is used.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.<br/>When using the environment variable, the regex escape character must be doubled (<code>\\</code>) because it's parsed as a JSON list and <code>\</code> is also a JSON escape character.
 </td>
 </tr>
 
@@ -769,10 +774,10 @@ This endpoint subscribes to a single flag's changes. Whenever the watched flag's
 ```js title="example.js"
 const rawData = {
   key: "<feature-flag-key>",
-  user: {
+  user: { // field types can only be `string`, `number`, or `string[]`.
     Identifier: "<user-id>",
-    Email: "<user-email>",
-    Country: "<user-country>",
+    Rating: 4.5,
+    Roles: ["Role1","Role2"],
     // any other attribute
   }
 }
@@ -821,10 +826,10 @@ This endpoint subscribes to all feature flags' changes behind the given [SDK ide
 **Example**:
 ```js title="example.js"
 const rawData = {
-  user: {
+  user: { // field types can only be `string`, `number`, or `string[]`.
     Identifier: "<user-id>",
-    Email: "<user-email>",
-    Country: "<user-country>",
+    Rating: 4.5,
+    Roles: ["Role1","Role2"],
     // any other attribute
   }
 }
@@ -960,7 +965,8 @@ CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\
 </td>
 <td>-</td>
 <td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
-When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.<br/>The <code>if_no_match</code> option is mandatory if this option is used.</td>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.<br/>The <code>if_no_match</code> option is mandatory if this option is used.<br/>When using the environment variable, the regex escape character must be doubled (<code>\\</code>) because it's parsed as a JSON list and <code>\</code> is also a JSON escape character.
+</td>
 </tr>
 
 <tr>
