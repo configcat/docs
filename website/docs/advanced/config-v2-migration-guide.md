@@ -8,23 +8,20 @@ This guide will help you migrate from Config V1 to Config V2.
 
 [See the supported SDK versions.](TODO)
 
-> legyen kulona config v2 leiras es a migracios doksi
+## What is Config V2?
 
-> mi az a Config V2?
-> mien mas mint a V1?
-> uj dashboard, uj api, uj sdk, uj **feature**-ek, uj config json schema (v6), lehet linkelni a github repora amiben a json schema van
-> feature-oket leirni,
+Config V2 is the next generation of ConfigCat. It comes with a new dashboard, API, SDKs, and features. It's not backward compatible with Config V1. Read more about the new features in the [Config V2 Overview](TODO).
 
-> a regi configokban nem lehet az uj feature-eket hasznalni
-> ha az uj feature-eket hasznalod akkor uj configot kell letrehozni vagy a regit konvertalni
-> a migracio utan megmarad a v1 es parhuzamosan letezik a v2 config is
-> nincsennek hatassal egymasra, valtozasok nem szinkronizalodnak
-> v1 et adddig hasznalod amig csak akrod
->
+## A few considerations before migrating
+
+- Config V2 and V1 are completely separate. They don't affect each other in any way. You can use them side by side.
+- Every newly created config is a V2 config.
+- You can migrate your V1 configs to V2. That will mean that a V1 and a V2 version of your config will be available at the same time. The V2 version will have a new SDK key for each environment.
+- There is no automatic sync between the V1 and V2 configs. You have to manually update the V2 config if you make changes to the V1 config and vice versa.
+- Once started it's recommended to migrate your V1 configs to V2 as quickly as possible to avoid confusion.
+- There is no pressure to migrate. You can stay on V1 for a long time.
 
 ## Migrating from Config V1 to Config V2
-
-> lehet hogy kene egy pelda
 
 ### Step 1: Create the V2 config
 
@@ -37,30 +34,20 @@ It's important to note that the V2 config was created with the same settings as 
 
 In your application, update the ConfigCat SDK to the latest version. Old versions of the SDK will not be able to access the new config. Make sure you update every application that uses the migrated config.
 
-> mutatni az SDK minimum verziokat egy tablazatban, make sure you have ...
+Here is a list of the SDKs that support Config V2: [See the supported SDK versions.](advanced/config-v2-sdk-support-table.md)
 
 ### Step 3: Update the ConfigCat SDK Key
 
-In your application, update the ConfigCat SDK Key to the one that belongs to the V2 config. The new key can be found on the ConfigCat Dashboard on the V2 config's page.
+In your application, update the ConfigCat SDK Key to the one that belongs to the V2 config in every environment. The new key can be found on the ConfigCat Dashboard on the V2 config's page.
 
-> sdk kety update minden envben
->
-> Step 4: deployolja ki es varja meg amig a userei atallnak 
->
-> migracio statuszat tudja nezni, ezt az oldalt linkelni
+### Step 4: Deploy your application
 
-### Step 4: Clean up
+Deploy your application to production and wait until all your users are migrated to the new config. You can check the [migration status](TODO) on the ConfigCat Dashboard on the V2 config's page.
 
-> amokor mar a regi konfigokra nincs behivas egy jo ideje, akkor kitorolheti oket
->ne pusholjuk oket
-> vigyazzz a regi configokat nem lehet visszaallitani
+### Step 5: Clean up
 
-After you've updated all your applications to use the V2 config, you can delete the V1 config. You can check the config JSON download trends page to see if there are any applications that still access the V1 config.
+Once you are sure that all your users are migrated (no downloads on the V1 configs for a long while) to the new config, you can delete the V1 config. This will prevent confusion and accidental use of the old config.
 
-> Of course, the new SDKs have to be backward compatible with the old V1 Dashboard. But the new V2 Dashboard will not be compatible with the old SDKs. This will be an important aspect during the migration.
-Basically, there will be V1 and V2 configs. At first, the current, V1 versions will be there and your applications will download the config.json from the V1 version.
-You will be able to migrate your V1 configs to V2. That will mean that a V1 and a V2 version of your config will be available at the same time. The V2 version will have a new SDK key for each environment. The V2 SDK keys will have a new format too, making them easy to distinguish.
-You'll have to update the SDK in your applications and replace the SDK keys to the V2 ones (for each of your environments). This way you'll be able to gradually switch to the new UI and the new SDKs.
-When you'll be ready with the migration, you will have to delete the V1 config (to prevent confusions).
-So during the migration you'll have a V1 and a V2 config next to each other. The whole migration process won't be a must have. If you want it, you'll be able to stay on the V1 config for a long time (we don't have a short or even a long term ETA for stopping supporting the V1 UI). e.g. For your production stuff you can stay on V1 for a while and start using the V2 UI for only new configs. And if you think you are ready to migrate with your production stuff, you'll be able to start the process anytime.
-This applies to the Beta as well. You'll be able to stay on V1 for your production stuff, while testing the new features with a new Config.
+:::caution
+Once you delete the V1 config, you won't be able to restore it.
+:::

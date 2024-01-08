@@ -69,4 +69,6 @@ By default the percentage-based targeting is based on the User's `Identifier` at
 
 You can change the evaluation attribute by clicking the 3 dots on the top right corner of the feature flag and select the **Change percentage attribute** option.
 
+### How to change the percentage attribute?
+
 *TODO - add screenshot*

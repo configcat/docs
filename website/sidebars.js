@@ -10,6 +10,13 @@ module.exports = {
         'organization',
       ],
       Guides: [
+        {
+          'Config V2': [
+            'advanced/config-v2',
+            'advanced/config-v2-migration-guide',
+            'advanced/config-v2-sdk-support-table',
+          ],
+        },
         'advanced/data-governance',
         {
           'Targeting': [
@@ -84,7 +91,6 @@ module.exports = {
         'advanced/notifications-webhooks',
         'advanced/troubleshooting',
         'advanced/cli',
-        // 'advanced/config-v2-migration-guide',
         {
           'Scan & Upload Code References': [
             {

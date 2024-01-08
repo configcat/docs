@@ -155,4 +155,3 @@ After testing the feature flags, you can safely move them to 100% ON. This ensur
 ## Prerequisite flag condition
 
 [Prerequisite flag condition kiértékelésének bemutatása]
----

@@ -10,11 +10,11 @@ description: Targeting allows you to define targeting rules for feature flags. T
 
 Comparison-based targeting allows you to define targeting rules for feature flags. This way you can target a specific user group with a specific feature. Using this feature you will be able to set different feature flag or setting values for different users in your application (based on the conditions you specify).
 
-## How to add a targeting rule?
+## How to add a Targeting Rule?
 
 *TODO - add screenshot and steps*
 
-## How does it work? - Anatomy of a targeting rule
+## How does it work? - Anatomy of a Targeting Rule
 
 A targeting rule has two parts: the IF part and the THEN part.
 

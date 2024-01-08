@@ -5,11 +5,7 @@ description: User Object attribute-based targeting (user condition)
 ---
 
 ```
-User Object attribute-based targeting
-mi az a User Object attribute comparison condition alias “user condition”, mire jó, mit lehet vele elérni? - “egy olyan feltétel, ami egy user attribútum és a dashboardon megadott érték összehasonlításán alapul, stb.”
-hol tud user conditiont hozzáadni egy targeting rule-hoz a dashboardon
-hogyan működik nagy vonalakban? - csak amennyire egy product managernek értenie kell, kb. az ami a jelenlegi doksiban is van: “comparison attribute”, “comparator”, “comparison value”
-példa screenshottal, rövid szöveges magyarázattal
+TODISCUSS User Object attribute-based targeting
 ```
 ## What is a user condition?
 
@@ -217,12 +213,6 @@ The following comparators assume that _Comparison attribute_ and _Comparison val
 
 ### Served value
 
-> ez tud lenni % based is, link a % based 
->
-> a kivalasztott userek halmazan alkaalmaz egy eloszlast
->
-> a mukodese ugyanaz mint a % based targetingnek
-
 The exact value that will be served to the users who match the targeting rule. Depending on the kind of your setting this could be:
 
 | Setting Kind   | Setting Type | Description                                     |
@@ -232,6 +222,14 @@ The exact value that will be served to the users who match the targeting rule. D
 | Whole Number   | Integer      | any whole number within the range of `int32`    |
 | Decimal Number | Double       | any decimal number within the range of `double` |
 
+#### Percentage-based value
+
+The served value can be a percentage-based value as well. In this case, the value will be served to a randomly selected fraction of the users who match the targeting rule. Read more about the [percentage-based targeting here](TODO).
+
+#### How to add a percentage-based value?
+
+*TODO - screenshot*
+
 ### Multiple targeting rules, ordering and evaluation sequence
 
-See the [Setting Evaluation](TODO) page.
+You can add multiple targeting rules to a setting. In this case, the rules will be evaluated in the order they were added. The first rule that matches the user will be the winner. If none of the rules match the user, the default value will be served. See the [evaluation sequence](TODO) page for more details.
