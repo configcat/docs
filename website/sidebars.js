@@ -14,7 +14,7 @@ module.exports = {
           'Config V2': [
             'advanced/config-v2',
             'advanced/config-v2-migration-guide',
-            'advanced/config-v2-sdk-support-table',
+            'advanced/config-v2-sdk-compatibility',
           ],
         },
         'advanced/data-governance',
