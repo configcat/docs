@@ -1,12 +1,9 @@
 ---
-id: user-targeting
-title: User Targeting
-description: User Object attribute-based targeting (user condition)
+id: user-condition
+title: User Condition
+description: A user condition is a condition that is based on the evaluation of a user attribute. It is used to determine whether a targeting rule is a match or not for a specific user.
 ---
 
-```
-TODISCUSS User Object attribute-based targeting
-```
 ## What is a user condition?
 
 A user condition is a condition that is based on the evaluation of a user attribute. It is used to determine whether a targeting rule is a match or not for a specific user.

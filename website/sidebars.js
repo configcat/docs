@@ -21,16 +21,16 @@ module.exports = {
         {
           'Targeting': [
             'targeting/overview',
-            'targeting/user-object',
-            'targeting/percentage-based',
             {
-              'Comparison-based Targeting': [
-                'targeting/comparison-based-targeting/overview',
-                'targeting/comparison-based-targeting/user-targeting',
-                'targeting/comparison-based-targeting/prerequisite',
-                'targeting/comparison-based-targeting/segments',
+              'Targeting Rules': [
+                'targeting/targeting-rules/targeting-rule-overview',
+                'targeting/targeting-rules/user-condition',
+                'targeting/targeting-rules/flag-condition',
+                'targeting/targeting-rules/segment-condition',
               ],
             },
+            'targeting/percentage-options',
+            'targeting/user-object',
             'targeting/setting-evaluation',
           ],
         },

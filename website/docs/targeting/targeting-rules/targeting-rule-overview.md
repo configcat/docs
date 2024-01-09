@@ -1,6 +1,6 @@
 ---
-id: overview
-title: Overview
+id: targeting-rule-overview
+title: Targeting Rule Overview
 description: Targeting allows you to define targeting rules for feature flags. This way you can target a specific user group with a specific feature.
 ---
 

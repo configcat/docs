@@ -1,6 +1,6 @@
 ---
-id: prerequisite
-title: Prerequisite Feature Flags
+id: flag-condition
+title: Flag Condition (Prerequisite)
 description: A prerequisite feature flag is a type of feature flag that is used to control the availability of another feature flag.
 ---
 

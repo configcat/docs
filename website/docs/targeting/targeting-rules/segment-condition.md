@@ -1,6 +1,6 @@
 ---
-id: segments
-title: Segmentation & Segments
+id: segment-condition
+title: Segment Condition
 description: Segments help you define user segments and assign them to your feature flags. Ideal for beta testing on a certain group of users.
 ---
 

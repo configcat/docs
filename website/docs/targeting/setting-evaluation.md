@@ -108,7 +108,7 @@ In this case both feature flags are enabled for only 10% of users.
 Despite both feature flags being set to 10% ON / 90% OFF, Jane is only enabled for the `isTwitterSharingEnabled` feature flag. Because Jane and Joe have different identifiers, they're assigned different numbers, which determines their eligibility for each feature flag.
 :::
 
-1. **Increasing `isTwitterSharingEnabled` to 40% ON / 60% OFF**
+3. **Increasing `isTwitterSharingEnabled` to 40% ON / 60% OFF**
 
 |      | isTwitterSharingEnabled <br/> 40% ON / 60% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |
