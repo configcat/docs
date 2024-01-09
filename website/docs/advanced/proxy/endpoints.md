@@ -16,13 +16,13 @@ The Proxy accepts HTTP requests on the following endpoints.
 The CDN proxy endpoint's purpose is to forward the underlying *config JSON* to other ConfigCat SDKs used by your application. 
 
 :::caution
-Regarding the config JSON's schema changes introduced recently (`v6`), the `v0.3.0` and newer Proxy versions are providing the new schema on the CDN proxy endpoint. 
+Regarding the config JSON's schema changes introduced recently (`v6`), the `v0.3.X` and newer Proxy versions are providing the new schema on the CDN proxy endpoint. 
 This new config JSON schema is only supported from certain SDK versions listed in the support table [below](/advanced/proxy/endpoints/#supported-sdk-versions). 
-Those SDKs that are older than the listed versions are incompatible with `v0.3.0`, and can be used only with `v0.2.4` or older Proxy versions.
+Those SDKs that are older than the listed versions are incompatible with `v0.3.X`, and can be used only with `v0.2.X` or older Proxy versions.
 :::
 
 <Tabs groupId="versions">
-<TabItem value="old" label="Proxy version 0.3.0 or newer" default>
+<TabItem value="old" label="Proxy version 0.3.X or newer" default>
 
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/configcat-proxy/&#123;sdkId&#125;/config_v6.json</span></summary>
@@ -85,7 +85,7 @@ var configCatClient = configcat.getClient(
 
 ### Supported SDK Versions
 
-The following SDK versions are supported by the `>=v0.3.0` Proxy's CDN endpoint:
+The following SDK versions are supported by the `>=v0.3.X` Proxy's CDN endpoint:
 
 |  SDK    | Version                                               |
 | ------- | ----------------------------------------------------- |
@@ -96,21 +96,21 @@ The following SDK versions are supported by the `>=v0.3.0` Proxy's CDN endpoint:
 | Node    | [`>=v11.0.0`](https://github.com/configcat/node-sdk/releases/tag/v11.0.0)  |
 | Python  | [`>=v9.0.0`](https://github.com/configcat/python-sdk/releases/tag/v9.0.0)  |
 | Go      | [`>=v9.0.0`](https://github.com/configcat/go-sdk/releases/tag/v9.0.0)      |
-| C++     | N/A |
-| Dart    | N/A |
-| Elixir  | N/A |
-| Java    | N/A |
-| Android | N/A |
-| Kotlin  | N/A |
-| PHP     | N/A |
-| Ruby    | N/A |
-| Swift   | N/A |
+| C++     | TBA |
+| Dart    | TBA |
+| Elixir  | TBA |
+| Java    | TBA |
+| Android | TBA |
+| Kotlin  | TBA |
+| PHP     | TBA |
+| Ruby    | TBA |
+| Swift   | TBA |
 
 </TabItem>
-<TabItem value="new" label="Proxy version 0.2.4 or older">
+<TabItem value="new" label="Proxy version 0.2.X or older">
 
 <details open>
-  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/&#123;sdkId&#125;/&#123;config-json-file&#125;</span></summary>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/&#123;sdkId&#125;/config_v5.json</span></summary>
 
 This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for feature flag evaluation. 
 
@@ -170,7 +170,7 @@ var configCatClient = configcat.getClient(
 
 ### Supported SDK Versions
 
-The following SDK versions are supported by the `<=v0.2.4` Proxy's CDN endpoint:
+The following SDK versions are supported by the `<=v0.2.X` Proxy's CDN endpoint:
 
 |  SDK    | Version                                               |
 | ------- | ----------------------------------------------------- |
