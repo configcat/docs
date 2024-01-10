@@ -20,7 +20,7 @@ module.exports = {
         'advanced/data-governance',
         {
           'Targeting': [
-            'targeting/overview',
+            'targeting/targeting-overview',
             {
               'Targeting Rules': [
                 'targeting/targeting-rules/targeting-rule-overview',

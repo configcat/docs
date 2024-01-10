@@ -64,16 +64,16 @@ Feature Flag and Setting **evaluation is on the Client** side within the [Config
 
 The data that could and should be passed to the User Object.
 
-| Property   | Description                                                                                                                                                              |
+| Attribute  | Description                                                                                                                                                              |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Identifier | **REQUIRED** We recommend adding a UserID, Email address, or SessionID. [More](advanced/user-object.md#identifier-property)                                              |
+| Identifier | **REQUIRED** We recommend adding a UserID, Email address, or SessionID.                                                                                                  |
 | Email      | **OPTIONAL** By adding this parameter you will be able to create Email address-based targeting. e.g: Only turn on a feature for users with @example.com addresses.       |
 | Country    | **OPTIONAL** Fill this for location or country-based targeting. e.g: Turn on a feature for users in Canada only.                                                         |
 | Custom     | **OPTIONAL** This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role, Device type, App version number, etc. |
 
-### Identifier property
+### Identifier attribute
 
-Unique identifier of a user in your application. This is a **REQUIRED** property which enables ConfigCat to differentiate your users from each other and to evaluate the setting values for percentage-based targeting.
+Unique identifier of a user in your application. This is a **REQUIRED** attribute which enables ConfigCat to differentiate your users from each other and to evaluate the setting values for percentage-based targeting.
 
 Our recommendation as an identifier:
 
@@ -81,13 +81,13 @@ Our recommendation as an identifier:
 - Email address - In most cases adding an email address works perfectly here, as long as it is unique.
 - SessionId - This is useful for when you want to target users who are not logged in to your application.
 
-### Custom property usage
+### Custom attribute usage
 
-First, you need to pass a User Object to the ConfigCat SDK containing the `custom` property.
+First, you need to pass a User Object to the ConfigCat SDK containing the `custom` attribute.
 
-> In case **a custom property is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), the corresponding targeting rule **evaluation will be skipped**.
+> In case **a custom attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), the corresponding targeting rule **evaluation will be skipped**.
 
-> Please ensure that **the custom property value is a string** when working with dynamically-typed languages such as JavaScript, PHP, Python, Elixir, or Ruby. If a different data type is used, the SDK will automatically convert it to a string and log a WARNING message.
+> The custom attribute's value can be multiple types. e.g: string, number, boolean, array, object, etc. Check the [SDK's reference](sdk-reference/overview.md) for more details.
 
 Example:
 
@@ -103,5 +103,5 @@ var userObject = {
 
 _The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](sdk-reference/overview.md)_
 
-On the Dashboard a targeting rule for the custom property `EyeColor` would look like:
+On the Dashboard a targeting rule for the custom attribute `EyeColor` would look like:
 <img src="/docs/assets/custom-property-ui.png" className="zoomable" alt="customPropertyUsageDashboard" />
