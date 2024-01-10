@@ -4,6 +4,8 @@ title: Go SDK Reference
 description: ConfigCat Go SDK Reference. This is a step-by-step guide on how to use feature flags in your Go applications.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 export const GoSchema = require('@site/src/schema-markup/sdk-reference/go.json');
 
 <script
@@ -12,10 +14,10 @@ export const GoSchema = require('@site/src/schema-markup/sdk-reference/go.json')
 ></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/go-sdk.svg?style=social)](https://github.com/configcat/go-sdk/stargazers)
-[![Build Status](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml/badge.svg?branch=v8)](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/configcat/go-sdk/v8)](https://goreportcard.com/report/github.com/configcat/go-sdk/v8)
-[![codecov](https://codecov.io/gh/configcat/go-sdk/branch/v8/graph/badge.svg)](https://codecov.io/gh/configcat/go-sdk)
-[![GoDoc](https://godoc.org/github.com/configcat/go-sdk?status.svg)](https://pkg.go.dev/github.com/configcat/go-sdk/v8)
+[![Build Status](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml/badge.svg?branch=v9)](https://github.com/configcat/go-sdk/actions/workflows/go-ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/configcat/go-sdk/v9)](https://goreportcard.com/report/github.com/configcat/go-sdk/v9)
+[![codecov](https://codecov.io/gh/configcat/go-sdk/branch/v9/graph/badge.svg)](https://codecov.io/gh/configcat/go-sdk)
+[![GoDoc](https://godoc.org/github.com/configcat/go-sdk?status.svg)](https://pkg.go.dev/github.com/configcat/go-sdk/v9)
 
 <a href="https://github.com/configcat/go-sdk" target="_blank">ConfigCat Go SDK on GitHub</a>
 
@@ -24,13 +26,13 @@ export const GoSchema = require('@site/src/schema-markup/sdk-reference/go.json')
 ### 1. Get the SDK with `go`
 
 ```bash
-go get github.com/configcat/go-sdk/v8
+go get github.com/configcat/go-sdk/v9
 ```
 
 ### 2. Import the ConfigCat package
 
 ```go
-import "github.com/configcat/go-sdk/v8"
+import "github.com/configcat/go-sdk/v9"
 ```
 
 ### 3. Create the _ConfigCat_ client with your _SDK Key_
@@ -78,22 +80,23 @@ _ConfigCat Client_ is responsible for:
 
 Available optional properties:
 
-| Properties         | Type                       | Description                                                                                                                                                                                                                                                                                     |
-| ------------------ | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `SDKKey`           | `string`                   | SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                                                                                                                                                                                                     |
-| `DataGovernance`   | `configcat.DataGovernance` | Defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`.        |
-| `BaseUrl`          | `string`                   | _Obsolete_ Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                                   |
-| `Cache `           | `ConfigCache`              | Sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                                                                                                                  |
+| Properties         | Type                       | Description  |
+| ------------------ | -------------------------- | ------------ |
+| `SDKKey`           | `string`                   | SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_. |
+| `DataGovernance`   | `configcat.DataGovernance` | Defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
+| `BaseUrl`          | `string`                   | _Obsolete_ Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
+| `Cache `           | `ConfigCache`              | Sets a custom cache implementation for the client. [See below](#custom-cache). |
 | `NoWaitForRefresh` | `bool`                     | Defaults to `false`. When it's `true` the typed get methods (`Get[TYPE]Value()`) will never wait for a configuration refresh to complete before returning. When it's `false` and `PollingMode` is `AutoPoll`, the first request may block, when `PollingMode` is `Lazy`, any request may block. |
-| `HttpTimeout`      | `time.Duration`            | Sets the maximum wait time for a HTTP response. [More about the HTTP timeout](#http-timeout)                                                                                                                                                                                                    |
-| `Transport`        | `http.RoundTripper`        | Sets the transport options for the underlying HTTP calls.                                                                                                                                                                                                                                       |
-| `Logger`           | `configcat.Logger`         | Sets the `Logger` implementation used by the SDK for logging. [More about logging](#logging)                                                                                                                                                                                                    |
-| `PollingMode`      | `configcat.PollingMode`    | Defaults to `AutoPoll`. Sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                       |
-| `PollInterval`     | `time.Duration`            | Sets after how much time a configuration is considered stale. When `PollingMode` is `AutoPoll` this value is used as the polling rate.                                                                                                                                                          |
-| `FlagOverrides`    | `*configcat.FlagOverrides` | Sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                          |
-| `DefaultUser`      | `configcat.User`           | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                                |
-| `Offline`          | `bool`                     | Defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                         |
-| `Hooks`            | `*configcat.Hooks`         | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                                  |
+| `HttpTimeout`      | `time.Duration`            | Sets the maximum wait time for a HTTP response. [More about the HTTP timeout](#http-timeout) |
+| `Transport`        | `http.RoundTripper`        | Sets the transport options for the underlying HTTP calls. |
+| `Logger`           | `configcat.Logger`         | Sets the `Logger` implementation used by the SDK for logging. [More about logging](#logging) |
+| `LogLevel`         | `configcat.LogLevel`       | Sets the logging verbosity. [More about logging](#logging) |
+| `PollingMode`      | `configcat.PollingMode`    | Defaults to `AutoPoll`. Sets the polling mode for the client. [More about polling modes](#polling-modes). |
+| `PollInterval`     | `time.Duration`            | Sets after how much time a configuration is considered stale. When `PollingMode` is `AutoPoll` this value is used as the polling rate. |
+| `FlagOverrides`    | `*configcat.FlagOverrides` | Sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides). |
+| `DefaultUser`      | `configcat.User`           | Sets the default user. [More about default user](#default-user). |
+| `Offline`          | `bool`                     | Defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode). |
+| `Hooks`            | `*configcat.Hooks`         | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). |
 
 Then you can pass it to the `NewCustomClient()` method:
 
@@ -162,16 +165,16 @@ details := client.GetIntValueDetails(
 
 The `details` result contains the following information:
 
-| Field                                  | Type                                  | Description                                                                               |
-| -------------------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `Value`                                | `bool` / `string` / `int` / `float64` | The evaluated value of the feature flag or setting.                                       |
-| `Data.Key`                             | `string`                              | The key of the evaluated feature flag or setting.                                         |
-| `Data.IsDefaultValue`                  | `bool`                                | True when the default value passed to getValueDetails() is returned due to an error.      |
-| `Data.Error`                           | `error`                               | In case of an error, this field contains the error message.                               |
-| `Data.User`                            | `User`                                | The user object that was used for evaluation.                                             |
-| `Data.MatchedEvaluationPercentageRule` | `*PercentageRule`                     | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `Data.MatchedEvaluationRule`           | `*RolloutRule`                        | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
-| `Data.FetchTime`                       | `time.Time`                           | The last download time of the current config.                                             |
+| Field       | Type             | Description                  |
+| ----------- | ---------------- | ---------------------------- |
+| `Value`                          | `bool` / `string` / `int` / `float64` | The evaluated value of the feature flag or setting. |
+| `Data.Key`                       | `string`            | The key of the evaluated feature flag or setting. |
+| `Data.IsDefaultValue`            | `bool`              | True when the default value passed to getValueDetails() is returned due to an error. |
+| `Data.Error`                     | `error`             | In case of an error, this field contains the error message. |
+| `Data.User`                      | `User`              | The user object that was used for evaluation. |
+| `Data.MatchedPercentageOption`   | `*PercentageOption` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `Data.MatchedTargetingRule`      | `*TargetingRule`    | If the evaluation was based on a targeting rule, this field contains that specific rule. |
+| `Data.FetchTime`                 | `time.Time`         | The last download time (UTC) of the current config. |
 
 ## User Object
 
@@ -195,7 +198,7 @@ user = &configcat.UserData{Identifier: "john@example.com"}
 | `Custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```go
-custom := map[string]string{}
+custom := map[string]interface{}
 custom["SubscriptionType"] = "Pro"
 custom["UserRole"] = "Admin"
 user := &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#",
@@ -204,15 +207,54 @@ user := &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#",
             Custom: custom}
 ```
 
+The `Custom` dictionary also allows attribute values other than `string` values:
+
+```go
+registeredAt, _ := time.Parse(time.DateTime, "2023-11-22 12:34:56")
+custom := map[string]interface{}
+custom["Rating"] = 4.5
+custom["RegisteredAt"] = registeredAt
+custom["Roles"] = []string{"Role1","Role2"}
+user := &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#", Custom: custom}
+```
+
+### User Object Attribute Types
+
+All comparators support `string` values as User Object attribute (in some cases they need to be provided in a specific format though, see below), but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
+
+**Text-based comparators** (`EQUALS`, `IS_ONE_OF`, etc.)
+- accept `string` or `[]byte` values,
+- all other values are automatically converted to `string` (a warning will be logged but evaluation will continue as normal).
+
+**SemVer-based comparators** (`IS_ONE_OF_SEMVER`, `LESS_THAN_SEMVER`, `GREATER_THAN_SEMVER`, etc.)
+- accept `string` or `[]byte` values containing a properly formatted, valid semver value,
+- all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**Number-based comparators** (`EQUALS_NUMBER`, `LESS_THAN_NUMBER`, `GREATER_THAN_OR_EQUAL_NUMBER`, etc.)
+- accept `float64` values and all other numeric values which can safely be converted to `float64`,
+- accept `string` or `[]byte` values containing a properly formatted, valid `float64` value,
+- all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**Date time-based comparators** (`BEFORE_DATETIME` / `AFTER_DATETIME`)
+- accept `time.Time` values, which are automatically converted to a second-based Unix timestamp (`time.Time` values with naive timezone are considered to be in UTC),
+- accept `float64` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `float64`,
+- accept `string` or `[]byte` values containing a properly formatted, valid `float64` value,
+- all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**String array-based comparators** (`ARRAY_CONTAINS_ANY_OF` / `ARRAY_NOT_CONTAINS_ANY_OF`)
+- accept arrays of `string` (`[]string`),
+- accept `string` or `[]byte` values containing a valid JSON string which can be deserialized to an array of `string`,
+- all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
 ### Other options to create a user object
 
-The _ConfigCat SDK_ uses reflection to determine what attributes are available on a user object. You can either implement the `UserAttributes` interface - which's `GetAttribute(string) string` method will be used to retrieve the attributes - or use a pointer to a struct type which's public fields are treated as possible comparison attributes.
+1. Using a simple `map[string]interface{}`. In this case the passed map is used for looking up the user attributes.
 
-If a field's type implements a `String() string` method, the field will be treated as textual and its `String()` method will be called to determine the value.
+2. Using a custom `struct`. The _ConfigCat SDK_ uses reflection to determine what attributes are available on the passed type. You can either implement the `UserAttributes` interface - which's `GetAttribute(string) interface{}` method will be used to retrieve the attributes - or use a pointer to a `struct` which's public fields are treated as user attributes.
 
-If a field's type is `map[string]string`, the map is used to look up any custom attribute not found directly in the struct. There should be at most one of these fields.
+  If a field's type is `map[string]interface{}`, the map is used to look up any custom attribute not found directly in the struct. There should be at most one of these fields.
 
-Otherwise, a field type must be a numeric type, a `string`, a `[]byte` or a `github.com/blang/semver.Version`.
+  Otherwise, a field type must be a numeric type, a `string`, a `[]byte`, a `[]string` or a `time.Time`.
 
 ### Default user
 
@@ -396,14 +438,162 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 
 This is the same format that the SDK downloads from the ConfigCat CDN.
-It allows the usage of all features you can do on the ConfigCat Dashboard.
+It allows the usage of all features you can access on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config JSON is based on your [Data Governance](advanced/data-governance.md) settings:
+<Tabs groupId="config-json-format">
+<TabItem value="config-json-v6" label="When using an SDK version v9.0.0 or newer">
 
-- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
-- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
+and execute the following command:
+
+```bash
+configcat config-json get -f v6 -p {YOUR-SDK-KEY} > config.json
+```
+
+(Depending on your [Data Governance](advanced/data-governance.md) settings, you may need to add the `--eu` switch.)
+
+Alternatively, you can download the config JSON manually, based on your [Data Governance](advanced/data-governance.md) settings:
+
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
+
+```json
+{
+  "p": {
+    // hash salt, required only when sensitive text comparator(s) are used
+    "s": "80xCU/SlDz1lCiWFaxIBjyJeJecWjq46T4eu6GtozkM="
+  },
+  "s": [ // array of segments
+    {
+      "n": "Beta Users", // segment name
+      "r": [ // array of user conditions (there is a logical AND relation between the elements)
+        {
+          "a": "Email", // comparison attribute
+          "c": 0, // comparator (see below)
+          "l": [ // comparison value (see below)
+            "john@example.com", "jane@example.com"
+          ]
+        }
+      ]
+    }
+  ],
+  "f": { // key-value map of feature flags & settings
+    "isFeatureEnabled": { // key of a particular flag / setting
+      "t": 0, // setting type, possible values:
+              // 0 -> on/off setting (feature flag)
+              // 1 -> text setting
+              // 2 -> whole number setting
+              // 3 -> decimal number setting
+      "r": [ // array of targeting rules (there is a logical OR relation between the elements)
+        {
+          "c": [ // array of conditions (there is a logical AND relation between the elements)
+            {
+              "u": { // user condition
+                "a": "Email", // comparison attribute
+                "c": 2, // comparator, possible values and required comparison value types:
+                        // 0  -> IS ONE OF (cleartext) + string array comparison value ("l")
+                        // 1  -> IS NOT ONE OF (cleartext) + string array comparison value ("l")
+                        // 2  -> CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 3  -> NOT CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 4  -> IS ONE OF (semver) + semver string array comparison value ("l")
+                        // 5  -> IS NOT ONE OF (semver) + semver string array comparison value ("l")
+                        // 6  -> < (semver) + semver string comparison value ("s")
+                        // 7  -> <= (semver + semver string comparison value ("s")
+                        // 8  -> > (semver) + semver string comparison value ("s")
+                        // 9  -> >= (semver + semver string comparison value ("s")
+                        // 10 -> = (number) + number comparison value ("d")
+                        // 11 -> <> (number + number comparison value ("d")
+                        // 12 -> < (number) + number comparison value ("d")
+                        // 13 -> <= (number + number comparison value ("d")
+                        // 14 -> > (number) + number comparison value ("d")
+                        // 15 -> >= (number) + number comparison value ("d")
+                        // 16 -> IS ONE OF (hashed) + string array comparison value ("l")
+                        // 17 -> IS NOT ONE OF (hashed) + string array comparison value ("l")
+                        // 18 -> BEFORE (UTC datetime) + second-based Unix timestamp number comparison value ("d")
+                        // 19 -> AFTER (UTC datetime) + second-based Unix timestamp number comparison value ("d")
+                        // 20 -> EQUALS (hashed) + string comparison value ("s")
+                        // 21 -> NOT EQUALS (hashed) + string comparison value ("s")
+                        // 22 -> STARTS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 23 -> NOT STARTS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 24 -> ENDS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 25 -> NOT ENDS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 26 -> ARRAY CONTAINS ANY OF (hashed) + string array comparison value ("l")
+                        // 27 -> ARRAY NOT CONTAINS ANY OF (hashed) + string array comparison value ("l")
+                        // 28 -> EQUALS (cleartext) + string comparison value ("s")
+                        // 29 -> NOT EQUALS (cleartext) + string comparison value ("s")
+                        // 30 -> STARTS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 31 -> NOT STARTS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 32 -> ENDS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 33 -> NOT ENDS WITH ANY OF (cleartext + string array comparison value ("l")
+                        // 34 -> ARRAY CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 35 -> ARRAY NOT CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                "l": [ // comparison value - depending on the comparator, another type of value may need
+                       // to be specified (see above):
+                       // "s": string
+                       // "d": number
+                  "@example.com"
+                ]
+              }
+            },
+            {
+              "p": { // prerequisite flag condition
+                "f": "mainIntFlag", // key of prerequisite flag
+                "c": 0, // comparator, possible values: 0 -> EQUALS, 1 -> NOT EQUALS
+                "v": { // comparison value (value's type must match the prerequisite flag's type)
+                  "i": 42
+                }
+              }
+            },
+            {
+              "s": { // segment condition
+                "s": 0, // segment index, a valid index into the top-level segment array ("s")
+                "c": 1 // comparator, possible values: 0 -> IS IN SEGMENT, 1 -> IS NOT IN SEGMENT
+              }
+            }
+          ],
+          "s": { // alternatively, an array of percentage options ("p", see below) can also be specified
+            "v": { // the value served when the rule is selected during evaluation
+              "b": true
+            },
+            "i": "bcfb84a7"
+          }
+        }
+      ],
+      "p": [ // array of percentage options
+        {
+          "p": 10, // % value
+          "v": { // the value served when the percentage option is selected during evaluation
+            "b": true
+          },
+          "i": "bcfb84a7"
+        },
+        {
+          "p": 90,
+          "v": {
+            "b": false
+          },
+          "i": "bddac6ae"
+        }
+      ],
+      "v": { // fallback value, served when none of the targeting rules match,
+             // no percentage options are defined or evaluation of these is not possible
+        "b": false // depending on the setting type, another type of value may need to be specified:
+                   // text setting -> "s": string
+                   // whole number setting -> "i": number
+                   // decimal number setting -> "d": number
+      },
+      "i": "430bded3" // variation id (for analytical purposes)
+    }
+  }
+}
+```
+
+For a more comprehensive specification of the config JSON v6 format, you may refer to [this JSON schema document](https://github.com/configcat/config-json/blob/main/V6/config.schema.json).
+
+</TabItem>
+<TabItem value="config-json-v5" label="When using an SDK version older than v9.0.0">
 
 ```json
 {
@@ -467,6 +657,23 @@ The URL to your current config JSON is based on your [Data Governance](advanced/
 }
 ```
 
+A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
+and execute the following command:
+
+```bash
+configcat config-json get -f v5 -p {YOUR-SDK-KEY} > config.json
+```
+
+(Depending on your [Data Governance](advanced/data-governance.md) settings, you may need to add the `--eu` switch.)
+
+Alternatively, you can download the config JSON manually, based on your [Data Governance](advanced/data-governance.md) settings:
+
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+
+</TabItem>
+</Tabs>
+
 ### Map
 
 You can set up the SDK to load your feature flag & setting overrides from a `map[string]interface{}`.
@@ -513,7 +720,7 @@ boolValue := boolSettingDescriptor.Get(snapshot)
 
 The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
 If you prefer to use your own cache solution, such as an external or distributed cache in your system,
-you can implement the [`ConfigCache`](https://github.com/configcat/go-sdk/blob/v8/configcat_client.go#L106) interface.
+you can implement the [`ConfigCache`](https://github.com/configcat/go-sdk/blob/v9/configcat_client.go#L106) interface.
 
 ```go
 type CustomCache struct {
@@ -570,53 +777,49 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
 
 ## Logging
 
-The default logger used by the SDK is [logrus](https://github.com/sirupsen/logrus), but you have the option to override it with your logger via the `Logger` config option, it only has to satisfy the [Logger](https://github.com/configcat/go-sdk/blob/master/logger.go) interface:
+The default logger implementation used by the SDK is based on the `log` package, but you have the option to override it with your logger via the `Logger` config option. It only has to satisfy the [Logger](https://github.com/configcat/go-sdk/blob/v9/logger.go) interface:
+
+```go
+type Logger interface {
+	Debugf(format string, args ...interface{})
+	Infof(format string, args ...interface{})
+	Warnf(format string, args ...interface{})
+	Errorf(format string, args ...interface{})
+}
+```
 
 ### Setting log levels
 
-#### Using `logrus`
-
 ```go
 import {
-	"github.com/configcat/go-sdk/v8"
-	"github.com/sirupsen/logrus"
+	"github.com/configcat/go-sdk/v9"
 }
 
-logger := logrus.New()
-logger.SetLevel(logrus.InfoLevel)
-
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
-    Logger: logger})
-```
-
-#### Using the default logger
-
-```go
-import {
-	"github.com/configcat/go-sdk/v8"
-	"github.com/sirupsen/logrus"
-}
-
-client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
-    Logger: configcat.DefaultLogger(configcat.LogLevelInfo)})
+client := configcat.NewCustomClient(configcat.Config{
+    SDKKey: "#YOUR-SDK-KEY#",
+    LogLevel: configcat.LogLevelInfo})
 ```
 
 Available log levels:
 
-| Level      | Description                                             |
-| ---------- | ------------------------------------------------------- |
-| ErrorLevel | Only error level events are logged.                     |
-| WarnLevel  | Default, Errors and Warnings are logged.                |
-| InfoLevel  | Errors, Warnings and feature flag evaluation is logged. |
-| DebugLevel | All of the above plus debug info is logged.             |
+| Level           | Description                                             |
+| --------------- | ------------------------------------------------------- |
+| `LogLevelNone`  | Turns off logging.                                      |
+| `LogLevelError` | Only error level events are logged.                     |
+| `LogLevelWarn`  | Default, Errors and Warnings are logged.                |
+| `LogLevelInfo`  | Errors, Warnings and feature flag evaluation is logged. |
+| `LogLevelDebug` | All of the above plus debug info is logged.             |
 
 Info level logging helps to inspect the feature flag evaluation process:
 
 ```bash
-ConfigCat - INFO - Evaluate 'isPOCFeatureEnabled'
-INFO[0000] Evaluating rule: [Email:] [CONTAINS] [@something.com] => no match
-INFO[0000] Evaluating rule: [Email:] [CONTAINS] [@example.com] => no match
-INFO[0000] Returning false.
+[ConfigCat] 2024/01/08 13:27:56 INFO: [5000] Evaluating 'isPOCFeatureEnabled' for User '&configcat.UserData{Identifier:"##SOME-USER-IDENTIFICATION##", Email:"configcat@example.com", Country:"", Custom:map[string]interface{}(nil)}'
+Evaluating targeting rules and applying the first match if any:
+- IF User.Email CONTAINS ANY OF ['@something.com'] => false, skipping the remaining AND conditions
+  THEN 'false' => no match
+- IF User.Email CONTAINS ANY OF ['@example.com'] => true
+  THEN 'true' => MATCH, applying rule
+Returning 'true'.
 ```
 
 ## Sample Applications
