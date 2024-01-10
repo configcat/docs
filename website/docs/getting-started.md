@@ -33,14 +33,14 @@ See the detailed [Docs on how to use the ConfigCat SDKs.](/sdk-reference/overvie
 Here's a short example to demonstrate the concept:
 
 ```js
-var configcat = require('configcat-client');
-var client = configcat.createClient('YOUR SDK KEY HERE');
+const configcat = await import("https://cdn.jsdelivr.net/npm/configcat-js/+esm");
+const client = configcat.getClient('YOUR SDK KEY HERE');
 
-client.getValue('isMyFeatureEnabled', false, (value) => {
-  if (value === true) {
-    do_the_new_thing();
-  } else {
-    do_the_old_thing();
-  }
-});
+const value = await client.getValueAsync('isMyFeatureEnabled', false);
+
+if (value) {
+  do_the_new_thing();
+} else {
+  do_the_old_thing();
+}
 ```
