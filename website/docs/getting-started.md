@@ -38,7 +38,8 @@ Here's a short example to demonstrate the concept:
 
 // 1. Import the ConfigCat SDK package.
 import * as configcat from 'configcat-js';
-// (Or use `const configcat = import("https://esm.sh/configcat-js");` instead if you just want to do a quick test in a scratchpad.)
+// (Or use `const configcat = import("https://esm.sh/configcat-js");` instead
+// if you just want to do a quick test in a scratchpad.)
 
 // 2. Get a client object for the SDK Key of your config.
 const client = configcat.getClient('YOUR SDK KEY HERE');
