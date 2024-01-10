@@ -30,17 +30,17 @@
     },
     {
       "@type": "HowToStep",
-      "text": "Install package",
+      "text": "Install the package",
       "image": "https://configcat.com/images/shared/home.png",
       "name": "Installation",
       "url": "https://configcat.com/docs/sdk-reference/community/vue/#1-install-the-package"
     },
     {
       "@type": "HowToStep",
-      "text": "Import and install the plugin",
+      "text": "Import and use the plugin",
       "image": "https://configcat.com/images/shared/home.png",
-      "name": "Import and install",
-      "url": "https://configcat.com/docs/sdk-reference/community/vue/#2-import-and-install-the-configcatplugin-with-your-sdk-key"
+      "name": "Import and use",
+      "url": "https://configcat.com/docs/sdk-reference/community/vue/#2-import-and-use-the-configcatplugin-with-your-sdk-key"
     },
     {
       "@type": "HowToStep",

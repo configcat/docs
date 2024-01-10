@@ -24,7 +24,7 @@ _via [npm](https://www.npmjs.com/package/configcat-vue)_
 npm i configcat-vue
 ```
 
-### 2. Import and install the `ConfigCatPlugin` with your SDK Key
+### 2. Import and use the `ConfigCatPlugin` with your SDK Key
 
 In **main.ts**:
 
