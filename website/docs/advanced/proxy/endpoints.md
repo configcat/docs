@@ -22,7 +22,7 @@ Those SDKs that are older than the listed versions are incompatible with `v0.3.X
 :::
 
 <Tabs groupId="versions">
-<TabItem value="old" label="Proxy version 0.3.X or newer" default>
+<TabItem value="new" label="Proxy version 0.3.X or newer" default>
 
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/configcat-proxy/&#123;sdkId&#125;/config_v6.json</span></summary>
@@ -31,7 +31,6 @@ This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
-- `config-json-file`: It's set by the ConfigCat SDK, it determines which *config JSON* schema must be used.  
 
 **Responses**:
 <ul className="responses">
@@ -107,7 +106,7 @@ The following SDK versions are supported by the `>=v0.3.X` Proxy's CDN endpoint:
 | Swift   | TBA |
 
 </TabItem>
-<TabItem value="new" label="Proxy version 0.2.X or older">
+<TabItem value="old" label="Proxy version 0.2.X or older">
 
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/&#123;sdkId&#125;/config_v5.json</span></summary>
@@ -116,7 +115,6 @@ This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
-- `config-json-file`: It's set by the ConfigCat SDK, it determines which *config JSON* schema must be used.  
 
 **Responses**:
 <ul className="responses">
