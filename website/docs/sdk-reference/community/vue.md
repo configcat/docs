@@ -9,7 +9,7 @@ description: Unofficial Vue SDK for ConfigCat Feature Flags. Based on ConfigCat'
 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(VueSchema) }}></script> -->
 
 :::caution
-As this is a community maintained package, ConfigCat can't guarantee it's stability, safety and can't provide official customer support.
+As this is a community-maintained package, ConfigCat can't guarantee its stability, and safety and can't provide official customer support.
 :::
 
 <a href="https://github.com/codedbychavez/configcat-vue" target="_blank">ConfigCat SDK for Vue.js on GitHub</a>
@@ -34,7 +34,7 @@ import { ConfigCatPlugin } from "configcat-vue";
 
 ```js
 app.use(ConfigCatPlugin, {
-  sdkKey: "YOUR-CONFIGCAT-SDK-KEY", // sdkKey is required
+  sdkKey: "YOUR-CONFIGCAT-SDK-KEY-GOES-HERE", // sdkKey is required
 });
 ```
 
@@ -91,7 +91,7 @@ Optionally, the **FeatureWrapper** component also provides an **#else** and **#l
 
 ### Specifying a polling mode
 
-Polling modes are used to control how often ConfigCat's SDK client downloads the values of feature flags from ConfigCat's servers. The default polling mode is **AutoPoll**. Auto Polling fetches the latest feature flag values every 60 seconds by default. To change this, Specify a polling mode and set the polling interval (in seconds) in the **pollingIntervalInSeconds** property.
+Polling modes are used to control how often ConfigCat's SDK client downloads the values of feature flags from ConfigCat's servers. The default polling mode is **AutoPoll**. Auto Polling fetches the latest feature flag values every 60 seconds by default. To change this, Specify a polling mode and set the polling interval (in seconds) via the **pollingIntervalInSeconds** property.
 
 Import:
 
@@ -99,24 +99,14 @@ Import:
 import { PollingMode } from "configcat-vue";
 ```
 
-Add **pollingMode** to the **ConfigCatPlugin** options:
+Add **pollingMode** to the **ConfigCatPlugin** options and set the polling interval via the **clientOptions** property:
 
 ```js
 app.use(ConfigCatPlugin, {
-    sdkKey: "YOUR-CONFIGCAT-SDKKEY",
-    pollingMode: PollingMode.AutoPoll, // Optional. Default is AutoPoll
-    // ...
-});
-```
-
-To change default interval of AutoPoll, specify the polling interval in seconds:
-
-```js
-app.use(ConfigCatPlugin, {
-    sdkKey: "YOUR-CONFIGCAT-SDKKEY",
+    sdkKey: "YOUR-CONFIGCAT-SDKKEY-GOES-HERE",
     pollingMode: PollingMode.AutoPoll, // Optional. Default is AutoPoll
     clientOptions: {
-        pollIntervalSeconds: 5 // Optional. Specify the polling interval in seconds. Default is 60 seconds.
+        pollIntervalSeconds: 5 // Optional. Specify the polling interval in seconds. The default is 60 seconds.
     }
 });
 
@@ -128,7 +118,7 @@ app.use(ConfigCatPlugin, {
 
 ### Using the plugin with a logger
 
-You may want to log the actions of the underlying ConfigCat SDK client. To do this by specify a logger in **clientOptions**:
+You may want to log the actions of the underlying ConfigCat SDK client. To do this, specify a logger in **clientOptions**:
 
 > See documentation here: <https://configcat.com/docs/sdk-reference/js/#logging>
 
@@ -146,7 +136,7 @@ Use the logger in **clientOptions**:
 
 ```js
 app.use(ConfigCatPlugin, {
-  sdkKey: "YOUR-CONFIGCAT-SDK-KEY", // // sdkKey is required
+  sdkKey: "YOUR-CONFIGCAT-SDK-KEY-GOES-HERE", // // sdkKey is required
   clientOptions: { // clientOptions is optional
     // ...
     logger: createConsoleLogger(LogLevel.Info),
@@ -164,11 +154,9 @@ The following methods are available on **LogLevel**:
 
 ### Specifying a User Object
 
-The [User Object](https://configcat.com/docs/advanced/user-object/) represents a user in your application. It works hand in hand with ConfigCat's [Targeting](https://configcat.com/docs/advanced/targeting/) rules.
+The [User Object](https://configcat.com/docs/advanced/user-object/) represents a user in your application. It works hand in hand with ConfigCat's [Targeting](https://configcat.com/docs/advanced/targeting/) rules for targeting specific users with feature flags. A User Object can be passed as a prop to the **FeatureWrapper** component.
 
 > See documentation here: <https://configcat.com/docs/advanced/user-object/>
-
-A User Object can be passed as a prop to the **FeatureWrapper** component.
 
 Define the User Object:
 
@@ -199,7 +187,9 @@ Pass it to the **FeatureWrapper** component:
 
 ### Listening to flag changes emitted from the FeatureWrapper component
 
-When a feature flag is toggled ON or OFF in the [ConfigCat dashboard](https://app.configcat.com) the **FeatureWrapper** component emits the updated feature flag value. Listen and handle changes using **@flag-value-changed**:
+When a feature flag is toggled ON or OFF in the [ConfigCat dashboard](https://app.configcat.com) the **FeatureWrapper** component emits the updated feature flag value. How quickly the updated value is emitted depends on the polling interval set in the **clientOptions** property of the **ConfigCatPlugin**.
+
+Listen and handle changes using **@flag-value-changed**:
 
 ```js
 <template>
@@ -222,13 +212,13 @@ const handleFlagValueChange = (flagValue: boolean) => {
 </script>
 ```
 
-### Listening to events emitted by the ConfigCat SDK client directly
+### Listening to events emitted by the underlying ConfigCat client
 
-This plugin, exposes (provides) the underlying ConfigCat SDK client. One of the ways it can be used is for subscribing to events emitted by the underlying ConfigCat client.
+This plugin exposes (provides) the underlying ConfigCat client. One of the ways it can be used is by subscribing to events emitted by the ConfigCat client.
 
 > See documentation here: <https://configcat.com/docs/sdk-reference/js/#hooks>
 
-Injecting the ConfigCat client it into your component:
+Inject the ConfigCat client into your component:
 
 ```js
 <script setup lang="ts">
