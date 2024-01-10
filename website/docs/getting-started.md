@@ -33,11 +33,20 @@ See the detailed [Docs on how to use the ConfigCat SDKs.](/sdk-reference/overvie
 Here's a short example to demonstrate the concept:
 
 ```js
-const configcat = await import("https://cdn.jsdelivr.net/npm/configcat-js/+esm");
+// 0. Install the ConfigCat SDK package for the platform you use.
+// E.g. `npm install configcat-js`
+
+// 1. Import the ConfigCat SDK package.
+import * as configcat from 'configcat-js';
+// (Or use `const configcat = import("https://esm.sh/configcat-js");` instead if you just want to do a quick test in a scratchpad.)
+
+// 2. Get a client object for the SDK Key of your config.
 const client = configcat.getClient('YOUR SDK KEY HERE');
 
+// 3. Evaluate a feature flag using the client object.
 const value = await client.getValueAsync('isMyFeatureEnabled', false);
 
+// 4. Based on the value of the feature flag decide whether or not to enable the related feature.
 if (value) {
   do_the_new_thing();
 } else {
