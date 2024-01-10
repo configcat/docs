@@ -33,7 +33,7 @@ See the detailed [Docs on how to use the ConfigCat SDKs.](/sdk-reference/overvie
 Here's a short example to demonstrate the concept:
 
 ```js
-// 0. Install the ConfigCat SDK package for the platform you use.
+// 0. If necessary, install the ConfigCat SDK package for the platform you use.
 // E.g. `npm install configcat-js`
 
 // 1. Import the ConfigCat SDK package.
