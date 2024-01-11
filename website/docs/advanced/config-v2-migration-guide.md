@@ -28,9 +28,9 @@ Config V2 is the next generation of ConfigCat. It comes with a new dashboard, AP
 
 It's important to note that the V2 config was created with the same settings as the V1 config and the V1 config is still accessible and unchanged.
 
-### Step 2: Update the ConfigCat SDK
+### Step 2: Upgrade the ConfigCat SDK version
 
-In your application, update the ConfigCat SDK to the latest version. Old versions of the SDK will not be able to access the new config. Make sure you update every application that uses the migrated config.
+In your application, upgrade the ConfigCat SDK to the latest version. Old versions of the SDK will not be able to access the new config. Make sure you upgrade every application that uses the migrated V2 config.
 
 Here is a list of the SDKs that support Config V2: [See the supported SDK versions.](advanced/config-v2-sdk-compatibility.md)
 

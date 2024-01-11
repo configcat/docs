@@ -81,3 +81,4 @@ example:
 - text, A/B/C
 - sensitiveeknek nem a tobbinek: 20%, 80%
 - ios: 20%/80% , android: 30%/70%
+- percentage attribute legyen tenant id, onnantol a tenanton tudok kiserletezni

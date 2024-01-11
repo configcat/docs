@@ -40,11 +40,11 @@ A property of your user (e.g. _email address_, _geographic location_). Your appl
 
 There are 3 predefined attributes. Additionally, you can define your **_custom attributes_** as well:
 
-| Comparison attribute name | Description                                                                          |
-| ------------------------- | ------------------------------------------------------------------------------------ |
-| `Email`                   | The e-mail address of your user.                                                     |
-| `Identifier`              | Usually a unique user identifier in your application.                                |
-| `Country`                 | Might come in useful for testing a new feature only in one country.                  |
+| Comparison attribute name | Description                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------ |
+| `Email`                   | The e-mail address of your user.                                               |
+| `Identifier`              | Usually a unique user identifier in your application.                          |
+| `Country`                 | Might come in useful for testing a new feature only in one country.            |
 | `Custom`                  | Define any attribute (e.g. `OS version`), by typing its name into the textbox. |
 
 ### Comparison value
@@ -57,14 +57,13 @@ Any string, number, or comma-separated list. Will be compared to the selected _C
 
 The following comparators assume that _Comparison attribute_ and _Comparison value_ contain string/text.
 
-> In case **attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), targeting rule **evaluation will be skipped**.
+:::note
+In case **attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), targeting rule **evaluation will be skipped**.
+:::
 
 :::caution
 Consider using Confidential text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
 :::
-
-> a comparatorkhoz kene pelda
-> es el kene magyarazni hogy a hashed az nagyobb config.json meretet eredmenyez, es nagyobb network trafficot. ha nem szenzitiv inkabb ne ezt hasznald.
 
 | Comparator                         | Description                                                                                |
 | ---------------------------------- | ------------------------------------------------------------------------------------------ |
@@ -80,7 +79,7 @@ Consider using Confidential text comparators if you are planning to target users
 #### Confidential text comparators
 
 We recommend using confidential text comparators especially in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
-In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed.
+In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed. This can cause an increase in the size of the config.json file and the overall network traffic. It is recommended to use confidential comparators only when necessary.
 
 | Comparator                      | Description                                                                                     |
 | ------------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -207,26 +206,3 @@ The following comparators assume that _Comparison attribute_ and _Comparison val
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | ARRAY CONTAINS ANY OF     | It matches when the comparison attribute interpreted as a comma-separated list contains any of the comparison values.        |
 | ARRAY NOT CONTAINS ANY OF | It matches when the comparison attribute interpreted as a comma-separated list does not contain any of the comparison values |
-
-### Served value
-
-The exact value that will be served to the users who match the targeting rule. Depending on the kind of your setting this could be:
-
-| Setting Kind   | Setting Type | Description                                     |
-| -------------- | ------------ | ----------------------------------------------- |
-| On/Off Toggle  | Boolean      | true/false, usually the state of a feature flag |
-| Text           | String       | any string, max. 100000 characters              |
-| Whole Number   | Integer      | any whole number within the range of `int32`    |
-| Decimal Number | Double       | any decimal number within the range of `double` |
-
-#### Percentage-based value
-
-The served value can be a percentage-based value as well. In this case, the value will be served to a randomly selected fraction of the users who match the targeting rule. Read more about the [percentage-based targeting here](TODO).
-
-#### How to add a percentage-based value?
-
-*TODO - screenshot*
-
-### Multiple targeting rules, ordering and evaluation sequence
-
-You can add multiple targeting rules to a setting. In this case, the rules will be evaluated in the order they were added. The first rule that matches the user will be the winner. If none of the rules match the user, the default value will be served. See the [evaluation sequence](TODO) page for more details.

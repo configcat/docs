@@ -6,7 +6,6 @@ description: Config V2 is the next generation of ConfigCat. It comes with a new 
 
 Config V2 is a new version of ConfigCat. It comes with a new dashboard, API, SDKs, and features.
 
-
 ## What's new?
 
 - A bunch of new features and improvements listed below.
@@ -27,20 +26,30 @@ With AND conditions, you can create more complex targeting rule sets for your fe
 
 > TODO add screenshot
 
+### New comparators
+
+With the new comparators, you can create date based targeting rules and schedule releases, compare arrays etc.
+
+- New text and sensitive text comparators: EQUALS, NOT EQUALS, STARTS WITH ANY OF, ENDS WITH ANY OF, NOT STARTS WITH ANY OF, NOT ENDS WITH ANY OF.
+- New array comparators: ARRAY CONTAINS ANY OF, ARRAY NOT CONTAINS ANY OF.
+- New date comparators: BEFORE, AFTER.
+
 ### Prerequisite flags
 
 With prerequisite flags, you can create feature flags that depend on other feature flags. Prerequisite feature flags are particularly useful for managing complex feature dependencies and ensuring a smooth user experience during feature rollouts.
 
 > TODO add screenshot
 
-### Targeting rule hints
+### Comparison value hints
 
-With targeting rule hints, you can add hints to targeting rules to navigate better in complex rule sets.
+With comparison value hints, you can add hints to your comparison values. This way you can add a description to your comparison value list items that helps you remember what they are for.
 
 > TODO add screenshot
 
-### New comparators
+### Percentage options for targeting rules
 
-With the new comparators, you can create date based targeting rules and schedule releases, compare arrays etc.
+You can add percentage options to your targeting rules. This is useful if you want to create percentage options based on your user attributes.
 
-> TODO list new comparators
+### Custom percentage attributes
+
+With custom percentage attributes, you can create percentage options based on custom attributes. This way you can create percentage options based on any of your user attributes.

@@ -43,11 +43,12 @@ A percentage option is a value that is served to a specific percentage of users.
 
 ### "To all users" value / Fallback value
 
-A fallback value is a value that is served to users who are not matched by any targeting rule. Or serves as a fallback value if a [User Object](TODO) is not given. More about fallback values [here](TODO).
+A fallback value is a value that is served to users who are not matched by any targeting rule. Or serves as a fallback value if a [User Object](TODO) is not given.
 
 ### User Object
 
-A user object is a collection of user attributes that can be used to target users. More about user objects [here](TODO).
+A user object is a collection of user attributes that can be used to target users. You have to pass a user object to the ConfigCat SDK in your application to use the targeting feature. More about user object [here](TODO). 
+
 
 ## Examples
 
