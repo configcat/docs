@@ -112,7 +112,7 @@ const userObject = {
   email: userEmail,
   custom: { domain: userDomain },
 };
-const value = configCatClient.getValue(key, defaultValue, callback, userObject);
+const value = await configCatClient.getValueAsync(key, defaultValue, userObject);
 ```
 
 Support for confidential comparators was introduced in the following SDK versions:
