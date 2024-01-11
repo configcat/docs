@@ -1,6 +1,6 @@
 ---
 id: terraform
-title: Terraform - Manage feature flags directly from HCL scripts
+title: Terraform - Manage feature flags from HCL scripts
 description: ConfigCat Terraform provider. This is a step-by-step guide on how to manage feature flags from Terraform using the ConfigCat Terraform provider.
 ---
 

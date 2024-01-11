@@ -1,6 +1,6 @@
 ---
 id: circleci
-title: CircleCI Orb - Scan source code for unused feature flags
+title: CircleCI - Scan your code for unused feature flags
 description: ConfigCat CircleCI Orb. This is a step-by-step guide on how to use the ConfigCat CircleCI Orb to eliminate tech debt in your project.
 ---
 
