@@ -24,7 +24,7 @@ then you can **connect your application** to the ConfigCat service to access you
 
 ### Connect your application
 
-There are ready to use code snippets for `.NET`, `Java`, `Android (Java)`, `Kotlin`, `iOS`, `Dart (Flutter)`, `Node`, `JavaScript`, `Python`, `Go`, `PHP`, `Elixir`, `C++` on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, just scroll down to the **SDK Key and steps to connect your application** section.
+There are ready to use code snippets for `.NET`, `Java`, `Android (Java)`, `Kotlin`, `iOS (Swift)`, `Dart (Flutter)`, `Node`, `JavaScript`, `React`, `Python`, `Go`, `PHP`, `Ruby`, `Elixir`, `C++` on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, just scroll down to the **SDK Key and steps to connect your application** section.
 
 All the ConfigCat SDKs are open-source and available on <a href="https://github.com/configcat" target="_blank">GitHub</a>.
 
@@ -33,14 +33,22 @@ See the detailed [Docs on how to use the ConfigCat SDKs.](/sdk-reference/overvie
 Here's a short example to demonstrate the concept:
 
 ```js
-var configcat = require('configcat-client');
-var client = configcat.createClient('YOUR SDK KEY HERE');
+// 0. If necessary, install the ConfigCat SDK package for the platform you use.
+// E.g. `npm install configcat-js`
 
-client.getValue('isMyFeatureEnabled', false, (value) => {
-  if (value === true) {
-    do_the_new_thing();
-  } else {
-    do_the_old_thing();
-  }
-});
+// 1. Import the ConfigCat SDK package.
+import * as configcat from 'configcat-js';
+
+// 2. Get a client object for the SDK Key of your config.
+const client = configcat.getClient('YOUR SDK KEY HERE');
+
+// 3. Evaluate a feature flag using the client object.
+const value = await client.getValueAsync('isMyFeatureEnabled', false);
+
+// 4. Based on the value of the feature flag decide whether or not to enable the related feature.
+if (value) {
+  do_the_new_thing();
+} else {
+  do_the_old_thing();
+}
 ```
