@@ -178,7 +178,7 @@ module.exports = {
             {
               type: 'doc',
               id: 'sdk-reference/community/vue',
-              label: 'TypeScript (Vue.js)',
+              label: 'JavaScript (Vue.js)',
             },
           ],
         },
