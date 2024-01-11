@@ -241,3 +241,12 @@ onBeforeMount(() => {
 
 </script>
 ```
+
+## Sample Application
+
+- <a href="https://github.com/codedbychavez/configcat-vue-sample" target="_blank">Sample Vue.js App</a>
+
+## Look under the hood
+
+- <a href="https://github.com/codedbychavez/configcat-vue" target="_blank">ConfigCat Vue.js SDK on GitHub</a>
+- <a href="https://www.npmjs.com/package/configcat-vue" target="_blank">ConfigCat Vue.js SDK in NPM</a>
