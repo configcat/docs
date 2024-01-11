@@ -144,13 +144,15 @@ app.use(ConfigCatPlugin, {
 });
 ```
 
-The following methods are available on **LogLevel**:
+Available log levels:
 
-- **LogLevel.Debug** - All events are logged.
-- **LogLevel.Info** - Info, Warn and Error are logged. Debug events are discarded.
-- **LogLevel.Warn** - Warn and Error events are logged. Info and Debug events are discarded.
-- **LogLevel.Error** - Error events are logged. All other events are discarded.
-- **LogLevel.Off** - No events are logged.
+| Level | Description                                             |
+| ----- | ------------------------------------------------------- |
+| Off   | Nothing gets logged.                                    |
+| Error | Only error level events are logged.                     |
+| Warn  | Default. Errors and Warnings are logged.                |
+| Info  | Errors, Warnings and feature flag evaluation is logged. |
+| Debug | All of the above plus debug info is logged.             |
 
 ### Specifying a User Object
 
