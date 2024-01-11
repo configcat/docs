@@ -32,7 +32,7 @@ OpenFeature now supports ConfigCat via dedicated providers for their SDKs. So if
 
 We're happy to share that the ConfigCat Proxy is now in the Beta phase and we need your help to make it even better!
 
-📚 Want to learn more about the ConfigCat Proxy? Get all the details <a href="advanced/proxy/proxy-overview" target="_blank" rel="noopener noreferrer">here</a>.
+📚 Want to learn more about the ConfigCat Proxy? Get all the details [here](advanced/proxy/proxy-overview).
 
 🔧 We'd like to invite you to participate in the beta testing. If you're interested, join the dedicated **#configcat-proxy-beta** channel in our <a href="https://configcat.com/slack" target="_blank" rel="noopener noreferrer">Slack Community</a>. 
 Share your experiences, ask questions, and collaborate with our team and fellow community members.
