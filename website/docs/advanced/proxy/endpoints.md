@@ -13,16 +13,108 @@ The Proxy accepts HTTP requests on the following endpoints.
 
 ## CDN Proxy
 
-The CDN proxy endpoint's purpose is to forward the underlying *config JSON* to other ConfigCat SDKs used by your application.  
+The CDN proxy endpoint's purpose is to forward the underlying *config JSON* to other ConfigCat SDKs used by your application. 
+
+:::caution
+Regarding the config JSON's schema changes introduced recently (`v6`), the `v0.3.X` and newer Proxy versions are providing the new schema on the CDN proxy endpoint. 
+This new config JSON schema is only supported from certain SDK versions listed in the support table [below](/advanced/proxy/endpoints/#supported-sdk-versions). 
+Those SDKs that are older than the listed versions are incompatible with `v0.3.X`, and can be used only with `v0.2.X` or older Proxy versions.
+:::
+
+<Tabs groupId="versions">
+<TabItem value="new" label="Proxy version 0.3.X or newer" default>
 
 <details open>
-  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/&#123;sdkId&#125;/&#123;config-json-file&#125;</span></summary>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/configcat-proxy/&#123;sdkId&#125;/config_v6.json</span></summary>
 
 This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for feature flag evaluation. 
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
-- `config-json-file`: It's set by the ConfigCat SDK, it determines which *config JSON* schema must be used.  
+
+**Responses**:
+<ul className="responses">
+  <li className="success"><span className="status">200</span>: The <code>config.json</code> file is downloaded successfully.</li>
+  <li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+  <li className="success"><span className="status">304</span>: The <code>config.json</code> file isn't modified based on the <code>Etag</code> sent in the <code>If-None-Match</code> header.</li>
+  <li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing.</li>
+  <li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+</details>
+
+### SDK Usage
+
+In order to let a ConfigCat SDK use the Proxy, you have to set the SDK's `baseUrl` parameter to point to the Proxy's host.
+Also, you have to pass the [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) prefixed with `configcat-proxy/` as the SDK key.
+
+So, let's assume you set up the Proxy with the following SDK option:
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml title="options.yml"
+sdks:
+  my_sdk:
+    key: "<your-sdk-key>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+```shell
+CONFIGCAT_SDKS={"my_sdk":"<your-sdk-key>"}
+```
+
+</TabItem>
+</Tabs>
+
+The SDK's initialization that works with the Proxy will look like this:
+
+```js title="example.js"
+import * as configcat from "configcat-js";
+
+var configCatClient = configcat.getClient(
+  // highlight-next-line
+  "configcat-proxy/my_sdk", // SDK identifier as SDK key
+  configcat.PollingMode.AutoPoll,
+  // highlight-next-line
+  { baseUrl: "http(s)://localhost:8050" } // Proxy URL
+);
+```
+
+### Supported SDK Versions
+
+The following SDK versions are supported by the `>=v0.3.X` Proxy's CDN endpoint:
+
+|  SDK    | Version                                               |
+| ------- | ----------------------------------------------------- |
+| .NET    | [`>=v9.0.0`](https://github.com/configcat/.net-sdk/releases/tag/v9.0.0)    |
+| JS      | [`>=v9.0.0`](https://github.com/configcat/js-sdk/releases/tag/v9.0.0)      |
+| JS SSR  | [`>=v8.0.0`](https://github.com/configcat/js-ssr-sdk/releases/tag/v8.0.0)  |
+| React   | [`>=v4.0.0`](https://github.com/configcat/react-sdk/releases/tag/v4.0.0)   |
+| Node    | [`>=v11.0.0`](https://github.com/configcat/node-sdk/releases/tag/v11.0.0)  |
+| Python  | [`>=v9.0.0`](https://github.com/configcat/python-sdk/releases/tag/v9.0.0)  |
+| Go      | [`>=v9.0.0`](https://github.com/configcat/go-sdk/releases/tag/v9.0.0)      |
+| C++     | TBA |
+| Dart    | TBA |
+| Elixir  | TBA |
+| Java    | TBA |
+| Android | TBA |
+| Kotlin  | TBA |
+| PHP     | TBA |
+| Ruby    | TBA |
+| Swift   | TBA |
+
+</TabItem>
+<TabItem value="old" label="Proxy version 0.2.X or older">
+
+<details open>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/&#123;sdkId&#125;/config_v5.json</span></summary>
+
+This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for feature flag evaluation. 
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
 
 **Responses**:
 <ul className="responses">
@@ -76,16 +168,16 @@ var configCatClient = configcat.getClient(
 
 ### Supported SDK Versions
 
-The following SDK versions are supported by the Proxy's CDN endpoint:
+The following SDK versions are supported by the `<=v0.2.X` Proxy's CDN endpoint:
 
 |  SDK    | Version                                               |
 | ------- | ----------------------------------------------------- |
-| .NET    | [`<=v8.2.0`](https://github.com/configcat/.net-sdk/releases/tag/v8.2.0) ([`>=v9.0.0`](https://github.com/configcat/.net-sdk/releases/tag/v9.0.0) is not supported yet.) |
-| JS      | [`<=v8.1.1`](https://github.com/configcat/js-sdk/releases/tag/v8.1.1) ([`>=v9.0.0`](https://github.com/configcat/js-sdk/releases/tag/v9.0.0) is not supported yet.) |
-| JS SSR  | [`<=v7.1.1`](https://github.com/configcat/js-ssr-sdk/releases/tag/v7.1.1) ([`>=v8.0.0`](https://github.com/configcat/js-ssr-sdk/releases/tag/v8.0.0) is not supported yet.) |
-| React   | [`<=v3.1.1`](https://github.com/configcat/react-sdk/releases/tag/v3.1.1) ([`>=v4.0.0`](https://github.com/configcat/react-sdk/releases/tag/v4.0.0) is not supported yet.) |
-| Node    | [`<=v10.1.1`](https://github.com/configcat/node-sdk/releases/tag/v10.1.1) ([`>=v11.0.0`](https://github.com/configcat/node-sdk/releases/tag/v11.0.0) is not supported yet.) |
-| Python  | [`<=v8.0.1`](https://github.com/configcat/python-sdk/releases/tag/v8.0.1) ([`>=v9.0.0`](https://github.com/configcat/python-sdk/releases/tag/v9.0.0) is not supported yet.) |
+| .NET    | [`<=v8.2.0`](https://github.com/configcat/.net-sdk/releases/tag/v8.2.0)    |
+| JS      | [`<=v8.1.1`](https://github.com/configcat/js-sdk/releases/tag/v8.1.1)      |
+| JS SSR  | [`<=v7.1.1`](https://github.com/configcat/js-ssr-sdk/releases/tag/v7.1.1)  |
+| React   | [`<=v3.1.1`](https://github.com/configcat/react-sdk/releases/tag/v3.1.1)   |
+| Node    | [`<=v10.1.1`](https://github.com/configcat/node-sdk/releases/tag/v10.1.1)  |
+| Python  | [`<=v8.0.1`](https://github.com/configcat/python-sdk/releases/tag/v8.0.1)  |
 | C++     | [`<=v3.1.1`](https://github.com/configcat/cpp-sdk/releases/tag/v3.1.1)     |
 | Dart    | [`<=v3.0.0`](https://github.com/configcat/dart-sdk/releases/tag/3.0.0)     |
 | Elixir  | [`<=v3.0.0`](https://github.com/configcat/elixir-sdk/releases/tag/v3.0.0)  |
@@ -95,9 +187,10 @@ The following SDK versions are supported by the Proxy's CDN endpoint:
 | Kotlin  | [`<=2.0.0`](https://github.com/configcat/kotlin-sdk/releases/tag/2.0.0)    |
 | PHP     | [`<=v8.1.0`](https://github.com/configcat/php-sdk/releases/tag/v8.1.0)     |
 | Ruby    | [`<=v7.0.0`](https://github.com/configcat/ruby-sdk/releases/tag/v7.0.0)    |
-| Swift   | [`<=v10.0.0`](https://github.com/configcat/swift-sdk/releases/tag/v10.0.0) |
+| Swift   | [`<=v10.0.0`](https://github.com/configcat/swift-sdk/releases/tag/10.0.0) |
 
-We are continously working on the support of all new SDK versions.
+</TabItem>
+</Tabs>
 
 ### Available Options
 
@@ -222,7 +315,7 @@ CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*do
 <td>-</td>
 <td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
 When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
-<br/>The <code>if_no_match</code> option is mandatory if this option is used.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.<br/>When using the environment variable, the regex escape character must be doubled (<code>\\</code>) because it's parsed as a JSON list and <code>\</code> is also a JSON escape character.
 </td>
 </tr>
 
@@ -304,12 +397,14 @@ This endpoint evaluates a single feature flag identified by a `key` with the giv
   "key": "<feature-flag-key>",
   "user": {
     "Identifier": "<user-id>",
-    "Email": "<user-email>",
-    "Country": "<user-country>",
+    "Rating": 4.5,
+    "Roles": ["Role1","Role2"],
     // any other attribute
   }
 }
 ```
+
+The type of the `user` object's fields can only be `string`, `number`, or `string[]`.
 
 **Responses**:
 <ul className="responses">
@@ -342,14 +437,17 @@ This endpoint evaluates all feature flags with the given [user object](/advanced
 **Request body**:
 ```json
 {
+  "key": "<feature-flag-key>",
   "user": {
     "Identifier": "<user-id>",
-    "Email": "<user-email>",
-    "Country": "<user-country>",
+    "Rating": 4.5,
+    "Roles": ["Role1","Role2"],
     // any other attribute
   }
 }
 ```
+
+The type of the `user` object's fields can only be `string`, `number`, or `string[]`.
 
 **Responses**:
 <ul className="responses">
@@ -548,7 +646,7 @@ CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\
 <td>-</td>
 <td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
 When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
-<br/>The <code>if_no_match</code> option is mandatory if this option is used.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.<br/>When using the environment variable, the regex escape character must be doubled (<code>\\</code>) because it's parsed as a JSON list and <code>\</code> is also a JSON escape character.
 </td>
 </tr>
 
@@ -674,10 +772,10 @@ This endpoint subscribes to a single flag's changes. Whenever the watched flag's
 ```js title="example.js"
 const rawData = {
   key: "<feature-flag-key>",
-  user: {
+  user: { // field types can only be `string`, `number`, or `string[]`.
     Identifier: "<user-id>",
-    Email: "<user-email>",
-    Country: "<user-country>",
+    Rating: 4.5,
+    Roles: ["Role1","Role2"],
     // any other attribute
   }
 }
@@ -726,10 +824,10 @@ This endpoint subscribes to all feature flags' changes behind the given [SDK ide
 **Example**:
 ```js title="example.js"
 const rawData = {
-  user: {
+  user: { // field types can only be `string`, `number`, or `string[]`.
     Identifier: "<user-id>",
-    Email: "<user-email>",
-    Country: "<user-country>",
+    Rating: 4.5,
+    Roles: ["Role1","Role2"],
     // any other attribute
   }
 }
@@ -865,7 +963,8 @@ CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\
 </td>
 <td>-</td>
 <td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
-When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.<br/>The <code>if_no_match</code> option is mandatory if this option is used.</td>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.<br/>The <code>if_no_match</code> option is mandatory if this option is used.<br/>When using the environment variable, the regex escape character must be doubled (<code>\\</code>) because it's parsed as a JSON list and <code>\</code> is also a JSON escape character.
+</td>
 </tr>
 
 <tr>

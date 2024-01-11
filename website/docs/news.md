@@ -8,6 +8,24 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 <!-- This page must be in sync with the news page in the dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html -->
 
+## Resource ordering in Public Management API and Terraform
+
+#### Jan 9, 2024
+
+From now on, you can change the order of your products, configs and environments trough the ConfigCat Public Management API and the Terraform provider. See the docs for details:
+- *ConfigCat Public Management API*: specify the order argument in the [Products](https://api.configcat.com/docs/index.html#tag/Products), [Configs](https://api.configcat.com/docs/index.html#tag/Configs), [Environment](https://api.configcat.com/docs/index.html#tag/Environments) and [Feature Flags & Settings](https://api.configcat.com/docs/index.html#tag/Feature-Flags-and-Settings) endpoints
+- *ConfigCat Feature Flags Provider for Terraform*: specify the order argument of the [configcat_product](https://registry.terraform.io/providers/configcat/configcat/latest/docs/resources/product#argument-reference), [configcat_config](https://registry.terraform.io/providers/configcat/configcat/latest/docs/resources/config#argument-reference), [configcat_environment](https://registry.terraform.io/providers/configcat/configcat/latest/docs/resources/environment#argument-reference) and [configcat_setting](https://registry.terraform.io/providers/configcat/configcat/latest/docs/resources/setting#argument-reference).
+
+## ConfigCat OpenFeature Providers available
+
+#### Jan 5, 2024
+
+OpenFeature now supports ConfigCat via dedicated providers for their SDKs. So if you prefer using ConfigCat via the OpenFeature API, you can now do so with the following providers:
+
+- [ConfigCat OpenFeature Provider for Java](https://github.com/open-feature/java-sdk-contrib/tree/main/providers/configcat)
+- [ConfigCat OpenFeature Provider for Go](https://github.com/open-feature/go-sdk-contrib/tree/main/providers/configcat)
+- [ConfigCat OpenFeature Provider for JavaScript](https://github.com/open-feature/js-sdk-contrib/tree/main/libs/providers/config-cat)
+
 ## ConfigCat Proxy Beta
 
 #### Nov 17, 2023
