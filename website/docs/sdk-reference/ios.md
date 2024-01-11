@@ -15,7 +15,7 @@ export const IosSchema = require('@site/src/schema-markup/sdk-reference/ios.json
 [![Coverage Status](https://img.shields.io/codecov/c/github/ConfigCat/swift-sdk.svg)](https://codecov.io/gh/ConfigCat/swift-sdk)
 [![CocoaPods](https://img.shields.io/cocoapods/v/ConfigCat.svg)](https://cocoapods.org/pods/ConfigCat)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Supported Platforms](https://img.shields.io/cocoapods/p/ConfigCat.svg?style=flat)](sdk-reference/ios/)
+[![Supported Platforms](https://img.shields.io/cocoapods/p/ConfigCat.svg?style=flat)](/sdk-reference/ios/)
 
 <a href="https://github.com/ConfigCat/swift-sdk" target="_blank">ConfigCat Swift SDK on GitHub</a>
 

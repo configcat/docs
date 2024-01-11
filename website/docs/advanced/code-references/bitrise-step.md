@@ -31,7 +31,7 @@ Scan reports are uploaded for each branch of your repository that triggers the j
 
 | Parameter             | Description                                                                                                                                                          | Required | Default             |
 | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------- |
-| `configcat_config_id` | The [config ID](advanced/code-references/overview#config-id) tells the step which feature flags it should search for in your source code. | &#9745;  |                     |
+| `configcat_config_id` | The [config ID](/advanced/code-references/overview#config-id) tells the step which feature flags it should search for in your source code. | &#9745;  |                     |
 | `configcat_api_host`  | ConfigCat Management API host.                                                                                                                                       |          | `api.configcat.com` |
 | `line_count`          | Code snippet line count before and after the reference line. (min: 1, max: 10)                                                                                       |          | 4                   |
 | `sub_folder`          | Sub-folder to scan, relative to the repository root folder.                                                                                                          |          |                     |
