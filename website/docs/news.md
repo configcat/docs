@@ -32,7 +32,7 @@ OpenFeature now supports ConfigCat via dedicated providers for their SDKs. So if
 
 We're happy to share that the ConfigCat Proxy is now in the Beta phase and we need your help to make it even better!
 
-📚 Want to learn more about the ConfigCat Proxy? Get all the details <a href="https://configcat.com/docs/advanced/proxy/proxy-overview" target="_blank" rel="noopener noreferrer">here</a>.
+📚 Want to learn more about the ConfigCat Proxy? Get all the details [here](/advanced/proxy/proxy-overview).
 
 🔧 We'd like to invite you to participate in the beta testing. If you're interested, join the dedicated **#configcat-proxy-beta** channel in our <a href="https://configcat.com/slack" target="_blank" rel="noopener noreferrer">Slack Community</a>. 
 Share your experiences, ask questions, and collaborate with our team and fellow community members.
@@ -105,7 +105,7 @@ Although we aim to keep older SDK versions functional, those trailing more than 
 
 #### Aug 1, 2023
 
-We are introducing [**Network Traffic**](https://configcat.com/docs/network-traffic/) limits for all plans. The usage is based on the Network Traffic your applications are making to the ConfigCat CDN.
+We are introducing [**Network Traffic**](/network-traffic/) limits for all plans. The usage is based on the Network Traffic your applications are making to the ConfigCat CDN.
 
 ### Why are we introducing these limits?
 
@@ -145,7 +145,7 @@ A new JS SDK for Chromium Extensions supporting the [Manifest V3](https://develo
 
 We just released a new official ConfigCat SDK supporting C++ applications.
 
-[See Documentation](https://configcat.com/docs/sdk-reference/cpp/)
+[See Documentation](/sdk-reference/cpp/)
 
 ## New ConfigCat SDK for React
 
@@ -153,7 +153,7 @@ We just released a new official ConfigCat SDK supporting C++ applications.
 
 We just released a new official ConfigCat SDK supporting React applications.
 
-[See Documentation](https://configcat.com/docs/sdk-reference/react/)
+[See Documentation](/sdk-reference/react/)
 
 ## monday.com integration
 
@@ -215,7 +215,7 @@ Open the environment menu to access the overview.
 
 ConfigCat: "Say no more fam! Let me show you!"
 
-[See the documentation for details](https://configcat.com/docs/advanced/code-references/overview)
+[See the documentation for details](/advanced/code-references/overview)
 
 ## Searching feature flags instead of Ctrl+F
 
@@ -358,7 +358,7 @@ We are accepting payments in USD from now on.
 
 ConfigCat's Zoho Flow integration is now available.
 
-- [Detailed Docs and Setup Guide](https://configcat.com/docs/integrations/zoho-flow)
+- [Detailed Docs and Setup Guide](/integrations/zoho-flow)
 
 ## Default Permission Group
 
@@ -372,7 +372,7 @@ Set a default Permission Group for Team member invites. The chosen group will be
 
 Annotate your setting changes on your Amplitude charts.
 
-- [Docs and Setup Guide](https://configcat.com/docs/integrations/amplitude)
+- [Docs and Setup Guide](/integrations/amplitude)
 
 ## ConfigCat Feature Flags Provider for Terraform
 
@@ -391,7 +391,7 @@ Addressing global data handling and processing trends, we have introduced the Da
 - **Global CDN**: providing geo-location based load balancing on server nodes all around the globe to ensure low response times.
 - **EU CDN**: Staying compliant with GDPR by using ConfigCat EU CDN. This way your data will never leave the EU.
 
-- [Read more on Data Governance and CDN](https://configcat.com/docs/advanced/data-governance)
+- [Read more on Data Governance and CDN](/advanced/data-governance)
 
 ## Organization Management
 
@@ -404,7 +404,7 @@ Featuring:
 - Customizable **SSO** methods.
 - Organization level **audit logs** and usage **statistics**.
 
-- [See Docs](https://configcat.com/docs/organization)
+- [See Docs](/organization)
 
 ## Public Management API v1 released
 
@@ -448,7 +448,7 @@ Renamed API Key to SDK Key since it was more confusing as the Public Management 
 
 New JavaScript SDK supporting Server Side Rendered (SSR) frameworks like [NuxtJS](https://nuxtjs.org).
 
-- [See Documentation](https://configcat.com/docs/sdk-reference/js-ssr/)
+- [See Documentation](/sdk-reference/js-ssr/)
 
 ## Trello Power-Up
 
@@ -504,7 +504,7 @@ See detailed statistics about the number of config.json downloads made towards C
 
 Zapier integration is now accessible.
 
-- [Detailed Docs and Setup Guide](https://configcat.com/docs/integrations/zapier)
+- [Detailed Docs and Setup Guide](/integrations/zapier)
 
 ## Public Management API (Beta)
 
@@ -520,7 +520,7 @@ Released Public Management API to Beta. From now on you can execute Dashboard ma
 
 Introduced sensitive text comparators to make sure sensitive info (like email address, user name) is kept hidden in targeting rules. Comes handy in front-end applications.
 
-- [Detailed Docs about comparators](https://configcat.com/docs/advanced/targeting/#comparator)
+- [Detailed Docs about comparators](/advanced/targeting/#comparator)
 - [Related blog post](https://configcat.com/blog/2020/03/02/sensitive-comparators/)
 
 ## Semantic version based user targeting
@@ -529,7 +529,7 @@ Introduced sensitive text comparators to make sure sensitive info (like email ad
 
 Especially useful for Mobile developers.
 
-- [Detailed Docs about comparators](https://configcat.com/docs/advanced/targeting/#comparator)
+- [Detailed Docs about comparators](/advanced/targeting/#comparator)
 - [Related blog post](https://configcat.com/blog/2020/01/27/semver)
 
 ## Ruby SDK
@@ -538,6 +538,6 @@ Especially useful for Mobile developers.
 
 It is out!
 
-- [Ruby SDK Docs](https://configcat.com/docs/sdk-reference/ruby/)
+- [Ruby SDK Docs](/sdk-reference/ruby/)
 - [GitHub repo](https://github.com/configcat/ruby-sdk)
 - [Blog post](https://configcat.com/blog/2019/10/29/ruby-sdk/)
