@@ -93,7 +93,7 @@ Validator::make([
 
 ### HTTP middleware
 
-The following route will only be accessible if the [feature flag](main-concepts/#about-setting-types) is truthy, otherwise a `404` will be thrown.
+The following route will only be accessible if the [feature flag](/main-concepts/#about-setting-types) is truthy, otherwise a `404` will be thrown.
 
 ```php
 Router::get('/registration')->middleware('configcat.on:new_registration_flow');

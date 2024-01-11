@@ -391,7 +391,7 @@ Addressing global data handling and processing trends, we have introduced the Da
 - **Global CDN**: providing geo-location based load balancing on server nodes all around the globe to ensure low response times.
 - **EU CDN**: Staying compliant with GDPR by using ConfigCat EU CDN. This way your data will never leave the EU.
 
-- [Read more on Data Governance and CDN](advanced/data-governance)
+- [Read more on Data Governance and CDN](/advanced/data-governance)
 
 ## Organization Management
 
