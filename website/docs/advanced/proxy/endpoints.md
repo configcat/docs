@@ -187,7 +187,7 @@ The following SDK versions are supported by the `<=v0.2.X` Proxy's CDN endpoint:
 | Kotlin  | [`<=2.0.0`](https://github.com/configcat/kotlin-sdk/releases/tag/2.0.0)    |
 | PHP     | [`<=v8.1.0`](https://github.com/configcat/php-sdk/releases/tag/v8.1.0)     |
 | Ruby    | [`<=v7.0.0`](https://github.com/configcat/ruby-sdk/releases/tag/v7.0.0)    |
-| Swift   | [`<=v10.0.0`](https://github.com/configcat/swift-sdk/releases/tag/v10.0.0) |
+| Swift   | [`<=v10.0.0`](https://github.com/configcat/swift-sdk/releases/tag/10.0.0) |
 
 </TabItem>
 </Tabs>
