@@ -4,9 +4,9 @@ title: ConfigCat SDK for Vue.js
 description: Unofficial Vue SDK for ConfigCat Feature Flags. Based on ConfigCat's JavaScript SDK.
 ---
 
-<!-- export const VueSchema = require('@site/src/schema-markup/sdk-reference/community/vue.json');
+export const VueSchema = require('@site/src/schema-markup/sdk-reference/community/vue.json');
 
-<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(VueSchema) }}></script> -->
+<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(VueSchema) }}></script>
 
 :::caution
 As this is a community-maintained package, ConfigCat can't guarantee its stability, and safety and can't provide official customer support.
