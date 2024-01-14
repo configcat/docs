@@ -53,6 +53,11 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 - [Documentation](sdk-reference/community/deno.md) on how to connect your application.
 - <a href="https://github.com/sigewuzhere/configcat-deno" target="_blank">GitHub repository of the ConfigCat Deno SDK.</a>
 
+## JavaScript (Vue.js)
+
+- [Documentation](sdk-reference/community/vue.md) on how to connect your application.
+- <a href="https://github.com/codedbychavez/configcat-vue" target="_blank">GitHub repository of the ConfigCat Vue.js SDK.</a>
+
 ## JavaScript (React)
 
 - [Documentation](sdk-reference/react.md) on how to connect your application.
