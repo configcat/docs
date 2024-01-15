@@ -32,7 +32,7 @@ It's important to note that the V2 config was created with the same settings as 
 
 In your application, upgrade the ConfigCat SDK to the latest version. Old versions of the SDK will not be able to access the new config. Make sure you upgrade every application that uses the migrated V2 config.
 
-Here is a list of the SDKs that support Config V2: [See the supported SDK versions.](advanced/config-v2-sdk-compatibility.md)
+Here is a list of the SDKs that support Config V2: [See the supported SDK versions.](advanced/config-v2-sdk-compatibility)
 
 ### Step 3: Update the ConfigCat SDK Key
 

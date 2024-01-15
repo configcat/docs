@@ -5,18 +5,18 @@ description: The user object lets you target users based on their properties wit
 ---
 
 The _User Object_ is an optional parameter when getting a feature flag or setting value from ConfigCat.
-It allows you to pass potential [Targeting rule](advanced/targeting.md) variables to the ConfigCat SDK.
+It allows you to pass potential [Targeting rule](advanced/targeting) variables to the ConfigCat SDK.
 And represents a user in your application.
 
 :::info
-The _User Object_ is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+The _User Object_ is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting) feature.
 :::
 
 ## The relationship between User Object and Targeting rules
 
-**As a product manager**, you can set [Targeting rules](advanced/targeting.md) on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> based on the parameters given to ConfigCat by your application.
+**As a product manager**, you can set [Targeting rules](advanced/targeting) on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> based on the parameters given to ConfigCat by your application.
 
-**As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your teammates) can use in the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> to apply [Targeting rules](advanced/targeting.md) on.
+**As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your teammates) can use in the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> to apply [Targeting rules](advanced/targeting) on.
 
 ### Example
 
@@ -87,7 +87,7 @@ First, you need to pass a User Object to the ConfigCat SDK containing the `custo
 
 > In case **a custom attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), the corresponding targeting rule **evaluation will be skipped**.
 
-> The custom attribute's value can be multiple types. e.g: string, number, boolean, array, object, etc. Check the [SDK's reference](sdk-reference/overview.md) for more details.
+> The custom attribute's value can be multiple types. e.g: string, number, boolean, array, object, etc. Check the [SDK's reference](sdk-reference/overview) for more details.
 
 Example:
 
@@ -101,7 +101,7 @@ var userObject = {
 };
 ```
 
-_The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](sdk-reference/overview.md)_
+_The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](sdk-reference/overview)_
 
 On the Dashboard a targeting rule for the custom attribute `EyeColor` would look like:
 <img src="/docs/assets/custom-property-ui.png" className="zoomable" alt="customPropertyUsageDashboard" />

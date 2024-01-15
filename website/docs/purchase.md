@@ -9,7 +9,7 @@ description: This page explains how to purchase ConfigCat plans, how to manage y
 ConfigCat is a feature flag service with unlimited team size, awesome support, and a reasonable price tag. You can use ConfigCat by subscribing with an email address which is free forever. Additionally, we offer three more plans
 with fewer limitations and more additional features. For a detailed comparison <a href="https://configcat.com/pricing/" target="_blank">check out the pricing table</a>.
 
-If you need a comprehensive table of all the business and technical limits of each plan, see the [Subscription Plan Limits Table](subscription-plan-limits.md).
+If you need a comprehensive table of all the business and technical limits of each plan, see the [Subscription Plan Limits Table](subscription-plan-limits).
 
 ### Shared vs Dedicated infrastructure
 
@@ -32,7 +32,7 @@ provide reports, review contracts or set up bank transfers.
 
 You can purchase a ConfigCat subscription plan on the <a href="https://app.configcat.com/plans" target="_blank">Plans page</a>.
 :::info
-You must have a [Billing Manager](organization.md) role in your Organization to change or upgrade your plan.
+You must have a [Billing Manager](organization) role in your Organization to change or upgrade your plan.
 :::
 
 ### Our payment provider
@@ -47,5 +47,5 @@ Credit card information is stored and managed by <a href="https://www.chargebee.
 
 You can update your billing info on the <a href="https://app.configcat.com/organization/billing" target="_blank">Manage Billing page</a>.
 :::info
-You must have a [Billing Manager](organization.md) role in your Organization to update your billing info.
+You must have a [Billing Manager](organization) role in your Organization to update your billing info.
 :::

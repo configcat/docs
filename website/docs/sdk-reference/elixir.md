@@ -73,7 +73,7 @@ _ConfigCat Client_ is responsible for:
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sdk_key`                      | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                                                                                                                                                                                                                                                      |
 | `base_url`                     | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                                                                                |
-| `data_governance`              | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](advanced/data-governance.md). Available options: `:global`, `:eu_only`.                                                                   |
+| `data_governance`              | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](advanced/data-governance). Available options: `:global`, `:eu_only`.                                                                   |
 | `cache_policy`                 | `CachePolicy.auto/1`, `CachePolicy.lazy/1` and `CachePolicy.manual/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details.                                                                                                                                                                                                          |
 | `cache`                        | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`. [More about cache](#custom-cache-behaviour-with-cache-option-parameter).                                                                                                                                                                                                                                         |
 | `http_proxy`                   | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`.                                                                                                          |
@@ -91,7 +91,7 @@ _ConfigCat Client_ is responsible for:
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                                                    |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                                                                 |
-| `user`          | Optional, _ConfigCat.User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md)                                         |
+| `user`          | Optional, _ConfigCat.User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting)                                         |
 | `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name of the instance which you want to access. |
 
 ```elixir
@@ -110,7 +110,7 @@ value = ConfigCat.get_value(
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                                                    |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                                                                 |
-| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md)                                                   |
+| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting)                                                   |
 | `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name of the instance which you want to access. |
 
 ```elixir
@@ -136,7 +136,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting) feature.
 
 ```elixir
 user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#")
@@ -494,7 +494,7 @@ It allows the usage of all features you can do on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config JSON is based on your [Data Governance](advanced/data-governance.md) settings:
+The URL to your current config JSON is based on your [Data Governance](advanced/data-governance) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`

@@ -27,11 +27,15 @@ module.exports = {
           },
           {
             to: '/targeting/targeting-overview',
-            from: ['/advanced/targeting']
+            from: ['/advanced/targeting',]
           },
           {
             to: '/targeting/user-object',
             from: ['/advanced/user-object']
+          },
+          {
+            to: '/targeting/targeting-rules/segment-condition',
+            from: ['/advanced/targeting/segments/']
           }
         ],
       },

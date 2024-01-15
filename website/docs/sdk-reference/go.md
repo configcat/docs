@@ -83,7 +83,7 @@ Available optional properties:
 | Properties         | Type                       | Description  |
 | ------------------ | -------------------------- | ------------ |
 | `SDKKey`           | `string`                   | SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_. |
-| `DataGovernance`   | `configcat.DataGovernance` | Defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
+| `DataGovernance`   | `configcat.DataGovernance` | Defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance). Available options: `Global`, `EuOnly`. |
 | `BaseUrl`          | `string`                   | _Obsolete_ Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
 | `Cache `           | `ConfigCache`              | Sets a custom cache implementation for the client. [See below](#custom-cache). |
 | `NoWaitForRefresh` | `bool`                     | Defaults to `false`. When it's `true` the typed get methods (`Get[TYPE]Value()`) will never wait for a configuration refresh to complete before returning. When it's `false` and `PollingMode` is `AutoPoll`, the first request may block, when `PollingMode` is `Lazy`, any request may block. |
@@ -119,7 +119,7 @@ Basically all of the value evaluator methods share the same signature, they only
 | -------------- | -------------------------------------------------------------------------------------------------- |
 | `key`          | Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                               |
 | `defaultValue` | This value will be returned in case of an error.                                                   |
-| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
 
 ```go
 boolValue := client.GetBoolValue(
@@ -145,7 +145,7 @@ intValue := client.GetIntValue(
 | -------------- | -------------------------------------------------------------------------------------------------- |
 | `key`          | Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                               |
 | `defaultValue` | This value will be returned in case of an error.                                                   |
-| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
 
 ```go
 details := client.GetBoolValueDetails(
@@ -178,7 +178,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting) feature.
 
 ```go
 user = &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
@@ -452,9 +452,9 @@ and execute the following command:
 configcat config-json get -f v6 -p {YOUR-SDK-KEY} > config.json
 ```
 
-(Depending on your [Data Governance](advanced/data-governance.md) settings, you may need to add the `--eu` switch.)
+(Depending on your [Data Governance](advanced/data-governance) settings, you may need to add the `--eu` switch.)
 
-Alternatively, you can download the config JSON manually, based on your [Data Governance](advanced/data-governance.md) settings:
+Alternatively, you can download the config JSON manually, based on your [Data Governance](advanced/data-governance) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
@@ -664,9 +664,9 @@ and execute the following command:
 configcat config-json get -f v5 -p {YOUR-SDK-KEY} > config.json
 ```
 
-(Depending on your [Data Governance](advanced/data-governance.md) settings, you may need to add the `--eu` switch.)
+(Depending on your [Data Governance](advanced/data-governance) settings, you may need to add the `--eu` switch.)
 
-Alternatively, you can download the config JSON manually, based on your [Data Governance](advanced/data-governance.md) settings:
+Alternatively, you can download the config JSON manually, based on your [Data Governance](advanced/data-governance) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`

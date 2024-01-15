@@ -41,7 +41,7 @@ Currently, we are using the `FAQ Page` and `How-to` types.
    The .json file's location should be under the website/src/schema-markup/... folder. Please use the same directory structure just like at the docs part.
 
 2. Usage
-   In the .md files you can inject the schema markup with a similar code:
+   In the  files you can inject the schema markup with a similar code:
 
 ```javascript
 export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json');

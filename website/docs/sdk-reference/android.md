@@ -108,7 +108,7 @@ These are the available options on the `Options` class:
 
 | Options                                                       | Description                                                                                                                                                                                                                                                                                        |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. |
+| `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance). Available options: `Global`, `EuOnly`. |
 | `baseUrl(string)`                                             | _Obsolete_ Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                                               |
 | `httpClient(OkHttpClient)`                                    | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient).                                                                                                                                                 |
 | `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
@@ -131,7 +131,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 
 ```java
@@ -149,7 +149,7 @@ boolean value = client.getValue(
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 
 ```java
@@ -175,7 +175,7 @@ client.getValueAsync(
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 
 ```java
@@ -212,7 +212,7 @@ The details result contains the following information:
 
 ## User Object
 
-The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting) feature.
 
 ```java
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object

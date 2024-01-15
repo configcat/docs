@@ -11,7 +11,7 @@ export const LaravelSchema = require('@site/src/schema-markup/sdk-reference/comm
 [![Star on GitHub](https://img.shields.io/github/stars/pod-point/laravel-configcat.svg?style=social)](https://github.com/pod-point/laravel-configcat/stargazers)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/pod-point/laravel-configcat.svg?style=flat-square)](https://packagist.org/packages/pod-point/laravel-configcat)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/pod-point/laravel-configcat/run-tests.yml?branch=main&label=tests)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/Pod-Point/laravel-configcat/blob/main/LICENSE.md)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/Pod-Point/laravel-configcat/blob/main/LICENSE)
 [![Total Downloads](https://img.shields.io/packagist/dt/pod-point/laravel-configcat.svg?style=flat-square)](https://packagist.org/packages/pod-point/laravel-configcat)
 
 :::caution
@@ -253,7 +253,7 @@ Please see our [Releases](https://github.com/pod-point/laravel-configcat/release
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/Pod-Point/laravel-configcat/blob/main/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](https://github.com/Pod-Point/laravel-configcat/blob/main/CONTRIBUTING) for details.
 
 ## Credits
 
@@ -264,4 +264,4 @@ Please see [CONTRIBUTING](https://github.com/Pod-Point/laravel-configcat/blob/ma
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/Pod-Point/laravel-configcat/blob/main/LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](https://github.com/Pod-Point/laravel-configcat/blob/main/LICENSE) for more information.

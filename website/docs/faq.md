@@ -26,7 +26,7 @@ You can always check your Usage & Quota [here](https://app.configcat.com/organiz
 ### Where can I find and download my invoices?
 
 All the invoices we issued are available for download from the [Billing & Invoices page.](https://app.configcat.com/organization/billing).
-You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Billing & Invoices page.
+You need to have a [Billing Manager](organization/#billing-manager-role) role to access the Billing & Invoices page.
 
 ### Is it possible to pay via wire transfer?
 
@@ -35,7 +35,7 @@ Using a credit card via the ConfigCat Dashboard is the preferred way of payment,
 ### How do I upgrade / downgrade my billing plan?
 
 You can change your billing plan on the [Plans](https://app.configcat.com/organization/plans) page.
-You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Plans page.
+You need to have a [Billing Manager](organization/#billing-manager-role) role to access the Plans page.
 
 ### Can I get a discounted rate?
 
@@ -56,12 +56,12 @@ Please note: Switching emails means you'll lose preferences from your old accoun
 ### How do I change the billing email address the way I receive my invoices?
 
 Go to the [Billing & Invoices page.](https://app.configcat.com/organization/billing) And click the `Update billing details` link.
-You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Billing & Invoices page.
+You need to have a [Billing Manager](organization/#billing-manager-role) role to access the Billing & Invoices page.
 
 ### How do I change my payment method or billing information?
 
 Go to the [Billing & Invoices page.](https://app.configcat.com/organization/billing) and click the `Update billing details` link.
-You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Billing & Invoices page.
+You need to have a [Billing Manager](organization/#billing-manager-role) role to access the Billing & Invoices page.
 
 ### The ChargeBee payment gets stuck | Throws an error
 
@@ -70,12 +70,12 @@ If you're using Firefox, try switching to a Chromium-based browser that has exte
 ### How do I cancel my account?
 
 Go to the [Plans](https://app.configcat.com/organization/plans) page and click the `Switch Plan` button under the Free plan.
-You need to have a [Billing Manager](organization.md/#billing-manager-role) role to access the Plans page.
+You need to have a [Billing Manager](organization/#billing-manager-role) role to access the Plans page.
 
 ### How do I change my currency?
 
 Go to the [Plans](https://app.configcat.com/organization/plans) page and use the currency toggle to switch between USD and EUR.
-You need to have a [Billing Manager](organization.md#billing-manager-role) role to access the Plans page.
+You need to have a [Billing Manager](organization#billing-manager-role) role to access the Plans page.
 
 ## Security
 
@@ -195,11 +195,11 @@ Also, consider the following:
 - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)
 - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)
 
-[More on stickiness and consistency](advanced/targeting.md/#stickiness--consistency)
+[More on stickiness and consistency](advanced/targeting/#stickiness--consistency)
 
 ### How to use targeting rules based on sensitive data?
 
-If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Confidential text comparators](advanced/targeting.md/#confidential-text-comparators).
+If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Confidential text comparators](advanced/targeting/#confidential-text-comparators).
 
 ## Technical Debt
 

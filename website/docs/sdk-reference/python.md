@@ -79,7 +79,7 @@ _ConfigCat Client_ is responsible for:
 | `connect_timeout_seconds` | The number of seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). | 10      |
 | `read_timeout_seconds`    | The number of seconds to wait for the server to respond before giving up.                                                   | 30      |
 | `flag_overrides`          | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)                                | None    |
-| `data_governance`         | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`. | `Global`|
+| `data_governance`         | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance). Available options: `Global`, `EuOnly`. | `Global`|
 | `default_user`            | Sets the default user. [More about default user](#default-user). | None |
 | `hooks`                   | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks). | None |
 | `offline`                 | Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode). | False |
@@ -105,7 +105,7 @@ These clients can be closed all at once with the `configcatclient.close_all()` m
 | --------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`           | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
 
 ```python
 value = client.get_value(
@@ -124,7 +124,7 @@ object with more detailed information about the evaluation result.
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
 
 ```python
 details = client.get_value_details(
@@ -150,7 +150,7 @@ The details result contains the following information:
 
 ## User Object
 
-The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting) feature.
 
 ```python
 user_object = User('#UNIQUE-USER-IDENTIFIER#')
@@ -454,9 +454,9 @@ and execute the following command:
 configcat config-json get -f v6 -p {YOUR-SDK-KEY} > config.json
 ```
 
-(Depending on your [Data Governance](advanced/data-governance.md) settings, you may need to add the `--eu` switch.)
+(Depending on your [Data Governance](advanced/data-governance) settings, you may need to add the `--eu` switch.)
 
-Alternatively, you can download the config JSON manually, based on your [Data Governance](advanced/data-governance.md) settings:
+Alternatively, you can download the config JSON manually, based on your [Data Governance](advanced/data-governance) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
@@ -604,9 +604,9 @@ and execute the following command:
 configcat config-json get -f v5 -p {YOUR-SDK-KEY} > config.json
 ```
 
-(Depending on your [Data Governance](advanced/data-governance.md) settings, you may need to add the `--eu` switch.)
+(Depending on your [Data Governance](advanced/data-governance) settings, you may need to add the `--eu` switch.)
 
-Alternatively, you can download the config JSON manually, based on your [Data Governance](advanced/data-governance.md) settings:
+Alternatively, you can download the config JSON manually, based on your [Data Governance](advanced/data-governance) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
@@ -750,7 +750,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 | Parameters | Description                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `user`     | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`     | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#')

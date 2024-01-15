@@ -9,65 +9,65 @@ Integrate ConfigCat with your technology stack and leverage all the benefits of 
 ## Slack
 
 Get a notification in Slack when a feature flag changes.
-[Documentation](integrations/slack.md)
+[Documentation](integrations/slack)
 
 ## Jira
 
 Turn features On / Off right from a linked Issue on your Jira board.
-[Documentation](integrations/jira.md)
+[Documentation](integrations/jira)
 
 ## Trello
 
 Turn features On / Off right from a linked Card on your Trello board.
-[Documentation](integrations/trello.md)
+[Documentation](integrations/trello)
 
 ## monday
 
 Turn features On / Off right from a linked item on your monday board.
-[Documentation](integrations/monday.md)
+[Documentation](integrations/monday)
 
 ## DataDog
 
 Ensure that every setting change in ConfigCat is sent to DataDog as an Event.
-[Documentation](integrations/datadog.md)
+[Documentation](integrations/datadog)
 
 ## Zapier
 
 Connect ConfigCat to 2,000+ other web services. Automated connections called Zaps, set up in minutes with no coding, can automate your day-to-day tasks and build workflows between apps that otherwise wouldn't be possible.
-[Documentation](integrations/zapier.md)
+[Documentation](integrations/zapier)
 
 ## Zoho Flow
 
 Connect ConfigCat to 500+ other web apps without any code. It helps you automate day-to-day tasks and build complex business workflows within minutes.
-[Documentation](integrations/zoho-flow.md)
+[Documentation](integrations/zoho-flow)
 
 ## CircleCI
 
 Discover feature flag usages in your source code and upload the found code references to ConfigCat.
-[Documentation](integrations/circleci.md)
+[Documentation](integrations/circleci)
 
 ## GitHub Actions
 
 Discover feature flag usages in your source code and upload the found code references to ConfigCat.
-[Documentation](integrations/github.md)
+[Documentation](integrations/github)
 
 ## Bitbucket Pipe
 
 Discover feature flag usages in your source code and upload the found code references to ConfigCat.
-[Documentation](integrations/bitbucket.md)
+[Documentation](integrations/bitbucket)
 
 ## Bitrise Step
 
 Discover feature flag usages in your source code and upload the found code references to ConfigCat.
-[Documentation](integrations/bitrise.md)
+[Documentation](integrations/bitrise)
 
 ## Terraform
 
 Manage feature flags directly from Terraform HCL scripts.
 
-[Documentation](integrations/terraform.md)
+[Documentation](integrations/terraform)
 
 ## Amplitude
 
 Annotate your Amplitude charts with feature flag changes.
-[Documentation](integrations/amplitude.md)
+[Documentation](integrations/amplitude)
