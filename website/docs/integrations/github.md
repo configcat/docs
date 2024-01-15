@@ -1,6 +1,6 @@
 ---
 id: github
-title: GitHub Action - Scan source code for unused feature flags
+title: GitHub Action - Scan your code for unused feature flags
 description: ConfigCat GitHub Action. This is a step-by-step guide on how to use the ConfigCat GitHub Action to eliminate tech debt in your project.
 ---
 

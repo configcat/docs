@@ -1,6 +1,6 @@
 ---
 id: zapier
-title: Zapier Zap - Build workflows based on feature flags
+title: Zapier Zap - Build feature flag workflows
 description: ConfigCat Zapier integration. This is a step-by-step guide on how to use the ConfigCat Zapier integration to connect manage features from thousands of Zapier apps.
 ---
 
