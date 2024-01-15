@@ -553,7 +553,7 @@ The URL to your current config JSON is based on your [Data Governance](advanced/
 
 You can set up the SDK to load your feature flag & setting overrides from a map.
 
-TODO: Link GitHub issue for this.
+**Coming soon**: [https://github.com/configcat/unreal-engine-sdk/issues/8](Support for Flag overrides via Map #8)
 
 :::info
 The Unreal Engine SDK doesn't support programmatically setting a flag map override currently.
@@ -627,9 +627,7 @@ TArray<FConfigCatEvaluationDetails> AllValueDetails = ConfigCat->GetAllValueDeta
 
 ## Custom Cache
 
-The _ConfigCat SDK_ stores the downloaded config data in a local cache to minimize network traffic and enhance client performance.
-
-TODO: Link GitHub issue for this.
+**Coming soon**: [https://github.com/configcat/unreal-engine-sdk/issues/9](Support for Custom Cache #9)
 
 :::info
 The Unreal Engine SDK doesn't support custom cache implementations currently.
@@ -658,9 +656,9 @@ ConfigCat->ForceRefresh();
 
 ## Using ConfigCat behind a proxy
 
-Provide your own network credentials (username/password), and proxy server settings (proxy server/port) in the ConfigCat `ProjectSettings`.
-
-<img className="unreal-settings-proxy zoomable" src="/docs/assets/unreal/settings-proxy.png" alt="Unreal Engine Settings Proxy" />
+:::info
+The Unreal Engine HTTP module doesn't support running behinde a proxy.
+:::
 
 ## Changing the default HTTP timeout
 
@@ -713,17 +711,11 @@ Also, we recommend using [confidential targeting comparators](/advanced/targetin
 
 ## Sample Applications
 
-TODO: Create one for Unreal: 
-
-Check out our Sample Application how they use the ConfigCat SDK
-
-- <a href="https://github.com/configcat/cpp-sdk/tree/main/samples/" target="_blank">ConfigCat C++ Console Sample App</a>
+**Coming soon**
 
 ## Guides
 
-TODO: Create one for Unreal: 
-
-See <a href="https://configcat.com/blog/2022/10/21/configcat-cpp-sdk-announcement/" target="_blank">this</a> guide on how to use ConfigCat's C++ SDK.
+**Coming soon**
 
 ## Look Under the Hood
 
