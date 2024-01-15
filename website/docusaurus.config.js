@@ -25,6 +25,14 @@ module.exports = {
             to: '/sdk-reference/dotnet',
             from: '/sdk-reference/csharp',
           },
+          {
+            to: '/targeting/targeting-overview',
+            from: ['/advanced/targeting']
+          },
+          {
+            to: '/targeting/user-object',
+            from: ['/advanced/user-object']
+          }
         ],
       },
     ],
