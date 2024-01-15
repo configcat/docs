@@ -11,12 +11,12 @@ Config V2 is a new version of ConfigCat. It comes with a new dashboard, API, SDK
 - A bunch of new features and improvements listed below.
 - New config editor UI on the Dashboard.
 - [New config JSON schema.](https://github.com/configcat/config-json)
-- New API: [See the API Docs.](TODO)
-- New SDKs: [See the supported SDK versions.](TODO)
+- New API: [See the API Docs.]
+- New SDKs: [See the supported SDK versions.]
 
-## [How to migrate from Config V1 to Config V2?](TODO)
+## [How to migrate from Config V1 to Config V2?]
 
-See the [Config V2 Migration Guide](TODO). If you get stuck or have any questions about the migration, [contact us](TODO).
+See the [Config V2 Migration Guide]. If you get stuck or have any questions about the migration, [contact us].
 
 ## New features
 

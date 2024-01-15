@@ -31,14 +31,14 @@ The IF part contains the conditions. The conditions are evaluated in order, from
 The conditions are evaluated in an **AND** relationship, meaning that all of them must evaluate to true for the targeting rule to match.
 
 The conditions can be added to the targeting rule in the dashboard. There three types of conditions:
-- [User conditions - User attribute based targeting](TODO)
-- [Prerequisite conditions - Feature flag based targeting](TODO)
-- [Segment conditions - Segment based targeting](TODO)
+- [User conditions - User attribute based targeting]
+- [Prerequisite conditions - Feature flag based targeting]
+- [Segment conditions - Segment based targeting]
 
 ### THEN part
 
-The THEN part contains the setting value that will be used if the targeting rule matches. The setting value can be a simple value or a [percentage-based value](TODO).
-If the targeting rules do not match or no [Uer Object](TODO) is given, the fallback value ("To Unidentified" / "To all other") will be used.
+The THEN part contains the setting value that will be used if the targeting rule matches. The setting value can be a simple value or a [percentage-based value].
+If the targeting rules do not match or no [Uer Object] is given, the fallback value ("To Unidentified" / "To all other") will be used.
 
 ## Multiple targeting rules and ordering
 You can add multiple targeting rules to a feature flag. The targeting rules are evaluated in order, from top to bottom.

@@ -10,7 +10,7 @@ A user condition is a condition that is based on the evaluation of a user attrib
 
 ## How does it work?
 
-The user condition is evaluated with the same [User Object](TODO). The user attribute's value is then compared to the comparison value that you set on the Dashboard. If the user attribute's value is equal to the comparison value, the targeting rule is a match. Otherwise, the targeting rule is not a match.
+The user condition is evaluated with the same [User Object]. The user attribute's value is then compared to the comparison value that you set on the Dashboard. If the user attribute's value is equal to the comparison value, the targeting rule is a match. Otherwise, the targeting rule is not a match.
 
 ## How to add a user condition?
 

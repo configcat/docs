@@ -11,8 +11,8 @@ Using this feature you will be able to set different setting values for differen
 
 ## How does it work?
 
-1. You define a [Targeting rule](TODO) on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>.
-2. You pass a [User Object](TODO) to the ConfigCat SDK in your application.
+1. You define a [Targeting rule] on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>.
+2. You pass a [User Object] to the ConfigCat SDK in your application.
 3. ConfigCat will use the User Object and the Targeting Rule to determine which features are enabled for the user.
 
 ## What is what?
@@ -27,11 +27,11 @@ The setting is a **string**, **integer**, **double** value that can be used to c
 
 ### Targeting Rule
 
-A targeting rule is a collection of conditions (IF / AND items) and values (THEN item). It is used to determine whether a feature flag or setting is enabled or not for a specific user. More about targeting rules [here](TODO).
+A targeting rule is a collection of conditions (IF / AND items) and values (THEN item). It is used to determine whether a feature flag or setting is enabled or not for a specific user. More about targeting rules [here].
 
 ### Condition (IF / AND item)
 
-A condition is a boolean expression that can be evaluated to true or false. It is used to determine whether a targeting rule is a match or not for a specific user. More about conditions [here](TODO).
+A condition is a boolean expression that can be evaluated to true or false. It is used to determine whether a targeting rule is a match or not for a specific user. More about conditions [here].
 
 ### Value
 
@@ -39,15 +39,15 @@ A value is the served value of a feature flag or setting. It can be a boolean, s
 
 ### Percentage option
 
-A percentage option is a value that is served to a specific percentage of users. More about percentage options [here](TODO).
+A percentage option is a value that is served to a specific percentage of users. More about percentage options [here].
 
 ### "To all users" value / Fallback value
 
-A fallback value is a value that is served to users who are not matched by any targeting rule. Or serves as a fallback value if a [User Object](TODO) is not given.
+A fallback value is a value that is served to users who are not matched by any targeting rule. Or serves as a fallback value if a [User Object] is not given.
 
 ### User Object
 
-A user object is a collection of user attributes that can be used to target users. You have to pass a user object to the ConfigCat SDK in your application to use the targeting feature. More about user object [here](TODO). 
+A user object is a collection of user attributes that can be used to target users. You have to pass a user object to the ConfigCat SDK in your application to use the targeting feature. More about user object [here]. 
 
 
 ## Examples

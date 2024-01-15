@@ -8,7 +8,7 @@ This guide will help you migrate from Config V1 to Config V2.
 
 ## What is Config V2?
 
-Config V2 is the next generation of ConfigCat. It comes with a new dashboard, API, SDKs, and features. It's not backward compatible with Config V1. Read more about the new features in the [Config V2 Overview](TODO).
+Config V2 is the next generation of ConfigCat. It comes with a new dashboard, API, SDKs, and features. It's not backward compatible with Config V1. Read more about the new features in the [Config V2 Overview].
 
 ## A few things to consider before migration
 
@@ -40,7 +40,7 @@ In your application, update the ConfigCat SDK Key to the one that belongs to the
 
 ### Step 4: Deploy your application
 
-Deploy your application to production and wait until all your users are migrated to the new config. You can check the [migration status](TODO) on the ConfigCat Dashboard on the V2 config's page.
+Deploy your application to production and wait until all your users are migrated to the new config. You can check the [migration status] on the ConfigCat Dashboard on the V2 config's page.
 
 ### Step 5: Clean up
 

@@ -20,13 +20,13 @@ Percentage options are used to define the percentage of users that will receive 
 
 ## How does it work? - Anatomy of a percentage option
 
-The grouping is random and based on the [User Object](TODO)'s identifier by default. You can also use [other user attributes](TODO) to evaluate the percentage options. Percentage options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
+The grouping is random and based on the [User Object]'s identifier by default. You can also use [other user attributes] to evaluate the percentage options. Percentage options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
 - **Sticky** means that the same user will always get the same value for a specific feature flag.
 - **Consistent** means that the same user will always get the same value for a specific feature flag across all SDKs.
 
-If the required attribute is not present in the [User Object](TODO), the [fallback value](TODO) will be served.
+If the required attribute is not present in the [User Object], the [fallback value] will be served.
 
-Read more about the technical details of the [percentage evaluation here](TODO).
+Read more about the technical details of the [percentage evaluation here].
 
 Percentage-based targeting consists of **% value** and the **Served value** pairs.
 
