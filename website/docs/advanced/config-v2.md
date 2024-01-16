@@ -1,7 +1,7 @@
 ---
 id: config-v2
 title: Config V2 Overview
-description: Config V2 is the next generation of ConfigCat. It comes with a new dashboard, API, SDKs, and features.
+description: Config V2 is the next generation of ConfigCat. It comes with a new dashboard, API, SDKs and features.
 ---
 
 Config V2 is a new version of ConfigCat. It comes with a new dashboard, API, SDKs, and features.
@@ -10,19 +10,21 @@ Config V2 is a new version of ConfigCat. It comes with a new dashboard, API, SDK
 
 - A bunch of new features and improvements listed below.
 - New config editor UI on the Dashboard.
-- [New config JSON schema.](https://github.com/configcat/config-json)
+- [New and improved config JSON schema.](https://github.com/configcat/config-json)
 - New API: [See the API Docs.](https://api.configcat.com/docs/)
 - New SDKs: [See the supported SDK versions.](advanced/config-v2-sdk-compatibility)
 
 ## How to migrate from Config V1 to Config V2?
 
-See the [Config V2 Migration Guide](advanced/config-v2-migration-guide). If you get stuck or have any questions about the migration, [contact us](https://configcat.com/support/).
+See the [Config V2 Migration Guide](advanced/config-v2-migration-guide). If you get stuck or have any questions about the migration, feel free to [contact us](https://configcat.com/support/).
 
 ## New features
 
 ### AND conditions
 
-With AND conditions, you can create more complex targeting rule sets for your feature flags. You can add multiple conditions to a targeting rule and they will be evaluated as a logical AND.
+With AND conditions, you can define more complex targeting rules, such as "serve this value for the users who use my Android app AND whose email domain is '@example.com'".
+
+You can add multiple conditions to a targeting rule and they will be evaluated as a logical AND.
 
 ### New comparators
 
