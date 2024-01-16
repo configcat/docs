@@ -1,10 +1,10 @@
 ---
-id: config-v2-sdk-support-table
-title: Config V2 SDK Support Table
+id: config-v2-sdk-compatibility
+title: Config V2 SDK Compatibility
 description: This table shows which SDK versions support Config V2.
 ---
 
-This table shows which SDK versions already support Config V2.
+This table shows which SDK versions support Config V2.
 
 | SDK                             | Version | Release Notes                                                   |
 | ------------------------------- |---------| --------------------------------------------------------------- |
