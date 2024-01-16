@@ -16,7 +16,7 @@ Config V2 is a new version of ConfigCat. It comes with a new dashboard, API, SDK
 
 ## How to migrate from Config V1 to Config V2?
 
-See the [Config V2 Migration Guide](advanced/config-v2-migration-guide). If you get stuck or have any questions about the migration, feel free to [contact us](https://configcat.com/support/).
+See the [Config V2 Migration Guide](/advanced/config-v2-migration-guide). If you get stuck or have any questions about the migration, feel free to [contact us](https://configcat.com/support/).
 
 ## New features
 

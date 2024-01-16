@@ -6,8 +6,8 @@ description: A detailed guide on how to migrate from Config V1 to Config V2.
 
 This guide will help you migrate from Config V1 to Config V2.
 
-:::note
-This migration guide is for ConfigCat users who have Config V2 enabled. If you don't have Config V2 enabled, you can contact us to add you to the Beta program.
+:::info
+This migration guide is for ConfigCat users who have Config V2 enabled. If you don't have Config V2 enabled, you can [contact us](https://configcat.com/support/) to add you to the Beta program.
 :::
 
 ## What is Config V2?
@@ -16,7 +16,7 @@ Config V2 is the next generation of ConfigCat. It comes with a new Dashboard, Pu
 
 Config V2 supports all the features of V1, so you can continue using those, but it offers interesting new features as well. However, you won't be able to use the new features with the V1 versions of the Dashboard, Public Management API and SDKs.
 
-Read more about the new features in the [Config V2 Overview](advanced/config-v2).
+Read more about the new features in the [Config V2 Overview](/advanced/config-v2).
 
 ## A few things to consider before migration
 
