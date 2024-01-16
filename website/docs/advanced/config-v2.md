@@ -24,7 +24,7 @@ See the [Config V2 Migration Guide](advanced/config-v2-migration-guide). If you 
 
 With AND conditions, you can define more complex targeting rules, such as "serve this value for the users who use my Android app AND whose email domain is '@example.com'".
 
-You can add multiple conditions to a targeting rule and they will be evaluated as a logical AND.
+You can add multiple conditions to a targeting rule and they will be evaluated with an AND connection between them.
 
 ### New comparators
 
