@@ -8,7 +8,7 @@ This guide will help you migrate from Config V1 to Config V2.
 
 ## What is Config V2?
 
-Config V2 is the next generation of ConfigCat. It comes with a new dashboard, API, SDKs, and features. It's not backward compatible with Config V1. Read more about the new features in the [Config V2 Overview].
+Config V2 is the next generation of ConfigCat. It comes with a new dashboard, API, SDKs, and features. It's not backward compatible with Config V1. Read more about the new features in the [Config V2 Overview](advanced/config-v2).
 
 ## A few things to consider before migration
 

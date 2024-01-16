@@ -1,6 +1,6 @@
 ---
 id: bitbucket
-title: Bitbucket Pipe - Scan source code for unused feature flags
+title: Bitbucket Pipe - Scan your code for unused feature flags
 description: ConfigCat Bitbucket Pipe integration. This is a step-by-step guide on how to use the ConfigCat Bitbucket integration to eliminate tech debt in your project.
 ---
 

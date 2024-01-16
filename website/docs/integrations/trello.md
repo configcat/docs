@@ -1,6 +1,6 @@
 ---
 id: trello
-title: Trello Power-Up - Manage feature flags right from your Trello board
+title: Trello Power-Up - Manage feature flags from Trello
 description: ConfigCat Trello Power-Up. This is a step-by-step guide on how to connect and manage feature flags from Trello boards and cards.
 ---
 

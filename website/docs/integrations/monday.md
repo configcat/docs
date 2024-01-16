@@ -1,6 +1,6 @@
 ---
 id: monday
-title: monday.com - Manage feature flags right from your monday.com board
+title: monday.com - Manage feature flags from monday
 description: ConfigCat monday app. This is a step-by-step guide on how to connect and manage feature flags from monday.com boards and items.
 ---
 
