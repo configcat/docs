@@ -44,7 +44,7 @@ With comparison value hints, you can associate arbitrary text with your comparis
 
 ### Percentage options for targeting rules
 
-You can add percentage options to your targeting rules. This is useful if you want to create more complex targeting rules, such as "serve this value for the 20% of the users who use my Android app and serve that value for the 80% of them".
+You can add percentage options to your targeting rules. This is useful if you want to create more complex targeting rules, such as "turn on the feature for 20% of the users who use my Android app".
 
 ### Custom percentage attributes
 

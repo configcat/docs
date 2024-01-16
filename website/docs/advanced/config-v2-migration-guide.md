@@ -18,12 +18,12 @@ Read more about the new features in the [Config V2 Overview](advanced/config-v2)
 - After Config V2 launches, every newly created config will be a V2 config by default.
 - You can migrate your V1 configs to V2. That will mean that a V1 and a V2 version of your config will be available at the same time. The V2 version will have a new SDK key for each environment.
 - There is no automatic sync between the V1 and V2 configs. If you want to keep them in sync, you have to manually update the V2 config when you make changes to the V1 config and vice versa.
-- Considering the above, it's recommended to migrate your V1 configs to V2 as quickly as possible to avoid confusion. However, there is no pressure to migrate. Although we have plans to phase out V1 eventually, you can stay on it for a long time.
-- There is no pressure to migrate. You can stay on V1 for a long time.
+- Considering the above, it's recommended to migrate your V1 configs to V2 as quickly as possible to avoid confusion. 
+- There is no pressure to migrate. Although we have plans to phase out V1 eventually, you can stay on it for a long time.
 
 ## Migrating from Config V1 to Config V2
 
-To migrate from Config V1 to Config V2, you have to create a new V2 config and update your applications to use the new config. The migration process is the following:
+To migrate from Config V1 to Config V2, you have to copy your V1 config to a new V2 one and update your applications to use the new config. The migration process is the following:
 
 ### Step 1: Create the V2 config
 
