@@ -28,7 +28,7 @@ You can add multiple conditions to a targeting rule and they will be evaluated a
 
 ### New comparators
 
-With the new comparators, you can create date based targeting rules and schedule releases, compare arrays etc.
+With the new comparators, you can create targeting rules which are based on dates, based on comparing arrays etc.
 
 - New text and sensitive text comparators: EQUALS, NOT EQUALS, STARTS WITH ANY OF, ENDS WITH ANY OF, NOT STARTS WITH ANY OF, NOT ENDS WITH ANY OF.
 - New array comparators: ARRAY CONTAINS ANY OF, ARRAY NOT CONTAINS ANY OF.
@@ -36,16 +36,16 @@ With the new comparators, you can create date based targeting rules and schedule
 
 ### Prerequisite flags
 
-With prerequisite flags, you can create feature flags that depend on other feature flags. Prerequisite feature flags are particularly useful for managing complex feature dependencies and ensuring a smooth user experience during feature rollouts.
+With prerequisite flags, you can create feature flags that depend on other feature flags. Prerequisite feature flags (aka. master feature flag, inter-dependent feature flag, global toggle) are particularly useful for managing complex feature dependencies and ensuring a smooth user experience during feature rollouts.
 
 ### Comparison value hints
 
-With comparison value hints, you can add hints to your comparison values. This way you can add a description to your comparison value list items that helps you remember what they are for.
+With comparison value hints, you can associate arbitrary text with your comparison values. This way you can add a description to your comparison value list items that helps you remember what they are for.
 
 ### Percentage options for targeting rules
 
-You can add percentage options to your targeting rules. This is useful if you want to create percentage options based on your user attributes.
+You can add percentage options to your targeting rules. This is useful if you want to create more complex targeting rules, such as "serve this value for the 20% of the users who use my Android app and serve that value for the 80% of them".
 
 ### Custom percentage attributes
 
-With custom percentage attributes, you can create percentage options based on custom attributes. This way you can create percentage options based on any of your user attributes.
+With custom percentage attributes, you can create percentage options based on custom attributes. This way you can create percentage options based on any of your user attributes. For example, you can create a percentage option that is based on the user's company or organization. So you can serve a value for 20% of the users from company A and serve another value for 80% of the users from company B.
