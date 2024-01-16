@@ -7,13 +7,13 @@ description: This table shows which SDK versions support Config V2.
 This table shows which SDK versions already support Config V2.
 
 | SDK                             | Version | Release Notes                                                   |
-| ------------------------------- | ------- | --------------------------------------------------------------- |
+| ------------------------------- |---------| --------------------------------------------------------------- |
 | .NET                            | v9.0.0  | https://github.com/configcat/.net-sdk/releases                  |
 | C++                             | -       | https://github.com/configcat/cpp-sdk/releases                   |
 | Dart (Flutter)                  | -       | https://github.com/configcat/dart-sdk/releases                  |
 | Elixir                          | -       | https://github.com/configcat/elixir-sdk/releases                |
 | Go                              | -       | https://github.com/configcat/go-sdk/releases                    |
-| Java                            | -       | https://github.com/configcat/java-sdk/releases                  |
+| Java                            | v9.0.0  | https://github.com/configcat/java-sdk/releases                  |
 | Java (Android)                  | -       | https://github.com/configcat/android-sdk/releases               |
 | JavaScript                      | v9.0.0  | https://github.com/configcat/js-sdk/releases                    |
 | JavaScript (Chromium Extension) | v2.0.0  | https://github.com/configcat/js-chromium-extension-sdk/releases |
