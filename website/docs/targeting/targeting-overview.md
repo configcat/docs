@@ -17,7 +17,7 @@ Using this feature you will be able to set different setting values for differen
 
 ## What is what?
 *TODO - new screenshot*
-![Targeting Overview](../../static/assets/targeting/targeting.png)
+![Targeting Overview](../../static/assets/targeting/targeting-overview/targeting.png)
 
 ### Feature Flag / Setting
 
@@ -49,8 +49,29 @@ A fallback value is a value that is served to users who are not matched by any t
 
 A user object is a collection of user attributes that can be used to target users. You have to pass a user object to the ConfigCat SDK in your application to use the targeting feature. More about user object [here]. 
 
-
 ## Examples
+
+### Phased rollout / Canary release / Percentage rollout Scenario
+
+**Intent:** In our sample company (Galactic AI Inc.), we want to release a new feature (Advanced Cognition) to 10% of our users and everyone at our company. We want to make sure that the new feature is working as expected before we release it to everyone.
+
+**Solution:** Have a feature flag called `Enable Advanced Cognition` with a percentage option of 10% and a targeting rule that matches everyone whose email address ends with `@galactic.example`.
+
+#### Dashboard
+![Targeting Example 1](../../static/assets/targeting/targeting-overview/example1.png)
+
+#### Code
+
+```js
+// Create a user object
+var user = {
+    identifier: '867428724',
+    email: 'isaac@galactic.example'
+};
+
+// Get the value of the feature flag
+```
+
 
 *TODO - come up with new examples and screenshots*
 
