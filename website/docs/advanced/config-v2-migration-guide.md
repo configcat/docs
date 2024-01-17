@@ -29,7 +29,7 @@ Read more about the new features in the [Config V2 Overview](/advanced/config-v2
 
 ## Migrating from Config V1 to Config V2
 
-To migrate from Config V1 to Config V2, you have to copy your V1 config to a new V2 one and update your applications to use the new config. The migration process is the following:
+The migration process starts with copying your V1 config to a new V2 one and updating your applications to use the new config. The complete process is the following:
 
 ### Step 1: Create the V2 config
 
