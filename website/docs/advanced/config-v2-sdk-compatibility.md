@@ -14,7 +14,7 @@ This table shows which SDK versions support Config V2. Read more about [Config V
 | Elixir                          | -       | https://github.com/configcat/elixir-sdk/releases                |
 | Go                              | -       | https://github.com/configcat/go-sdk/releases                    |
 | Java                            | v9.0.0  | https://github.com/configcat/java-sdk/releases                  |
-| Java (Android)                  | -       | https://github.com/configcat/android-sdk/releases               |
+| Java (Android)                  | v10.0.0 | https://github.com/configcat/android-sdk/releases               |
 | JavaScript                      | v9.0.0  | https://github.com/configcat/js-sdk/releases                    |
 | JavaScript (Chromium Extension) | v2.0.0  | https://github.com/configcat/js-chromium-extension-sdk/releases |
 | JavaScript (React)              | v4.0.0  | https://github.com/configcat/react-sdk/releases                 |
