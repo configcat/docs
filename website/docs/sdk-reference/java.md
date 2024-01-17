@@ -26,7 +26,7 @@ export const JavaSchema = require('@site/src/schema-markup/sdk-reference/java.js
 
 ```groovy title="build.gradle"
 dependencies {
-    implementation 'com.configcat:configcat-java-client:8.+'
+    implementation 'com.configcat:configcat-java-client:9.+'
 }
 ```
 
@@ -37,7 +37,7 @@ dependencies {
 <dependency>
   <groupId>com.configcat</groupId>
   <artifactId>configcat-java-client</artifactId>
-  <version>[8.0.0,)</version>
+  <version>[9.0.0,)</version>
 </dependency>
 ```
 
