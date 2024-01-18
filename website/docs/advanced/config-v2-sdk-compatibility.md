@@ -12,7 +12,7 @@ This table shows which SDK versions support Config V2. Read more about [Config V
 | C++                             | WIP     | https://github.com/configcat/cpp-sdk/releases                   |
 | Dart (Flutter)                  | WIP     | https://github.com/configcat/dart-sdk/releases                  |
 | Elixir                          | WIP     | https://github.com/configcat/elixir-sdk/releases                |
-| Go                              | WIP     | https://github.com/configcat/go-sdk/releases                    |
+| Go                              | v9.0.3  | https://github.com/configcat/go-sdk/releases                    |
 | Java                            | v9.0.0  | https://github.com/configcat/java-sdk/releases                  |
 | Java (Android)                  | WIP     | https://github.com/configcat/android-sdk/releases               |
 | JavaScript                      | v9.4.0  | https://github.com/configcat/js-sdk/releases                    |
