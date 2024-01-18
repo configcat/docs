@@ -65,34 +65,34 @@ In case **attribute is not passed** to the SDK or it's value is **falsy** (unkno
 Consider using Confidential text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
 :::
 
-| Comparator                         | Description                                                                                |
-| ---------------------------------- | ------------------------------------------------------------------------------------------ |
-| EQUALS (cleartext)                 | It matches when the comparison attribute is equal to the comparison value.                 |
-| NOT EQUALS (cleartext)             | It matches when the comparison attribute is not equal to the comparison value.             |
-| IS ONE OF (cleartext)              | It matches when the comparison attribute is equal to any of the comparison values          |
-| IS NOT ONE OF (cleartext)          | It matches when the comparison attribute is not equal to any of the comparison values.     |
-| STARTS WITH ANY OF (cleartext)     | It matches when the comparison attribute starts with any of the comparison values.         |
-| ENDS WITH ANY OF (cleartext)       | It matches when the comparison attribute ends with any of the comparison values.           |
-| NOT STARTS WITH ANY OF (cleartext) | It matches when the comparison attribute does not start with any of the comparison values. |
-| NOT ENDS WITH ANY OF (cleartext)   | It matches when the comparison attribute does not end with any of the comparison values.   |
+| Comparator                         | Description                                                                                     |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------- |
+| EQUALS (cleartext)                 | It matches when the comparison attribute is equal to the comparison value.                      |
+| NOT EQUALS (cleartext)             | It matches when the comparison attribute is not equal to the comparison value.                  |
+| IS ONE OF (cleartext)              | It matches when the comparison attribute is equal to any of the comparison values               |
+| IS NOT ONE OF (cleartext)          | It matches when the comparison attribute is not equal to any of the comparison values.          |
+| STARTS WITH ANY OF (cleartext)     | It matches when the comparison attribute starts with any of the comparison values.              |
+| ENDS WITH ANY OF (cleartext)       | It matches when the comparison attribute ends with any of the comparison values.                |
+| CONTAINS ANY OF (cleartext)        | It matches when the comparison attribute contains any comparison values as a substring.         |
+| NOT STARTS WITH ANY OF (cleartext) | It matches when the comparison attribute does not start with any of the comparison values.      |
+| NOT ENDS WITH ANY OF (cleartext)   | It matches when the comparison attribute does not end with any of the comparison values.        |
+| NOT CONTAINS ANY OF (cleartext)    | It matches when the comparison attribute does not contain any comparison values as a substring. |
 
 #### Confidential text comparators
 
 We recommend using confidential text comparators especially in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
 In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed. This can cause an increase in the size of the config.json file and the overall network traffic. It is recommended to use confidential comparators only when necessary.
 
-| Comparator                      | Description                                                                                     |
-| ------------------------------- | ----------------------------------------------------------------------------------------------- |
-| EQUALS (hashed)                 | It matches when the comparison attribute is equal to the comparison value.                      |
-| NOT EQUALS (hashed)             | It matches when the comparison attribute is not equal to the comparison value.                  |
-| IS ONE OF (hashed)              | It matches when the comparison attribute is equal to any of the comparison values               |
-| IS NOT ONE OF (hashed)          | It matches when the comparison attribute is not equal to any of the comparison values.          |
-| STARTS WITH ANY OF (hashed)     | It matches when the comparison attribute starts with any of the comparison values.              |
-| ENDS WITH ANY OF (hashed)       | It matches when the comparison attribute ends with any of the comparison values.                |
-| NOT STARTS WITH ANY OF (hashed) | It matches when the comparison attribute does not start with any of the comparison values.      |
-| NOT ENDS WITH ANY OF (hashed)   | It matches when the comparison attribute does not end with any of the comparison values.        |
-| CONTAINS ANY OF (hashed)        | It matches when the comparison attribute contains any comparison values as a substring.         |
-| NOT CONTAINS ANY OF (hashed)    | It matches when the comparison attribute does not contain any comparison values as a substring. |
+| Comparator                      | Description                                                                                |
+| ------------------------------- | ------------------------------------------------------------------------------------------ |
+| EQUALS (hashed)                 | It matches when the comparison attribute is equal to the comparison value.                 |
+| NOT EQUALS (hashed)             | It matches when the comparison attribute is not equal to the comparison value.             |
+| IS ONE OF (hashed)              | It matches when the comparison attribute is equal to any of the comparison values          |
+| IS NOT ONE OF (hashed)          | It matches when the comparison attribute is not equal to any of the comparison values.     |
+| STARTS WITH ANY OF (hashed)     | It matches when the comparison attribute starts with any of the comparison values.         |
+| ENDS WITH ANY OF (hashed)       | It matches when the comparison attribute ends with any of the comparison values.           |
+| NOT STARTS WITH ANY OF (hashed) | It matches when the comparison attribute does not start with any of the comparison values. |
+| NOT ENDS WITH ANY OF (hashed)   | It matches when the comparison attribute does not end with any of the comparison values.   |
 
 Since confidential text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example of how to target users from the same company. Which used to be handled by a rule like:
 
