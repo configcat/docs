@@ -22,9 +22,7 @@ export const CPPSchema = require('@site/src/schema-markup/sdk-reference/cpp.json
 
 ### 1. Installing the ConfigCat plugin to your project
 
-Via **[Unreal Marketplace](TODO)**
-
-** TODO: ** Currently work in progress
+Via **[Unreal Marketplace](https://www.unrealengine.com/marketplace/product/e142293a397d4ce4bf6a1f3053a2316d)**
 
 Via **[Github clone](https://github.com/configcat/unreal-engine-sdk)**
 
