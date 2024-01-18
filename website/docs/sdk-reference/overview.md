@@ -101,9 +101,3 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 
 - [Documentation](sdk-reference/ios.md) on how to connect your application.
 - <a href="https://github.com/ConfigCat/swift-sdk" target="_blank">GitHub repository of the ConfigCat Swift SDK.</a>
-
-## Unreal Engine
-
-- [Documentation](sdk-reference/unreal.md) on how to connect your application.
-- <a href="https://github.com/configcat/unreal-engine-sdk" target="_blank">GitHub repository of the ConfigCat Unreal Engine SDK.</a>
-
