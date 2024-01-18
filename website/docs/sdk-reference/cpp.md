@@ -97,7 +97,7 @@ _ConfigCat Client_ is responsible for:
 | Properties         | Description                                                                                                                                                                                                                                                                                        |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `baseUrl`          | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                          |
-| `dataGovernance`   | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance). Available options: `Global`, `EuOnly`. |
+| `dataGovernance`   | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](/advanced/data-governance). Available options: `Global`, `EuOnly`. |
 | `connectTimeoutMs` | Optional, defaults to `8000ms`. Sets the amount of milliseconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). `0` means it never times out during transfer                                                                                 |
 | `readTimeoutMs`    | Optional, defaults to `5000ms`. Sets the amount of milliseconds to wait for the server to respond before giving up. `0` means it never times out during transfer.                                                                                                                                  |
 | `pollingMode`      | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
@@ -126,7 +126,7 @@ These clients can be closed all at once with `ConfigCatClient::closeAll()` metho
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 ```cpp
 auto user = ConfigCatUser("#USER-IDENTIFIER#");
@@ -145,7 +145,7 @@ auto value = client->getValue(
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 ```cpp
 auto user = ConfigCatUser("#USER-IDENTIFIER#");
@@ -171,7 +171,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting) feature.
+The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
 
 ```cpp
 auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
@@ -406,7 +406,7 @@ It allows the usage of all features you can do on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config JSON is based on your [Data Governance](advanced/data-governance) settings:
+The URL to your current config JSON is based on your [Data Governance](/advanced/data-governance) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`

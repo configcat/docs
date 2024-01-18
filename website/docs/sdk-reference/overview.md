@@ -10,57 +10,57 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 
 ## .NET, .NET Core, Xamarin
 
-- [Documentation](sdk-reference/dotnet) on how to connect your application.
+- [Documentation](/sdk-reference/dotnet) on how to connect your application.
 - <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">GitHub repository of the ConfigCat .NET SDK.</a>
 
 ## C++
 
-- [Documentation](sdk-reference/cpp) on how to connect your application.
+- [Documentation](/sdk-reference/cpp) on how to connect your application.
 - <a href="https://github.com/configcat/cpp-sdk" target="_blank">GitHub repository of the ConfigCat C++ SDK.</a>
 
 ## Dart (Flutter)
 
-- [Documentation](sdk-reference/dart) on how to connect your application.
+- [Documentation](/sdk-reference/dart) on how to connect your application.
 - <a href="https://github.com/configcat/dart-sdk" target="_blank">GitHub repository of the ConfigCat Dart (Flutter) SDK.</a>
 
 ## Elixir
 
-- [Documentation](sdk-reference/elixir) on how to connect your application.
+- [Documentation](/sdk-reference/elixir) on how to connect your application.
 - <a href="https://github.com/configcat/elixir-sdk" target="_blank">GitHub repository of the ConfigCat Elixir SDK.</a>
 
 ## Go
 
-- [Documentation](sdk-reference/go) on how to connect your application.
+- [Documentation](/sdk-reference/go) on how to connect your application.
 - <a href="https://github.com/configcat/go-sdk" target="_blank">GitHub repository of the ConfigCat Go SDK.</a>
 
 ## Java
 
-- [Documentation](sdk-reference/java) on how to connect your application.
+- [Documentation](/sdk-reference/java) on how to connect your application.
 - <a href="https://github.com/ConfigCat/java-sdk" target="_blank">GitHub repository of the ConfigCat Java SDK.</a>
 
 ## Java (Android)
 
-- [Documentation](sdk-reference/android) on how to connect your application.
+- [Documentation](/sdk-reference/android) on how to connect your application.
 - <a href="https://github.com/configcat/android-sdk" target="_blank">GitHub repository of the ConfigCat Android (Java) SDK.</a>
 
 ## JavaScript
 
-- [Documentation](sdk-reference/js) on how to connect your application.
+- [Documentation](/sdk-reference/js) on how to connect your application.
 - <a href="https://github.com/ConfigCat/js-sdk" target="_blank">GitHub repository of the ConfigCat JavaScript SDK.</a>
 
 ## JavaScript (Deno) - Community maintained
 
-- [Documentation](sdk-reference/community/deno) on how to connect your application.
+- [Documentation](/sdk-reference/community/deno) on how to connect your application.
 - <a href="https://github.com/sigewuzhere/configcat-deno" target="_blank">GitHub repository of the ConfigCat Deno SDK.</a>
 
 ## JavaScript (React)
 
-- [Documentation](sdk-reference/react) on how to connect your application.
+- [Documentation](/sdk-reference/react) on how to connect your application.
 - <a href="https://github.com/ConfigCat/react-sdk" target="_blank">GitHub repository of the ConfigCat React SDK.</a>
 
 ## JavaScript (Server-Side Rendered apps)
 
-- [Documentation](sdk-reference/js-ssr) on how to connect your application.
+- [Documentation](/sdk-reference/js-ssr) on how to connect your application.
 - <a href="https://github.com/ConfigCat/js-ssr-sdk" target="_blank">GitHub repository of the ConfigCat JS SSR SDK.</a>
 
 ## JavaScript (Chromium Extension)
@@ -69,35 +69,35 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 
 ## Kotlin Multiplatform
 
-- [Documentation](sdk-reference/kotlin) on how to connect your application.
+- [Documentation](/sdk-reference/kotlin) on how to connect your application.
 - <a href="https://github.com/configcat/kotlin-sdk" target="_blank">GitHub repository of the ConfigCat Kotlin Multiplatform SDK.</a>
 
 ## Node.js
 
-- [Documentation](sdk-reference/node) on how to connect your application.
+- [Documentation](/sdk-reference/node) on how to connect your application.
 - <a href="https://github.com/ConfigCat/node-sdk" target="_blank">GitHub repository of the ConfigCat Node SDK.</a>
 
 ## PHP
 
-- [Documentation](sdk-reference/php) on how to connect your application.
+- [Documentation](/sdk-reference/php) on how to connect your application.
 - <a href="https://github.com/configcat/php-sdk" target="_blank">GitHub repository of the ConfigCat PHP SDK.</a>
 
 ## PHP (Laravel) - Community maintained
 
-- [Documentation](sdk-reference/community/laravel) on how to connect your application.
+- [Documentation](/sdk-reference/community/laravel) on how to connect your application.
 - <a href="https://github.com/pod-point/laravel-configcat" target="_blank">GitHub repository of the Laravel ConfigCat package.</a>
 
 ## Python
 
-- [Documentation](sdk-reference/python) on how to connect your application.
+- [Documentation](/sdk-reference/python) on how to connect your application.
 - <a href="https://github.com/ConfigCat/python-sdk" target="_blank">GitHub repository of the ConfigCat Python SDK.</a>
 
 ## Ruby
 
-- [Documentation](sdk-reference/ruby) on how to connect your application.
+- [Documentation](/sdk-reference/ruby) on how to connect your application.
 - <a href="https://github.com/configcat/ruby-sdk" target="_blank">GitHub repository of the ConfigCat Ruby SDK.</a>
 
 ## Swift (iOS)
 
-- [Documentation](sdk-reference/ios) on how to connect your application.
+- [Documentation](/sdk-reference/ios) on how to connect your application.
 - <a href="https://github.com/ConfigCat/swift-sdk" target="_blank">GitHub repository of the ConfigCat Swift SDK.</a>

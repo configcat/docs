@@ -61,7 +61,7 @@ Available options:
 
 | Name                     | Type  | Description  |
 | ------------------------ | ----- | ------------ |
-| `data-governance`        | `int` | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance). Available options: `GLOBAL_`, `EU_ONLY`. |
+| `data-governance`        | `int` | Optional, defaults to `DataGovernance::GLOBAL_`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](/advanced/data-governance). Available options: `GLOBAL_`, `EU_ONLY`. |
 | `logger`                 | [`\Psr\Log\LoggerInterface`](https://github.com/php-fig/log/blob/master/src/LoggerInterface.php) | Optional, sets the logger for errors and warnings produced by the SDK, defaults to [Monolog](https://github.com/Seldaek/monolog). [More about logging](#logging). |
 | `log-level`              | `int` | Optional, defaults to `LogLevel::WARNING`. Sets the internal log level. [More about log levels](#logging).   |
 | `cache`                  | [`\ConfigCat\Cache\ConfigCache`](https://github.com/configcat/php-sdk/blob/master/src/Cache/ConfigCache.php) | Optional, sets a `\ConfigCat\Cache\ConfigCache` implementation for caching the latest feature flag and setting values. [More about cache](#cache). You can check the currently available implementations [here](https://github.com/configcat/php-sdk/tree/master/src/Cache). |
@@ -93,7 +93,7 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 ```php
 $value = $client->getValue(
@@ -111,7 +111,7 @@ $value = $client->getValue(
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 ```php
 $details = $client->getValueDetails(
@@ -136,7 +136,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting) feature.
+The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
 
 ```php
 $user = new \ConfigCat\User("#UNIQUE-USER-IDENTIFIER#");
@@ -322,7 +322,7 @@ It allows the usage of all features you can do on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config JSON is based on your [Data Governance](advanced/data-governance) settings:
+The URL to your current config JSON is based on your [Data Governance](/advanced/data-governance) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`

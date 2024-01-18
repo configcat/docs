@@ -26,7 +26,7 @@ export const JavaSchema = require('@site/src/schema-markup/sdk-reference/java.js
 
 ```groovy title="build.gradle"
 dependencies {
-    implementation 'com.configcat:configcat-java-client:8.+'
+    implementation 'com.configcat:configcat-java-client:9.+'
 }
 ```
 
@@ -37,7 +37,7 @@ dependencies {
 <dependency>
   <groupId>com.configcat</groupId>
   <artifactId>configcat-java-client</artifactId>
-  <version>[8.0.0,)</version>
+  <version>[9.0.0,)</version>
 </dependency>
 ```
 
@@ -111,7 +111,7 @@ These are the available options on the `Options` class:
 
 | Option                                                        | Description                                                                                                                                                                                                                                                                                        |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance). Available options: `Global`, `EuOnly`. |
+| `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](/advanced/data-governance). Available options: `Global`, `EuOnly`. |
 | `baseUrl(string)`                                             | _Obsolete_ Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                            |
 | `httpClient(OkHttpClient)`                                    | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient).                                                                                                                                                 |
 | `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
@@ -134,7 +134,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 
 ```java
@@ -152,7 +152,7 @@ boolean value = client.getValue(
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 
 ```java
@@ -178,7 +178,7 @@ client.getValueAsync(
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 
 ```java
@@ -201,20 +201,20 @@ client.getValueDetailsAsync(
 
 The details result contains the following information:
 
-| Property                               | Type                                    | Description                                                                               |
-| -------------------------------------- | --------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `getValue()`                           | `boolean` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                       |
-| `getKey()`                             | `String`                                | The key of the evaluated feature flag or setting.                                         |
-| `isDefaultValue()`                     | `boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
-| `getError()`                           | `String`                                | In case of an error, this field contains the error message.                               |
-| `getUser()`                            | `User`                                  | The user object that was used for evaluation.                                             |
-| `getMatchedEvaluationPercentageRule()` | `PercentageRule`                        | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `getMatchedEvaluationRule()`           | `RolloutRule`                           | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
-| `getFetchTimeUnixMilliseconds()`       | `long`                                  | The last download time of the current config in unix milliseconds format.                 |
+| Property                           | Type                                    | Description                                                                                                |
+|------------------------------------|-----------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `getValue()`                       | `boolean` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                                        |
+| `getKey()`                         | `String`                                | The key of the evaluated feature flag or setting.                                                          |
+| `isDefaultValue()`                 | `boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.                       |
+| `getError()`                       | `String`                                | In case of an error, this field contains the error message.                                                |
+| `getUser()`                        | `User`                                  | The user object that was used for evaluation.                                                              |
+| `getMatchedPercentageOption()`     | `PercentageOption`                      | The percentage option (if any) that was used to select the evaluated value.                                |
+| `getMatchedTargetingRule()`        | `TargetingRule`                         | The targeting rule (if any) that matched during the evaluation and was used to return the evaluated value. |
+| `getFetchTimeUnixMilliseconds()`   | `long`                                  | The last download time of the current config in unix milliseconds format.                                  |
 
 ## User Object
 
-The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting) feature.
+The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
 
 ```java
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
@@ -232,7 +232,7 @@ User user = User.newBuilder().build("john@example.com");
 | `custom()`      | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
 
 ```java
-java.util.Map<String,String> customAttributes = new java.util.HashMap<String,String>();
+java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
     customAttributes.put("SubscriptionType", "Pro");
     customAttributes.put("UserRole", "Admin");
 
@@ -242,6 +242,50 @@ User user = User.newBuilder()
     .custom(customAttributes)
     .build("#UNIQUE-USER-IDENTIFIER#");
 ```
+
+The `Custom` dictionary also allows attribute values other than `String` values:
+
+```java
+java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
+    customAttributes.put("Rating", 4.5);
+    customAttributes.put("RegisteredAt", new Date("2023-11-22 12:34:56 +00:00"));
+    customAttributes.put("Roles", new String[]{"Role1", "Role2"});
+
+User user = User.newBuilder()
+    .email("john@example.com")
+    .country("United Kingdom")
+    .custom(customAttributes)
+    .build("#UNIQUE-USER-IDENTIFIER#");
+```
+### User Object Attribute Types
+
+All comparators support `String` values as User Object attribute (in some cases they need to be provided in a specific format though, see below), but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
+
+**Text-based comparators** (EQUALS, IS ONE OF, etc.)
+* accept `String` values,
+* all other values are automatically converted to `String` (a warning will be logged but evaluation will continue as normal).
+
+**SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
+* accept `String` values containing a properly formatted, valid semver value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**Number-based comparators** (=, &lt;, &gt;=, etc.)
+* accept `Double` values and all other numeric values which can safely be converted to `Double`,
+* accept `String` values containing a properly formatted, valid `Double` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**Date time-based comparators** (BEFORE / AFTER)
+* accept `Date` or `Instant` values, which are automatically converted to a second-based Unix timestamp,
+* accept `Double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `Double`,
+* accept `String` values containing a properly formatted, valid `Double` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
+* accept arrays and list of `String`,
+* accept `String` values containing a valid JSON string which can be deserialized to an array of `String`,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+
 
 ### Default User
 
@@ -463,8 +507,169 @@ It allows the usage of all features you can do on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config JSON is based on your [Data Governance](advanced/data-governance) settings:
+<Tabs groupId="config-json-format">
+<TabItem value="config-json-v6" label="When using an SDK version v9.0.0 or newer">
 
+A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
+and execute the following command:
+
+```bash
+configcat config-json get -f v6 -p {YOUR-SDK-KEY} > config.json
+```
+
+(Depending on your [Data Governance](/advanced/data-governance) settings, you may need to add the `--eu` switch.)
+
+Alternatively, you can download the config JSON manually, based on your [Data Governance](/advanced/data-governance) settings:
+
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
+
+```json
+{
+  "p": {
+    // hash salt, required only when sensitive text comparator(s) are used
+    "s": "80xCU/SlDz1lCiWFaxIBjyJeJecWjq46T4eu6GtozkM="
+  },
+  "s": [ // array of segments
+    {
+      "n": "Beta Users", // segment name
+      "r": [ // array of user conditions (there is a logical AND relation between the elements)
+        {
+          "a": "Email", // comparison attribute
+          "c": 0, // comparator (see below)
+          "l": [ // comparison value (see below)
+            "john@example.com", "jane@example.com"
+          ]
+        }
+      ]
+    }
+  ],
+  "f": { // key-value map of feature flags & settings
+    "isFeatureEnabled": { // key of a particular flag / setting
+      "t": 0, // setting type, possible values:
+              // 0 -> on/off setting (feature flag)
+              // 1 -> text setting
+              // 2 -> whole number setting
+              // 3 -> decimal number setting
+      "r": [ // array of targeting rules (there is a logical OR relation between the elements)
+        {
+          "c": [ // array of conditions (there is a logical AND relation between the elements)
+            {
+              "u": { // user condition
+                "a": "Email", // comparison attribute
+                "c": 2, // comparator, possible values and required comparison value types:
+                        // 0  -> IS ONE OF (cleartext) + string array comparison value ("l")
+                        // 1  -> IS NOT ONE OF (cleartext) + string array comparison value ("l")
+                        // 2  -> CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 3  -> NOT CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 4  -> IS ONE OF (semver) + semver string array comparison value ("l")
+                        // 5  -> IS NOT ONE OF (semver) + semver string array comparison value ("l")
+                        // 6  -> < (semver) + semver string comparison value ("s")
+                        // 7  -> <= (semver + semver string comparison value ("s")
+                        // 8  -> > (semver) + semver string comparison value ("s")
+                        // 9  -> >= (semver + semver string comparison value ("s")
+                        // 10 -> = (number) + number comparison value ("d")
+                        // 11 -> <> (number + number comparison value ("d")
+                        // 12 -> < (number) + number comparison value ("d")
+                        // 13 -> <= (number + number comparison value ("d")
+                        // 14 -> > (number) + number comparison value ("d")
+                        // 15 -> >= (number) + number comparison value ("d")
+                        // 16 -> IS ONE OF (hashed) + string array comparison value ("l")
+                        // 17 -> IS NOT ONE OF (hashed) + string array comparison value ("l")
+                        // 18 -> BEFORE (UTC datetime) + second-based Unix timestamp number comparison value ("d")
+                        // 19 -> AFTER (UTC datetime) + second-based Unix timestamp number comparison value ("d")
+                        // 20 -> EQUALS (hashed) + string comparison value ("s")
+                        // 21 -> NOT EQUALS (hashed) + string comparison value ("s")
+                        // 22 -> STARTS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 23 -> NOT STARTS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 24 -> ENDS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 25 -> NOT ENDS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 26 -> ARRAY CONTAINS ANY OF (hashed) + string array comparison value ("l")
+                        // 27 -> ARRAY NOT CONTAINS ANY OF (hashed) + string array comparison value ("l")
+                        // 28 -> EQUALS (cleartext) + string comparison value ("s")
+                        // 29 -> NOT EQUALS (cleartext) + string comparison value ("s")
+                        // 30 -> STARTS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 31 -> NOT STARTS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 32 -> ENDS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 33 -> NOT ENDS WITH ANY OF (cleartext + string array comparison value ("l")
+                        // 34 -> ARRAY CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 35 -> ARRAY NOT CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                "l": [ // comparison value - depending on the comparator, another type of value may need
+                       // to be specified (see above):
+                       // "s": string
+                       // "d": number
+                  "@example.com"
+                ]
+              }
+            },
+            {
+              "p": { // prerequisite flag condition
+                "f": "mainIntFlag", // key of prerequisite flag
+                "c": 0, // comparator, possible values: 0 -> EQUALS, 1 -> NOT EQUALS
+                "v": { // comparison value (value's type must match the prerequisite flag's type)
+                  "i": 42
+                }
+              }
+            },
+            {
+              "s": { // segment condition
+                "s": 0, // segment index, a valid index into the top-level segment array ("s")
+                "c": 1 // comparator, possible values: 0 -> IS IN SEGMENT, 1 -> IS NOT IN SEGMENT
+              }
+            }
+          ],
+          "s": { // alternatively, an array of percentage options ("p", see below) can also be specified
+            "v": { // the value served when the rule is selected during evaluation
+              "b": true
+            },
+            "i": "bcfb84a7"
+          }
+        }
+      ],
+      "p": [ // array of percentage options
+        {
+          "p": 10, // % value
+          "v": { // the value served when the percentage option is selected during evaluation
+            "b": true
+          },
+          "i": "bcfb84a7"
+        },
+        {
+          "p": 90,
+          "v": {
+            "b": false
+          },
+          "i": "bddac6ae"
+        }
+      ],
+      "v": { // fallback value, served when none of the targeting rules match,
+             // no percentage options are defined or evaluation of these is not possible
+        "b": false // depending on the setting type, another type of value may need to be specified:
+                   // text setting -> "s": string
+                   // whole number setting -> "i": number
+                   // decimal number setting -> "d": number
+      },
+      "i": "430bded3" // variation id (for analytical purposes)
+    }
+  }
+}
+```
+
+For a more comprehensive specification of the config JSON v6 format, you may refer to [this JSON schema document](https://github.com/configcat/config-json/blob/main/V6/config.schema.json).
+
+</TabItem>
+<TabItem value="config-json-v5" label="When using an SDK version older than v9.0.0">
+
+A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
+and execute the following command:
+
+```bash
+configcat config-json get -f v5 -p {YOUR-SDK-KEY} > config.json
+```
+
+(Depending on your [Data Governance](/advanced/data-governance) settings, you may need to add the `--eu` switch.)
+
+Alternatively, you can download the config JSON manually, based on your [Data Governance](/advanced/data-governance) settings:
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 
@@ -529,6 +734,8 @@ The URL to your current config JSON is based on your [Data Governance](advanced/
   }
 }
 ```
+</TabItem>
+</Tabs>
 
 ### Map
 
@@ -709,10 +916,11 @@ Available log levels:
 Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-INFO com.configcat.ConfigCatClient - [5000] Evaluating getValue(isPOCFeatureEnabled).
-User object: User{Identifier=435170f4-8a8b-4b67-a723-505ac7cdea92, Email=john@example.com}
-Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
-Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning "true"
+INFO com.configcat.ConfigCatClient - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
+  Evaluating targeting rules and applying the first match if any:
+  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'False' => no match
+  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'True' => MATCH, applying rule
+  Returning 'True'.
 ```
 
 ### Logging Implementation
