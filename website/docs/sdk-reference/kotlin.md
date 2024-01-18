@@ -108,7 +108,7 @@ These are the available options on the `ConfigCatOptions` class:
 
 | Properties       | Type                          | Description                                                                                                                                                                                                                                                                                                                                      |
 | ---------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `dataGovernance` | `DataGovernance`              | Optional, defaults to `DataGovernance.GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.GLOBAL`, `DataGovernance.EU_ONLY`. |
+| `dataGovernance` | `DataGovernance`              | Optional, defaults to `DataGovernance.GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](/advanced/data-governance). Available options: `DataGovernance.GLOBAL`, `DataGovernance.EU_ONLY`. |
 | `baseUrl`        | `String`                      | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                                                        |
 | `requestTimeout` | `Duration`                    | Optional, defaults to `30s`. Sets the underlying HTTP client's request timeout. [More about HTTP Timeout](#http-timeout).                                                                                                                                                                                                                        |
 | `configCache`    | `ConfigCache`                 | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                                                                  |
@@ -134,7 +134,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 ```kotlin
 val value = client.getValue(
@@ -152,7 +152,7 @@ val value = client.getValue(
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 ```kotlin
 val details = client.getValueDetails(
@@ -177,7 +177,7 @@ The details result contains the following information:
 
 ## User Object
 
-The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
 
 ```kotlin
 val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")

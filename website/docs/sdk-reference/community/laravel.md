@@ -139,7 +139,7 @@ The following view content will only be rendered if the feature flag is truthy:
 
 ### User targeting
 
-The [User Object](/sdk-reference/php/#user-object) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+The [User Object](/sdk-reference/php/#user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
 
 ConfigCat needs to understand the representation of your users from your application. To do so, you will need to transform your user into a `ConfigCat\User` object. This can be done directly from the [`config/configcat.php`](https://github.com/Pod-Point/laravel-configcat/blob/main/config/configcat.php) file. Here is an example:
 
