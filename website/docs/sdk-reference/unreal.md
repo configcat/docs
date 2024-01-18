@@ -707,14 +707,6 @@ If you do not want to expose the SDK key or the content of the config JSON file,
 
 Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
 
-## Sample Applications
-
-**Coming soon**
-
-## Guides
-
-**Coming soon**
-
 ## Look Under the Hood
 
 - <a href="https://github.com/ConfigCat/unreal-engine-sdk" target="_blank">ConfigCat Unreal Engine SDK's repository on GitHub</a>
