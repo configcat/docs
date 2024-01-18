@@ -42,7 +42,7 @@ With prerequisite flags, you can create feature flags that depend on other featu
 
 With comparison value hints, you can associate arbitrary text with your comparison values. This way you can add a description to your comparison value list items that helps you remember what they are for.
 
-### Percentage options for targeting rules
+### Percentage options within targeting rules
 
 You can add percentage options to your targeting rules. This is useful if you want to create more complex targeting rules, such as "turn on the feature for 20% of the users who are on iOS, and off for 80%".
 
