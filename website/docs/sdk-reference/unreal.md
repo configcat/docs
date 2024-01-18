@@ -54,20 +54,20 @@ You can configure all ConfigCat related settings inside the `ProjectSettings -> 
 
 <img className="unreal-plugin-settings zoomable" src="/docs/assets/unreal/plugin-settings.png" alt="Unreal Engine plugin settings" />
 
-| Properties              | Description                                                                                                                                                                                                                                                                                         |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `SdkKey`                | SDK Key to access your feature flags and configurations. Get it from ConfigCat Dashboard.                                                                                                                                                                                                           |
-| `BaseUrl`               | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                                                        |
-| `DataGovernance`        | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`.  |
-| `ConnectTimeoutMs`      | Optional, defaults to `8000ms`. Sets the amount of milliseconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). `0` means it never times out during transfer                                                                                  |
-| `ReadTimeoutMs`         | Optional, defaults to `5000ms`. Sets the amount of milliseconds to wait for the server to respond before giving up. `0` means it never times out during transfer.                                                                                                                                   |
-| `PollingMode`           | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                         |
-| `AutoPollInterval`      | For PollingMode == Custom, sets at least how often this policy should fetch the latest configuration and refresh the cache.                                                                                                                                                                         |
-| `MaxInitWaitTime`       | For PollingMode == Custom, sets the maximum waiting time between initialization and the first config acquisition in seconds.                                                                                                                                                                        |
-| `CacheRefreshInterval`  | For PollingMode == LazyLoad, sets how long the cache will store its value before fetching the latest from the network again.                                                                                                                                                                        |
-| `Proxies`               | Optional, sets proxy addresses. e.g. { "https": "your_proxy_ip:your_proxy_port" } on each http request                                                                                                                                                                                              |
-| `ProxyAuthentications`  | Optional, sets proxy authentication on each http request.                                                                                                                                                                                                                                           |
-| `bStartOffline`         | Optional, sets the SDK ot be initialized in offline mode.                                                                                                                                                                                                                                           |
+| Properties                    | Description                                                                                                                                                                                                                                                                                         |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Sdk Key`                     | SDK Key to access your feature flags and configurations. Get it from ConfigCat Dashboard.                                                                                                                                                                                                           |
+| `Base Url`                    | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                                                        |
+| `Data Governance`             | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`.  |
+| `Connect Timeout`             | Optional, defaults to `8000ms`. Sets the amount of milliseconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). `0` means it never times out during transfer                                                                                  |
+| `Read Timeout`                | Optional, defaults to `5000ms`. Sets the amount of milliseconds to wait for the server to respond before giving up. `0` means it never times out during transfer.                                                                                                                                   |
+| `Polling Mode`                | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                         |
+| `Auto Poll Interval`          | For PollingMode == Custom, sets at least how often this policy should fetch the latest configuration and refresh the cache.                                                                                                                                                                         |
+| `Maximum Inititial Wait Time` | For PollingMode == Custom, sets the maximum waiting time between initialization and the first config acquisition in seconds.                                                                                                                                                                        |
+| `Cache Refresh Interval`      | For PollingMode == LazyLoad, sets how long the cache will store its value before fetching the latest from the network again.                                                                                                                                                                        |
+| `Proxies`                     | Optional, sets proxy addresses. e.g. { "https": "your_proxy_ip:your_proxy_port" } on each http request                                                                                                                                                                                              |
+| `Proxy Authentications`       | Optional, sets proxy authentication on each http request.                                                                                                                                                                                                                                           |
+| `Start Offline`               | Optional, sets the SDK ot be initialized in offline mode.                                                                                                                                                                                                                                           |
 
 ### 4. Get your setting value
 
@@ -100,11 +100,11 @@ SetMyAwesomeFeatureEnabled(bIsMyAwesomeFeatureEnabled);
 
 ## Anatomy of `GetValue`
 
-| Parameters     | Description                                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `Key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
-| `DefaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `User`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| Parameters      | Description                                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
+| `Default Value` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `User`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
@@ -140,11 +140,11 @@ FString TargetValue = ConfigCat->GetStringValue(TEXT("targetValue"), TEXT(""), U
 
 `GetValueDetails()` is similar to `GetValue()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
 
-| Parameters     | Description                                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `Key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
-| `DefaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `User`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| Parameters      | Description                                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
+| `Default Value` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `User`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
@@ -167,16 +167,16 @@ FConfigCatEvaluationDetails Details = ConfigCat->GetStringValueDetails(TEXT("myF
 
 The `Details` result contains the following information:
 
-| Field                             | Description                                                                               |
-| --------------------------------- | ----------------------------------------------------------------------------------------- |
-| `Value`                           | The evaluated value of the feature flag or setting.                                       |
-| `Key`                             | The key of the evaluated feature flag or setting.                                         |
-| `IsDefaultValue`                  | True when the default value passed to getValueDetails() is returned due to an error.      |
-| `Error`                           | In case of an error, this field contains the error message.                               |
-| `User`                            | The user object that was used for evaluation.                                             |
-| `MatchedEvaluationPercentageRule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `MatchedEvaluationRule`           | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
-| `FetchTime`                       | The last download time of the current config.                                             |
+| Field                                | Description                                                                               |
+| ------------------------------------ | ----------------------------------------------------------------------------------------- |
+| `Value`                              | The evaluated value of the feature flag or setting.                                       |
+| `Key`                                | The key of the evaluated feature flag or setting.                                         |
+| `Is Default Value`                   | True when the default value passed to getValueDetails() is returned due to an error.      |
+| `Error`                              | In case of an error, this field contains the error message.                               |
+| `User`                               | The user object that was used for evaluation.                                             |
+| `Matched Evaluation Percentage Rule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `Matched Evaluation Rule`            | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `FetchTime`                          | The last download time of the current config.                                             |
 
 ## User Object
 
@@ -325,10 +325,10 @@ The _ConfigCat SDK_ downloads the latest values and stores them automatically ev
 
 Available options:
 
-| Option Parameter            | Description                                                                                         | Default |
-| --------------------------- | --------------------------------------------------------------------------------------------------- | ------- |
-| `AutoPollIntervalInSeconds` | Polling interval.                                                                                   | 60      |
-| `MaxInitWaitTimeInSeconds`  | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
+| Option Parameter           | Description                                                                                         | Default |
+| -------------------------- | --------------------------------------------------------------------------------------------------- | ------- |
+| `Auto Poll Interval`       | Polling interval.                                                                                   | 60      |
+| `Max Inititial Wait Time`  | Maximum waiting time between the client initialization and the first config acquisition in seconds. | 5       |
 
 ### Lazy Loading
 
@@ -338,9 +338,9 @@ When calling `getValue()` the _ConfigCat SDK_ downloads the latest setting value
 
 Available options:
 
-| Parameter                       | Description | Default |
-| ------------------------------- | ----------- | ------- |
-| `cacheRefreshIntervalInSeconds` | Cache TTL.  | 60      |
+| Parameter                | Description | Default |
+| ------------------------ | ----------- | ------- |
+| `Cache Refresh Interval` | Cache TTL.  | 60      |
 
 ### Manual Polling
 
