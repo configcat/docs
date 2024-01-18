@@ -16,7 +16,7 @@ export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.js
 [![Node.JS](https://img.shields.io/node/v/configcat-node)](https://img.shields.io/node/v/configcat-node)
 
 :::info
-For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](js-ssr.md).
+For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](/sdk-reference/js-ssr).
 :::
 
 <a href="https://github.com/configcat/node-sdk" target="_blank">ConfigCat Node.js SDK on GitHub</a>
@@ -109,7 +109,7 @@ The available options depends on the chosen polling mode. However, there are som
 | `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                       | 30000                   |
 | `baseUrl`          | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                  |                         |
 | `proxy`            | Proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy).                                                                                                                                                                                                                |                         |
-| `dataGovernance`   | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
+| `dataGovernance`   | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](/advanced/data-governance). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
 | `cache`            | Custom [`IConfigCatCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) implementation for caching the downloaded config.                                                                                                                     | [`InMemoryConfigCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) |
 | `flagOverrides`    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                    | -                       |
 | `defaultUser`      | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                                 | `undefined` (none)      |
@@ -145,7 +145,7 @@ Returns a Promise with the value.
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 ```js
 const value = await configCatClient.getValueAsync(
@@ -202,7 +202,7 @@ If you specify an allowed type but it mismatches the setting kind, an error mess
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 ```js
 const details = await configCatClient.getValueDetailsAsync(
@@ -247,7 +247,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
 
 For simple targeting:
 

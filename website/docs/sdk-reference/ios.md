@@ -213,7 +213,7 @@ These are the available options on the `ConfigCatOptions` class:
 
 | Arguments              | Type                      | Description                                                                                                                                                                                                                                                                                        |
 | ---------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dataGovernance`       | `DataGovernance`          | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `global`, `euOnly`. |
+| `dataGovernance`       | `DataGovernance`          | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](/advanced/data-governance). Available options: `global`, `euOnly`. |
 | `configCache`          | `ConfigCache?`            | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
 | `pollingMode`          | `PollingMode`             | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
 | `sessionConfiguration` | `URLSessionConfiguration` | Optional, sets a custom `URLSessionConfiguration` used by the HTTP calls.                                                                                                                                                                                                                          |
@@ -236,7 +236,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 | `completion`   | **REQUIRED.** Callback function to call, when the result is ready.                                           |
 
 <Tabs groupId="ios-languages">
@@ -298,7 +298,7 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-ID
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -423,7 +423,7 @@ let state = await client.waitForReady()
 
 ## User Object
 
-The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -686,7 +686,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 | Parameters | Description                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `user`     | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `user`     | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
