@@ -57,7 +57,7 @@ These values are served to users who are not matched by any targeting rule. Or t
 
 ### User Object
 
-A *user object* is a collection of *user attributes* that describe the properties of a user. These attributes can be referenced in conditions of targeting rules. This is what makes possible to define rules for targeting specific users. More about user object [here].
+A *user object* is a collection of *user attributes* that describe the properties of a user. Using these attributes in the conditions of the targeting rules, you can target specific users. More about the user object [here].
 
 ## Examples
 
