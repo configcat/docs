@@ -160,7 +160,7 @@ In case _Comparison attribute_ is not passed to the SDK or its value is not a va
 :::
 
 :::tip
-The ConfigCat SDKs don't provide date and time values. You have to pass them to the SDKs as custom attributes in UNIX timestamp format.
+The ConfigCat SDKs don't provide date and time values. You have to pass them to the SDKs as described above.
 :::
 
 :::info
