@@ -58,7 +58,7 @@ You can configure all ConfigCat related settings inside the `ProjectSettings -> 
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Sdk Key`                     | SDK Key to access your feature flags and configurations. Get it from ConfigCat Dashboard.                                                                                                                                                                                                           |
 | `Base Url`                    | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                                                        |
-| `Data Governance`             | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](advanced/data-governance.md). Available options: `Global`, `EuOnly`.  |
+| `Data Governance`             | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](/advanced/data-governance). Available options: `Global`, `EuOnly`.  |
 | `Connect Timeout`             | Optional, defaults to `8000ms`. Sets the amount of milliseconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). `0` means it never times out during transfer                                                                                  |
 | `Read Timeout`                | Optional, defaults to `5000ms`. Sets the amount of milliseconds to wait for the server to respond before giving up. `0` means it never times out during transfer.                                                                                                                                   |
 | `Polling Mode`                | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                         |
@@ -144,7 +144,7 @@ FString TargetValue = ConfigCat->GetStringValue(TEXT("targetValue"), TEXT(""), U
 | --------------- | ------------------------------------------------------------------------------------------------------------ |
 | `Key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `Default Value` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `User`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `User`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
@@ -180,7 +180,7 @@ The `Details` result contains the following information:
 
 ## User Object
 
-The [User Object](../advanced/user-object.md) is essential if you'd like to use ConfigCat's [Targeting](advanced/targeting.md) feature.
+The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
@@ -480,7 +480,7 @@ It allows the usage of all features you can do on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config JSON is based on your [Data Governance](advanced/data-governance.md) settings:
+The URL to your current config JSON is based on your [Data Governance](/advanced/data-governance) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
