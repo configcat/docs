@@ -6,7 +6,7 @@ description: Instead of spamming your mailbox, we're posting news and product up
 
 Here, you'll find all the latest updates, enhancements, and new features we've added to our service. Stay tuned to this page to keep up with all the latest news from ConfigCat!
 
-<!-- This page must be in sync with the news page in the dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html -->
+<!-- This page must be in sync with the news page in the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html -->
 
 ## Resource ordering in Public Management API and Terraform
 

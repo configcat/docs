@@ -215,7 +215,7 @@ The [Zombie (Stale) Flags Report](https://app.configcat.com/my-account/zombie-fl
 
 ### I am not getting the Zombie Feature Flag email report. What am I doing wrong?
 
-You can change the frequency, criteria and scope of the Zombie Feature Flag report from the dashboard.
+You can change the frequency, criteria and scope of the Zombie Feature Flag report on the Dashboard.
 
 **Note:** Please be aware that feature flags are only treated as zombie flags if they haven't been modified (with save & publish) in the past given timeframe. It currently doesn't have any connection with your real usage in your code.
 

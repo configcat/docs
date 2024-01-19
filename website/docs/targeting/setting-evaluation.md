@@ -34,7 +34,7 @@ A rule is considered a match only if all conditions are true. Otherwise, it's no
 
 ### Evaluation of a User Condition
 
-The SDK compares the user attribute from the [User Object] with the condition set on the dashboard using the specified comparator. This comparison yields a `true` or `false` outcome.
+The SDK compares the user attribute from the [User Object] with the condition set on the Dashboard using the specified comparator. This comparison yields a `true` or `false` outcome.
 
 If the necessary user attribute is missing or incorrectly formatted, the outcome is `indeterminable (cannot evaluate)`.
 

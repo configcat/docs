@@ -35,7 +35,7 @@ The next step will guide you on how to configure ConfigCat with appearing inform
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/google/meta_url_cert.png" alt="Google SSO url" />
 
-- Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
+- Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat Dashboard</a>.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
 

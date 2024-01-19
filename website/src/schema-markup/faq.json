@@ -247,7 +247,7 @@
       "name": "I am not getting the Zombie Feature Flag email report from ConfigCat",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can change the frequency, criteria, and scope of the Zombie Feature Flag report from the dashboard. Please be aware that feature flags are only considered zombie flags if they have not been modified (with save & publish) within the past given timeframe. Currently, it has no connection to the actual usage in your code."
+        "text": "You can change the frequency, criteria, and scope of the Zombie Feature Flag report from the Dashboard. Please be aware that feature flags are only considered zombie flags if they have not been modified (with save & publish) within the past given timeframe. Currently, it has no connection to the actual usage in your code."
       }
     },
     {
@@ -263,7 +263,7 @@
       "name": "Is there a way to compare flag statuses between two or more environments in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, you can see the state of all your Feature Flags across all your environments on the overview page in the dashboard: https://app.configcat.com/overview"
+        "text": "Yes, you can see the state of all your Feature Flags across all your environments on the overview page on the Dashboard: https://app.configcat.com/overview"
       }
     },
     {

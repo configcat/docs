@@ -1,10 +1,10 @@
 ---
 id: config-v2
 title: Config V2 Overview
-description: Config V2 is the next generation of ConfigCat. It comes with a new dashboard, API, SDKs and features.
+description: Config V2 is the next generation of ConfigCat. It comes with a new Dashboard, API, SDKs and features.
 ---
 
-Config V2 is a new version of ConfigCat. It comes with a new dashboard, API, SDKs, and features.
+Config V2 is a new version of ConfigCat. It comes with a new Dashboard, API, SDKs, and features.
 
 ## What's new?
 

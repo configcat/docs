@@ -9,7 +9,7 @@ Furthermore, you can also set which Organization roles / Product permissions the
 
 ## Steps to configure:
 
-- Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
+- Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat Dashboard</a>.
 
   <img className="saml-tutorial-img zoomable zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" alt="Authentication settings" />
 
