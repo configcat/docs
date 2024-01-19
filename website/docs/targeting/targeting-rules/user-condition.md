@@ -169,7 +169,11 @@ All number comparators return `false` if either _Comparison attribute_ or _Compa
 
 #### Date and time comparators
 
-The following comparators assume that _Comparison attribute_ and _Comparison value_ contain date and time values.
+The following comparators expect _Comparison attribute_ to be a double-precision floating-point number representing a second-based [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time). (Values that can be converted to a Unix timestamp accepted as well, including the specific platform's standard date types.)
+
+:::note
+In case _Comparison attribute_ is not passed to the SDK or its value is not a valid Unix timestamp, a warning will be logged, the targeting rule will be ignored and the evaluation will continue with the next rule.
+:::
 
 :::tip
 The ConfigCat SDKs don't provide date and time values. You have to pass them to the SDKs as custom attributes in UNIX timestamp format.
