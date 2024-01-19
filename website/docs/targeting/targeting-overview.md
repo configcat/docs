@@ -11,9 +11,9 @@ Using this feature you will be able to set different setting values for specific
 
 ## How does it work?
 
-1. You define a [Targeting rule] on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>.
-2. You pass a [User Object] to the ConfigCat SDK in your application.
-3. ConfigCat will use the User Object and the Targeting Rule to determine which features are enabled for the user.
+1. On the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, you add [Targeting rules] and/or [Percentage options] to your feature flag.
+2. In your application, you pass a [User Object] to the setting evaluation functions of the ConfigCat SDK (`getValue`, `getAllValues`, etc.)
+3. The ConfigCat SDK will use the attributes in the User Object and the rules defined on the ConfigCat Dashboard to evaluate the feature flag, that is, to determine whether or not the related feature should be enabled for the user.
 
 ## What is what?
 *TODO - new screenshot*
