@@ -151,7 +151,6 @@ The following comparators assume that _Comparison attribute_ and _Comparison val
 | \> (Number)        | It matches when the comparison attribute interpreted as a decimal number is greater than the comparison value.             |
 | \>= (Number)       | It matches when the comparison attribute interpreted as a decimal number is greater than or equal to the comparison value. |
 
-All number comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid number.
 
 #### Date and time comparators
 
