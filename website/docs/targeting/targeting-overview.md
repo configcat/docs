@@ -33,17 +33,17 @@ Since the most common type of settings is feature flag, we usually use that term
 
 A *targeting rule* consists of two parts: a collection of conditions and a value to serve. In case the conditions are met (the targeting rule *matches*), the value is served to the user. More about targeting rules [here].
 
-### Condition (IF / AND item)
+### Condition
 
 A *condition* is a logical expression that can be evaluated to true or false. There are three types of conditions: [User condition], [Flag condition (Prerequisite)], [Segment condition]. For a targeting rule to match, all of its conditions must evaluate to true. More about conditions [here].
 
 ### Value
 
-A *value* is the outcome of a feature flag or setting. It can be a boolean, string, integer, or double value.
+A *value* is the result of a feature flag or a setting. It can be a boolean, string, integer, or double value.
 
-### Percentage option
+### Percentage options
 
-A percentage option is a value that is served to a specific percentage of users. More about percentage options [here].
+Percentage options are used to split users into groups that will receive a specific value for a feature flag. The groups are based on the ratio of the percentages. Percentage options are often used for A/B testing or phased rollouts. More about percentage options [here].
 
 ### "To all users" value / Fallback value
 
