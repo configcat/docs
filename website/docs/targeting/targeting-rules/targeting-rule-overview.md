@@ -23,7 +23,7 @@ The targeting rules are in an **OR** relationship, meaning that the targeting ru
 
 ## How does it work? - Anatomy of a Targeting Rule
 
-A targeting rule has two parts: the IF part and the THEN part.
+A targeting rule consists of two parts: the IF part and the THEN part.
 
 *TODO - add screenshot*
 
