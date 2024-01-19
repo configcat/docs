@@ -4,11 +4,12 @@ title: Targeting Rule Overview
 description: Targeting allows you to define targeting rules for feature flags. This way you can target a specific user group with a specific feature.
 ---
 
-# Comparison-based Targeting Overview
+# Targeting Rules
 
-## What is Comparison-based Targeting?
+## What are Targeting Rules?
 
-Comparison-based targeting allows you to define targeting rules for feature flags. This way you can target a specific user group with a specific feature. Using this feature you will be able to set different feature flag or setting values for different users in your application (based on the conditions you specify).
+Targeting rules allow you to set different feature flag or setting values for specific users or groups of users in your application, based on conditions you specify.
+
 
 ### AND and OR relationships
 
