@@ -30,9 +30,9 @@ By adding a rule, you specify a group of your users and what feature flag or set
 
 | Field                | Purpose                                                                                                                                              |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Comparison attribute | The attribute that the targeting rule is based on. Could be "User ID", "Email", "Country" or any custom attribute.                                   |
-| Comparator           | The comparison operator. Holds the connection between the attribute and the value.                                                                   |
-| Comparison value     | The value that the attribute is compared to. Could be a string, a number, a semantic version or a comma-separated list, depending on the comparator. |
+| Comparison attribute | The user attribute that the condition is based on. Could be "User ID", "Email", "Country" or any custom attribute.                                   |
+| Comparator           | The comparison operator. Defines the relation between the comparison attribute and the comparison value.                                                                   |
+| Comparison value     | The preset value that the comparison attribute is compared to. Depending on the comparator, could be a string, a list of strings, a number, a semantic version, a list of semantic versions or a date. |
 
 ### Comparison attribute
 
