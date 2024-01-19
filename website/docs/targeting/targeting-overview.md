@@ -21,9 +21,13 @@ Using this feature you will be able to set different setting values for specific
 
 ### Feature Flag / Setting
 
-A feature flag is a named boolean setting that can be turned ON or OFF. It is also known as a feature toggle, feature switch, feature flipper, conditional feature, etc.
+A *setting* is a set of rules that produces a **boolean**, **string**, **integer** or **double** value, which can be used to configure your application. It is also known as a configuration value, configuration setting, configuration parameter, etc.
 
-The setting is a **string**, **integer**, **double** value that can be used to configure your application. It is also known as a configuration value, configuration setting, configuration parameter, etc.
+A setting that provides a **boolean** value is also called a *feature flag* since it is often used to decide whether an application feature should be turned on or off. It is also known as a feature toggle, feature switch, feature flipper, conditional feature, etc.
+
+:::info
+Since the most common type of settings is feature flag, we usually use that term throughout the documentation for the sake of simplicity - even though setting is the more general term. In other words, when feature flags are mentioned, it also applies to settings unless stated otherwise.
+:::
 
 ### Targeting Rule
 
