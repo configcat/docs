@@ -13,7 +13,9 @@ Targeting rules allow you to set different feature flag or setting values for sp
 
 ### AND and OR relationships
 
-The conditions within a targeting rule are evaluated in an **AND** relationship, meaning that all of them must evaluate to true for the targeting rule to match. The targeting rules are in an **OR** relationship, meaning that if a targeting rule matches, the other targeting rules will not be evaluated.
+The conditions within a targeting rule are in an **AND** relationship, meaning that all of them must evaluate to true for the targeting rule to match.
+
+The targeting rules are in an **OR** relationship, meaning that the targeting rule which matches first in order, from top to bottom, will provide the value of the feature flag.
 
 ## How to add a Targeting Rule?
 
