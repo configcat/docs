@@ -94,7 +94,9 @@ In this case, the feature flag evaluation is performed using the SHA256 hashes o
 | NOT STARTS WITH ANY OF (hashed) | It matches when the comparison attribute does not start with any of the comparison values. |
 | NOT ENDS WITH ANY OF (hashed)   | It matches when the comparison attribute does not end with any of the comparison values.   |
 
-Since confidential text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example of how to target users from the same company. Which used to be handled by a rule like:
+##### CONTAINS / NOT CONTAINS for confidential text
+
+Since confidential text comparators don't support CONTAINS or NOT CONTAINS comparisons, here is an example of how to target users from the same company. Instead of defining a rule like:
 
 <img src="/docs/assets/sensitive2.png" className="zoomable" alt="Confidential" />
 
