@@ -18,8 +18,7 @@ We're looking for ConfigCat users willing to participate in the beta testing of 
 
 Config V2 is a new version of ConfigCat. It brings together a bundle of highly requested features like AND
 conditions, new comparators (Text Equals, Text Starts with Any of, Text Ends with Any of, Before/After),
-Prerequisite flags, and more. <a href="https://configcat.com/docs/advanced/config-v2/" target="_blank">Read
-more about Config V2 and the new features.</a>
+Prerequisite flags, and more. [Read more about Config V2 and the new features.](/advanced/config-v2/)
 
 You can get early access to the new features and shape the final product with your feedback.
 
