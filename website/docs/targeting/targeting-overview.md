@@ -25,9 +25,6 @@ A *setting* is a set of rules that yields a **boolean**, **string**, **integer**
 
 A *feature flag* is a setting that yields a **boolean** value, that is used to decide whether an application feature should be turned ON or OFF. It is also known as a feature toggle, feature switch, feature flipper, conditional feature, etc.
 
-ff kifejezest hasznaljuk mert az a leggyakobb fajtaja a settingeknek
-ha ffrol beszelunk akkor az a settingekre is vonatkozik
-
 :::info
 Throughout this documentation, we will use the term *feature flag* to refer to both feature flags and settings for simplicity, because feature flags are the most common type of settings.
 :::
