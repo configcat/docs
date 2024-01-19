@@ -33,7 +33,7 @@ The IF part contains the conditions, which are logical expressions that evaluate
 
 The conditions are in an **AND** relationship, meaning that all of them must evaluate to true for the targeting rule to match.
 
-The conditions can be added to the targeting rule in the dashboard. There three types of conditions:
+The conditions can be added to the targeting rule in the dashboard. There are three types of conditions:
 - [User conditions - User attribute based targeting]
 - [Prerequisite conditions - Feature flag based targeting]
 - [Segment conditions - Segment based targeting]
