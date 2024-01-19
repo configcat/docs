@@ -136,7 +136,6 @@ Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer 
 | \> (Semver)            | It matches when the comparison attribute interpreted as a semantic version is greater than the comparison value.             |
 | \>= (Semver)           | It matches when the comparison attribute interpreted as a semantic version is greater than or equal to the comparison value. |
 
-All semantic version comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
 
 #### Number comparators
 
