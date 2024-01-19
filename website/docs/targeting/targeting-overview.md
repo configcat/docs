@@ -60,7 +60,7 @@ These values are served to users who are not matched by any targeting rule. Or t
 
 ### User Object
 
-A user object is a collection of user attributes that can be used to target users. You have to pass a user object to the ConfigCat SDK in your application to use the targeting feature. More about user object [here]. 
+A *user object* is a collection of *user attributes* that describe the properties of a user. These attributes can be referenced in conditions of targeting rules. This is what makes possible to define rules for targeting specific users. More about user object [here].
 
 ## Examples
 
