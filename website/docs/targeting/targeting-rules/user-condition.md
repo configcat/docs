@@ -24,7 +24,7 @@ The user condition is evaluated with the same [User Object]. The user attribute'
 
 ## Anatomy of a User Condition
 
-By adding a rule, you specify a group of your users and what feature flag or setting value they should get. A rule consists of a **Comparison attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses), and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
+A *user condition* consists of a **Comparison attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses), and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
 
 <img src="/docs/assets/sensitive2.png" className="zoomable" alt="Confidential" />
 
