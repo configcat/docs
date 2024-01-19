@@ -39,7 +39,7 @@ A *condition* is a logical expression that can be evaluated to true or false. Th
 
 ### Value
 
-A value is the served value of a feature flag or setting. It can be a boolean, string, integer, or double value.
+A *value* is the outcome of a feature flag or setting. It can be a boolean, string, integer, or double value.
 
 ### Percentage option
 
