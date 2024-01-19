@@ -104,7 +104,7 @@ SetMyAwesomeFeatureEnabled(bIsMyAwesomeFeatureEnabled);
 | --------------- | ------------------------------------------------------------------------------------------------------------ |
 | `Key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `Default Value` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `User`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](advanced/targeting.md) |
+| `User`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
