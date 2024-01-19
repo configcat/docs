@@ -37,23 +37,13 @@ A *targeting rule* consists of two parts: a collection of conditions and a value
 
 A *condition* is a logical expression that can be evaluated to true or false. There are three types of conditions: [User condition], [Flag condition (Prerequisite)], [Segment condition]. For a targeting rule to match, all of its conditions must evaluate to true. More about conditions [here].
 
-### Percentage options
+### Percentage Options
 
 Percentage options are used to split users into groups that will receive a specific value for a feature flag. The groups are based on the ratio of the percentages. Percentage options are often used for A/B testing or phased rollouts. More about percentage options [here].
 
-### Value
+### "To all users" / "To all other" / "To unidentified" value
 
-A *value* is the result of a feature flag or a setting. It can be a boolean, string, integer, or double value.
-
-### "To all users" value
-
-This value is served if there are no targeting rules or percentage options defined for the feature flag.
-
-### "To all other" value
-
-These values are served to users who are not matched by any targeting rule. Or they serve as a fallback value if a [User Object] is not given.
-
-### "To unidentified" value
+A feature flag always contains a trivial "rule", a simple value, which comes after the actual rules. This value is returned when none of the preceding rules yields a result. Or they serve as a fallback value if a [User Object] is not given.
 
 ### User Object
 
