@@ -35,7 +35,7 @@ A *targeting rule* consists of two parts: a collection of conditions and a value
 
 ### Condition (IF / AND item)
 
-A *condition* is a logical expression that can be evaluated to true or false. It defines a requirement that needs to be met for the containing targeting rule to match. More about conditions [here].
+A *condition* is a logical expression that can be evaluated to true or false. There are three types of conditions: [User condition], [Flag condition (Prerequisite)], [Segment condition]. For a targeting rule to match, all of its conditions must evaluate to true. More about conditions [here].
 
 ### Value
 
