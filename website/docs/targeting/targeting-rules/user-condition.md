@@ -188,7 +188,7 @@ var user = new User(appUserData.Identifier)
 
 #### Array comparators
 
-The following comparators expect _Comparison attribute_ to be an array of strings. (An array of strings serialized to JSON is also accepted.)
+The following comparators expect _Comparison attribute_ to be an array of strings. An array of strings serialized to JSON is also accepted.
 
 :::note
 In case _Comparison attribute_ is not passed to the SDK or its value is not an array of strings, a warning will be logged, the targeting rule will be ignored and the evaluation will continue with the next rule.
