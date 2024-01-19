@@ -21,9 +21,9 @@ Using this feature you will be able to set different setting values for specific
 
 ### Feature Flag / Setting
 
-A *setting* is a set of rules that produces a **boolean**, **string**, **integer** or **double** value, which can be used to configure your application. It is also known as a configuration value, configuration setting, configuration parameter, etc.
+A *setting* is a set of rules that yields a **boolean**, **string**, **integer** or **double** value, which can be used to configure your application. It is also known as a configuration value, configuration setting, configuration parameter, etc.
 
-A setting that provides a **boolean** value is also called a *feature flag* since it is often used to decide whether an application feature should be turned on or off. It is also known as a feature toggle, feature switch, feature flipper, conditional feature, etc.
+A *feature flag* is a setting that yields a **boolean** value, that is used to decide whether an application feature should be turned ON or OFF. It is also known as a feature toggle, feature switch, feature flipper, conditional feature, etc.
 
 :::info
 Since the most common type of settings is feature flag, we usually use that term throughout the documentation for the sake of simplicity - even though setting is the more general term. In other words, when feature flags are mentioned, it also applies to settings unless stated otherwise.
@@ -31,7 +31,7 @@ Since the most common type of settings is feature flag, we usually use that term
 
 ### Targeting Rule
 
-A targeting rule is a collection of conditions (IF / AND items) and values (THEN item). It is used to determine whether a feature flag or setting is enabled or not for a specific user. More about targeting rules [here].
+A *targeting rule* consists of two parts: a collection of conditions and a value to serve. In case the conditions are met (the targeting rule *matches*), the value is served to the user. More about targeting rules [here].
 
 ### Condition (IF / AND item)
 
