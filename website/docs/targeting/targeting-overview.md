@@ -25,8 +25,11 @@ A *setting* is a set of rules that yields a **boolean**, **string**, **integer**
 
 A *feature flag* is a setting that yields a **boolean** value, that is used to decide whether an application feature should be turned ON or OFF. It is also known as a feature toggle, feature switch, feature flipper, conditional feature, etc.
 
+ff kifejezest hasznaljuk mert az a leggyakobb fajtaja a settingeknek
+ha ffrol beszelunk akkor az a settingekre is vonatkozik
+
 :::info
-Since the most common type of settings is feature flag, we usually use that term throughout the documentation for the sake of simplicity - even though setting is the more general term. In other words, when feature flags are mentioned, it also applies to settings unless stated otherwise.
+Throughout this documentation, we will use the term *feature flag* to refer to both feature flags and settings for simplicity, because feature flags are the most common type of settings.
 :::
 
 ### Targeting Rule
@@ -37,17 +40,23 @@ A *targeting rule* consists of two parts: a collection of conditions and a value
 
 A *condition* is a logical expression that can be evaluated to true or false. There are three types of conditions: [User condition], [Flag condition (Prerequisite)], [Segment condition]. For a targeting rule to match, all of its conditions must evaluate to true. More about conditions [here].
 
-### Value
-
-A *value* is the result of a feature flag or a setting. It can be a boolean, string, integer, or double value.
-
 ### Percentage options
 
 Percentage options are used to split users into groups that will receive a specific value for a feature flag. The groups are based on the ratio of the percentages. Percentage options are often used for A/B testing or phased rollouts. More about percentage options [here].
 
-### "To all users" value / Fallback value
+### Value
 
-A fallback value is a value that is served to users who are not matched by any targeting rule. Or serves as a fallback value if a [User Object] is not given.
+A *value* is the result of a feature flag or a setting. It can be a boolean, string, integer, or double value.
+
+### "To all users" value
+
+This value is served if there are no targeting rules or percentage options defined for the feature flag.
+
+### "To all other" value
+
+These values are served to users who are not matched by any targeting rule. Or they serve as a fallback value if a [User Object] is not given.
+
+### "To unidentified" value
 
 ### User Object
 
