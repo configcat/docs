@@ -6,7 +6,7 @@ description: A user condition is a condition that is based on the evaluation of 
 
 ## What is a user condition?
 
-A user condition is a condition that is based on the evaluation of a user attribute. It is used to determine whether a targeting rule is a match or not for a specific user.
+A user condition is a condition that is based on the comparison of a user attribute and a preset value (comparison value). It allows you to define targeting rules which target users based on some of their properties.
 
 ## How does it work?
 
