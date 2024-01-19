@@ -138,7 +138,12 @@ Support for confidential comparators was introduced in the following SDK version
 
 #### Semantic version comparators
 
-The following comparators assume that _Comparison attribute_ and _Comparison value_ contain semantic versions.
+The following comparators expect _Comparison attribute_ to be a string containing a valid semantic version.
+
+:::note
+In case _Comparison attribute_ is not passed to the SDK or its value is not a valid semantic version, a warning will be logged, the targeting rule will be ignored and the evaluation will continue with the next rule.
+:::
+
 Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer Semantic Version Specification</a>.
 
 | Comparator             | Description                                                                                                                  |
