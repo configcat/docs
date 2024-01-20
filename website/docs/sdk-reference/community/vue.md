@@ -120,7 +120,7 @@ app.use(ConfigCatPlugin, {
 
 You may want to log the actions of the underlying ConfigCat SDK client. To do this, specify a logger in `clientOptions`:
 
-> See documentation here: <https://configcat.com/docs/sdk-reference/js/#logging>
+> See documentation [here](/sdk-reference/js/#logging).
 
 Add `createConsoleLogger`, and `LoggerLevel` to your import:
 
