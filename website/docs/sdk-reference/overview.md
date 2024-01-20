@@ -55,7 +55,7 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 
 ## JavaScript (Vue.js) - Community maintained
 
-- [Documentation](sdk-reference/community/vue.md) on how to connect your application.
+- [Documentation](/sdk-reference/community/vue) on how to connect your application.
 - <a href="https://github.com/codedbychavez/configcat-vue" target="_blank">GitHub repository of the ConfigCat Vue.js SDK.</a>
 
 ## JavaScript (React)
