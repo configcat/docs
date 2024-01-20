@@ -130,7 +130,7 @@ import { createConsoleLogger, LogLevel } from "configcat-vue";
 
 Create the logger with a specified log level:
 
-> Documentation: <https://configcat.com/docs/sdk-reference/js/#setting-log-levels>
+> See documentation [here](/sdk-reference/js/#setting-log-levels).
 
 Use the logger in `clientOptions`:
 
