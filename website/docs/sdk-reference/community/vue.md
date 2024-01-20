@@ -158,7 +158,7 @@ app.use(ConfigCatPlugin, {
 
 The [User Object](/advanced/user-object/) stores attributes of a user in your application. It works hand in hand with ConfigCat's [Targeting](/advanced/targeting/) rules for targeting specific users with feature flags. A User Object can be passed as a prop to the `FeatureWrapper` component.
 
-> See documentation here: <https://configcat.com/docs/advanced/user-object/>
+> See documentation [here](/advanced/user-object/).
 
 Define the User Object:
 
