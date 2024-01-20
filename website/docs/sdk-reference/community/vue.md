@@ -218,7 +218,7 @@ const handleFlagValueChange = (flagValue: boolean) => {
 
 This plugin exposes (provides) the underlying ConfigCat client. By injecting the provided client instance, you can use all the features it offers.
 
-> See documentation here: <https://configcat.com/docs/sdk-reference/js>
+> See documentation [here](/sdk-reference/js).
 
 One of the ways it can be used is by subscribing to events emitted by the ConfigCat client.
 
