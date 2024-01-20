@@ -114,7 +114,7 @@ app.use(ConfigCatPlugin, {
 
 `pollingMode` can be set to: `PollingMode.AutoPoll`, `PollingMode.ManualPoll` and `PollingMode.LazyLoad`
 
-> See documentation here: <https://configcat.com/docs/advanced/caching/>
+> See documentation [here](/advanced/caching/).
 
 ### Using the plugin with a logger
 
