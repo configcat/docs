@@ -24,9 +24,9 @@ You can add a targeting rule to a feature flag on the Dashboard by clicking on t
 
 ## How does it work? - Anatomy of a Targeting Rule
 
-A targeting rule consists of two parts: the IF part and the THEN part.
+A targeting rule consists of two parts: the **IF part** and the **THEN part**.
 
-*TODO - add screenshot*
+![Targeting rule anatomy](/assets/targeting/targeting-rule/targeting-rule.jpg)
 
 ### IF part
 
@@ -35,9 +35,9 @@ The IF part contains the conditions, which are logical expressions that evaluate
 The conditions are in an **AND** relationship, meaning that all of them must evaluate to true for the targeting rule to match.
 
 The conditions can be added to the targeting rule on the Dashboard. There are three types of conditions:
-- [User conditions - User attribute based targeting]
-- [Prerequisite conditions - Feature flag based targeting]
-- [Segment conditions - Segment based targeting]
+- [User condition](/targeting/targeting-rules/user-condition) - User attribute based targeting.
+- [Flag condition (Prerequisite)](/targeting/targeting-rules/) - Feature flag based targeting.
+- [Segment condition](/targeting/targeting-rules/segment-condition) - Segment based targeting.
 
 ### THEN part
 
