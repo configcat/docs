@@ -24,7 +24,7 @@ export const CPPSchema = require('@site/src/schema-markup/sdk-reference/cpp.json
 
 Via **[Unreal Marketplace](https://www.unrealengine.com/marketplace/product/e142293a397d4ce4bf6a1f3053a2316d)**
 
-Via **[Github clone](https://github.com/configcat/unreal-engine-sdk)**
+Via **[GitHub clone](https://github.com/configcat/unreal-engine-sdk)**
 
 Prequesities to cloning manually:
 - you are working in a [C++ project](https://docs.unrealengine.com/5.2/en-US/compiling-game-projects-in-unreal-engine-using-cplusplus/)
@@ -671,11 +671,11 @@ All ConfigCat logs are inside the `LogConfigCat` category. By default the verbos
 
 The verbosity can be changed:
 
-Via [Command line arguments]:
+Via **Command line arguments**:
 
 Run the executable with `-LogCmds="LogConfigCat VerbosityLevel"`. For example: `-LogCmds="LogConfigCat Warning"` to only show warnings and above.
 
-Via [DefaultEngine.ini]:
+Via **DefaultEngine.ini**:
 
 In the `[Core.Log]` category add `LogConfigCat=VerbosityLevel` inside the `DefaultEngine.ini`. For example:
 
@@ -700,7 +700,7 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is [downloading a config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
