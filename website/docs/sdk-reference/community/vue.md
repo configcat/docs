@@ -209,7 +209,6 @@ Listen and handle changes using `@flag-value-changed`:
 const handleFlagValueChange = (flagValue: boolean) => {
   console.log('Flag value changed to: ', flagValue);
 }
-
 </script>
 ```
 
