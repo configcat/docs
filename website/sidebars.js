@@ -194,6 +194,11 @@ module.exports = {
               id: 'sdk-reference/community/deno',
               label: 'TypeScript (Deno)',
             },
+            {
+              type: 'doc',
+              id: 'sdk-reference/community/vue',
+              label: 'JavaScript (Vue.js)',
+            },
           ],
         },
       ],
