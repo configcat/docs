@@ -19,7 +19,8 @@ The targeting rules are in an **OR** relationship, meaning that the targeting ru
 
 ## How to add a Targeting Rule?
 
-*TODO - add screenshot and steps*
+You can add a targeting rule to a feature flag on the Dashboard by clicking on the `+IF` ("Add targeting rule") button.
+![Add targeting rule](/assets/targeting/targeting-rule/add-rule.jpg)
 
 ## How does it work? - Anatomy of a Targeting Rule
 
