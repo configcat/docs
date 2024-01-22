@@ -44,7 +44,7 @@ This SDK includes a `FeatureWrapper` component. It enables users to control the 
 
 In any `.vue` component file:
 
-```vue
+```html
 <script setup lang="ts">
 
 import { FeatureWrapper } from "configcat-vue";
@@ -54,11 +54,11 @@ import { FeatureWrapper } from "configcat-vue";
 
 Pass the feature flag key as a prop:
 
-```js
+```html
 <template>
   <div class="my-app">
     <FeatureWrapper featureKey="YOUR-FEATURE-KEY-GOES-HERE">
-      {/* This is displayed when the feature flag is turned on */}
+      <!-- This is displayed when the feature flag is turned on --> 
       <TheNewFeature />
     </FeatureWrapper>
   </div>
@@ -67,19 +67,19 @@ Pass the feature flag key as a prop:
 
 Optionally, the `FeatureWrapper` component also provides an `#else` and `#loading` template. Components or HTML elements can be included within these templates that would display when the feature flag is **turned off** or **loading** respectively.
 
-```js
+```html
 <FeatureWrapper
   featureKey="YOUR-FEATURE-KEY-GOES-HERE"
 >
   <TheNewFeature />
   <template #else>
-    {/* Displayed when the feature flag is turned off. Add anything in this block, like HTML elements or other Vue components */}
+    <!-- Displayed when the feature flag is turned off -->
     <div class="feature-not-available-wrapper">
       <p>Sorry, this feature is not available. Your feature flag is off.</p>
     </div>
   </template>
   <template #loading>
-    {/* Display while the feature flag is loading. Add anything in this block, like HTML elements or other Vue components */}
+    <!-- Display while the feature flag is loading -->
     <div class="loading-wrapper">
       <p>Loading...</p>
     </div>
@@ -109,7 +109,6 @@ app.use(ConfigCatPlugin, {
         pollIntervalSeconds: 5 // Optional. Specify the polling interval in seconds. The default is 60 seconds.
     }
 });
-
 ```
 
 `pollingMode` can be set to: `PollingMode.AutoPoll`, `PollingMode.ManualPoll` and `PollingMode.LazyLoad`
@@ -162,7 +161,7 @@ The [User Object](/advanced/user-object/) stores attributes of a user in your ap
 
 Define the User Object:
 
-```js
+```html
 <script setup lang="ts">
 import { ref } from 'vue';
 import { User } from 'configcat-vue';
@@ -176,12 +175,11 @@ const userObject = ref<User>(user)
 
 Pass it to the `FeatureWrapper` component:
 
-```js
+```html
 <template>
   <div class="my-app">
     <FeatureWrapper featureKey="YOUR-FEATURE-KEY-GOES-HERE" :userObject="userObject">
       <TheNewFeature />
-      
     </FeatureWrapper>
   </div>
 </template>
@@ -193,24 +191,22 @@ When a feature flag is toggled ON or OFF in the [ConfigCat dashboard](https://ap
 
 Listen and handle changes using `@flag-value-changed`:
 
-```js
+```html
 <template>
   <div class="my-app">
     <FeatureWrapper featureKey="YOUR-FEATURE-KEY-GOES-HERE" @flag-value-changed="handleFlagValueChange">
       <TheNewFeature />
-      
     </FeatureWrapper>
   </div>
 </template>
 ```
 
-```js
+```html
 <script setup lang="ts">
-{/* Handle to the flag value changes */}
+// Handle to the flag value changes
 const handleFlagValueChange = (flagValue: boolean) => {
   console.log('Flag value changed to: ', flagValue);
 }
-
 </script>
 ```
 
@@ -224,11 +220,10 @@ One of the ways it can be used is by subscribing to events emitted by the Config
 
 Inject the ConfigCat client into your component:
 
-```js
+```html
 <script setup lang="ts">
 import { inject, onBeforeMount } from 'vue';
 import { FeatureWrapper } from "configcat-vue";
-// ...
 
 // Import the ConfigCat client interface
 import type { IConfigCatClient } from 'configcat-vue';
@@ -242,7 +237,6 @@ onBeforeMount(() => {
     console.log('Flag evaluated');
   });
 });
-
 </script>
 ```
 
