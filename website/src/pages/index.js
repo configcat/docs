@@ -70,6 +70,7 @@ const features = [
       { url: 'sdk-reference/android', title: 'Java (Android)' },
       { url: 'sdk-reference/js', title: 'JavaScript' },
       { url: 'sdk-reference/community/deno', title: 'JavaScript (Deno)' },
+      { url: 'sdk-reference/community/vue', title: 'JavaScript (Vue.js)' },
       { url: 'sdk-reference/react', title: 'JavaScript (React)' },
       { url: 'sdk-reference/js-ssr', title: 'JavaScript (SSR)' },
       { url: 'sdk-reference/kotlin', title: 'Kotlin Multiplatform' },
