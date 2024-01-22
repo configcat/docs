@@ -180,7 +180,6 @@ Pass it to the `FeatureWrapper` component:
   <div class="my-app">
     <FeatureWrapper featureKey="YOUR-FEATURE-KEY-GOES-HERE" :userObject="userObject">
       <TheNewFeature />
-      
     </FeatureWrapper>
   </div>
 </template>
@@ -197,7 +196,6 @@ Listen and handle changes using `@flag-value-changed`:
   <div class="my-app">
     <FeatureWrapper featureKey="YOUR-FEATURE-KEY-GOES-HERE" @flag-value-changed="handleFlagValueChange">
       <TheNewFeature />
-      
     </FeatureWrapper>
   </div>
 </template>
@@ -226,7 +224,6 @@ Inject the ConfigCat client into your component:
 <script setup lang="ts">
 import { inject, onBeforeMount } from 'vue';
 import { FeatureWrapper } from "configcat-vue";
-// ...
 
 // Import the ConfigCat client interface
 import type { IConfigCatClient } from 'configcat-vue';
