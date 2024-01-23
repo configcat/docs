@@ -1,10 +1,10 @@
 ---
 id: feature-flag-evaluation
-title: Setting Evaluation
+title: Feature Flag Evaluation
 description: This document offers an in-depth guide on how the SDK determines the value of a setting.
 ---
 
-# Setting Evaluation
+# Feature Flag Evaluation
 
 This document offers an in-depth guide on how the SDK determines the value of a setting when the `GetValue` call is made. Understanding this process requires prior knowledge of targeting concepts.
 
