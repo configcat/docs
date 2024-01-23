@@ -69,7 +69,7 @@ By hashing both the User's attribute and the feature flag's key, we ensure diver
 :::
 
 :::info
-The evaluation process is entirely contained within the SDKs, meaning your User's sensitive data never leaves your system. The data flow is one-way – from ConfigCat CDN servers to your SDKs – and ConfigCat does not receive or store any attributes of the [User Object] passed to the SDKs. This design prioritizes the privacy and security of user data.
+The evaluation process is entirely implemented within the SDKs, meaning your users' sensitive data never leaves your system. The data flow is one-way – from ConfigCat CDN servers to your SDKs – and ConfigCat does not receive or store any attributes of the [User Object] passed to the SDKs. This design prioritizes the privacy and security of user data.
 :::
 
 ### Percentage Evaluation Attribute
