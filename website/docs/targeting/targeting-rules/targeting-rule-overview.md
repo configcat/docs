@@ -41,8 +41,9 @@ The conditions can be added to the targeting rule on the Dashboard. There are th
 
 ### THEN part
 
-The THEN part contains the setting value that will be used if the targeting rule matches. The setting value can be a simple value or a [percentage-based value].
-If the targeting rules do not match or no [Uer Object] is given, the fallback value ("To Unidentified" / "To all other") will be used.
+The THEN part contains either a value or percentage options that will be used to determine the outcome of the feature flag when the rule matches.
+
+When none of the targeting rules match, the value of the feature flag will be provided by the percentage options after the rules. If there's none or it can't be evaluated, then the fallback value ("To all others") specified at the end of the feature flag will apply.
 
 ## Multiple targeting rules and ordering
 You can add multiple targeting rules to a feature flag. The targeting rules are evaluated in order, from top to bottom.
