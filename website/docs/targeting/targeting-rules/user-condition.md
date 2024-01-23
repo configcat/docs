@@ -169,19 +169,6 @@ The ConfigCat SDKs don't provide date and time values. You have to pass them to 
 | BEFORE     | It matches when the comparison attribute interpreted as the seconds elapsed since <a href="https://en.wikipedia.org/wiki/Unix_time">Unix Epoch</a> is less than the comparison value.          |
 | AFTER      | It matches when the comparison attribute interpreted as the seconds elapsed since <a href="https://en.wikipedia.org/wiki/Unix_time">Unix Epoch</a> is greater than the comparison value.value. |
 
-##### Example
-If you want to target users who registered before a certain date, you have to pass the registration date to the SDK as a custom attribute in [UNIX timestamp](https://en.wikipedia.org/wiki/Unix_time) format.
-
-```cs
-var user = new User(appUserData.Identifier)
-{
-    Custom =
-    {
-        ["RegisteredAt"] = User.AttributeValueFrom(appUserData.RegistrationTime),
-    }
-};
-```
-
 #### Array comparators
 
 The following comparators expect _Comparison attribute_ to be an array of strings. An array of strings serialized to JSON is also accepted.
