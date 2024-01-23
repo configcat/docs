@@ -41,9 +41,7 @@ The conditions can be added to the targeting rule on the Dashboard. There are th
 
 ### THEN part
 
-The THEN part contains either a value or percentage options that will be used to determine the outcome of the feature flag when the rule matches.
-
-When none of the targeting rules match, the value of the feature flag will be provided by the percentage options after the rules. If there's none or it can't be evaluated, then the fallback value ("To all others") specified at the end of the feature flag will apply.
+The THEN part contains either a value or percentage options that will be used to determine the result of the feature flag when the rule matches.
 
 ## Multiple targeting rules and ordering
 You can add multiple targeting rules to a feature flag. The targeting rules are evaluated in order, from top to bottom.
