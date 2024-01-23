@@ -51,7 +51,7 @@ There are 3 predefined attributes. Additionally, you can define your **_custom a
 
 ### Comparison value
 
-A string, a list of strings, a number, a semantic version, a list of semantic versions or a date value. Will be compared to the selected _Comparison attribute_ using the _Comparator_. The length of the comparison value is limited. And it depends on your subscription plan.
+A string, a list of strings, a number, a semantic version, a list of semantic versions or a date value. Will be compared to the selected _Comparison attribute_ using the _Comparator_. The length of the comparison value is limited, and it depends on your subscription plan. See the [plan limits page](subscription-plan-limits/) for more details.
 
 ### Comparator
 
