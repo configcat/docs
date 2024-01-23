@@ -45,7 +45,7 @@ The THEN part contains either a value or percentage options that will be used to
 
 ## Multiple targeting rules and ordering
 You can add multiple targeting rules to a feature flag. The targeting rules are evaluated in order, from top to bottom.
-The targeting rules are in an **OR** relationship, meaning that if a targeting rule matches, the other targeting rules will not be evaluated.
+The targeting rules are in an **OR** relationship, meaning that the targeting rule which matches first in order, from top to bottom, will provide the value of the feature flag.
 
 ### How to change the order of the targeting rules?
 
