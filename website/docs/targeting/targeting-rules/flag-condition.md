@@ -22,65 +22,21 @@ You can set a flag condition for a feature flag on the ConfigCat Dashboard. The 
 
 ## Comparators
 
-The following comparators are available for flag conditions:
+Different comparators are available for different types of prerequisites.
 
-### Text comparators
+When the prerequisite is a feature flag (boolean setting), the following comparators are available:
 
-:::note
-In case **attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), targeting rule **evaluation will be skipped**.
-:::
+| Comparator | Description                                           |
+| ---------- | ----------------------------------------------------- |
+| IS ON      | It matches when the prerequisite feature flag is ON.  |
+| IS OFF     | It matches when the prerequisite feature flag is OFF. |
 
-:::caution
-Consider using Confidential text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
-:::
+When the prerequisite is a string, number or double setting the following comparators are available:
 
-| Comparator                   | Description                                                                                     |
-| ---------------------------- | ----------------------------------------------------------------------------------------------- |
-| IS ONE OF (cleartext)        | It matches when the comparison attribute is equal to any of the comparison values               |
-| IS NOT ONE OF (cleartext)    | It matches when the comparison attribute is not equal to any of the comparison values.          |
-| CONTAINS (cleartext)         | It matches when the comparison attribute contains any comparison values as a substring.         |
-| DOES NOT CONTAIN (cleartext) | It matches when the comparison attribute does not contain any comparison values as a substring. |
-
-### Confidential text comparators
-
-We recommend using confidential text comparators especially in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
-In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed. This can cause an increase in the size of the config.json file and the overall network traffic. It is recommended to use confidential comparators only when necessary.
-
-| Comparator                      | Description                                                                                |
-| ------------------------------- | ------------------------------------------------------------------------------------------ |
-| IS ONE OF (hashed)              | It matches when the comparison attribute is equal to any of the comparison values          |
-| IS NOT ONE OF (hashed)          | It matches when the comparison attribute is not equal to any of the comparison values.     |
-
-### Semantic version comparators
-
-The following comparators assume that _Comparison attribute_ and _Comparison value_ contain semantic versions.
-Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer Semantic Version Specification</a>.
-
-| Comparator             | Description                                                                                                                  |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF (Semver)     | It matches when the comparison attribute interpreted as a semantic version is equal to any of the comparison values.         |
-| IS NOT ONE OF (Semver) | It matches when the comparison attribute interpreted as a semantic version is not equal to any of the comparison values.     |
-| < (Semver)             | It matches when the comparison attribute interpreted as a semantic version is less than the comparison value.                |
-| <= (Semver)            | It matches when the comparison attribute interpreted as a semantic version is less than or equal to the comparison value.    |
-| \> (Semver)            | It matches when the comparison attribute interpreted as a semantic version is greater than the comparison value.             |
-| \>= (Semver)           | It matches when the comparison attribute interpreted as a semantic version is greater than or equal to the comparison value. |
-
-All semantic version comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
-
-### Number comparators
-
-The following comparators assume that _Comparison attribute_ and _Comparison value_ contain numbers.
-
-| Comparator         | Description                                                                                                                |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| = (Number)         | It matches when the comparison attribute interpreted as a decimal number is equal to the comparison value.                 |
-| <&#8203;> (Number) | It matches when the comparison attribute interpreted as a decimal number is not equal to the comparison value.             |
-| < (Number)         | It matches when the comparison attribute interpreted as a decimal number is less than the comparison value.                |
-| <= (Number)        | It matches when the comparison attribute interpreted as a decimal number is less than or equal to the comparison value.    |
-| \> (Number)        | It matches when the comparison attribute interpreted as a decimal number is greater than the comparison value.             |
-| \>= (Number)       | It matches when the comparison attribute interpreted as a decimal number is greater than or equal to the comparison value. |
-
-All number comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid number.
+| Comparator          | Description                                                                                 |
+| ------------------- | ------------------------------------------------------------------------------------------- |
+| EQUALS (hashed)     | It matches when the prerequisite feature flag's value is equal to the comparison value.     |
+| NOT EQUALS (hashed) | It matches when the prerequisite feature flag's value is not equal to the comparison value. |
 
 ## Example
 
