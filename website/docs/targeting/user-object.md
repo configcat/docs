@@ -4,7 +4,7 @@ title: User Object
 description: The user object lets you target users based on their properties with different features. The user object is essential for beta and A/B testing.
 ---
 
-The _User Object_ is an optional parameter when getting a feature flag or setting value from ConfigCat.
+The *User Object*  is a collection of *user attributes* that describe the properties of a user. The *User Object* is necessary define [targeting rules] and [percentage options].
 It allows you to pass potential [Targeting rule](/advanced/targeting) variables to the ConfigCat SDK.
 And represents a user in your application.
 
