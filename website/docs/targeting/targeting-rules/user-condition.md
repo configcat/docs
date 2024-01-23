@@ -134,10 +134,12 @@ The following comparators expect the *Comparison attribute* to be an array of st
 
 ## Examples
 
-##### CONTAINS / NOT CONTAINS for confidential text
+### Confidential CONTAINS and NOT CONTAINS
 
-Since confidential text comparators don't support CONTAINS or NOT CONTAINS comparisons, here is an example of how to target users from the same company.
+#### Scenario
+Let's target users who who are from the same company confidentially. However text comparators don't support `CONTAINS` or `NOT CONTAINS` comparisons. How can we solve this?
 
+#### Solution
 You can add a custom attribute called `domain` and use only confidential comparators in the targeting rule.
 
 On the Dashboard:
