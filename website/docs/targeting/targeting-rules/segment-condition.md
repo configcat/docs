@@ -4,7 +4,7 @@ title: Segment Condition
 description: Segments help you define user segments and assign them to your feature flags. Ideal for beta testing on a certain group of users.
 ---
 
-## What is a segment condition?
+## What is a segment condition? What is a segment?
 
 A segment condition is a condition that is based on the evaluation of a [segment]. It is used to determine whether a targeting rule is a match or not for a specific user.
 
