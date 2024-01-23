@@ -12,6 +12,8 @@ A *user condition* is a condition that is based on the comparison of a user attr
 
 The *comparison attribute's value* from the [user object] is compared to the *comparison value* that you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
+For more details on the evaluation of user conditions, please refer to [Setting Evaluation](TODO).
+
 ## How to add a user condition?
 
 *TODO - rewrite this part and add screenshot*
