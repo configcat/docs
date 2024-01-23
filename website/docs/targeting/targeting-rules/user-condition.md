@@ -51,7 +51,7 @@ There are 3 predefined attributes. Additionally, you can define your **_custom a
 
 ### Comparison value
 
-Any string, number, or comma-separated list. Will be compared to the selected _Comparison attribute_ using the _Comparator_. **Max Length: 65535 chars**.
+A string, a list of strings, a number, a semantic version, a list of semantic versions or a date value. Will be compared to the selected _Comparison attribute_ using the _Comparator_. **Max Length: 65535 chars**.
 
 ### Comparator
 
