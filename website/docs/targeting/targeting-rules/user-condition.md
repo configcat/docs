@@ -117,11 +117,7 @@ const value = await configCatClient.getValueAsync(key, defaultValue, userObject)
 
 #### Semantic version comparators
 
-The following comparators expect _Comparison attribute_ to be a string containing a valid semantic version.
-
-:::note
-In case _Comparison attribute_ is not passed to the SDK or its value is not a valid semantic version, a warning will be logged, the targeting rule will be ignored and the evaluation will continue with the next rule.
-:::
+The following comparators expect the *Comparison attribute* to be a string containing a valid semantic version, and the *Comparison value* to be a semantic version or a list of semantic versions.
 
 Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer Semantic Version Specification</a>.
 
@@ -160,13 +156,9 @@ The following comparators expect the *Comparison attribute* to be a date value (
 
 #### Array comparators
 
-The following comparators expect _Comparison attribute_ to be an array of strings. An array of strings serialized to JSON is also accepted.
+The following comparators expect the *Comparison attribute* to be an array of strings (or an array of strings serialized to JSON), and the *Comparison value* to be a string or a list of strings.
 
-:::note
-In case _Comparison attribute_ is not passed to the SDK or its value is not an array of strings, a warning will be logged, the targeting rule will be ignored and the evaluation will continue with the next rule.
-:::
-
-| Comparator                | Description                                                                                                                  |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| ARRAY CONTAINS ANY OF     | It matches when the comparison attribute interpreted as a comma-separated list contains any of the comparison values.        |
-| ARRAY NOT CONTAINS ANY OF | It matches when the comparison attribute interpreted as a comma-separated list does not contain any of the comparison values |
+| Comparator                | Description                                                                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| ARRAY CONTAINS ANY OF     | It matches when the comparison attribute interpreted as an array of strings that contains any of the comparison values.        |
+| ARRAY NOT CONTAINS ANY OF | It matches when the comparison attribute interpreted as an array of strings that does not contain any of the comparison values |
