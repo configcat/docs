@@ -73,7 +73,7 @@ The data that could and should be passed to the User Object.
 
 ### Identifier attribute
 
-Unique identifier of a user in your application. This is a **REQUIRED** attribute which enables ConfigCat to differentiate your users from each other and to evaluate the setting values for percentage-based targeting.
+Unique identifier of a user in your application. This is a **REQUIRED** attribute which enables ConfigCat to differentiate your users from each other and to evaluate the feature flag values for percentage options.
 
 Our recommendation as an identifier:
 
@@ -81,13 +81,13 @@ Our recommendation as an identifier:
 - Email address - In most cases adding an email address works perfectly here, as long as it is unique.
 - SessionId - This is useful for when you want to target users who are not logged in to your application.
 
-### Custom attribute usage
+### Custom attributes
 
-First, you need to pass a User Object to the ConfigCat SDK containing the `custom` attribute.
+First, you need to pass a User Object containing the `custom` attribute to the ConfigCat SDK.
 
-> In case **a custom attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), the corresponding targeting rule **evaluation will be skipped**.
+> In case **a custom attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), the corresponding **targeting rule will be skipped** and the evaluation will continue with the next rule.
 
-> The custom attribute's value can be multiple types. e.g: string, number, boolean, array, object, etc. Check the [SDK's reference](sdk-reference/overview) for more details.
+> The custom attribute's value can be multiple types. e.g: string, number, date, array of strings, etc. Check the [SDK reference](sdk-reference/overview) for more details.
 
 Example:
 
@@ -101,7 +101,7 @@ var userObject = {
 };
 ```
 
-_The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](sdk-reference/overview)_
+_The above code sample is in JavaScript. You can find code samples for other platforms in the [SDK reference.](sdk-reference/overview)_
 
 On the Dashboard a targeting rule for the custom attribute `EyeColor` would look like:
 <img src="/docs/assets/custom-property-ui.png" className="zoomable" alt="customPropertyUsageDashboard" />
