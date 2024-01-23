@@ -4,7 +4,7 @@ title: Flag Condition (Prerequisite)
 description: A prerequisite feature flag is a type of feature flag that is used to control the availability of another feature flag.
 ---
 
-## What is a flag condition / prerequisite feature flag?
+## What is a flag condition? What is a prerequisite flag?
 
 A flag condition acts as a condition that must be met before the dependent feature flag becomes active. A prerequisite feature flag (aka. master feature flag, inter-dependent feature flag, global toggle) is a type of feature flag that is used to control the availability of another feature flag. 
 
