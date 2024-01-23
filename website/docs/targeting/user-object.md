@@ -9,14 +9,14 @@ It allows you to pass potential [Targeting rule](/advanced/targeting) variables 
 And represents a user in your application.
 
 :::info
-The _User Object_ is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
+The *User Object* is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
 :::
 
 ## The relationship between User Object and Targeting rules
 
-**As a product manager**, you can set [Targeting rules](/advanced/targeting) on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> based on the parameters given to ConfigCat by your application.
+**As a product manager**, you can define [Targeting rules](/advanced/targeting) on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> based on the user attributes that are provided by your application.
 
-**As a developer**, User Object allows you to pass optional parameters to the ConfigCat SDK, which you (or your teammates) can use in the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> to apply [Targeting rules](/advanced/targeting) on.
+**As a developer**, User Object allows you to pass user attributes to the ConfigCat SDK, which you (or your teammates) can reference in the [Targeting rules](/advanced/targeting) <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>.
 
 ### Example
 
