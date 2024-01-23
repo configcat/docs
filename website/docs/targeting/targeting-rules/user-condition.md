@@ -57,11 +57,7 @@ A string, a list of strings, a number, a semantic version, a list of semantic ve
 
 #### Text comparators
 
-The following comparators assume that _Comparison attribute_ and _Comparison value_ contain string/text.
-
-:::note
-In case **attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), targeting rule **evaluation will be skipped**.
-:::
+The following comparators expect the *Comparison attribute* to be a string value, and the *Comparison value* to be a string or a list of strings.
 
 :::caution
 Consider using Confidential text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
@@ -141,7 +137,7 @@ Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer 
 
 #### Number comparators
 
-The following comparators assume that _Comparison attribute_ and _Comparison value_ contain numbers.
+The following comparators expect the *Comparison attribute* and the *Comparison value* to be a number.
 
 | Comparator         | Description                                                                                                                |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
@@ -166,8 +162,6 @@ The ConfigCat SDKs don't provide date and time values. You have to pass them to 
 :::
 
 :::info
-You cannot store date and time values directly in User Object attributes. You have to pass them to the SDKs as second-based [UNIX timestamps](https://en.wikipedia.org/wiki/Unix_time), converted to string. (Most SDKs provide a helper method named like `User.AttributeValueFrom` to convert a date and time value to the expected string representation.)
-:::
 
 
 | Comparator | Description                                                                                                                                                                                    |
