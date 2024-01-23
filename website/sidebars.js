@@ -31,7 +31,7 @@ module.exports = {
             },
             'targeting/percentage-options',
             'targeting/user-object',
-            'targeting/setting-evaluation',
+            'targeting/feature-flag-evaluation',
           ],
         },
         'advanced/public-api',

@@ -1,5 +1,5 @@
 ---
-id: setting-evaluation
+id: feature-flag-evaluation
 title: Setting Evaluation
 description: This document offers an in-depth guide on how the SDK determines the value of a setting.
 ---

@@ -1,15 +1,14 @@
 ---
 id: targeting-rule-overview
 title: Targeting Rule Overview
-description: Targeting allows you to define targeting rules for feature flags. This way you can target a specific user group with a specific feature.
+description: Targeting rules allow you to set different feature flag or setting values for specific users or groups of users in your application.
 ---
 
-# Targeting Rules
+# Targeting Rule
 
-## What are Targeting Rules?
+## What is a Targeting Rule?
 
 Targeting rules allow you to set different feature flag or setting values for specific users or groups of users in your application. You can set conditions based on user attributes, feature flags, or segments within a targeting rule.
-
 
 ### AND and OR relationships
 
