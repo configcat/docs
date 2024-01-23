@@ -17,7 +17,7 @@ Using this feature you will be able to set different setting values for specific
 
 ## What is what?
 *TODO - new screenshot*
-![Targeting Overview](../../static/assets/targeting/targeting-overview/targeting.png)
+![Targeting Overview](../../static/assets/targeting/targeting-overview/targeting.jpg)
 
 ### Feature Flag / Setting
 
