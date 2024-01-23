@@ -30,10 +30,10 @@ A *user condition* consists of a **Comparison attribute** of a user in your appl
 
 <img src="/docs/assets/sensitive2.png" className="zoomable" alt="Confidential" />
 
-| Field                | Purpose                                                                                                                                              |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Comparison attribute | The user attribute that the condition is based on. Could be "User ID", "Email", "Country" or any custom attribute.                                   |
-| Comparator           | The comparison operator. Defines the relation between the comparison attribute and the comparison value.                                                                   |
+| Field                | Purpose                                                                                                                                                                                                |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Comparison attribute | The user attribute that the condition is based on. Could be "User ID", "Email", "Country" or any custom attribute.                                                                                     |
+| Comparator           | The comparison operator. Defines the relation between the comparison attribute and the comparison value.                                                                                               |
 | Comparison value     | The preset value that the comparison attribute is compared to. Depending on the comparator, could be a string, a list of strings, a number, a semantic version, a list of semantic versions or a date. |
 
 ### Comparison attribute
@@ -151,18 +151,7 @@ The following comparators expect the *Comparison attribute* and the *Comparison 
 
 #### Date and time comparators
 
-The following comparators expect _Comparison attribute_ to be a double-precision floating-point number representing a second-based [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time). Values that can be converted to a Unix timestamp are also accepted, including platform specific standard date types.
-
-:::note
-In case _Comparison attribute_ is not passed to the SDK or its value is not a valid Unix timestamp, a warning will be logged, the targeting rule will be ignored and the evaluation will continue with the next rule.
-:::
-
-:::tip
-The ConfigCat SDKs don't provide date and time values. You have to pass them to the SDKs as described above.
-:::
-
-:::info
-
+The following comparators expect the *Comparison attribute* to be a date value (a second-based [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) or a platform specific date object), and the *Comparison value* to be a date.
 
 | Comparator | Description                                                                                                                                                                                    |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
