@@ -16,16 +16,16 @@ The prerequisite feature flag is evaluated first before the dependent feature fl
 
 ## How to set a flag condition?
 
-You can set a flag condition for a feature flag on the ConfigCat Dashboard. The prerequisite feature flag can be any feature flag that is already defined on the Dashboard. You can also set a comparison value that the prerequisite feature flag's value will be compared to.
+You can set a flag condition for a feature flag on the ConfigCat Dashboard. The prerequisite feature flag can be any feature flag that is already defined in the same config on the Dashboard. You can also set a comparison value that the prerequisite feature flag's value will be compared to.
 
-> TODO add steps and screenshot
+![Flag condition](/assets/targeting/targeting-rule/flag-condition/flag-condition.jpg)
 
 ## Anatomy of a flag condition
 
 A flag condition consists of the following: 
 
 - **Prerequisite feature flag or setting key**: The feature flag or setting key that the condition is based on.
-- **Comparator**: The comparison operator that holds the connection between the prerequisite feature flag's value and the comparison value.
+- **Comparator**: The comparison operator that holds the connection between the prerequisite feature flag's value and the comparison value. See the available comparators below.
 - **Comparison value**: Only available for string, number and double settings. The value that the prerequisite feature flag's value is compared to.
 
 ## Comparators
@@ -48,4 +48,8 @@ When the prerequisite is a string, number or double setting the following compar
 
 ## Example
 
-> TODO add screenshot and explanation
+Let's have the `Cafe Notifications` enabled only if `Cafe Ratings` are enabled in the example application.
+
+In this case, `Cafe Ratings` is the prerequisite feature flag. The comparator is `IS ON`, which means that the `Cafe Notifications` feature flag will be enabled only if the `Cafe Ratings` feature flag is ON.
+
+![Flag condition example](/assets/targeting/targeting-rule/flag-condition/flag-condition-example.jpg)
