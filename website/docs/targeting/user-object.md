@@ -57,7 +57,7 @@ var isEnabled = client.GetValue("myAwesomeFeature", false, user);
 Keeping your user data safe was one of our main goals when designing ConfigCat. The main concept here is that the ConfigCat SDK which connects your application to our servers never pushes any data to the ConfigCat servers. It pulls only configs and targeting rules.
 
 :::info
-Feature Flag and Setting **evaluation is on the Client** side within the [ConfigCat SDKs](https://github.com/configcat). This means that **any sensitive data passed to ConfigCat will never leave your system**.
+Feature Flag and Setting **evaluation is on the Client** side within the [ConfigCat SDKs](https://github.com/configcat). This means that **any confidential data passed to ConfigCat will never leave your system**.
 :::
 
 ## User Object's structure

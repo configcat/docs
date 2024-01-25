@@ -220,7 +220,7 @@
     },
     {
       "@type": "Question",
-      "name": "How to use targeting rules in ConfigCat based on sensitive data?",
+      "name": "How to use targeting rules in ConfigCat based on confidential data?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the Confidential text comparators: https://configcat.com/docs/advanced/targeting/#confidential-text-comparators."

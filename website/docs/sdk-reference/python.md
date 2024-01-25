@@ -464,7 +464,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
 ```json
 {
   "p": {
-    // hash salt, required only when sensitive text comparator(s) are used
+    // hash salt, required only when confidential text comparator(s) are used
     "s": "80xCU/SlDz1lCiWFaxIBjyJeJecWjq46T4eu6GtozkM="
   },
   "s": [ // array of segments
