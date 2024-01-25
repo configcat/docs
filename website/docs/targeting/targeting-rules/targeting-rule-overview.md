@@ -48,9 +48,9 @@ The targeting rules are in an **OR** relationship, meaning that the targeting ru
 
 ### How to change the order of the targeting rules?
 
-The order of the targeting rules can be changed on the Dashboard.
+The order of the targeting rules can be changed on the Dashboard by dragging and dropping the targeting rules.
 
-*TODO - add screenshot and steps*
+![Change targeting rule order](/assets/targeting/targeting-rule/reorder.jpg)
 
 ## Examples
 
