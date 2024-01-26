@@ -16,7 +16,7 @@ Using this feature you will be able to set different setting values for specific
 3. The ConfigCat SDK will use the User Object and the rules defined on the Dashboard to determine whether the feature should be enabled for the user.
 
 ## What is what?
-![Targeting Overview](../../static/assets/targeting/targeting-overview/targeting.jpg)
+![Targeting Overview](/assets/targeting/targeting-overview/targeting.jpg)
 
 ### Feature Flag / Setting
 

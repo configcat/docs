@@ -10,13 +10,9 @@ Percentage options are used to define the percentage of users that will receive 
 
 ## How to add Percentage Options?
 
-*TODO - add screenshot and steps*
+You can add percentage options to a feature flag on the Dashboard by clicking on the `+%` button.
 
-1. <a href="https://app.configcat.com/auth/login" target="_blank">Log in</a> to access the _Dashboard_
-2. Go to **Feature Flags & Settings**
-3. Select **TARGET % OF USERS** after clicking the actions icon.
-
-<img src="/docs/assets/targeting-2.png" className="zoomable" alt="targeting-2" />
+![Add percentage option](/assets/targeting/percentage-options/add-percentage-option.jpg)
 
 ## How does it work? - Anatomy of a percentage option
 
@@ -29,8 +25,6 @@ If the required attribute is not present in the [User Object], the [fallback val
 Read more about the technical details of the [percentage evaluation here].
 
 Percentage-based targeting consists of **% value** and the **Served value** pairs.
-
-*TODO - add screenshot*
 
 ### % value
 
@@ -60,7 +54,7 @@ This value will be served as a fallback if none of the above rules apply or a [U
 
 Percentage options can be used in combination with targeting rules. In this case, the percentage options will be evaluated after the targeting rule only on the users that matched the targeting rule.
 
-*TODO - add screenshot*
+![Percentage options with targeting rules](/assets/targeting/percentage-options/percentage-options-with-targeting-rules.jpg)
 
 ## Percentage options based on other User Attributes
 
@@ -70,15 +64,48 @@ You can change the evaluation attribute by clicking the 3 dots on the top right 
 
 ### How to change the percentage attribute?
 
-*TODO - add screenshot*
+Click the 3 dots on the top right corner of the feature flag and select the **Change percentage attribute** option.
+
+![Change percentage attribute](/assets/targeting/percentage-options/change-percentage-attribute.jpg)
 
 # Examples
 
-*TODO - add screenshot and steps* pl. “ha a User.Identifierben ezt az X értéket adják be, akkor ebbe a csoportba kerül, ha azt az Y értéket, akkor meg abba a csoportba”
+### Simple phased rollout / Canary release / Percentage rollout Scenario
 
-example: 
-- toggle: 20%, 80%
-- text, A/B/C
-- sensitiveeknek nem a tobbinek: 20%, 80%
-- ios: 20%/80% , android: 30%/70%
-- percentage attribute legyen tenant id, onnantol a tenanton tudok kiserletezni
+**Intent:** In our sample company (Whisker Co.), we want to release a new feature `Enable Park Weather Info` to 20% of our users. We want to make sure that the new feature is working as expected before we release it to everyone.
+
+**Solution:** Have a percentage option of `20%` `ON`.
+
+![Targeting Example 1](/assets/targeting/percentage-options/example1.jpg)
+
+### A/B/C Testing Scenario
+
+**Intent:** Let's test three different variations of the `Discount Type` each with 1/3rd of our users. We want to decide which variation is the most effective. 
+
+**Solution:** A text setting with three options set to `33% / 33% / 34%` is used to define the different variations.
+
+![Targeting Example 2](/assets/targeting/percentage-options/example2.jpg)
+
+### Complex phased rollout / Canary release / Percentage rollout Scenario
+
+**Intent:** In our sample company (Whisker Co.), we want to release a new feature `Enable Park Weather Info` to all users within our `Whisker Co.` company `AND` `20%` of the rest of our users. We want to make sure that the new feature is working as expected before we release it to everyone.
+
+**Solution:** Have a percentage option of `20%` `ON` and a targeting rule that matches everyone whose email address ends with `@whisker.example`.
+
+![Targeting Example 3](/assets/targeting/percentage-options/example3.jpg)
+
+### Platform specific phased rollout
+
+**Intent:** Let's enable `Cafe Notifications` for 20% of our users on `iOS` and 60% of our users on `Android`.
+
+**Solution:** Have a targeting rule that matches everyone whose `Platform` is `iOS` and a percentage option of `20%` `ON`. Have a targeting rule that matches everyone whose `Platform` is `Android` and a percentage option of `60%` `ON`.
+
+![Targeting Example 4](/assets/targeting/percentage-options/example4.jpg)
+
+### Percentage options based on other User Attributes
+
+**Intent:** Let's imagine at our sample company (Whisker Co.) we have a `Tenant ID` attribute that is used to identify the tenant of our users. We want to release a new feature `Enable Park Weather Info` to 20% of our users based on their `Tenant ID`.
+
+**Solution:** Have a percentage option of `20%` `ON` and have the percentage attribute set to `Tenant ID`.
+
+![Targeting Example 4](/assets/targeting/percentage-options/example5.jpg)
