@@ -18,6 +18,8 @@ One segment belongs to one product and can be used in multiple feature flags wit
 
 The segment is evaluated with the [User Object], then the result is checked against the comparator that you set on the Dashboard. In the case of `IS IN SEGMENT` the result of the segment condition will be the same as the result of the segment. In the case of `IS NOT IN SEGMENT`, the result will be negated. 
 
+For more details on the evaluation of flag conditions, please refer to [Setting Evaluation](TODO).
+
 ## How to add a segment condition?
 
 > TODO add steps and screenshot
@@ -27,6 +29,12 @@ The segment is evaluated with the [User Object], then the result is checked agai
 You can define your segments on the [ConfigCat Dashboard under the Segments tab](https://app.configcat.com/product/segments).
 
 > TODO add screenshot
+
+## Anatomy of a segment condition
+
+>TODO
+segment name
+segment conditionn comparator tablazat
 
 ## Anatomy of a Segment
 
