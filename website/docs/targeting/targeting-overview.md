@@ -48,6 +48,10 @@ A feature flag always contains a trivial "rule", a simple value, which comes aft
 
 A *user object* is a collection of *user attributes* that describe the properties of a user. Referencing these attributes in conditions allows you to define rules for targeting users. More about the user object [here].
 
+### Default value
+
+> TODO
+
 ## Examples
 
 ### Phased rollout / Canary release / Percentage rollout Scenario

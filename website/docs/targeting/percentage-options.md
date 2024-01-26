@@ -56,11 +56,9 @@ Percentage options can be used in combination with targeting rules. In this case
 
 ![Percentage options with targeting rules](/assets/targeting/percentage-options/percentage-options-with-targeting-rules.jpg)
 
-## Percentage options based on other User Attributes
+## Percentage Evaluation Attribute
 
-By default the percentage-based targeting is based on the User's `Identifier` attribute. You can also use other user attributes to evaluate the percentage-based targeting.
-
-You can change the evaluation attribute by clicking the 3 dots on the top right corner of the feature flag and select the **Change percentage attribute** option.
+The *percentage evaluation attribute* is the attribute that is used to split the users into groups. By default, the percentage evaluation attribute is the [User Object]'s `Identifier` attribute. You can also use other user attributes as the basis of the grouping (see an [example use case] below).
 
 ### How to change the percentage attribute?
 
@@ -68,7 +66,15 @@ Click the 3 dots on the top right corner of the feature flag and select the **Ch
 
 ![Change percentage attribute](/assets/targeting/percentage-options/change-percentage-attribute.jpg)
 
-# Examples
+## Stickiness
+
+>TODO
+
+## Consistency
+
+> TODO
+
+## Examples
 
 ### Simple phased rollout / Canary release / Percentage rollout Scenario
 

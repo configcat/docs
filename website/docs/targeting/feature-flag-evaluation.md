@@ -1,95 +1,86 @@
 ---
 id: feature-flag-evaluation
 title: Feature Flag Evaluation
-description: This document offers an in-depth guide on how the SDK determines the value of a setting.
+description: This document offers an in-depth explanation on how the ConfigCat SDK determines the value of a feature flag.
 ---
 
 # Feature Flag Evaluation
 
-This document offers an in-depth guide on how the SDK determines the value of a setting when the `GetValue` call is made. Understanding this process requires prior knowledge of targeting concepts.
+This document offers an in-depth explanation on how the SDK determines the value of a feature flag when executing the `GetValue` function. Understanding this process requires prior knowledge of targeting concepts.
 
-The setting's value is influenced by:
+The feature flag's value is influenced by:
 
-- Rules established on the Dashboard,
+- The feature flag's rules defined on the Dashboard,
 - The [User Object] provided to the `GetValue` function, and
-- The `default value` assigned in the `GetValue` function.
+- The *default value* passed to the `GetValue` function.
 
-The setting's value is derived from exactly one rule, following this algorithm:
+The feature flag's value always comes from exactly one rule, following this algorithm:
 
-1. **Targeting Rules Assessment:** If targeting rules are present, the SDK evaluates each one sequentially. It checks if the user meets the conditions in the rule's IF section.
-   - If the conditions are met, the THEN section sets the value, which is then returned. Note: If the THEN section involves a [Percentage option] and the necessary user attribute is missing, the SDK will bypass this rule and proceed.
-   - If the conditions aren't met, the SDK moves to the next targeting rule or to step 2 (below) if there are no more rules.
-2. **Percentage Option Rule:** If a percentage option rule exists, the SDK calculates the value based on the [Evaluation of percentage options] algorithm and returns it. If the necessary user attribute is missing, the SDK skips to step 3 (below).
-3. **Default Value Assignment:** At this stage, the only remaining option is the default value specified at the end of the setting, which the SDK then returns.
+1. **Evaluation of Targeting Rules:** If targeting rules are present, the SDK evaluates them one by one, from top to bottom. It checks if all the conditions in the rule's IF part are met (i.e. all the conditions evaluate to true).
+   - If the conditions are met, the THEN part determines the value to return. Note: If the THEN part contains [Percentage Options] and the necessary user attribute is missing, the SDK will skip the targeting rule and continue with the next rule - even though the targeting rule's conditions are met!
+   - If the conditions aren't met, the SDK moves to the next targeting rule, or to step 2 (below) if there are no more targeting rules.
+2. **Evaluation of Percentage Options:** If a percentage option rule exists, the SDK executes the [Evaluation of percentage options] algorithm to determine which percentage option applies to the user and returns the value associated with that option. If the necessary user attribute is missing, the SDK skips to step 3 (below).
+3. **Returning simple value:** At this stage, the only remaining "rule" is the simple value specified at the end of the feature flag, which the SDK then returns.
 
-In the event of an unexpected error during evaluation, the SDK defaults to the value provided in the `GetValue` function.
+In the event of an unexpected error during evaluation, the SDK returns the default value that was passed to the `GetValue` function.
 
 ## Evaluation of a Targeting Rule
 
-The SDK sequentially checks each targeting rule. A condition can be evaluated as `true`, `false`, or `indeterminable (cannot evaluate)`.
+The SDK evaluates the conditions in the rule's IF part one by one, from top to bottom. The result of a condition can be one of the following: `true`, `false` or `cannot evaluate`.
 
-Indeterminable results occur if the necessary user attribute is missing or incorrectly formatted (the SDK logs these instances as warnings).
+The result `cannot evaluate` occurs when the necessary user attribute is missing, invalid or incorrectly formatted (the SDK logs these issues as warnings).
 
-A rule is considered a match only if all conditions are true. Otherwise, it's not a match.
+A targeting rule matches only when all its conditions evaluates to `true`. In any other cases, it doesn't match.
 
 ### Evaluation of a User Condition
 
-The SDK compares the user attribute from the [User Object] with the condition set on the Dashboard using the specified comparator. This comparison yields a `true` or `false` outcome.
+The SDK looks up the comparison attribute (the user attribute referenced by the condition) in the [User Object] and compares it to the comparison value that is set on the Dashboard. The comparison is done according to the selected comparator and will result in a `true` or `false` value. This will be the result of the condition.
 
-If the necessary user attribute is missing or incorrectly formatted, the outcome is `indeterminable (cannot evaluate)`.
+The result of the condition will be `cannot evaluate` in case the comparison attribute is missing (`null`, `undefined`, `""`) or invalid (not of the type expected by the comparator or not formatted properly). In such cases the targeting rule containing the condition will be skipped and the evaluation will continue with the next rule.
 
-### Evaluation of a Prerequisite Flag Condition
+### Evaluation of a Flag Condition
 
-The SDK evaluates the prerequisite flag as a separate setting using the same [User Object]. The result of this evaluation is compared with the Dashboard's set value using the specified comparator, resulting in a `true` or `false` outcome.
+Using the same User Object that is used to evaluate the dependent flag, the SDK evaluates the prerequisite flag (the feature flag referenced by the condition). Then compares the result to the comparison value that is set on the Dashboard. The comparison is done according to the selected comparator and will result in a `true` or `false` value. This will be the result of the condition.
 
-If an error occurs during this evaluation, the process stops, and the SDK returns the default value.
+In case the referenced feature flag is missing or there is a type mismatch between the return value and the comparison value, the evaluation process stops, and the SDK will return the [default value]. (Though this can happen only when using the [flag overrides] feature with invalid data.)
 
 ### Evaluation of a Segment Condition
 
-The SDK evaluates segment conditions similarly to [user conditions].
+The SDK looks up the segment referenced by the condition and evaluates the condition described by the segment similarly to [user conditions]. In the case of `IS IN SEGMENT` the result of the segment condition will be the same as the result of the segment. In the case of `IS NOT IN SEGMENT`, the result will be negated.
 
-If the user condition is `true` and the comparator is `IS IN SEGMENT`, or if the user condition is `false` and the comparator is `IS NOT IN SEGMENT`, the segment condition yields `true`.
+If the segment evaluates to `cannot evaluate`, so is the segment condition.
 
-Conversely, if the user condition is `false` and the comparator is `IS IN SEGMENT`, or if the user condition is `true` and the comparator is `IS NOT IN SEGMENT`, the segment condition yields `false`.
-
-If the user condition is `indeterminable (cannot evaluate)`, so is the segment condition.
+In case the referenced segment is missing, the evaluation process stops, and the SDK will return the [default value]. (Though this can happen only when using the [flag overrides] feature with invalid data.)
 
 ## Evaluation of Percentage Options
 
-Percentage options are designed to be consistent and sticky across all SDKs, ensuring a reliable experience.
+Percentage options are designed to be consistent and sticky across all SDKs, which means that users with the same attributes fall in the same group and get the same feature flag value across the supported platforms.
 
-This approach primarily relies by default on the identifier ([this can be changed to any attribute]) from the [User Object] provided to the SDK's `getValue()` function. Here's how it works:
-- The SDKs create a hash from the combination of the [User Object]'s attribute and the specific feature flag's `Key`.
-- This hash process assigns a unique 0-99 number to each User for a specific feature flag.
-- The assigned number determines the user's eligibility for a feature flag based on the percentage options set on the Dashboard.
-- Importantly, this number remains fixed and consistent for each User across all SDKs, ensuring uniformity in feature flag evaluation.
+The SDK looks up the [percentage evaluation attribute] in the [User Object] and:
+- The SDK creates a hash from the combination of the value of the percentage evaluation attribute and the specific feature flag's key.
+- The hash algorithm assigns a number between 0 and 99 to the user.
+- The assigned number determines which group the user falls into, i.e. which percentage option applies to the user.
 
-:::caution
-By hashing both the User's attribute and the feature flag's key, we ensure diverse user bases for different feature flags. This method prevents the same group of users from being repeatedly targeted across various feature flags.
-:::
+The fact that the above algorithm is implemented across all SDKs guarantees [stickiness] and [consistency].
+
+Worth mentioning that by hashing the combination of the user attribute and the feature flag's key, we ensure diverse user groups for different feature flags. In other words, this method prevents the same users from being assigned to the same percentage options for different feature flags.
 
 :::info
 The evaluation process is entirely implemented within the SDKs, meaning your users' sensitive data never leaves your system. The data flow is one-way – from ConfigCat CDN servers to your SDKs – and ConfigCat does not receive or store any attributes of the [User Object] passed to the SDKs. This design prioritizes the privacy and security of user data.
 :::
 
-### Percentage Evaluation Attribute
+### Example Scenarios for Percentage Options
 
-The default attribute used for percentage evaluation is the [User Object]'s `Identifier`. However, you can change this to any attribute you want.
+Imagine you have two users, Jane and Joe, and you're experimenting with two different feature flags (`isTwitterSharingEnabled` and `isFacebookSharingEnabled`) that use percentage-based targeting. In these scenarios, we see how percentage options allows for a controlled and gradual rollout of features, ensuring a smooth transition for users like Jane and Joe.
 
-*TODO - Where and how to change this*
-
-### Example Scenarios for Percentage-Based Targeting
-
-Imagine you have two users, Jane and Joe, and you're experimenting with two different feature flags (`isTwitterSharingEnabled` and `isFacebookSharingEnabled`) that use percentage-based targeting. In these scenarios, we see how percentage-based targeting allows for a controlled and gradual rollout of features, ensuring a smooth transition for users like Jane and Joe.
-
-First, the users are assigned a number between 0-99 based on the hash of their identifier and the feature flag's key. This number determines their eligibility for a feature flag based on the percentage options set on the Dashboard.
+First, the users are assigned a number between 0-99 based on the hash of their identifier and the feature flag's key. This number determines their eligibility for a feature based on the percentage options set on the Dashboard.
 
 |      | isTwitterSharingEnabled                                                   | isFacebookSharingEnabled                                                    |
 | ---- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | Jane | `hash('Jane' + 'isTwitterSharingEnabled') mod 100` <br/> Results in **8** | `hash('Jane' + 'isFacebookSharingEnabled') mod 100` <br/> Results in **64** |
 | Joe  | `hash('Joe' + 'isTwitterSharingEnabled') mod 100` <br/> Results in **32** | `hash('Joe' + 'isFacebookSharingEnabled') mod 100` <br/> Results in **12**  |
 
-1. **Initial Setting: 0% ON / 100% OFF**
+1. **Initial Setup: 0% ON / 100% OFF**
 
 |      | isTwitterSharingEnabled <br/> 0% ON / 100% OFF | isFacebookSharingEnabled <br/> 0% ON / 100% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |
@@ -105,7 +96,7 @@ In this case both feature flags are enabled for only 10% of users.
 | Joe  | 32 >= 10 <br/>-> **OFF**                       | 12 >= 10 <br/>-> **OFF**                        |
 
 :::info
-Despite both feature flags being set to 10% ON / 90% OFF, Jane is only enabled for the `isTwitterSharingEnabled` feature flag. Because Jane and Joe have different identifiers, they're assigned different numbers, which determines their eligibility for each feature flag.
+Despite both feature flags being set to 10% ON / 90% OFF, the `isTwitterSharingEnabled` feature flag is only enabled for Jane. Because Jane and Joe have different identifiers, they're assigned different numbers, which determines their eligibility for each feature.
 :::
 
 3. **Increasing `isTwitterSharingEnabled` to 40% ON / 60% OFF**
@@ -152,6 +143,6 @@ After testing the feature flags, you can safely move them to 100% ON. This ensur
 
 [Segment condition kiértékelésének bemutatása]
 
-## Prerequisite flag condition
+## Flag condition
 
 [Prerequisite flag condition kiértékelésének bemutatása]
