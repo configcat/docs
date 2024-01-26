@@ -6,37 +6,21 @@ description: Segments help you define user segments and assign them to your feat
 
 ## What is a segment condition? What is a segment?
 
-A *segment condition* is a condition that is based on the evaluation of a *segment*, which is roughly a reusable, predefined [user condition](TODO) (a condition that selects a specific user or group of users based on their properties).
+A *segment condition* is a condition that is based on the evaluation of a *segment*. A *segment* is roughly a reusable, predefined [user condition](TODO).
 
-Segments allow you to define user groups on the product level and reference them in the targeting rules of the product's configs. When you update a segment definition, the changes will be reflected automatically in the feature flags that uses it.
+Segments allow you to define user groups based on any user attributes. You can reference segments in targeting rules. When you update a segment definition, the changes will be reflected automatically in all the targeting rules that reference it.
 
-For more details, please refer to [Setting Evaluation](TODO).
+*For example, you can define a segment called "Beta Testers" and use that segment for all features that you want to be available for beta testers.*
+
+One segment belongs to one product and can be used in multiple feature flags within the same product.
 
 ## How does it work?
 
-The segment condition is evaluated with the same [User Object]. The segment's value is then compared to the comparison value that you set on the Dashboard. If the segment's value is equal to the comparison value, the targeting rule is a match. Otherwise, the targeting rule is not a match.
+The segment is evaluated with the [User Object], then the result is checked against the comparator that you set on the Dashboard. In the case of `IS IN SEGMENT` the result of the segment condition will be the same as the result of the segment. In the case of `IS NOT IN SEGMENT`, the result will be negated. 
 
 ## How to add a segment condition?
 
 > TODO add steps and screenshot
-
-## Example
-
-> TODO add screenshot and explanation
-
----
-> TODISCUSS talan az alabbi reszt egy kulon oldalon kene targyalni
-
-## What is a segment?
-
-Segments allow you to group your users based on any of their properties. This way you can
-define segments of your users and then assign them to specific feature flags. If you update a segment definition, it will update all
-feature flags that are assigned to it. You can think of segments as reusable targeting rules. If you have groups of users that you want to target regularly with
-different features, it's a good idea to define a segment for each group.
-
-_For example, you can define a segment called "Beta Users" and assign that segment to all future features that you want to be available for beta users._
-
-One segment belongs to one product and can be used in multiple feature flags within the same product.
 
 ## Where can I define segments?
 
@@ -122,3 +106,7 @@ The following comparators assume that _Comparison attribute_ and _Comparison val
 | \>= (Number)       | True if _Comparison attribute_ is larger than or equals _Comparison value_. |
 
 All number comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid number.
+
+## Example
+
+> TODO add screenshot and explanation
