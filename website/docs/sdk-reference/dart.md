@@ -41,7 +41,7 @@ Or put the following directly to your `pubspec.yml` and run `dart pub get` or `f
 
 ```yaml title="pubspec.yml"
 dependencies:
-  configcat_client: ^3.0.0
+  configcat_client: ^4.0.0
 ```
 
 ### 2. Import the ConfigCat SDK
@@ -175,16 +175,16 @@ final details = await client.getValueDetails(
 
 The `details` result contains the following information:
 
-| Field                             | Type                                 | Description                                                                               |
-| --------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------- |
-| `value`                           | `Bool` / `String` / `Int` / `Double` | The evaluated value of the feature flag or setting.                                       |
-| `key`                             | `String`                             | The key of the evaluated feature flag or setting.                                         |
-| `isDefaultValue`                  | `Bool`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
-| `error`                           | `String?`                            | In case of an error, this field contains the error message.                               |
-| `user`                            | `ConfigCatUser?`                     | The user object that was used for evaluation.                                             |
-| `matchedEvaluationPercentageRule` | `PercentageRule?`                    | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `matchedEvaluationRule`           | `RolloutRule?`                       | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
-| `fetchTime`                       | `DateTime`                           | The last download time of the current config.                                             |
+| Field                       | Type                                 | Description                                                                               |
+|-----------------------------|--------------------------------------| ----------------------------------------------------------------------------------------- |
+| `value`                     | `Bool` / `String` / `Int` / `Double` | The evaluated value of the feature flag or setting.                                       |
+| `key`                       | `String`                             | The key of the evaluated feature flag or setting.                                         |
+| `isDefaultValue`            | `Bool`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
+| `error`                     | `String?`                            | In case of an error, this field contains the error message.                               |
+| `user`                      | `ConfigCatUser?`                     | The user object that was used for evaluation.                                             |
+| `matchedPercentageOption`   | `PercentageOption?`                  | If the evaluation was based on a percentage rule, this field contains that specific rule. |
+| `matchedTargetingRule`      | `TargetingRule?`                     | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `fetchTime`                 | `DateTime`                           | The last download time of the current config.                                             |
 
 ## User Object
 
@@ -218,6 +218,48 @@ final user = ConfigCatUser(
     }
 );
 ```
+The `custom` map also allows attribute values other than `String` values:
+
+```dart
+final user = ConfigCatUser(
+    identifier: '#UNIQUE-USER-IDENTIFIER#',
+    email: 'john@example.com',
+    country: 'United Kingdom',
+    custom:  {
+      'Rating': 4.5,
+      'RegisteredAt': DateTime.parse('2023-11-22 12:34:56 +00:00'),
+      'Roles': {"Role1", "Role2"}
+    }
+);
+```
+### User Object Attribute Types
+
+All comparators support `String` values as User Object attribute (in some cases they need to be provided in a specific format though, see below), but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
+
+**Text-based comparators** (EQUALS, IS ONE OF, etc.)
+* accept `String` values,
+* all other values are automatically converted to `String` (a warning will be logged but evaluation will continue as normal).
+
+**SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
+* accept `String` values containing a properly formatted, valid semver value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**Number-based comparators** (=, &lt;, &gt;=, etc.)
+* accept `Double` values and all other numeric values which can safely be converted to `Double`,
+* accept `String` values containing a properly formatted, valid `Double` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**Date time-based comparators** (BEFORE / AFTER)
+* accept `DateTime` values, which are automatically converted to a second-based Unix timestamp,
+* accept `Double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `Double`,
+* accept `String` values containing a properly formatted, valid `Double` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
+* accept arrays and list of `String`,
+* accept `String` values containing a valid JSON string which can be deserialized to an array of `String`,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
 
 ### Default user
 
@@ -570,10 +612,11 @@ Available log levels:
 Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-[INFO] 2022-01-20T18:22:02.313703 ConfigCat - Evaluating getValue(isPOCFeatureEnabled)
-User object: {Identifier: 435170f4-8a8b-4b67-a723-505ac7cdea92, Email: john@example.com}
-Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
-Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: true
+[INFO] 2022-01-20T18:22:02.313703 ConfigCat - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
+  Evaluating targeting rules and applying the first match if any:
+  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'False' => no match
+  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'True' => MATCH, applying rule
+  Returning 'True'.
 ```
 
 ## Sample Apps
