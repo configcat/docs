@@ -6,9 +6,11 @@ description: Segments help you define user segments and assign them to your feat
 
 ## What is a segment condition? What is a segment?
 
-A segment condition is a condition that is based on the evaluation of a [segment]. It is used to determine whether a targeting rule is a match or not for a specific user.
+A *segment condition* is a condition that is based on the evaluation of a *segment*, which is roughly a reusable, predefined [user condition](TODO) (a condition that selects a specific user or group of users based on their properties).
 
-A segment is a re-usable user condition that defines a user group based on any of their properties.
+Segments allow you to define user groups on the product level and reference them in the targeting rules of the product's configs. When you update a segment definition, the changes will be reflected automatically in the feature flags that uses it.
+
+For more details, please refer to [Setting Evaluation](TODO).
 
 ## How does it work?
 
