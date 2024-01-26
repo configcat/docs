@@ -12,7 +12,7 @@ This allows you to control the value of multiple feature flags by changing the v
 
 ## How does it work?
 
-The prerequisite feature flag is evaluated first before the dependent feature flag is evaluated with the same User Object. The prerequisite feature flag's value is then compared to the comparison value that you set on the Dashboard. If the prerequisite feature flag's value is equal to the comparison value, the dependent feature flag is enabled. Otherwise, the dependent feature flag is disabled.
+The prerequisite flag is evaluated with the same user object as the one that is used to evaluate the dependent flag, then the result is checked against the comparator that you set on the Dashboard.
 
 ## How to set a flag condition?
 
