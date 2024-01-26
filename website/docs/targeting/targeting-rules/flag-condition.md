@@ -12,7 +12,11 @@ This allows you to control the value of multiple feature flags by changing the v
 
 ## How does it work?
 
-The prerequisite flag is evaluated with the same user object as the one that is used to evaluate the dependent flag, then the result is checked against the comparator that you set on the Dashboard.
+The prerequisite flag is evaluated with the same user object as the one that is used to evaluate the dependent flag, then the result is checked against the comparator that you set on the Dashboard. 
+
+The prerequisite flag can be other than a feature flag (boolean setting), in which case the prerequisite flag's evaluated value will be compared to the comparison value that you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
+
+For more details on the evaluation of flag conditions, please refer to [Setting Evaluation](TODO).
 
 ## How to set a flag condition?
 
@@ -25,8 +29,8 @@ You can set a flag condition for a feature flag on the ConfigCat Dashboard. The 
 A flag condition consists of the following: 
 
 - **Prerequisite feature flag or setting key**: The feature flag or setting key that the condition is based on.
-- **Comparator**: The comparison operator that holds the connection between the prerequisite feature flag's value and the comparison value. See the available comparators below.
-- **Comparison value**: Only available for string, number and double settings. The value that the prerequisite feature flag's value is compared to.
+- **Comparator**: The comparison operator that defines the relation between the prerequisite flag's value and the comparison value. See the available comparators below.
+- **Comparison value**: Only available for string, number and double settings. The value that the prerequisite flag's value is compared to.
 
 ## Comparators
 
@@ -36,15 +40,15 @@ When the prerequisite is a feature flag (boolean setting), the following compara
 
 | Comparator | Description                                           |
 | ---------- | ----------------------------------------------------- |
-| IS ON      | It matches when the prerequisite feature flag is ON.  |
-| IS OFF     | It matches when the prerequisite feature flag is OFF. |
+| IS ON      | It matches when the prerequisite flag is ON.  |
+| IS OFF     | It matches when the prerequisite flag is OFF. |
 
 When the prerequisite is a string, number or double setting the following comparators are available:
 
 | Comparator          | Description                                                                                 |
 | ------------------- | ------------------------------------------------------------------------------------------- |
-| EQUALS (hashed)     | It matches when the prerequisite feature flag's value is equal to the comparison value.     |
-| NOT EQUALS (hashed) | It matches when the prerequisite feature flag's value is not equal to the comparison value. |
+| EQUALS (hashed)     | It matches when the prerequisite flag's value is equal to the comparison value.     |
+| NOT EQUALS (hashed) | It matches when the prerequisite flag's value is not equal to the comparison value. |
 
 ## Example
 
@@ -52,6 +56,6 @@ When the prerequisite is a string, number or double setting the following compar
 Let's have the `Cafe Notifications` enabled only if `Cafe Ratings` are enabled in the example application.
 
 ### Solution
-In this case, `Cafe Ratings` is the prerequisite feature flag. The comparator is `IS ON`, which means that the `Cafe Notifications` feature flag will be enabled only if the `Cafe Ratings` feature flag is ON.
+In this case, `Cafe Ratings` is the prerequisite flag. The comparator is `IS ON`, which means that the `Cafe Notifications` feature flag will be enabled only if the `Cafe Ratings` feature flag is ON.
 
 ![Flag condition example](/assets/targeting/targeting-rule/flag-condition/flag-condition-example.jpg)
