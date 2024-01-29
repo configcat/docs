@@ -35,6 +35,8 @@ You can define your segments on the [ConfigCat Dashboard under the Segments tab]
 
 ## Anatomy of a Segment Condition
 
+![Segment condition anatomy](/assets/targeting/targeting-rule/segment-condition/segment-condition-anatomy.jpg)
+
 A *segment condition* consists of two parts: 
 
 - **Segment comparator:** The comparison operator that defines the relation between the segment and the condition.

@@ -22,6 +22,8 @@ You can add a user condition to a targeting rule on the Dashboard by clicking on
 
 ## Anatomy of a User Condition
 
+![User condition anatomy](/assets/targeting/targeting-rule/user-condition/user-condition-anatomy.jpg)
+
 A *user condition* consists of three parts:
 
 - **Comparison attribute:** The user attribute that the condition is based on. Could be "User ID", "Email", "Country" or any custom attribute.

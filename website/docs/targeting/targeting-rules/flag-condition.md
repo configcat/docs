@@ -26,6 +26,12 @@ You can set a flag condition for a feature flag on the ConfigCat Dashboard. The 
 
 ## Anatomy of a flag condition
 
+#### Prerequisite is a feature flag (boolean setting)
+![Flag condition anatomy 1](/assets/targeting/targeting-rule/flag-condition/flag-condition-anatomy1.jpg)
+
+#### Prerequisite is a string, number or double setting
+![Flag condition anatomy 2](/assets/targeting/targeting-rule/flag-condition/flag-condition-anatomy2.jpg)
+
 A flag condition consists of the following: 
 
 - **Prerequisite feature flag or setting key**: The feature flag or setting key that the condition is based on.
