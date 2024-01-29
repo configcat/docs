@@ -68,11 +68,19 @@ Click the 3 dots on the top right corner of the feature flag and select the **Ch
 
 ## Stickiness
 
->TODO
+Stickiness means that the same user will always get the same value for a specific feature flag no matter the history of the feature flag. This is achieved by implementing a deterministic hashing algorithm that is based on the feature flag's key and the percentage evaluation attribute.
+
+*For example, if you have a feature flag with a percentage option of 20% `ON`, then you change the percentage option to 40% `ON`, then then again to 20% `ON`, the same 20% of users will get the `ON` value for the feature flag as the first time.*
 
 ## Consistency
 
-> TODO
+Consistency means that the same user will always get the same value for a specific feature flag no matter which SDK they use. This is achieved by using the same hashing algorithm across all SDKs.
+
+*For example, if you have a feature flag with a percentage option of 20% `ON`, then the same 20% of users will get the `ON` value across all SDKs. No matter if a user is on iOS, Android, or Web, they will always get the same value for the feature flag.*
+
+Worth mentioning that in case of different feature flags the same user might get different values. This is because the hashing algorithm is based on the feature flag's key and the percentage evaluation attribute. And the feature flag's key is different for each feature flag.
+
+*For example, if you have two feature flags with percentage options of 20% `ON`, then a different 20% of users will get the `ON` value for each feature flags.*
 
 ## Examples
 
