@@ -123,26 +123,3 @@ After testing the feature flags, you can safely move them to 100% ON. This ensur
 | ---- | ---------------------------------------------- | ----------------------------------------------- |
 | Jane | 8 < 100 <br/>-> **ON**                         | 64 < 100 <br/>-> **ON**                         |
 | Joe  | 32 < 100 <br/>-> **ON**                        | 12 < 100 <br/>-> **ON**                         |
-
-
-# Examples - TODO
-
-## Simple feature flag
-
-[Egy kőegyszerű ff kiértékelésének bemutatása]
-
-## Percentage options
-
-[Egy egyszerű percentage optionsös ff-en a %-os elosztás működésének bemutatása - ide jöhetne ez: https://configcat.com/docs/advanced/targeting/#example-1]
-
-## Targeting rules with AND conditions
-
-[Egy egyszerűbb, 2 targeting rule-os ff-en az OR és AND kapcsolatok működésének bemutatása]
-
-## Segment condition
-
-[Segment condition kiértékelésének bemutatása]
-
-## Flag condition
-
-[Prerequisite flag condition kiértékelésének bemutatása]

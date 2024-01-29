@@ -56,35 +56,29 @@ This value will be returned by the [ConfigCat SDK] in case of an error. The defa
 
 ### Phased rollout / Canary release / Percentage rollout Scenario
 
-**Intent:** In our sample company (Galactic AI Inc.), we want to release a new feature (Advanced Cognition) to 10% of our users and everyone at our company. We want to make sure that the new feature is working as expected before we release it to everyone.
+**Intent:** In our sample company (Whisker Co.), we want to release a new feature called `Park Weather Info`. Let's release the feature everyone at Whisker Co. and to `20%` of our users. We want to make sure that the new feature is working as expected before we release it to everyone.
 
-**Solution:** Have a feature flag called `Enable Advanced Cognition` with a percentage option of 10% and a targeting rule that matches everyone whose email address ends with `@galactic.example`.
+**Solution:** Have a feature flag called `Enable Park Weather Info` with a targeting rule that matches everyone at Whisker Co. and a percentage option of `20%` `ON`.
 
 #### Dashboard
-![Targeting Example 1](../../static/assets/targeting/targeting-overview/example1.png)
+Here is how the feature flag looks like on the Dashboard:
+![Phased rollout Example](../../static/assets/targeting/targeting-overview/phased-rollout.jpg)
 
 #### Code
-
+Here is how you can get the value of the feature flag in your application code:
 ```js
-// Create a user object
-var user = {
-    identifier: '867428724',
-    email: 'isaac@galactic.example'
-};
+import * as configcat from 'configcat-js';
+
+// Create the user object
+let userObject = new configcat.User(
+  '867428724', // Identifier (required)
+  'isaac@whisker.example', // Email (optional)
+);
 
 // Get the value of the feature flag
+const value = await configCatClient.getValueAsync(
+  'enableParkWeatherInfo', // Feature flag key
+  false, // Default value
+  userObject, // User object
+);
 ```
-
-
-*TODO - come up with new examples and screenshots*
-
-*TODO - Have a code example in parallel with the screenshots*
-
-This is the simplest feature flag you can create. It is enabled for everyone.
-![Basic Feature Flag](../../static/assets/targeting/basic.png)
-
-This feature flag is enabled for everyone whose email address ends with `@example.com`.
-![Simple Feature Flag](../../static/assets/targeting/simple.png)
-
-This is a more complex feature flag. It is enabled for everyone whose email address ends with `@example.com` AND the OS is `iOS or Android`. This flag is also enabled for everyone who is among the `Beta Users` segment. Read more about segments [here](/targeting/targeting-rules/segment-condition).
-![Complex Feature Flag](../../static/assets/targeting/complex.png)

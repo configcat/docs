@@ -12,7 +12,7 @@ A *user condition* is a condition that is based on the comparison of a user attr
 
 The *comparison attribute's value* from the [user object] is compared to the *comparison value* that you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
-For more details on the evaluation of user conditions, please refer to [Setting Evaluation](TODO).
+For more details on the evaluation of user conditions, please refer to [Setting Evaluation].
 
 ## How to set a user condition?
 
@@ -136,7 +136,7 @@ The following comparators expect the *Comparison attribute* to be an array of st
 
 ### Confidential CONTAINS and NOT CONTAINS
 
-#### Scenario
+#### Intent
 Let's target users who who are from the same company confidentially. However text comparators don't support `CONTAINS` or `NOT CONTAINS` comparisons. How can we solve this?
 
 #### Solution

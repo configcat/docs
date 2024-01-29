@@ -89,19 +89,30 @@ First, you need to pass a User Object containing the `custom` attribute to the C
 
 > The custom attribute's value can be multiple types. e.g: string, number, date, array of strings, etc. Check the [SDK reference](sdk-reference/overview) for more details.
 
-Example:
+## Example
 
-```javascript
+### Enable a feature for users with a specific subscription type
+
+#### Intent
+Let's enable the `Personalized Layout` feature for users with a `Pro` subscription type.
+
+#### Solution
+In this case, `SubscriptionType` is the custom attribute. The comparator is `EQUALS`, which means that the `Enable Personalized Layout` feature flag will be enabled only if the `SubscriptionType` custom attribute is `Pro`.
+
+#### Dashboard
+![User object example](/assets/targeting/user-object/user-object-example.jpg)
+
+#### Code
+Don't forget to add the `SubscriptionType` custom attribute to the User Object in your application code.
+
+```js
 var userObject = {
   identifier: '<unique-identifier-here>', // required
   custom: {
     SubscriptionType: 'Pro',
-    UserRole: 'Admin',
   },
 };
 ```
 
-_The above code sample is in JavaScript. You can find code samples for other platforms in the [SDK reference.](sdk-reference/overview)_
 
-On the Dashboard a targeting rule for the custom attribute `EyeColor` would look like:
-<img src="/docs/assets/custom-property-ui.png" className="zoomable" alt="customPropertyUsageDashboard" />
+

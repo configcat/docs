@@ -51,13 +51,3 @@ The targeting rules are in an **OR** relationship, meaning that the targeting ru
 The order of the targeting rules can be changed on the Dashboard by dragging and dropping the targeting rules.
 
 ![Change targeting rule order](/assets/targeting/targeting-rule/reorder.jpg)
-
-## Examples
-
-### Single targeting rule
-
-*TODO - add screenshot and steps*
-
-### Multiple targeting rules
-
-*TODO - add screenshot and steps*

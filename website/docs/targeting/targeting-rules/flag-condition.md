@@ -52,10 +52,13 @@ When the prerequisite is a string, number or double setting the following compar
 
 ## Example
 
-### Scenario
-Let's have the `Cafe Notifications` enabled only if `Cafe Ratings` are enabled in the example application.
+### Prerequisite flag is a feature flag
 
-### Solution
+#### Intent
+In our mobile app let's have `Cafe Notifications` enabled only if `Cafe Ratings` are enabled. So users will only receive notifications about their favorite cafes if they can rate them.
+
+#### Solution
 In this case, `Cafe Ratings` is the prerequisite flag. The comparator is `IS ON`, which means that the `Cafe Notifications` feature flag will be enabled only if the `Cafe Ratings` feature flag is ON.
 
+#### Dashboard
 ![Flag condition example](/assets/targeting/targeting-rule/flag-condition/flag-condition-example.jpg)

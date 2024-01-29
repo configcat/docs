@@ -6,7 +6,7 @@ description: Segments help you define user segments and assign them to your feat
 
 ## What is a segment condition? What is a segment?
 
-A *segment condition* is a condition that is based on the evaluation of a *segment*. A *segment* is roughly a reusable, predefined [user condition](TODO).
+A *segment condition* is a condition that is based on the evaluation of a *segment*. A *segment* is roughly a reusable, predefined [user condition].
 
 Segments allow you to define user groups based on any user attributes. You can reference segments in targeting rules. When you update a segment definition, the changes will be reflected automatically in all the targeting rules that reference it.
 
@@ -126,4 +126,13 @@ All number comparators return `false` if either _Comparison attribute_ or _Compa
 
 ## Example
 
-> TODO add screenshot and explanation
+### Beta Testing Scenario
+
+#### Intent
+Let's release our `Personalized Layout` feature of the webstore to beta testers.
+
+#### Solution
+In this case, we create a segment called `Beta Testers` and use that segment in the `Enable Personalized Layout` feature flag as a segment condition.
+
+#### Dashboard
+![Segment condition example](/assets/targeting/targeting-rule/segment-condition/beta-testers.jpg)
