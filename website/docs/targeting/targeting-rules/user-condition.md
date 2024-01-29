@@ -8,13 +8,13 @@ description: A user condition is a condition that is based on the evaluation of 
 
 A *user condition* is a condition that is based on the comparison of a user attribute and a preset value (*comparison value*). It allows you to define targeting rules which target users based on their properties.
 
-## How does it work?
+## How does the user condition work?
 
 The *comparison attribute's value* from the [user object] is compared to the *comparison value* that you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
 For more details on the evaluation of user conditions, please refer to [Setting Evaluation](TODO).
 
-## How to add a user condition?
+## How to set a user condition?
 
 You can add a user condition to a targeting rule on the Dashboard by clicking on the `+IF` ("Add condition") button. Add more conditions by clicking on the `+AND` button on the bottom of a condition.
 
@@ -25,7 +25,7 @@ You can add a user condition to a targeting rule on the Dashboard by clicking on
 A *user condition* consists of three parts:
 
 - **Comparison attribute:** The user attribute that the condition is based on. Could be "User ID", "Email", "Country" or any custom attribute.
-- **Comparator:** The comparison operator. Defines the relation between the comparison attribute and the comparison value.
+- **Comparator:** The comparison operator that defines the relation between the comparison attribute and the comparison value.
 - **Comparison value:** The preset value that the comparison attribute is compared to. Depending on the comparator, could be a string, a list of strings, a number, a semantic version, a list of semantic versions or a date.
 
 ### Comparison Attribute

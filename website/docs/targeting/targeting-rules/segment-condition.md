@@ -14,27 +14,36 @@ Segments allow you to define user groups based on any user attributes. You can r
 
 One segment belongs to one product and can be used in multiple feature flags within the same product.
 
-## How does it work?
+## How does the segment condition work?
 
 The segment is evaluated with the [User Object], then the result is checked against the comparator that you set on the Dashboard. In the case of `IS IN SEGMENT` the result of the segment condition will be the same as the result of the segment. In the case of `IS NOT IN SEGMENT`, the result will be negated. 
 
-For more details on the evaluation of flag conditions, please refer to [Setting Evaluation](TODO).
+For more details on the evaluation of flag conditions, please refer to [Setting Evaluation].
 
-## How to add a segment condition?
+## How to set a segment condition?
 
-> TODO add steps and screenshot
+You can add a segment condition to a targeting rule on the Dashboard by clicking on the `+IF` ("Add targeting rule") button.
+
+![Add segment condition](/assets/targeting/targeting-rule/segment-condition/add-segment-condition.jpg)
 
 ## Where can I define segments?
 
 You can define your segments on the [ConfigCat Dashboard under the Segments tab](https://app.configcat.com/product/segments).
 
-> TODO add screenshot
+![Ass segment](/assets/targeting/targeting-rule/segment-condition/add-segment.jpg)
 
-## Anatomy of a segment condition
 
->TODO
-segment name
-segment conditionn comparator tablazat
+## Anatomy of a Segment Condition
+
+A *segment condition* consists of two parts: 
+
+- **Segment comparator:** The comparison operator that defines the relation between the segment and the condition.
+- **Segment:** The segment that the condition is based on.
+
+| Comparator        | Description                                              |
+| ----------------- | -------------------------------------------------------- |
+| IS IN SEGMENT     | It matches when the user is in the selected segment.     |
+| IS NOT IN SEGMENT | It matches when the user is not in the selected segment. |
 
 ## Anatomy of a Segment
 

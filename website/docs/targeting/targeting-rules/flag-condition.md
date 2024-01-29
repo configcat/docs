@@ -10,13 +10,13 @@ A *flag condition* is a condition that is based on the comparison of another fea
 
 This allows you to control the value of multiple feature flags by changing the value of a single, central feature flag. Prerequisite flags are particularly useful for managing complex feature dependencies and ensuring a smooth user experience during feature rollouts.
 
-## How does it work?
+## How does the flag condition work?
 
 The prerequisite flag is evaluated with the same user object as the one that is used to evaluate the dependent flag, then the result is checked against the comparator that you set on the Dashboard. 
 
 The prerequisite flag can be other than a feature flag (boolean setting), in which case the prerequisite flag's evaluated value will be compared to the comparison value that you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
-For more details on the evaluation of flag conditions, please refer to [Setting Evaluation](TODO).
+For more details on the evaluation of flag conditions, please refer to [Setting Evaluation].
 
 ## How to set a flag condition?
 
