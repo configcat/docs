@@ -26,7 +26,7 @@ With AND conditions, you can define more complex targeting rules, such as "serve
 
 You can add multiple conditions to a targeting rule and they will be evaluated with an AND connection between them.
 
-> TODO add screenshot
+![AND conditions](/assets/config-v2/and-conditions.jpg)
 
 ### New comparators
 
@@ -36,21 +36,26 @@ With the new comparators, you can create targeting rules which are based on date
 - New array comparators: ARRAY CONTAINS ANY OF, ARRAY NOT CONTAINS ANY OF.
 - New date comparators: BEFORE, AFTER.
 
+![New comparators](/assets/config-v2/new-comparators.jpg)
+
 ### Prerequisite flags
 
 With prerequisite flags, you can create feature flags that depend on other feature flags. Prerequisite feature flags (aka. master feature flag, inter-dependent feature flag, global toggle) are particularly useful for managing complex feature dependencies and ensuring a smooth user experience during feature rollouts.
 
-> TODO add screenshot
+![Prerequisite flags](/assets/config-v2/prerequisite-flags.jpg)
 
 ### Comparison value hints
 
 With comparison value hints, you can associate arbitrary text with your comparison values. This way you can add a description to your comparison value list items that helps you remember what they are for.
 
 ### Percentage options within targeting rules
-> TODO add screenshot
 
 You can add percentage options to your targeting rules. This is useful if you want to create more complex targeting rules, such as "turn on the feature for 20% of the users who are on iOS, and off for 80%".
+
+![Percentage options within targeting rules](/assets/config-v2/percentage-options-within-targeting-rules.jpg)
 
 ### Custom percentage attributes
 
 With custom percentage attributes, you can create percentage options based on custom attributes. This way you can create percentage options based on any of your user attributes. For example, you can create a percentage option that is based on the user's company or organization. So you can serve a value for 20% of the users from company A and serve another value for 80% of the users from company B.
+
+![Custom percentage attributes](/assets/config-v2/custom-percentage-attributes.jpg)

@@ -50,7 +50,7 @@ A *user object* is a collection of *user attributes* that describe the propertie
 
 ### Default value
 
-> TODO
+This value will be returned by the [ConfigCat SDK] in case of an error. The default value is a required parameter when you use the SDK in your application code to get the value of a feature flag.
 
 ## Examples
 
