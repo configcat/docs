@@ -16,7 +16,7 @@ One segment belongs to one product and can be used in multiple feature flags wit
 
 ## How does the segment condition work?
 
-The segment is evaluated with the [User Object], then the result is checked against the comparator that you set on the Dashboard. In the case of `IS IN SEGMENT` the result of the segment condition will be the same as the result of the segment. In the case of `IS NOT IN SEGMENT`, the result will be negated. 
+The segment is evaluated with the [User Object], and then the result is checked against the comparator that you set on the Dashboard. In the case of `IS IN SEGMENT` the result of the segment condition will be the same as the result of the segment. In the case of `IS NOT IN SEGMENT`, the result will be negated. 
 
 For more details on the evaluation of flag conditions, please refer to [Setting Evaluation].
 
