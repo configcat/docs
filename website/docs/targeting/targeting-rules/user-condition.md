@@ -10,13 +10,13 @@ A *user condition* is a condition that is based on the comparison of a user attr
 
 ## How does the user condition work?
 
-The *comparison attribute's value* from the [user object] is compared to the *comparison value* that you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
+The *comparison attribute's value* from the [user object] is compared to the *comparison value* you set on the Dashboard. The comparison is done according to the selected comparator and will result in `true` or `false`. This will be the result of the condition.
 
 For more details on the evaluation of user conditions, please refer to [Setting Evaluation].
 
 ## How to set a user condition?
 
-You can add a user condition to a targeting rule on the Dashboard by clicking on the `+IF` ("Add condition") button. Add more conditions by clicking on the `+AND` button on the bottom of a condition.
+You can add a user condition to a targeting rule on the Dashboard by clicking on the `+IF` ("Add condition") button. Add more conditions by clicking on the `+AND` button at the bottom of a condition.
 
 ![Add user condition](/assets/targeting/targeting-rule/user-condition/user-condition.jpg)
 
@@ -26,9 +26,9 @@ You can add a user condition to a targeting rule on the Dashboard by clicking on
 
 A *user condition* consists of three parts:
 
-- **Comparison attribute:** The user attribute that the condition is based on. Could be "User ID", "Email", "Country" or any custom attribute.
+- **Comparison attribute:** The user attribute on which the condition is based. Could be "User ID", "Email", "Country", or any custom attribute.
 - **Comparator:** The comparison operator that defines the relation between the comparison attribute and the comparison value.
-- **Comparison value:** The preset value that the comparison attribute is compared to. Depending on the comparator, could be a string, a list of strings, a number, a semantic version, a list of semantic versions or a date.
+- **Comparison value:** The preset value to which the comparison attribute is compared. Depending on the comparator, could be a string, a list of strings, a number, a semantic version, a list of semantic versions or a date.
 
 ### Comparison Attribute
 
@@ -39,8 +39,8 @@ There are 3 predefined attributes. Additionally, you can define your **_custom a
 | Comparison attribute name | Description                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------ |
 | `Email`                   | The e-mail address of your user.                                               |
-| `Identifier`              | Usually a unique user identifier in your application.                          |
-| `Country`                 | Might come in useful for testing a new feature only in one country.            |
+| `Identifier`              | Usually, it is a unique user identifier in your application.                   |
+| `Country`                 | Might be useful for testing a new feature only in one country.                 |
 | `Custom`                  | Define any attribute (e.g. `OS version`), by typing its name into the textbox. |
 
 ### Comparison Value
@@ -51,15 +51,16 @@ A string, a list of strings, a number, a semantic version, a list of semantic ve
 
 #### Text Comparators
 
-The following comparators expect the *Comparison attribute* to be a string value, and the *Comparison value* to be a string or a list of strings.
+The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings.
 
 :::caution
-Consider using Confidential text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
+Consider using Confidential text comparators if you plan to target users by their sensitive information, e.g.: email address or company domain.
 :::
+
 
 | Comparator                         | Description                                                                                     |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- |
-| EQUALS (cleartext)                 | It matches when the comparison attribute is equal to the comparison value.                      |
+| EQUALS (cleartext)                 | It matches when the comparison attribute equals the comparison value.                           |
 | NOT EQUALS (cleartext)             | It matches when the comparison attribute is not equal to the comparison value.                  |
 | IS ONE OF (cleartext)              | It matches when the comparison attribute is equal to any of the comparison values               |
 | IS NOT ONE OF (cleartext)          | It matches when the comparison attribute is not equal to any of the comparison values.          |
@@ -88,7 +89,7 @@ In this case, the feature flag evaluation is performed using the SHA256 hashes o
 
 #### Semantic Version Comparators
 
-The following comparators expect the *Comparison attribute* to be a string containing a valid semantic version, and the *Comparison value* to be a semantic version or a list of semantic versions.
+The following comparators expect the *Comparison attribute* to be a string containing a valid semantic version and the *Comparison value* to be a semantic version or a list of semantic versions.
 
 Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer Semantic Version Specification</a>.
 
@@ -104,7 +105,7 @@ Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer 
 
 #### Number Comparators
 
-The following comparators expect the *Comparison attribute* and the *Comparison value* to be a number.
+The following comparators expect the *Comparison attribute* and the *Comparison value* to be numbers.
 
 | Comparator         | Description                                                                                                                |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
@@ -118,7 +119,7 @@ The following comparators expect the *Comparison attribute* and the *Comparison 
 
 #### Date and Time Comparators
 
-The following comparators expect the *Comparison attribute* to be a date value (a second-based [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) or a platform specific date object), and the *Comparison value* to be a date.
+The following comparators expect the *Comparison attribute* to be a date value (a second-based [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) or a platform-specific date object), and the *Comparison value* to be a date.
 
 | Comparator | Description                                                                                                                                                                                    |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -139,7 +140,7 @@ The following comparators expect the *Comparison attribute* to be an array of st
 ### Confidential CONTAINS and NOT CONTAINS
 
 #### Intent
-Let's target users who who are from the same company confidentially. However text comparators don't support `CONTAINS` or `NOT CONTAINS` comparisons. How can we solve this?
+Let's target users who are from the same company confidentially. However, text comparators don't support `CONTAINS` or `NOT CONTAINS` comparisons. How can we solve this?
 
 #### Solution
 You can add a custom attribute called `domain` and use only confidential comparators in the targeting rule.
