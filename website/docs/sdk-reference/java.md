@@ -145,6 +145,24 @@ boolean value = client.getValue(
     false // Default value
 );
 ```
+:::caution
+It is important to provide an argument for the `classOfT` parameter, specifically for the `T` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to the following table for the corresponding types.
+:::
+
+<div id="setting-type-mapping"></div>
+
+| Setting Kind   | Type parameter `T`    |
+| -------------- |-----------------------|
+| On/Off Toggle  | `boolean` / `Boolean` |
+| Text           | `String`              |
+| Whole Number   | `int` / `Integer`     |
+| Decimal Number | `double` / `Double`   |
+
+It's important to note that providing any other type for the type parameter will result in an `IllegalArgumentException`.
+
+If you specify an allowed type but it mismatches the setting kind, an error message will be logged and `defaultValue` will be returned.
+
 
 ## Anatomy of `getValueAsync()`
 
@@ -169,6 +187,12 @@ client.getValueAsync(
     }
 });
 ```
+
+:::caution
+It is important to provide an argument for the `classOfT` parameter, specifically for the `T` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to [this table](#setting-type-mapping) for the corresponding types.
+:::
+
 
 ## Anatomy of `getValueDetails()`
 
@@ -198,6 +222,11 @@ client.getValueDetailsAsync(
     // Use the details result
 });
 ```
+
+:::caution
+It is important to provide an argument for the `classOfT` parameter, specifically for the `T` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to [this table](#setting-type-mapping) for the corresponding types.
+:::
 
 The details result contains the following information:
 

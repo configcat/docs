@@ -86,24 +86,24 @@ var configCatClient = configcat.getClient(
 
 The following SDK versions are supported by the `>=v0.3.X` Proxy's CDN endpoint:
 
-|  SDK    | Version                                                                   |
-| ------- |---------------------------------------------------------------------------|
-| .NET    | [`>=v9.0.0`](https://github.com/configcat/.net-sdk/releases/tag/v9.0.0)   |
-| JS      | [`>=v9.0.0`](https://github.com/configcat/js-sdk/releases/tag/v9.0.0)     |
-| JS SSR  | [`>=v8.0.0`](https://github.com/configcat/js-ssr-sdk/releases/tag/v8.0.0) |
-| React   | [`>=v4.0.0`](https://github.com/configcat/react-sdk/releases/tag/v4.0.0)  |
-| Node    | [`>=v11.0.0`](https://github.com/configcat/node-sdk/releases/tag/v11.0.0) |
-| Python  | [`>=v9.0.0`](https://github.com/configcat/python-sdk/releases/tag/v9.0.0) |
-| Go      | [`>=v9.0.0`](https://github.com/configcat/go-sdk/releases/tag/v9.0.0)     |
-| C++     | TBA                                                                       |
-| Dart    | TBA                                                                       |
-| Elixir  | TBA                                                                       |
-| Java    | [`>=v9.0.0`](https://github.com/configcat/java-sdk/releases/tag/v9.0.0)   |
-| Android | TBA                                                                       |
-| Kotlin  | TBA                                                                       |
-| PHP     | TBA                                                                       |
-| Ruby    | TBA                                                                       |
-| Swift   | TBA                                                                       |
+|  SDK    | Version                                                                      |
+| ------- |------------------------------------------------------------------------------|
+| .NET    | [`>=v9.0.0`](https://github.com/configcat/.net-sdk/releases/tag/v9.0.0)      |
+| JS      | [`>=v9.0.0`](https://github.com/configcat/js-sdk/releases/tag/v9.0.0)        |
+| JS SSR  | [`>=v8.0.0`](https://github.com/configcat/js-ssr-sdk/releases/tag/v8.0.0)    |
+| React   | [`>=v4.0.0`](https://github.com/configcat/react-sdk/releases/tag/v4.0.0)     |
+| Node    | [`>=v11.0.0`](https://github.com/configcat/node-sdk/releases/tag/v11.0.0)    |
+| Python  | [`>=v9.0.0`](https://github.com/configcat/python-sdk/releases/tag/v9.0.0)    |
+| Go      | [`>=v9.0.0`](https://github.com/configcat/go-sdk/releases/tag/v9.0.0)        |
+| C++     | TBA                                                                          |
+| Dart    | TBA                                                                          |
+| Elixir  | TBA                                                                          |
+| Java    | [`>=v9.0.0`](https://github.com/configcat/java-sdk/releases/tag/v9.0.0)      |
+| Android | [`>=v10.0.0`](https://github.com/configcat/android-sdk/releases/tag/v10.0.0) |
+| Kotlin  | TBA                                                                          |
+| PHP     | TBA                                                                          |
+| Ruby    | TBA                                                                          |
+| Swift   | TBA                                                                          |
 
 </TabItem>
 <TabItem value="old" label="Proxy version 0.2.X or older">
