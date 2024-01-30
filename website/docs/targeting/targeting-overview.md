@@ -4,7 +4,7 @@ title: Targeting Overview
 description: Overview of the ConfigCat targeting feature with examples.
 ---
 
-Using this feature you will be able to set different setting values for specific users or groups of users in your application. Typical use cases are:
+Using this feature, you can set different setting values for specific users or groups of users in your application. Typical use cases are:
 - Beta testing
 - A/B testing
 - Phased rollouts, canary releases
@@ -12,7 +12,7 @@ Using this feature you will be able to set different setting values for specific
 ## How does it work?
 
 1. On the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, you add [Targeting rules] and/or [Percentage options] to your feature flag.
-2. In your application, you pass a [User Object] to the ConfigCat SDK.
+2. you pass a [User Object] to the ConfigCat SDK in your application.
 3. The ConfigCat SDK will use the User Object and the rules defined on the Dashboard to determine whether the feature should be enabled for the user.
 
 ## What is what?
@@ -22,15 +22,15 @@ Using this feature you will be able to set different setting values for specific
 
 A *setting* is a set of rules that yields a **boolean**, **string**, **integer** or **double** value, which can be used to configure your application. It is also known as a configuration value, configuration setting, configuration parameter, etc.
 
-A *feature flag* is a **boolean** setting that is used to decide whether an application feature should be turned ON or OFF. It is also known as a feature toggle, feature switch, feature flipper, conditional feature, etc.
+A *feature flag* is a **boolean** setting to decide whether an application feature should be turned ON or OFF. It is also known as a feature toggle, feature switch, feature flipper, conditional feature, etc.
 
 :::info
-Throughout this documentation, we generally use the term *feature flag* to refer to both feature flags and settings for simplicity, because feature flags are the most common type of settings.
+Throughout this documentation, we generally use the term *feature flag* to refer to both feature flags and settings for simplicity because feature flags are the most common type of settings.
 :::
 
 ### Targeting Rule
 
-A *targeting rule* consists of two parts: a collection of conditions and a value to serve. In case the conditions are met (the targeting rule *matches*), the value is served to the user. More about targeting rules [here].
+A *targeting rule* consists of a collection of conditions and a value to serve. If the conditions are met (the targeting rule *matches*), the value is served to the user. More about targeting rules [here].
 
 ### Condition
 
@@ -42,7 +42,7 @@ A *condition* is a logical expression that can be evaluated to true or false. Th
 
 ### "To all users" / "To all other" / "To unidentified" value
 
-A feature flag always contains a trivial "rule", a simple value, which comes after the actual rules. This value is returned when none of the preceding rules yields a result.
+A feature flag always contains a trivial "rule", a simple value after the actual rules. This value is returned when none of the preceding rules yields a result.
 
 ### User Object
 
@@ -56,12 +56,12 @@ This value will be returned by the [ConfigCat SDK] in case of an error. The defa
 
 ### Phased rollout / Canary release / Percentage rollout Scenario
 
-**Intent:** In our sample company (Whisker Co.), we want to release a new feature called `Park Weather Info`. Let's release the feature everyone at Whisker Co. and to `20%` of our users. We want to make sure that the new feature is working as expected before we release it to everyone.
+**Intent:** In our sample company (Whisker Co.), we want to release a new feature called `Park Weather Info`. Let's release the feature to everyone at Whisker Co. and to `20%` of our users. We want to ensure the new feature is working as expected before we release it to everyone.
 
 **Solution:** Have a feature flag called `Enable Park Weather Info` with a targeting rule that matches everyone at Whisker Co. and a percentage option of `20%` `ON`.
 
 #### Dashboard
-Here is how the feature flag looks like on the Dashboard:
+Here is what the feature flag looks like on the Dashboard:
 ![Phased rollout Example](../../static/assets/targeting/targeting-overview/phased-rollout.jpg)
 
 #### Code
