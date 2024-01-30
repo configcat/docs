@@ -1,22 +1,22 @@
 ---
 id: segment-condition
 title: Segment Condition
-description: Segments help you define user segments and assign them to your feature flags. Ideal for beta testing on a certain group of users.
+description: Segments help you define and assign user segments to your feature flags. Ideal for beta testing on a certain group of users.
 ---
 
 ## What is a segment condition? What is a segment?
 
-A *segment condition* is a condition that is based on the evaluation of a *segment*. A *segment* is roughly a reusable, predefined [user condition].
+A *segment condition* is a condition that is based on the evaluation of a *segment*. A *segment* is a reusable, predefined [user condition].
 
 Segments allow you to define user groups based on any user attributes. You can reference segments in targeting rules. When you update a segment definition, the changes will be reflected automatically in all the targeting rules that reference it.
 
-*For example, you can define a segment called "Beta Testers" and use that segment for all features that you want to be available for beta testers.*
+*For example, you can define a segment called "Beta Testers" and use that segment for all features you want to be available for beta testers.*
 
 One segment belongs to one product and can be used in multiple feature flags within the same product.
 
 ## How does the segment condition work?
 
-The segment is evaluated with the [User Object], and then the result is checked against the comparator that you set on the Dashboard. In the case of `IS IN SEGMENT` the result of the segment condition will be the same as the result of the segment. In the case of `IS NOT IN SEGMENT`, the result will be negated. 
+The segment is evaluated with the [User Object], and the result is checked against the comparator you set on the Dashboard. In the case of `IS IN SEGMENT`, the result of the segment condition will be the same as that of the segment. The result will be negated in the case of `IS NOT IN SEGMENT`.
 
 For more details on the evaluation of flag conditions, please refer to [Setting Evaluation].
 
@@ -39,7 +39,7 @@ You can define your segments on the [ConfigCat Dashboard under the Segments tab]
 
 A *segment condition* consists of two parts: 
 
-- **Segment comparator:** The comparison operator that defines the relation between the segment and the condition.
+- **Segment comparator:** The comparison operator defines the relation between the segment and the condition.
 - **Segment:** The segment that the condition is based on.
 
 | Comparator        | Description                                              |
@@ -59,15 +59,15 @@ A *segment condition* consists of two parts:
 
 ### Comparison attribute
 
-A property of your user (e.g. _email address_, _geographic location_). Your application should pass the attribute values (e.g. *jane@example.com*, _Europe_) to ConfigCat for comparison.
+A property of your user (e.g. _email address_, _geographic location_). Your application should pass the attribute values (e.g. *jane@example.com*, _Europe_)for comparison to ConfigCat.
 
 There are 3 predefined attributes. Additionally, you can define your **_custom attributes_** as well:
 
 | Comparison attribute name | Description                                                                          |
 | ------------------------- | ------------------------------------------------------------------------------------ |
 | `Email`                   | The e-mail address of your user.                                                     |
-| `Identifier`              | Usually a unique user identifier in your application.                                |
-| `Country`                 | Might come in useful for testing a new feature only in one country.                  |
+| `Identifier`              | Usually, it is a unique user identifier in your application.                         |
+| `Country`                 | Might be useful for testing a new feature only in one country.                       |
 | `Custom`                  | **_Define any attribute (e.g. `OS version`), by typing its name into the textbox._** |
 
 ### Comparison value
@@ -87,8 +87,7 @@ The following comparators assume that _Comparison attribute_ and _Comparison val
 
 #### Confidential text comparators
 
-We recommend confidential text comparators in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
-In this case, the feature flag evaluation is based on the secure hashes of the comparison values.
+Our recommendation is to use confidential text comparators in front-end applications that target users based on sensitive data (such as email addresses, names, etc.). In this case, the *Comparison attribute* and the *Comparison value* are hashed before the comparison.
 
 | Comparator             | Description                                                                                                                    |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
