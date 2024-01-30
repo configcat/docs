@@ -1,12 +1,12 @@
 ---
 id: percentage-options
 title: Percentage Options
-description: Percentage options are used to define the percentage of users that will receive a specific value for a feature flag or setting. This way you can gradually release a new feature to a subset of users.
+description: Percentage options define the percentage of users that will receive a specific value for a feature flag or setting. This way, you can gradually release a new feature to a subset of users.
 ---
 
 ## What are Percentage Options?
 
-Percentage options are used to define the percentage of users that will receive a specific value for a feature flag or setting. This way you can gradually release a new feature to a subset of users. Instead of releasing a feature to all users at once, a specific percentage of users are selected to receive access to the feature. This allows developers to control and monitor the impact of the new feature in a controlled manner.
+Percentage options define the percentage of users receiving a specific value for a feature flag or setting. This way, you can gradually release a new feature to a subset of users. Instead of releasing a feature to all users simultaneously, a specific percentage of users are selected to receive access to the feature. This allows developers to control and monitor the impact of the new feature in a controlled manner.
 
 ## How to add Percentage Options?
 
@@ -17,8 +17,8 @@ You can add percentage options to a feature flag on the Dashboard by clicking on
 ## How does it work? - Anatomy of a percentage option
 
 The grouping is random and based on the [User Object]'s identifier by default. You can also use [other user attributes] to evaluate the percentage options. Percentage options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
-- **Sticky** means that the same user will always get the same value for a specific feature flag.
-- **Consistent** means that the same user will always get the same value for a specific feature flag across all SDKs.
+- **Sticky** means the same user will always get the same value for a specific feature flag. Read more below.
+- **Consistent** means that the same user will always get the same value for a specific feature flag across all SDKs. Read more below.
 
 If the required attribute is not present in the [User Object], the [fallback value] will be served.
 
@@ -32,7 +32,7 @@ Any _number between 0 and 100_ that represents a randomly allocated fraction of 
 
 ### Served value
 
-The exact value that will be served to the users that fall into that fraction.
+The exact value will be served to the users that fall into that fraction.
 
 ## Multiple percentage options
 
@@ -42,7 +42,7 @@ When the Setting Kind is On/Off Toggle, the number of options must be 2. One for
 
 ### Text and Number
 
-When the Setting Kind is _Text_, _Whole Number_, or _Decimal Number_ the maximum number options depend on your subscription plan. You can add/remove options by clicking the _Actions_ icon.
+When the Setting Kind is _Text_, _Whole Number_, or _Decimal Number_, the maximum number options depend on your subscription plan. You can add/remove options by clicking the _Actions_ icon.
 
 > The sum of all _% values_ must be equal to 100.
 
@@ -58,7 +58,7 @@ Percentage options can be used in combination with targeting rules. In this case
 
 ## Percentage Evaluation Attribute
 
-The *percentage evaluation attribute* is the attribute that is used to split the users into groups. By default, the percentage evaluation attribute is the [User Object]'s `Identifier` attribute. You can also use other user attributes as the basis of the grouping (see an [example use case] below).
+The *percentage evaluation attribute* is the attribute that is used to split the users into groups. The percentage evaluation attribute is the [User Object]'s `Identifier` attribute by default. You can also use other user attributes as the basis of the grouping (see an [example use case] below).
 
 ### How to change the percentage attribute?
 
@@ -68,25 +68,25 @@ Click the 3 dots on the top right corner of the feature flag and select the **Ch
 
 ## Stickiness
 
-Stickiness means that the same user will always get the same value for a specific feature flag no matter the history of the feature flag. This is achieved by implementing a deterministic hashing algorithm that is based on the feature flag's key and the percentage evaluation attribute.
+Stickiness means that the same user will always get the same value for a specific feature flag, no matter the history of the feature flag. This is achieved by implementing a deterministic hashing algorithm based on the feature flag's key and the percentage evaluation attribute.
 
-*For example, if you have a feature flag with a percentage option of 20% `ON`, then you change the percentage option to 40% `ON`, then then again to 20% `ON`, the same 20% of users will get the `ON` value for the feature flag as the first time.*
+*For example, if you have a feature flag with a percentage option of 20% `ON`, then the same 20% of users will get the `ON` value across all SDKs. Users on iOS, Android, or the Web will always get the same value for the feature flag.*
 
 ## Consistency
 
-Consistency means that the same user will always get the same value for a specific feature flag no matter which SDK they use. This is achieved by using the same hashing algorithm across all SDKs.
+Consistency means that the same user will always get the same value for a specific feature flag, no matter which SDK they use. This is achieved by using the same hashing algorithm across all SDKs.
 
 *For example, if you have a feature flag with a percentage option of 20% `ON`, then the same 20% of users will get the `ON` value across all SDKs. No matter if a user is on iOS, Android, or Web, they will always get the same value for the feature flag.*
 
-Worth mentioning that in case of different feature flags the same user might get different values. This is because the hashing algorithm is based on the feature flag's key and the percentage evaluation attribute. And the feature flag's key is different for each feature flag.
+The same user might get different values in the case of different feature flags. The hashing algorithm is based on the feature flag's key and the percentage evaluation attribute. The key of each feature flag is different.
 
-*For example, if you have two feature flags with percentage options of 20% `ON`, then a different 20% of users will get the `ON` value for each feature flags.*
+*For example, if you have two feature flags with percentage options of 20% `ON`, then a different 20% of users will get the `ON` value for each feature flag.*
 
 ## Examples
 
 ### Simple phased rollout / Canary release / Percentage rollout Scenario
 
-**Intent:** In our sample company (Whisker Co.), we want to release a new feature `Enable Park Weather Info` to 20% of our users. We want to make sure that the new feature is working as expected before we release it to everyone.
+**Intent:** In our sample company (Whisker Co.), we want to release a new feature, `Enable Park Weather Info` to 20% of our users. We want to ensure the new feature is working as expected before we release it to everyone.
 
 **Solution:** Have a percentage option of `20%` `ON`.
 
@@ -94,21 +94,21 @@ Worth mentioning that in case of different feature flags the same user might get
 
 ### A/B/C Testing Scenario
 
-**Intent:** Let's test three different variations of the `Discount Type` each with 1/3rd of our users. We want to decide which variation is the most effective. 
+**Intent:** Let's test three variations of the `Discount Type`, each with 1/3rd of our users. We want to decide which variation is the most effective. 
 
-**Solution:** A text setting with three options set to `33% / 33% / 34%` is used to define the different variations.
+**Solution:** A text setting with three options set to `33% / 33% / 34%` defines the different variations.
 
 ![Targeting Example 2](/assets/targeting/percentage-options/example2.jpg)
 
 ### Complex phased rollout / Canary release / Percentage rollout Scenario
 
-**Intent:** In our sample company (Whisker Co.), we want to release a new feature `Enable Park Weather Info` to all users within our `Whisker Co.` company `AND` `20%` of the rest of our users. We want to make sure that the new feature is working as expected before we release it to everyone.
+**Intent:** In our sample company (Whisker Co.), we want to release a new feature, `Enable Park Weather Info` to all users within our `Whisker Co.` company `AND` `20%` of the rest of our users. We want to ensure the new feature is working as expected before we release it to everyone.
 
 **Solution:** Have a percentage option of `20%` `ON` and a targeting rule that matches everyone whose email address ends with `@whisker.example`.
 
 ![Targeting Example 3](/assets/targeting/percentage-options/example3.jpg)
 
-### Platform specific phased rollout
+### Platform-specific phased rollout
 
 **Intent:** Let's enable `Cafe Notifications` for 20% of our users on `iOS` and 60% of our users on `Android`.
 
@@ -118,8 +118,8 @@ Worth mentioning that in case of different feature flags the same user might get
 
 ### Percentage options based on other User Attributes
 
-**Intent:** Let's imagine at our sample company (Whisker Co.) we have a `Tenant ID` attribute that is used to identify the tenant of our users. We want to release a new feature `Enable Park Weather Info` to 20% of our users based on their `Tenant ID`.
+**Intent:** Let's imagine that at our sample company (Whisker Co.), we have a `Tenant ID` attribute that is used to identify the tenants of our users. We want to release a new feature, `Enable Park Weather Info`, to 20% of our users based on their `Tenant ID`.
 
-**Solution:** Have a percentage option of `20%` `ON` and have the percentage attribute set to `Tenant ID`.
+**Solution:** Have a percentage option of `20%` `ON` and set the percentage attribute to `Tenant ID`.
 
 ![Targeting Example 4](/assets/targeting/percentage-options/example5.jpg)
