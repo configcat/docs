@@ -22,7 +22,7 @@ The *User Object* is essential if you'd like to use ConfigCat's [Targeting](/adv
 
 ConfigCat was designed with security and privacy in mind. The evaluation process is entirely implemented within the SDKs, meaning **your users' sensitive data never leaves your system**. The data flow is one-way – from ConfigCat CDN servers to your SDKs – and ConfigCat does not receive or store any attributes of the User Object passed to the SDKs. This design prioritizes the privacy and security of user data.
 
-## User Object's structure
+## Anatomy of the User Object
 
 The data that could and should be passed to the User Object.
 
@@ -32,6 +32,20 @@ The data that could and should be passed to the User Object.
 | Email      | **OPTIONAL** By adding this parameter you will be able to create Email address-based targeting. e.g: Only turn on a feature for users with @example.com addresses.       |
 | Country    | **OPTIONAL** Fill this for location or country-based targeting. e.g: Turn on a feature for users in Canada only.                                                         |
 | Custom     | **OPTIONAL** This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role, Device type, App version number, etc. |
+
+### Code example
+
+```js
+let userObject = new configcat.User(
+  '#UNIQUE-USER-IDENTIFIER#', // Identifier attribute (Required)
+  'john@example.com', // Email attribute (Optional)
+  'United Kingdom', // Country attribute (Optional)
+  { // Custom attributes (Optional)
+    SubscriptionType: 'Pro', 
+    UserRole: 'Admin',
+  },
+);
+```
 
 ### Identifier attribute
 
