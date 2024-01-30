@@ -8,6 +8,26 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 <!-- This page must be in sync with the news page in the dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html -->
 
+## Join the Config V2 Beta Program!
+
+#### Jan 19, 2024
+
+We're looking for ConfigCat users willing to participate in the beta testing of Config V2.
+
+### What is Config V2?
+
+Config V2 is a new version of ConfigCat. It brings together a bundle of highly requested features like AND
+conditions, new comparators (Text Equals, Text Starts with Any of, Text Ends with Any of, Before/After),
+Prerequisite flags, and more. [Read more about Config V2 and the new features.](/advanced/config-v2/)
+
+You can get early access to the new features and shape the final product with your feedback.
+
+### How to join the beta program?
+
+1. <a href="https://forms.gle/wEFxKYs5Lv5iiLUF8" target="_blank">Apply via this form</a>
+2. Join the <strong>#config-v2-beta-testing</strong> channel in our <a href="https://configcat.com/slack/" target="_blank">Community Slack</a> to give feedback.
+
+
 ## Resource ordering in Public Management API and Terraform
 
 #### Jan 9, 2024

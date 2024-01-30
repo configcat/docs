@@ -12,7 +12,7 @@ Config V2 is a new version of ConfigCat. It comes with a new dashboard, API, SDK
 - New config editor UI on the Dashboard.
 - [New and improved config JSON schema.](https://github.com/configcat/config-json)
 - New API: [See the API Docs.](https://api.configcat.com/docs/)
-- New SDKs: [See the supported SDK versions.](advanced/config-v2-sdk-compatibility)
+- New SDKs: [See the supported SDK versions.](/advanced/config-v2-sdk-compatibility)
 
 ## How to migrate from Config V1 to Config V2?
 
@@ -42,7 +42,7 @@ With prerequisite flags, you can create feature flags that depend on other featu
 
 With comparison value hints, you can associate arbitrary text with your comparison values. This way you can add a description to your comparison value list items that helps you remember what they are for.
 
-### Percentage options for targeting rules
+### Percentage options within targeting rules
 
 You can add percentage options to your targeting rules. This is useful if you want to create more complex targeting rules, such as "turn on the feature for 20% of the users who are on iOS, and off for 80%".
 

@@ -181,7 +181,7 @@ All other cases: OFF
 
 ### To all other users, serve
 
-This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) is not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
+This value will be served as a fallback if none of the above rules apply or a [`User Object`](/advanced/user-object) is not passed to the [ConfigCat SDK](/sdk-reference/overview) correctly within your application.
 
 ## Targeting a percentage of users
 
@@ -294,4 +294,4 @@ When the Setting Kind is _Text_, _Whole Number_, or _Decimal Number_ the maximum
 
 ### All other cases
 
-This value will be served as a fallback if none of the above rules apply or a [`User Object`](advanced/user-object.md) was not passed to the [ConfigCat SDK](sdk-reference/overview.md) correctly within your application.
+This value will be served as a fallback if none of the above rules apply or a [`User Object`](/advanced/user-object) was not passed to the [ConfigCat SDK](/sdk-reference/overview) correctly within your application.
