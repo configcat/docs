@@ -155,6 +155,39 @@ final value = await client.getValue(
 );
 ```
 
+:::caution
+It is important to provide an argument for the `defaultValue` parameter, specifically for the `T` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to the following table for the corresponding types.
+:::
+
+<div id="setting-type-mapping"></div>
+
+| Setting Kind   | Type parameter `T` |
+| -------------- |--------------------|
+| On/Off Toggle  | `bool`             |
+| Text           | `string`           |
+| Whole Number   | `int`              |
+| Decimal Number | `double`           |
+
+In addition to the types mentioned above, you also have the option to provide `dynamic` for the type parameter regardless of the setting kind.
+
+It's important to note that providing any other type for the type parameter will result in an `ArgumentError`.
+
+If you specify an allowed type but it mismatches the setting kind, an error message will be logged and `defaultValue` will be returned.
+
+When relying on type inference and not explicitly specifying the type parameter, be mindful of potential type mismatch issues, especially with number types.
+For example, `client.getValue(key: "keyOfMyDecimalSetting", defaultValue: 0)` will return `defaultValue` (`0`) instead of the actual value of the decimal setting because
+the compiler infers the type as `int` instead of `double`, that is, the call is equivalent to `client.getValue<int>("keyOfMyDecimalSetting", 0)`,
+which is a type mismatch.
+
+To correctly evaluate a decimal setting, you should use:
+
+```dart
+var value = client.getValue("keyOfMyDecimalSetting", 0.0);
+// -or-
+var value = client.getValue<double>("keyOfMyDecimalSetting", 0);
+```
+
 ## Anatomy of `getValueDetails()`
 
 `getValueDetails()` is similar to `getValue()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
@@ -173,13 +206,18 @@ final details = await client.getValueDetails(
 );
 ```
 
+:::caution
+It is important to provide an argument for the `defaultValue` parameter, specifically for the `T` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to [this table](#setting-type-mapping) for the corresponding types.
+:::
+
 The `details` result contains the following information:
 
 | Field                       | Type                                 | Description                                                                               |
 |-----------------------------|--------------------------------------| ----------------------------------------------------------------------------------------- |
-| `value`                     | `Bool` / `String` / `Int` / `Double` | The evaluated value of the feature flag or setting.                                       |
+| `value`                     | `bool` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                       |
 | `key`                       | `String`                             | The key of the evaluated feature flag or setting.                                         |
-| `isDefaultValue`            | `Bool`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
+| `isDefaultValue`            | `bool`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
 | `error`                     | `String?`                            | In case of an error, this field contains the error message.                               |
 | `user`                      | `ConfigCatUser?`                     | The user object that was used for evaluation.                                             |
 | `matchedPercentageOption`   | `PercentageOption?`                  | If the evaluation was based on a percentage rule, this field contains that specific rule. |
@@ -245,14 +283,14 @@ All comparators support `String` values as User Object attribute (in some cases 
 * all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
 
 **Number-based comparators** (=, &lt;, &gt;=, etc.)
-* accept `Double` values and all other numeric values which can safely be converted to `Double`,
-* accept `String` values containing a properly formatted, valid `Double` value,
+* accept `double` values and all other numeric values which can safely be converted to `double`,
+* accept `String` values containing a properly formatted, valid `double` value,
 * all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
 
 **Date time-based comparators** (BEFORE / AFTER)
 * accept `DateTime` values, which are automatically converted to a second-based Unix timestamp,
-* accept `Double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `Double`,
-* accept `String` values containing a properly formatted, valid `Double` value,
+* accept `double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `Double`,
+* accept `String` values containing a properly formatted, valid `double` value,
 * all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
 
 **String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
