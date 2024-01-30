@@ -25,3 +25,5 @@ Every value marked with a \* in the table marks a technical limit. If you hit a 
 | Permission groups (per product)                | 1       | 2       | 100\*   | 100\*      | 100\*     | 2       | 3       |
 | Audit log retention (days)                     | 7       | 35      | 35      | 750        | 750       | 35      | 7       |
 | Verified domains for SAML                      | 1       | 1       | 1000\*  | 1000\*     | 1000\*    | 1       | 1       |
+| Comparison value list length                   | 100     | 1000    | 15000   | 15000      | 15000     | 1000    | 1000    |
+| Comparison value item length                   | 255     | 255     | 255     | 255        | 255       | 255     | 255     |

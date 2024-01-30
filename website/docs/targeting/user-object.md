@@ -12,7 +12,7 @@ And represents a user in your application.
 The *User Object* is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
 :::
 
-## The relationship between User Object and Targeting rules
+## The relationship between the User Object and Targeting rules
 
 **As a product manager**, you can define [Targeting rules](/advanced/targeting) on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> based on the user attributes that are provided by your application.
 
