@@ -236,8 +236,8 @@ The `details` result contains the following information:
 | `isDefaultValue`                  | `boolean`                       | True when the default value passed to `getValueDetailsAsync()` is returned due to an error. |
 | `errorMessage`                    | `string`                        | In case of an error, this field contains the error message.                                 |
 | `errorException`                  | `any`                           | In case of an error, this field contains the related exception object (if any).             |
-| `matchedTargetingRule`            | `ITargetingRule`                | The targeting rule (if any) that matched during the evaluation and was used to return the evaluated value. |
-| `matchedPercentageOption`         | `IPercentageOption`             | The percentage option (if any) that was used to select the evaluated value.                 |
+| `matchedTargetingRule`            | `ITargetingRule`                | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
+| `matchedPercentageOption`         | `IPercentageOption`             | The Percentage Option (if any) that was used to select the evaluated value.                 |
 | `fetchTime`                       | `Date`                          | The last download time (UTC) of the current config.                                         |
 
 ## User Object
@@ -257,9 +257,9 @@ let userObject = new configcat.User('john@example.com');
 | Parameters   | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. E.g. User role, Subscription type. |
+| `email`      | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `country`    | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `custom`     | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. E.g. User role, Subscription type. |
 
 For advanced targeting:
 
@@ -297,23 +297,23 @@ but some of them also support other types of values. It depends on the comparato
 
 **SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
 * accept `string` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Number-based comparators** (=, &lt;, &gt;=, etc.)
 * accept `number` values,
 * accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Date time-based comparators** (BEFORE / AFTER)
 * accept `Date` values, which are automatically converted to a second-based Unix timestamp,
 * accept `number` values representing a second-based Unix timestamp,
 * accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
 * accept arrays of `string`,
 * accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
@@ -558,7 +558,7 @@ Info level logging helps to inspect the feature flag evaluation process:
 
 ```bash
 ConfigCat - INFO - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"#SOME-USER-ID#","Email":"configcat@example.com"}'
-  Evaluating targeting rules and applying the first match if any:
+  Evaluating Targeting Rules and applying the first match if any:
   - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'false' => no match
   - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'true' => MATCH, applying rule
   Returning 'true'.
@@ -712,12 +712,12 @@ The JavaScript (SSR) SDK supports *shared caching*. You can read more about this
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/docs/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/docs/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the _ConfigCat SDK_ that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
-Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
+Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
 
 ## Browser compatibility
 

@@ -175,7 +175,7 @@ The `Details` result contains the following information:
 | `Error`                              | In case of an error, this field contains the error message.                               |
 | `User`                               | The user object that was used for evaluation.                                             |
 | `Matched Evaluation Percentage Rule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `Matched Evaluation Rule`            | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `Matched Evaluation Rule`            | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `FetchTime`                          | The last download time of the current config.                                             |
 
 ## User Object
@@ -202,9 +202,9 @@ FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"));
 | Argument  | Description                                                                                                                     |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `Id`      | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `Email`   | Optional parameter for easier targeting rule definitions.                                                                       |
-| `Country` | Optional parameter for easier targeting rule definitions.                                                                       |
-| `Custom`  | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| `Email`   | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `Country` | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `Custom`  | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. |
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
@@ -514,7 +514,7 @@ The URL to your current config JSON is based on your [Data Governance](/advanced
         }
       ],
       "r": [
-        // list of targeting rules
+        // list of Targeting Rules
         {
           "o": 0, // rule's order
           "a": "Identifier", // comparison attribute
@@ -700,12 +700,12 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is [downloading a config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is [downloading a config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
-Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
+Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
 
 ## Look Under the Hood
 

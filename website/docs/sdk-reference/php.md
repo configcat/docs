@@ -131,7 +131,7 @@ The `details` result contains the following information:
 | `getError()`                           | `string`                             | In case of an error, this property returns the error message.                               |
 | `getUser()`                            | `User`                               | The user object that was used for evaluation.                                               |
 | `getMatchedEvaluationPercentageRule()` | `array`                              | If the evaluation was based on a percentage rule, this property returns that specific rule. |
-| `getMatchedEvaluationRule()`           | `array`                              | If the evaluation was based on a targeting rule, this property returns that specific rule.  |
+| `getMatchedEvaluationRule()`           | `array`                              | If the evaluation was based on a Targeting Rule, this property returns that specific rule.  |
 | `getFetchTimeUnixSeconds()`            | `int`                                | The last download time of the current config in unix seconds format.                        |
 
 ## User Object
@@ -151,9 +151,9 @@ $user = new \ConfigCat\User("john@example.com");
 | Parameters   | Description                                                                                                                                                          |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                                                            |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                                                            |
-| `custom`     | Optional `array of strings` representing the custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. The value's type of the array must be a `string`. |
+| `email`      | Optional parameter for easier Targeting Rule definitions.                                                                                                            |
+| `country`    | Optional parameter for easier Targeting Rule definitions.                                                                                                            |
+| `custom`     | Optional `array of strings` representing the custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. The value's type of the array must be a `string`. |
 
 ```php
 $user = new \ConfigCat\User(
@@ -356,7 +356,7 @@ The URL to your current config JSON is based on your [Data Governance](/advanced
         }
       ],
       "r": [
-        // list of targeting rules
+        // list of Targeting Rules
         {
           "o": 0, // rule's order
           "a": "Identifier", // comparison attribute

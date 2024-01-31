@@ -8,7 +8,7 @@ description: Segments allow you to define user groups based on any user attribut
 
 A *segment condition* is a condition that is based on the evaluation of a *segment*. A *segment* is a reusable, predefined [user condition].
 
-Segments allow you to define user groups based on any user attributes. You can reference segments in targeting rules. When you update a segment definition, the changes will be reflected automatically in all the targeting rules that reference it.
+Segments allow you to define user groups based on any user attributes. You can reference segments in Targeting Rules. When you update a segment definition, the changes will be reflected automatically in all the Targeting Rules that reference it.
 
 *For example, you can define a segment called "Beta Testers" and use that segment for all features you want to be available for beta testers.*
 
@@ -22,7 +22,7 @@ For more details on the evaluation of flag conditions, please refer to [Setting 
 
 ## How to set a segment condition?
 
-You can add a targeting rule with a segment condition on the Dashboard by clicking on the `+IF` ("Add targeting rule") button.
+You can add a Targeting Rule with a segment condition on the Dashboard by clicking on the `+IF` ("Add Targeting Rule") button.
 
 ![Add segment condition](/assets/targeting/targeting-rule/segment-condition/add-segment-condition.jpg)
 

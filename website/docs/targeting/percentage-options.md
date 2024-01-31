@@ -12,9 +12,9 @@ Using *Percentage Options*, you can define if a certain percentage of users shou
 
 You can add Percentage Options to a feature flag on the Dashboard by clicking on the `+%` button.
 
-![Add percentage option](/assets/targeting/percentage-options/add-percentage-option.jpg)
+![Add Percentage Option](/assets/targeting/percentage-options/add-percentage-option.jpg)
 
-## How does it work? - Anatomy of a percentage option
+## How does it work? - Anatomy of a Percentage Option
 
 The grouping is random and based on the [User Object](../user-object)'s identifier by default. You can also use [other user attributes](#percentage-evaluation-attribute) to evaluate the Percentage Options. Percentage Options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
 - **Sticky** means the same user will always get the same value for a specific feature flag and for a certain Percentage Option set. Read more below.
@@ -44,11 +44,11 @@ When the Setting Kind is On/Off Toggle, the number of options must be 2. One for
 
 When the Setting Kind is _Text_, _Whole Number_, or _Decimal Number_, the maximum number of options depends on your subscription plan. You can add/remove options by clicking the _Actions_ icon.
 
-## Percentage Options in combination with targeting rules
+## Percentage Options in combination with Targeting Rules
 
-Percentage Options can be used in combination with targeting rules. In this case, the percentage options will be evaluated only when the targeting rule matches. In other words, the percentage options apply only to the users that matched the targeting rule.
+Percentage Options can be used in combination with Targeting Rules. In this case, the Percentage Options will be evaluated only when the Targeting Rule matches. In other words, the Percentage Options apply only to the users that matched the Targeting Rule.
 
-![Percentage Options with targeting rules](/assets/targeting/percentage-options/percentage-options-with-targeting-rules.jpg)
+![Percentage Options with Targeting Rules](/assets/targeting/percentage-options/percentage-options-with-targeting-rules.jpg)
 
 ## Percentage Evaluation Attribute
 
@@ -66,13 +66,13 @@ Click the 3 dots on the top right corner of the feature flag and select the **Ch
 
 Stickiness means that the same user will always get the same value for a specific feature flag, no matter the history of the feature flag. This is achieved by implementing a deterministic hashing algorithm based on the feature flag's key and the Percentage Evaluation Attribute.
 
-*For example, if you have a feature flag with a percentage option of `20%` `ON`, then you change the percentage option to `40%` `ON`, and then back to `20%` `ON`, the same `20%` of users will get the `ON` value for the feature flag just like the first time.*
+*For example, if you have a feature flag with a Percentage Option of `20%` `ON`, then you change the Percentage Option to `40%` `ON`, and then back to `20%` `ON`, the same `20%` of users will get the `ON` value for the feature flag just like the first time.*
 
 ## Consistency
 
 Consistency means that the same user will always get the same value for a specific feature flag, no matter which SDK they use. This is achieved by using the same hashing algorithm across all SDKs.
 
-*For example, if you have a feature flag with a percentage option of `20%` `ON`, then the same `20%` of users will get the `ON` value across all SDKs. No matter if a user is on iOS, Android, or Web, they will always get the same value for the feature flag.*
+*For example, if you have a feature flag with a Percentage Option of `20%` `ON`, then the same `20%` of users will get the `ON` value across all SDKs. No matter if a user is on iOS, Android, or Web, they will always get the same value for the feature flag.*
 
 ## Randomness
 
@@ -86,7 +86,7 @@ The same user might get different values in the case of different feature flags.
 
 **Goal:** In our sample company (Whisker Co.), we want to release a new feature, `Enable Park Weather Info` to 20% of our users. We want to ensure the new feature is working as expected before we release it to everyone.
 
-**Solution:** Have a percentage option of `20%` `ON`.
+**Solution:** Have a Percentage Option of `20%` `ON`.
 
 ![Targeting Example 1](/assets/targeting/percentage-options/example1.jpg)
 
@@ -102,7 +102,7 @@ The same user might get different values in the case of different feature flags.
 
 **Goal:** In our sample company (Whisker Co.), we want to release a new feature, `Enable Park Weather Info` to all users within our `Whisker Co.` company `AND` `20%` of the rest of our users. We want to ensure the new feature is working as expected before we release it to everyone.
 
-**Solution:** Have a percentage option of `20%` `ON` and a targeting rule that matches everyone whose email address ends with `@whisker.example`.
+**Solution:** Have a Percentage Option of `20%` `ON` and a Targeting Rule that matches everyone whose email address ends with `@whisker.example`.
 
 ![Targeting Example 3](/assets/targeting/percentage-options/example3.jpg)
 
@@ -110,7 +110,7 @@ The same user might get different values in the case of different feature flags.
 
 **Goal:** Let's enable `Cafe Notifications` for 20% of our users on `iOS` and 60% of our users on `Android`.
 
-**Solution:** Have a targeting rule that matches everyone whose `Platform` is `iOS` and a percentage option of `20%` `ON`. Have a targeting rule that matches everyone whose `Platform` is `Android` and a percentage option of `60%` `ON`.
+**Solution:** Have a Targeting Rule that matches everyone whose `Platform` is `iOS` and a Percentage Option of `20%` `ON`. Have a Targeting Rule that matches everyone whose `Platform` is `Android` and a Percentage Option of `60%` `ON`.
 
 ![Targeting Example 4](/assets/targeting/percentage-options/example4.jpg)
 
@@ -118,6 +118,6 @@ The same user might get different values in the case of different feature flags.
 
 **Goal:** Let's imagine that at our sample company (Whisker Co.), we have a `Tenant ID` attribute that is used to identify the tenants of our users. We want to release a new feature, `Enable Park Weather Info`, to 20% of our users based on their `Tenant ID`.
 
-**Solution:** Have a percentage option of `20%` `ON` and set the Percentage Attribute to `Tenant ID`.
+**Solution:** Have a Percentage Option of `20%` `ON` and set the Percentage Attribute to `Tenant ID`.
 
 ![Targeting Example 4](/assets/targeting/percentage-options/example5.jpg)

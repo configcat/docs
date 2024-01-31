@@ -131,7 +131,7 @@ The `details` result contains the following information:
 | `error`                              | In case of an error, this field contains the error message.                               |
 | `user`                               | The user object that was used for evaluation.                                             |
 | `matched_evaluation_percentage_rule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `matched_evaluation_rule`            | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `matched_evaluation_rule`            | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `fetch_time`                         | The last download time (UTC DateTime) of the current config.                              |
 
 ## User Object
@@ -146,9 +146,9 @@ user_object = ConfigCat.User.new("john@example.com")
 | Parameters   | Description                                                                                                                                                          |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                                                            |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                                                            |
-| `custom`     | Optional `Map of strings` representing the custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type.|
+| `email`      | Optional parameter for easier Targeting Rule definitions.                                                                                                            |
+| `country`    | Optional parameter for easier Targeting Rule definitions.                                                                                                            |
+| `custom`     | Optional `Map of strings` representing the custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type.|
 
 ```elixir
 user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#", email: "john@example", country: "United Kingdom",
@@ -528,7 +528,7 @@ The URL to your current config JSON is based on your [Data Governance](/advanced
         }
       ],
       "r": [
-        // list of targeting rules
+        // list of Targeting Rules
         {
           "o": 0, // rule's order
           "a": "Identifier", // comparison attribute

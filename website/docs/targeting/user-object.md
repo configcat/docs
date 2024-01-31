@@ -4,18 +4,18 @@ title: User Object
 description: The user object is a collection of *user attributes* that describe the properties of a user. The user object is essential for targeting.
 ---
 
-The *User Object* is a collection of *user attributes* that describe the properties of a user. The *User Object* is necessary to evaluate [targeting rules] and [percentage options].
+The *User Object* is a collection of *user attributes* that describe the properties of a user. The *User Object* is necessary to evaluate [Targeting Rules] and [Percentage Options].
 It allows you to pass the user attributes that are referenced in the rules of the feature flag to the ConfigCat SDK. The user object represents a user in your application.
 
 :::info
-The *User Object* is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
+The *User Object* is essential if you'd like to use ConfigCat's [Targeting](../targeting-overview) feature.
 :::
 
-## The relationship between the User Object and Targeting rules
+## The relationship between the User Object and Targeting Rules
 
-**As a product manager**, you can define [Targeting rules](/advanced/targeting) on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> based on the user attributes that are provided by your application.
+**As a product manager**, you can define [Targeting Rules](/advanced/targeting) on the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a> based on the user attributes that are provided by your application.
 
-**As a developer**, User Object allows you to pass user attributes to the ConfigCat SDK, which you (or your teammates) can reference in the [Targeting rules](/advanced/targeting) on the <a href="https://app.configcat.com" target="_blank">Dashboard</a>.
+**As a developer**, User Object allows you to pass user attributes to the ConfigCat SDK, which you (or your teammates) can reference in the [Targeting Rules](/advanced/targeting) on the <a href="https://app.configcat.com" target="_blank">Dashboard</a>.
 
 ## Security and privacy concerns
 

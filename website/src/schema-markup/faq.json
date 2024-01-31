@@ -191,7 +191,7 @@
       "name": "Is it possible to export feature flags in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes! You can export and download your current product as a standard JSON file anytime you want. The export will include: All feature flags and settings together with their values, targeting rules, % options, segments, tags, All configs, All environments, All tags and All segments."
+        "text": "Yes! You can export and download your current product as a standard JSON file anytime you want. The export will include: All feature flags and settings together with their values, Targeting Rules, % options, segments, tags, All configs, All environments, All tags and All segments."
       }
     },
     {
@@ -204,7 +204,7 @@
     },
     {
       "@type": "Question",
-      "name": "How can I use AND operators in my targeting rules in ConfigCat?",
+      "name": "How can I use AND operators in my Targeting Rules in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Although there is no direct support for AND operators in the UI, you can use the AND operator with a combination of OR and NOT operators. Read more here: https://configcat.com/docs/faq/#can-i-use-and-operators-in-my-targeting-rules"
@@ -220,10 +220,10 @@
     },
     {
       "@type": "Question",
-      "name": "How to use targeting rules in ConfigCat based on confidential data?",
+      "name": "How to use Targeting Rules in ConfigCat based on confidential data?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the Confidential text comparators: https://configcat.com/docs/advanced/targeting/#confidential-text-comparators."
+        "text": "If you want to use Targeting Rules based on email address, phone number, or other sensitive data, you can use the Confidential text comparators: https://configcat.com/docs/advanced/targeting/#confidential-text-comparators."
       }
     },
     {

@@ -138,7 +138,7 @@ You can read more [here](/advanced/data-governance).
 
 Yes! You can export and download your current product as a standard JSON file anytime you want. The export will include:
 
-- All feature flags and settings together with their values, targeting rules, % options, segments, tags
+- All feature flags and settings together with their values, Targeting Rules, % options, segments, tags
 - All configs
 - All environments
 - All tags
@@ -156,7 +156,7 @@ We consider an organization inactive if it meets all of the following criteria:
 
 ## A/B Testing & Targeting
 
-### Can I use AND operators in my targeting rules?
+### Can I use AND operators in my Targeting Rules?
 
 Although there is no direct support for `AND` operators in the UI, you can use the `AND` operator with a combination of `OR` and `NOT` operators.
 
@@ -197,9 +197,9 @@ Also, consider the following:
 
 [More on stickiness and consistency](/advanced/targeting/#stickiness--consistency)
 
-### How to use targeting rules based on sensitive data?
+### How to use Targeting Rules based on sensitive data?
 
-If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Confidential text comparators](/advanced/targeting/#confidential-text-comparators).
+If you want to use Targeting Rules based on email address, phone number, or other sensitive data, you can use the [Confidential text comparators](/advanced/targeting/#confidential-text-comparators).
 
 ## Technical Debt
 

@@ -1,12 +1,12 @@
 ---
 id: user-condition
 title: User Condition
-description: A user condition is a condition that is based on the comparison of a user attribute and a preset value (comparison value). It allows you to define targeting rules which target users based on their properties.
+description: A user condition is a condition that is based on the comparison of a user attribute and a preset value (comparison value). It allows you to define Targeting Rules which target users based on their properties.
 ---
 
 ## What is a user condition?
 
-A *user condition* is a condition that is based on the comparison of a user attribute and a preset value (*comparison value*). It allows you to define targeting rules which target users based on their properties.
+A *user condition* is a condition that is based on the comparison of a user attribute and a preset value (*comparison value*). It allows you to define Targeting Rules which target users based on their properties.
 
 ## How does the user condition work?
 
@@ -16,7 +16,7 @@ For more details on the evaluation of user conditions, please refer to [Setting 
 
 ## How to set a user condition?
 
-You can add a targeting rule with a condition on the Dashboard by clicking on the `+IF` ("Add targeting rule") button. Add more conditions by clicking on the `+AND` button.
+You can add a Targeting Rule with a condition on the Dashboard by clicking on the `+IF` ("Add Targeting Rule") button. Add more conditions by clicking on the `+AND` button.
 
 ![Add user condition](/assets/targeting/targeting-rule/user-condition/user-condition.jpg)
 
@@ -143,7 +143,7 @@ The following comparators expect the *Comparison attribute* to be an array of st
 Let's target users who are from the same company confidentially. However, text comparators don't support `CONTAINS` or `NOT CONTAINS` comparisons. How can we solve this?
 
 #### Solution
-Let's add a custom attribute called `domain` and use only confidential comparators in the targeting rule.
+Let's add a custom attribute called `domain` and use only confidential comparators in the Targeting Rule.
 
 On the Dashboard:
 <img src="/docs/assets/targeting/targeting-rule/user-condition/user-condition-example1.jpg" className="zoomable" alt="User Condition Example" />

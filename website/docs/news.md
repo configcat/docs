@@ -538,7 +538,7 @@ Released Public Management API to Beta. From now on you can execute Dashboard ma
 
 #### March 3, 2020
 
-Introduced sensitive text comparators to make sure sensitive info (like email address, user name) is kept hidden in targeting rules. Comes handy in front-end applications.
+Introduced sensitive text comparators to make sure sensitive info (like email address, user name) is kept hidden in Targeting Rules. Comes handy in front-end applications.
 
 - [Detailed Docs about comparators](/advanced/targeting/#comparator)
 - [Related blog post](https://configcat.com/blog/2020/03/02/sensitive-comparators/)

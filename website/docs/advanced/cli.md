@@ -275,9 +275,9 @@ The following example shows how you can update the value of a Feature Flag in a 
 
 <img src="/docs/assets/cli/flag-value-update.gif" className="zoomable" alt="flag value update" />
 
-### Add targeting rules
+### Add Targeting Rules
 
-The following example shows how you can add targeting rules to a Feature Flag.
+The following example shows how you can add Targeting Rules to a Feature Flag.
 
 <img src="/docs/assets/cli/flag-targeting-add.gif" className="zoomable" alt="flag targeting add" />
 

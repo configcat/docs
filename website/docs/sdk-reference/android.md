@@ -232,8 +232,8 @@ The details result contains the following information:
 | `isDefaultValue()`                | `boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.                       |
 | `getError()`                      | `String`                                | In case of an error, this field contains the error message.                                                |
 | `getUser()`                       | `User`                                  | The user object that was used for evaluation.                                                              |
-| `getMatchedPercentageOption()`    | `PercentageOption`                      | The percentage option (if any) that was used to select the evaluated value.                                |
-| `getMatchedTargetingRule()`       | `TargetingRule`                         | The targeting rule (if any) that matched during the evaluation and was used to return the evaluated value. |
+| `getMatchedPercentageOption()`    | `PercentageOption`                      | The Percentage Option (if any) that was used to select the evaluated value.                                |
+| `getMatchedTargetingRule()`       | `TargetingRule`                         | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
 | `getFetchTimeUnixMilliseconds()`  | `long`                                  | The last download time of the current config in unix milliseconds format.                                  |
 
 ## User Object
@@ -253,9 +253,9 @@ User user = User.newBuilder().build("john@example.com");
 | Builder options | Description                                                                                                                     |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier()`  | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email()`       | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country()`     | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom()`      | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| `email()`       | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `country()`     | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `custom()`      | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. |
 
 ```java
 java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
@@ -294,23 +294,23 @@ All comparators support `String` values as User Object attribute (in some cases 
 
 **SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
 * accept `String` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Number-based comparators** (=, &lt;, &gt;=, etc.)
 * accept `Double` values and all other numeric values which can safely be converted to `Double`,
 * accept `String` values containing a properly formatted, valid `Double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Date time-based comparators** (BEFORE / AFTER)
 * accept `Date` values, which are automatically converted to a second-based Unix timestamp,
 * accept `Double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `Double`,
 * accept `String` values containing a properly formatted, valid `Double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
 * accept arrays and list of `String`,
 * accept `String` values containing a valid JSON string which can be deserialized to an array of `String`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
@@ -665,7 +665,7 @@ Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
 INFO com.configcat.ConfigCatClient - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
-  Evaluating targeting rules and applying the first match if any:
+  Evaluating Targeting Rules and applying the first match if any:
   - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'False' => no match
   - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'True' => MATCH, applying rule
   Returning 'True'.
@@ -679,12 +679,12 @@ Examples for <a href="https://github.com/configcat/android-sdk/blob/master/sampl
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
-Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
+Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
 
 ## Sample App
 

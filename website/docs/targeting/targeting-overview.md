@@ -30,11 +30,11 @@ Throughout this documentation, we generally use the term *feature flag* to refer
 
 ### Targeting Rule
 
-A *targeting rule* consists of a collection of conditions and a value to serve. If the conditions are met (the targeting rule *matches*), the value is served to the user. More about [Targeting Rules here](../targeting-rule/targeting-rule-overview).
+A *Targeting Rule* consists of a collection of conditions and a value to serve. If the conditions are met (the Targeting Rule *matches*), the value is served to the user. More about [Targeting Rules here](../targeting-rule/targeting-rule-overview).
 
 ### Condition
 
-A *condition* is a logical expression that can be evaluated to `true` or `false`. There are three types of conditions: [User condition](../targeting-rule/user-condition), [Flag condition (Prerequisite)](../targeting-rule/flag-condition), [Segment condition](../targeting-rule/segment-condition). For a targeting rule to match, all of its conditions must evaluate to `true`.
+A *condition* is a logical expression that can be evaluated to `true` or `false`. There are three types of conditions: [User condition](../targeting-rule/user-condition), [Flag condition (Prerequisite)](../targeting-rule/flag-condition), [Segment condition](../targeting-rule/segment-condition). For a Targeting Rule to match, all of its conditions must evaluate to `true`.
 
 ### Percentage Options
 
@@ -62,7 +62,7 @@ In our sample company (Whisker Co.), we want to release a new feature called `Pa
 
 #### Solution
 
-Let's have a feature flag called `Enable Park Weather Info` with a targeting rule that matches everyone at Whisker Co. and a percentage option of `20%` `ON`.
+Let's have a feature flag called `Enable Park Weather Info` with a Targeting Rule that matches everyone at Whisker Co. and a Percentage Option of `20%` `ON`.
 
 Here is what the feature flag looks like on the Dashboard:
 ![Phased rollout Example](../../static/assets/targeting/targeting-overview/phased-rollout.jpg)

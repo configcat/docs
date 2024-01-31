@@ -29,7 +29,7 @@ ConfigCat will replace the following variables in the request body:
 | **##EnvironmentId##**      | ID of the Environment.                                                                            |
 | **##URL##**                | A direct link to the Config in the _ConfigCat Dashboard._                                         |
 | **##ChangeNotes##**        | The **Mandatory notes** added to the actual changeset.                                            |
-| **##ChangeDetails##**      | Details of the change in JSON format including setting name, old, new values and targeting rules. |
+| **##ChangeDetails##**      | Details of the change in JSON format including setting name, old, new values and Targeting Rules. |
 | **##ChangeDetailsTeams##** | Details of the change in MS Teams format.                                                         |
 
 The structure of the JSON array injected into the **##ChangeDetails##** looks like the following:

@@ -219,8 +219,8 @@ The `details` result contains the following information:
 | `IsDefaultValue`                  | `bool`                               | True when the default value passed to `GetValueDetails()`/`GetValueDetailsAsync()` is returned due to an error. |
 | `ErrorMessage`                    | `string`                             | In case of an error, this field contains the error message.                                                     |
 | `ErrorException`                  | `Exception`                          | In case of an error, this field contains the related exception object (if any).                                 |
-| `MatchedTargetingRule`            | `ITargetingRule`                     | The targeting rule (if any) that matched during the evaluation and was used to return the evaluated value.      |
-| `MatchedPercentageOption`         | `IPercentageOption`                  | The percentage option (if any) that was used to select the evaluated value.                                     |
+| `MatchedTargetingRule`            | `ITargetingRule`                     | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value.      |
+| `MatchedPercentageOption`         | `IPercentageOption`                  | The Percentage Option (if any) that was used to select the evaluated value.                                     |
 | `FetchTime`                       | `DateTime`                           | The last download time (UTC) of the current config.                                                             |
 
 ## User Object
@@ -238,9 +238,9 @@ User userObject = new User("john@example.com");
 | Parameters | Description                                                                                                                     |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `Id`       | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |
-| `Email`    | Optional parameter for easier targeting rule definitions.                                                                       |
-| `Country`  | Optional parameter for easier targeting rule definitions.                                                                       |
-| `Custom`   | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. E.g. User role, Subscription type. |
+| `Email`    | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `Country`  | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `Custom`   | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. E.g. User role, Subscription type. |
 
 ```csharp
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
@@ -279,23 +279,23 @@ All comparators support `string` values as User Object attribute (in some cases 
 
 **SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
 * accept `string` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Number-based comparators** (=, &lt;, &gt;=, etc.)
 * accept `double` values and all other numeric values which can safely be converted to `double`,
 * accept `string` values containing a properly formatted, valid `double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
   
 **Date time-based comparators** (BEFORE / AFTER)
 * accept `DateTime` or `DateTimeOffset` values, which are automatically converted to a second-based Unix timestamp,
 * accept `double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `double`,
 * accept `string` values containing a properly formatted, valid `double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
   
 **String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
 * accept arrays of `string`,
 * accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
@@ -557,7 +557,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               // 1 -> text setting
               // 2 -> whole number setting
               // 3 -> decimal number setting
-      "r": [ // array of targeting rules (there is a logical OR relation between the elements)
+      "r": [ // array of Targeting Rules (there is a logical OR relation between the elements)
         {
           "c": [ // array of conditions (there is a logical AND relation between the elements)
             {
@@ -635,7 +635,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
       "p": [ // array of Percentage Options
         {
           "p": 10, // % value
-          "v": { // the value served when the percentage option is selected during evaluation
+          "v": { // the value served when the Percentage Option is selected during evaluation
             "b": true
           },
           "i": "bcfb84a7"
@@ -648,7 +648,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
           "i": "bddac6ae"
         }
       ],
-      "v": { // fallback value, served when none of the targeting rules match,
+      "v": { // fallback value, served when none of the Targeting Rules match,
              // no Percentage Options are defined or evaluation of these is not possible
         "b": false // depending on the setting type, another type of value may need to be specified:
                    // text setting -> "s": string
@@ -709,7 +709,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
         }
       ],
       "r": [
-        // list of targeting rules
+        // list of Targeting Rules
         {
           "o": 0, // rule's order
           "a": "Identifier", // comparison attribute
@@ -789,7 +789,7 @@ Info level logging helps to inspect the feature flag evaluation process:
 
 ```bash
 ConfigCat.INFO  [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
-  Evaluating targeting rules and applying the first match if any:
+  Evaluating Targeting Rules and applying the first match if any:
   - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'False' => no match
   - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'True' => MATCH, applying rule
   Returning 'True'.

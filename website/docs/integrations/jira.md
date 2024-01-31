@@ -46,8 +46,8 @@ Turn features On / Off right from a linked Issue on your Jira board with <a href
 1. Open an Issue on your Jira board with linked feature flag.
 2. You can see the linked feature flags in the `Feature Flag (ConfigCat)` issue section.
 3. You can turn your features On / Off right from this Issue.
-4. You can add new targeting rules, target a new segment or target a percentage of users.
-5. You can remove targeting rules as well.
+4. You can add new Targeting Rules, target a new segment or target a percentage of users.
+5. You can remove Targeting Rules as well.
 6. To see the feature flag on the ConfigCat Dashboard just use the `Open in ConfigCat` link.
 
 ### Remove linked feature flags
