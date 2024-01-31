@@ -4,8 +4,8 @@ title: User Object
 description: The user object is a collection of *user attributes* that describe the properties of a user. The user object is essential for targeting.
 ---
 
-The *User Object*  is a collection of *user attributes* that describe the properties of a user. The *User Object* is necessary to define [targeting rules] and [Percentage Options].
-It allows you to pass potential [Targeting rule](/advanced/targeting) variables to the ConfigCat SDK. The user object represents a user in your application.
+The *User Object* is a collection of *user attributes* that describe the properties of a user. The *User Object* is necessary to evaluate [targeting rules] and [percentage options].
+It allows you to pass the user attributes that are referenced in the rules of the feature flag to the ConfigCat SDK. The user object represents a user in your application.
 
 :::info
 The *User Object* is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.

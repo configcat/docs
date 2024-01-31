@@ -34,7 +34,7 @@ Any _number between 0 and 100_ that represents a randomly allocated fraction of 
 
 The value that will be served to the users who fall into the group determined by the percentage.
 
-## Multiple Percentage Options
+## Number of Percentage Options
 
 ### On/Off Toggle
 
@@ -46,7 +46,7 @@ When the Setting Kind is _Text_, _Whole Number_, or _Decimal Number_, the maximu
 
 ## Percentage options in combination with targeting rules
 
-Percentage options can be used in combination with targeting rules. In this case, the Percentage Options will be evaluated after the targeting rule only on the users that matched the targeting rule.
+Percentage options can be used in combination with targeting rules. In this case, the percentage options will be evaluated only when the targeting rule matches. In other words, the percentage options apply only to the users that matched the targeting rule.
 
 ![Percentage options with targeting rules](/assets/targeting/percentage-options/percentage-options-with-targeting-rules.jpg)
 
