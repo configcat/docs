@@ -17,7 +17,7 @@ You can add Percentage Options to a feature flag on the Dashboard by clicking on
 ## How does it work? - Anatomy of a percentage option
 
 The grouping is random and based on the [User Object]'s identifier by default. You can also use [other user attributes] to evaluate the Percentage Options. Percentage options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
-- **Sticky** means the same user will always get the same value for a specific feature flag. Read more below.
+- **Sticky** means the same user will always get the same value for a specific feature flag and for a certain Percentage Option set. Read more below.
 - **Consistent** means that the same user will always get the same value for a specific feature flag across all SDKs. Read more below.
 
 If the required attribute is not present in the [User Object], the [fallback value] will be served.
