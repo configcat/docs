@@ -1,30 +1,30 @@
 ---
 id: user-condition
 title: User Condition
-description: A user condition is a condition that is based on the comparison of a user attribute and a preset value (comparison value). It allows you to define Targeting Rules which target users based on their properties.
+description: A User Condition is a condition that is based on the comparison of a user attribute and a preset value (comparison value). It allows you to define Targeting Rules which target users based on their properties.
 ---
 
-## What is a user condition?
+## What is a User Condition?
 
-A *user condition* is a condition that is based on the comparison of a user attribute and a preset value (*comparison value*). It allows you to define Targeting Rules which target users based on their properties.
+A *User Condition* is a condition that is based on the comparison of a user attribute and a preset value (*comparison value*). It allows you to define Targeting Rules which target users based on their properties.
 
-## How does the user condition work?
+## How does the User Condition work?
 
 The *comparison attribute*'s value from the [User Object](../../user-object) is compared to the *comparison value* you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
-For more details on the evaluation of user conditions, please refer to the [feature flag evaluation](../../feature-flag-evaluation).
+For more details on the evaluation of User Conditions, please refer to the [feature flag evaluation](../../feature-flag-evaluation).
 
-## How to set a user condition?
+## How to set a User Condition?
 
 You can add a Targeting Rule with a condition on the Dashboard by clicking on the `+IF` ("Add Targeting Rule") button. Add more conditions by clicking on the `+AND` button.
 
-![Add user condition](/assets/targeting/targeting-rule/user-condition/user-condition.jpg)
+![Add User Condition](/assets/targeting/targeting-rule/user-condition/user-condition.jpg)
 
 ## Anatomy of a User Condition
 
-![User condition anatomy](/assets/targeting/targeting-rule/user-condition/user-condition-anatomy.jpg)
+![User Condition anatomy](/assets/targeting/targeting-rule/user-condition/user-condition-anatomy.jpg)
 
-A *user condition* consists of three parts:
+A *User Condition* consists of three parts:
 
 - **Comparison attribute:** The user attribute on which the condition is based. Could be "User ID", "Email", "Country", or any custom attribute.
 - **Comparator:** The comparison operator that defines the relation between the comparison attribute and the comparison value.

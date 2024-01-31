@@ -4,9 +4,9 @@ title: Segment Condition
 description: Segments allow you to define user groups based on any user attributes. Ideal for beta testing on a certain group of users.
 ---
 
-## What is a segment condition? What is a segment?
+## What is a Segment Condition? What is a segment?
 
-A *segment condition* is a condition that is based on the evaluation of a *segment*. A *segment* is a reusable, predefined [user condition](../user-condition).
+A *Segment Condition* is a condition that is based on the evaluation of a *segment*. A *segment* is a reusable, predefined [user condition](../user-condition).
 
 Segments allow you to define user groups based on any user attributes. You can reference segments in Targeting Rules. When you update a segment definition, the changes will be reflected automatically in all the Targeting Rules that reference it.
 
@@ -14,17 +14,17 @@ Segments allow you to define user groups based on any user attributes. You can r
 
 One segment belongs to one product and can be used in multiple feature flags within the same product.
 
-## How does the segment condition work?
+## How does the Segment Condition work?
 
-The segment is evaluated with the [User Object](../../user-object), and the result is checked against the comparator you set on the Dashboard. In the case of `IS IN SEGMENT`, the result of the segment condition will be the same as that of the segment. The result will be negated in the case of `IS NOT IN SEGMENT`.
+The segment is evaluated with the [User Object](../../user-object), and the result is checked against the comparator you set on the Dashboard. In the case of `IS IN SEGMENT`, the result of the Segment Condition will be the same as that of the segment. The result will be negated in the case of `IS NOT IN SEGMENT`.
 
 For more details on the evaluation of flag conditions, please refer to the [feature flag evaluation](../../feature-flag-evaluation).
 
-## How to set a segment condition?
+## How to set a Segment Condition?
 
-You can add a Targeting Rule with a segment condition on the Dashboard by clicking on the `+IF` ("Add Targeting Rule") button.
+You can add a Targeting Rule with a Segment Condition on the Dashboard by clicking on the `+IF` ("Add Targeting Rule") button.
 
-![Add segment condition](/assets/targeting/targeting-rule/segment-condition/add-segment-condition.jpg)
+![Add Segment Condition](/assets/targeting/targeting-rule/segment-condition/add-segment-condition.jpg)
 
 ## Where can I define segments?
 
@@ -35,9 +35,9 @@ You can define your segments on the [ConfigCat Dashboard under the Segments tab]
 
 ## Anatomy of a Segment Condition
 
-![Segment condition anatomy](/assets/targeting/targeting-rule/segment-condition/segment-condition-anatomy.jpg)
+![Segment Condition anatomy](/assets/targeting/targeting-rule/segment-condition/segment-condition-anatomy.jpg)
 
-A *segment condition* consists of two parts: 
+A *Segment Condition* consists of two parts: 
 
 - **Segment comparator:** The comparison operator defines the relation between the segment and the condition.
 - **Segment:** The segment that the condition is based on.
@@ -141,7 +141,7 @@ All number comparators return `false` if either _Comparison attribute_ or _Compa
 Let's release our `Personalized Layout` feature of the webstore to beta testers.
 
 #### Solution
-In this case, we create a segment called `Beta Testers` and use that segment in the `Enable Personalized Layout` feature flag as a segment condition.
+In this case, we create a segment called `Beta Testers` and use that segment in the `Enable Personalized Layout` feature flag as a Segment Condition.
 
 On the Dashboard:
-![Segment condition example](/assets/targeting/targeting-rule/segment-condition/beta-testers.jpg)
+![Segment Condition example](/assets/targeting/targeting-rule/segment-condition/beta-testers.jpg)
