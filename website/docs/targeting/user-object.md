@@ -66,7 +66,7 @@ First, you must pass a User Object containing the `custom` attribute to the Conf
 
 ### Example: Enable a feature for users with a specific subscription type
 
-#### Intent
+#### Goal
 Let's enable the `Personalized Layout` feature for users with a `Pro` subscription type.
 
 #### Solution

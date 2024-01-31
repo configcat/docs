@@ -129,7 +129,7 @@ All number comparators return `false` if either _Comparison attribute_ or _Compa
 
 ### Beta Testing Scenario
 
-#### Intent
+#### Goal
 Let's release our `Personalized Layout` feature of the webstore to beta testers.
 
 #### Solution

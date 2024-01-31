@@ -86,7 +86,7 @@ The same user might get different values in the case of different feature flags.
 
 ### Simple phased rollout / Canary release / Percentage rollout Scenario
 
-**Intent:** In our sample company (Whisker Co.), we want to release a new feature, `Enable Park Weather Info` to 20% of our users. We want to ensure the new feature is working as expected before we release it to everyone.
+**Goal:** In our sample company (Whisker Co.), we want to release a new feature, `Enable Park Weather Info` to 20% of our users. We want to ensure the new feature is working as expected before we release it to everyone.
 
 **Solution:** Have a percentage option of `20%` `ON`.
 
@@ -94,7 +94,7 @@ The same user might get different values in the case of different feature flags.
 
 ### A/B/C Testing Scenario
 
-**Intent:** Let's test three variations of the `Discount Type`, each with 1/3rd of our users. We want to decide which variation is the most effective. 
+**Goal:** Let's test three variations of the `Discount Type`, each with 1/3rd of our users. We want to decide which variation is the most effective. 
 
 **Solution:** A text setting with three options set to `33% / 33% / 34%` defines the different variations.
 
@@ -102,7 +102,7 @@ The same user might get different values in the case of different feature flags.
 
 ### Complex phased rollout / Canary release / Percentage rollout Scenario
 
-**Intent:** In our sample company (Whisker Co.), we want to release a new feature, `Enable Park Weather Info` to all users within our `Whisker Co.` company `AND` `20%` of the rest of our users. We want to ensure the new feature is working as expected before we release it to everyone.
+**Goal:** In our sample company (Whisker Co.), we want to release a new feature, `Enable Park Weather Info` to all users within our `Whisker Co.` company `AND` `20%` of the rest of our users. We want to ensure the new feature is working as expected before we release it to everyone.
 
 **Solution:** Have a percentage option of `20%` `ON` and a targeting rule that matches everyone whose email address ends with `@whisker.example`.
 
@@ -110,7 +110,7 @@ The same user might get different values in the case of different feature flags.
 
 ### Platform-specific phased rollout
 
-**Intent:** Let's enable `Cafe Notifications` for 20% of our users on `iOS` and 60% of our users on `Android`.
+**Goal:** Let's enable `Cafe Notifications` for 20% of our users on `iOS` and 60% of our users on `Android`.
 
 **Solution:** Have a targeting rule that matches everyone whose `Platform` is `iOS` and a percentage option of `20%` `ON`. Have a targeting rule that matches everyone whose `Platform` is `Android` and a percentage option of `60%` `ON`.
 
@@ -118,7 +118,7 @@ The same user might get different values in the case of different feature flags.
 
 ### Percentage options based on other User Attributes
 
-**Intent:** Let's imagine that at our sample company (Whisker Co.), we have a `Tenant ID` attribute that is used to identify the tenants of our users. We want to release a new feature, `Enable Park Weather Info`, to 20% of our users based on their `Tenant ID`.
+**Goal:** Let's imagine that at our sample company (Whisker Co.), we have a `Tenant ID` attribute that is used to identify the tenants of our users. We want to release a new feature, `Enable Park Weather Info`, to 20% of our users based on their `Tenant ID`.
 
 **Solution:** Have a percentage option of `20%` `ON` and set the percentage attribute to `Tenant ID`.
 

@@ -60,7 +60,7 @@ When the prerequisite is a string, number or double setting, the following compa
 
 ### Prerequisite flag is a feature flag
 
-#### Intent
+#### Goal
 In our mobile app, let's have `Cafe Notifications` enabled only if `Cafe Ratings` are enabled. So, users will only receive notifications about their favorite cafes if they can rate them.
 
 #### Solution

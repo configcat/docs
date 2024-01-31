@@ -139,7 +139,7 @@ The following comparators expect the *Comparison attribute* to be an array of st
 
 ### Confidential CONTAINS and NOT CONTAINS
 
-#### Intent
+#### Goal
 Let's target users who are from the same company confidentially. However, text comparators don't support `CONTAINS` or `NOT CONTAINS` comparisons. How can we solve this?
 
 #### Solution

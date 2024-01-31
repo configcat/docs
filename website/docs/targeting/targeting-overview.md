@@ -56,16 +56,18 @@ This value will be returned by the [ConfigCat SDK] in case of an error. The defa
 
 ### Phased rollout / Canary release / Percentage rollout Scenario
 
-**Intent:** In our sample company (Whisker Co.), we want to release a new feature called `Park Weather Info`. Let's release the feature to everyone at Whisker Co. and to `20%` of our users. We want to ensure the new feature is working as expected before we release it to everyone.
+#### Goal
 
-**Solution:** Have a feature flag called `Enable Park Weather Info` with a targeting rule that matches everyone at Whisker Co. and a percentage option of `20%` `ON`.
+In our sample company (Whisker Co.), we want to release a new feature called `Park Weather Info`. Let's release the feature to everyone at Whisker Co. and to `20%` of our users. We want to ensure the new feature is working as expected before we release it to everyone.
 
-#### Dashboard
+#### Solution
+
+Let's have a feature flag called `Enable Park Weather Info` with a targeting rule that matches everyone at Whisker Co. and a percentage option of `20%` `ON`.
+
 Here is what the feature flag looks like on the Dashboard:
 ![Phased rollout Example](../../static/assets/targeting/targeting-overview/phased-rollout.jpg)
 
-#### Code
-Here is how you can get the value of the feature flag in your application code:
+Here is how you to get the value of the feature flag in the code:
 ```js
 import * as configcat from 'configcat-js';
 
