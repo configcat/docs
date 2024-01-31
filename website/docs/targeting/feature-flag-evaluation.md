@@ -54,7 +54,7 @@ The evaluation process stops if the referenced segment is missing, and the SDK w
 
 ## Evaluation of Percentage Options
 
-Percentage options are designed to be consistent and sticky across all SDKs, which means that users with the same attributes fall in the same group and get the same feature flag value across the supported platforms.
+Percentage Options are designed to be consistent and sticky across all SDKs, which means that users with the same attributes fall in the same group and get the same feature flag value across the supported platforms.
 
 The SDK looks up the [Percentage Evaluation Attribute] in the [User Object], then:
 - The SDK creates a hash from the combination of the Percentage Evaluation Attribute's value and the specific feature flag's key.

@@ -11,8 +11,8 @@ Targeting allows you to enable or disable a feature for specific users or groups
 
 ## How does it work?
 
-1. On the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, you add [Targeting Rules](../targeting-rule/targeting-rule-overview) and/or [Percentage Options] to your feature flag.
-2. You pass a [User Object] to the ConfigCat SDK in your application.
+1. On the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, you add [Targeting Rules](../targeting-rule/targeting-rule-overview) and/or [Percentage Options](../percentage-options) to your feature flag.
+2. You pass a [User Object](../user-object) to the ConfigCat SDK in your application.
 3. The ConfigCat SDK will use the User Object and the rules defined on the Dashboard to determine whether the feature should be enabled for the user.
 
 ## What is what?
@@ -30,15 +30,15 @@ Throughout this documentation, we generally use the term *feature flag* to refer
 
 ### Targeting Rule
 
-A *targeting rule* consists of a collection of conditions and a value to serve. If the conditions are met (the targeting rule *matches*), the value is served to the user. More about targeting rules [here].
+A *targeting rule* consists of a collection of conditions and a value to serve. If the conditions are met (the targeting rule *matches*), the value is served to the user. More about [Targeting Rules here](../targeting-rule/targeting-rule-overview).
 
 ### Condition
 
-A *condition* is a logical expression that can be evaluated to true or false. There are three types of conditions: [User condition], [Flag condition (Prerequisite)], [Segment condition]. For a targeting rule to match, all of its conditions must evaluate to true. More about conditions [here].
+A *condition* is a logical expression that can be evaluated to `true` or `false`. There are three types of conditions: [User condition](../targeting-rule/user-condition), [Flag condition (Prerequisite)](../targeting-rule/flag-condition), [Segment condition](../targeting-rule/segment-condition). For a targeting rule to match, all of its conditions must evaluate to `true`.
 
 ### Percentage Options
 
-*Percentage options* are used to split users into groups that will receive a specific value for a feature flag. The groups are allocated based on the ratio of the percentages. Percentage options are often used for A/B testing or phased rollouts. More about Percentage Options [here].
+*Percentage Options* are used to split users into groups that will receive a specific value for a feature flag. The groups are allocated based on the ratio of the percentages. Percentage Options are often used for A/B testing or phased rollouts. More about [Percentage Options here](../percentage-options).
 
 ### "To all users" / "To all other" / "To unidentified" value
 
@@ -46,7 +46,7 @@ A feature flag always contains a trivial "rule", a simple value after the actual
 
 ### User Object
 
-A *user object* is a collection of *user attributes* that describe the properties of a user. Referencing these attributes in conditions allows you to define rules for targeting users. More about the user object [here].
+A *user object* is a collection of *user attributes* that describe the properties of a user. Referencing these attributes in conditions allows you to define rules for targeting users. More about the [User Object here](../user-object).
 
 ### Default value
 

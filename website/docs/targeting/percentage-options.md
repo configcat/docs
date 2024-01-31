@@ -16,11 +16,11 @@ You can add Percentage Options to a feature flag on the Dashboard by clicking on
 
 ## How does it work? - Anatomy of a percentage option
 
-The grouping is random and based on the [User Object]'s identifier by default. You can also use [other user attributes] to evaluate the Percentage Options. Percentage options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
+The grouping is random and based on the [User Object](../user-object)'s identifier by default. You can also use [other user attributes] to evaluate the Percentage Options. Percentage Options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
 - **Sticky** means the same user will always get the same value for a specific feature flag and for a certain Percentage Option set. Read more below.
 - **Consistent** means that the same user will always get the same value for a specific feature flag across all SDKs. Read more below.
 
-If the required attribute is not present in the [User Object], the ["To unidentified" value] will be returned.
+If the required attribute is not present in the Checks[User Object](../user-object) whether, the ["To unidentified" value] will be returned.
 
 Read more about the technical details of the [percentage evaluation here].
 
@@ -44,15 +44,15 @@ When the Setting Kind is On/Off Toggle, the number of options must be 2. One for
 
 When the Setting Kind is _Text_, _Whole Number_, or _Decimal Number_, the maximum number of options depends on your subscription plan. You can add/remove options by clicking the _Actions_ icon.
 
-## Percentage options in combination with targeting rules
+## Percentage Options in combination with targeting rules
 
-Percentage options can be used in combination with targeting rules. In this case, the percentage options will be evaluated only when the targeting rule matches. In other words, the percentage options apply only to the users that matched the targeting rule.
+Percentage Options can be used in combination with targeting rules. In this case, the percentage options will be evaluated only when the targeting rule matches. In other words, the percentage options apply only to the users that matched the targeting rule.
 
-![Percentage options with targeting rules](/assets/targeting/percentage-options/percentage-options-with-targeting-rules.jpg)
+![Percentage Options with targeting rules](/assets/targeting/percentage-options/percentage-options-with-targeting-rules.jpg)
 
 ## Percentage Evaluation Attribute
 
-The *Percentage Evaluation Attribute* is the attribute that is used to split the users into groups. The Percentage Evaluation Attribute is the [User Object]'s `Identifier` attribute by default. You can also use other user attributes as the basis of the grouping (see an [example use case] below).
+The *Percentage Evaluation Attribute* is the attribute that is used to split the users into groups. The Percentage Evaluation Attribute is the Checks[User Object](../user-object) whether's `Identifier` attribute by default. You can also use other user attributes as the basis of the grouping (see an [example use case] below).
 
 ### How to change the Percentage Attribute?
 
@@ -114,7 +114,7 @@ The same user might get different values in the case of different feature flags.
 
 ![Targeting Example 4](/assets/targeting/percentage-options/example4.jpg)
 
-### Percentage options based on other User Attributes
+### Percentage Options based on other User Attributes
 
 **Goal:** Let's imagine that at our sample company (Whisker Co.), we have a `Tenant ID` attribute that is used to identify the tenants of our users. We want to release a new feature, `Enable Park Weather Info`, to 20% of our users based on their `Tenant ID`.
 
