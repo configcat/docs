@@ -66,5 +66,5 @@ In our mobile app, let's have `Cafe Notifications` enabled only if `Cafe Ratings
 #### Solution
 In this case, `Cafe Ratings` is the prerequisite flag. The comparator is `IS ON`, meaning that the `Cafe Notifications` feature flag will be enabled only if the `Cafe Ratings` feature flag is ON.
 
-#### Dashboard
+On the Dashboard:
 ![Flag condition example](/assets/targeting/targeting-rule/flag-condition/flag-condition-example.jpg)

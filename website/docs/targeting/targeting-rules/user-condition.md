@@ -143,12 +143,12 @@ The following comparators expect the *Comparison attribute* to be an array of st
 Let's target users who are from the same company confidentially. However, text comparators don't support `CONTAINS` or `NOT CONTAINS` comparisons. How can we solve this?
 
 #### Solution
-You can add a custom attribute called `domain` and use only confidential comparators in the targeting rule.
+Let's add a custom attribute called `domain` and use only confidential comparators in the targeting rule.
 
 On the Dashboard:
 <img src="/docs/assets/targeting/targeting-rule/user-condition/user-condition-example1.jpg" className="zoomable" alt="User Condition Example" />
 
-In your code:
+In the code:
 
 ```js
 const userDomain = userEmail.split('@').pop();

@@ -135,5 +135,5 @@ Let's release our `Personalized Layout` feature of the webstore to beta testers.
 #### Solution
 In this case, we create a segment called `Beta Testers` and use that segment in the `Enable Personalized Layout` feature flag as a segment condition.
 
-#### Dashboard
+On the Dashboard:
 ![Segment condition example](/assets/targeting/targeting-rule/segment-condition/beta-testers.jpg)
