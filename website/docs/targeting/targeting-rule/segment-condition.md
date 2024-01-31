@@ -80,7 +80,7 @@ Any string, number, or comma-separated list. Will be compared to the selected _C
 
 The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings.
 
-:::caution
+:::info
 Consider using Confidential text comparators if you plan to target users by their sensitive information, e.g.: email address or company domain.
 :::
 
