@@ -22,11 +22,11 @@ module.exports = {
           'Targeting': [
             'targeting/targeting-overview',
             {
-              'Targeting Rules': [
-                'targeting/targeting-rules/targeting-rule-overview',
-                'targeting/targeting-rules/user-condition',
-                'targeting/targeting-rules/flag-condition',
-                'targeting/targeting-rules/segment-condition',
+              'Targeting Rule': [
+                'targeting/targeting-rule/targeting-rule-overview',
+                'targeting/targeting-rule/user-condition',
+                'targeting/targeting-rule/flag-condition',
+                'targeting/targeting-rule/segment-condition',
               ],
             },
             'targeting/percentage-options',

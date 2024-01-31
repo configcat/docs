@@ -11,7 +11,7 @@ Targeting allows you to enable or disable a feature for specific users or groups
 
 ## How does it work?
 
-1. On the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, you add [Targeting rules] and/or [Percentage options] to your feature flag.
+1. On the <a href="https://app.configcat.com" target="_blank">ConfigCat Dashboard</a>, you add [Targeting Rules](../targeting-rule/targeting-rule-overview) and/or [Percentage Options] to your feature flag.
 2. You pass a [User Object] to the ConfigCat SDK in your application.
 3. The ConfigCat SDK will use the User Object and the rules defined on the Dashboard to determine whether the feature should be enabled for the user.
 
