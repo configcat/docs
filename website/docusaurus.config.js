@@ -34,7 +34,7 @@ module.exports = {
             from: '/advanced/user-object'
           },
           {
-            to: '/targeting/targeting-rules/segment-condition',
+            to: '/targeting/targeting-rule/segment-condition',
             from: '/advanced/targeting/segments/'
           }
         ],
