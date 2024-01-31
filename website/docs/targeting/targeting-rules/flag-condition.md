@@ -46,15 +46,15 @@ When the prerequisite is a feature flag (boolean setting), the following compara
 
 | Comparator | Description                                           |
 | ---------- | ----------------------------------------------------- |
-| IS ON      | It matches when the prerequisite flag is ON.  |
-| IS OFF     | It matches when the prerequisite flag is OFF. |
+| IS ON      | Checks whether the prerequisite flag is ON.  |
+| IS OFF     | Checks whether the prerequisite flag is OFF. |
 
 When the prerequisite is a string, number or double setting, the following comparators are available:
 
 | Comparator          | Description                                                                                 |
 | ------------------- | ------------------------------------------------------------------------------------------- |
-| EQUALS (hashed)     | It matches when the prerequisite flag's value equals the comparison value.     |
-| NOT EQUALS (hashed) | It matches when the prerequisite flag's value is not equal to the comparison value. |
+| EQUALS (hashed)     | Checks whether the prerequisite flag's value equals the comparison value.     |
+| NOT EQUALS (hashed) | Checks whether the prerequisite flag's value is not equal to the comparison value. |
 
 ## Example
 

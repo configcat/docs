@@ -44,8 +44,8 @@ A *segment condition* consists of two parts:
 
 | Comparator        | Description                                              |
 | ----------------- | -------------------------------------------------------- |
-| IS IN SEGMENT     | It matches when the user is in the selected segment.     |
-| IS NOT IN SEGMENT | It matches when the user is not in the selected segment. |
+| IS IN SEGMENT     | Checks whether the user is in the selected segment.     |
+| IS NOT IN SEGMENT | Checks whether the user is not in the selected segment. |
 
 ## Anatomy of a Segment
 

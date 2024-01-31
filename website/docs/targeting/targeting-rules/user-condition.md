@@ -61,15 +61,15 @@ Consider using Confidential text comparators if you plan to target users by thei
 | Comparator                         | Description                                                                                     |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- |
 | EQUALS (cleartext)                 | Checks whether the comparison attribute equals the comparison value.                           |
-| NOT EQUALS (cleartext)             | It matches when the comparison attribute is not equal to the comparison value.                  |
-| IS ONE OF (cleartext)              | It matches when the comparison attribute is equal to any of the comparison values               |
-| IS NOT ONE OF (cleartext)          | It matches when the comparison attribute is not equal to any of the comparison values.          |
-| STARTS WITH ANY OF (cleartext)     | It matches when the comparison attribute starts with any of the comparison values.              |
-| ENDS WITH ANY OF (cleartext)       | It matches when the comparison attribute ends with any of the comparison values.                |
-| NOT STARTS WITH ANY OF (cleartext) | It matches when the comparison attribute does not start with any of the comparison values.      |
-| NOT ENDS WITH ANY OF (cleartext)   | It matches when the comparison attribute does not end with any of the comparison values.        |
-| CONTAINS ANY OF (cleartext)        | It matches when the comparison attribute contains any comparison values as a substring.         |
-| NOT CONTAINS ANY OF (cleartext)    | It matches when the comparison attribute does not contain any comparison values as a substring. |
+| NOT EQUALS (cleartext)             | Checks whether the comparison attribute is not equal to the comparison value.                  |
+| IS ONE OF (cleartext)              | Checks whether the comparison attribute is equal to any of the comparison values               |
+| IS NOT ONE OF (cleartext)          | Checks whether the comparison attribute is not equal to any of the comparison values.          |
+| STARTS WITH ANY OF (cleartext)     | Checks whether the comparison attribute starts with any of the comparison values.              |
+| ENDS WITH ANY OF (cleartext)       | Checks whether the comparison attribute ends with any of the comparison values.                |
+| NOT STARTS WITH ANY OF (cleartext) | Checks whether the comparison attribute does not start with any of the comparison values.      |
+| NOT ENDS WITH ANY OF (cleartext)   | Checks whether the comparison attribute does not end with any of the comparison values.        |
+| CONTAINS ANY OF (cleartext)        | Checks whether the comparison attribute contains any comparison values as a substring.         |
+| NOT CONTAINS ANY OF (cleartext)    | Checks whether the comparison attribute does not contain any comparison values as a substring. |
 
 #### Confidential Text Comparators
 
@@ -78,14 +78,14 @@ In this case, the feature flag evaluation is performed using the SHA256 hashes o
 
 | Comparator                      | Description                                                                                |
 | ------------------------------- | ------------------------------------------------------------------------------------------ |
-| EQUALS (hashed)                 | It matches when the comparison attribute is equal to the comparison value.                 |
-| NOT EQUALS (hashed)             | It matches when the comparison attribute is not equal to the comparison value.             |
-| IS ONE OF (hashed)              | It matches when the comparison attribute is equal to any of the comparison values          |
-| IS NOT ONE OF (hashed)          | It matches when the comparison attribute is not equal to any of the comparison values.     |
-| STARTS WITH ANY OF (hashed)     | It matches when the comparison attribute starts with any of the comparison values.         |
-| ENDS WITH ANY OF (hashed)       | It matches when the comparison attribute ends with any of the comparison values.           |
-| NOT STARTS WITH ANY OF (hashed) | It matches when the comparison attribute does not start with any of the comparison values. |
-| NOT ENDS WITH ANY OF (hashed)   | It matches when the comparison attribute does not end with any of the comparison values.   |
+| EQUALS (hashed)                 | Checks whether the comparison attribute is equal to the comparison value.                 |
+| NOT EQUALS (hashed)             | Checks whether the comparison attribute is not equal to the comparison value.             |
+| IS ONE OF (hashed)              | Checks whether the comparison attribute is equal to any of the comparison values          |
+| IS NOT ONE OF (hashed)          | Checks whether the comparison attribute is not equal to any of the comparison values.     |
+| STARTS WITH ANY OF (hashed)     | Checks whether the comparison attribute starts with any of the comparison values.         |
+| ENDS WITH ANY OF (hashed)       | Checks whether the comparison attribute ends with any of the comparison values.           |
+| NOT STARTS WITH ANY OF (hashed) | Checks whether the comparison attribute does not start with any of the comparison values. |
+| NOT ENDS WITH ANY OF (hashed)   | Checks whether the comparison attribute does not end with any of the comparison values.   |
 
 #### Semantic Version Comparators
 
@@ -95,12 +95,12 @@ Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer 
 
 | Comparator             | Description                                                                                                                  |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF (Semver)     | It matches when the comparison attribute interpreted as a semantic version is equal to any of the comparison values.         |
-| IS NOT ONE OF (Semver) | It matches when the comparison attribute interpreted as a semantic version is not equal to any of the comparison values.     |
-| < (Semver)             | It matches when the comparison attribute interpreted as a semantic version is less than the comparison value.                |
-| <= (Semver)            | It matches when the comparison attribute interpreted as a semantic version is less than or equal to the comparison value.    |
-| \> (Semver)            | It matches when the comparison attribute interpreted as a semantic version is greater than the comparison value.             |
-| \>= (Semver)           | It matches when the comparison attribute interpreted as a semantic version is greater than or equal to the comparison value. |
+| IS ONE OF (Semver)     | Checks whether the comparison attribute interpreted as a semantic version is equal to any of the comparison values.         |
+| IS NOT ONE OF (Semver) | Checks whether the comparison attribute interpreted as a semantic version is not equal to any of the comparison values.     |
+| < (Semver)             | Checks whether the comparison attribute interpreted as a semantic version is less than the comparison value.                |
+| <= (Semver)            | Checks whether the comparison attribute interpreted as a semantic version is less than or equal to the comparison value.    |
+| \> (Semver)            | Checks whether the comparison attribute interpreted as a semantic version is greater than the comparison value.             |
+| \>= (Semver)           | Checks whether the comparison attribute interpreted as a semantic version is greater than or equal to the comparison value. |
 
 
 #### Number Comparators
@@ -109,12 +109,12 @@ The following comparators expect the *Comparison attribute* and the *Comparison 
 
 | Comparator         | Description                                                                                                                |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| = (Number)         | It matches when the comparison attribute interpreted as a decimal number is equal to the comparison value.                 |
-| <&#8203;> (Number) | It matches when the comparison attribute interpreted as a decimal number is not equal to the comparison value.             |
-| < (Number)         | It matches when the comparison attribute interpreted as a decimal number is less than the comparison value.                |
-| <= (Number)        | It matches when the comparison attribute interpreted as a decimal number is less than or equal to the comparison value.    |
-| \> (Number)        | It matches when the comparison attribute interpreted as a decimal number is greater than the comparison value.             |
-| \>= (Number)       | It matches when the comparison attribute interpreted as a decimal number is greater than or equal to the comparison value. |
+| = (Number)         | Checks whether the comparison attribute interpreted as a decimal number is equal to the comparison value.                 |
+| <&#8203;> (Number) | Checks whether the comparison attribute interpreted as a decimal number is not equal to the comparison value.             |
+| < (Number)         | Checks whether the comparison attribute interpreted as a decimal number is less than the comparison value.                |
+| <= (Number)        | Checks whether the comparison attribute interpreted as a decimal number is less than or equal to the comparison value.    |
+| \> (Number)        | Checks whether the comparison attribute interpreted as a decimal number is greater than the comparison value.             |
+| \>= (Number)       | Checks whether the comparison attribute interpreted as a decimal number is greater than or equal to the comparison value. |
 
 
 #### Date and Time Comparators
@@ -123,8 +123,8 @@ The following comparators expect the *Comparison attribute* to be a date value (
 
 | Comparator | Description                                                                                                                                                                                    |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BEFORE     | It matches when the comparison attribute interpreted as the seconds elapsed since <a href="https://en.wikipedia.org/wiki/Unix_time">Unix Epoch</a> is less than the comparison value.          |
-| AFTER      | It matches when the comparison attribute interpreted as the seconds elapsed since <a href="https://en.wikipedia.org/wiki/Unix_time">Unix Epoch</a> is greater than the comparison value.value. |
+| BEFORE     | Checks whether the comparison attribute interpreted as the seconds elapsed since <a href="https://en.wikipedia.org/wiki/Unix_time">Unix Epoch</a> is less than the comparison value.          |
+| AFTER      | Checks whether the comparison attribute interpreted as the seconds elapsed since <a href="https://en.wikipedia.org/wiki/Unix_time">Unix Epoch</a> is greater than the comparison value.value. |
 
 #### Array Comparators
 
@@ -132,8 +132,8 @@ The following comparators expect the *Comparison attribute* to be an array of st
 
 | Comparator                | Description                                                                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| ARRAY CONTAINS ANY OF     | It matches when the comparison attribute interpreted as an array of strings that contains any of the comparison values.        |
-| ARRAY NOT CONTAINS ANY OF | It matches when the comparison attribute interpreted as an array of strings that does not contain any of the comparison values |
+| ARRAY CONTAINS ANY OF     | Checks whether the comparison attribute interpreted as an array of strings that contains any of the comparison values.        |
+| ARRAY NOT CONTAINS ANY OF | Checks whether the comparison attribute interpreted as an array of strings that does not contain any of the comparison values |
 
 ## Examples
 
