@@ -56,8 +56,8 @@ The evaluation process stops if the referenced segment is missing, and the SDK w
 
 Percentage options are designed to be consistent and sticky across all SDKs, which means that users with the same attributes fall in the same group and get the same feature flag value across the supported platforms.
 
-The SDK looks up the [percentage evaluation attribute] in the [User Object] and:
-- The SDK creates a hash from the combination of the value of the percentage evaluation attribute and the specific feature flag's key.
+The SDK looks up the [percentage evaluation attribute] in the [User Object], then:
+- The SDK creates a hash from the combination of the percentage evaluation attribute's value and the specific feature flag's key.
 - The hash algorithm assigns the user a number between 0 and 99.
 - The assigned number determines which group the user falls into, i.e. which percentage option applies to the user.
 
