@@ -40,7 +40,7 @@ The conditions can be added to the Targeting Rule on the Dashboard. There are th
 
 ### THEN part
 
-The THEN part contains either a value or Percentage Options that will be used to determine the result of the feature flag when the rule matches.
+The *THEN part* contains either a value or Percentage Options that will be used to determine the result of the feature flag when the targeting rule matches.
 
 ## Multiple Targeting Rules and ordering
 The order of Targeting Rules matters because they are in an **OR** relationship, meaning that the Targeting Rule which matches first in order, from top to bottom, will provide the value of the feature flag.

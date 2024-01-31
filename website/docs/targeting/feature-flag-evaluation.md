@@ -63,7 +63,7 @@ The SDK looks up the [Percentage Evaluation Attribute] in the [User Object], the
 
 The fact that the above algorithm is implemented across all SDKs guarantees [stickiness] and [consistency].
 
-By hashing the combination of the user attribute and the feature flag's key, we ensure diverse user groups for different feature flags. In other words, this method prevents the same users from being assigned to the same Percentage Options for different feature flags.
+By hashing the combination of the user attribute and the feature flag's key, we ensure diverse user groups for different feature flags. In other words, the algorithm prevents the same users from being assigned to the same Percentage Options for different feature flags.
 
 :::info
 The evaluation process is entirely implemented within the SDKs, meaning your users' sensitive data never leaves your system. The data flow is one-way – from ConfigCat CDN servers to your SDKs – and ConfigCat does not receive or store any attributes of the [User Object] passed to the SDKs. This design prioritizes the privacy and security of user data.

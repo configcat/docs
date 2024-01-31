@@ -29,14 +29,14 @@ You can set a flag condition for a feature flag on the ConfigCat Dashboard. The 
 #### Prerequisite is a feature flag (boolean setting)
 ![Flag condition anatomy 1](/assets/targeting/targeting-rule/flag-condition/flag-condition-anatomy1.jpg)
 
-#### Prerequisite is a string, number or double setting
+#### Prerequisite is a string, integer or double setting
 ![Flag condition anatomy 2](/assets/targeting/targeting-rule/flag-condition/flag-condition-anatomy2.jpg)
 
 A flag condition consists of the following: 
 
 - **Prerequisite flag key**: The key of the feature flag (or setting) on which the condition is based.
 - **Comparator**: The comparison operator that defines the relation between the prerequisite flag's value and the comparison value. See the available comparators below.
-- **Comparison value**: Available only in the case of string, number and double settings. The value that the prerequisite flag's value is compared to.
+- **Comparison value**: Available only in the case of string, integer and double settings. The value that the prerequisite flag's value is compared to.
 
 ### Comparators
 
@@ -49,7 +49,7 @@ When the prerequisite is a feature flag (boolean setting), the following compara
 | IS ON      | Checks whether the prerequisite flag is ON.  |
 | IS OFF     | Checks whether the prerequisite flag is OFF. |
 
-When the prerequisite is a string, number or double setting, the following comparators are available:
+When the prerequisite is a string, integer or double setting, the following comparators are available:
 
 | Comparator          | Description                                                                                 |
 | ------------------- | ------------------------------------------------------------------------------------------- |
