@@ -624,7 +624,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               }
             }
           ],
-          "s": { // alternatively, an array of percentage options ("p", see below) can also be specified
+          "s": { // alternatively, an array of Percentage Options ("p", see below) can also be specified
             "v": { // the value served when the rule is selected during evaluation
               "b": true
             },
@@ -632,7 +632,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
           }
         }
       ],
-      "p": [ // array of percentage options
+      "p": [ // array of Percentage Options
         {
           "p": 10, // % value
           "v": { // the value served when the percentage option is selected during evaluation
@@ -649,7 +649,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
         }
       ],
       "v": { // fallback value, served when none of the targeting rules match,
-             // no percentage options are defined or evaluation of these is not possible
+             // no Percentage Options are defined or evaluation of these is not possible
         "b": false // depending on the setting type, another type of value may need to be specified:
                    // text setting -> "s": string
                    // whole number setting -> "i": number

@@ -38,7 +38,7 @@ A *condition* is a logical expression that can be evaluated to true or false. Th
 
 ### Percentage Options
 
-*Percentage options* are used to split users into groups that will receive a specific value for a feature flag. The groups are allocated based on the ratio of the percentages. Percentage options are often used for A/B testing or phased rollouts. More about percentage options [here].
+*Percentage options* are used to split users into groups that will receive a specific value for a feature flag. The groups are allocated based on the ratio of the percentages. Percentage options are often used for A/B testing or phased rollouts. More about Percentage Options [here].
 
 ### "To all users" / "To all other" / "To unidentified" value
 

@@ -50,12 +50,12 @@ With comparison value hints, you can associate arbitrary text with your comparis
 
 ### Percentage options within targeting rules
 
-You can add percentage options to your targeting rules. This is useful if you want to create more complex targeting rules, such as "turn on the feature for 20% of the users who are on iOS, and off for 80%".
+You can add Percentage Options to your targeting rules. This is useful if you want to create more complex targeting rules, such as "turn on the feature for 20% of the users who are on iOS, and off for 80%".
 
 ![Percentage options within targeting rules](/assets/config-v2/percentage-options-within-targeting-rules.jpg)
 
 ### Custom percentage attributes
 
-With custom percentage attributes, you can create percentage options based on custom attributes. This way you can create percentage options based on any of your user attributes. For example, you can create a percentage option that is based on the user's company or organization. So you can serve a value for 20% of the users from company A and serve another value for 80% of the users from company B.
+With custom percentage attributes, you can create Percentage Options based on custom attributes. This way you can create Percentage Options based on any of your user attributes. For example, you can create a percentage option that is based on the user's company or organization. So you can serve a value for 20% of the users from company A and serve another value for 80% of the users from company B.
 
 ![Custom percentage attributes](/assets/config-v2/custom-percentage-attributes.jpg)

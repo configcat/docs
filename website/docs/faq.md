@@ -186,7 +186,7 @@ To all other users the feature is ON
 
 [Here is an example in our blog.](https://configcat.com/blog/2019/10/23/user-segmentation-and-targeting/#everyone-in-my-company-plus-android-users-from-germany-above-v53)
 
-### Are percentage options sticky?
+### Are Percentage Options sticky?
 
 Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.
 

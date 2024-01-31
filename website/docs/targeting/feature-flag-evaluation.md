@@ -17,9 +17,9 @@ The feature flag's value is determined by:
 The feature flag's value always comes from exactly one rule, following this algorithm:
 
 1. **Evaluation of Targeting Rules:** If targeting rules are present, the SDK evaluates them one by one, from top to bottom. It checks if all the conditions in the rule's IF part are met (i.e. all the conditions evaluate to true).
-   - If the conditions are met, the THEN part determines the value to return. Note: If the THEN part contains percentage options but the [percentage evaluation attribute] is missing, the SDK will skip the targeting rule and continue with the next rule - even though the targeting rule's conditions are met!
+   - If the conditions are met, the THEN part determines the value to return. Note: If the THEN part contains Percentage Options but the [percentage evaluation attribute] is missing, the SDK will skip the targeting rule and continue with the next rule - even though the targeting rule's conditions are met!
    - If the conditions aren't met, the SDK moves to the next targeting rule, or to step 2 (below) if there are no more targeting rules.
-2. **Evaluation of Percentage Options:** If a *Percentage Options* rule exists, the SDK executes the [Evaluation of percentage options] algorithm to determine which percentage option applies to the user and returns the value associated with that option. If the necessary user attribute is missing, the SDK skips to step 3 (below).
+2. **Evaluation of Percentage Options:** If a *Percentage Options* rule exists, the SDK executes the [Evaluation of Percentage Options] algorithm to determine which percentage option applies to the user and returns the value associated with that option. If the necessary user attribute is missing, the SDK skips to step 3 (below).
 3. **Returning simple value:** At this stage, the only remaining "rule" is the simple value specified at the end of the feature flag, which the SDK then returns.
 
 In the event of an unexpected error during evaluation, the SDK returns the default value passed to the `GetValue` function.
@@ -63,7 +63,7 @@ The SDK looks up the [percentage evaluation attribute] in the [User Object], the
 
 The fact that the above algorithm is implemented across all SDKs guarantees [stickiness] and [consistency].
 
-By hashing the combination of the user attribute and the feature flag's key, we ensure diverse user groups for different feature flags. In other words, this method prevents the same users from being assigned to the same percentage options for different feature flags.
+By hashing the combination of the user attribute and the feature flag's key, we ensure diverse user groups for different feature flags. In other words, this method prevents the same users from being assigned to the same Percentage Options for different feature flags.
 
 :::info
 The evaluation process is entirely implemented within the SDKs, meaning your users' sensitive data never leaves your system. The data flow is one-way – from ConfigCat CDN servers to your SDKs – and ConfigCat does not receive or store any attributes of the [User Object] passed to the SDKs. This design prioritizes the privacy and security of user data.
@@ -71,9 +71,9 @@ The evaluation process is entirely implemented within the SDKs, meaning your use
 
 ### Example Scenarios for Percentage Options
 
-Imagine you have two users, Jane and Joe, and you're experimenting with two different feature flags (`isTwitterSharingEnabled` and `isFacebookSharingEnabled`) that use percentage-based targeting. In these scenarios, we see how percentage options allows for a controlled and gradual rollout of features, ensuring a smooth transition for users like Jane and Joe.
+Imagine you have two users, Jane and Joe, and you're experimenting with two different feature flags (`isTwitterSharingEnabled` and `isFacebookSharingEnabled`) that use percentage-based targeting. In these scenarios, we see how Percentage Options allows for a controlled and gradual rollout of features, ensuring a smooth transition for users like Jane and Joe.
 
-First, the users are assigned a number between 0-99 based on the hash of their identifier and the feature flag's key. This number determines their eligibility for a feature based on the percentage options set on the Dashboard.
+First, the users are assigned a number between 0-99 based on the hash of their identifier and the feature flag's key. This number determines their eligibility for a feature based on the Percentage Options set on the Dashboard.
 
 |      | isTwitterSharingEnabled                                                   | isFacebookSharingEnabled                                                    |
 | ---- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
@@ -108,7 +108,7 @@ Despite both feature flags being set to 10% ON / 90% OFF, the `isTwitterSharingE
 
 4. **Rolling Back to a Safer 10% ON / 90% OFF**
 > Same setup as in Step 2.
-There are cases when you want to roll back a feature flag to a safer state. In this case, you can change the percentage options to 10% ON / 90% OFF. The sticky nature of percentage-based targeting ensures that the same user base is served **ON** as in Step 2, not another random 10% of users.
+There are cases when you want to roll back a feature flag to a safer state. In this case, you can change the Percentage Options to 10% ON / 90% OFF. The sticky nature of percentage-based targeting ensures that the same user base is served **ON** as in Step 2, not another random 10% of users.
 
 |      | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |

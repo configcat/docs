@@ -10,13 +10,13 @@ Percentage options define the percentage of users receiving a specific value for
 
 ## How to add Percentage Options?
 
-You can add percentage options to a feature flag on the Dashboard by clicking on the `+%` button.
+You can add Percentage Options to a feature flag on the Dashboard by clicking on the `+%` button.
 
 ![Add percentage option](/assets/targeting/percentage-options/add-percentage-option.jpg)
 
 ## How does it work? - Anatomy of a percentage option
 
-The grouping is random and based on the [User Object]'s identifier by default. You can also use [other user attributes] to evaluate the percentage options. Percentage options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
+The grouping is random and based on the [User Object]'s identifier by default. You can also use [other user attributes] to evaluate the Percentage Options. Percentage options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
 - **Sticky** means the same user will always get the same value for a specific feature flag. Read more below.
 - **Consistent** means that the same user will always get the same value for a specific feature flag across all SDKs. Read more below.
 
@@ -34,7 +34,7 @@ Any _number between 0 and 100_ that represents a randomly allocated fraction of 
 
 The exact value will be served to the users that fall into that fraction.
 
-## Multiple percentage options
+## Multiple Percentage Options
 
 ### On/Off Toggle
 
@@ -52,7 +52,7 @@ This value will be served as a fallback if none of the above rules apply or a [U
 
 ## Percentage options in combination with targeting rules
 
-Percentage options can be used in combination with targeting rules. In this case, the percentage options will be evaluated after the targeting rule only on the users that matched the targeting rule.
+Percentage options can be used in combination with targeting rules. In this case, the Percentage Options will be evaluated after the targeting rule only on the users that matched the targeting rule.
 
 ![Percentage options with targeting rules](/assets/targeting/percentage-options/percentage-options-with-targeting-rules.jpg)
 
@@ -63,6 +63,8 @@ The *percentage evaluation attribute* is the attribute that is used to split the
 ### How to change the percentage attribute?
 
 Click the 3 dots on the top right corner of the feature flag and select the **Change percentage attribute** option.
+
+> Changing the percentage attribute will be valid for all Percentage Options in the feature flag.
 
 ![Change percentage attribute](/assets/targeting/percentage-options/change-percentage-attribute.jpg)
 
@@ -80,7 +82,7 @@ Consistency means that the same user will always get the same value for a specif
 
 The same user might get different values in the case of different feature flags. The hashing algorithm is based on the feature flag's key and the percentage evaluation attribute. The key of each feature flag is different.
 
-*For example, if you have two feature flags with percentage options of 20% `ON`, then a different 20% of users will get the `ON` value for each feature flag.*
+*For example, if you have two feature flags with Percentage Options of 20% `ON`, then a different 20% of users will get the `ON` value for each feature flag.*
 
 ## Examples
 
