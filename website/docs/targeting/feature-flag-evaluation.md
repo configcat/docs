@@ -8,7 +8,7 @@ description: This document offers an in-depth explanation of how the ConfigCat S
 
 This document offers an in-depth explanation of how the SDK determines the value of a feature flag when executing the `GetValue` function. Understanding this process requires prior knowledge of targeting concepts.
 
-The feature flag's value is influenced by:
+The feature flag's value is determined by:
 
 - The feature flag's rules defined on the Dashboard,
 - The [User Object] provided to the `GetValue` function, and
@@ -17,7 +17,7 @@ The feature flag's value is influenced by:
 The feature flag's value always comes from exactly one rule, following this algorithm:
 
 1. **Evaluation of Targeting Rules:** If targeting rules are present, the SDK evaluates them one by one, from top to bottom. It checks if all the conditions in the rule's IF part are met (i.e. all the conditions evaluate to true).
-   - If the conditions are met, the THEN part determines the value to return. Note: If the THEN part contains [Percentage Options] and the necessary user attribute is missing, the SDK will skip the targeting rule and continue with the next rule - even though the targeting rule's conditions are met!
+   - If the conditions are met, the THEN part determines the value to return. Note: If the THEN part contains percentage options but the [percentage evaluation attribute] is missing, the SDK will skip the targeting rule and continue with the next rule - even though the targeting rule's conditions are met!
    - If the conditions aren't met, the SDK moves to the next targeting rule, or to step 2 (below) if there are no more targeting rules.
 2. **Evaluation of Percentage Options:** If a percentage option rule exists, the SDK executes the [Evaluation of percentage options] algorithm to determine which percentage option applies to the user and returns the value associated with that option. If the necessary user attribute is missing, the SDK skips to step 3 (below).
 3. **Returning simple value:** At this stage, the only remaining "rule" is the simple value specified at the end of the feature flag, which the SDK then returns.
