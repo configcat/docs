@@ -50,7 +50,7 @@ A *user object* is a collection of *user attributes* that describe the propertie
 
 ### Default value
 
-This value will be returned by the [ConfigCat SDK] in case of an error. The default value is a required parameter when you use the SDK in your application code to get the value of a feature flag.
+The ConfigCat SDK's feature flag evaluation functions (e.g. `GetValue`) requires you to provide a *default value*. This value will be returned in case the SDK fails to fetch the config or some other error occurs during the evaluation of the feature flag.
 
 ## Examples
 
