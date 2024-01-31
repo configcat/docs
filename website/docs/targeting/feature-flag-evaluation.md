@@ -42,7 +42,7 @@ The result of the condition will be `cannot evaluate` in case the comparison att
 
 Using the same User Object used to evaluate the dependent flag, the SDK evaluates the prerequisite flag (the feature flag referenced by the condition). Then, the result is checked against the comparator. In case the prerequisite flag is not a boolean setting, the result is compared to the comparison value that is set on the Dashboard. The comparison results in a `true` or `false` value. This will be the result of the condition.
 
-In case the referenced feature flag is missing or there is a type mismatch between the return value and the comparison value, the evaluation process stops, and the SDK will return the [default value]. (Though this can happen only when using the [flag overrides] feature with invalid data.)
+In case the prerequisite flag is missing or there is a type mismatch between the return value and the comparison value, the evaluation process stops, and the SDK will return the [default value]. (Though this can happen only when using the [flag overrides] feature with invalid data.)
 
 ### Evaluation of a Segment Condition
 
