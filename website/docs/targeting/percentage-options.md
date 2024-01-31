@@ -1,12 +1,12 @@
 ---
 id: percentage-options
 title: Percentage Options
-description: Percentage options define the percentage of users that will receive a specific value for a feature flag or setting. This way, you can gradually release a new feature to a subset of users.
+description: Using Percentage Options, you can define if a certain percentage of users should receive a specific value for a feature flag or setting. This way, you can gradually release a new feature to a subset of users.
 ---
 
 ## What are Percentage Options?
 
-Percentage options define the percentage of users receiving a specific value for a feature flag or setting. This way, you can gradually release a new feature to a subset of users. Instead of releasing a feature to all users simultaneously, a specific percentage of users are selected to receive access to the feature. This allows developers to control and monitor the impact of the new feature in a controlled manner.
+Using *Percentage Options*, you can define if a certain percentage of users should receive a specific value for a feature flag or setting. This way, you can gradually release a new feature to a subset of users. Instead of releasing a feature to all users simultaneously, a specific percentage of users are selected to receive access to the feature. This allows developers to control and monitor the impact of the new feature in a controlled manner.
 
 ## How to add Percentage Options?
 
