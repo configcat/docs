@@ -58,7 +58,7 @@ Percentage options can be used in combination with targeting rules. In this case
 
 ## Percentage Evaluation Attribute
 
-The *percentage evaluation attribute* is the attribute that is used to split the users into groups. The percentage evaluation attribute is the [User Object]'s `Identifier` attribute by default. You can also use other user attributes as the basis of the grouping (see an [example use case] below).
+The *Percentage Evaluation Attribute* is the attribute that is used to split the users into groups. The Percentage Evaluation Attribute is the [User Object]'s `Identifier` attribute by default. You can also use other user attributes as the basis of the grouping (see an [example use case] below).
 
 ### How to change the percentage attribute?
 
@@ -70,7 +70,7 @@ Click the 3 dots on the top right corner of the feature flag and select the **Ch
 
 ## Stickiness
 
-Stickiness means that the same user will always get the same value for a specific feature flag, no matter the history of the feature flag. This is achieved by implementing a deterministic hashing algorithm based on the feature flag's key and the percentage evaluation attribute.
+Stickiness means that the same user will always get the same value for a specific feature flag, no matter the history of the feature flag. This is achieved by implementing a deterministic hashing algorithm based on the feature flag's key and the Percentage Evaluation Attribute.
 
 *For example, if you have a feature flag with a percentage option of 20% `ON`, then the same 20% of users will get the `ON` value across all SDKs. Users on iOS, Android, or the Web will always get the same value for the feature flag.*
 
@@ -80,7 +80,7 @@ Consistency means that the same user will always get the same value for a specif
 
 *For example, if you have a feature flag with a percentage option of 20% `ON`, then the same 20% of users will get the `ON` value across all SDKs. No matter if a user is on iOS, Android, or Web, they will always get the same value for the feature flag.*
 
-The same user might get different values in the case of different feature flags. The hashing algorithm is based on the feature flag's key and the percentage evaluation attribute. The key of each feature flag is different.
+The same user might get different values in the case of different feature flags. The hashing algorithm is based on the feature flag's key and the Percentage Evaluation Attribute. The key of each feature flag is different.
 
 *For example, if you have two feature flags with Percentage Options of 20% `ON`, then a different 20% of users will get the `ON` value for each feature flag.*
 

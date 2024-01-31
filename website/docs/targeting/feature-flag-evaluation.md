@@ -17,7 +17,7 @@ The feature flag's value is determined by:
 The feature flag's value always comes from exactly one rule, following this algorithm:
 
 1. **Evaluation of Targeting Rules:** If targeting rules are present, the SDK evaluates them one by one, from top to bottom. It checks if all the conditions in the rule's IF part are met (i.e. all the conditions evaluate to true).
-   - If the conditions are met, the THEN part determines the value to return. Note: If the THEN part contains Percentage Options but the [percentage evaluation attribute] is missing, the SDK will skip the targeting rule and continue with the next rule - even though the targeting rule's conditions are met!
+   - If the conditions are met, the THEN part determines the value to return. Note: If the THEN part contains Percentage Options but the [Percentage Evaluation Attribute] is missing, the SDK will skip the targeting rule and continue with the next rule - even though the targeting rule's conditions are met!
    - If the conditions aren't met, the SDK moves to the next targeting rule, or to step 2 (below) if there are no more targeting rules.
 2. **Evaluation of Percentage Options:** If a *Percentage Options* rule exists, the SDK executes the [Evaluation of Percentage Options] algorithm to determine which percentage option applies to the user and returns the value associated with that option. If the necessary user attribute is missing, the SDK skips to step 3 (below).
 3. **Returning simple value:** At this stage, the only remaining "rule" is the simple value specified at the end of the feature flag, which the SDK then returns.
@@ -56,8 +56,8 @@ The evaluation process stops if the referenced segment is missing, and the SDK w
 
 Percentage options are designed to be consistent and sticky across all SDKs, which means that users with the same attributes fall in the same group and get the same feature flag value across the supported platforms.
 
-The SDK looks up the [percentage evaluation attribute] in the [User Object], then:
-- The SDK creates a hash from the combination of the percentage evaluation attribute's value and the specific feature flag's key.
+The SDK looks up the [Percentage Evaluation Attribute] in the [User Object], then:
+- The SDK creates a hash from the combination of the Percentage Evaluation Attribute's value and the specific feature flag's key.
 - The hash algorithm assigns the user a number between 0 and 99.
 - The assigned number determines which group the user falls into, i.e. which percentage option applies to the user.
 
