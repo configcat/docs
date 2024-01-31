@@ -34,11 +34,11 @@ You can set a flag condition for a feature flag on the ConfigCat Dashboard. The 
 
 A flag condition consists of the following: 
 
-- **Prerequisite feature flag or setting key**: The feature flag or setting key on which the condition is based.
+- **Prerequisite flag key**: The key of the feature flag (or setting) on which the condition is based.
 - **Comparator**: The comparison operator that defines the relation between the prerequisite flag's value and the comparison value. See the available comparators below.
-- **Comparison value**: Only string, number and double settings are available. The value that the prerequisite flag's value is compared to.
+- **Comparison value**: Available only in the case of string, number and double settings. The value that the prerequisite flag's value is compared to.
 
-## Comparators
+### Comparators
 
 Different comparators are available for different types of prerequisites.
 
