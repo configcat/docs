@@ -168,7 +168,7 @@ user_object = ConfigCat::User.new('john@example.com')
 
 ```ruby
 user_object = ConfigCat::User.new('#UNIQUE-USER-IDENTIFIER#', email: 'john@example', country: 'United Kingdom',
-                custom: {'SubscriptionType': 'Pro', 'UserRole': 'Admin'})
+                custom: {'SubscriptionType' => 'Pro', 'UserRole' => 'Admin'})
 ```
 
 ### Default user
