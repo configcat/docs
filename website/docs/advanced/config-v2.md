@@ -54,8 +54,8 @@ You can add Percentage Options to your targeting rules. This is useful if you wa
 
 ![Percentage options within targeting rules](/assets/config-v2/percentage-options-within-targeting-rules.jpg)
 
-### Custom percentage attributes
+### Custom Percentage Attributes
 
-With custom percentage attributes, you can create Percentage Options based on custom attributes. This way you can create Percentage Options based on any of your user attributes. For example, you can create a percentage option that is based on the user's company or organization. So you can serve a value for 20% of the users from company A and serve another value for 80% of the users from company B.
+With custom Percentage Attributes, you can create Percentage Options based on custom attributes. This way you can create Percentage Options based on any of your user attributes. For example, you can create a percentage option that is based on the user's company or organization. So you can serve a value for 20% of the users from company A and serve another value for 80% of the users from company B.
 
-![Custom percentage attributes](/assets/config-v2/custom-percentage-attributes.jpg)
+![Custom Percentage Attributes](/assets/config-v2/custom-percentage-attributes.jpg)

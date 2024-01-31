@@ -60,13 +60,13 @@ Percentage options can be used in combination with targeting rules. In this case
 
 The *Percentage Evaluation Attribute* is the attribute that is used to split the users into groups. The Percentage Evaluation Attribute is the [User Object]'s `Identifier` attribute by default. You can also use other user attributes as the basis of the grouping (see an [example use case] below).
 
-### How to change the percentage attribute?
+### How to change the Percentage Attribute?
 
-Click the 3 dots on the top right corner of the feature flag and select the **Change percentage attribute** option.
+Click the 3 dots on the top right corner of the feature flag and select the **Change Percentage Attribute** option.
 
-> Changing the percentage attribute will be valid for all Percentage Options in the feature flag.
+> Changing the Percentage Attribute will be valid for all Percentage Options in the feature flag.
 
-![Change percentage attribute](/assets/targeting/percentage-options/change-percentage-attribute.jpg)
+![Change Percentage Attribute](/assets/targeting/percentage-options/change-percentage-attribute.jpg)
 
 ## Stickiness
 
@@ -122,6 +122,6 @@ The same user might get different values in the case of different feature flags.
 
 **Goal:** Let's imagine that at our sample company (Whisker Co.), we have a `Tenant ID` attribute that is used to identify the tenants of our users. We want to release a new feature, `Enable Park Weather Info`, to 20% of our users based on their `Tenant ID`.
 
-**Solution:** Have a percentage option of `20%` `ON` and set the percentage attribute to `Tenant ID`.
+**Solution:** Have a percentage option of `20%` `ON` and set the Percentage Attribute to `Tenant ID`.
 
 ![Targeting Example 4](/assets/targeting/percentage-options/example5.jpg)
