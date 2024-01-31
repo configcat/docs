@@ -138,7 +138,7 @@ You can read more [here](/advanced/data-governance).
 
 Yes! You can export and download your current product as a standard JSON file anytime you want. The export will include:
 
-- All feature flags and settings together with their values, Targeting Rules, % options, segments, tags
+- All feature flags and settings together with their values, Targeting Rules, Percentage Options, segments, tags
 - All configs
 - All environments
 - All tags

@@ -191,7 +191,7 @@
       "name": "Is it possible to export feature flags in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes! You can export and download your current product as a standard JSON file anytime you want. The export will include: All feature flags and settings together with their values, Targeting Rules, % options, segments, tags, All configs, All environments, All tags and All segments."
+        "text": "Yes! You can export and download your current product as a standard JSON file anytime you want. The export will include: All feature flags and settings together with their values, Targeting Rules, Percentage Options, segments, tags, All configs, All environments, All tags and All segments."
       }
     },
     {

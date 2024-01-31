@@ -18,7 +18,7 @@ Every value marked with a \* in the table marks a technical limit. If you hit a 
 | Environments (per product)                     | 2       | 3       | 50\*    | 50\*       | 50\*      | 3       | 2       |
 | Segments (per product)                         | 2       | 3       | 500\*   | 1000\*     | 1000\*    | 3       | 3       |
 | Feature flags / Settings (per product)         | 10      | 100     | 500\*   | 500\*      | 500\*     | 1000    | 10      |
-| % options (per feature flag)                   | 4       | 8       | 500\*   | 500\*      | 500\*     | 8       | 4       |
+| Percentage Options (per feature flag)                   | 4       | 8       | 500\*   | 500\*      | 500\*     | 8       | 4       |
 | Targeting Rules (per feature flag)             | 4       | 8       | 500\*   | 500\*      | 500\*     | 8       | 4       |
 | Targeting Rule comparison value length (chars) | 65535\* | 65535\* | 65535\* | 65535\*    | 65535\*   | 65535\* | 65535\* |
 | Webhooks (per environment)                     | 1       | 3       | 200\*   | 200\*      | 200\*     | 3       | 1       |
