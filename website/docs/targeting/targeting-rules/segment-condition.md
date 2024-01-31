@@ -1,7 +1,7 @@
 ---
 id: segment-condition
 title: Segment Condition
-description: Segments help you define and assign user segments to your feature flags. Ideal for beta testing on a certain group of users.
+description: Segments allow you to define user groups based on any user attributes. Ideal for beta testing on a certain group of users.
 ---
 
 ## What is a segment condition? What is a segment?
@@ -22,7 +22,7 @@ For more details on the evaluation of flag conditions, please refer to [Setting 
 
 ## How to set a segment condition?
 
-You can add a segment condition to a targeting rule on the Dashboard by clicking on the `+IF` ("Add targeting rule") button.
+You can add a targeting rule with a segment condition on the Dashboard by clicking on the `+IF` ("Add targeting rule") button.
 
 ![Add segment condition](/assets/targeting/targeting-rule/segment-condition/add-segment-condition.jpg)
 
@@ -59,7 +59,7 @@ A *segment condition* consists of two parts:
 
 ### Comparison attribute
 
-A property of your user (e.g. _email address_, _geographic location_). Your application should pass the attribute values (e.g. *jane@example.com*, _Europe_)for comparison to ConfigCat.
+A property of your user (e.g. _email address_, _geographic location_). Your application should pass the attribute values (e.g. *jane@example.com*, _Europe_) to the ConfigCat SDK as a [User Object].
 
 There are 3 predefined attributes. Additionally, you can define your **_custom attributes_** as well:
 

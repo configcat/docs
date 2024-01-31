@@ -1,7 +1,7 @@
 ---
 id: flag-condition
 title: Flag Condition (Prerequisite)
-description: A prerequisite feature flag is a type of feature flag used to control another feature flag's availability.
+description: A flag condition is a condition that is based on the comparison of another feature flag's value and a preset value (comparison value).
 ---
 
 ## What is a flag condition? What is a prerequisite flag?
@@ -14,13 +14,13 @@ This allows you to control the value of multiple feature flags by changing the v
 
 The prerequisite flag is evaluated with the same user object as the one used to evaluate the dependent flag, and then the result is checked against the comparator that you set on the Dashboard. 
 
-The prerequisite flag can be other than a feature flag (boolean setting), in which case the prerequisite flag's evaluated value will be compared to the comparison value that you set on the Dashboard. The comparison is done according to the selected comparator, resulting in true or false results. This will be the result of the condition.
+The prerequisite flag can be other than a feature flag (boolean setting), in which case the prerequisite flag's evaluated value will be compared to the comparison value that you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
 For more details on the evaluation of flag conditions, please refer to [setting evaluation].
 
 ## How to set a flag condition?
 
-You can set a flag condition for a feature flag on the ConfigCat Dashboard. The prerequisite feature flag can be any feature flag already defined in the same config on the Dashboard. You can also set a comparison value to which the prerequisite feature flag will be compared.
+You can set a flag condition for a feature flag on the ConfigCat Dashboard. The prerequisite flag can be any feature flag already defined in the same config on the Dashboard. In the case of settings other than feature flags (*boolean* settings), you can also set a comparison value to which the prerequisite flag's value will be compared.
 
 ![Flag condition](/assets/targeting/targeting-rule/flag-condition/flag-condition.jpg)
 
@@ -34,11 +34,11 @@ You can set a flag condition for a feature flag on the ConfigCat Dashboard. The 
 
 A flag condition consists of the following: 
 
-- **Prerequisite feature flag or setting key**: The feature flag or setting key on which the condition is based.
+- **Prerequisite flag key**: The key of the feature flag (or setting) on which the condition is based.
 - **Comparator**: The comparison operator that defines the relation between the prerequisite flag's value and the comparison value. See the available comparators below.
-- **Comparison value**: Only string, number and double settings are available. The value that the prerequisite flag's value is compared to.
+- **Comparison value**: Available only in the case of string, number and double settings. The value that the prerequisite flag's value is compared to.
 
-## Comparators
+### Comparators
 
 Different comparators are available for different types of prerequisites.
 
