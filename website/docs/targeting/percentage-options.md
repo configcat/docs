@@ -16,13 +16,13 @@ You can add Percentage Options to a feature flag on the Dashboard by clicking on
 
 ## How does it work? - Anatomy of a percentage option
 
-The grouping is random and based on the [User Object](../user-object)'s identifier by default. You can also use [other user attributes] to evaluate the Percentage Options. Percentage Options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
+The grouping is random and based on the [User Object](../user-object)'s identifier by default. You can also use [other user attributes](#percentage-evaluation-attribute) to evaluate the Percentage Options. Percentage Options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
 - **Sticky** means the same user will always get the same value for a specific feature flag and for a certain Percentage Option set. Read more below.
 - **Consistent** means that the same user will always get the same value for a specific feature flag across all SDKs. Read more below.
 
-If the required attribute is not present in the Checks[User Object](../user-object) whether, the ["To unidentified" value] will be returned.
+If the required attribute is not present in the Checks [User Object](../user-object) whether, the ["To unidentified" value](../targeting-overview/#to-all-users--to-all-other--to-unidentified-value) will be returned.
 
-Read more about the technical details of the [percentage evaluation here].
+Read more about the technical details of the [percentage evaluation here](../feature-flag-evaluation/#evaluation-of-percentage-options).
 
 Percentage Options are a list of **% value** and **Served value** pairs, where % values add up to 100.
 
@@ -52,7 +52,7 @@ Percentage Options can be used in combination with targeting rules. In this case
 
 ## Percentage Evaluation Attribute
 
-The *Percentage Evaluation Attribute* is the attribute that is used to split the users into groups. The Percentage Evaluation Attribute is the Checks[User Object](../user-object) whether's `Identifier` attribute by default. You can also use other user attributes as the basis of the grouping (see an [example use case] below).
+The *Percentage Evaluation Attribute* is the attribute that is used to split the users into groups. The Percentage Evaluation Attribute is the [User Object's](../user-object) `Identifier` attribute by default. You can also use other user attributes as the basis of the grouping (see an example use case below).
 
 ### How to change the Percentage Attribute?
 
