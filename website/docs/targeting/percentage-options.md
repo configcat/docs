@@ -20,11 +20,11 @@ The grouping is random and based on the [User Object]'s identifier by default. Y
 - **Sticky** means the same user will always get the same value for a specific feature flag and for a certain Percentage Option set. Read more below.
 - **Consistent** means that the same user will always get the same value for a specific feature flag across all SDKs. Read more below.
 
-If the required attribute is not present in the [User Object], the [fallback value] will be served.
+If the required attribute is not present in the [User Object], the ["To unidentified" value] will be returned.
 
 Read more about the technical details of the [percentage evaluation here].
 
-Percentage-based targeting consists of **% value** and the **Served value** pairs.
+Percentage Options are a list of **% value** and **Served value** pairs, where % values add up to 100.
 
 ### % value
 
@@ -32,7 +32,7 @@ Any _number between 0 and 100_ that represents a randomly allocated fraction of 
 
 ### Served value
 
-The exact value will be served to the users that fall into that fraction.
+The value that will be served to the users who fall into the group determined by the percentage.
 
 ## Multiple Percentage Options
 
@@ -42,13 +42,7 @@ When the Setting Kind is On/Off Toggle, the number of options must be 2. One for
 
 ### Text and Number
 
-When the Setting Kind is _Text_, _Whole Number_, or _Decimal Number_, the maximum number options depend on your subscription plan. You can add/remove options by clicking the _Actions_ icon.
-
-> The sum of all _% values_ must be equal to 100.
-
-### All other cases
-
-This value will be served as a fallback if none of the above rules apply or a [User Object](advanced/user-object) was not passed to the [ConfigCat SDK](sdk-reference/overview) correctly within your application.
+When the Setting Kind is _Text_, _Whole Number_, or _Decimal Number_, the maximum number of options depends on your subscription plan. You can add/remove options by clicking the _Actions_ icon.
 
 ## Percentage options in combination with targeting rules
 
