@@ -4,7 +4,7 @@ title: Targeting Overview
 description: Overview of the ConfigCat targeting feature with examples.
 ---
 
-Using this feature, you can set different setting values for specific users or groups of users in your application. Typical use cases are:
+Targeting allows you to enable or disable a feature for specific users or groups of users in your application. Typical use cases are:
 - Beta testing
 - A/B testing
 - Phased rollouts, canary releases
