@@ -34,7 +34,7 @@ A targeting rule matches only when all its conditions evaluates to `true`. In an
 
 ### Evaluation of a User Condition
 
-The SDK looks up the comparison attribute (the user attribute referenced by the condition) in the [User Object]. It compares it to the comparison value that is set on the Dashboard. The comparison is done according to the selected comparator, resulting in a `true` or `false` value. This will be the result of the condition.
+The SDK looks up the comparison attribute (the user attribute referenced by the condition) in the [User Object]. It compares the attribute value to the comparison value that is set on the Dashboard. The comparison is done according to the selected comparator, resulting in a `true` or `false` value. This will be the result of the condition.
 
 The result of the condition will be `cannot evaluate` in case the comparison attribute is missing (`null`, `undefined`, `""`) or invalid (not of the type expected by the comparator or not formatted properly). In such cases, the targeting rule containing the condition will be skipped, and the evaluation will continue with the next rule.
 
