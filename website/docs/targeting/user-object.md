@@ -1,7 +1,7 @@
 ---
 id: user-object
 title: User Object
-description: The user object lets you target users based on their properties with different features. The user object is essential for beta and A/B testing.
+description: The user object is a collection of *user attributes* that describe the properties of a user. The user object is essential for targeting.
 ---
 
 The *User Object*  is a collection of *user attributes* that describe the properties of a user. The *User Object* is necessary to define [targeting rules] and [Percentage Options].
@@ -23,7 +23,7 @@ ConfigCat was designed with security and privacy in mind. The evaluation process
 
 ## Anatomy of the User Object
 
-The data that could and should be passed to the User Object.
+The data that can be stored in the User Object:
 
 | Attribute  | Description                                                                                                                                                              |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -58,9 +58,8 @@ Our recommendation as an identifier:
 
 ### Custom attributes
 
-First, you must pass a User Object containing the `custom` attribute to the ConfigCat SDK.
+To use custom attributes, you need to pass a User Object containing the `custom` attribute to the ConfigCat SDK.
 
-> In case **a custom attribute is not passed** to the SDK or its value is **falsy** (unknown, null, ""), the corresponding **targeting rule will be skipped**, and the evaluation will continue with the next rule.
 
 > The custom attribute's value can be multiple types. e.g.: string, number, date, array of strings, etc. Check the [SDK reference](sdk-reference/overview) for more details.
 

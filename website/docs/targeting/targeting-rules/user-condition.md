@@ -128,7 +128,7 @@ The following comparators expect the *Comparison attribute* to be a date value (
 
 #### Array Comparators
 
-The following comparators expect the *Comparison attribute* to be an array of strings (or an array of strings serialized to JSON), and the *Comparison value* to be a string or a list of strings.
+The following comparators expect the *Comparison attribute* to be an array of strings (or an array of strings serialized to JSON), and the *Comparison value* to be a list of strings.
 
 | Comparator                | Description                                                                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
