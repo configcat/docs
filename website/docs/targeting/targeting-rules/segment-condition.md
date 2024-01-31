@@ -65,8 +65,8 @@ There are 3 predefined attributes. Additionally, you can define your **_custom a
 
 | Comparison attribute name | Description                                                                          |
 | ------------------------- | ------------------------------------------------------------------------------------ |
-| `Email`                   | The e-mail address of your user.                                                     |
 | `Identifier`              | Usually, it is a unique user identifier in your application.                         |
+| `Email`                   | The e-mail address of your user.                                                     |
 | `Country`                 | Might be useful for testing a new feature only in one country.                       |
 | `Custom`                  | **_Define any attribute (e.g. `OS version`), by typing its name into the textbox._** |
 
