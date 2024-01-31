@@ -46,7 +46,7 @@ In case the prerequisite flag is missing or there is a type mismatch between the
 
 ### Evaluation of a Segment Condition
 
-The SDK looks up the segment referenced by the condition and evaluates the condition described by the segment similarly to [user conditions]. In the case of `IS IN SEGMENT` the result of the segment condition will be the same as the result of the segment. The result will be negated in the case of `IS NOT IN SEGMENT`.
+The SDK looks up the segment referenced by the condition and evaluates the condition described by the segment similarly to [user conditions]. Then, the result is checked against the comparator. In the case of `IS IN SEGMENT` the result of the segment condition will be the same as the result of the segment. The result will be negated in the case of `IS NOT IN SEGMENT`.
 
 If the segment evaluates to `cannot evaluate`, so is the segment condition.
 
