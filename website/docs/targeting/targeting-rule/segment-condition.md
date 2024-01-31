@@ -6,7 +6,7 @@ description: Segments allow you to define user groups based on any user attribut
 
 ## What is a segment condition? What is a segment?
 
-A *segment condition* is a condition that is based on the evaluation of a *segment*. A *segment* is a reusable, predefined [user condition].
+A *segment condition* is a condition that is based on the evaluation of a *segment*. A *segment* is a reusable, predefined [user condition](../user-condition).
 
 Segments allow you to define user groups based on any user attributes. You can reference segments in Targeting Rules. When you update a segment definition, the changes will be reflected automatically in all the Targeting Rules that reference it.
 
@@ -16,9 +16,9 @@ One segment belongs to one product and can be used in multiple feature flags wit
 
 ## How does the segment condition work?
 
-The segment is evaluated with the [User Object], and the result is checked against the comparator you set on the Dashboard. In the case of `IS IN SEGMENT`, the result of the segment condition will be the same as that of the segment. The result will be negated in the case of `IS NOT IN SEGMENT`.
+The segment is evaluated with the [User Object](../../user-object), and the result is checked against the comparator you set on the Dashboard. In the case of `IS IN SEGMENT`, the result of the segment condition will be the same as that of the segment. The result will be negated in the case of `IS NOT IN SEGMENT`.
 
-For more details on the evaluation of flag conditions, please refer to [Setting Evaluation].
+For more details on the evaluation of flag conditions, please refer to the [feature flag evaluation](../../feature-flag-evaluation).
 
 ## How to set a segment condition?
 
@@ -42,8 +42,8 @@ A *segment condition* consists of two parts:
 - **Segment comparator:** The comparison operator defines the relation between the segment and the condition.
 - **Segment:** The segment that the condition is based on.
 
-| Comparator        | Description                                              |
-| ----------------- | -------------------------------------------------------- |
+| Comparator        | Description                                             |
+| ----------------- | ------------------------------------------------------- |
 | IS IN SEGMENT     | Checks whether the user is in the selected segment.     |
 | IS NOT IN SEGMENT | Checks whether the user is not in the selected segment. |
 
@@ -59,7 +59,7 @@ A *segment condition* consists of two parts:
 
 ### Comparison attribute
 
-A property of your user (e.g. _email address_, _geographic location_). Your application should pass the attribute values (e.g. *jane@example.com*, _Europe_) to the ConfigCat SDK as a [User Object].
+A property of your user (e.g. _email address_, _geographic location_). Your application should pass the attribute values (e.g. *jane@example.com*, _Europe_) to the ConfigCat SDK as a [User Object](../../user-object).
 
 There are 3 predefined attributes. Additionally, you can define your **_custom attributes_** as well:
 
@@ -84,8 +84,8 @@ The following comparators expect the *Comparison attribute* to be a string value
 Consider using Confidential text comparators if you plan to target users by their sensitive information, e.g.: email address or company domain.
 :::
 
-| Comparator                   | Description                                                                                                                    |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Comparator                   | Description                                                                                                                                  |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | CONTAINS (cleartext)         | Checks whether the comparison attribute contains the comparison value as a substring.                                                        |
 | DOES NOT CONTAIN (cleartext) | Checks whether the comparison attribute does not contain the comparison value as a substring.                                                |
 | IS ONE OF (cleartext)        | Checks whether the comparison attribute is equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.)     |
@@ -96,8 +96,8 @@ Consider using Confidential text comparators if you plan to target users by thei
 We recommend using confidential text comparators especially in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
 In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed. This can cause an increase in the size of the config.json file and the overall network traffic. It is recommended to use confidential comparators only when necessary.
 
-| Comparator             | Description                                                                                                                    |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Comparator             | Description                                                                                                                                  |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | IS ONE OF (hashed)     | Checks whether the comparison attribute is equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.)     |
 | IS NOT ONE OF (hashed) | Checks whether the comparison attribute is not equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.) |
 
@@ -107,8 +107,8 @@ The following comparators expect the *Comparison attribute* to be a string conta
 
 Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer Semantic Version Specification</a>.
 
-| Comparator             | Description                                                                                                                                   |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Comparator             | Description                                                                                                                                                                                         |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | IS ONE OF (semver)     | Checks whether the comparison attribute interpreted as a semantic version is equal to any of the comparison values. (_Comparison value_ should be a comma-separated list of semantic versions.)     |
 | IS NOT ONE OF (semver) | Checks whether the comparison attribute interpreted as a semantic version is not equal to any of the comparison values. (_Comparison value_ should be a comma-separated list of semantic versions.) |
 | < (semver)             | Checks whether the comparison attribute interpreted as a semantic version is less than the comparison value.                                                                                        |
@@ -122,8 +122,8 @@ All semantic version comparators return `false` if either _Comparison attribute_
 
 The following comparators expect the *Comparison attribute* and the *Comparison value* to be numbers.
 
-| Comparator         | Description                                                                 |
-| ------------------ | --------------------------------------------------------------------------- |
+| Comparator         | Description                                                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------- |
 | = (number)         | Checks whether the comparison attribute interpreted as a decimal number is equal to the comparison value.                 |
 | <&#8203;> (number) | Checks whether the comparison attribute interpreted as a decimal number is not equal to the comparison value.             |
 | < (number)         | Checks whether the comparison attribute interpreted as a decimal number is less than the comparison value.                |

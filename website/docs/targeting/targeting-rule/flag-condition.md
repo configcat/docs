@@ -16,7 +16,7 @@ The prerequisite flag is evaluated with the same user object as the one used to 
 
 The prerequisite flag can be other than a feature flag (boolean setting), in which case the prerequisite flag's evaluated value will be compared to the comparison value that you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
-For more details on the evaluation of flag conditions, please refer to [setting evaluation].
+For more details on the evaluation of flag conditions, please refer to the [feature flag evaluation](../../feature-flag-evaluation).
 
 ## How to set a flag condition?
 
