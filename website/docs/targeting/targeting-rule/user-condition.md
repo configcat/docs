@@ -10,9 +10,9 @@ A *user condition* is a condition that is based on the comparison of a user attr
 
 ## How does the user condition work?
 
-The *comparison attribute*'s value from the [user object] is compared to the *comparison value* you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
+The *comparison attribute*'s value from the [User Object](../../user-object) is compared to the *comparison value* you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
-For more details on the evaluation of user conditions, please refer to [Setting Evaluation].
+For more details on the evaluation of user conditions, please refer to the [feature flag evaluation](../../feature-flag-evaluation).
 
 ## How to set a user condition?
 
@@ -32,7 +32,7 @@ A *user condition* consists of three parts:
 
 ### Comparison Attribute
 
-A property of your user (e.g. _email address_, _geographic location_). Your application should pass the attribute values (e.g. *jane@example.com*, _Europe_) to the ConfigCat SDK as a [User Object].
+A property of your user (e.g. _email address_, _geographic location_). Your application should pass the attribute values (e.g. *jane@example.com*, _Europe_) to the ConfigCat SDK as a [User Object](../../user-object).
 
 There are 3 predefined attributes. Additionally, you can define your **_custom attributes_** as well:
 
@@ -45,7 +45,7 @@ There are 3 predefined attributes. Additionally, you can define your **_custom a
 
 ### Comparison Value
 
-A string, a list of strings, a number, a semantic version, a list of semantic versions or a date value. Will be compared to the selected _Comparison attribute_ using the _Comparator_. The length of the _Comparison value_ is limited, and the limit depends on your subscription plan. See the [plan limits page](subscription-plan-limits/) for more details.
+A string, a list of strings, a number, a semantic version, a list of semantic versions or a date value. Will be compared to the selected _Comparison attribute_ using the _Comparator_. The length of the _Comparison value_ is limited, and the limit depends on your subscription plan. See the [plan limits page](../../../subscription-plan-limits) for more details.
 
 ### Comparator
 
