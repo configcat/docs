@@ -64,7 +64,7 @@ The *Percentage Evaluation Attribute* is the attribute that is used to split the
 
 Click the 3 dots on the top right corner of the feature flag and select the **Change Percentage Attribute** option.
 
-> Changing the Percentage Attribute will be valid for all Percentage Options in the feature flag.
+> Changing the Percentage Attribute will be valid for all Percentage Options within the feature flag.
 
 ![Change Percentage Attribute](/assets/targeting/percentage-options/change-percentage-attribute.jpg)
 
@@ -72,17 +72,17 @@ Click the 3 dots on the top right corner of the feature flag and select the **Ch
 
 Stickiness means that the same user will always get the same value for a specific feature flag, no matter the history of the feature flag. This is achieved by implementing a deterministic hashing algorithm based on the feature flag's key and the Percentage Evaluation Attribute.
 
-*For example, if you have a feature flag with a percentage option of 20% `ON`, then the same 20% of users will get the `ON` value across all SDKs. Users on iOS, Android, or the Web will always get the same value for the feature flag.*
+*For example, if you have a feature flag with a percentage option of `20%` `ON`, then you change the percentage option to `40%` `ON`, and then back to `20%` `ON`, the same `20%` of users will get the `ON` value for the feature flag just like the first time.*
 
 ## Consistency
 
 Consistency means that the same user will always get the same value for a specific feature flag, no matter which SDK they use. This is achieved by using the same hashing algorithm across all SDKs.
 
-*For example, if you have a feature flag with a percentage option of 20% `ON`, then the same 20% of users will get the `ON` value across all SDKs. No matter if a user is on iOS, Android, or Web, they will always get the same value for the feature flag.*
+*For example, if you have a feature flag with a percentage option of `20%` `ON`, then the same `20%` of users will get the `ON` value across all SDKs. No matter if a user is on iOS, Android, or Web, they will always get the same value for the feature flag.*
 
 The same user might get different values in the case of different feature flags. The hashing algorithm is based on the feature flag's key and the Percentage Evaluation Attribute. The key of each feature flag is different.
 
-*For example, if you have two feature flags with Percentage Options of 20% `ON`, then a different 20% of users will get the `ON` value for each feature flag.*
+*For example, if you have two feature flags with Percentage Options of `20%` `ON`, then a different `20%` of users will get the `ON` value for each feature flag.*
 
 ## Examples
 
