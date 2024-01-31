@@ -19,7 +19,7 @@ The feature flag's value always comes from exactly one rule, following this algo
 1. **Evaluation of Targeting Rules:** If targeting rules are present, the SDK evaluates them one by one, from top to bottom. It checks if all the conditions in the rule's IF part are met (i.e. all the conditions evaluate to true).
    - If the conditions are met, the THEN part determines the value to return. Note: If the THEN part contains percentage options but the [percentage evaluation attribute] is missing, the SDK will skip the targeting rule and continue with the next rule - even though the targeting rule's conditions are met!
    - If the conditions aren't met, the SDK moves to the next targeting rule, or to step 2 (below) if there are no more targeting rules.
-2. **Evaluation of Percentage Options:** If a percentage options rule exists, the SDK executes the [Evaluation of percentage options] algorithm to determine which percentage option applies to the user and returns the value associated with that option. If the necessary user attribute is missing, the SDK skips to step 3 (below).
+2. **Evaluation of Percentage Options:** If a *Percentage Options* rule exists, the SDK executes the [Evaluation of percentage options] algorithm to determine which percentage option applies to the user and returns the value associated with that option. If the necessary user attribute is missing, the SDK skips to step 3 (below).
 3. **Returning simple value:** At this stage, the only remaining "rule" is the simple value specified at the end of the feature flag, which the SDK then returns.
 
 In the event of an unexpected error during evaluation, the SDK returns the default value passed to the `GetValue` function.
