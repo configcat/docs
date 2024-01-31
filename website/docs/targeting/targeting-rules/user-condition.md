@@ -1,7 +1,7 @@
 ---
 id: user-condition
 title: User Condition
-description: A user condition is a condition that is based on the evaluation of a user attribute. It is used to determine whether a targeting rule is a match or not for a specific user.
+description: A user condition is a condition that is based on the comparison of a user attribute and a preset value (comparison value). It allows you to define targeting rules which target users based on their properties.
 ---
 
 ## What is a user condition?
@@ -10,13 +10,13 @@ A *user condition* is a condition that is based on the comparison of a user attr
 
 ## How does the user condition work?
 
-The *comparison attribute's value* from the [user object] is compared to the *comparison value* you set on the Dashboard. The comparison is done according to the selected comparator and will result in `true` or `false`. This will be the result of the condition.
+The *comparison attribute*'s value from the [user object] is compared to the *comparison value* you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
 For more details on the evaluation of user conditions, please refer to [Setting Evaluation].
 
 ## How to set a user condition?
 
-You can add a user condition to a targeting rule on the Dashboard by clicking on the `+IF` ("Add condition") button. Add more conditions by clicking on the `+AND` button at the bottom of a condition.
+You can add a targeting rule with a condition on the Dashboard by clicking on the `+IF` ("Add targeting rule") button. Add more conditions by clicking on the `+AND` button.
 
 ![Add user condition](/assets/targeting/targeting-rule/user-condition/user-condition.jpg)
 
@@ -38,14 +38,14 @@ There are 3 predefined attributes. Additionally, you can define your **_custom a
 
 | Comparison attribute name | Description                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------ |
-| `Email`                   | The e-mail address of your user.                                               |
 | `Identifier`              | Usually, it is a unique user identifier in your application.                   |
+| `Email`                   | The e-mail address of your user.                                               |
 | `Country`                 | Might be useful for testing a new feature only in one country.                 |
 | `Custom`                  | Define any attribute (e.g. `OS version`), by typing its name into the textbox. |
 
 ### Comparison Value
 
-A string, a list of strings, a number, a semantic version, a list of semantic versions or a date value. Will be compared to the selected _Comparison attribute_ using the _Comparator_. The length of the comparison value is limited, and it depends on your subscription plan. See the [plan limits page](subscription-plan-limits/) for more details.
+A string, a list of strings, a number, a semantic version, a list of semantic versions or a date value. Will be compared to the selected _Comparison attribute_ using the _Comparator_. The length of the _Comparison value_ is limited, and the limit depends on your subscription plan. See the [plan limits page](subscription-plan-limits/) for more details.
 
 ### Comparator
 
@@ -60,7 +60,7 @@ Consider using Confidential text comparators if you plan to target users by thei
 
 | Comparator                         | Description                                                                                     |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- |
-| EQUALS (cleartext)                 | It matches when the comparison attribute equals the comparison value.                           |
+| EQUALS (cleartext)                 | Checks whether the comparison attribute equals the comparison value.                           |
 | NOT EQUALS (cleartext)             | It matches when the comparison attribute is not equal to the comparison value.                  |
 | IS ONE OF (cleartext)              | It matches when the comparison attribute is equal to any of the comparison values               |
 | IS NOT ONE OF (cleartext)          | It matches when the comparison attribute is not equal to any of the comparison values.          |
