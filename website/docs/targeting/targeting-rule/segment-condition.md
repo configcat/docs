@@ -86,10 +86,10 @@ Consider using Confidential text comparators if you plan to target users by thei
 
 | Comparator                   | Description                                                                                                                    |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| CONTAINS (cleartext)         | True if the _Comparison attribute_ contains the _Comparison value_.                                                            |
-| DOES NOT CONTAIN (cleartext) | True if the _Comparison attribute_ doesn't contain the _Comparison value_.                                                     |
-| IS ONE OF (cleartext)        | Checks if the _Comparison attribute_ is listed in the _Comparison value_. _Comparison value_ should be a comma-separated list. |
-| IS NOT ONE OF (cleartext)    | True if the _Comparison attribute_ is not listed in the _Comparison value_.                                                    |
+| CONTAINS (cleartext)         | Checks whether the comparison attribute contains the comparison value as a substring.                                                        |
+| DOES NOT CONTAIN (cleartext) | Checks whether the comparison attribute does not contain the comparison value as a substring.                                                |
+| IS ONE OF (cleartext)        | Checks whether the comparison attribute is equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.)     |
+| IS NOT ONE OF (cleartext)    | Checks whether the comparison attribute is not equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.) |
 
 #### Confidential Text Comparators
 
@@ -98,8 +98,8 @@ In this case, the feature flag evaluation is performed using the SHA256 hashes o
 
 | Comparator             | Description                                                                                                                    |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| IS ONE OF (hashed)     | Checks if the _Comparison attribute_ is listed in the _Comparison value_. _Comparison value_ should be a comma-separated list. |
-| IS NOT ONE OF (hashed) | True if the _Comparison attribute_ is not listed in the _Comparison value_.                                                    |
+| IS ONE OF (hashed)     | Checks whether the comparison attribute is equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.)     |
+| IS NOT ONE OF (hashed) | Checks whether the comparison attribute is not equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.) |
 
 #### Semantic version comparators
 
@@ -109,12 +109,12 @@ Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer 
 
 | Comparator             | Description                                                                                                                                   |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF (Semver)     | True if _Comparison attribute_ is listed in the _Comparison value_. _Comparison value_ should be a comma-separated list of semantic versions. |
-| IS NOT ONE OF (Semver) | True if the _Comparison attribute_ is not listed in the _Comparison value_.                                                                   |
-| < (Semver)             | True if _Comparison attribute_ is a smaller version number than _Comparison value_.                                                           |
-| <= (Semver)            | True if _Comparison attribute_ is smaller than or equals _Comparison value_.                                                                  |
-| \> (Semver)            | True if _Comparison attribute_ is a larger version number than _Comparison value_.                                                            |
-| \>= (Semver)           | True if _Comparison attribute_ is larger than or equals _Comparison value_.                                                                   |
+| IS ONE OF (semver)     | Checks whether the comparison attribute interpreted as a semantic version is equal to any of the comparison values. (_Comparison value_ should be a comma-separated list of semantic versions.)     |
+| IS NOT ONE OF (semver) | Checks whether the comparison attribute interpreted as a semantic version is not equal to any of the comparison values. (_Comparison value_ should be a comma-separated list of semantic versions.) |
+| < (semver)             | Checks whether the comparison attribute interpreted as a semantic version is less than the comparison value.                                                                                        |
+| <= (semver)            | Checks whether the comparison attribute interpreted as a semantic version is less than or equal to the comparison value.                                                                            |
+| \> (semver)            | Checks whether the comparison attribute interpreted as a semantic version is greater than the comparison value.                                                                                     |
+| \>= (semver)           | Checks whether the comparison attribute interpreted as a semantic version is greater than or equal to the comparison value.                                                                         |
 
 All semantic version comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
 
@@ -124,12 +124,12 @@ The following comparators expect the *Comparison attribute* and the *Comparison 
 
 | Comparator         | Description                                                                 |
 | ------------------ | --------------------------------------------------------------------------- |
-| = (Number)         | True if _Comparison attribute_ equals _Comparison value_.                   |
-| <&#8203;> (Number) | True if _Comparison attribute_ does not equal _Comparison value_.           |
-| < (Number)         | True if _Comparison attribute_ is less than _Comparison value_.             |
-| <= (Number)        | True if _Comparison attribute_ is less than or equals _Comparison value_.   |
-| \> (Number)        | True if _Comparison attribute_ is a larger than _Comparison value_.         |
-| \>= (Number)       | True if _Comparison attribute_ is larger than or equals _Comparison value_. |
+| = (number)         | Checks whether the comparison attribute interpreted as a decimal number is equal to the comparison value.                 |
+| <&#8203;> (number) | Checks whether the comparison attribute interpreted as a decimal number is not equal to the comparison value.             |
+| < (number)         | Checks whether the comparison attribute interpreted as a decimal number is less than the comparison value.                |
+| <= (number)        | Checks whether the comparison attribute interpreted as a decimal number is less than or equal to the comparison value.    |
+| \> (number)        | Checks whether the comparison attribute interpreted as a decimal number is greater than the comparison value.             |
+| \>= (number)       | Checks whether the comparison attribute interpreted as a decimal number is greater than or equal to the comparison value. |
 
 All number comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid number.
 

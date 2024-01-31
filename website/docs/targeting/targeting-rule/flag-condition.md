@@ -51,10 +51,10 @@ When the prerequisite is a feature flag (boolean setting), the following compara
 
 When the prerequisite is a string, integer or double setting, the following comparators are available:
 
-| Comparator          | Description                                                                                 |
-| ------------------- | ------------------------------------------------------------------------------------------- |
-| EQUALS (hashed)     | Checks whether the prerequisite flag's value equals the comparison value.     |
-| NOT EQUALS (hashed) | Checks whether the prerequisite flag's value is not equal to the comparison value. |
+| Comparator | Description                                                                                 |
+| -----------| ------------------------------------------------------------------------------------------- |
+| EQUALS     | Checks whether the prerequisite flag's value is equal to the comparison value.     |
+| NOT EQUALS | Checks whether the prerequisite flag's value is not equal to the comparison value. |
 
 ## Example
 
