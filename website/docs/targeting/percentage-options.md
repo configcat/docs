@@ -84,40 +84,67 @@ The same user might get different values in the case of different feature flags.
 
 ### Simple phased rollout / Canary release / Percentage rollout Scenario
 
-**Goal:** In our sample company (Whisker Co.), we want to release a new feature, `Enable Park Weather Info` to 20% of our users. We want to ensure the new feature is working as expected before we release it to everyone.
+#### Context
+Our demo company, Whisker Co. is about to release a new feature called `Park Weather Info`. The stakeholders want to make sure that the new feature will be received well by the customers.
 
-**Solution:** Have a Percentage Option of `20%` `ON`.
+#### Goal
+To get some feedback from our customers before releasing it to everyone, we initially want to make the feature available to `20%` of the customers only.
+
+#### Solution
+Let's create a feature flag called `Enable Park Weather Info` with Percentage Options set to `20%` `ON` and `80%` `OFF`.
 
 ![Targeting Example 1](/assets/targeting/percentage-options/example1.jpg)
 
 ### A/B/C Testing Scenario
 
-**Goal:** Let's test three variations of the `Discount Type`, each with 1/3rd of our users. We want to decide which variation is the most effective. 
+#### Context
+The marketing specialists at Whisker Co. want to introduce a discount method to encourage more purchases in the webshop. They have multiple ideas but, without data, they can't decide which is the most effective.
 
-**Solution:** A text setting with three options set to `33% / 33% / 34%` defines the different variations.
+#### Goal
+To learn which is the most effective discount method, we want to perform an A/B/C test.
+
+#### Solution
+We need a string or integer setting for this task because we need to represent 3 different variations. Let's create a string setting named `Discount Type`, as text is more descriptive than numbers.
+
+The go-to feature for A/B testing is Percentage Options. So let's add one with 3 options, each covering 1/3rd of our customers.
 
 ![Targeting Example 2](/assets/targeting/percentage-options/example2.jpg)
 
 ### Complex phased rollout / Canary release / Percentage rollout Scenario
 
-**Goal:** In our sample company (Whisker Co.), we want to release a new feature, `Enable Park Weather Info` to all users within our `Whisker Co.` company `AND` `20%` of the rest of our users. We want to ensure the new feature is working as expected before we release it to everyone.
+#### Context
+Whisker Co. is about to release a new feature called `Park Weather Info`. The stakeholders want to make sure that releasing the new feature will go smoothly and it will be received well by the customers.
 
-**Solution:** Have a Percentage Option of `20%` `ON` and a Targeting Rule that matches everyone whose email address ends with `@whisker.example`.
+#### Goal
+To do some in-house testing and also get some feedback from our customers before releasing it to everyone, we initially want to make the feature available to the employees and to `20%` of the customers only.
+
+#### Solution
+Let's create a feature flag called `Enable Park Weather Info` with a Targeting Rule that matches everyone at Whisker Co. and Percentage Options set to `20%` `ON` and `80%` `OFF`.
 
 ![Targeting Example 3](/assets/targeting/percentage-options/example3.jpg)
 
 ### Platform-specific phased rollout
 
-**Goal:** Let's enable `Cafe Notifications` for 20% of our users on `iOS` and 60% of our users on `Android`.
+#### Context
+Whisker Co. is about to release a new feature called `Cafe Notifications` in their mobil app, which has an Android and an iOS version. We know that the user base of the iOS app is much larger than the Android app. The stakeholders want to make sure that the new feature will be received well by the customers.
 
-**Solution:** Have a Targeting Rule that matches everyone whose `Platform` is `iOS` and a Percentage Option of `20%` `ON`. Have a Targeting Rule that matches everyone whose `Platform` is `Android` and a Percentage Option of `60%` `ON`.
+#### Goal
+To get some feedback from our customers before releasing it to everyone, we initially want to make the feature available to a limited number of customers only. We also want to release the feature to roughly the same number of Android and iOS users.
+
+#### Solution
+Let's create a feature flag called `Cafe Notifications` with two targeting rules: one that matches Android users and one that matches iOS users. Then change the THEN part of both to Percentage Options. Finally, set the percentages so that the feature is enabled for roughly the same number of users (e.g. 60% for `Android` users, 20% for `iOS` users).
 
 ![Targeting Example 4](/assets/targeting/percentage-options/example4.jpg)
 
 ### Percentage Options based on other User Attributes
 
-**Goal:** Let's imagine that at our sample company (Whisker Co.), we have a `Tenant ID` attribute that is used to identify the tenants of our users. We want to release a new feature, `Enable Park Weather Info`, to 20% of our users based on their `Tenant ID`.
+#### Context
+Let's imagine that at Whisker Co., we have a custom attribute named `Tenant ID` that is used to identify the tenants of our customers.
 
-**Solution:** Have a Percentage Option of `20%` `ON` and set the Percentage Attribute to `Tenant ID`.
+#### Goal
+We want to release a new feature, `Park Weather Info`, to 20% of our customers based on their `Tenant ID`.
+
+#### Solution
+Let's create a feature flag called `Enable Park Weather Info` with Percentage Options set to `20%` `ON` and `80%` `OFF`. Finally, set the Percentage Evaluation Attribute to `Tenant ID`.
 
 ![Targeting Example 4](/assets/targeting/percentage-options/example5.jpg)

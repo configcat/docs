@@ -56,15 +56,23 @@ When the prerequisite is a string, integer or double setting, the following comp
 | EQUALS     | Checks whether the prerequisite flag's value is equal to the comparison value.     |
 | NOT EQUALS | Checks whether the prerequisite flag's value is not equal to the comparison value. |
 
-## Example
+## Examples
 
-### Prerequisite flag is a feature flag
+### Enable feature depending on the availability of another one
+
+#### Context
+Our demo company, Whisker Co. has a mobile app, which, among other things, can show the cat-friendly cafés in the neighborhood.
+
+The app can send notifications about the users' favorite cafés. This feauture is not available to everyone though, it's enabled using the `Cafe Notifications` feature flag.
+There is another feature that allows users to rate cafés, whose availability is controlled similarly, via the `Cafe Ratings` feature flag.
 
 #### Goal
-In our mobile app, let's have `Cafe Notifications` enabled only if `Cafe Ratings` are enabled. So, users will only receive notifications about their favorite cafes if they can rate them.
+We want to make sure that users only receive notifications about their favorite cafés if they can rate them.
 
 #### Solution
-In this case, `Cafe Ratings` is the prerequisite flag. The comparator is `IS ON`, meaning that the `Cafe Notifications` feature flag will be enabled only if the `Cafe Ratings` feature flag is ON.
+ConfigCat offers a built-in way to solve this problem without the need of extra coding: prerequisite flags.
+
+We can achieve our goal by adding a targeting rule containing a Flag Condition to `Cafe Notifications`, then referencing `Cafe Ratings` in the condition and setting the comparator to `IS ON`, meaning that the `Cafe Notifications` feature flag will be enabled only if the `Cafe Ratings` feature flag is ON.
 
 On the Dashboard:
 ![Flag Condition example](/assets/targeting/targeting-rule/flag-condition/flag-condition-example.jpg)

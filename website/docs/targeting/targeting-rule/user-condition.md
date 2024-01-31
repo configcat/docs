@@ -137,13 +137,22 @@ The following comparators expect the *Comparison attribute* to be an array of st
 
 ## Examples
 
-### Confidential CONTAINS and NOT CONTAINS
+### Confidential CONTAINS and NOT CONTAINS workaround
+
+#### Context
+We use ConfigCat in our Angular frontend application to control the availability of a feature.
 
 #### Goal
-Let's target users who are from the same company confidentially. However, text comparators don't support `CONTAINS` or `NOT CONTAINS` comparisons. How can we solve this?
+We want to enable this feature for users from certain companies. To do the job, we would need to use the `CONTAINS` or `NOT CONTAINS` comparators.
+
+However, there is no confidential version of these comparators and we are well aware that, for privacy reasons, it's not a good idea to use cleartext comparators for applications running in the browser.
+
+How can we solve this?
 
 #### Solution
-Let's add a custom attribute called `domain` and use only confidential comparators in the Targeting Rule.
+We can work around the problem by extracting the domain part of the email and pass it as a custom attribute named e.g. `domain` to the ConfigCat SDK.
+
+This way we can define the desired Targeting Rule using confidential comparators only.
 
 On the Dashboard:
 <img src="/docs/assets/targeting/targeting-rule/user-condition/user-condition-example1.jpg" className="zoomable" alt="User Condition Example" />

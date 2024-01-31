@@ -56,31 +56,39 @@ The ConfigCat SDK's feature flag evaluation functions (e.g. `GetValue`) requires
 
 ### Phased rollout / Canary release / Percentage rollout Scenario
 
-#### Goal
+#### Context
+Our demo company, Whisker Co. is about to release a new feature called `Park Weather Info`. The stakeholders want to make sure that releasing the new feature will go smoothly and it will be received well by the customers.
 
-In our sample company (Whisker Co.), we want to release a new feature called `Park Weather Info`. Let's release the feature to everyone at Whisker Co. and to `20%` of our users. We want to ensure the new feature is working as expected before we release it to everyone.
+#### Goal
+To make sure that the new feature is working as expected before releasing it to everyone, we initially want to make the feature available to the employees and to `20%` of the customers only.
 
 #### Solution
+Let's create a feature flag called `Enable Park Weather Info` with a Targeting Rule that matches everyone at Whisker Co. and Percentage Options of `20%` `ON` and `80%` `OFF`.
 
-Let's have a feature flag called `Enable Park Weather Info` with a Targeting Rule that matches everyone at Whisker Co. and a Percentage Option of `20%` `ON`.
-
-Here is what the feature flag looks like on the Dashboard:
+Here is what such a feature flag looks like on the Dashboard:
 ![Phased rollout Example](../../static/assets/targeting/targeting-overview/phased-rollout.jpg)
 
-Here is how you to get the value of the feature flag in the code:
+Here is how we get the value of the feature flag in your application:
 ```js
 import * as configcat from 'configcat-js';
 
 // Create the user object
 let userObject = new configcat.User(
-  '867428724', // Identifier (required)
-  'isaac@whisker.example', // Email (optional)
+   // Identifier - used by the Percentage Options to split the users into groups
+  '867428724',
+  // Email - used by the Targeting Rule's User Condition to determine whether
+  // the user is an employee at Whisker Co.
+  'isaac@whisker.example',
 );
 
 // Get the value of the feature flag
 const value = await configCatClient.getValueAsync(
-  'enableParkWeatherInfo', // Feature flag key
-  false, // Default value
-  userObject, // User object
+  // Feature flag key
+  'enableParkWeatherInfo',
+  // Default value - by providing `false` we specify that the feature should not be
+  // enabled if the SDK fails to fetch the config or some other error occurs
+  false,
+  // User object
+  userObject,
 );
 ```

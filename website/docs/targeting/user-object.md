@@ -64,11 +64,16 @@ To use custom attributes, you need to pass a User Object containing the `custom`
 
 ### Example: Enable a feature for users with a specific subscription type
 
+#### Context
+Our demo company, Whisker Co. developed a new feature called `Personalized Layout` to enhance the user experience of their most valuable customers.
+
 #### Goal
-Let's enable the `Personalized Layout` feature for users with a `Pro` subscription type.
+We want to enable the `Personalized Layout` feature but only for customers with the `Pro` subscription type.
 
 #### Solution
-In this case, `SubscriptionType` is the custom attribute. The comparator is `EQUALS`, meaning the `Enable Personalized Layout` feature flag will be enabled only if the `SubscriptionType` custom attribute is `Pro`.
+To achieve this goal, we need a custom attribute named e.g. `SubscriptionType`, which stores the subscription type of the customer.
+
+This allows us to define a Targeting Rule that turns on the feature for the customers whose `SubscriptionType` attribute is `Pro`. Finally, we need to make sure that the "To all others" value is OFF so the feature is turned off for the rest of the customers.
 
 #### Dashboard
 ![User object example](/assets/targeting/user-object/user-object-example.jpg)
@@ -77,12 +82,9 @@ In this case, `SubscriptionType` is the custom attribute. The comparator is `EQU
 Add the `SubscriptionType` custom attribute to the User Object in your application code.
 
 ```js
-var userObject = {
-  identifier: '<unique-identifier-here>', // required
-  custom: {
+let userObject = new configcat.User('<unique-identifier-here>', undefined, undefined, { 
     SubscriptionType: 'Pro',
-  },
-};
+});
 ```
 
 

@@ -10,7 +10,7 @@ A *Segment Condition* is a condition that is based on the evaluation of a *segme
 
 Segments allow you to define user groups based on any user attributes. You can reference segments in Targeting Rules. When you update a segment definition, the changes will be reflected automatically in all the Targeting Rules that reference it.
 
-*For example, you can define a segment called "Beta Testers" and use that segment for all features you want to be available for beta testers.*
+*For example, you can define a segment called "Beta Testers" and use that segment for all features you want to be available to beta testers.*
 
 One segment belongs to one product and can be used in multiple feature flags within the same product.
 
@@ -18,7 +18,7 @@ One segment belongs to one product and can be used in multiple feature flags wit
 
 The segment is evaluated with the [User Object](../../user-object), and the result is checked against the comparator you set on the Dashboard. In the case of `IS IN SEGMENT`, the result of the Segment Condition will be the same as that of the segment. The result will be negated in the case of `IS NOT IN SEGMENT`.
 
-For more details on the evaluation of flag conditions, please refer to the [feature flag evaluation](../../feature-flag-evaluation).
+For more details on the evaluation of Segment Conditions, please refer to the [feature flag evaluation](../../feature-flag-evaluation).
 
 ## How to set a Segment Condition?
 
@@ -133,15 +133,22 @@ The following comparators expect the *Comparison attribute* and the *Comparison 
 
 All number comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid number.
 
-## Example
+## Examples
 
 ### Beta Testing Scenario
 
+#### Context
+The developers at our demo company, Whisker Co. just finished implementing a nice new feature which allows users to personalize the layout of the webshop. It's time for a beta test.
+
 #### Goal
-Let's release our `Personalized Layout` feature of the webstore to beta testers.
+We want to make the `Personalized Layout` feature of the webshop available to the beta testers.
 
 #### Solution
-In this case, we create a segment called `Beta Testers` and use that segment in the `Enable Personalized Layout` feature flag as a Segment Condition.
+We could simply achieve our goal using a Targeting Rule with a User Condition. However, `Personalized Layout` is certainly not the last feature developed at Whisker Co., so it's a good idea to create a segment named e.g. `Beta Testers` for our beta testers. This makes it easier for us to release further features for beta testing in the future.
+
+After creating the segment, we can complete our task by adding a Targeting Rule containing a Segment Condition to `Enable Personalized Layout`, then referencing the `Beta Testers` segment in the condition and setting the comparator to `IS IN SEGMENT`.
+
+TODO: a screenshot of the segment as well
 
 On the Dashboard:
 ![Segment Condition example](/assets/targeting/targeting-rule/segment-condition/beta-testers.jpg)
