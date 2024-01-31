@@ -70,7 +70,7 @@ There are 3 predefined attributes. Additionally, you can define your **_custom a
 | `Country`                 | Might be useful for testing a new feature only in one country.                       |
 | `Custom`                  | **_Define any attribute (e.g. `OS version`), by typing its name into the textbox._** |
 
-### Comparison value
+### Comparison Value
 
 Any string, number, or comma-separated list. Will be compared to the selected _Comparison attribute_ using the _Comparator_. **Max Length: 65535 chars**.
 
@@ -78,16 +78,23 @@ Any string, number, or comma-separated list. Will be compared to the selected _C
 
 #### Text comparators
 
-The following comparators assume that _Comparison attribute_ and _Comparison value_ contain string/text.
+The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings.
 
-| Comparator                   | Description                                                                |
-| ---------------------------- | -------------------------------------------------------------------------- |
-| CONTAINS (cleartext)         | True if the _Comparison attribute_ contains the _Comparison value_.        |
-| DOES NOT CONTAIN (cleartext) | True if the _Comparison attribute_ doesn't contain the _Comparison value_. |
+:::caution
+Consider using Confidential text comparators if you plan to target users by their sensitive information, e.g.: email address or company domain.
+:::
 
-#### Confidential text comparators
+| Comparator                   | Description                                                                                                                    |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| CONTAINS (cleartext)         | True if the _Comparison attribute_ contains the _Comparison value_.                                                            |
+| DOES NOT CONTAIN (cleartext) | True if the _Comparison attribute_ doesn't contain the _Comparison value_.                                                     |
+| IS ONE OF (cleartext)        | Checks if the _Comparison attribute_ is listed in the _Comparison value_. _Comparison value_ should be a comma-separated list. |
+| IS NOT ONE OF (cleartext)    | True if the _Comparison attribute_ is not listed in the _Comparison value_.                                                    |
 
-Our recommendation is to use confidential text comparators in front-end applications that target users based on sensitive data (such as email addresses, names, etc.). In this case, the *Comparison attribute* and the *Comparison value* are hashed before the comparison.
+#### Confidential Text Comparators
+
+We recommend using confidential text comparators especially in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
+In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed. This can cause an increase in the size of the config.json file and the overall network traffic. It is recommended to use confidential comparators only when necessary.
 
 | Comparator             | Description                                                                                                                    |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
@@ -96,7 +103,8 @@ Our recommendation is to use confidential text comparators in front-end applicat
 
 #### Semantic version comparators
 
-The following comparators assume that _Comparison attribute_ and _Comparison value_ contain semantic versions.
+The following comparators expect the *Comparison attribute* to be a string containing a valid semantic version and the *Comparison value* to be a semantic version or a list of semantic versions.
+
 Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer Semantic Version Specification</a>.
 
 | Comparator             | Description                                                                                                                                   |
@@ -112,7 +120,7 @@ All semantic version comparators return `false` if either _Comparison attribute_
 
 #### Number comparators
 
-The following comparators assume that _Comparison attribute_ and _Comparison value_ contain numbers.
+The following comparators expect the *Comparison attribute* and the *Comparison value* to be numbers.
 
 | Comparator         | Description                                                                 |
 | ------------------ | --------------------------------------------------------------------------- |
