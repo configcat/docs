@@ -14,10 +14,10 @@ You can add Percentage Options to a feature flag on the Dashboard by clicking on
 
 ![Add Percentage Option](/assets/targeting/percentage-options/add-percentage-option.jpg)
 
-## How does it work? - Anatomy of a Percentage Option
+## How does it work? - Anatomy of Percentage Options
 
-The grouping is random and based on the [User Object](../user-object)'s identifier by default. You can also use [other user attributes](#percentage-evaluation-attribute) to evaluate the Percentage Options. Percentage Options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
-- **Sticky** means the same user will always get the same value for a specific feature flag and for a certain Percentage Option set. Read more below.
+The grouping is random and based on the [User Object's](../user-object) `Identifier` attribute by default. You can also use [other user attributes](#percentage-evaluation-attribute) to evaluate the Percentage Options. Percentage Options are designed to be **consistent** and **sticky** across all SDKs, ensuring a reliable experience.
+- **Sticky** means the same user will always get the same value for a specific feature flag and for a certain Percentage Options setup. Read more below.
 - **Consistent** means that the same user will always get the same value for a specific feature flag across all SDKs. Read more below.
 
 If the required attribute is not present in the [User Object](../user-object), the ["To unidentified" value](../targeting-overview/#to-all-users--to-all-other--to-unidentified-value) will be returned.
@@ -28,7 +28,7 @@ Percentage Options are a list of **% value** and **Served value** pairs, where %
 
 ### % value
 
-Any _number between 0 and 100_ that represents a randomly allocated fraction of your users.
+Any number between 0 and 100 that represents a randomly allocated fraction of your users.
 
 ### Served value
 
@@ -76,7 +76,7 @@ Consistency means that the same user will always get the same value for a specif
 
 ## Randomness
 
-The same user might get different values in the case of different feature flags. The hashing algorithm is based on the feature flag's key and the Percentage Evaluation Attribute. The key of each feature flag is different.
+The same user might get different values for the same Percentage Options setup in the case of different feature flags. This is because the hashing algorithm is based on the combination of the feature flag's key and the Percentage Evaluation Attribute. The key of each feature flag is different, so the hash will be as well.
 
 *For example, if you have two feature flags with Percentage Options of `20%` `ON`, then a different `20%` of users will get the `ON` value for each feature flag.*
 

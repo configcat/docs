@@ -58,7 +58,7 @@ The evaluation process stops if the referenced segment is missing, and the SDK w
 
 The SDK looks up the [Percentage Evaluation Attribute](../percentage-options#percentage-evaluation-attribute) in the [User Object](../user-object), then:
 - The SDK creates a hash from the combination of the Percentage Evaluation Attribute's value and the specific feature flag's key.
-- The hash algorithm assigns the user a number between 0 and 99.
+- The hashing algorithm assigns the user a number between 0 and 99.
 - The assigned number determines which group the user falls into, i.e. which Percentage Option applies to the user.
 
 The fact that the above algorithm is implemented across all SDKs guarantees [stickiness](../percentage-options#stickiness) and [consistency](../percentage-options#consistency).

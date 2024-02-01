@@ -12,7 +12,7 @@ description: Targeting Rules allow you to set different feature flag or setting 
 
 ### AND and OR relationships
 
-The conditions within a Targeting Rule are in an **AND** relationship, meaning that all of them must evaluate to `true` for the Targeting Rule to match.
+The conditions within a Targeting Rule are in an **AND** relationship, meaning that all of them must evaluate to true for the Targeting Rule to match.
 
 The Targeting Rules are in an **OR** relationship, meaning that the Targeting Rule which matches first in order, from top to bottom, will provide the value of the feature flag.
 
@@ -29,9 +29,9 @@ A Targeting Rule consists of an **IF part** and a **THEN part**.
 
 ### IF part
 
-The *IF part* contains the conditions, which are logical expressions that evaluate to `true` or `false`.
+The *IF part* contains the conditions, which are logical expressions that evaluate to true or false.
 
-The conditions are in an **AND** relationship, meaning that all of them must evaluate to `true` for the Targeting Rule to match.
+The conditions are in an **AND** relationship, meaning that all of them must evaluate to true for the Targeting Rule to match.
 
 The conditions can be added to the Targeting Rule on the Dashboard. There are three types of conditions:
 - [User Condition](../user-condition) - A condition that is based on some property of the user.

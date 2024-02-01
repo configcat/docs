@@ -22,7 +22,7 @@ Targeting allows you to enable or disable a feature for specific users or groups
 
 A *setting* is a set of rules that yields a **boolean**, **string**, **integer** or **double** value, which can be used to configure your application. It is also known as a configuration value, configuration setting, configuration parameter, etc.
 
-A *feature flag* is a **boolean** setting to decide whether an application feature should be turned ON or OFF. It is also known as a feature toggle, feature switch, feature flipper, conditional feature, etc.
+A *feature flag* is a **boolean** setting used to decide whether an application feature should be turned ON or OFF. It is also known as a feature toggle, feature switch, feature flipper, conditional feature, etc.
 
 :::info
 Throughout this documentation, we generally use the term *feature flag* to refer to both feature flags and settings for simplicity because feature flags are the most common type of settings.
@@ -34,23 +34,23 @@ A *Targeting Rule* consists of a collection of conditions and a value to serve. 
 
 ### Condition
 
-A *condition* is a logical expression that can be evaluated to `true` or `false`. There are three types of conditions: [User Condition](../targeting-rule/user-condition), [Flag Condition (Prerequisite)](../targeting-rule/flag-condition), [Segment Condition](../targeting-rule/segment-condition). For a Targeting Rule to match, all of its conditions must evaluate to `true`.
+A *condition* is a logical expression that can be evaluated to true or false. There are three types of conditions: [User Condition](../targeting-rule/user-condition), [Flag Condition (Prerequisite)](../targeting-rule/flag-condition), [Segment Condition](../targeting-rule/segment-condition). For a Targeting Rule to match, all of its conditions must evaluate to true.
 
 ### Percentage Options
 
-*Percentage Options* are used to split users into groups that will receive a specific value for a feature flag. The groups are allocated based on the ratio of the percentages. Percentage Options are often used for A/B testing or phased rollouts. More about [Percentage Options here](../percentage-options).
+*Percentage Options* are used to split users into groups that will receive a specific value for the feature flag. The groups are allocated based on the ratio of the percentages. Percentage Options are often used for A/B testing or phased rollouts. More about [Percentage Options here](../percentage-options).
 
 ### "To all users" / "To all other" / "To unidentified" value
 
 A feature flag always contains a trivial "rule", a simple value after the actual rules. This value is returned when none of the preceding rules yields a result.
 
-### User Object
-
-A *User Object* is a collection of *user attributes* that describe the properties of a user. Referencing these attributes in conditions allows you to define rules for targeting users. More about the [User Object here](../user-object).
-
 ### Default value
 
 The ConfigCat SDK's feature flag evaluation functions (e.g. `GetValue`) requires you to provide a *default value*. This value will be returned in case the SDK fails to fetch the config or some other error occurs during the evaluation of the feature flag.
+
+### User Object
+
+A *User Object* is a collection of *user attributes* that describe the properties of a user. Referencing these attributes in conditions allows you to define rules for targeting users. More about the [User Object here](../user-object).
 
 ## Examples
 

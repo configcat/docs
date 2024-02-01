@@ -27,10 +27,10 @@ The data that can be stored in the User Object:
 
 | Attribute  | Description                                                                                                                                                              |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Identifier | **REQUIRED** We recommend adding a UserID, Email address, or SessionID.                                                                                                  |
-| Email      | **OPTIONAL** By adding this parameter, you can create Email address-based targeting. e.g.: Only turn on a feature for users with @example.com addresses.                 |
-| Country    | **OPTIONAL** Fill this for location or country-based targeting. e.g.: Turn on a feature for users in Canada only.                                                        |
-| Custom     | **OPTIONAL** This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role, Device type, App version number, etc. |
+| Identifier | **REQUIRED.** We recommend adding a UserID, Email address, or SessionID.                                                                                                  |
+| Email      | Optional. By adding this parameter, you can create Email address-based targeting. e.g.: Only turn on a feature for users with @example.com addresses.                 |
+| Country    | Optional. Fill this for location or country-based targeting. e.g.: Turn on a feature for users in Canada only.                                                        |
+| Custom     | Optional. This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role, Device type, App version number, etc. |
 
 ### Code example
 
@@ -62,7 +62,9 @@ To use custom attributes, you need to pass a User Object containing the `custom`
 
 > The custom attribute's value can be multiple types. e.g.: string, number, date, array of strings, etc. Check the [SDK reference](../../sdk-reference/overview) for more details.
 
-### Example: Enable a feature for users with a specific subscription type
+## Examples
+
+### Enable a feature for most valuable customers only
 
 #### Context
 Our demo company, Whisker Co. developed a new feature called `Personalized Layout` to enhance the user experience of their most valuable customers.

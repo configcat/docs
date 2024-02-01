@@ -12,7 +12,7 @@ A *User Condition* is a condition that is based on the comparison of a user attr
 
 The *comparison attribute*'s value from the [User Object](../../user-object) is compared to the *comparison value* you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
-For more details on the evaluation of User Conditions, please refer to the [feature flag evaluation](../../feature-flag-evaluation).
+For more details on the evaluation of User Conditions, please refer to [Feature Flag Evaluation](../../feature-flag-evaluation).
 
 ## How to set a User Condition?
 

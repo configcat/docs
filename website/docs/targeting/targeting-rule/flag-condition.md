@@ -6,7 +6,7 @@ description: A Flag Condition is a condition that is based on the comparison of 
 
 ## What is a Flag Condition? What is a prerequisite flag?
 
-A *Flag Condition* is a condition that is based on the comparison of another feature flag's value and a preset value (*comparison value*). In other words, a Flag Condition creates a dependency between the feature flag containing the condition (dependent flag) and another feature flag (prerequisite flag, aka. master feature flag, master switch, inter-dependent feature flag, global toggle, etc.)
+A *Flag Condition* is a condition that is based on the comparison of another feature flag's value and a preset value (*comparison value*). In other words, a Flag Condition creates a dependency between the feature flag containing the condition (*dependent flag*) and another feature flag (*prerequisite flag*, aka. master feature flag, master switch, inter-dependent feature flag, global toggle, etc.)
 
 This allows you to control the value of multiple feature flags by changing the value of a single, central feature flag. Prerequisite flags are useful for managing complex feature dependencies and ensuring a smooth user experience during feature rollouts.
 
@@ -16,11 +16,11 @@ The prerequisite flag is evaluated with the same User Object as the one used to 
 
 The prerequisite flag can be other than a feature flag (boolean setting), in which case the prerequisite flag's evaluated value will be compared to the comparison value that you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
-For more details on the evaluation of Flag Conditions, please refer to the [feature flag evaluation](../../feature-flag-evaluation).
+For more details on the evaluation of Flag Conditions, please refer to [Feature Flag Evaluation](../../feature-flag-evaluation).
 
 ## How to set a Flag Condition?
 
-You can set a Flag Condition for a feature flag on the ConfigCat Dashboard. The prerequisite flag can be any feature flag already defined in the same config on the Dashboard. In the case of settings other than feature flags (*boolean* settings), you can also set a comparison value to which the prerequisite flag's value will be compared.
+You can set a Flag Condition for a feature flag on the ConfigCat Dashboard. The prerequisite flag can be any feature flag already defined in the same config on the Dashboard. In the case of settings other than feature flags (boolean settings), you can also set a comparison value to which the prerequisite flag's value will be compared.
 
 ![Flag Condition](/assets/targeting/targeting-rule/flag-condition/flag-condition.jpg)
 
@@ -36,7 +36,7 @@ A Flag Condition consists of the following:
 
 - **Prerequisite flag key**: The key of the feature flag (or setting) on which the condition is based.
 - **Comparator**: The comparison operator that defines the relation between the prerequisite flag's value and the comparison value. See the available comparators below.
-- **Comparison value**: Available only in the case of string, integer and double settings. The value that the prerequisite flag's value is compared to.
+- **Comparison value**: Available only when the prerequisite flag is a string, integer or double setting. The value that the prerequisite flag's value is compared to.
 
 ### Comparators
 
@@ -63,7 +63,7 @@ When the prerequisite is a string, integer or double setting, the following comp
 #### Context
 Our demo company, Whisker Co. has a mobile app, which, among other things, can show the cat-friendly cafés in the neighborhood.
 
-The app can send notifications about the users' favorite cafés. This feauture is not available to everyone though, it's enabled using the `Enable Cafe Notifications` feature flag.
+The app can send notifications about the users' favorite cafés. This feature is not available to everyone though, it's enabled using the `Enable Cafe Notifications` feature flag.
 There is another feature that allows users to rate cafés, whose availability is controlled similarly, via the `Enable Cafe Ratings` feature flag.
 
 #### Goal

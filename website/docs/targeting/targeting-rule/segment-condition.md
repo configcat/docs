@@ -6,7 +6,7 @@ description: Segments allow you to define user groups based on any user attribut
 
 ## What is a Segment Condition? What is a segment?
 
-A *Segment Condition* is a condition that is based on the evaluation of a *segment*. A *segment* is a reusable, predefined [User Condition](../user-condition).
+A *Segment Condition* is a condition that is based on the evaluation of a segment. A *segment* is a reusable, predefined [User Condition](../user-condition).
 
 Segments allow you to define user groups based on any user attributes. You can reference segments in Targeting Rules. When you update a segment definition, the changes will be reflected automatically in all the Targeting Rules that reference it.
 
@@ -18,7 +18,7 @@ One segment belongs to one product and can be used in multiple feature flags wit
 
 The segment is evaluated with the [User Object](../../user-object), and the result is checked against the comparator you set on the Dashboard. In the case of `IS IN SEGMENT`, the result of the Segment Condition will be the same as that of the segment. The result will be negated in the case of `IS NOT IN SEGMENT`.
 
-For more details on the evaluation of Segment Conditions, please refer to the [feature flag evaluation](../../feature-flag-evaluation).
+For more details on the evaluation of Segment Conditions, please refer to [Feature Flag Evaluation](../../feature-flag-evaluation).
 
 ## How to set a Segment Condition?
 
@@ -39,7 +39,7 @@ You can define your segments on the [ConfigCat Dashboard under the Segments tab]
 
 A *Segment Condition* consists of two parts: 
 
-- **Segment comparator:** The comparison operator defines the relation between the segment and the condition.
+- **Segment comparator:** The comparison operator defines the relation between the user and the segment.
 - **Segment:** The segment that the condition is based on.
 
 | Comparator        | Description                                             |
@@ -118,8 +118,6 @@ Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer 
 | \> (semver)            | Checks whether the comparison attribute interpreted as a semantic version is greater than the comparison value.                                                                                     |
 | \>= (semver)           | Checks whether the comparison attribute interpreted as a semantic version is greater than or equal to the comparison value.                                                                         |
 
-All semantic version comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
-
 #### Number comparators
 
 The following comparators expect the *Comparison attribute* and the *Comparison value* to be numbers.
@@ -132,8 +130,6 @@ The following comparators expect the *Comparison attribute* and the *Comparison 
 | <= (number)        | Checks whether the comparison attribute interpreted as a decimal number is less than or equal to the comparison value.    |
 | \> (number)        | Checks whether the comparison attribute interpreted as a decimal number is greater than the comparison value.             |
 | \>= (number)       | Checks whether the comparison attribute interpreted as a decimal number is greater than or equal to the comparison value. |
-
-All number comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid number.
 
 ## Examples
 
