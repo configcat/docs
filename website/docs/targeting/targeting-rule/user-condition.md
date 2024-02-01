@@ -137,6 +137,30 @@ The following comparators expect the *Comparison attribute* to be an array of st
 
 ## Examples
 
+### Black Friday Sale
+
+#### Context
+Black Friday is coming and we want to offer a special discount to our users.
+
+#### Goal
+The deals should be available only at midnight on Black Friday. We want to make sure that the users can't access the deals before that.
+
+#### Solution
+Let's use the AFTER comparator to check whether the current time is after midnight on Black Friday.
+
+On the Dashboard:
+![Black Friday Sale Example](/assets/targeting/targeting-rule/user-condition/black-friday-example.jpg)
+
+In the code:
+```js
+const userObject = {
+  identifier: '<SOME USER ID>',
+  email: userEmail,
+  custom: { Date: new Date() },
+};
+const value = await configCatClient.getValueAsync("enableBlackFridayDeals", false, userObject);
+```
+
 ### Confidential CONTAINS and NOT CONTAINS workaround
 
 #### Context
@@ -150,7 +174,7 @@ However, there is no confidential version of these comparators and we are well a
 How can we solve this?
 
 #### Solution
-We can work around the problem by extracting the domain part of the email and pass it as a custom attribute named e.g. `domain` to the ConfigCat SDK.
+Let's work around the problem by extracting the domain part of the email and pass it as a custom attribute named e.g. `domain` to the ConfigCat SDK.
 
 This way we can define the desired Targeting Rule using confidential comparators only.
 

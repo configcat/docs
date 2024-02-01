@@ -50,3 +50,31 @@ The order of Targeting Rules matters because they are in an **OR** relationship,
 The order of the Targeting Rules can be changed on the Dashboard by dragging and dropping the Targeting Rules.
 
 ![Change Targeting Rule order](/assets/targeting/targeting-rule/reorder.jpg)
+
+## Examples
+
+### AND relationship between Conditions
+
+#### Context
+In our demo company (Whisker Co.) we have a new feature in our mobile app that notifies frequent shopper cat owners about the cat-friendly cafés in the neighborhood. 
+
+#### Goal
+Since this feature is new, we want to make sure that only frequent shoppers and cat owners who have the right version of the app receive these notifications. The earlier versions of the app don't have this feature, so we want to make sure that anyone higher than version 3.0.0 receives the notifications.
+
+#### Solution
+We can achieve this by adding a Targeting Rule to the `Enable Cafe Notifications` feature flag. The Targeting Rule will have two conditions:
+- User condition: `AppVersion` is greater than `3.0.0`
+- Segment condition: `Frequent Shoppers`
+
+On the Dashboard:
+![Targeting Rule example](/assets/targeting/targeting-rule/and-example.jpg)
+
+In the code:
+```js
+const userObject = {
+  identifier: '<SOME USER ID>',
+  email: userEmail,
+  custom: { AppVersion: `<APP VERSION>` },
+};
+const value = await configCatClient.getValueAsync("enableCafeNotifications", false, userObject);
+```
