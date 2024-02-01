@@ -63,8 +63,8 @@ When the prerequisite is a string, integer or double setting, the following comp
 #### Context
 Our demo company, Whisker Co. has a mobile app, which, among other things, can show the cat-friendly cafés in the neighborhood.
 
-The app can send notifications about the users' favorite cafés. This feauture is not available to everyone though, it's enabled using the `Cafe Notifications` feature flag.
-There is another feature that allows users to rate cafés, whose availability is controlled similarly, via the `Cafe Ratings` feature flag.
+The app can send notifications about the users' favorite cafés. This feauture is not available to everyone though, it's enabled using the `Enable Cafe Notifications` feature flag.
+There is another feature that allows users to rate cafés, whose availability is controlled similarly, via the `Enable Cafe Ratings` feature flag.
 
 #### Goal
 We want to make sure that users only receive notifications about their favorite cafés if they can rate them.
@@ -72,7 +72,7 @@ We want to make sure that users only receive notifications about their favorite 
 #### Solution
 ConfigCat offers a built-in way to solve this problem without the need of extra coding: prerequisite flags.
 
-We can achieve our goal by adding a targeting rule containing a Flag Condition to `Cafe Notifications`, then referencing `Cafe Ratings` in the condition and setting the comparator to `IS ON`, meaning that the `Cafe Notifications` feature flag will be enabled only if the `Cafe Ratings` feature flag is ON.
+We can achieve our goal by adding a targeting rule containing a Flag Condition to `Enable Cafe Notifications`, then referencing `Enable Cafe Ratings` in the condition and setting the comparator to `IS ON`, meaning that the `Enable Cafe Notifications` feature flag will be enabled only if the `Enable Cafe Ratings` feature flag is ON.
 
 On the Dashboard:
 ![Flag Condition example](/assets/targeting/targeting-rule/flag-condition/flag-condition-example.jpg)

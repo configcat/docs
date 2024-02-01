@@ -104,7 +104,7 @@ The marketing specialists at Whisker Co. want to introduce a discount method to 
 To learn which is the most effective discount method, we want to perform an A/B/C test.
 
 #### Solution
-We need a string or integer setting for this task because we need to represent 3 different variations. Let's create a string setting named `Discount Type`, as text is more descriptive than numbers.
+We need a string or integer setting for this task because we need to represent 3 different variations. Let's create a string setting named `Discount Type` (as textual values tell more than numbers).
 
 The go-to feature for A/B testing is Percentage Options. So let's add one with 3 options, each covering 1/3rd of our customers.
 
