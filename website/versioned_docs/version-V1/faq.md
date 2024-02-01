@@ -138,7 +138,7 @@ You can read more [here](/advanced/data-governance).
 
 Yes! You can export and download your current product as a standard JSON file anytime you want. The export will include:
 
-- All feature flags and settings together with their values, targeting rules, % options, segments, tags
+- All feature flags and settings together with their values, Targeting Rules, Percentage Options, segments, tags
 - All configs
 - All environments
 - All tags
@@ -156,7 +156,7 @@ We consider an organization inactive if it meets all of the following criteria:
 
 ## A/B Testing & Targeting
 
-### Can I use AND operators in my targeting rules?
+### Can I use AND operators in my Targeting Rules?
 
 Although there is no direct support for `AND` operators in the UI, you can use the `AND` operator with a combination of `OR` and `NOT` operators.
 
@@ -186,7 +186,7 @@ To all other users the feature is ON
 
 [Here is an example in our blog.](https://configcat.com/blog/2019/10/23/user-segmentation-and-targeting/#everyone-in-my-company-plus-android-users-from-germany-above-v53)
 
-### Are percentage options sticky?
+### Are Percentage Options sticky?
 
 Yes. The percentage-based targeting is sticky by design and consistent across all SDKs.
 
@@ -197,9 +197,9 @@ Also, consider the following:
 
 [More on stickiness and consistency](/advanced/targeting/#stickiness--consistency)
 
-### How to use targeting rules based on sensitive data?
+### How to use Targeting Rules based on sensitive data?
 
-If you want to use targeting rules based on email address, phone number, or other sensitive data, you can use the [Confidential text comparators](/advanced/targeting/#confidential-text-comparators).
+If you want to use Targeting Rules based on email address, phone number, or other sensitive data, you can use the [Confidential text comparators](/advanced/targeting/#confidential-text-comparators).
 
 ## Technical Debt
 
@@ -215,7 +215,7 @@ The [Zombie (Stale) Flags Report](https://app.configcat.com/my-account/zombie-fl
 
 ### I am not getting the Zombie Feature Flag email report. What am I doing wrong?
 
-You can change the frequency, criteria and scope of the Zombie Feature Flag report from the dashboard.
+You can change the frequency, criteria and scope of the Zombie Feature Flag report on the Dashboard.
 
 **Note:** Please be aware that feature flags are only treated as zombie flags if they haven't been modified (with save & publish) in the past given timeframe. It currently doesn't have any connection with your real usage in your code.
 

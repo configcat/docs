@@ -6,7 +6,7 @@ description: Instead of spamming your mailbox, we're posting news and product up
 
 Here, you'll find all the latest updates, enhancements, and new features we've added to our service. Stay tuned to this page to keep up with all the latest news from ConfigCat!
 
-<!-- This page must be in sync with the news page in the dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html -->
+<!-- This page must be in sync with the news page in the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html -->
 
 ## Join the Config V2 Beta Program!
 
@@ -538,7 +538,7 @@ Released Public Management API to Beta. From now on you can execute Dashboard ma
 
 #### March 3, 2020
 
-Introduced sensitive text comparators to make sure sensitive info (like email address, user name) is kept hidden in targeting rules. Comes handy in front-end applications.
+Introduced sensitive text comparators to make sure sensitive info (like email address, user name) is kept hidden in Targeting Rules. Comes handy in front-end applications.
 
 - [Detailed Docs about comparators](/advanced/targeting/#comparator)
 - [Related blog post](https://configcat.com/blog/2020/03/02/sensitive-comparators/)

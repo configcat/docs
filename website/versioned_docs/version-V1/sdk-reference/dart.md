@@ -183,7 +183,7 @@ The `details` result contains the following information:
 | `error`                           | `String?`                            | In case of an error, this field contains the error message.                               |
 | `user`                            | `ConfigCatUser?`                     | The user object that was used for evaluation.                                             |
 | `matchedEvaluationPercentageRule` | `PercentageRule?`                    | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `matchedEvaluationRule`           | `RolloutRule?`                       | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `matchedEvaluationRule`           | `RolloutRule?`                       | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `fetchTime`                       | `DateTime`                           | The last download time of the current config.                                             |
 
 ## User Object
@@ -203,9 +203,9 @@ final user = ConfigCatUser(identifier: 'john@example.com');
 | Argument     | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| `email`      | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `country`    | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `custom`     | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. |
 
 ```dart
 final user = ConfigCatUser(

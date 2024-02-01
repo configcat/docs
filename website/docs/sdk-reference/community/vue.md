@@ -187,7 +187,7 @@ Pass it to the `FeatureWrapper` component:
 
 ### Listening to flag changes emitted from the FeatureWrapper component
 
-When a feature flag is toggled ON or OFF in the [ConfigCat dashboard](https://app.configcat.com) the `FeatureWrapper` component emits the updated feature flag value. How quickly the updated value is emitted depends on the polling interval set in the `clientOptions` property of the `ConfigCatPlugin`.
+When a feature flag is toggled ON or OFF in the [ConfigCat Dashboard](https://app.configcat.com) the `FeatureWrapper` component emits the updated feature flag value. How quickly the updated value is emitted depends on the polling interval set in the `clientOptions` property of the `ConfigCatPlugin`.
 
 Listen and handle changes using `@flag-value-changed`:
 

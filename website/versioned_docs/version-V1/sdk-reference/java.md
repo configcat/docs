@@ -237,8 +237,8 @@ The details result contains the following information:
 | `isDefaultValue()`                 | `boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.                       |
 | `getError()`                       | `String`                                | In case of an error, this field contains the error message.                                                |
 | `getUser()`                        | `User`                                  | The user object that was used for evaluation.                                                              |
-| `getMatchedPercentageOption()`     | `PercentageOption`                      | The percentage option (if any) that was used to select the evaluated value.                                |
-| `getMatchedTargetingRule()`        | `TargetingRule`                         | The targeting rule (if any) that matched during the evaluation and was used to return the evaluated value. |
+| `getMatchedPercentageOption()`     | `PercentageOption`                      | The Percentage Option (if any) that was used to select the evaluated value.                                |
+| `getMatchedTargetingRule()`        | `TargetingRule`                         | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
 | `getFetchTimeUnixMilliseconds()`   | `long`                                  | The last download time of the current config in unix milliseconds format.                                  |
 
 ## User Object
@@ -256,9 +256,9 @@ User user = User.newBuilder().build("john@example.com");
 | Builder options | Description                                                                                                                     |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier()`  | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email()`       | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country()`     | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom()`      | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| `email()`       | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `country()`     | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `custom()`      | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. |
 
 ```java
 java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
@@ -296,23 +296,23 @@ All comparators support `String` values as User Object attribute (in some cases 
 
 **SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
 * accept `String` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Number-based comparators** (=, &lt;, &gt;=, etc.)
 * accept `Double` values and all other numeric values which can safely be converted to `Double`,
 * accept `String` values containing a properly formatted, valid `Double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Date time-based comparators** (BEFORE / AFTER)
 * accept `Date` or `Instant` values, which are automatically converted to a second-based Unix timestamp,
 * accept `Double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `Double`,
 * accept `String` values containing a properly formatted, valid `Double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
 * accept arrays and list of `String`,
 * accept `String` values containing a valid JSON string which can be deserialized to an array of `String`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 
 
@@ -556,7 +556,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
 ```json
 {
   "p": {
-    // hash salt, required only when sensitive text comparator(s) are used
+    // hash salt, required only when confidential text comparator(s) are used
     "s": "80xCU/SlDz1lCiWFaxIBjyJeJecWjq46T4eu6GtozkM="
   },
   "s": [ // array of segments
@@ -580,7 +580,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               // 1 -> text setting
               // 2 -> whole number setting
               // 3 -> decimal number setting
-      "r": [ // array of targeting rules (there is a logical OR relation between the elements)
+      "r": [ // array of Targeting Rules (there is a logical OR relation between the elements)
         {
           "c": [ // array of conditions (there is a logical AND relation between the elements)
             {
@@ -632,7 +632,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               }
             },
             {
-              "p": { // prerequisite flag condition
+              "p": { // flag condition (prerequisite)
                 "f": "mainIntFlag", // key of prerequisite flag
                 "c": 0, // comparator, possible values: 0 -> EQUALS, 1 -> NOT EQUALS
                 "v": { // comparison value (value's type must match the prerequisite flag's type)
@@ -647,7 +647,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               }
             }
           ],
-          "s": { // alternatively, an array of percentage options ("p", see below) can also be specified
+          "s": { // alternatively, an array of Percentage Options ("p", see below) can also be specified
             "v": { // the value served when the rule is selected during evaluation
               "b": true
             },
@@ -655,10 +655,10 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
           }
         }
       ],
-      "p": [ // array of percentage options
+      "p": [ // array of Percentage Options
         {
           "p": 10, // % value
-          "v": { // the value served when the percentage option is selected during evaluation
+          "v": { // the value served when the Percentage Option is selected during evaluation
             "b": true
           },
           "i": "bcfb84a7"
@@ -671,8 +671,8 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
           "i": "bddac6ae"
         }
       ],
-      "v": { // fallback value, served when none of the targeting rules match,
-             // no percentage options are defined or evaluation of these is not possible
+      "v": { // fallback value, served when none of the Targeting Rules match,
+             // no Percentage Options are defined or evaluation of these is not possible
         "b": false // depending on the setting type, another type of value may need to be specified:
                    // text setting -> "s": string
                    // whole number setting -> "i": number
@@ -731,7 +731,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
         }
       ],
       "r": [
-        // list of targeting rules
+        // list of Targeting Rules
         {
           "o": 0, // rule's order
           "a": "Identifier", // comparison attribute
@@ -946,7 +946,7 @@ Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
 INFO com.configcat.ConfigCatClient - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
-  Evaluating targeting rules and applying the first match if any:
+  Evaluating Targeting Rules and applying the first match if any:
   - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'False' => no match
   - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'True' => MATCH, applying rule
   Returning 'True'.

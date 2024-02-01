@@ -35,7 +35,7 @@ The next step will guide you on how to collect the information required for the 
 
 ## 2. Configure SAML for the OneLogin Application
 
-- Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
+- Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat Dashboard</a>.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
 

@@ -173,7 +173,7 @@ The `details` result contains the following information:
 | `Data.Error`                     | `error`             | In case of an error, this field contains the error message. |
 | `Data.User`                      | `User`              | The user object that was used for evaluation. |
 | `Data.MatchedPercentageOption`   | `*PercentageOption` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `Data.MatchedTargetingRule`      | `*TargetingRule`    | If the evaluation was based on a targeting rule, this field contains that specific rule. |
+| `Data.MatchedTargetingRule`      | `*TargetingRule`    | If the evaluation was based on a Targeting Rule, this field contains that specific rule. |
 | `Data.FetchTime`                 | `time.Time`         | The last download time (UTC) of the current config. |
 
 ## User Object
@@ -193,9 +193,9 @@ user = &configcat.UserData{Identifier: "john@example.com"}
 | Arguments    | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `Identifier` | Unique identifier of a user in your application. Can be any value, even an email address.                                       |
-| `Email`      | Optional parameter for easier targeting rule definitions.                                                                       |
-| `Country`    | Optional parameter for easier targeting rule definitions.                                                                       |
-| `Custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| `Email`      | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `Country`    | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `Custom`     | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. |
 
 ```go
 custom := map[string]interface{}
@@ -228,23 +228,23 @@ All comparators support `string` values as User Object attribute (in some cases 
 
 **SemVer-based comparators** (`IS_ONE_OF_SEMVER`, `LESS_THAN_SEMVER`, `GREATER_THAN_SEMVER`, etc.)
 - accept `string` or `[]byte` values containing a properly formatted, valid semver value,
-- all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+- all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Number-based comparators** (`EQUALS_NUMBER`, `LESS_THAN_NUMBER`, `GREATER_THAN_OR_EQUAL_NUMBER`, etc.)
 - accept `float64` values and all other numeric values which can safely be converted to `float64`,
 - accept `string` or `[]byte` values containing a properly formatted, valid `float64` value,
-- all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+- all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Date time-based comparators** (`BEFORE_DATETIME` / `AFTER_DATETIME`)
 - accept `time.Time` values, which are automatically converted to a second-based Unix timestamp (`time.Time` values with naive timezone are considered to be in UTC),
 - accept `float64` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `float64`,
 - accept `string` or `[]byte` values containing a properly formatted, valid `float64` value,
-- all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+- all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **String array-based comparators** (`ARRAY_CONTAINS_ANY_OF` / `ARRAY_NOT_CONTAINS_ANY_OF`)
 - accept arrays of `string` (`[]string`),
 - accept `string` or `[]byte` values containing a valid JSON string which can be deserialized to an array of `string`,
-- all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+- all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Other options to create a user object
 
@@ -486,7 +486,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               // 1 -> text setting
               // 2 -> whole number setting
               // 3 -> decimal number setting
-      "r": [ // array of targeting rules (there is a logical OR relation between the elements)
+      "r": [ // array of Targeting Rules (there is a logical OR relation between the elements)
         {
           "c": [ // array of conditions (there is a logical AND relation between the elements)
             {
@@ -538,7 +538,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               }
             },
             {
-              "p": { // prerequisite flag condition
+              "p": { // flag condition (prerequisite)
                 "f": "mainIntFlag", // key of prerequisite flag
                 "c": 0, // comparator, possible values: 0 -> EQUALS, 1 -> NOT EQUALS
                 "v": { // comparison value (value's type must match the prerequisite flag's type)
@@ -553,7 +553,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               }
             }
           ],
-          "s": { // alternatively, an array of percentage options ("p", see below) can also be specified
+          "s": { // alternatively, an array of Percentage Options ("p", see below) can also be specified
             "v": { // the value served when the rule is selected during evaluation
               "b": true
             },
@@ -561,10 +561,10 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
           }
         }
       ],
-      "p": [ // array of percentage options
+      "p": [ // array of Percentage Options
         {
           "p": 10, // % value
-          "v": { // the value served when the percentage option is selected during evaluation
+          "v": { // the value served when the Percentage Option is selected during evaluation
             "b": true
           },
           "i": "bcfb84a7"
@@ -577,8 +577,8 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
           "i": "bddac6ae"
         }
       ],
-      "v": { // fallback value, served when none of the targeting rules match,
-             // no percentage options are defined or evaluation of these is not possible
+      "v": { // fallback value, served when none of the Targeting Rules match,
+             // no Percentage Options are defined or evaluation of these is not possible
         "b": false // depending on the setting type, another type of value may need to be specified:
                    // text setting -> "s": string
                    // whole number setting -> "i": number
@@ -624,7 +624,7 @@ For a more comprehensive specification of the config JSON v6 format, you may ref
         }
       ],
       "r": [
-        // list of targeting rules
+        // list of Targeting Rules
         {
           "o": 0, // rule's order
           "a": "Identifier", // comparison attribute
@@ -814,7 +814,7 @@ Info level logging helps to inspect the feature flag evaluation process:
 
 ```bash
 [ConfigCat] 2024/01/08 13:27:56 INFO: [5000] Evaluating 'isPOCFeatureEnabled' for User '&configcat.UserData{Identifier:"##SOME-USER-IDENTIFICATION##", Email:"configcat@example.com", Country:"", Custom:map[string]interface{}(nil)}'
-Evaluating targeting rules and applying the first match if any:
+Evaluating Targeting Rules and applying the first match if any:
 - IF User.Email CONTAINS ANY OF ['@something.com'] => false, skipping the remaining AND conditions
   THEN 'false' => no match
 - IF User.Email CONTAINS ANY OF ['@example.com'] => true

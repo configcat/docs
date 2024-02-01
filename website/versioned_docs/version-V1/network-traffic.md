@@ -20,7 +20,7 @@ Here are a few examples of config JSON file sizes:
       </tr>
       <tr>
         <th># of feature flags</th>
-        <th>targeting rules</th>
+        <th>Targeting Rules</th>
         <th>first download size</th>
         <th>no change <br/> <code> 304 - Not Modified </code> </th>
       </tr>
@@ -48,7 +48,7 @@ Here are a few examples of config JSON file sizes:
   </table>
 
 #### Size of the `config JSON`
-Affected by the number of feature flags, settings, targeting rules, segments, and the length of their values.
+Affected by the number of feature flags, settings, Targeting Rules, segments, and the length of their values.
 
 #### Number of clients connecting to ConfigCat
 Every time a client downloads the config JSON, it contributes to the overall Network Traffic.
@@ -89,17 +89,17 @@ Runs on the customer's own servers. We suggest <a href="https://configcat.com/su
 
 ## How to reduce the monthly Network Traffic?
 
-### Delete the old feature flags and unused targeting rules
+### Delete the old feature flags and unused Targeting Rules
 
-If you have a lot of feature flags and targeting rules in a config, you can lower the size of the `config JSON` by deleting the old ones.
+If you have a lot of feature flags and Targeting Rules in a config, you can lower the size of the `config JSON` by deleting the old ones.
 
-### Avoid keeping lots of data in the comparison value of targeting rules or segments
+### Avoid keeping lots of data in the comparison value of Targeting Rules or segments
 
-The comparison value of a targeting rule or segment is stored in the `config JSON` and downloaded by the SDKs. If you have a lot of targeting rules or segments with long comparison values, you can lower the size of the `config JSON` by shortening them.
+The comparison value of a Targeting Rule or segment is stored in the `config JSON` and downloaded by the SDKs. If you have a lot of Targeting Rules or segments with long comparison values, you can lower the size of the `config JSON` by shortening them.
 
 ### Consider the amount of text you keep in a text setting's value
 
-Similarly to the comparison value of targeting rules or segments, the value of a text setting is stored in the `config JSON` and downloaded by the SDKs. If you have a lot of text settings with long values, you can lower the size of the `config JSON` by shortening them.
+Similarly to the comparison value of Targeting Rules or segments, the value of a text setting is stored in the `config JSON` and downloaded by the SDKs. If you have a lot of text settings with long values, you can lower the size of the `config JSON` by shortening them.
 
 ### Separate your feature flags into multiple configs
 
