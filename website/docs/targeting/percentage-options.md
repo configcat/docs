@@ -54,11 +54,11 @@ Percentage Options can be used in combination with Targeting Rules. In this case
 
 The *Percentage Evaluation Attribute* is the attribute that is used to split the users into groups. The Percentage Evaluation Attribute is the [User Object's](../user-object) `Identifier` attribute by default. You can also use other user attributes as the basis of the grouping (see an example use case below).
 
-### How to change the Percentage Attribute?
+### How to change the Percentage Evaluation Attribute?
 
 Click the 3 dots on the top right corner of the feature flag and select the **Change Percentage Attribute** option.
 
-> Changing the Percentage Attribute will be valid for all Percentage Options within the feature flag.
+> Changing the Percentage Evaluation Attribute will apply to all Percentage Options within the feature flag (but only in the current environment).
 
 ![Change Percentage Attribute](/assets/targeting/percentage-options/change-percentage-attribute.jpg)
 
