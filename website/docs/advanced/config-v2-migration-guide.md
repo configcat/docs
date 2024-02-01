@@ -50,7 +50,7 @@ In your application, replace the old ConfigCat SDK Key with the new one (i.e. wi
 
 ### Step 4: Deploy your application
 
-Deploy your application to production and wait until all your users upgrade to the new version. You can check the [migration status] on the ConfigCat Dashboard on the V2 config's page.
+Deploy your application to production and wait until all your users upgrade to the new version. You can check the migration status on the ConfigCat Dashboard on the V2 config's page.
 
 ### Step 5: Clean up
 

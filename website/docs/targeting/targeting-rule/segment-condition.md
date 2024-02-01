@@ -148,7 +148,5 @@ We could simply achieve our goal using a Targeting Rule with a User Condition. H
 
 After creating the segment, we can complete our task by adding a Targeting Rule containing a Segment Condition to `Enable Personalized Layout`, then referencing the `Beta Testers` segment in the condition and setting the comparator to `IS IN SEGMENT`.
 
-TODO: a screenshot of the segment as well
-
 On the Dashboard:
 ![Segment Condition example](/assets/targeting/targeting-rule/segment-condition/beta-testers.jpg)
