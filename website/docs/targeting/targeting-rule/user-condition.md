@@ -49,14 +49,31 @@ A string, a list of strings, a number, a semantic version, a list of semantic ve
 
 ### Comparator
 
+#### Confidential Text Comparators
+
+We recommend using confidential text comparators when targeting users based on their sensitive data (like email address, name, etc).
+In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed. This can cause an increase in the size of the config JSON file and the overall network traffic. Yet it is not recommended to use the cleartext version of the confidential comparators unless the increased network traffic becomes an issue.
+
+The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings.
+
+| Comparator                      | Description                                                                                |
+| ------------------------------- | ------------------------------------------------------------------------------------------ |
+| EQUALS (hashed)                 | Checks whether the comparison attribute is equal to the comparison value.                 |
+| NOT EQUALS (hashed)             | Checks whether the comparison attribute is not equal to the comparison value.             |
+| IS ONE OF (hashed)              | Checks whether the comparison attribute is equal to any of the comparison values.         |
+| IS NOT ONE OF (hashed)          | Checks whether the comparison attribute is not equal to any of the comparison values.     |
+| STARTS WITH ANY OF (hashed)     | Checks whether the comparison attribute starts with any of the comparison values.         |
+| NOT STARTS WITH ANY OF (hashed) | Checks whether the comparison attribute does not start with any of the comparison values. |
+| ENDS WITH ANY OF (hashed)       | Checks whether the comparison attribute ends with any of the comparison values.           |
+| NOT ENDS WITH ANY OF (hashed)   | Checks whether the comparison attribute does not end with any of the comparison values.   |
+
 #### Text Comparators
 
 The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings.
 
 :::info
-Consider using Confidential text comparators if you plan to target users by their sensitive information, e.g.: email address or company domain.
+Consider using Confidential text comparators if you plan to target users by their sensitive data, e.g.: email address or company domain.
 :::
-
 
 | Comparator                         | Description                                                                                     |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -71,21 +88,6 @@ Consider using Confidential text comparators if you plan to target users by thei
 | CONTAINS ANY OF (cleartext)        | Checks whether the comparison attribute contains any comparison values as a substring.         |
 | NOT CONTAINS ANY OF (cleartext)    | Checks whether the comparison attribute does not contain any comparison values as a substring. |
 
-#### Confidential Text Comparators
-
-We recommend using confidential text comparators especially in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
-In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed. This can cause an increase in the size of the config.json file and the overall network traffic. It is recommended to use confidential comparators only when necessary.
-
-| Comparator                      | Description                                                                                |
-| ------------------------------- | ------------------------------------------------------------------------------------------ |
-| EQUALS (hashed)                 | Checks whether the comparison attribute is equal to the comparison value.                 |
-| NOT EQUALS (hashed)             | Checks whether the comparison attribute is not equal to the comparison value.             |
-| IS ONE OF (hashed)              | Checks whether the comparison attribute is equal to any of the comparison values.         |
-| IS NOT ONE OF (hashed)          | Checks whether the comparison attribute is not equal to any of the comparison values.     |
-| STARTS WITH ANY OF (hashed)     | Checks whether the comparison attribute starts with any of the comparison values.         |
-| NOT STARTS WITH ANY OF (hashed) | Checks whether the comparison attribute does not start with any of the comparison values. |
-| ENDS WITH ANY OF (hashed)       | Checks whether the comparison attribute ends with any of the comparison values.           |
-| NOT ENDS WITH ANY OF (hashed)   | Checks whether the comparison attribute does not end with any of the comparison values.   |
 
 #### Semantic Version Comparators
 

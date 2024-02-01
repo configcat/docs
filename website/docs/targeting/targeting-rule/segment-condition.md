@@ -76,12 +76,24 @@ Any string, number, or comma-separated list. Will be compared to the selected _C
 
 ### Comparator
 
+#### Confidential Text Comparators
+
+We recommend using confidential text comparators when targeting users based on their sensitive data (like email address, name, etc).
+In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed. This can cause an increase in the size of the config JSON file and the overall network traffic. Yet it is not recommended to use the cleartext version of the confidential comparators unless the increased network traffic becomes an issue.
+
+The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings.
+
+| Comparator             | Description                                                                                                                                  |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| IS ONE OF (hashed)     | Checks whether the comparison attribute is equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.)     |
+| IS NOT ONE OF (hashed) | Checks whether the comparison attribute is not equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.) |
+
 #### Text comparators
 
 The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings.
 
 :::info
-Consider using Confidential text comparators if you plan to target users by their sensitive information, e.g.: email address or company domain.
+Consider using Confidential text comparators if you plan to target users by their sensitive data, e.g.: email address or company domain.
 :::
 
 | Comparator                   | Description                                                                                                                                  |
@@ -90,16 +102,6 @@ Consider using Confidential text comparators if you plan to target users by thei
 | DOES NOT CONTAIN (cleartext) | Checks whether the comparison attribute does not contain the comparison value as a substring.                                                |
 | IS ONE OF (cleartext)        | Checks whether the comparison attribute is equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.)     |
 | IS NOT ONE OF (cleartext)    | Checks whether the comparison attribute is not equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.) |
-
-#### Confidential Text Comparators
-
-We recommend using confidential text comparators especially in case of frontend applications targeting users based on sensitive data (like email addresses, names, etc).
-In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed. This can cause an increase in the size of the config.json file and the overall network traffic. It is recommended to use confidential comparators only when necessary.
-
-| Comparator             | Description                                                                                                                                  |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| IS ONE OF (hashed)     | Checks whether the comparison attribute is equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.)     |
-| IS NOT ONE OF (hashed) | Checks whether the comparison attribute is not equal to any of the comparison values. (_Comparison value_ should be a comma-separated list.) |
 
 #### Semantic version comparators
 
