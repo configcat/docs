@@ -1,0 +1,288 @@
+---
+id: cli
+title: Command Line Interface (CLI)
+description: The ConfigCat Command Line Interface (CLI) connect and match feature flags in your source code with feature flags in the Dashboard.
+---
+
+The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> allows you to interact with the [Public Management API](/advanced/public-api) via the command line. It supports most functionality found on the ConfigCat Dashboard. You can manage ConfigCat resources like Feature Flags, Targeting / Percentage rules, Products, Configs, Environments, and more.
+
+The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> has the ability to [scan your source code](/advanced/code-references/overview) for feature flag and setting usages and upload the found code references to ConfigCat.
+
+```
+configcat
+  This is the Command Line Tool of ConfigCat.
+  ConfigCat is a hosted feature flag service: https://configcat.com
+  For more information, see the documentation here: https://configcat.com/docs/advanced/cli
+
+Usage:
+  configcat [command] [options]
+
+Options:
+  -v, --verbose           Print detailed execution information
+  -ni, --non-interactive  Turn off progress rendering and interactive features
+  --version               Show version information
+  -?, -h, --help          Show help and usage information
+
+Commands:
+  setup                 Setup the CLI with Public Management API host and credentials
+  ls                    List all Product, Config, and Environment IDs
+  p, product            Manage Products
+  c, config             Manage Configs
+  e, environment        Manage Environments
+  f, flag, s, setting   Manage Feature Flags & Settings
+  seg, segment          Manage Segments
+  permission-group, pg  Manage Permission Groups
+  m, member             Manage Members
+  t, tag                Manage Tags
+  k, sdk-key            List SDK Keys
+  scan <directory>      Scan files for Feature Flag & Setting usages
+  config-json           Config JSON-related utilities
+
+Use "configcat [command] -?" for more information about a command.
+```
+
+## Reference
+
+See the <a target="_blank" href="https://configcat.github.io/cli/">command reference documentation</a> for more information about each available command.
+
+## Getting Started
+
+The following instructions will guide you through the first steps to start using this tool.
+
+### Installation
+
+You can install the CLI on multiple operating systems using the following sources.
+
+<details>
+  <summary><strong>Homebrew (macOS / Linux)</strong></summary>
+
+Install the CLI with <a target="_blank" href="https://brew.sh">Homebrew</a> from <a target="_blank" href="https://github.com/configcat/homebrew-tap">ConfigCat's tap</a> by executing the following command:
+
+```bash
+brew tap configcat/tap
+brew install configcat
+```
+
+</details>
+
+<details>
+  <summary><strong>Snap (Linux)</strong></summary>
+
+Install the CLI with <a target="_blank" href="https://snapcraft.io">Snapcraft</a> by executing the following command:
+
+```bash
+sudo snap install configcat
+```
+
+</details>
+
+<details>
+  <summary><strong>Scoop (Windows)</strong></summary>
+
+Install the CLI with <a target="_blank" href="https://scoop.sh">Scoop</a> from <a target="_blank" href="https://github.com/configcat/scoop-configcat">ConfigCat's bucket</a> by executing the following command:
+
+```bash
+scoop bucket add configcat https://github.com/configcat/scoop-configcat
+scoop install configcat
+```
+
+</details>
+
+<details>
+  <summary><strong>Chocolatey (Windows)</strong></summary>
+
+Install the CLI with <a target="_blank" href="https://chocolatey.org/">Chocolatey</a> by executing the following command:
+
+```powershell
+choco install configcat
+```
+
+</details>
+
+<details>
+  <summary><strong>.NET tool / NuGet.org</strong></summary>
+
+The CLI can be installed as a [.NET tool](https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools) via the .NET SDK.
+```bash
+dotnet tool install -g configcat-cli
+```
+
+After installing, you can execute the CLI using the `configcat` command:
+```bash
+configcat scan "/repository" --print --config-id <CONFIG-ID>
+```
+
+</details>
+
+<details>
+  <summary><strong>Docker</strong></summary>
+
+The CLI can be executed from a <a target="_blank" href="https://www.docker.com/">Docker</a> image.
+
+```bash
+docker pull configcat/cli
+```
+
+An example of how to scan a repository for feature flag & setting references with the docker image.
+
+```bash
+docker run --rm \
+    --env CONFIGCAT_API_HOST=<API-HOST> \
+    --env CONFIGCAT_API_USER=<API-USER> \
+    --env CONFIGCAT_API_PASS=<API-PASSWORD> \
+    -v /path/to/repository:/repository \
+  configcat/cli scan "/repository" --print --config-id <CONFIG-ID>
+```
+
+</details>
+
+<details>
+  <summary><strong>Install Script</strong></summary>
+
+On Unix platforms, you can install the CLI by executing an install script.
+
+```bash
+curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash
+```
+
+By default, the script downloads the OS specific artifact from the latest <a target="_blank" href="https://github.com/configcat/cli/releases">GitHub Release</a> with `curl` and moves it into the `/usr/local/bin` directory.
+
+It might happen that you don't have permissions to write into `/usr/local/bin`, then you should execute the install script with `sudo`.
+
+```bash
+curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | sudo bash
+```
+
+The script accepts the following input parameters:
+
+| Parameter         | Description                                      | Default value    |
+| ----------------- | ------------------------------------------------ | ---------------- |
+| `-d`, `--dir`     | The directory where the CLI should be installed. | `/usr/local/bin` |
+| `-v`, `--version` | The desired version to install.                  | `latest`         |
+| `-a`, `--arch`    | The desired architecture to install.             | `x64`            |
+
+Available **architecture** values for Linux: `x64`, `musl-x64`, `arm`, `arm64`.
+
+Available **architecture** values for macOS: `x64`, `arm64`.
+
+**Script usage examples**:
+
+_Custom installation directory_:
+
+```bash
+curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash -s -- -d=/path/to/install
+```
+
+_Install a different version_:
+
+```bash
+curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash -s -- -v=1.4.2
+```
+
+_Install with custom architecture_:
+
+```bash
+curl -fsSL "https://raw.githubusercontent.com/configcat/cli/main/scripts/install.sh" | bash -s -- -a=arm
+```
+
+</details>
+
+<details>
+  <summary><strong>Standalone executables</strong></summary>
+
+You can download the executables directly from <a target="_blank" href="https://github.com/configcat/cli/releases">GitHub Releases</a> for your desired platform.
+
+</details>
+
+### Setup
+
+After a successful installation, the CLI must be set up with your <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credentials</a>.
+
+You can do this by using the `configcat setup` command.
+
+<img src="/docs/assets/cli/setup.gif" className="zoomable" alt="interactive" />
+
+#### Environment Variables
+
+Besides the `setup` command above, the CLI can read your credentials from the following environment variables.
+
+| Name                 | Description                                           |
+| -------------------- | ----------------------------------------------------- |
+| `CONFIGCAT_API_HOST` | The Management API host. (default: api.configcat.com) |
+| `CONFIGCAT_API_USER` | The Management API basic authentication username.     |
+| `CONFIGCAT_API_PASS` | The Management API basic authentication password.     |
+
+:::caution
+When any of these environment variables are set, the CLI will use them over the local values set by the `configcat setup` command.
+:::
+
+## Modes
+
+The CLI supports both interactive and argument driven execution. When no arguments provided for a command and user input is enabled (stdout is not redirected), the CLI automatically activates interactive mode.
+
+### Interactive
+
+<img src="/docs/assets/cli/teaser.gif" className="zoomable" alt="interactive" />
+
+### With Arguments
+
+The same operation with command arguments would look like this:
+
+```bash
+configcat flag create \
+  --config-id <config-id> \
+  --name "My awesome feature" \
+  --hint "This is my awesome feature" \
+  --key my_awesome_feature
+  --type boolean \
+  --tag-ids <tag-id-1> <tag-id-2> \
+```
+
+:::info
+Each `create` command writes the newly created resource's ID to the standard output so you can save that for further operations.
+
+Example:
+```bash
+#!/bin/bash
+
+ORGANIZATION_ID="<your-organization-id>"
+PRODUCT_ID=$(configcat product create -o $ORGANIZATION_ID -n "<product-name>")
+CONFIG_ID=$(configcat config create -p $PRODUCT_ID -n "<config-name>")
+```
+:::
+
+:::info
+You can change the output format of several command's result to JSON with the `--json` option, like: `configcat flag ls --json`. See more about these commands in the <a target="_blank" href="https://configcat.github.io/cli/">command reference documentation</a>.
+:::
+
+## Scan & Upload Code References
+
+The CLI has the ability to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. You can read more about this feature [here](/docs/advanced/code-references/overview).
+
+## Examples
+
+Here are a few examples showing the true power of the CLI.
+
+### Create a Feature Flag
+
+The following example shows how you can create a Feature Flag in a specific Config.
+
+<img src="/docs/assets/cli/create-flag.gif" className="zoomable" alt="create flag" />
+
+### Value update
+
+The following example shows how you can update the value of a Feature Flag in a specific Environment.
+
+<img src="/docs/assets/cli/flag-value-update.gif" className="zoomable" alt="flag value update" />
+
+### Add targeting rules
+
+The following example shows how you can add targeting rules to a Feature Flag.
+
+<img src="/docs/assets/cli/flag-targeting-add.gif" className="zoomable" alt="flag targeting add" />
+
+### Add percentage rules
+
+The following example shows how you can set percentage rules on a Feature Flag.
+
+<img src="/docs/assets/cli/flag-percentage-add.gif" className="zoomable" alt="flag percentage add" />
