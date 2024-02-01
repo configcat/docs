@@ -1,0 +1,1204 @@
+---
+id: endpoints
+title: Endpoints
+description: HTTP endpoints of the ConfigCat Proxy.
+toc_max_heading_level: 4
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+The Proxy accepts HTTP requests on the following endpoints.
+
+## CDN Proxy
+
+The CDN proxy endpoint's purpose is to forward the underlying *config JSON* to other ConfigCat SDKs used by your application. 
+
+:::caution
+Regarding the config JSON's schema changes introduced recently (`v6`), the `v0.3.X` and newer Proxy versions are providing the new schema on the CDN proxy endpoint. 
+This new config JSON schema is only supported from certain SDK versions listed in the support table [below](/advanced/proxy/endpoints/#supported-sdk-versions). 
+Those SDKs that are older than the listed versions are incompatible with `v0.3.X`, and can be used only with `v0.2.X` or older Proxy versions.
+:::
+
+<Tabs groupId="versions">
+<TabItem value="new" label="Proxy version 0.3.X or newer" default>
+
+<details open>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/configcat-proxy/&#123;sdkId&#125;/config_v6.json</span></summary>
+
+This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for feature flag evaluation. 
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+
+**Responses**:
+<ul className="responses">
+  <li className="success"><span className="status">200</span>: The <code>config.json</code> file is downloaded successfully.</li>
+  <li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+  <li className="success"><span className="status">304</span>: The <code>config.json</code> file isn't modified based on the <code>Etag</code> sent in the <code>If-None-Match</code> header.</li>
+  <li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing.</li>
+  <li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+</details>
+
+### SDK Usage
+
+In order to let a ConfigCat SDK use the Proxy, you have to set the SDK's `baseUrl` parameter to point to the Proxy's host.
+Also, you have to pass the [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) prefixed with `configcat-proxy/` as the SDK key.
+
+So, let's assume you set up the Proxy with the following SDK option:
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml title="options.yml"
+sdks:
+  my_sdk:
+    key: "<your-sdk-key>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+```shell
+CONFIGCAT_SDKS={"my_sdk":"<your-sdk-key>"}
+```
+
+</TabItem>
+</Tabs>
+
+The SDK's initialization that works with the Proxy will look like this:
+
+```js title="example.js"
+import * as configcat from "configcat-js";
+
+var configCatClient = configcat.getClient(
+  // highlight-next-line
+  "configcat-proxy/my_sdk", // SDK identifier as SDK key
+  configcat.PollingMode.AutoPoll,
+  // highlight-next-line
+  { baseUrl: "http(s)://localhost:8050" } // Proxy URL
+);
+```
+
+### Supported SDK Versions
+
+The following SDK versions are supported by the `>=v0.3.X` Proxy's CDN endpoint:
+
+|  SDK    | Version                                                                      |
+| ------- |------------------------------------------------------------------------------|
+| .NET    | [`>=v9.0.0`](https://github.com/configcat/.net-sdk/releases/tag/v9.0.0)      |
+| JS      | [`>=v9.0.0`](https://github.com/configcat/js-sdk/releases/tag/v9.0.0)        |
+| JS SSR  | [`>=v8.0.0`](https://github.com/configcat/js-ssr-sdk/releases/tag/v8.0.0)    |
+| React   | [`>=v4.0.0`](https://github.com/configcat/react-sdk/releases/tag/v4.0.0)     |
+| Node    | [`>=v11.0.0`](https://github.com/configcat/node-sdk/releases/tag/v11.0.0)    |
+| Python  | [`>=v9.0.0`](https://github.com/configcat/python-sdk/releases/tag/v9.0.0)    |
+| Go      | [`>=v9.0.0`](https://github.com/configcat/go-sdk/releases/tag/v9.0.0)        |
+| C++     | TBA                                                                          |
+| Dart    | TBA                                                                          |
+| Elixir  | TBA                                                                          |
+| Java    | [`>=v9.0.0`](https://github.com/configcat/java-sdk/releases/tag/v9.0.0)      |
+| Android | [`>=v10.0.0`](https://github.com/configcat/android-sdk/releases/tag/v10.0.0) |
+| Kotlin  | TBA                                                                          |
+| PHP     | TBA                                                                          |
+| Ruby    | TBA                                                                          |
+| Swift   | TBA                                                                          |
+
+</TabItem>
+<TabItem value="old" label="Proxy version 0.2.X or older">
+
+<details open>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/configuration-files/&#123;sdkId&#125;/config_v5.json</span></summary>
+
+This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for feature flag evaluation. 
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+
+**Responses**:
+<ul className="responses">
+  <li className="success"><span className="status">200</span>: The <code>config.json</code> file is downloaded successfully.</li>
+  <li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+  <li className="success"><span className="status">304</span>: The <code>config.json</code> file isn't modified based on the <code>Etag</code> sent in the <code>If-None-Match</code> header.</li>
+  <li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing.</li>
+  <li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+</details>
+
+### SDK Usage
+
+In order to let a ConfigCat SDK use the Proxy, you have to set the SDK's `baseUrl` parameter to point to the Proxy's host.
+Also, you have to pass the [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) as the SDK key.
+
+So, let's assume you set up the Proxy with the following SDK option:
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml title="options.yml"
+sdks:
+  my_sdk:
+    key: "<your-sdk-key>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+```shell
+CONFIGCAT_SDKS={"my_sdk":"<your-sdk-key>"}
+```
+
+</TabItem>
+</Tabs>
+
+The SDK's initialization that works with the Proxy will look like this:
+
+```js title="example.js"
+import * as configcat from "configcat-js";
+
+var configCatClient = configcat.getClient(
+  // highlight-next-line
+  "my_sdk", // SDK identifier as SDK key
+  configcat.PollingMode.AutoPoll,
+  // highlight-next-line
+  { baseUrl: "http(s)://localhost:8050" } // Proxy URL
+);
+```
+
+### Supported SDK Versions
+
+The following SDK versions are supported by the `<=v0.2.X` Proxy's CDN endpoint:
+
+|  SDK    | Version                                               |
+| ------- | ----------------------------------------------------- |
+| .NET    | [`<=v8.2.0`](https://github.com/configcat/.net-sdk/releases/tag/v8.2.0)    |
+| JS      | [`<=v8.1.1`](https://github.com/configcat/js-sdk/releases/tag/v8.1.1)      |
+| JS SSR  | [`<=v7.1.1`](https://github.com/configcat/js-ssr-sdk/releases/tag/v7.1.1)  |
+| React   | [`<=v3.1.1`](https://github.com/configcat/react-sdk/releases/tag/v3.1.1)   |
+| Node    | [`<=v10.1.1`](https://github.com/configcat/node-sdk/releases/tag/v10.1.1)  |
+| Python  | [`<=v8.0.1`](https://github.com/configcat/python-sdk/releases/tag/v8.0.1)  |
+| C++     | [`<=v3.1.1`](https://github.com/configcat/cpp-sdk/releases/tag/v3.1.1)     |
+| Dart    | [`<=v3.0.0`](https://github.com/configcat/dart-sdk/releases/tag/3.0.0)     |
+| Elixir  | [`<=v3.0.0`](https://github.com/configcat/elixir-sdk/releases/tag/v3.0.0)  |
+| Go      | [`<=v8.0.1`](https://github.com/configcat/go-sdk/releases/tag/v8.0.1)      |
+| Java    | [`<=v8.4.0`](https://github.com/configcat/java-sdk/releases/tag/v8.4.0)    |
+| Android | [`<=v9.1.1`](https://github.com/configcat/android-sdk/releases/tag/v9.1.1) |
+| Kotlin  | [`<=2.0.0`](https://github.com/configcat/kotlin-sdk/releases/tag/2.0.0)    |
+| PHP     | [`<=v8.1.0`](https://github.com/configcat/php-sdk/releases/tag/v8.1.0)     |
+| Ruby    | [`<=v7.0.0`](https://github.com/configcat/ruby-sdk/releases/tag/v7.0.0)    |
+| Swift   | [`<=v10.0.0`](https://github.com/configcat/swift-sdk/releases/tag/10.0.0) |
+
+</TabItem>
+</Tabs>
+
+### Available Options
+
+The following CDN Proxy related options are available:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  cdn_proxy:
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_CDN_PROXY_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Enables or disables the CDN proxy endpoint, which can be used by ConfigCat SDKs in your applications.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  cdn_proxy:
+    cors:
+      enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_CDN_PROXY_CORS_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  cdn_proxy:
+    cors:
+      allowed_origins: 
+        - https://domain1.com
+        - https://domain2.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://domain2.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
+When there's no matching request origin and the <code>allowed_origins_regex</code> option is not set, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  cdn_proxy:
+    cors:
+      allowed_origins_regex:
+        patterns:
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.<br/>When using the environment variable, the regex escape character must be doubled (<code>\\</code>) because it's parsed as a JSON list and <code>\</code> is also a JSON escape character.
+</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  cdn_proxy:
+    cors:
+      allowed_origins_regex:
+        if_no_match: https://domain1.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_CDN_PROXY_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1.com"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Required when the previous <code>patterns</code> option is set. It's value is used in the <code>Access-Control-Allow-Origin</code> header when an incoming request's <code>Origin</code> doesn't match with any previously configured regex patterns.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  cdn_proxy:
+    headers:
+      Custom-Header-Name: "<header-value>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_CDN_PROXY_HEADERS='{"Custom-Header-Name":"<header-value>"}'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Additional headers that must be sent back on each CDN proxy endpoint response.</td>
+</tr>
+
+</tbody>
+</table>
+
+## API
+
+The API endpoints are for server side feature flag evaluation.
+
+<details>
+  <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/eval</span></summary>
+
+This endpoint evaluates a single feature flag identified by a `key` with the given [user object](/advanced/user-object). 
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+
+**Request body**:
+```json
+{
+  "key": "<feature-flag-key>",
+  "user": {
+    "Identifier": "<user-id>",
+    "Rating": 4.5,
+    "Roles": ["Role1","Role2"],
+    // any other attribute
+  }
+}
+```
+
+The type of the `user` object's fields can only be `string`, `number`, or `string[]`.
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The feature flag evaluation finished successfully.<br/>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "value": <evaluated-value>,
+  "variationId": "<variation-id>"
+}
+```
+
+</li>
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>sdkId</code> or the <code>key</code> from the request body is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+</details>
+
+<details>
+  <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/eval-all</span></summary>
+
+This endpoint evaluates all feature flags with the given [user object](/advanced/user-object). 
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+
+**Request body**:
+```json
+{
+  "key": "<feature-flag-key>",
+  "user": {
+    "Identifier": "<user-id>",
+    "Rating": 4.5,
+    "Roles": ["Role1","Role2"],
+    // any other attribute
+  }
+}
+```
+
+The type of the `user` object's fields can only be `string`, `number`, or `string[]`.
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The evaluation of all feature flags finished successfully.<br/>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "feature-flag-key-1": {
+    "value": <evaluated-value>,
+    "variationId": "<variation-id>"
+  },
+  "feature-flag-key-2": {
+    "value": <evaluated-value>,
+    "variationId": "<variation-id>"
+  }
+}
+```
+
+</li>
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+</details>
+
+<details>
+  <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/refresh</span></summary>
+
+This endpoint commands the underlying SDK to download the latest available *config JSON*. 
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The refresh was successful.</li>
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+</details>
+
+<details>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/keys</span></summary>
+
+This endpoint returns all feature flag keys belonging to the given [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key). 
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The keys are returned successfully.<br/>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "keys": [
+    "feature-flag-key-1",
+    "feature-flag-key-1"
+  ]
+}
+```
+
+</li>
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+</details>
+
+### Available Options
+
+The following API related options are available:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Enables or disables the API endpoints, which can be used for server side feature flag evaluation.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    cors:
+      enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_CORS_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    cors:
+      allowed_origins: 
+        - https://domain1.com
+        - https://domain2.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://domain2.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
+When there's no matching request origin and the <code>allowed_origins_regex</code> option is not set, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    cors:
+      allowed_origins_regex:
+        patterns:
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.
+<br/>The <code>if_no_match</code> option is mandatory if this option is used.<br/>When using the environment variable, the regex escape character must be doubled (<code>\\</code>) because it's parsed as a JSON list and <code>\</code> is also a JSON escape character.
+</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    cors:
+      allowed_origins_regex:
+        if_no_match: https://domain1.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1.com"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Required when the previous <code>patterns</code> option is set. It's value is used in the <code>Access-Control-Allow-Origin</code> header when an incoming request's <code>Origin</code> doesn't match with any previously configured regex patterns.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    headers:
+      Custom-Header-Name: "<header-value>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_HEADERS='{"Custom-Header-Name":"<header-value>"}'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Additional headers that must be sent back on each API endpoint response.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  api:
+    auth_headers:
+      X-API-KEY: "<auth-value>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_API_AUTH_HEADERS='{"X-API-KEY":"<auth-value>"}'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Additional headers that must be on each request sent to the API endpoints. If the request doesn't include the specified header, or the values are not matching, the Proxy will respond with a <code>401</code> HTTP status code.</td>
+</tr>
+
+</tbody>
+</table>
+
+## SSE
+
+The SSE endpoint allows you to subscribe for feature flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
+
+<details>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval/&#123;data&#125;</span></summary> 
+
+This endpoint subscribes to a single flag's changes. Whenever the watched flag's value changes, the Proxy sends the new value to each connected client.
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `data`: The `base64` encoded input data for feature flag evaluation that must contain the feature flag's key and a [user object](/advanced/user-object).
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The SSE connection established successfully.</li>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "value": <evaluated-value>,
+  "variationId": "<variation-id>"
+}
+```
+
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>sdkId</code>, <code>data</code>, or the <code>key</code> attribute of <code>data</code> is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+**Example**:
+```js title="example.js"
+const rawData = {
+  key: "<feature-flag-key>",
+  user: { // field types can only be `string`, `number`, or `string[]`.
+    Identifier: "<user-id>",
+    Rating: 4.5,
+    Roles: ["Role1","Role2"],
+    // any other attribute
+  }
+}
+
+const data = btoa(JSON.stringify(rawData))
+const evtSource = new EventSource("http(s)://localhost:8050/sse/my_sdk/eval/" + data);
+evtSource.onmessage = (event) => {
+  console.log(event.data); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
+};
+```
+
+</details>
+
+<details>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval-all/&#123;data&#125;</span></summary> 
+
+This endpoint subscribes to all feature flags' changes behind the given [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key). When any of the watched flags' value change, the Proxy sends its new value to each connected client.
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `data`: **Optional**. The `base64` encoded input data for feature flag evaluation that contains a [user object](/advanced/user-object).
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The SSE connection established successfully.</li>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "feature-flag-key-1": {
+    "value": <evaluated-value>,
+    "variationId": "<variation-id>"
+  },
+  "feature-flag-key-2": {
+    "value": <evaluated-value>,
+    "variationId": "<variation-id>"
+  }
+}
+```
+
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+**Example**:
+```js title="example.js"
+const rawData = {
+  user: { // field types can only be `string`, `number`, or `string[]`.
+    Identifier: "<user-id>",
+    Rating: 4.5,
+    Roles: ["Role1","Role2"],
+    // any other attribute
+  }
+}
+
+const data = btoa(JSON.stringify(rawData))
+const evtSource = new EventSource("http(s)://localhost:8050/sse/my_sdk/eval-all/" + data);
+evtSource.onmessage = (event) => {
+  console.log(event.data); // {"feature-flag-key":{"value":<evaluated-value>,"variationId":"<variation-id>"}}
+};
+```
+
+</details>
+
+### Available Options
+
+The following SSE related options are available:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Enables or disables the SSE endpoint, which can be used for streaming feature flag value changes.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    cors:
+      enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_CORS_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    cors:
+      allowed_origins: 
+        - https://domain1.com
+        - https://domain2.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS='["https://domain1.com","https://domain2.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of allowed CORS origins. When it's set, the Proxy will include only that origin in the <code>Access-Control-Allow-Origin</code> response header which matches the request's <code>Origin</code>.<br/>
+When there's no matching request origin and the <code>allowed_origins_regex</code> option is not set, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the first item in the allowed origins list.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    cors:
+      allowed_origins_regex:
+        patterns:
+          - https:\/\/.*domain1\.com
+          - https:\/\/.*domain2\.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_PATTERNS='["https:\\/\\/.*domain1\\.com","https:\\/\\/.*domain2\\.com"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>List of regex patterns used to match allowed CORS origins. When it's set, the Proxy will match the request's <code>Origin</code> with the given regex patterns. When there's a match, the <code>Access-Control-Allow-Origin</code> response header will be set to the matched origin.<br/>
+When there's no matching request origin, the Proxy will set the <code>Access-Control-Allow-Origin</code> response header to the <code>if_no_match</code> field's value.<br/>The <code>if_no_match</code> option is mandatory if this option is used.<br/>When using the environment variable, the regex escape character must be doubled (<code>\\</code>) because it's parsed as a JSON list and <code>\</code> is also a JSON escape character.
+</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    cors:
+      allowed_origins_regex:
+        if_no_match: https://domain1.com
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_CORS_ALLOWED_ORIGINS_REGEX_IF_NO_MATCH="https://domain1.com"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Required when the previous <code>patterns</code> option is set. It's value is used in the <code>Access-Control-Allow-Origin</code> header when an incoming request's <code>Origin</code> doesn't match with any previously configured regex patterns.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    headers:
+      Custom-Header-Name: "<header-value>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_HEADERS='{"Custom-Header-Name":"<header-value>"}'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Additional headers that must be sent back on each <a href="#sse">SSE endpoint</a> response.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  sse:
+    log:
+      level: "<error|warn|info|debug>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_SSE_LOG_LEVEL="<error|warn|info|debug>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>warn</code></td>
+<td>The verbosity of the SSE related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code> or <code>debug</code>.</td>
+</tr>
+
+</tbody>
+</table>
+
+## Webhook
+
+Through the webhook endpoint, you can notify the Proxy about the availability of new feature flag evaluation data. Also, with the appropriate [SDK options](/advanced/proxy/proxy-overview/#additional-sdk-options), the Proxy can [validate the signature](/advanced/notifications-webhooks/#verifying-webhook-requests) of each incoming webhook request.
+
+<details open>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method blue">POST</span>/hook/&#123;sdkId&#125;</span></summary>
+
+Notifies the Proxy that the SDK with the given [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) must refresh its *config JSON* to the latest version. 
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The Proxy accepted the notification.</li>
+<li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing or the <a href="/advanced/notifications-webhooks/#verifying-webhook-requests">webhook signature validation</a> failed.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+</details>
+
+### ConfigCat Dashboard
+
+You can set up webhooks to invoke the Proxy on the <a target="blank" href="https://app.configcat.com/product/webhooks">Webhooks page</a> of the ConfigCat Dashboard.
+
+<img className="bordered zoomable" src="/docs/assets/proxy/webhook.png" alt="Webhook" />
+
+### Available Options
+
+The following webhook related options are available:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  webhook:
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_WEBHOOK_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Enables or disables the Webhook endpoint, which can be used for notifying the Proxy about the availability of new feature flag evaluation data.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  webhook:
+    auth:
+      user: "<auth-user>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_WEBHOOK_AUTH_USER="<auth-user>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Basic authentication user. The basic authentication webhook header can be set on the <a target="blank" href="https://app.configcat.com/product/webhooks">Webhooks page</a> of the ConfigCat Dashboard.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  webhook:
+    auth:
+      password: "<auth-pass>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_WEBHOOK_AUTH_PASSWORD="<auth-pass>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Basic authentication password. The basic authentication webhook header can be set on the <a target="blank" href="https://app.configcat.com/product/webhooks">Webhooks page</a> of the ConfigCat Dashboard.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  webhook:
+    auth_headers:
+      X-API-KEY: "<auth-value>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_WEBHOOK_AUTH_HEADERS='{"X-API-KEY":"<auth-value>"}'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>Additional headers that ConfigCat must send with each request to the Webhook endpoint. Webhook headers can be set on the <a target="blank" href="https://app.configcat.com/product/webhooks">Webhooks page</a> of the ConfigCat Dashboard.</td>
+</tr>
+
+</tbody>
+</table>

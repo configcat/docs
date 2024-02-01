@@ -34,9 +34,9 @@ The *IF part* contains the conditions, which are logical expressions that evalua
 The conditions are in an **AND** relationship, meaning that all of them must evaluate to `true` for the Targeting Rule to match.
 
 The conditions can be added to the Targeting Rule on the Dashboard. There are three types of conditions:
-- [User condition](/targeting/targeting-rule/user-condition) - A condition that is based on some property of the user.
-- [Flag condition (Prerequisite)](/targeting/targeting-rule/flag-condition) - A condition that is based on the value of another feature flag.
-- [Segment condition](/targeting/targeting-rule/segment-condition) - A condition that is based on a segment.
+- [User condition](../user-condition) - A condition that is based on some property of the user.
+- [Flag condition (Prerequisite)](../flag-condition) - A condition that is based on the value of another feature flag.
+- [Segment condition](../segment-condition) - A condition that is based on a segment.
 
 ### THEN part
 
