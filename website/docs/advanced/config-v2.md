@@ -32,9 +32,9 @@ You can add multiple conditions to a Targeting Rule and they will be evaluated w
 
 With the new comparators, you can create Targeting Rules which are based on dates, based on comparing arrays etc.
 
-- New text and confidential text comparators: EQUALS, NOT EQUALS, STARTS WITH ANY OF, ENDS WITH ANY OF, NOT STARTS WITH ANY OF, NOT ENDS WITH ANY OF.
-- New array comparators: ARRAY CONTAINS ANY OF, ARRAY NOT CONTAINS ANY OF.
-- New date comparators: BEFORE, AFTER.
+- New text and confidential text comparators: `EQUALS`, `NOT EQUALS`, `STARTS WITH ANY OF`, `ENDS WITH ANY OF`, `NOT STARTS WITH ANY OF`, `NOT ENDS WITH ANY OF`.
+- New array comparators: `ARRAY CONTAINS ANY OF`, `ARRAY NOT CONTAINS ANY OF`.
+- New date comparators: `BEFORE`, `AFTER`.
 
 ![New comparators](/assets/config-v2/new-comparators.jpg)
 
