@@ -32,7 +32,7 @@ A *User Condition* consists of three parts:
 
 ### Comparison Attribute
 
-A property of your user (e.g. _email address_, _geographic location_). Your application should pass the attribute values (e.g. *jane@example.com*, _Europe_) to the ConfigCat SDK as a [User Object](../../user-object).
+A property of your user (e.g. _email address_, _geographic location_). Your application should pass the attribute values (e.g. *jane&#64;example.com*, _Europe_) to the ConfigCat SDK as a [User Object](../../user-object).
 
 There are 3 predefined attributes. Additionally, you can define your **_custom attributes_** as well:
 

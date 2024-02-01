@@ -73,8 +73,8 @@ Here is how we get the value of the feature flag in your application:
 import * as configcat from 'configcat-js';
 
 // Create the User Object
-let userObject = new configcat.User(
-   // Identifier - used by the Percentage Options to split the users into groups
+const userObject = new configcat.User(
+  // Identifier - used by the Percentage Options to split the users into groups
   '867428724',
   // Email - used by the Targeting Rule's User Condition to determine whether
   // the user is an employee at Whisker Co.
