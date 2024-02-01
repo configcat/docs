@@ -20,7 +20,7 @@ The grouping is random and based on the [User Object](../user-object)'s identifi
 - **Sticky** means the same user will always get the same value for a specific feature flag and for a certain Percentage Option set. Read more below.
 - **Consistent** means that the same user will always get the same value for a specific feature flag across all SDKs. Read more below.
 
-If the required attribute is not present in the Checks [User Object](../user-object) whether, the ["To unidentified" value](../targeting-overview/#to-all-users--to-all-other--to-unidentified-value) will be returned.
+If the required attribute is not present in the [User Object](../user-object), the ["To unidentified" value](../targeting-overview/#to-all-users--to-all-other--to-unidentified-value) will be returned.
 
 Read more about the technical details of the [percentage evaluation here](../feature-flag-evaluation/#evaluation-of-percentage-options).
 
