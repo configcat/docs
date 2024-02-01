@@ -539,7 +539,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
   "s": [ // array of segments
     {
       "n": "Beta Users", // segment name
-      "r": [ // array of user conditions (there is a logical AND relation between the elements)
+      "r": [ // array of User Conditions (there is a logical AND relation between the elements)
         {
           "a": "Email", // comparison attribute
           "c": 0, // comparator (see below)
@@ -561,7 +561,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
         {
           "c": [ // array of conditions (there is a logical AND relation between the elements)
             {
-              "u": { // user condition
+              "u": { // User Condition
                 "a": "Email", // comparison attribute
                 "c": 2, // comparator, possible values and required comparison value types:
                         // 0  -> IS ONE OF (cleartext) + string array comparison value ("l")
@@ -609,7 +609,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               }
             },
             {
-              "p": { // flag condition (prerequisite)
+              "p": { // Flag Condition (Prerequisite)
                 "f": "mainIntFlag", // key of prerequisite flag
                 "c": 0, // comparator, possible values: 0 -> EQUALS, 1 -> NOT EQUALS
                 "v": { // comparison value (value's type must match the prerequisite flag's type)
@@ -618,7 +618,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               }
             },
             {
-              "s": { // segment condition
+              "s": { // Segment Condition
                 "s": 0, // segment index, a valid index into the top-level segment array ("s")
                 "c": 1 // comparator, possible values: 0 -> IS IN SEGMENT, 1 -> IS NOT IN SEGMENT
               }

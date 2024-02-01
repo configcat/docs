@@ -34,7 +34,7 @@ A *Targeting Rule* consists of a collection of conditions and a value to serve. 
 
 ### Condition
 
-A *condition* is a logical expression that can be evaluated to `true` or `false`. There are three types of conditions: [User condition](../targeting-rule/user-condition), [Flag condition (Prerequisite)](../targeting-rule/flag-condition), [Segment condition](../targeting-rule/segment-condition). For a Targeting Rule to match, all of its conditions must evaluate to `true`.
+A *condition* is a logical expression that can be evaluated to `true` or `false`. There are three types of conditions: [User Condition](../targeting-rule/user-condition), [Flag Condition (Prerequisite)](../targeting-rule/flag-condition), [Segment Condition](../targeting-rule/segment-condition). For a Targeting Rule to match, all of its conditions must evaluate to `true`.
 
 ### Percentage Options
 

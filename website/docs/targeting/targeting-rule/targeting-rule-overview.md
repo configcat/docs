@@ -34,9 +34,9 @@ The *IF part* contains the conditions, which are logical expressions that evalua
 The conditions are in an **AND** relationship, meaning that all of them must evaluate to `true` for the Targeting Rule to match.
 
 The conditions can be added to the Targeting Rule on the Dashboard. There are three types of conditions:
-- [User condition](../user-condition) - A condition that is based on some property of the user.
-- [Flag condition (Prerequisite)](../flag-condition) - A condition that is based on the value of another feature flag.
-- [Segment condition](../segment-condition) - A condition that is based on a segment.
+- [User Condition](../user-condition) - A condition that is based on some property of the user.
+- [Flag Condition (Prerequisite)](../flag-condition) - A condition that is based on the value of another feature flag.
+- [Segment Condition](../segment-condition) - A condition that is based on a segment.
 
 ### THEN part
 
@@ -63,8 +63,8 @@ Since this feature is new, we want to make sure that only frequent shoppers and 
 
 #### Solution
 We can achieve this by adding a Targeting Rule to the `Enable Cafe Notifications` feature flag. The Targeting Rule will have two conditions:
-- User condition: `AppVersion` is greater than `3.0.0`
-- Segment condition: `Frequent Shoppers`
+- User Condition: `AppVersion` is greater than `3.0.0`
+- Segment Condition: `Frequent Shoppers`
 
 On the Dashboard:
 ![Targeting Rule example](/assets/targeting/targeting-rule/and-example.jpg)

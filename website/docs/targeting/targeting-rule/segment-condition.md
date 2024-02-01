@@ -6,7 +6,7 @@ description: Segments allow you to define user groups based on any user attribut
 
 ## What is a Segment Condition? What is a segment?
 
-A *Segment Condition* is a condition that is based on the evaluation of a *segment*. A *segment* is a reusable, predefined [user condition](../user-condition).
+A *Segment Condition* is a condition that is based on the evaluation of a *segment*. A *segment* is a reusable, predefined [User Condition](../user-condition).
 
 Segments allow you to define user groups based on any user attributes. You can reference segments in Targeting Rules. When you update a segment definition, the changes will be reflected automatically in all the Targeting Rules that reference it.
 
