@@ -345,7 +345,7 @@ The details result contains the following information:
 | `key`                             | `String`                             | The key of the evaluated feature flag or setting.                                         |
 | `isDefaultValue`                  | `Bool`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
 | `error`                           | `String?`                            | In case of an error, this field contains the error message.                               |
-| `user`                            | `ConfigCatUser?`                     | The user object that was used for evaluation.                                             |
+| `user`                            | `ConfigCatUser?`                     | The User Object that was used for evaluation.                                             |
 | `matchedEvaluationPercentageRule` | `PercentageRule?`                    | If the evaluation was based on a percentage rule, this field contains that specific rule. |
 | `matchedEvaluationRule`           | `RolloutRule?`                       | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `fetchTime`                       | `Date`                               | The last download time of the current config.                                             |
@@ -497,9 +497,9 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-ID
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -549,7 +549,7 @@ client.setDefaultUser(user: ConfigCatUser(identifier: "john@example.com"))
 </TabItem>
 </Tabs>
 
-Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -585,7 +585,7 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"john@example.co
 </TabItem>
 </Tabs>
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">

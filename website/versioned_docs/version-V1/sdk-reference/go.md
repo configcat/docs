@@ -171,7 +171,7 @@ The `details` result contains the following information:
 | `Data.Key`                       | `string`            | The key of the evaluated feature flag or setting. |
 | `Data.IsDefaultValue`            | `bool`              | True when the default value passed to getValueDetails() is returned due to an error. |
 | `Data.Error`                     | `error`             | In case of an error, this field contains the error message. |
-| `Data.User`                      | `User`              | The user object that was used for evaluation. |
+| `Data.User`                      | `User`              | The User Object that was used for evaluation. |
 | `Data.MatchedPercentageOption`   | `*PercentageOption` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
 | `Data.MatchedTargetingRule`      | `*TargetingRule`    | If the evaluation was based on a Targeting Rule, this field contains that specific rule. |
 | `Data.FetchTime`                 | `time.Time`         | The last download time (UTC) of the current config. |
@@ -188,7 +188,7 @@ user = &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
 user = &configcat.UserData{Identifier: "john@example.com"}
 ```
 
-### Customized user object creation
+### Customized User Object creation
 
 | Arguments    | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -246,7 +246,7 @@ All comparators support `string` values as User Object attribute (in some cases 
 - accept `string` or `[]byte` values containing a valid JSON string which can be deserialized to an array of `string`,
 - all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
-### Other options to create a user object
+### Other options to create a User Object
 
 1. Using a simple `map[string]interface{}`. In this case the passed map is used for looking up the user attributes.
 
@@ -258,16 +258,16 @@ All comparators support `string` values as User Object attribute (in some cases 
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object on SDK initialization:
+You can set the default User Object on SDK initialization:
 
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
         DefaultUser: &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}})
 ```
 
-Whenever the `Get[TYPE]Value()`, `Get[TYPE]ValueDetails()`, `GetAllValues()`, or `GetAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `Get[TYPE]Value()`, `Get[TYPE]ValueDetails()`, `GetAllValues()`, or `GetAllValueDetails()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
@@ -277,7 +277,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
 value := client.GetBoolValue("keyOfMyBoolSetting", false, nil)
 ```
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
@@ -385,7 +385,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a Us
 client := configcat.NewClient("#YOUR-SDK-KEY#")
 settingValues := client.GetAllValues(nil)
 
-// invoke with user object
+// invoke with User Object
 user := &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
 settingValuesTargeting := client.GetAllValues(user)
 ```

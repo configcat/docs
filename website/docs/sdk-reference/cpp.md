@@ -164,7 +164,7 @@ The `details` result contains the following information:
 | `key`                             | `string`                             | The key of the evaluated feature flag or setting.                                         |
 | `isDefaultValue`                  | `bool`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
 | `error`                           | `string`                             | In case of an error, this field contains the error message.                               |
-| `user`                            | `ConfigCatUser*`                     | The user object that was used for evaluation.                                             |
+| `user`                            | `ConfigCatUser*`                     | The User Object that was used for evaluation.                                             |
 | `matchedEvaluationPercentageRule` | `optional<RolloutPercentageItem>`    | If the evaluation was based on a percentage rule, this field contains that specific rule. |
 | `matchedEvaluationRule`           | `optional<RolloutRule>`              | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `fetchTime`                       | `chrono::time_point`                 | The last download time of the current config.                                             |
@@ -181,7 +181,7 @@ auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 auto user = ConfigCatUser("john@example.com");
 ```
 
-### Customized user object creation
+### Customized User Object creation
 
 | Argument  | Description                                                                                                                     |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -204,9 +204,9 @@ auto user = ConfigCatUser(
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```cpp
 ConfigCatOptions options;
@@ -220,7 +220,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client->setDefaultUser(make_shared<ConfigCatUser>("john@example.com"));
 ```
 
-Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllValueDetails()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```cpp
 auto user = make_shared<ConfigCatUser>("john@example.com");
@@ -230,7 +230,7 @@ client->setDefaultUser(user);
 auto value = client->getValue("keyOfMySetting", false);
 ```
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```cpp
 auto user = make_shared<ConfigCatUser>("john@example.com");
@@ -508,7 +508,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a Us
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
 auto settingValues = client->getAllValues();
 
-// invoke with user object
+// invoke with User Object
 auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 auto settingValuesTargeting = client->getAllValues(&user);
 ```
@@ -520,7 +520,7 @@ Evaluates and returns the detailed values of all feature flags and settings. Pas
 ```cpp
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
 
-// invoke with user object
+// invoke with User Object
 auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 auto allValueDetails = client->getAllValueDetails(&user)
 ```

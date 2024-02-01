@@ -149,7 +149,7 @@ If you have any further questions or need assistance, please don't hesitate to [
 
 We're pleased to announce the arrival of "Test with User" for feature flags!
 
-With "Test with User," you can now test your feature flags before deploying them to production. Wondering how your flags will perform for specific users? This feature allows you to see the evaluation results based on a given user object.
+With "Test with User," you can now test your feature flags before deploying them to production. Wondering how your flags will perform for specific users? This feature allows you to see the evaluation results based on a given User Object.
 
 ## Chromium Extension SDK (Beta)
 

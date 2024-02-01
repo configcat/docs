@@ -129,7 +129,7 @@ The `details` result contains the following information:
 | `getKey()`                             | `string`                             | The key of the evaluated feature flag or setting.                                           |
 | `isDefaultValue()`                     | `bool`                               | True when the default value passed to getValueDetails() is returned due to an error.        |
 | `getError()`                           | `string`                             | In case of an error, this property returns the error message.                               |
-| `getUser()`                            | `User`                               | The user object that was used for evaluation.                                               |
+| `getUser()`                            | `User`                               | The User Object that was used for evaluation.                                               |
 | `getMatchedEvaluationPercentageRule()` | `array`                              | If the evaluation was based on a percentage rule, this property returns that specific rule. |
 | `getMatchedEvaluationRule()`           | `array`                              | If the evaluation was based on a Targeting Rule, this property returns that specific rule.  |
 | `getFetchTimeUnixSeconds()`            | `int`                                | The last download time of the current config in unix seconds format.                        |
@@ -146,7 +146,7 @@ $user = new \ConfigCat\User("#UNIQUE-USER-IDENTIFIER#");
 $user = new \ConfigCat\User("john@example.com");
 ```
 
-### Customized user object creation
+### Customized User Object creation
 
 | Parameters   | Description                                                                                                                                                          |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -168,9 +168,9 @@ $user = new \ConfigCat\User(
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
@@ -184,7 +184,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 $client->setDefaultUser(new \ConfigCat\User("john@example.com"));
 ```
 
-Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```php
 $user = new \ConfigCat\User("john@example.com");
@@ -194,7 +194,7 @@ $client->setDefaultUser($user);
 $value = $client->getValue("keyOfMySetting", false);
 ```
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```php
 $user = new \ConfigCat\User("john@example.com");
@@ -229,7 +229,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a Us
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
 $settingValues = $client->getAllValues();
 
-// invoke with user object
+// invoke with User Object
 $user = new \ConfigCat\User("john@example.com");
 $settingValuesTargeting = $client->getAllValues($user);
 ```

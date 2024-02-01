@@ -12,7 +12,7 @@ This allows you to control the value of multiple feature flags by changing the v
 
 ## How does the Flag Condition work?
 
-The prerequisite flag is evaluated with the same user object as the one used to evaluate the dependent flag, and then the result is checked against the comparator that you set on the Dashboard. 
+The prerequisite flag is evaluated with the same User Object as the one used to evaluate the dependent flag, and then the result is checked against the comparator that you set on the Dashboard. 
 
 The prerequisite flag can be other than a feature flag (boolean setting), in which case the prerequisite flag's evaluated value will be compared to the comparison value that you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 

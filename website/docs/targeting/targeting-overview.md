@@ -46,7 +46,7 @@ A feature flag always contains a trivial "rule", a simple value after the actual
 
 ### User Object
 
-A *user object* is a collection of *user attributes* that describe the properties of a user. Referencing these attributes in conditions allows you to define rules for targeting users. More about the [User Object here](../user-object).
+A *User Object* is a collection of *user attributes* that describe the properties of a user. Referencing these attributes in conditions allows you to define rules for targeting users. More about the [User Object here](../user-object).
 
 ### Default value
 
@@ -72,7 +72,7 @@ Here is how we get the value of the feature flag in your application:
 ```js
 import * as configcat from 'configcat-js';
 
-// Create the user object
+// Create the User Object
 let userObject = new configcat.User(
    // Identifier - used by the Percentage Options to split the users into groups
   '867428724',
@@ -88,7 +88,7 @@ const value = await configCatClient.getValueAsync(
   // Default value - by providing `false` we specify that the feature should not be
   // enabled if the SDK fails to fetch the config or some other error occurs
   false,
-  // User object
+  // User Object
   userObject,
 );
 ```

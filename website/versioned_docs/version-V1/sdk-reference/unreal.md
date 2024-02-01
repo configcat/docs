@@ -173,7 +173,7 @@ The `Details` result contains the following information:
 | `Key`                                | The key of the evaluated feature flag or setting.                                         |
 | `Is Default Value`                   | True when the default value passed to getValueDetails() is returned due to an error.      |
 | `Error`                              | In case of an error, this field contains the error message.                               |
-| `User`                               | The user object that was used for evaluation.                                             |
+| `User`                               | The User Object that was used for evaluation.                                             |
 | `Matched Evaluation Percentage Rule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
 | `Matched Evaluation Rule`            | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `FetchTime`                          | The last download time of the current config.                                             |
@@ -197,7 +197,7 @@ FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"));
 </TabItem>
 </Tabs>
 
-### Customized user object creation
+### Customized User Object creation
 
 | Argument  | Description                                                                                                                     |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -227,9 +227,9 @@ FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"), TEXT("joh
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object with the `setDefaultUser()` method of the ConfigCat client.
+You can set the default User Object with the `setDefaultUser()` method of the ConfigCat client.
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
@@ -248,7 +248,7 @@ ConfigCat->SetDefaultUser(User);
 </TabItem>
 </Tabs>
 
-Whenever the `GetValue()`, `GetValueDetails()`, `GetAllValues()`, or `GetAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `GetValue()`, `GetValueDetails()`, `GetAllValues()`, or `GetAllValueDetails()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
@@ -270,7 +270,7 @@ bool bMySetting = ConfigCat->GetBoolValue(TEXT("keyOfMySetting"), false);
 </TabItem>
 </Tabs>
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">

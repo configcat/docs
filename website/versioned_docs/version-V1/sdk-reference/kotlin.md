@@ -170,7 +170,7 @@ The details result contains the following information:
 | `key`                             | `String`                                | The key of the evaluated feature flag or setting.                                         |
 | `isDefaultValue`                  | `Boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
 | `error`                           | `String?`                               | In case of an error, this field contains the error message.                               |
-| `user`                            | `ConfigCatUser?`                        | The user object that was used for evaluation.                                             |
+| `user`                            | `ConfigCatUser?`                        | The User Object that was used for evaluation.                                             |
 | `matchedEvaluationPercentageRule` | `PercentageRule?`                       | If the evaluation was based on a percentage rule, this field contains that specific rule. |
 | `matchedEvaluationRule`           | `RolloutRule?`                          | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `fetchTimeUnixMilliseconds`       | `Long`                                  | The last download time of the current config in unix milliseconds format.                 |
@@ -187,7 +187,7 @@ val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")
 val user = ConfigCatUser(identifier = "john@example.com")
 ```
 
-### Customized user object creation
+### Customized User Object creation
 
 | Argument     | Description                                                                                                              |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------ |
@@ -210,9 +210,9 @@ val user = ConfigCatUser(
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```kotlin
 val client = ConfigCatClient("#YOUR-SDK-KEY#") {
@@ -226,7 +226,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client.setDefaultUser(ConfigCatUser(identifier = "john@example.com"))
 ```
 
-Whenever the `getValue()`, `getValueDetails()`, or `getAllValues()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue()`, `getValueDetails()`, or `getAllValues()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```kotlin
 val user = ConfigCatUser(identifier = "john@example.com")
@@ -236,7 +236,7 @@ client.setDefaultUser(user)
 val value = client.getValue("keyOfMySetting", false)
 ```
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```kotlin
 val user = ConfigCatUser(identifier = "john@example.com")
@@ -455,7 +455,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a Us
 val client = ConfigCatClient("#YOUR-SDK-KEY#")
 val settingValues = client.getAllValues()
 
-// invoke with user object
+// invoke with User Object
 val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")
 val settingValuesTargeting = client.getAllValues(user)
 ```

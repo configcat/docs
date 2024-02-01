@@ -142,7 +142,7 @@ The details result contains the following information:
 | `key`                                | The key of the evaluated feature flag or setting.                                                          |
 | `is_default_value`                   | True when the default value passed to get_value_details() is returned due to an error.                     |
 | `error`                              | In case of an error, this field contains the error message.                                                |
-| `user`                               | The user object that was used for evaluation.                                                              |
+| `user`                               | The User Object that was used for evaluation.                                                              |
 | `matched_targeting_rule`             | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
 | `matched_percentage_option`          | The Percentage Option (if any) that was used to select the evaluated value.                                |
 | `fetch_time`                         | The last download time (UTC _datetime_) of the current config.                                             |
@@ -160,7 +160,7 @@ user_object = User('#UNIQUE-USER-IDENTIFIER#')
 user_object = User('john@example.com')
 ```
 
-### Customized user object creation
+### Customized User Object creation
 
 | Parameters   | Description                                                                                                                       |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -221,9 +221,9 @@ All comparators support `string` values as User Object attribute (in some cases 
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#',
     ConfigCatOptions(
@@ -237,7 +237,7 @@ or with the `set_default_user()` method of the ConfigCat client.
 client.set_default_user(User('john@example.com'))
 ```
 
-Whenever the `get_value()`, `get_value_details()`, `get_variation_id()`, `get_all_variation_ids()`, or `get_all_values()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `get_value()`, `get_value_details()`, `get_variation_id()`, `get_all_variation_ids()`, or `get_all_values()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#',
@@ -249,7 +249,7 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 value = client.get_value('keyOfMySetting', False)
 ```
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#',

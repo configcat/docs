@@ -129,7 +129,7 @@ The `details` result contains the following information:
 | `key`                                | The key of the evaluated feature flag or setting.                                         |
 | `default_value?`                     | True when the default value passed to get_value_details() is returned due to an error.    |
 | `error`                              | In case of an error, this field contains the error message.                               |
-| `user`                               | The user object that was used for evaluation.                                             |
+| `user`                               | The User Object that was used for evaluation.                                             |
 | `matched_evaluation_percentage_rule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
 | `matched_evaluation_rule`            | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `fetch_time`                         | The last download time (UTC DateTime) of the current config.                              |
@@ -157,9 +157,9 @@ user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#", email: "john@exampl
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```elixir
 {ConfigCat, [
@@ -174,7 +174,7 @@ or with the `set_default_user` method of the ConfigCat client.
 ConfigCat.set_default_user(ConfigCat.User.new("john@example.com"))
 ```
 
-Whenever the `get_value`, `get_value_details`, `get_variation_id`, `get_all_variation_ids`, or `get_all_values` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `get_value`, `get_value_details`, `get_variation_id`, `get_all_variation_ids`, or `get_all_values` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```elixir
 {ConfigCat, [
@@ -187,7 +187,7 @@ Whenever the `get_value`, `get_value_details`, `get_variation_id`, `get_all_vari
 value = ConfigCat.get_value("keyOfMySetting", false)
 ```
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```elixir
 other_user = ConfigCat.User.new("brian@example.com")

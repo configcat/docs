@@ -46,7 +46,7 @@ message EvalRequest {
   string sdk_id = 1;
   // The feature flag's key to evaluate.
   string key = 2;
-  // The user object.
+  // The User Object.
   map<string, UserValue> user = 3;
 }
 

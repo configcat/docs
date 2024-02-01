@@ -215,7 +215,7 @@ The `details` result contains the following information:
 | --------------------------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
 | `Key`                             | `string`                             | The key of the evaluated feature flag or setting.                                                               |
 | `Value`                           | `bool` / `string` / `int` / `double` | The evaluated value of the feature flag or setting.                                                             |
-| `User`                            | `User`                               | The user object used for the evaluation.                                                                        |
+| `User`                            | `User`                               | The User Object used for the evaluation.                                                                        |
 | `IsDefaultValue`                  | `bool`                               | True when the default value passed to `GetValueDetails()`/`GetValueDetailsAsync()` is returned due to an error. |
 | `ErrorMessage`                    | `string`                             | In case of an error, this field contains the error message.                                                     |
 | `ErrorException`                  | `Exception`                          | In case of an error, this field contains the related exception object (if any).                                 |
@@ -299,9 +299,9 @@ All comparators support `string` values as User Object attribute (in some cases 
 
 ### Default user
 
-It's possible to set a default user object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
+It's possible to set a default User Object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
@@ -314,7 +314,7 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 client.SetDefaultUser(new User(identifier: "john@example.com"));
 ```
 
-Whenever the evaluation methods like `GetValue()`, `GetValueAsync()`, etc. are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the evaluation methods like `GetValue()`, `GetValueAsync()`, etc. are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```csharp
 var user = new User(identifier: "john@example.com");
@@ -324,7 +324,7 @@ client.SetDefaultUser(user);
 var value = await client.GetValueAsync(key: "keyOfMyFeatureFlag", defaultValue: false);
 ```
 
-When a user object parameter is passed to the evaluation methods, it takes precedence over the default user.
+When a `user` parameter is passed to the evaluation methods, it takes precedence over the default user.
 
 ```csharp
 var user = new User(identifier: "john@example.com");
@@ -821,7 +821,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IDictionary<string, object> settingValues = client.GetAllValues();
 
-// invoke with user object
+// invoke with User Object
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 IDictionary<string, object> settingValuesTargeting = client.GetAllValues(userObject);
 ```
@@ -830,7 +830,7 @@ IDictionary<string, object> settingValuesTargeting = client.GetAllValues(userObj
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IDictionary<string, object> settingValues = await client.GetAllValuesAsync();
 
-// invoke with user object
+// invoke with User Object
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
 ```
@@ -843,7 +843,7 @@ Evaluates and returns the values along with evaluation details of all feature fl
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IReadOnlyList<EvaluationDetails> settingValues = client.GetAllValueDetails();
 
-// invoke with user object
+// invoke with User Object
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 IReadOnlyList<EvaluationDetails> settingValuesTargeting = client.GetAllValueDetails(userObject);
 ```
@@ -852,7 +852,7 @@ IReadOnlyList<EvaluationDetails> settingValuesTargeting = client.GetAllValueDeta
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IReadOnlyList<EvaluationDetails> settingValues = await client.GetAllValueDetailsAsync();
 
-// invoke with user object
+// invoke with User Object
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 IReadOnlyList<EvaluationDetails> settingValuesTargeting = await client.GetAllValueDetailsAsync(userObject);
 ```

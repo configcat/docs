@@ -237,7 +237,7 @@ The `details` result contains the following information:
 | --------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------- |
 | `key`                             | `string`                        | The key of the evaluated feature flag or setting.                                           |
 | `value`                           | `boolean` / `string` / `number` | The evaluated value of the feature flag or setting.                                         |
-| `user`                            | `User`                          | The user object used for the evaluation.                                                    |
+| `user`                            | `User`                          | The User Object used for the evaluation.                                                    |
 | `isDefaultValue`                  | `boolean`                       | True when the default value passed to `getValueDetailsAsync()` is returned due to an error. |
 | `errorMessage`                    | `string`                        | In case of an error, this field contains the error message.                                 |
 | `errorException`                  | `any`                           | In case of an error, this field contains the related exception object (if any).             |
@@ -322,9 +322,9 @@ but some of them also support other types of values. It depends on the comparato
 
 ### Default user
 
-It's possible to set a default user object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
+It's possible to set a default User Object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```js
 const configCatClient = configcat.getClient(
@@ -342,7 +342,7 @@ const configCatClient = configcat.getClient(
 configCatClient.setDefaultUser(new configcat.User('john@example.com'));
 ```
 
-Whenever the evaluation methods like `getValueAsync()`, `getValueDetailsAsync()`, etc. are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the evaluation methods like `getValueAsync()`, `getValueDetailsAsync()`, etc. are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```js
 const user = new configcat.User('john@example.com');
@@ -352,7 +352,7 @@ configCatClient.setDefaultUser(user);
 const value = await configCatClient.getValueAsync('keyOfMyFeatureFlag', false);
 ```
 
-When a user object parameter is passed to the evaluation methods, it takes precedence over the default user.
+When a `user` parameter is passed to the evaluation methods, it takes precedence over the default user.
 
 ```js
 const user = new configcat.User('john@example.com');
@@ -592,7 +592,7 @@ settingValues.forEach((i) =>
   console.log(i.settingKey + ' -> ' + i.settingValue),
 );
 
-// invoke with user object
+// invoke with User Object
 const userObject = new configcat.User('john@example.com');
 
 settingValues = await configCatClient.getAllValuesAsync(userObject);
@@ -611,7 +611,7 @@ const configCatClient = configcat.getClient('#YOUR-SDK-KEY#');
 let settingValues = await configCatClient.getAllValueDetailsAsync();
 settingValues.forEach((details) => console.log(details));
 
-// invoke with user object
+// invoke with User Object
 const userObject = new configcat.User('john@example.com');
 
 settingValues = await configCatClient.getAllValueDetailsAsync(userObject);

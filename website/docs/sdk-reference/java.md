@@ -236,7 +236,7 @@ The details result contains the following information:
 | `getKey()`                         | `String`                                | The key of the evaluated feature flag or setting.                                                          |
 | `isDefaultValue()`                 | `boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.                       |
 | `getError()`                       | `String`                                | In case of an error, this field contains the error message.                                                |
-| `getUser()`                        | `User`                                  | The user object that was used for evaluation.                                                              |
+| `getUser()`                        | `User`                                  | The User Object that was used for evaluation.                                                              |
 | `getMatchedPercentageOption()`     | `PercentageOption`                      | The Percentage Option (if any) that was used to select the evaluated value.                                |
 | `getMatchedTargetingRule()`        | `TargetingRule`                         | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
 | `getFetchTimeUnixMilliseconds()`   | `long`                                  | The last download time of the current config in unix milliseconds format.                                  |
@@ -318,9 +318,9 @@ All comparators support `String` values as User Object attribute (in some cases 
 
 ### Default User
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object either with the ConfigCatClient builder:
+You can set the default User Object either with the ConfigCatClient builder:
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
@@ -336,7 +336,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client.setDefaultUser(User.newBuilder().build("john@example.com"));
 ```
 
-Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllValueDetails()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```java
 client.setDefaultUser(User.newBuilder().build("john@example.com"));
@@ -344,7 +344,7 @@ client.setDefaultUser(User.newBuilder().build("john@example.com"));
 boolean value = client.getValue(Boolean.class, "keyOfMySetting", false);
 ```
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```java
 client.setDefaultUser(User.newBuilder().build("john@example.com"));
@@ -806,7 +806,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a Us
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 Map<String, Object> settingValues = client.getAllValues();
 
-// invoke with user object
+// invoke with User Object
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#")
 Map<String, Object> settingValuesTargeting = client.getAllValues(user);
 ```
@@ -815,7 +815,7 @@ Map<String, Object> settingValuesTargeting = client.getAllValues(user);
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 client.getAllValuesAsync().thenAccept(settingValues -> { });
 
-// invoke with user object
+// invoke with User Object
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#")
 client.getAllValuesAsync(user).thenAccept(settingValuesTargeting -> { });
 ```
