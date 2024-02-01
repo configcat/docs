@@ -1,7 +1,7 @@
 ---
 id: targeting
 title: Targeting
-description: Targeting allows you to define targeting rules for feature flags. This way you can target a specific user group with a specific feature.
+description: Targeting allows you to define Targeting Rules for feature flags. This way you can target a specific user group with a specific feature.
 ---
 
 Using this feature you will be able to set different setting values for different users in your application. Let's say you would like to enable a feature only for the users within your company or only to a small percentage of your users before releasing it to the entire world.
@@ -18,13 +18,13 @@ Using this feature you will be able to set different setting values for differen
 
 ## Anatomy of a Targeting Rule
 
-By adding a rule, you specify a group of your users and what feature flag or setting value they should get. A rule consists of a **Comparison attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses), and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the targeting rule every time your application requires and decides what value to serve.
+By adding a rule, you specify a group of your users and what feature flag or setting value they should get. A rule consists of a **Comparison attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses), and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the Targeting Rule every time your application requires and decides what value to serve.
 
 <img src="/docs/assets/sensitive2.png" className="zoomable" alt="Confidential" />
 
 | Field                | Purpose                                                                                                                                              |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Comparison attribute | The attribute that the targeting rule is based on. Could be "User ID", "Email", "Country" or any custom attribute.                                   |
+| Comparison attribute | The attribute that the Targeting Rule is based on. Could be "User ID", "Email", "Country" or any custom attribute.                                   |
 | Comparator           | The comparison operator. Holds the connection between the attribute and the value.                                                                   |
 | Comparison value     | The value that the attribute is compared to. Could be a string, a number, a semantic version or a comma-separated list, depending on the comparator. |
 
@@ -51,7 +51,7 @@ Any string, number, or comma-separated list. Will be compared to the selected _C
 
 The following comparators assume that _Comparison attribute_ and _Comparison value_ contain string/text.
 
-> In case **attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), targeting rule **evaluation will be skipped**.
+> In case **attribute is not passed** to the SDK or it's value is **falsy** (unknown, null, ""), Targeting Rule **evaluation will be skipped**.
 
 :::caution
 Consider using Confidential text comparators if you are planning to target users by their sensitive information e.g: email address or company domain!
@@ -78,7 +78,7 @@ Since confidential text comparators don't support CONTAINS or DOES NOT CONTAIN c
 
 <img src="/docs/assets/sensitive2.png" className="zoomable" alt="Confidential" />
 
-You can add a custom attribute called `domain` and use only confidential comparators in the targeting rule.
+You can add a custom attribute called `domain` and use only confidential comparators in the Targeting Rule.
 
 On the Dashboard:
 <img src="/docs/assets/sensitive1.png" className="zoomable" alt="Confidential" />
@@ -149,7 +149,7 @@ All number comparators return `false` if either _Comparison attribute_ or _Compa
 
 ### Served value
 
-The exact value that will be served to the users who match the targeting rule. Depending on the kind of your setting this could be:
+The exact value that will be served to the users who match the Targeting Rule. Depending on the kind of your setting this could be:
 
 | Setting Kind   | Setting Type | Description                                     |
 | -------------- | ------------ | ----------------------------------------------- |
@@ -158,19 +158,19 @@ The exact value that will be served to the users who match the targeting rule. D
 | Whole Number   | Integer      | any whole number within the range of `int32`    |
 | Decimal Number | Double       | any decimal number within the range of `double` |
 
-### Multiple targeting rules and ordering
+### Multiple Targeting Rules and ordering
 
 Add new rule by clicking on the _Actions_ icon.
 
-By adding multiple targeting rules you can create more complex rule sets.
+By adding multiple Targeting Rules you can create more complex rule sets.
 
 > Rule sets are evaluated one by one, from top to bottom direction.
 
-> Change the order of targeting rules by drag n' drop.
+> Change the order of Targeting Rules by drag n' drop.
 
 #### Example
 
-_Enable a feature only to users within your company except for the sales team (Susan and Simon) by adding two targeting rules:_
+_Enable a feature only to users within your company except for the sales team (Susan and Simon) by adding two Targeting Rules:_
 
 | #   | Comparison attribute | Comparator | Comparison value                           | Served value |
 | --- | -------------------- | ---------- | ------------------------------------------ | ------------ |
@@ -219,7 +219,7 @@ The exact value that will be served to the users that fall into that fraction. D
 The percentage-based targeting is sticky by design and consistent across all SDKs.
 
 Percentage-based targeting is based on the identifier of the `User Object` passed to the SDK's `getValue()` methods.
-The SDKs are hashing the concatenated value of the `User Object's` `identifier` and the requested feature flag's `Key`. Then they assign a 0-99 number to the User for a specific feature flag. This number is used to evaluate a particular feature flag's value based on the targeting rules.
+The SDKs are hashing the concatenated value of the `User Object's` `identifier` and the requested feature flag's `Key`. Then they assign a 0-99 number to the User for a specific feature flag. This number is used to evaluate a particular feature flag's value based on the Targeting Rules.
 This number is fix and consistent for each User across all SDKs. The SDKs check if the assigned number is greater or less than the percentage set on the ConfigCat Dashboard.
 
 :::caution

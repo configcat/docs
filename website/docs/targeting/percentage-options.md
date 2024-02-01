@@ -132,7 +132,7 @@ Whisker Co. is about to release a new feature called `Cafe Notifications` in the
 To get some feedback from our customers before releasing it to everyone, we initially want to make the feature available to a limited number of customers only. We also want to release the feature to roughly the same number of Android and iOS users.
 
 #### Solution
-Let's create a feature flag called `Cafe Notifications` with two targeting rules: one that matches Android users and one that matches iOS users. Then change the THEN part of both to Percentage Options. Finally, set the percentages so that the feature is enabled for roughly the same number of users (e.g. 60% for `Android` users, 20% for `iOS` users).
+Let's create a feature flag called `Cafe Notifications` with two Targeting Rules: one that matches Android users and one that matches iOS users. Then change the THEN part of both to Percentage Options. Finally, set the percentages so that the feature is enabled for roughly the same number of users (e.g. 60% for `Android` users, 20% for `iOS` users).
 
 ![Targeting Example 4](/assets/targeting/percentage-options/example4.jpg)
 

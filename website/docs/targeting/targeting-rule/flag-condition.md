@@ -72,7 +72,7 @@ We want to make sure that users only receive notifications about their favorite 
 #### Solution
 ConfigCat offers a built-in way to solve this problem without the need of extra coding: prerequisite flags.
 
-We can achieve our goal by adding a targeting rule containing a Flag Condition to `Enable Cafe Notifications`, then referencing `Enable Cafe Ratings` in the condition and setting the comparator to `IS ON`, meaning that the `Enable Cafe Notifications` feature flag will be enabled only if the `Enable Cafe Ratings` feature flag is ON.
+We can achieve our goal by adding a Targeting Rule containing a Flag Condition to `Enable Cafe Notifications`, then referencing `Enable Cafe Ratings` in the condition and setting the comparator to `IS ON`, meaning that the `Enable Cafe Notifications` feature flag will be enabled only if the `Enable Cafe Ratings` feature flag is ON.
 
 On the Dashboard:
 ![Flag Condition example](/assets/targeting/targeting-rule/flag-condition/flag-condition-example.jpg)

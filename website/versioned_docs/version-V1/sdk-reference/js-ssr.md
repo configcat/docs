@@ -558,7 +558,7 @@ Info level logging helps to inspect the feature flag evaluation process:
 
 ```bash
 ConfigCat - INFO - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"#SOME-USER-ID#","Email":"configcat@example.com"}'
-  Evaluating Targeting Rules and applying the first match if any:
+  Evaluating targeting rules and applying the first match if any:
   - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'false' => no match
   - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'true' => MATCH, applying rule
   Returning 'true'.
