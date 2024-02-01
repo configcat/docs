@@ -95,7 +95,7 @@ Let's create a feature flag called `Enable Park Weather Info` with Percentage Op
 
 ![Targeting Example 1](/assets/targeting/percentage-options/example1.jpg)
 
-### A/B/C Testing Scenario
+### A/B/n Testing Scenario
 
 #### Context
 The marketing specialists at Whisker Co. want to introduce a discount method to encourage more purchases in the webshop. They have multiple ideas but, without data, they can't decide which is the most effective.
