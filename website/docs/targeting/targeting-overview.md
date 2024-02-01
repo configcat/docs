@@ -63,7 +63,7 @@ Our demo company, Whisker Co. is about to release a new feature called `Park Wea
 To make sure that the new feature is working as expected before releasing it to everyone, we initially want to make the feature available to the employees and to `20%` of the customers only.
 
 #### Solution
-Let's create a feature flag called `Enable Park Weather Info` with a Targeting Rule that matches everyone at Whisker Co. and Percentage Options of `20%` `ON` and `80%` `OFF`.
+Let's create a feature flag called `Enable Park Weather Info` with a Targeting Rule that matches the employees at Whisker Co. and Percentage Options set to `20%` `ON` and `80%` `OFF` for the rest of the users (i.e. for the customers).
 
 Here is what such a feature flag looks like on the Dashboard:
 ![Phased rollout Example](../../static/assets/targeting/targeting-overview/phased-rollout.jpg)

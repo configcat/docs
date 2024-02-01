@@ -143,7 +143,7 @@ The following comparators expect the *Comparison attribute* to be an array of st
 Black Friday is coming and we want to offer a special discount to our users.
 
 #### Goal
-The deals should be available only at midnight on Black Friday. We want to make sure that the users can't access the deals before that.
+The deals should become available at midnight on Black Friday. We want to make sure that the users can't access the deals before that.
 
 #### Solution
 Let's use the AFTER comparator to check whether the current time is after midnight on Black Friday.
@@ -156,6 +156,8 @@ In the code:
 const userObject = {
   identifier: '<SOME USER ID>',
   email: userEmail,
+  // In case this code runs on the customer's device, we should consider getting the current time
+  // from a time server since customers are free to set the system clock on their devices.
   custom: { Date: new Date() },
 };
 const value = await configCatClient.getValueAsync("enableBlackFridayDeals", false, userObject);

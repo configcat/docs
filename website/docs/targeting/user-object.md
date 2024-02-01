@@ -86,6 +86,3 @@ let userObject = new configcat.User('<unique-identifier-here>', undefined, undef
     SubscriptionType: 'Pro',
 });
 ```
-
-
-
