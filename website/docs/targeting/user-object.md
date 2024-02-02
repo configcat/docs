@@ -84,7 +84,7 @@ This allows us to define a Targeting Rule that turns on the feature for the cust
 Add the `SubscriptionType` custom attribute to the User Object in your application code.
 
 ```js
-let userObject = new configcat.User('<unique-identifier-here>', undefined, undefined, { 
-    SubscriptionType: 'Pro',
+const userObject = new configcat.User(userId, undefined, undefined, {
+  SubscriptionType: 'Pro',
 });
 ```

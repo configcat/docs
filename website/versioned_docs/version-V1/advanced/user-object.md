@@ -91,13 +91,10 @@ First, you need to pass a User Object to the ConfigCat SDK containing the `custo
 Example:
 
 ```javascript
-var userObject = {
-  identifier: '<unique-identifier-here>', // required
-  custom: {
-    SubscriptionType: 'Pro',
-    UserRole: 'Admin',
-  },
-};
+const userObject = new configcat.User('<unique-identifier-here>', undefined, undefined, {
+  SubscriptionType: 'Pro',
+  UserRole: 'Admin',
+});
 ```
 
 _The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](/sdk-reference/overview)_

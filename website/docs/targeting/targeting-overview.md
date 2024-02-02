@@ -70,15 +70,13 @@ Here is what such a feature flag looks like on the Dashboard:
 
 Here is how we get the value of the feature flag in your application:
 ```js
-import * as configcat from 'configcat-js';
-
 // Create the User Object
 const userObject = new configcat.User(
   // Identifier - used by the Percentage Options to split the users into groups
   '867428724',
   // Email - used by the Targeting Rule's User Condition to determine whether
   // the user is an employee at Whisker Co.
-  'isaac@whisker.example',
+  'isaac@whisker.example'
 );
 
 // Get the value of the feature flag
@@ -89,6 +87,6 @@ const value = await configCatClient.getValueAsync(
   // enabled if the SDK fails to fetch the config or some other error occurs
   false,
   // User Object
-  userObject,
+  userObject
 );
 ```

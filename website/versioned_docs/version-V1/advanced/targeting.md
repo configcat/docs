@@ -87,11 +87,9 @@ In your code:
 
 ```js
 const userDomain = userEmail.split('@').pop();
-const userObject = {
-  identifier: '<SOME USER ID>',
-  email: userEmail,
-  custom: { domain: userDomain },
-};
+const userObject = new configcat.User('<SOME USER ID>', userEmail, undefined, {
+  { domain: userDomain }
+});
 const value = await configCatClient.getValueAsync(key, defaultValue, userObject);
 ```
 

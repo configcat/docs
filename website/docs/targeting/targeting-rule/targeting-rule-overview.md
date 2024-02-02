@@ -71,10 +71,9 @@ On the Dashboard:
 
 In the code:
 ```js
-const userObject = {
-  identifier: '<SOME USER ID>',
-  email: userEmail,
-  custom: { AppVersion: `<APP VERSION>` },
-};
+const userObject = new configcat.User(userId, userEmail, undefined, {
+  AppVersion: `3.1.2`
+});
+
 const value = await configCatClient.getValueAsync("enableCafeNotifications", false, userObject);
 ```
