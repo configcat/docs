@@ -1,10 +1,10 @@
 ---
 id: config-v2
 title: Config V2 Overview
-description: Config V2 is the next generation of ConfigCat. It comes with a new dashboard, API, SDKs and features.
+description: Config V2 is the next generation of ConfigCat. It comes with a new Dashboard, Public Management API, SDKs and features.
 ---
 
-Config V2 is a new version of ConfigCat. It comes with a new dashboard, API, SDKs, and features.
+Config V2 is a new version of ConfigCat. It comes with a new Dashboard, Public Management API, SDKs, and features.
 
 ## What's new?
 
@@ -22,30 +22,40 @@ See the [Config V2 Migration Guide](/advanced/config-v2-migration-guide). If you
 
 ### AND conditions
 
-With AND conditions, you can define more complex targeting rules, such as "serve this value for the users who use my Android app AND whose email domain is '@example.com'".
+With AND conditions, you can define more complex Targeting Rules, such as "serve this value for the users who use my Android app AND whose email domain is '@example.com'".
 
-You can add multiple conditions to a targeting rule and they will be evaluated with an AND connection between them.
+You can add multiple conditions to a Targeting Rule and they will be evaluated with an AND connection between them.
+
+![AND conditions](/assets/config-v2/and-conditions.jpg)
 
 ### New comparators
 
-With the new comparators, you can create targeting rules which are based on dates, based on comparing arrays etc.
+With the new comparators, you can create Targeting Rules which are based on dates, based on comparing arrays etc.
 
-- New text and sensitive text comparators: EQUALS, NOT EQUALS, STARTS WITH ANY OF, ENDS WITH ANY OF, NOT STARTS WITH ANY OF, NOT ENDS WITH ANY OF.
-- New array comparators: ARRAY CONTAINS ANY OF, ARRAY NOT CONTAINS ANY OF.
-- New date comparators: BEFORE, AFTER.
+- New text and confidential text comparators: `EQUALS`, `NOT EQUALS`, `STARTS WITH ANY OF`, `ENDS WITH ANY OF`, `NOT STARTS WITH ANY OF`, `NOT ENDS WITH ANY OF`.
+- New array comparators: `ARRAY CONTAINS ANY OF`, `ARRAY NOT CONTAINS ANY OF`.
+- New date comparators: `BEFORE`, `AFTER`.
+
+![New comparators](/assets/config-v2/new-comparators.jpg)
 
 ### Prerequisite flags
 
 With prerequisite flags, you can create feature flags that depend on other feature flags. Prerequisite feature flags (aka. master feature flag, inter-dependent feature flag, global toggle) are particularly useful for managing complex feature dependencies and ensuring a smooth user experience during feature rollouts.
 
+![Prerequisite flags](/assets/config-v2/prerequisite-flags.jpg)
+
 ### Comparison value hints
 
 With comparison value hints, you can associate arbitrary text with your comparison values. This way you can add a description to your comparison value list items that helps you remember what they are for.
 
-### Percentage options within targeting rules
+### Percentage Options within Targeting Rules
 
-You can add percentage options to your targeting rules. This is useful if you want to create more complex targeting rules, such as "turn on the feature for 20% of the users who are on iOS, and off for 80%".
+You can add Percentage Options to your Targeting Rules. This is useful if you want to create more complex Targeting Rules, such as "turn on the feature for 20% of the users who are on iOS, and off for 80%".
 
-### Custom percentage attributes
+![Percentage Options within Targeting Rules](/assets/config-v2/percentage-options-within-targeting-rules.jpg)
 
-With custom percentage attributes, you can create percentage options based on custom attributes. This way you can create percentage options based on any of your user attributes. For example, you can create a percentage option that is based on the user's company or organization. So you can serve a value for 20% of the users from company A and serve another value for 80% of the users from company B.
+### Custom Percentage Attributes
+
+With custom Percentage Attributes, you can create Percentage Options based on custom attributes. This way you can create Percentage Options based on any of your user attributes. For example, you can create a Percentage Option that is based on the user's company or organization. So you can serve a value for 20% of the users from company A and serve another value for 80% of the users from company B.
+
+![Custom Percentage Attributes](/assets/config-v2/custom-percentage-attributes.jpg)

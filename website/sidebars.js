@@ -10,10 +10,30 @@ module.exports = {
         'organization',
       ],
       Guides: [
+        {
+          'Config V2': [
+            'advanced/config-v2',
+            'advanced/config-v2-migration-guide',
+            'advanced/config-v2-sdk-compatibility',
+          ],
+        },
         'advanced/data-governance',
-        'advanced/targeting',
-        'advanced/segments',
-        'advanced/user-object',
+        {
+          'Targeting': [
+            'targeting/targeting-overview',
+            {
+              'Targeting Rule': [
+                'targeting/targeting-rule/targeting-rule-overview',
+                'targeting/targeting-rule/user-condition',
+                'targeting/targeting-rule/flag-condition',
+                'targeting/targeting-rule/segment-condition',
+              ],
+            },
+            'targeting/percentage-options',
+            'targeting/user-object',
+            'targeting/feature-flag-evaluation',
+          ],
+        },
         'advanced/public-api',
         'advanced/caching',
         {
@@ -71,7 +91,6 @@ module.exports = {
         'advanced/notifications-webhooks',
         'advanced/troubleshooting',
         'advanced/cli',
-        // 'advanced/config-v2-migration-guide',
         {
           'Scan & Upload Code References': [
             {

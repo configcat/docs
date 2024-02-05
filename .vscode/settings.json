@@ -4,9 +4,11 @@
     ],
     "cSpell.words": [
         "Bitrise",
+        "cleartext",
         "Deno",
         "JSONs",
         "laravel",
+        "rollouts",
         "Multiplatform",
         "runtimes",
         "SDKKEY",
@@ -15,5 +17,6 @@
     "grammarly.userWords": [
         "ConfigCat",
         "authorTitle"
-    ]
+    ],
+    "editor.inlineSuggest.showToolbar": "onHover"
 }
