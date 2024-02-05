@@ -64,7 +64,6 @@ Discover feature flag usages in your source code and upload the found code refer
 ## Terraform
 
 Manage feature flags directly from Terraform HCL scripts.
-
 [Documentation](/integrations/terraform)
 
 ## Amplitude
