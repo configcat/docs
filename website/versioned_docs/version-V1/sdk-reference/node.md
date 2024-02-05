@@ -19,7 +19,13 @@ export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.js
 For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](/sdk-reference/js-ssr).
 :::
 
-<a href="https://github.com/configcat/node-sdk" target="_blank">ConfigCat Node.js SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/node-sdk" target="_blank">ConfigCat Node.js SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v10.x version** of the ConfigCat Node.js SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/node).
+:::
 
 ## Getting started
 

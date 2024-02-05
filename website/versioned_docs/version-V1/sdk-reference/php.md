@@ -15,7 +15,13 @@ export const PHPSchema = require('@site/src/schema-markup/sdk-reference/php.json
 [![Total Downloads](https://poser.pugx.org/configcat/configcat-client/downloads)](https://packagist.org/packages/configcat/configcat-client)
 [![Latest Unstable Version](https://poser.pugx.org/configcat/configcat-client/v/unstable)](https://packagist.org/packages/configcat/configcat-client)
 
-<a href="https://github.com/configcat/php-sdk" target="_blank">ConfigCat PHP SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/php-sdk" target="_blank">ConfigCat PHP SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v8.x version** of the ConfigCat PHP SDK . For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/php).
+:::
 
 ## Getting started
 

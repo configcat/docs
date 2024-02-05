@@ -13,7 +13,13 @@ export const RubySchema = require('@site/src/schema-markup/sdk-reference/ruby.js
 [![Coverage Status](https://coveralls.io/repos/github/configcat/ruby-sdk/badge.svg?branch=master)](https://coveralls.io/github/configcat/ruby-sdk?branch=master)
 [![Gem version](https://badge.fury.io/rb/configcat.svg)](https://rubygems.org/gems/configcat)
 
-<a href="https://github.com/configcat/ruby-sdk" target="_blank">ConfigCat Ruby SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/ruby-sdk" target="_blank">ConfigCat Ruby SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v7.x version** of the ConfigCat Ruby SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/ruby).
+:::
 
 ## Getting started
 

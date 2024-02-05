@@ -17,7 +17,13 @@ export const GoSchema = require('@site/src/schema-markup/sdk-reference/go.json')
 [![codecov](https://codecov.io/gh/configcat/go-sdk/branch/v8/graph/badge.svg)](https://codecov.io/gh/configcat/go-sdk)
 [![GoDoc](https://godoc.org/github.com/configcat/go-sdk?status.svg)](https://pkg.go.dev/github.com/configcat/go-sdk/v8)
 
-<a href="https://github.com/configcat/go-sdk" target="_blank">ConfigCat Go SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/go-sdk" target="_blank">ConfigCat Go SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v8.x version** of the ConfigCat Go SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/go).
+:::
 
 ## Getting Started:
 

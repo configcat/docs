@@ -15,7 +15,13 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 [![Sonar Coverage](https://img.shields.io/sonar/coverage/net-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=net-sdk)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
 
-<a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+<p>
+  <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v8.x version** of the ConfigCat .NET SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/dotnet).
+:::
 
 ## Getting started
 

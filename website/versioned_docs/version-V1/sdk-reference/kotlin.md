@@ -18,6 +18,10 @@ export const KotlinSchema = require('@site/src/schema-markup/sdk-reference/kotli
 - <a href="https://github.com/configcat/kotlin-sdk" target="_blank">ConfigCat Kotlin Multiplatform SDK on GitHub</a>
 - <a href="https://configcat.github.io/kotlin-sdk/" target="_blank">API Documentation</a>
 
+:::info
+This documentation applies to the **v2.x version** of the ConfigCat Kotlin Multiplatform SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/kotlin).
+:::
+
 ## Getting started
 
 ### 1. Install the ConfigCat SDK

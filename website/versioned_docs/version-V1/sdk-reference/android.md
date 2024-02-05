@@ -19,7 +19,13 @@ export const AndroidSchema = require('@site/src/schema-markup/sdk-reference/andr
 This SDK is mainly for Java-based Android applications. For a more modern Android development experience, check our [Kotlin Multiplatform SDK](/sdk-reference/kotlin).
 :::
 
-<a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android (Java) SDK on GitHub</a>
+<p>
+  <a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android (Java) SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v9.x version** of the ConfigCat Android (Java) SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/android).
+:::
 
 ### Compatibility
 

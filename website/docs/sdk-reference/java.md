@@ -17,6 +17,8 @@ export const JavaSchema = require('@site/src/schema-markup/sdk-reference/java.js
 [![Coverage Status](https://img.shields.io/sonar/coverage/configcat_java-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=configcat_java-sdk)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=configcat_java-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=configcat_java-sdk)
 
+<a href="https://github.com/ConfigCat/java-sdk" target="_blank">ConfigCat Java SDK on GitHub</a>
+
 ## Getting Started
 
 ### 1. Add the ConfigCat SDK to your project

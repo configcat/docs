@@ -17,7 +17,13 @@ export const JavaScriptSSRSchema = require('@site/src/schema-markup/sdk-referenc
 This SDK is for Server-Side Rendered JavaScript frameworks like <a href="https://nuxtjs.org" target="_blank">NuxtJS</a>.
 :::
 
-<a href="https://github.com/configcat/js-ssr-sdk" target="_blank">ConfigCat JavaScript (SSR) SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/js-ssr-sdk" target="_blank">ConfigCat JavaScript (SSR) SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v7.x version** of the ConfigCat JavaScript (SSR) SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/js-ssr).
+:::
 
 ## Getting started
 

@@ -20,7 +20,13 @@ export const ElixirSchema = require('@site/src/schema-markup/sdk-reference/elixi
 [![Hex.pm](https://img.shields.io/hexpm/l/configcat.svg)](https://hex.pm/packages/configcat)
 [![Last Updated](https://img.shields.io/github/last-commit/configcat/elixir-sdk.svg)](https://github.com/configcat/elixir-sdk/commits/main)
 
-<a href="https://github.com/configcat/elixir-sdk" target="_blank">ConfigCat Elixir SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/elixir-sdk" target="_blank">ConfigCat Elixir SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v3.x version** of the ConfigCat Elixir SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/elixir).
+:::
 
 ## Getting started
 

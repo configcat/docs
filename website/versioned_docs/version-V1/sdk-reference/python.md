@@ -15,7 +15,13 @@ export const PythonSchema = require('@site/src/schema-markup/sdk-reference/pytho
 [![PyPI](https://img.shields.io/pypi/pyversions/configcat-client.svg)](https://pypi.python.org/pypi/configcat-client)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=configcat_python-sdk&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=configcat_python-sdk)
 
-<a href="https://github.com/configcat/python-sdk" target="_blank">ConfigCat Python SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/python-sdk" target="_blank">ConfigCat Python SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v8.x version** of the ConfigCat Python SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/python).
+:::
 
 ## Getting started
 

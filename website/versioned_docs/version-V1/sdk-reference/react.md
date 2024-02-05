@@ -15,7 +15,13 @@ export const ReactSchema = require('@site/src/schema-markup/sdk-reference/react.
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=configcat_react-sdk&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=configcat_react-sdk)
 [![JSDELIVR](https://data.jsdelivr.com/v1/package/npm/configcat-react/badge)](https://www.jsdelivr.com/package/npm/configcat-react)
 
-<a href="https://github.com/configcat/react-sdk" target="_blank">ConfigCat React SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/react-sdk" target="_blank">ConfigCat React SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v3.x version** of the ConfigCat React SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/react).
+:::
 
 ## Getting started
 

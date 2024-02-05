@@ -21,7 +21,13 @@ export const JavaScriptSchema = require('@site/src/schema-markup/sdk-reference/j
 For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](/sdk-reference/js-ssr).
 :::
 
-<a href="https://github.com/configcat/js-sdk" target="_blank">ConfigCat JavaScript SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/js-sdk" target="_blank">ConfigCat JavaScript SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v8.x version** of the ConfigCat JavaScript SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/js).
+:::
 
 ## Getting started
 
