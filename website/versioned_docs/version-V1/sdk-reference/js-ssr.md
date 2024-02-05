@@ -236,8 +236,8 @@ The `details` result contains the following information:
 | `isDefaultValue`                  | `boolean`                       | True when the default value passed to `getValueDetailsAsync()` is returned due to an error. |
 | `errorMessage`                    | `string`                        | In case of an error, this field contains the error message.                                 |
 | `errorException`                  | `any`                           | In case of an error, this field contains the related exception object (if any).             |
-| `matchedTargetingRule`            | `ITargetingRule`                | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
-| `matchedPercentageOption`         | `IPercentageOption`             | The Percentage Option (if any) that was used to select the evaluated value.                 |
+| `matchedEvaluationRule`           | `RolloutRule`                   | If the evaluation was based on a Targeting Rule, this field contains that specific rule.    |
+| `matchedEvaluationPercentageRule` | `RolloutPercentageItem`         | If the evaluation was based on a Percentage Rule, this field contains that specific rule.   |
 | `fetchTime`                       | `Date`                          | The last download time (UTC) of the current config.                                         |
 
 ## User Object
@@ -254,12 +254,12 @@ let userObject = new configcat.User('#UNIQUE-USER-IDENTIFIER#');
 let userObject = new configcat.User('john@example.com');
 ```
 
-| Parameters   | Description                                                                                                                     |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |
-| `email`      | Optional parameter for easier Targeting Rule definitions.                                                                       |
-| `country`    | Optional parameter for easier Targeting Rule definitions.                                                                       |
-| `custom`     | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. E.g. User role, Subscription type. |
+| Parameters   | Description                                                                                                                                                          |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
+| `email`      | Optional parameter for easier Targeting Rule definitions.                                                                                                            |
+| `country`    | Optional parameter for easier Targeting Rule definitions.                                                                                                            |
+| `custom`     | Optional dictionary of strings representing the custom attributes of a user for advanced Targeting Rule definitions. E.g. User role, Subscription type. |
 
 For advanced targeting:
 
@@ -274,46 +274,6 @@ let userObject = new configcat.User(
   },
 );
 ```
-
-The `custom` dictionary also allows attribute values other than `string` values:
-
-```js
-let userObject = new configcat.User("#UNIQUE-USER-IDENTIFIER#");
-userObject.custom = {
-  Rating: 4.5,
-  RegisteredAt: new Date("2023-11-22T12:34:56.000Z"),
-  Roles: ["Role1", "Role2"]
-};
-```
-
-### User Object Attribute Types
-
-All comparators support `string` values as User Object attribute (in some cases they need to be provided in a specific format though, see below),
-but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
-
-**Text-based comparators** (EQUALS, IS ONE OF, etc.)
-* accept `string` values,
-* all other values are automatically converted to `string` (a warning will be logged but evaluation will continue as normal).
-
-**SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
-* accept `string` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-
-**Number-based comparators** (=, &lt;, &gt;=, etc.)
-* accept `number` values,
-* accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-
-**Date time-based comparators** (BEFORE / AFTER)
-* accept `Date` values, which are automatically converted to a second-based Unix timestamp,
-* accept `number` values representing a second-based Unix timestamp,
-* accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-
-**String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
-* accept arrays of `string`,
-* accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
@@ -557,11 +517,11 @@ Available log levels:
 Info level logging helps to inspect the feature flag evaluation process:
 
 ```bash
-ConfigCat - INFO - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"#SOME-USER-ID#","Email":"configcat@example.com"}'
-  Evaluating targeting rules and applying the first match if any:
-  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'false' => no match
-  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'true' => MATCH, applying rule
-  Returning 'true'.
+ConfigCat - INFO - [5000] Evaluate 'isPOCFeatureEnabled'
+ User : {"identifier":"#SOME-USER-ID#","email":"configcat@example.com"}
+ Evaluating rule: 'configcat@example.com' CONTAINS '@something.com' => no match
+ Evaluating rule: 'configcat@example.com' CONTAINS '@example.com' => MATCH
+ Returning value : true
 ```
 
 ## `getAllKeysAsync()`

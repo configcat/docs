@@ -35,7 +35,7 @@ When you use R8 or ProGuard, the aar artifact automatically applies the [include
 
 ```groovy title="build.gradle"
 dependencies {
-    implementation 'com.configcat:configcat-android-client:10.+'
+    implementation 'com.configcat:configcat-android-client:9.+'
 }
 ```
 
@@ -225,16 +225,16 @@ that matches the type of the feature flag or setting you are evaluating. Please 
 
 The details result contains the following information:
 
-| Property                          | Type                                    | Description                                                                                                |
-|-----------------------------------| --------------------------------------- |------------------------------------------------------------------------------------------------------------|
-| `getValue()`                      | `boolean` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                                        |
-| `getKey()`                        | `String`                                | The key of the evaluated feature flag or setting.                                                          |
-| `isDefaultValue()`                | `boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.                       |
-| `getError()`                      | `String`                                | In case of an error, this field contains the error message.                                                |
-| `getUser()`                       | `User`                                  | The User Object that was used for evaluation.                                                              |
-| `getMatchedPercentageOption()`    | `PercentageOption`                      | The Percentage Option (if any) that was used to select the evaluated value.                                |
-| `getMatchedTargetingRule()`       | `TargetingRule`                         | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
-| `getFetchTimeUnixMilliseconds()`  | `long`                                  | The last download time of the current config in unix milliseconds format.                                  |
+| Property                               | Type                                    | Description                                                                               |
+| -------------------------------------- | --------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `getValue()`                           | `boolean` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                       |
+| `getKey()`                             | `String`                                | The key of the evaluated feature flag or setting.                                         |
+| `isDefaultValue()`                     | `boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
+| `getError()`                           | `String`                                | In case of an error, this field contains the error message.                               |
+| `getUser()`                            | `User`                                  | The User Object that was used for evaluation.                                             |
+| `getMatchedEvaluationPercentageRule()` | `PercentageRule`                        | If the evaluation was based on a Percentage Rule, this field contains that specific rule. |
+| `getMatchedEvaluationRule()`           | `RolloutRule`                           | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
+| `getFetchTimeUnixMilliseconds()`       | `long`                                  | The last download time of the current config in unix milliseconds format.                 |
 
 ## User Object
 
@@ -258,7 +258,7 @@ User user = User.newBuilder().build("john@example.com");
 | `custom()`      | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. |
 
 ```java
-java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
+java.util.Map<String,String> customAttributes = new java.util.HashMap<String,String>();
     customAttributes.put("SubscriptionType", "Pro");
     customAttributes.put("UserRole", "Admin");
 
@@ -268,49 +268,6 @@ User user = User.newBuilder()
     .custom(customAttributes)
     .build("#UNIQUE-USER-IDENTIFIER#"); // UserID
 ```
-
-The `Custom` dictionary also allows attribute values other than `String` values:
-
-```java
-java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
-    customAttributes.put("Rating", 4.5);
-    customAttributes.put("RegisteredAt", new Date("2023-11-22 12:34:56 +00:00"));
-    customAttributes.put("Roles", new String[]{"Role1", "Role2"});
-
-User user = User.newBuilder()
-    .email("john@example.com")
-    .country("United Kingdom")
-    .custom(customAttributes)
-    .build("#UNIQUE-USER-IDENTIFIER#");
-```
-
-### User Object Attribute Types
-
-All comparators support `String` values as User Object attribute (in some cases they need to be provided in a specific format though, see below), but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
-
-**Text-based comparators** (EQUALS, IS ONE OF, etc.)
-* accept `String` values,
-* all other values are automatically converted to `String` (a warning will be logged but evaluation will continue as normal).
-
-**SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
-* accept `String` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-
-**Number-based comparators** (=, &lt;, &gt;=, etc.)
-* accept `Double` values and all other numeric values which can safely be converted to `Double`,
-* accept `String` values containing a properly formatted, valid `Double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-
-**Date time-based comparators** (BEFORE / AFTER)
-* accept `Date` values, which are automatically converted to a second-based Unix timestamp,
-* accept `Double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `Double`,
-* accept `String` values containing a properly formatted, valid `Double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-
-**String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
-* accept arrays and list of `String`,
-* accept `String` values containing a valid JSON string which can be deserialized to an array of `String`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
@@ -664,11 +621,10 @@ Available log levels:
 Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-INFO com.configcat.ConfigCatClient - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
-  Evaluating targeting rules and applying the first match if any:
-  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'False' => no match
-  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'True' => MATCH, applying rule
-  Returning 'True'.
+INFO com.configcat.ConfigCatClient - [5000] Evaluating getValue(isPOCFeatureEnabled).
+User object: User{Identifier=435170f4-8a8b-4b67-a723-505ac7cdea92, Email=john@example.com}
+Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
+Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning "true"
 ```
 
 ### Logging Implementation
