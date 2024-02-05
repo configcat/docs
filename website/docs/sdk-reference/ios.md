@@ -17,7 +17,7 @@ export const IosSchema = require('@site/src/schema-markup/sdk-reference/ios.json
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Supported Platforms](https://img.shields.io/cocoapods/p/ConfigCat.svg?style=flat)](/sdk-reference/ios/)
 
-<a href="https://github.com/ConfigCat/swift-sdk" target="_blank">ConfigCat Swift SDK on GitHub</a>
+<a href="https://github.com/configcat/swift-sdk" target="_blank">ConfigCat Swift SDK on GitHub</a>
 
 ## Getting Started:
 

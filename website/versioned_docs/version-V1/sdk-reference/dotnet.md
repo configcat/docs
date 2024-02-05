@@ -16,7 +16,7 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
 
 <p>
-  <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+  <a href="https://github.com/configcat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
 </p>
 
 :::info
@@ -768,8 +768,8 @@ When the _ConfigCat SDK_ does not work as expected in your application, please c
 
 Check out our Sample Applications how they use the _ConfigCat SDK_:
 
-- <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
-- <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Web App</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Web App</a>
 
 ## Guides
 
@@ -780,5 +780,5 @@ See the following guides on how to use ConfigCat's .NET SDK:
 
 ## Look under the hood
 
-- <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+- <a href="https://github.com/configcat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
 - <a href="https://www.nuget.org/packages/ConfigCat.Client" target="_blank">ConfigCat .NET SDK on nuget.org</a>

@@ -18,7 +18,7 @@ export const JavaSchema = require('@site/src/schema-markup/sdk-reference/java.js
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=configcat_java-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=configcat_java-sdk)
 
 <p>
-  <a href="https://github.com/ConfigCat/java-sdk" target="_blank">ConfigCat Java SDK on GitHub</a>
+  <a href="https://github.com/configcat/java-sdk" target="_blank">ConfigCat Java SDK on GitHub</a>
 </p>
 
 :::info
@@ -762,8 +762,8 @@ Examples fo <a href="https://github.com/configcat/java-sdk/blob/master/samples/c
 
 Check out our Sample Applications how they use the ConfigCat SDK
 
-- <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/console" target="_blank">Simple Console Application</a>
-- <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/web" target="_blank">Spring Boot Web Application</a>
+- <a href="https://github.com/configcat/java-sdk/tree/master/samples/console" target="_blank">Simple Console Application</a>
+- <a href="https://github.com/configcat/java-sdk/tree/master/samples/web" target="_blank">Spring Boot Web Application</a>
 
 ## Guides
 
@@ -771,6 +771,6 @@ See <a href="https://configcat.com/blog/2022/10/28/using-feature-flags-in-java/"
 
 ## Look Under the Hood
 
-- <a href="https://github.com/ConfigCat/java-sdk" target="_blank">ConfigCat Java SDK's repository on GitHub</a>
+- <a href="https://github.com/configcat/java-sdk" target="_blank">ConfigCat Java SDK's repository on GitHub</a>
 - <a href="https://javadoc.io/doc/com.configcat/configcat-java-client" target="_blank">ConfigCat Java SDK's javadoc page</a>
 - <a href="https://search.maven.org/artifact/com.configcat/configcat-java-client" target="_blank">ConfigCat Java SDK on Maven Central</a>

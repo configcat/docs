@@ -15,7 +15,7 @@ export const DartSchema = require('@site/src/schema-markup/sdk-reference/dart.js
 [![Dart CI](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml/badge.svg?branch=main)](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml)
 
 <p>
-  <a href="https://github.com/ConfigCat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK on GitHub</a>
+  <a href="https://github.com/configcat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK on GitHub</a>
 </p>
 
 :::info
@@ -595,5 +595,5 @@ See <a href="https://configcat.com/blog/2022/10/18/feature-flags-in-dart/" targe
 
 ## Look Under the Hood
 
-- <a href="https://github.com/ConfigCat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK's repository on GitHub</a>
+- <a href="https://github.com/configcat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK's repository on GitHub</a>
 - <a href="https://pub.dev/packages/configcat_client" target="_blank">ConfigCat Dart (Flutter) SDK's pub.dev page</a>

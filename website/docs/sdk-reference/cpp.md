@@ -15,7 +15,7 @@ export const CPPSchema = require('@site/src/schema-markup/sdk-reference/cpp.json
 [![Build Status](https://img.shields.io/github/actions/workflow/status/configcat/cpp-sdk/cpp-ci.yml?logo=GitHub&label=windows%20%2F%20macos%20%2F%20linux&branch=main)](https://github.com/configcat/cpp-sdk/actions/workflows/cpp-ci.yml)
 [![Coverage Status](https://codecov.io/gh/configcat/cpp-sdk/branch/main/graph/badge.svg?token=cvUgfof8k7)](https://codecov.io/gh/configcat/cpp-sdk)
 
-<a href="https://github.com/ConfigCat/cpp-sdk" target="_blank">ConfigCat C++ SDK on GitHub</a>
+<a href="https://github.com/configcat/cpp-sdk" target="_blank">ConfigCat C++ SDK on GitHub</a>
 
 ## Getting Started:
 
@@ -653,4 +653,4 @@ See <a href="https://configcat.com/blog/2022/10/21/configcat-cpp-sdk-announcemen
 
 ## Look Under the Hood
 
-- <a href="https://github.com/ConfigCat/cpp-sdk" target="_blank">ConfigCat C++ SDK's repository on GitHub</a>
+- <a href="https://github.com/configcat/cpp-sdk" target="_blank">ConfigCat C++ SDK's repository on GitHub</a>

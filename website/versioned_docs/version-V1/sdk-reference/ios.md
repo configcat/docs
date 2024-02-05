@@ -18,7 +18,7 @@ export const IosSchema = require('@site/src/schema-markup/sdk-reference/ios.json
 [![Supported Platforms](https://img.shields.io/cocoapods/p/ConfigCat.svg?style=flat)](/sdk-reference/ios/)
 
 <p>
-  <a href="https://github.com/ConfigCat/swift-sdk" target="_blank">ConfigCat Swift SDK on GitHub</a>
+  <a href="https://github.com/configcat/swift-sdk" target="_blank">ConfigCat Swift SDK on GitHub</a>
 </p>
 
 :::info
