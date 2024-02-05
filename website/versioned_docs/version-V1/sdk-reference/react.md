@@ -15,7 +15,13 @@ export const ReactSchema = require('@site/src/schema-markup/sdk-reference/react.
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=configcat_react-sdk&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=configcat_react-sdk)
 [![JSDELIVR](https://data.jsdelivr.com/v1/package/npm/configcat-react/badge)](https://www.jsdelivr.com/package/npm/configcat-react)
 
-<a href="https://github.com/configcat/react-sdk" target="_blank">ConfigCat React SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/react-sdk" target="_blank">ConfigCat React SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v3.x version** of the ConfigCat React SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/react).
+:::
 
 ## Getting started
 
@@ -420,46 +426,6 @@ function ButtonComponent() {
 }
 ```
 
-The `custom` dictionary also allows attribute values other than `string` values:
-
-```tsx
-let userObject = new User("#UNIQUE-USER-IDENTIFIER#");
-userObject.custom = {
-  Rating: 4.5,
-  RegisteredAt: new Date("2023-11-22T12:34:56.000Z"),
-  Roles: ["Role1", "Role2"]
-};
-```
-
-### User Object Attribute Types
-
-All comparators support `string` values as User Object attribute (in some cases they need to be provided in a specific format though, see below),
-but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
-
-**Text-based comparators** (EQUALS, IS ONE OF, etc.)
-* accept `string` values,
-* all other values are automatically converted to `string` (a warning will be logged but evaluation will continue as normal).
-
-**SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
-* accept `string` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-
-**Number-based comparators** (=, &lt;, &gt;=, etc.)
-* accept `number` values,
-* accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-
-**Date time-based comparators** (BEFORE / AFTER)
-* accept `Date` values, which are automatically converted to a second-based Unix timestamp,
-* accept `number` values representing a second-based Unix timestamp,
-* accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-
-**String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
-* accept arrays of `string`,
-* accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-
 ### Default user
 
 It's possible to set a default User Object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
@@ -847,11 +813,11 @@ Available log levels:
 Info level logging helps to inspect the feature flag evaluation process:
 
 ```bash
-ConfigCat - INFO - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"#SOME-USER-ID#","Email":"configcat@example.com"}'
-  Evaluating targeting rules and applying the first match if any:
-  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'false' => no match
-  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'true' => MATCH, applying rule
-  Returning 'true'.
+ConfigCat - INFO - [5000] Evaluate 'isPOCFeatureEnabled'
+ User : {"identifier":"#SOME-USER-ID#","email":"configcat@example.com"}
+ Evaluating rule: 'configcat@example.com' CONTAINS '@something.com' => no match
+ Evaluating rule: 'configcat@example.com' CONTAINS '@example.com' => MATCH
+ Returning value : true
 ```
 
 ## Using custom cache implementation

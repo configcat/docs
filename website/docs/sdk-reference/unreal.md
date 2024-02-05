@@ -16,7 +16,7 @@ export const CPPSchema = require('@site/src/schema-markup/sdk-reference/cpp.json
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/unreal-engine-sdk.svg?style=social)](https://github.com/configcat/unreal-engine-sdk/stargazers)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/configcat/unreal-engine-sdk/plugin-ci.yml?logo=GitHub&label=Unreal&branch=main)](https://github.com/configcat/unreal-engine-sdk/actions/workflows/plugin-ci.yml)
 
-<a href="https://github.com/ConfigCat/unreal-engine-sdk" target="_blank">ConfigCat Unreal SDK on GitHub</a>
+<a href="https://github.com/configcat/unreal-engine-sdk" target="_blank">ConfigCat Unreal SDK on GitHub</a>
 
 ## Getting Started:
 
@@ -476,7 +476,7 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 
 This is the same format that the SDK downloads from the ConfigCat CDN.
-It allows the usage of all features you can do on the ConfigCat Dashboard.
+It allows the usage of all features that are available on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
@@ -709,4 +709,4 @@ Also, we recommend using [confidential targeting comparators](/advanced/targetin
 
 ## Look Under the Hood
 
-- <a href="https://github.com/ConfigCat/unreal-engine-sdk" target="_blank">ConfigCat Unreal Engine SDK's repository on GitHub</a>
+- <a href="https://github.com/configcat/unreal-engine-sdk" target="_blank">ConfigCat Unreal Engine SDK's repository on GitHub</a>

@@ -13,7 +13,13 @@ export const RubySchema = require('@site/src/schema-markup/sdk-reference/ruby.js
 [![Coverage Status](https://coveralls.io/repos/github/configcat/ruby-sdk/badge.svg?branch=master)](https://coveralls.io/github/configcat/ruby-sdk?branch=master)
 [![Gem version](https://badge.fury.io/rb/configcat.svg)](https://rubygems.org/gems/configcat)
 
-<a href="https://github.com/configcat/ruby-sdk" target="_blank">ConfigCat Ruby SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/ruby-sdk" target="_blank">ConfigCat Ruby SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v7.x version** of the ConfigCat Ruby SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/ruby).
+:::
 
 ## Getting started
 
@@ -397,7 +403,7 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 
 This is the same format that the SDK downloads from the ConfigCat CDN.
-It allows the usage of all features you can do on the ConfigCat Dashboard.
+It allows the usage of all features that are available on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 

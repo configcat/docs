@@ -17,6 +17,8 @@ export const JavaSchema = require('@site/src/schema-markup/sdk-reference/java.js
 [![Coverage Status](https://img.shields.io/sonar/coverage/configcat_java-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=configcat_java-sdk)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=configcat_java-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=configcat_java-sdk)
 
+<a href="https://github.com/configcat/java-sdk" target="_blank">ConfigCat Java SDK on GitHub</a>
+
 ## Getting Started
 
 ### 1. Add the ConfigCat SDK to your project
@@ -532,12 +534,9 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 
 This is the same format that the SDK downloads from the ConfigCat CDN.
-It allows the usage of all features you can do on the ConfigCat Dashboard.
+It allows the usage of all features that are available on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
-
-<Tabs groupId="config-json-format">
-<TabItem value="config-json-v6" label="When using an SDK version v9.0.0 or newer">
 
 A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
 and execute the following command:
@@ -685,86 +684,6 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
 ```
 
 For a more comprehensive specification of the config JSON v6 format, you may refer to [this JSON schema document](https://github.com/configcat/config-json/blob/main/V6/config.schema.json).
-
-</TabItem>
-<TabItem value="config-json-v5" label="When using an SDK version older than v9.0.0">
-
-A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
-and execute the following command:
-
-```bash
-configcat config-json get -f v5 -p {YOUR-SDK-KEY} > config.json
-```
-
-(Depending on your [Data Governance](/advanced/data-governance) settings, you may need to add the `--eu` switch.)
-
-Alternatively, you can download the config JSON manually, based on your [Data Governance](/advanced/data-governance) settings:
-- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
-- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
-
-```json
-{
-  "f": {
-    // list of feature flags & settings
-    "isFeatureEnabled": {
-      // key of a particular flag
-      "v": false, // default value, served when no rules are defined
-      "i": "430bded3", // variation id (for analytical purposes)
-      "t": 0, // feature flag's type, possible values:
-      // 0 -> BOOLEAN
-      // 1 -> STRING
-      // 2 -> INT
-      // 3 -> DOUBLE
-      "p": [
-        // list of percentage rules
-        {
-          "o": 0, // rule's order
-          "v": true, // value served when the rule is selected during evaluation
-          "p": 10, // % value
-          "i": "bcfb84a7" // variation id (for analytical purposes)
-        },
-        {
-          "o": 1, // rule's order
-          "v": false, // value served when the rule is selected during evaluation
-          "p": 90, // % value
-          "i": "bddac6ae" // variation id (for analytical purposes)
-        }
-      ],
-      "r": [
-        // list of Targeting Rules
-        {
-          "o": 0, // rule's order
-          "a": "Identifier", // comparison attribute
-          "t": 2, // comparator, possible values:
-          // 0  -> 'IS ONE OF',
-          // 1  -> 'IS NOT ONE OF',
-          // 2  -> 'CONTAINS',
-          // 3  -> 'DOES NOT CONTAIN',
-          // 4  -> 'IS ONE OF (SemVer)',
-          // 5  -> 'IS NOT ONE OF (SemVer)',
-          // 6  -> '< (SemVer)',
-          // 7  -> '<= (SemVer)',
-          // 8  -> '> (SemVer)',
-          // 9  -> '>= (SemVer)',
-          // 10 -> '= (Number)',
-          // 11 -> '<> (Number)',
-          // 12 -> '< (Number)',
-          // 13 -> '<= (Number)',
-          // 14 -> '> (Number)',
-          // 15 -> '>= (Number)',
-          // 16 -> 'IS ONE OF (Hashed)',
-          // 17 -> 'IS NOT ONE OF (Hashed)'
-          "c": "@example.com", // comparison value
-          "v": true, // value served when the rule is selected during evaluation
-          "i": "bcfb84a7" // variation id (for analytical purposes)
-        }
-      ]
-    }
-  }
-}
-```
-</TabItem>
-</Tabs>
 
 ### Map
 
@@ -962,8 +881,8 @@ Examples fo <a href="https://github.com/configcat/java-sdk/blob/master/samples/c
 
 Check out our Sample Applications how they use the ConfigCat SDK
 
-- <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/console" target="_blank">Simple Console Application</a>
-- <a href="https://github.com/ConfigCat/java-sdk/tree/master/samples/web" target="_blank">Spring Boot Web Application</a>
+- <a href="https://github.com/configcat/java-sdk/tree/master/samples/console" target="_blank">Simple Console Application</a>
+- <a href="https://github.com/configcat/java-sdk/tree/master/samples/web" target="_blank">Spring Boot Web Application</a>
 
 ## Guides
 
@@ -971,6 +890,6 @@ See <a href="https://configcat.com/blog/2022/10/28/using-feature-flags-in-java/"
 
 ## Look Under the Hood
 
-- <a href="https://github.com/ConfigCat/java-sdk" target="_blank">ConfigCat Java SDK's repository on GitHub</a>
+- <a href="https://github.com/configcat/java-sdk" target="_blank">ConfigCat Java SDK's repository on GitHub</a>
 - <a href="https://javadoc.io/doc/com.configcat/configcat-java-client" target="_blank">ConfigCat Java SDK's javadoc page</a>
 - <a href="https://search.maven.org/artifact/com.configcat/configcat-java-client" target="_blank">ConfigCat Java SDK on Maven Central</a>

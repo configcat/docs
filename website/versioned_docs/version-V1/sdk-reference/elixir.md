@@ -20,7 +20,13 @@ export const ElixirSchema = require('@site/src/schema-markup/sdk-reference/elixi
 [![Hex.pm](https://img.shields.io/hexpm/l/configcat.svg)](https://hex.pm/packages/configcat)
 [![Last Updated](https://img.shields.io/github/last-commit/configcat/elixir-sdk.svg)](https://github.com/configcat/elixir-sdk/commits/main)
 
-<a href="https://github.com/configcat/elixir-sdk" target="_blank">ConfigCat Elixir SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/elixir-sdk" target="_blank">ConfigCat Elixir SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v3.x version** of the ConfigCat Elixir SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/elixir).
+:::
 
 ## Getting started
 
@@ -490,7 +496,7 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 
 This is the same format that the SDK downloads from the ConfigCat CDN.
-It allows the usage of all features you can do on the ConfigCat Dashboard.
+It allows the usage of all features that are available on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 

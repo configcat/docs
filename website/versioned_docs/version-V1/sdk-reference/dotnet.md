@@ -15,7 +15,13 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 [![Sonar Coverage](https://img.shields.io/sonar/coverage/net-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=net-sdk)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
 
-<a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v8.x version** of the ConfigCat .NET SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/dotnet).
+:::
 
 ## Getting started
 
@@ -219,8 +225,8 @@ The `details` result contains the following information:
 | `IsDefaultValue`                  | `bool`                               | True when the default value passed to `GetValueDetails()`/`GetValueDetailsAsync()` is returned due to an error. |
 | `ErrorMessage`                    | `string`                             | In case of an error, this field contains the error message.                                                     |
 | `ErrorException`                  | `Exception`                          | In case of an error, this field contains the related exception object (if any).                                 |
-| `MatchedTargetingRule`            | `ITargetingRule`                     | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value.      |
-| `MatchedPercentageOption`         | `IPercentageOption`                  | The Percentage Option (if any) that was used to select the evaluated value.                                     |
+| `MatchedEvaluationRule`           | `RolloutRule`                        | If the evaluation was based on a Targeting Rule, this field contains that specific rule.                        |
+| `MatchedEvaluationPercentageRule` | `RolloutPercentageItem`              | If the evaluation was based on a Percentage Rule, this field contains that specific rule.                       |
 | `FetchTime`                       | `DateTime`                           | The last download time (UTC) of the current config.                                                             |
 
 ## User Object
@@ -254,48 +260,6 @@ User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
     }
 };
 ```
-
-The `Custom` dictionary also allows attribute values other than `string` values:
-
-```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
-{
-    Custom =
-    {
-        ["Rating"] = 4.5,
-        ["RegisteredAt"] = DateTimeOffset.Parse("2023-11-22 12:34:56 +00:00", CultureInfo.InvariantCulture),
-        ["Roles"] = new[] { "Role1", "Role2" }
-    }
-};
-```
-
-### User Object Attribute Types
-
-All comparators support `string` values as User Object attribute (in some cases they need to be provided in a specific format though, see below), but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
-
-**Text-based comparators** (EQUALS, IS ONE OF, etc.)
-* accept `string` values,
-* all other values are automatically converted to `string` (a warning will be logged but evaluation will continue as normal).
-
-**SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
-* accept `string` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-
-**Number-based comparators** (=, &lt;, &gt;=, etc.)
-* accept `double` values and all other numeric values which can safely be converted to `double`,
-* accept `string` values containing a properly formatted, valid `double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-  
-**Date time-based comparators** (BEFORE / AFTER)
-* accept `DateTime` or `DateTimeOffset` values, which are automatically converted to a second-based Unix timestamp,
-* accept `double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `double`,
-* accept `string` values containing a properly formatted, valid `double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
-  
-**String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
-* accept arrays of `string`,
-* accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
@@ -509,173 +473,11 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 
 This is the same format that the SDK downloads from the ConfigCat CDN.
-It allows the usage of all features you can access on the ConfigCat Dashboard.
+It allows the usage of all features that are available on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-<Tabs groupId="config-json-format">
-<TabItem value="config-json-v6" label="When using an SDK version v9.0.0 or newer">
-
-A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
-and execute the following command:
-
-```bash
-configcat config-json get -f v6 -p {YOUR-SDK-KEY} > config.json
-```
-
-(Depending on your [Data Governance](/advanced/data-governance) settings, you may need to add the `--eu` switch.)
-
-Alternatively, you can download the config JSON manually, based on your [Data Governance](/advanced/data-governance) settings:
-
-- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
-- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
-
-```json
-{
-  "p": {
-    // hash salt, required only when confidential text comparator(s) are used
-    "s": "80xCU/SlDz1lCiWFaxIBjyJeJecWjq46T4eu6GtozkM="
-  },
-  "s": [ // array of segments
-    {
-      "n": "Beta Users", // segment name
-      "r": [ // array of User Conditions (there is a logical AND relation between the elements)
-        {
-          "a": "Email", // comparison attribute
-          "c": 0, // comparator (see below)
-          "l": [ // comparison value (see below)
-            "john@example.com", "jane@example.com"
-          ]
-        }
-      ]
-    }
-  ],
-  "f": { // key-value map of feature flags & settings
-    "isFeatureEnabled": { // key of a particular flag / setting
-      "t": 0, // setting type, possible values:
-              // 0 -> on/off setting (feature flag)
-              // 1 -> text setting
-              // 2 -> whole number setting
-              // 3 -> decimal number setting
-      "r": [ // array of Targeting Rules (there is a logical OR relation between the elements)
-        {
-          "c": [ // array of conditions (there is a logical AND relation between the elements)
-            {
-              "u": { // User Condition
-                "a": "Email", // comparison attribute
-                "c": 2, // comparator, possible values and required comparison value types:
-                        // 0  -> IS ONE OF (cleartext) + string array comparison value ("l")
-                        // 1  -> IS NOT ONE OF (cleartext) + string array comparison value ("l")
-                        // 2  -> CONTAINS ANY OF (cleartext) + string array comparison value ("l")
-                        // 3  -> NOT CONTAINS ANY OF (cleartext) + string array comparison value ("l")
-                        // 4  -> IS ONE OF (semver) + semver string array comparison value ("l")
-                        // 5  -> IS NOT ONE OF (semver) + semver string array comparison value ("l")
-                        // 6  -> < (semver) + semver string comparison value ("s")
-                        // 7  -> <= (semver + semver string comparison value ("s")
-                        // 8  -> > (semver) + semver string comparison value ("s")
-                        // 9  -> >= (semver + semver string comparison value ("s")
-                        // 10 -> = (number) + number comparison value ("d")
-                        // 11 -> <> (number + number comparison value ("d")
-                        // 12 -> < (number) + number comparison value ("d")
-                        // 13 -> <= (number + number comparison value ("d")
-                        // 14 -> > (number) + number comparison value ("d")
-                        // 15 -> >= (number) + number comparison value ("d")
-                        // 16 -> IS ONE OF (hashed) + string array comparison value ("l")
-                        // 17 -> IS NOT ONE OF (hashed) + string array comparison value ("l")
-                        // 18 -> BEFORE (UTC datetime) + second-based Unix timestamp number comparison value ("d")
-                        // 19 -> AFTER (UTC datetime) + second-based Unix timestamp number comparison value ("d")
-                        // 20 -> EQUALS (hashed) + string comparison value ("s")
-                        // 21 -> NOT EQUALS (hashed) + string comparison value ("s")
-                        // 22 -> STARTS WITH ANY OF (hashed) + string array comparison value ("l")
-                        // 23 -> NOT STARTS WITH ANY OF (hashed) + string array comparison value ("l")
-                        // 24 -> ENDS WITH ANY OF (hashed) + string array comparison value ("l")
-                        // 25 -> NOT ENDS WITH ANY OF (hashed) + string array comparison value ("l")
-                        // 26 -> ARRAY CONTAINS ANY OF (hashed) + string array comparison value ("l")
-                        // 27 -> ARRAY NOT CONTAINS ANY OF (hashed) + string array comparison value ("l")
-                        // 28 -> EQUALS (cleartext) + string comparison value ("s")
-                        // 29 -> NOT EQUALS (cleartext) + string comparison value ("s")
-                        // 30 -> STARTS WITH ANY OF (cleartext) + string array comparison value ("l")
-                        // 31 -> NOT STARTS WITH ANY OF (cleartext) + string array comparison value ("l")
-                        // 32 -> ENDS WITH ANY OF (cleartext) + string array comparison value ("l")
-                        // 33 -> NOT ENDS WITH ANY OF (cleartext + string array comparison value ("l")
-                        // 34 -> ARRAY CONTAINS ANY OF (cleartext) + string array comparison value ("l")
-                        // 35 -> ARRAY NOT CONTAINS ANY OF (cleartext) + string array comparison value ("l")
-                "l": [ // comparison value - depending on the comparator, another type of value may need
-                       // to be specified (see above):
-                       // "s": string
-                       // "d": number
-                  "@example.com"
-                ]
-              }
-            },
-            {
-              "p": { // Flag Condition (Prerequisite)
-                "f": "mainIntFlag", // key of prerequisite flag
-                "c": 0, // comparator, possible values: 0 -> EQUALS, 1 -> NOT EQUALS
-                "v": { // comparison value (value's type must match the prerequisite flag's type)
-                  "i": 42
-                }
-              }
-            },
-            {
-              "s": { // Segment Condition
-                "s": 0, // segment index, a valid index into the top-level segment array ("s")
-                "c": 1 // comparator, possible values: 0 -> IS IN SEGMENT, 1 -> IS NOT IN SEGMENT
-              }
-            }
-          ],
-          "s": { // alternatively, an array of Percentage Options ("p", see below) can also be specified
-            "v": { // the value served when the rule is selected during evaluation
-              "b": true
-            },
-            "i": "bcfb84a7"
-          }
-        }
-      ],
-      "p": [ // array of Percentage Options
-        {
-          "p": 10, // % value
-          "v": { // the value served when the Percentage Option is selected during evaluation
-            "b": true
-          },
-          "i": "bcfb84a7"
-        },
-        {
-          "p": 90,
-          "v": {
-            "b": false
-          },
-          "i": "bddac6ae"
-        }
-      ],
-      "v": { // fallback value, served when none of the Targeting Rules match,
-             // no Percentage Options are defined or evaluation of these is not possible
-        "b": false // depending on the setting type, another type of value may need to be specified:
-                   // text setting -> "s": string
-                   // whole number setting -> "i": number
-                   // decimal number setting -> "d": number
-      },
-      "i": "430bded3" // variation id (for analytical purposes)
-    }
-  }
-}
-```
-
-For a more comprehensive specification of the config JSON v6 format, you may refer to [this JSON schema document](https://github.com/configcat/config-json/blob/main/V6/config.schema.json).
-
-</TabItem>
-<TabItem value="config-json-v5" label="When using an SDK version older than v9.0.0">
-
-A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
-and execute the following command:
-
-```bash
-configcat config-json get -f v5 -p {YOUR-SDK-KEY} > config.json
-```
-
-(Depending on your [Data Governance](/advanced/data-governance) settings, you may need to add the `--eu` switch.)
-
-Alternatively, you can download the config JSON manually, based on your [Data Governance](/advanced/data-governance) settings:
+The URL to your current config JSON is based on your [Data Governance](/advanced/data-governance) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
@@ -694,7 +496,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
       // 2 -> INT
       // 3 -> DOUBLE
       "p": [
-        // list of percentage rules
+        // list of Percentage Rules
         {
           "o": 0, // rule's order
           "v": true, // value served when the rule is selected during evaluation
@@ -742,9 +544,6 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
 }
 ```
 
-</TabItem>
-</Tabs>
-
 ### Dictionary
 
 You can set up the SDK to load your feature flag & setting overrides from a `Dictionary<string, object>`.
@@ -788,11 +587,11 @@ Available log levels:
 Info level logging helps to inspect the feature flag evaluation process:
 
 ```bash
-ConfigCat.INFO  [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
-  Evaluating targeting rules and applying the first match if any:
-  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'False' => no match
-  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'True' => MATCH, applying rule
-  Returning 'True'.
+ConfigCat.INFO  [5000] Evaluating 'isPOCFeatureEnabled'
+  Applying the first targeting rule that matches the User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","Custom":{"SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}}':
+    - rule: [IF User.Email CONTAINS '@something.com' THEN False] => no match
+    - rule: [IF User.Email CONTAINS '@example.com' THEN True] => MATCH, applying rule
+  Returning 'True' (VariationId: '9f21c24c').
 ```
 
 Sample code on how to create a basic file logger implementation for ConfigCat client: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/FileLoggerSample.cs" target="_blank">See Sample Code</a>
@@ -969,8 +768,8 @@ When the _ConfigCat SDK_ does not work as expected in your application, please c
 
 Check out our Sample Applications how they use the _ConfigCat SDK_:
 
-- <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
-- <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Web App</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Web App</a>
 
 ## Guides
 
@@ -981,5 +780,5 @@ See the following guides on how to use ConfigCat's .NET SDK:
 
 ## Look under the hood
 
-- <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+- <a href="https://github.com/configcat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
 - <a href="https://www.nuget.org/packages/ConfigCat.Client" target="_blank">ConfigCat .NET SDK on nuget.org</a>

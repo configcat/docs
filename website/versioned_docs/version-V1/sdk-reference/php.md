@@ -15,7 +15,13 @@ export const PHPSchema = require('@site/src/schema-markup/sdk-reference/php.json
 [![Total Downloads](https://poser.pugx.org/configcat/configcat-client/downloads)](https://packagist.org/packages/configcat/configcat-client)
 [![Latest Unstable Version](https://poser.pugx.org/configcat/configcat-client/v/unstable)](https://packagist.org/packages/configcat/configcat-client)
 
-<a href="https://github.com/configcat/php-sdk" target="_blank">ConfigCat PHP SDK on GitHub</a>
+<p>
+  <a href="https://github.com/configcat/php-sdk" target="_blank">ConfigCat PHP SDK on GitHub</a>
+</p>
+
+:::info
+This documentation applies to the **v8.x version** of the ConfigCat PHP SDK . For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/php).
+:::
 
 ## Getting started
 
@@ -318,7 +324,7 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 
 This is the same format that the SDK downloads from the ConfigCat CDN.
-It allows the usage of all features you can do on the ConfigCat Dashboard.
+It allows the usage of all features that are available on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 

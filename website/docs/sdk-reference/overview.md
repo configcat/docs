@@ -11,7 +11,7 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ## .NET, .NET Core, Xamarin
 
 - [Documentation](/sdk-reference/dotnet) on how to connect your application.
-- <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">GitHub repository of the ConfigCat .NET SDK.</a>
+- <a href="https://github.com/configcat/.net-sdk" target="_blank">GitHub repository of the ConfigCat .NET SDK.</a>
 
 ## C++
 
@@ -36,7 +36,7 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ## Java
 
 - [Documentation](/sdk-reference/java) on how to connect your application.
-- <a href="https://github.com/ConfigCat/java-sdk" target="_blank">GitHub repository of the ConfigCat Java SDK.</a>
+- <a href="https://github.com/configcat/java-sdk" target="_blank">GitHub repository of the ConfigCat Java SDK.</a>
 
 ## Java (Android)
 
@@ -46,7 +46,7 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ## JavaScript
 
 - [Documentation](/sdk-reference/js) on how to connect your application.
-- <a href="https://github.com/ConfigCat/js-sdk" target="_blank">GitHub repository of the ConfigCat JavaScript SDK.</a>
+- <a href="https://github.com/configcat/js-sdk" target="_blank">GitHub repository of the ConfigCat JavaScript SDK.</a>
 
 ## JavaScript (Deno) - Community maintained
 
@@ -61,12 +61,12 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ## JavaScript (React)
 
 - [Documentation](/sdk-reference/react) on how to connect your application.
-- <a href="https://github.com/ConfigCat/react-sdk" target="_blank">GitHub repository of the ConfigCat React SDK.</a>
+- <a href="https://github.com/configcat/react-sdk" target="_blank">GitHub repository of the ConfigCat React SDK.</a>
 
 ## JavaScript (Server-Side Rendered apps)
 
 - [Documentation](/sdk-reference/js-ssr) on how to connect your application.
-- <a href="https://github.com/ConfigCat/js-ssr-sdk" target="_blank">GitHub repository of the ConfigCat JS SSR SDK.</a>
+- <a href="https://github.com/configcat/js-ssr-sdk" target="_blank">GitHub repository of the ConfigCat JS SSR SDK.</a>
 
 ## JavaScript (Chromium Extension)
 
@@ -80,7 +80,7 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ## Node.js
 
 - [Documentation](/sdk-reference/node) on how to connect your application.
-- <a href="https://github.com/ConfigCat/node-sdk" target="_blank">GitHub repository of the ConfigCat Node SDK.</a>
+- <a href="https://github.com/configcat/node-sdk" target="_blank">GitHub repository of the ConfigCat Node SDK.</a>
 
 ## PHP
 
@@ -95,7 +95,7 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ## Python
 
 - [Documentation](/sdk-reference/python) on how to connect your application.
-- <a href="https://github.com/ConfigCat/python-sdk" target="_blank">GitHub repository of the ConfigCat Python SDK.</a>
+- <a href="https://github.com/configcat/python-sdk" target="_blank">GitHub repository of the ConfigCat Python SDK.</a>
 
 ## Ruby
 
@@ -105,4 +105,4 @@ Check out our language specific<a href="https://app.configcat.com/sdkkey" target
 ## Swift (iOS)
 
 - [Documentation](/sdk-reference/ios) on how to connect your application.
-- <a href="https://github.com/ConfigCat/swift-sdk" target="_blank">GitHub repository of the ConfigCat Swift SDK.</a>
+- <a href="https://github.com/configcat/swift-sdk" target="_blank">GitHub repository of the ConfigCat Swift SDK.</a>
