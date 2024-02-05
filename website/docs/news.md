@@ -8,7 +8,7 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 <!-- This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html -->
 
-## Join the Config V2 Beta Program!
+## Join the Config V2 Beta Program
 
 #### Jan 19, 2024
 
@@ -18,7 +18,7 @@ We're looking for ConfigCat users willing to participate in the beta testing of 
 
 Config V2 is a new version of ConfigCat. It brings together a bundle of highly requested features like AND
 conditions, new comparators (Text Equals, Text Starts with Any of, Text Ends with Any of, Before/After),
-Prerequisite flags, and more. [Read more about Config V2 and the new features.](/advanced/config-v2/)
+Prerequisite flags, and more. [Read more about Config V2 and the new features.](/V2/advanced/config-v2)
 
 You can get early access to the new features and shape the final product with your feedback.
 
@@ -27,12 +27,12 @@ You can get early access to the new features and shape the final product with yo
 1. <a href="https://forms.gle/wEFxKYs5Lv5iiLUF8" target="_blank">Apply via this form</a>
 2. Join the <strong>#config-v2-beta-testing</strong> channel in our <a href="https://configcat.com/slack/" target="_blank">Community Slack</a> to give feedback.
 
-
 ## Resource ordering in Public Management API and Terraform
 
 #### Jan 9, 2024
 
 From now on, you can change the order of your products, configs and environments trough the ConfigCat Public Management API and the Terraform provider. See the docs for details:
+
 - *ConfigCat Public Management API*: specify the order argument in the [Products](https://api.configcat.com/docs/index.html#tag/Products), [Configs](https://api.configcat.com/docs/index.html#tag/Configs), [Environment](https://api.configcat.com/docs/index.html#tag/Environments) and [Feature Flags & Settings](https://api.configcat.com/docs/index.html#tag/Feature-Flags-and-Settings) endpoints
 - *ConfigCat Feature Flags Provider for Terraform*: specify the order argument of the [configcat_product](https://registry.terraform.io/providers/configcat/configcat/latest/docs/resources/product#argument-reference), [configcat_config](https://registry.terraform.io/providers/configcat/configcat/latest/docs/resources/config#argument-reference), [configcat_environment](https://registry.terraform.io/providers/configcat/configcat/latest/docs/resources/environment#argument-reference) and [configcat_setting](https://registry.terraform.io/providers/configcat/configcat/latest/docs/resources/setting#argument-reference).
 
@@ -54,7 +54,7 @@ We're happy to share that the ConfigCat Proxy is now in the Beta phase and we ne
 
 📚 Want to learn more about the ConfigCat Proxy? Get all the details [here](/advanced/proxy/proxy-overview).
 
-🔧 We'd like to invite you to participate in the beta testing. If you're interested, join the dedicated **#configcat-proxy-beta** channel in our <a href="https://configcat.com/slack" target="_blank" rel="noopener noreferrer">Slack Community</a>. 
+🔧 We'd like to invite you to participate in the beta testing. If you're interested, join the dedicated **#configcat-proxy-beta** channel in our <a href="https://configcat.com/slack" target="_blank" rel="noopener noreferrer">Slack Community</a>.
 Share your experiences, ask questions, and collaborate with our team and fellow community members.
 
 ## New cleartext comparators in Segments
@@ -97,7 +97,7 @@ We're increasing our uptime commitment for the following plans:
 
 By enhancing our SLA terms, we aim to provide a more consistent and trustworthy service that you can depend on, day in and day out.
 
-## Old SDKs will stop working after October 1st, 2023.
+## Old SDKs will stop working after October 1st, 2023
 
 #### Aug 10, 2023
 
@@ -105,7 +105,7 @@ All ConfigCat SDKs released before Feb, 2020 will stop working after October 1st
 
 Although we aim to keep older SDK versions functional, those trailing more than one major or minor release lack official support and SLA. Many of these outdated SDKs will no longer remain functional.
 
-### Affected SDKs and versions:
+### Affected SDKs and versions
 
 | SDK Type | Latest available version | Will stop working |
 | -------- | ------------------------ | ----------------- |
@@ -203,7 +203,7 @@ Click the Reorder icon on any overview to change the ordering of your feature fl
 
 You can copy feature flag values (including segment, targeting, percentage rules) from one environment to another.
 
-## Segments are here!!!
+## Segments are here
 
 #### Feb 15, 2022
 
@@ -245,7 +245,7 @@ Added a search bar to the feature flags page.
 
 We recommend using it instead of Ctr+F and Cmd+F since the page is lazy loaded. So it might not yield results from parts of the page that are not currently rendered.
 
-## Environment colors are finally here!
+## Environment colors are finally here
 
 #### Sep 24, 2021
 
@@ -268,7 +268,7 @@ To make organization level user management more convenient we added a bunch of n
 - SAML Single Sign-On supporting all of the major identity providers.
 - Improved layout for admins to [manage organization members](https://app.configcat.com/organization/members) on our Dashboard page.
 
-_Only team members with Organization Admin role can access these features._
+*Only team members with Organization Admin role can access these features.*
 
 [Set up user provisioning and SAML Single Sign-On on our Dashboard](https://app.configcat.com/organization/authentication)
 
@@ -279,7 +279,7 @@ _Only team members with Organization Admin role can access these features._
 - Organization Admins can remove a member from the whole organization.
 - Organization Admins can modify a member's permissions globally.
 
-_Only team members with Organization Admin role can access these features._
+*Only team members with Organization Admin role can access these features.*
 
 [Open Organization Members & Roles page on our Dashboard](https://app.configcat.com/organization/members)
 
@@ -289,7 +289,7 @@ _Only team members with Organization Admin role can access these features._
 
 Disable Two-factor authentication for your team members. This feature is useful if somebody lost the device used for Two-factor authentication.
 
-_Only team members with Organization Admin role can disable Two-factor authentication._
+*Only team members with Organization Admin role can disable Two-factor authentication.*
 
 [Open Organization Members & Roles page on our Dashboard](https://app.configcat.com/organization/members)
 
@@ -301,7 +301,7 @@ Export (download), and import (upload) Configs, Environments, and Feature Flags 
 
 [Open Export / Import page on our Dashboard](https://app.configcat.com/product/exportimport)
 
-## Dashboard v3 released!
+## Dashboard v3 released
 
 #### Jun 30, 2021
 
@@ -309,7 +309,7 @@ Hope you like it.
 
 Tell us your opinion over [Slack](https://configcat.com/slack) or [Email](mailto:team@configcat.com).
 
-## Help us grow!
+## Help us grow
 
 #### Jun 10, 2021
 

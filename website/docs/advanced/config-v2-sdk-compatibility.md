@@ -4,7 +4,7 @@ title: Config V2 SDK Compatibility
 description: This table shows which SDK versions support Config V2.
 ---
 
-This table shows which SDK versions support Config V2. Read more about [Config V2](/advanced/config-v2)
+This table shows which SDK versions support Config V2. Read more about [Config V2](../config-v2)
 
 | SDK                             | Version | Release Notes                                                   |
 | ------------------------------- |---------| --------------------------------------------------------------- |
