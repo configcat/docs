@@ -7,6 +7,8 @@ const config: Config = {
   url: 'https://configcat.com',
   baseUrl: '/docs/',
   onBrokenLinks: 'throw',
+  onBrokenAnchors: 'throw',
+  onBrokenMarkdownLinks: 'throw',
   trailingSlash: true,
   favicon: 'img/favicon.png',
   organizationName: 'configcat', // Usually your GitHub org/user name.
