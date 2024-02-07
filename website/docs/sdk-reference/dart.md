@@ -14,7 +14,7 @@ export const DartSchema = require('@site/src/schema-markup/sdk-reference/dart.js
 [![pub package](https://img.shields.io/pub/v/configcat_client.svg)](https://pub.dev/packages/configcat_client)
 [![Dart CI](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml/badge.svg?branch=main)](https://github.com/configcat/dart-sdk/actions/workflows/dart-ci.yml)
 
-<a href="https://github.com/ConfigCat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK on GitHub</a>
+<a href="https://github.com/configcat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK on GitHub</a>
 
 ## Getting Started
 
@@ -214,14 +214,14 @@ that matches the type of the feature flag or setting you are evaluating. Please 
 The `details` result contains the following information:
 
 | Field                       | Type                                 | Description                                                                               |
-|-----------------------------|--------------------------------------| ----------------------------------------------------------------------------------------- |
+|-----------------------------|--------------------------------------|-------------------------------------------------------------------------------------------|
 | `value`                     | `bool` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                       |
 | `key`                       | `String`                             | The key of the evaluated feature flag or setting.                                         |
 | `isDefaultValue`            | `bool`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
 | `error`                     | `String?`                            | In case of an error, this field contains the error message.                               |
-| `user`                      | `ConfigCatUser?`                     | The user object that was used for evaluation.                                             |
+| `user`                      | `ConfigCatUser?`                     | The User Object that was used for evaluation.                                             |
 | `matchedPercentageOption`   | `PercentageOption?`                  | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `matchedTargetingRule`      | `TargetingRule?`                     | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `matchedTargetingRule`      | `TargetingRule?`                     | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `fetchTime`                 | `DateTime`                           | The last download time of the current config.                                             |
 
 ## User Object
@@ -236,14 +236,14 @@ final user = ConfigCatUser(identifier: '#UNIQUE-USER-IDENTIFIER#');
 final user = ConfigCatUser(identifier: 'john@example.com');
 ```
 
-### Customized user object creation
+### Customized User Object creation
 
 | Argument     | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| `email`      | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `country`    | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `custom`     | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. |
 
 ```dart
 final user = ConfigCatUser(
@@ -301,9 +301,9 @@ All comparators support `String` values as User Object attribute (in some cases 
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```dart
 final client = ConfigCatClient.get(
@@ -320,7 +320,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client.setDefaultUser(ConfigCatUser(identifier: 'john@example.com'));
 ```
 
-Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllVariationIds()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```dart
 final user = ConfigCatUser(identifier: 'john@example.com');
@@ -330,7 +330,7 @@ client.setDefaultUser(user);
 final value = await client.getValue(key: 'keyOfMySetting', defaultValue: false);
 ```
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```dart
 final user = ConfigCatUser(identifier: 'john@example.com');
@@ -517,7 +517,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a Us
 final client = ConfigCatClient.get(sdkKey: '#YOUR-SDK-KEY#');
 final settingValues = await client.getAllValues();
 
-// invoke with user object
+// invoke with User Object
 final user = ConfigCatUser(identifier: '#UNIQUE-USER-IDENTIFIER#');
 final settingValuesTargeting = await client.getAllValues(user);
 ```
@@ -670,5 +670,5 @@ See <a href="https://configcat.com/blog/2022/10/18/feature-flags-in-dart/" targe
 
 ## Look Under the Hood
 
-- <a href="https://github.com/ConfigCat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK's repository on GitHub</a>
+- <a href="https://github.com/configcat/dart-sdk" target="_blank">ConfigCat Dart (Flutter) SDK's repository on GitHub</a>
 - <a href="https://pub.dev/packages/configcat_client" target="_blank">ConfigCat Dart (Flutter) SDK's pub.dev page</a>

@@ -15,7 +15,7 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 [![Sonar Coverage](https://img.shields.io/sonar/coverage/net-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=net-sdk)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
 
-<a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+<a href="https://github.com/configcat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
 
 ## Getting started
 
@@ -215,12 +215,12 @@ The `details` result contains the following information:
 | --------------------------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
 | `Key`                             | `string`                             | The key of the evaluated feature flag or setting.                                                               |
 | `Value`                           | `bool` / `string` / `int` / `double` | The evaluated value of the feature flag or setting.                                                             |
-| `User`                            | `User`                               | The user object used for the evaluation.                                                                        |
+| `User`                            | `User`                               | The User Object used for the evaluation.                                                                        |
 | `IsDefaultValue`                  | `bool`                               | True when the default value passed to `GetValueDetails()`/`GetValueDetailsAsync()` is returned due to an error. |
 | `ErrorMessage`                    | `string`                             | In case of an error, this field contains the error message.                                                     |
 | `ErrorException`                  | `Exception`                          | In case of an error, this field contains the related exception object (if any).                                 |
-| `MatchedTargetingRule`            | `ITargetingRule`                     | The targeting rule (if any) that matched during the evaluation and was used to return the evaluated value.      |
-| `MatchedPercentageOption`         | `IPercentageOption`                  | The percentage option (if any) that was used to select the evaluated value.                                     |
+| `MatchedTargetingRule`            | `ITargetingRule`                     | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value.      |
+| `MatchedPercentageOption`         | `IPercentageOption`                  | The Percentage Option (if any) that was used to select the evaluated value.                                     |
 | `FetchTime`                       | `DateTime`                           | The last download time (UTC) of the current config.                                                             |
 
 ## User Object
@@ -238,9 +238,9 @@ User userObject = new User("john@example.com");
 | Parameters | Description                                                                                                                     |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `Id`       | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |
-| `Email`    | Optional parameter for easier targeting rule definitions.                                                                       |
-| `Country`  | Optional parameter for easier targeting rule definitions.                                                                       |
-| `Custom`   | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. E.g. User role, Subscription type. |
+| `Email`    | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `Country`  | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `Custom`   | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. E.g. User role, Subscription type. |
 
 ```csharp
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
@@ -279,29 +279,29 @@ All comparators support `string` values as User Object attribute (in some cases 
 
 **SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
 * accept `string` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Number-based comparators** (=, &lt;, &gt;=, etc.)
 * accept `double` values and all other numeric values which can safely be converted to `double`,
 * accept `string` values containing a properly formatted, valid `double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
   
 **Date time-based comparators** (BEFORE / AFTER)
 * accept `DateTime` or `DateTimeOffset` values, which are automatically converted to a second-based Unix timestamp,
 * accept `double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `double`,
 * accept `string` values containing a properly formatted, valid `double` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
   
 **String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
 * accept arrays of `string`,
 * accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
-It's possible to set a default user object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
+It's possible to set a default User Object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
@@ -314,7 +314,7 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 client.SetDefaultUser(new User(identifier: "john@example.com"));
 ```
 
-Whenever the evaluation methods like `GetValue()`, `GetValueAsync()`, etc. are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the evaluation methods like `GetValue()`, `GetValueAsync()`, etc. are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```csharp
 var user = new User(identifier: "john@example.com");
@@ -324,7 +324,7 @@ client.SetDefaultUser(user);
 var value = await client.GetValueAsync(key: "keyOfMyFeatureFlag", defaultValue: false);
 ```
 
-When a user object parameter is passed to the evaluation methods, it takes precedence over the default user.
+When a `user` parameter is passed to the evaluation methods, it takes precedence over the default user.
 
 ```csharp
 var user = new User(identifier: "john@example.com");
@@ -509,12 +509,9 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 
 This is the same format that the SDK downloads from the ConfigCat CDN.
-It allows the usage of all features you can access on the ConfigCat Dashboard.
+It allows the usage of all features that are available on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
-
-<Tabs groupId="config-json-format">
-<TabItem value="config-json-v6" label="When using an SDK version v9.0.0 or newer">
 
 A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
 and execute the following command:
@@ -533,13 +530,13 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
 ```json
 {
   "p": {
-    // hash salt, required only when sensitive text comparator(s) are used
+    // hash salt, required only when confidential text comparator(s) are used
     "s": "80xCU/SlDz1lCiWFaxIBjyJeJecWjq46T4eu6GtozkM="
   },
   "s": [ // array of segments
     {
       "n": "Beta Users", // segment name
-      "r": [ // array of user conditions (there is a logical AND relation between the elements)
+      "r": [ // array of User Conditions (there is a logical AND relation between the elements)
         {
           "a": "Email", // comparison attribute
           "c": 0, // comparator (see below)
@@ -557,11 +554,11 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               // 1 -> text setting
               // 2 -> whole number setting
               // 3 -> decimal number setting
-      "r": [ // array of targeting rules (there is a logical OR relation between the elements)
+      "r": [ // array of Targeting Rules (there is a logical OR relation between the elements)
         {
           "c": [ // array of conditions (there is a logical AND relation between the elements)
             {
-              "u": { // user condition
+              "u": { // User Condition
                 "a": "Email", // comparison attribute
                 "c": 2, // comparator, possible values and required comparison value types:
                         // 0  -> IS ONE OF (cleartext) + string array comparison value ("l")
@@ -609,7 +606,7 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               }
             },
             {
-              "p": { // prerequisite flag condition
+              "p": { // Flag Condition (Prerequisite)
                 "f": "mainIntFlag", // key of prerequisite flag
                 "c": 0, // comparator, possible values: 0 -> EQUALS, 1 -> NOT EQUALS
                 "v": { // comparison value (value's type must match the prerequisite flag's type)
@@ -618,13 +615,13 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
               }
             },
             {
-              "s": { // segment condition
+              "s": { // Segment Condition
                 "s": 0, // segment index, a valid index into the top-level segment array ("s")
                 "c": 1 // comparator, possible values: 0 -> IS IN SEGMENT, 1 -> IS NOT IN SEGMENT
               }
             }
           ],
-          "s": { // alternatively, an array of percentage options ("p", see below) can also be specified
+          "s": { // alternatively, an array of Percentage Options ("p", see below) can also be specified
             "v": { // the value served when the rule is selected during evaluation
               "b": true
             },
@@ -632,10 +629,10 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
           }
         }
       ],
-      "p": [ // array of percentage options
+      "p": [ // array of Percentage Options
         {
           "p": 10, // % value
-          "v": { // the value served when the percentage option is selected during evaluation
+          "v": { // the value served when the Percentage Option is selected during evaluation
             "b": true
           },
           "i": "bcfb84a7"
@@ -648,8 +645,8 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
           "i": "bddac6ae"
         }
       ],
-      "v": { // fallback value, served when none of the targeting rules match,
-             // no percentage options are defined or evaluation of these is not possible
+      "v": { // fallback value, served when none of the Targeting Rules match,
+             // no Percentage Options are defined or evaluation of these is not possible
         "b": false // depending on the setting type, another type of value may need to be specified:
                    // text setting -> "s": string
                    // whole number setting -> "i": number
@@ -662,88 +659,6 @@ Alternatively, you can download the config JSON manually, based on your [Data Go
 ```
 
 For a more comprehensive specification of the config JSON v6 format, you may refer to [this JSON schema document](https://github.com/configcat/config-json/blob/main/V6/config.schema.json).
-
-</TabItem>
-<TabItem value="config-json-v5" label="When using an SDK version older than v9.0.0">
-
-A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
-and execute the following command:
-
-```bash
-configcat config-json get -f v5 -p {YOUR-SDK-KEY} > config.json
-```
-
-(Depending on your [Data Governance](/advanced/data-governance) settings, you may need to add the `--eu` switch.)
-
-Alternatively, you can download the config JSON manually, based on your [Data Governance](/advanced/data-governance) settings:
-
-- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
-- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
-
-```json
-{
-  "f": {
-    // list of feature flags & settings
-    "isFeatureEnabled": {
-      // key of a particular flag
-      "v": false, // default value, served when no rules are defined
-      "i": "430bded3", // variation id (for analytical purposes)
-      "t": 0, // feature flag's type, possible values:
-      // 0 -> BOOLEAN
-      // 1 -> STRING
-      // 2 -> INT
-      // 3 -> DOUBLE
-      "p": [
-        // list of percentage rules
-        {
-          "o": 0, // rule's order
-          "v": true, // value served when the rule is selected during evaluation
-          "p": 10, // % value
-          "i": "bcfb84a7" // variation id (for analytical purposes)
-        },
-        {
-          "o": 1, // rule's order
-          "v": false, // value served when the rule is selected during evaluation
-          "p": 90, // % value
-          "i": "bddac6ae" // variation id (for analytical purposes)
-        }
-      ],
-      "r": [
-        // list of targeting rules
-        {
-          "o": 0, // rule's order
-          "a": "Identifier", // comparison attribute
-          "t": 2, // comparator, possible values:
-          // 0  -> 'IS ONE OF',
-          // 1  -> 'IS NOT ONE OF',
-          // 2  -> 'CONTAINS',
-          // 3  -> 'DOES NOT CONTAIN',
-          // 4  -> 'IS ONE OF (SemVer)',
-          // 5  -> 'IS NOT ONE OF (SemVer)',
-          // 6  -> '< (SemVer)',
-          // 7  -> '<= (SemVer)',
-          // 8  -> '> (SemVer)',
-          // 9  -> '>= (SemVer)',
-          // 10 -> '= (Number)',
-          // 11 -> '<> (Number)',
-          // 12 -> '< (Number)',
-          // 13 -> '<= (Number)',
-          // 14 -> '> (Number)',
-          // 15 -> '>= (Number)',
-          // 16 -> 'IS ONE OF (Hashed)',
-          // 17 -> 'IS NOT ONE OF (Hashed)'
-          "c": "@example.com", // comparison value
-          "v": true, // value served when the rule is selected during evaluation
-          "i": "bcfb84a7" // variation id (for analytical purposes)
-        }
-      ]
-    }
-  }
-}
-```
-
-</TabItem>
-</Tabs>
 
 ### Dictionary
 
@@ -821,7 +736,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IDictionary<string, object> settingValues = client.GetAllValues();
 
-// invoke with user object
+// invoke with User Object
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 IDictionary<string, object> settingValuesTargeting = client.GetAllValues(userObject);
 ```
@@ -830,7 +745,7 @@ IDictionary<string, object> settingValuesTargeting = client.GetAllValues(userObj
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IDictionary<string, object> settingValues = await client.GetAllValuesAsync();
 
-// invoke with user object
+// invoke with User Object
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
 ```
@@ -843,7 +758,7 @@ Evaluates and returns the values along with evaluation details of all feature fl
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IReadOnlyList<EvaluationDetails> settingValues = client.GetAllValueDetails();
 
-// invoke with user object
+// invoke with User Object
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 IReadOnlyList<EvaluationDetails> settingValuesTargeting = client.GetAllValueDetails(userObject);
 ```
@@ -852,7 +767,7 @@ IReadOnlyList<EvaluationDetails> settingValuesTargeting = client.GetAllValueDeta
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IReadOnlyList<EvaluationDetails> settingValues = await client.GetAllValueDetailsAsync();
 
-// invoke with user object
+// invoke with User Object
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 IReadOnlyList<EvaluationDetails> settingValuesTargeting = await client.GetAllValueDetailsAsync(userObject);
 ```
@@ -969,8 +884,8 @@ When the _ConfigCat SDK_ does not work as expected in your application, please c
 
 Check out our Sample Applications how they use the _ConfigCat SDK_:
 
-- <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
-- <a href="https://github.com/ConfigCat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Web App</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Web App</a>
 
 ## Guides
 
@@ -981,5 +896,5 @@ See the following guides on how to use ConfigCat's .NET SDK:
 
 ## Look under the hood
 
-- <a href="https://github.com/ConfigCat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+- <a href="https://github.com/configcat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
 - <a href="https://www.nuget.org/packages/ConfigCat.Client" target="_blank">ConfigCat .NET SDK on nuget.org</a>

@@ -15,7 +15,7 @@ export const CPPSchema = require('@site/src/schema-markup/sdk-reference/cpp.json
 [![Build Status](https://img.shields.io/github/actions/workflow/status/configcat/cpp-sdk/cpp-ci.yml?logo=GitHub&label=windows%20%2F%20macos%20%2F%20linux&branch=main)](https://github.com/configcat/cpp-sdk/actions/workflows/cpp-ci.yml)
 [![Coverage Status](https://codecov.io/gh/configcat/cpp-sdk/branch/main/graph/badge.svg?token=cvUgfof8k7)](https://codecov.io/gh/configcat/cpp-sdk)
 
-<a href="https://github.com/ConfigCat/cpp-sdk" target="_blank">ConfigCat C++ SDK on GitHub</a>
+<a href="https://github.com/configcat/cpp-sdk" target="_blank">ConfigCat C++ SDK on GitHub</a>
 
 ## Getting Started:
 
@@ -164,9 +164,9 @@ The `details` result contains the following information:
 | `key`                             | `string`                             | The key of the evaluated feature flag or setting.                                         |
 | `isDefaultValue`                  | `bool`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
 | `error`                           | `string`                             | In case of an error, this field contains the error message.                               |
-| `user`                            | `ConfigCatUser*`                     | The user object that was used for evaluation.                                             |
+| `user`                            | `ConfigCatUser*`                     | The User Object that was used for evaluation.                                             |
 | `matchedEvaluationPercentageRule` | `optional<RolloutPercentageItem>`    | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `matchedEvaluationRule`           | `optional<RolloutRule>`              | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `matchedEvaluationRule`           | `optional<RolloutRule>`              | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `fetchTime`                       | `chrono::time_point`                 | The last download time of the current config.                                             |
 
 ## User Object
@@ -181,14 +181,14 @@ auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 auto user = ConfigCatUser("john@example.com");
 ```
 
-### Customized user object creation
+### Customized User Object creation
 
 | Argument  | Description                                                                                                                     |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `id`      | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email`   | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country` | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom`  | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| `email`   | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `country` | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `custom`  | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. |
 
 ```cpp
 auto user = ConfigCatUser(
@@ -204,9 +204,9 @@ auto user = ConfigCatUser(
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```cpp
 ConfigCatOptions options;
@@ -220,7 +220,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client->setDefaultUser(make_shared<ConfigCatUser>("john@example.com"));
 ```
 
-Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue()`, `getValueDetails()`, `getAllValues()`, or `getAllValueDetails()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```cpp
 auto user = make_shared<ConfigCatUser>("john@example.com");
@@ -230,7 +230,7 @@ client->setDefaultUser(user);
 auto value = client->getValue("keyOfMySetting", false);
 ```
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```cpp
 auto user = make_shared<ConfigCatUser>("john@example.com");
@@ -402,7 +402,7 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 
 This is the same format that the SDK downloads from the ConfigCat CDN.
-It allows the usage of all features you can do on the ConfigCat Dashboard.
+It allows the usage of all features that are available on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
@@ -440,7 +440,7 @@ The URL to your current config JSON is based on your [Data Governance](/advanced
         }
       ],
       "r": [
-        // list of targeting rules
+        // list of Targeting Rules
         {
           "o": 0, // rule's order
           "a": "Identifier", // comparison attribute
@@ -508,7 +508,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a Us
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
 auto settingValues = client->getAllValues();
 
-// invoke with user object
+// invoke with User Object
 auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 auto settingValuesTargeting = client->getAllValues(&user);
 ```
@@ -520,7 +520,7 @@ Evaluates and returns the detailed values of all feature flags and settings. Pas
 ```cpp
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
 
-// invoke with user object
+// invoke with User Object
 auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
 auto allValueDetails = client->getAllValueDetails(&user)
 ```
@@ -634,12 +634,12 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
-Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
+Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
 
 ## Sample Applications
 
@@ -653,4 +653,4 @@ See <a href="https://configcat.com/blog/2022/10/21/configcat-cpp-sdk-announcemen
 
 ## Look Under the Hood
 
-- <a href="https://github.com/ConfigCat/cpp-sdk" target="_blank">ConfigCat C++ SDK's repository on GitHub</a>
+- <a href="https://github.com/configcat/cpp-sdk" target="_blank">ConfigCat C++ SDK's repository on GitHub</a>

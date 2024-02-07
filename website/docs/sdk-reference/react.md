@@ -386,9 +386,9 @@ const userObject = new User('john@example.com');
 | Parameters   | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. E.g. User role, Subscription type. |
+| `email`      | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `country`    | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `custom`     | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. E.g. User role, Subscription type. |
 
 For advanced targeting:
 
@@ -442,29 +442,29 @@ but some of them also support other types of values. It depends on the comparato
 
 **SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
 * accept `string` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Number-based comparators** (=, &lt;, &gt;=, etc.)
 * accept `number` values,
 * accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Date time-based comparators** (BEFORE / AFTER)
 * accept `Date` values, which are automatically converted to a second-based Unix timestamp,
 * accept `number` values representing a second-based Unix timestamp,
 * accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
 * accept arrays of `string`,
 * accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
-It's possible to set a default user object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
+It's possible to set a default User Object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```tsx
 <ConfigCatProvider
@@ -494,7 +494,7 @@ export const SetConfigCatUserComponent = () => {
 };
 ```
 
-Whenever the evaluation methods like `getValueAsync()`, `getValueDetailsAsync()`, etc. are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the evaluation methods like `getValueAsync()`, `getValueDetailsAsync()`, etc. are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```tsx
 export const FlagValueDetailsComponent = () => {
@@ -503,7 +503,7 @@ export const FlagValueDetailsComponent = () => {
   const [flagDetails, setFlagDetails] =
     useState<IEvaluationDetails<boolean> | null>(null);
 
-  // invoke getValueDetailsAsync method WITHOUT User object
+  // invoke getValueDetailsAsync method WITHOUT User Object
   useEffect(() => {
     client
       .getValueDetailsAsync('featureFlagKey', false)
@@ -516,7 +516,7 @@ export const FlagValueDetailsComponent = () => {
 };
 ```
 
-When a user object parameter is passed to the evaluation methods, it takes precedence over the default user.
+When a `user` parameter is passed to the evaluation methods, it takes precedence over the default user.
 
 ```tsx
 const CurrentUser: User = new User('john@example.com');
@@ -528,7 +528,7 @@ export const FlagValueDetailsComponent = () => {
     useState<IEvaluationDetails<boolean> | null>(null);
   const [user] = useState(CurrentUser);
 
-  // invoke getValueDetailsAsync method WITH User object
+  // invoke getValueDetailsAsync method WITH User Object
   useEffect(() => {
     client
       .getValueDetailsAsync('featureFlagKey', false, user)
@@ -905,12 +905,12 @@ The React SDK supports *shared caching*. You can read more about this feature an
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/docs/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/docs/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the _ConfigCat SDK_  that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
-Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
+Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
 
 ## Sample Application
 

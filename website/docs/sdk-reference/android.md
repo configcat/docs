@@ -19,7 +19,7 @@ export const AndroidSchema = require('@site/src/schema-markup/sdk-reference/andr
 This SDK is mainly for Java-based Android applications. For a more modern Android development experience, check our [Kotlin Multiplatform SDK](/sdk-reference/kotlin).
 :::
 
-<a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android (Java) SDK on GitHub</a>
+<a href="https://github.com/configcat/android-sdk" target="_blank">ConfigCat Android (Java) SDK on GitHub</a>
 
 ### Compatibility
 
@@ -35,7 +35,7 @@ When you use R8 or ProGuard, the aar artifact automatically applies the [include
 
 ```groovy title="build.gradle"
 dependencies {
-    implementation 'com.configcat:configcat-android-client:9.+'
+    implementation 'com.configcat:configcat-android-client:10.+'
 }
 ```
 
@@ -142,6 +142,23 @@ boolean value = client.getValue(
     false // Default value
 );
 ```
+:::caution
+It is important to provide an argument for the `classOfT` parameter, specifically for the `T` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to the following table for the corresponding types.
+:::
+
+<div id="setting-type-mapping"></div>
+
+| Setting Kind   | Type parameter `T`    |
+| -------------- |-----------------------|
+| On/Off Toggle  | `boolean` / `Boolean` |
+| Text           | `String`              |
+| Whole Number   | `int` / `Integer`     |
+| Decimal Number | `double` / `Double`   |
+
+It's important to note that providing any other type for the type parameter will result in an `IllegalArgumentException`.
+
+If you specify an allowed type but it mismatches the setting kind, an error message will be logged and `defaultValue` will be returned.
 
 ## Anatomy of `getValueAsync()`
 
@@ -166,6 +183,11 @@ client.getValueAsync(
     }
 });
 ```
+
+:::caution
+It is important to provide an argument for the `classOfT` parameter, specifically for the `T` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to [this table](#setting-type-mapping) for the corresponding types.
+:::
 
 ## Anatomy of `getValueDetails()`
 
@@ -196,19 +218,23 @@ client.getValueDetailsAsync(
     // Use the details result
 });
 ```
+:::caution
+It is important to provide an argument for the `classOfT` parameter, specifically for the `T` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to [this table](#setting-type-mapping) for the corresponding types.
+:::
 
 The details result contains the following information:
 
-| Property                               | Type                                    | Description                                                                               |
-| -------------------------------------- | --------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `getValue()`                           | `boolean` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                       |
-| `getKey()`                             | `String`                                | The key of the evaluated feature flag or setting.                                         |
-| `isDefaultValue()`                     | `boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
-| `getError()`                           | `String`                                | In case of an error, this field contains the error message.                               |
-| `getUser()`                            | `User`                                  | The user object that was used for evaluation.                                             |
-| `getMatchedEvaluationPercentageRule()` | `PercentageRule`                        | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `getMatchedEvaluationRule()`           | `RolloutRule`                           | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
-| `getFetchTimeUnixMilliseconds()`       | `long`                                  | The last download time of the current config in unix milliseconds format.                 |
+| Property                          | Type                                    | Description                                                                                                |
+|-----------------------------------| --------------------------------------- |------------------------------------------------------------------------------------------------------------|
+| `getValue()`                      | `boolean` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                                        |
+| `getKey()`                        | `String`                                | The key of the evaluated feature flag or setting.                                                          |
+| `isDefaultValue()`                | `boolean`                               | True when the default value passed to getValueDetails() is returned due to an error.                       |
+| `getError()`                      | `String`                                | In case of an error, this field contains the error message.                                                |
+| `getUser()`                       | `User`                                  | The User Object that was used for evaluation.                                                              |
+| `getMatchedPercentageOption()`    | `PercentageOption`                      | The Percentage Option (if any) that was used to select the evaluated value.                                |
+| `getMatchedTargetingRule()`       | `TargetingRule`                         | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
+| `getFetchTimeUnixMilliseconds()`  | `long`                                  | The last download time of the current config in unix milliseconds format.                                  |
 
 ## User Object
 
@@ -222,17 +248,17 @@ User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"); // Optional Use
 User user = User.newBuilder().build("john@example.com");
 ```
 
-### Customized user object creation
+### Customized User Object creation
 
 | Builder options | Description                                                                                                                     |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier()`  | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `email()`       | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country()`     | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom()`      | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| `email()`       | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `country()`     | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `custom()`      | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. |
 
 ```java
-java.util.Map<String,String> customAttributes = new java.util.HashMap<String,String>();
+java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
     customAttributes.put("SubscriptionType", "Pro");
     customAttributes.put("UserRole", "Admin");
 
@@ -243,11 +269,54 @@ User user = User.newBuilder()
     .build("#UNIQUE-USER-IDENTIFIER#"); // UserID
 ```
 
+The `Custom` dictionary also allows attribute values other than `String` values:
+
+```java
+java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
+    customAttributes.put("Rating", 4.5);
+    customAttributes.put("RegisteredAt", new Date("2023-11-22 12:34:56 +00:00"));
+    customAttributes.put("Roles", new String[]{"Role1", "Role2"});
+
+User user = User.newBuilder()
+    .email("john@example.com")
+    .country("United Kingdom")
+    .custom(customAttributes)
+    .build("#UNIQUE-USER-IDENTIFIER#");
+```
+
+### User Object Attribute Types
+
+All comparators support `String` values as User Object attribute (in some cases they need to be provided in a specific format though, see below), but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
+
+**Text-based comparators** (EQUALS, IS ONE OF, etc.)
+* accept `String` values,
+* all other values are automatically converted to `String` (a warning will be logged but evaluation will continue as normal).
+
+**SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
+* accept `String` values containing a properly formatted, valid semver value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
+**Number-based comparators** (=, &lt;, &gt;=, etc.)
+* accept `Double` values and all other numeric values which can safely be converted to `Double`,
+* accept `String` values containing a properly formatted, valid `Double` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
+**Date time-based comparators** (BEFORE / AFTER)
+* accept `Date` values, which are automatically converted to a second-based Unix timestamp,
+* accept `Double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `Double`,
+* accept `String` values containing a properly formatted, valid `Double` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
+**String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
+* accept arrays and list of `String`,
+* accept `String` values containing a valid JSON string which can be deserialized to an array of `String`,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```java
 
@@ -262,7 +331,7 @@ or with the `setDefaultUser()` method of the ConfigCat client.
 client.setDefaultUser(User.newBuilder().build("john@example.com"));
 ```
 
-Whenever the `getValue[Async]()`, `getValueDetails[Async]()`, or `getAllValues[Async]()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `getValue[Async]()`, `getValueDetails[Async]()`, or `getAllValues[Async]()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
@@ -273,7 +342,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 boolean value = client.getValue(Boolean.class, "keyOfMySetting", false);
 ```
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
@@ -447,7 +516,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a Us
 ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
 Map<String, Object> settingValues = client.getAllValues();
 
-// invoke with user object
+// invoke with User Object
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#")
 Map<String, Object> settingValuesTargeting = client.getAllValues(user);
 ```
@@ -456,7 +525,7 @@ Map<String, Object> settingValuesTargeting = client.getAllValues(user);
 ConfigCatClient client = new ConfigCatClient("#YOUR-SDK-KEY#");
 client.getAllValuesAsync().thenAccept(settingValues -> { });
 
-// invoke with user object
+// invoke with User Object
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#")
 client.getAllValuesAsync(user).thenAccept(settingValuesTargeting -> { });
 ```
@@ -595,10 +664,11 @@ Available log levels:
 Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-INFO com.configcat.ConfigCatClient - [5000] Evaluating getValue(isPOCFeatureEnabled).
-User object: User{Identifier=435170f4-8a8b-4b67-a723-505ac7cdea92, Email=john@example.com}
-Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
-Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning "true"
+INFO com.configcat.ConfigCatClient - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
+  Evaluating targeting rules and applying the first match if any:
+  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'False' => no match
+  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'True' => MATCH, applying rule
+  Returning 'True'.
 ```
 
 ### Logging Implementation
@@ -609,12 +679,12 @@ Examples for <a href="https://github.com/configcat/android-sdk/blob/master/sampl
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
-Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
+Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
 
 ## Sample App
 
@@ -626,6 +696,6 @@ See <a href="https://configcat.com/blog/2022/01/24/feature-flags-in-android/" ta
 
 ## Look under the hood
 
-- <a href="https://github.com/ConfigCat/android-sdk" target="_blank">ConfigCat Android SDK's repository on GitHub</a>
+- <a href="https://github.com/configcat/android-sdk" target="_blank">ConfigCat Android SDK's repository on GitHub</a>
 - <a href="https://javadoc.io/doc/com.configcat/configcat-android-client" target="_blank">ConfigCat Android SDK's javadoc page</a>
 - <a href="https://search.maven.org/artifact/com.configcat/configcat-android-client" target="_blank">ConfigCat Android SDK on Maven Central</a>

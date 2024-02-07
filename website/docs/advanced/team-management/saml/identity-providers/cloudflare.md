@@ -12,7 +12,7 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 ## 1. Create an Application in Cloudflare
 
-- Log in to <a href="https://dash.cloudflare.com/" target="_blank">CloudFlare</a>, go to the Zero Trust dashboard, and select `Applications` under the `Access` menu.  
+- Log in to <a href="https://dash.cloudflare.com/" target="_blank">CloudFlare</a>, go to the Zero Trust Dashboard, and select `Applications` under the `Access` menu.  
   Then click on `Add an application`.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/cloudflare/add_app.png" alt="Create Cloudflare application" />
@@ -29,7 +29,7 @@ The next step will guide you on how to collect the information required for the 
 
 ## 2. Configure SAML for the Cloudflare Application
 
-- Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat dashboard</a>.
+- Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat Dashboard</a>.
 
   <img className="saml-tutorial-img zoomable" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
 

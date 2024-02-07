@@ -6,7 +6,7 @@ description: Segments help you define user segments and assign them to your feat
 
 Segments allow you to group your users based on any of their properties. This way you can
 define segments of your users and then assign them to specific feature flags. If you update a segment definition, it will update all
-feature flags that are assigned to it. You can think of segments as reusable targeting rules. If you have groups of users that you want to target regularly with
+feature flags that are assigned to it. You can think of segments as reusable Targeting Rules. If you have groups of users that you want to target regularly with
 different features, it's a good idea to define a segment for each group.
 
 _For example, you can define a segment called "Beta Users" and assign that segment to all future features that you want to be available for beta users._

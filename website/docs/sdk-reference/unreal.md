@@ -16,7 +16,7 @@ export const CPPSchema = require('@site/src/schema-markup/sdk-reference/cpp.json
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/unreal-engine-sdk.svg?style=social)](https://github.com/configcat/unreal-engine-sdk/stargazers)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/configcat/unreal-engine-sdk/plugin-ci.yml?logo=GitHub&label=Unreal&branch=main)](https://github.com/configcat/unreal-engine-sdk/actions/workflows/plugin-ci.yml)
 
-<a href="https://github.com/ConfigCat/unreal-engine-sdk" target="_blank">ConfigCat Unreal SDK on GitHub</a>
+<a href="https://github.com/configcat/unreal-engine-sdk" target="_blank">ConfigCat Unreal SDK on GitHub</a>
 
 ## Getting Started:
 
@@ -173,9 +173,9 @@ The `Details` result contains the following information:
 | `Key`                                | The key of the evaluated feature flag or setting.                                         |
 | `Is Default Value`                   | True when the default value passed to getValueDetails() is returned due to an error.      |
 | `Error`                              | In case of an error, this field contains the error message.                               |
-| `User`                               | The user object that was used for evaluation.                                             |
+| `User`                               | The User Object that was used for evaluation.                                             |
 | `Matched Evaluation Percentage Rule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `Matched Evaluation Rule`            | If the evaluation was based on a targeting rule, this field contains that specific rule.  |
+| `Matched Evaluation Rule`            | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `FetchTime`                          | The last download time of the current config.                                             |
 
 ## User Object
@@ -197,14 +197,14 @@ FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"));
 </TabItem>
 </Tabs>
 
-### Customized user object creation
+### Customized User Object creation
 
 | Argument  | Description                                                                                                                     |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `Id`      | **REQUIRED.** Unique identifier of a user in your application. Can be any value, even an email address.                         |
-| `Email`   | Optional parameter for easier targeting rule definitions.                                                                       |
-| `Country` | Optional parameter for easier targeting rule definitions.                                                                       |
-| `Custom`  | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. e.g. User role, Subscription type. |
+| `Email`   | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `Country` | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `Custom`  | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. |
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
@@ -227,9 +227,9 @@ FConfigCatUser User = FConfigCatUser(TEXT("#UNIQUE-USER-IDENTIFIER#"), TEXT("joh
 
 ### Default user
 
-There's an option to set a default user object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
+There's an option to set a default User Object that will be used at feature flag and setting evaluation. It can be useful when your application has a single user only, or rarely switches users.
 
-You can set the default user object with the `setDefaultUser()` method of the ConfigCat client.
+You can set the default User Object with the `setDefaultUser()` method of the ConfigCat client.
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
@@ -248,7 +248,7 @@ ConfigCat->SetDefaultUser(User);
 </TabItem>
 </Tabs>
 
-Whenever the `GetValue()`, `GetValueDetails()`, `GetAllValues()`, or `GetAllValueDetails()` methods are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the `GetValue()`, `GetValueDetails()`, `GetAllValues()`, or `GetAllValueDetails()` methods are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
@@ -270,7 +270,7 @@ bool bMySetting = ConfigCat->GetBoolValue(TEXT("keyOfMySetting"), false);
 </TabItem>
 </Tabs>
 
-When the user object parameter is specified on the requesting method, it takes precedence over the default user.
+When the `user` parameter is specified on the requesting method, it takes precedence over the default user.
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
@@ -476,7 +476,7 @@ The SDK supports 2 types of JSON structures to describe feature flags & settings
 ##### 2. Complex (full-featured) structure
 
 This is the same format that the SDK downloads from the ConfigCat CDN.
-It allows the usage of all features you can do on the ConfigCat Dashboard.
+It allows the usage of all features that are available on the ConfigCat Dashboard.
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
@@ -514,7 +514,7 @@ The URL to your current config JSON is based on your [Data Governance](/advanced
         }
       ],
       "r": [
-        // list of targeting rules
+        // list of Targeting Rules
         {
           "o": 0, // rule's order
           "a": "Identifier", // comparison attribute
@@ -700,13 +700,13 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is [downloading a config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is [downloading a config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
-Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
+Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
 
 ## Look Under the Hood
 
-- <a href="https://github.com/ConfigCat/unreal-engine-sdk" target="_blank">ConfigCat Unreal Engine SDK's repository on GitHub</a>
+- <a href="https://github.com/configcat/unreal-engine-sdk" target="_blank">ConfigCat Unreal Engine SDK's repository on GitHub</a>

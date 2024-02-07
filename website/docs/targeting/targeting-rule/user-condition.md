@@ -1,0 +1,197 @@
+---
+id: user-condition
+title: User Condition
+description: A User Condition is a condition that is based on the comparison of a user attribute and a preset value (comparison value). It allows you to define Targeting Rules which target users based on their properties.
+---
+
+## What is a User Condition?
+
+A *User Condition* is a condition that is based on the comparison of a user attribute and a preset value (*comparison value*). It allows you to define Targeting Rules which target users based on their properties.
+
+## How does the User Condition work?
+
+The *comparison attribute*'s value from the [User Object](../../user-object) is compared to the *comparison value* you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
+
+For more details on the evaluation of User Conditions, please refer to [Feature Flag Evaluation](../../feature-flag-evaluation).
+
+## How to set a User Condition?
+
+You can add a Targeting Rule with a condition on the Dashboard by clicking on the `+IF` ("Add Targeting Rule") button. Add more conditions by clicking on the `+AND` button.
+
+![Add User Condition](/assets/targeting/targeting-rule/user-condition/user-condition.jpg)
+
+## Anatomy of a User Condition
+
+![User Condition anatomy](/assets/targeting/targeting-rule/user-condition/user-condition-anatomy.jpg)
+
+A *User Condition* consists of three parts:
+
+- **Comparison attribute:** The user attribute on which the condition is based. Could be "User ID", "Email", "Country", or any custom attribute.
+- **Comparator:** The comparison operator that defines the relation between the comparison attribute and the comparison value.
+- **Comparison value:** The preset value to which the comparison attribute is compared. Depending on the comparator, could be a string, a list of strings, a number, a semantic version, a list of semantic versions or a date.
+
+### Comparison Attribute
+
+A property of your user (e.g. _email address_, _geographic location_). Your application should pass the attribute values (e.g. *jane&#64;example.com*, _Europe_) to the ConfigCat SDK as a [User Object](../../user-object).
+
+There are 3 predefined attributes. Additionally, you can define your **_custom attributes_** as well:
+
+| Comparison attribute name | Description                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------ |
+| `Identifier`              | Usually, it is a unique user identifier in your application.                   |
+| `Email`                   | The e-mail address of your user.                                               |
+| `Country`                 | Might be useful for testing a new feature only in one country.                 |
+| `Custom`                  | Define any attribute (e.g. `OS version`), by typing its name into the textbox. |
+
+### Comparison Value
+
+A string, a list of strings, a number, a semantic version, a list of semantic versions or a date value. Will be compared to the selected _Comparison attribute_ using the _Comparator_. The length of the _Comparison value_ is limited, and the limit depends on your subscription plan. See the [plan limits page](../../../subscription-plan-limits) for more details.
+
+### Comparator
+
+#### Confidential Text Comparators
+
+We recommend using confidential text comparators when targeting users based on their sensitive data (like email address, name, etc).
+In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed. This can cause an increase in the size of the config JSON file and the overall network traffic. Yet it is not recommended to use the cleartext version of the confidential comparators unless the increased network traffic becomes an issue.
+
+The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings.
+
+| Comparator                      | Description                                                                                |
+| ------------------------------- | ------------------------------------------------------------------------------------------ |
+| EQUALS (hashed)                 | Checks whether the comparison attribute is equal to the comparison value.                 |
+| NOT EQUALS (hashed)             | Checks whether the comparison attribute is not equal to the comparison value.             |
+| IS ONE OF (hashed)              | Checks whether the comparison attribute is equal to any of the comparison values.         |
+| IS NOT ONE OF (hashed)          | Checks whether the comparison attribute is not equal to any of the comparison values.     |
+| STARTS WITH ANY OF (hashed)     | Checks whether the comparison attribute starts with any of the comparison values.         |
+| NOT STARTS WITH ANY OF (hashed) | Checks whether the comparison attribute does not start with any of the comparison values. |
+| ENDS WITH ANY OF (hashed)       | Checks whether the comparison attribute ends with any of the comparison values.           |
+| NOT ENDS WITH ANY OF (hashed)   | Checks whether the comparison attribute does not end with any of the comparison values.   |
+
+#### Text Comparators
+
+The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings.
+
+:::info
+Consider using Confidential text comparators if you plan to target users by their sensitive data, e.g.: email address or company domain.
+:::
+
+| Comparator                         | Description                                                                                     |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------- |
+| EQUALS (cleartext)                 | Checks whether the comparison attribute equals the comparison value.                           |
+| NOT EQUALS (cleartext)             | Checks whether the comparison attribute is not equal to the comparison value.                  |
+| IS ONE OF (cleartext)              | Checks whether the comparison attribute is equal to any of the comparison values.              |
+| IS NOT ONE OF (cleartext)          | Checks whether the comparison attribute is not equal to any of the comparison values.          |
+| STARTS WITH ANY OF (cleartext)     | Checks whether the comparison attribute starts with any of the comparison values.              |
+| NOT STARTS WITH ANY OF (cleartext) | Checks whether the comparison attribute does not start with any of the comparison values.      |
+| ENDS WITH ANY OF (cleartext)       | Checks whether the comparison attribute ends with any of the comparison values.                |
+| NOT ENDS WITH ANY OF (cleartext)   | Checks whether the comparison attribute does not end with any of the comparison values.        |
+| CONTAINS ANY OF (cleartext)        | Checks whether the comparison attribute contains any comparison values as a substring.         |
+| NOT CONTAINS ANY OF (cleartext)    | Checks whether the comparison attribute does not contain any comparison values as a substring. |
+
+
+#### Semantic Version Comparators
+
+The following comparators expect the *Comparison attribute* to be a string containing a valid semantic version and the *Comparison value* to be a semantic version or a list of semantic versions.
+
+Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer Semantic Version Specification</a>.
+
+| Comparator             | Description                                                                                                                  |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| IS ONE OF (semver)     | Checks whether the comparison attribute interpreted as a semantic version is equal to any of the comparison values.         |
+| IS NOT ONE OF (semver) | Checks whether the comparison attribute interpreted as a semantic version is not equal to any of the comparison values.     |
+| < (semver)             | Checks whether the comparison attribute interpreted as a semantic version is less than the comparison value.                |
+| <= (semver)            | Checks whether the comparison attribute interpreted as a semantic version is less than or equal to the comparison value.    |
+| \> (semver)            | Checks whether the comparison attribute interpreted as a semantic version is greater than the comparison value.             |
+| \>= (semver)           | Checks whether the comparison attribute interpreted as a semantic version is greater than or equal to the comparison value. |
+
+
+#### Number Comparators
+
+The following comparators expect the *Comparison attribute* and the *Comparison value* to be numbers.
+
+| Comparator         | Description                                                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| = (number)         | Checks whether the comparison attribute interpreted as a decimal number is equal to the comparison value.                 |
+| <&#8203;> (number) | Checks whether the comparison attribute interpreted as a decimal number is not equal to the comparison value.             |
+| < (number)         | Checks whether the comparison attribute interpreted as a decimal number is less than the comparison value.                |
+| <= (number)        | Checks whether the comparison attribute interpreted as a decimal number is less than or equal to the comparison value.    |
+| \> (number)        | Checks whether the comparison attribute interpreted as a decimal number is greater than the comparison value.             |
+| \>= (number)       | Checks whether the comparison attribute interpreted as a decimal number is greater than or equal to the comparison value. |
+
+
+#### Date and Time Comparators
+
+The following comparators expect the *Comparison attribute* to be a date value (a second-based [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) or a platform-specific date object), and the *Comparison value* to be a date.
+
+| Comparator | Description                                                                                                                                                                                    |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BEFORE     | Checks whether the comparison attribute interpreted as a second-based [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time") is less than the comparison value.    |
+| AFTER      | Checks whether the comparison attribute interpreted as a second-based [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time") is greater than the comparison value. |
+
+#### Array Comparators
+
+The following comparators expect the *Comparison attribute* to be an array of strings (or an array of strings serialized to JSON), and the *Comparison value* to be a list of strings.
+
+| Comparator                | Description                                                                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| ARRAY CONTAINS ANY OF     | Checks whether the comparison attribute interpreted as an array of strings contains any of the comparison values.        |
+| ARRAY NOT CONTAINS ANY OF | Checks whether the comparison attribute interpreted as an array of strings does not contain any of the comparison values |
+
+## Examples
+
+### Black Friday Sale
+
+#### Context
+Black Friday is coming and we want to offer a special discount to our users.
+
+#### Goal
+The deals should become available at midnight on Black Friday. We want to make sure that the users can't access the deals before that.
+
+#### Solution
+Let's use the AFTER comparator to check whether the current time is after midnight on Black Friday.
+
+On the Dashboard:
+![Black Friday Sale Example](/assets/targeting/targeting-rule/user-condition/black-friday-example.jpg)
+
+In the code:
+```js
+const userObject = new configcat.User(userId, userEmail, undefined, {
+  // In case this code runs on the customer's device, we should consider getting the current time
+  // from a time server since customers are free to set the system clock on their devices.
+  Date: new Date()
+});
+
+const value = await configCatClient.getValueAsync("enableBlackFridayDeals", false, userObject);
+```
+
+### Confidential CONTAINS and NOT CONTAINS workaround
+
+#### Context
+We use ConfigCat in our Angular frontend application to control the availability of a feature.
+
+#### Goal
+We want to enable this feature for users from certain companies. To do the job, we would need to use the `CONTAINS` or `NOT CONTAINS` comparators.
+
+However, there is no confidential version of these comparators and we are well aware that, for privacy reasons, it's not a good idea to use cleartext comparators for applications running in the browser.
+
+How can we solve this?
+
+#### Solution
+Let's work around the problem by extracting the domain part of the email and pass it as a custom attribute named e.g. `domain` to the ConfigCat SDK.
+
+This way we can define the desired Targeting Rule using confidential comparators only.
+
+On the Dashboard:
+<img src="/docs/assets/targeting/targeting-rule/user-condition/user-condition-example1.jpg" className="zoomable" alt="User Condition Example" />
+
+In the code:
+
+```js
+const userDomain = userEmail.split('@').pop();
+
+const userObject = new configcat.User(userId, userEmail, undefined, {
+  { domain: userDomain }
+});
+
+const value = await configCatClient.getValueAsync(key, defaultValue, userObject);
+```

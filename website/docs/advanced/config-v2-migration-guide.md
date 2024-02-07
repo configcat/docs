@@ -16,7 +16,7 @@ Config V2 is the next generation of ConfigCat. It comes with a new Dashboard, Pu
 
 Config V2 supports all the features of V1, so you can continue using those, but it offers interesting new features as well. However, you won't be able to use the new features with the V1 versions of the Dashboard, Public Management API and SDKs.
 
-Read more about the new features in the [Config V2 Overview](/advanced/config-v2).
+Read more about the new features in the [Config V2 Overview](../config-v2).
 
 ## A few things to consider before migration
 
@@ -42,7 +42,7 @@ It's important to note that the V2 config will be created with the same settings
 
 In your application, upgrade the ConfigCat SDK to the latest version. Old versions of the SDK will not be able to access the new config. Make sure you upgrade every application that uses the migrated V2 config.
 
-Here is a list of the SDKs that support Config V2: [See the supported SDK versions.](/advanced/config-v2-sdk-compatibility)
+Here is a list of the SDKs that support Config V2: [See the supported SDK versions.](../config-v2-sdk-compatibility)
 
 ### Step 3: Update the ConfigCat SDK Key
 

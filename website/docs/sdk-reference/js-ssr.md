@@ -232,12 +232,12 @@ The `details` result contains the following information:
 | --------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------- |
 | `key`                             | `string`                        | The key of the evaluated feature flag or setting.                                           |
 | `value`                           | `boolean` / `string` / `number` | The evaluated value of the feature flag or setting.                                         |
-| `user`                            | `User`                          | The user object used for the evaluation.                                                    |
+| `user`                            | `User`                          | The User Object used for the evaluation.                                                    |
 | `isDefaultValue`                  | `boolean`                       | True when the default value passed to `getValueDetailsAsync()` is returned due to an error. |
 | `errorMessage`                    | `string`                        | In case of an error, this field contains the error message.                                 |
 | `errorException`                  | `any`                           | In case of an error, this field contains the related exception object (if any).             |
-| `matchedTargetingRule`            | `ITargetingRule`                | The targeting rule (if any) that matched during the evaluation and was used to return the evaluated value. |
-| `matchedPercentageOption`         | `IPercentageOption`             | The percentage option (if any) that was used to select the evaluated value.                 |
+| `matchedTargetingRule`            | `ITargetingRule`                | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
+| `matchedPercentageOption`         | `IPercentageOption`             | The Percentage Option (if any) that was used to select the evaluated value.                 |
 | `fetchTime`                       | `Date`                          | The last download time (UTC) of the current config.                                         |
 
 ## User Object
@@ -257,9 +257,9 @@ let userObject = new configcat.User('john@example.com');
 | Parameters   | Description                                                                                                                     |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                |
-| `email`      | Optional parameter for easier targeting rule definitions.                                                                       |
-| `country`    | Optional parameter for easier targeting rule definitions.                                                                       |
-| `custom`     | Optional dictionary for custom attributes of a user for advanced targeting rule definitions. E.g. User role, Subscription type. |
+| `email`      | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `country`    | Optional parameter for easier Targeting Rule definitions.                                                                       |
+| `custom`     | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. E.g. User role, Subscription type. |
 
 For advanced targeting:
 
@@ -297,29 +297,29 @@ but some of them also support other types of values. It depends on the comparato
 
 **SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
 * accept `string` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Number-based comparators** (=, &lt;, &gt;=, etc.)
 * accept `number` values,
 * accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Date time-based comparators** (BEFORE / AFTER)
 * accept `Date` values, which are automatically converted to a second-based Unix timestamp,
 * accept `number` values representing a second-based Unix timestamp,
 * accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
 * accept arrays of `string`,
 * accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
-It's possible to set a default user object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
+It's possible to set a default User Object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
 
-You can set the default user object either on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```js
 const configCatClient = configcat.getClient(
@@ -337,7 +337,7 @@ const configCatClient = configcat.getClient(
 configCatClient.setDefaultUser(new configcat.User('john@example.com'));
 ```
 
-Whenever the evaluation methods like `getValueAsync()`, `getValueDetailsAsync()`, etc. are called without an explicit user object parameter, the SDK will automatically use the default user as a user object.
+Whenever the evaluation methods like `getValueAsync()`, `getValueDetailsAsync()`, etc. are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```js
 const user = new configcat.User('john@example.com');
@@ -347,7 +347,7 @@ configCatClient.setDefaultUser(user);
 const value = await configCatClient.getValueAsync('keyOfMyFeatureFlag', false);
 ```
 
-When a user object parameter is passed to the evaluation methods, it takes precedence over the default user.
+When a `user` parameter is passed to the evaluation methods, it takes precedence over the default user.
 
 ```js
 const user = new configcat.User('john@example.com');
@@ -587,7 +587,7 @@ settingValues.forEach((i) =>
   console.log(i.settingKey + ' -> ' + i.settingValue),
 );
 
-// invoke with user object
+// invoke with User Object
 const userObject = new configcat.User('john@example.com');
 
 settingValues = await configCatClient.getAllValuesAsync(userObject);
@@ -606,7 +606,7 @@ const configCatClient = configcat.getClient('#YOUR-SDK-KEY#');
 let settingValues = await configCatClient.getAllValueDetailsAsync();
 settingValues.forEach((details) => console.log(details));
 
-// invoke with user object
+// invoke with User Object
 const userObject = new configcat.User('john@example.com');
 
 settingValues = await configCatClient.getAllValueDetailsAsync(userObject);
@@ -712,12 +712,12 @@ The JavaScript (SSR) SDK supports *shared caching*. You can read more about this
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/docs/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, targeting rules, % rules) can be visible to your users.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/docs/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the _ConfigCat SDK_ that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
-Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the targeting rules of those feature flags that are used in the frontend/mobile SDKs.
+Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
 
 ## Browser compatibility
 
