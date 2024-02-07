@@ -31,6 +31,7 @@ ConfigCat will replace the following variables in the request body:
 | **##ChangeNotes##**        | The **Mandatory notes** added to the actual changeset.                                            |
 | **##ChangeDetails##**      | Details of the change in JSON format including setting name, old, new values and Targeting Rules. |
 | **##ChangeDetailsTeams##** | Details of the change in MS Teams format.                                                         |
+| **##ChangeDetailsSlack##** | Details of the change in Slack message format.                                                    |
 
 The structure of the JSON array injected into the **##ChangeDetails##** looks like the following:
 

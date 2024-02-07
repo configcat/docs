@@ -9,7 +9,6 @@ module.exports = {
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.
   plugins: [
-    require.resolve('docusaurus-plugin-image-zoom'),
     [
       '@docusaurus/plugin-google-tag-manager',
       {
@@ -17,6 +16,7 @@ module.exports = {
       },
     ],
     'docusaurus-plugin-sass',
+    'plugin-image-zoom',
     [
       '@docusaurus/plugin-client-redirects',
       {
@@ -247,12 +247,10 @@ module.exports = {
       searchParameters: {},
       externalUrlRegex: 'configcat\\.com/blog',
     },
-    zoom: {
-      selector: '.markdown img.zoomable',
-      background: {
-        light: 'rgb(255, 255, 255)',
-        dark: 'rgb(50, 50, 50)',
-      },
+    imageZoom: {
+      options: {
+        background: 'var(--ifm-background-color)',
+      }
     },
   },
   presets: [
@@ -262,7 +260,6 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           sidebarCollapsible: true,
-          // Please change this to your repo.
           editUrl: 'https://github.com/configcat/docs/tree/master/website',
           routeBasePath: '/',
           lastVersion: 'V1',
