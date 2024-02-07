@@ -165,7 +165,7 @@ that matches the type of the feature flag or setting you are evaluating. Please 
 | Setting Kind   | Type parameter `T` |
 | -------------- |--------------------|
 | On/Off Toggle  | `bool`             |
-| Text           | `string`           |
+| Text           | `String`           |
 | Whole Number   | `int`              |
 | Decimal Number | `double`           |
 
