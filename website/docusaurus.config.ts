@@ -1,5 +1,6 @@
 import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
+import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'ConfigCat Docs',
@@ -13,6 +14,10 @@ const config: Config = {
   favicon: 'img/favicon.png',
   organizationName: 'configcat', // Usually your GitHub org/user name.
   projectName: 'configcat', // Usually your repo name.
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en'],
+  },
   plugins: [
     [
       '@docusaurus/plugin-google-tag-manager',
@@ -247,13 +252,13 @@ const config: Config = {
         dark: 'var(--ifm-background-color)'
       },
     }
-  },
+  } satisfies Preset.ThemeConfig,
   presets: [
     [
-      '@docusaurus/preset-classic',
+      'classic',
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: './sidebars.ts',
           sidebarCollapsible: true,
           editUrl: 'https://github.com/configcat/docs/tree/master/website',
           routeBasePath: '/',
@@ -270,7 +275,7 @@ const config: Config = {
           },
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.scss'),
+          customCss: './src/css/custom.scss',
         },
         blog: {
           archiveBasePath: null,
@@ -278,7 +283,7 @@ const config: Config = {
         sitemap: {
           ignorePatterns: ['/docs/V2/**'],
         }
-      },
+      } satisfies Preset.Options,
     ],
   ],
   scripts: [],
