@@ -123,10 +123,10 @@ Evaluation is based on <a target="_blank" href="https://semver.org/">the SemVer 
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | IS ONE OF (Semver)     | True if _Comparison attribute_ is listed in the _Comparison value_. _Comparison value_ should be a comma-separated list of semantic versions. |
 | IS NOT ONE OF (Semver) | True if the _Comparison attribute_ is not listed in the _Comparison value_.                                                                   |
-| < (Semver)             | True if _Comparison attribute_ is a smaller version number than _Comparison value_.                                                           |
-| <= (Semver)            | True if _Comparison attribute_ is smaller than or equals _Comparison value_.                                                                  |
-| \> (Semver)            | True if _Comparison attribute_ is a larger version number than _Comparison value_.                                                            |
-| \>= (Semver)           | True if _Comparison attribute_ is larger than or equals _Comparison value_.                                                                   |
+| &lt; (Semver)          | True if _Comparison attribute_ is a smaller version number than _Comparison value_.                                                           |
+| &lt;= (Semver)         | True if _Comparison attribute_ is smaller than or equals _Comparison value_.                                                                  |
+| &gt; (Semver)          | True if _Comparison attribute_ is a larger version number than _Comparison value_.                                                            |
+| &gt;= (Semver)         | True if _Comparison attribute_ is larger than or equals _Comparison value_.                                                                   |
 
 All semantic version comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid <a target="_blank" href="https://semver.org/">semantic version</a>.
 
@@ -137,11 +137,11 @@ The following comparators assume that _Comparison attribute_ and _Comparison val
 | Comparator         | Description                                                                 |
 | ------------------ | --------------------------------------------------------------------------- |
 | = (Number)         | True if _Comparison attribute_ equals _Comparison value_.                   |
-| <&#8203;> (Number) | True if _Comparison attribute_ does not equal _Comparison value_.           |
-| < (Number)         | True if _Comparison attribute_ is less than _Comparison value_.             |
-| <= (Number)        | True if _Comparison attribute_ is less than or equals _Comparison value_.   |
-| \> (Number)        | True if _Comparison attribute_ is a larger than _Comparison value_.         |
-| \>= (Number)       | True if _Comparison attribute_ is larger than or equals _Comparison value_. |
+| &lt;&gt; (Number)  | True if _Comparison attribute_ does not equal _Comparison value_.           |
+| &lt; (Number)      | True if _Comparison attribute_ is less than _Comparison value_.             |
+| &lt;= (Number)     | True if _Comparison attribute_ is less than or equals _Comparison value_.   |
+| &gt; (Number)      | True if _Comparison attribute_ is a larger than _Comparison value_.         |
+| &gt;= (Number)     | True if _Comparison attribute_ is larger than or equals _Comparison value_. |
 
 All number comparators return `false` if either _Comparison attribute_ or _Comparison value_ is not a valid number.
 
