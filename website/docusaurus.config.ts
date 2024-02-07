@@ -1,4 +1,7 @@
-module.exports = {
+import type { Config } from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+
+const config: Config = {
   title: 'ConfigCat Docs',
   tagline: 'Learn more on how to use ConfigCat Feature Flags.',
   url: 'https://configcat.com',
@@ -217,8 +220,8 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} ConfigCat.`,
     },
     prism: {
-      theme: require('prism-react-renderer/themes/github'),
-      darkTheme: require('prism-react-renderer/themes/palenight'),
+      theme: prismThemes.github,
+      darkTheme: prismThemes.palenight,
       additionalLanguages: [
         'hcl',
         'csharp',
@@ -291,3 +294,5 @@ module.exports = {
   scripts: [],
   stylesheets: [],
 };
+
+export default config;
