@@ -16,7 +16,7 @@ module.exports = {
       },
     ],
     'docusaurus-plugin-sass',
-    'plugin-image-zoom',
+    'docusaurus-plugin-image-zoom',
     [
       '@docusaurus/plugin-client-redirects',
       {
@@ -247,11 +247,13 @@ module.exports = {
       searchParameters: {},
       externalUrlRegex: 'configcat\\.com/blog',
     },
-    imageZoom: {
-      options: {
-        background: 'var(--ifm-background-color)',
-      }
-    },
+    zoom: {
+      selector: '.markdown img',
+      background: {
+        light: 'var(--ifm-background-color)',
+        dark: 'var(--ifm-background-color)'
+      },
+    }
   },
   presets: [
     [
