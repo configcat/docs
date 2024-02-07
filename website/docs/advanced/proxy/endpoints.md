@@ -1080,7 +1080,7 @@ Notifies the Proxy that the SDK with the given [SDK identifier](/advanced/proxy/
 
 You can set up webhooks to invoke the Proxy on the <a target="blank" href="https://app.configcat.com/product/webhooks">Webhooks page</a> of the ConfigCat Dashboard.
 
-<img className="bordered zoomable" src="/docs/assets/proxy/webhook.png" alt="Webhook" />
+<img  src="/docs/assets/proxy/webhook.png" alt="Webhook" />
 
 ### Available Options
 

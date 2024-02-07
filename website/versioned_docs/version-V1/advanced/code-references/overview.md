@@ -48,11 +48,11 @@ To get the ID of a Config, follow the steps below:
 
 1. Go to your <a target="_blank" href="https://app.configcat.com">ConfigCat Dashboard</a>, select the desired Config, and click the code references icon on one of your feature flags.
 
-<img className="bordered zoomable" src="/docs/assets/cli/scan/code_ref.png" alt="ConfigCat code references button" />
+<img  src="/docs/assets/cli/scan/code_ref.png" alt="ConfigCat code references button" />
 
 2. Copy the Config ID from the highlighted box.
 
-<img className="bordered zoomable" src="/docs/assets/cli/scan/config_id.png" alt="ConfigCat Config ID"  />
+<img  src="/docs/assets/cli/scan/config_id.png" alt="ConfigCat Config ID"  />
 
 ## How Scanning Works
 

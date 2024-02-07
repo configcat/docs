@@ -25,7 +25,7 @@ The Proxy provides the following:
 
 The following diagram shows the high level architecture of the Proxy.
 
-<img className="bordered zoomable" src="/docs/assets/proxy/proxy_arch.png" alt="High level Proxy architecture" />
+<img  src="/docs/assets/proxy/proxy_arch.png" alt="High level Proxy architecture" />
 
 ### How It Works
 The Proxy wraps one or more SDK instances for handling feature flag evaluation requests. It also serves the related *config JSON* files that can be consumed by other ConfigCat SDKs running in your applications. 
@@ -36,7 +36,7 @@ Within the Proxy, the underlying SDK instances can run in the following modes:
 
 With the combination of the above modes, you can construct a cluster of proxies where only one node is responsible for the communication with ConfigCat, and all the other nodes are working from a central cache.
 
-<img className="bordered zoomable" src="/docs/assets/proxy/load_balanced.png" alt="Load balanced Proxy architecture" />
+<img  src="/docs/assets/proxy/load_balanced.png" alt="Load balanced Proxy architecture" />
 
 ### Communication
 
@@ -915,7 +915,7 @@ Currently, the only available option is <a target="blank" href="https://redis.io
 :::info
 The ConfigCat Proxy supports *shared caching*, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
 
-<img className="bordered zoomable" src="/docs/assets/proxy/shared_cache.png" alt="Shared cache architecture" />
+<img  src="/docs/assets/proxy/shared_cache.png" alt="Shared cache architecture" />
 
 :::
 
