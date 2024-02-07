@@ -32,18 +32,6 @@ const config: Config = {
           TODO: before turning V2 as latest. We have to check all page urls that are not existing in V2 anymore and create some redirects for them (e.g. commented section below - /targeting/targeting-overview).
           Also, we can remove the v2 (/V2/advanced/config-v2, /V2/advanced/config-v2-migration-guide, /V2/advanced/config-v2-sdk-compatibility) redirects
           */
-          {
-            to: '/V2/advanced/config-v2',
-            from: '/advanced/config-v2'
-          },
-          {
-            to: '/V2/advanced/config-v2-migration-guide',
-            from: '/advanced/config-v2-migration-guide'
-          },
-          {
-            to: '/V2/advanced/config-v2-sdk-compatibility',
-            from: '/advanced/config-v2-sdk-compatibility'
-          }
           /*
           {
             to: '/targeting/targeting-overview',
