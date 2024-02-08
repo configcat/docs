@@ -18,5 +18,6 @@
         "ConfigCat",
         "authorTitle"
     ],
-    "editor.inlineSuggest.showToolbar": "onHover"
+    "editor.inlineSuggest.showToolbar": "onHover",
+    "terminal.integrated.cwd": "website"
 }

@@ -9,7 +9,8 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "configure-husky": "cd .. && npx husky install"
+    "configure-husky": "cd .. && npx husky install",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@docusaurus/core": "^3.1.1",
@@ -22,7 +23,7 @@
     "docusaurus-plugin-sass": "^0.2.5",
     "file-loader": "^6.2.0",
     "docusaurus-plugin-image-zoom": "2.0.0",
-    "prism-react-renderer": "^2.1.0",
+    "prism-react-renderer": "^2.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "url-loader": "^4.1.1"
@@ -44,7 +45,9 @@
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.7",
     "@docusaurus/module-type-aliases": "3.1.1",
-    "@docusaurus/types": "3.1.1"
+    "@docusaurus/types": "3.1.1",
+    "@docusaurus/tsconfig": "3.1.1",
+    "typescript": "~5.2.2"
   },
   "husky": {
     "hooks": {
