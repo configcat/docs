@@ -164,10 +164,10 @@ that matches the type of the feature flag or setting you are evaluating. Please 
 
 | Setting Kind   | Type parameter `T` |
 | -------------- |--------------------|
-| On/Off Toggle  | `bool`             |
-| Text           | `String`           |
-| Whole Number   | `int`              |
-| Decimal Number | `double`           |
+| On/Off Toggle  | `bool`/`bool?`     |
+| Text           | `String`/`String?` |
+| Whole Number   | `int`/`int?`       |
+| Decimal Number | `double`/`double?` |
 
 In addition to the types mentioned above, you also have the option to provide `dynamic` for the type parameter regardless of the setting kind.
 
