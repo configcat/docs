@@ -18,6 +18,7 @@
   --ifm-color-primary-lighter: #f9a757;
   --ifm-color-primary-lightest: #fabd81;
   --ifm-code-font-size: 95%;
+  --ifm-background-color: #fff;
 
   --docusaurus-highlighted-code-line-bg: rgb(235, 235, 235);
 }
@@ -51,12 +52,7 @@
   height: 100%;
 }
 
-.bordered {
-  border: 1px solid rgb(224, 224, 224);
-}
-
 .saml-tutorial-img {
-  border: 1px solid rgb(224, 224, 224);
   margin-bottom: 1rem;
 }
 
