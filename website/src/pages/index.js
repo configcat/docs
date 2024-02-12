@@ -30,7 +30,7 @@ const features = [
       { url: 'advanced/targeting', title: 'Targeting' },
       { url: 'advanced/segments', title: 'Segmentation & Segments' },
       { url: 'advanced/user-object', title: 'The User Object' },
-      { url: 'advanced/public-api', title: 'Public Management API' },
+      { url: 'api/reference/configcat-public-management-api', title: 'Public Management API' },
       { url: 'advanced/caching', title: 'Polling modes & Caching' },
       {
         url: 'advanced/team-management/team-management-basics',
