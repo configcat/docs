@@ -82,6 +82,7 @@ const config: Config = {
                   outputDir: 'api/reference',
                   sidebarOptions: {
                       groupPathsBy: 'tag',
+                      categoryLinkSource: 'tag'
                   },
               },
           },
