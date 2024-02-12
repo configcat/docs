@@ -267,6 +267,7 @@ const config: Config = {
             current: {
               label: 'V2 (beta)',
               path: '/V2',
+              noIndex: true
             },
             "V1": {
               label: 'V1',
