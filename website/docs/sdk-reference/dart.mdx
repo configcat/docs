@@ -169,7 +169,7 @@ that matches the type of the feature flag or setting you are evaluating. Please 
 | Whole Number   | `int`/`int?`       |
 | Decimal Number | `double`/`double?` |
 
-In addition to the types mentioned above, you also have the option to provide `dynamic` for the type parameter regardless of the setting kind.
+In addition to the types mentioned above, you also have the option to provide `object`, `object?` or `dynamic for the type parameter regardless of the setting kind.
 
 It's important to note that providing any other type for the type parameter will result in an `ArgumentError`.
 
@@ -213,16 +213,16 @@ that matches the type of the feature flag or setting you are evaluating. Please 
 
 The `details` result contains the following information:
 
-| Field                       | Type                                 | Description                                                                                 |
-|-----------------------------|--------------------------------------|---------------------------------------------------------------------------------------------|
-| `value`                     | `bool` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                         |
-| `key`                       | `String`                             | The key of the evaluated feature flag or setting.                                           |
-| `isDefaultValue`            | `bool`                               | True when the default value passed to getValueDetails() is returned due to an error.        |
-| `error`                     | `String?`                            | In case of an error, this field contains the error message.                                 |
-| `user`                      | `ConfigCatUser?`                     | The User Object that was used for evaluation.                                               |
-| `matchedPercentageOption`   | `PercentageOption?`                  | If the evaluation was based on a Percentage Option, this field contains that specific rule. |
-| `matchedTargetingRule`      | `TargetingRule?`                     | If the evaluation was based on a Targeting Rule, this field contains that specific rule.    |
-| `fetchTime`                 | `DateTime`                           | The last download time of the current config.                                               |
+| Field                       | Type                                 | Description                                                                                                |
+|-----------------------------|--------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `value`                     | `bool` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                                        |
+| `key`                       | `String`                             | The key of the evaluated feature flag or setting.                                                          |
+| `isDefaultValue`            | `bool`                               | True when the default value passed to `getValueDetails()` is returned due to an error.                     |
+| `error`                     | `String?`                            | In case of an error, this field contains the error message.                                                |
+| `user`                      | `ConfigCatUser?`                     | The User Object that was used for evaluation.                                                              |
+| `matchedPercentageOption`   | `PercentageOption?`                  | The Percentage Option (if any) that was used to select the evaluated value.                                |
+| `matchedTargetingRule`      | `TargetingRule?`                     | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
+| `fetchTime`                 | `DateTime`                           | The last download time of the current config.                                                              |
 
 ## User Object
 
@@ -294,7 +294,7 @@ All comparators support `String` values as User Object attribute (in some cases 
 * all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
-* accept arrays and list of `String`,
+* accept lists or sets of `String`,
 * accept `String` values containing a valid JSON string which can be deserialized to an array of `String`,
 * all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
