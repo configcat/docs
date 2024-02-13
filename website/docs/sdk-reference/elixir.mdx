@@ -29,7 +29,7 @@ export const ElixirSchema = require('@site/src/schema-markup/sdk-reference/elixi
 ```elixir
 def deps do
   [
-    {:configcat, "~> 3.0.0"}
+    {:configcat, "~> 4.0.0"}
   ]
 end
 ```
@@ -123,16 +123,16 @@ details = ConfigCat.get_value_details(
 
 The `details` result contains the following information:
 
-| Field                                | Description                                                                               |
-| ------------------------------------ | ----------------------------------------------------------------------------------------- |
-| `value`                              | The evaluated value of the feature flag or setting.                                       |
-| `key`                                | The key of the evaluated feature flag or setting.                                         |
-| `default_value?`                     | True when the default value passed to get_value_details() is returned due to an error.    |
-| `error`                              | In case of an error, this field contains the error message.                               |
-| `user`                               | The User Object that was used for evaluation.                                             |
-| `matched_evaluation_percentage_rule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
-| `matched_evaluation_rule`            | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
-| `fetch_time`                         | The last download time (UTC DateTime) of the current config.                              |
+| Field                                | Description                                                                                                |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| `value`                              | The evaluated value of the feature flag or setting.                                                        |
+| `key`                                | The key of the evaluated feature flag or setting.                                                          |
+| `default_value?`                     | True when the default value passed to get_value_details() is returned due to an error.                     |
+| `error`                              | In case of an error, this field contains the error message.                                                |
+| `user`                               | The User Object that was used for evaluation.                                                              |
+| `matched_targeting_rule`             | The targeting rule (if any) that matched during the evaluation and was used to return the evaluated value. |
+| `matched_percentage_option`          | The percentage option (if any) that was used to select the evaluated value.                                |
+| `fetch_time`                         | The last download time (UTC DateTime) of the current config.                                               |
 
 ## User Object
 
@@ -143,17 +143,58 @@ user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#")
 user_object = ConfigCat.User.new("john@example.com")
 ```
 
-| Parameters   | Description                                                                                                                                                          |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
-| `email`      | Optional parameter for easier Targeting Rule definitions.                                                                                                            |
-| `country`    | Optional parameter for easier Targeting Rule definitions.                                                                                                            |
-| `custom`     | Optional `Map of strings` representing the custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type.|
+| Parameters   | Description                                                                                                                |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `String` value, even an email address.           |
+| `email`      | Optional parameter for easier Targeting Rule definitions.                                                                  |
+| `country`    | Optional parameter for easier Targeting Rule definitions.                                                                  |
+| `custom`     | Optional `Map` for custom attributes of a user for advanced Targeting Rule definitions. E.g. User role, Subscription type. |
 
 ```elixir
 user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#", email: "john@example", country: "United Kingdom",
                 custom: %{SubscriptionType: "Pro", UserRole: "Admin"})
 ```
+
+The `custom` dictionary also allows attribute values other than `String` values:
+
+```elixir
+user_object = ConfigCat.User.new(
+    "#UNIQUE-USER-IDENTIFIER#",
+    custom: %{
+        "Rating" => 4.5,
+        "RegisteredAt" => ~U[2023-09-19T11:01:35.999Z],
+        "Roles" => [ "Role1", "Role2" ]
+    }
+)
+```
+
+### User Object Attribute Types
+
+All comparators support `String` values as User Object attribute (in some cases they need to be provided in a specific format though, see below), but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
+
+**Text-based comparators** (EQUALS, IS_ONE_OF, etc.)
+* accept `String` values,
+* all other values are automatically converted to `String` (a warning will be logged but evaluation will continue as normal).
+
+**SemVer-based comparators** (IS_ONE_OF_SEMVER, LESS_THAN_SEMVER, GREATER_THAN_SEMVER, etc.)
+* accept `String` values containing a properly formatted, valid semver value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
+**Number-based comparators** (EQUALS_NUMBER, LESS_THAN_NUMBER, GREATER_THAN_OR_EQUAL_NUMBER, etc.)
+* accept `Float` values and all other numeric values which can safely be converted to `Float`,
+* accept `String` values containing a properly formatted, valid `Float` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+  
+**Date time-based comparators** (BEFORE_DATETIME / AFTER_DATETIME)
+* accept `DateTime` and `NaiveDateTime` values, which are automatically converted to a second-based Unix timestamp (`NaiveDateTime` values are considered to be in UTC),
+* accept `Float` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `Float`,
+* accept `String` values containing a properly formatted, valid `Float` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+  
+**String array-based comparators** (ARRAY_CONTAINS_ANY_OF / ARRAY_NOT_CONTAINS_ANY_OF)
+* accept arrays of `String`,
+* accept `String` values containing a valid JSON string which can be deserialized to an array of `String`,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
@@ -494,72 +535,152 @@ It allows the usage of all features that are available on the ConfigCat Dashboar
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config JSON is based on your [Data Governance](/advanced/data-governance) settings:
+A convenient way to get the config JSON for a specific SDK Key is to install the [ConfigCat CLI](https://github.com/configcat/cli) tool
+and execute the following command:
+
+```bash
+configcat config-json get -f v6 -p {YOUR-SDK-KEY} > config.json
+```
+
+(Depending on your [Data Governance](/advanced/data-governance) settings, you may need to add the `--eu` switch.)
+
+Alternatively, you can download the config JSON manually, based on your [Data Governance](/advanced/data-governance) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 
 ```json
 {
-  "f": {
-    // list of feature flags & settings
-    "isFeatureEnabled": {
-      // key of a particular flag
-      "v": false, // default value, served when no rules are defined
-      "i": "430bded3", // variation id (for analytical purposes)
-      "t": 0, // feature flag's type, possible values:
-      // 0 -> BOOLEAN
-      // 1 -> STRING
-      // 2 -> INT
-      // 3 -> DOUBLE
-      "p": [
-        // list of percentage rules
+  "p": {
+    // hash salt, required only when confidential text comparator(s) are used
+    "s": "80xCU/SlDz1lCiWFaxIBjyJeJecWjq46T4eu6GtozkM="
+  },
+  "s": [ // array of segments
+    {
+      "n": "Beta Users", // segment name
+      "r": [ // array of User Conditions (there is a logical AND relation between the elements)
         {
-          "o": 0, // rule's order
-          "v": true, // value served when the rule is selected during evaluation
-          "p": 10, // % value
-          "i": "bcfb84a7" // variation id (for analytical purposes)
-        },
-        {
-          "o": 1, // rule's order
-          "v": false, // value served when the rule is selected during evaluation
-          "p": 90, // % value
-          "i": "bddac6ae" // variation id (for analytical purposes)
-        }
-      ],
-      "r": [
-        // list of Targeting Rules
-        {
-          "o": 0, // rule's order
-          "a": "Identifier", // comparison attribute
-          "t": 2, // comparator, possible values:
-          // 0  -> 'IS ONE OF',
-          // 1  -> 'IS NOT ONE OF',
-          // 2  -> 'CONTAINS',
-          // 3  -> 'DOES NOT CONTAIN',
-          // 4  -> 'IS ONE OF (SemVer)',
-          // 5  -> 'IS NOT ONE OF (SemVer)',
-          // 6  -> '< (SemVer)',
-          // 7  -> '<= (SemVer)',
-          // 8  -> '> (SemVer)',
-          // 9  -> '>= (SemVer)',
-          // 10 -> '= (Number)',
-          // 11 -> '<> (Number)',
-          // 12 -> '< (Number)',
-          // 13 -> '<= (Number)',
-          // 14 -> '> (Number)',
-          // 15 -> '>= (Number)',
-          // 16 -> 'IS ONE OF (Hashed)',
-          // 17 -> 'IS NOT ONE OF (Hashed)'
-          "c": "@example.com", // comparison value
-          "v": true, // value served when the rule is selected during evaluation
-          "i": "bcfb84a7" // variation id (for analytical purposes)
+          "a": "Email", // comparison attribute
+          "c": 0, // comparator (see below)
+          "l": [ // comparison value (see below)
+            "john@example.com", "jane@example.com"
+          ]
         }
       ]
+    }
+  ],
+  "f": { // key-value map of feature flags & settings
+    "isFeatureEnabled": { // key of a particular flag / setting
+      "t": 0, // setting type, possible values:
+              // 0 -> on/off setting (feature flag)
+              // 1 -> text setting
+              // 2 -> whole number setting
+              // 3 -> decimal number setting
+      "r": [ // array of Targeting Rules (there is a logical OR relation between the elements)
+        {
+          "c": [ // array of conditions (there is a logical AND relation between the elements)
+            {
+              "u": { // User Condition
+                "a": "Email", // comparison attribute
+                "c": 2, // comparator, possible values and required comparison value types:
+                        // 0  -> IS ONE OF (cleartext) + string array comparison value ("l")
+                        // 1  -> IS NOT ONE OF (cleartext) + string array comparison value ("l")
+                        // 2  -> CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 3  -> NOT CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 4  -> IS ONE OF (semver) + semver string array comparison value ("l")
+                        // 5  -> IS NOT ONE OF (semver) + semver string array comparison value ("l")
+                        // 6  -> < (semver) + semver string comparison value ("s")
+                        // 7  -> <= (semver + semver string comparison value ("s")
+                        // 8  -> > (semver) + semver string comparison value ("s")
+                        // 9  -> >= (semver + semver string comparison value ("s")
+                        // 10 -> = (number) + number comparison value ("d")
+                        // 11 -> <> (number + number comparison value ("d")
+                        // 12 -> < (number) + number comparison value ("d")
+                        // 13 -> <= (number + number comparison value ("d")
+                        // 14 -> > (number) + number comparison value ("d")
+                        // 15 -> >= (number) + number comparison value ("d")
+                        // 16 -> IS ONE OF (hashed) + string array comparison value ("l")
+                        // 17 -> IS NOT ONE OF (hashed) + string array comparison value ("l")
+                        // 18 -> BEFORE (UTC datetime) + second-based Unix timestamp number comparison value ("d")
+                        // 19 -> AFTER (UTC datetime) + second-based Unix timestamp number comparison value ("d")
+                        // 20 -> EQUALS (hashed) + string comparison value ("s")
+                        // 21 -> NOT EQUALS (hashed) + string comparison value ("s")
+                        // 22 -> STARTS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 23 -> NOT STARTS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 24 -> ENDS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 25 -> NOT ENDS WITH ANY OF (hashed) + string array comparison value ("l")
+                        // 26 -> ARRAY CONTAINS ANY OF (hashed) + string array comparison value ("l")
+                        // 27 -> ARRAY NOT CONTAINS ANY OF (hashed) + string array comparison value ("l")
+                        // 28 -> EQUALS (cleartext) + string comparison value ("s")
+                        // 29 -> NOT EQUALS (cleartext) + string comparison value ("s")
+                        // 30 -> STARTS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 31 -> NOT STARTS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 32 -> ENDS WITH ANY OF (cleartext) + string array comparison value ("l")
+                        // 33 -> NOT ENDS WITH ANY OF (cleartext + string array comparison value ("l")
+                        // 34 -> ARRAY CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                        // 35 -> ARRAY NOT CONTAINS ANY OF (cleartext) + string array comparison value ("l")
+                "l": [ // comparison value - depending on the comparator, another type of value may need
+                       // to be specified (see above):
+                       // "s": string
+                       // "d": number
+                  "@example.com"
+                ]
+              }
+            },
+            {
+              "p": { // Flag Condition (Prerequisite)
+                "f": "mainIntFlag", // key of prerequisite flag
+                "c": 0, // comparator, possible values: 0 -> EQUALS, 1 -> NOT EQUALS
+                "v": { // comparison value (value's type must match the prerequisite flag's type)
+                  "i": 42
+                }
+              }
+            },
+            {
+              "s": { // Segment Condition
+                "s": 0, // segment index, a valid index into the top-level segment array ("s")
+                "c": 1 // comparator, possible values: 0 -> IS IN SEGMENT, 1 -> IS NOT IN SEGMENT
+              }
+            }
+          ],
+          "s": { // alternatively, an array of Percentage Options ("p", see below) can also be specified
+            "v": { // the value served when the rule is selected during evaluation
+              "b": true
+            },
+            "i": "bcfb84a7"
+          }
+        }
+      ],
+      "p": [ // array of Percentage Options
+        {
+          "p": 10, // % value
+          "v": { // the value served when the Percentage Option is selected during evaluation
+            "b": true
+          },
+          "i": "bcfb84a7"
+        },
+        {
+          "p": 90,
+          "v": {
+            "b": false
+          },
+          "i": "bddac6ae"
+        }
+      ],
+      "v": { // fallback value, served when none of the Targeting Rules match,
+             // no Percentage Options are defined or evaluation of these is not possible
+        "b": false // depending on the setting type, another type of value may need to be specified:
+                   // text setting -> "s": string
+                   // whole number setting -> "i": number
+                   // decimal number setting -> "d": number
+      },
+      "i": "430bded3" // variation id (for analytical purposes)
     }
   }
 }
 ```
+
+For a more comprehensive specification of the config JSON v6 format, you may refer to [this JSON schema document](https://github.com/configcat/config-json/blob/main/V6/config.schema.json).
 
 ### Map
 
@@ -587,10 +708,11 @@ In the _ConfigCat SDK_, we use the default Elixir's [Logger](https://hexdocs.pm/
 Debug level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-[debug]  Evaluating get_value('isPOCFeatureEnabled').
-User object: %ConfigCat.User{country: nil, custom: %{}, email: "configcat@example.com", identifier: "435170f4-8a8b-4b67-a723-505ac7cdea92"}
-Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@something.com] => no match
-Evaluating rule: [Email:configcat@example.com] [CONTAINS] [@example.com] => match, returning: true
+[debug] [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
+  Evaluating targeting rules and applying the first match if any:
+  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'false' => no match
+  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'true' => MATCH, applying rule
+  Returning 'true'.
 ```
 
 The following example shows how to set the _Log Level_ on the internal _ConfigCat_ logger.
