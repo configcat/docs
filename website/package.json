@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
+    "start": "npm run gen-api-docs && docusaurus start",
     "build": "npm run gen-api-docs && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
     "gen-api-docs": "docusaurus gen-api-docs all && node ./api/cleanup-api-docs.js",
     "configure-husky": "cd .. && npx husky install",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "cf": "npm run gen-api-docs && docusaurus build --out-dir build/docs && echo '/ /docs' > build/_redirects"
   },
   "dependencies": {
     "@docusaurus/core": "^3.1.1",
