@@ -121,58 +121,14 @@ const config: Config = {
           position: 'left',
         },
         {
-          type: 'dropdown',
-          label: 'Resources',
+          href: 'https://configcat.com/blog/',
+          label: 'Blog',
           position: 'left',
-          items: [
-            {
-              href: 'https://configcat.com/',
-              label: 'configcat.com',
-            },
-            {
-              href: 'https://configcat.com/pricing/',
-              label: 'Pricing',
-            },
-            {
-              href: 'https://configcat.com/architecture/',
-              label: 'Architecture',
-            },       
-            {
-              href: 'https://status.configcat.com',
-              label: 'Service Status',
-            }, 
-          ]
         },
         {
-          type: 'dropdown',
-          label: 'Community',
+          href: 'https://configcat.com/',
+          label: 'configcat.com',
           position: 'left',
-          items: [
-            {
-              href: 'https://configcat.com/blog/',
-              label: 'Blog',
-            },
-            {
-              label: 'Slack',
-              href: 'https://configcat.com/slack/',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/configcat',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/configcat',
-            },
-            {
-              label: 'Facebook',
-              href: 'https://www.facebook.com/configcat',
-            },
-            {
-              label: 'LinkedIn',
-              href: 'https://www.linkedin.com/company/configcat/',
-            },
-          ]
         },
         {
           type: 'docsVersionDropdown',
@@ -322,7 +278,7 @@ const config: Config = {
       externalUrlRegex: 'configcat\\.com/blog',
     },
     zoom: {
-      selector: '.markdown img',
+      selector: '.markdown img:not([src^="http"])',
       background: {
         light: 'var(--ifm-background-color)',
         dark: 'var(--ifm-background-color)'
