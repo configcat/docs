@@ -104,8 +104,9 @@ const config: Config = {
       },
       items: [
         {
-          to: 'getting-started',
+          type: 'docSidebar',
           label: 'Docs',
+          sidebarId: 'docs',
           position: 'left',
         },
         {
