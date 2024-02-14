@@ -97,30 +97,21 @@ const config: Config = {
   themeConfig: {
     image: '/img/docs-cover.png',
     navbar: {
-      title: 'ConfigCat Docs',
+      title: 'ConfigCat',
       logo: {
         alt: 'ConfigCat',
         src: 'img/cat.svg',
       },
       items: [
         {
-          href: 'https://configcat.com/',
-          label: 'configcat.com',
+          to: 'getting-started',
+          label: 'Docs',
           position: 'left',
         },
         {
-          href: 'https://configcat.com/pricing/',
-          label: 'Pricing',
-          position: 'left',
-        },
-        {
-          href: 'https://configcat.com/architecture/',
-          label: 'Architecture',
-          position: 'left',
-        },
-        {
-          href: 'https://configcat.com/blog/',
-          label: 'Blog',
+          type: 'docSidebar',
+          label: 'SDKs',
+          sidebarId: 'sdks',
           position: 'left',
         },
         {
@@ -129,14 +120,63 @@ const config: Config = {
           position: 'left',
         },
         {
+          type: 'dropdown',
+          label: 'Resources',
+          position: 'left',
+          items: [
+            {
+              href: 'https://configcat.com/',
+              label: 'configcat.com',
+            },
+            {
+              href: 'https://configcat.com/pricing/',
+              label: 'Pricing',
+            },
+            {
+              href: 'https://configcat.com/architecture/',
+              label: 'Architecture',
+            },       
+            {
+              href: 'https://status.configcat.com',
+              label: 'Service Status',
+            }, 
+          ]
+        },
+        {
+          type: 'dropdown',
+          label: 'Community',
+          position: 'left',
+          items: [
+            {
+              href: 'https://configcat.com/blog/',
+              label: 'Blog',
+            },
+            {
+              label: 'Slack',
+              href: 'https://configcat.com/slack/',
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/configcat',
+            },
+            {
+              label: 'Twitter',
+              href: 'https://twitter.com/configcat',
+            },
+            {
+              label: 'Facebook',
+              href: 'https://www.facebook.com/configcat',
+            },
+            {
+              label: 'LinkedIn',
+              href: 'https://www.linkedin.com/company/configcat/',
+            },
+          ]
+        },
+        {
           type: 'docsVersionDropdown',
           position: 'right',
           dropdownActiveClassDisabled: true,
-        },
-        {
-          href: 'https://status.configcat.com',
-          label: 'Service Status',
-          position: 'right',
         },
         {
           href: '/search',

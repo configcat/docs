@@ -161,6 +161,103 @@
       ]
     },
     {
+      "label": "Integrations",
+      "type": "category",
+      "link": {
+        "type": "doc",
+        "id": "integrations/overview"
+      },
+      "items": [  
+        {
+          "type": "doc",
+          "id": "integrations/amplitude",
+          "label": "Amplitude"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/bitbucket",
+          "label": "Bitbucket Pipe"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/bitrise",
+          "label": "Bitrise Step"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/circleci",
+          "label": "CircleCI Orb"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/datadog",
+          "label": "Datadog"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/github",
+          "label": "GitHub Action"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/jira",
+          "label": "Jira Cloud Plugin"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/monday",
+          "label": "monday.com"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/slack",
+          "label": "Slack"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/terraform",
+          "label": "Terraform"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/trello",
+          "label": "Trello Power-Up"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/vscode",
+          "label": "Visual Studio Code"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/zapier",
+          "label": "Zapier Zap"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/zoho-flow",
+          "label": "Zoho Flow"
+        }
+      ]
+    },
+    {
+      "type": "doc",
+      "id": "service/status",
+      "label": "Service Status"
+    },
+    {
+      "type": "doc",
+      "id": "news",
+      "label": "News & Product Updates"
+    },
+    {
+      "type": "doc",
+      "id": "faq",
+      "label": "FAQ"
+    }
+  ],
+  "sdks": [
+    {
       "label": "SDK References",
       "type": "category",
       "link": {
@@ -268,101 +365,6 @@
           ]
         }
       ]
-    },
-    {
-      "label": "Integrations",
-      "type": "category",
-      "link": {
-        "type": "doc",
-        "id": "integrations/overview"
-      },
-      "items": [  
-        {
-          "type": "doc",
-          "id": "integrations/amplitude",
-          "label": "Amplitude"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/bitbucket",
-          "label": "Bitbucket Pipe"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/bitrise",
-          "label": "Bitrise Step"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/circleci",
-          "label": "CircleCI Orb"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/datadog",
-          "label": "Datadog"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/github",
-          "label": "GitHub Action"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/jira",
-          "label": "Jira Cloud Plugin"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/monday",
-          "label": "monday.com"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/slack",
-          "label": "Slack"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/terraform",
-          "label": "Terraform"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/trello",
-          "label": "Trello Power-Up"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/vscode",
-          "label": "Visual Studio Code"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/zapier",
-          "label": "Zapier Zap"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/zoho-flow",
-          "label": "Zoho Flow"
-        }
-      ]
-    },
-    {
-      "type": "doc",
-      "id": "service/status",
-      "label": "Service Status"
-    },
-    {
-      "type": "doc",
-      "id": "news",
-      "label": "News & Product Updates"
-    },
-    {
-      "type": "doc",
-      "id": "faq",
-      "label": "FAQ"
     }
   ]
 }
