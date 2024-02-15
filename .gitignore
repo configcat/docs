@@ -17,3 +17,5 @@ website/i18n/*
 /.vs/configcat.docs/v15/.suo
 /.vs/config/applicationhost.config
 .dccache
+
+website/api/reference/*

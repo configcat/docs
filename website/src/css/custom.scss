@@ -8,6 +8,7 @@
 /* You can override the default Infima variables here. */
 
 @use 'proxy';
+@use 'api';
 
 :root {
   --ifm-color-primary: #f7912d;

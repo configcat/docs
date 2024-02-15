@@ -35,6 +35,10 @@ const config: Config = {
             to: '/sdk-reference/dotnet',
             from: '/sdk-reference/csharp',
           },
+          {
+            to: '/api/reference/configcat-public-management-api',
+            from: '/advanced/public-api',
+          },
           /*
           TODO: before turning V2 as latest. We have to check all page urls that are not existing in V2 anymore and create some redirects for them (e.g. commented section below - /targeting/targeting-overview).
           Also, we can remove the v2 (/V2/advanced/config-v2, /V2/advanced/config-v2-migration-guide, /V2/advanced/config-v2-sdk-compatibility) redirects
@@ -55,6 +59,35 @@ const config: Config = {
         ],
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'api-content',
+        path: 'api',
+        routeBasePath: 'api',
+        sidebarPath: './api/sidebars.ts',
+        docRootComponent: "@theme/DocRoot",
+        docItemComponent: "@theme/ApiItem",
+        
+      },
+    ],
+    [
+      'docusaurus-plugin-openapi-docs',
+      {
+          id: 'api-docs',
+          docsPluginId: 'api-content',
+          config: {
+              server: {
+                  specPath: 'https://api.configcat.com/docs/v1/swagger.json',
+                  outputDir: 'api/reference',
+                  sidebarOptions: {
+                      groupPathsBy: 'tag',
+                      categoryLinkSource: 'tag'
+                  },
+              },
+          },
+      },
+  ],
     // ['./src/plugins/smartlook',
     //   {
     //     smartlookKey: '05d0e4ca90c61150955104a9d4b76ab16a0b2380',
@@ -64,25 +97,27 @@ const config: Config = {
   themeConfig: {
     image: '/img/docs-cover.png',
     navbar: {
-      title: 'ConfigCat Docs',
+      title: 'ConfigCat',
       logo: {
         alt: 'ConfigCat',
         src: 'img/cat.svg',
       },
       items: [
         {
-          href: 'https://configcat.com/',
-          label: 'configcat.com',
+          type: 'docSidebar',
+          label: 'Docs',
+          sidebarId: 'docs',
           position: 'left',
         },
         {
-          href: 'https://configcat.com/pricing/',
-          label: 'Pricing',
+          type: 'docSidebar',
+          label: 'SDKs',
+          sidebarId: 'sdks',
           position: 'left',
         },
         {
-          href: 'https://configcat.com/architecture/',
-          label: 'Architecture',
+          to: '/api/reference/configcat-public-management-api',
+          label: 'API',
           position: 'left',
         },
         {
@@ -91,19 +126,14 @@ const config: Config = {
           position: 'left',
         },
         {
+          href: 'https://configcat.com/',
+          label: 'configcat.com',
+          position: 'left',
+        },
+        {
           type: 'docsVersionDropdown',
           position: 'right',
           dropdownActiveClassDisabled: true,
-        },
-        {
-          href: 'https://status.configcat.com',
-          label: 'Service Status',
-          position: 'right',
-        },
-        {
-          href: 'https://api.configcat.com/docs/',
-          label: 'API',
-          position: 'right',
         },
         {
           href: '/search',
@@ -174,7 +204,7 @@ const config: Config = {
             },
             {
               label: 'Public Management API Docs',
-              href: 'https://api.configcat.com/docs/',
+              to: '/api/reference/configcat-public-management-api',
             },
             {
               label: 'Search the documentation',
@@ -233,6 +263,8 @@ const config: Config = {
         'c',
         'objectivec',
         'protobuf',
+        'json',
+        'bash'
       ],
     },
     algolia: {
@@ -246,7 +278,7 @@ const config: Config = {
       externalUrlRegex: 'configcat\\.com/blog',
     },
     zoom: {
-      selector: '.markdown img',
+      selector: '.markdown img:not([src^="http"])',
       background: {
         light: 'var(--ifm-background-color)',
         dark: 'var(--ifm-background-color)'
@@ -287,6 +319,7 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+  themes: ["docusaurus-theme-openapi-docs"],
   scripts: [],
   stylesheets: [],
 };
