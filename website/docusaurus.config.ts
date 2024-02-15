@@ -297,12 +297,12 @@ const config: Config = {
           lastVersion: 'V1',
           versions: {
             current: {
-              label: 'V2 (beta)',
+              label: 'Config V2 (beta)',
               path: '/V2',
               noIndex: true
             },
             "V1": {
-              label: 'V1',
+              label: 'Config V1',
               path: '/',
             },
           },
