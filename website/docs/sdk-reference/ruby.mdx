@@ -174,9 +174,9 @@ user_object = ConfigCat::User.new('#UNIQUE-USER-IDENTIFIER#', email: 'john@examp
 The `custom` Hash also allows attribute values other than `String` values:
 
 ```ruby
-user_object = ConfigCat.User.new(
+user_object = ConfigCat::User.new(
     '#UNIQUE-USER-IDENTIFIER#',
-    {
+    custom: {
         'Rating' => 4.5,
         'RegisteredAt' => DateTime.iso8601('2023-11-22T12:34:56+00:00'),
         'Roles' => ['Role1', 'Role2']
