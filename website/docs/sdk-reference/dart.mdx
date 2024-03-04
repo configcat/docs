@@ -218,7 +218,7 @@ The `details` result contains the following information:
 | `value`                     | `bool` / `String` / `int` / `double` | The evaluated value of the feature flag or setting.                                                        |
 | `key`                       | `String`                             | The key of the evaluated feature flag or setting.                                                          |
 | `isDefaultValue`            | `bool`                               | True when the default value passed to `getValueDetails()` is returned due to an error.                     |
-| `error`                     | `String?`                            | In case of an error, this field contains the error message.                                                |
+| `error`                     | `String?`                            | In case of an error, this property contains the error message.                                             |
 | `user`                      | `ConfigCatUser?`                     | The User Object that was used for evaluation.                                                              |
 | `matchedPercentageOption`   | `PercentageOption?`                  | The Percentage Option (if any) that was used to select the evaluated value.                                |
 | `matchedTargetingRule`      | `TargetingRule?`                     | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
