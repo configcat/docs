@@ -127,7 +127,7 @@ The `details` result contains the following information:
 | -------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
 | `getKey()`                       | `string`                             | The key of the evaluated feature flag or setting.                                                          |
 | `getValue()`                     | `bool` / `string` / `int` / `double` | The evaluated value of the feature flag or setting.                                                        |
-| `getUser()`                      | `?User`                              | The User Object used for the evaluation.                                                                   |
+| `getUser()`                      | `?\ConfigCat\User`                   | The User Object used for the evaluation.                                                                   |
 | `isDefaultValue()`               | `bool`                               | True when the default value passed to `getValueDetails()` is returned due to an error.                     |
 | `getErrorMessage()`              | `?string`                            | In case of an error, this property contains the error message.                                             |
 | `getErrorException()`            | `?Throwable`                         | In case of an error, this property contains the related exception object (if any).                         |
@@ -341,7 +341,7 @@ You can also specify whether the file should be reloaded when it gets modified.
 
 ```php
 $client = new \ConfigCat\ConfigCatClient("localhost", [
-  \ConfigCat\ClientOptions::FLAG_OVERRIDES => \ConfigCat\Override\FlagOverrides(
+  \ConfigCat\ClientOptions::FLAG_OVERRIDES => new \ConfigCat\Override\FlagOverrides(
     \ConfigCat\Override\OverrideDataSource::localFile("path/to/the/local_flags.json"), // path to the file
     \ConfigCat\Override\OverrideBehaviour::LOCAL_ONLY
   ),
@@ -446,7 +446,7 @@ You can set up the SDK to load your feature flag & setting overrides from an ass
 
 ```php
 $client = new \ConfigCat\ConfigCatClient("localhost", [
-  \ConfigCat\ClientOptions::FLAG_OVERRIDES => \ConfigCat\Override\FlagOverrides(
+  \ConfigCat\ClientOptions::FLAG_OVERRIDES => new \ConfigCat\Override\FlagOverrides(
     \ConfigCat\Override\OverrideDataSource::localArray([
       'enabledFeature' => true,
       'disabledFeature' => false,
