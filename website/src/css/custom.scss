@@ -28,11 +28,8 @@
   --docusaurus-highlighted-code-line-bg: #3f4255;
 }
 
-.docusaurus-highlight-code-line {
-  background-color: rgb(72, 77, 91);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
+.theme-code-block-highlighted-line {
+  display: table-row !important;
 }
 
 .video-container {
