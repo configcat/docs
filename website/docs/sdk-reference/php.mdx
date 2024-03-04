@@ -123,16 +123,17 @@ $details = $client->getValueDetails(
 
 The `details` result contains the following information:
 
-| Property                               | Type                                 | Description                                                                                 |
-| -------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------- |
-| `getValue()`                           | `bool` / `string` / `int` / `double` | The evaluated value of the feature flag or setting.                                         |
-| `getKey()`                             | `string`                             | The key of the evaluated feature flag or setting.                                           |
-| `isDefaultValue()`                     | `bool`                               | True when the default value passed to getValueDetails() is returned due to an error.        |
-| `getError()`                           | `string`                             | In case of an error, this property returns the error message.                               |
-| `getUser()`                            | `User`                               | The User Object that was used for evaluation.                                               |
-| `getMatchedEvaluationPercentageRule()` | `array`                              | If the evaluation was based on a percentage rule, this property returns that specific rule. |
-| `getMatchedEvaluationRule()`           | `array`                              | If the evaluation was based on a Targeting Rule, this property returns that specific rule.  |
-| `getFetchTimeUnixSeconds()`            | `int`                                | The last download time of the current config in unix seconds format.                        |
+| Property                         | Type                                 | Description                                                                                                |
+| -------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| `getKey()`                       | `string`                             | The key of the evaluated feature flag or setting.                                                          |
+| `getValue()`                     | `bool` / `string` / `int` / `double` | The evaluated value of the feature flag or setting.                                                        |
+| `getUser()`                      | `?\ConfigCat\User`                   | The User Object used for the evaluation.                                                                   |
+| `isDefaultValue()`               | `bool`                               | True when the default value passed to `getValueDetails()` is returned due to an error.                     |
+| `getErrorMessage()`              | `?string`                            | In case of an error, this property contains the error message.                                             |
+| `getErrorException()`            | `?Throwable`                         | In case of an error, this property contains the related exception object (if any).                         |
+| `getMatchedTargetingRule()`      | `?array`                             | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
+| `getMatchedPercentageOption()`   | `?array`                             | The Percentage Option (if any) that was used to select the evaluated value.                                |
+| `getFetchTimeUnixMilliseconds()` | `float`                              | The last download time of the current config in unix milliseconds format.                                  |
 
 ## User Object
 
@@ -153,7 +154,7 @@ $user = new \ConfigCat\User("john@example.com");
 | `identifier` | **REQUIRED.** Unique identifier of a user in your application. Can be any `string` value, even an email address.                                                     |
 | `email`      | Optional parameter for easier Targeting Rule definitions.                                                                                                            |
 | `country`    | Optional parameter for easier Targeting Rule definitions.                                                                                                            |
-| `custom`     | Optional `array of strings` representing the custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. The value's type of the array must be a `string`. |
+| `custom`     | Optional associative array representing the custom attributes of a user for advanced Targeting Rule definitions. e.g. User role, Subscription type. The value's type of the array must be a `string`, `int`, `float`, `DateTimeInterface` or an array of `string`. |
 
 ```php
 $user = new \ConfigCat\User(
@@ -165,6 +166,56 @@ $user = new \ConfigCat\User(
         'UserRole' => 'Admin'
     ]);
 ```
+
+:::caution
+If you want to use a `string` value containing non-ASCII characters as a user attribute,
+please make sure that the content of the string is a UTF-8 byte sequence.
+([A PHP string is just a sequence of bytes](https://www.php.net/manual/en/language.types.string.php),
+it doesn't use any internal character encoding, that is, doesn't offer native Unicode support.
+Thus, to support Unicode text, the ConfigCat SDK assumes UTF-8 encoding.)
+:::
+
+The `custom` array also allows attribute values other than `string` values:
+
+```php
+$user = new \ConfigCat\User(
+    '#UNIQUE-USER-IDENTIFIER#',
+    null,
+    null,
+    [
+        'Rating' => 4.5,
+        'RegisteredAt' => new DateTimeImmutable('2023-11-22T12:34:56.0000000Z'),
+        'Roles' => ['Role1', 'Role2']
+    ]);
+```
+
+### User Object Attribute Types
+
+All comparators support `string` values as User Object attribute (in some cases they need to be provided in a specific format though, see below), but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
+
+**Text-based comparators** (EQUALS, IS ONE OF, etc.)
+* accept `string` values,
+* all other values are automatically converted to `string` (a warning will be logged but evaluation will continue as normal).
+
+**SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
+* accept `string` values containing a properly formatted, valid semver value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
+**Number-based comparators** (=, &lt;, &gt;=, etc.)
+* accept `int` or `float` values,
+* accept `string` values containing a properly formatted, valid `int` or `float` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
+**Date time-based comparators** (BEFORE / AFTER)
+* accept `DateTimeInterface` values, which are automatically converted to a second-based Unix timestamp,
+* accept `int` or `float` values representing a second-based Unix timestamp,
+* accept `string` values containing a properly formatted, valid `int` or `float` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
+**String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
+* accept arrays of `string`,
+* accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
+* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
@@ -290,7 +341,7 @@ You can also specify whether the file should be reloaded when it gets modified.
 
 ```php
 $client = new \ConfigCat\ConfigCatClient("localhost", [
-  \ConfigCat\ClientOptions::FLAG_OVERRIDES => \ConfigCat\Override\FlagOverrides(
+  \ConfigCat\ClientOptions::FLAG_OVERRIDES => new \ConfigCat\Override\FlagOverrides(
     \ConfigCat\Override\OverrideDataSource::localFile("path/to/the/local_flags.json"), // path to the file
     \ConfigCat\Override\OverrideBehaviour::LOCAL_ONLY
   ),
@@ -395,7 +446,7 @@ You can set up the SDK to load your feature flag & setting overrides from an ass
 
 ```php
 $client = new \ConfigCat\ConfigCatClient("localhost", [
-  \ConfigCat\ClientOptions::FLAG_OVERRIDES => \ConfigCat\Override\FlagOverrides(
+  \ConfigCat\ClientOptions::FLAG_OVERRIDES => new \ConfigCat\Override\FlagOverrides(
     \ConfigCat\Override\OverrideDataSource::localArray([
       'enabledFeature' => true,
       'disabledFeature' => false,
@@ -516,10 +567,11 @@ The following levels are used by the ConfigCat SDK:
 Info level logging helps to inspect how a feature flag was evaluated:
 
 ```bash
-[2022-01-06T18:34:16.846039+00:00] ConfigCat.INFO: Evaluating getValue(isPOCFeatureEnabled).
-User object: {"Identifier":"435170f4-8a8b-4b67-a723-505ac7cdea92","Email":"john@example.com"}
-Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match.
-Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: true.
+[2022-01-06T18:34:16.846039+00:00] ConfigCat.INFO: [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
+  Evaluating targeting rules and applying the first match if any:
+  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'false' => no match
+  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'true' => MATCH, applying rule
+  Returning 'true'.
 ```
 
 ## HTTP Client

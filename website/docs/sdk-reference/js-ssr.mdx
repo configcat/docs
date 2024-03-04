@@ -234,8 +234,8 @@ The `details` result contains the following information:
 | `value`                           | `boolean` / `string` / `number` | The evaluated value of the feature flag or setting.                                         |
 | `user`                            | `User`                          | The User Object used for the evaluation.                                                    |
 | `isDefaultValue`                  | `boolean`                       | True when the default value passed to `getValueDetailsAsync()` is returned due to an error. |
-| `errorMessage`                    | `string`                        | In case of an error, this field contains the error message.                                 |
-| `errorException`                  | `any`                           | In case of an error, this field contains the related exception object (if any).             |
+| `errorMessage`                    | `string`                        | In case of an error, this property contains the error message.                              |
+| `errorException`                  | `any`                           | In case of an error, this property contains the related exception object (if any).          |
 | `matchedTargetingRule`            | `ITargetingRule`                | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
 | `matchedPercentageOption`         | `IPercentageOption`             | The Percentage Option (if any) that was used to select the evaluated value.                 |
 | `fetchTime`                       | `Date`                          | The last download time (UTC) of the current config.                                         |
