@@ -15,11 +15,11 @@ The ConfigCat Proxy is in a public beta phase. If you have feedback or questions
 The <a target="_blank" href="https://github.com/configcat/configcat-proxy">ConfigCat Proxy</a> allows you to host a feature flag evaluation service in your own infrastructure. It's a small Go application that communicates with ConfigCat's CDN network and caches/proxies *config JSON* files for your frontend and backend applications. The *config JSON* contains all the data that is needed for ConfigCat SDKs to evaluate feature flags.
 
 The Proxy provides the following:
-- **Performance**: The Proxy can be deployed close to your applications and can serve the downloaded *config JSON* files from memory. ConfigCat SDKs then can operate on the [proxied *config JSON*](/docs/advanced/proxy/endpoints#cdn-proxy). This can reduce the duration of feature flag evaluation for stateless or short lived applications.
+- **Performance**: The Proxy can be deployed close to your applications and can serve the downloaded *config JSON* files from memory. ConfigCat SDKs then can operate on the [proxied *config JSON*](/advanced/proxy/endpoints#cdn-proxy). This can reduce the duration of feature flag evaluation for stateless or short lived applications.
 - **Reliability**: The Proxy can store the downloaded *config JSON* files in an external [cache](#cache). It can fall back to operating on the cached *config JSON* if the ConfigCat CDN network becomes inaccessible.
-- **Security**: The Proxy can act as a [server side flag evaluation](/docs/advanced/proxy/endpoints#api) component. Using it like that can prevent the exposure of *config JSON* files to frontend and mobile applications.
+- **Security**: The Proxy can act as a [server side flag evaluation](/advanced/proxy/endpoints#api) component. Using it like that can prevent the exposure of *config JSON* files to frontend and mobile applications.
 - **Scalability**: Horizontal scaling allows you to align with the load coming from your applications accordingly.
-- **Streaming**: The Proxy provides real-time feature flag change notifications via [Server-Sent Events (SSE)](/docs/advanced/proxy/endpoints#sse) and [gRPC](/advanced/proxy/grpc).
+- **Streaming**: The Proxy provides real-time feature flag change notifications via [Server-Sent Events (SSE)](/advanced/proxy/endpoints#sse) and [gRPC](/advanced/proxy/grpc).
 
 ## Architecture
 
@@ -42,11 +42,11 @@ With the combination of the above modes, you can construct a cluster of proxies 
 
 There are three ways how the Proxy is informed about the availability of new feature flag evaluation data:
 - **Polling**: The ConfigCat SDKs within the Proxy are regularly polling the ConfigCat CDN for new *config JSON* versions.
-- **Webhook**: The Proxy has [webhook endpoints](/docs/advanced/proxy/endpoints#webhook) (for each underlying SDK) which can be set on the <a target="_blank" href="https://app.configcat.com/product/webhooks">ConfigCat Dashboard</a> to be invoked when someone saves & publishes new feature flag changes.
+- **Webhook**: The Proxy has [webhook endpoints](/advanced/proxy/endpoints#webhook) (for each underlying SDK) which can be set on the <a target="_blank" href="https://app.configcat.com/product/webhooks">ConfigCat Dashboard</a> to be invoked when someone saves & publishes new feature flag changes.
 - **Cache polling / file watching**: In [offline mode](#offline-mode), the Proxy can regularly poll a cache or watch a file for new *config JSON* versions.
 
 These are the ports used by the Proxy by default:
-- **8050**: for standard HTTP communication. ([API](/docs/advanced/proxy/endpoints#api), [CDN proxy](/docs/advanced/proxy/endpoints#cdn-proxy), [Webhook](/docs/advanced/proxy/endpoints#webhook), [SSE](/docs/advanced/proxy/endpoints#sse), [Status](/advanced/proxy/monitoring#status))
+- **8050**: for standard HTTP communication. ([API](/advanced/proxy/endpoints#api), [CDN proxy](/advanced/proxy/endpoints#cdn-proxy), [Webhook](/advanced/proxy/endpoints#webhook), [SSE](/advanced/proxy/endpoints#sse), [Status](/advanced/proxy/monitoring#status))
 - **8051**: for providing [prometheus metrics](/advanced/proxy/monitoring#prometheus-metrics).
 - **50051**: for [gRPC](/advanced/proxy/grpc) communication.
 
@@ -304,7 +304,7 @@ It's also possible to set default user attributes at the SDK level. See the [SDK
 
 In order to make the Proxy work properly, it must be set up with one or more <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a>. It will instantiate one SDK instance for each SDK key.
 In case of environment variables, the SDK keys can be specified in a **JSON key-value** format, where the **key is the identifier** of a specific SDK and the **value is the actual SDK key**.
-The **SDK identifier** part is later used in [endpoint route variables](/docs/advanced/proxy/endpoints) to recognize which SDK must serve the given flag evaluation request.
+The **SDK identifier** part is later used in [endpoint route variables](/advanced/proxy/endpoints) to recognize which SDK must serve the given flag evaluation request.
 
 Furthermore, when configuring the Proxy **via environment variables**, the identifier becomes a **part of the SDK specific environment variable's name** using the following format: `CONFIGCAT_<SDK_ID>_<OPTION>`.
 
@@ -913,7 +913,7 @@ The Proxy in its default setup stores all the information it needs for feature f
 Currently, the only available option is <a target="blank" href="https://redis.io">Redis</a>. The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
 
 :::info
-The ConfigCat Proxy supports *shared caching*, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The ConfigCat Proxy supports *shared caching*, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/advanced/caching/#shared-cache).
 
 <img  src="/docs/assets/proxy/shared_cache.png" alt="Shared cache architecture" />
 
@@ -1351,7 +1351,7 @@ CONFIGCAT_HTTP_PROXY_URL="<proxy-url>"
 
 #### Endpoints
 
-The options for HTTP endpoints are discussed in the [Endpoints](/docs/advanced/proxy/endpoints) section.
+The options for HTTP endpoints are discussed in the [Endpoints](/advanced/proxy/endpoints) section.
 
 ### TLS
 
