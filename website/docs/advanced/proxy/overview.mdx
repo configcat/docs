@@ -412,7 +412,7 @@ CONFIGCAT_SDKS={"my_sdk":"<your-sdk-key>"}
 </Tabs>
 
 </td>
-<td>The <strong>SDK identifier</strong> and the <strong>SDK key</strong>. The <strong>SDK identifier</strong> is used in <a href="/docs/advanced/proxy/endpoints">endpoint route variables</a> to recognize which SDK must serve the given flag evaluation request. The <a target="blank" href="https://app.configcat.com/sdkkey">SDK key</a> is crucial for the underlying SDK to operate.</td>
+<td>The <strong>SDK identifier</strong> and the <strong>SDK key</strong>. The <strong>SDK identifier</strong> is used in <a href="/docs/v2/advanced/proxy/endpoints">endpoint route variables</a> to recognize which SDK must serve the given flag evaluation request. The <a target="blank" href="https://app.configcat.com/sdkkey">SDK key</a> is crucial for the underlying SDK to operate.</td>
 </tr>
 </tbody>
 </table>
@@ -497,7 +497,7 @@ CONFIGCAT_MY_SDK_DATA_GOVERNANCE="<global|eu>"
 
 </td>
 <td><code>global</code></td>
-<td>Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. <a href="/docs/advanced/data-governance">More about Data Governance</a>.</td>
+<td>Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. <a href="/docs/v2/advanced/data-governance">More about Data Governance</a>.</td>
 </tr>
 
 <tr>
@@ -523,7 +523,7 @@ CONFIGCAT_MY_SDK_WEBHOOK_SIGNING_KEY="<key>"
 
 </td>
 <td>-</td>
-<td>The <a href="/docs/advanced/notifications-webhooks/#calculating-signature">key used to sign</a> the webhook requests sent to the Proxy. <a href="/docs/advanced/proxy/endpoints#webhook">More about the webhook endpoint</a>.</td>
+<td>The <a href="/docs/advanced/notifications-webhooks/#calculating-signature">key used to sign</a> the webhook requests sent to the Proxy. <a href="/docs/v2/advanced/proxy/endpoints#webhook">More about the webhook endpoint</a>.</td>
 </tr>
 
 <tr>
@@ -549,7 +549,7 @@ CONFIGCAT_MY_SDK_WEBHOOK_SIGNATURE_VALID_FOR=300
 
 </td>
 <td><code>300</code></td>
-<td>The time period within the webhook requests are considered valid. <a href="/docs/advanced/proxy/endpoints#webhook">More about the webhook endpoint</a>.</td>
+<td>The time period within the webhook requests are considered valid. <a href="/docs/v2/advanced/proxy/endpoints#webhook">More about the webhook endpoint</a>.</td>
 </tr>
 
 <tr>
@@ -1285,7 +1285,7 @@ CONFIGCAT_HTTP_PORT=8050
 
 </td>
 <td><code>8050</code></td>
-<td>The HTTP server's port that serves the <a href="/docs/advanced/proxy/endpoints#cdn-proxy">CDN proxy</a>, <a href="/docs/advanced/proxy/endpoints#api">API</a>, <a href="/docs/advanced/proxy/endpoints#sse">SSE</a>, and <a href="/docs/advanced/proxy/endpoints#webhook">webhook</a> endpoints.</td>
+<td>The HTTP server's port that serves the <a href="/docs/v2/advanced/proxy/endpoints#cdn-proxy">CDN proxy</a>, <a href="/docs/v2/advanced/proxy/endpoints#api">API</a>, <a href="/docs/v2/advanced/proxy/endpoints#sse">SSE</a>, and <a href="/docs/v2/advanced/proxy/endpoints#webhook">webhook</a> endpoints.</td>
 </tr>
 
 <tr>
@@ -1339,7 +1339,7 @@ CONFIGCAT_HTTP_STATUS_ENABLED=<true|false>
 
 </td>
 <td><code>false</code></td>
-<td>Enables or disables the hosting of the <a href="/docs/advanced/proxy/monitoring/#status">status endpoint</a> on the main HTTP port. (default: <code>8050</code>)</td>
+<td>Enables or disables the hosting of the <a href="/docs/v2/advanced/proxy/monitoring/#status">status endpoint</a> on the main HTTP port. (default: <code>8050</code>)</td>
 </tr>
 
 </tbody>
