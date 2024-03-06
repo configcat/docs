@@ -42,13 +42,13 @@ With the combination of the above modes, you can construct a cluster of proxies 
 
 There are three ways how the Proxy is informed about the availability of new feature flag evaluation data:
 - **Polling**: The ConfigCat SDKs within the Proxy are regularly polling the ConfigCat CDN for new *config JSON* versions.
-- **Webhook**: The Proxy has [webhook endpoints](/advanced/proxy/endpoints#webhook) (for each underlying SDK) which can be set on the <a target="_blank" href="https://app.configcat.com/product/webhooks">ConfigCat Dashboard</a> to be invoked when someone saves & publishes new feature flag changes.
+- **Webhook**: The Proxy has [webhook endpoints](/docs/v2/advanced/proxy/endpoints#webhook) (for each underlying SDK) which can be set on the <a target="_blank" href="https://app.configcat.com/product/webhooks">ConfigCat Dashboard</a> to be invoked when someone saves & publishes new feature flag changes.
 - **Cache polling / file watching**: In [offline mode](#offline-mode), the Proxy can regularly poll a cache or watch a file for new *config JSON* versions.
 
 These are the ports used by the Proxy by default:
-- **8050**: for standard HTTP communication. ([API](/advanced/proxy/endpoints#api), [CDN proxy](/advanced/proxy/endpoints#cdn-proxy), [Webhook](/advanced/proxy/endpoints#webhook), [SSE](/advanced/proxy/endpoints#sse))
-- **8051**: for providing diagnostic data ([status](/advanced/proxy/monitoring#status), [prometheus metrics](/advanced/proxy/monitoring#prometheus-metrics)).
-- **50051**: for [gRPC](/advanced/proxy/grpc) communication.
+- **8050**: for standard HTTP communication. ([API](/docs/v2/advanced/proxy/endpoints#api), [CDN proxy](/docs/v2/advanced/proxy/endpoints#cdn-proxy), [Webhook](/docs/v2/advanced/proxy/endpoints#webhook), [SSE](/docs/v2/advanced/proxy/endpoints#sse))
+- **8051**: for providing diagnostic data ([status](/docs/v2/advanced/proxy/monitoring#status), [prometheus metrics](/docs/v2/advanced/proxy/monitoring#prometheus-metrics)).
+- **50051**: for [gRPC](/docs/v2/advanced/proxy/grpc) communication.
 
 ## Installation
 
@@ -523,7 +523,7 @@ CONFIGCAT_MY_SDK_WEBHOOK_SIGNING_KEY="<key>"
 
 </td>
 <td>-</td>
-<td>The <a href="/docs/advanced/notifications-webhooks/#calculating-signature">key used to sign</a> the webhook requests sent to the Proxy. <a href="/docs/v2/advanced/proxy/endpoints#webhook">More about the webhook endpoint</a>.</td>
+<td>The <a href="/docs/v2/advanced/notifications-webhooks/#calculating-signature">key used to sign</a> the webhook requests sent to the Proxy. <a href="/docs/v2/advanced/proxy/endpoints#webhook">More about the webhook endpoint</a>.</td>
 </tr>
 
 <tr>
