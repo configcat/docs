@@ -9,7 +9,121 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-This section will go through the monitoring options of the ConfigCat Proxy.
+The ConfigCat Proxy provides diagnostic data via its `/status` and a Prometheus-compatible `/metrics` endpoint. These endpoints are served on a specific port, so you can separate them from the public HTTP communication.
+
+The following diagnostics related configuration options are available:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Enables or disables the diagnostics HTTP server.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  port: 8051
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_PORT=8051
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>8051</code></td>
+<td>The port used by the diagnostics HTTP server.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  status:
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_STATUS_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Enables or disables the <a href="#status">status endpoint</a> on the diagnostics HTTP server.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  metrics:
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_METRICS_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Enables or disables the <a href="#prometheus-metrics">Prometheus metrics</a> on the diagnostics HTTP server.</td>
+</tr>
+
+</tbody>
+</table>
 
 ## Status Endpoint {#status}
 
@@ -75,9 +189,13 @@ The root `status` is `healthy` if all of the SDKs are `healthy`. If any of the S
 
 </details>
 
+:::note
+You can enable the status endpoint on the main HTTP port (default: `8050`) with the [HTTP configuration options](/V2/advanced/proxy/proxy-overview/#http).
+:::
+
 ## Prometheus Metrics
 
-You can set up the Proxy to export metrics about its internal state in Prometheus format. These metrics are served via the `/metrics` endpoint on a specific port, so you can separate it from the public HTTP communication. The default port is `8051`.
+You can set up the Proxy to export metrics about its internal state in Prometheus format. These metrics are served via the `/metrics` endpoint.
 
 The following metrics are exported:
 
@@ -160,65 +278,3 @@ scrape_configs:
       - targets:
           - <proxy-host>:8051
 ```
-
-### Available Options
-
-The following metrics related options are available:
-
-<table className="proxy-arg-table">
-<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td>
-
-<Tabs groupId="yaml-env">
-<TabItem value="yaml" label="YAML" default>
-
-```yaml
-metrics:
-  enabled: <true|false>
-```
-
-</TabItem>
-<TabItem value="env-vars" label="Environment variable">
-
-```shell
-CONFIGCAT_METRICS_ENABLED=<true|false>
-```
-
-</TabItem>
-</Tabs>
-
-</td>
-<td><code>true</code></td>
-<td>Enables or disables Prometheus metrics.</td>
-</tr>
-
-<tr>
-<td>
-
-<Tabs groupId="yaml-env">
-<TabItem value="yaml" label="YAML" default>
-
-```yaml
-metrics:
-  port: 8051
-```
-
-</TabItem>
-<TabItem value="env-vars" label="Environment variable">
-
-```shell
-CONFIGCAT_METRICS_PORT=8051
-```
-
-</TabItem>
-</Tabs>
-
-</td>
-<td><code>8051</code></td>
-<td>The port used for serving metrics.</td>
-</tr>
-
-</tbody>
-</table>
