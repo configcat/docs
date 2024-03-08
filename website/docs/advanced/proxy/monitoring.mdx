@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-The ConfigCat Proxy provides diagnostic data via its `/status` and a Prometheus-compatible `/metrics` endpoint.
+The ConfigCat Proxy provides diagnostic data via its `/status` and a Prometheus-compatible `/metrics` endpoint. These endpoints are served on a specific port, so you can separate them from the public HTTP communication.
 
 The following diagnostics related configuration options are available:
 
@@ -195,7 +195,7 @@ You can enable the status endpoint on the main HTTP port (default: `8050`) with 
 
 ## Prometheus Metrics
 
-You can set up the Proxy to export metrics about its internal state in Prometheus format. These metrics are served via the `/metrics` endpoint on a specific port, so you can separate it from the public HTTP communication. The default port is `8051`.
+You can set up the Proxy to export metrics about its internal state in Prometheus format. These metrics are served via the `/metrics` endpoint.
 
 The following metrics are exported:
 
