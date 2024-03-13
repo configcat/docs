@@ -223,7 +223,7 @@ CONFIGCAT_HTTP_CDN_PROXY_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the CDN proxy endpoint, which can be used by ConfigCat SDKs in your applications.</td>
+<td>Turns the hosting of the CDN proxy endpoint on/off. This endpoint can be used by other ConfigCat SDKs in your applications.</td>
 </tr>
 
 <tr>
@@ -251,7 +251,7 @@ CONFIGCAT_HTTP_CDN_PROXY_CORS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
+<td>Turns the sending of CORS headers on/off. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
 </tr>
 
 <tr>
@@ -409,8 +409,7 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 
 **Responses**:
 <ul className="responses">
-<li className="success">
-<span className="status">200</span>: The feature flag evaluation finished successfully.<br/>
+<li className="success"><span className="status">200</span>: The feature flag evaluation finished successfully.</li>
 <div className="response-body">Response body:</div>
 
 ```json
@@ -420,7 +419,6 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 }
 ```
 
-</li>
 <li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
 <li className="error"><span className="status">400</span>: The <code>sdkId</code> or the <code>key</code> from the request body is missing.</li>
 <li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
@@ -453,8 +451,7 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 
 **Responses**:
 <ul className="responses">
-<li className="success">
-<span className="status">200</span>: The evaluation of all feature flags finished successfully.<br/>
+<li className="success"><span className="status">200</span>: The evaluation of all feature flags finished successfully.</li>
 <div className="response-body">Response body:</div>
 
 ```json
@@ -470,7 +467,6 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 }
 ```
 
-</li>
 <li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
 <li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing.</li>
 <li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
@@ -506,8 +502,7 @@ This endpoint returns all feature flag keys belonging to the given [SDK identifi
 
 **Responses**:
 <ul className="responses">
-<li className="success">
-<span className="status">200</span>: The keys are returned successfully.<br/>
+<li className="success"><span className="status">200</span>: The keys are returned successfully.</li>
 <div className="response-body">Response body:</div>
 
 ```json
@@ -519,7 +514,6 @@ This endpoint returns all feature flag keys belonging to the given [SDK identifi
 }
 ```
 
-</li>
 <li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
 <li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing.</li>
 <li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
@@ -558,7 +552,7 @@ CONFIGCAT_HTTP_API_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the API endpoints, which can be used for server side feature flag evaluation.</td>
+<td>Turns the hosting of the API endpoints on/off. These endpoints can be used for server side feature flag evaluation.</td>
 </tr>
 
 <tr>
@@ -586,7 +580,7 @@ CONFIGCAT_HTTP_API_CORS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
+<td>Turns the sending of CORS headers on/off. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
 </tr>
 
 <tr>
@@ -877,7 +871,7 @@ CONFIGCAT_HTTP_SSE_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the SSE endpoint, which can be used for streaming feature flag value changes.</td>
+<td>Turns the hosting of the SSE endpoint on/off, This endpoint can be used to stream feature flag value changes.</td>
 </tr>
 
 <tr>
@@ -905,7 +899,7 @@ CONFIGCAT_HTTP_SSE_CORS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the sending of CORS headers. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
+<td>Turns the sending of CORS headers on/off. It can be used to restrict access to specific domains. By default, the Proxy allows each origin by setting the <code>Access-Control-Allow-Origin</code> response header to the request's origin. You can override this functionality by restricting the allowed origins with the <code>allowed_origins</code> or <code>allowed_origins_regex</code> options.</td>
 </tr>
 
 <tr>
@@ -1119,7 +1113,7 @@ CONFIGCAT_HTTP_WEBHOOK_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the Webhook endpoint, which can be used for notifying the Proxy about the availability of new feature flag evaluation data.</td>
+<td>Turns the hosting of the Webhook endpoint on/off. This endpoint can be used to notify the Proxy about the availability of new feature flag evaluation data.</td>
 </tr>
 
 <tr>

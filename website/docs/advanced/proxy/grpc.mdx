@@ -103,7 +103,9 @@ message StringList {
 }
 ```
 
-In order to secure the gRPC communication with the Proxy, set up [TLS](/advanced/proxy/proxy-overview#tls).
+:::info
+In order to secure the gRPC communication with the Proxy, set up [TLS](/V2/advanced/proxy/proxy-overview#tls).
+:::
 
 ## Client Usage
 
@@ -157,6 +159,14 @@ The following gRPC related options are available:
 grpc:
   enabled: <true|false>
   port: 50051
+  server_reflection_enabled: <true|false>
+  health_check_enabled: <true|false>
+  keep_alive:
+    max_connection_idle: 15
+    max_connection_age: 30
+    max_connection_age_grace: 5
+    time: 5
+    timeout: 1
   log:
     level: "<error|warn|info|debug>"
 ```
@@ -201,7 +211,7 @@ CONFIGCAT_GRPC_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the ability to communicate with the Proxy through gRPC.</td>
+<td>Turns the ability to communicate with the Proxy through gRPC on/off.</td>
 </tr>
 
 <tr>
@@ -238,6 +248,193 @@ CONFIGCAT_GRPC_PORT=50051
 
 ```yaml
 grpc:
+  health_check_enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_GRPC_HEALTH_CHECK_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Turns the [gRPC health check service](https://grpc.io/docs/guides/health-checking/) on/off.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+grpc:
+  server_reflection_enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_GRPC_SERVER_REFLECTION_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Turns the [gRPC server reflection](https://grpc.io/docs/guides/reflection/) on/off.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+grpc:
+  keep_alive:
+    max_connection_idle: 15
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_GRPC_KEEP_ALIVE_MAX_CONNECTION_IDLE=15
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>INT_MAX (Infinite)</code></td>
+<td>Maximum time in seconds that a channel may have no outstanding rpcs, after which the server will close the connection. [More about the gRPC keep-alive](https://grpc.io/docs/guides/keepalive/).</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+grpc:
+  keep_alive:
+    max_connection_age: 30
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_GRPC_KEEP_ALIVE_MAX_CONNECTION_AGE=30
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>INT_MAX (Infinite)</code></td>
+<td>Maximum time in seconds that a channel may exist. [More about the gRPC keep-alive](https://grpc.io/docs/guides/keepalive/).</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+grpc:
+  keep_alive:
+    max_connection_age_grace: 5
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_GRPC_KEEP_ALIVE_MAX_CONNECTION_AGE_GRACE=5
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>INT_MAX (Infinite)</code></td>
+<td>Grace period in seconds after the channel reaches its max age. [More about the gRPC keep-alive](https://grpc.io/docs/guides/keepalive/).</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+grpc:
+  keep_alive:
+    time: 5
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_GRPC_KEEP_ALIVE_TIME=5
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>7200</code></td>
+<td>The interval in seconds between PING frames. [More about the gRPC keep-alive](https://grpc.io/docs/guides/keepalive/).</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+grpc:
+  keep_alive:
+    timeout: 1
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_GRPC_KEEP_ALIVE_TIMEOUT=1
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>20</code></td>
+<td>The timeout in seconds for a PING frame to be acknowledged. If sender does not receive an acknowledgment within this time, it will close the connection. [More about the gRPC keep-alive](https://grpc.io/docs/guides/keepalive/).</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+grpc:
   log:
     level: "<error|warn|info|debug>"
 ```
@@ -254,7 +451,7 @@ CONFIGCAT_GRPC_LOG_LEVEL="<error|warn|info|debug>"
 
 </td>
 <td><code>warn</code></td>
-<td>The verbosity of the gRPC related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code> or <code>debug</code>.</td>
+<td>The verbosity of the gRPC related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code> or <code>debug</code>.<br/>When <code>debug</code> is set, the Proxy will log each RPC with additional details.</td>
 </tr>
 
 </tbody>
