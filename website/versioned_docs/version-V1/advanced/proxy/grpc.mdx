@@ -148,6 +148,21 @@ if err != nil {
 fmt.Printf("Evaluation result: %v", resp.GetBoolValue())
 ```
 
+## Health Check
+
+The Proxy exposes health information over a [standardized health RPC service](https://github.com/grpc/grpc-proto/blob/master/grpc/health/v1/health.proto).
+
+Clients can set `""` as the `service` parameter (or skip specifying it) to get the health status of the gRPC server. Exposing the health check service is configurable and turned on by default.
+
+For more details about gRPC health checking, check out the [official documentation](https://grpc.io/docs/guides/health-checking/). 
+
+## Server Reflection
+
+The Proxy can expose its protobuf-defined feature flag evaluation API over a [standardized reflection RPC service](https://github.com/grpc/grpc-proto/blob/master/grpc/reflection/v1/reflection.proto), including all types referenced by the request and response messages. 
+Exposing the reflection service is configurable and turned off by default.
+
+For more details about gRPC server reflection, check out the [official documentation](https://grpc.io/docs/guides/reflection/). 
+
 ## Available Options
 
 The following gRPC related options are available:
@@ -177,6 +192,13 @@ grpc:
 ```shell
 CONFIGCAT_GRPC_ENABLED=<true|false>
 CONFIGCAT_GRPC_PORT=50051
+CONFIGCAT_GRPC_HEALTH_CHECK_ENABLED=<true|false>
+CONFIGCAT_GRPC_SERVER_REFLECTION_ENABLED=<true|false>
+CONFIGCAT_GRPC_KEEP_ALIVE_MAX_CONNECTION_IDLE=15
+CONFIGCAT_GRPC_KEEP_ALIVE_MAX_CONNECTION_AGE=30
+CONFIGCAT_GRPC_KEEP_ALIVE_MAX_CONNECTION_AGE_GRACE=5
+CONFIGCAT_GRPC_KEEP_ALIVE_TIME=5
+CONFIGCAT_GRPC_KEEP_ALIVE_TIMEOUT=1
 CONFIGCAT_GRPC_LOG_LEVEL="<error|warn|info|debug>"
 ```
 
@@ -288,7 +310,7 @@ CONFIGCAT_GRPC_SERVER_REFLECTION_ENABLED=<true|false>
 </Tabs>
 
 </td>
-<td><code>true</code></td>
+<td><code>false</code></td>
 <td>Turns the [gRPC server reflection](https://grpc.io/docs/guides/reflection/) on/off.</td>
 </tr>
 
