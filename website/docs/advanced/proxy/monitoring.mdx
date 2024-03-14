@@ -39,7 +39,7 @@ CONFIGCAT_DIAG_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the diagnostics HTTP server.</td>
+<td>Turns the diagnostics HTTP server on/off.</td>
 </tr>
 
 <tr>
@@ -92,7 +92,7 @@ CONFIGCAT_DIAG_STATUS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the <a href="#status">status endpoint</a> on the diagnostics HTTP server.</td>
+<td>Turns the hosting of the <a href="#status">status endpoint</a> on the diagnostics HTTP server on/off.</td>
 </tr>
 
 <tr>
@@ -119,7 +119,7 @@ CONFIGCAT_DIAG_METRICS_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Enables or disables the <a href="#prometheus-metrics">Prometheus metrics</a> on the diagnostics HTTP server.</td>
+<td>Turns the <a href="#prometheus-metrics">Prometheus metrics</a> on the diagnostics HTTP server on/off.</td>
 </tr>
 
 </tbody>
@@ -133,12 +133,6 @@ The Proxy provides status information (health check) about its components on the
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/status</span></summary>
 
 The Proxy regularly checks whether the underlying SDKs can communicate with their configured source and with the cache. This endpoint returns the actual state of these checks.
-
-If everything is operational, each `status` node shows the value `healthy`. If an SDK could not connect to its source, it'll put an error to its `records` collection. 
-If a component's last two records are errors, its `status` will switch to `degraded`. 
-If a component becomes operational again it'll put an `[ok]` to the `records` and will switch to `healthy` again. 
-
-The root `status` is `healthy` if all of the SDKs are `healthy`. If any of the SDKs become `degraded`, the root will also switch to `degraded`.
 
 **Responses**:
 <ul className="responses">
@@ -187,6 +181,19 @@ The root `status` is `healthy` if all of the SDKs are `healthy`. If any of the S
 }
 ```
 
+**Details**:
+
+If everything is operational, each `status` node shows the value `healthy`. If a component encounters a failure, it'll put an error to its `records` collection. 
+If a component's last two records are errors, its `status` will switch to `degraded`. 
+If a component becomes operational again it'll put an `[ok]` to the `records` and will switch back to `healthy`. 
+
+If an SDK couldn't initialize itself neither from an external cache nor from the ConfigCat CDN, its status will be `down`. It means, this SDK is not able to accept evaluation requests because it doesn't have a valid _config JSON_ to work with.
+
+If an SDK was able to initialize from its configured source, but its last two attempts to refresh has been failed (either from cache or from the ConfigCat CDN), it will become `degraded` because each refresh attempt will put an error to its `records` collection. 
+This means, it's still able to evaluate feature flags, but it might work on a stale _config JSON_.
+
+The root `status` is `healthy` if all of the SDKs are `healthy`. If any of the SDKs become `degraded` or `down`, the root will also switch to `degraded` (or `down` if each SDK is `down`).
+
 </details>
 
 :::note
@@ -218,6 +225,25 @@ Tags:
 - `route`: The request's URL path.
 - `method`: The request's HTTP method.
 - `status`: The response's HTTP status.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`configcat_grpc_rpc_duration_seconds`
+
+</td>
+<td>
+Histogram
+</td>
+<td>
+Histogram of RPC call latency in seconds.<br/><br/>
+Tags:
+
+- `method`: The RPCs name.
+- `code`: The RPCs response code.
 
 </td>
 </tr>
@@ -257,7 +283,27 @@ Tags:
 
 - `sdk`: The SDK's identifier that handles the connection.
 - `type`: `sse` or `grpc`.
-- `flag`: The feature flag's key.
+- `flag`: The streamed feature flag's key.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`configcat_stream_msg_sent_total`
+
+</td>
+<td>
+Counter
+</td>
+<td>
+Total number of all messages sent with streaming.<br/><br/>
+Tags:
+
+- `sdk`: The related SDK's identifier.
+- `type`: `sse` or `grpc`.
+- `flag`: The evaluated feature flag's key.
 
 </td>
 </tr>
