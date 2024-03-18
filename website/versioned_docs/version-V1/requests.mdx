@@ -65,8 +65,8 @@ form of a config JSON file from the ConfigCat CDN and caches it locally.
 ## `GetValue()` call is NOT a config JSON download
 
 Reading feature flag and setting values from cache with `GetValue()` is not considered as a config JSON download.
-If the cache is empty (e.g: on application launch) or expired, a config JSON will be downloaded then all coming `GetValue()`
-calls served from cache.
+If the cache is empty (e.g., on application launch) or expired, a config JSON will be downloaded, and then all 
+subsequent `GetValue()` calls will be served from the cache
 
 ## Example use cases
 
@@ -104,7 +104,7 @@ All these 4 instances use ConfigCat SDK in auto polling mode with a 1-minute pol
 #### Example: High frequency polling in 10 instances
 
 If you want your system to react faster after changing a feature flag in ConfigCat, you can decrease
-the default polling interval down to 1 second. In this case we are calculating with 10 running instances.
+the default polling interval down to 1 second. In this case, we are calculating with 10 running instances.
 
 > **10** _(instances)_ × **2,592,000** _(seconds in a month)_ = **25,920,000 config JSON downloads / month**
 
