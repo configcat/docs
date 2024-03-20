@@ -25,7 +25,7 @@ Read more about the new features in the [Config V2 Overview](../config-v2).
 - Every newly created config will be a V2 config by default.
 - There is no automatic sync between the V1 and V2 configs. If you want to keep them in sync, you have to manually update the V2 config when you make changes to the V1 config and vice versa.
 - There is no pressure to migrate. Although we have plans to phase out V1 eventually, you can stay on it for a long time.
-- Once the migration process is started, it's recommended to migrate your V1 configs to V2 as quickly as possible to avoid confusion. 
+- Once the migration process is started, it's recommended to migrate your V1 configs to V2 as quickly as possible to avoid confusion.
 
 ## Migrating from Config V1 to Config V2
 
@@ -50,11 +50,14 @@ In your application, replace the old ConfigCat SDK Key with the new one (i.e. wi
 
 ### Step 4: Deploy your application
 
-Deploy your application to production and wait until all your users upgrade to the new version. You can check the migration status on the ConfigCat Dashboard on the V2 config's page.
+Deploy your application to production and wait until all your users upgrade to the new version.
+You can check the migration status on the ConfigCat Dashboard under the migration status page that is available from the V2 config's context menu in the sidebar.
 
 ### Step 5: Clean up
 
-Once you are sure that all your users are upgraded to the new version of your application (i.e. the migration status page reports that the V1 configs are not downloaded for a long while), you can complete the migration process by deleting the V1 config. This will prevent confusion and accidental use of the old config.
+After confirming that all your users have transitioned to the latest version of your application, you can finalize the migration by removing the V1 config. 
+To verify that the V1 configs haven't been accessed for a significant period, check the migration status page accessible via the V2 config's context menu in 
+the sidebar. This step helps eliminate any mix-ups and prevents the unintended use of outdated configurations.
 
 :::caution
 Once you delete the V1 config, you won't be able to restore it.
