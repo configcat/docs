@@ -1156,7 +1156,9 @@ You have the option to inject your custom cache implementation into the client. 
 <TabItem value="swift" label="Swift">
 
 ```swift
-public class MyCustomCache : ConfigCache {
+@import ConfigCat
+
+public class MyCustomCache: ConfigCache {
     public func read(key: String) throws -> String {
         // here you have to return with the cached value
     }
@@ -1174,7 +1176,7 @@ public class MyCustomCache : ConfigCache {
 @import Foundation;
 @import ConfigCat;
 
-@interface MyCustomCache : NSObject <ConfigCache>
+@interface MyCustomCache: NSObject <ConfigCache>
 
 @end
 ```
@@ -1198,7 +1200,7 @@ public class MyCustomCache : ConfigCache {
 </TabItem>
 </Tabs>
 
-Then use your custom cache implementation:
+Then you can use your custom cache implementation at the SDK's initialization:
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -1337,8 +1339,74 @@ You can override the default logger with your custom implementation via the `log
 <TabItem value="swift" label="Swift">
 
 ```swift
+@import ConfigCat
+
+class MyCustomLogger: ConfigCatLogger {
+    func debug(message: String) {
+        // write the debug logs
+    }
+    
+    func info(message: String) {
+        // write the info logs
+    }
+    
+    func warning(message: String) {
+        // write the warning logs
+    }
+    
+    func error(message: String) {
+        // write the error logs
+    }
+}
+```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec title="MyCustomLogger.h"
+@import Foundation;
+@import ConfigCat;
+
+@interface MyCustomLogger: NSObject <ConfigCatLogger>
+
+@end
+```
+
+```objectivec title="MyCustomLogger.m"
+#import "MyCustomLogger.h"
+
+@implementation MyCustomLogger
+
+- (void)debugWithMessage:(NSString * _Nonnull)message { 
+    // write the debug logs
+}
+
+- (void)infoWithMessage:(NSString * _Nonnull)message { 
+    // write the info logs
+}
+
+- (void)warningWithMessage:(NSString * _Nonnull)message { 
+    // write the warning logs
+}
+
+- (void)errorWithMessage:(NSString * _Nonnull)message { 
+    // write the error logs
+}
+
+@end
+```
+
+</TabItem>
+</Tabs>
+
+Then you can use your custom logger implementation at the SDK's initialization:
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
+```swift
 let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
-    options.logger = CustomLogger()
+    options.logger = MyCustomLogger()
 }
 ```
 
@@ -1349,7 +1417,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
                                             configurator:^(ConfigCatOptions* options) {
 
-    options.logger = [CustomLogger alloc];
+    options.logger = [MyCustomLogger alloc];
 }];
 ```
 
