@@ -46,8 +46,8 @@ There are three ways how the Proxy is informed about the availability of new fea
 - **Cache polling / file watching**: In [offline mode](#offline-mode), the Proxy can regularly poll a cache or watch a file for new *config JSON* versions.
 
 These are the ports used by the Proxy by default:
-- **8050**: for standard HTTP communication. ([API](/advanced/proxy/endpoints#api), [CDN proxy](/advanced/proxy/endpoints#cdn-proxy), [Webhook](/advanced/proxy/endpoints#webhook), [SSE](/advanced/proxy/endpoints#sse), [Status](/advanced/proxy/monitoring#status))
-- **8051**: for providing [prometheus metrics](/advanced/proxy/monitoring#prometheus-metrics).
+- **8050**: for standard HTTP communication. ([API](/advanced/proxy/endpoints#api), [CDN proxy](/advanced/proxy/endpoints#cdn-proxy), [Webhook](/advanced/proxy/endpoints#webhook), [SSE](/advanced/proxy/endpoints#sse))
+- **8051**: for providing diagnostic data ([status](/advanced/proxy/monitoring#status), [prometheus metrics](/advanced/proxy/monitoring#prometheus-metrics)).
 - **50051**: for [gRPC](/advanced/proxy/grpc) communication.
 
 ## Installation
@@ -107,7 +107,7 @@ You can download the executables directly from <a target="_blank" href="https://
 
 </details>
 
-You can then check the [status endpoint](/advanced/proxy/monitoring#status) of the Proxy to ensure it's working correctly: `http(s)://localhost:8050/status`
+You can then check the [status endpoint](/advanced/proxy/monitoring#status) of the Proxy to ensure it's working correctly: `http://localhost:8051/status`
 
 ## Available Options
 
@@ -272,6 +272,10 @@ CONFIGCAT_LOG_LEVEL="<error|warn|info|debug>"
 
 </TabItem>
 </Tabs>
+
+:::info
+When the main HTTP server's or gRPC server's log level is set to `debug`, each HTTP request or RPC the Proxy receives is logged with additional details. (duration, response status, etc.)
+:::
 
 ### Default User Attributes
 
@@ -643,7 +647,7 @@ CONFIGCAT_MY_SDK_OFFLINE_ENABLED=<true|false>
 
 </td>
 <td><code>false</code></td>
-<td>Enables or disables the SDK's offline mode. In offline mode the SDK will not communicate with the ConfigCat CDN network. Instead, it uses the configured cache or a file as the source of its <code>config.json</code>.</td>
+<td>Turns the SDK's offline mode on/off. In offline mode the SDK will not communicate with the ConfigCat CDN network. Instead, it uses the configured cache or a file as the source of its <code>config.json</code>.</td>
 </tr>
 
 <tr>
@@ -844,7 +848,7 @@ CONFIGCAT_OFFLINE_ENABLED=<true|false>
 
 </td>
 <td><code>false</code></td>
-<td>Enables or disables the global offline mode.</td>
+<td>Turns the global offline mode on/off.</td>
 </tr>
 
 <tr>
@@ -1018,7 +1022,7 @@ CONFIGCAT_CACHE_REDIS_ENABLED=<true|false>
 
 </td>
 <td><code>false</code></td>
-<td>Enables or disables caching into Redis.</td>
+<td>Turns the Redis caching on/off.</td>
 </tr>
 
 <tr>
@@ -1134,7 +1138,7 @@ CONFIGCAT_CACHE_REDIS_TLS_ENABLED=<true|false>
 
 </td>
 <td><code>false</code></td>
-<td>Enables or disables TLS connection to Redis.</td>
+<td>Turns the TLS connection to Redis on/off.</td>
 </tr>
 
 <tr>
@@ -1233,9 +1237,12 @@ The following HTTP and HTTP Proxy related options are available:
 
 ```yaml title="options.yml"
 http:
+  enabled: <true|false>
   port: 8050
   log: 
     level: "<error|warn|info|debug>"
+  status:
+    enabled: <true|false>
 
 http_proxy:
   url: "<proxy-url>"
@@ -1245,8 +1252,10 @@ http_proxy:
 <TabItem value="env-vars" label="Environment variables">
 
 ```shell
+CONFIGCAT_HTTP_ENABLED=<true|false>
 CONFIGCAT_HTTP_PORT=8050
 CONFIGCAT_HTTP_LOG_LEVEL="<error|warn|info|debug>"
+CONFIGCAT_HTTP_STATUS_ENABLED=<true|false>
 
 CONFIGCAT_HTTP_PROXY_URL="<proxy-url>"
 ```
@@ -1259,6 +1268,31 @@ Here's the explanation for each option:
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
 <tbody>
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http: 
+  enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Turns the main HTTP server on/off. This server hosts the <a href="/docs/advanced/proxy/endpoints#cdn-proxy">CDN proxy</a>, <a href="/docs/advanced/proxy/endpoints#api">API</a>, <a href="/docs/advanced/proxy/endpoints#sse">SSE</a>, and <a href="/docs/advanced/proxy/endpoints#webhook">webhook</a> endpoints.</td>
+</tr>
 <tr>
 <td>
 
@@ -1282,7 +1316,7 @@ CONFIGCAT_HTTP_PORT=8050
 
 </td>
 <td><code>8050</code></td>
-<td>The HTTP server's port that serves the <a href="/docs/advanced/proxy/endpoints#cdn-proxy">CDN proxy</a>, <a href="/docs/advanced/proxy/endpoints#api">API</a>, <a href="/docs/advanced/proxy/endpoints#sse">SSE</a>, and <a href="/docs/advanced/proxy/endpoints#webhook">webhook</a> endpoints.</td>
+<td>The main HTTP server's port.</td>
 </tr>
 
 <tr>
@@ -1309,7 +1343,34 @@ CONFIGCAT_HTTP_LOG_LEVEL="<error|warn|info|debug>"
 
 </td>
 <td><code>warn</code></td>
-<td>The verbosity of the HTTP related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code>, or <code>debug</code>. When <code>debug</code> is set, the Proxy will log every HTTP request it receives.</td>
+<td>The verbosity of the HTTP related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code>, or <code>debug</code>.<br />When <code>debug</code> is set, the Proxy will log each HTTP request with additional details.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+http:
+  status: 
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_HTTP_STATUS_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>false</code></td>
+<td>Turns the hosting of the <a href="/docs/advanced/proxy/monitoring/#status">status endpoint</a> on the main HTTP port (default: <code>8050</code>) on/off.</td>
 </tr>
 
 </tbody>
@@ -1411,7 +1472,7 @@ CONFIGCAT_TLS_ENABLED=<true|false>
 
 </td>
 <td><code>false</code></td>
-<td>Enables or disables the enforcement of TLS connection to the ConfigCat Proxy.</td>
+<td>Turns the enforcement of TLS connection to the ConfigCat Proxy on/off.</td>
 </tr>
 
 <tr>

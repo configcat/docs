@@ -1,7 +1,7 @@
 ---
 id: ios
-title: iOS (Swift) SDK Reference
-description: ConfigCat iOS (Swift) SDK Reference. This is a step-by-step guide on how to use feature flags in your iOS mobile application.
+title: Swift (iOS) SDK Reference
+description: ConfigCat Swift (iOS) SDK Reference. This is a step-by-step guide on how to use feature flags in your iOS mobile application.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -12,14 +12,14 @@ export const IosSchema = require('@site/src/schema-markup/sdk-reference/ios.json
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/swift-sdk.svg?style=social)](https://github.com/configcat/swift-sdk/stargazers)
 [![Build Status](https://github.com/configcat/swift-sdk/actions/workflows/swift-ci.yml/badge.svg?branch=master)](https://github.com/configcat/swift-sdk/actions/workflows/swift-ci.yml)
-[![Coverage Status](https://img.shields.io/codecov/c/github/ConfigCat/swift-sdk.svg)](https://codecov.io/gh/ConfigCat/swift-sdk)
 [![CocoaPods](https://img.shields.io/cocoapods/v/ConfigCat.svg)](https://cocoapods.org/pods/ConfigCat)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Supported Platforms](https://img.shields.io/cocoapods/p/ConfigCat.svg?style=flat)](/sdk-reference/ios/)
+[![Supported Platforms](https://img.shields.io/cocoapods/p/ConfigCat.svg?style=flat)](https://configcat.com/docs/sdk-reference/ios)
+[![Coverage Status](https://img.shields.io/sonar/coverage/configcat_swift-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=configcat_swift-sdk)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=configcat_swift-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=configcat_swift-sdk)
 
 <a href="https://github.com/configcat/swift-sdk" target="_blank">ConfigCat Swift SDK on GitHub</a>
 
-## Getting Started:
+## Getting Started
 
 ### 1. Add the ConfigCat SDK to your project
 
@@ -56,7 +56,7 @@ Add the SDK to your `Package.swift`.
 dependencies: [
     .package(
         url: "https://github.com/configcat/swift-sdk",
-        from: "10.0.0"
+        from: "11.0.0"
     )
 ]
 ```
@@ -170,6 +170,18 @@ client.close() // closes the specific client
 </TabItem>
 </Tabs>
 
+## Supported platform versions
+
+The following device platform versions are supported:
+
+| Platform | Version    |
+| -------- | ---------- |
+| iOS      | >= 12.0    |
+| watchOS  | >= 4.0     |
+| tvOS     | >= 12.0    |
+| macOS    | >= 10.13   |
+| visionOS | >= 1.0     |
+
 ## Creating the _ConfigCat Client_
 
 _ConfigCat Client_ is responsible for:
@@ -221,6 +233,7 @@ These are the available options on the `ConfigCatOptions` class:
 | `flagOverrides`        | `OverrideDataSource?`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
 | `logLevel`             | `LogLevel`                | Optional, sets the internal log level. [More about logging.](#logging).                                                                                                                                                                                                                            |
 | `defaultUser`          | `ConfigCatUser?`          | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                         |
+| `logger`               | `ConfigCatLogger`         | Optional, sets the logger implementation used by the SDK. [More about logging](#logging)                                                                                                                                                                                                       |
 | `offline`              | `Bool`                    | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                  |
 | `hooks`                | `Hooks`                   | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
 
@@ -290,6 +303,36 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-ID
 </TabItem>
 </Tabs>
 
+:::caution
+_The following is only related to the SDK's generic-typed API which's only accessible from Swift._
+
+It is important to provide an argument for the `defaultValue` parameter, specifically for the `Value` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to the following table for the corresponding types.
+:::
+
+### Setting type mapping {#setting-type-mapping}
+
+| Setting Kind   | Type parameter `Value` |
+| -------------- | ---------------------- |
+| On/Off Toggle  | `Bool` / `Bool?`       |
+| Text           | `String` / `String?`   |
+| Whole Number   | `Int` / `Int?`         |
+| Decimal Number | `Double` / `Double?`   |
+
+In addition to the types mentioned above, you also have the option to provide `Any` or `Any?` for the type parameter (or to use the `getAnyValue` method) regardless of the setting kind.
+
+If you provide any other type for the type parameter, or if you specify an allowed type but it mismatches the setting kind, an error message will be logged and `defaultValue` will be returned.
+
+When relying on type inference, be mindful of potential type mismatch issues, especially with number types.
+For example, `await client.getValue(for: "keyOfMyDecimalSetting", defaultValue: 0)` will return `defaultValue` (`0`) instead of the actual value of the decimal setting because
+the compiler infers the type as `Int` instead of `Double`.
+
+To correctly evaluate a decimal setting, you should use:
+
+```swift
+let value = await client.getValue(for: "keyOfMyDecimalSetting", defaultValue: 0.0);
+```
+
 ## Anatomy of `getValueDetails()`
 
 `getValueDetails()` is similar to `getValue()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
@@ -337,6 +380,13 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-ID
 </TabItem>
 </Tabs>
 
+:::caution
+_The following is only related to the SDK's generic-typed API which's only accessible from Swift._
+
+It is important to provide an argument for the `defaultValue` parameter, specifically for the `Value` generic type parameter,
+that matches the type of the feature flag or setting you are evaluating. Please refer to [this table](#setting-type-mapping) for the corresponding types.
+:::
+
 The details result contains the following information:
 
 | Field                             | Type                                 | Description                                                                               |
@@ -346,8 +396,8 @@ The details result contains the following information:
 | `isDefaultValue`                  | `Bool`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
 | `error`                           | `String?`                            | In case of an error, this property contains the error message.                            |
 | `user`                            | `ConfigCatUser?`                     | The User Object that was used for evaluation.                                             |
-| `matchedEvaluationPercentageRule` | `PercentageRule?`                    | If the evaluation was based on a percentage rule, this property contains that specific rule. |
-| `matchedEvaluationRule`           | `RolloutRule?`                       | If the evaluation was based on a Targeting Rule, this property contains that specific rule.  |
+| `matchedPercentageOption`         | `PercentageOption?`                  | The Percentage Option (if any) that was used to select the evaluated value.               |
+| `matchedTargetingRule`            | `TargetingRule?`                     | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value.  |
 | `fetchTime`                       | `Date`                               | The last download time of the current config.                                             |
 
 ## Snapshots and synchronous feature flag evaluation
@@ -494,6 +544,70 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-ID
 
 </TabItem>
 </Tabs>
+
+The `custom` map also allows attribute values other than `String` values:
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
+```swift
+let dateFormatter = DateFormatter()
+dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+let registeredAt = dateFormatter.date(from:"2023-03-31T23:59:59.999Z")!
+
+let user = ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#",
+    email: "john@example.com",
+    country: "United Kingdom",
+    custom: ["Rating":4.5, "RegisteredAt":registeredAt, "Roles": ["Role1", "Role2"]])
+```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec
+NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+NSDate *registeredAt = [dateFormatter dateFromString: @"2023-03-31T23:59:59.999Z"];
+
+ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
+                                                         email:@"john@example.com"
+                                                       country:@"United Kingdom"
+                                                        custom:@{@"Rating": @4.5, 
+                                                                 @"RegisteredAt": registeredAt,
+                                                                 @"Roles":@[@"Role1", @"Role2"]}];
+```
+
+</TabItem>
+</Tabs>
+
+### User Object Attribute Types
+
+All comparators support `String` values as User Object attribute (in some cases they need to be provided in a specific format though, see below),
+but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
+
+**Text-based comparators** (EQUALS, IS ONE OF, etc.)
+* accept `String` values,
+* all other values are automatically converted to `String` (a warning will be logged but evaluation will continue as normal).
+
+**SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
+* accept `String` values containing a properly formatted, valid semver value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**Number-based comparators** (=, &lt;, &gt;=, etc.)
+* accept `Int`, `UInt`, `Double`, or `Float` values,
+* accept `String` values containing a properly formatted, valid `Double` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**Date time-based comparators** (BEFORE / AFTER)
+* accept `Date` values, which are automatically converted to a second-based Unix timestamp,
+* accept `Int`, `UInt`, `Double`, or `Float` values representing a second-based Unix timestamp,
+* accept `String` values containing a properly formatted, valid `Double` value,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
+
+**String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
+* accept arrays of `String`,
+* accept `String` values containing a valid JSON string which can be deserialized to an array of `String`,
+* all other values are considered invalid (a warning will be logged and the currently evaluated targeting rule will be skipped).
 
 ### Default user
 
@@ -1037,13 +1151,15 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 
 ### Custom cache
 
-You have the option to inject your custom cache implementation into the client. All you have to do is to inherit from the `ConfigCache` open class:
+You have the option to inject your custom cache implementation into the client. All you have to do is to conform the `ConfigCache` protocol:
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
 
 ```swift
-public class MyCustomCache : ConfigCache {
+@import ConfigCat
+
+public class MyCustomCache: ConfigCache {
     public func read(key: String) throws -> String {
         // here you have to return with the cached value
     }
@@ -1061,7 +1177,7 @@ public class MyCustomCache : ConfigCache {
 @import Foundation;
 @import ConfigCat;
 
-@interface MyCustomCache : NSObject <ConfigCache>
+@interface MyCustomCache: NSObject <ConfigCache>
 
 @end
 ```
@@ -1085,7 +1201,7 @@ public class MyCustomCache : ConfigCache {
 </TabItem>
 </Tabs>
 
-Then use your custom cache implementation:
+Then you can use your custom cache implementation at the SDK's initialization:
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -1215,8 +1331,99 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 
 ## Logging
 
-We are using the _Unified Logging System_ in the _ConfigCat SDK_ for logging. For more information about _Unified Logging_ please visit
+The default logger used by the SDK is using the _Unified Logging System_. For more information about _Unified Logging_ please visit
 <a href="https://developer.apple.com/documentation/os/logging" target="_blank">Apple's developer page</a> or check <a href="https://developer.apple.com/videos/play/wwdc2016/721" target="_blank">Session 721 - Unified Logging and Activity Tracing</a> from WWDC 2016.
+
+You can override the default logger with your custom implementation via the `logger` client option. The custom implementation must conform the `ConfigCatLogger` protocol.
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
+```swift
+@import ConfigCat
+
+class MyCustomLogger: ConfigCatLogger {
+    func debug(message: String) {
+        // write the debug logs
+    }
+    
+    func info(message: String) {
+        // write the info logs
+    }
+    
+    func warning(message: String) {
+        // write the warning logs
+    }
+    
+    func error(message: String) {
+        // write the error logs
+    }
+}
+```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec title="MyCustomLogger.h"
+@import Foundation;
+@import ConfigCat;
+
+@interface MyCustomLogger: NSObject <ConfigCatLogger>
+
+@end
+```
+
+```objectivec title="MyCustomLogger.m"
+#import "MyCustomLogger.h"
+
+@implementation MyCustomLogger
+
+- (void)debugWithMessage:(NSString * _Nonnull)message { 
+    // write the debug logs
+}
+
+- (void)infoWithMessage:(NSString * _Nonnull)message { 
+    // write the info logs
+}
+
+- (void)warningWithMessage:(NSString * _Nonnull)message { 
+    // write the warning logs
+}
+
+- (void)errorWithMessage:(NSString * _Nonnull)message { 
+    // write the error logs
+}
+
+@end
+```
+
+</TabItem>
+</Tabs>
+
+Then you can use your custom logger implementation at the SDK's initialization:
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
+```swift
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.logger = MyCustomLogger()
+}
+```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
+                                            configurator:^(ConfigCatOptions* options) {
+
+    options.logger = [MyCustomLogger alloc];
+}];
+```
+
+</TabItem>
+</Tabs>
 
 ### Log level
 
@@ -1238,7 +1445,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
                                             configurator:^(ConfigCatOptions* options) {
 
-    options.logLevel = LogLevelInfo;
+    options.logLevel = ConfigCatLogLevelInfo;
 }];
 ```
 
@@ -1261,13 +1468,13 @@ Available log levels:
 </TabItem>
 <TabItem value="objectivec" label="Objective-C">
 
-| Level             | Description                                                                             |
-| ----------------- | --------------------------------------------------------------------------------------- |
-| `LogLevelNolog`   | Turn the ConfigCat logging off.                                                         |
-| `LogLevelError`   | Only error level events are logged.                                                     |
-| `LogLevelWarning` | Default. Errors and Warnings are logged.                                                |
-| `LogLevelInfo`    | Errors, Warnings and feature flag evaluation is logged.                                 |
-| `LogLevelDebug`   | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
+| Level                      | Description                                                                             |
+| ---------------------------| --------------------------------------------------------------------------------------- |
+| `ConfigCatLogLevelNolog`   | Turn the ConfigCat logging off.                                                         |
+| `ConfigCatLogLevelError`   | Only error level events are logged.                                                     |
+| `ConfigCatLogLevelWarning` | Default. Errors and Warnings are logged.                                                |
+| `ConfigCatLogLevelInfo`    | Errors, Warnings and feature flag evaluation is logged.                                 |
+| `ConfigCatLogLevelDebug`   | All of the above plus debug info is logged. Debug logs can be different for other SDKs. |
 
 </TabItem>
 </Tabs>
@@ -1276,13 +1483,11 @@ Info level logging helps to inspect the feature flag evaluation process.
 Example log entries:
 
 ```bash
-[main] Evaluating getValue(isPOCFeatureEnabled).
-User object: {
-  "Identifier" : "#UNIQUE-USER-IDENTIFIER#",
-  "Email" : "john@example.com"
-}.
-Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
-Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: Optional(true)
+[5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","version":"1.0.0","Email":"configcat@example.com","Country":"CountryID"}'
+  Evaluating targeting rules and applying the first match if any:
+  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'false' => no match
+  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'true' => MATCH, applying rule
+  Returning 'true'.
 ```
 
 ## Sensitive information handling
