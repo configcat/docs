@@ -26,7 +26,7 @@ const options = {
     /\/Configs/g,
     /\/Tags/g,
     /\/Permission-Groups/g,
-    '(/docs/targeting/targeting-overview/#anatomy-of-the-percentage-based-targeting)', // TODO: Remove when public api docs points to the correct location
+    '(/docs/advanced/targeting/#anatomy-of-the-percentage-based-targeting)', // TODO: Remove when public api docs points to the correct location
     '(/docs/advanced/targeting/)', // TODO: Remove when public api docs points to the correct location
     '(/docs/advanced/user-object/)' // TODO: Remove when public api docs points to the correct location
   ],
