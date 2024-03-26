@@ -376,6 +376,10 @@ A few steps to set up Slack and get a message when a setting changes:
 }
 ```
 
+## Retries
+
+When ConfigCat notices that a webhook request might not delivered successfully (either due to network instabilities or when we receive a non-2XX status response), it attempts to retry the request at most 5 times with variable frequency.
+
 ## Connecting to Microsoft Teams
 
 A few steps to set up Microsoft Teams and get a message when a setting changes:
