@@ -30,7 +30,7 @@ The SDK evaluates the conditions in the rule's IF part one by one, from top to b
 
 The result `cannot evaluate` occurs when the necessary user attribute is missing, invalid or incorrectly formatted (the SDK logs these issues as warnings).
 
-A Targeting Rule matches only when all its conditions evaluates to `true`. In any other cases, it doesn't match.
+A Targeting Rule matches only when all its conditions evaluate to `true`. In any other cases, it doesn't match.
 
 ### Evaluation of a User Condition
 
@@ -71,7 +71,7 @@ The evaluation process is entirely implemented within the SDKs, meaning your use
 
 ### Example Scenarios for Percentage Options
 
-Imagine you have two users, Jane and Joe, and you're experimenting with two different feature flags (`isTwitterSharingEnabled` and `isFacebookSharingEnabled`) that use percentage-based targeting. In these scenarios, we see how Percentage Options allows for a controlled and gradual rollout of features, ensuring a smooth transition for users like Jane and Joe.
+Imagine you have two users, Jane and Joe, and you're experimenting with two different feature flags (`isTwitterSharingEnabled` and `isFacebookSharingEnabled`) that use percentage-based targeting. In these scenarios, we see how Percentage Options allow for a controlled and gradual rollout of features, ensuring a smooth transition for users like Jane and Joe.
 
 First, the users are assigned a number between 0-99 based on the hash of their identifier and the feature flag's key. This number determines their eligibility for a feature based on the Percentage Options set on the Dashboard.
 
