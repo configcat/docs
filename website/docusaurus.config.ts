@@ -39,11 +39,6 @@ const config: Config = {
             to: '/api/reference/configcat-public-management-api',
             from: '/advanced/public-api',
           },
-          /*
-          TODO: before turning V2 as latest. We have to check all page urls that are not existing in V2 anymore and create some redirects for them (e.g. commented section below - /targeting/targeting-overview).
-          Also, we can remove the v2 (/V2/advanced/config-v2, /V2/advanced/config-v2-migration-guide, /V2/advanced/config-v2-sdk-compatibility) redirects
-          */
-          /*
           {
             to: '/targeting/targeting-overview',
             from: '/advanced/targeting'
@@ -55,7 +50,7 @@ const config: Config = {
           {
             to: '/targeting/targeting-rule/segment-condition',
             from: '/advanced/targeting/segments/'
-          }*/
+          }
         ],
       },
     ],
@@ -68,26 +63,26 @@ const config: Config = {
         sidebarPath: './api/sidebars.ts',
         docRootComponent: "@theme/DocRoot",
         docItemComponent: "@theme/ApiItem",
-        
+
       },
     ],
     [
       'docusaurus-plugin-openapi-docs',
       {
-          id: 'api-docs',
-          docsPluginId: 'api-content',
-          config: {
-              server: {
-                  specPath: 'https://api.configcat.com/docs/v1/swagger.json',
-                  outputDir: 'api/reference',
-                  sidebarOptions: {
-                      groupPathsBy: 'tag',
-                      categoryLinkSource: 'tag'
-                  },
-              },
+        id: 'api-docs',
+        docsPluginId: 'api-content',
+        config: {
+          server: {
+            specPath: 'https://api.configcat.com/docs/v1/swagger.json',
+            outputDir: 'api/reference',
+            sidebarOptions: {
+              groupPathsBy: 'tag',
+              categoryLinkSource: 'tag'
+            },
           },
+        },
       },
-  ],
+    ],
     // ['./src/plugins/smartlook',
     //   {
     //     smartlookKey: '05d0e4ca90c61150955104a9d4b76ab16a0b2380',
@@ -294,16 +289,16 @@ const config: Config = {
           sidebarCollapsible: true,
           editUrl: 'https://github.com/configcat/docs/tree/master/website',
           routeBasePath: '/',
-          lastVersion: 'V1',
+          lastVersion: 'current',
           versions: {
             current: {
-              label: 'Config V2 (beta)',
-              path: '/V2',
-              noIndex: true
+              label: 'Config V2',
+              path: '/',
             },
             "V1": {
-              label: 'Config V1',
-              path: '/',
+              label: 'Config V1 (legacy)',
+              path: '/V1',
+              noIndex: true
             },
           },
         },
@@ -314,7 +309,7 @@ const config: Config = {
           archiveBasePath: null,
         },
         sitemap: {
-          ignorePatterns: ['/docs/V2/**'],
+          ignorePatterns: ['/docs/V1/**'],
         }
       } satisfies Preset.Options,
     ],
