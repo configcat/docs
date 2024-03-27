@@ -1518,7 +1518,7 @@ CONFIGCAT_CACHE_MONGODB_TLS_CERTIFICATES='[{"key":"<path-to-key>","cert":"<path-
 
 By default, the Proxy uses the standard [AWS CLI environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) (or a local AWS configuration file) to read the AWS credentials and region for connecting to DynamoDB. 
 
-The Proxy doesn't create the DynamoDB table automatically, it must must already exist with a partition key called `key`. The data stored in the table has the following attributes:
+The Proxy doesn't create the DynamoDB table automatically, it must already exist with a partition key called `key`. The data stored in the table has the following attributes:
 - `key`: The unique cache key determined by the ConfigCat SDK within the Proxy.
 - `payload`: The downloaded _config JSON_ in a standardized format determined by the ConfigCat SDK within the Proxy.
 
