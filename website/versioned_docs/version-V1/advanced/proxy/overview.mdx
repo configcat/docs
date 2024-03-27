@@ -109,7 +109,7 @@ You can download the executables directly from <a target="_blank" href="https://
 
 You can then check the [status endpoint](/advanced/proxy/monitoring#status) of the Proxy to ensure it's working correctly: `http://localhost:8051/status`
 
-## Available Options
+## Configuration Options
 
 You can specify options for the Proxy either via a YAML file or with environment variables. When an option is defined in both places, the environment variable's value takes precedence.
 
@@ -249,7 +249,7 @@ Then start the Proxy:
 
 The following sections will go through each available option in detail.
 
-### Logging
+## Logging
 
 The Proxy supports the following log levels: `debug`, `info`, `warn`, and `error`. The default is `warn`.
 
@@ -277,7 +277,7 @@ CONFIGCAT_LOG_LEVEL="<error|warn|info|debug>"
 When the main HTTP server's or gRPC server's log level is set to `debug`, each HTTP request or RPC the Proxy receives is logged with additional details. (duration, response status, etc.)
 :::
 
-### Default User Attributes
+## Default User Attributes
 
 There's an option to predefine [User Object](/advanced/user-object) attributes with default values. Whenever the Proxy receives an evaluation request it will automatically attach these predefined attributes to the request. If the evaluation request contains a different value for an attribute you previously defined, the request's value will take precedence.
 
@@ -304,7 +304,7 @@ CONFIGCAT_DEFAULT_USER_ATTRIBUTES='{"attribute_key1":"<attribute_value1>","attri
 It's also possible to set default user attributes at the SDK level. See the [SDK options](#sdk) section below for more details.
 :::
 
-### SDK
+## SDK
 
 In order to make the Proxy work properly, it must be set up with one or more <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a>. It will instantiate one SDK instance for each SDK key.
 In case of environment variables, the SDK keys can be specified in a **JSON key-value** format, where the **key is the identifier** of a specific SDK and the **value is the actual SDK key**.
@@ -389,7 +389,7 @@ CONFIGCAT_ANOTHER_SDK_POLL_INTERVAL=15
 
 Here's the explanation for each option:
 
-#### SDK Identifier / SDK Key
+### SDK Identifier / SDK Key
 
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Description</th></tr></thead>
@@ -421,7 +421,7 @@ CONFIGCAT_SDKS={"my_sdk":"<your-sdk-key>"}
 </tbody>
 </table>
 
-#### Additional SDK Options
+### Additional SDK Options
 
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
@@ -613,7 +613,7 @@ CONFIGCAT_MY_SDK_LOG_LEVEL="<error|warn|info|debug>"
 </tbody>
 </table>
 
-#### Offline Mode
+### Offline Mode
 
 The following options are specific to the SDK's offline mode. In offline mode, there are two ways the Proxy can get the required feature flag evaluation data for the underlying SDKs.
 
@@ -818,7 +818,7 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_POLL_INTERVAL=5
 </tbody>
 </table>
 
-#### Global Offline Mode
+### Global Offline Mode
 
 It is possible to turn on offline mode globally for a whole Proxy instance. When it's turned on, each underlying SDK switches to work from the configured [cache](#cache).
 
@@ -910,11 +910,11 @@ CONFIGCAT_OFFLINE_LOG_LEVEL="<error|warn|info|debug>"
 When an SDK also has its offline option set, that will override what it would inherit from the global offline option.
 :::
 
-### Cache
+## Cache
 
 The Proxy in its default setup stores all the information it needs for feature flag evaluation in memory. This behavior is extendable with an external cache that you can use for pointing the underlying SDKs to your own data storage.
 
-Currently, the only available option is <a target="blank" href="https://redis.io">Redis</a>. The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
+Currently, <a target="blank" href="https://redis.io">Redis</a>, <a target="blank" href="https://mongodb.com/">MongoDB</a>, and <a target="blank" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide">DynamoDB</a> is supported as external cache. The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
 
 :::info
 The ConfigCat Proxy supports *shared caching*, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](/advanced/caching/#shared-cache).
@@ -923,10 +923,12 @@ The ConfigCat Proxy supports *shared caching*, which means it can feed an extern
 
 :::
 
+### Redis
+
 <Tabs groupId="yaml-env">
 <TabItem value="yaml" label="YAML" default>
 
-This is the whole YAML section of the cache specific options.
+This is the whole YAML section of the Redis specific options.
 ```yaml title="options.yml"
 cache:
   redis:
@@ -947,7 +949,7 @@ cache:
 </TabItem>
 <TabItem value="env-vars" label="Environment variables">
 
-These are the cache specific environment variables.
+These are the Redis specific environment variables.
 ```shell
 CONFIGCAT_CACHE_REDIS_ENABLED=<true|false>
 CONFIGCAT_CACHE_REDIS_DB=0
@@ -965,38 +967,9 @@ CONFIGCAT_CACHE_REDIS_TLS_CERTIFICATES='[{"key":"<path-to-key>","cert":"<path-to
 
 Here's the explanation for each option:
 
-#### Redis
-
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
 <tbody>
-
-<tr>
-<td>
-
-<Tabs groupId="yaml-env">
-<TabItem value="yaml" label="YAML" default>
-
-```yaml
-cache:
-  redis:
-    addresses: ["<addr1>", "<addr2>"]
-```
-
-</TabItem>
-<TabItem value="env-vars" label="Environment variable">
-
-```shell
-CONFIGCAT_CACHE_REDIS_ADDRESSES='["<addr1>", "<addr2>"]'
-```
-
-</TabItem>
-</Tabs>
-
-</td>
-<td><code>["localhost:6379"]</code></td>
-<td>The addresses of the Redis instances. The Proxy uses <a target="blank" href="https://redis.uptrace.dev/guide/universal.html">Universal Redis clients</a>, so if the array contains multiple addresses, it will use <code>ClusterClient</code> instances.</td>
-</tr>
 
 <tr>
 <td>
@@ -1022,7 +995,34 @@ CONFIGCAT_CACHE_REDIS_ENABLED=<true|false>
 
 </td>
 <td><code>false</code></td>
-<td>Turns the Redis caching on/off.</td>
+<td>Turns caching into Redis on/off.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  redis:
+    addresses: ["<addr1>", "<addr2>"]
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_REDIS_ADDRESSES='["<addr1>", "<addr2>"]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>["localhost:6379"]</code></td>
+<td>The addresses of the Redis instances. The Proxy uses <a target="blank" href="https://redis.uptrace.dev/guide/universal.html">Universal Redis clients</a>, so if the array contains multiple addresses, it will use a <code>ClusterClient</code> instance.</td>
 </tr>
 
 <tr>
@@ -1108,7 +1108,7 @@ CONFIGCAT_CACHE_REDIS_PASSWORD="<pass>"
 </tbody>
 </table>
 
-The following options are related to securing the connection to Redis with TLS.
+The following options are for securing the connection to Redis with TLS.
 
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
@@ -1228,7 +1228,421 @@ CONFIGCAT_CACHE_REDIS_TLS_CERTIFICATES='[{"key":"<path-to-key>","cert":"<path-to
 </tbody>
 </table>
 
-### HTTP
+### MongoDB
+
+When the configured MongoDB database and collection doesn't exist, the Proxy automatically creates them. The following document structure is used to store the downloaded _config JSON_ in BSON format: 
+```json
+{ 
+  "key": "<The unique cache key determined by the ConfigCat SDK within the Proxy>", 
+  "payload": "<The downloaded config JSON in a standardized format determined by the ConfigCat SDK within the Proxy>" 
+}
+```  
+At the collection creation, the Proxy also creates a unique index for the `key` field.
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+This is the whole YAML section of the MongoDB specific options.
+```yaml title="options.yml"
+cache:
+  mongodb:
+    enabled: <true|false>
+    url: "<connection-url>"
+    database: "<database-name>"
+    collection: "<collection-name>"
+    tls: 
+      enabled: <true|false>
+      min_version: <1.0|1.1|1.2|1.3>
+      server_name: "<server-name>"
+      certificates:
+        - cert: "<path-to-cert>"
+          key: "<path-to-key>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+These are the MongoDB specific environment variables.
+```shell
+CONFIGCAT_CACHE_MONGODB_ENABLED=<true|false>
+CONFIGCAT_CACHE_MONGODB_URL="<connection-url>"
+CONFIGCAT_CACHE_MONGODB_DATABASE="<database-name>"
+CONFIGCAT_CACHE_MONGODB_COLLECTION="<collection-name>"
+CONFIGCAT_CACHE_MONGODB_TLS_ENABLED=<true|false>
+CONFIGCAT_CACHE_MONGODB_TLS_MIN_VERSION=<1.0|1.1|1.2|1.3>
+CONFIGCAT_CACHE_MONGODB_TLS_SERVER_NAME="<server-name>"
+CONFIGCAT_CACHE_MONGODB_TLS_CERTIFICATES='[{"key":"<path-to-key>","cert":"<path-to-cert>"}]'
+```
+
+</TabItem>
+</Tabs>
+
+Here's the explanation for each option:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  mongodb:
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_MONGODB_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>false</code></td>
+<td>Turns caching into MongoDB on/off.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  mongodb:
+    url: "<connection-url>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_MONGODB_URL="<connection-url>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>-</code></td>
+<td>The [connection url](https://www.mongodb.com/docs/drivers/go/current/fundamentals/connections/connection-guide/#connection-uri) to MongoDB.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  mongodb:
+    database: "<database-name>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_MONGODB_DATABASE="<database-name>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>configcat_proxy</code></td>
+<td>The name of the MongoDB database that the Proxy will use for storing data.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  mongodb:
+    collection: "<collection-name>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_MONGODB_COLLECTION="<collection-name>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>cache</code></td>
+<td>The name of the collection inside the MongoDB database.</td>
+</tr>
+
+</tbody>
+</table>
+
+The following options are for securing the connection to MongoDB with TLS.
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  mongodb:
+    tls: 
+      enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_MONGODB_TLS_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>false</code></td>
+<td>Turns the TLS connection to MongoDB on/off.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  mongodb:
+    tls: 
+      min_version: <1.0|1.1|1.2|1.3>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_MONGODB_TLS_MIN_VERSION=<1.0|1.1|1.2|1.3>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>1.2</code></td>
+<td>The minimum TLS version to use.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  mongodb:
+    tls: 
+      server_name: "<server-name>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_MONGODB_TLS_SERVER_NAME="<server-name>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>The name of the MongoDB server.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  mongodb:
+    certificates:
+      - cert: "<path-to-cert>"
+        key: "<path-to-key>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_MONGODB_TLS_CERTIFICATES='[{"key":"<path-to-key>","cert":"<path-to-cert>"}]'
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td>-</td>
+<td>A list of TLS certificate/key pairs.</td>
+</tr>
+</tbody>
+</table>
+
+### DynamoDB
+
+By default, the Proxy uses the standard [AWS CLI environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) (or a local AWS configuration file) to read the AWS credentials and region for connecting to DynamoDB. 
+
+The Proxy doesn't create the DynamoDB table automatically, it must already exist with a partition key called `key`. The data stored in the table has the following attributes:
+- `key`: The unique cache key determined by the ConfigCat SDK within the Proxy.
+- `payload`: The downloaded _config JSON_ in a standardized format determined by the ConfigCat SDK within the Proxy.
+
+The following permissions are needed to read and write the table:
+
+- `GetItem`
+- `PutItem`
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+This is the whole YAML section of the DynamoDB specific options.
+```yaml title="options.yml"
+cache:
+  dynamodb:
+    enabled: <true|false>
+    url: "<url>"
+    table: "<table-name>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+These are the DynamoDB specific environment variables.
+```shell
+CONFIGCAT_CACHE_DYNAMODB_ENABLED=<true|false>
+CONFIGCAT_CACHE_DYNAMODB_URL="<url>"
+CONFIGCAT_CACHE_DYNAMODB_TABLE="<table-name>"
+```
+
+</TabItem>
+</Tabs>
+
+Here's the explanation for each option:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  dynamodb:
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_DYNAMODB_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>false</code></td>
+<td>Turns caching into DynamoDB on/off.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  dynamodb:
+    url: "<url>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_DYNAMODB_URL="<url>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>-</code></td>
+<td>The DynamoDB service endpoint.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+cache:
+  dynamodb:
+    table: "<table-name>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_CACHE_DYNAMODB_TABLE="<table-name>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>configcat_proxy_cache</code></td>
+<td>The name of the DynamoDB table that the Proxy will use for storing data.</td>
+</tr>
+
+</tbody>
+</table>
+
+## HTTP
 
 The following HTTP and HTTP Proxy related options are available:
 
@@ -1376,7 +1790,7 @@ CONFIGCAT_HTTP_STATUS_ENABLED=<true|false>
 </tbody>
 </table>
 
-#### HTTP Proxy
+### HTTP Proxy
 
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
@@ -1410,11 +1824,11 @@ CONFIGCAT_HTTP_PROXY_URL="<proxy-url>"
 </tbody>
 </table>
 
-#### Endpoints
+### Endpoints
 
 The options for HTTP endpoints are discussed in the [Endpoints](/advanced/proxy/endpoints) section.
 
-### TLS
+## TLS
 
 For securing direct communication to the ConfigCat Proxy, you have the option to set up TLS. Another option would be to use a full-featured reverse proxy that secures the communication and forwards each request to the Proxy.
 
