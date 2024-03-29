@@ -26,7 +26,6 @@ const config: Config = {
       },
     ],
     'docusaurus-plugin-sass',
-    'docusaurus-plugin-image-zoom',
     [
       '@docusaurus/plugin-client-redirects',
       {
@@ -277,12 +276,8 @@ const config: Config = {
       searchParameters: {},
       externalUrlRegex: 'configcat\\.com/blog',
     },
-    zoom: {
+    imgZoom: {
       selector: '.markdown img:not([src^="http"])',
-      background: {
-        light: 'var(--ifm-background-color)',
-        dark: 'var(--ifm-background-color)'
-      },
     }
   } satisfies Preset.ThemeConfig,
   presets: [
@@ -322,6 +317,7 @@ const config: Config = {
   themes: ["docusaurus-theme-openapi-docs"],
   scripts: [],
   stylesheets: [],
+  clientModules: ['./src/client-modules/img-zoom'],
 };
 
 export default config;
