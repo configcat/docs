@@ -278,6 +278,7 @@ const config: Config = {
     },
     imgZoom: {
       selector: '.markdown img:not([src^="http"])',
+      zoomedInClass: 'zoomed-in-img',
     }
   } satisfies Preset.ThemeConfig,
   presets: [

@@ -4,11 +4,12 @@ import './zoom.scss';
 
 const { themeConfig } = siteConfig;
 const { imgZoom }: { imgZoom?: ZoomOptions } = themeConfig;
-const { selector = '.markdown img', scrollOffset = 45 } = imgZoom || ({} as ZoomOptions);
+const { selector = '.markdown img', scrollOffset = 45, zoomedInClass = '' } = imgZoom || ({} as ZoomOptions);
 
 type ZoomOptions = {
   selector: string;
   scrollOffset: number;
+  zoomedInClass: string;
 }
 
 const zoom = () => {
@@ -104,13 +105,16 @@ const zoom = () => {
     overlay.classList.add('zoom-overlay');
     document.body.appendChild(overlay);
 
-    var targetImage = event.target;
-    var img = document.createElement('img')
-    img.onload = function () {
+    const targetImage = event.target;
+    const img = document.createElement('img');
+    img.onload = () => {
       document.body.classList.add('zoom-overlay-open');
       overlay.appendChild(img);
+    };
+    img.src = targetImage.currentSrc || targetImage.src;
+    if (zoomedInClass.length) {
+      img.classList.add(zoomedInClass);
     }
-    img.src = targetImage.currentSrc || targetImage.src
   }
 
   const _closeZoom = event => {
@@ -132,7 +136,7 @@ const zoom = () => {
   }
 
   const _getScrollTop = () => {
-    return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+    return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
   }
 
   return { start, tearDown };
