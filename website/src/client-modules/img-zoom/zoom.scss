@@ -1,0 +1,23 @@
+.zoom-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    z-index: 9999;
+    background: var(--ifm-background-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+  
+  .zoom-overlay-open .zoom-overlay {
+    opacity: 1;
+  }
+
+  .zoom-img {
+    cursor: zoom-in;
+  }
