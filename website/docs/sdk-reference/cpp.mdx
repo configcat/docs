@@ -129,11 +129,11 @@ These clients can be closed all at once with `ConfigCatClient::closeAll()` metho
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 ```cpp
-auto user = ConfigCatUser("#USER-IDENTIFIER#");
+auto user = ConfigCatUser::create("#USER-IDENTIFIER#");
 auto value = client->getValue(
     "keyOfMySetting", // key
     false, // defaultValue
-    &user, // Optional User Object
+    user, // Optional User Object
 );
 ```
 
@@ -148,11 +148,11 @@ auto value = client->getValue(
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
 
 ```cpp
-auto user = ConfigCatUser("#USER-IDENTIFIER#");
+auto user = ConfigCatUser::create("#USER-IDENTIFIER#");
 auto details = client->getValueDetails(
     "keyOfMySetting", // key
     false, // defaultValue
-    &user, // Optional User Object
+    user, // Optional User Object
 );
 ```
 
@@ -367,11 +367,11 @@ You can subscribe to these events either on SDK initialization:
 ```cpp
 ConfigCatOptions options;
 options.pollingMode = PollingMode::manualPoll();
-options.hooks = make_shared<Hooks>(
+options.hooks = std::make_shared<Hooks>(
     []() { /* onClientReady callback */ },
-    [](shared_ptr<Settings> config) { /* onConfigChanged callback */ },
-    [](const EvaluationDetails& details) { /* onFlagEvaluated callback */ },
-    [](const string& error) { /* onError callback */ }
+    [](std::shared_ptr<const Settings> config) { /* onConfigChanged callback */ },
+    [](const EvaluationDetailsBase& details) { /* onFlagEvaluated callback */ },
+    [](const std::string& error, const std::exception_ptr& exception) { /* onError callback */ }
 );
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
@@ -379,7 +379,7 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 or with the  `getHooks()` method of the ConfigCat client:
 
 ```cpp
-client->getHooks->addOnFlagEvaluated([](const EvaluationDetails& details) { /* onFlagEvaluated callback */ });
+client->getHooks->addOnFlagEvaluated([](const EvaluationDetailsBase& details) { /* onFlagEvaluated callback */ });
 ```
 
 ## Online / Offline mode
@@ -421,7 +421,7 @@ The SDK can be set up to load your feature flag & setting overrides from a file.
 
 ```cpp
 ConfigCatOptions options;
-options.flagOverrides = make_shared<FileFlagOverrides>("path/to/the/local_flags.json", LocalOnly);
+options.flagOverrides = std::make_shared<FileFlagOverrides>("path/to/the/local_flags.json", LocalOnly);
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
@@ -611,7 +611,7 @@ const std::unordered_map<std::string, Value>& map = {
 };
 
 ConfigCatOptions options;
-options.flagOverrides = make_shared<MapFlagOverrides>(map, LocalOnly);
+options.flagOverrides = std::make_shared<MapFlagOverrides>(map, LocalOnly);
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
@@ -633,8 +633,8 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
 auto settingValues = client->getAllValues();
 
 // invoke with User Object
-auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
-auto settingValuesTargeting = client->getAllValues(&user);
+auto user = ConfigCatUser::create("#UNIQUE-USER-IDENTIFIER#");
+auto settingValuesTargeting = client->getAllValues(user);
 ```
 
 ## `getAllValueDetails`
@@ -645,8 +645,8 @@ Evaluates and returns the detailed values of all feature flags and settings. Pas
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#");
 
 // invoke with User Object
-auto user = ConfigCatUser("#UNIQUE-USER-IDENTIFIER#");
-auto allValueDetails = client->getAllValueDetails(&user)
+auto user = ConfigCatUser::create("#UNIQUE-USER-IDENTIFIER#");
+auto allValueDetails = client->getAllValueDetails(user)
 ```
 
 ## Custom Cache
@@ -676,7 +676,7 @@ Then use your custom cache implementation:
 
 ```cpp
 ConfigCatOptions options;
-options.configCache = make_shared<MyCustomCache>();
+options.configCache = std::make_shared<MyCustomCache>();
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
@@ -722,10 +722,11 @@ The custom implementation must satisfy the `ILogger` abstract class.
 #include <configcat/configcat.h>
 #include <configcat/consolelogger.h>
 
-auto logger = make_shared<ConsoleLogger>(LOG_LEVEL_WARNING);
+auto logger = std::make_shared<ConsoleLogger>(LOG_LEVEL_WARNING);
 ConfigCatOptions options;
 options.logger = logger;
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
+```
 
 You can change the verbosity of the logs by setting the `LogLevel`.
 
