@@ -356,11 +356,11 @@ With the following hooks you can subscribe to particular events fired by the SDK
 - `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling, it's considered ready right after instantiation.
   If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeInSeconds` is reached.
 
-- `onConfigChanged(std::shared_ptr<Settings>)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
+- `onConfigChanged(std::shared_ptr<const Settings>)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
-- `onFlagEvaluated(const EvaluationDetails&)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
+- `onFlagEvaluated(const EvaluationDetailsBase&)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
-- `onError(const string&)`: This event is sent when an error occurs within the ConfigCat SDK.
+- `onError(const std::string&, const std::exception_ptr&)`: This event is sent when an error occurs within the ConfigCat SDK.
 
 You can subscribe to these events either on SDK initialization:
 
