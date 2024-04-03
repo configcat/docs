@@ -388,7 +388,7 @@ The API endpoints are for server side feature flag evaluation.
 <details>
   <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/eval</span></summary>
 
-This endpoint evaluates a single feature flag identified by a `key` with the given [User Object](/advanced/user-object). 
+This endpoint evaluates a single feature flag identified by a `key` with the given [User Object](/targeting/user-object). 
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
@@ -430,7 +430,7 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 <details>
   <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/eval-all</span></summary>
 
-This endpoint evaluates all feature flags with the given [User Object](/advanced/user-object). 
+This endpoint evaluates all feature flags with the given [User Object](/targeting/user-object). 
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
@@ -749,7 +749,7 @@ This endpoint subscribes to a single flag's changes. Whenever the watched flag's
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
-- `data`: The `base64` encoded input data for feature flag evaluation that must contain the feature flag's key and a [User Object](/advanced/user-object).
+- `data`: The `base64` encoded input data for feature flag evaluation that must contain the feature flag's key and a [User Object](/targeting/user-object).
 
 **Responses**:
 <ul className="responses">
@@ -796,7 +796,7 @@ This endpoint subscribes to all feature flags' changes behind the given [SDK ide
 
 **Route parameters**:
 - `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
-- `data`: **Optional**. The `base64` encoded input data for feature flag evaluation that contains a [User Object](/advanced/user-object).
+- `data`: **Optional**. The `base64` encoded input data for feature flag evaluation that contains a [User Object](/targeting/user-object).
 
 **Responses**:
 <ul className="responses">

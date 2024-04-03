@@ -13,6 +13,7 @@ const features = [
     links: [
       { url: 'getting-started', title: 'Getting started' },
       { url: 'main-concepts', title: 'Main Concepts' },
+      { url: 'targeting/targeting-overview', title: 'Targeting' },
       { url: 'requests', title: 'What is a config JSON download?' },
       { url: 'network-traffic', title: 'Network Traffic' },
       { url: 'purchase', title: 'Plans, Purchase & Billing' },
@@ -26,11 +27,8 @@ const features = [
     title: 'Advanced Guides',
     description: <>API, CLI, SAML, Webhooks...</>,
     links: [
-      { url: 'advanced/data-governance', title: 'Data Governance - CDN' },
-      { url: 'advanced/targeting', title: 'Targeting' },
-      { url: 'advanced/segments', title: 'Segmentation & Segments' },
-      { url: 'advanced/user-object', title: 'The User Object' },
       { url: 'api/reference/configcat-public-management-api', title: 'Public Management API' },
+      { url: 'advanced/data-governance', title: 'Data Governance - CDN' },
       { url: 'advanced/caching', title: 'Polling modes & Caching' },
       {
         url: 'advanced/team-management/team-management-basics',
