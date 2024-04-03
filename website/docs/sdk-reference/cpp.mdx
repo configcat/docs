@@ -137,6 +137,25 @@ auto value = client->getValue(
 );
 ```
 
+:::caution
+It is important to choose the correct `getValue` overload, where the type of the `defaultValue` parameter
+matches the type of the feature flag or setting you are evaluating. Please refer to the following table for the corresponding types.
+:::
+
+### Setting type mapping {#setting-type-mapping}
+
+| Setting Kind   | Type of `defaultValue`        |
+| -------------- | ----------------------------- |
+| On/Off Toggle  | `bool`                        |
+| Text           | `std::string` / `const char*` |
+| Whole Number   | `int32_t`                     |
+| Decimal Number | `double`                      |
+
+In addition to the overloads mentioned above, you also have the option to choose an overload that doesn't expect a default value.
+In that case any setting kind is allowed, and in case of error, the return value will be `std::nullopt`.
+
+If you specify a default value whose type mismatches the setting kind, an error message will be logged and `defaultValue` will be returned.
+
 ## Anatomy of `getValueDetails()`
 
 `getValueDetails()` is similar to `getValue()` but instead of returning the evaluated value only, it gives more detailed information about the evaluation result.
@@ -155,6 +174,11 @@ auto details = client->getValueDetails(
     user, // Optional User Object
 );
 ```
+
+:::caution
+It is important to choose the correct `getValueDetails` overload, where the type of the `defaultValue` parameter
+matches the type of the feature flag or setting you are evaluating. Please refer to [this table](#setting-type-mapping) for the corresponding types.
+:::
 
 The `details` result contains the following information:
 
