@@ -48,8 +48,40 @@ const config: Config = {
           },
           {
             to: '/targeting/targeting-rule/segment-condition',
-            from: '/advanced/targeting/segments/'
-          }
+            from: '/advanced/targeting/segments'
+          },
+          {
+            to: '/targeting/targeting-overview',
+            from: '/V2/targeting/targeting-overview'
+          },
+          {
+            to: '/targeting/targeting-rule/targeting-rule-overview',
+            from: '/V2/targeting/targeting-rule/targeting-rule-overview'
+          },
+          {
+            to: '/targeting/targeting-rule/user-condition',
+            from: '/V2/targeting/targeting-rule/user-condition'
+          },
+          {
+            to: '/targeting/targeting-rule/segment-condition',
+            from: '/V2/targeting/targeting-rule/segment-condition'
+          },
+          {
+            to: '/targeting/targeting-rule/flag-condition',
+            from: '/V2/targeting/targeting-rule/flag-condition'
+          },
+          {
+            to: '/targeting/percentage-options',
+            from: '/V2/targeting/percentage-options'
+          },
+          {
+            to: '/targeting/user-object',
+            from: '/V2/targeting/user-object'
+          },
+          {
+            to: '/targeting/feature-flag-evaluation',
+            from: '/V2/targeting/feature-flag-evaluation'
+          },
         ],
       },
     ],
