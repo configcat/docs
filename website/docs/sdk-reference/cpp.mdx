@@ -126,7 +126,7 @@ These clients can be closed all at once with `ConfigCatClient::closeAll()` metho
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
 
 ```cpp
 auto user = ConfigCatUser::create("#USER-IDENTIFIER#");
@@ -164,7 +164,7 @@ If you specify a default value whose type mismatches the setting kind, an error 
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
 
 ```cpp
 auto user = ConfigCatUser::create("#USER-IDENTIFIER#");
@@ -196,7 +196,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
+The [User Object](/targeting/user-object) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
 
 ```cpp
 auto user = ConfigCatUser::create("#UNIQUE-USER-IDENTIFIER#");
@@ -784,7 +784,7 @@ This SDK key is read-only, it only allows downloading your config JSON file, but
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
-Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
+Also, we recommend using [confidential targeting comparators](/targeting/targeting-rule/user-condition/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
 
 ## Sample Applications
 

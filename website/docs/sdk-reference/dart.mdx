@@ -145,7 +145,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
 
 ```dart
 final value = await client.getValue(
@@ -169,7 +169,7 @@ that matches the type of the feature flag or setting you are evaluating. Please 
 | Whole Number   | `int`/`int?`       |
 | Decimal Number | `double`/`double?` |
 
-In addition to the types mentioned above, you also have the option to provide `object`, `object?` or `dynamic for the type parameter regardless of the setting kind.
+In addition to the types mentioned above, you also have the option to provide `object`, `object?` or `dynamic` for the type parameter regardless of the setting kind.
 
 It's important to note that providing any other type for the type parameter will result in an `ArgumentError`.
 
@@ -196,7 +196,7 @@ var value = client.getValue<double>("keyOfMyDecimalSetting", 0);
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
 
 ```dart
 final details = await client.getValueDetails(
@@ -226,7 +226,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
+The [User Object](/targeting/user-object) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
 
 ```dart
 final user = ConfigCatUser(identifier: '#UNIQUE-USER-IDENTIFIER#');

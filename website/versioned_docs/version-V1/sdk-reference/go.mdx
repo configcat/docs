@@ -22,7 +22,7 @@ export const GoSchema = require('@site/src/schema-markup/sdk-reference/go.json')
 </p>
 
 :::info
-This documentation applies to the **v8.x version** of the ConfigCat Go SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/go).
+This documentation applies to the **v8.x version** of the ConfigCat Go SDK. For the documentation of the latest release, please refer to [this page](/sdk-reference/go).
 :::
 
 ## Getting Started:
@@ -122,7 +122,7 @@ Basically all of the value evaluator methods share the same signature, they only
 | -------------- | -------------------------------------------------------------------------------------------------- |
 | `key`          | Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                               |
 | `defaultValue` | This value will be returned in case of an error.                                                   |
-| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
+| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
 
 ```go
 boolValue := client.GetBoolValue(
@@ -148,7 +148,7 @@ intValue := client.GetIntValue(
 | -------------- | -------------------------------------------------------------------------------------------------- |
 | `key`          | Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                               |
 | `defaultValue` | This value will be returned in case of an error.                                                   |
-| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
+| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
 
 ```go
 details := client.GetBoolValueDetails(
@@ -172,7 +172,7 @@ The `details` result contains the following information:
 | -------------------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `Value`                                | `bool` / `string` / `int` / `float64` | The evaluated value of the feature flag or setting.                                       |
 | `Data.Key`                             | `string`                              | The key of the evaluated feature flag or setting.                                         |
-| `Data.IsDefaultValue`                  | `bool`                                | True when the default value passed to getValueDetails() is returned due to an error.      |
+| `Data.IsDefaultValue`                  | `bool`                                | True when the default value passed to `Get[TYPE]ValueDetails()` is returned due to an error.    |
 | `Data.Error`                           | `error`                               | In case of an error, this field contains the error message.                               |
 | `Data.User`                            | `User`                                | The User Object that was used for evaluation.                                             |
 | `Data.MatchedEvaluationPercentageRule` | `*PercentageRule`                     | If the evaluation was based on a Percentage Rule, this field contains that specific rule. |
@@ -181,7 +181,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
+The [User Object](/targeting/user-object) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
 
 ```go
 user = &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}

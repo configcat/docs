@@ -26,36 +26,62 @@ const config: Config = {
       },
     ],
     'docusaurus-plugin-sass',
-    'docusaurus-plugin-image-zoom',
     [
       '@docusaurus/plugin-client-redirects',
       {
         redirects: [
           {
-            to: '/sdk-reference/dotnet',
             from: '/sdk-reference/csharp',
+            to: '/sdk-reference/dotnet',
           },
           {
-            to: '/api/reference/configcat-public-management-api',
             from: '/advanced/public-api',
+            to: '/api/reference/configcat-public-management-api',
           },
-          /*
-          TODO: before turning V2 as latest. We have to check all page urls that are not existing in V2 anymore and create some redirects for them (e.g. commented section below - /targeting/targeting-overview).
-          Also, we can remove the v2 (/V2/advanced/config-v2, /V2/advanced/config-v2-migration-guide, /V2/advanced/config-v2-sdk-compatibility) redirects
-          */
-          /*
           {
+            from: '/advanced/targeting',
             to: '/targeting/targeting-overview',
-            from: '/advanced/targeting'
           },
           {
+            from: '/advanced/user-object',
             to: '/targeting/user-object',
-            from: '/advanced/user-object'
           },
           {
+            from: '/advanced/targeting/segments',
             to: '/targeting/targeting-rule/segment-condition',
-            from: '/advanced/targeting/segments/'
-          }*/
+          },
+          {
+            from: '/V2/targeting/targeting-overview',
+            to: '/targeting/targeting-overview',
+          },
+          {
+            from: '/V2/targeting/targeting-rule/targeting-rule-overview',
+            to: '/targeting/targeting-rule/targeting-rule-overview',
+          },
+          {
+            from: '/V2/targeting/targeting-rule/user-condition',
+            to: '/targeting/targeting-rule/user-condition',
+          },
+          {
+            from: '/V2/targeting/targeting-rule/segment-condition',
+            to: '/targeting/targeting-rule/segment-condition',
+          },
+          {
+            from: '/V2/targeting/targeting-rule/flag-condition',
+            to: '/targeting/targeting-rule/flag-condition',
+          },
+          {
+            from: '/V2/targeting/percentage-options',
+            to: '/targeting/percentage-options',
+          },
+          {
+            from: '/V2/targeting/user-object',
+            to: '/targeting/user-object',
+          },
+          {
+            from: '/V2/targeting/feature-flag-evaluation',
+            to: '/targeting/feature-flag-evaluation',
+          },
         ],
       },
     ],
@@ -68,26 +94,26 @@ const config: Config = {
         sidebarPath: './api/sidebars.ts',
         docRootComponent: "@theme/DocRoot",
         docItemComponent: "@theme/ApiItem",
-        
+
       },
     ],
     [
       'docusaurus-plugin-openapi-docs',
       {
-          id: 'api-docs',
-          docsPluginId: 'api-content',
-          config: {
-              server: {
-                  specPath: 'https://api.configcat.com/docs/v1/swagger.json',
-                  outputDir: 'api/reference',
-                  sidebarOptions: {
-                      groupPathsBy: 'tag',
-                      categoryLinkSource: 'tag'
-                  },
-              },
+        id: 'api-docs',
+        docsPluginId: 'api-content',
+        config: {
+          server: {
+            specPath: 'https://api.configcat.com/docs/v1/swagger.json',
+            outputDir: 'api/reference',
+            sidebarOptions: {
+              groupPathsBy: 'tag',
+              categoryLinkSource: 'tag'
+            },
           },
+        },
       },
-  ],
+    ],
     // ['./src/plugins/smartlook',
     //   {
     //     smartlookKey: '05d0e4ca90c61150955104a9d4b76ab16a0b2380',
@@ -277,12 +303,9 @@ const config: Config = {
       searchParameters: {},
       externalUrlRegex: 'configcat\\.com/blog',
     },
-    zoom: {
+    imgZoom: {
       selector: '.markdown img:not([src^="http"])',
-      background: {
-        light: 'var(--ifm-background-color)',
-        dark: 'var(--ifm-background-color)'
-      },
+      zoomedInClass: 'zoomed-in-img',
     }
   } satisfies Preset.ThemeConfig,
   presets: [
@@ -294,16 +317,16 @@ const config: Config = {
           sidebarCollapsible: true,
           editUrl: 'https://github.com/configcat/docs/tree/master/website',
           routeBasePath: '/',
-          lastVersion: 'V1',
+          lastVersion: 'current',
           versions: {
             current: {
-              label: 'Config V2 (beta)',
-              path: '/V2',
-              noIndex: true
+              label: 'Config V2',
+              path: '/',
             },
             "V1": {
-              label: 'Config V1',
-              path: '/',
+              label: 'Config V1 (legacy)',
+              path: '/V1',
+              noIndex: true
             },
           },
         },
@@ -314,7 +337,7 @@ const config: Config = {
           archiveBasePath: null,
         },
         sitemap: {
-          ignorePatterns: ['/docs/V2/**'],
+          ignorePatterns: ['/docs/V1/**'],
         }
       } satisfies Preset.Options,
     ],
@@ -322,6 +345,7 @@ const config: Config = {
   themes: ["docusaurus-theme-openapi-docs"],
   scripts: [],
   stylesheets: [],
+  clientModules: ['./src/client-modules/img-zoom'],
 };
 
 export default config;

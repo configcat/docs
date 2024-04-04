@@ -22,7 +22,7 @@ export const IosSchema = require('@site/src/schema-markup/sdk-reference/ios.json
 </p>
 
 :::info
-This documentation applies to the **v10.x version** of the ConfigCat Swift SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/ios).
+This documentation applies to the **v10.x version** of the ConfigCat Swift SDK. For the documentation of the latest release, please refer to [this page](/sdk-reference/ios).
 :::
 
 ## Getting Started
@@ -242,7 +242,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
 | `completion`   | **REQUIRED.** Callback function to call, when the result is ready.                                           |
 
 <Tabs groupId="ios-languages">
@@ -304,7 +304,7 @@ ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-ID
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -349,7 +349,7 @@ The details result contains the following information:
 | --------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------- |
 | `value`                           | `Bool` / `String` / `Int` / `Double` | The evaluated value of the feature flag or setting.                                       |
 | `key`                             | `String`                             | The key of the evaluated feature flag or setting.                                         |
-| `isDefaultValue`                  | `Bool`                               | True when the default value passed to getValueDetails() is returned due to an error.      |
+| `isDefaultValue`                  | `Bool`                               | True when the default value passed to `getValueDetails()` is returned due to an error.    |
 | `error`                           | `String?`                            | In case of an error, this field contains the error message.                               |
 | `user`                            | `ConfigCatUser?`                     | The User Object that was used for evaluation.                                             |
 | `matchedEvaluationPercentageRule` | `PercentageRule?`                    | If the evaluation was based on a percentage rule, this field contains that specific rule. |
@@ -429,7 +429,7 @@ let state = await client.waitForReady()
 
 ## User Object
 
-The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
+The [User Object](/targeting/user-object) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -692,7 +692,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 | Parameters | Description                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `user`     | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting) |
+| `user`     | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -1298,7 +1298,7 @@ This SDK key is read-only, it only allows downloading your config JSON file, but
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
-Also, we recommend using [confidential targeting comparators](/advanced/targeting/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
+Also, we recommend using [confidential targeting comparators](/targeting/targeting-rule/user-condition/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
 
 ## Sample App
 

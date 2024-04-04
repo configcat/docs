@@ -215,7 +215,7 @@
       "name": "Are ConfigCat percentage targeting options sticky?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The percentage-based targeting is sticky by design and consistent across all SDKs. More on stickiness and consistency: https://configcat.com/docs/advanced/targeting/#stickiness--consistency"
+        "text": "Yes. The percentage-based targeting is sticky by design and consistent across all SDKs. More on stickiness and consistency: https://configcat.com/docs/targeting/percentage-options/#stickiness, https://configcat.com/docs/targeting/percentage-options/#consistency"
       }
     },
     {
@@ -223,7 +223,7 @@
       "name": "How to use Targeting Rules in ConfigCat based on confidential data?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you want to use Targeting Rules based on email address, phone number, or other sensitive data, you can use the Confidential text comparators: https://configcat.com/docs/advanced/targeting/#confidential-text-comparators."
+        "text": "If you want to use Targeting Rules based on email address, phone number, or other sensitive data, you can use the Confidential text comparators: https://configcat.com/docs/targeting/targeting-rule/user-condition/#confidential-text-comparators."
       }
     },
     {

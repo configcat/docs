@@ -25,7 +25,7 @@ export const ElixirSchema = require('@site/src/schema-markup/sdk-reference/elixi
 </p>
 
 :::info
-This documentation applies to the **v3.x version** of the ConfigCat Elixir SDK. For the documentation of the latest release, please refer to [this page](/V2/sdk-reference/elixir).
+This documentation applies to the **v3.x version** of the ConfigCat Elixir SDK. For the documentation of the latest release, please refer to [this page](/sdk-reference/elixir).
 :::
 
 ## Getting started
@@ -97,7 +97,7 @@ _ConfigCat Client_ is responsible for:
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                                                    |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                                                                 |
-| `user`          | Optional, _ConfigCat.User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting)                                         |
+| `user`          | Optional, _ConfigCat.User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview)                                         |
 | `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name of the instance which you want to access. |
 
 ```elixir
@@ -116,7 +116,7 @@ value = ConfigCat.get_value(
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                                                    |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                                                                 |
-| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/advanced/targeting)                                                   |
+| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview)                                                   |
 | `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name of the instance which you want to access. |
 
 ```elixir
@@ -133,7 +133,7 @@ The `details` result contains the following information:
 | ------------------------------------ | ----------------------------------------------------------------------------------------- |
 | `value`                              | The evaluated value of the feature flag or setting.                                       |
 | `key`                                | The key of the evaluated feature flag or setting.                                         |
-| `default_value?`                     | True when the default value passed to get_value_details() is returned due to an error.    |
+| `default_value?`                     | True when the default value passed to `get_value_details()` is returned due to an error.  |
 | `error`                              | In case of an error, this field contains the error message.                               |
 | `user`                               | The User Object that was used for evaluation.                                             |
 | `matched_evaluation_percentage_rule` | If the evaluation was based on a percentage rule, this field contains that specific rule. |
@@ -142,7 +142,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](/advanced/user-object) is essential if you'd like to use ConfigCat's [Targeting](/advanced/targeting) feature.
+The [User Object](/targeting/user-object) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
 
 ```elixir
 user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#")
