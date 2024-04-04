@@ -31,56 +31,56 @@ const config: Config = {
       {
         redirects: [
           {
-            to: '/sdk-reference/dotnet',
             from: '/sdk-reference/csharp',
+            to: '/sdk-reference/dotnet',
           },
           {
-            to: '/api/reference/configcat-public-management-api',
             from: '/advanced/public-api',
+            to: '/api/reference/configcat-public-management-api',
           },
           {
+            from: '/advanced/targeting',
             to: '/targeting/targeting-overview',
-            from: '/advanced/targeting'
           },
           {
+            from: '/advanced/user-object',
             to: '/targeting/user-object',
-            from: '/advanced/user-object'
           },
           {
+            from: '/advanced/targeting/segments',
             to: '/targeting/targeting-rule/segment-condition',
-            from: '/advanced/targeting/segments'
           },
           {
+            from: '/V2/targeting/targeting-overview',
             to: '/targeting/targeting-overview',
-            from: '/V2/targeting/targeting-overview'
           },
           {
+            from: '/V2/targeting/targeting-rule/targeting-rule-overview',
             to: '/targeting/targeting-rule/targeting-rule-overview',
-            from: '/V2/targeting/targeting-rule/targeting-rule-overview'
           },
           {
+            from: '/V2/targeting/targeting-rule/user-condition',
             to: '/targeting/targeting-rule/user-condition',
-            from: '/V2/targeting/targeting-rule/user-condition'
           },
           {
+            from: '/V2/targeting/targeting-rule/segment-condition',
             to: '/targeting/targeting-rule/segment-condition',
-            from: '/V2/targeting/targeting-rule/segment-condition'
           },
           {
+            from: '/V2/targeting/targeting-rule/flag-condition',
             to: '/targeting/targeting-rule/flag-condition',
-            from: '/V2/targeting/targeting-rule/flag-condition'
           },
           {
+            from: '/V2/targeting/percentage-options',
             to: '/targeting/percentage-options',
-            from: '/V2/targeting/percentage-options'
           },
           {
+            from: '/V2/targeting/user-object',
             to: '/targeting/user-object',
-            from: '/V2/targeting/user-object'
           },
           {
+            from: '/V2/targeting/feature-flag-evaluation',
             to: '/targeting/feature-flag-evaluation',
-            from: '/V2/targeting/feature-flag-evaluation'
           },
         ],
       },
