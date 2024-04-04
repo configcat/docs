@@ -172,7 +172,7 @@ The `details` result contains the following information:
 | -------------------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `Value`                                | `bool` / `string` / `int` / `float64` | The evaluated value of the feature flag or setting.                                       |
 | `Data.Key`                             | `string`                              | The key of the evaluated feature flag or setting.                                         |
-| `Data.IsDefaultValue`                  | `bool`                                | True when the default value passed to `getValueDetails()` is returned due to an error.    |
+| `Data.IsDefaultValue`                  | `bool`                                | True when the default value passed to `Get[TYPE]ValueDetails()` is returned due to an error.    |
 | `Data.Error`                           | `error`                               | In case of an error, this field contains the error message.                               |
 | `Data.User`                            | `User`                                | The User Object that was used for evaluation.                                             |
 | `Data.MatchedEvaluationPercentageRule` | `*PercentageRule`                     | If the evaluation was based on a Percentage Rule, this field contains that specific rule. |
