@@ -453,8 +453,8 @@ configcat config-json get -f v6 -p {YOUR-SDK-KEY} > config.json
 
 Alternatively, you can download the config JSON manually, based on your [Data Governance](/advanced/data-governance) settings:
 
-- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
-- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
+- GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
+- EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
 
 ```json
 {
@@ -631,9 +631,9 @@ Info level logging helps to inspect the feature flag evaluation process:
 ```bash
 INFO:configcat:[5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"<SOME USERID>","Email":"configcat@example.com","Country":"US","SubscriptionType":"Pro","Role":"Admin","version":"1.0.0"}'
   Evaluating targeting rules and applying the first match if any:
-  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'False' => no match
-  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'True' => MATCH, applying rule
-  Returning 'True'.
+  - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'false' => no match
+  - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'true' => MATCH, applying rule
+  Returning 'true'.
 ```
 
 You can easily replace the default logger with your own one. The following example shows how to set a logger writes logs into a text file.
