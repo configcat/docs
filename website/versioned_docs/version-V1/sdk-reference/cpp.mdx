@@ -103,7 +103,7 @@ _ConfigCat Client_ is responsible for:
 | Properties         | Description                                                                                                                                                                                                                                                                                        |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `baseUrl`          | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                          |
-| `dataGovernance`   | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](/advanced/data-governance). Available options: `Global`, `EuOnly`. |
+| `dataGovernance`   | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly`. |
 | `connectTimeoutMs` | Optional, defaults to `8000ms`. Sets the amount of milliseconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake). `0` means it never times out during transfer                                                                                 |
 | `readTimeoutMs`    | Optional, defaults to `5000ms`. Sets the amount of milliseconds to wait for the server to respond before giving up. `0` means it never times out during transfer.                                                                                                                                  |
 | `pollingMode`      | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
@@ -412,7 +412,7 @@ It allows the usage of all features that are available on the ConfigCat Dashboar
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config JSON is based on your [Data Governance](/advanced/data-governance) settings:
+The URL to your current config JSON is based on your [Data Governance](../advanced/data-governance.mdx) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`

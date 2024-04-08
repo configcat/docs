@@ -73,7 +73,7 @@ _ConfigCat Client_ is responsible for:
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sdk_key`                      | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                                                                                                                                                                                                                                                      |
 | `base_url`                     | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                                                                                |
-| `data_governance`              | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](/advanced/data-governance). Available options: `:global`, `:eu_only`.                                                                   |
+| `data_governance`              | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](../advanced/data-governance.mdx). Available options: `:global`, `:eu_only`.                                                                   |
 | `cache_policy`                 | `CachePolicy.auto/1`, `CachePolicy.lazy/1` and `CachePolicy.manual/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details.                                                                                                                                                                                                          |
 | `cache`                        | Caching module you want `configcat` to use. Defaults to: `ConfigCat.InMemoryCache`. [More about cache](#custom-cache-behaviour-with-cache-option-parameter).                                                                                                                                                                                                                                         |
 | `http_proxy`                   | Specify this option if you need to use a proxy server to access your ConfigCat settings. You can provide a simple URL, like `https://my_proxy.example.com` or include authentication information, like `https://user:password@my_proxy.example.com/`.                                                                                                          |
@@ -542,9 +542,9 @@ and execute the following command:
 configcat config-json get -f v6 -p {YOUR-SDK-KEY} > config.json
 ```
 
-(Depending on your [Data Governance](/advanced/data-governance) settings, you may need to add the `--eu` switch.)
+(Depending on your [Data Governance](../advanced/data-governance.mdx) settings, you may need to add the `--eu` switch.)
 
-Alternatively, you can download the config JSON manually, based on your [Data Governance](/advanced/data-governance) settings:
+Alternatively, you can download the config JSON manually, based on your [Data Governance](../advanced/data-governance.mdx) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v6.json`
