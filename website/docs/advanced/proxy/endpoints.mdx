@@ -17,7 +17,7 @@ The CDN proxy endpoint's purpose is to forward the underlying *config JSON* to o
 
 :::caution
 Regarding the config JSON's schema changes introduced recently (`v6`), the `v0.3.X` and newer Proxy versions are providing the new schema on the CDN proxy endpoint. 
-This new config JSON schema is only supported from certain SDK versions listed in the support table [below](/advanced/proxy/endpoints/#supported-sdk-versions). 
+This new config JSON schema is only supported from certain SDK versions listed in the support table [below](endpoints.mdx#supported-sdk-versions). 
 Those SDKs that are older than the listed versions are incompatible with `v0.3.X`, and can be used only with `v0.2.X` or older Proxy versions.
 :::
 
@@ -30,7 +30,7 @@ Those SDKs that are older than the listed versions are incompatible with `v0.3.X
 This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for feature flag evaluation. 
 
 **Route parameters**:
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
 
 **Responses**:
 <ul className="responses">
@@ -45,7 +45,7 @@ This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for
 ### SDK Usage
 
 In order to let a ConfigCat SDK use the Proxy, you have to set the SDK's `baseUrl` parameter to point to the Proxy's host.
-Also, you have to pass the [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) prefixed with `configcat-proxy/` as the SDK key.
+Also, you have to pass the [SDK identifier](overview.mdx#sdk-identifier--sdk-key) prefixed with `configcat-proxy/` as the SDK key.
 
 So, let's assume you set up the Proxy with the following SDK option:
 
@@ -115,7 +115,7 @@ The following SDK versions are supported by the `>=v0.3.X` Proxy's CDN endpoint:
 This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for feature flag evaluation. 
 
 **Route parameters**:
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
 
 **Responses**:
 <ul className="responses">
@@ -130,7 +130,7 @@ This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for
 ### SDK Usage
 
 In order to let a ConfigCat SDK use the Proxy, you have to set the SDK's `baseUrl` parameter to point to the Proxy's host.
-Also, you have to pass the [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) as the SDK key.
+Also, you have to pass the [SDK identifier](overview.mdx#sdk-identifier--sdk-key) as the SDK key.
 
 So, let's assume you set up the Proxy with the following SDK option:
 
@@ -391,7 +391,7 @@ The API endpoints are for server side feature flag evaluation.
 This endpoint evaluates a single feature flag identified by a `key` with the given [User Object](/targeting/user-object). 
 
 **Route parameters**:
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 
 **Request body**:
 ```json
@@ -433,7 +433,7 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 This endpoint evaluates all feature flags with the given [User Object](/targeting/user-object). 
 
 **Route parameters**:
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 
 **Request body**:
 ```json
@@ -481,7 +481,7 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 This endpoint commands the underlying SDK to download the latest available *config JSON*. 
 
 **Route parameters**:
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 
 **Responses**:
 <ul className="responses">
@@ -496,10 +496,10 @@ This endpoint commands the underlying SDK to download the latest available *conf
 <details>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/keys</span></summary>
 
-This endpoint returns all feature flag keys belonging to the given [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key). 
+This endpoint returns all feature flag keys belonging to the given [SDK identifier](overview.mdx#sdk-identifier--sdk-key). 
 
 **Route parameters**:
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 
 **Responses**:
 <ul className="responses">
@@ -748,7 +748,7 @@ The SSE endpoint allows you to subscribe for feature flag value changes through 
 This endpoint subscribes to a single flag's changes. Whenever the watched flag's value changes, the Proxy sends the new value to each connected client.
 
 **Route parameters**:
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 - `data`: The `base64` encoded input data for feature flag evaluation that must contain the feature flag's key and a [User Object](/targeting/user-object).
 
 **Responses**:
@@ -792,10 +792,10 @@ evtSource.onmessage = (event) => {
 <details>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval-all/&#123;data&#125;</span></summary> 
 
-This endpoint subscribes to all feature flags' changes behind the given [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key). When any of the watched flags' value change, the Proxy sends its new value to each connected client.
+This endpoint subscribes to all feature flags' changes behind the given [SDK identifier](overview.mdx#sdk-identifier--sdk-key). When any of the watched flags' value change, the Proxy sends its new value to each connected client.
 
 **Route parameters**:
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 - `data`: **Optional**. The `base64` encoded input data for feature flag evaluation that contains a [User Object](/targeting/user-object).
 
 **Responses**:
@@ -1058,15 +1058,15 @@ CONFIGCAT_HTTP_SSE_LOG_LEVEL="<error|warn|info|debug>"
 
 ## Webhook
 
-Through the webhook endpoint, you can notify the Proxy about the availability of new feature flag evaluation data. Also, with the appropriate [SDK options](/advanced/proxy/proxy-overview/#additional-sdk-options), the Proxy can [validate the signature](/advanced/notifications-webhooks/#verifying-webhook-requests) of each incoming webhook request.
+Through the webhook endpoint, you can notify the Proxy about the availability of new feature flag evaluation data. Also, with the appropriate [SDK options](overview.mdx#additional-sdk-options), the Proxy can [validate the signature](/advanced/notifications-webhooks/#verifying-webhook-requests) of each incoming webhook request.
 
 <details open>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method blue">POST</span>/hook/&#123;sdkId&#125;</span></summary>
 
-Notifies the Proxy that the SDK with the given [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) must refresh its *config JSON* to the latest version. 
+Notifies the Proxy that the SDK with the given [SDK identifier](overview.mdx#sdk-identifier--sdk-key) must refresh its *config JSON* to the latest version. 
 
 **Route parameters**:
-- `sdkId`: The [SDK identifier](/advanced/proxy/proxy-overview/#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
 
 **Responses**:
 <ul className="responses">
