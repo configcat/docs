@@ -19,7 +19,7 @@ The Proxy provides the following:
 - **Reliability**: The Proxy can store the downloaded *config JSON* files in an external [cache](#cache). It can fall back to operating on the cached *config JSON* if the ConfigCat CDN network becomes inaccessible.
 - **Security**: The Proxy can act as a [server side flag evaluation](endpoints.mdx#api) component. Using it like that can prevent the exposure of *config JSON* files to frontend and mobile applications.
 - **Scalability**: Horizontal scaling allows you to align with the load coming from your applications accordingly.
-- **Streaming**: The Proxy provides real-time feature flag change notifications via [Server-Sent Events (SSE)](endpoints.mdx#sse) and [gRPC](/advanced/proxy/grpc).
+- **Streaming**: The Proxy provides real-time feature flag change notifications via [Server-Sent Events (SSE)](endpoints.mdx#sse) and [gRPC](grpc.mdx).
 
 ## Architecture
 
