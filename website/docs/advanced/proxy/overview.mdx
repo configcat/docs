@@ -917,7 +917,7 @@ The Proxy in its default setup stores all the information it needs for feature f
 Currently, <a target="blank" href="https://redis.io">Redis</a>, <a target="blank" href="https://mongodb.com/">MongoDB</a>, and <a target="blank" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide">DynamoDB</a> is supported as external cache. The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
 
 :::info
-The ConfigCat Proxy supports *shared caching*, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](../caching.mdx/#shared-cache).
+The ConfigCat Proxy supports *shared caching*, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](../caching.mdx#shared-cache).
 
 <img  src="/docs/assets/proxy/shared_cache.png" alt="Shared cache architecture" />
 
