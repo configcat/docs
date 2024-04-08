@@ -75,7 +75,7 @@ You need to have a [Billing Manager](organization.mdx#billing-manager-role) role
 ### How do I change my currency?
 
 Go to the [Plans](https://app.configcat.com/organization/plans) page and use the currency toggle to switch between USD and EUR.
-You need to have a [Billing Manager](/organization#billing-manager-role) role to access the Plans page.
+You need to have a [Billing Manager](./organization.mdx#billing-manager-role) role to access the Plans page.
 
 ## Security
 
@@ -195,7 +195,7 @@ Also, consider the following:
 - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)
 - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)
 
-More on [stickyness](/targeting/percentage-options/#stickiness) and [consistency](/targeting/percentage-options/#consistency)
+More on [stickyness and consistency](./advanced/targeting.mdx#stickiness--consistency).
 
 ### How to use Targeting Rules based on sensitive data?
 
@@ -221,7 +221,7 @@ You can change the frequency, criteria and scope of the Zombie Feature Flag repo
 
 ### How to avoid technical debt caused by feature flags?
 
-The [ConfigCat CLI](/advanced/code-references/overview) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
+The [ConfigCat CLI](./advanced/code-references/overview.mdx) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
 <img src="/docs/assets/cli/code-refs.png" className="zoomable" alt="Code references screenshot" />
 
 ### Is there a way to compare flag statuses between two or more environments?

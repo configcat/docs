@@ -65,7 +65,7 @@ The data that could and should be passed to the User Object.
 
 | Property   | Description                                                                                                                                                              |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Identifier | **REQUIRED** We recommend adding a UserID, Email address, or SessionID. [More](/targeting/user-object/#identifier-attribute)                                              |
+| Identifier | **REQUIRED** We recommend adding a UserID, Email address, or SessionID. [More](../advanced/user-object.mdx#identifier-attribute)                                              |
 | Email      | **OPTIONAL** By adding this parameter you will be able to create Email address-based targeting. e.g: Only turn on a feature for users with @example.com addresses.       |
 | Country    | **OPTIONAL** Fill this for location or country-based targeting. e.g: Turn on a feature for users in Canada only.                                                         |
 | Custom     | **OPTIONAL** This parameter will let you create targeting based on any user data you like. e.g: Age, Subscription type, User role, Device type, App version number, etc. |
@@ -97,7 +97,7 @@ const userObject = new configcat.User('<unique-identifier-here>', undefined, und
 });
 ```
 
-_The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](/sdk-reference/overview)_
+_The above scheme is in JavaScript. Find the proper schemes in each [SDK's reference.](../sdk-reference/overview.mdx)_
 
 On the Dashboard a Targeting Rule for the custom property `EyeColor` would look like:
 <img src="/docs/assets/custom-property-ui.png" className="zoomable" alt="customPropertyUsageDashboard" />

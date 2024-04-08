@@ -54,7 +54,7 @@ $flag = ConfigCat::get('new_registration_flow');
 $flag = configcat('new_registration_flow');
 ```
 
-> **Note:** You can define the actual value of a feature flag to be `bool(true)` or `bool(false)` on ConfigCat but not only, it can also be [a number or a text setting](/main-concepts/#about-setting-types).
+> **Note:** You can define the actual value of a feature flag to be `bool(true)` or `bool(false)` on ConfigCat but not only, it can also be [a number or a text setting](../../main-concepts.mdx#about-setting-types).
 
 If the feature flag is undefined or something went wrong, `bool(false)` will be returned by default, however you can change this by specifying a default value **only when using the Facade or the global helper** to retrieve the feature flag value using:
 
@@ -68,7 +68,7 @@ $flag = configcat('new_registration_flow', true);
 
 You can also globally sepcify a default value from the [`config/configcat.php`](https://github.com/Pod-Point/laravel-configcat/blob/main/config/configcat.php) file.
 
-:warning: **Only** `boolean`, `string`, `integer` or `float` default value types are supported as these are the only [setting types](/main-concepts/#about-setting-types) available from ConfigCat.
+:warning: **Only** `boolean`, `string`, `integer` or `float` default value types are supported as these are the only [setting types](../../main-concepts.mdx#about-setting-types) available from ConfigCat.
 
 ### Validation rule
 
@@ -93,7 +93,7 @@ Validator::make([
 
 ### HTTP middleware
 
-The following route will only be accessible if the [feature flag](/main-concepts/#about-setting-types) is truthy, otherwise a `404` will be thrown.
+The following route will only be accessible if the [feature flag](../../main-concepts.mdx#about-setting-types) is truthy, otherwise a `404` will be thrown.
 
 ```php
 Router::get('/registration')->middleware('configcat.on:new_registration_flow');
@@ -139,7 +139,7 @@ The following view content will only be rendered if the feature flag is truthy:
 
 ### User targeting
 
-The [User Object](/sdk-reference/php/#user-object) is essential if you'd like to use ConfigCat's [Targeting](../../advanced/targeting.mdx) feature.
+The [User Object](../php.mdx#user-object) is essential if you'd like to use ConfigCat's [Targeting](../../advanced/targeting.mdx) feature.
 
 ConfigCat needs to understand the representation of your users from your application. To do so, you will need to transform your user into a `ConfigCat\User` object. This can be done directly from the [`config/configcat.php`](https://github.com/Pod-Point/laravel-configcat/blob/main/config/configcat.php) file. Here is an example:
 
