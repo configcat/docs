@@ -18,6 +18,12 @@
     opacity: 1;
   }
 
+  .zoom-img-zoomed-in {
+    width: auto;
+    height: auto;
+    max-height: 100%;
+  }
+
   .zoom-img {
     cursor: zoom-in;
   }
