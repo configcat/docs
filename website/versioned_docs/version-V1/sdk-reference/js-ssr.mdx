@@ -608,7 +608,7 @@ for (const key of snapshot.getAllKeys()) {
 
 :::caution
 Please note that when you create and utilize a snapshot, it won't refresh your local cache once the cached config data expires.
-Additionally, when working with [shared caching](/docs/advanced/caching/#shared-cache), creating a snapshot also doesn't
+Additionally, when working with [shared caching](../advanced/caching.mdx#shared-cache), creating a snapshot also doesn't
 trigger a sync with the external cache, since the snapshot only captures the config instance stored in the client's memory.
 Therefore, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically updates the local cache
 in the background. For other polling modes, you'll need to manually initiate a cache refresh by invoking `forceRefreshAsync`.
@@ -673,7 +673,7 @@ const configCatClient = configcat.getClient(
 ```
 
 :::info
-The JavaScript (SSR) SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The JavaScript (SSR) SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](../advanced/caching.mdx#shared-cache).
 :::
 
 ## Sensitive information handling
