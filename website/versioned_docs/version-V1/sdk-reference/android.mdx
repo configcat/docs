@@ -137,7 +137,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 
 ```java
@@ -172,7 +172,7 @@ If you specify an allowed type but it mismatches the setting kind, an error mess
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 
 ```java
@@ -203,7 +203,7 @@ that matches the type of the feature flag or setting you are evaluating. Please 
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `classOfT`     | **REQUIRED.** The type of the setting.                                                                       |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 
 ```java
@@ -244,7 +244,7 @@ The details result contains the following information:
 
 ## User Object
 
-The [User Object](../advanced/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
+The [User Object](../advanced/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../advanced/targeting.mdx) feature.
 
 ```java
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object

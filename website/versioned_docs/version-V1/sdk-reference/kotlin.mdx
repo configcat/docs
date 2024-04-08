@@ -138,7 +138,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 
 ```kotlin
 val value = client.getValue(
@@ -156,7 +156,7 @@ val value = client.getValue(
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 
 ```kotlin
 val details = client.getValueDetails(
@@ -181,7 +181,7 @@ The details result contains the following information:
 
 ## User Object
 
-The [User Object](../advanced/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
+The [User Object](../advanced/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../advanced/targeting.mdx) feature.
 
 ```kotlin
 val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")

@@ -91,7 +91,7 @@ _ConfigCat Client_ is responsible for:
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                                                    |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                                                                 |
-| `user`          | Optional, _ConfigCat.User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview)                                         |
+| `user`          | Optional, _ConfigCat.User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx)                                         |
 | `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name of the instance which you want to access. |
 
 ```elixir
@@ -110,7 +110,7 @@ value = ConfigCat.get_value(
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `key`           | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                                                    |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                                                                                 |
-| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview)                                                   |
+| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx)                                                   |
 | `client`        | If you are running multiple instances of `ConfigCat`, provide the `client: :unique_name` option, specifying the name of the instance which you want to access. |
 
 ```elixir
@@ -136,7 +136,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](../targeting/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
+The [User Object](../targeting/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../targeting/targeting-overview.mdx) feature.
 
 ```elixir
 user_object = ConfigCat.User.new("#UNIQUE-USER-IDENTIFIER#")

@@ -249,7 +249,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 | `completion`   | **REQUIRED.** Callback function to call, when the result is ready.                                           |
 
 <Tabs groupId="ios-languages">
@@ -341,7 +341,7 @@ let value = await client.getValue(for: "keyOfMyDecimalSetting", defaultValue: 0.
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -473,7 +473,7 @@ let state = await client.waitForReady()
 
 ## User Object
 
-The [User Object](../targeting/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
+The [User Object](../targeting/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../targeting/targeting-overview.mdx) feature.
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -800,7 +800,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 | Parameters | Description                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `user`     | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`     | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">

@@ -136,7 +136,7 @@ You can close all open clients at once using the `ConfigCatClient.DisposeAll()` 
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 
 ```csharp
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#");  // Optional User Object
@@ -192,7 +192,7 @@ var value = client.GetValue<double>("keyOfMyDecimalSetting", 0);
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 
 ```csharp
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
@@ -225,7 +225,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](../targeting/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
+The [User Object](../targeting/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../targeting/targeting-overview.mdx) feature.
 
 ```csharp
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#");

@@ -119,7 +119,7 @@ Basically all of the value evaluator methods share the same signature, they only
 | -------------- | -------------------------------------------------------------------------------------------------- |
 | `key`          | Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                               |
 | `defaultValue` | This value will be returned in case of an error.                                                   |
-| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 
 ```go
 boolValue := client.GetBoolValue(
@@ -145,7 +145,7 @@ intValue := client.GetIntValue(
 | -------------- | -------------------------------------------------------------------------------------------------- |
 | `key`          | Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                               |
 | `defaultValue` | This value will be returned in case of an error.                                                   |
-| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 
 ```go
 details := client.GetBoolValueDetails(
@@ -178,7 +178,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](../targeting/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
+The [User Object](../targeting/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../targeting/targeting-overview.mdx) feature.
 
 ```go
 user = &configcat.UserData{Identifier: "#UNIQUE-USER-IDENTIFIER#"}
