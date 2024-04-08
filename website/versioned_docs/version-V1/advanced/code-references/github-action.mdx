@@ -12,7 +12,7 @@ You can find more information about GitHub Actions <a target="_blank" href="http
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in your repository's <a target="_blank" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">GitHub Secrets</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
    <img  src="/docs/assets/cli/scan/gh_secrets.png" alt="Github Action secrets" />
 
-2. Get your selected [Config's ID](/docs/advanced/code-references/overview#config-id).
+2. Get your selected [Config's ID](overview.mdx#config-id).
 
 3. Create a new Actions workflow in your GitHub repository under the `.github/workflows` folder, and put the following snippet into it. Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
 
