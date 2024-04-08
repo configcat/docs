@@ -13,11 +13,11 @@ type ZoomOptions = {
 }
 
 const zoom = () => {
-  var zoomActive = false;
-  var busy = false;
-  var overlay = null;
-  var scrollPosition = 0;
-  var images = [];
+  let zoomActive = false;
+  let busy = false;
+  let overlay = null;
+  let scrollPosition = 0;
+  let images = [];
 
   const start = () => {
     document.body.addEventListener('click', _clickHandler);
@@ -30,6 +30,9 @@ const zoom = () => {
   };
 
   const tearDown = () => {
+    if (zoomActive) {
+      _closeActiveZoom();
+    }
     document.body.removeEventListener('click', _clickHandler);
     document.removeEventListener('keyup', _keyUpHandler);
     document.removeEventListener('scroll', _scrollHandler);
@@ -107,6 +110,7 @@ const zoom = () => {
 
     const targetImage = event.target;
     const img = document.createElement('img');
+    img.classList.add('zoom-img-zoomed-in');
     img.onload = () => {
       document.body.classList.add('zoom-overlay-open');
       overlay.appendChild(img);
