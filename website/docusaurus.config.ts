@@ -51,6 +51,10 @@ const config: Config = {
             to: '/targeting/targeting-rule/segment-condition',
           },
           {
+            from: '/advanced/segments',
+            to: '/targeting/targeting-rule/segment-condition',
+          },
+          {
             from: '/V2/targeting/targeting-overview',
             to: '/targeting/targeting-overview',
           },
