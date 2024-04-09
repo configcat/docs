@@ -18,7 +18,7 @@ export const RubySchema = require('@site/src/schema-markup/sdk-reference/ruby.js
 </p>
 
 :::info
-This documentation applies to the **v7.x version** of the ConfigCat Ruby SDK. For the documentation of the latest release, please refer to [this page](/sdk-reference/ruby).
+This documentation applies to the **v7.x version** of the ConfigCat Ruby SDK. For the documentation of the latest release, please refer to [this page](../../../docs/sdk-reference/ruby.mdx).
 :::
 
 ## Getting started
@@ -84,7 +84,7 @@ _ConfigCat Client_ is responsible for:
 | `open_timeout_seconds` | The number of seconds to wait for the server to make the initial connection (i.e. completing the TCP connection handshake).                                                                                                                                         | 10                    |
 | `read_timeout_seconds` | The number of seconds to wait for the server to respond before giving up.                                                                                                                                                                                           | 30                    |
 | `flag_overrides`       | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides)                                                                                                                                                                        | nil                   |
-| `data_governance`      | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](/advanced/data-governance). Available options: `GLOBAL`, `EU_ONLY`. | `GLOBAL`              |
+| `data_governance`      | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `GLOBAL`, `EU_ONLY`. | `GLOBAL`              |
 | `default_user`         | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                    | nil                   |
 | `hooks`                | Used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                      | nil                   |
 | `offline`              | Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                  | false                 |
@@ -109,7 +109,7 @@ These clients can be closed all at once with the `ConfigCat.close_all` method or
 | --------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`           | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 
 ```ruby
 value = client.get_value(
@@ -128,7 +128,7 @@ object with more detailed information about the evaluation result.
 | --------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`           | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `default_value` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`          | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 
 ```ruby
 details = client.get_value_details(
@@ -153,7 +153,7 @@ The details result contains the following information:
 
 ## User Object
 
-The [User Object](/targeting/user-object) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
+The [User Object](../advanced/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../advanced/targeting.mdx) feature.
 
 ```ruby
 user_object = ConfigCat::User.new('#UNIQUE-USER-IDENTIFIER#')
@@ -231,7 +231,7 @@ client.clear_default_user
 ## Polling Modes
 
 The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
-[More about polling modes.](/advanced/caching/)
+[More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
 
@@ -407,7 +407,7 @@ It allows the usage of all features that are available on the ConfigCat Dashboar
 
 You can download your current config JSON from ConfigCat's CDN and use it as a baseline.
 
-The URL to your current config JSON is based on your [Data Governance](/advanced/data-governance) settings:
+The URL to your current config JSON is based on your [Data Governance](../advanced/data-governance.mdx) settings:
 
 - GLOBAL: `https://cdn-global.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
 - EU: `https://cdn-eu.configcat.com/configuration-files/{YOUR-SDK-KEY}/config_v5.json`
@@ -545,7 +545,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a [U
 
 | Parameters | Description                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `user`     | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`     | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 
 ```ruby
 client = ConfigCat.get('#YOUR-SDK-KEY#')
@@ -601,7 +601,7 @@ client = ConfigCat.get('#YOUR-SDK-KEY#',
 ```
 
 :::info
-The Ruby SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The Ruby SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](../advanced/caching.mdx#shared-cache).
 :::
 
 ## Force refresh

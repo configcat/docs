@@ -18,7 +18,7 @@ You can book a free demo session [here](https://calendly.com/configcat/demo), wh
 
 ## Billing, Payments & Subscriptions
 
-### What if I exceed the [config JSON download](/requests) limit of my plan?
+### What if I exceed the [config JSON download](./requests.mdx) limit of my plan?
 
 Don't worry, we will keep serving your data and feature flags. Someone from our team will contact you to discuss your options.
 You can always check your Usage & Quota [here](https://app.configcat.com/organization/usage).
@@ -26,7 +26,7 @@ You can always check your Usage & Quota [here](https://app.configcat.com/organiz
 ### Where can I find and download my invoices?
 
 All the invoices we issued are available for download from the [Billing & Invoices page.](https://app.configcat.com/organization/billing).
-You need to have a [Billing Manager](/organization/#billing-manager-role) role to access the Billing & Invoices page.
+You need to have a [Billing Manager](organization.mdx#billing-manager-role) role to access the Billing & Invoices page.
 
 ### Is it possible to pay via wire transfer?
 
@@ -35,7 +35,7 @@ Using a credit card via the ConfigCat Dashboard is the preferred way of payment,
 ### How do I upgrade / downgrade my billing plan?
 
 You can change your billing plan on the [Plans](https://app.configcat.com/organization/plans) page.
-You need to have a [Billing Manager](/organization/#billing-manager-role) role to access the Plans page.
+You need to have a [Billing Manager](organization.mdx#billing-manager-role) role to access the Plans page.
 
 ### Can I get a discounted rate?
 
@@ -56,12 +56,12 @@ Please note: Switching emails means you'll lose preferences from your old accoun
 ### How do I change the billing email address the way I receive my invoices?
 
 Go to the [Billing & Invoices page.](https://app.configcat.com/organization/billing) And click the `Update billing details` link.
-You need to have a [Billing Manager](/organization/#billing-manager-role) role to access the Billing & Invoices page.
+You need to have a [Billing Manager](organization.mdx#billing-manager-role) role to access the Billing & Invoices page.
 
 ### How do I change my payment method or billing information?
 
 Go to the [Billing & Invoices page.](https://app.configcat.com/organization/billing) and click the `Update billing details` link.
-You need to have a [Billing Manager](/organization/#billing-manager-role) role to access the Billing & Invoices page.
+You need to have a [Billing Manager](organization.mdx#billing-manager-role) role to access the Billing & Invoices page.
 
 ### The ChargeBee payment gets stuck | Throws an error
 
@@ -70,12 +70,12 @@ If you're using Firefox, try switching to a Chromium-based browser that has exte
 ### How do I cancel my account?
 
 Go to the [Plans](https://app.configcat.com/organization/plans) page and click the `Switch Plan` button under the Free plan.
-You need to have a [Billing Manager](/organization/#billing-manager-role) role to access the Plans page.
+You need to have a [Billing Manager](organization.mdx#billing-manager-role) role to access the Plans page.
 
 ### How do I change my currency?
 
 Go to the [Plans](https://app.configcat.com/organization/plans) page and use the currency toggle to switch between USD and EUR.
-You need to have a [Billing Manager](/organization#billing-manager-role) role to access the Plans page.
+You need to have a [Billing Manager](./organization.mdx#billing-manager-role) role to access the Plans page.
 
 ## Security
 
@@ -132,7 +132,7 @@ ConfigCat doesn't collect, store or process any browser data. The data flow is o
 
 Our main infrastructure and database is in the EU, but CDN servers are located both in the EU and globally. You can set where you want us to keep your data, so its always within reach for your needs.
 
-You can read more [here](/advanced/data-governance).
+You can read more [here](./advanced/data-governance.mdx).
 
 ### Is it possible to export the feature flags?
 
@@ -195,11 +195,11 @@ Also, consider the following:
 - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)
 - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)
 
-More on [stickyness](/targeting/percentage-options/#stickiness) and [consistency](/targeting/percentage-options/#consistency)
+More on [stickyness](./targeting/percentage-options.mdx#stickiness) and [consistency](./targeting/percentage-options.mdx#consistency)
 
 ### How to use Targeting Rules based on sensitive data?
 
-If you want to use Targeting Rules based on email address, phone number, or other sensitive data, you can use the [Confidential text comparators](/targeting/targeting-rule/user-condition/#confidential-text-comparators).
+If you want to use Targeting Rules based on email address, phone number, or other sensitive data, you can use the [Confidential text comparators](./targeting/targeting-rule/user-condition.mdx#confidential-text-comparators).
 
 ## Technical Debt
 
@@ -221,7 +221,7 @@ You can change the frequency, criteria and scope of the Zombie Feature Flag repo
 
 ### How to avoid technical debt caused by feature flags?
 
-The [ConfigCat CLI](/advanced/code-references/overview) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
+The [ConfigCat CLI](./advanced/code-references/overview.mdx) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
 <img src="/docs/assets/cli/code-refs.png" className="zoomable" alt="Code references screenshot" />
 
 ### Is there a way to compare flag statuses between two or more environments?

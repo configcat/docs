@@ -19,7 +19,7 @@ export const KotlinSchema = require('@site/src/schema-markup/sdk-reference/kotli
 - <a href="https://configcat.github.io/kotlin-sdk/" target="_blank">API Documentation</a>
 
 :::info
-This documentation applies to the **v2.x version** of the ConfigCat Kotlin Multiplatform SDK. For the documentation of the latest release, please refer to [this page](/sdk-reference/kotlin).
+This documentation applies to the **v2.x version** of the ConfigCat Kotlin Multiplatform SDK. For the documentation of the latest release, please refer to [this page](../../../docs/sdk-reference/kotlin.mdx).
 :::
 
 ## Getting started
@@ -112,7 +112,7 @@ These are the available options on the `ConfigCatOptions` class:
 
 | Properties       | Type                          | Description                                                                                                                                                                                                                                                                                                                                      |
 | ---------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `dataGovernance` | `DataGovernance`              | Optional, defaults to `DataGovernance.GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](/advanced/data-governance). Available options: `DataGovernance.GLOBAL`, `DataGovernance.EU_ONLY`. |
+| `dataGovernance` | `DataGovernance`              | Optional, defaults to `DataGovernance.GLOBAL`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `DataGovernance.GLOBAL`, `DataGovernance.EU_ONLY`. |
 | `baseUrl`        | `String`                      | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                                                        |
 | `requestTimeout` | `Duration`                    | Optional, defaults to `30s`. Sets the underlying HTTP client's request timeout. [More about HTTP Timeout](#http-timeout).                                                                                                                                                                                                                        |
 | `configCache`    | `ConfigCache`                 | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                                                                  |
@@ -138,7 +138,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 
 ```kotlin
 val value = client.getValue(
@@ -156,7 +156,7 @@ val value = client.getValue(
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 
 ```kotlin
 val details = client.getValueDetails(
@@ -181,7 +181,7 @@ The details result contains the following information:
 
 ## User Object
 
-The [User Object](/targeting/user-object) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
+The [User Object](../advanced/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../advanced/targeting.mdx) feature.
 
 ```kotlin
 val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")
@@ -261,7 +261,7 @@ client.clearDefaultUser()
 ## Polling Modes
 
 The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
-[More about polling modes.](/advanced/caching/)
+[More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
 
@@ -511,7 +511,7 @@ val client = ConfigCatClient("#YOUR-SDK-KEY#") {
 ```
 
 :::info
-The Kotlin SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The Kotlin SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](../advanced/caching.mdx#shared-cache).
 :::
 
 ## HTTP Engine
@@ -607,12 +607,12 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, re
 
 ## Sensitive information handling
 
-The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](/requests/) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
+The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](../requests.mdx) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
 This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
-Also, we recommend using [confidential targeting comparators](/targeting/targeting-rule/user-condition/#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
+Also, we recommend using [confidential targeting comparators](../advanced/targeting.mdx#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
 
 ## Sample Apps
 

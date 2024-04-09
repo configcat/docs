@@ -113,13 +113,13 @@ app.use(ConfigCatPlugin, {
 
 `pollingMode` can be set to: `PollingMode.AutoPoll`, `PollingMode.ManualPoll` and `PollingMode.LazyLoad`
 
-> See documentation [here](/advanced/caching/).
+> See documentation [here](../../advanced/caching.mdx).
 
 ### Using the plugin with a logger
 
 You may want to log the actions of the underlying ConfigCat SDK client. To do this, specify a logger in `clientOptions`:
 
-> See documentation [here](/sdk-reference/js/#logging).
+> See documentation [here](../js.mdx#logging).
 
 Add `createConsoleLogger`, and `LoggerLevel` to your import:
 
@@ -129,7 +129,7 @@ import { createConsoleLogger, LogLevel } from "configcat-vue";
 
 Create the logger with a specified log level:
 
-> See documentation [here](/sdk-reference/js/#setting-log-levels).
+> See documentation [here](../js.mdx#setting-log-levels).
 
 Use the logger in `clientOptions`:
 
@@ -155,9 +155,9 @@ app.use(ConfigCatPlugin, {
 
 ### Specifying a User Object
 
-The [User Object](/targeting/user-object) stores attributes of a user in your application. It works hand in hand with ConfigCat's [Targeting](/targeting/targeting-overview) rules for targeting specific users with feature flags. A User Object can be passed as a prop to the `FeatureWrapper` component.
+The [User Object](../../targeting/user-object.mdx) stores attributes of a user in your application. It works hand in hand with ConfigCat's [Targeting](../../targeting/targeting-overview.mdx) rules for targeting specific users with feature flags. A User Object can be passed as a prop to the `FeatureWrapper` component.
 
-> See documentation [here](/targeting/user-object).
+> See documentation [here](../../targeting/user-object.mdx).
 
 Define the User Object:
 
@@ -214,7 +214,7 @@ const handleFlagValueChange = (flagValue: boolean) => {
 
 This plugin exposes (provides) the underlying ConfigCat client. By injecting the provided client instance, you can use all the features it offers.
 
-> See documentation [here](/sdk-reference/js).
+> See documentation [here](../js.mdx).
 
 One of the ways it can be used is by subscribing to events emitted by the ConfigCat client.
 

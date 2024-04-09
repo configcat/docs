@@ -19,7 +19,7 @@ export const DartSchema = require('@site/src/schema-markup/sdk-reference/dart.js
 </p>
 
 :::info
-This documentation applies to the **v3.x version** of the ConfigCat Dart (Flutter). For the documentation of the latest release, please refer to [this page](/sdk-reference/dart).
+This documentation applies to the **v3.x version** of the ConfigCat Dart (Flutter). For the documentation of the latest release, please refer to [this page](../../../docs/sdk-reference/dart.mdx).
 :::
 
 ## Getting Started
@@ -126,7 +126,7 @@ These are the available options on the `ConfigCatOptions` class:
 
 | Properties       | Description                                                                                                                                                                                                                                                                                        |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `dataGovernance` | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](/advanced/data-governance). Available options: `global`, `euOnly`. |
+| `dataGovernance` | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `global`, `euOnly`. |
 | `baseUrl`        | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                                                          |
 | `connectTimeout` | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's connect timeout. [More about the HTTP Client](#httpclient).                                                                                                                      |
 | `receiveTimeout` | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's receive timeout. [More about the HTTP Client](#httpclient).                                                                                                                      |
@@ -151,7 +151,7 @@ These clients can be closed all at once with the `ConfigCatClient.closeAll()` me
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                           |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 
 ```dart
 final value = await client.getValue(
@@ -169,7 +169,7 @@ final value = await client.getValue(
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](/targeting/targeting-overview) |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 
 ```dart
 final details = await client.getValueDetails(
@@ -194,7 +194,7 @@ The `details` result contains the following information:
 
 ## User Object
 
-The [User Object](/targeting/user-object) is essential if you'd like to use ConfigCat's [Targeting](/targeting/targeting-overview) feature.
+The [User Object](../advanced/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../advanced/targeting.mdx) feature.
 
 ```dart
 final user = ConfigCatUser(identifier: '#UNIQUE-USER-IDENTIFIER#');
@@ -277,7 +277,7 @@ client.clearDefaultUser();
 ## Polling Modes
 
 The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
-[More about polling modes.](/advanced/caching/)
+[More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
 
@@ -492,7 +492,7 @@ final client = ConfigCatClient.get(
 ```
 
 :::info
-The Dart (Flutter) SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](/docs/advanced/caching/#shared-cache).
+The Dart (Flutter) SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](../advanced/caching.mdx#shared-cache).
 :::
 
 ## HttpClient
