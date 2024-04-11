@@ -134,7 +134,7 @@
           ]
         },
         {
-          "label": "ConfigCat Proxy (Beta)",
+          "label": "ConfigCat Proxy",
           "type": "category",
           "link": {
             "type": "doc",

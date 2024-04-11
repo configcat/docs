@@ -141,7 +141,7 @@ const sidebars: SidebarsConfig = {
           ],
         },
         {
-          label: 'ConfigCat Proxy (Beta)',
+          label: 'ConfigCat Proxy',
           type: 'category',
           link: { type: 'doc', id: 'advanced/proxy/proxy-overview' },
           items: [

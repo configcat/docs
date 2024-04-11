@@ -1,16 +1,12 @@
 ---
 id: proxy-overview
-title: ConfigCat Proxy (Beta)
+title: ConfigCat Proxy
 description: The ConfigCat Proxy allows you to host a feature flag evaluation service in your own infrastructure.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
-
-:::info
-The ConfigCat Proxy is in a public beta phase. If you have feedback or questions, please [contact us](https://configcat.com/support).
-:::
 
 The <a target="_blank" href="https://github.com/configcat/configcat-proxy">ConfigCat Proxy</a> allows you to host a feature flag evaluation service in your own infrastructure. It's a small Go application that communicates with ConfigCat's CDN network and caches/proxies *config JSON* files for your frontend and backend applications. The *config JSON* contains all the data that is needed for ConfigCat SDKs to evaluate feature flags.
 
@@ -62,9 +58,9 @@ The docker image is available on DockerHub. You can run the image either as a st
 <Tabs>
 <TabItem value="standalone" label="Standalone" default>
 
-Pull the latest image:
+Pull the docker image:
 ```shell
-docker pull configcat/proxy:latest
+docker pull configcat/proxy:1.0.0
 ```
 
 Run the ConfigCat Proxy:
@@ -81,7 +77,7 @@ docker run -d --name configcat-proxy \
 ```yaml title="docker-compose.yml"
 services:
   configcat_proxy:
-    image: configcat/proxy:latest
+    image: configcat/proxy:1.0.0
     environment:
       - CONFIGCAT_SDKS={"<sdk-identifier>":"<your-sdk-key>"}
     ports:
