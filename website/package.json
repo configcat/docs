@@ -46,15 +46,8 @@
     "@docusaurus/module-type-aliases": "3.2.1",
     "@docusaurus/tsconfig": "3.2.1",
     "@docusaurus/types": "3.2.1",
-    "lint-staged": "^13.2.0",
-    "prettier": "^2.8.7",
     "typescript": "~5.2.2",
     "replace-in-file": "7.1.0"
-  },
-  "lint-staged": {
-    "**/*.{js,md,json}": [
-      "prettier --write ."
-    ]
   },
   "engines": {
     "node": ">=18.0"
