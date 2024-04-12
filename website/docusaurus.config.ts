@@ -302,7 +302,7 @@ const config: Config = {
       appId: '0MLXBNIK0Q',
       apiKey: '6484bd6c163502bacf229cb8d22024ab',
       indexName: 'configcat',
-      contextualSearch: false,
+      contextualSearch: true,
       searchPagePath: 'search',
       searchParameters: {},
       externalUrlRegex: 'configcat\\.com/blog',
