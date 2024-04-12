@@ -345,7 +345,7 @@ def start(_type, _args) do
   Supervisor.start_link(children, opts)
 end
 
-# Calling code:
+# Calling code
 FirstFlags.get_value("someKey", "default value")
 SecondFlags.get_value("otherKey", "other default")
 ```
@@ -372,7 +372,7 @@ def start(_type, _args) do
   Supervisor.start_link(children, opts)
 end
 
-# Calling code:
+# Calling code
 ConfigCat.get_value("someKey", "default value", client: :first)
 ConfigCat.get_value("otherKey", "other default", client: :second)
 ```
