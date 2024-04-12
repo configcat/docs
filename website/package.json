@@ -10,16 +10,15 @@
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
     "gen-api-docs": "docusaurus gen-api-docs all && node ./api/cleanup-api-docs.js",
-    "configure-husky": "cd .. && npx husky install",
     "typecheck": "tsc",
     "cf": "npm run gen-api-docs && docusaurus build --out-dir build/docs && echo '/ /docs' > build/_redirects"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.1.1",
-    "@docusaurus/plugin-client-redirects": "^3.1.1",
-    "@docusaurus/plugin-google-tag-manager": "^3.1.1",
-    "@docusaurus/preset-classic": "^3.1.1",
-    "@mdx-js/react": "^3.0.0",
+    "@docusaurus/core": "^3.2.1",
+    "@docusaurus/plugin-client-redirects": "^3.2.1",
+    "@docusaurus/plugin-google-tag-manager": "^3.2.1",
+    "@docusaurus/preset-classic": "^3.2.1",
+    "@mdx-js/react": "^3.0.1",
     "@svgr/webpack": "^8.1.0",
     "clsx": "^2.1.0",
     "docusaurus-plugin-openapi-docs": "3.0.0-beta.5",
@@ -44,24 +43,11 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.1.1",
-    "@docusaurus/tsconfig": "3.1.1",
-    "@docusaurus/types": "3.1.1",
-    "husky": "^8.0.2",
-    "lint-staged": "^13.2.0",
-    "prettier": "^2.8.7",
-    "typescript": "~5.2.2",
+    "@docusaurus/module-type-aliases": "3.2.1",
+    "@docusaurus/tsconfig": "3.2.1",
+    "@docusaurus/types": "3.2.1",
+    "typescript": "~5.4.5",
     "replace-in-file": "7.1.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{js,md,json}": [
-      "prettier --write ."
-    ]
   },
   "engines": {
     "node": ">=18.0"
