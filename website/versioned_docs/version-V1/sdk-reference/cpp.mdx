@@ -638,6 +638,29 @@ Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no matc
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: true
 ```
 
+### Custom logger implementation
+
+```cpp
+#include "log.h"
+
+class CustomLogger : public ILogger {
+public:
+    void log(LogLevel level, const std::string& message) override {
+        // Write the logs
+        std::cout << logLevelAsString(level) << ": " << message << std::endl;
+    }
+};
+```
+
+```cpp
+auto logger = std::make_shared<CustomLogger>();
+logger->setLogLevel(LOG_LEVEL_INFO);
+
+ConfigCatOptions options;
+options.logger = logger;
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
+```
+
 ## Sensitive information handling
 
 The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](../requests.mdx) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
