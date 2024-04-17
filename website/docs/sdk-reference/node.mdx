@@ -6,7 +6,10 @@ description: ConfigCat Node.js SDK Reference. This is a step-by-step guide on ho
 
 export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.json');
 
-<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(NodeSchema) }}></script>
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(NodeSchema) }}
+></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/node-sdk.svg?style=social)](https://github.com/configcat/node-sdk/stargazers)
 [![Node CI](https://github.com/configcat/node-sdk/actions/workflows/node-ci.yml/badge.svg?branch=master)](https://github.com/configcat/node-sdk/actions/workflows/node-ci.yml)
@@ -19,7 +22,9 @@ export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.js
 For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](./js-ssr.mdx).
 :::
 
-<a href="https://github.com/configcat/node-sdk" target="_blank">ConfigCat Node.js SDK on GitHub</a>
+<a href="https://github.com/configcat/node-sdk" target="_blank">
+  ConfigCat Node.js SDK on GitHub
+</a>
 
 ## Getting started
 
@@ -48,7 +53,10 @@ const configCatClient = configcat.getClient('#YOUR-SDK-KEY#');
 The async/await way:
 
 ```js
-const value = await configCatClient.getValueAsync('isMyAwesomeFeatureEnabled', false);
+const value = await configCatClient.getValueAsync(
+  'isMyAwesomeFeatureEnabled',
+  false,
+);
 
 if (value) {
   do_the_new_thing();
@@ -103,17 +111,17 @@ The `getClient` function has optional parameters, which can be used to adjust th
 
 The available options depends on the chosen polling mode. However, there are some common options which can be set in the case of every polling mode:
 
-| Option Parameter   | Description                                                                                                                                                                                                                                                                                      | Default                 |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
-| `logger`           | Custom [`IConfigCatLogger`](https://github.com/configcat/common-js/blob/master/src/ConfigCatLogger.ts) implementation for tracing.                                                                                                                                       | [`ConfigCatConsoleLogger`](https://github.com/configcat/common-js/blob/master/src/ConfigCatLogger.ts) (with WARN level) |
-| `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                       | 30000                   |
-| `baseUrl`          | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                  |                         |
-| `proxy`            | Proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy).                                                                                                                                                                                                                |                         |
-| `dataGovernance`   | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global` |
-| `cache`            | Custom [`IConfigCatCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) implementation for caching the downloaded config.                                                                                                                     | [`InMemoryConfigCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) |
-| `flagOverrides`    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                    | -                       |
-| `defaultUser`      | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                                 | `undefined` (none)      |
-| `offline`          | Determines whether the client should be initialized to offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                                           | `false`                 |
+| Option Parameter   | Description                                                                                                                                                                                                                                                                                          | Default                                                                                                                 |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `logger`           | Custom [`IConfigCatLogger`](https://github.com/configcat/common-js/blob/master/src/ConfigCatLogger.ts) implementation for tracing.                                                                                                                                                                   | [`ConfigCatConsoleLogger`](https://github.com/configcat/common-js/blob/master/src/ConfigCatLogger.ts) (with WARN level) |
+| `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                           | 30000                                                                                                                   |
+| `baseUrl`          | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                      |                                                                                                                         |
+| `proxy`            | Proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy).                                                                                                                                                                                                                    |                                                                                                                         |
+| `dataGovernance`   | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global`                                                                                                 |
+| `cache`            | Custom [`IConfigCatCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts) implementation for caching the downloaded config.                                                                                                                                               | [`InMemoryConfigCache`](https://github.com/configcat/common-js/blob/master/src/ConfigCatCache.ts)                       |
+| `flagOverrides`    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                        | -                                                                                                                       |
+| `defaultUser`      | Sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                                     | `undefined` (none)                                                                                                      |
+| `offline`          | Determines whether the client should be initialized to offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                                               | `false`                                                                                                                 |
 
 Options also include a property named `setupHook`, which you can use to subscribe to the hooks (events) at the time of initialization. [More about hooks](#hooks).
 
@@ -141,10 +149,10 @@ You can close all open clients at once using the `configcat.disposeAllClients()`
 
 Returns a Promise with the value.
 
-| Parameters     | Description                                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
-| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| Parameters     | Description                                                                                                                |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                                             |
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 
 ```js
@@ -177,7 +185,7 @@ Please refer to the following table for the corresponding types.
 ### Setting type mapping {#setting-type-mapping}
 
 | Setting Kind   | `typeof defaultValue` |
-| -------------- | ----------------------|
+| -------------- | --------------------- |
 | On/Off Toggle  | `boolean`             |
 | Text           | `string`              |
 | Whole Number   | `number`              |
@@ -185,8 +193,9 @@ Please refer to the following table for the corresponding types.
 
 In addition to the types mentioned above, you also have the option to provide `null` or `undefined` for the `defaultValue` parameter regardless of the setting kind.
 However, if you do so, the return type of the `getValue` method will be
-* `boolean | string | number | null` when `defaultValue` is `null` or
-* `boolean | string | number | undefined` when `defaultValue` is `undefined`.
+
+- `boolean | string | number | null` when `defaultValue` is `null` or
+- `boolean | string | number | undefined` when `defaultValue` is `undefined`.
 
 This is because in these cases the exact return type cannot be determined at compile-time as the TypeScript compiler has no information about the setting type.
 
@@ -198,10 +207,10 @@ If you specify an allowed type but it mismatches the setting kind, an error mess
 
 `getValueDetailsAsync()` is similar to `getValueAsync()` but instead of returning the evaluated value only, it provides more detailed information about the evaluation result.
 
-| Parameters     | Description                                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
-| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
+| Parameters     | Description                                                                                                                |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.                |
+| `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                                             |
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 
 ```js
@@ -233,17 +242,17 @@ Please refer to [this table](#setting-type-mapping) for the corresponding types.
 
 The `details` result contains the following information:
 
-| Field                             | Type                            | Description                                                                                 |
-| --------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------- |
-| `key`                             | `string`                        | The key of the evaluated feature flag or setting.                                           |
-| `value`                           | `boolean` / `string` / `number` | The evaluated value of the feature flag or setting.                                         |
-| `user`                            | `User`                          | The User Object used for the evaluation.                                                    |
-| `isDefaultValue`                  | `boolean`                       | True when the default value passed to `getValueDetailsAsync()` is returned due to an error. |
-| `errorMessage`                    | `string`                        | In case of an error, this property contains the error message.                              |
-| `errorException`                  | `any`                           | In case of an error, this property contains the related exception object (if any).          |
-| `matchedTargetingRule`            | `ITargetingRule`                | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
-| `matchedPercentageOption`         | `IPercentageOption`             | The Percentage Option (if any) that was used to select the evaluated value.                 |
-| `fetchTime`                       | `Date`                          | The last download time (UTC) of the current config.                                         |
+| Field                     | Type                            | Description                                                                                                |
+| ------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `key`                     | `string`                        | The key of the evaluated feature flag or setting.                                                          |
+| `value`                   | `boolean` / `string` / `number` | The evaluated value of the feature flag or setting.                                                        |
+| `user`                    | `User`                          | The User Object used for the evaluation.                                                                   |
+| `isDefaultValue`          | `boolean`                       | True when the default value passed to `getValueDetailsAsync()` is returned due to an error.                |
+| `errorMessage`            | `string`                        | In case of an error, this property contains the error message.                                             |
+| `errorException`          | `any`                           | In case of an error, this property contains the related exception object (if any).                         |
+| `matchedTargetingRule`    | `ITargetingRule`                | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value. |
+| `matchedPercentageOption` | `IPercentageOption`             | The Percentage Option (if any) that was used to select the evaluated value.                                |
+| `fetchTime`               | `Date`                          | The last download time (UTC) of the current config.                                                        |
 
 ## User Object
 
@@ -283,11 +292,11 @@ let userObject = new configcat.User(
 The `custom` dictionary also allows attribute values other than `string` values:
 
 ```js
-let userObject = new configcat.User("#UNIQUE-USER-IDENTIFIER#");
+let userObject = new configcat.User('#UNIQUE-USER-IDENTIFIER#');
 userObject.custom = {
   Rating: 4.5,
-  RegisteredAt: new Date("2023-11-22T12:34:56.000Z"),
-  Roles: ["Role1", "Role2"]
+  RegisteredAt: new Date('2023-11-22T12:34:56.000Z'),
+  Roles: ['Role1', 'Role2'],
 };
 ```
 
@@ -297,28 +306,33 @@ All comparators support `string` values as User Object attribute (in some cases 
 but some of them also support other types of values. It depends on the comparator how the values will be handled. The following rules apply:
 
 **Text-based comparators** (EQUALS, IS ONE OF, etc.)
-* accept `string` values,
-* all other values are automatically converted to `string` (a warning will be logged but evaluation will continue as normal).
+
+- accept `string` values,
+- all other values are automatically converted to `string` (a warning will be logged but evaluation will continue as normal).
 
 **SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
-* accept `string` values containing a properly formatted, valid semver value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
+- accept `string` values containing a properly formatted, valid semver value,
+- all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Number-based comparators** (=, &lt;, &gt;=, etc.)
-* accept `number` values,
-* accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
+- accept `number` values,
+- accept `string` values containing a properly formatted, valid `number` value,
+- all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Date time-based comparators** (BEFORE / AFTER)
-* accept `Date` values, which are automatically converted to a second-based Unix timestamp,
-* accept `number` values representing a second-based Unix timestamp,
-* accept `string` values containing a properly formatted, valid `number` value,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
+- accept `Date` values, which are automatically converted to a second-based Unix timestamp,
+- accept `number` values representing a second-based Unix timestamp,
+- accept `string` values containing a properly formatted, valid `number` value,
+- all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
-* accept arrays of `string`,
-* accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
-* all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
+
+- accept arrays of `string`,
+- accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
+- all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 ### Default user
 
@@ -361,7 +375,11 @@ configCatClient.setDefaultUser(user);
 const otherUser = new configcat.User('brian@example.com');
 
 // otherUser will be used in the evaluation process.
-const value = await configCatClient.getValueAsync('keyOfMyFeatureFlag', false, otherUser);
+const value = await configCatClient.getValueAsync(
+  'keyOfMyFeatureFlag',
+  false,
+  otherUser,
+);
 ```
 
 You can also remove the default user by doing the following:
@@ -417,7 +435,7 @@ const configCatClient = configcat.getClient(
 Available options (in addition to the [common ones](#creating-the-configcat-client)):
 
 | Option Parameter         | Description           | Default |
-| ------------------------ | ----------------------| ------- |
+| ------------------------ | --------------------- | ------- |
 | `cacheTimeToLiveSeconds` | Cache TTL in seconds. | 60s     |
 
 ### Manual polling
@@ -431,7 +449,10 @@ const configCatClient = configcat.getClient(
 );
 
 await configCatClient.forceRefreshAsync();
-let value = await configCatClient.getValueAsync('keyOfMyTextSetting', 'my default value');
+let value = await configCatClient.getValueAsync(
+  'keyOfMyTextSetting',
+  'my default value',
+);
 console.log(value);
 ```
 
@@ -443,11 +464,17 @@ const configCatClient = configcat.getClient(
   configcat.PollingMode.ManualPoll,
 );
 
-let value = await configCatClient.getValueAsync('keyOfMyTextSetting', 'my default value');
+let value = await configCatClient.getValueAsync(
+  'keyOfMyTextSetting',
+  'my default value',
+);
 console.log(value); // console: "my default value"
 
 await configCatClient.forceRefreshAsync();
-value = await configCatClient.getValueAsync('keyOfMyTextSetting', 'my default value');
+value = await configCatClient.getValueAsync(
+  'keyOfMyTextSetting',
+  'my default value',
+);
 console.log(value);
 ```
 
@@ -544,7 +571,7 @@ const configCatClient = configcat.getClient(
   '#YOUR-SDK-KEY#',
   configcat.PollingMode.AutoPoll,
   {
-    logger: configcat.createConsoleLogger(configcat.LogLevel.Info) // Setting log level to Info
+    logger: configcat.createConsoleLogger(configcat.LogLevel.Info), // Setting log level to Info
   },
 );
 ```
@@ -567,6 +594,54 @@ ConfigCat - INFO - [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifie
   - IF User.Email CONTAINS ANY OF ['@something.com'] THEN 'false' => no match
   - IF User.Email CONTAINS ANY OF ['@example.com'] THEN 'true' => MATCH, applying rule
   Returning 'true'.
+```
+
+### Custom logger implementation
+
+The SDK provides a simple logger implementation that logs to [the debugging console](https://developer.mozilla.org/en-US/docs/Web/API/console) (`configcat.createConsoleLogger(...)`) but it also allows you to inject any custom implementation of `IConfigCatLogger`.
+
+```ts
+class MyCustomLogger implements IConfigCatLogger {
+  /**
+   * Writes an event into the log.
+   * @param level Event severity level.
+   * @param eventId Event identifier.
+   * @param message Message.
+   * @param exception The exception object related to the message (if any).
+   */
+  log(
+    level: LogLevel,
+    eventId: LogEventId,
+    message: LogMessage,
+    exception?: any,
+  ): void {
+    // insert your custom log logic
+  }
+}
+```
+
+or
+
+```js
+function MyCustomLogger() {}
+
+MyCustomLogger.prototype.log = function (level, eventId, message, exception) {
+  // insert your custom log logic
+};
+```
+
+then
+
+```js
+// set the `MyCustomLogger` implementation on creating the client instance
+
+const configCatClient = configcat.getClient(
+  '#YOUR-SDK-KEY#',
+  configcat.PollingMode.AutoPoll,
+  {
+    logger: new MyCustomLogger(),
+  },
+);
 ```
 
 ## `getAllKeysAsync()`
@@ -625,13 +700,16 @@ because these operations may involve network communication (e.g. downloading con
 which is necessarily an asynchronous operation in JavaScript.
 
 However, there may be use cases where synchronous evaluation is preferable, thus, since v10.1.0, the Node.js SDK provides a way
-to synchronously evaluate feature flags and settings via *snapshots*.
+to synchronously evaluate feature flags and settings via _snapshots_.
 
 Using the `snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
 and you can use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
 
 ```js
-const configCatClient = configcat.getClient("#YOUR-SDK-KEY#", configcat.PollingMode.ManualPoll);
+const configCatClient = configcat.getClient(
+  '#YOUR-SDK-KEY#',
+  configcat.PollingMode.ManualPoll,
+);
 
 // Make sure that the latest config data is available locally.
 await configCatClient.forceRefreshAsync();
@@ -656,7 +734,10 @@ in the background. For other polling modes, you'll need to manually initiate a c
 In Auto Poll mode, you can use the `waitForReady` method to wait for that latest config data to become available locally:
 
 ```js
-const configCatClient = configcat.getClient("#YOUR-SDK-KEY#", configcat.PollingMode.AutoPoll);
+const configCatClient = configcat.getClient(
+  '#YOUR-SDK-KEY#',
+  configcat.PollingMode.AutoPoll,
+);
 
 // Make sure that the latest config data is available locally.
 await configCatClient.waitForReady();
@@ -692,7 +773,9 @@ class MyCustomCache implements IConfigCatCache {
     // insert your cache write logic here
   }
 
-  get(key: string): Promise<string | null | undefined> | string | null | undefined {
+  get(
+    key: string,
+  ): Promise<string | null | undefined> | string | null | undefined {
     // insert your cache read logic here
   }
 }
@@ -701,7 +784,7 @@ class MyCustomCache implements IConfigCatCache {
 or
 
 ```js
-function MyCustomCache() { }
+function MyCustomCache() {}
 
 MyCustomCache.prototype.set = function (key, value) {
   // insert your cache write logic here
@@ -730,7 +813,7 @@ const configCatClient = configcat.getClient(
 [See implementation of Redis cache.](https://github.com/configcat/node-sdk/tree/master/samples/customcache)
 
 :::info
-The Node.js SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](../advanced/caching.mdx#shared-cache).
+The Node.js SDK supports _shared caching_. You can read more about this feature and the required minimum SDK versions [here](../advanced/caching.mdx#shared-cache).
 :::
 
 ## Sample Application
@@ -743,8 +826,18 @@ The Node.js SDK supports *shared caching*. You can read more about this feature 
 
 See the guides on how to use ConfigCat's Node SDK with the following libraries and frameworks:
 
-- <a href="https://configcat.com/blog/2022/08/19/how-to-use-feature-flags-in-nestjs/" target="_blank">NestJS</a>
-- <a href="https://configcat.com/blog/2022/09/02/how-to-use-feature-flag-in-expressjs/" target="_blank">Express</a>
+- <a
+    href="https://configcat.com/blog/2022/08/19/how-to-use-feature-flags-in-nestjs/"
+    target="_blank"
+  >
+    NestJS
+  </a>
+- <a
+    href="https://configcat.com/blog/2022/09/02/how-to-use-feature-flag-in-expressjs/"
+    target="_blank"
+  >
+    Express
+  </a>
 
 ## Look under the hood
 
