@@ -597,16 +597,13 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 
 ## Logging
 
-The default logger used by the ConfigCat SDK is the <a href="https://pub.dev/packages/logger" target="_blank">logger</a> package, but you can override it with your implementation via the `logger` client option. The custom implementation must satisfy the <a href="https://github.com/configcat/dart-sdk/blob/main/lib/src/log/logger.dart" target="_blank">Logger</a> abstract class.
-
-In the ConfigCat SDK, a default `ConsoleLogger` writes logs to the standard output, but you can override it with your implementation via the `logger` client option.
-The custom implementation must satisfy the `ILogger` abstract class.
+### Setting log levels
 
 ```cpp
 #include <configcat/configcat.h>
 #include <configcat/consolelogger.h>
 
-auto logger = make_shared<ConsoleLogger>(LOG_LEVEL_WARNING);
+auto logger = std::make_shared<ConsoleLogger>(LOG_LEVEL_WARNING);
 ConfigCatOptions options;
 options.logger = logger;
 auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
@@ -636,6 +633,32 @@ User object: {
 }
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@something.com] => no match
 Evaluating rule: [Email:john@example.com] [CONTAINS] [@example.com] => match, returning: true
+```
+
+### Custom logger implementation
+
+In the ConfigCat SDK, the default logger (`ConsoleLogger`) writes logs to the standard output, but you can override it with your implementation via the `logger` client option.
+The custom logger must implement the `ILogger` abstract class.
+
+```cpp
+#include "log.h"
+
+class CustomLogger : public ILogger {
+public:
+    void log(LogLevel level, const std::string& message) override {
+        // Write the logs
+        std::cout << logLevelAsString(level) << ": " << message << std::endl;
+    }
+};
+```
+
+```cpp
+auto logger = std::make_shared<CustomLogger>();
+logger->setLogLevel(LOG_LEVEL_INFO);
+
+ConfigCatOptions options;
+options.logger = logger;
+auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 ```
 
 ## Sensitive information handling
