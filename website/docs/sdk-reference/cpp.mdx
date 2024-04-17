@@ -778,8 +778,8 @@ Info level logging helps to inspect how a feature flag was evaluated:
 
 ### Custom logger implementation
 
-In the ConfigCat SDK, a default `ConsoleLogger` writes logs to the standard output, but you can override it with your implementation via the `logger` client option.
-The custom implementation must satisfy the `ILogger` abstract class.
+In the ConfigCat SDK, the default logger (`ConsoleLogger`) writes logs to the standard output, but you can override it with your implementation via the `logger` client option.
+The custom logger must implement the `ILogger` abstract class.
 
 ```cpp
 #include "log.h"
