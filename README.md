@@ -80,11 +80,6 @@ You might run into errors caused by the wrong version of Node.js. To make sure y
 1. Run `nvm use`. This will use the compatible version of Node.js.
 1. Your local Node.js version (`node -v`) should be the same as in the `.nvmrc` file.
 
-# Code style and formatting
-It is recommended to use the [Prettier](https://prettier.io/) extension in your editor to format the code.
-
-We're using Prettier combined with a Husky pre-commit hook in order to always have clean code on every commit, so if you see any automatic changes after you commit - they're for the better! Read more: https://prettier.io/docs/en/install.html#git-hooks
-
 # Questions & Support
 
 We are happy to help.
