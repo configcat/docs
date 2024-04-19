@@ -618,6 +618,37 @@ Call the `forceRefresh()` method on the client to download the latest config JSO
 The default logger used by the SDK simply outputs the log messages with `print()`, but you can override it with your implementation via the `logger` client option. The custom implementation must satisfy the <a href="https://github.com/configcat/dart-sdk/blob/main/lib/src/log/logger.dart" target="_blank">Logger</a> abstract class.
 
 ```dart
+class MyCustomLogger implements Logger {
+  @override
+  void close() {
+    // close the logger
+  }
+
+  @override
+  void debug(message, [error, StackTrace? stackTrace]) {
+    // write the debug logs
+  }
+
+  @override
+  void error(message, [error, StackTrace? stackTrace]) {
+    // write the error logs
+  }
+
+  @override
+  void info(message, [error, StackTrace? stackTrace]) {
+    // write the info logs
+  }
+
+  @override
+  void warning(message, [error, StackTrace? stackTrace]) {
+    // write the warning logs
+  }
+}
+```
+
+Then you can use your custom logger implementation at the SDK's initialization:
+
+```dart
 final client = ConfigCatClient.get(
     sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
     options: ConfigCatOptions(

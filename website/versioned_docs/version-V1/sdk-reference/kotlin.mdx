@@ -573,6 +573,32 @@ Call the `forceRefresh()` method on the client to download the latest config JSO
 The default logger used by the SDK is simply using `println()` to log messages, but you can override it with your custom logger implementation via the `logger` client option. The custom implementation must satisfy the <a href="https://github.com/configcat/kotlin-sdk/blob/main/src/commonMain/kotlin/com/configcat/log/Logger.kt" target="_blank">Logger</a> interface.
 
 ```kotlin
+class MyCustomLogger: Logger {
+    override fun error(message: String) {
+        // write the error logs
+    }
+
+    override fun error(message: String, throwable: Throwable) {
+        // write the error logs
+    }
+
+    override fun warning(message: String) {
+        // write the warning logs
+    }
+
+    override fun info(message: String) {
+        // write the info logs
+    }
+
+    override fun debug(message: String) {
+        // write the debug logs
+    }
+}
+```
+
+Then you can use your custom logger implementation at the SDK's initialization:
+
+```kotlin
 val client = ConfigCatClient("#YOUR-SDK-KEY#") {
     logger = MyCustomLogger()
 }
