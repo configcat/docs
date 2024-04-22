@@ -23,13 +23,13 @@ export const KotlinSchema = require('@site/src/schema-markup/sdk-reference/kotli
 ### 1. Install the ConfigCat SDK
 
 ```kotlin title="build.bradle.kts"
-val CONFIGCAT_VERSION: String by project
+val configcatVersion: String by project
 
 kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.configcat:configcat-kotlin-client:CONFIGCAT_VERSION")
+                implementation("com.configcat:configcat-kotlin-client:configcatVersion")
             }
         }
     }
