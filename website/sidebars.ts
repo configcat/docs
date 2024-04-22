@@ -58,7 +58,7 @@ const sidebars: SidebarsConfig = {
                 {
                   type: 'doc',
                   id: 'advanced/team-management/saml/identity-providers/azure-ad',
-                  label: 'Azure Active Directory',
+                  label: 'Entra ID (Azure AD)',
                 },
                 {
                   type: 'doc',
