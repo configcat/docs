@@ -27,13 +27,13 @@ This documentation applies to the **v2.x version** of the ConfigCat Kotlin Multi
 ### 1. Install the ConfigCat SDK
 
 ```kotlin title="build.bradle.kts"
-val configcat_version: String by project
+val CONFIGCAT_VERSION: String by project
 
 kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.configcat:configcat-kotlin-client:$configcat_version")
+                implementation("com.configcat:configcat-kotlin-client:CONFIGCAT_VERSION")
             }
         }
     }
