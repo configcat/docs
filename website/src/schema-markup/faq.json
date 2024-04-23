@@ -207,7 +207,7 @@
       "name": "How can I use AND operators in my Targeting Rules in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Although there is no direct support for AND operators in the UI, you can use the AND operator with a combination of OR and NOT operators. Read more here: https://configcat.com/docs/faq/#can-i-use-and-operators-in-my-targeting-rules"
+        "text": "Yes, since Config V2 there is direct support for 'AND' operators in ConfigCat. "
       }
     },
     {
