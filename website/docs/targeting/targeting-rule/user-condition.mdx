@@ -145,10 +145,10 @@ The following comparators expect the *Comparison attribute* to be an array of st
 Black Friday is coming and we want to offer a special discount to our users.
 
 #### Goal
-The deals should become available at midnight on Black Friday. We want to make sure that the users can't access the deals before that.
+The deals should become available at midnight on Black Friday. We want to make sure that the users can't access the deals before that. And the deal should be available for the whole weekend.
 
 #### Solution
-Let's use the AFTER comparator to check whether the current time is after midnight on Black Friday.
+Let's use the AFTER comparator to check whether the current time is after midnight on Black Friday AND the current time is BEFORE midnight on Sunday.
 
 On the Dashboard:
 ![Black Friday Sale Example](/assets/targeting/targeting-rule/user-condition/black-friday-example.png)
