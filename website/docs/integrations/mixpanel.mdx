@@ -1,0 +1,36 @@
+---
+id: datadog
+title: Mixpanel - Monitor your feature flags events
+description: ConfigCat Mixpanel integration. This is a step-by-step guide on how to connect the ConfigCat feature flag service events to Mixpanel.
+---
+
+## Overview
+
+Ensures that every setting change in ConfigCat is sent to Mixpanel as an <a href="https://docs.mixpanel.com/docs/reports/insights#annotations" target="_blank" rel="noopener noreferrer">Annotation</a>.
+
+<img src="/docs/assets/datadog_event.png" className="zoomable" alt="datadog_event" />
+
+## Installation
+
+1. Have a <a href="https://mixpanel.com/" target="_blank" rel="noopener noreferrer">Mixpanel account.</a>
+2. Create a Service account that has he role of at least Analyst.
+3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on ConfigCat Dashboard.
+4. Click on Mixpanel's CONNECT button and set your Mixpanel Service Account .
+5. OPTIONAL - Set the proper site of your Datadog account. <a href="https://docs.mixpanel.com/docs/privacy/eu-residency" target="_blank" rel="noopener noreferrer">More about Mixpanel servers</a>.
+6. You're all set. Go ahead and make some changes on your feature flags then check your Events in Datadog.
+
+## Un-installation
+
+1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
+2. Click on Datadog's DISCONNECT button.
+
+## Event details
+
+Every event sent to Datadog by ConfigCat has a _source_ property of `configcat` and _tagged_ with the `product_name`, `config_name` and
+`environment_name` where the change has happened.
+
+### Searching for Events
+
+For example here is how to search for events that happened in the production environment: `sources:configcat production`
+
+<img src="/docs/assets/datadog_filtering.png" className="zoomable" alt="datadog_filtering" />
