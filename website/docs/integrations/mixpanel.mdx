@@ -1,16 +1,26 @@
 ---
 id: mixpanel
-title: Mixpanel - Monitor your feature flag change events
+title: Mixpanel - Monitor your feature flag change events and feature flag analytics
 description: ConfigCat Mixpanel integration. This is a step-by-step guide on how to connect the ConfigCat feature flag service events to Mixpanel.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
 ## Overview
+
+There are two available integration oppurtunities between ConfigCat and Mixpanel:
+- [Monitoring your feature flag change events in Mixpanel with Annotations](#annotations)
+- [Sending feature flag evaluation analytics to Mixpanel Experiments](#experiments)
+
+## Monitoring your feature flag change events in Mixpanel with Annotations {#annotations}
 
 Ensures that every setting change in ConfigCat is sent to Mixpanel as an <a href="https://docs.mixpanel.com/docs/reports/insights#annotations" target="_blank" rel="noopener noreferrer">Annotation</a>.
 
-<img src="/docs/assets/mixpanel/annotation.png" className="zoomable" alt="datadog_event" />
+<img src="/docs/assets/mixpanel/annotation.png" className="zoomable" alt="Mixpanel Annotation" />
 
-## Installation
+### Installation
 
 1. Have a <a href="https://mixpanel.com/" target="_blank" rel="noopener noreferrer">Mixpanel account.</a>
 2. Create a Service account that has he role of at least Analyst. <img src="/docs/assets/mixpanel/service_account.png" className="zoomable" alt="mixpanel_service_Account" />
@@ -19,15 +29,105 @@ Ensures that every setting change in ConfigCat is sent to Mixpanel as an <a href
 5. OPTIONAL - Set the proper server of your Mixpanel account. <a href="https://docs.mixpanel.com/docs/privacy/eu-residency" target="_blank" rel="noopener noreferrer">More about Mixpanel servers</a>.
 6. You're all set. Go ahead and make some changes on your feature flags then check your annotations in Mixpanel.
 
-## Un-installation
+### Un-installation
 
-1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
+1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on ConfigCat Dashboard.
 2. Click on Mixpanel's DISCONNECT button.
 
-## Annotation details
+### Annotation details
 
 Every annotation sent to Mixpanel by ConfigCat has:
 
 - **Integration ID:** configcat.
 - **Date:** When the change happened
 - **Description:** A brief summary of the change.
+
+## Sending feature flag evaluation analytics to Mixpanel Experiments {#experiments}
+
+Ensures that feature flag evaluations are logged into <a href="https://docs.mixpanel.com/docs/reports/apps/experiments" target="_blank" rel="noopener noreferrer">Mixpanel Experiments</a>. With this integration, you can have advanced analytics about your feature flag usages, A/B test results.
+
+### Setup
+
+1. Install the ConfigCat and Mixpanel SDKs to your application.
+2. Configure the ConfigCat SDK with your ConfigCat SDK key and the Mixpanel SDK with your Mixpanel token.
+3. Subscribe to the `flagEvaluated` hook during the ConfigCat SDK initialization and send feature flag evaluation data to Mixpanel experiments.
+<Tabs>
+<TabItem value="js" label="JavaScript, Node, SSR" default>
+```js
+const configCatClient = configcat.getClient("#YOUR_SDK_KEY", PollingMode.AutoPoll, {
+    setupHooks: (hooks) =>
+        hooks.on('flagEvaluated', evaluationDetails => {
+            mixpanel.track('$experiment_started',
+                {
+                    'Experiment name': evaluationDetails.key,
+                    'Variant name': evaluationDetails.value,
+                    'Variation ID': evaluationDetails.variationId
+                });
+        }),
+});
+```
+</TabItem>
+
+<TabItem value="react" label="React">
+```tsx
+<ConfigCatProvider
+  sdkKey="#YOUR_SDK_KEY"
+  pollingMode={PollingMode.AutoPoll}
+  options={{
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', evaluationDetails => {
+        mixpanel.track('$experiment_started',
+            {
+                'Experiment name': evaluationDetails.key,
+                'Variant name': evaluationDetails.value,
+                'Variation ID': evaluationDetails.variationId
+            });
+      }),
+  }}
+>
+</ConfigCatProvider>
+```
+</TabItem>
+
+<TabItem value="python" label="Python">
+```python
+def on_flag_evaluated(evaluation_details):
+    mp.track(evaluation_details.user.get_identifier(), '$experiment_started',  {
+        'Experiment name': evaluation_details.key,
+        'Variant name': evaluation_details.value,
+        'Variation ID': evaluation_details.variation_id
+    })
+    pass
+
+client = configcatclient.get('#YOUR-SDK-KEY#',
+    ConfigCatOptions(
+        hooks=Hooks(on_flag_evaluated=on_flag_evaluated)
+    )
+)
+```
+</TabItem>
+
+<TabItem value="go" label="Go">
+```go
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
+        err := mp.Track(ctx, []*mixpanel.Event{
+            mp.NewEvent("$experiment_started", details.Data.User.(*UserData).Identifier, map[string]any{
+                "Experiment name": details.Data.Key,
+                "Variant name": details.Value,
+                "Variation ID": details.Data.VariationID,
+            }),
+        })
+    }}})
+```
+</TabItem>
+</Tabs>
+
+:::note
+If you are using Text feature flags with long text values (e.g. JSON values) that makes no sense to send into Mixpanel as a Variant, you can send the `variationId` as the `Variant name` to Mixpanel instead of the `value`.
+The `variationId` is a hashed version of the value and you can see the `variationId` on the ConfigCat Dashboard after turning on the _Show VariationIDs to support A/B testing_ 
+<a href="https://app.configcat.com/product/preferences" target="_blank" rel="noopener noreferrer">Product preference</a>.
+:::
+4. Check your Experiments in Mixpanel.  
+If you don't have access to the Experiments feature in Mixpanel, you can create a custom Insights report based on the `Experiment Started` event. 
+<img src="/docs/assets/mixpanel/insights.png" className="zoomable" alt="Mixpanel Insights report" />
