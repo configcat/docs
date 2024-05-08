@@ -194,7 +194,13 @@ The `variationId` is a hashed version of the value and you can see the `variatio
 <a href="https://app.configcat.com/product/preferences" target="_blank" rel="noopener noreferrer">Product preference</a>.
 :::
 
-### Usage
-1. Deploy your application and wait for feature flag evaluations to happen so Experiments in Mixpanel could be populated.
-2. Check your Experiments in Mixpanel. If you don't have access to the Experiments feature in Mixpanel, you can create a custom Insights report based on the `Experiment Started` event. Example:
+4. Deploy your application and wait for feature flag evaluations to happen so Experiments in Mixpanel could be populated.
+
+### Usage with Experiments
+Check your Experiments in Mixpanel. 
+TODO image, if we have access to the Experiments feature.
+
+### Usage with Insights report
+If you don't have access to the Experiments feature in Mixpanel, you can create a custom Insights report based on the `Experiment Started` event. 
+You can filter for your feature flag keys with the `Experiment name` property and visualize the different variants by using the `Variant name` property as a Breakdown. Example:
 <img src="/docs/assets/mixpanel/insights.png" className="zoomable" alt="Mixpanel Insights report" />
