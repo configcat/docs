@@ -50,7 +50,7 @@ Ensures that feature flag evaluations are logged into <a href="https://docs.mixp
 
 1. Install the ConfigCat and Mixpanel SDKs to your application.
 2. Configure the ConfigCat SDK with your ConfigCat SDK key and the Mixpanel SDK with your Mixpanel token.
-3. Subscribe to the `flagEvaluated` hook during the ConfigCat SDK initialization and send feature flag evaluation data to Mixpanel experiments.
+3. Subscribe to the `flagEvaluated` hook during the ConfigCat SDK initialization and send feature flag evaluation data to Mixpanel experiments. Examples:
 <Tabs>
 <TabItem value="js" label="JavaScript, Node, SSR" default>
 ```js
@@ -107,6 +107,24 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 ```
 </TabItem>
 
+<TabItem value="ruby" label="Ruby">
+```ruby
+def on_flag_evaluated(evaluation_details):
+    mp.track(evaluation_details.user.get_identifier(), '$experiment_started',  {
+        'Experiment name': evaluation_details.key,
+        'Variant name': evaluation_details.value,
+        'Variation ID': evaluation_details.variation_id
+    })
+end
+
+client = ConfigCat.get('#YOUR-SDK-KEY#',
+    ConfigCat::ConfigCatOptions.new(
+        hooks: ConfigCat::Hooks.new(on_flag_evaluated: method(:on_flag_evaluated))
+    )
+)
+```
+</TabItem>
+
 <TabItem value="go" label="Go">
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
@@ -121,6 +139,53 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     }}})
 ```
 </TabItem>
+
+<TabItem value="java" label="Java">
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        JSONObject props = new JSONObject();
+        props.put("Experiment name", details.getKey());
+        props.put("Variant name", details.getValue());
+        props.put("Variation ID", details.getVariationId());
+        JSONObject event = messageBuilder.event(details.getUser().getIdentifier(), "$experiment_started", props);
+
+        ClientDelivery delivery = new ClientDelivery();
+        delivery.addMessage(event);
+        mixpanel.deliver(delivery);
+    });
+});
+```
+</TabItem>
+
+<TabItem value="android" label="Android">
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        JSONObject props = new JSONObject();
+        props.put("Experiment name", details.getKey());
+        props.put("Variant name", details.getValue());
+        props.put("Variation ID", details.getVariationId());
+        mp.track("$experiment_started", props);
+    });
+});
+```
+</TabItem>
+
+<TabItem value="ios" label="Swift (iOS)">
+```swift
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.hooks.addOnFlagEvaluated { details in
+        Mixpanel.mainInstance().track(event:"$experiment_started", properties: [
+            "Experiment name": details.key,
+            "Variant name": details.value,
+            "Variation ID": details.variationID,
+        ])
+    }
+}
+```
+</TabItem>
+
 </Tabs>
 
 :::note
@@ -128,6 +193,8 @@ If you are using Text feature flags with long text values (e.g. JSON values) tha
 The `variationId` is a hashed version of the value and you can see the `variationId` on the ConfigCat Dashboard after turning on the _Show VariationIDs to support A/B testing_ 
 <a href="https://app.configcat.com/product/preferences" target="_blank" rel="noopener noreferrer">Product preference</a>.
 :::
-4. Check your Experiments in Mixpanel.  
-If you don't have access to the Experiments feature in Mixpanel, you can create a custom Insights report based on the `Experiment Started` event. 
+
+### Usage
+1. Deploy your application and wait for feature flag evaluations to happen so Experiments in Mixpanel could be populated.
+2. Check your Experiments in Mixpanel. If you don't have access to the Experiments feature in Mixpanel, you can create a custom Insights report based on the `Experiment Started` event. Example:
 <img src="/docs/assets/mixpanel/insights.png" className="zoomable" alt="Mixpanel Insights report" />
