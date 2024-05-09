@@ -23,15 +23,15 @@ Ensures that every setting change in ConfigCat is sent to Mixpanel as an <a href
 ### Installation
 
 1. Have a <a href="https://mixpanel.com/" target="_blank" rel="noopener noreferrer">Mixpanel account.</a>
-2. Create a Service account that has he role of at least Analyst. <img src="/docs/assets/mixpanel/service_account.png" className="zoomable" alt="mixpanel_service_Account" />
-3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on ConfigCat Dashboard.
-4. Click on Mixpanel's CONNECT button and set your Mixpanel Service Account's Username, Secret, your Project ID.
+2. Create a Service account that has at least an Analyst role. <img src="/docs/assets/mixpanel/service_account.png" className="zoomable" alt="mixpanel_service_Account" />
+3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
+4. Click on Mixpanel's CONNECT button and set your Mixpanel Service Account's Username, Secret, and your Project ID.
 5. OPTIONAL - Set the proper server of your Mixpanel account. <a href="https://docs.mixpanel.com/docs/privacy/eu-residency" target="_blank" rel="noopener noreferrer">More about Mixpanel servers</a>.
 6. You're all set. Go ahead and make some changes on your feature flags then check your annotations in Mixpanel.
 
 ### Un-installation
 
-1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on ConfigCat Dashboard.
+1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
 2. Click on Mixpanel's DISCONNECT button.
 
 ### Annotation details
@@ -50,7 +50,7 @@ Ensures that feature flag evaluations are logged into <a href="https://docs.mixp
 
 1. Install the ConfigCat and Mixpanel SDKs to your application.
 2. Configure the ConfigCat SDK with your ConfigCat SDK key and the Mixpanel SDK with your Mixpanel token.
-3. Subscribe to the `flagEvaluated` hook during the ConfigCat SDK initialization and send feature flag evaluation data to Mixpanel experiments. Examples:
+3. In your code, subscribe to the `flagEvaluated` hook during the ConfigCat SDK initialization and send feature flag evaluation data to Mixpanel experiments. Examples:
 <Tabs>
 <TabItem value="js" label="JavaScript, Node, SSR" default>
 ```js
@@ -190,7 +190,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 
 :::note
 If you are using Text feature flags with long text values (e.g. JSON values) that makes no sense to send into Mixpanel as a Variant, you can send the `variationId` as the `Variant name` to Mixpanel instead of the `value`.
-The `variationId` is a hashed version of the value and you can see the `variationId` on the ConfigCat Dashboard after turning on the _Show VariationIDs to support A/B testing_ 
+The `variationId` is a hashed version of the feature flag value and you can access the `variationId` on the ConfigCat Dashboard after turning on the _Show VariationIDs to support A/B testing_ 
 <a href="https://app.configcat.com/product/preferences" target="_blank" rel="noopener noreferrer">Product preference</a>.
 :::
 
