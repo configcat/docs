@@ -189,7 +189,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 </Tabs>
 
 :::note
-If you are using Text feature flags with long text values (e.g. JSON values) that makes no sense to send into Mixpanel as a Variant, you can send the `variationId` as the `Variant name` to Mixpanel instead of the `value`.
+If you are using Text feature flags with long text values (e.g. JSON values), you can send the `variationId` as the `Variant name` to Mixpanel instead of the `value`.
 The `variationId` is a hashed version of the feature flag value and you can access the `variationId` on the ConfigCat Dashboard after turning on the _Show VariationIDs to support A/B testing_ 
 <a href="https://app.configcat.com/product/preferences" target="_blank" rel="noopener noreferrer">Product preference</a>.
 :::
