@@ -250,7 +250,13 @@ The `variationId` is a hashed version of the feature flag value and you can acce
 4. Deploy your application and wait for feature flag evaluations to happen so Experiments in Amplitude could be populated.
 
 ### Usage with Experiments
+Check your Experiments page in Amplitude and select your feature flag as the Experiment.
 
 ### Usage with custom chart
+If you don't have access to the Experiments feature in Amplitude, you can create a custom chart based on the `Exposure` event. 
+You can filter for your feature flag keys with the `Flag Key` property and visualize the different variants by using the `Variant` property as a Breakdown. Example:
+<img src="/docs/assets/amplitude/customchart.png" className="zoomable" alt="Amplitude custom chart" />
 
 ### Usage with enriched user properties for your custom events.
+If you use the <a href="https://www.docs.developers.amplitude.com/analytics/apis/identify-api/" target="_blank" rel="noopener noreferrer">Identify API</a> approach, you'll be able to use the feature flag evaluation data in your current reports. You can Group Segments by your feature flag evaluations:
+<img src="/docs/assets/amplitude/enriched.png" className="zoomable" alt="Amplitude chart with enriched data" />
