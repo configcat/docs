@@ -6,11 +6,17 @@ description: ConfigCat Amplitude integration reference. This is a step-by-step g
 
 ## Overview
 
+There are two available integration oppurtunities between ConfigCat and Mixpanel:
+- [Monitoring your feature flag change events in Amplitude with Annotations](#annotations)
+- [Sending feature flag evaluation analytics to Amplitude Experiments](#experiments)
+
+## Monitoring your feature flag change events in Amplitude with Annotations {#annotations}
+
 Every feature flag change in ConfigCat is annotated on the Amplitude charts as a vertical line and some details are added automatically about the change.
 
 <img src="/docs/assets/amplitude_chart.png" className="zoomable" alt="amplitude_chart" />
 
-## Installation
+### Installation
 
 1. Have an <a href="https://www.amplitude.com/" target="_blank">Amplitude subscription.</a>
 2. Get an <a href="https://www.docs.developers.amplitude.com/analytics/find-api-credentials/" target="_blank">Amplitude API Key and Secret Key.</a>
@@ -19,12 +25,12 @@ Every feature flag change in ConfigCat is annotated on the Amplitude charts as a
 4. Click on Amplitude's CONNECT button and set your Amplitude API key and Secret key.
 5. You're all set. Go ahead and make some changes on your feature flags then check your charts in Amplitude.
 
-## Un-installation
+### Un-installation
 
 1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
 2. Click on Amplitude's DISCONNECT button.
 
-## Chart Annotation
+### Chart Annotation
 
 Every annotation sent to Amplitude by ConfigCat has:
 
@@ -32,3 +38,216 @@ Every annotation sent to Amplitude by ConfigCat has:
 - **Description:** A direct link to the Product/Config/Environment of the feature flag in ConfigCat.
 
 <img src="/docs/assets/amplitude_annotation.png" className="zoomable" alt="amplitude_annoation" />
+
+
+## Sending feature flag evaluation analytics to Amplitude Experiments {#experiments}
+
+Ensures that feature flag evaluations are logged into <a href="https://www.docs.developers.amplitude.com/experiment/" target="_blank" rel="noopener noreferrer">Amplitude Experiments</a>. With this integration, you can have advanced analytics about your feature flag usages, A/B test results.
+
+### Setup
+
+1. Install the ConfigCat and Amplitude SDKs to your application.
+2. Configure the ConfigCat SDK with your ConfigCat SDK key and the Amplitude SDK with your Amplitude ApiKey.
+3. In your code, subscribe to the `flagEvaluated` hook during the ConfigCat SDK initialization and send feature flag evaluation data to Amplitude experiments.  
+There are 2 different approaches that you can use to send feature flag analytics events to Amplitude. 
+    - You can send an `$exposure` tracking event when the feature flag is evaluated. 
+    This way you can create custom reports based on feature flag evaluation events and use the Experiments feature in Amplitude.
+    - You can use the <a href="https://www.docs.developers.amplitude.com/analytics/apis/identify-api/" target="_blank" rel="noopener noreferrer">Identify API</a> in Amplitude to enrich all your events with feature flag metadata. This way you can easily group/filter your existing Amplitude events by feature flag evaluations.
+
+Code samples:
+<Tabs>
+<TabItem value="js" label="JavaScript, Node, SSR" default>
+```js
+const configCatClient = configcat.getClient("#YOUR_SDK_KEY", PollingMode.AutoPoll, {
+    setupHooks: (hooks) =>
+        hooks.on('flagEvaluated', evaluationDetails => {
+            // Send an `$exposure` event.
+            amplitude.track('$exposure',
+                {
+                    'flag_key': evaluationDetails.key,
+                    'variant': evaluationDetails.value,
+                    'variation_id': evaluationDetails.variationId
+                });
+
+            // Use the identify API.
+            const identifyEvent = new amplitude.Identify();
+            identifyEvent.set("configcat_" + evaluationDetails.key, evaluationDetails.value);
+            amplitude.identify(identifyEvent);
+        }),
+});
+```
+</TabItem>
+
+<TabItem value="react" label="React">
+```tsx
+<ConfigCatProvider
+  sdkKey="#YOUR_SDK_KEY"
+  pollingMode={PollingMode.AutoPoll}
+  options={{
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', evaluationDetails => {
+         // Send an `$exposure` event.
+         amplitude.track('$exposure',
+               {
+                  'flag_key': evaluationDetails.key,
+                  'variant': evaluationDetails.value,
+                  'variation_id': evaluationDetails.variationId
+               });
+
+         // Use the identify API.
+         const identifyEvent = new amplitude.Identify();
+         identifyEvent.set("configcat_" + evaluationDetails.key, evaluationDetails.value);
+         amplitude.identify(identifyEvent);
+      }),
+  }}
+>
+</ConfigCatProvider>
+```
+</TabItem>
+
+<TabItem value="python" label="Python">
+```python
+def on_flag_evaluated(evaluation_details):
+   # Send an `$exposure` event.
+   amplitude.track(
+      BaseEvent(
+         event_type="$exposure",
+         user_id=evaluation_details.user.get_identifier(),
+         event_properties={
+            "flag_key": evaluation_details.key,
+            "variant": evaluation_details.value,
+            "variation_id": evaluation_details.variationId
+         }
+   ))
+
+   # Use the identify API.
+   identify_obj=Identify()
+   identify_obj.set(f'configcat_{evaluationDetails.key}', evaluation_details.value)
+   amplitude.identify(identify_obj, EventOptions(user_id=evaluation_details.user.get_identifier()))
+   pass
+
+client = configcatclient.get('#YOUR-SDK-KEY#',
+    ConfigCatOptions(
+        hooks=Hooks(on_flag_evaluated=on_flag_evaluated)
+    )
+)
+```
+</TabItem>
+
+<TabItem value="go" label="Go">
+```go
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
+        // Send an `$exposure` event.
+        err := mixpanel.Track(ctx, []*mixpanel.Event{
+            mixpanel.NewEvent("$experiment_started", details.Data.User.(*UserData).Identifier, map[string]any{
+                "Experiment name": details.Data.Key,
+                "Variant name": details.Value,
+                "Variation ID": details.Data.VariationID,
+            }),
+        })
+
+        // Use the identify API.
+        err := mixpanel.PeopleSet(ctx,
+            []*mixpanel.PeopleProperties{
+                mixpanel.NewPeopleProperties(details.Data.User.(*UserData).Identifier, map[string]any{
+                    "configcat_" + details.Data.Key: details.Value,
+                })
+            },
+        )
+    }}})
+```
+</TabItem>
+
+<TabItem value="java" label="Java">
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        // Send an `$exposure` event.
+        JSONObject eventProps = new JSONObject();
+        eventProps.put("Experiment name", details.getKey());
+        eventProps.put("Variant name", details.getValue());
+        eventProps.put("Variation ID", details.getVariationId());
+        JSONObject event = messageBuilder.event(details.getUser().getIdentifier(), "$experiment_started", eventProps);
+        mixpanel.sendMessage(event);
+
+        // Use the identify API.
+        JSONObject userProps = new JSONObject();
+        userProps.put("configcat_" + details.getKey(), details.getValue());
+        JSONObject updateUser = messageBuilder.set(details.getUser().getIdentifier(), userProps);
+        mixpanel.sendMessage(updateUser);
+    });
+});
+```
+</TabItem>
+
+<TabItem value="android" label="Android">
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        // Send an `$exposure` event.
+        JSONObject eventProps = new JSONObject();
+        eventProps.put("Experiment name", details.getKey());
+        eventProps.put("Variant name", details.getValue());
+        eventProps.put("Variation ID", details.getVariationId());
+        mixpanel.track("$experiment_started", eventProps);
+
+        // Use the identify API.
+        mixpanel.getPeople().set("configcat_" + details.getKey(), details.getValue());
+    });
+});
+```
+</TabItem>
+
+<TabItem value="ios" label="Swift (iOS)">
+```swift
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.hooks.addOnFlagEvaluated { details in
+        // Send an `$exposure` event.
+        Mixpanel.mainInstance().track(event:"$experiment_started", properties: [
+            "Experiment name": details.key,
+            "Variant name": details.value,
+            "Variation ID": details.variationId,
+        ])
+
+        // Use the identify API.
+        let keyProperty = "configcat_" + details.Data.Key;
+        Mixpanel.mainInstance().people.set(properties: [ keyProperty: details.value])
+    }
+}
+```
+</TabItem>
+
+<TabItem value="other" label="Other langauges">
+The documentation only shows code examples to those languages that Mixpanel natively supports and has an official SDK, 
+but you can use this integration in other languages as well with sending an event to Mixpanel with a third-party SDK or with using the <a href="https://developer.mixpanel.com/reference/track-event" target="_blank" rel="noopener noreferrer">Mixpanel's Track Events API</a>. 
+You can subscribe to the FlagEvaluated hook in the ConfigCat SDK and send an Event to Mixpanel with the `$experiment_started` event name and the following event properties:
+1. `Experiment name`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
+2. `Variant name`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+3. `Variant name`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+4. `distinct_id` (optional): in case you are using the tracking in a backend component or you don't identify all your event sendings to Mixpanel with user details, 
+you have to send the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users#what-is-distinct-id" target="_blank" rel="noopener noreferrer">distinct_id</a> property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
+</TabItem>
+
+</Tabs>
+
+:::note
+If you are using Text feature flags with long text values (e.g. JSON values), you can send the `variationId` as the `Variant name` to Mixpanel instead of the `value`.
+The `variationId` is a hashed version of the feature flag value and you can access the `variationId` on the ConfigCat Dashboard after turning on the _Show VariationIDs to support A/B testing_ 
+<a href="https://app.configcat.com/product/preferences" target="_blank" rel="noopener noreferrer">Product preference</a>.
+:::
+
+4. Deploy your application and wait for feature flag evaluations to happen so Experiments in Mixpanel could be populated.
+
+### Usage with Experiments
+Check your Experiments page in Mixpanel, select your feature flag as the Experiment.
+<img src="/docs/assets/mixpanel/experiments.png" className="zoomable" alt="Mixpanel Experiments report" />
+
+### Usage with Insights report
+If you don't have access to the Experiments feature in Mixpanel, you can create a custom Insights report based on the `Experiment Started` event. 
+You can filter for your feature flag keys with the `Experiment name` property and visualize the different variants by using the `Variant name` property as a Breakdown. Example:
+<img src="/docs/assets/mixpanel/insights.png" className="zoomable" alt="Mixpanel Insights report" />
+
+### Usage with enriched user properties for your custom events.
+If you use the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users" target="_blank" rel="noopener noreferrer">Identify API</a> approach, you'll be able to use the feature flag evaluation data in your current reports. Example with a Breakdown:
+<img src="/docs/assets/mixpanel/enrichment.png" className="zoomable" alt="Mixpanel Insights report with enriched data" />
