@@ -176,6 +176,7 @@ const sidebars: SidebarsConfig = {
         { type: 'doc', id: 'integrations/datadog', label: 'Datadog' },
         { type: 'doc', id: 'integrations/github', label: 'GitHub Action' },
         { type: 'doc', id: 'integrations/jira', label: 'Jira Cloud Plugin' },
+        { type: 'doc', id: 'integrations/mixpanel', label: 'Mixpanel' },
         { type: 'doc', id: 'integrations/monday', label: 'monday.com' },
         { type: 'doc', id: 'integrations/slack', label: 'Slack' },
         { type: 'doc', id: 'integrations/terraform', label: 'Terraform' },

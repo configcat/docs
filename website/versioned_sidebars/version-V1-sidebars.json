@@ -205,6 +205,11 @@
         },
         {
           "type": "doc",
+          "id": "integrations/mixpanel",
+          "label": "Mixpanel"
+        },
+        {
+          "type": "doc",
           "id": "integrations/monday",
           "label": "monday.com"
         },
