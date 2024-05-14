@@ -48,13 +48,17 @@ Ensures that feature flag evaluations are logged into <a href="https://docs.mixp
 
 ### Setup
 
-1. Install the ConfigCat and Mixpanel SDKs to your application.
-2. Configure the ConfigCat SDK with your ConfigCat SDK key and the Mixpanel SDK with your Mixpanel token.
-3. In your code, subscribe to the `flagEvaluated` hook during the ConfigCat SDK initialization and send feature flag evaluation data to Mixpanel experiments.  
-There are 2 different approaches that you can use to send feature flag analytics events to Mixpanel. 
-    - You can send an `$experiment_started` tracking event when the feature flag is evaluated. 
-    This way you can create custom reports based on feature flag evaluation events and use the Experiments feature in Mixpanel.
-    - You can use the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users" target="_blank" rel="noopener noreferrer">Identify API</a> in Mixpanel to enrich all your events with feature flag metadata. This way you can easily group/filter your existing Mixpanel events by feature flag evaluations.
+1. **Install SDKs:** Add both the ConfigCat SDK and Mixpanel SDK to your application.
+2. **Configure SDKs:**
+   - **ConfigCat SDK:** Initialize with your ConfigCat SDK key.
+   - **Mixpanel SDK:** Set up with your Mixpanel token.
+3. **Integrate Feature Flag Evaluations:**
+   - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
+   - Send feature flag evaluation data to Mixpanel using the `$experiment_started` event name. Include the following parameter:
+     - `Experiment name`: the feature flag's key.
+     - `Variant name`: the evaluated feature flag's value or variation ID
+     - `Variation ID` (optional): the evaluated feature flag's variation ID
+   - You can use the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users" target="_blank" rel="noopener noreferrer">Identify API</a> in Mixpanel to enrich all your events with feature flag metadata. This way you can easily group/filter your existing Mixpanel events by feature flag evaluations.
 
 Code samples:
 <Tabs>
@@ -236,22 +240,23 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 </TabItem>
 
 <TabItem value="other" label="Other langauges">
-The documentation only shows code examples to those languages that Mixpanel natively supports and has an official SDK, 
-but you can use this integration in other languages as well with sending an event to Mixpanel with a third-party SDK or with using the <a href="https://developer.mixpanel.com/reference/track-event" target="_blank" rel="noopener noreferrer">Mixpanel's Track Events API</a>. 
-You can subscribe to the FlagEvaluated hook in the ConfigCat SDK and send an Event to Mixpanel with the `$experiment_started` event name and the following event properties:
-1. `Experiment name`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
-2. `Variant name`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
-3. `Variant name`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
-4. `distinct_id` (optional): in case you are using the tracking in a backend component or you don't identify all your event sendings to Mixpanel with user details, 
+While our documentation primarily provides code examples for languages that Mixpanel natively supports and has an official SDK, 
+you can integrate with other languages by sending an event to Mixpanel with a third-party SDK or with using the <a href="https://developer.mixpanel.com/reference/track-event" target="_blank" rel="noopener noreferrer">Mixpanel's Track Events API</a>. 
+
+1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
+2. **Send an event to Mixpanel** using the `$experiment_started` event name. Include the following event properties:
+    - `Experiment name`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
+    - `Variant name`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+    - `Variant name`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+    - `distinct_id` (optional): in case you are using the tracking in a backend component or you don't identify all your event sendings to Mixpanel with user details, 
 you have to send the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users#what-is-distinct-id" target="_blank" rel="noopener noreferrer">distinct_id</a> property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
 </TabItem>
 
 </Tabs>
 
 :::note
-If you are using Text feature flags with long text values (e.g. JSON values), you can send the `variationId` as the `Variant name` to Mixpanel instead of the `value`.
-The `variationId` is a hashed version of the feature flag value and you can access the `variationId` on the ConfigCat Dashboard after turning on the _Show VariationIDs to support A/B testing_ 
-<a href="https://app.configcat.com/product/preferences" target="_blank" rel="noopener noreferrer">Product preference</a>.
+For Text feature flags with lengthy values (e.g., JSON), send the `variationId` instead of the `value` as the `Variant name` to Mixpanel.
+The `variationId` is a hashed version of the feature flag value, accessible on the ConfigCat Dashboard by enabling the _Show VariationIDs to support A/B testing_ setting. Learn more [here](https://app.configcat.com/product/preferences).
 :::
 
 4. Deploy your application and wait for feature flag evaluations to happen so Experiments in Mixpanel could be populated.
