@@ -362,6 +362,10 @@ To prevent replay attacks, you can determine whether the request is within your 
 
 Also, as the timestamp is part of the signed content, an attacker can't change it without breaking the signature.
 
+## Retries
+
+When ConfigCat notices that a webhook request might not delivered successfully (either due to network instabilities or when we receive a non-2XX status response), it attempts to retry the request at most 5 times with variable frequency.
+
 ## Connecting to Slack
 
 A few steps to set up Slack and get a message when a setting changes:
@@ -374,13 +378,9 @@ A few steps to set up Slack and get a message when a setting changes:
 
 ```
 {
-  "text": "<##URL##|##ConfigName## - ##EnvironmentName##> changed in ConfigCat."
+  "text": "<##URL##|##ConfigName## - ##EnvironmentName##> changed in ConfigCat: \n\n##ChangeDetailsSlack##"
 }
 ```
-
-## Retries
-
-When ConfigCat notices that a webhook request might not delivered successfully (either due to network instabilities or when we receive a non-2XX status response), it attempts to retry the request at most 5 times with variable frequency.
 
 ## Connecting to Microsoft Teams
 
