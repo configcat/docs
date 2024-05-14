@@ -50,13 +50,17 @@ Ensures that feature flag evaluations are logged into <a href="https://www.docs.
 
 ### Setup
 
-1. Install the ConfigCat and Amplitude SDKs to your application.
-2. Configure the ConfigCat SDK with your ConfigCat SDK key and the Amplitude SDK with your Amplitude ApiKey.
-3. In your code, subscribe to the `flagEvaluated` hook during the ConfigCat SDK initialization and send feature flag evaluation data to Amplitude experiments.  
-There are 2 different approaches that you can use to send feature flag analytics events to Amplitude. 
-    - You can send an `$exposure` tracking event when the feature flag is evaluated. 
-    This way you can create custom reports based on feature flag evaluation events and use the Experiments feature in Amplitude.
-    - You can use the <a href="https://www.docs.developers.amplitude.com/analytics/apis/identify-api/" target="_blank" rel="noopener noreferrer">Identify API</a> in Amplitude to enrich all your events with feature flag metadata. This way you can easily group/filter your existing Amplitude events by feature flag evaluations.
+1. **Install SDKs:** Add both the ConfigCat SDK and Amplitude SDK to your application.
+2. **Configure SDKs:**
+   - **ConfigCat SDK:** Initialize with your ConfigCat SDK key.
+   - **Amplitude SDK:** Set up with your Amplitude ApiKey.
+3. **Integrate Feature Flag Evaluations:**
+   - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
+   - Send feature flag evaluation data to Amplitude using the `$exposure` event name. Include the following parameter:
+     - `flag_key`: the feature flag's key.
+     - `variant`: the evaluated feature flag's value or variation ID
+     - `variation_id` (optional): the evaluated feature flag's variation ID
+   - You can use the <a href="https://www.docs.developers.amplitude.com/analytics/apis/identify-api/" target="_blank" rel="noopener noreferrer">Identify API</a> in Amplitude to enrich all your events with feature flag metadata. This way you can easily group/filter your existing Amplitude events by feature flag evaluations.
 
 Code samples:
 <Tabs>
@@ -229,22 +233,23 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 </TabItem>
 
 <TabItem value="other" label="Other langauges">
-The documentation only shows code examples to those languages that Amplitude natively supports and has an official SDK, 
-but you can use this integration in other languages as well with sending an event to Amplitude with a third-party SDK or with using the <a href="https://www.docs.developers.amplitude.com/analytics/apis/http-v2-api/#upload-request" target="_blank" rel="noopener noreferrer">Amplitude's Upload request API</a>. 
-You can subscribe to the FlagEvaluated hook in the ConfigCat SDK and send an Event to Amplitude with the `$exposure` event name and the following event properties:
-1. `flag_key`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
-2. `variant`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
-3. `variation_id`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
-4. `user_id` (optional): in case you are using the tracking in a backend component or you don't identify all your event sendings to Amplitude with user details, 
+While our documentation primarily provides code examples for languages that Amplitude natively supports and has an official SDK, 
+you can integrate with other languages by sending an event to Amplitude with a third-party SDK or with using the <a href="https://www.docs.developers.amplitude.com/analytics/apis/http-v2-api/#upload-request" target="_blank" rel="noopener noreferrer">Amplitude's Upload request API</a>. 
+
+1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
+2. **Send an event to Amplitude** using the `$exposure` event name. Include the following event properties:
+   - `flag_key`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
+   - `variant`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+   - `variation_id`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+   - `user_id` (optional): in case you are using the tracking in a backend component or you don't identify all your event sendings to Amplitude with user details, 
 you have to send the `user_id` property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
 </TabItem>
 
 </Tabs>
 
 :::note
-If you are using Text feature flags with long text values (e.g. JSON values), you can send the `variationId` as the `Variant name` to Amplitude instead of the `value`.
-The `variationId` is a hashed version of the feature flag value and you can access the `variationId` on the ConfigCat Dashboard after turning on the _Show VariationIDs to support A/B testing_ 
-<a href="https://app.configcat.com/product/preferences" target="_blank" rel="noopener noreferrer">Product preference</a>.
+For Text feature flags with lengthy values (e.g., JSON), send the `variationId` instead of the `value` as the `variant` to Amplitude.
+The `variationId` is a hashed version of the feature flag value, accessible on the ConfigCat Dashboard by enabling the _Show VariationIDs to support A/B testing_ setting. Learn more [here](https://app.configcat.com/product/preferences).
 :::
 
 4. Deploy your application and wait for feature flag evaluations to happen so Experiments in Amplitude could be populated.
