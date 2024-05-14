@@ -1,0 +1,270 @@
+---
+id: mixpanel
+title: Mixpanel - Monitor your feature flag change events and feature flag analytics
+description: ConfigCat Mixpanel integration. This is a step-by-step guide on how to connect the ConfigCat feature flag service events to Mixpanel.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+## Overview
+
+There are two available integration oppurtunities between ConfigCat and Mixpanel:
+- [Monitoring your feature flag change events in Mixpanel with Annotations](#annotations)
+- [Sending feature flag evaluation analytics to Mixpanel Experiments](#experiments)
+
+## Monitoring your feature flag change events in Mixpanel with Annotations {#annotations}
+
+Ensures that every setting change in ConfigCat is sent to Mixpanel as an <a href="https://docs.mixpanel.com/docs/reports/insights#annotations" target="_blank" rel="noopener noreferrer">Annotation</a>.
+
+<img src="/docs/assets/mixpanel/annotation.png" className="zoomable" alt="Mixpanel Annotation" />
+
+### Installation
+
+1. Have a <a href="https://mixpanel.com/" target="_blank" rel="noopener noreferrer">Mixpanel account.</a>
+2. Create a Service account that has at least an Analyst role. <img src="/docs/assets/mixpanel/service_account.png" className="zoomable" alt="mixpanel_service_Account" />
+3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
+4. Click on Mixpanel's CONNECT button and set your Mixpanel Service Account's Username, Secret, and your Project ID.
+5. OPTIONAL - Set the proper server of your Mixpanel account. <a href="https://docs.mixpanel.com/docs/privacy/eu-residency" target="_blank" rel="noopener noreferrer">More about Mixpanel servers</a>.
+6. You're all set. Go ahead and make some changes on your feature flags then check your annotations in Mixpanel.
+
+### Un-installation
+
+1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
+2. Click on Mixpanel's DISCONNECT button.
+
+### Annotation details
+
+Every annotation sent to Mixpanel by ConfigCat has:
+
+- **Integration ID:** configcat.
+- **Date:** When the change happened
+- **Description:** A brief summary of the change.
+
+## Sending feature flag evaluation analytics to Mixpanel Experiments {#experiments}
+
+Ensures that feature flag evaluations are logged into <a href="https://docs.mixpanel.com/docs/reports/apps/experiments" target="_blank" rel="noopener noreferrer">Mixpanel Experiments</a>. With this integration, you can have advanced analytics about your feature flag usages, A/B test results.
+
+### Setup
+
+1. Install the ConfigCat and Mixpanel SDKs to your application.
+2. Configure the ConfigCat SDK with your ConfigCat SDK key and the Mixpanel SDK with your Mixpanel token.
+3. In your code, subscribe to the `flagEvaluated` hook during the ConfigCat SDK initialization and send feature flag evaluation data to Mixpanel experiments.  
+There are 2 different approaches that you can use to send feature flag analytics events to Mixpanel. 
+    - You can send an `$experiment_started` tracking event when the feature flag is evaluated. 
+    This way you can create custom reports based on feature flag evaluation events and use the Experiments feature in Mixpanel.
+    - You can use the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users" target="_blank" rel="noopener noreferrer">Identify API</a> in Mixpanel to enrich all your events with feature flag metadata. This way you can easily group/filter your existing Mixpanel events by feature flag evaluations.
+
+Code samples:
+<Tabs>
+<TabItem value="js" label="JavaScript, Node, SSR" default>
+```js
+const configCatClient = configcat.getClient("#YOUR_SDK_KEY", PollingMode.AutoPoll, {
+    setupHooks: (hooks) =>
+        hooks.on('flagEvaluated', evaluationDetails => {
+            // Send an `$experiment_started` event.
+            mixpanel.track('$experiment_started',
+                {
+                    'Experiment name': evaluationDetails.key,
+                    'Variant name': evaluationDetails.value,
+                    'Variation ID': evaluationDetails.variationId
+                });
+            
+            // Use the identify API.
+            mixpanel.people.set({ ["configcat_" + evaluationDetails.key]: evaluationDetails.value });
+        }),
+});
+```
+</TabItem>
+
+<TabItem value="react" label="React">
+```tsx
+<ConfigCatProvider
+  sdkKey="#YOUR_SDK_KEY"
+  pollingMode={PollingMode.AutoPoll}
+  options={{
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', evaluationDetails => {
+        // Send an `$experiment_started` event.
+        mixpanel.track('$experiment_started',
+            {
+                'Experiment name': evaluationDetails.key,
+                'Variant name': evaluationDetails.value,
+                'Variation ID': evaluationDetails.variationId
+            });
+         
+        // Use the identify API.
+        mixpanel.people.set({ ["configcat_" + evaluationDetails.key]: evaluationDetails.value });
+      }),
+  }}
+>
+</ConfigCatProvider>
+```
+</TabItem>
+
+<TabItem value="python" label="Python">
+```python
+def on_flag_evaluated(evaluation_details):
+    # Send an `$experiment_started` event.
+    mixpanel.track(evaluation_details.user.get_identifier(), '$experiment_started',  {
+        'Experiment name': evaluation_details.key,
+        'Variant name': evaluation_details.value,
+        'Variation ID': evaluation_details.variation_id
+    })
+
+    # Use the identify API.
+    mixpanel.people_set(evaluation_details.user.get_identifier(), {
+        f'configcat_{evaluationDetails.key}': evaluation_details.value,
+    })
+    pass
+
+client = configcatclient.get('#YOUR-SDK-KEY#',
+    ConfigCatOptions(
+        hooks=Hooks(on_flag_evaluated=on_flag_evaluated)
+    )
+)
+```
+</TabItem>
+
+<TabItem value="ruby" label="Ruby">
+```ruby
+def on_flag_evaluated(evaluation_details):
+    # Send an `$experiment_started` event.
+    mixpanel.track(evaluation_details.user.get_identifier(), "$experiment_started",  {
+        "Experiment name": evaluation_details.key,
+        "Variant name": evaluation_details.value,
+        "Variation ID": evaluation_details.variation_id
+    })
+
+    # Use the identify API.
+    mixpanel.people.set(evaluation_details.user.get_identifier(), {
+        "configcat_#{evaluationDetails.key}" => evaluation_details.value,
+    })
+end
+
+client = ConfigCat.get("#YOUR-SDK-KEY#",
+    ConfigCat::ConfigCatOptions.new(
+        hooks: ConfigCat::Hooks.new(on_flag_evaluated: method(:on_flag_evaluated))
+    )
+)
+```
+</TabItem>
+
+<TabItem value="go" label="Go">
+```go
+client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
+        // Send an `$experiment_started` event.
+        err := mixpanel.Track(ctx, []*mixpanel.Event{
+            mixpanel.NewEvent("$experiment_started", details.Data.User.(*UserData).Identifier, map[string]any{
+                "Experiment name": details.Data.Key,
+                "Variant name": details.Value,
+                "Variation ID": details.Data.VariationID,
+            }),
+        })
+
+        // Use the identify API.
+        err := mixpanel.PeopleSet(ctx,
+            []*mixpanel.PeopleProperties{
+                mixpanel.NewPeopleProperties(details.Data.User.(*UserData).Identifier, map[string]any{
+                    "configcat_" + details.Data.Key: details.Value,
+                })
+            },
+        )
+    }}})
+```
+</TabItem>
+
+<TabItem value="java" label="Java">
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        // Send an `$experiment_started` event.
+        JSONObject eventProps = new JSONObject();
+        eventProps.put("Experiment name", details.getKey());
+        eventProps.put("Variant name", details.getValue());
+        eventProps.put("Variation ID", details.getVariationId());
+        JSONObject event = messageBuilder.event(details.getUser().getIdentifier(), "$experiment_started", eventProps);
+        mixpanel.sendMessage(event);
+
+        // Use the identify API.
+        JSONObject userProps = new JSONObject();
+        userProps.put("configcat_" + details.getKey(), details.getValue());
+        JSONObject updateUser = messageBuilder.set(details.getUser().getIdentifier(), userProps);
+        mixpanel.sendMessage(updateUser);
+    });
+});
+```
+</TabItem>
+
+<TabItem value="android" label="Android">
+```java
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        // Send an `$experiment_started` event.
+        JSONObject eventProps = new JSONObject();
+        eventProps.put("Experiment name", details.getKey());
+        eventProps.put("Variant name", details.getValue());
+        eventProps.put("Variation ID", details.getVariationId());
+        mixpanel.track("$experiment_started", eventProps);
+
+        // Use the identify API.
+        mixpanel.getPeople().set("configcat_" + details.getKey(), details.getValue());
+    });
+});
+```
+</TabItem>
+
+<TabItem value="ios" label="Swift (iOS)">
+```swift
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.hooks.addOnFlagEvaluated { details in
+        // Send an `$experiment_started` event.
+        Mixpanel.mainInstance().track(event:"$experiment_started", properties: [
+            "Experiment name": details.key,
+            "Variant name": details.value,
+            "Variation ID": details.variationId,
+        ])
+        
+        // Use the identify API.
+        let keyProperty = "configcat_" + details.Data.Key;
+        Mixpanel.mainInstance().people.set(properties: [ keyProperty: details.value])
+    }
+}
+```
+</TabItem>
+
+<TabItem value="other" label="Other langauges">
+The documentation only shows code examples to those languages that Mixpanel natively supports and has an official SDK, 
+but you can use this integration in other languages as well with sending an event to Mixpanel with a third-party SDK or with using the <a href="https://developer.mixpanel.com/reference/track-event" target="_blank" rel="noopener noreferrer">Mixpanel's Track Events API</a>. 
+You can subscribe to the FlagEvaluated hook in the ConfigCat SDK and send an Event to Mixpanel with the `$experiment_started` event name and the following event properties:
+1. `Experiment name`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
+2. `Variant name`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+3. `Variant name`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+4. `distinct_id` (optional): in case you are using the tracking in a backend component or you don't identify all your event sendings to Mixpanel with user details, 
+you have to send the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users#what-is-distinct-id" target="_blank" rel="noopener noreferrer">distinct_id</a> property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
+</TabItem>
+
+</Tabs>
+
+:::note
+If you are using Text feature flags with long text values (e.g. JSON values), you can send the `variationId` as the `Variant name` to Mixpanel instead of the `value`.
+The `variationId` is a hashed version of the feature flag value and you can access the `variationId` on the ConfigCat Dashboard after turning on the _Show VariationIDs to support A/B testing_ 
+<a href="https://app.configcat.com/product/preferences" target="_blank" rel="noopener noreferrer">Product preference</a>.
+:::
+
+4. Deploy your application and wait for feature flag evaluations to happen so Experiments in Mixpanel could be populated.
+
+### Usage with Experiments
+Check your Experiments page in Mixpanel, select your feature flag as the Experiment.
+<img src="/docs/assets/mixpanel/experiments.png" className="zoomable" alt="Mixpanel Experiments report" />
+
+### Usage with Insights report
+If you don't have access to the Experiments feature in Mixpanel, you can create a custom Insights report based on the `Experiment Started` event. 
+You can filter for your feature flag keys with the `Experiment name` property and visualize the different variants by using the `Variant name` property as a Breakdown. Example:
+<img src="/docs/assets/mixpanel/insights.png" className="zoomable" alt="Mixpanel Insights report" />
+
+### Usage with enriched user properties for your custom events.
+If you use the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users" target="_blank" rel="noopener noreferrer">Identify API</a> approach, you'll be able to use the feature flag evaluation data in your current reports. Example with a Breakdown:
+<img src="/docs/assets/mixpanel/enrichment.png" className="zoomable" alt="Mixpanel Insights report with enriched data" />
