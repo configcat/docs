@@ -25,6 +25,7 @@ Ensures that feature flag evaluations are sent into the Segment ConfigCat source
      - `featureFlagKey`: the feature flag's key
      - `value`: the evaluated feature flag's value or Variation ID
      - `variationId` (optional): the evaluated feature flag's Variation ID
+     - `userId` (optional): the user object's identifier used during feature flag evaluation.
      - `user` (optional): the user object used during feature flag evaluation.
 
 Code samples:
@@ -39,8 +40,9 @@ const configCatClient = configcat.getClient("#YOUR_SDK_KEY#", PollingMode.AutoPo
                 {
                     'featureFlagKey': evaluationDetails.key,
                     'value': evaluationDetails.value,
-                    'variationId': evaluationDetails.variationId
-                    'user': evaluationDetails.user
+                    'variationId': evaluationDetails.variationId,
+                    'user': evaluationDetails.user,
+                    'userId': evaluationDetails.user.identifier
                 });
         }),
 });
@@ -63,7 +65,8 @@ const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_
             {
                 'featureFlagKey': evaluationDetails.key,
                 'value': evaluationDetails.value,
-                'variationId': evaluationDetails.variationId
+                'variationId': evaluationDetails.variationId,
+                'userId': evaluationDetails.user.identifier,
                 'user': evaluationDetails.user
             });
       }),
@@ -187,6 +190,7 @@ struct TrackProperties: Codable {
     let value: Any
     let variationId: String
     let user: ConfigCatUser?
+    let userId: String
 }
 
 let configuration = Configuration(writeKey: "#YOUR_SEGMENT_WRITE_KEY#")
@@ -197,6 +201,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
             featureFlagKey: details.key,
             value: details.value,
             variationId: details.variationId,
+            userId: details.user.identifier
             user: details.user
         ))
     }
