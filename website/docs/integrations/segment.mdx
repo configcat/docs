@@ -22,9 +22,9 @@ Ensures that feature flag evaluations are sent into the Segment ConfigCat source
 3. **Integrate Feature Flag Evaluations:**
    - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
    - Send feature flag evaluation data to Segment using the `featureFlagEvaluated` event name. Include the following parameter:
-     - `featureFlagKey`: the feature flag's key
-     - `value`: the evaluated feature flag's value or Variation ID
-     - `variationId` (optional): the evaluated feature flag's Variation ID
+     - `featureFlagKey`: the feature flag's key.
+     - `value`: the evaluated feature flag's value or Variation ID.
+     - `variationId` (optional): the evaluated feature flag's Variation ID.
      - `userId` (optional): the user object's identifier used during feature flag evaluation.
      - `user` (optional): the user object used during feature flag evaluation.
 
@@ -215,9 +215,9 @@ you can integrate with other languages by sending an event to Segment with a thi
 
 1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
 2. **Send an event to Segment** using the `featureFlagEvaluated` event name. Include the following event properties:
-    - `featureFlagKey`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
-    - `value`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
-    - `variationId`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+    - `featureFlagKey`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails.
+    - `value`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
+    - `variationId`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
     - `userId` (optional): in case you are using the tracking in a backend component you have to send the `userId` property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
     - `user` (optional): the user object used during feature flag evaluation.
 </TabItem>
