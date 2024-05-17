@@ -239,8 +239,8 @@ you can integrate with other languages by sending an event to Amplitude with a t
 1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
 2. **Send an event to Amplitude** using the `$exposure` event name. Include the following event properties:
    - `flag_key`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
-   - `variant`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
-   - `variation_id`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+   - `variant`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+   - `variation_id`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
    - `user_id` (optional): in case you are using the tracking in a backend component or you don't identify all your event sendings to Amplitude with user details, 
 you have to send the `user_id` property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
 </TabItem>
