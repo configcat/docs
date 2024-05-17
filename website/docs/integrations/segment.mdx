@@ -1,0 +1,233 @@
+---
+id: segment
+title: Segment - Send feature flag analytics to Segment
+description: ConfigCat Segment integration. This is a step-by-step guide on how to send feature flag analytics to Segment.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+## Sending feature flag evaluation analytics to Segment
+
+Ensures that feature flag evaluations are sent into the Segment ConfigCat source. With this integration, you can have advanced analytics about your feature flag usages, A/B test results in any of Segment's destinations.
+
+### Setup
+
+1. **Add ConfigCat source in Segment:** Add the ConfigCat source in Segment.
+1. **Install SDKs:** Add both the ConfigCat SDK and Segment SDK to your application.
+2. **Configure SDKs:**
+   - **ConfigCat SDK:** Initialize with your ConfigCat SDK key.
+   - **Segment SDK:** Set up with the Segment write token acquired while adding the ConfigCat source in Segment.
+3. **Integrate Feature Flag Evaluations:**
+   - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
+   - Send feature flag evaluation data to Segment using the `featureFlagEvaluated` event name. Include the following parameter:
+     - `featureFlagKey`: the feature flag's key
+     - `value`: the evaluated feature flag's value or Variation ID
+     - `variationId` (optional): the evaluated feature flag's Variation ID
+     - `user` (optional): the user object used during feature flag evaluation.
+
+Code samples:
+<Tabs>
+<TabItem value="js" label="JavaScript, Node, SSR" default>
+```js
+const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_KEY#" });
+const configCatClient = configcat.getClient("#YOUR_SDK_KEY#", PollingMode.AutoPoll, {
+    setupHooks: (hooks) =>
+        hooks.on('flagEvaluated', evaluationDetails => {
+            segmentAnalytics.track('featureFlagEvaluated',
+                {
+                    'featureFlagKey': evaluationDetails.key,
+                    'value': evaluationDetails.value,
+                    'variationId': evaluationDetails.variationId
+                    'user': evaluationDetails.user
+                });
+        }),
+});
+```
+</TabItem>
+
+<TabItem value="react" label="React">
+```tsx
+const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_KEY#" });
+
+//...
+
+<ConfigCatProvider
+  sdkKey="#YOUR_SDK_KEY"
+  pollingMode={PollingMode.AutoPoll}
+  options={{
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', evaluationDetails => {
+        segmentAnalytics.track('featureFlagEvaluated',
+            {
+                'featureFlagKey': evaluationDetails.key,
+                'value': evaluationDetails.value,
+                'variationId': evaluationDetails.variationId
+                'user': evaluationDetails.user
+            });
+      }),
+  }}
+>
+</ConfigCatProvider>
+```
+</TabItem>
+
+<TabItem value="python" label="Python">
+```python
+import segment.analytics as analytics
+
+analytics.write_key = '#YOUR_SEGMENT_WRITE_KEY#'
+
+def on_flag_evaluated(evaluation_details):
+    analytics.track(evaluation_details.user.get_identifier(), 'featureFlagEvaluated',  {
+        'featureFlagKey': evaluation_details.key,
+        'value': evaluation_details.value,
+        'variationId': evaluation_details.variationId,
+        'user': evaluation_details.user
+    })
+    pass
+
+client = configcatclient.get('#YOUR_SDK_KEY#',
+    ConfigCatOptions(
+        hooks=Hooks(on_flag_evaluated=on_flag_evaluated)
+    )
+)
+```
+</TabItem>
+
+<TabItem value="ruby" label="Ruby">
+```ruby
+Analytics = Segment::Analytics.new({
+    write_key: '#YOUR-SEGMENT-WRITE-KEY#',
+    on_error: Proc.new { |status, msg| print msg }
+})
+
+def on_flag_evaluated(evaluation_details):
+    Analytics.track(
+        user_id: evaluation_details.user.get_identifier(),
+        event: "featureFlagEvaluated",  
+        properties: {
+            'featureFlagKey': evaluation_details.key,
+            'value': evaluation_details.value,
+            'variationId': evaluation_details.variationId,
+            'user': evaluation_details.user
+        }
+    )
+end
+
+client = ConfigCat.get("#YOUR-SDK-KEY#",
+    ConfigCat::ConfigCatOptions.new(
+        hooks: ConfigCat::Hooks.new(on_flag_evaluated: method(:on_flag_evaluated))
+    )
+)
+```
+</TabItem>
+
+<TabItem value="go" label="Go">
+```go
+analyticsClient := analytics.New("#YOUR_SEGMENT_WRITE_KEY#")
+
+configCatClient := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR_SDK_KEY#",
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
+        client.Enqueue(analytics.Track{
+            UserId: details.Data.User.(*UserData).Identifier,
+            Event:  "featureFlagEvaluated",
+            Properties: analytics.NewProperties().
+                Set("featureFlagKey", details.Data.Key).
+                Set("value", details.Value).
+                Set("variationId", details.Data.VariationID),
+                Set("user", details.Data.User.(*UserData)),
+        })
+    }}})
+```
+</TabItem>
+
+<TabItem value="java" label="Java">
+```java
+Analytics analytics = Analytics.builder("#YOUR_SEGMENT_WRITE_KEY#").build();
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        analytics.enqueue(TrackMessage.builder("featureFlagEvaluated")
+            .userId(details.getUser().getIdentifier())
+            .properties(ImmutableMap.builder()
+                .put("featureFlagKey", details.getKey())
+                .put("value", details.getValue())
+                .put("variationId", details.getVariationId())
+                .put("user", details.getUser())
+                .build()
+            )
+        );
+    });
+});
+```
+</TabItem>
+
+<TabItem value="android" label="Android">
+```java
+AndroidAnalyticsKt.Analytics("#YOUR_SEGMENT_WRITE_KEY#",  getApplicationContext(), configuration -> {});
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        analytics.track("featureFlagEvaluated", Builders.buildJsonObject(o -> {
+            o.put("userId", details.getUser().getIdentifier())
+            .put("featureFlagKey", details.getKey())
+            .put("value", details.getValue())
+            .put("variationId", details.getVariationId())
+            .put("user", details.getUser())
+        }));
+    });
+});
+```
+</TabItem>
+
+<TabItem value="ios" label="Swift (iOS)">
+```swift
+struct TrackProperties: Codable {
+    let featureFlagKey: String
+    let value: Any
+    let variationId: String
+    let user: ConfigCatUser?
+}
+
+let configuration = Configuration(writeKey: "#YOUR_SEGMENT_WRITE_KEY#")
+let analytics = Analytics(configuration: configuration)
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.hooks.addOnFlagEvaluated { details in
+        analytics.track(name: "featureFlagEvaluated", properties: TrackProperties(
+            featureFlagKey: details.key,
+            value: details.value,
+            variationId: details.variationId,
+            user: details.user
+        ))
+    }
+}
+```
+</TabItem>
+
+<TabItem value="other" label="Other langauges">
+While our documentation primarily provides code examples for languages that Segment natively supports and has an official SDK, 
+you can integrate with other languages by sending an event to Segment with a third-party SDK or with using the <a href="https://segment.com/docs/connections/sources/catalog/libraries/server/http-api/" target="_blank" rel="noopener noreferrer">Segment's HTTP API source</a>. 
+
+1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
+2. **Send an event to Segment** using the `featureFlagEvaluated` event name. Include the following event properties:
+    - `featureFlagKey`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
+    - `value`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+    - `variationId`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+    - `userId` (optional): in case you are using the tracking in a backend component you have to send the `userId` property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
+    - `user` (optional): the user object used during feature flag evaluation.
+</TabItem>
+
+</Tabs>
+
+:::note
+For Text feature flags with lengthy values (e.g., JSON), send the `variationId` instead of the `value` as the `value` to Segment.
+The `variationId` is a hashed version of the feature flag value, accessible on the ConfigCat Dashboard by enabling the _Show VariationIDs to support A/B testing_ setting. Learn more [here](https://app.configcat.com/product/preferences).
+:::
+
+4. Deploy your application and wait for feature flag evaluations to happen so feature flag evaluation events could be sent to Segment.
+5. Add the preferred destination in Segment for your source and configure your mappings. 
+6. Enable the destination and leverage advanced feature flag analytics in the destination.
+
+### Example event
+Check your source's debugger to see the events.
+<img src="/docs/assets/segment/segment.png" className="zoomable" alt="Segment event debugger" />
