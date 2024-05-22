@@ -246,8 +246,8 @@ you can integrate with other languages by sending an event to Mixpanel with a th
 1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
 2. **Send an event to Mixpanel** using the `$experiment_started` event name. Include the following event properties:
     - `Experiment name`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
-    - `Variant name`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
-    - `Variant name`: the evalated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+    - `Variant name`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
+    - `Variant name`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
     - `distinct_id` (optional): in case you are using the tracking in a backend component or you don't identify all your event sendings to Mixpanel with user details, 
 you have to send the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users#what-is-distinct-id" target="_blank" rel="noopener noreferrer">distinct_id</a> property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
 </TabItem>
