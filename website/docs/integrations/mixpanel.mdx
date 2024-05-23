@@ -54,7 +54,7 @@ Ensures that feature flag evaluations are logged into <a href="https://docs.mixp
    - **Mixpanel SDK:** Set up with your Mixpanel token.
 3. **Integrate Feature Flag Evaluations:**
    - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
-   - Send feature flag evaluation data to Mixpanel using the `$experiment_started` event name. Include the following parameter:
+   - Send feature flag evaluation data to Mixpanel using the `$experiment_started` event name. Include the following parameters:
      - `Experiment name`: the feature flag's key.
      - `Variant name`: the evaluated feature flag's value or variation ID
      - `Variation ID` (optional): the evaluated feature flag's variation ID

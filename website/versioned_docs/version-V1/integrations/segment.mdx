@@ -60,7 +60,7 @@ Ensures that feature flag evaluations are sent into the Twilio Segment ConfigCat
    - **Twilio Segment SDK:** Set up with the Twilio Segment Write Key acquired while adding the ConfigCat source in Twilio Segment.
 3. **Integrate Feature Flag Evaluations:**
    - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
-   - Send feature flag evaluation data to Twilio Segment using the `featureFlagEvaluated` event name. Include the following parameter:
+   - Send feature flag evaluation data to Twilio Segment using the `featureFlagEvaluated` event name. Include the following parameters:
      - `featureFlagKey`: the feature flag's key.
      - `value`: the evaluated feature flag's value or Variation ID.
      - `variationId` (optional): the evaluated feature flag's Variation ID.

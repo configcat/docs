@@ -56,7 +56,7 @@ Ensures that feature flag evaluations are logged into <a href="https://www.docs.
    - **Amplitude SDK:** Set up with your Amplitude ApiKey.
 3. **Integrate Feature Flag Evaluations:**
    - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
-   - Send feature flag evaluation data to Amplitude using the `$exposure` event name. Include the following parameter:
+   - Send feature flag evaluation data to Amplitude using the `$exposure` event name. Include the following parameters:
      - `flag_key`: the feature flag's key.
      - `variant`: the evaluated feature flag's value or variation ID
      - `variation_id` (optional): the evaluated feature flag's variation ID
