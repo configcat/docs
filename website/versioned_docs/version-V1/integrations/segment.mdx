@@ -8,7 +8,46 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-## Sending feature flag evaluation analytics to Segment
+## Overview
+
+There are two available integration oppurtunities between ConfigCat and Segment:
+- [Sending feature flag change events to Segment](#changeevents)
+- [Sending feature flag evaluation analytics to Segment](#analytics)
+
+## Sending feature flag change events to Segment {#changeevents}
+
+Ensures that every setting change in ConfigCat is sent to Segment as an <a href="https://segment.com/docs/connections/spec/track/" target="_blank" rel="noopener noreferrer">track event</a>.
+
+<img src="/docs/assets/segment/changeevent.png" className="zoomable" alt="Segment featureFlagsChanged event" />
+
+### Installation
+
+1. Have a <a href="https://segment.com/" target="_blank" rel="noopener noreferrer">Twilio Segment account.</a>
+2. Add the ConfigCat source to your Twilio Segment account and copy the Write Key.
+3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
+4. Click on Segment's CONNECT button and set the Twilio Segment Write Key acquired while adding the ConfigCat source in Segment.
+5. OPTIONAL - Set the proper server of your Segment account. <a href="https://segment.com/docs/guides/regional-segment/" target="_blank" rel="noopener noreferrer">More about Segment servers</a>.
+6. You're all set. Go ahead and make some changes on your feature flags then check your events in Segment.
+
+### Un-installation
+
+1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
+2. Click on Segment's DISCONNECT button.
+
+### Event details
+
+Every feature flag change event sent to Segment by ConfigCat has:
+
+- **event name:** `featureFlagsChanged`.
+- **timestamp:** When the change happened.
+- **details:** A brief summary of the change.
+- **productId, productName**: The product where the change happened.
+- **configId, configName**: The config where the change happened.
+- **environmentId, environmentName**: The environment where the change happened.
+- **url**: A direct link to the config/feature flag.
+- **userId, userEmail, userFullName**: Who made the changes.
+
+## Sending feature flag evaluation analytics to Segment {#analytics}
 
 Ensures that feature flag evaluations are sent into the Segment ConfigCat source. With this integration, you can have advanced analytics about your feature flag usages, A/B test results in any of Segment's destinations.
 
@@ -18,7 +57,7 @@ Ensures that feature flag evaluations are sent into the Segment ConfigCat source
 1. **Install SDKs:** Add both the ConfigCat SDK and Segment SDK to your application.
 2. **Configure SDKs:**
    - **ConfigCat SDK:** Initialize with your ConfigCat SDK key.
-   - **Segment SDK:** Set up with the Segment write token acquired while adding the ConfigCat source in Segment.
+   - **Segment SDK:** Set up with the Twilio Segment Write Key acquired while adding the ConfigCat source in Segment.
 3. **Integrate Feature Flag Evaluations:**
    - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
    - Send feature flag evaluation data to Segment using the `featureFlagEvaluated` event name. Include the following parameter:
