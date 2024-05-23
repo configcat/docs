@@ -10,7 +10,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 ## Overview
 
-There are two available integration oppurtunities between ConfigCat and Mixpanel:
+There are two available integration opportunities between ConfigCat and Mixpanel:
 - [Monitoring your feature flag change events in Mixpanel with Annotations](#annotations)
 - [Sending feature flag evaluation analytics to Mixpanel Experiments](#experiments)
 
@@ -27,7 +27,7 @@ Ensures that every setting change in ConfigCat is sent to Mixpanel as an <a href
 3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
 4. Click on Mixpanel's CONNECT button and set your Mixpanel Service Account's Username, Secret, and your Project ID.
 5. OPTIONAL - Set the proper server of your Mixpanel account. <a href="https://docs.mixpanel.com/docs/privacy/eu-residency" target="_blank" rel="noopener noreferrer">More about Mixpanel servers</a>.
-6. You're all set. Go ahead and make some changes on your feature flags then check your annotations in Mixpanel.
+6. You're all set. Go ahead and make some changes on your feature flags, then check your annotations in Mixpanel.
 
 ### Un-installation
 
@@ -239,7 +239,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 ```
 </TabItem>
 
-<TabItem value="other" label="Other langauges">
+<TabItem value="other" label="Other languages">
 While our documentation primarily provides code examples for languages that Mixpanel natively supports and has an official SDK, 
 you can integrate with other languages by sending an event to Mixpanel with a third-party SDK or with using the <a href="https://developer.mixpanel.com/reference/track-event" target="_blank" rel="noopener noreferrer">Mixpanel's Track Events API</a>. 
 

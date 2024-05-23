@@ -1,7 +1,7 @@
 ---
 id: segment
-title: Twilio Segment - Send feature flag analytics to Twilio Segment
-description: ConfigCat Twilio Segment integration. This is a step-by-step guide on how to send feature flag analytics to Twilio Segment.
+title: Twilio Segment - Monitor your feature flag change events and feature flag analytics
+description: ConfigCat Twilio Segment integration. This is a step-by-step guide on how to connect the ConfigCat feature flag service events to Twilio Segment.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -10,13 +10,13 @@ import CodeBlock from '@theme/CodeBlock';
 
 ## Overview
 
-There are two available integration oppurtunities between ConfigCat and Twilio Segment:
+There are two available integration opportunities between ConfigCat and Twilio Segment:
 - [Sending feature flag change events to Twilio Segment](#changeevents)
 - [Sending feature flag evaluation analytics to Twilio Segment](#analytics)
 
 ## Sending feature flag change events to Twilio Segment {#changeevents}
 
-Ensures that every setting change in ConfigCat is sent to Segment as an <a href="https://segment.com/docs/connections/spec/track/" target="_blank" rel="noopener noreferrer">track event</a>.
+Ensures that every setting change in ConfigCat is sent to Segment as a <a href="https://segment.com/docs/connections/spec/track/" target="_blank" rel="noopener noreferrer">track event</a>.
 
 <img src="/docs/assets/segment/changeevent.png" className="zoomable" alt="Twilio Segment featureFlagsChanged event" />
 
@@ -27,7 +27,7 @@ Ensures that every setting change in ConfigCat is sent to Segment as an <a href=
 3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
 4. Click on Twilio Segment's CONNECT button and set the Twilio Segment Write Key acquired while adding the ConfigCat source in Twilio Segment.
 5. OPTIONAL - Set the proper server of your Twilio Segment account. <a href="https://segment.com/docs/guides/regional-segment/" target="_blank" rel="noopener noreferrer">More about Segment servers</a>.
-6. You're all set. Go ahead and make some changes on your feature flags then check your events in Twilio Segment.
+6. You're all set. Go ahead and make some changes on your feature flags, then check your events in Twilio Segment.
 
 ### Un-installation
 
@@ -36,7 +36,7 @@ Ensures that every setting change in ConfigCat is sent to Segment as an <a href=
 
 ### Event details
 
-Every feature flag change event sent to Twilio Segment by ConfigCat has:
+Every feature flag change event sent to Twilio Segment by ConfigCat has the following properties:
 
 - **event name:** `featureFlagsChanged`.
 - **timestamp:** When the change happened.
@@ -248,7 +248,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 ```
 </TabItem>
 
-<TabItem value="other" label="Other langauges">
+<TabItem value="other" label="Other languages">
 While our documentation primarily provides code examples for languages that Twilio Segment natively supports and has an official SDK, 
 you can integrate with other languages by sending an event to Twilio Segment with a third-party SDK or with using the <a href="https://segment.com/docs/connections/sources/catalog/libraries/server/http-api/" target="_blank" rel="noopener noreferrer">Segment's HTTP API source</a>. 
 
