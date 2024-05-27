@@ -10,28 +10,28 @@ import CodeBlock from '@theme/CodeBlock';
 
 ## Overview
 
-There are two available integration opportunities between ConfigCat and Mixpanel:
+There are two available integration opportunities between [ConfigCat and Mixpanel](https://mixpanel.com/partners/integrations/configcat):
 - [Monitoring your feature flag change events in Mixpanel with Annotations](#annotations)
 - [Sending feature flag evaluation analytics to Mixpanel Experiments](#experiments)
 
 ## Monitoring your feature flag change events in Mixpanel with Annotations {#annotations}
 
-Ensures that every setting change in ConfigCat is sent to Mixpanel as an <a href="https://docs.mixpanel.com/docs/reports/insights#annotations" target="_blank" rel="noopener noreferrer">Annotation</a>.
+Ensures that every setting change in ConfigCat is sent to Mixpanel as an [Annotation](https://docs.mixpanel.com/docs/reports/insights#annotations).
 
 <img src="/docs/assets/mixpanel/annotation.png" className="zoomable" alt="Mixpanel Annotation" />
 
 ### Installation
 
-1. Have a <a href="https://mixpanel.com/" target="_blank" rel="noopener noreferrer">Mixpanel account.</a>
+1. Have a [Mixpanel account](https://mixpanel.com/).
 2. Create a Service account that has at least an Analyst role. <img src="/docs/assets/mixpanel/service_account.png" className="zoomable" alt="mixpanel_service_Account" />
-3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
+3. Open the [integrations tab](https://app.configcat.com/product/integrations) on the ConfigCat Dashboard.
 4. Click on Mixpanel's CONNECT button and set your Mixpanel Service Account's Username, Secret, and your Project ID.
-5. OPTIONAL - Set the proper server of your Mixpanel account. <a href="https://docs.mixpanel.com/docs/privacy/eu-residency" target="_blank" rel="noopener noreferrer">More about Mixpanel servers</a>.
+5. OPTIONAL - Set the proper server of your Mixpanel account. [More about Mixpanel servers](https://docs.mixpanel.com/docs/privacy/eu-residency).
 6. You're all set. Go ahead and make some changes on your feature flags, then check your annotations in Mixpanel.
 
 ### Un-installation
 
-1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
+1. Open the [integrations tab](https://app.configcat.com/product/integrations) on the ConfigCat Dashboard.
 2. Click on Mixpanel's DISCONNECT button.
 
 ### Annotation details
@@ -44,7 +44,7 @@ Every annotation sent to Mixpanel by ConfigCat has:
 
 ## Sending feature flag evaluation analytics to Mixpanel Experiments {#experiments}
 
-Ensures that feature flag evaluations are logged into <a href="https://docs.mixpanel.com/docs/reports/apps/experiments" target="_blank" rel="noopener noreferrer">Mixpanel Experiments</a>. With this integration, you can have advanced analytics about your feature flag usages, A/B test results.
+Ensures that feature flag evaluations are logged into [Mixpanel Experiments](https://docs.mixpanel.com/docs/reports/apps/experiments). With this integration, you can have advanced analytics about your feature flag usages, A/B test results.
 
 ### Setup
 
@@ -58,7 +58,7 @@ Ensures that feature flag evaluations are logged into <a href="https://docs.mixp
      - `Experiment name`: the feature flag's key.
      - `Variant name`: the evaluated feature flag's value or variation ID
      - `Variation ID` (optional): the evaluated feature flag's variation ID
-   - You can use the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users" target="_blank" rel="noopener noreferrer">Identify API</a> in Mixpanel to enrich all your events with feature flag metadata. This way you can easily group/filter your existing Mixpanel events by feature flag evaluations.
+   - You can use the [Identify API](https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users) in Mixpanel to enrich all your events with feature flag metadata. This way you can easily group/filter your existing Mixpanel events by feature flag evaluations.
 
 Code samples:
 <Tabs>
@@ -241,7 +241,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 
 <TabItem value="other" label="Other languages">
 While our documentation primarily provides code examples for languages that Mixpanel natively supports and has an official SDK, 
-you can integrate with other languages by sending an event to Mixpanel with a third-party SDK or with using the <a href="https://developer.mixpanel.com/reference/track-event" target="_blank" rel="noopener noreferrer">Mixpanel's Track Events API</a>. 
+you can integrate with other languages by sending an event to Mixpanel with a third-party SDK or with using the [Mixpanel's Track Events API](https://developer.mixpanel.com/reference/track-event). 
 
 1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
 2. **Send an event to Mixpanel** using the `$experiment_started` event name. Include the following event properties:
@@ -249,7 +249,7 @@ you can integrate with other languages by sending an event to Mixpanel with a th
     - `Variant name`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
     - `Variant name`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
     - `distinct_id` (optional): in case you are using the tracking in a backend component or you don't identify all your event sendings to Mixpanel with user details, 
-you have to send the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users#what-is-distinct-id" target="_blank" rel="noopener noreferrer">distinct_id</a> property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
+you have to send the [distinct_id](https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users#what-is-distinct-id) property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
 </TabItem>
 
 </Tabs>
@@ -271,5 +271,5 @@ You can filter for your feature flag keys with the `Experiment name` property an
 <img src="/docs/assets/mixpanel/insights.png" className="zoomable" alt="Mixpanel Insights report" />
 
 ### Usage with enriched user properties for your custom events.
-If you use the <a href="https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users" target="_blank" rel="noopener noreferrer">Identify API</a> approach, you'll be able to use the feature flag evaluation data in your current reports. Example with a Breakdown:
+If you use the [Identify API](https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users) approach, you'll be able to use the feature flag evaluation data in your current reports. Example with a Breakdown:
 <img src="/docs/assets/mixpanel/enrichment.png" className="zoomable" alt="Mixpanel Insights report with enriched data" />
