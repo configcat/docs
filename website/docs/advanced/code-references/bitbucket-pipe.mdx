@@ -26,6 +26,7 @@ You can find more information about Bitbucket Pipelines <a target="_blank" href=
        # EXCLUDE_KEYS: >         # optional
        #   flag_key_to_exclue_1
        #   flag_key_to_exclue_2
+       # ALIAS_PATTERNS: (\w+) = :CC_KEY,const (\w+) = feature_flags\.enabled\(:CC_KEY\)  # optional
        # VERBOSE: 'true'         # optional
    ```
 
@@ -42,4 +43,5 @@ Scan reports are uploaded for each branch of your repository that triggers the j
 | `LINE_COUNT`         | Context line count before and after the reference line. (min: 1, max: 10) |          | 4                   |
 | `SUB_FOLDER`         | Sub-folder to scan, relative to the repository root folder.               |          |                     |
 | `EXCLUDE_KEYS`       | List of feature flag keys that must be excluded from the scan report.     |          |                     |
+| `ALIAS_PATTERNS`     | Comma delimited list of custom regex patterns used to search for additional aliases. |   |                 |
 | `VERBOSE`            | Turns on detailed logging.                                                |          | false               |

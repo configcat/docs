@@ -112,6 +112,46 @@ The similarity check is case insensitive and ignores `_` characters.
 This behavior prevents false recognitions in expressions like `<input type="text" value="my_awesome_feature">` where `value` shouldn't be treated as alias.
 :::
 
+### Custom alias match patterns
+
+There's an option to set custom regex patterns for identifying additional aliases. The `scan` command accepts a list of patterns via the `--alias-patterns` argument.
+
+```bash
+configcat scan <dir> --alias-patterns "<pattern1>" "<pattern2>"
+```
+
+:::info
+If the command line argument is not a suitable option for you to pass the patterns, you can set the `CONFIGCAT_ALIAS_PATTERNS` environment variable to a comma delimited list of patterns. The CLI reads that environment variable during the scan execution.
+
+```bash
+export CONFIGCAT_ALIAS_PATTERNS="<pattern1>,<pattern2>";
+```
+:::
+
+#### Match pattern format
+
+The regex pattern must include at least one capture group that will be treated as the actual alias. When more then one group is defined, the first one is selected.
+To bind the actual feature flag keys to aliases, the CLI replaces a `CC_KEY` placeholder with the known keys.
+
+For example, the following pattern allows to find aliases that point to Ruby symbols:
+
+```bash
+configcat scan <dir> --alias-patterns "(\w+) = client\.get_value\(:CC_KEY"
+```
+
+It will match to the following usage:
+
+```ruby
+# 'my_feature_enabled' now is treated as an alias to the 'my_feature_key' flag.
+my_feature_enabled = client.get_value(:my_feature_key, false)
+```
+
+:::note
+The CLI implicitly adds the optional `` ` ``, `'`, `"` wrapping around the flag keys, so you don't have to add them manually in your pattern around the `CC_KEY` placeholder.
+
+For example, the pattern `(\w+) = CC_KEY` will either match to `alias = flag_key`, `alias = "flag_key"`, `alias = 'flag_key'`, or ``alias = `flag_key` ``.
+:::
+
 ### Wrappers
 
 In addition to aliases, the scanner also looks for different feature flag/setting key usage patterns. This helps to recognize functions and properties used to wrap direct ConfigCat SDK calls as indirect references. Aliases are also included in this search.
