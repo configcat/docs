@@ -114,24 +114,22 @@ This behavior prevents false recognitions in expressions like `<input type="text
 
 ### Custom alias match patterns
 
-There's an option to set custom regex patterns for identifying additional aliases. The `scan` command accepts a list of patterns via the `--alias-patterns` argument.
+There's an option to set custom regex patterns for identifying additional aliases. The `scan` command accepts a list of patterns via the `--alias-patterns` argument or via the `CONFIGCAT_ALIAS_PATTERNS` environment variable.
 
 ```bash
 configcat scan <dir> --alias-patterns "<pattern1>" "<pattern2>"
 ```
 
-:::info
-If the command line argument is not a suitable option for you to pass the patterns, you can set the `CONFIGCAT_ALIAS_PATTERNS` environment variable to a comma delimited list of patterns. The CLI reads that environment variable during the scan execution.
+The CLI expects the patterns from `CONFIGCAT_ALIAS_PATTERNS` as a comma delimited list.
 
 ```bash
 export CONFIGCAT_ALIAS_PATTERNS="<pattern1>,<pattern2>";
 ```
-:::
 
 #### Match pattern format
 
-The regex pattern must include at least one capture group that will be treated as the actual alias. When more then one group is defined, the first one is selected.
-To bind the actual feature flag keys to aliases, the CLI replaces a `CC_KEY` placeholder with the known keys.
+The regex pattern must include at least one capture group that represents the actual alias. When more then one group is defined, the first one is selected.
+To bind the actual flag keys to aliases, the CLI uses a `CC_KEY` placeholder to inject the known keys into the pattern.
 
 For example, the following pattern allows to find aliases that point to Ruby symbols:
 
@@ -147,7 +145,7 @@ my_feature_enabled = client.get_value(:my_feature_key, false)
 ```
 
 :::note
-The CLI implicitly adds the optional `` ` ``, `'`, `"` wrapping around the flag keys, so you don't have to add them manually in your pattern around the `CC_KEY` placeholder.
+The CLI implicitly adds the optional `` ` ``, `'`, `"` wrapping around flag keys, so you don't have to wrap the `CC_KEY` placeholder manually.
 
 For example, the pattern `(\w+) = CC_KEY` will either match to `alias = flag_key`, `alias = "flag_key"`, `alias = 'flag_key'`, or ``alias = `flag_key` ``.
 :::
