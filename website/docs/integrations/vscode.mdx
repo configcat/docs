@@ -6,8 +6,8 @@ description: ConfigCat Visual Studio Code extension. This is a step-by-step guid
 
 <a href="https://marketplace.visualstudio.com/items?itemName=ConfigCat.configcat-feature-flags" target="_blank">ConfigCat's Visual Studio Code extension</a> to manage feature flags from Visual Studio Code.
 
-Connect your Product and Configs to your Workspace. Find your Feature Flag's usages in your code easily.
-Turn features On / Off right from VSCode. Modify or add new Targeting or Percentage Rules easily to the flags.
+Connect your Product and Config to your Workspace. Find your Feature Flag's usages in your code easily.
+Turn features On/Off right from VSCode. You can also easily modify the linked flags to edit or add new Targeting or Percentage Rules.
 
 This guide will help you with the Extensions installation and familiarise you with the Extensions usage.
 
@@ -35,7 +35,7 @@ This guide will help you with the Extensions installation and familiarise you wi
 
 ### Install within Visual Studio Code
 
-1. Search for ConfigCat Feature Flags at the Extensions page.
+1. Search for ConfigCat Feature Flags on the Extensions page.
 1. Click on the Install button.
 1. [Configure extension](#configure-extension).
 
@@ -59,23 +59,23 @@ This guide will help you with the Extensions installation and familiarise you wi
 
 ### Advanced
 
-If you are trying to use the ConfigCat Feature Flags extension for Visual Studio Code with a `dedicated hosted`/[on-premise](https://configcat.com/on-premise/) ConfigCat instance, you can specify your custom urls by executing the `Preferences: Open Workspace Settings` command from the Command Palette and search for `Extensions/ConfigCat` or clicking the manage button on the ConfigCat Feature Flags extension's page. Important settings:
+If you are trying to use the ConfigCat Feature Flags extension for Visual Studio Code with a `dedicated hosted`/[on-premise](https://configcat.com/on-premise/) ConfigCat instance. In that case, you can specify your custom URLs by executing the `Preferences: Open Workspace Settings` command from the Command Palette and searching for `Extensions/ConfigCat` or clicking the manage button on the ConfigCat Feature Flags extension's page. Important settings:
 
-- `Public Api Base URL`: the base url for the ConfigCat Public Management Api. Defaults to: https://api.configcat.com.
-- `Dashboard Base URL`: the base url for ConfigCat Dashboard. Defaults to: https://app.configcat.com.
+- `Public Api Base URL`: the base URL for the ConfigCat Public Management API. Defaults to: https://api.configcat.com.
+- `Dashboard Base URL`: the base URL for ConfigCat Dashboard. Defaults to: https://app.configcat.com.
 
 ## Usage of ConfigCat Feature Flags Views
 
-The ConfigCat Feature Flags Views can be opened by clicking on the ConfigCat Feature Flags icon on the Activity Bar. It consists of 3 different views.
+The ConfigCat Feature Flags Views can be opened by clicking the ConfigCat Feature Flags icon on the Activity Bar. There are three different views.
 
 ### Feature Flags & Settings View
 
-After you successfully connected a Config to your Workspace, from the Feature Flags & Settings View you can:
+After you successfully connect a Config to your Workspace from the Feature Flags & Settings View, you can:
 
 - View the connected Config's Feature Flags.
 - View or Update your Feature Flag's value.
 - Create new Feature Flags.
-- Copy a Feature Flag's key to clipboard.
+- Copy a Feature Flag's key to the clipboard.
 - Find your Feature Flag's usages in your code.
 
  <img src="/docs/assets/vscode/auth.gif" className="zoomable" alt="Installation of ConfigCat Feature Flags Visual Studio Code Extension" />
@@ -87,20 +87,20 @@ After you successfully connected a Config to your Workspace, from the Feature Fl
 1. Select the environment.
 1. See the Feature Flag in the opened tab.
 1. You can turn your features On / Off right from this Issue.
-1. You can add new Targeting Rules with User, Segment or Prerequisite conditions with large selection of Comparators.
+1. You can add new Targeting Rules with User, Segment or Prerequisite conditions with a large selection of Comparators.
 1. You can add new Percentage Options to Feature Flags or Targeting Rules
 
-#### Create new Feature Flag
+#### Create a new Feature Flag
 
 1. Open the Feature Flags & Settings View.
 1. Click the '+' in the View header.
-1. Select setting type.
+1. Select the setting type.
 1. Enter the new Feature Flag name.
 1. Enter the new Feature Flag key.
-1. Add hint to your Feature Flag (optional).
+1. Add a hint to your Feature Flag (optional).
 1. Select 'Yes' to confirm the Flag creation.
 
-#### Copy a Feature Flag's key to clipboard
+#### Copy a Feature Flag's key to the clipboard
 
 1. Open the Feature Flags & Settings View.
 1. Find the Flag and click the 'Copy Key to clipboard' icon next to the Flag name.
@@ -113,7 +113,7 @@ After you successfully connected a Config to your Workspace, from the Feature Fl
 
 ### Products & Configs View
 
-On the Products & Configs View you can manage your products and configs. You can do the following actions.
+Manage your products and configs on the Products & Configs View by performing the following actions.
 
 - View all of your Products & Configs.
 - Create Configs under a Product.
@@ -122,13 +122,13 @@ On the Products & Configs View you can manage your products and configs. You can
 
  <img src="/docs/assets/vscode/auth.gif" className="zoomable" alt="Installation of ConfigCat Feature Flags Visual Studio Code Extension" />
 
-#### Create new Config under a product
+#### Create a new Config under a product
 
 1. Open the Products & Configs View.
-1. In the products list click the '+' icon next to the product where you want to create the new config.
+1. In the products list, click the '+' icon next to the product where you want to create the new config.
 1. Enter a name for the new config.
-1. Select config version
-1. Connect the new config to you current Workspace (optional)
+1. Select the config version
+1. Connect the new config to your current Workspace (optional)
 
 #### Connect a Config to your current Workspace
 
@@ -144,4 +144,4 @@ On the Products & Configs View you can manage your products and configs. You can
 
 ### Help & Feedback View
 
-The Help & Feedback view provides you some quick links to open ConfigCat's Documentation, ConfigCat's Dashboard and gives you the opportunity to report any issues.
+The Help & Feedback view provides quick links to open ConfigCat's Documentation and Dashboard and allows you to report issues.
