@@ -37,6 +37,7 @@ You can find more information about GitHub Actions <a target="_blank" href="http
              # exclude-keys: >           # optional
              #   flag_key_to_exclue_1
              #   flag_key_to_exclue_2
+             # alias-patterns: (\w+) = :CC_KEY,const (\w+) = feature_flags\.enabled\(:CC_KEY\) #optional
              # verbose: true             # optional
    ```
 
@@ -56,4 +57,5 @@ Scan reports are uploaded for each branch of your repository that triggers the w
 | `line-count`   | Context line count before and after the reference line. (min: 1, max: 10)                                                                         |          | 4                   |
 | `sub-folder`   | Sub-folder to scan, relative to the repository root folder.                                                                                       |          |                     |
 | `exclude-keys` | List of feature flag keys that must be excluded from the scan report.                                                                             |          |                     |
+| `alias-patterns` | Comma delimited list of custom regex patterns used to search for additional aliases.                                                            |          |                     |
 | `verbose`      | Turns on detailed logging.                                                                                                                        |          | false               |

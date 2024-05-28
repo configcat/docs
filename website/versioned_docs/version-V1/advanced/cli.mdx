@@ -24,19 +24,24 @@ Options:
   -?, -h, --help          Show help and usage information
 
 Commands:
-  setup                 Setup the CLI with Public Management API host and credentials
-  ls                    List all Product, Config, and Environment IDs
-  p, product            Manage Products
-  c, config             Manage Configs
-  e, environment        Manage Environments
-  f, flag, s, setting   Manage Feature Flags & Settings
-  seg, segment          Manage Segments
-  permission-group, pg  Manage Permission Groups
-  m, member             Manage Members
-  t, tag                Manage Tags
-  k, sdk-key            List SDK Keys
-  scan <directory>      Scan files for Feature Flag & Setting usages
-  config-json           Config JSON-related utilities
+  setup                        Setup the CLI with Public Management API host and credentials
+  ls                           List all Product, Config, and Environment IDs
+  p, product                   Manage Products
+  c, config                    Manage Configs
+  webhook, wh                  Manage Webhooks
+  e, environment               Manage Environments
+  f, flag, s, setting          Manage Feature Flags & Settings
+  f2, flag-v2, s2, setting-v2  Manage V2 Feature Flags & Settings
+  seg, segment                 Manage Segments
+  permission-group, pg         Manage Permission Groups
+  m, member                    Manage Members
+  t, tag                       Manage Tags
+  k, sdk-key                   List SDK Keys
+  scan <directory>             Scan files for Feature Flag & Setting usages
+  config-json                  Config JSON-related utilities
+  w, workspace                 Manage the CLI workspace. When set, the CLI's interactive mode
+                               filters Product and Config selectors by the values set in the
+                               workspace
 
 Use "configcat [command] -?" for more information about a command.
 ```
