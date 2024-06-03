@@ -18,7 +18,7 @@ There are two available integration opportunities between ConfigCat and Twilio S
 
 Ensures that every setting change in ConfigCat is sent to Segment as a <a href="https://segment.com/docs/connections/spec/track/" target="_blank" rel="noopener noreferrer">track event</a>.
 
-<img src="/docs/assets/segment/changeevent.png" className="zoomable" alt="Twilio Segment featureFlagsChanged event" />
+<img src="/docs/assets/segment/changeevent.png" className="zoomable" alt="Twilio Segment Feature Flag Changed event" />
 
 ### Installation
 
@@ -38,14 +38,14 @@ Ensures that every setting change in ConfigCat is sent to Segment as a <a href="
 
 Every feature flag change event sent to Twilio Segment by ConfigCat has the following properties:
 
-- **event name:** `featureFlagsChanged`.
+- **event name:** `Feature Flag Changed`.
 - **timestamp:** When the change happened.
 - **details:** A brief summary of the change.
-- **productId, productName**: The product where the change happened.
-- **configId, configName**: The config where the change happened.
-- **environmentId, environmentName**: The environment where the change happened.
+- **product_id, product_name**: The product where the change happened.
+- **config_id, config_name**: The config where the change happened.
+- **environment_id, environment_name**: The environment where the change happened.
 - **url**: A direct link to the config/feature flag.
-- **userId, userEmail, userFullName**: Who made the changes.
+- **userId, user_email, user_full_name**: Who made the changes.
 
 ## Sending feature flag evaluation analytics to Twilio Segment {#analytics}
 
@@ -60,10 +60,10 @@ Ensures that feature flag evaluations are sent into the Twilio Segment ConfigCat
    - **Twilio Segment SDK:** Set up with the Twilio Segment Write Key acquired while adding the ConfigCat source in Twilio Segment.
 3. **Integrate Feature Flag Evaluations:**
    - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
-   - Send feature flag evaluation data to Twilio Segment using the `featureFlagEvaluated` event name. Include the following parameters:
-     - `featureFlagKey`: the feature flag's key.
+   - Send feature flag evaluation data to Twilio Segment using the `Feature Flag Evaluated` event name. Include the following parameters:
+     - `feature_flag_key`: the feature flag's key.
      - `value`: the evaluated feature flag's value or Variation ID.
-     - `variationId` (optional): the evaluated feature flag's Variation ID.
+     - `variation_id` (optional): the evaluated feature flag's Variation ID.
      - `userId` (optional): the user object's identifier used during feature flag evaluation.
      - `user` (optional): the user object used during feature flag evaluation.
 
@@ -75,11 +75,11 @@ const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_
 const configCatClient = configcat.getClient("#YOUR_SDK_KEY#", PollingMode.AutoPoll, {
     setupHooks: (hooks) =>
         hooks.on('flagEvaluated', evaluationDetails => {
-            segmentAnalytics.track('featureFlagEvaluated',
+            segmentAnalytics.track('Feature Flag Evaluated',
                 {
-                    'featureFlagKey': evaluationDetails.key,
+                    'feature_flag_key': evaluationDetails.key,
                     'value': evaluationDetails.value,
-                    'variationId': evaluationDetails.variationId,
+                    'variation_id': evaluationDetails.variationId,
                     'user': evaluationDetails.user,
                     'userId': evaluationDetails.user.identifier
                 });
@@ -100,11 +100,11 @@ const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_
   options={{
     setupHooks: (hooks) =>
       hooks.on('flagEvaluated', evaluationDetails => {
-        segmentAnalytics.track('featureFlagEvaluated',
+        segmentAnalytics.track('Feature Flag Evaluated',
             {
-                'featureFlagKey': evaluationDetails.key,
+                'feature_flag_key': evaluationDetails.key,
                 'value': evaluationDetails.value,
-                'variationId': evaluationDetails.variationId,
+                'variation_id': evaluationDetails.variationId,
                 'userId': evaluationDetails.user.identifier,
                 'user': evaluationDetails.user
             });
@@ -122,10 +122,10 @@ import segment.analytics as analytics
 analytics.write_key = '#YOUR_SEGMENT_WRITE_KEY#'
 
 def on_flag_evaluated(evaluation_details):
-    analytics.track(evaluation_details.user.get_identifier(), 'featureFlagEvaluated',  {
-        'featureFlagKey': evaluation_details.key,
+    analytics.track(evaluation_details.user.get_identifier(), 'Feature Flag Evaluated',  {
+        'feature_flag_key': evaluation_details.key,
         'value': evaluation_details.value,
-        'variationId': evaluation_details.variationId,
+        'variation_id': evaluation_details.variationId,
         'user': evaluation_details.user
     })
     pass
@@ -148,11 +148,11 @@ Analytics = Segment::Analytics.new({
 def on_flag_evaluated(evaluation_details):
     Analytics.track(
         user_id: evaluation_details.user.get_identifier(),
-        event: "featureFlagEvaluated",  
+        event: "Feature Flag Evaluated",  
         properties: {
-            'featureFlagKey': evaluation_details.key,
+            'feature_flag_key': evaluation_details.key,
             'value': evaluation_details.value,
-            'variationId': evaluation_details.variationId,
+            'variation_id': evaluation_details.variationId,
             'user': evaluation_details.user
         }
     )
@@ -174,11 +174,11 @@ configCatClient := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR_SDK
     Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
         client.Enqueue(analytics.Track{
             UserId: details.Data.User.(*UserData).Identifier,
-            Event:  "featureFlagEvaluated",
+            Event:  "Feature Flag Evaluated",
             Properties: analytics.NewProperties().
-                Set("featureFlagKey", details.Data.Key).
+                Set("feature_flag_key", details.Data.Key).
                 Set("value", details.Value).
-                Set("variationId", details.Data.VariationID),
+                Set("variation_id", details.Data.VariationID),
                 Set("user", details.Data.User.(*UserData)),
         })
     }}})
@@ -190,12 +190,12 @@ configCatClient := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR_SDK
 Analytics analytics = Analytics.builder("#YOUR_SEGMENT_WRITE_KEY#").build();
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.hooks().addOnFlagEvaluated(details -> {
-        analytics.enqueue(TrackMessage.builder("featureFlagEvaluated")
+        analytics.enqueue(TrackMessage.builder("Feature Flag Evaluated")
             .userId(details.getUser().getIdentifier())
             .properties(ImmutableMap.builder()
-                .put("featureFlagKey", details.getKey())
+                .put("feature_flag_key", details.getKey())
                 .put("value", details.getValue())
-                .put("variationId", details.getVariationId())
+                .put("variation_id", details.getVariationId())
                 .put("user", details.getUser())
                 .build()
             )
@@ -210,11 +210,11 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 AndroidAnalyticsKt.Analytics("#YOUR_SEGMENT_WRITE_KEY#",  getApplicationContext(), configuration -> {});
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.hooks().addOnFlagEvaluated(details -> {
-        analytics.track("featureFlagEvaluated", Builders.buildJsonObject(o -> {
+        analytics.track("Feature Flag Evaluated", Builders.buildJsonObject(o -> {
             o.put("userId", details.getUser().getIdentifier())
-            .put("featureFlagKey", details.getKey())
+            .put("feature_flag_key", details.getKey())
             .put("value", details.getValue())
-            .put("variationId", details.getVariationId())
+            .put("variation_id", details.getVariationId())
             .put("user", details.getUser())
         }));
     });
@@ -225,9 +225,9 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 <TabItem value="ios" label="Swift (iOS)">
 ```swift
 struct TrackProperties: Codable {
-    let featureFlagKey: String
+    let feature_flag_key: String
     let value: Any
-    let variationId: String
+    let variation_id: String
     let user: ConfigCatUser?
     let userId: String
 }
@@ -236,10 +236,10 @@ let configuration = Configuration(writeKey: "#YOUR_SEGMENT_WRITE_KEY#")
 let analytics = Analytics(configuration: configuration)
 let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
     options.hooks.addOnFlagEvaluated { details in
-        analytics.track(name: "featureFlagEvaluated", properties: TrackProperties(
-            featureFlagKey: details.key,
+        analytics.track(name: "Feature Flag Evaluated", properties: TrackProperties(
+            feature_flag_key: details.key,
             value: details.value,
-            variationId: details.variationId,
+            variation_id: details.variationId,
             userId: details.user.identifier
             user: details.user
         ))
@@ -253,10 +253,10 @@ While our documentation primarily provides code examples for languages that Twil
 you can integrate with other languages by sending an event to Twilio Segment with a third-party SDK or with using the <a href="https://segment.com/docs/connections/sources/catalog/libraries/server/http-api/" target="_blank" rel="noopener noreferrer">Segment's HTTP API source</a>. 
 
 1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
-2. **Send an event to Twilio Segment** using the `featureFlagEvaluated` event name. Include the following event properties:
-    - `featureFlagKey`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails.
+2. **Send an event to Twilio Segment** using the `Feature Flag Evaluated` event name. Include the following event properties:
+    - `feature_flag_key`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails.
     - `value`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
-    - `variationId`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
+    - `variation_id`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
     - `userId` (optional): in case you are using the tracking in a backend component you have to send the `userId` property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
     - `user` (optional): the user object used during feature flag evaluation.
 </TabItem>
