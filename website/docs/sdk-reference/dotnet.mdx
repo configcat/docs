@@ -130,18 +130,13 @@ You can acquire singleton client instances for your SDK keys using the `ConfigCa
 You can close all open clients at once using the `ConfigCatClient.DisposeAll()` method or do it individually using the `client.Dispose()` method.
 :::
 
-## Anatomy of `GetValue()`, `GetValueAsync()`
+## Anatomy of `GetValueAsync()`
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
-
-```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#");  // Optional User Object
-var value = client.GetValue("keyOfMyFeatureFlag", false, userObject);
-```
 
 ```csharp
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
@@ -184,20 +179,15 @@ var value = await client.GetValueAsync("keyOfMyDecimalSetting", 0d);
 var value = await client.GetValueAsync<double>("keyOfMyDecimalSetting", 0);
 ```
 
-## Anatomy of `GetValueDetails()`, `GetValueDetailsAsync()` {#anatomy-of-getvaluedetails}
+## Anatomy of `GetValueDetailsAsync()`
 
-`GetValueDetails()`/`GetValueDetailsAsync()` are similar to `GetValue()`/`GetValueAsync()` but instead of returning the evaluated value only, they provide more detailed information about the evaluation result.
+`GetValueDetailsAsync()` is similar to `GetValueAsync()` but instead of returning the evaluated value only, it provides more detailed information about the evaluation result.
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
-
-```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
-var details = client.GetValueDetails("keyOfMyFeatureFlag", false, userObject);
-```
 
 ```csharp
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
@@ -216,7 +206,7 @@ The `details` result contains the following information:
 | `Key`                             | `string`                             | The key of the evaluated feature flag or setting.                                                               |
 | `Value`                           | `bool` / `string` / `int` / `double` | The evaluated value of the feature flag or setting.                                                             |
 | `User`                            | `User`                               | The User Object used for the evaluation.                                                                        |
-| `IsDefaultValue`                  | `bool`                               | True when the default value passed to `GetValueDetails()`/`GetValueDetailsAsync()` is returned due to an error. |
+| `IsDefaultValue`                  | `bool`                               | True when the default value passed to `GetValueDetailsAsync()` is returned due to an error.                     |
 | `ErrorCode`                       | `EvaluationErrorCode`                | In case of an error, this property contains a code that identifies the reason for the error.                    |
 | `ErrorMessage`                    | `string`                             | In case of an error, this property contains the error message.                                                  |
 | `ErrorException`                  | `Exception`                          | In case of an error, this property contains the related exception object (if any).                              |
@@ -315,7 +305,7 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 client.SetDefaultUser(new User(identifier: "john@example.com"));
 ```
 
-Whenever the evaluation methods like `GetValue()`, `GetValueAsync()`, etc. are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
+Whenever the evaluation methods like `GetValueAsync()`, `GetValueDetailsAsync()`, etc. are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```csharp
 var user = new User(identifier: "john@example.com");
@@ -345,7 +335,7 @@ client.ClearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache then all `GetValue()`, `GetValueAsync()`, etc. calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache then all `GetValueAsync()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -370,7 +360,7 @@ Available options:
 
 ### Lazy loading
 
-When calling `GetValue()` or `GetValueAsync()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `GetValue()` or `GetValueAsync()` will return the setting value after the cache is updated.
+When calling `GetValueAsync()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `GetValueAsync()` will return the setting value after the cache is updated.
 
 Use `cacheTimeToLive` parameter to manage configuration lifetime.
 
@@ -420,10 +410,10 @@ Via the following events you can subscribe to particular events raised by the cl
 
 - `event EventHandler<ClientReadyEventArgs> ClientReady`: This event is raised when the SDK reaches the ready state. If the SDK is set up to use lazy loading or manual polling, it's considered ready right after syncing up with the config cache.
   If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `ClientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
-- `event EventHandler<ConfigFetchedEventArgs> ConfigFetched`: This event is raised each time when the SDK attempts to refresh the locally cached config by fetching the latest version from the remote server. It is raised not only when `ForceRefresh`/`ForceRefreshAsync` is called but also
+- `event EventHandler<ConfigFetchedEventArgs> ConfigFetched`: This event is raised each time when the SDK attempts to refresh the locally cached config by fetching the latest version from the remote server. It is raised not only when `ForceRefreshAsync` is called but also
   when the refresh is initiated by the SDK automatically. Thus, this event allows you to observe potential network issues that occur under the hood.
 - `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
-- `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetails()`/`GetValueDetailsAsync()`](#anatomy-of-getvaluedetails).
+- `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetailsAsync()`](#anatomy-of-getvaluedetailsasync).
 - `event EventHandler<ConfigCatClientErrorEventArgs> Error`: This event is raised when an error occurs within the _ConfigCat SDK_.
 
 You can subscribe to these events either on initialization:
@@ -717,32 +707,18 @@ Sample code on how to create a basic file logger implementation for ConfigCat cl
 
 Another sample which shows how to implement an adapter to [the built-in logging framework](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging) of .NET Core/.NET 5+: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/ASP.NETCore/WebApplication/Adapters/ConfigCatToMSLoggerAdapter.cs" target="_blank">See Sample Code</a>
 
-## `GetAllKeys()`, `GetAllKeysAsync()`
+## `GetAllKeysAsync()`
 
-You can get all the setting keys from your configuration by calling the `GetAllKeys()` or `GetAllKeysAsync()` method of the `ConfigCatClient`.
-
-```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IEnumerable<string> keys = client.GetAllKeys();
-```
+You can get all the setting keys from your configuration by calling the `GetAllKeysAsync()` method of the `ConfigCatClient`.
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IEnumerable<string> keys = await client.GetAllKeysAsync();
 ```
 
-## `GetAllValues()`, `GetAllValuesAsync()`
+## `GetAllValuesAsync()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
-
-```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IDictionary<string, object> settingValues = client.GetAllValues();
-
-// invoke with User Object
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
-IDictionary<string, object> settingValuesTargeting = client.GetAllValues(userObject);
-```
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
@@ -753,18 +729,9 @@ User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
 ```
 
-## `GetAllValueDetails()`, `GetAllValueDetailsAsync()`
+## `GetAllValueDetailsAsync()`
 
 Evaluates and returns the values along with evaluation details of all feature flags and settings. Passing a [User Object](#user-object) is optional.
-
-```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IReadOnlyList<EvaluationDetails> settingValues = client.GetAllValueDetails();
-
-// invoke with User Object
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
-IReadOnlyList<EvaluationDetails> settingValuesTargeting = client.GetAllValueDetails(userObject);
-```
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
@@ -907,7 +874,7 @@ The default timeout is 30 seconds.
 
 When the _ConfigCat SDK_ does not work as expected in your application, please check for the following potential problems:
 
-- **Symptom:** Instead of the actual value, the default one is constantly returned by `GetValue()`/`GetValueAsync()` and
+- **Symptom:** Instead of the actual value, the default one is constantly returned by `GetValueAsync()` and
   the log contains the following message (provided that the client is set up to log error level events as described [here](#logging)):
   "Secure connection could not be established. Please make sure that your application is enabled to use TLS 1.2+."
 
