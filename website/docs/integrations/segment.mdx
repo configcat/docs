@@ -295,16 +295,28 @@ configCatClient := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR_SDK
 Analytics analytics = Analytics.builder("#YOUR_SEGMENT_WRITE_KEY#").build();
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.hooks().addOnFlagEvaluated(details -> {
-        analytics.enqueue(TrackMessage.builder("Feature Flag Evaluated")
-            .userId(details.getUser().getIdentifier())
-            .properties(ImmutableMap.builder()
-                .put("feature_flag_key", details.getKey())
-                .put("value", details.getValue())
-                .put("variation_id", details.getVariationId())
-                .put("user", details.getUser())
-                .build()
-            )
-        );
+        if (details.getUser() != null){
+            analytics.enqueue(TrackMessage.builder("Feature Flag Evaluated")
+                .userId(details.getUser().getIdentifier())
+                .properties(ImmutableMap.builder()
+                    .put("feature_flag_key", details.getKey())
+                    .put("value", details.getValue())
+                    .put("variation_id", details.getVariationId())
+                    .put("user", details.getUser())
+                    .build()
+                )
+            );
+        } else {
+            analytics.enqueue(TrackMessage.builder("Feature Flag Evaluated")
+                .anonymusId(UUID.randomUUID().ToString())
+                .properties(ImmutableMap.builder()
+                    .put("feature_flag_key", details.getKey())
+                    .put("value", details.getValue())
+                    .put("variation_id", details.getVariationId())
+                    .build()
+                )
+            );
+        }
     });
 });
 ```
@@ -315,12 +327,17 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 AndroidAnalyticsKt.Analytics("#YOUR_SEGMENT_WRITE_KEY#",  getApplicationContext(), configuration -> {});
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.hooks().addOnFlagEvaluated(details -> {
+        if (details.getUser() != null){
+            analytics.identify(details.getUser().getIdentifier())
+        }
         analytics.track("Feature Flag Evaluated", Builders.buildJsonObject(o -> {
-            o.put("userId", details.getUser().getIdentifier())
-            .put("feature_flag_key", details.getKey())
+            o.put("feature_flag_key", details.getKey())
             .put("value", details.getValue())
-            .put("variation_id", details.getVariationId())
-            .put("user", details.getUser())
+            .put("variation_id", details.getVariationId());
+            
+            if (details.getuser() != null){
+                o.put("user", details.getUser());
+            }
         }));
     });
 });
@@ -329,26 +346,38 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 
 <TabItem value="ios" label="Swift (iOS)">
 ```swift
+import ConfigCat
+import Segment
+
 struct TrackProperties: Codable {
     let feature_flag_key: String
-    let value: Any
+    let value: String
     let variation_id: String
-    let user: ConfigCatUser?
 }
 
 let configuration = Configuration(writeKey: "#YOUR_SEGMENT_WRITE_KEY#")
 let analytics = Analytics(configuration: configuration)
+analytics.add { ev in
+    var event = ev
+    if var ctx = ev?.context?.dictionaryValue {
+        ctx[keyPath: "integration.name"] = "configcat"
+        ctx[keyPath: "integration.version"] = "1.0.0"
+        event?.context = try? JSON(ctx)
+    }
+    return event
+}
 let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
     options.hooks.addOnFlagEvaluated { details in
-        if details.user != null{
-            analytics.identify(details.user.identifier)
+        if let user = details.user {
+            analytics.identify(userId: user.identifier)
         }
-        analytics.track(name: "Feature Flag Evaluated", properties: TrackProperties(
-            feature_flag_key: details.key,
-            value: details.value,
-            variation_id: details.variationId,
-            user: details.user
-        ))
+
+        analytics.track(name: "Feature Flag Evaluated", properties: [
+            "feature_flag_key": details.key,
+            "value": details.value,
+            "variation_id": details.variationId ?? "",
+            "user": details.user?.description ?? ""
+        ])
     }
 }
 ```
