@@ -72,16 +72,25 @@ Code samples:
 <TabItem value="js" label="JavaScript, Node, SSR" default>
 ```js
 const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_KEY#" });
+segmentAnalytics.addSourceMiddleware(({payload, next}) => {
+    payload.obj.context.integration = payload.obj.context.integration || {};
+    payload.obj.context.integration['name'] = 'configcat';
+    payload.obj.context.integration['version'] = '1.0.0';
+    next(payload);
+});
+
 const configCatClient = configcat.getClient("#YOUR_SDK_KEY#", PollingMode.AutoPoll, {
     setupHooks: (hooks) =>
         hooks.on('flagEvaluated', evaluationDetails => {
+            if (evaluationDetails.user) {
+                segmentAnalytics.identify(evaluationDetails.user.identifier, evaluationDetails.user);
+            }
             segmentAnalytics.track('Feature Flag Evaluated',
                 {
                     'feature_flag_key': evaluationDetails.key,
                     'value': evaluationDetails.value,
                     'variation_id': evaluationDetails.variationId,
-                    'user': evaluationDetails.user,
-                    'userId': evaluationDetails.user.identifier
+                    'user': evaluationDetails.user
                 });
         }),
 });
@@ -91,6 +100,12 @@ const configCatClient = configcat.getClient("#YOUR_SDK_KEY#", PollingMode.AutoPo
 <TabItem value="react" label="React">
 ```tsx
 const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_KEY#" });
+segmentAnalytics.addSourceMiddleware(({payload, next}) => {
+    payload.obj.context.integration = payload.obj.context.integration || {};
+    payload.obj.context.integration['name'] = 'configcat';
+    payload.obj.context.integration['version'] = '1.0.0';
+    next(payload);
+});
 
 //...
 
@@ -100,12 +115,14 @@ const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_
   options={{
     setupHooks: (hooks) =>
       hooks.on('flagEvaluated', evaluationDetails => {
+        if (evaluationDetails.user) {
+            segmentAnalytics.identify(evaluationDetails.user.identifier, evaluationDetails.user);
+        }
         segmentAnalytics.track('Feature Flag Evaluated',
             {
                 'feature_flag_key': evaluationDetails.key,
                 'value': evaluationDetails.value,
                 'variation_id': evaluationDetails.variationId,
-                'userId': evaluationDetails.user.identifier,
                 'user': evaluationDetails.user
             });
       }),
@@ -118,16 +135,43 @@ const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_
 <TabItem value="python" label="Python">
 ```python
 import segment.analytics as analytics
+import configcatclient
+from configcatclient.configcatoptions import ConfigCatOptions, Hooks
+import uuid
 
 analytics.write_key = '#YOUR_SEGMENT_WRITE_KEY#'
 
 def on_flag_evaluated(evaluation_details):
-    analytics.track(evaluation_details.user.get_identifier(), 'Feature Flag Evaluated',  {
-        'feature_flag_key': evaluation_details.key,
-        'value': evaluation_details.value,
-        'variation_id': evaluation_details.variationId,
-        'user': evaluation_details.user
-    })
+    if evaluation_details.user is not None:
+        analytics.track(user_id=evaluation_details.user.get_identifier(), 
+            event='Feature Flag Evaluated',  
+            properties={
+                'feature_flag_key': evaluation_details.key,
+                'value': evaluation_details.value,
+                'variation_id': evaluation_details.variation_id,
+                'user': vars(evaluation_details.user)
+            }, 
+            context={
+                'integration': {
+                    'name': 'configcat',
+                    'version': '1.0.0'
+                }
+            }
+        )
+    else:
+        analytics.track(anonymous_id=str(uuid.uuid4()), # Or any other kind of random anonymus id.
+        event='Feature Flag Evaluated',  
+        properties={
+            'feature_flag_key': evaluation_details.key,
+            'value': evaluation_details.value,
+            'variation_id': evaluation_details.variation_id
+        }, 
+        context={
+            'integration': {
+                'name': 'configcat',
+                'version': '1.0.0'
+            }
+        })
     pass
 
 client = configcatclient.get('#YOUR_SDK_KEY#',
@@ -140,22 +184,50 @@ client = configcatclient.get('#YOUR_SDK_KEY#',
 
 <TabItem value="ruby" label="Ruby">
 ```ruby
+require 'configcat'
+require 'segment/analytics'
+require 'securerandom'
+
 Analytics = Segment::Analytics.new({
     write_key: '#YOUR-SEGMENT-WRITE-KEY#',
     on_error: Proc.new { |status, msg| print msg }
 })
 
-def on_flag_evaluated(evaluation_details):
-    Analytics.track(
-        user_id: evaluation_details.user.get_identifier(),
-        event: "Feature Flag Evaluated",  
-        properties: {
-            'feature_flag_key': evaluation_details.key,
-            'value': evaluation_details.value,
-            'variation_id': evaluation_details.variationId,
-            'user': evaluation_details.user
-        }
-    )
+def on_flag_evaluated(evaluation_details)
+    if evaluation_details.user
+        Analytics.track(
+            user_id: evaluation_details.user.get_identifier(),
+            event: "Feature Flag Evaluated",  
+            properties: {
+                feature_flag_key: evaluation_details.key,
+                value: evaluation_details.value,
+                variation_id: evaluation_details.variation_id,
+                user: evaluation_details.user
+            },
+            context: {
+                integration: {
+                    name: 'configcat',
+                    version: '1.0.0'
+                }
+            }
+        )
+    else
+        Analytics.track(
+            anonymous_id: SecureRandom.uuid, # Or any other kind of random anonymus id.
+            event: "Feature Flag Evaluated",  
+            properties: {
+                feature_flag_key: evaluation_details.key,
+                value: evaluation_details.value,
+                variation_id: evaluation_details.variation_id
+            },
+            context: {
+                integration: {
+                    name: 'configcat',
+                    version: '1.0.0'
+                }
+            }
+        )
+    end
 end
 
 client = ConfigCat.get("#YOUR-SDK-KEY#",
@@ -172,15 +244,26 @@ analyticsClient := analytics.New("#YOUR_SEGMENT_WRITE_KEY#")
 
 configCatClient := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR_SDK_KEY#",
     Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
-        client.Enqueue(analytics.Track{
-            UserId: details.Data.User.(*UserData).Identifier,
-            Event:  "Feature Flag Evaluated",
-            Properties: analytics.NewProperties().
-                Set("feature_flag_key", details.Data.Key).
-                Set("value", details.Value).
-                Set("variation_id", details.Data.VariationID),
-                Set("user", details.Data.User.(*UserData)),
-        })
+        if details.Data.User != nil {
+            client.Enqueue(analytics.Track{
+                UserId: details.Data.User.(*UserData).Identifier,
+                Event:  "Feature Flag Evaluated",
+                Properties: analytics.NewProperties().
+                    Set("feature_flag_key", details.Data.Key).
+                    Set("value", details.Value).
+                    Set("variation_id", details.Data.VariationID),
+                    Set("user", details.Data.User.(*UserData)),
+            })
+        } else{
+            client.Enqueue(analytics.Track{
+                AnonymousId: uuid.New().String(), // Or any other kind of random anonymus id.
+                Event:  "Feature Flag Evaluated",
+                Properties: analytics.NewProperties().
+                    Set("feature_flag_key", details.Data.Key).
+                    Set("value", details.Value).
+                    Set("variation_id", details.Data.VariationID),
+            })
+        }
     }}})
 ```
 </TabItem>
