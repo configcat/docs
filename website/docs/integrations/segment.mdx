@@ -240,28 +240,50 @@ client = ConfigCat.get("#YOUR-SDK-KEY#",
 
 <TabItem value="go" label="Go">
 ```go
+import (
+	configcat "github.com/configcat/go-sdk/v9"
+	"github.com/google/uuid"
+	"github.com/segmentio/analytics-go"
+)
+
 analyticsClient := analytics.New("#YOUR_SEGMENT_WRITE_KEY#")
 
 configCatClient := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR_SDK_KEY#",
-    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *configcat.EvaluationDetails) {
         if details.Data.User != nil {
-            client.Enqueue(analytics.Track{
-                UserId: details.Data.User.(*UserData).Identifier,
+            analyticsClient.Enqueue(analytics.Track{
+                UserId: details.Data.User.(*configcat.UserData).Identifier,
                 Event:  "Feature Flag Evaluated",
                 Properties: analytics.NewProperties().
                     Set("feature_flag_key", details.Data.Key).
                     Set("value", details.Value).
-                    Set("variation_id", details.Data.VariationID),
-                    Set("user", details.Data.User.(*UserData)),
+                    Set("variation_id", details.Data.VariationID).
+                    Set("user", details.Data.User.(*configcat.UserData)),
+                Context: &analytics.Context{
+                    Extra: map[string]interface{}{
+                        "integration": map[string]interface{}{
+                            "name":    "configcat",
+                            "version": "1.0.0",
+                        },
+                    },
+                },
             })
-        } else{
-            client.Enqueue(analytics.Track{
+        } else {
+            analyticsClient.Enqueue(analytics.Track{
                 AnonymousId: uuid.New().String(), // Or any other kind of random anonymus id.
-                Event:  "Feature Flag Evaluated",
+                Event:       "Feature Flag Evaluated",
                 Properties: analytics.NewProperties().
                     Set("feature_flag_key", details.Data.Key).
                     Set("value", details.Value).
                     Set("variation_id", details.Data.VariationID),
+                Context: &analytics.Context{
+                    Extra: map[string]interface{}{
+                        "integration": map[string]interface{}{
+                            "name":    "configcat",
+                            "version": "1.0.0",
+                        },
+                    },
+                },
             })
         }
     }}})
