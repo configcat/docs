@@ -334,18 +334,19 @@ struct TrackProperties: Codable {
     let value: Any
     let variation_id: String
     let user: ConfigCatUser?
-    let userId: String
 }
 
 let configuration = Configuration(writeKey: "#YOUR_SEGMENT_WRITE_KEY#")
 let analytics = Analytics(configuration: configuration)
 let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
     options.hooks.addOnFlagEvaluated { details in
+        if details.user != null{
+            analytics.identify(details.user.identifier)
+        }
         analytics.track(name: "Feature Flag Evaluated", properties: TrackProperties(
             feature_flag_key: details.key,
             value: details.value,
             variation_id: details.variationId,
-            userId: details.user.identifier
             user: details.user
         ))
     }
