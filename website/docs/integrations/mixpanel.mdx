@@ -228,7 +228,7 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
         Mixpanel.mainInstance().track(event:"$experiment_started", properties: [
             "Experiment name": details.key,
             "Variant name": details.value,
-            "Variation ID": details.variationId,
+            "Variation ID": details.variationId ?? "",
         ])
         
         // Use the identify API.

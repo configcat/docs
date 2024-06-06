@@ -349,12 +349,6 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 import ConfigCat
 import Segment
 
-struct TrackProperties: Codable {
-    let feature_flag_key: String
-    let value: String
-    let variation_id: String
-}
-
 let configuration = Configuration(writeKey: "#YOUR_SEGMENT_WRITE_KEY#")
 let analytics = Analytics(configuration: configuration)
 analytics.add { ev in

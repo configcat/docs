@@ -219,13 +219,13 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
          eventProperties: [
             "flag_key": details.key,
             "variant": details.value,
-            "variation_id": details.variationId
+            "variation_id": details.variationId ?? ""
          ]
       )
 
       // Use the identify API.
       let identify = Identify()
-      identify.set(property: "configcat_" + details.Data.Key, value: details.value)
+      identify.set(property: "configcat_" + details.key, value: details.value)
       amplitude.identify(identify: identify)
    }
 }
