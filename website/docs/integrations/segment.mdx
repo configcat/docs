@@ -292,29 +292,47 @@ configCatClient := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR_SDK
 
 <TabItem value="java" label="Java">
 ```java
+import com.configcat.ConfigCatClient;
+import com.configcat.User;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.messages.TrackMessage;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+//...
+
 Analytics analytics = Analytics.builder("#YOUR_SEGMENT_WRITE_KEY#").build();
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.hooks().addOnFlagEvaluated(details -> {
+        
+        Map<String, String> contextMapIntegrations = new HashMap<>();
+        contextMapIntegrations.put("name", "configcat");
+        contextMapIntegrations.put("version", "1.0.0");
+
+        Map<String, Object> contextMap = new HashMap<>();
+        contextMap.put("integration", contextMapIntegrations);
+
+        Map<String, Object> propertiesMap = new HashMap<>();
+        propertiesMap.put("feature_flag_key", details.getKey());
+        propertiesMap.put("value", details.getValue());
+        propertiesMap.put("variation_id", details.getVariationId());
+
         if (details.getUser() != null){
+            propertiesMap.put("user", details.getUser());
+
             analytics.enqueue(TrackMessage.builder("Feature Flag Evaluated")
-                .userId(details.getUser().getIdentifier())
-                .properties(ImmutableMap.builder()
-                    .put("feature_flag_key", details.getKey())
-                    .put("value", details.getValue())
-                    .put("variation_id", details.getVariationId())
-                    .put("user", details.getUser())
-                    .build()
-                )
+                    .userId(details.getUser().getIdentifier())
+                    .properties(propertiesMap)
+                    .context(contextMap)
             );
         } else {
             analytics.enqueue(TrackMessage.builder("Feature Flag Evaluated")
-                .anonymusId(UUID.randomUUID().ToString())
-                .properties(ImmutableMap.builder()
-                    .put("feature_flag_key", details.getKey())
-                    .put("value", details.getValue())
-                    .put("variation_id", details.getVariationId())
-                    .build()
-                )
+                    .anonymousId(UUID.randomUUID().toString())
+                    .properties(propertiesMap)
+                    .context(contextMap)
             );
         }
     });
@@ -324,21 +342,30 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 
 <TabItem value="android" label="Android">
 ```java
-AndroidAnalyticsKt.Analytics("#YOUR_SEGMENT_WRITE_KEY#",  getApplicationContext(), configuration -> {});
+Analytics analytics = new Analytics.Builder(getApplicationContext(), "#YOUR_SEGMENT_WRITE_KEY#").build();
+Analytics.setSingletonInstance(analytics);
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.cache(new SharedPreferencesCache(getApplicationContext()));
     options.hooks().addOnFlagEvaluated(details -> {
+        Properties properties = new Properties()
+            .putValue("feature_flag_key", details.getKey())
+            .putValue("value", details.getValue())
+            .putValue("variation_id", details.getVariationId());
+
+        Map<String, Object> contextMapIntegrations = new HashMap<>();
+        contextMapIntegrations.put("name", "configcat");
+        contextMapIntegrations.put("version", "1.0.0");
+
+        Options optionsAnalytics = new Options().putContext("integration", contextMapIntegrations);
+
         if (details.getUser() != null){
-            analytics.identify(details.getUser().getIdentifier())
+            analytics.identify(details.getUser().getIdentifier());
+            properties.putValue("user", details.getUser());
+        } else {
+            analytics.identify(new Traits().putValue("anonymousId", UUID.randomUUID().toString()));
         }
-        analytics.track("Feature Flag Evaluated", Builders.buildJsonObject(o -> {
-            o.put("feature_flag_key", details.getKey())
-            .put("value", details.getValue())
-            .put("variation_id", details.getVariationId());
-            
-            if (details.getuser() != null){
-                o.put("user", details.getUser());
-            }
-        }));
+
+        analytics.track("Feature Flag Evaluated", properties, optionsAnalytics);
     });
 });
 ```

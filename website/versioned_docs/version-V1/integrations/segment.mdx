@@ -72,16 +72,25 @@ Code samples:
 <TabItem value="js" label="JavaScript, Node, SSR" default>
 ```js
 const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_KEY#" });
+segmentAnalytics.addSourceMiddleware(({payload, next}) => {
+    payload.obj.context.integration = payload.obj.context.integration || {};
+    payload.obj.context.integration['name'] = 'configcat';
+    payload.obj.context.integration['version'] = '1.0.0';
+    next(payload);
+});
+
 const configCatClient = configcat.getClient("#YOUR_SDK_KEY#", PollingMode.AutoPoll, {
     setupHooks: (hooks) =>
         hooks.on('flagEvaluated', evaluationDetails => {
+            if (evaluationDetails.user) {
+                segmentAnalytics.identify(evaluationDetails.user.identifier, evaluationDetails.user);
+            }
             segmentAnalytics.track('Feature Flag Evaluated',
                 {
                     'feature_flag_key': evaluationDetails.key,
                     'value': evaluationDetails.value,
                     'variation_id': evaluationDetails.variationId,
-                    'user': evaluationDetails.user,
-                    'userId': evaluationDetails.user.identifier
+                    'user': evaluationDetails.user
                 });
         }),
 });
@@ -91,6 +100,12 @@ const configCatClient = configcat.getClient("#YOUR_SDK_KEY#", PollingMode.AutoPo
 <TabItem value="react" label="React">
 ```tsx
 const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_KEY#" });
+segmentAnalytics.addSourceMiddleware(({payload, next}) => {
+    payload.obj.context.integration = payload.obj.context.integration || {};
+    payload.obj.context.integration['name'] = 'configcat';
+    payload.obj.context.integration['version'] = '1.0.0';
+    next(payload);
+});
 
 //...
 
@@ -100,12 +115,14 @@ const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_
   options={{
     setupHooks: (hooks) =>
       hooks.on('flagEvaluated', evaluationDetails => {
+        if (evaluationDetails.user) {
+            segmentAnalytics.identify(evaluationDetails.user.identifier, evaluationDetails.user);
+        }
         segmentAnalytics.track('Feature Flag Evaluated',
             {
                 'feature_flag_key': evaluationDetails.key,
                 'value': evaluationDetails.value,
                 'variation_id': evaluationDetails.variationId,
-                'userId': evaluationDetails.user.identifier,
                 'user': evaluationDetails.user
             });
       }),
@@ -118,16 +135,43 @@ const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_
 <TabItem value="python" label="Python">
 ```python
 import segment.analytics as analytics
+import configcatclient
+from configcatclient.configcatoptions import ConfigCatOptions, Hooks
+import uuid
 
 analytics.write_key = '#YOUR_SEGMENT_WRITE_KEY#'
 
 def on_flag_evaluated(evaluation_details):
-    analytics.track(evaluation_details.user.get_identifier(), 'Feature Flag Evaluated',  {
-        'feature_flag_key': evaluation_details.key,
-        'value': evaluation_details.value,
-        'variation_id': evaluation_details.variationId,
-        'user': evaluation_details.user
-    })
+    if evaluation_details.user is not None:
+        analytics.track(user_id=evaluation_details.user.get_identifier(), 
+            event='Feature Flag Evaluated',  
+            properties={
+                'feature_flag_key': evaluation_details.key,
+                'value': evaluation_details.value,
+                'variation_id': evaluation_details.variation_id,
+                'user': vars(evaluation_details.user)
+            }, 
+            context={
+                'integration': {
+                    'name': 'configcat',
+                    'version': '1.0.0'
+                }
+            }
+        )
+    else:
+        analytics.track(anonymous_id=str(uuid.uuid4()), # Or any other kind of random anonymus id.
+        event='Feature Flag Evaluated',  
+        properties={
+            'feature_flag_key': evaluation_details.key,
+            'value': evaluation_details.value,
+            'variation_id': evaluation_details.variation_id
+        }, 
+        context={
+            'integration': {
+                'name': 'configcat',
+                'version': '1.0.0'
+            }
+        })
     pass
 
 client = configcatclient.get('#YOUR_SDK_KEY#',
@@ -140,22 +184,50 @@ client = configcatclient.get('#YOUR_SDK_KEY#',
 
 <TabItem value="ruby" label="Ruby">
 ```ruby
+require 'configcat'
+require 'segment/analytics'
+require 'securerandom'
+
 Analytics = Segment::Analytics.new({
     write_key: '#YOUR-SEGMENT-WRITE-KEY#',
     on_error: Proc.new { |status, msg| print msg }
 })
 
-def on_flag_evaluated(evaluation_details):
-    Analytics.track(
-        user_id: evaluation_details.user.get_identifier(),
-        event: "Feature Flag Evaluated",  
-        properties: {
-            'feature_flag_key': evaluation_details.key,
-            'value': evaluation_details.value,
-            'variation_id': evaluation_details.variationId,
-            'user': evaluation_details.user
-        }
-    )
+def on_flag_evaluated(evaluation_details)
+    if evaluation_details.user
+        Analytics.track(
+            user_id: evaluation_details.user.get_identifier(),
+            event: "Feature Flag Evaluated",  
+            properties: {
+                feature_flag_key: evaluation_details.key,
+                value: evaluation_details.value,
+                variation_id: evaluation_details.variation_id,
+                user: evaluation_details.user
+            },
+            context: {
+                integration: {
+                    name: 'configcat',
+                    version: '1.0.0'
+                }
+            }
+        )
+    else
+        Analytics.track(
+            anonymous_id: SecureRandom.uuid, # Or any other kind of random anonymus id.
+            event: "Feature Flag Evaluated",  
+            properties: {
+                feature_flag_key: evaluation_details.key,
+                value: evaluation_details.value,
+                variation_id: evaluation_details.variation_id
+            },
+            context: {
+                integration: {
+                    name: 'configcat',
+                    version: '1.0.0'
+                }
+            }
+        )
+    end
 end
 
 client = ConfigCat.get("#YOUR-SDK-KEY#",
@@ -168,38 +240,101 @@ client = ConfigCat.get("#YOUR-SDK-KEY#",
 
 <TabItem value="go" label="Go">
 ```go
+import (
+	configcat "github.com/configcat/go-sdk/v9"
+	"github.com/google/uuid"
+	"github.com/segmentio/analytics-go"
+)
+
 analyticsClient := analytics.New("#YOUR_SEGMENT_WRITE_KEY#")
 
 configCatClient := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR_SDK_KEY#",
-    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
-        client.Enqueue(analytics.Track{
-            UserId: details.Data.User.(*UserData).Identifier,
-            Event:  "Feature Flag Evaluated",
-            Properties: analytics.NewProperties().
-                Set("feature_flag_key", details.Data.Key).
-                Set("value", details.Value).
-                Set("variation_id", details.Data.VariationID),
-                Set("user", details.Data.User.(*UserData)),
-        })
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *configcat.EvaluationDetails) {
+        if details.Data.User != nil {
+            analyticsClient.Enqueue(analytics.Track{
+                UserId: details.Data.User.(*configcat.UserData).Identifier,
+                Event:  "Feature Flag Evaluated",
+                Properties: analytics.NewProperties().
+                    Set("feature_flag_key", details.Data.Key).
+                    Set("value", details.Value).
+                    Set("variation_id", details.Data.VariationID).
+                    Set("user", details.Data.User.(*configcat.UserData)),
+                Context: &analytics.Context{
+                    Extra: map[string]interface{}{
+                        "integration": map[string]interface{}{
+                            "name":    "configcat",
+                            "version": "1.0.0",
+                        },
+                    },
+                },
+            })
+        } else {
+            analyticsClient.Enqueue(analytics.Track{
+                AnonymousId: uuid.New().String(), // Or any other kind of random anonymus id.
+                Event:       "Feature Flag Evaluated",
+                Properties: analytics.NewProperties().
+                    Set("feature_flag_key", details.Data.Key).
+                    Set("value", details.Value).
+                    Set("variation_id", details.Data.VariationID),
+                Context: &analytics.Context{
+                    Extra: map[string]interface{}{
+                        "integration": map[string]interface{}{
+                            "name":    "configcat",
+                            "version": "1.0.0",
+                        },
+                    },
+                },
+            })
+        }
     }}})
 ```
 </TabItem>
 
 <TabItem value="java" label="Java">
 ```java
+import com.configcat.ConfigCatClient;
+import com.configcat.User;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.messages.TrackMessage;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+//...
+
 Analytics analytics = Analytics.builder("#YOUR_SEGMENT_WRITE_KEY#").build();
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
     options.hooks().addOnFlagEvaluated(details -> {
-        analytics.enqueue(TrackMessage.builder("Feature Flag Evaluated")
-            .userId(details.getUser().getIdentifier())
-            .properties(ImmutableMap.builder()
-                .put("feature_flag_key", details.getKey())
-                .put("value", details.getValue())
-                .put("variation_id", details.getVariationId())
-                .put("user", details.getUser())
-                .build()
-            )
-        );
+        
+        Map<String, String> contextMapIntegrations = new HashMap<>();
+        contextMapIntegrations.put("name", "configcat");
+        contextMapIntegrations.put("version", "1.0.0");
+
+        Map<String, Object> contextMap = new HashMap<>();
+        contextMap.put("integration", contextMapIntegrations);
+
+        Map<String, Object> propertiesMap = new HashMap<>();
+        propertiesMap.put("feature_flag_key", details.getKey());
+        propertiesMap.put("value", details.getValue());
+        propertiesMap.put("variation_id", details.getVariationId());
+
+        if (details.getUser() != null){
+            propertiesMap.put("user", details.getUser());
+
+            analytics.enqueue(TrackMessage.builder("Feature Flag Evaluated")
+                    .userId(details.getUser().getIdentifier())
+                    .properties(propertiesMap)
+                    .context(contextMap)
+            );
+        } else {
+            analytics.enqueue(TrackMessage.builder("Feature Flag Evaluated")
+                    .anonymousId(UUID.randomUUID().toString())
+                    .properties(propertiesMap)
+                    .context(contextMap)
+            );
+        }
     });
 });
 ```
@@ -207,16 +342,30 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 
 <TabItem value="android" label="Android">
 ```java
-AndroidAnalyticsKt.Analytics("#YOUR_SEGMENT_WRITE_KEY#",  getApplicationContext(), configuration -> {});
+Analytics analytics = new Analytics.Builder(getApplicationContext(), "#YOUR_SEGMENT_WRITE_KEY#").build();
+Analytics.setSingletonInstance(analytics);
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.cache(new SharedPreferencesCache(getApplicationContext()));
     options.hooks().addOnFlagEvaluated(details -> {
-        analytics.track("Feature Flag Evaluated", Builders.buildJsonObject(o -> {
-            o.put("userId", details.getUser().getIdentifier())
-            .put("feature_flag_key", details.getKey())
-            .put("value", details.getValue())
-            .put("variation_id", details.getVariationId())
-            .put("user", details.getUser())
-        }));
+        Properties properties = new Properties()
+            .putValue("feature_flag_key", details.getKey())
+            .putValue("value", details.getValue())
+            .putValue("variation_id", details.getVariationId());
+
+        Map<String, Object> contextMapIntegrations = new HashMap<>();
+        contextMapIntegrations.put("name", "configcat");
+        contextMapIntegrations.put("version", "1.0.0");
+
+        Options optionsAnalytics = new Options().putContext("integration", contextMapIntegrations);
+
+        if (details.getUser() != null){
+            analytics.identify(details.getUser().getIdentifier());
+            properties.putValue("user", details.getUser());
+        } else {
+            analytics.identify(new Traits().putValue("anonymousId", UUID.randomUUID().toString()));
+        }
+
+        analytics.track("Feature Flag Evaluated", properties, optionsAnalytics);
     });
 });
 ```
@@ -224,25 +373,32 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 
 <TabItem value="ios" label="Swift (iOS)">
 ```swift
-struct TrackProperties: Codable {
-    let feature_flag_key: String
-    let value: Any
-    let variation_id: String
-    let user: ConfigCatUser?
-    let userId: String
-}
+import ConfigCat
+import Segment
 
 let configuration = Configuration(writeKey: "#YOUR_SEGMENT_WRITE_KEY#")
 let analytics = Analytics(configuration: configuration)
+analytics.add { ev in
+    var event = ev
+    if var ctx = ev?.context?.dictionaryValue {
+        ctx[keyPath: "integration.name"] = "configcat"
+        ctx[keyPath: "integration.version"] = "1.0.0"
+        event?.context = try? JSON(ctx)
+    }
+    return event
+}
 let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
     options.hooks.addOnFlagEvaluated { details in
-        analytics.track(name: "Feature Flag Evaluated", properties: TrackProperties(
-            feature_flag_key: details.key,
-            value: details.value,
-            variation_id: details.variationId,
-            userId: details.user.identifier
-            user: details.user
-        ))
+        if let user = details.user {
+            analytics.identify(userId: user.identifier)
+        }
+
+        analytics.track(name: "Feature Flag Evaluated", properties: [
+            "feature_flag_key": details.key,
+            "value": details.value,
+            "variation_id": details.variationId ?? "",
+            "user": details.user?.description ?? ""
+        ])
     }
 }
 ```
@@ -253,11 +409,10 @@ While our documentation primarily provides code examples for languages that Twil
 you can integrate with other languages by sending an event to Twilio Segment with a third-party SDK or with using the <a href="https://segment.com/docs/connections/sources/catalog/libraries/server/http-api/" target="_blank" rel="noopener noreferrer">Segment's HTTP API source</a>. 
 
 1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
-2. **Send an event to Twilio Segment** using the `Feature Flag Evaluated` event name. Include the following event properties:
+2. **Send an event to Twilio Segment** using the `Feature Flag Evaluated` event name. If the feature flag was evaluated with a user object, set the userId for the event, otherwise set a random generated string as the anonymusId. Include the following event properties:
     - `feature_flag_key`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails.
     - `value`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
     - `variation_id`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
-    - `userId` (optional): in case you are using the tracking in a backend component you have to send the `userId` property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
     - `user` (optional): the user object used during feature flag evaluation.
 </TabItem>
 
