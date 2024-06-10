@@ -314,7 +314,7 @@ ConfigCat->ClearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `GetValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache, then all `GetValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -332,7 +332,7 @@ Available options:
 
 ### Lazy Loading
 
-When calling `getValue()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
+When calling `getValue()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `getValue()` will return the setting value after the cache is updated.
 
 <img className="unreal-settings-polling-mode-lazy zoomable" src="/docs/assets/unreal/settings-polling-mode-lazy.png" alt="Unreal Engine Polling Mode Lazy" />
 

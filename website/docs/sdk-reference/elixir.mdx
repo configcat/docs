@@ -244,7 +244,7 @@ ConfigCat.clear_default_user()
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache, then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -269,7 +269,7 @@ Available options:
 
 ### Lazy loading
 
-When calling `get_value()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value()` will return the setting value after the cache is updated.
+When calling `get_value()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `get_value()` will return the setting value after the cache is updated.
 
 Use `cache_refresh_interval_seconds` option parameter to set cache lifetime.
 

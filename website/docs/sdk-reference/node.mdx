@@ -390,7 +390,7 @@ configCatClient.clearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache then all `getValueAsync()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache, then all `getValueAsync()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -418,7 +418,7 @@ Available options (in addition to the [common ones](#creating-the-configcat-clie
 
 ### Lazy loading
 
-When calling `getValueAsync()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `getValueAsync()` will return the setting value after the cache is updated.
+When calling `getValueAsync()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `getValueAsync()` will return the setting value after the cache is updated.
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
