@@ -409,7 +409,7 @@ While our documentation primarily provides code examples for languages that Twil
 you can integrate with other languages by sending an event to Twilio Segment with a third-party SDK or with using the <a href="https://segment.com/docs/connections/sources/catalog/libraries/server/http-api/" target="_blank" rel="noopener noreferrer">Segment's HTTP API source</a>. 
 
 1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
-2. **Send an event to Twilio Segment** using the `Feature Flag Evaluated` event name. If the feature flag was evaluated with a user object, set the userId for the event, otherwise set a random generated string as the anonymusId. Include the following event properties:
+2. **Send an event to Twilio Segment** using the `Feature Flag Evaluated` event name. If the feature flag was evaluated with a user object, set the event's `userId` property to the user object's identifier. Otherwise, set the `anonymousId` property to a random generated string. Also, include the following event properties:
     - `feature_flag_key`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails.
     - `value`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
     - `variation_id`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
