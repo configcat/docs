@@ -421,7 +421,7 @@ client.forceRefresh();
 
 With the following hooks you can subscribe to particular events fired by the SDK:
 
-- `onClientReady(ClientReadyState)`: This event is sent when the SDK reaches the ready state. If the SDK is set up to use lazy loading or manual polling, it's considered ready right after syncing up with the config cache.
+- `onClientReady(ClientCacheState)`: This event is sent when the SDK reaches the ready state. If the SDK is set up to use lazy loading or manual polling, it's considered ready right after syncing up with the config cache.
   If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeSeconds` is reached.
 
 - `onConfigChanged(Map<String, Setting>)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
