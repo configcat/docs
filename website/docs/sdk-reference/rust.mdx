@@ -624,11 +624,11 @@ This allows you to seamlessly integrate ConfigCat with your existing caching inf
 struct CustomCache {}
 
 impl ConfigCache for CustomCache {
-    fn read(&self, _: &str) -> Option<String> {
+    fn read(&self, key: &str) -> Option<String> {
         // here you have to return with the cached value
     }
 
-    fn write(&self, _: &str, _: &str) {
+    fn write(&self, key: &str, value: &str) {
         // here you have to store the new value in the cache
     }
 }
