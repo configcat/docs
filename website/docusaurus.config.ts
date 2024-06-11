@@ -294,7 +294,8 @@ const config: Config = {
         'objectivec',
         'protobuf',
         'json',
-        'bash'
+        'bash',
+        'rust',
       ],
     },
     algolia: {
