@@ -301,6 +301,8 @@ You can also remove the default user by doing the following:
 client.clear_default_user();
 ```
 
+## Polling Modes
+
 The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache, then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 
 When no polling mode is specified upon SDK initialization, `AutoPoll` will be selected with a `60s` poll interval.
