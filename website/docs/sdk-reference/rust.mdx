@@ -49,7 +49,7 @@ use configcat::*;
 async fn main() {
     let client = Client::new("#YOUR-SDK-KEY#").unwrap();
 
-    let is_awesome_feature_enabled = client.get_value("isAwesomeFeatureEnabled", None, false).await;
+    let is_awesome_feature_enabled = client.get_value("isAwesomeFeatureEnabled", false, None).await;
     
     if is_awesome_feature_enabled {
         do_the_new_thing();
@@ -111,14 +111,14 @@ If you want to use multiple SDK Keys in the same application, create only one _C
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 | `default`      | **REQUIRED.** This value will be returned in case of an error.                                               |
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 
 ```rust
 let is_awesome_feature_enabled = client.get_value(
     "isAwesomeFeatureEnabled", // Setting Key
-    Some(User::new("#UNIQUE-USER-IDENTIFIER#")), // Optional User Object
-    false // Default value
+    false, // Default value
+    Some(User::new("#UNIQUE-USER-IDENTIFIER#")) // Optional User Object
 ).await;
 ```
 
@@ -139,16 +139,16 @@ that matches the type of the feature flag or setting you are evaluating. Please 
 If you specify an allowed type but it mismatches the setting kind, an error message will be logged and `default` will be returned.
 
 When relying on type inference and not explicitly specifying the type parameter, be mindful of potential type mismatch issues, especially with number types.
-For example, `client.get_value("keyOfMyDecimalSetting", None, 0).await` will return `default` (`0`) instead of the actual value of the decimal setting because
-the compiler infers the type as `i64` instead of `f64`, that is, the call is equivalent to `client.get_value::<i64>("keyOfMyDecimalSetting", None, 0).await`,
+For example, `client.get_value("keyOfMyDecimalSetting", 0, None).await` will return `default` (`0`) instead of the actual value of the decimal setting because
+the compiler infers the type as `i64` instead of `f64`, that is, the call is equivalent to `client.get_value::<i64>("keyOfMyDecimalSetting", 0, None).await`,
 which is a type mismatch.
 
 To correctly evaluate a decimal setting, you should use:
 
 ```rust
-let value = client.get_value("keyOfMyDecimalSetting", None, 0.0).await;
+let value = client.get_value("keyOfMyDecimalSetting", 0.0, None).await;
 // -or-
-let value = client.get_value("keyOfMyDecimalSetting", None, 0_f64).await;
+let value = client.get_value("keyOfMyDecimalSetting", 0_f64, None).await;
 ```
 
 ## Anatomy of `get_value_details()`
@@ -158,12 +158,12 @@ let value = client.get_value("keyOfMyDecimalSetting", None, 0_f64).await;
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                           |
-| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 | `default`      | **REQUIRED.** This value will be returned in case of an error.        
+| `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
 
 ```rust
 let user = User::new("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
-let details = client.get_value_details("keyOfMyFeatureFlag", Some(user), false).await;
+let details = client.get_value_details("keyOfMyFeatureFlag", false, Some(user)).await;
 ```
 
 :::caution
@@ -278,7 +278,7 @@ let client = Client::builder("#YOUR-SDK-KEY#")
     .unwrap();
 
 // The default user will be used in the evaluation process.
-let value = client.get_value("keyOfMyFeatureFlag", None, false).await;
+let value = client.get_value("keyOfMyFeatureFlag", false, None).await;
 ```
 
 When a `user` parameter is passed to the evaluation methods, it takes precedence over the default user.
@@ -292,7 +292,7 @@ let client = Client::builder("#YOUR-SDK-KEY#")
 let other_user = User::new("brian@example.com");
 
 // other_user will be used in the evaluation process.
-let value = client.get_value("keyOfMyFeatureFlag", Some(other_user), false).await;
+let value = client.get_value("keyOfMyFeatureFlag", false, Some(other_user)).await;
 ```
 
 You can also remove the default user by doing the following:
