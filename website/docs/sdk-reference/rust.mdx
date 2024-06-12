@@ -253,7 +253,7 @@ but some of them also support other types of values. It depends on the comparato
 
 It's possible to set a default User Object that will be used on feature flag and setting evaluation. It can be useful when your application has a single user only or rarely switches users.
 
-You can set the default User Object on SDK initialization:
+You can set the default User Object either on SDK initialization:
 
 ```rust
 let client = Client::builder("#YOUR-SDK-KEY#")
@@ -261,6 +261,12 @@ let client = Client::builder("#YOUR-SDK-KEY#")
     .default_user(User::new("john@example.com"))
     .build()
     .unwrap();
+```
+
+...or using the `set_default_user()` method of the `configcat::Client`:
+
+```csharp
+client.set_default_user(User::new("john@example.com"));
 ```
 
 Whenever the evaluation methods like `get_value()`, `get_value_details()`, etc. are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
@@ -289,14 +295,23 @@ let other_user = User::new("brian@example.com");
 let value = client.get_value("keyOfMyFeatureFlag", Some(other_user), false).await;
 ```
 
+You can also remove the default user by doing the following:
+
+```csharp
+client.clear_default_user();
+```
+
 ## Polling Modes
 
 The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache, then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+
+When no polling mode is specified upon SDK initialization, `AutoPoll` will be selected with a `60s` poll interval.
+
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
 
-The _ConfigCat SDK_ downloads and stores the latest values automatically every 60 seconds.
+The _ConfigCat SDK_ downloads and stores the latest values automatically. The `Duration` parameter specifies how frequent the config JSON downloads will happen.
 
 ```rust
 let client = Client::builder("#YOUR-SDK-KEY#")
@@ -309,6 +324,7 @@ let client = Client::builder("#YOUR-SDK-KEY#")
 ### Lazy loading
 
 When calling `get_value()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `get_value()` will return the setting value after the cache is updated.
+The `Duration` parameter specifies after how much time the cache is considered stale.
 
 ```rust
 let client = Client::builder("#YOUR-SDK-KEY#")

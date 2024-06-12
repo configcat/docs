@@ -296,6 +296,7 @@ const config: Config = {
         'json',
         'bash',
         'rust',
+        'toml',
       ],
     },
     algolia: {
