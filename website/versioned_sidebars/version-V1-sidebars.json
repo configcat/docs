@@ -210,6 +210,11 @@
         },
         {
           "type": "doc",
+          "id": "integrations/segment",
+          "label": "Twilio Segment"
+        },
+        {
+          "type": "doc",
           "id": "integrations/google-analytics",
           "label": "Google Analytics"
         },

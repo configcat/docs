@@ -98,6 +98,7 @@ const features = [
       { url: 'integrations/terraform', title: 'Terraform' },
       { url: 'integrations/amplitude', title: 'Amplitude' },
       { url: 'integrations/mixpanel', title: 'Mixpanel' },
+      { url: 'integrations/segment', title: 'Twilio Segment' },
       { url: 'integrations/google-analytics', title: 'Google Analytics' },
       { url: 'integrations/zoho-flow', title: 'Zoho Flow' },
       { url: 'integrations/vscode', title: 'Visual Studio Code' },
