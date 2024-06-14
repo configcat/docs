@@ -615,17 +615,17 @@ let user = User::new("#UNIQUE-USER-IDENTIFIER#");
 let values_with_user = await client.get_all_values(Some(user)).await;
 ```
 
-## `get_all_details()`
+## `get_all_value_details()`
 
 Evaluates and returns the values along with evaluation details of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
 ```rust
 let client = Client::new("#YOUR-SDK-KEY#").unwrap();
-let details = await client.get_all_details(None).await;
+let details = await client.get_all_value_details(None).await;
 
 // invoke with User Object
 let user = User::new("#UNIQUE-USER-IDENTIFIER#");
-let details_with_user = await client.get_all_details(Some(user)).await;
+let details_with_user = await client.get_all_value_details(Some(user)).await;
 ```
 
 ## Cache
