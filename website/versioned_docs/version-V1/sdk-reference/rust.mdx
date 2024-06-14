@@ -4,6 +4,7 @@ title: Rust SDK Reference
 description: ConfigCat Rust SDK Reference. This is a step-by-step guide on how to use feature flags in your Rust applications.
 ---
 
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/rust-sdk.svg?style=social)](https://github.com/configcat/rust-sdk/stargazers)
 [![Build Status](https://github.com/configcat/rust-sdk/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/configcat/rust-sdk/actions/workflows/ci.yml)
 [![crates.io](https://img.shields.io/crates/v/configcat.svg?logo=rust)](https://crates.io/crates/configcat)
 [![docs.rs](https://img.shields.io/badge/docs.rs-configcat-66c2a5?logo=docs.rs)](https://docs.rs/configcat)
@@ -304,10 +305,9 @@ client.clear_default_user();
 ## Polling Modes
 
 The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache, then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+[More about polling modes & caching](../advanced/caching.mdx).
 
 When no polling mode is specified upon SDK initialization, `AutoPoll` will be selected with a `60s` poll interval.
-
-[More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
 
