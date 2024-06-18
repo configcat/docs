@@ -77,6 +77,7 @@ const features = [
       { url: 'sdk-reference/community/laravel', title: 'PHP (Laravel)' },
       { url: 'sdk-reference/python', title: 'Python' },
       { url: 'sdk-reference/ruby', title: 'Ruby' },
+      { url: 'sdk-reference/rust', title: 'Rust' },
       { url: 'sdk-reference/ios', title: 'Swift (iOS)' },
     ],
   },

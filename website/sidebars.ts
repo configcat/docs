@@ -217,6 +217,7 @@ const sidebars: SidebarsConfig = {
         { type: 'doc', id: 'sdk-reference/php', label: 'PHP' },
         { type: 'doc', id: 'sdk-reference/python', label: 'Python' },
         { type: 'doc', id: 'sdk-reference/ruby', label: 'Ruby' },
+        { type: 'doc', id: 'sdk-reference/rust', label: 'Rust' },
         { type: 'doc', id: 'sdk-reference/ios', label: 'Swift (iOS)' },
         {
           'Community Maintained': [

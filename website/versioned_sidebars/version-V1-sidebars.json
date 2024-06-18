@@ -357,6 +357,11 @@
         },
         {
           "type": "doc",
+          "id": "sdk-reference/rust",
+          "label": "Rust"
+        },
+        {
+          "type": "doc",
           "id": "sdk-reference/ios",
           "label": "Swift (iOS)"
         },

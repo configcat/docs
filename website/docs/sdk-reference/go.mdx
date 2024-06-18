@@ -85,7 +85,7 @@ Available optional properties:
 | ------------------ | -------------------------- | ------------ |
 | `SDKKey`           | `string`                   | SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_. |
 | `DataGovernance`   | `configcat.DataGovernance` | Defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly`. |
-| `BaseUrl`          | `string`                   | _Obsolete_ Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
+| `BaseUrl`          | `string`                   | Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations. |
 | `Cache `           | `ConfigCache`              | Sets a custom cache implementation for the client. [See below](#custom-cache). |
 | `NoWaitForRefresh` | `bool`                     | Defaults to `false`. When it's `true` the typed get methods (`Get[TYPE]Value()`) will never wait for a configuration refresh to complete before returning. When it's `false` and `PollingMode` is `AutoPoll`, the first request may block, when `PollingMode` is `Lazy`, any request may block. |
 | `HttpTimeout`      | `time.Duration`            | Sets the maximum wait time for a HTTP response. [More about the HTTP timeout](#http-timeout) |
