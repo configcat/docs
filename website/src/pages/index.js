@@ -56,7 +56,7 @@ const features = [
     ],
   },
   {
-    title: 'SDK references',
+    title: 'SDK references', // This list should be in alphabetical order
     description: <>Let's do some coding.</>,
     links: [
       { url: 'sdk-reference/dotnet', title: '.NET, .NET Core, Xamarin' },
@@ -82,7 +82,7 @@ const features = [
     ],
   },
   {
-    title: 'Integrations',
+    title: 'Integrations', // This list should be in alphabetical order
     description: <>Get connected to increase productivity.</>,
     links: [
       { url: 'integrations/amplitude', title: 'Amplitude' },
