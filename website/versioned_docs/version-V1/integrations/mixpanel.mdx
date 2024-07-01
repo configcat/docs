@@ -157,23 +157,25 @@ client = ConfigCat.get("#YOUR-SDK-KEY#",
 
 <TabItem value="go" label="Go">
 ```go
+mp := mixpanel.NewApiClient("#YOUR-MIXPANEL-PROJECT-TOKEN#")
+
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
     Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
         // Send an `$experiment_started` event.
-        err := mixpanel.Track(ctx, []*mixpanel.Event{
-            mixpanel.NewEvent("$experiment_started", details.Data.User.(*UserData).Identifier, map[string]any{
+        _ = mp.Track(context.Background(), []*mixpanel.Event{
+            mp.NewEvent("$experiment_started", details.Data.User.(*configcat.UserData).Identifier, map[string]any{
                 "Experiment name": details.Data.Key,
-                "Variant name": details.Value,
-                "Variation ID": details.Data.VariationID,
+                "Variant name":    details.Value,
+                "Variation ID":    details.Data.VariationID,
             }),
         })
 
         // Use the identify API.
-        err := mixpanel.PeopleSet(ctx,
+        _ = mp.PeopleSet(context.Background(),
             []*mixpanel.PeopleProperties{
-                mixpanel.NewPeopleProperties(details.Data.User.(*UserData).Identifier, map[string]any{
+                mixpanel.NewPeopleProperties(details.Data.User.(*configcat.UserData).Identifier, map[string]any{
                     "configcat_" + details.Data.Key: details.Value,
-                })
+                }),
             },
         )
     }}})
