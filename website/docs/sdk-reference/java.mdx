@@ -123,6 +123,7 @@ These are the available options on the `Options` class:
 | `defaultUser(User)`                                           | Optional, sets default user. [More about default user](#default-user).                                                                                                                                                                                                                             |
 | `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                  |
 | `hooks()`                                                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
+| `logFilter(LogFilterFunction)`                                | Optional, used to set custom log filter implementation. [More about log filter](#log-filter).                                                                                                                                                                                           |
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
@@ -870,6 +871,19 @@ INFO com.configcat.ConfigCatClient - [5000] Evaluating 'isPOCFeatureEnabled' for
 You have the flexibility to use any slf4j implementation for logging with ConfigCat. However, some logger implementations may not display debug level messages by default. In these cases, you simply need to adjust the logger configuration to receive all log messages from the ConfigCat SDK.
 
 Examples fo <a href="https://github.com/configcat/java-sdk/blob/master/samples/console/src/main/resources/simplelogger.properties" target="_blank">slf4j-simple</a> and <a href="https://github.com/configcat/java-sdk/blob/master/samples/web/src/main/resources/logback.xml" target="_blank">logback</a> are available under the [Sample Apps](#sample-apps) section.
+
+### Log Filter
+
+You can set a custom log filter option by implementing the `LogFilterFunction` interface. The `apply` method provide the options to filter by `logLevel`, `eventId`, `message` or `exception`.
+If the `apply` method return with `true`, the event will be logged.
+
+```java
+    //Filter out the logs with the eventId 1001.
+    LogFilterFunction filterLogFunction = ( LogLevel logLevel, int eventId, String message, Throwable exception) -> eventId != 1001;
+
+    ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> options.logFilter(filterLogFunction));
+```
+> A complex or a badly implemented log filter can affect the SDK efficiency.
 
 ## Sample Apps
 
