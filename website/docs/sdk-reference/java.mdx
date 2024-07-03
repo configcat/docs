@@ -883,7 +883,7 @@ If the `apply` method returns with `true`, the event will be logged, otherwise i
 
     ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> options.logFilter(filterLogFunction));
 ```
-> Please make sure that your log filter logic doesn't perform heavy computation and dosen't block the executing thread. A complex or incorrectly implemented log filter can negatively affect the performance of the SDK.
+> Please make sure that your log filter logic doesn't perform heavy computation and doesn't block the executing thread. A complex or incorrectly implemented log filter can degrade the performance of the SDK.
 
 ## Sample Apps
 
