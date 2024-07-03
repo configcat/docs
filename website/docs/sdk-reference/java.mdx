@@ -123,7 +123,7 @@ These are the available options on the `Options` class:
 | `defaultUser(User)`                                           | Optional, sets default user. [More about default user](#default-user).                                                                                                                                                                                                                             |
 | `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                  |
 | `hooks()`                                                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
-| `logFilter(LogFilterFunction)`                                | Optional, used to set custom log filter implementation. [More about log filter](#log-filter).                                                                                                                                                                                           |
+| `logFilter(LogFilterFunction)`                                | Optional, sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                             |
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
@@ -872,18 +872,18 @@ You have the flexibility to use any slf4j implementation for logging with Config
 
 Examples fo <a href="https://github.com/configcat/java-sdk/blob/master/samples/console/src/main/resources/simplelogger.properties" target="_blank">slf4j-simple</a> and <a href="https://github.com/configcat/java-sdk/blob/master/samples/web/src/main/resources/logback.xml" target="_blank">logback</a> are available under the [Sample Apps](#sample-apps) section.
 
-### Log Filter
+### Log Filtering
 
-You can set a custom log filter option by implementing the `LogFilterFunction` interface. The `apply` method provide the options to filter by `logLevel`, `eventId`, `message` or `exception`.
-If the `apply` method return with `true`, the event will be logged.
+You can define a custom log filter option by implementing the `LogFilterFunction` interface. The `apply` method will be called by the _ConfigCat SDK_  each time a log event occurs (and the event passes the minimum log level specified by the `logLevel` option). That is, the `apply` method allows you to filter log events by `logLevel`, `eventId`, `message` or `exception`.
+If the `apply` method returns with `true`, the event will be logged, otherwise it will be skipped.
 
 ```java
-    //Filter out the logs with the eventId 1001.
+    // Filter out events with id 1001 from the log.
     LogFilterFunction filterLogFunction = ( LogLevel logLevel, int eventId, String message, Throwable exception) -> eventId != 1001;
 
     ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> options.logFilter(filterLogFunction));
 ```
-> A complex or a badly implemented log filter can affect the SDK efficiency.
+> Please make sure that your log filter logic doesn't perform heavy computation and dosen't block the executing thread. A complex or incorrectly implemented log filter can negatively affect the performance of the SDK.
 
 ## Sample Apps
 
