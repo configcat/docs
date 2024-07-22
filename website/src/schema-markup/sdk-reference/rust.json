@@ -1,0 +1,60 @@
+{
+    "@context": "https://schema.org/",
+    "@type": "HowTo",
+    "name": "How to use feature flags in Rust?",
+    "description": "How to use feature flags in Rust using ConfigCat Feature Flags.",
+    "image": "https://configcat.com/images/shared/home.png",
+    "totalTime": "PT10M",
+    "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "USD",
+        "value": "0"
+    },
+    "supply": {
+        "@type": "HowToSupply",
+        "name": "ConfigCat",
+        "image": "https://configcat.com/images/shared/home.png",
+        "url": "https://configcat.com"
+    },
+    "tool": {
+        "@type": "HowToTool",
+        "name": "ConfigCat Feature Flags - https://configcat.com"
+    },
+    "step": [
+        {
+            "@type": "HowToStep",
+            "text": "Sign up for a free ConfigCat account",
+            "image": "https://configcat.com/images/shared/home.png",
+            "name": "Registration",
+            "url": "https://app.configcat.com/auth/signup"
+        },
+        {
+            "@type": "HowToStep",
+            "text": "Install the package",
+            "image": "https://configcat.com/images/shared/home.png",
+            "name": "Installation",
+            "url": "https://configcat.com/docs/sdk-reference/rust/#1-install-the-package"
+        },
+        {
+            "@type": "HowToStep",
+            "text": "Import the configcat module to your application",
+            "image": "https://configcat.com/images/shared/home.png",
+            "name": "Import",
+            "url": "https://configcat.com/docs/sdk-reference/rust/#2-import-the-configcat-module-to-your-application"
+        },
+        {
+            "@type": "HowToStep",
+            "text": "Create the ConfigCat client with your SDK Key",
+            "image": "https://configcat.com/images/shared/home.png",
+            "name": "Initialization",
+            "url": "https://configcat.com/docs/sdk-reference/rust/#3-create-the-configcat-client-with-your-sdk-key"
+        },
+        {
+            "@type": "HowToStep",
+            "text": "Get your setting value",
+            "image": "https://configcat.com/images/shared/home.png",
+            "name": "Evaluation",
+            "url": "https://configcat.com/docs/sdk-reference/rust/#4-get-your-setting-value"
+        }
+    ]
+}
