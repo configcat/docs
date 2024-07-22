@@ -58,6 +58,36 @@ To get the ID of a Config, follow the steps below:
 
 The scanner looks for feature flag and setting keys between quotation marks (`'` `"` `` ` ``) in the first place.
 
+:::info
+There's an option to extend the feature flag and setting key usage regex patterns with the `--usage-patterns` argument of the `scan` command. 
+
+```bash
+configcat scan <dir> --usage-patterns "<pattern1>" "<pattern2>"
+```
+
+Usage patterns can also be set via the `CONFIGCAT_USAGE_PATTERNS` environment variable as a comma delimited list.
+
+```bash
+export CONFIGCAT_USAGE_PATTERNS="<pattern1>,<pattern2>";
+```
+
+The regex pattern must include the `CC_KEY` placeholder that represents the actual feature flag or setting key in your code.
+For example, the following pattern allows the recognition of Ruby symbols as flag key usage:
+
+```bash
+configcat scan <dir> --usage-patterns ":CC_KEY"
+```
+
+It will match for the following usage:
+
+```ruby
+if FeatureFlags.enabled(:my_feature_key)
+  #...
+end
+```
+
+:::
+
 ### Aliases
 
 The found keys' context is examined for **aliases**, like variables, constants, or enumerations used to store these keys.
