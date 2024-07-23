@@ -874,12 +874,12 @@ Examples fo <a href="https://github.com/configcat/java-sdk/blob/master/samples/c
 
 ### Log Filtering
 
-You can define a custom log filter option by implementing the `LogFilterFunction` interface. The `apply` method will be called by the _ConfigCat SDK_  each time a log event occurs (and the event passes the minimum log level specified by the `logLevel` option). That is, the `apply` method allows you to filter log events by `logLevel`, `eventId`, `message` or `exception`.
+You can define a custom log filter option by implementing the `LogFilterFunction` interface. The `apply` method will be called by the _ConfigCat SDK_  each time a log event occurs (and the event passes the minimum log level specified by the `logLevel` option). That is, the `apply` method allows you to filter log events by `logLevel`, `eventId`, `message` or `exception`. The formatted message String can be obtained by calling `toString()` on the `message` parameter.
 If the `apply` method returns with `true`, the event will be logged, otherwise it will be skipped.
 
 ```java
     // Filter out events with id 1001 from the log.
-    LogFilterFunction filterLogFunction = ( LogLevel logLevel, int eventId, String message, Throwable exception) -> eventId != 1001;
+    LogFilterFunction filterLogFunction = ( LogLevel logLevel, int eventId, Object message, Throwable exception) -> eventId != 1001;
 
     ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> options.logFilter(filterLogFunction));
 ```
