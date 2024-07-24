@@ -366,6 +366,11 @@
           "label": "Swift (iOS)"
         },
         {
+          "type": "doc",
+          "id": "sdk-reference/unreal",
+          "label": "Unreal Engine"
+        },
+        {
           "Community Maintained": [
             {
               "type": "doc",
