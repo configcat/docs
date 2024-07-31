@@ -102,6 +102,7 @@ These are the available options on the `ConfigCatClientOptions` class:
 | Properties          | Description                                                                                                                                                                                                                                                                                       | Default                                                                                                                                |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `PollingMode`       | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                       | `PollingModes.AutoPoll()`                                                                                                              |
+| `ConfigFetcher`     | Optional, [`IConfigCatConfigFetcher`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/ConfigService/IConfigCatConfigFetcher.cs) instance for downloading a config.                                                                                                          | [`HttpClientConfigFetcher`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/ConfigService/HttpClientConfigFetcher.cs) |
 | `ConfigCache`       | Optional, [`IConfigCatCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/IConfigCatCache.cs) instance for caching the downloaded config.                                                                                                                         | [`InMemoryConfigCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/InMemoryConfigCache.cs)            |
 | `Logger`            | Optional, [`IConfigCatLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/IConfigCatLogger.cs) instance for tracing.                                                                                                                                           | [`ConsoleLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/ConsoleLogger.cs) (with WARNING level) |
 | `LogFilter`         | Optional, sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                                                   | `null` (none)                                                                                                                          |
@@ -891,6 +892,23 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 
 The default timeout is 30 seconds.
 
+## Platform compatibility
+
+The _ConfigCat SDK_ supports all the widespread .NET JIT runtimes, everything that implements [.NET Standard 2.0](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)+ should work.
+Starting with v9.3.0, it can also be used in applications that employ [trimmed self-contained](https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained) or various ahead-of-time (AOT) compilation deployment models.
+
+The SDK has been tested on the following .NET runtimes:
+* .NET Framework 4.5+
+* .NET Core 3.1, .NET 5+
+* .NET 8 Native AOT
+* UWP/WinUI (.NET MAUI 8)
+* Mono JIT (Unity 2021.3+)
+* Mono AOT (.NET MAUI 8 iOS)
+* Mono WebAssembly AOT/Emscripten (ASP.NET Core Blazor 8)
+* IL2CPP (Unity 2021.3+) - Unity WebGL also works but needs a bit of extra effort (see [sample scripts](https://github.com/configcat/.net-sdk/tree/master/samples/UnityWebGL))
+
+We strive to provide an extensive support for the various .NET runtimes and versions. If you still encounter an issue with the SDK on some platform, please open a [GitHub issue](https://github.com/configcat/.net-sdk/issues/new/choose) or contact support.
+
 ## Troubleshooting
 
 When the _ConfigCat SDK_ does not work as expected in your application, please check for the following potential problems:
@@ -925,7 +943,9 @@ When the _ConfigCat SDK_ does not work as expected in your application, please c
 Check out our Sample Applications how they use the _ConfigCat SDK_:
 
 - <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
-- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Web App</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Multi-page Web App (ASP.NET Core MVC)</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/BlazorWasm" target="_blank">Sample Single-page Web App (ASP.NET Core Blazor)</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/MAUI" target="_blank">Sample Mobile/Windows Store App (.NET MAUI)</a>
 
 ## Guides
 
