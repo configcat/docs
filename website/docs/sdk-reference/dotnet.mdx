@@ -104,11 +104,12 @@ These are the available options on the `ConfigCatClientOptions` class:
 | `PollingMode`       | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                       | `PollingModes.AutoPoll()`                                                                                                              |
 | `ConfigCache`       | Optional, [`IConfigCatCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/IConfigCatCache.cs) instance for caching the downloaded config.                                                                                                                         | [`InMemoryConfigCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/InMemoryConfigCache.cs)            |
 | `Logger`            | Optional, [`IConfigCatLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/IConfigCatLogger.cs) instance for tracing.                                                                                                                                           | [`ConsoleLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/ConsoleLogger.cs) (with WARNING level) |
+| `LogFilter`         | Optional, sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                                                   | `null` (none)                                                                                                                          |
 | `BaseUrl`           | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                         |                                                                                                                                        |
-| `HttpClientHandler` | Optional, `HttpClientHandler` to provide network credentials and proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy).                                                                                                                                               | built-in `HttpClientHandler`                                                                                                           |
+| `HttpClientHandler` | Optional, `HttpClientHandler` to provide network credentials and proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy).                                                                                                                                                | built-in `HttpClientHandler`                                                                                                           |
 | `HttpTimeout`       | Optional, sets the underlying HTTP client's timeout. [More about the HTTP timeout](#http-timeout).                                                                                                                                                                                                | `TimeSpan.FromSeconds(30)`                                                                                                             |
 | `FlagOverrides`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                  |                                                                                                                                        |
-| `DataGovernance`    | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly` | `Global`                                                                                                                               |
+| `DataGovernance`    | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly` | `Global`                                                                                                                           |
 | `DefaultUser`       | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                        | `null` (none)                                                                                                                          |
 | `Offline`           | Optional, determines whether the client should be initialized to offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                                  | `false`                                                                                                                                |
 
@@ -703,9 +704,29 @@ ConfigCat.INFO  [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":
   Returning 'True'.
 ```
 
+### Custom logger implementation
+
+By default, the SDK logs to [the console's standard output](https://learn.microsoft.com/en-us/dotnet/api/system.console.out) but it also allows you to inject any custom logger implementation via the `ConfigCatClientOptions.Logger` property.
+
 Sample code on how to create a basic file logger implementation for ConfigCat client: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/FileLoggerSample.cs" target="_blank">See Sample Code</a>
 
 Another sample which shows how to implement an adapter to [the built-in logging framework](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging) of .NET Core/.NET 5+: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/ASP.NETCore/WebApplication/Adapters/ConfigCatToMSLoggerAdapter.cs" target="_blank">See Sample Code</a>
+
+### Log Filtering
+
+You can define a custom log filter by providing a callback function via the `ConfigCatClientOptions.LogFilter` property. The callback will be called by the _ConfigCat SDK_  each time a log event occurs (and the event passes the minimum log level specified by the `IConfigCatLogger.LogLevel` property). That is, the callback allows you to filter log events by `level`, `eventId`, `message` or `exception`. The formatted message string can be obtained via `message.InvariantFormattedMessage`.
+If the callback function returns `true`, the event will be logged, otherwise it will be skipped.
+
+```cs
+// Filter out events with id 1001 from the log.
+LogFilterCallback logFilter = (LogLevel level, LogEventId eventId, ref FormattableLogMessage message, Exception? exception) => eventId != 1001;
+
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options => options.LogFilter = logFilter);
+```
+
+:::caution
+Please make sure that your log filter logic doesn't perform heavy computation and doesn't block the executing thread. A complex or incorrectly implemented log filter can degrade the performance of the SDK.
+:::
 
 ## `GetAllKeysAsync()`
 
