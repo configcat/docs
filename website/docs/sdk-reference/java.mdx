@@ -119,11 +119,11 @@ These are the available options on the `Options` class:
 | `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
 | `pollingMode(PollingMode)`                                    | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
 | `logLevel(LogLevel)`                                          | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging).                                                                                                                                                                                                      |
+| `logFilter(LogFilterFunction)`                                | Optional, sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                             |
 | `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
 | `defaultUser(User)`                                           | Optional, sets default user. [More about default user](#default-user).                                                                                                                                                                                                                             |
 | `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                  |
 | `hooks()`                                                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
-| `logFilter(LogFilterFunction)`                                | Optional, sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                             |
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
@@ -874,16 +874,19 @@ Examples fo <a href="https://github.com/configcat/java-sdk/blob/master/samples/c
 
 ### Log Filtering
 
-You can define a custom log filter option by implementing the `LogFilterFunction` interface. The `apply` method will be called by the _ConfigCat SDK_  each time a log event occurs (and the event passes the minimum log level specified by the `logLevel` option). That is, the `apply` method allows you to filter log events by `logLevel`, `eventId`, `message` or `exception`. The formatted message String can be obtained by calling `toString()` on the `message` parameter.
-If the `apply` method returns with `true`, the event will be logged, otherwise it will be skipped.
+You can define a custom log filter by implementing the `LogFilterFunction` interface. The `apply` method will be called by the _ConfigCat SDK_  each time a log event occurs (and the event passes the minimum log level specified by the `logLevel` option). That is, the `apply` method allows you to filter log events by `logLevel`, `eventId`, `message` or `exception`. The formatted message string can be obtained by calling `toString()` on the `message` parameter.
+If the `apply` method returns `true`, the event will be logged, otherwise it will be skipped.
 
 ```java
-    // Filter out events with id 1001 from the log.
-    LogFilterFunction filterLogFunction = ( LogLevel logLevel, int eventId, Object message, Throwable exception) -> eventId != 1001;
+// Filter out events with id 1001 from the log.
+LogFilterFunction filterLogFunction = ( LogLevel logLevel, int eventId, Object message, Throwable exception) -> eventId != 1001;
 
-    ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> options.logFilter(filterLogFunction));
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> options.logFilter(filterLogFunction));
 ```
-> Please make sure that your log filter logic doesn't perform heavy computation and doesn't block the executing thread. A complex or incorrectly implemented log filter can degrade the performance of the SDK.
+
+:::caution
+Please make sure that your log filter logic doesn't perform heavy computation and doesn't block the executing thread. A complex or incorrectly implemented log filter can degrade the performance of the SDK.
+:::
 
 ## Sample Apps
 
