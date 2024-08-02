@@ -894,18 +894,23 @@ The default timeout is 30 seconds.
 
 ## Platform compatibility
 
-The _ConfigCat SDK_ supports all the widespread .NET JIT runtimes, everything that implements [.NET Standard 2.0](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)+ should work.
+The _ConfigCat SDK_ supports all the widespread .NET JIT runtimes, everything that implements [.NET Standard 2.0](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)+ and supports TLS 1.2 should work.
 Starting with v9.3.0, it can also be used in applications that employ [trimmed self-contained](https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained) or various ahead-of-time (AOT) compilation deployment models.
 
-The SDK has been tested on the following .NET runtimes:
-* .NET Framework 4.5+
-* .NET Core 3.1, .NET 5+
-* .NET 8 Native AOT
-* UWP/WinUI (.NET MAUI 8)
-* Mono JIT (Unity 2021.3+)
-* Mono AOT (.NET MAUI 8 iOS)
-* Mono WebAssembly AOT/Emscripten (ASP.NET Core Blazor 8)
-* IL2CPP (Unity 2021.3+) - Unity WebGL also works but needs a bit of extra effort (see [sample scripts](https://github.com/configcat/.net-sdk/tree/master/samples/UnityWebGL))
+Based on our tests, the SDK is compatible with the following runtimes/deployment models:
+* .NET Framework 4.5+ (including Ngen)
+* .NET Core 3.1, .NET 5+ (including Crossgen2/ReadyToRun and Native AOT)
+* Mono 5.10+
+* .NET for Android (formerly known as Xamarin.Android)
+* .NET for iOS (formerly known as Xamarin.iOS)
+* Unity 2021.3+ (Mono JIT)
+* Unity 2021.3+ (IL2CPP)<sup><small>*</small></sup>
+* Universal Windows Platform 10.0.16299.0+ (.NET Native)<sup><small>**</small></sup>
+* WebAssembly (Mono AOT/Emscripten, also known as wasm-tools)
+
+<sup><small>*</small></sup>Unity WebGL also works but needs a bit of extra effort: you will need to enable WebGL compatibility by calling the `ConfigCatClient.PlatformCompatibilityOptions.EnableUnityWebGLCompatibility` method. For more details, see [Sample Scripts](https://github.com/configcat/.net-sdk/tree/master/samples/UnityWebGL).
+<br/>
+<sup><small>**</small></sup>To make the SDK work in Release builds on UWP, you will need to add `<Namespace Name="System.Text.Json.Serialization.Converters" Browse="Required All"/>` to your application's [.rd.xml](https://learn.microsoft.com/en-us/windows/uwp/dotnet-native/runtime-directives-rd-xml-configuration-file-reference) file. See also [this discussion](https://github.com/dotnet/runtime/issues/29912#issuecomment-638471351).
 
 We strive to provide an extensive support for the various .NET runtimes and versions. If you still encounter an issue with the SDK on some platform, please open a [GitHub issue](https://github.com/configcat/.net-sdk/issues/new/choose) or contact support.
 
