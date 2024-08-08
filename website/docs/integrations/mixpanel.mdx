@@ -160,7 +160,7 @@ client = ConfigCat.get("#YOUR-SDK-KEY#",
 mp := mixpanel.NewApiClient("#YOUR-MIXPANEL-PROJECT-TOKEN#")
 
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
-    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *configcat.EvaluationDetails) {
         // Send an `$experiment_started` event.
         _ = mp.Track(context.Background(), []*mixpanel.Event{
             mp.NewEvent("$experiment_started", details.Data.User.(*configcat.UserData).Identifier, map[string]any{
