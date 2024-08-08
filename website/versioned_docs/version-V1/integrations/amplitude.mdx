@@ -145,10 +145,10 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 <TabItem value="go" label="Go">
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
-    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *configcat.EvaluationDetails) {
          // Send an `$exposure` event.
          amplitude.Track(amplitude.Event{
-            UserID:    details.Data.User.(*UserData).Identifier,
+            UserID:    details.Data.User.(*configcat.UserData).Identifier,
             EventType: "$exposure",
             EventProperties: map[string]interface{}{
                "flag_key": details.Data.Key,
@@ -160,7 +160,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
          // Use the identify API.
          identifyObj := amplitude.Identify{}
          identifyObj.Set("configcat_" + details.Data.Key, details.Value)
-         amplitude.Identify(identifyObj, amplitude.EventOptions{UserID: details.Data.User.(*UserData).Identifier})
+         amplitude.Identify(identifyObj, amplitude.EventOptions{UserID: details.Data.User.(*configcat.UserData).Identifier})
     }}})
 ```
 </TabItem>

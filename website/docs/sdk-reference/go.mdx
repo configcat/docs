@@ -346,7 +346,7 @@ You can subscribe to these events on SDK initialization:
 
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
-    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *configcat.EvaluationDetails) {
         /* handle the event */
     }}})
 ```
