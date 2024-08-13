@@ -200,6 +200,11 @@
         },
         {
           "type": "doc",
+          "id": "integrations/google-analytics",
+          "label": "Google Analytics"
+        },
+        {
+          "type": "doc",
           "id": "integrations/jira",
           "label": "Jira Cloud Plugin"
         },
@@ -207,16 +212,6 @@
           "type": "doc",
           "id": "integrations/mixpanel",
           "label": "Mixpanel"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/segment",
-          "label": "Twilio Segment"
-        },
-        {
-          "type": "doc",
-          "id": "integrations/google-analytics",
-          "label": "Google Analytics"
         },
         {
           "type": "doc",
@@ -237,6 +232,11 @@
           "type": "doc",
           "id": "integrations/trello",
           "label": "Trello Power-Up"
+        },
+        {
+          "type": "doc",
+          "id": "integrations/segment",
+          "label": "Twilio Segment"
         },
         {
           "type": "doc",
