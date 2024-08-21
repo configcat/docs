@@ -6,12 +6,6 @@ pr: none
 pool:
   name: Contabo
 
-variables:
-  ${{ if eq( variables['skip_cache'], 'true' ) }}: 
-    buildArguments: '--build-arg SONAR_TOKEN=$(sonar_token) --network=host --no-cache'
-  ${{ else }}: 
-    buildArguments: '--build-arg SONAR_TOKEN=$(sonar_token) --network=host'
-
 steps:
 
 - task: Docker@2
@@ -22,7 +16,7 @@ steps:
     command: build
     Dockerfile: Dockerfile
     buildContext: '$(System.DefaultWorkingDirectory)'
-    arguments: $(buildArguments)
+    arguments: '--build-arg SONAR_TOKEN=$(sonar_token) --network=host $(additional_arguments)'
 
 - task: Docker@2
   displayName: push
