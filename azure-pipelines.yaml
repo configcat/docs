@@ -8,9 +8,9 @@ pool:
 
 variables:
   ${{ if eq( variables['skip_cache'], 'true' ) }}: 
-    buildArguments: '--build-arg SONAR_TOKEN=$(sonar_token) --network=host'
-  ${{ else }}: 
     buildArguments: '--build-arg SONAR_TOKEN=$(sonar_token) --network=host --no-cache'
+  ${{ else }}: 
+    buildArguments: '--build-arg SONAR_TOKEN=$(sonar_token) --network=host'
 
 steps:
 
