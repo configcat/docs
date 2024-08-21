@@ -9,7 +9,6 @@ steps:
 
 - task: Docker@2
   displayName: build
-  condition: $[eq($(skip_cache), 'false')]
   inputs:
     containerRegistry: 'Docker Hub'
     repository: configcat/docs
@@ -17,17 +16,6 @@ steps:
     Dockerfile: Dockerfile
     buildContext: '$(System.DefaultWorkingDirectory)'
     arguments: '--build-arg SONAR_TOKEN=$(sonar_token) --network=host'
-
-- task: Docker@2
-  displayName: build
-  condition: $[eq($(skip_cache), 'true')]
-  inputs:
-    containerRegistry: 'Docker Hub'
-    repository: configcat/docs
-    command: build
-    Dockerfile: Dockerfile
-    buildContext: '$(System.DefaultWorkingDirectory)'
-    arguments: '--build-arg SONAR_TOKEN=$(sonar_token) --network=host --no-cache'
 
 - task: Docker@2
   displayName: push
