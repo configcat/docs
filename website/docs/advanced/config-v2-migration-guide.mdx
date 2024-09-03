@@ -8,21 +8,21 @@ This guide will help you migrate from Config V1 to Config V2.
 
 ## What is Config V2?
 
-Config V2 is the next generation of ConfigCat. It comes with a new Dashboard, Public Management API and SDKs.
+**Config V2 is the next generation of ConfigCat.** It comes with a new Dashboard, Public Management API and SDKs.
 
-Config V2 supports all the features of V1, so you can continue using those, but it offers interesting new features as well. However, you won't be able to use the new features with the V1 versions of the Dashboard, Public Management API and SDKs.
+**Config V2 supports all the features of V1**, so you can continue using those, but **it offers interesting new features as well**. However, you won't be able to use the new features with the V1 versions of the Dashboard, Public Management API and SDKs.
 
 Read more about the new features in the [Config V2 Overview](../config-v2).
 
 ## A few things to consider before migration
 
-- Migration from Config V1 means that a V2 config will be copied from the V1 config. The V1 config will remain unchanged and accessible. The V2 version will have a new SDK key for each environment.
-- Config V2 and V1 are completely separate. They don't affect each other in any way. You can use them side by side.
-- Every newly created config will be a V2 config by default.
-- There is no automatic sync between the V1 and V2 configs. If you want to keep them in sync, you have to manually update the V2 config when you make changes to the V1 config and vice versa.
+- **Migration from Config V1 means that a V2 config will be copied from the V1 config. The V1 config will remain unchanged and accessible.** The V2 version will have a new SDK key for each environment.
+- **Config V2 and V1 are completely separate.** They don't affect each other in any way. You can use them side by side.
+- **There is no automatic sync between the V1 and V2 configs.** If you want to keep them in sync, you have to manually update the V2 config when you make changes to the V1 config and vice versa.
 - There is no pressure to migrate. Although we have plans to phase out V1 eventually, you can stay on it for a long time.
 - Once the migration process is started, it's recommended to migrate your V1 configs to V2 as quickly as possible to avoid confusion.
 - Keep in mind that the <a href="https://app.configcat.com/integrations" target="_blank" rel="noopener noreferrer">integrations</a> and <a href="https://app.configcat.com/product/webhooks" target="_blank" rel="noopener noreferrer">webhooks</a> connected to V1 configs are not migrated automatically and you have to set them up manually for the migrated V2 configs.
+- Every newly created config will be a V2 config by default.
 
 ## Migrating from Config V1 to Config V2
 
