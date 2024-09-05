@@ -1,0 +1,107 @@
+---
+id: rust
+title: OpenFeature Provider for Rust
+description: ConfigCat OpenFeature Provider for Rust. This is a step-by-step guide on how to use ConfigCat with the OpenFeature Rust SDK.
+---
+
+<a href="https://github.com/configcat/openfeature-rust" target="_blank">ConfigCat OpenFeature Provider for Rust on GitHub</a>
+
+## Getting started
+
+### 1. Install the provider
+
+Run the following Cargo command in your project directory:
+```shell
+cargo add configcat-openfeature-provider
+```
+
+Or add the following to your `Cargo.toml`:
+
+```toml
+[dependencies]
+configcat-openfeature-provider = "0.1"
+```
+
+### 2. Initialize the provider
+
+The `ConfigCatProvider` needs a pre-configured [ConfigCat Rust SDK](../../rust/#creating-the-configcat-client) client:
+
+```rust
+use std::time::Duration;
+use configcat::{Client, PollingMode};
+use open_feature::OpenFeature;
+use configcat_openfeature_provider::ConfigCatProvider;
+
+#[tokio::main]
+async fn main() {
+    // Acquire an OpenFeature API instance.
+    let mut api = OpenFeature::singleton_mut().await;
+
+    // Configure the ConfigCat SDK.
+    let configcat_client = Client::builder("<YOUR-CONFIGCAT-SDK-KEY>")
+        .polling_mode(PollingMode::AutoPoll(Duration::from_secs(60)))
+        .build()
+        .unwrap();
+
+    // Configure the provider.
+    api.set_provider(ConfigCatProvider::new(configcat_client)).await;
+
+    // Create a client.
+    let client = api.create_client();
+}
+```
+
+For more information about all the configuration options, see the [Rust SDK documentation](../../rust/#creating-the-configcat-client).
+
+### 3. Evaluate your feature flag
+
+```rust
+let is_awesome_feature_enabled = client
+    .get_bool_value("isAwesomeFeatureEnabled", None, None)
+    .await
+    .unwrap_or(false);
+
+if is_awesome_feature_enabled {
+    do_the_new_thing();
+} else {
+    do_the_old_thing();
+}
+```
+
+## Evaluation Context
+
+An <a href="https://openfeature.dev/docs/reference/concepts/evaluation-context" target="_blank">evaluation context</a> in the OpenFeature specification is a container for arbitrary contextual data that can be used as a basis for feature flag evaluation.
+The ConfigCat provider translates these evaluation contexts to ConfigCat [User Objects](../../rust/#user-object).
+
+The following table shows how the different context attributes are mapped to User Object attributes.
+
+| Evaluation context | User Object  | Required |
+| ------------------ | ------------ | -------- |
+| `targeting_key`    | `identifier` | &#9745;  | 
+| `Email`            | `email`      |          | 
+| `Country`          | `country`    |          | 
+| Any other          | `custom`     |          | 
+
+To evaluate feature flags for a context, use the <a href="https://openfeature.dev/docs/reference/concepts/evaluation-api/" target="_blank">OpenFeature Evaluation API</a>:
+
+```rust
+let context = EvaluationContext::default()
+    .with_targeting_key("#SOME-USER-ID#")
+    .with_custom_field("Email", "configcat@example.com")
+    .with_custom_field("Country", "CountryID")
+    .with_custom_field("Rating", 4.5)
+    .with_custom_field("RegisteredAt", DateTime::from_str("2023-06-14T15:27:15.8440000Z").unwrap())
+    .with_custom_field("Roles", ["Role1", "Role2"]);
+
+let is_awesome_feature_enabled = client
+    .get_bool_value("isAwesomeFeatureEnabled", Some(&context), None)
+    .await
+    .unwrap_or(false);
+```
+
+## Look under the hood
+
+- <a href="https://github.com/configcat/openfeature-rust/tree/main/examples" target="_blank">Sample Rust App</a>
+- <a href="https://github.com/configcat/openfeature-rust" target="_blank">ConfigCat OpenFeature Provider's repository on GitHub</a>
+- <a href="https://crates.io/crates/configcat-openfeature-provider" target="_blank">ConfigCat OpenFeature Provider on crates.io</a>
+- <a href="https://docs.rs/configcat-openfeature-provider/latest/configcat_openfeature_provider" target="_blank">ConfigCat OpenFeature Provider on docs.rs</a>

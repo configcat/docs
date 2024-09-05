@@ -265,8 +265,8 @@ User user = User.newBuilder().build("john@example.com");
 
 ```java
 java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
-    customAttributes.put("SubscriptionType", "Pro");
-    customAttributes.put("UserRole", "Admin");
+customAttributes.put("SubscriptionType", "Pro");
+customAttributes.put("UserRole", "Admin");
 
 User user = User.newBuilder()
     .email("john@example.com")
@@ -279,9 +279,9 @@ The `Custom` dictionary also allows attribute values other than `String` values:
 
 ```java
 java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
-    customAttributes.put("Rating", 4.5);
-    customAttributes.put("RegisteredAt", new Date("2023-11-22 12:34:56 +00:00"));
-    customAttributes.put("Roles", new String[]{"Role1", "Role2"});
+customAttributes.put("Rating", 4.5);
+customAttributes.put("RegisteredAt", new Date("2023-11-22 12:34:56 +00:00"));
+customAttributes.put("Roles", new String[]{"Role1", "Role2"});
 
 User user = User.newBuilder()
     .email("john@example.com")
@@ -395,7 +395,7 @@ Use the `cacheRefreshIntervalInSeconds` option parameter of the `PollingModes.la
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-        options.pollingMode(PollingModes.lazyLoad(60 /* the cache will expire in 120 seconds */));
+    options.pollingMode(PollingModes.lazyLoad(60 /* the cache will expire in 120 seconds */));
 });
 ```
 
@@ -413,7 +413,7 @@ Manual polling gives you full control over when the `config JSON` (with the sett
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options ->{
-        options.pollingMode(PollingModes.manualPoll());
+    options.pollingMode(PollingModes.manualPoll());
 });
 
 client.forceRefresh();
@@ -699,7 +699,7 @@ map.put("doubleSetting", 3.14);
 map.put("stringSetting", "test");
 
 ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
-        options.flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY)
+    options.flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY)
 });
 ```
 
