@@ -43,7 +43,7 @@ For more information about all the configuration options, see the [Go SDK docume
 
 ### 3. Evaluate your feature flag
 
-```rust
+```go
 isAwesomeFeatureEnabled, err := client.BooleanValue(
     context.Background(), "isAwesomeFeatureEnabled", false, openfeature.EvaluationContext{},
 )
