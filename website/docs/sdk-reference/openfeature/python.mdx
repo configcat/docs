@@ -1,0 +1,92 @@
+---
+id: python
+title: OpenFeature Provider for Python
+description: ConfigCat OpenFeature Provider for Python. This is a step-by-step guide on how to use ConfigCat with the OpenFeature Python SDK.
+---
+
+[![CI](https://github.com/configcat/openfeature-python/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/configcat/openfeature-python/actions/workflows/ci.yml) 
+[![PyPI](https://img.shields.io/pypi/v/configcat-openfeature-provider.svg)](https://pypi.python.org/pypi/configcat-openfeature-provider)
+[![PyPI](https://img.shields.io/pypi/pyversions/configcat-openfeature-provider.svg)](https://pypi.python.org/pypi/configcat-openfeature-provider)
+
+<a href="https://github.com/configcat/openfeature-python" target="_blank">ConfigCat OpenFeature Provider for Python on GitHub</a>
+
+## Getting started
+
+### 1. Install the provider
+
+```bash
+pip install configcat-openfeature-provider
+```
+
+### 2. Initialize the provider
+
+The `ConfigCatProvider` constructor takes the SDK key and an optional `ConfigCatOptions` argument containing the additional 
+configuration options for the [ConfigCat Python SDK](../../python/#creating-the-configcat-client):
+
+```python
+from configcatclient import ConfigCatOptions, PollingMode
+from openfeature import api
+from configcat_openfeature_provider import ConfigCatProvider
+
+# Configure the OpenFeature API with the ConfigCat provider.
+api.set_provider(
+    ConfigCatProvider(
+        "#YOUR-SDK-KEY#",
+        # Configure the ConfigCat SDK.
+        ConfigCatOptions(
+            polling_mode=PollingMode.auto_poll(60),
+        ),
+    )
+)
+
+# Create a client.
+client = api.get_client()
+```
+
+For more information about all the configuration options, see the [Python SDK documentation](../../python/#creating-the-configcat-client).
+
+### 3. Evaluate your feature flag
+
+```python
+is_awesome_feature_enabled = client.get_boolean_value("isAwesomeFeatureEnabled", False)
+if is_awesome_feature_enabled:
+    do_the_new_thing()
+else:
+    do_the_old_thing()
+```
+
+## Evaluation Context
+
+An <a href="https://openfeature.dev/docs/reference/concepts/evaluation-context" target="_blank">evaluation context</a> in the OpenFeature specification is a container for arbitrary contextual data that can be used as a basis for feature flag evaluation.
+The ConfigCat provider translates these evaluation contexts to ConfigCat [User Objects](../../python/#user-object).
+
+The following table shows how the different context attributes are mapped to User Object attributes.
+
+| Evaluation context | User Object  | Required |
+| ------------------ | ------------ | -------- |
+| `targeting_key`    | `identifier` | &#9745;  | 
+| `Email`            | `email`      |          | 
+| `Country`          | `country`    |          | 
+| Any other          | `custom`     |          | 
+
+To evaluate feature flags for a context, use the <a href="https://openfeature.dev/docs/reference/concepts/evaluation-api/" target="_blank">OpenFeature Evaluation API</a>:
+
+```python
+context = EvaluationContext(
+    targeting_key='#SOME-USER-ID#',
+    attributes={
+        'Email': 'configcat@example.com',
+        'Country': 'CountryID',
+        'Rating': 4.5,
+        'RegisteredAt': datetime.fromisoformat('2023-11-22 12:34:56 +00:00'),
+        'Roles': [ 'Role1', 'Role2' ]
+    }
+)
+
+is_awesome_feature_enabled = client.get_boolean_value('isAwesomeFeatureEnabled', False, context);
+```
+
+## Look under the hood
+
+- <a href="https://github.com/configcat/openfeature-python" target="_blank">ConfigCat OpenFeature Provider's repository on GitHub</a>
+- <a href="https://pypi.org/project/configcat-openfeature-provider/" target="_blank">ConfigCat OpenFeature Provider in PyPI</a>

@@ -1,0 +1,102 @@
+---
+id: java
+title: OpenFeature Provider for Java
+description: ConfigCat OpenFeature Provider for Java. This is a step-by-step guide on how to use ConfigCat with the OpenFeature Java SDK.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<a href="https://github.com/open-feature/java-sdk-contrib/tree/main/providers/configcat" target="_blank">ConfigCat OpenFeature Provider for Java on GitHub</a>
+
+## Getting started
+
+### 1. Install the provider
+
+<Tabs groupId="java-install">
+<TabItem value="Gradle" label="Gradle">
+
+```groovy title="build.gradle"
+dependencies {
+    implementation 'dev.openfeature.contrib.providers:configcat:0.0.4'
+}
+```
+
+</TabItem>
+<TabItem value="Maven" label="Maven">
+
+```xml title="pom.xml"
+<dependency>
+  <groupId>dev.openfeature.contrib.providers</groupId>
+  <artifactId>configcat</artifactId>
+  <version>0.0.4</version>
+</dependency>
+```
+
+</TabItem>
+</Tabs>
+### 2. Initialize the provider
+
+The `ConfigCatProvider` constructor takes a `ConfigCatProviderConfig` argument containing the configuration options for the [ConfigCat Java SDK](../../java/#creating-the-configcat-client):
+
+```java
+// Build options for the ConfigCat SDK.
+ConfigCatProviderConfig configCatProviderConfig = ConfigCatProviderConfig.builder()
+    .sdkKey("#YOUR-SDK-KEY#")
+    .pollingMode(PollingModes.autoPoll())
+    .logLevel(LogLevel.WARNING)
+    .build();
+
+// Configure the provider.
+OpenFeatureAPI.getInstance().setProviderAndWait(new ConfigCatProvider(configCatProviderConfig));
+
+// Create a client.
+Client client = OpenFeatureAPI.getInstance().getClient();
+```
+
+For more information about all the configuration options, see the [Java SDK documentation](../../java/#creating-the-configcat-client).
+
+### 3. Evaluate your feature flag
+
+```java
+boolean isAwesomeFeatureEnabled = client.getBooleanValue("isAwesomeFeatureEnabled", false);
+if(isAwesomeFeatureEnabled)
+{
+    doTheNewThing();
+}
+else
+{
+    doTheOldThing();
+}
+```
+
+## Evaluation Context
+
+An <a href="https://openfeature.dev/docs/reference/concepts/evaluation-context" target="_blank">evaluation context</a> in the OpenFeature specification is a container for arbitrary contextual data that can be used as a basis for feature flag evaluation.
+The ConfigCat provider translates these evaluation contexts to ConfigCat [User Objects](../../java/#user-object).
+
+The following table shows how the different context attributes are mapped to User Object attributes.
+
+| Evaluation context | User Object  | Required |
+| ------------------ | ------------ | -------- |
+| `TargetingKey`     | `identifier` | &#9745;  | 
+| `Email`            | `email`      |          | 
+| `Country`          | `country`    |          | 
+| Any other          | `custom`     |          | 
+
+To evaluate feature flags for a context, use the <a href="https://openfeature.dev/docs/reference/concepts/evaluation-api/" target="_blank">OpenFeature Evaluation API</a>:
+
+```java
+MutableContext evaluationContext = new MutableContext();
+evaluationContext.setTargetingKey("#SOME-USER-ID#");
+evaluationContext.add("Email", "configcat@example.com");
+evaluationContext.add("Country", "CountryID");
+evaluationContext.add("Rating", 4.5);
+
+boolean isAwesomeFeatureEnabled = client.getBooleanValue("isAwesomeFeatureEnabled", false, context);
+```
+
+## Look under the hood
+
+- <a href="https://github.com/open-feature/java-sdk-contrib/tree/main/providers/configcat" target="_blank">ConfigCat OpenFeature Provider's repository on GitHub</a>
+- <a href="https://search.maven.org/artifact/dev.openfeature.contrib.providers/configcat" target="_blank">ConfigCat OpenFeature Provider on Maven Central</a>

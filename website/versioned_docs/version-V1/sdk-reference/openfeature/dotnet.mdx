@@ -1,0 +1,108 @@
+---
+id: dotnet
+title: OpenFeature Provider for .NET
+description: ConfigCat OpenFeature Provider for .NET. This is a step-by-step guide on how to use ConfigCat with the OpenFeature .NET SDK.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<a href="https://github.com/open-feature/dotnet-sdk-contrib/tree/main/src/OpenFeature.Contrib.Providers.ConfigCat" target="_blank">ConfigCat OpenFeature Provider for .NET on GitHub</a>
+
+## Getting started
+
+### 1. Install the provider
+
+<Tabs groupId="dotnet-install">
+<TabItem value="Powershell / NuGet Package Manager Console" label="Powershell / NuGet Package Manager Console">
+
+```powershell
+Install-Package OpenFeature.Contrib.Providers.ConfigCat
+```
+
+</TabItem>
+<TabItem value=".NET CLI" label=".NET CLI">
+
+```bash
+dotnet add package OpenFeature.Contrib.Providers.ConfigCat
+```
+
+</TabItem>
+<TabItem value="Package Reference" label="Package Reference">
+
+```xml
+<PackageReference Include="OpenFeature.Contrib.Providers.ConfigCat" />
+```
+
+</TabItem>
+</Tabs>
+### 2. Initialize the provider
+
+The `ConfigCatProvider` constructor takes the SDK key and an optional `ConfigCatClientOptions` argument containing the additional configuration options for the [ConfigCat .NET SDK](../../dotnet/#creating-the-configcat-client):
+
+```cs
+using OpenFeature.Contrib.Providers.ConfigCat;
+
+// Build options for the ConfigCat SDK.
+var options = new ConfigCatClientOptions
+{
+    PollingMode = PollingModes.AutoPoll(pollInterval: TimeSpan.FromSeconds(60));
+    Logger = new ConsoleLogger(LogLevel.Warning);
+    // ...
+};
+
+// Configure the provider.
+OpenFeature.Api.Instance.SetProvider(new ConfigCatProvider("#YOUR-SDK-KEY#", options));
+
+// Create a client.
+var client = OpenFeature.Api.Instance.GetClient();
+```
+
+For more information about all the configuration options, see the [.NET SDK documentation](../../dotnet/#creating-the-configcat-client).
+
+### 3. Evaluate your feature flag
+
+```cs
+var isAwesomeFeatureEnabled = await client.GetBooleanValueAsync("isAwesomeFeatureEnabled", false);
+if(isAwesomeFeatureEnabled)
+{
+    doTheNewThing();
+}
+else
+{
+    doTheOldThing();
+}
+```
+
+## Evaluation Context
+
+An <a href="https://openfeature.dev/docs/reference/concepts/evaluation-context" target="_blank">evaluation context</a> in the OpenFeature specification is a container for arbitrary contextual data that can be used as a basis for feature flag evaluation.
+The ConfigCat provider translates these evaluation contexts to ConfigCat [User Objects](../../dotnet/#user-object).
+
+The following table shows how the different context attributes are mapped to User Object attributes.
+
+| Evaluation context | User Object  | Required |
+| ------------------ | ------------ | -------- |
+| `Id`/`Identifier`  | `Identifier` | &#9745;  | 
+| `Email`            | `Email`      |          | 
+| `Country`          | `Country`    |          | 
+| Any other          | `Custom`     |          | 
+
+To evaluate feature flags for a context, use the <a href="https://openfeature.dev/docs/reference/concepts/evaluation-api/" target="_blank">OpenFeature Evaluation API</a>:
+
+```cs
+var context = new EvaluationContext()
+    .Set("Id", "#SOME-USER-ID#")
+    .Set("Email", "configcat@example.com")
+    .Set("Country", "CountryID")
+    .Set("Rating", 4.5)
+    .Set("RegisteredAt", DateTime.Parse("2023-11-22 12:34:56 +00:00", CultureInfo.InvariantCulture))
+    .Build();
+
+var isAwesomeFeatureEnabled = await client.GetBooleanValueAsync("isAwesomeFeatureEnabled", false, context);
+```
+
+## Look under the hood
+
+- <a href="https://github.com/open-feature/dotnet-sdk-contrib/tree/main/src/OpenFeature.Contrib.Providers.ConfigCat" target="_blank">ConfigCat OpenFeature Provider's repository on GitHub</a>
+- <a href="https://www.nuget.org/packages/OpenFeature.Contrib.Providers.ConfigCat" target="_blank">ConfigCat OpenFeature Provider on nuget.org</a>
