@@ -287,6 +287,11 @@
         },
         {
           "type": "doc",
+          "id": "sdk-reference/android",
+          "label": "Android (Java)"
+        },
+        {
+          "type": "doc",
           "id": "sdk-reference/cpp",
           "label": "C++"
         },
@@ -309,11 +314,6 @@
           "type": "doc",
           "id": "sdk-reference/java",
           "label": "Java"
-        },
-        {
-          "type": "doc",
-          "id": "sdk-reference/android",
-          "label": "Java (Android)"
         },
         {
           "type": "doc",

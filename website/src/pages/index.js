@@ -59,13 +59,13 @@ const features = [
     title: 'SDK references', // This list should be in alphabetical order
     description: <>Let's do some coding.</>,
     links: [
-      { url: 'sdk-reference/dotnet', title: '.NET, .NET Core, Xamarin' },
+      { url: 'sdk-reference/dotnet', title: '.NET' },
+      { url: 'sdk-reference/android', title: 'Android (Java)' },
       { url: 'sdk-reference/cpp', title: 'C++' },
       { url: 'sdk-reference/dart', title: 'Dart (Flutter)' },
       { url: 'sdk-reference/elixir', title: 'Elixir' },
       { url: 'sdk-reference/go', title: 'Go' },
       { url: 'sdk-reference/java', title: 'Java' },
-      { url: 'sdk-reference/android', title: 'Java (Android)' },
       { url: 'sdk-reference/js', title: 'JavaScript' },
       { url: 'sdk-reference/community/deno', title: 'JavaScript (Deno)' },
       { url: 'sdk-reference/community/vue', title: 'JavaScript (Vue.js)' },
