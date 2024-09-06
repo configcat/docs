@@ -4,6 +4,10 @@ title: OpenFeature Provider for Rust
 description: ConfigCat OpenFeature Provider for Rust. This is a step-by-step guide on how to use ConfigCat with the OpenFeature Rust SDK.
 ---
 
+[![Build Status](https://github.com/configcat/openfeature-rust/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/configcat/openfeature-rust/actions/workflows/ci.yml)
+[![crates.io](https://img.shields.io/crates/v/configcat-openfeature-provider.svg?logo=rust)](https://crates.io/crates/configcat-openfeature-provider)
+[![docs.rs](https://img.shields.io/badge/docs.rs-configcat_openfeature_provider-66c2a5?logo=docs.rs)](https://docs.rs/configcat-openfeature-provider)
+
 <a href="https://github.com/configcat/openfeature-rust" target="_blank">ConfigCat OpenFeature Provider for Rust on GitHub</a>
 
 ## Getting started
@@ -90,7 +94,6 @@ let context = EvaluationContext::default()
     .with_custom_field("Email", "configcat@example.com")
     .with_custom_field("Country", "CountryID")
     .with_custom_field("Rating", 4.5)
-    .with_custom_field("RegisteredAt", DateTime::from_str("2023-06-14T15:27:15.8440000Z").unwrap())
     .with_custom_field("Roles", ["Role1", "Role2"]);
 
 let is_awesome_feature_enabled = client
