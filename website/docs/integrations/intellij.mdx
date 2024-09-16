@@ -1,7 +1,7 @@
 ---
 id: intellij
 title: JetBrains/IntelliJ Plugin - Manage your feature flags from JetBrains/IntelliJ IDEs
-description: ConfigCat IntelliJ IDEA Plugin. This is a step-by-step guide on how to use the ConfigCat IntelliJ IDEA Plugin to manage feature flags in your IDEs.
+description: ConfigCat IntelliJ IDEA Plugin. This is a step-by-step guide on how to use the ConfigCat JetBrains/IntelliJ  Plugin to manage feature flags in your IDEs.
 ---
 
 // TODO jetbrains mp link
@@ -10,26 +10,22 @@ description: ConfigCat IntelliJ IDEA Plugin. This is a step-by-step guide on how
 
 Connect your ConfigCat Product and Config to your JetBrains/IntelliJ IDE. Find your Feature Flag's usages in your code easily.
 
-This guide will help you with the JetBrains/IntelliJ IDE Plugin installation and familiarize you with the Plugin usage.
+This guide will help you install the JetBrains/IntelliJ IDE Plugin and familiarize you with its usage.
 
 ## Feature overview
 
 - View your Feature Flags within the IDE.
 - Create Feature Flags within the IDE.
-- Open a Feature Flags on ConfigCat Dashboard.
+- Open a Feature Flag on the ConfigCat Dashboard.
 - Find Feature Flag usages in your code.
 - Copy a Feature Flag's key to the clipboard.
 - View your Products & Configs.
 - Create Configs within the IDE.
 - Open a Config on ConfigCat Dashboard.
 
-// TODO gif replace
-
 <img src="/docs/assets/vscode/ff_setting_view.gif" className="zoomable" alt="Usage of ConfigCat Feature Flags Visual Studio Code Extension" />
 
 ## Install plugin
-
-// TODO fix install descriptions
 
 ### Install within the IDE from Marketplace
 
@@ -41,7 +37,7 @@ This guide will help you with the JetBrains/IntelliJ IDE Plugin installation and
 
 ### Install manually within the IDE
 
- //TODO fix MP link
+//TODO fix MP link
 
 1. Download the latest release from [GitHub](https://github.com/configcat/intellij-plugin/releases/latest) or from [JetBrains Marketplace](https://github.com/configcat/intellij-plugin/releases/latest)
 1. Open the `File` > `Settings/Preferences` menu.
@@ -50,11 +46,11 @@ This guide will help you with the JetBrains/IntelliJ IDE Plugin installation and
 1. Configure the plugin (see below).
 
 ### Compatible IDEs
-The plugin is compatible with the following IDEs. To see the full detailed compatibility list check the plugin [JetBrains Marketplace](https://github.com/configcat/intellij-plugin/releases/latest) page.
+The plugin is compatible with the following IDEs. Check the plugin [JetBrains Marketplace](https://github.com/configcat/intellij-plugin/releases/latest) page for the full, detailed compatibility list.
 
 - IntelliJ IDEA (Community & Ultimate)
 - Android Studio
-- PyCharm
+- PyCharm (Community & Professional)
 - PhpStorm
 - GoLand
 - Rider
@@ -76,13 +72,11 @@ The plugin is compatible with the following IDEs. To see the full detailed compa
 1. Search for `ConfigCat Feature Flags` page.
 1. Fill out the `Basic auth user name` and `Basic auth password` inputs.
 
-// TOD gif fix
-
-<img src="/docs/assets/vscode/auth.gif" className="zoomable" alt="Installation of ConfigCat Feature Flags Visual Studio Code Extension" />
+<img src="/docs/assets/vscode/auth3.gif" className="zoomable" alt="Installation of ConfigCat Feature Flags Visual Studio Code Extension" />
 
 ### Advanced
 
-This section is for you if you use a  `dedicated hosted`/[on-premise](https://configcat.com/on-premise/) ConfigCat instance. In that case, you can specify your custom ConfigCat URLs  in IntelliJ IDEA.
+This section is for you if you use a  `dedicated hosted`/[on-premise](https://configcat.com/on-premise/) ConfigCat instance. In that case, you can specify your custom ConfigCat URLs  in the IDE.
 
 1. Open the `File` >  `Settings/Preferences` menu.
 1. Search for `ConfigCat Feature Flags` page.
@@ -106,8 +100,6 @@ After you successfully configured your ConfigCat Config account in the `Settings
 - Copy a Feature Flag's key to the clipboard.
 - Find your Feature Flag's usages in your code.
 
-// TODO gif repalce
-
 <img src="/docs/assets/vscode/ff_setting_view.gif" className="zoomable" alt="Usage of ConfigCat Feature Flags & Settings View in Visual Studio Code Extension" />
 
 #### Create a new Feature Flag
@@ -118,20 +110,20 @@ After you successfully configured your ConfigCat Config account in the `Settings
 1. Enter the new Feature Flag name.
 1. Enter the new Feature Flag key.
 1. Add a hint to your Feature Flag (optional).
-1. Select 'Ok' to confirm the Flag creation.
+1. Select 'OK' to confirm the Flag creation.
 
 #### Copy a Feature Flag's key to the clipboard
 
 1. Select the Feature Flag in the tree whose key you want to copy.
 1. Click the 'Copy' button on the action bar to copy the key to the clipboard.
 
-#### Open your Configs on the ConfigCat Dashboard
-1. Select the Config in the which you want to open in Dashboard.
+#### Open your Flags on the ConfigCat Dashboard
+1. Select the Flag you want to open in the Dashboard.
 1. Click the 'Open Config in ConfigCat Dashboard' button on the action bar.
 
 #### Find your Feature Flag's usages in your code
 
-1. Select the Feature Flag in the tree which you want to search.
+1. Select the Feature Flag in the tree you want to search.
 1. Click the 'Find Usage' button on the action bar.
 1. See the search results in the opened dialog.
 
@@ -141,10 +133,10 @@ After you successfully configured your ConfigCat Config account in the `Settings
 1. Click the '+' button on the action bar to open the create dialog.
 1. Enter a name for the new config.
 1. Add a hint to your config (optional).
-1. Select 'Ok' to confirm the Config creation.
+1. Select 'OK' to confirm the Config creation.
 
 #### Open your Configs on the ConfigCat Dashboard
-1. Select the Config in the which you want to open in Dashboard.
+1. Select the Config which you want to open in the Dashboard.
 1. Click the 'Open Config in ConfigCat Dashboard' button on the action bar.
 
 :::info
