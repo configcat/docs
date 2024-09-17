@@ -13,41 +13,29 @@ import TabItem from '@theme/TabItem';
 
 ### 1. Install the provider
 
-<Tabs groupId="js-install">
-<TabItem value="NPM" label="NPM">
-
 ```bash
 npm i @openfeature/config-cat-web-provider
 ```
 
-</TabItem>
-<TabItem value="CDN" label="CDN">
-
-```html
-<script
-  type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@openfeature/config-cat-web-provider/index.cjs.min.js">
-</script>
-```
-
-</TabItem>
-</Tabs>
 ### 2. Initialize the provider
 
 The `ConfigCatWebProvider.create()` function takes the SDK key and an optional `options` argument containing additional configuration options for the [ConfigCat JavaScript SDK](../../js/#creating-the-configcat-client):
 
 ```js
+import { OpenFeature } from "@openfeature/web-sdk";
 import { ConfigCatWebProvider } from '@openfeature/config-cat-web-provider';
+import { createConsoleLogger, LogLevel } from "configcat-js-ssr";
 
 // Build options for the ConfigCat SDK.
-const options = { 
-    setupHooks: (hooks) => hooks.on('clientReady', () => console.log('Client is ready!')),
-    // ...
+const options = {
+  logger: createConsoleLogger(LogLevel.Info),
+  setupHooks: (hooks) => hooks.on('clientReady', () => console.log('Client is ready!')),
+  // ...
 }
 
 // Configure the provider.
-OpenFeature.setProvider(ConfigCatWebProvider.create('#YOUR-SDK-KEY#', options));
- 
+await OpenFeature.setProviderAndWait(ConfigCatWebProvider.create('#YOUR-SDK-KEY#', options));
+
 // Create a client.
 const client = OpenFeature.getClient();
 ```
@@ -58,10 +46,10 @@ For more information about all the configuration options, see the [JavaScript SD
 
 ```js
 const isAwesomeFeatureEnabled = client.getBooleanValue('isAwesomeFeatureEnabled', false);
-if(isAwesomeFeatureEnabled) {
-    doTheNewThing();
+if (isAwesomeFeatureEnabled) {
+  doTheNewThing();
 } else {
-    doTheOldThing();
+  doTheOldThing();
 }
 ```
 
@@ -82,10 +70,10 @@ The following table shows how the different context attributes are mapped to Use
 To evaluate feature flags for a context, use the <a href="https://openfeature.dev/docs/reference/concepts/evaluation-api/" target="_blank">OpenFeature Evaluation API</a>:
 
 ```js
-await OpenFeature.setContext({ 
-    targetingKey: '#SOME-USER-ID#', 
-    email: 'configcat@example.com', 
-    country: 'CountryID',
+await OpenFeature.setContext({
+  targetingKey: '#SOME-USER-ID#',
+  email: 'configcat@example.com',
+  country: 'CountryID',
 });
 
 const isAwesomeFeatureEnabled = client.getBooleanValue('isAwesomeFeatureEnabled', false);
