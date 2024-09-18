@@ -38,21 +38,23 @@ dotnet add package OpenFeature.Contrib.Providers.ConfigCat
 </Tabs>
 ### 2. Initialize the provider
 
-The `ConfigCatProvider` constructor takes the SDK key and an optional `ConfigCatClientOptions` argument containing the additional configuration options for the [ConfigCat .NET SDK](../../dotnet/#creating-the-configcat-client):
+The `ConfigCatProvider` constructor takes the SDK key and an optional callback that can be used to specify additional configuration options for the [ConfigCat .NET SDK](../../dotnet/#creating-the-configcat-client):
 
 ```cs
-using OpenFeature.Contrib.Providers.ConfigCat;
+using System;
+using ConfigCat.Client;
+using OpenFeature.Contrib.ConfigCat;
 
-// Build options for the ConfigCat SDK.
-var options = new ConfigCatClientOptions
+// Specify options for the ConfigCat SDK.
+Action<ConfigCat.Client.Configuration.ConfigCatClientOptions> configureOptions = (options) =>
 {
-    PollingMode = PollingModes.AutoPoll(pollInterval: TimeSpan.FromSeconds(60));
-    Logger = new ConsoleLogger(LogLevel.Warning);
+    options.PollingMode = PollingModes.AutoPoll(pollInterval: TimeSpan.FromSeconds(60));
+    options.Logger = new ConsoleLogger(LogLevel.Warning);
     // ...
 };
 
 // Configure the provider.
-OpenFeature.Api.Instance.SetProvider(new ConfigCatProvider("#YOUR-SDK-KEY#", options));
+await OpenFeature.Api.Instance.SetProviderAsync(new ConfigCatProvider("#YOUR-SDK-KEY#", configureOptions));
 
 // Create a client.
 var client = OpenFeature.Api.Instance.GetClient();
@@ -64,7 +66,7 @@ For more information about all the configuration options, see the [.NET SDK docu
 
 ```cs
 var isAwesomeFeatureEnabled = await client.GetBooleanValueAsync("isAwesomeFeatureEnabled", false);
-if(isAwesomeFeatureEnabled)
+if (isAwesomeFeatureEnabled)
 {
     doTheNewThing();
 }
@@ -72,6 +74,14 @@ else
 {
     doTheOldThing();
 }
+```
+
+### 4. Cleaning up
+
+On application shutdown, clean up the OpenFeature provider and the underlying ConfigCat client.
+
+```cs
+await OpenFeature.Api.Instance.ShutdownAsync();
 ```
 
 ## Evaluation Context
@@ -91,12 +101,12 @@ The following table shows how the different context attributes are mapped to Use
 To evaluate feature flags for a context, use the <a href="https://openfeature.dev/docs/reference/concepts/evaluation-api/" target="_blank">OpenFeature Evaluation API</a>:
 
 ```cs
-var context = new EvaluationContext()
+var context = OpenFeature.Model.EvaluationContext.Builder()
     .Set("Id", "#SOME-USER-ID#")
     .Set("Email", "configcat@example.com")
     .Set("Country", "CountryID")
     .Set("Rating", 4.5)
-    .Set("RegisteredAt", DateTime.Parse("2023-11-22 12:34:56 +00:00", CultureInfo.InvariantCulture))
+    .Set("RegisteredAt", DateTime.Parse("2023-11-22 12:34:56 +00:00", System.Globalization.CultureInfo.InvariantCulture))
     .Build();
 
 var isAwesomeFeatureEnabled = await client.GetBooleanValueAsync("isAwesomeFeatureEnabled", false, context);

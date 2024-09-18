@@ -1,7 +1,7 @@
 ---
 id: node
 title: OpenFeature Provider for Node.js
-description: ConfigCat OpenFeature Provider for Node. This is a step-by-step guide on how to use ConfigCat with the OpenFeature Node.js SDK.
+description: ConfigCat OpenFeature Provider for Node.js. This is a step-by-step guide on how to use ConfigCat with the OpenFeature Node.js SDK.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -22,17 +22,20 @@ npm i @openfeature/config-cat-provider
 The `ConfigCatProvider.create()` function takes the SDK key and an optional `options` argument containing additional configuration options for the [ConfigCat Node.js SDK](../../node/#creating-the-configcat-client):
 
 ```js
+import { OpenFeature } from "@openfeature/server-sdk";
 import { ConfigCatProvider } from '@openfeature/config-cat-provider';
+import { createConsoleLogger, LogLevel, PollingMode } from "configcat-node";
 
 // Build options for the ConfigCat SDK.
-const options = { 
-    setupHooks: (hooks) => hooks.on('clientReady', () => console.log('Client is ready!')),
-    // ...
+const options = {
+  logger: createConsoleLogger(LogLevel.Info),
+  setupHooks: (hooks) => hooks.on('clientReady', () => console.log('Client is ready!')),
+  // ...
 }
 
 // Configure the provider.
-OpenFeature.setProvider(ConfigCatWebProvider.create('#YOUR-SDK-KEY#', PollingMode.AutoPoll, options));
- 
+await OpenFeature.setProviderAndWait(ConfigCatProvider.create('#YOUR-SDK-KEY#', PollingMode.AutoPoll, options));
+
 // Create a client.
 const client = OpenFeature.getClient();
 ```
@@ -43,11 +46,19 @@ For more information about all the configuration options, see the [Node.js SDK d
 
 ```js
 const isAwesomeFeatureEnabled = await client.getBooleanValue('isAwesomeFeatureEnabled', false);
-if(isAwesomeFeatureEnabled) {
-    doTheNewThing();
+if (isAwesomeFeatureEnabled) {
+  doTheNewThing();
 } else {
-    doTheOldThing();
+  doTheOldThing();
 }
+```
+
+### 4. Cleaning up
+
+On application shutdown, clean up the OpenFeature provider and the underlying ConfigCat client.
+
+```cs
+await OpenFeature.clearProviders();
 ```
 
 ## Evaluation Context
@@ -67,10 +78,10 @@ The following table shows how the different context attributes are mapped to Use
 To evaluate feature flags for a context, use the <a href="https://openfeature.dev/docs/reference/concepts/evaluation-api/" target="_blank">OpenFeature Evaluation API</a>:
 
 ```js
-const context = { 
-    targetingKey: '#SOME-USER-ID#', 
-    email: 'configcat@example.com', 
-    country: 'CountryID',
+const context = {
+  targetingKey: '#SOME-USER-ID#',
+  email: 'configcat@example.com',
+  country: 'CountryID',
 };
 
 const isAwesomeFeatureEnabled = await client.getBooleanValue('isAwesomeFeatureEnabled', false, context);
