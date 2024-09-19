@@ -1,6 +1,6 @@
 ---
 id: google-analytics
-title: Google Analytics - Send feature flag analytics to Google Analytics
+title: Google Analytics
 description: ConfigCat Google Analytics integration. This is a step-by-step guide on how to send feature flag analytics events to Google Analytics.
 ---
 
@@ -24,6 +24,7 @@ Integrate your feature flag evaluations with [Google Analytics experiments](http
      - `exp_variant_string`: Construct this string to include the tool name (`configcat`), the feature flag's key, and its value. For example: `configcat-isMyAwesomeFeatureEnabled-true`.
 
 Code samples:
+
 <Tabs>
 <TabItem value="js" label="JavaScript, SSR" default>
 ```js
@@ -42,24 +43,26 @@ const configCatClient = configcat.getClient("#YOUR_SDK_KEY", PollingMode.AutoPol
 </TabItem>
 
 <TabItem value="react" label="React">
-```tsx
-<ConfigCatProvider
-  sdkKey="#YOUR_SDK_KEY"
-  pollingMode={PollingMode.AutoPoll}
-  options={{
-    setupHooks: (hooks) =>
-      hooks.on('flagEvaluated', evaluationDetails => {
-        const variant = "configcat-" + evaluationDetails.key + "-" + evaluationDetails.value;
-        gtag('event', 'experience_impression',
-            {
-                'exp_variant_string': variant,
-                'variation_id': evaluationDetails.variationId
-            });
-      }),
-  }}
->
-</ConfigCatProvider>
-```
+  ```tsx
+  <ConfigCatProvider
+    sdkKey="#YOUR_SDK_KEY"
+    pollingMode={PollingMode.AutoPoll}
+    options={{
+      setupHooks: (hooks) =>
+        hooks.on('flagEvaluated', (evaluationDetails) => {
+          const variant =
+            'configcat-' +
+            evaluationDetails.key +
+            '-' +
+            evaluationDetails.value;
+          gtag('event', 'experience_impression', {
+            exp_variant_string: variant,
+            variation_id: evaluationDetails.variationId,
+          });
+        }),
+    }}
+  ></ConfigCatProvider>
+  ```
 </TabItem>
 
 <TabItem value="other" label="Other languages">
@@ -83,4 +86,9 @@ For Text feature flags with lengthy values (e.g., JSON), send the `variationId` 
 5. **Define an audience** in Google Analytics using the `exp_variant_string` parameter with the same values that you using in your events (e.g. `configcat-isMyAwesomeFeatureEnabled-true`) it by following the guide [here](https://support.google.com/analytics/answer/9267572). This allows you to leverage feature flag evaluation events effectively.
 
 ### Example audiences reports
-<img src="/docs/assets/googleanalytics/audiences.png" className="zoomable" alt="Google Analytics Audience report" />
+
+<img
+  src="/docs/assets/googleanalytics/audiences.png"
+  className="zoomable"
+  alt="Google Analytics Audience report"
+/>
