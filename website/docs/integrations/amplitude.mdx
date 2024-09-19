@@ -98,7 +98,7 @@ const configCatClient = configcat.getClient("#YOUR_SDK_KEY", PollingMode.AutoPol
 
 });
 
-````
+```
 </TabItem>
 
 <TabItem value="react" label="React">
@@ -125,7 +125,7 @@ const configCatClient = configcat.getClient("#YOUR_SDK_KEY", PollingMode.AutoPol
   }}
 >
 </ConfigCatProvider>
-````
+```
 
 </TabItem>
 
@@ -157,7 +157,7 @@ hooks=Hooks(on_flag_evaluated=on_flag_evaluated)
 )
 )
 
-````
+```
 </TabItem>
 
 <TabItem value="go" label="Go">
@@ -180,7 +180,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
          identifyObj.Set("configcat_" + details.Data.Key, details.Value)
          amplitude.Identify(identifyObj, amplitude.EventOptions{UserID: details.Data.User.(*configcat.UserData).Identifier})
     }}})
-````
+```
 
 </TabItem>
 
@@ -206,7 +206,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 });
 });
 
-````
+```
 </TabItem>
 
 <TabItem value="android" label="Android">
@@ -227,7 +227,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
       identify.set("configcat_" + details.getKey(), details.getValue())
     });
 });
-````
+```
 
 </TabItem>
 
