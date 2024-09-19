@@ -1,8 +1,8 @@
 {
   "@context": "https://schema.org/",
   "@type": "HowTo",
-  "name": "How to use feature flags in .NET, .NET Core, C#?",
-  "description": "How to use feature flags in .NET, .NET Core, C# using ConfigCat Feature Flags. https://configcat.com",
+  "name": "How to use feature flags in .NET and C#?",
+  "description": "How to use feature flags in .NET and C# using ConfigCat Feature Flags. https://configcat.com",
   "image": "https://configcat.com/images/shared/home.png",
   "totalTime": "PT10M",
   "estimatedCost": {
@@ -60,7 +60,7 @@
       "@type": "HowToStep",
       "text": "Dispose ConfigCat client",
       "name": "Dispose",
-      "url": "https://configcat.com/docs/sdk-reference/dotnet/#5-dispose-configcat-client",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/#5-dispose-the-configcat-client",
       "image": "https://configcat.com/images/shared/home.png"
     }
   ]
