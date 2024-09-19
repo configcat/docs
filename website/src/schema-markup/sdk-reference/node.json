@@ -61,7 +61,7 @@
       "text": "Dispose ConfigCat client",
       "image": "https://configcat.com/images/shared/home.png",
       "name": "Dispose",
-      "url": "https://configcat.com/docs/sdk-reference/node/#5-dispose-configcat-client"
+      "url": "https://configcat.com/docs/sdk-reference/node/#5-dispose-the-configcat-client"
     }
   ]
 }
