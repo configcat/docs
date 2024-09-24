@@ -19,6 +19,7 @@ import TabItem from '@theme/TabItem';
 ```groovy title="build.gradle"
 dependencies {
     implementation 'dev.openfeature.contrib.providers:configcat:0.0.4'
+    implementation 'dev.openfeature:sdk:1.+'
 }
 ```
 
@@ -27,9 +28,14 @@ dependencies {
 
 ```xml title="pom.xml"
 <dependency>
-  <groupId>dev.openfeature.contrib.providers</groupId>
-  <artifactId>configcat</artifactId>
-  <version>0.0.4</version>
+    <groupId>dev.openfeature.contrib.providers</groupId>
+    <artifactId>configcat</artifactId>
+    <version>0.0.4</version>
+</dependency>
+<dependency>
+    <groupId>dev.openfeature</groupId>
+    <artifactId>sdk</artifactId>
+    <version>[1.0,)</version>
 </dependency>
 ```
 
@@ -42,10 +48,13 @@ The `ConfigCatProvider` constructor takes a `ConfigCatProviderConfig` argument c
 ```java
 // Build options for the ConfigCat SDK.
 ConfigCatProviderConfig configCatProviderConfig = ConfigCatProviderConfig.builder()
-    .sdkKey("#YOUR-SDK-KEY#")
-    .pollingMode(PollingModes.autoPoll())
-    .logLevel(LogLevel.WARNING)
-    .build();
+        .sdkKey("#YOUR-SDK-KEY#")
+        .options(options -> {
+            options.pollingMode(PollingModes.autoPoll());
+            options.logLevel(LogLevel.WARNING);
+            // ...
+        })
+        .build();
 
 // Configure the provider.
 OpenFeatureAPI.getInstance().setProviderAndWait(new ConfigCatProvider(configCatProviderConfig));
@@ -60,7 +69,7 @@ For more information about all the configuration options, see the [Java SDK docu
 
 ```java
 boolean isAwesomeFeatureEnabled = client.getBooleanValue("isAwesomeFeatureEnabled", false);
-if(isAwesomeFeatureEnabled)
+if (isAwesomeFeatureEnabled)
 {
     doTheNewThing();
 }
@@ -68,6 +77,14 @@ else
 {
     doTheOldThing();
 }
+```
+
+### 4. Cleaning up
+
+On application shutdown, clean up the OpenFeature provider and the underlying ConfigCat client.
+
+```cs
+OpenFeatureAPI.getInstance().shutdown();
 ```
 
 ## Evaluation Context
@@ -87,11 +104,11 @@ The following table shows how the different context attributes are mapped to Use
 To evaluate feature flags for a context, use the <a href="https://openfeature.dev/docs/reference/concepts/evaluation-api/" target="_blank">OpenFeature Evaluation API</a>:
 
 ```java
-MutableContext evaluationContext = new MutableContext();
-evaluationContext.setTargetingKey("#SOME-USER-ID#");
-evaluationContext.add("Email", "configcat@example.com");
-evaluationContext.add("Country", "CountryID");
-evaluationContext.add("Rating", 4.5);
+MutableContext context = new MutableContext();
+context.setTargetingKey("#SOME-USER-ID#");
+context.add("Email", "configcat@example.com");
+context.add("Country", "CountryID");
+context.add("Rating", 4.5);
 
 boolean isAwesomeFeatureEnabled = client.getBooleanValue("isAwesomeFeatureEnabled", false, context);
 ```
