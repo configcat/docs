@@ -97,7 +97,7 @@ For example, the following `C#` constant's name (`MyAwesomeFeature`) will be rec
 ```csharp
 public static class FeatureFlagKeys
 {
-  public const string MyAwesomeFeature = "my_awesome_feature";
+    public const string MyAwesomeFeature = "my_awesome_feature";
 }
 ```
 
@@ -106,7 +106,7 @@ The scanner will treat this constant's usage as an indirect reference to the fla
 ```csharp
 if (await configCatClient.GetValueAsync(FeatureFlagKeys.MyAwesomeFeature, false))
 {
-  // the feature is on.
+    // the feature is on.
 }
 ```
 
