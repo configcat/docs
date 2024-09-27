@@ -104,7 +104,7 @@ public static class FeatureFlagKeys
 The scanner will treat this constant's usage as an indirect reference to the flag.
 
 ```csharp
-if (configCatClient.GetValue(FeatureFlagKeys.MyAwesomeFeature, false))
+if (await configCatClient.GetValueAsync(FeatureFlagKeys.MyAwesomeFeature, false))
 {
   // the feature is on.
 }
