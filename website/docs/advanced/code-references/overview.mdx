@@ -72,7 +72,7 @@ export CONFIGCAT_USAGE_PATTERNS="<pattern1>,<pattern2>";
 ```
 
 The regex pattern must include the `CC_KEY` placeholder that represents the actual feature flag or setting key in your code.
-For example, the following pattern allows the recognition of Ruby symbols as flag key usage:
+For example, the following pattern allows the recognition of Ruby symbols as flag key usages:
 
 ```bash
 configcat scan <dir> --usage-patterns ":CC_KEY"
@@ -85,7 +85,6 @@ if FeatureFlags.enabled(:my_feature_key)
   #...
 end
 ```
-
 :::
 
 ### Aliases
@@ -98,16 +97,16 @@ For example, the following `C#` constant's name (`MyAwesomeFeature`) will be rec
 ```csharp
 public static class FeatureFlagKeys
 {
-  public const string MyAwesomeFeature = "my_awesome_feature";
+    public const string MyAwesomeFeature = "my_awesome_feature";
 }
 ```
 
 The scanner will treat this constant's usage as an indirect reference to the flag.
 
 ```csharp
-if (configCatClient.GetValue(FeatureFlagKeys.MyAwesomeFeature, false))
+if (await configCatClient.GetValueAsync(FeatureFlagKeys.MyAwesomeFeature, false))
 {
-  // the feature is on.
+    // the feature is on.
 }
 ```
 
@@ -150,7 +149,7 @@ There's an option to set custom regex patterns for identifying additional aliase
 configcat scan <dir> --alias-patterns "<pattern1>" "<pattern2>"
 ```
 
-The CLI expects the patterns from `CONFIGCAT_ALIAS_PATTERNS` as a comma delimited list.
+The CLI also accepts patterns from the `CONFIGCAT_ALIAS_PATTERNS` environment variable as a comma delimited list.
 
 ```bash
 export CONFIGCAT_ALIAS_PATTERNS="<pattern1>,<pattern2>";
@@ -158,7 +157,7 @@ export CONFIGCAT_ALIAS_PATTERNS="<pattern1>,<pattern2>";
 
 #### Match pattern format
 
-The regex pattern must include at least one capture group that represents the actual alias. When more then one group is defined, the first one is selected.
+The regex pattern must include at least one capture group that represents the actual alias. When more than one group is defined, the first one is selected.
 To bind the actual flag keys to aliases, the CLI uses a `CC_KEY` placeholder to inject the known keys into the pattern.
 
 For example, the following pattern allows to find aliases that point to Ruby symbols:
@@ -189,17 +188,17 @@ For example, the scanner will treat the `IsMyAwesomeFeatureEnabled` function of 
 ```csharp
 public class FeatureFlagProvider
 {
-  public bool IsMyAwesomeFeatureEnabled(bool defaultValue = false)
+  public async Task<bool> IsMyAwesomeFeatureEnabled(bool defaultValue = false)
   {
-    return configCatClient.GetValue("my_awesome_feature", defaultValue);
+    return await configCatClient.GetValueAsync("my_awesome_feature", defaultValue);
   }
 }
 ```
 
-And will include it's usage in the scan report:
+And will include its usage in the scan report:
 
 ```csharp
-if (featureFlagProvider.IsMyAwesomeFeatureEnabled())
+if (await featureFlagProvider.IsMyAwesomeFeatureEnabled())
 {
   // the feature is on.
 }
