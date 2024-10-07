@@ -224,7 +224,7 @@ If you specify an allowed type but it mismatches the setting kind, an error mess
 
 | Parameters     | Description                                                                                                                |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `providerId`   | Optional, Identifier of `ConfigCatProvider`. [More about multiple providers](#using-multiple-providers).                   |
+| `providerId`   | Optional. Instructs the ConfigCat Client to use a specific `ConfigCatProvider` instead of the default one. Use it if you have multiple `ConfigCatProvider`s in your code. [More about multiple providers](#using-multiple-providers).                   |
 
 This custom hook returns the ConfigCat instance from the context API. You have to wrap your parent element with `ConfigCatProvider` to ensure a `ConfigCatContextData`.
 
