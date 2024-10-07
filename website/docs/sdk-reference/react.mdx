@@ -177,7 +177,7 @@ The SDK supports two ways to acquire the initialized ConfigCat instance:
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                                         |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                                             |
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
-| `providerId`   | Optional, Identifier of `ConfigCatProvider`. [More about multiple providers](#using-multiple-providers).                   |
+| `providerId`   | Optional. Instructs the ConfigCat Client to use a specific `ConfigCatProvider` instead of the default one. Use it if you have multiple `ConfigCatProvider`s in your code. [More about multiple providers](#using-multiple-providers).                   |
 
 ```tsx
 function ButtonComponent() {
