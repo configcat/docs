@@ -131,7 +131,7 @@ _ConfigCat Client_ is responsible for:
 | `sdkKey`      | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                               | -                      |
 | `pollingMode` | Optional. The polling mode to use to acquire the setting values from the ConfigCat servers. [More about polling modes](#polling-modes). | `PollingMode.AutoPoll` |
 | `options`     | Optional. The options object. See the table below.                                                                                      | -                      |
-| `id`          | Optional. Identifier of `ConfigCatProvider`. [More about multiple providers](#using-multiple-providers).                                  | `undefined` (none)     |
+| `id`          | Optional. Instructs the ConfigCat Client to use a specific `ConfigCatProvider` instead of the default one. Use it if you have multiple `ConfigCatProvider`s in your code. [More about multiple providers](#using-multiple-providers).                                  | `undefined` (none)     |
 
 The available options depends on the chosen polling mode. However, there are some common options which can be set in the case of every polling mode:
 
