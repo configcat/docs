@@ -989,10 +989,11 @@ Also, we recommend using [confidential targeting comparators](../targeting/targe
 
 ## Using multiple providers
 
-This section explains how can you use multiple providers in one application with ReactSDK.
+To access a feature flag's value, your code needs to refer to that Config where that particular feature flag is located. This is what a ConfigCatProvider does for you; it refers to the Config by specifying the Config's sdkKey.
 
-It can be real life scenario when you arrange your feature flags into multiple configs. These configs have different sdkKeys and in your code you have to differentiate those with ConfigCatProvider's attribute called `id`.
-When you would like to use the proper instance you must specify the `id` value. The consumer side this argument's name is `providerId`.
+If your code needs access to feature flags from multiple Configs, you will need multiple ConfigCatProviders - each pointing to a Config by specifying that particular Config's sdkKey.
+
+And when your code wants to access a particular feature flag, it should refer to the specific ConfigCatProvider that is associated with the Config where that particular feature flag is located. This is exactly what the providerId allows your code to do: to refer to the specific ConfigCatProvider that is associated with the feature flag it wants to access.
 
 ```tsx
 const CC_PROVIDERID = {
