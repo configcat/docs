@@ -79,6 +79,7 @@ const features = [
       { url: 'sdk-reference/ruby', title: 'Ruby' },
       { url: 'sdk-reference/rust', title: 'Rust' },
       { url: 'sdk-reference/ios', title: 'Swift (iOS)' },
+      { url: 'sdk-reference/unity', title: 'Unity' },
       { url: 'sdk-reference/unreal', title: 'Unreal Engine' },
     ],
   },
