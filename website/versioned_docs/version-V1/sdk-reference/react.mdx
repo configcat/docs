@@ -137,7 +137,6 @@ _ConfigCat Client_ is responsible for:
 | `sdkKey`      | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                               | -                      |
 | `pollingMode` | Optional. The polling mode to use to acquire the setting values from the ConfigCat servers. [More about polling modes](#polling-modes). | `PollingMode.AutoPoll` |
 | `options`     | Optional. The options object. See the table below.                                                                                      | -                      |
-| `id`          | Optional. Instructs the ConfigCat Client to use a specific `ConfigCatProvider` instead of the default one. Use it if you have multiple `ConfigCatProvider`s in your code. [More about multiple providers](#using-multiple-providers).                                  | `undefined` (none)     |
 
 The available options depends on the chosen polling mode. However, there are some common options which can be set in the case of every polling mode:
 
@@ -183,7 +182,6 @@ The SDK supports two ways to acquire the initialized ConfigCat instance:
 | `key`          | **REQUIRED.** Setting-specific key. Set on _ConfigCat Dashboard_ for each setting.                               |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                                   |
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
-| `providerId`   | Optional. Instructs the ConfigCat Client to use a specific `ConfigCatProvider` instead of the default one. Use it if you have multiple `ConfigCatProvider`s in your code. [More about multiple providers](#using-multiple-providers).          |
 
 ```tsx
 function ButtonComponent() {
@@ -228,10 +226,6 @@ If you specify an allowed type but it mismatches the setting kind, an error mess
 
 ## Anatomy of `useConfigCatClient()`
 
-| Parameters     | Description                                                                                                                |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `providerId`   | Optional. Instructs the ConfigCat Client to use a specific `ConfigCatProvider` instead of the default one. Use it if you have multiple `ConfigCatProvider`s in your code. [More about multiple providers](#using-multiple-providers).                   |
-
 This custom hook returns the ConfigCat instance from the context API. You have to wrap your parent element with `ConfigCatProvider` to ensure a `ConfigCatContextData`.
 
 ```tsx
@@ -254,10 +248,6 @@ export const FlagDetailsComponent = () => {
 ```
 
 ## Anatomy of `withConfigCatClient()`
-
-| Parameters     | Description                                                                                                                |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `providerId`   | Optional. Instructs the ConfigCat Client to use a specific `ConfigCatProvider` instead of the default one. Use it if you have multiple `ConfigCatProvider`s in your code. [More about multiple providers](#using-multiple-providers).                   |
 
 This is a higher-order component that can take your React component and will return the component with the injected ConfigCat related props (`WithConfigCatClientProps`).
 
@@ -947,51 +937,6 @@ In ConfigCat, all SDK keys are read-only. They only allow downloading your confi
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the _ConfigCat SDK_ that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
 Also, we recommend using [confidential targeting comparators](../advanced/targeting.mdx#confidential-text-comparators) in the Targeting Rules of those feature flags that are used in the frontend/mobile SDKs.
-
-## Using multiple providers
-
-`ConfigCatProvider` allows you to access the feature flags of a specific Config, identified by the `sdkKey` parameter. (More precisely, `sdkKey` identifies a combination of a Config and an Environment.)
-
-However, in some cases, you may want to access feature flags from multiple Configs in your application. To do this, you will need to use multiple `ConfigCatProvider`s — each associated with a specific Config by providing the corresponding `sdkKey`.
-
-It's also important to keep in mind that `useFeatureFlag` calls will default to using the nearest `ConfigCatProvider`, similar to how React's [useContext](https://react.dev/learn/passing-data-deeply-with-context) works.
-
-So, when working with multiple providers, it may be necessary to differentiate between them. You can achieve this by assigning a unique `id` to each provider. (Note that the absence of `id` also acts as a unique identifier.)
-
-Then, by passing the provider id in your `useFeatureFlag`, `useConfigCatClient`, or similar calls, you can explicitly specify which provider (i.e. which `sdkKey`, and ultimately which Config and Environment) to use.
-
-```tsx
-const CC_PROVIDER_ID_COMMON = "COMMON";
-const CC_PROVIDER_ID_FRONTEND = "FRONTEND";
-
-<ConfigCatProvider sdkKey="#YOUR_COMMON_SDK_KEY#" id={CC_PROVIDER_ID_COMMON}> 
-  <ConfigCatProvider sdkKey="#YOUR_FRONTEND_SDK_KEY#" id={CC_PROVIDER_ID_FRONTEND}>
-      ...
-      const myFeatureInCommon = useFeatureFlag("myFeatureInCommon", false, void 0, CC_PROVIDER_ID_COMMON)
-
-      const myFeatureInFrontEnd = useFeatureFlag("myFeatureInFrontEnd", false, void 0, CC_PROVIDER_ID_FRONTEND)
-      ...
-  </ConfigCatProvider>
-</ConfigCatProvider>
-```
-
-When you are using multiple providers and they are not nested, it is not necessary to specify the `id` attribute:
-
-```tsx
-<ConfigCatProvider sdkKey="#YOUR_COMMON_SDK_KEY#">
-  ...
-  const myFeatureInCommon = useFeatureFlag("myFeatureInCommon", false);
-  ...
-</ConfigCatProvider>
-
-<ConfigCatProvider sdkKey="#YOUR_FRONTEND_SDK_KEY#">
-  ...
-  const myFeatureInFrontEnd = useFeatureFlag("myFeatureInFrontEnd", false);
-  ...
-</ConfigCatProvider>
-```
-
-If you are using higher order components you can set `providerId` parameter in `withConfigCatClient` function.
 
 ## Sample Application
 
