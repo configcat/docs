@@ -219,8 +219,8 @@ const sidebars: SidebarsConfig = {
         { type: 'doc', id: 'sdk-reference/ruby', label: 'Ruby' },
         { type: 'doc', id: 'sdk-reference/rust', label: 'Rust' },
         { type: 'doc', id: 'sdk-reference/ios', label: 'Swift (iOS)' },
+        { type: 'doc', id: 'sdk-reference/unity', label: 'Unity' },
         { type: 'doc', id: 'sdk-reference/unreal', label: 'Unreal Engine' },
-        
       ],
     },
     {
