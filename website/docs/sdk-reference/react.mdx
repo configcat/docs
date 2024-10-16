@@ -989,38 +989,41 @@ Also, we recommend using [confidential targeting comparators](../targeting/targe
 
 ## Using multiple providers
 
-To access a feature flag's value, your code needs to refer to that Config where that particular feature flag is located. This is what a ConfigCatProvider does for you; it refers to the Config by specifying the Config's sdkKey.
+`ConfigCatProvider` allows you to access the feature flags of a specific Config, identified by the `sdkKey` parameter. (More precisely, `sdkKey` identifies a combination of a Config and an Environment.)
 
-If your code needs access to feature flags from multiple Configs, you will need multiple ConfigCatProviders - each pointing to a Config by specifying that particular Config's sdkKey.
+However, in some cases, you may want to access feature flags from multiple Configs in your application. To do this, you will need to use multiple `ConfigCatProvider`s — each associated with a specific Config by providing the corresponding `sdkKey`.
 
-And when your code wants to access a particular feature flag, it should refer to the specific ConfigCatProvider that is associated with the Config where that particular feature flag is located. This is exactly what the providerId allows your code to do: to refer to the specific ConfigCatProvider that is associated with the feature flag it wants to access.
+It's also important to keep in mind that `useFeatureFlag` calls will default to using the nearest `ConfigCatProvider`, similar to how React's [useContext](https://react.dev/learn/passing-data-deeply-with-context) works.
+
+So, when working with multiple providers, it may be necessary to differentiate between them. You can achieve this by assigning a unique `id` to each provider. (Note that the absence of `id` also acts as a unique identifier.)
+
+Then, by passing the provider id in your `useFeatureFlag`, `useConfigCatClient`, or similar calls, you can explicitly specify which provider (i.e. which `sdkKey`, and ultimately which Config and Environment) to use.
 
 ```tsx
-const CC_PROVIDERID = {
-  COMMON: "COMMON",
-  FRONTEND: "FRONTEND"};
+const CC_PROVIDER_ID_COMMON = "COMMON";
+const CC_PROVIDER_ID_FRONTEND = "FRONTEND";
 
-<ConfigCatProvider sdkKey={"sdkKey-01"} id={CC_PROVIDERID.COMMON}> 
-  <ConfigCatProvider sdkKey={"sdkKey-02"} id={CC_PROVIDERID.FRONTEND}>
+<ConfigCatProvider sdkKey="#YOUR_COMMON_SDK_KEY#" id={CC_PROVIDER_ID_COMMON}> 
+  <ConfigCatProvider sdkKey="#YOUR_FRONTEND_SDK_KEY#" id={CC_PROVIDER_ID_FRONTEND}>
       ...
-      const myFeatureInCommon = useFeatureFlag("myFeatureInCommon", false, void 0, CC_PROVIDERID.COMMON)
+      const myFeatureInCommon = useFeatureFlag("myFeatureInCommon", false, void 0, CC_PROVIDER_ID_COMMON)
 
-      const myFeatureInFrontEnd = useFeatureFlag("myFeatureInFrontEnd", false, void 0, CC_PROVIDERID.FRONTEND)
+      const myFeatureInFrontEnd = useFeatureFlag("myFeatureInFrontEnd", false, void 0, CC_PROVIDER_ID_FRONTEND)
       ...
   </ConfigCatProvider>
 </ConfigCatProvider>
 ```
 
-When you are using multiple providers and they are not embed in each other it is not necessary to specify the `id` attribute:
+When you are using multiple providers and they are not nested, it is not necessary to specify the `id` attribute:
 
 ```tsx
-<ConfigCatProvider sdkKey={"sdkKey-01"}>
+<ConfigCatProvider sdkKey="#YOUR_COMMON_SDK_KEY#">
   ...
   const myFeatureInCommon = useFeatureFlag("myFeatureInCommon", false);
   ...
 </ConfigCatProvider>
 
-<ConfigCatProvider sdkKey={"sdkKey-02"}>
+<ConfigCatProvider sdkKey="#YOUR_FRONTEND_SDK_KEY#">
   ...
   const myFeatureInFrontEnd = useFeatureFlag("myFeatureInFrontEnd", false);
   ...
