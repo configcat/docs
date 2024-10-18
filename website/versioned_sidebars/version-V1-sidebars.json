@@ -367,11 +367,6 @@
         },
         {
           "type": "doc",
-          "id": "sdk-reference/unreal",
-          "label": "Unreal Engine"
-        },
-        {
-          "type": "doc",
           "id": "sdk-reference/unity",
           "label": "Unity"
         },
