@@ -1,0 +1,191 @@
+---
+id: unity
+title: Using the ConfigCat SDK in Unity
+description: Using the ConfigCat SDK in Unity. This is a step-by-step guide on how to use feature flags in your Unity project.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+export const UnitySchema = require('@site/src/schema-markup/sdk-reference/unity.json');
+
+<script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(UnitySchema) }}></script>
+
+:::info
+This documentation applies to the **v8.x version** of the ConfigCat .NET SDK. For the documentation of the latest release, please refer to [this page](../../../docs/sdk-reference/unity.mdx).
+:::
+
+## Getting Started
+
+ConfigCat provides support for feature flagging in Unity applications and games via the [ConfigCat .NET SDK](./dotnet.mdx).
+
+However, compared to an ordinary .NET application, the installation process is different in Unity and requires a bit of extra effort.
+(Mainly because Unity doesn't support NuGet packages and uses .NET as a scripting platform.)
+
+### 1. Get the SDK assembly files
+
+Since NuGet packages cannot be referenced in Unity projects directly, the SDK's assembly file (`ConfigCat.Client.dll`) and its dependencies must be added manually.
+
+So, as a first step, you will need to get the assembly .dll files for `netstandard2.0` from the following packages:
+* [ConfigCat.Client v8.0.0+](https://www.nuget.org/packages/ConfigCat.Client)
+* [Microsoft.Bcl.AsyncInterfaces v6.0.0](https://www.nuget.org/packages/Microsoft.Bcl.AsyncInterfaces/6.0.0)
+* [System.Buffers v4.5.1](https://www.nuget.org/packages/System.Buffers/4.5.1)
+* [System.Memory v4.5.4](https://www.nuget.org/packages/System.Memory/4.5.4)
+* [System.Numerics.Vectors v4.5.0](https://www.nuget.org/packages/System.Numerics.Vectors/4.5.0)
+* [System.Runtime.CompilerServices.Unsafe v6.0.0](https://www.nuget.org/packages/System.Runtime.CompilerServices.Unsafe/6.0.0)
+* [System.Text.Encodings.Web v6.0.0](https://www.nuget.org/packages/System.Text.Encodings.Web/6.0.0)
+* [System.Text.Json v6.0.0](https://www.nuget.org/packages/System.Text.Json/6.0.0)
+* [System.Threading.Tasks.Extensions v4.5.4](https://www.nuget.org/packages/System.Threading.Tasks.Extensions/4.5.4)
+
+You can do this by downloading these packages and extracting the .dll files manually from the .nupkg files (which are actually plain ZIP files).
+
+Or, if you have [.NET](https://dotnet.microsoft.com) installed, you can take a shortcut:
+1. Create a file named `Plugins.csproj` (anywhere in your file system) with the following content:
+   ```xml
+   <Project Sdk="Microsoft.NET.Sdk">
+     <PropertyGroup>
+       <TargetFramework>netstandard2.0</TargetFramework>
+     </PropertyGroup>
+     <ItemGroup>
+       <PackageReference Include="ConfigCat.Client" Version="*" />
+     </ItemGroup>
+   </Project>
+   ```
+1. Run `dotnet publish -c Release` in the same folder.
+1. You will now have all the necessary .dll files in the `bin/Release/netstandard2.0/publish` folder.
+
+### 2. Add the SDK assembly files to your Unity project
+
+Create a folder named `Plugins` in your Unity project's Assets, then copy the SDK assembly files into this folder.
+
+### 3. Create a script for hosting the _ConfigCat_ client
+
+To access your feature flags, you will need to create an instance of `ConfigCatClient` with your SDK Key.
+Usually you do this once, at the start of your application or game, then use the client throughout its lifetime.
+
+However, sharing object instances between scripts is not straightforward in Unity. We recommend the following approach:
+
+Create a folder named `Scripts` in your Unity project's Assets, then add a C# Script named `SingletonServices` to it.
+Replace the script content with the following code:
+
+```cs
+using System;
+using System.Globalization;
+using System.Threading;
+using ConfigCat.Client;
+using UnityEngine;
+
+public class SingletonServices : MonoBehaviour
+{
+    private static SingletonServices instance;
+    public static SingletonServices Instance => instance;
+
+    [field: NonSerialized]
+    public IConfigCatClient ConfigCatClient { get; private set; }
+
+    private void Awake()
+    {
+        if (Interlocked.CompareExchange(ref instance, this, null) is not null)
+        {
+            // If another instance has been created already, get rid of this one.
+            Destroy(this);
+            return;
+        }
+
+        ConfigCatClient = ConfigCat.Client.ConfigCatClient.Get("YOUR_SDK_KEY", options =>
+        {
+            options.Logger = new ConfigCatToUnityDebugLogAdapter(LogLevel.Warning);
+        });
+
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    // Start is called before the first frame update
+    void Start() { }
+
+    // Update is called once per frame
+    void Update() { }
+
+    private void OnDestroy()
+    {
+        this.ConfigCatClient?.Dispose();
+        this.ConfigCatClient = null;
+    }
+
+    private sealed class ConfigCatToUnityDebugLogAdapter : IConfigCatLogger
+    {
+        private readonly LogLevel logLevel;
+
+        public ConfigCatToUnityDebugLogAdapter(LogLevel logLevel)
+        {
+            this.logLevel = logLevel;
+        }
+
+        public LogLevel LogLevel
+        {
+            get => this.logLevel;
+            set { throw new NotSupportedException(); }
+        }
+
+        public void Log(LogLevel level, LogEventId eventId, ref FormattableLogMessage message, Exception exception = null)
+        {
+            var eventIdString = eventId.Id.ToString(CultureInfo.InvariantCulture);
+            var exceptionString = exception is null ? string.Empty : Environment.NewLine + exception;
+            var logMessage = $"ConfigCat[{eventIdString}] {message.InvariantFormattedMessage}{exceptionString}";
+            switch (level)
+            {
+                case LogLevel.Error:
+                    Debug.LogError(logMessage);
+                    break;
+                case LogLevel.Warning:
+                    Debug.LogWarning(logMessage);
+                    break;
+                case LogLevel.Info:
+                    Debug.Log(logMessage);
+                    break;
+                case LogLevel.Debug:
+                    Debug.Log(logMessage);
+                    break;
+            }
+        }
+    }
+}
+```
+
+:::caution
+In case your application or game targets WebGL, this won't work. WebGL is not supported currently.
+:::
+
+Finally, to activate the `SingletonServices` script, add an empty GameObject to your first scene and assign the script to it.
+
+### 4. Get your setting value
+
+Once the setup above is done, you will be able to access the _ConfigCat_ client in your other scripts and use it to evaluate feature flags and settings:
+
+```cs
+var configCatClient = SingletonServices.Instance.ConfigCatClient;
+
+var isMyAwesomeFeatureEnabled = await configCatClient.GetValueAsync("isMyAwesomeFeatureEnabled", false);
+if (isMyAwesomeFeatureEnabled)
+{
+    doTheNewThing();
+}
+else
+{
+    doTheOldThing();
+}
+```
+
+## Further reading
+
+You can read about the configuration and the advanced features of the ConfigCat .NET SDK [here](./dotnet.mdx).
+
+## Guides
+
+See the following guides on how to use ConfigCat's .NET SDK in Unity:
+
+- <a href="https://configcat.com/blog/2023/01/27/how-to-use-feature-flags-in-unity/" target="_blank">How to use feature flags in Unity</a> (partly outdated)
+
+## Look under the hood
+
+- <a href="https://github.com/configcat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+- <a href="https://www.nuget.org/packages/ConfigCat.Client" target="_blank">ConfigCat .NET SDK on nuget.org</a>

@@ -35,7 +35,7 @@ $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
 
 ```php
 $isMyAwesomeFeatureEnabled = $client->getValue("isMyAwesomeFeatureEnabled", false);
-if(is_bool($isMyAwesomeFeatureEnabled) && $isMyAwesomeFeatureEnabled) {
+if (is_bool($isMyAwesomeFeatureEnabled) && $isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
     doTheOldThing();

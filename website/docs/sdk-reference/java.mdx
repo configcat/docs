@@ -62,7 +62,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 
 ```java
 boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "isMyAwesomeFeatureEnabled", false);
-if(isMyAwesomeFeatureEnabled) {
+if (isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
     doTheOldThing();
@@ -119,11 +119,11 @@ These are the available options on the `Options` class:
 | `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
 | `pollingMode(PollingMode)`                                    | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
 | `logLevel(LogLevel)`                                          | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging).                                                                                                                                                                                                      |
+| `logFilter(LogFilterFunction)`                                | Optional, sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                             |
 | `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
 | `defaultUser(User)`                                           | Optional, sets default user. [More about default user](#default-user).                                                                                                                                                                                                                             |
 | `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                  |
 | `hooks()`                                                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
-| `logFilter(LogFilterFunction)`                                | Optional, sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                             |
 
 :::caution
 We strongly recommend you to use the `ConfigCatClient` as a Singleton object in your application.
@@ -183,7 +183,7 @@ client.getValueAsync(
     User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"), // Optional User Object
     false // Default value
 ).thenAccept(isMyAwesomeFeatureEnabled -> {
-    if(isMyAwesomeFeatureEnabled) {
+    if (isMyAwesomeFeatureEnabled) {
         doTheNewThing();
     } else {
         doTheOldThing();
@@ -265,8 +265,8 @@ User user = User.newBuilder().build("john@example.com");
 
 ```java
 java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
-    customAttributes.put("SubscriptionType", "Pro");
-    customAttributes.put("UserRole", "Admin");
+customAttributes.put("SubscriptionType", "Pro");
+customAttributes.put("UserRole", "Admin");
 
 User user = User.newBuilder()
     .email("john@example.com")
@@ -279,9 +279,9 @@ The `Custom` dictionary also allows attribute values other than `String` values:
 
 ```java
 java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
-    customAttributes.put("Rating", 4.5);
-    customAttributes.put("RegisteredAt", new Date("2023-11-22 12:34:56 +00:00"));
-    customAttributes.put("Roles", new String[]{"Role1", "Role2"});
+customAttributes.put("Rating", 4.5);
+customAttributes.put("RegisteredAt", new Date("2023-11-22 12:34:56 +00:00"));
+customAttributes.put("Roles", new String[]{"Role1", "Role2"});
 
 User user = User.newBuilder()
     .email("john@example.com")
@@ -395,7 +395,7 @@ Use the `cacheRefreshIntervalInSeconds` option parameter of the `PollingModes.la
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-        options.pollingMode(PollingModes.lazyLoad(60 /* the cache will expire in 120 seconds */));
+    options.pollingMode(PollingModes.lazyLoad(60 /* the cache will expire in 120 seconds */));
 });
 ```
 
@@ -413,7 +413,7 @@ Manual polling gives you full control over when the `config JSON` (with the sett
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options ->{
-        options.pollingMode(PollingModes.manualPoll());
+    options.pollingMode(PollingModes.manualPoll());
 });
 
 client.forceRefresh();
@@ -699,7 +699,7 @@ map.put("doubleSetting", 3.14);
 map.put("stringSetting", "test");
 
 ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
-        options.flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY)
+    options.flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY)
 });
 ```
 
@@ -874,16 +874,19 @@ Examples fo <a href="https://github.com/configcat/java-sdk/blob/master/samples/c
 
 ### Log Filtering
 
-You can define a custom log filter option by implementing the `LogFilterFunction` interface. The `apply` method will be called by the _ConfigCat SDK_  each time a log event occurs (and the event passes the minimum log level specified by the `logLevel` option). That is, the `apply` method allows you to filter log events by `logLevel`, `eventId`, `message` or `exception`. The formatted message String can be obtained by calling `toString()` on the `message` parameter.
-If the `apply` method returns with `true`, the event will be logged, otherwise it will be skipped.
+You can define a custom log filter by implementing the `LogFilterFunction` interface. The `apply` method will be called by the _ConfigCat SDK_  each time a log event occurs (and the event passes the minimum log level specified by the `logLevel` option). That is, the `apply` method allows you to filter log events by `logLevel`, `eventId`, `message` or `exception`. The formatted message string can be obtained by calling `toString()` on the `message` parameter.
+If the `apply` method returns `true`, the event will be logged, otherwise it will be skipped.
 
 ```java
-    // Filter out events with id 1001 from the log.
-    LogFilterFunction filterLogFunction = ( LogLevel logLevel, int eventId, Object message, Throwable exception) -> eventId != 1001;
+// Filter out events with id 1001 from the log.
+LogFilterFunction filterLogFunction = ( LogLevel logLevel, int eventId, Object message, Throwable exception) -> eventId != 1001;
 
-    ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> options.logFilter(filterLogFunction));
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> options.logFilter(filterLogFunction));
 ```
-> Please make sure that your log filter logic doesn't perform heavy computation and doesn't block the executing thread. A complex or incorrectly implemented log filter can degrade the performance of the SDK.
+
+:::caution
+Please make sure that your log filter logic doesn't perform heavy computation and doesn't block the executing thread. A complex or incorrectly implemented log filter can degrade the performance of the SDK.
+:::
 
 ## Sample Apps
 

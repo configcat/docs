@@ -1,17 +1,18 @@
 ---
 id: dotnet
-title: .NET, .NET Core SDK Reference
-description: ConfigCat .NET, .NET Core SDK Reference. This is a step-by-step guide on how to use feature flags in your .NET, .NET Core application.
+title: .NET SDK Reference
+description: ConfigCat .NET SDK Reference. This is a step-by-step guide on how to use feature flags in your .NET application.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json');
 
-<script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(NetSchema) }}></script>
+<script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(NetSchema) }}></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/.net-sdk.svg?style=social)](https://github.com/configcat/.net-sdk/stargazers)
-[![Build status](https://ci.appveyor.com/api/projects/status/3kygp783vc2uv9xr?svg=true)](https://ci.appveyor.com/project/ConfigCat/net-sdk) [![NuGet Version](https://buildstats.info/nuget/ConfigCat.Client)](https://www.nuget.org/packages/ConfigCat.Client/)
+[![Build status](https://ci.appveyor.com/api/projects/status/3kygp783vc2uv9xr?svg=true)](https://ci.appveyor.com/project/ConfigCat/net-sdk)
+[![NuGet Version](https://img.shields.io/nuget/v/ConfigCat.Client)](https://www.nuget.org/packages/ConfigCat.Client/)
 [![Sonar Coverage](https://img.shields.io/sonar/coverage/net-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=net-sdk)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
 
@@ -38,6 +39,10 @@ dotnet add package ConfigCat.Client
 </TabItem>
 </Tabs>
 
+:::info
+To get the _ConfigCat SDK_ up and running in Unity, please refer to [this guide](./unity.mdx).
+:::
+
 ### 2. Import package
 
 ```csharp
@@ -54,7 +59,7 @@ var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 
 ```csharp
 var isMyAwesomeFeatureEnabled = await client.GetValueAsync("isMyAwesomeFeatureEnabled", false);
-if(isMyAwesomeFeatureEnabled)
+if (isMyAwesomeFeatureEnabled)
 {
     doTheNewThing();
 }
@@ -102,13 +107,15 @@ These are the available options on the `ConfigCatClientOptions` class:
 | Properties          | Description                                                                                                                                                                                                                                                                                       | Default                                                                                                                                |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `PollingMode`       | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                       | `PollingModes.AutoPoll()`                                                                                                              |
+| `ConfigFetcher`     | Optional, [`IConfigCatConfigFetcher`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/ConfigService/IConfigCatConfigFetcher.cs) instance for downloading a config.                                                                                                          | [`HttpClientConfigFetcher`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/ConfigService/HttpClientConfigFetcher.cs) |
 | `ConfigCache`       | Optional, [`IConfigCatCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/IConfigCatCache.cs) instance for caching the downloaded config.                                                                                                                         | [`InMemoryConfigCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/InMemoryConfigCache.cs)            |
 | `Logger`            | Optional, [`IConfigCatLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/IConfigCatLogger.cs) instance for tracing.                                                                                                                                           | [`ConsoleLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/ConsoleLogger.cs) (with WARNING level) |
+| `LogFilter`         | Optional, sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                                                   | `null` (none)                                                                                                                          |
 | `BaseUrl`           | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                         |                                                                                                                                        |
-| `HttpClientHandler` | Optional, `HttpClientHandler` to provide network credentials and proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy).                                                                                                                                               | built-in `HttpClientHandler`                                                                                                           |
+| `HttpClientHandler` | Optional, `HttpClientHandler` to provide network credentials and proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy).                                                                                                                                                | built-in `HttpClientHandler`                                                                                                           |
 | `HttpTimeout`       | Optional, sets the underlying HTTP client's timeout. [More about the HTTP timeout](#http-timeout).                                                                                                                                                                                                | `TimeSpan.FromSeconds(30)`                                                                                                             |
 | `FlagOverrides`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                  |                                                                                                                                        |
-| `DataGovernance`    | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly` | `Global`                                                                                                                               |
+| `DataGovernance`    | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly` | `Global`                                                                                                                           |
 | `DefaultUser`       | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                        | `null` (none)                                                                                                                          |
 | `Offline`           | Optional, determines whether the client should be initialized to offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                                  | `false`                                                                                                                                |
 
@@ -703,9 +710,29 @@ ConfigCat.INFO  [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":
   Returning 'True'.
 ```
 
+### Custom logger implementation
+
+By default, the SDK logs to [the console's standard output](https://learn.microsoft.com/en-us/dotnet/api/system.console.out) but it also allows you to inject any custom logger implementation via the `ConfigCatClientOptions.Logger` property.
+
 Sample code on how to create a basic file logger implementation for ConfigCat client: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/FileLoggerSample.cs" target="_blank">See Sample Code</a>
 
 Another sample which shows how to implement an adapter to [the built-in logging framework](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging) of .NET Core/.NET 5+: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/ASP.NETCore/WebApplication/Adapters/ConfigCatToMSLoggerAdapter.cs" target="_blank">See Sample Code</a>
+
+### Log Filtering
+
+You can define a custom log filter by providing a callback function via the `ConfigCatClientOptions.LogFilter` property. The callback will be called by the _ConfigCat SDK_  each time a log event occurs (and the event passes the minimum log level specified by the `IConfigCatLogger.LogLevel` property). That is, the callback allows you to filter log events by `level`, `eventId`, `message` or `exception`. The formatted message string can be obtained via `message.InvariantFormattedMessage`.
+If the callback function returns `true`, the event will be logged, otherwise it will be skipped.
+
+```cs
+// Filter out events with id 1001 from the log.
+LogFilterCallback logFilter = (LogLevel level, LogEventId eventId, ref FormattableLogMessage message, Exception? exception) => eventId != 1001;
+
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options => options.LogFilter = logFilter);
+```
+
+:::caution
+Please make sure that your log filter logic doesn't perform heavy computation and doesn't block the executing thread. A complex or incorrectly implemented log filter can degrade the performance of the SDK.
+:::
 
 ## `GetAllKeysAsync()`
 
@@ -870,6 +897,29 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 
 The default timeout is 30 seconds.
 
+## Platform compatibility
+
+The _ConfigCat SDK_ supports all the widespread .NET JIT runtimes, everything that implements [.NET Standard 2.0](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)+ and supports TLS 1.2 should work.
+Starting with v9.3.0, it can also be used in applications that employ [trimmed self-contained](https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained) or various [ahead-of-time (AOT) compilation](https://en.wikipedia.org/wiki/Ahead-of-time_compilation) deployment models.
+
+Based on our tests, the SDK is compatible with the following runtimes/deployment models:
+* .NET Framework 4.5+ (including Ngen)
+* .NET Core 3.1, .NET 5+ (including Crossgen2/ReadyToRun and Native AOT)
+* Mono 5.10+
+* .NET for Android (formerly known as Xamarin.Android)
+* .NET for iOS (formerly known as Xamarin.iOS)
+* Unity 2021.3+ (Mono JIT)
+* Unity 2021.3+ (IL2CPP)<sup><small>*</small></sup>
+* Universal Windows Platform 10.0.16299.0+ (.NET Native)<sup><small>**</small></sup>
+* WebAssembly (Mono AOT/Emscripten, also known as wasm-tools)
+
+<sup><small>*</small></sup>Unity WebGL also works but needs a bit of extra effort: you will need to enable WebGL compatibility by calling the `ConfigCatClient.PlatformCompatibilityOptions.EnableUnityWebGLCompatibility` method. For more details, see [Sample Scripts](https://github.com/configcat/.net-sdk/tree/master/samples/UnityWebGL).<br/>
+<sup><small>**</small></sup>To make the SDK work in Release builds on UWP, you will need to add `<Namespace Name="System.Text.Json.Serialization.Converters" Browse="Required All"/>` to your application's [.rd.xml](https://learn.microsoft.com/en-us/windows/uwp/dotnet-native/runtime-directives-rd-xml-configuration-file-reference) file. See also [this discussion](https://github.com/dotnet/runtime/issues/29912#issuecomment-638471351).
+
+:::info
+We strive to provide an extensive support for the various .NET runtimes and versions. If you still encounter an issue with the SDK on some platform, please open a [GitHub issue](https://github.com/configcat/.net-sdk/issues/new/choose) or [contact support](https://configcat.com/support).
+:::
+
 ## Troubleshooting
 
 When the _ConfigCat SDK_ does not work as expected in your application, please check for the following potential problems:
@@ -904,14 +954,16 @@ When the _ConfigCat SDK_ does not work as expected in your application, please c
 Check out our Sample Applications how they use the _ConfigCat SDK_:
 
 - <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
-- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Web App</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Multi-page Web App (ASP.NET Core MVC)</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/BlazorWasm" target="_blank">Sample Single-page Web App (ASP.NET Core Blazor WebAssembly)</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/MAUI" target="_blank">Sample Mobile/Windows Store App (.NET MAUI)</a>
 
 ## Guides
 
 See the following guides on how to use ConfigCat's .NET SDK:
 
 - <a href="https://configcat.com/blog/2022/11/25/feature-flags-in-net6/" target="_blank">.NET 6</a>
-- <a href="https://configcat.com/blog/2021/10/10/aspnetcore-options-pattern/" target="_blank">.NET Core</a>
+- <a href="https://configcat.com/blog/2021/10/10/aspnetcore-options-pattern/" target="_blank">ASP.NET Core</a>
 
 ## Look under the hood
 

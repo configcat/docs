@@ -61,7 +61,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 
 ```java
 boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "<key-of-my-awesome-feature>", false);
-if(isMyAwesomeFeatureEnabled) {
+if (isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
     doTheOldThing();
@@ -70,7 +70,7 @@ if(isMyAwesomeFeatureEnabled) {
 // Or asynchronously
 client.getValueAsync(Boolean.class, "<key-of-my-awesome-feature>", false)
     .thenAccept(isMyAwesomeFeatureEnabled -> {
-        if(isMyAwesomeFeatureEnabled) {
+        if (isMyAwesomeFeatureEnabled) {
             doTheNewThing();
         } else {
             doTheOldThing();
@@ -182,7 +182,7 @@ client.getValueAsync(
     User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"), // Optional User Object
     false // Default value
 ).thenAccept(isMyAwesomeFeatureEnabled -> {
-    if(isMyAwesomeFeatureEnabled) {
+    if (isMyAwesomeFeatureEnabled) {
         doTheNewThing();
     } else {
         doTheOldThing();
@@ -265,8 +265,8 @@ User user = User.newBuilder().build("john@example.com");
 
 ```java
 java.util.Map<String,String> customAttributes = new java.util.HashMap<String,String>();
-    customAttributes.put("SubscriptionType", "Pro");
-    customAttributes.put("UserRole", "Admin");
+customAttributes.put("SubscriptionType", "Pro");
+customAttributes.put("UserRole", "Admin");
 
 User user = User.newBuilder()
     .email("john@example.com")
@@ -506,7 +506,7 @@ List<EvaluationDetails<?>> allValueDetails = client.getAllValueDetails(user);
 ```java
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
-        client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
+client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
 ```
 
 ## Cache
@@ -519,7 +519,7 @@ The `SharedPreferencesCache` implementation uses the Android `SharedPreferences`
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-        options.cache(new SharedPreferencesCache(getApplicationContext())); // Use ConfigCat's shared preferences cache.
+    options.cache(new SharedPreferencesCache(getApplicationContext())); // Use ConfigCat's shared preferences cache.
 });
 ```
 

@@ -55,7 +55,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 
 ```java
 boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "<key-of-my-awesome-feature>", false);
-if(isMyAwesomeFeatureEnabled) {
+if (isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
     doTheOldThing();
@@ -64,7 +64,7 @@ if(isMyAwesomeFeatureEnabled) {
 // Or asynchronously
 client.getValueAsync(Boolean.class, "<key-of-my-awesome-feature>", false)
     .thenAccept(isMyAwesomeFeatureEnabled -> {
-        if(isMyAwesomeFeatureEnabled) {
+        if (isMyAwesomeFeatureEnabled) {
             doTheNewThing();
         } else {
             doTheOldThing();
@@ -176,7 +176,7 @@ client.getValueAsync(
     User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"), // Optional User Object
     false // Default value
 ).thenAccept(isMyAwesomeFeatureEnabled -> {
-    if(isMyAwesomeFeatureEnabled) {
+    if (isMyAwesomeFeatureEnabled) {
         doTheNewThing();
     } else {
         doTheOldThing();
@@ -259,8 +259,8 @@ User user = User.newBuilder().build("john@example.com");
 
 ```java
 java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
-    customAttributes.put("SubscriptionType", "Pro");
-    customAttributes.put("UserRole", "Admin");
+customAttributes.put("SubscriptionType", "Pro");
+customAttributes.put("UserRole", "Admin");
 
 User user = User.newBuilder()
     .email("john@example.com")
@@ -273,9 +273,9 @@ The `Custom` dictionary also allows attribute values other than `String` values:
 
 ```java
 java.util.Map<String,Object> customAttributes = new java.util.HashMap<String,Object>();
-    customAttributes.put("Rating", 4.5);
-    customAttributes.put("RegisteredAt", new Date("2023-11-22 12:34:56 +00:00"));
-    customAttributes.put("Roles", new String[]{"Role1", "Role2"});
+customAttributes.put("Rating", 4.5);
+customAttributes.put("RegisteredAt", new Date("2023-11-22 12:34:56 +00:00"));
+customAttributes.put("Roles", new String[]{"Role1", "Role2"});
 
 User user = User.newBuilder()
     .email("john@example.com")
@@ -543,7 +543,7 @@ List<EvaluationDetails<?>> allValueDetails = client.getAllValueDetails(user);
 ```java
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
-        client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
+client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
 ```
 
 ## Cache

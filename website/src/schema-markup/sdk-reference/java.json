@@ -49,7 +49,7 @@
     "text": "Get your setting value",
     "image": "https://configcat.com/images/shared/home.png",
     "name": "Evaluation",
-    "url": "https://configcat.com/docs/sdk-reference/java/#3-create-and-get-the-configcat-client-for-your-sdk-key"
+    "url": "https://configcat.com/docs/sdk-reference/java/#4-get-your-setting-value"
   },{
     "@type": "HowToStep",
     "text": "Stop ConfigCat client",

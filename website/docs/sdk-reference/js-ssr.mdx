@@ -61,7 +61,7 @@ if (value) {
 }
 ```
 
-(Please note that [top-level await in modules](https://exploringjs.com/impatient-js/ch_modules.html#top-level-await) is available only if your project is [set up to use the ECMAScript module system](https://nodejs.org/api/esm.html). Otherwise you will need either to use Promises or wrap your code in an async function as shown [here](https://github.com/configcat/node-sdk/blob/master/samples/console/index.js).)
+(Please note that [top-level await in modules](https://exploringjs.com/js/book/ch_modules.html#top-level-await) is available only if your project is [set up to use the ECMAScript module system](https://nodejs.org/api/esm.html). Otherwise you will need either to use Promises or wrap your code in an async function as shown [here](https://github.com/configcat/node-sdk/blob/master/samples/console/index.js).)
 
 The Promise way:
 
@@ -818,8 +818,11 @@ You can view a sample run [here](https://github.com/configcat/js-ssr-sdk/actions
 ## Next.js/AWS lambda recommendation
 
 If the SDK is running in a Next.js application that is hosted on Vercel (AWS lambda) or your application is hosted directly in AWS lambdas, it is recommended to use the SDK in Lazy loading or Manual polling mode instead of the default Auto polling mode.
+
 As AWS lamdbas try to minimize their uptime, the applications are terminated as soon as the sytem detects inactivity in the application. 
+
 The Auto polling mode is using a background thread to acquire the setting values from the ConfigCat servers periodically and the AWS lambda does not detect it as a running application and terminates it. 
+
 However, it can easily happen that there is an ongoing HTTP GET call towards our servers and this termination can cause errors.
 The most possible error message in this case is `Request timed out while trying to fetch config JSON.`.
 

@@ -199,12 +199,12 @@ const sidebars: SidebarsConfig = {
       link: { type: 'doc', id: 'sdk-reference/overview' },
       items: [
         { type: 'doc', id: 'sdk-reference/dotnet', label: '.NET' },
+        { type: 'doc', id: 'sdk-reference/android', label: 'Android (Java)' },
         { type: 'doc', id: 'sdk-reference/cpp', label: 'C++' },
         { type: 'doc', id: 'sdk-reference/dart', label: 'Dart (Flutter)' },
         { type: 'doc', id: 'sdk-reference/elixir', label: 'Elixir' },
         { type: 'doc', id: 'sdk-reference/go', label: 'Go' },
         { type: 'doc', id: 'sdk-reference/java', label: 'Java' },
-        { type: 'doc', id: 'sdk-reference/android', label: 'Java (Android)' },
         { type: 'doc', id: 'sdk-reference/js', label: 'JavaScript' },
         { type: 'doc', id: 'sdk-reference/react', label: 'JavaScript (React)' },
         { type: 'doc', id: 'sdk-reference/js-ssr', label: 'JavaScript (SSR)' },
@@ -219,25 +219,41 @@ const sidebars: SidebarsConfig = {
         { type: 'doc', id: 'sdk-reference/ruby', label: 'Ruby' },
         { type: 'doc', id: 'sdk-reference/rust', label: 'Rust' },
         { type: 'doc', id: 'sdk-reference/ios', label: 'Swift (iOS)' },
+        { type: 'doc', id: 'sdk-reference/unity', label: 'Unity' },
         { type: 'doc', id: 'sdk-reference/unreal', label: 'Unreal Engine' },
+      ],
+    },
+    {
+      label: 'OpenFeature Providers',
+      type: 'category',
+      link: { type: 'doc', id: 'sdk-reference/openfeature/overview' },
+      items: [
+        { type: 'doc', id: 'sdk-reference/openfeature/dotnet', label: '.NET' },
+        { type: 'doc', id: 'sdk-reference/openfeature/go', label: 'Go' },
+        { type: 'doc', id: 'sdk-reference/openfeature/java', label: 'Java' },
+        { type: 'doc', id: 'sdk-reference/openfeature/js', label: 'JavaScript' },
+        { type: 'doc', id: 'sdk-reference/openfeature/node', label: 'Node.js' },
+        { type: 'doc', id: 'sdk-reference/openfeature/php', label: 'PHP' },
+        { type: 'doc', id: 'sdk-reference/openfeature/python', label: 'Python' },
+        { type: 'doc', id: 'sdk-reference/openfeature/rust', label: 'Rust' },
+      ],
+    },
+    {
+      'Community Maintained': [
         {
-          'Community Maintained': [
-            {
-              type: 'doc',
-              id: 'sdk-reference/community/laravel',
-              label: 'PHP (Laravel)',
-            },
-            {
-              type: 'doc',
-              id: 'sdk-reference/community/deno',
-              label: 'TypeScript (Deno)',
-            },
-            {
-              type: 'doc',
-              id: 'sdk-reference/community/vue',
-              label: 'JavaScript (Vue.js)',
-            },
-          ],
+          type: 'doc',
+          id: 'sdk-reference/community/laravel',
+          label: 'PHP (Laravel)',
+        },
+        {
+          type: 'doc',
+          id: 'sdk-reference/community/deno',
+          label: 'TypeScript (Deno)',
+        },
+        {
+          type: 'doc',
+          id: 'sdk-reference/community/vue',
+          label: 'JavaScript (Vue.js)',
         },
       ],
     },
