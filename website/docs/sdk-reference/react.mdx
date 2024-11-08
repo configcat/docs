@@ -824,10 +824,14 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 
 - **Remote over local** (`OverrideBehaviour.RemoteOverLocal`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
 
-You can set up the SDK to load your feature flag & setting overrides from a `{ [name: string]: any }` map.
+You can load your feature flag & setting overrides from a simple `{ [key: string]: boolean | string | number }` map or query string parameters.
+
+### Map
+
+You can set up the SDK to load your feature flag & setting overrides from a `{ [key: string]: boolean | string | number }` map.
 
 ```tsx
-const flagOverrides: createFlagOverridesFromMap({
+const flagOverrides = createFlagOverridesFromMap({
     enabledFeature: true,
     disabledFeature: false,
     intSetting: 5,
@@ -838,14 +842,34 @@ OverrideBehaviour.LocalOnly);
 ```
 
 ```tsx
-<ConfigCatProvider
-  sdkKey="YOUR_SDK_KEY"
-  pollingMode={PollingMode.ManualPoll}
-  options={{ flagOverrides }}
->
+<ConfigCatProvider sdkKey="YOUR_SDK_KEY" options={{ flagOverrides }}>
   ...
 </ConfigCatProvider>
 ```
+
+### Query string
+
+Since v4.8.0, it is also possible to override feature flags & settings using query string parameters.
+
+```tsx
+const flagOverrides = createFlagOverridesFromQueryParams(OverrideBehaviour.LocalOverRemote);
+```
+
+```tsx
+<ConfigCatProvider sdkKey="YOUR_SDK_KEY" options={{ flagOverrides }}>
+  ...
+</ConfigCatProvider>
+```
+
+With that setup, you can override feature flags and settings by appending query string parameters to the URL of
+your application in the following form: `https://app.example.com/?cc-myBooleanFlag=true&cc-myStringSetting=abc&...`
+
+The setting type is automatically inferred from the value. Please pay attention to this behavior. The inferred type of
+the value must match the type of the feature flag or setting you override (see also [this table](#setting-type-mapping)).
+In case you want to force a boolean or number value to be interpreted as a string value, use the `;str` suffix: `&cc-myStringSetting;str=true`.
+
+If the default prefix used to differentiate between normal and flag override query string parameters (`cc-`) is not
+suitable for you, you can set a custom prefix using the corresponding optional parameter of `createFlagOverridesFromQueryParams`.
 
 ## Logging
 
