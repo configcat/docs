@@ -68,7 +68,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 
 ```java
 boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "isMyAwesomeFeatureEnabled", false);
-if(isMyAwesomeFeatureEnabled) {
+if (isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
     doTheOldThing();
@@ -120,7 +120,7 @@ These are the available options on the `Options` class:
 | Option                                                        | Description                                                                                                                                                                                                                                                                                        |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly`. |
-| `baseUrl(string)`                                             | _Obsolete_ Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                            |
+| `baseUrl(string)`                                             | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                            |
 | `httpClient(OkHttpClient)`                                    | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient).                                                                                                                                                 |
 | `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
 | `pollingMode(PollingMode)`                                    | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
@@ -188,7 +188,7 @@ client.getValueAsync(
     User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"), // Optional User Object
     false // Default value
 ).thenAccept(isMyAwesomeFeatureEnabled -> {
-    if(isMyAwesomeFeatureEnabled) {
+    if (isMyAwesomeFeatureEnabled) {
         doTheNewThing();
     } else {
         doTheOldThing();
@@ -270,8 +270,8 @@ User user = User.newBuilder().build("john@example.com");
 
 ```java
 java.util.Map<String,String> customAttributes = new java.util.HashMap<String,String>();
-    customAttributes.put("SubscriptionType", "Pro");
-    customAttributes.put("UserRole", "Admin");
+customAttributes.put("SubscriptionType", "Pro");
+customAttributes.put("UserRole", "Admin");
 
 User user = User.newBuilder()
     .email("john@example.com")
@@ -326,7 +326,7 @@ client.clearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache, then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -350,13 +350,13 @@ Available options:
 
 ### Lazy Loading
 
-When calling `getValue()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
+When calling `getValue()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `getValue()` will return the setting value after the cache is updated.
 
 Use the `cacheRefreshIntervalInSeconds` option parameter of the `PollingModes.lazyLoad()` to set cache lifetime.
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-        options.pollingMode(PollingModes.lazyLoad(60 /* the cache will expire in 120 seconds */));
+    options.pollingMode(PollingModes.lazyLoad(60 /* the cache will expire in 120 seconds */));
 });
 ```
 
@@ -374,7 +374,7 @@ Manual polling gives you full control over when the `config JSON` (with the sett
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options ->{
-        options.pollingMode(PollingModes.manualPoll());
+    options.pollingMode(PollingModes.manualPoll());
 });
 
 client.forceRefresh();
@@ -580,7 +580,7 @@ map.put("doubleSetting", 3.14);
 map.put("stringSetting", "test");
 
 ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
-        options.flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY)
+    options.flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY)
 });
 ```
 

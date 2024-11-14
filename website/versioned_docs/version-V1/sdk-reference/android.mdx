@@ -61,7 +61,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 
 ```java
 boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "<key-of-my-awesome-feature>", false);
-if(isMyAwesomeFeatureEnabled) {
+if (isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
     doTheOldThing();
@@ -70,7 +70,7 @@ if(isMyAwesomeFeatureEnabled) {
 // Or asynchronously
 client.getValueAsync(Boolean.class, "<key-of-my-awesome-feature>", false)
     .thenAccept(isMyAwesomeFeatureEnabled -> {
-        if(isMyAwesomeFeatureEnabled) {
+        if (isMyAwesomeFeatureEnabled) {
             doTheNewThing();
         } else {
             doTheOldThing();
@@ -115,7 +115,7 @@ These are the available options on the `Options` class:
 | Options                                                       | Description                                                                                                                                                                                                                                                                                        |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly`. |
-| `baseUrl(string)`                                             | _Obsolete_ Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                                               |
+| `baseUrl(string)`                                             | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                                               |
 | `httpClient(OkHttpClient)`                                    | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient).                                                                                                                                                 |
 | `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
 | `pollingMode(PollingMode)`                                    | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
@@ -182,7 +182,7 @@ client.getValueAsync(
     User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"), // Optional User Object
     false // Default value
 ).thenAccept(isMyAwesomeFeatureEnabled -> {
-    if(isMyAwesomeFeatureEnabled) {
+    if (isMyAwesomeFeatureEnabled) {
         doTheNewThing();
     } else {
         doTheOldThing();
@@ -265,8 +265,8 @@ User user = User.newBuilder().build("john@example.com");
 
 ```java
 java.util.Map<String,String> customAttributes = new java.util.HashMap<String,String>();
-    customAttributes.put("SubscriptionType", "Pro");
-    customAttributes.put("UserRole", "Admin");
+customAttributes.put("SubscriptionType", "Pro");
+customAttributes.put("UserRole", "Admin");
 
 User user = User.newBuilder()
     .email("john@example.com")
@@ -326,7 +326,7 @@ client.clearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache, then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -350,7 +350,7 @@ Available options:
 
 ### Lazy loading
 
-When calling `getValue()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `getValue()` will return the setting value after the cache is updated.
+When calling `getValue()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `getValue()` will return the setting value after the cache is updated.
 
 Use the `cacheRefreshIntervalInSeconds` parameter of the `PollingModes.lazyLoad()` to set cache lifetime.
 
@@ -506,7 +506,7 @@ List<EvaluationDetails<?>> allValueDetails = client.getAllValueDetails(user);
 ```java
 User user = User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#");
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
-        client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
+client.getAllValueDetailsAsync(user).thenAccept(allValueDetails -> { });
 ```
 
 ## Cache
@@ -519,7 +519,7 @@ The `SharedPreferencesCache` implementation uses the Android `SharedPreferences`
 
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-        options.cache(new SharedPreferencesCache(getApplicationContext())); // Use ConfigCat's shared preferences cache.
+    options.cache(new SharedPreferencesCache(getApplicationContext())); // Use ConfigCat's shared preferences cache.
 });
 ```
 
@@ -636,7 +636,7 @@ Examples for <a href="https://github.com/configcat/android-sdk/blob/master/sampl
 ## Sensitive information handling
 
 The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](../requests.mdx) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
-This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
+In ConfigCat, all SDK keys are read-only. They only allow downloading your config JSON files, but nobody can make any changes with them in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the ConfigCat SDK that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 

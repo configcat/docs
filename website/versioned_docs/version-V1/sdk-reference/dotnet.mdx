@@ -1,17 +1,18 @@
 ---
 id: dotnet
-title: .NET, .NET Core SDK Reference
-description: ConfigCat .NET, .NET Core SDK Reference. This is a step-by-step guide on how to use feature flags in your .NET, .NET Core application.
+title: .NET SDK Reference
+description: ConfigCat .NET SDK Reference. This is a step-by-step guide on how to use feature flags in your .NET application.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json');
 
-<script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(NetSchema) }}></script>
+<script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(NetSchema) }}></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/.net-sdk.svg?style=social)](https://github.com/configcat/.net-sdk/stargazers)
-[![Build status](https://ci.appveyor.com/api/projects/status/3kygp783vc2uv9xr?svg=true)](https://ci.appveyor.com/project/ConfigCat/net-sdk) [![NuGet Version](https://buildstats.info/nuget/ConfigCat.Client)](https://www.nuget.org/packages/ConfigCat.Client/)
+[![Build status](https://ci.appveyor.com/api/projects/status/3kygp783vc2uv9xr?svg=true)](https://ci.appveyor.com/project/ConfigCat/net-sdk)
+[![NuGet Version](https://img.shields.io/nuget/v/ConfigCat.Client)](https://www.nuget.org/packages/ConfigCat.Client/)
 [![Sonar Coverage](https://img.shields.io/sonar/coverage/net-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=net-sdk)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
 
@@ -44,6 +45,10 @@ dotnet add package ConfigCat.Client
 </TabItem>
 </Tabs>
 
+:::info
+To get the _ConfigCat SDK_ up and running in Unity, please refer to [this guide](./unity.mdx).
+:::
+
 ### 2. Import package
 
 ```csharp
@@ -60,7 +65,7 @@ var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 
 ```csharp
 var isMyAwesomeFeatureEnabled = client.GetValue("isMyAwesomeFeatureEnabled", false);
-if(isMyAwesomeFeatureEnabled)
+if (isMyAwesomeFeatureEnabled)
 {
     doTheNewThing();
 }
@@ -308,7 +313,7 @@ client.ClearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache then all `GetValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache, then all `GetValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -333,7 +338,7 @@ Available options:
 
 ### Lazy loading
 
-When calling `GetValue()` or `GetValueAsync()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `GetValue())` or `GetValueAsync()` will return the setting value after the cache is updated.
+When calling `GetValue()` or `GetValueAsync()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `GetValue()` or `GetValueAsync()` will return the setting value after the cache is updated.
 
 Use `cacheTimeToLive` parameter to manage configuration lifetime.
 
@@ -381,7 +386,7 @@ Console.WriteLine(client.GetValue("keyOfMyTextSetting", "my default value")); //
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
 Via the following events you can subscribe to particular events raised by the client:
 
-- `event EventHandler ClientReady`: This event is raised when the SDK reaches the ready state. If the SDK is set up to use lazy load or manual polling, it's considered ready right after instantiation.
+- `event EventHandler ClientReady`: This event is raised when the SDK reaches the ready state. If the SDK is set up to use lazy loading or manual polling, it's considered ready right after instantiation.
   If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `ClientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
 - `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
 - `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetails()`/`GetValueDetailsAsync()`](#anatomy-of-getvaluedetails).
@@ -776,7 +781,7 @@ Check out our Sample Applications how they use the _ConfigCat SDK_:
 See the following guides on how to use ConfigCat's .NET SDK:
 
 - <a href="https://configcat.com/blog/2022/11/25/feature-flags-in-net6/" target="_blank">.NET 6</a>
-- <a href="https://configcat.com/blog/2021/10/10/aspnetcore-options-pattern/" target="_blank">.NET Core</a>
+- <a href="https://configcat.com/blog/2021/10/10/aspnetcore-options-pattern/" target="_blank">ASP.NET Core</a>
 
 ## Look under the hood
 

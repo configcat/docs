@@ -61,7 +61,7 @@ if (value) {
 }
 ```
 
-(Please note that [top-level await in modules](https://exploringjs.com/impatient-js/ch_modules.html#top-level-await) is available only if your project is [set up to use the ECMAScript module system](https://nodejs.org/api/esm.html). Otherwise you will need either to use Promises or wrap your code in an async function as shown [here](https://github.com/configcat/node-sdk/blob/master/samples/console/index.js).)
+(Please note that [top-level await in modules](https://exploringjs.com/js/book/ch_modules.html#top-level-await) is available only if your project is [set up to use the ECMAScript module system](https://nodejs.org/api/esm.html). Otherwise you will need either to use Promises or wrap your code in an async function as shown [here](https://github.com/configcat/node-sdk/blob/master/samples/console/index.js).)
 
 The Promise way:
 
@@ -385,7 +385,7 @@ configCatClient.clearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache then all `getValueAsync()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache, then all `getValueAsync()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -413,7 +413,7 @@ Available options (in addition to the [common ones](#creating-the-configcat-clie
 
 ### Lazy loading
 
-When calling `getValueAsync()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `getValueAsync()` will return the setting value after the cache is updated.
+When calling `getValueAsync()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `getValueAsync()` will return the setting value after the cache is updated.
 
 Use `cacheTimeToLiveSeconds` option parameter to set cache lifetime.
 
@@ -478,7 +478,7 @@ console.log(value);
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
 You can subscribe to the following events emitted by the client:
 
-- `clientReady`: This event is emitted when the SDK reaches the ready state. If the SDK is set up to use lazy load or manual polling, it's considered ready right after instantiation.
+- `clientReady`: This event is emitted when the SDK reaches the ready state. If the SDK is set up to use lazy loading or manual polling, it's considered ready right after syncing up with the config cache.
   If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
 - `configChanged`: This event is emitted first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
 - `flagEvaluated`: This event is emitted each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`getValueDetailsAsync()`](#anatomy-of-getvaluedetailsasync).
@@ -536,7 +536,7 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 
 - **Remote over local** (`OverrideBehaviour.RemoteOverLocal`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
 
-You can set up the SDK to load your feature flag & setting overrides from a `{ [name: string]: any }` map.
+You can set up the SDK to load your feature flag & setting overrides from a `{ [key: string]: boolean | string | number }` map.
 
 ```js
 const configCatClient = configcat.getClient(
@@ -726,7 +726,7 @@ Therefore, it's recommended to use snapshots in conjunction with the Auto Pollin
 in the background. For other polling modes, you'll need to manually initiate a cache refresh by invoking `forceRefreshAsync`.
 :::
 
-In Auto Poll mode, you can use the `waitForReady` method to wait for that latest config data to become available locally:
+In Auto Poll mode, you can use the `waitForReady` method to wait for the latest config data to become available locally:
 
 ```js
 const configCatClient = configcat.getClient(
@@ -796,7 +796,7 @@ The JavaScript (SSR) SDK supports _shared caching_. You can read more about this
 ## Sensitive information handling
 
 The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](../requests.mdx) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
-This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
+In ConfigCat, all SDK keys are read-only. They only allow downloading your config JSON files, but nobody can make any changes with them in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the _ConfigCat SDK_ that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 
@@ -814,6 +814,17 @@ The SDK is [tested](https://github.com/configcat/js-ssr-sdk/blob/master/.github/
 
 These tests are running on each pull request, before each deploy, and on a daily basis.
 You can view a sample run [here](https://github.com/configcat/js-ssr-sdk/actions/runs/6400037904).
+
+## Next.js/AWS lambda recommendation
+
+If the SDK is running in a Next.js application that is hosted on Vercel (AWS lambda) or your application is hosted directly in AWS lambdas, it is recommended to use the SDK in Lazy loading or Manual polling mode instead of the default Auto polling mode.
+
+As AWS lamdbas try to minimize their uptime, the applications are terminated as soon as the sytem detects inactivity in the application. 
+
+The Auto polling mode is using a background thread to acquire the setting values from the ConfigCat servers periodically and the AWS lambda does not detect it as a running application and terminates it. 
+
+However, it can easily happen that there is an ongoing HTTP GET call towards our servers and this termination can cause errors.
+The most possible error message in this case is `Request timed out while trying to fetch config JSON.`.
 
 ## Sample Applications
 

@@ -33,8 +33,10 @@ You can find more information about CircleCI Orbs <a target="_blank" href="https
              # line-count: 3           # optional
              # sub-folder: 'src'       # optional
              # exclude-keys: >         # optional
-             #   flag_key_to_exclue_1
-             #   flag_key_to_exclue_2
+             #   flag_key_to_exclude_1
+             #   flag_key_to_exclude_2
+             # alias-patterns: (\w+) = :CC_KEY,const (\w+) = feature_flags\.enabled\(:CC_KEY\) # optional
+             # usage-patterns: feature_flags\.enabled\(:CC_KEY\)   # optional
              # verbose: true           # optional
    ```
 
@@ -51,9 +53,11 @@ Scan reports are uploaded for each branch of your repository that triggers the w
 | `api-host`            | ConfigCat Management API host.                                                                                                                                                                         |          | `api.configcat.com` |
 | `api-user`            | Name of the environment variable where the <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication username</a> is stored. |          | CONFIGCAT_API_USER  |
 | `api-pass`            | Name of the environment variable where the <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication password</a> is stored. |          | CONFIGCAT_API_PASS  |
-| `file-url-template`   | Template url used to generate VCS file links. Available template parameters: `commitHash`, `filePath`, `lineNumber`. Example: `https://github.com/my/repo/blob/{commitHash}/{filePath}#L{lineNumber}`    |          |                     |
-| `commit-url-template` | Template url used to generate VCS commit links. Available template parameters: `commitHash`. Example: `https://github.com/my/repo/commit/{commitHash}`                                                   |          |                     |
+| `file-url-template`   | Template url used to generate VCS file links. Available template parameters: `commitHash`, `filePath`, `lineNumber`. Example: `https://github.com/my/repo/blob/{commitHash}/{filePath}#L{lineNumber}`  |          |                     |
+| `commit-url-template` | Template url used to generate VCS commit links. Available template parameters: `commitHash`. Example: `https://github.com/my/repo/commit/{commitHash}`                                                 |          |                     |
 | `line-count`          | Context line count before and after the reference line. (min: 1, max: 10)                                                                                                                              |          | 4                   |
 | `sub-folder`          | Sub-folder to scan, relative to the repository root folder.                                                                                                                                            |          |                     |
 | `exclude-keys`        | List of feature flag keys that must be excluded from the scan report.                                                                                                                                  |          |                     |
+| `alias-patterns`      | Comma delimited list of custom regex patterns used to search for additional aliases.                                                                                                                   |          |                     |
+| `usage-patterns`      | Comma delimited list of custom regex patterns that describe additional feature flag key usages. |  |          |
 | `verbose`             | Turns on detailed logging.                                                                                                                                                                             |          | false               |

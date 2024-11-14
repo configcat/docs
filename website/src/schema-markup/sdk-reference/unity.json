@@ -1,0 +1,60 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "HowTo",
+  "name": "How to use feature flags in Unity?",
+  "description": "How to use feature flags in Unity using ConfigCat Feature Flags. https://configcat.com",
+  "image": "https://configcat.com/images/shared/home.png",
+  "totalTime": "PT10M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "tool": {
+    "@type": "HowToTool",
+    "name": "ConfigCat Feature Flags - https://configcat.com"
+  },
+  "supply": {
+    "@type": "HowToSupply",
+    "name": "ConfigCat",
+    "image": "https://configcat.com/images/shared/home.png",
+    "url": "https://configcat.com"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "text": "Sign up for a free ConfigCat account",
+      "name": "Registration",
+      "url": "https://app.configcat.com/auth/signup",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Get the SDK assembly files",
+      "name": "Installation",
+      "url": "https://configcat.com/docs/sdk-reference/unity/#1-get-the-sdk-assembly-files",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Add the SDK assembly files to your Unity project",
+      "name": "Import",
+      "url": "https://configcat.com/docs/sdk-reference/unity/#2-add-the-sdk-assembly-files-to-your-unity-project",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Create a script for hosting the _ConfigCat_ client",
+      "name": "Initialization",
+      "url": "https://configcat.com/docs/sdk-reference/unity/#3-create-a-script-for-hosting-the-configcat-client",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Get your setting value",
+      "name": "Evaluation",
+      "url": "https://configcat.com/docs/sdk-reference/unity/#4-get-your-setting-value",
+      "image": "https://configcat.com/images/shared/home.png"
+    }
+  ]
+}

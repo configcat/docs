@@ -535,7 +535,7 @@ export const ClearConfigCatUserComponent = () => {
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache then all `getValueAsync()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache, then all `getValueAsync()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -579,7 +579,7 @@ Available options (in addition to the [common ones](#creating-the-configcat-clie
 
 ### Lazy loading
 
-When calling `useFeatureFlag()` or `WithConfigCatClientProps.getValue()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache.
+When calling `useFeatureFlag()` or `WithConfigCatClientProps.getValue()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache.
 
 #### Initialization
 
@@ -635,7 +635,7 @@ useEffect(() => {
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
 You can subscribe to the following events emitted by the client:
 
-- `clientReady`: This event is emitted when the SDK reaches the ready state. If the SDK is set up to use lazy load or manual polling, it's considered ready right after instantiation.
+- `clientReady`: This event is emitted when the SDK reaches the ready state. If the SDK is set up to use lazy loading or manual polling, it's considered ready right after instantiation.
   If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
 - `configChanged`: This event is emitted first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
 - `flagEvaluated`: This event is emitted each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from `getValueDetailsAsync()`.
@@ -775,10 +775,10 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 
 - **Remote over local** (`OverrideBehaviour.RemoteOverLocal`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
 
-You can set up the SDK to load your feature flag & setting overrides from a `{ [name: string]: any }` map.
+You can set up the SDK to load your feature flag & setting overrides from a `{ [key: string]: boolean | string | number }` map.
 
 ```tsx
-const flagOverrides: createFlagOverridesFromMap({
+const flagOverrides = createFlagOverridesFromMap({
     enabledFeature: true,
     disabledFeature: false,
     intSetting: 5,
@@ -932,7 +932,7 @@ The React SDK supports _shared caching_. You can read more about this feature an
 ## Sensitive information handling
 
 The frontend/mobile SDKs are running in your users' browsers/devices. The SDK is downloading a [config JSON](../requests.mdx) file from ConfigCat's CDN servers. The URL path for this config JSON file contains your SDK key, so the SDK key and the content of your config JSON file (feature flag keys, feature flag values, Targeting Rules, % rules) can be visible to your users.
-This SDK key is read-only, it only allows downloading your config JSON file, but nobody can make any changes with it in your ConfigCat account.
+In ConfigCat, all SDK keys are read-only. They only allow downloading your config JSON files, but nobody can make any changes with them in your ConfigCat account.
 
 If you do not want to expose the SDK key or the content of the config JSON file, we recommend using the SDK in your backend components only. You can always create a backend endpoint using the _ConfigCat SDK_ that can evaluate feature flags for a specific user, and call that backend endpoint from your frontend/mobile applications.
 

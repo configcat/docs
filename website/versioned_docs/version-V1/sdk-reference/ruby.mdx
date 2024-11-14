@@ -74,7 +74,7 @@ _ConfigCat Client_ is responsible for:
 
 | Client options         | Description                                                                                                                                                                                                                                                         | Default               |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| `base_url`             | _Obsolete_, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                         | nil                   |
+| `base_url`             | Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                         | nil                   |
 | `polling_mode`         | Sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                   | PollingMode.auto_poll |
 | `config_cache`         | Sets a custom config cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                        | nil                   |
 | `proxy_address`        | Sets custom proxy address for the client. [More about proxy](#using-configcat-behind-a-proxy).                                                                                                                                                                      | nil                   |
@@ -230,7 +230,7 @@ client.clear_default_user
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache, then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -256,7 +256,7 @@ Available options:
 
 ### Lazy loading
 
-When calling `get_value` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `get_value` will return the setting value after the cache is updated.
+When calling `get_value`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `get_value` will return the setting value after the cache is updated.
 
 Use `cache_refresh_interval_seconds` option parameter to set cache lifetime.
 
@@ -317,7 +317,7 @@ With the following hooks you can subscribe to particular events fired by the SDK
 You can subscribe to these events either on SDK initialization:
 
 ```ruby
-def on_flag_evaluated(evaluation_details):
+def on_flag_evaluated(evaluation_details)
     # handle the event
 end
 

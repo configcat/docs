@@ -58,6 +58,35 @@ To get the ID of a Config, follow the steps below:
 
 The scanner looks for feature flag and setting keys between quotation marks (`'` `"` `` ` ``) in the first place.
 
+:::info
+There's an option to extend the feature flag and setting key usage regex patterns with the `--usage-patterns` argument of the `scan` command. 
+
+```bash
+configcat scan <dir> --usage-patterns "<pattern1>" "<pattern2>"
+```
+
+Usage patterns can also be set via the `CONFIGCAT_USAGE_PATTERNS` environment variable as a comma delimited list.
+
+```bash
+export CONFIGCAT_USAGE_PATTERNS="<pattern1>,<pattern2>";
+```
+
+The regex pattern must include the `CC_KEY` placeholder that represents the actual feature flag or setting key in your code.
+For example, the following pattern allows the recognition of Ruby symbols as flag key usages:
+
+```bash
+configcat scan <dir> --usage-patterns ":CC_KEY"
+```
+
+It will match for the following usage:
+
+```ruby
+if FeatureFlags.enabled(:my_feature_key)
+  #...
+end
+```
+:::
+
 ### Aliases
 
 The found keys' context is examined for **aliases**, like variables, constants, or enumerations used to store these keys.
@@ -68,16 +97,16 @@ For example, the following `C#` constant's name (`MyAwesomeFeature`) will be rec
 ```csharp
 public static class FeatureFlagKeys
 {
-  public const string MyAwesomeFeature = "my_awesome_feature";
+    public const string MyAwesomeFeature = "my_awesome_feature";
 }
 ```
 
 The scanner will treat this constant's usage as an indirect reference to the flag.
 
 ```csharp
-if (configCatClient.GetValue(FeatureFlagKeys.MyAwesomeFeature, false))
+if (await configCatClient.GetValueAsync(FeatureFlagKeys.MyAwesomeFeature, false))
 {
-  // the feature is on.
+    // the feature is on.
 }
 ```
 
@@ -112,6 +141,44 @@ The similarity check is case insensitive and ignores `_` characters.
 This behavior prevents false recognitions in expressions like `<input type="text" value="my_awesome_feature">` where `value` shouldn't be treated as alias.
 :::
 
+### Custom alias match patterns
+
+There's an option to set custom regex patterns for identifying additional aliases. The `scan` command accepts a list of patterns via the `--alias-patterns` argument.
+
+```bash
+configcat scan <dir> --alias-patterns "<pattern1>" "<pattern2>"
+```
+
+The CLI also accepts patterns from the `CONFIGCAT_ALIAS_PATTERNS` environment variable as a comma delimited list.
+
+```bash
+export CONFIGCAT_ALIAS_PATTERNS="<pattern1>,<pattern2>";
+```
+
+#### Match pattern format
+
+The regex pattern must include at least one capture group that represents the actual alias. When more than one group is defined, the first one is selected.
+To bind the actual flag keys to aliases, the CLI uses a `CC_KEY` placeholder to inject the known keys into the pattern.
+
+For example, the following pattern allows to find aliases that point to Ruby symbols:
+
+```bash
+configcat scan <dir> --alias-patterns "(\w+) = client\.get_value\(:CC_KEY"
+```
+
+It will match to the following usage:
+
+```ruby
+# 'my_feature_enabled' now is treated as an alias to the 'my_feature_key' flag.
+my_feature_enabled = client.get_value(:my_feature_key, false)
+```
+
+:::note
+The CLI implicitly adds the optional `` ` ``, `'`, `"` wrapping around flag keys, so you don't have to wrap the `CC_KEY` placeholder manually.
+
+For example, the pattern `(\w+) = CC_KEY` will either match to `alias = flag_key`, `alias = "flag_key"`, `alias = 'flag_key'`, or ``alias = `flag_key` ``.
+:::
+
 ### Wrappers
 
 In addition to aliases, the scanner also looks for different feature flag/setting key usage patterns. This helps to recognize functions and properties used to wrap direct ConfigCat SDK calls as indirect references. Aliases are also included in this search.
@@ -121,17 +188,17 @@ For example, the scanner will treat the `IsMyAwesomeFeatureEnabled` function of 
 ```csharp
 public class FeatureFlagProvider
 {
-  public bool IsMyAwesomeFeatureEnabled(bool defaultValue = false)
+  public async Task<bool> IsMyAwesomeFeatureEnabled(bool defaultValue = false)
   {
-    return configCatClient.GetValue("my_awesome_feature", defaultValue);
+    return await configCatClient.GetValueAsync("my_awesome_feature", defaultValue);
   }
 }
 ```
 
-And will include it's usage in the scan report:
+And will include its usage in the scan report:
 
 ```csharp
-if (featureFlagProvider.IsMyAwesomeFeatureEnabled())
+if (await featureFlagProvider.IsMyAwesomeFeatureEnabled())
 {
   // the feature is on.
 }

@@ -88,7 +88,7 @@ Available optional properties:
 | ------------------ | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `SDKKey`           | `string`                   | SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                                                                                                                                                                                                     |
 | `DataGovernance`   | `configcat.DataGovernance` | Defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly`. |
-| `BaseUrl`          | `string`                   | _Obsolete_ Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                                   |
+| `BaseUrl`          | `string`                   | Sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                                   |
 | `Cache `           | `ConfigCache`              | Sets a custom cache implementation for the client. [See below](#custom-cache).                                                                                                                                                                                                                  |
 | `NoWaitForRefresh` | `bool`                     | Defaults to `false`. When it's `true` the typed get methods (`Get[TYPE]Value()`) will never wait for a configuration refresh to complete before returning. When it's `false` and `PollingMode` is `AutoPoll`, the first request may block, when `PollingMode` is `Lazy`, any request may block. |
 | `HttpTimeout`      | `time.Duration`            | Sets the maximum wait time for a HTTP response. [More about the HTTP timeout](#http-timeout)                                                                                                                                                                                                    |
@@ -116,7 +116,7 @@ If you want to use multiple SDK Keys in the same application, create only one _C
 
 ## Anatomy of `Get[TYPE]Value()`
 
-Basically all of the value evaluator methods share the same signature, they only differ in their served value type. `GetBoolValue()` is for evaluating feature flags, `GetIntValue()` and `GetFloatValue()` are for numeric and `GetStringValue()` is for textual settings.
+All feature flag evaluator methods share the same signature, they only differ in their served value type. `GetBoolValue()` is for evaluating feature flags, `GetIntValue()` and `GetFloatValue()` are for numeric and `GetStringValue()` is for textual settings.
 
 | Parameters     | Description                                                                                        |
 | -------------- | -------------------------------------------------------------------------------------------------- |
@@ -255,7 +255,7 @@ value := client.GetBoolValue("keyOfMyBoolSetting", false, otherUser)
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache then all value retrievals are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache, then all value retrievals are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -272,7 +272,7 @@ client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
 
 ### Lazy loading
 
-When calling `GetBoolValue()`, `GetIntValue()`, `GetFloatValue()` or `GetStringValue()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case, when the `NoWaitForRefresh` option is `false` the new setting value will be returned right after the cache update. When it's set to `true` the setting value retrievals will not wait for the downloads and they will return immediately with the previous setting value.
+When calling `GetBoolValue()`, `GetIntValue()`, `GetFloatValue()` or `GetStringValue()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case, when the `NoWaitForRefresh` option is `false` the new setting value will be returned right after the cache update. When it's set to `true` the setting value retrievals will not wait for the downloads and they will return immediately with the previous setting value.
 
 Use the `PollInterval` option parameter of the _ConfigCat Client_ to set the cache TTL.
 
@@ -309,9 +309,9 @@ You can subscribe to these events on SDK initialization:
 
 ```go
 client := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
-    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *EvaluationDetails) {
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *configcat.EvaluationDetails) {
         /* handle the event */
-    }})
+    }}})
 ```
 
 ## Online / Offline mode

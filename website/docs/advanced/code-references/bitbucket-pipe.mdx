@@ -10,7 +10,7 @@ You can find more information about Bitbucket Pipelines <a target="_blank" href=
 ## Setup
 
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in secure pipeline variables with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
-   <img  src="/docs/assets/cli/scan/pipe_secrets.png" alt="Bitbucket Pipe secrets" />
+   <img  src="/docs/assets/cli/scan/pipe_secrets.png" className="bordered-img" alt="Bitbucket Pipe secrets" />
 
 2. Get your selected [Config's ID](overview.mdx#config-id).
 
@@ -24,8 +24,10 @@ You can find more information about Bitbucket Pipelines <a target="_blank" href=
        # LINE_COUNT: '3'         # optional
        # SUB_FOLDER: '/src'      # optional
        # EXCLUDE_KEYS: >         # optional
-       #   flag_key_to_exclue_1
-       #   flag_key_to_exclue_2
+       #   flag_key_to_exclude_1
+       #   flag_key_to_exclude_2
+       # ALIAS_PATTERNS: (\w+) = :CC_KEY,const (\w+) = feature_flags\.enabled\(:CC_KEY\)  # optional
+       # USAGE_PATTERNS: feature_flags\.enabled\(:CC_KEY\)
        # VERBOSE: 'true'         # optional
    ```
 
@@ -42,4 +44,6 @@ Scan reports are uploaded for each branch of your repository that triggers the j
 | `LINE_COUNT`         | Context line count before and after the reference line. (min: 1, max: 10) |          | 4                   |
 | `SUB_FOLDER`         | Sub-folder to scan, relative to the repository root folder.               |          |                     |
 | `EXCLUDE_KEYS`       | List of feature flag keys that must be excluded from the scan report.     |          |                     |
+| `ALIAS_PATTERNS`     | Comma delimited list of custom regex patterns used to search for additional aliases. |   |                 |
+| `USAGE_PATTERNS`     | Comma delimited list of custom regex patterns that describe additional feature flag key usages. |   |      |
 | `VERBOSE`            | Turns on detailed logging.                                                |          | false               |

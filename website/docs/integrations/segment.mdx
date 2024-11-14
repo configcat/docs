@@ -1,0 +1,432 @@
+---
+id: segment
+title: Twilio Segment - Monitor your feature flag change events and feature flag analytics
+description: ConfigCat Twilio Segment integration. This is a step-by-step guide on how to connect the ConfigCat feature flag service events to Twilio Segment.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+## Overview
+
+There are two available integration opportunities between [ConfigCat and Twilio Segment](https://segment.com/docs/connections/sources/catalog/cloud-apps/configcat/):
+- [Sending feature flag change events to Twilio Segment](#changeevents)
+- [Sending feature flag evaluation analytics to Twilio Segment](#analytics)
+
+## Sending feature flag change events to Twilio Segment {#changeevents}
+
+Ensures that every setting change in ConfigCat is sent to Segment as a <a href="https://segment.com/docs/connections/spec/track/" target="_blank" rel="noopener noreferrer">track event</a>.
+
+<img src="/docs/assets/segment/featureflagchanged.png" className="bordered-img zoomable" alt="Twilio Segment Feature Flag Changed event" />
+
+### Installation
+
+1. Have a <a href="https://segment.com/" target="_blank" rel="noopener noreferrer">Twilio Segment account.</a>
+2. Add the <a href="https://segment.com/catalog/integrations/source/configcat/" target="_blank" rel="noopener noreferrer">ConfigCat source</a> to your Twilio Segment account and copy the Write Key.
+3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
+4. Click on Twilio Segment's CONNECT button and set the Twilio Segment Write Key acquired while adding the ConfigCat source in Twilio Segment.
+5. OPTIONAL - Set the proper server of your Twilio Segment account. <a href="https://segment.com/docs/guides/regional-segment/" target="_blank" rel="noopener noreferrer">More about Segment servers</a>.
+6. You're all set. Go ahead and make some changes on your feature flags, then check your events in Twilio Segment.
+
+### Un-installation
+
+1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
+2. Click on Twilio Segment's DISCONNECT button.
+
+### Event details
+
+Every feature flag change event sent to Twilio Segment by ConfigCat has the following properties:
+
+- **event name:** `Feature Flag Changed`.
+- **timestamp:** When the change happened.
+- **details:** A brief summary of the change.
+- **product_id, product_name**: The product where the change happened.
+- **config_id, config_name**: The config where the change happened.
+- **environment_id, environment_name**: The environment where the change happened.
+- **url**: A direct link to the config/feature flag.
+- **userId, user_email, user_full_name**: Who made the changes.
+
+## Sending feature flag evaluation analytics to Twilio Segment {#analytics}
+
+Ensures that feature flag evaluations are sent into the Twilio Segment <a href="https://segment.com/catalog/integrations/source/configcat/" target="_blank" rel="noopener noreferrer">ConfigCat source</a>. With this integration, you can have advanced analytics about your feature flag usages, A/B test results in any of Segment's destinations.
+
+### Setup
+
+1. **Add ConfigCat source in Twilio Segment:** Add the ConfigCat source in Twilio Segment.
+1. **Install SDKs:** Add both the ConfigCat SDK and Segment SDK to your application.
+2. **Configure SDKs:**
+   - **ConfigCat SDK:** Initialize with your ConfigCat SDK key.
+   - **Twilio Segment SDK:** Set up with the Twilio Segment Write Key acquired while adding the ConfigCat source in Twilio Segment.
+3. **Integrate Feature Flag Evaluations:**
+   - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
+   - Send feature flag evaluation data to Twilio Segment using the `Feature Flag Evaluated` event name. Include the following parameters:
+     - `feature_flag_key`: the feature flag's key.
+     - `value`: the evaluated feature flag's value or Variation ID.
+     - `variation_id` (optional): the evaluated feature flag's Variation ID.
+     - `userId` (optional): the user object's identifier used during feature flag evaluation.
+     - `user` (optional): the user object used during feature flag evaluation.
+
+Code samples:
+<Tabs>
+<TabItem value="js" label="JavaScript, Node, SSR" default>
+```js
+const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_KEY#" });
+segmentAnalytics.addSourceMiddleware(({payload, next}) => {
+    payload.obj.context.integration = payload.obj.context.integration || {};
+    payload.obj.context.integration['name'] = 'configcat';
+    payload.obj.context.integration['version'] = '1.0.0';
+    next(payload);
+});
+
+const configCatClient = configcat.getClient("#YOUR_SDK_KEY#", PollingMode.AutoPoll, {
+    setupHooks: (hooks) =>
+        hooks.on('flagEvaluated', evaluationDetails => {
+            if (evaluationDetails.user) {
+                segmentAnalytics.identify(evaluationDetails.user.identifier, evaluationDetails.user);
+            }
+            segmentAnalytics.track('Feature Flag Evaluated',
+                {
+                    'feature_flag_key': evaluationDetails.key,
+                    'value': evaluationDetails.value,
+                    'variation_id': evaluationDetails.variationId,
+                    'user': evaluationDetails.user
+                });
+        }),
+});
+```
+</TabItem>
+
+<TabItem value="react" label="React">
+```tsx
+const segmentAnalytics = AnalyticsBrowser.load({ writeKey: "#YOUR_SEGMENT_WRITE_KEY#" });
+segmentAnalytics.addSourceMiddleware(({payload, next}) => {
+    payload.obj.context.integration = payload.obj.context.integration || {};
+    payload.obj.context.integration['name'] = 'configcat';
+    payload.obj.context.integration['version'] = '1.0.0';
+    next(payload);
+});
+
+//...
+
+<ConfigCatProvider
+  sdkKey="#YOUR_SDK_KEY"
+  pollingMode={PollingMode.AutoPoll}
+  options={{
+    setupHooks: (hooks) =>
+      hooks.on('flagEvaluated', evaluationDetails => {
+        if (evaluationDetails.user) {
+            segmentAnalytics.identify(evaluationDetails.user.identifier, evaluationDetails.user);
+        }
+        segmentAnalytics.track('Feature Flag Evaluated',
+            {
+                'feature_flag_key': evaluationDetails.key,
+                'value': evaluationDetails.value,
+                'variation_id': evaluationDetails.variationId,
+                'user': evaluationDetails.user
+            });
+      }),
+  }}
+>
+</ConfigCatProvider>
+```
+</TabItem>
+
+<TabItem value="python" label="Python">
+```python
+import segment.analytics as analytics
+import configcatclient
+from configcatclient.configcatoptions import ConfigCatOptions, Hooks
+import uuid
+
+analytics.write_key = '#YOUR_SEGMENT_WRITE_KEY#'
+
+def on_flag_evaluated(evaluation_details):
+    if evaluation_details.user is not None:
+        analytics.track(user_id=evaluation_details.user.get_identifier(), 
+            event='Feature Flag Evaluated',  
+            properties={
+                'feature_flag_key': evaluation_details.key,
+                'value': evaluation_details.value,
+                'variation_id': evaluation_details.variation_id,
+                'user': vars(evaluation_details.user)
+            }, 
+            context={
+                'integration': {
+                    'name': 'configcat',
+                    'version': '1.0.0'
+                }
+            }
+        )
+    else:
+        analytics.track(anonymous_id=str(uuid.uuid4()), # Or any other kind of random anonymus id.
+        event='Feature Flag Evaluated',  
+        properties={
+            'feature_flag_key': evaluation_details.key,
+            'value': evaluation_details.value,
+            'variation_id': evaluation_details.variation_id
+        }, 
+        context={
+            'integration': {
+                'name': 'configcat',
+                'version': '1.0.0'
+            }
+        })
+    pass
+
+client = configcatclient.get('#YOUR_SDK_KEY#',
+    ConfigCatOptions(
+        hooks=Hooks(on_flag_evaluated=on_flag_evaluated)
+    )
+)
+```
+</TabItem>
+
+<TabItem value="ruby" label="Ruby">
+```ruby
+require 'configcat'
+require 'segment/analytics'
+require 'securerandom'
+
+Analytics = Segment::Analytics.new({
+    write_key: '#YOUR-SEGMENT-WRITE-KEY#',
+    on_error: Proc.new { |status, msg| print msg }
+})
+
+def on_flag_evaluated(evaluation_details)
+    if evaluation_details.user
+        Analytics.track(
+            user_id: evaluation_details.user.get_identifier(),
+            event: "Feature Flag Evaluated",  
+            properties: {
+                feature_flag_key: evaluation_details.key,
+                value: evaluation_details.value,
+                variation_id: evaluation_details.variation_id,
+                user: evaluation_details.user
+            },
+            context: {
+                integration: {
+                    name: 'configcat',
+                    version: '1.0.0'
+                }
+            }
+        )
+    else
+        Analytics.track(
+            anonymous_id: SecureRandom.uuid, # Or any other kind of random anonymus id.
+            event: "Feature Flag Evaluated",  
+            properties: {
+                feature_flag_key: evaluation_details.key,
+                value: evaluation_details.value,
+                variation_id: evaluation_details.variation_id
+            },
+            context: {
+                integration: {
+                    name: 'configcat',
+                    version: '1.0.0'
+                }
+            }
+        )
+    end
+end
+
+client = ConfigCat.get("#YOUR-SDK-KEY#",
+    ConfigCat::ConfigCatOptions.new(
+        hooks: ConfigCat::Hooks.new(on_flag_evaluated: method(:on_flag_evaluated))
+    )
+)
+```
+</TabItem>
+
+<TabItem value="go" label="Go">
+```go
+import (
+	configcat "github.com/configcat/go-sdk/v9"
+	"github.com/google/uuid"
+	"github.com/segmentio/analytics-go"
+)
+
+analyticsClient := analytics.New("#YOUR_SEGMENT_WRITE_KEY#")
+
+configCatClient := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR_SDK_KEY#",
+    Hooks: &configcat.Hooks{OnFlagEvaluated: func(details *configcat.EvaluationDetails) {
+        if details.Data.User != nil {
+            analyticsClient.Enqueue(analytics.Track{
+                UserId: details.Data.User.(*configcat.UserData).Identifier,
+                Event:  "Feature Flag Evaluated",
+                Properties: analytics.NewProperties().
+                    Set("feature_flag_key", details.Data.Key).
+                    Set("value", details.Value).
+                    Set("variation_id", details.Data.VariationID).
+                    Set("user", details.Data.User.(*configcat.UserData)),
+                Context: &analytics.Context{
+                    Extra: map[string]interface{}{
+                        "integration": map[string]interface{}{
+                            "name":    "configcat",
+                            "version": "1.0.0",
+                        },
+                    },
+                },
+            })
+        } else {
+            analyticsClient.Enqueue(analytics.Track{
+                AnonymousId: uuid.New().String(), // Or any other kind of random anonymus id.
+                Event:       "Feature Flag Evaluated",
+                Properties: analytics.NewProperties().
+                    Set("feature_flag_key", details.Data.Key).
+                    Set("value", details.Value).
+                    Set("variation_id", details.Data.VariationID),
+                Context: &analytics.Context{
+                    Extra: map[string]interface{}{
+                        "integration": map[string]interface{}{
+                            "name":    "configcat",
+                            "version": "1.0.0",
+                        },
+                    },
+                },
+            })
+        }
+    }}})
+```
+</TabItem>
+
+<TabItem value="java" label="Java">
+```java
+import com.configcat.ConfigCatClient;
+import com.configcat.User;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.messages.TrackMessage;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+//...
+
+Analytics analytics = Analytics.builder("#YOUR_SEGMENT_WRITE_KEY#").build();
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.hooks().addOnFlagEvaluated(details -> {
+        
+        Map<String, String> contextMapIntegrations = new HashMap<>();
+        contextMapIntegrations.put("name", "configcat");
+        contextMapIntegrations.put("version", "1.0.0");
+
+        Map<String, Object> contextMap = new HashMap<>();
+        contextMap.put("integration", contextMapIntegrations);
+
+        Map<String, Object> propertiesMap = new HashMap<>();
+        propertiesMap.put("feature_flag_key", details.getKey());
+        propertiesMap.put("value", details.getValue());
+        propertiesMap.put("variation_id", details.getVariationId());
+
+        if (details.getUser() != null){
+            propertiesMap.put("user", details.getUser());
+
+            analytics.enqueue(TrackMessage.builder("Feature Flag Evaluated")
+                    .userId(details.getUser().getIdentifier())
+                    .properties(propertiesMap)
+                    .context(contextMap)
+            );
+        } else {
+            analytics.enqueue(TrackMessage.builder("Feature Flag Evaluated")
+                    .anonymousId(UUID.randomUUID().toString())
+                    .properties(propertiesMap)
+                    .context(contextMap)
+            );
+        }
+    });
+});
+```
+</TabItem>
+
+<TabItem value="android" label="Android">
+```java
+Analytics analytics = new Analytics.Builder(getApplicationContext(), "#YOUR_SEGMENT_WRITE_KEY#").build();
+Analytics.setSingletonInstance(analytics);
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
+    options.cache(new SharedPreferencesCache(getApplicationContext()));
+    options.hooks().addOnFlagEvaluated(details -> {
+        Properties properties = new Properties()
+            .putValue("feature_flag_key", details.getKey())
+            .putValue("value", details.getValue())
+            .putValue("variation_id", details.getVariationId());
+
+        Map<String, Object> contextMapIntegrations = new HashMap<>();
+        contextMapIntegrations.put("name", "configcat");
+        contextMapIntegrations.put("version", "1.0.0");
+
+        Options optionsAnalytics = new Options().putContext("integration", contextMapIntegrations);
+
+        if (details.getUser() != null){
+            analytics.identify(details.getUser().getIdentifier());
+            properties.putValue("user", details.getUser());
+        } else {
+            analytics.identify(new Traits().putValue("anonymousId", UUID.randomUUID().toString()));
+        }
+
+        analytics.track("Feature Flag Evaluated", properties, optionsAnalytics);
+    });
+});
+```
+</TabItem>
+
+<TabItem value="ios" label="Swift (iOS)">
+```swift
+import ConfigCat
+import Segment
+
+let configuration = Configuration(writeKey: "#YOUR_SEGMENT_WRITE_KEY#")
+let analytics = Analytics(configuration: configuration)
+analytics.add { ev in
+    var event = ev
+    if var ctx = ev?.context?.dictionaryValue {
+        ctx[keyPath: "integration.name"] = "configcat"
+        ctx[keyPath: "integration.version"] = "1.0.0"
+        event?.context = try? JSON(ctx)
+    }
+    return event
+}
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.hooks.addOnFlagEvaluated { details in
+        if let user = details.user {
+            analytics.identify(userId: user.identifier)
+        }
+
+        analytics.track(name: "Feature Flag Evaluated", properties: [
+            "feature_flag_key": details.key,
+            "value": details.value,
+            "variation_id": details.variationId ?? "",
+            "user": details.user?.description ?? ""
+        ])
+    }
+}
+```
+</TabItem>
+
+<TabItem value="other" label="Other languages">
+While our documentation primarily provides code examples for languages that Twilio Segment natively supports and has an official SDK, 
+you can integrate with other languages by sending an event to Twilio Segment with a third-party SDK or with using the <a href="https://segment.com/docs/connections/sources/catalog/libraries/server/http-api/" target="_blank" rel="noopener noreferrer">Segment's HTTP API source</a>. 
+
+1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
+2. **Send an event to Twilio Segment** using the `Feature Flag Evaluated` event name. If the feature flag was evaluated with a user object, set the event's `userId` property to the user object's identifier. Otherwise, set the `anonymousId` property to a random generated string. Also, include the following event properties:
+    - `feature_flag_key`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails.
+    - `value`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
+    - `variation_id`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
+    - `user` (optional): the user object used during feature flag evaluation.
+</TabItem>
+
+</Tabs>
+
+:::note
+For Text feature flags with lengthy values (e.g., JSON), send the `variationId` instead of the `value` as the `value` to Twilio Segment.
+The `variationId` is a hashed version of the feature flag value, accessible on the ConfigCat Dashboard by enabling the _Show VariationIDs to support A/B testing_ setting. Learn more [here](https://app.configcat.com/product/preferences).
+:::
+
+4. Deploy your application and wait for feature flag evaluations to happen so feature flag evaluation events could be sent to Twilio Segment.
+5. Add the preferred destination in Twilio Segment for your source and configure your mappings. 
+6. Enable the destination and leverage advanced feature flag analytics in the destination.
+
+### Example event
+Check your source's debugger to see the events.
+<img src="/docs/assets/segment/featureflagevaluated.png" className="bordered-img zoomable" alt="Twilio Segment event debugger" />

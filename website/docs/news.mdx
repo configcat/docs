@@ -8,6 +8,174 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 {/* This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html */}
 
+
+## Disable two-factor authentication permission
+
+#### Oct 8, 2024
+
+You can disable two-factor authentication for your team members. This feature is useful if someone loses the device used for two-factor authentication.
+
+*Only team members with Organization Admin role or with 'Can disable two-factor authentication for other team members' permission can disable two-factor authentication.*
+
+[Open Team Members page on our Dashboard](https://app.configcat.com/product/members)
+
+## Introducing ConfigCat Playground:<br/>Test Feature Flags Easily in a safe environment
+
+#### Sept 26, 2024
+
+We've just released the ConfigCat Playground, a simulator that provides a safe virtual environment where you can try out everything ConfigCat has to offer.
+
+This new feature gives you virtual devices and a virtual app that can be connected to your ConfigCat feature flags. This lets you test feature flags and targeting rules without needing to connect any real applications.
+
+Please do not use the Playground with feature flags already connected to live applications. We highly recommend using feature flags from non-production environments when experimenting in the Playground.
+        
+To get started, simply click on the <strong>"Test in Playground"</strong> option in the <strong>...</strong> menu of any boolean feature flag inside your ConfigCat Dashboard.
+
+<img src="/docs/assets/news/playground.png" alt="ConfigCat Playground" />
+<img src="/docs/assets/news/playground-context-menu.png" width="700" alt="Test in Playground option in the ... menu" />
+
+## New ConfigCat OpenFeature providers
+
+#### Sept 6, 2024
+
+We're happy to share that we have released new OpenFeature providers for the following platforms:
+
+- [PHP](./sdk-reference/openfeature/php.mdx)
+- [Python](./sdk-reference/openfeature/python.mdx)
+- [Rust](./sdk-reference/openfeature/rust.mdx)
+
+[See the documentation](./sdk-reference/openfeature/overview.mdx) for the complete list of currently supported platforms.
+
+## Integration management via Public Management API and Terraform
+
+#### Aug 13, 2024
+
+From now on, you can manage your Integrations through the ConfigCat Public Management API and Terraform provider. See the docs for details:
+
+<ul>
+    <li>
+        ConfigCat Public Management API: use the
+        <a href="https://api.configcat.com/docs/index.html#tag/Integrations" target="_blank" rel="noopener noreferrer">Integrations</a>
+        endpoints.
+    </li>
+    <li>
+        ConfigCat Feature Flags Provider for Terraform: use the
+        <a href="https://registry.terraform.io/providers/configcat/configcat/latest/docs/resources/integration"
+            target="_blank" rel="noopener noreferrer">configcat_integration </a>
+        resource.
+    </li>
+</ul>
+
+## New ConfigCat SDK for Unreal Engine
+
+#### Jul 31, 2024
+
+We just released a new official ConfigCat SDK supporting Unreal Engine applications.
+
+<img src="/docs/assets/news/unreal.jpg" width="400" />
+
+[See Documentation](./sdk-reference/unreal.mdx)
+
+## New ConfigCat SDK for Rust
+
+#### Jul 19, 2024
+
+We just released a new official ConfigCat SDK supporting Rust applications.
+
+[See Documentation](./sdk-reference/rust.mdx)
+
+## Ability to connect multiple integrations
+
+#### Jun 27, 2024
+
+We're happy to share that we have added the ability to connect multiple <a href="https://app.configcat.com/integrations" target="_blank" rel="noopener noreferrer">integrations</a> of the same type.<br/>
+Moreover, it's now possible to apply environment/config filters on each individual integration.
+
+<img src="/docs/assets/news/multi_integ_1.png" height="500" />
+<img src="/docs/assets/news/multi_integ_2.png" height="500" />
+
+## Advanced feature flag analytics with Twilio Segment
+
+#### Jun 14, 2024
+
+We're happy to share that we have introduced a new way to track your feature flags in your analytics tools.
+From now on you can [send feature flag change events and](./integrations/segment.mdx#changeevents) and [send feature flag evaluation analytics](./integrations/segment.mdx#analytics) to Twilio Segment.
+
+## Introducing the ConfigCat Feature Flags Tutorial
+
+#### Jun 11, 2024
+
+We're excited to launch our [Feature Flags Tutorial](https://tutorial.configcat.com/), a comprehensive guide designed to enhance your skills in feature management. 
+This tutorial covers everything from basic toggling and simple targeting to advanced techniques like percentage rollouts and handling rollbacks.
+
+<img src="/docs/assets/news/tutorial.png" alt="Feature Flags Tutorial"/>
+
+### Tutorial Highlights:
+- Begin with toggling a feature flag on and off to see its immediate impact on a user interface, simulating real-world user scenarios.
+- Simple Targeting: Learn to apply basic targeting rules by enabling a feature for all users except those in a specific country.
+- Dogfooding: Practice internal testing by setting the feature to be visible only to users from your company.
+- Percentage Rollout: Advance to partial feature deployment by enabling a new feature for a percentage of your users, testing its acceptance incrementally.
+- Rollback: Master the ability to quickly revert changes for specific user groups when encountering issues during rollout.
+
+This step-by-step guide is ideal for anyone looking to integrate feature flags into their projects efficiently. 
+
+[Explore the Tutorial](https://tutorial.configcat.com/)
+
+## Advanced feature flag analytics with Mixpanel, Amplitude and Google Analytics
+
+#### May 15, 2024
+
+We're happy to share that we have introduced new ways to track your feature flags in your analytics tools.
+
+From now on you can:
+
+ <ul>
+    <li>
+        <a href="https://configcat.com/docs/integrations/mixpanel/#annotations" target="_blank"
+            rel="noopener noreferrer">Monitor feature flag change events in Mixpanel with Annotations</a>
+    </li>
+    <li>
+        <a href="https://configcat.com/docs/integrations/mixpanel/#experiments" target="_blank"
+            rel="noopener noreferrer">Send feature flag evaluation analytics to Mixpanel Experiments</a>
+    </li>
+    <li>
+        <a href="https://configcat.com/docs/integrations/amplitude/#experiments" target="_blank"
+            rel="noopener noreferrer">Send feature flag evaluation analytics to Amplitude Experiments</a>
+    </li>
+    <li>
+        <a href="https://configcat.com/docs/integrations/google-analytics" target="_blank"
+            rel="noopener noreferrer">Send feature flag evaluation analytics to Google Analytics</a>
+    </li>
+</ul>
+
+## Webhook and Product preference management in Public Management API and Terraform
+
+#### May 8, 2024
+
+From now on, you can manage your Webhooks and Product preferences through the ConfigCat Public Management API and the Terraform provider. See the docs for details:
+
+ <ul>
+    <li>
+    ConfigCat Public Management API: use the
+        <a href="https://api.configcat.com/docs/index.html#tag/Webhooks" target="_blank"
+            rel="noopener noreferrer">Webhooks
+        </a>,
+        <a href="https://api.configcat.com/docs/index.html#tag/Products/operation/get-product-preferences"
+            target="_blank" rel="noopener noreferrer">Get Product Preferences</a> and
+        <a href="https://api.configcat.com/docs/index.html#tag/Products/operation/update-product-preferences"
+            target="_blank" rel="noopener noreferrer">Update Product Preferences</a>
+        endpoints.
+    </li>
+    <li>
+        ConfigCat Feature Flags Provider for Terraform: use the
+        <a href="https://registry.terraform.io/providers/configcat/configcat/latest/docs/resources/webhook"
+            target="_blank" rel="noopener noreferrer">configcat_webhook </a> and
+        <a href="https://registry.terraform.io/providers/configcat/configcat/latest/docs/resources/product_preferences"
+            target="_blank" rel="noopener noreferrer">configcat_product_preferences</a>
+        resources.
+    </li>
+</ul>
+
 ## ConfigCat Proxy Released!
 
 #### Apr 17, 2024

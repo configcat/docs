@@ -5,6 +5,7 @@ pr: none
 
 pool:
   name: Contabo
+
 steps:
 
 - task: Docker@2
@@ -15,7 +16,7 @@ steps:
     command: build
     Dockerfile: Dockerfile
     buildContext: '$(System.DefaultWorkingDirectory)'
-    arguments: '--build-arg SONAR_TOKEN=$(sonar_token) --network=host'
+    arguments: '--build-arg SONAR_TOKEN=$(sonar_token) --network=host $(additional_arguments)'
 
 - task: Docker@2
   displayName: push

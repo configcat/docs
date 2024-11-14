@@ -1,17 +1,18 @@
 ---
 id: dotnet
-title: .NET, .NET Core SDK Reference
-description: ConfigCat .NET, .NET Core SDK Reference. This is a step-by-step guide on how to use feature flags in your .NET, .NET Core application.
+title: .NET SDK Reference
+description: ConfigCat .NET SDK Reference. This is a step-by-step guide on how to use feature flags in your .NET application.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json');
 
-<script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(NetSchema) }}></script>
+<script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(NetSchema) }}></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/.net-sdk.svg?style=social)](https://github.com/configcat/.net-sdk/stargazers)
-[![Build status](https://ci.appveyor.com/api/projects/status/3kygp783vc2uv9xr?svg=true)](https://ci.appveyor.com/project/ConfigCat/net-sdk) [![NuGet Version](https://buildstats.info/nuget/ConfigCat.Client)](https://www.nuget.org/packages/ConfigCat.Client/)
+[![Build status](https://ci.appveyor.com/api/projects/status/3kygp783vc2uv9xr?svg=true)](https://ci.appveyor.com/project/ConfigCat/net-sdk)
+[![NuGet Version](https://img.shields.io/nuget/v/ConfigCat.Client)](https://www.nuget.org/packages/ConfigCat.Client/)
 [![Sonar Coverage](https://img.shields.io/sonar/coverage/net-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=net-sdk)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
 
@@ -38,6 +39,10 @@ dotnet add package ConfigCat.Client
 </TabItem>
 </Tabs>
 
+:::info
+To get the _ConfigCat SDK_ up and running in Unity, please refer to [this guide](./unity.mdx).
+:::
+
 ### 2. Import package
 
 ```csharp
@@ -53,8 +58,8 @@ var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 ### 4. Get your setting value
 
 ```csharp
-var isMyAwesomeFeatureEnabled = client.GetValue("isMyAwesomeFeatureEnabled", false);
-if(isMyAwesomeFeatureEnabled)
+var isMyAwesomeFeatureEnabled = await client.GetValueAsync("isMyAwesomeFeatureEnabled", false);
+if (isMyAwesomeFeatureEnabled)
 {
     doTheNewThing();
 }
@@ -102,13 +107,15 @@ These are the available options on the `ConfigCatClientOptions` class:
 | Properties          | Description                                                                                                                                                                                                                                                                                       | Default                                                                                                                                |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `PollingMode`       | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                       | `PollingModes.AutoPoll()`                                                                                                              |
+| `ConfigFetcher`     | Optional, [`IConfigCatConfigFetcher`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/ConfigService/IConfigCatConfigFetcher.cs) instance for downloading a config.                                                                                                          | [`HttpClientConfigFetcher`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/ConfigService/HttpClientConfigFetcher.cs) |
 | `ConfigCache`       | Optional, [`IConfigCatCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/IConfigCatCache.cs) instance for caching the downloaded config.                                                                                                                         | [`InMemoryConfigCache`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Cache/InMemoryConfigCache.cs)            |
 | `Logger`            | Optional, [`IConfigCatLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/IConfigCatLogger.cs) instance for tracing.                                                                                                                                           | [`ConsoleLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/ConsoleLogger.cs) (with WARNING level) |
+| `LogFilter`         | Optional, sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                                                   | `null` (none)                                                                                                                          |
 | `BaseUrl`           | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                         |                                                                                                                                        |
-| `HttpClientHandler` | Optional, `HttpClientHandler` to provide network credentials and proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy).                                                                                                                                               | built-in `HttpClientHandler`                                                                                                           |
+| `HttpClientHandler` | Optional, `HttpClientHandler` to provide network credentials and proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy).                                                                                                                                                | built-in `HttpClientHandler`                                                                                                           |
 | `HttpTimeout`       | Optional, sets the underlying HTTP client's timeout. [More about the HTTP timeout](#http-timeout).                                                                                                                                                                                                | `TimeSpan.FromSeconds(30)`                                                                                                             |
 | `FlagOverrides`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                  |                                                                                                                                        |
-| `DataGovernance`    | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly` | `Global`                                                                                                                               |
+| `DataGovernance`    | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly` | `Global`                                                                                                                           |
 | `DefaultUser`       | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                        | `null` (none)                                                                                                                          |
 | `Offline`           | Optional, determines whether the client should be initialized to offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                                  | `false`                                                                                                                                |
 
@@ -130,18 +137,13 @@ You can acquire singleton client instances for your SDK keys using the `ConfigCa
 You can close all open clients at once using the `ConfigCatClient.DisposeAll()` method or do it individually using the `client.Dispose()` method.
 :::
 
-## Anatomy of `GetValue()`, `GetValueAsync()`
+## Anatomy of `GetValueAsync()`
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
-
-```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#");  // Optional User Object
-var value = client.GetValue("keyOfMyFeatureFlag", false, userObject);
-```
 
 ```csharp
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
@@ -170,34 +172,29 @@ It's important to note that providing any other type for the type parameter will
 If you specify an allowed type but it mismatches the setting kind, an error message will be logged and `defaultValue` will be returned.
 
 When relying on type inference and not explicitly specifying the type parameter, be mindful of potential type mismatch issues, especially with number types.
-For example, `client.GetValue("keyOfMyDecimalSetting", 0)` will return `defaultValue` (`0`) instead of the actual value of the decimal setting because
-the compiler infers the type as `int` instead of `double`, that is, the call is equivalent to `client.GetValue<int>("keyOfMyDecimalSetting", 0)`,
+For example, `client.GetValueAsync("keyOfMyDecimalSetting", 0)` will return `defaultValue` (`0`) instead of the actual value of the decimal setting because
+the compiler infers the type as `int` instead of `double`, that is, the call is equivalent to `client.GetValueAsync<int>("keyOfMyDecimalSetting", 0)`,
 which is a type mismatch.
 
 To correctly evaluate a decimal setting, you should use:
 
 ```csharp
-var value = client.GetValue("keyOfMyDecimalSetting", 0.0);
+var value = await client.GetValueAsync("keyOfMyDecimalSetting", 0.0);
 // -or-
-var value = client.GetValue("keyOfMyDecimalSetting", 0d);
+var value = await client.GetValueAsync("keyOfMyDecimalSetting", 0d);
 // -or-
-var value = client.GetValue<double>("keyOfMyDecimalSetting", 0);
+var value = await client.GetValueAsync<double>("keyOfMyDecimalSetting", 0);
 ```
 
-## Anatomy of `GetValueDetails()`, `GetValueDetailsAsync()` {#anatomy-of-getvaluedetails}
+## Anatomy of `GetValueDetailsAsync()`
 
-`GetValueDetails()`/`GetValueDetailsAsync()` are similar to `GetValue()`/`GetValueAsync()` but instead of returning the evaluated value only, they provide more detailed information about the evaluation result.
+`GetValueDetailsAsync()` is similar to `GetValueAsync()` but instead of returning the evaluated value only, it provides more detailed information about the evaluation result.
 
 | Parameters     | Description                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
 | `key`          | **REQUIRED.** The key of a specific setting or feature flag. Set on _ConfigCat Dashboard_ for each setting.  |
 | `defaultValue` | **REQUIRED.** This value will be returned in case of an error.                                               |
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../targeting/targeting-overview.mdx) |
-
-```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
-var details = client.GetValueDetails("keyOfMyFeatureFlag", false, userObject);
-```
 
 ```csharp
 User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
@@ -216,7 +213,8 @@ The `details` result contains the following information:
 | `Key`                             | `string`                             | The key of the evaluated feature flag or setting.                                                               |
 | `Value`                           | `bool` / `string` / `int` / `double` | The evaluated value of the feature flag or setting.                                                             |
 | `User`                            | `User`                               | The User Object used for the evaluation.                                                                        |
-| `IsDefaultValue`                  | `bool`                               | True when the default value passed to `GetValueDetails()`/`GetValueDetailsAsync()` is returned due to an error. |
+| `IsDefaultValue`                  | `bool`                               | True when the default value passed to `GetValueDetailsAsync()` is returned due to an error.                     |
+| `ErrorCode`                       | `EvaluationErrorCode`                | In case of an error, this property contains a code that identifies the reason for the error.                    |
 | `ErrorMessage`                    | `string`                             | In case of an error, this property contains the error message.                                                  |
 | `ErrorException`                  | `Exception`                          | In case of an error, this property contains the related exception object (if any).                              |
 | `MatchedTargetingRule`            | `ITargetingRule`                     | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value.      |
@@ -314,7 +312,7 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 client.SetDefaultUser(new User(identifier: "john@example.com"));
 ```
 
-Whenever the evaluation methods like `GetValue()`, `GetValueAsync()`, etc. are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
+Whenever the evaluation methods like `GetValueAsync()`, `GetValueDetailsAsync()`, etc. are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```csharp
 var user = new User(identifier: "john@example.com");
@@ -344,7 +342,7 @@ client.ClearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache then all `GetValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache, then all `GetValueAsync()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
@@ -369,7 +367,7 @@ Available options:
 
 ### Lazy loading
 
-When calling `GetValue()` or `GetValueAsync()` the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case the `GetValue())` or `GetValueAsync()` will return the setting value after the cache is updated.
+When calling `GetValueAsync()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `GetValueAsync()` will return the setting value after the cache is updated.
 
 Use `cacheTimeToLive` parameter to manage configuration lifetime.
 
@@ -388,7 +386,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the config JSON (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the config JSON (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `ForceRefreshAsync()` is your application's responsibility.
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
@@ -396,10 +394,10 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
     options.PollingMode = PollingModes.ManualPoll;
 });
 
-client.ForceRefresh();
+await client.ForceRefreshAsync();
 ```
 
-> `GetValue()` returns `defaultValue` if the cache is empty. Call `ForceRefresh()` to update the cache.
+> `GetValueAsync()` returns `defaultValue` if the cache is empty. Call `ForceRefreshAsync()` to update the cache.
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
@@ -407,9 +405,9 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
     options.PollingMode = PollingModes.ManualPoll;
 });
 
-Console.WriteLine(client.GetValue("keyOfMyTextSetting", "my default value")); // console: "my default value"
-client.ForceRefresh();
-Console.WriteLine(client.GetValue("keyOfMyTextSetting", "my default value")); // console: "value from server"
+Console.WriteLine(await client.GetValueAsync("keyOfMyTextSetting", "my default value")); // console: "my default value"
+await client.ForceRefreshAsync();
+Console.WriteLine(await client.GetValueAsync("keyOfMyTextSetting", "my default value")); // console: "value from server"
 ```
 
 ## Hooks
@@ -417,10 +415,12 @@ Console.WriteLine(client.GetValue("keyOfMyTextSetting", "my default value")); //
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
 Via the following events you can subscribe to particular events raised by the client:
 
-- `event EventHandler ClientReady`: This event is raised when the SDK reaches the ready state. If the SDK is set up to use lazy load or manual polling, it's considered ready right after instantiation.
+- `event EventHandler<ClientReadyEventArgs> ClientReady`: This event is raised when the SDK reaches the ready state. If the SDK is set up to use lazy loading or manual polling, it's considered ready right after syncing up with the config cache.
   If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `ClientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
+- `event EventHandler<ConfigFetchedEventArgs> ConfigFetched`: This event is raised each time when the SDK attempts to refresh the locally cached config by fetching the latest version from the remote server. It is raised not only when `ForceRefreshAsync` is called but also
+  when the refresh is initiated by the SDK automatically. Thus, this event allows you to observe potential network issues that occur under the hood.
 - `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
-- `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetails()`/`GetValueDetailsAsync()`](#anatomy-of-getvaluedetails).
+- `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetailsAsync()`](#anatomy-of-getvaluedetailsasync).
 - `event EventHandler<ConfigCatClientErrorEventArgs> Error`: This event is raised when an error occurs within the _ConfigCat SDK_.
 
 You can subscribe to these events either on initialization:
@@ -710,36 +710,42 @@ ConfigCat.INFO  [5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":
   Returning 'True'.
 ```
 
+### Custom logger implementation
+
+By default, the SDK logs to [the console's standard output](https://learn.microsoft.com/en-us/dotnet/api/system.console.out) but it also allows you to inject any custom logger implementation via the `ConfigCatClientOptions.Logger` property.
+
 Sample code on how to create a basic file logger implementation for ConfigCat client: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/FileLoggerSample.cs" target="_blank">See Sample Code</a>
 
 Another sample which shows how to implement an adapter to [the built-in logging framework](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging) of .NET Core/.NET 5+: <a href="https://github.com/configcat/.net-sdk/blob/master/samples/ASP.NETCore/WebApplication/Adapters/ConfigCatToMSLoggerAdapter.cs" target="_blank">See Sample Code</a>
 
-## `GetAllKeys()`, `GetAllKeysAsync()`
+### Log Filtering
 
-You can get all the setting keys from your configuration by calling the `GetAllKeys()` or `GetAllKeysAsync()` method of the `ConfigCatClient`.
+You can define a custom log filter by providing a callback function via the `ConfigCatClientOptions.LogFilter` property. The callback will be called by the _ConfigCat SDK_  each time a log event occurs (and the event passes the minimum log level specified by the `IConfigCatLogger.LogLevel` property). That is, the callback allows you to filter log events by `level`, `eventId`, `message` or `exception`. The formatted message string can be obtained via `message.InvariantFormattedMessage`.
+If the callback function returns `true`, the event will be logged, otherwise it will be skipped.
 
-```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IEnumerable<string> keys = client.GetAllKeys();
+```cs
+// Filter out events with id 1001 from the log.
+LogFilterCallback logFilter = (LogLevel level, LogEventId eventId, ref FormattableLogMessage message, Exception? exception) => eventId != 1001;
+
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options => options.LogFilter = logFilter);
 ```
+
+:::caution
+Please make sure that your log filter logic doesn't perform heavy computation and doesn't block the executing thread. A complex or incorrectly implemented log filter can degrade the performance of the SDK.
+:::
+
+## `GetAllKeysAsync()`
+
+You can get all the setting keys from your configuration by calling the `GetAllKeysAsync()` method of the `ConfigCatClient`.
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 IEnumerable<string> keys = await client.GetAllKeysAsync();
 ```
 
-## `GetAllValues()`, `GetAllValuesAsync()`
+## `GetAllValuesAsync()`
 
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
-
-```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IDictionary<string, object> settingValues = client.GetAllValues();
-
-// invoke with User Object
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
-IDictionary<string, object> settingValuesTargeting = client.GetAllValues(userObject);
-```
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
@@ -750,18 +756,9 @@ User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
 ```
 
-## `GetAllValueDetails()`, `GetAllValueDetailsAsync()`
+## `GetAllValueDetailsAsync()`
 
 Evaluates and returns the values along with evaluation details of all feature flags and settings. Passing a [User Object](#user-object) is optional.
-
-```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IReadOnlyList<EvaluationDetails> settingValues = client.GetAllValueDetails();
-
-// invoke with User Object
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
-IReadOnlyList<EvaluationDetails> settingValuesTargeting = client.GetAllValueDetails(userObject);
-```
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
@@ -770,6 +767,55 @@ IReadOnlyList<EvaluationDetails> settingValues = await client.GetAllValueDetails
 // invoke with User Object
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 IReadOnlyList<EvaluationDetails> settingValuesTargeting = await client.GetAllValueDetailsAsync(userObject);
+```
+
+## Snapshots and non-blocking synchronous feature flag evaluation
+
+Currently, the _ConfigCat_ client provides both asynchronous and synchronous methods for evaluating feature flags and settings.
+However, depending on the setup, the synchronous methods may block the executing thread for longer periods of time
+(e.g. when downloading config data from the ConfigCat CDN servers), which can lead to an unresponsive application.
+To prevent such issues, the problematic methods have been deprecated and are going to be removed in a future major version.
+
+As an alternative, since v9.2.0, the .NET SDK provides a way to synchronously evaluate feature flags and settings via _snapshots_.
+
+Using the `Snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
+and you can use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
+
+```csharp
+using var client = ConfigCatClient.Get("#YOUR-SDK-KEY#",
+    options => options.PollingMode = PollingModes.ManualPoll);
+
+// Make sure that the latest config data is available locally.
+await client.ForceRefreshAsync();
+
+var snapshot = client.Snapshot();
+
+var user = new User("#UNIQUE-USER-IDENTIFIER#");
+foreach (var key in snapshot.GetAllKeys())
+{
+    var value = snapshot.GetValue(key, default(object), user);
+    Console.WriteLine($"{key}: {value}");
+}
+```
+
+:::caution
+Please note that when you create and utilize a snapshot, it won't refresh your local cache once the cached config data expires.
+Additionally, when working with [shared caching](../advanced/caching.mdx#shared-cache), creating a snapshot also doesn't
+trigger a sync with the external cache, since the snapshot only captures the config instance stored in the client's memory.
+Therefore, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically updates the local cache
+in the background. For other polling modes, you'll need to manually initiate a cache refresh by invoking `ForceRefreshAsync`.
+:::
+
+In Auto Poll mode, you can use the `WaitForReadyAsync` method to wait for the latest config data to become available locally:
+
+```csharp
+using var client = ConfigCatClient.Get("#YOUR-SDK-KEY#",
+    options => options.PollingMode = PollingModes.AutoPoll());
+
+// Make sure that the latest config data is available locally.
+await client.WaitForReadyAsync();
+
+var snapshot = client.Snapshot();
 ```
 
 ## Using custom cache implementation
@@ -851,11 +897,34 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 
 The default timeout is 30 seconds.
 
+## Platform compatibility
+
+The _ConfigCat SDK_ supports all the widespread .NET JIT runtimes, everything that implements [.NET Standard 2.0](https://learn.microsoft.com/en-us/dotnet/standard/net-standard?tabs=net-standard-2-0)+ and supports TLS 1.2 should work.
+Starting with v9.3.0, it can also be used in applications that employ [trimmed self-contained](https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained) or various [ahead-of-time (AOT) compilation](https://en.wikipedia.org/wiki/Ahead-of-time_compilation) deployment models.
+
+Based on our tests, the SDK is compatible with the following runtimes/deployment models:
+* .NET Framework 4.5+ (including Ngen)
+* .NET Core 3.1, .NET 5+ (including Crossgen2/ReadyToRun and Native AOT)
+* Mono 5.10+
+* .NET for Android (formerly known as Xamarin.Android)
+* .NET for iOS (formerly known as Xamarin.iOS)
+* Unity 2021.3+ (Mono JIT)
+* Unity 2021.3+ (IL2CPP)<sup><small>*</small></sup>
+* Universal Windows Platform 10.0.16299.0+ (.NET Native)<sup><small>**</small></sup>
+* WebAssembly (Mono AOT/Emscripten, also known as wasm-tools)
+
+<sup><small>*</small></sup>Unity WebGL also works but needs a bit of extra effort: you will need to enable WebGL compatibility by calling the `ConfigCatClient.PlatformCompatibilityOptions.EnableUnityWebGLCompatibility` method. For more details, see [Sample Scripts](https://github.com/configcat/.net-sdk/tree/master/samples/UnityWebGL).<br/>
+<sup><small>**</small></sup>To make the SDK work in Release builds on UWP, you will need to add `<Namespace Name="System.Text.Json.Serialization.Converters" Browse="Required All"/>` to your application's [.rd.xml](https://learn.microsoft.com/en-us/windows/uwp/dotnet-native/runtime-directives-rd-xml-configuration-file-reference) file. See also [this discussion](https://github.com/dotnet/runtime/issues/29912#issuecomment-638471351).
+
+:::info
+We strive to provide an extensive support for the various .NET runtimes and versions. If you still encounter an issue with the SDK on some platform, please open a [GitHub issue](https://github.com/configcat/.net-sdk/issues/new/choose) or [contact support](https://configcat.com/support).
+:::
+
 ## Troubleshooting
 
 When the _ConfigCat SDK_ does not work as expected in your application, please check for the following potential problems:
 
-- **Symptom:** Instead of the actual value, the default one is constantly returned by `GetValue()`/`GetValueAsync()` and
+- **Symptom:** Instead of the actual value, the default one is constantly returned by `GetValueAsync()` and
   the log contains the following message (provided that the client is set up to log error level events as described [here](#logging)):
   "Secure connection could not be established. Please make sure that your application is enabled to use TLS 1.2+."
 
@@ -885,14 +954,16 @@ When the _ConfigCat SDK_ does not work as expected in your application, please c
 Check out our Sample Applications how they use the _ConfigCat SDK_:
 
 - <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
-- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Web App</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Multi-page Web App (ASP.NET Core MVC)</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/BlazorWasm" target="_blank">Sample Single-page Web App (ASP.NET Core Blazor WebAssembly)</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/MAUI" target="_blank">Sample Mobile/Windows Store App (.NET MAUI)</a>
 
 ## Guides
 
 See the following guides on how to use ConfigCat's .NET SDK:
 
 - <a href="https://configcat.com/blog/2022/11/25/feature-flags-in-net6/" target="_blank">.NET 6</a>
-- <a href="https://configcat.com/blog/2021/10/10/aspnetcore-options-pattern/" target="_blank">.NET Core</a>
+- <a href="https://configcat.com/blog/2021/10/10/aspnetcore-options-pattern/" target="_blank">ASP.NET Core</a>
 
 ## Look under the hood
 
