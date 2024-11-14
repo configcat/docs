@@ -13,3 +13,4 @@ jobs:
       repo: ${{ github.repository }}
     secrets:
       gh_token: ${{ secrets.GITHUB_TOKEN }}
+      slack_webhook_url: ${{ secrets.TEXT_REVIEW_SLACK_WEBHOOK_URL }}

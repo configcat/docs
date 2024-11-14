@@ -1,8 +1,8 @@
 {
   "@context": "https://schema.org/",
   "@type": "HowTo",
-  "name": "How to use feature flags in .NET and C#?",
-  "description": "How to use feature flags in .NET and C# using ConfigCat Feature Flags. https://configcat.com",
+  "name": "How to use feature flags in Unity?",
+  "description": "How to use feature flags in Unity using ConfigCat Feature Flags. https://configcat.com",
   "image": "https://configcat.com/images/shared/home.png",
   "totalTime": "PT10M",
   "estimatedCost": {
@@ -30,37 +30,30 @@
     },
     {
       "@type": "HowToStep",
-      "text": "Install ConfigCat SDK Nuget package",
+      "text": "Get the SDK assembly files",
       "name": "Installation",
-      "url": "https://configcat.com/docs/sdk-reference/dotnet/#1-install-configcat-sdk-nuget-package",
+      "url": "https://configcat.com/docs/sdk-reference/unity/#1-get-the-sdk-assembly-files",
       "image": "https://configcat.com/images/shared/home.png"
     },
     {
       "@type": "HowToStep",
-      "text": "Import package",
+      "text": "Add the SDK assembly files to your Unity project",
       "name": "Import",
-      "url": "https://configcat.com/docs/sdk-reference/dotnet/#2-import-package",
+      "url": "https://configcat.com/docs/sdk-reference/unity/#2-add-the-sdk-assembly-files-to-your-unity-project",
       "image": "https://configcat.com/images/shared/home.png"
     },
     {
       "@type": "HowToStep",
-      "text": "Create the *ConfigCat* client with your *SDK Key*",
+      "text": "Create a script for hosting the _ConfigCat_ client",
       "name": "Initialization",
-      "url": "https://configcat.com/docs/sdk-reference/dotnet/#3-create-the-configcat-client-with-your-sdk-key",
+      "url": "https://configcat.com/docs/sdk-reference/unity/#3-create-a-script-for-hosting-the-configcat-client",
       "image": "https://configcat.com/images/shared/home.png"
     },
     {
       "@type": "HowToStep",
       "text": "Get your setting value",
       "name": "Evaluation",
-      "url": "https://configcat.com/docs/sdk-reference/dotnet/#4-get-your-setting-value",
-      "image": "https://configcat.com/images/shared/home.png"
-    },
-    {
-      "@type": "HowToStep",
-      "text": "Dispose ConfigCat client",
-      "name": "Dispose",
-      "url": "https://configcat.com/docs/sdk-reference/dotnet/#5-dispose-the-configcat-client",
+      "url": "https://configcat.com/docs/sdk-reference/unity/#4-get-your-setting-value",
       "image": "https://configcat.com/images/shared/home.png"
     }
   ]

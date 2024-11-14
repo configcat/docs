@@ -1,17 +1,18 @@
 ---
 id: dotnet
-title: .NET, .NET Core SDK Reference
-description: ConfigCat .NET, .NET Core SDK Reference. This is a step-by-step guide on how to use feature flags in your .NET, .NET Core application.
+title: .NET SDK Reference
+description: ConfigCat .NET SDK Reference. This is a step-by-step guide on how to use feature flags in your .NET application.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json');
 
-<script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(NetSchema) }}></script>
+<script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(NetSchema) }}></script>
 
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/.net-sdk.svg?style=social)](https://github.com/configcat/.net-sdk/stargazers)
-[![Build status](https://ci.appveyor.com/api/projects/status/3kygp783vc2uv9xr?svg=true)](https://ci.appveyor.com/project/ConfigCat/net-sdk) [![NuGet Version](https://buildstats.info/nuget/ConfigCat.Client)](https://www.nuget.org/packages/ConfigCat.Client/)
+[![Build status](https://ci.appveyor.com/api/projects/status/3kygp783vc2uv9xr?svg=true)](https://ci.appveyor.com/project/ConfigCat/net-sdk)
+[![NuGet Version](https://img.shields.io/nuget/v/ConfigCat.Client)](https://www.nuget.org/packages/ConfigCat.Client/)
 [![Sonar Coverage](https://img.shields.io/sonar/coverage/net-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=net-sdk)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
 
@@ -38,6 +39,10 @@ dotnet add package ConfigCat.Client
 </TabItem>
 </Tabs>
 
+:::info
+To get the _ConfigCat SDK_ up and running in Unity, please refer to [this guide](./unity.mdx).
+:::
+
 ### 2. Import package
 
 ```csharp
@@ -54,7 +59,7 @@ var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 
 ```csharp
 var isMyAwesomeFeatureEnabled = await client.GetValueAsync("isMyAwesomeFeatureEnabled", false);
-if(isMyAwesomeFeatureEnabled)
+if (isMyAwesomeFeatureEnabled)
 {
     doTheNewThing();
 }
@@ -911,7 +916,9 @@ Based on our tests, the SDK is compatible with the following runtimes/deployment
 <sup><small>*</small></sup>Unity WebGL also works but needs a bit of extra effort: you will need to enable WebGL compatibility by calling the `ConfigCatClient.PlatformCompatibilityOptions.EnableUnityWebGLCompatibility` method. For more details, see [Sample Scripts](https://github.com/configcat/.net-sdk/tree/master/samples/UnityWebGL).<br/>
 <sup><small>**</small></sup>To make the SDK work in Release builds on UWP, you will need to add `<Namespace Name="System.Text.Json.Serialization.Converters" Browse="Required All"/>` to your application's [.rd.xml](https://learn.microsoft.com/en-us/windows/uwp/dotnet-native/runtime-directives-rd-xml-configuration-file-reference) file. See also [this discussion](https://github.com/dotnet/runtime/issues/29912#issuecomment-638471351).
 
-We strive to provide an extensive support for the various .NET runtimes and versions. If you still encounter an issue with the SDK on some platform, please open a [GitHub issue](https://github.com/configcat/.net-sdk/issues/new/choose) or contact support.
+:::info
+We strive to provide an extensive support for the various .NET runtimes and versions. If you still encounter an issue with the SDK on some platform, please open a [GitHub issue](https://github.com/configcat/.net-sdk/issues/new/choose) or [contact support](https://configcat.com/support).
+:::
 
 ## Troubleshooting
 
@@ -956,7 +963,7 @@ Check out our Sample Applications how they use the _ConfigCat SDK_:
 See the following guides on how to use ConfigCat's .NET SDK:
 
 - <a href="https://configcat.com/blog/2022/11/25/feature-flags-in-net6/" target="_blank">.NET 6</a>
-- <a href="https://configcat.com/blog/2021/10/10/aspnetcore-options-pattern/" target="_blank">.NET Core</a>
+- <a href="https://configcat.com/blog/2021/10/10/aspnetcore-options-pattern/" target="_blank">ASP.NET Core</a>
 
 ## Look under the hood
 

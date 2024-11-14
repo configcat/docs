@@ -497,7 +497,7 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 
 - **Remote over local** (`OverrideBehaviour.RemoteOverLocal`): When evaluating values, the SDK will use all feature flags & settings that are downloaded from the ConfigCat CDN, plus all feature flags & settings that are loaded from local-override sources. If a feature flag or a setting is defined both in the downloaded and the local-override source then the downloaded version will take precedence.
 
-You can set up the SDK to load your feature flag & setting overrides from a `{ [name: string]: any }` map.
+You can set up the SDK to load your feature flag & setting overrides from a `{ [key: string]: boolean | string | number }` map.
 
 ```js
 const configCatClient = configcat.getClient(
@@ -779,8 +779,11 @@ You can view a sample run [here](https://github.com/configcat/js-ssr-sdk/actions
 ## Next.js/AWS lambda recommendation
 
 If the SDK is running in a Next.js application that is hosted on Vercel (AWS lambda) or your application is hosted directly in AWS lambdas, it is recommended to use the SDK in Lazy loading or Manual polling mode instead of the default Auto polling mode.
+
 As AWS lamdbas try to minimize their uptime, the applications are terminated as soon as the sytem detects inactivity in the application. 
+
 The Auto polling mode is using a background thread to acquire the setting values from the ConfigCat servers periodically and the AWS lambda does not detect it as a running application and terminates it. 
+
 However, it can easily happen that there is an ongoing HTTP GET call towards our servers and this termination can cause errors.
 The most possible error message in this case is `Request timed out while trying to fetch config JSON.`.
 

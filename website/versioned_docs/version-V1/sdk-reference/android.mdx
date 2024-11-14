@@ -61,7 +61,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#");
 
 ```java
 boolean isMyAwesomeFeatureEnabled = client.getValue(Boolean.class, "<key-of-my-awesome-feature>", false);
-if(isMyAwesomeFeatureEnabled) {
+if (isMyAwesomeFeatureEnabled) {
     doTheNewThing();
 } else {
     doTheOldThing();
@@ -70,7 +70,7 @@ if(isMyAwesomeFeatureEnabled) {
 // Or asynchronously
 client.getValueAsync(Boolean.class, "<key-of-my-awesome-feature>", false)
     .thenAccept(isMyAwesomeFeatureEnabled -> {
-        if(isMyAwesomeFeatureEnabled) {
+        if (isMyAwesomeFeatureEnabled) {
             doTheNewThing();
         } else {
             doTheOldThing();
@@ -182,7 +182,7 @@ client.getValueAsync(
     User.newBuilder().build("#UNIQUE-USER-IDENTIFIER#"), // Optional User Object
     false // Default value
 ).thenAccept(isMyAwesomeFeatureEnabled -> {
-    if(isMyAwesomeFeatureEnabled) {
+    if (isMyAwesomeFeatureEnabled) {
         doTheNewThing();
     } else {
         doTheOldThing();

@@ -37,13 +37,6 @@
     },
     {
       "@type": "HowToStep",
-      "text": "Import the package",
-      "image": "https://configcat.com/images/shared/home.png",
-      "name": "Import",
-      "url": "https://configcat.com/docs/sdk-reference/python/#2-import-the-package"
-    },
-    {
-      "@type": "HowToStep",
       "text": "Import and initialize a ConfigCatProvider with your SDK Key",
       "image": "https://configcat.com/images/shared/home.png",
       "name": "Import and initialize",
