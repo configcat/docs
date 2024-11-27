@@ -54,7 +54,7 @@ A string, a list of strings, a number, a semantic version, a list of semantic ve
 We recommend using confidential text comparators when targeting users based on their sensitive data (like email address, name, etc).
 In this case, the feature flag evaluation is performed using the SHA256 hashes of the values to ensure that the comparison values are not exposed. This can cause an increase in the size of the config JSON file and the overall network traffic. Yet it is not recommended to use the cleartext version of the confidential comparators unless the increased network traffic becomes an issue.
 
-The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings.
+The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings. The comparison is case-sensitive.
 
 | Comparator                      | Description                                                                                |
 | ------------------------------- | ------------------------------------------------------------------------------------------ |
@@ -69,7 +69,7 @@ The following comparators expect the *Comparison attribute* to be a string value
 
 #### Text Comparators
 
-The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings.
+The following comparators expect the *Comparison attribute* to be a string value and the *Comparison value* to be a string or a list of strings. The comparison is case-sensitive.
 
 :::info
 Consider using Confidential text comparators if you plan to target users by their sensitive data, e.g.: email address or company domain.
@@ -130,7 +130,7 @@ The following comparators expect the *Comparison attribute* to be a date value (
 
 #### Array Comparators
 
-The following comparators expect the *Comparison attribute* to be an array of strings (or an array of strings serialized to JSON), and the *Comparison value* to be a list of strings.
+The following comparators expect the *Comparison attribute* to be an array of strings (or an array of strings serialized to JSON), and the *Comparison value* to be a list of strings. The comparison is case-sensitive.
 
 | Comparator                | Description                                                                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
