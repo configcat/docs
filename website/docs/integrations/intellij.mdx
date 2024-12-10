@@ -1,0 +1,146 @@
+---
+id: intellij
+title: JetBrains/IntelliJ Plugin - Manage your feature flags from JetBrains/IntelliJ IDEs
+description: ConfigCat IntelliJ IDE Plugin. This is a step-by-step guide on how to use the ConfigCat JetBrains/IntelliJ Plugin to manage feature flags in your IDEs.
+---
+
+ConfigCat's JetBrains/IntelliJ IDE plugin to manage feature flags from IDEs.
+
+Connect your ConfigCat Product and Config to your JetBrains/IntelliJ IDE. Find your Feature Flag's usages in your code easily.
+
+This guide will help you install the JetBrains/IntelliJ IDE Plugin and familiarize you with its usage.
+
+## Feature overview
+
+- View your Feature Flags within the IDE.
+- Create Feature Flags within the IDE.
+- Open a Feature Flag on the ConfigCat Dashboard.
+- Find Feature Flag usages in your code.
+- Copy a Feature Flag's key to the clipboard.
+- View your Products & Configs.
+- Create Configs within the IDE.
+- Open a Config on ConfigCat Dashboard.
+
+<img src="/docs/assets/intellij/usage1.gif" className="bordered-img zoomable" alt="Usage of ConfigCat Feature Flags & Settings Tab" />
+
+## Install plugin
+
+### Install within the IDE from Marketplace
+
+1. In your IDE, open the `File` > `Settings/Preferences` menu.
+1. Go to the `Plugin` page and select the `Marketplace` tab.
+1. Search for `ConfigCat Feature Flags`.
+1. `Install` the plugin.
+1. Configure the plugin ([see below](#configure-extension)).
+
+### Install manually within the IDE
+
+1. Download the latest release from [GitHub](https://github.com/configcat/intellij-plugin/releases/latest) or from JetBrains Marketplace
+1. In your IDE, open the `File` > `Settings/Preferences` menu.
+1. Go to the `Plugin` page and open the `Gear Icon` menu.
+1. Select the `Install plugin from disk...` option.
+1. Configure the plugin ([see below](#configure-extension)).
+
+### Compatible IDEs
+The plugin is compatible with the following IDEs. Check the plugin JetBrains Marketplace page for the full, detailed compatibility list.
+
+- Android Studio
+- Aqua
+- CLion
+- DataGrip
+- DataSpell
+- GoLand
+- IntelliJ IDEA (Community & Ultimate)
+- MPS
+- PhpStorm
+- PyCharm (Community & Professional)
+- Rider
+- RubyMine
+- RustRover
+- WebStorm
+- Writerside
+
+## Configure extension
+
+### Authentication
+
+1. Get your ConfigCat Public API credentials from [ConfigCat Dashboard/Public Management API credentials](https://app.configcat.com/my-account/public-api-credentials).
+1. In your IDE, open the `File` > `Settings/Preferences` menu.
+1. Search for `ConfigCat Feature Flags` page.
+1. Fill out the `Basic auth user name` and `Basic auth password` inputs.
+
+<img src="/docs/assets/intellij/auth.gif" className="bordered-img zoomable" alt="Installation of ConfigCat Feature Flags Plugin" />
+
+### Advanced
+
+This section is for you if you use a `dedicated hosted`/[on-premise](https://configcat.com/on-premise/) ConfigCat instance. In that case, you can specify your custom ConfigCat URLs  in the IDE.
+
+1. In your IDE, open the `File` > `Settings/Preferences` menu.
+1. Search for `ConfigCat Feature Flags` page.
+1. Fill out the `Public Api Base URL` and `Dashboard Base URL` inputs.
+
+- `Public Api Base URL`: the base URL for the ConfigCat Public Management API. Defaults to: https://api.configcat.com.
+- `Dashboard Base URL`: the base URL for ConfigCat Dashboard. Defaults to: https://app.configcat.com.
+
+## Usage of ConfigCat Feature Flags Plugin
+
+The ConfigCat Feature Flags Tool Window can be opened by clicking the ConfigCat Feature Flags icon on the side of the IDE main window.
+
+### Feature Flags & Settings Tab
+
+After you successfully configured your ConfigCat account in the `Settings`, you can use the Feature Flags & Settings Tab and:
+
+- View all of your Products, Configs and Feature Flags.
+- Create new Configs and Feature Flags.
+- Open your Configs and Feature Flags on the ConfigCat Dashboard.
+- Copy a Feature Flag's key to the clipboard.
+- Find your Feature Flag's usages in your code.
+
+<img src="/docs/assets/intellij/usage2.gif" className="bordered-img zoomable" alt="Usage of ConfigCat Feature Flags & Settings Tab" />
+
+#### Create a new Feature Flag
+
+1. Select the Config in the tree where you want to create your new flag.
+1. Click the `+` button on the action bar to open the create dialog.
+1. Select the setting type.
+1. Enter the new Feature Flag name.
+1. Enter the new Feature Flag key.
+1. Add a hint to your Feature Flag (optional).
+1. Select 'OK' to confirm the Flag creation.
+
+#### Copy a Feature Flag's key to the clipboard
+
+1. Select the Feature Flag in the tree whose key you want to copy.
+1. Click the `Copy` button on the action bar to copy the key to the clipboard.
+
+#### Open your Flags on the ConfigCat Dashboard
+
+1. Select the Flag you want to open in the Dashboard.
+1. Click the `Open Config in ConfigCat Dashboard` button on the action bar.
+
+#### Find your Feature Flag's usages in your code
+
+1. Select the Feature Flag in the tree you want to search.
+1. Click the `Find Usage` button on the action bar.
+1. See the search results in the opened dialog.
+
+#### Create a new Config under a product
+
+1. Select the Products in the tree where you want to create your new config.
+1. Click the `+` button on the action bar to open the create dialog.
+1. Enter a name for the new config.
+1. Add a hint to your config (optional).
+1. Select `OK` to confirm the Config creation.
+
+#### Open your Configs on the ConfigCat Dashboard
+
+1. Select the Config which you want to open in the Dashboard.
+1. Click the `Open Config in ConfigCat Dashboard` button on the action bar.
+
+:::info
+The actions are available by right click menu as well.
+:::
+
+### Help & Feedback Tab
+
+The Help & Feedback tab provides quick links to open ConfigCat's Documentation and Dashboard and allows you to report issues.
