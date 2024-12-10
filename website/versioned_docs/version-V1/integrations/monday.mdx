@@ -4,39 +4,49 @@ title: monday.com - Manage feature flags from monday
 description: ConfigCat monday app. This is a step-by-step guide on how to connect and manage feature flags from monday.com boards and items.
 ---
 
-Turn features On / Off right from a linked item on your monday.com board with the <a href="https://monday.com/marketplace/10000079" target="_blank">ConfigCat Feature Flags</a> monday.com app. Also you can add targeting or percentage rules just as easily.
+The <a href="https://monday.com/marketplace/10000079" target="_blank">ConfigCat Feature Flags monday app</a> allows you to connect your Monday items and feature flags. Create or link existing flags to your items without leaving your monday instance.
+
+Turn features On/Off right from a linked item on your Monday board. You can also easily modify the linked flags to edit or add new Targeting or Percentage Rules.
+
+This guide will help you with the plugin installation and familiarise you with the plugin usage.
 
 ## Installation
 
-<img src="/docs/assets/monday/monday_auth.gif" className="zoomable" alt="Installation of the ConfigCat Feature Flags monday app" />
+<img src="/docs/assets/monday/v1/monday_auth.gif" className="bordered-img zoomable" alt="Installation of the ConfigCat Feature Flags monday app" />
 
 1. Install <a href="https://monday.com/marketplace/10000079" target="_blank">ConfigCat Feature Flags</a> monday.com app to your monday account.
-2. Open one of your boards in monday and click on an item.
+2. Open one of your boards on monday.com and click on an item.
 3. Add the ConfigCat Feature Flags monday app to your item.
-4. In order to use ConfigCat Feature Flags you have to authorize first with your ConfigCat Public API credentials.
-5. Get your ConfigCat Public API credentials: https://app.configcat.com/my-account/public-api-credentials
+4. In order to use ConfigCat Feature Flags, you have to authorize first with your ConfigCat Public API credentials.
+5. Copy your ConfigCat Public API credentials to the inputs. Read more about <a href="https://app.configcat.com/my-account/public-api-credentials" target="_blank">ConfigCat Public API credentials here</a>.
 6. Click authorize.
+
+:::info
+Every monday.com user must authorize ConfigCat in monday.com who wants to use the ConfigCat Feature Flags app.
+:::
 
 ## Usage
 
 ### Linking existing feature flags
 
-<img src="/docs/assets/monday/monday_link.gif" className="zoomable" alt="Linking feature flags with the ConfigCat Feature Flags monday.com app" />
-
 1. Open any item on your monday.com board.
-2. Push `Link existing feature flag`
-3. Select a Product, Config, Environment and a Feature Flag to be linked to your monday.com item.
-4. When linked, you can turn your features On / Off right from this monday.com item.
+2. Push the `Link existing feature flag`.
+3. Select a Product, Config, Environment, and Feature Flag to be linked to your monday.com item.
+4. When linked, you can manage the selected feature flag from this monday.com item.
 5. View linked monday.com items next to your Feature Flags in ConfigCat and jump to the monday.com item directly.
+
+<img src="/docs/assets/monday/v1/monday_link.gif" className="bordered-img zoomable" alt="Linking feature flags with the ConfigCat Feature Flags monday.com app" />
+
 
 ### Creating new feature flags
 
-<img src="/docs/assets/monday/monday_create.gif" className="zoomable" alt="Create feature flags with the ConfigCat Feature Flags monday app" />
 
 1. Open any item on your monday.com board.
-2. Push `Create and link feature flag`
-3. Select a Product, Config where you want to create the feature flag.
-4. Setup your feature flag.
-5. Select which environment would you like to link to this item.
-6. When linked, you can turn your features On / Off right from this monday.com item.
+2. Push the `Create and link feature flag`.
+3. Select a Product and config where you want to create the feature flag.
+4. Set up your feature flag.
+5. Select which environment you would like to link to this item.
+6. When linked, you can manage the selected feature flag from this monday.com item.
 7. View linked monday.com items next to your Feature Flags in ConfigCat and jump to the monday.com item directly.
+
+<img src="/docs/assets/monday/v1/monday_create.gif" className="bordered-img zoomable" alt="Create feature flags with the ConfigCat Feature Flags monday app" />
