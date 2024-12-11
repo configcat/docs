@@ -58,9 +58,10 @@ $badge-classes: (
   margin-right: var(--ifm-spacing-horizontal);
   text-align: center;
   flex-shrink: 0;
+  text-decoration: unset;
 }
 
-.menu__list-item--deprecated {
+.api-method.menu__list-item--deprecated {
   text-decoration: line-through;
 }
 
