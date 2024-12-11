@@ -60,6 +60,10 @@ $badge-classes: (
   flex-shrink: 0;
 }
 
+.menu__list-item--deprecated {
+  text-decoration: line-through;
+}
+
 @each $name, $color in $colors {
   .#{$name} > .menu__link::before {
     content: "#{map.get($contents, $name)}";
