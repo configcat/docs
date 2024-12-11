@@ -1,21 +1,23 @@
 import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
+const infoId = 'reference/configcat-public-management-api';
+
 const generated = require('./reference/sidebar.ts')
-    .slice(1)
-    .filter(item => item.label != 'Integration links');
+    .map(item => {
+      return {
+        ...item, 
+        items: item.items.filter(sub => sub.id !== infoId),
+      }
+    });
 
 const sidebars: SidebarsConfig = {
   api: [
     {
-      label: 'Public Management API',
-      collapsed: true,
-      type: 'category',
-      link: {
-        type: "doc",
-        id: "reference/configcat-public-management-api",
-      },
-      items: generated
+      label: 'Introduction',
+      type: "doc",
+      id: infoId,
     },
+    ...generated,
   ],
 };
 
