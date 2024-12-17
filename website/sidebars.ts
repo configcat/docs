@@ -176,6 +176,7 @@ const sidebars: SidebarsConfig = {
         { type: 'doc', id: 'integrations/datadog', label: 'Datadog' },
         { type: 'doc', id: 'integrations/github', label: 'GitHub Action' },
         { type: 'doc', id: 'integrations/google-analytics', label: 'Google Analytics' },
+        { type: 'doc', id: 'integrations/intellij', label: 'JetBrains/IntelliJ IDE' },
         { type: 'doc', id: 'integrations/jira', label: 'Jira Cloud Plugin' },
         { type: 'doc', id: 'integrations/mixpanel', label: 'Mixpanel' },
         { type: 'doc', id: 'integrations/monday', label: 'monday.com' },

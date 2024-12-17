@@ -96,6 +96,7 @@ const features = [
       { url: 'integrations/github', title: 'GitHub Action' },
       { url: 'integrations/google-analytics', title: 'Google Analytics' },
       { url: 'advanced/code-references/gitlab-ci/', title: 'GitLab (via CLI)' },
+      { url: 'integrations/intellij', title: 'JetBrains/IntelliJ IDE' },
       { url: 'integrations/jira', title: 'Jira Cloud Plugin' },
       {
         url: 'advanced/notifications-webhooks#connecting-to-microsoft-teams',
