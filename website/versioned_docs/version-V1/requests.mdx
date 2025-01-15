@@ -126,3 +126,17 @@ In a backend application, you might want to try using [Webhooks.](./advanced/not
 ### Call your backend instead of the ConfigCat CDN
 
 In the case of a frontend application, you can lower the number of calls made towards the ConfigCat CDN by moving the evaluation logic from the frontend application to your backend.
+
+### Use the ConfigCat Proxy to cache/proxy config JSON downloads
+
+The [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) allows you to host a feature flag evaluation and config JSON proxy/cache service in your own infrastructure.  
+The [CDN proxy](https://configcat.com/docs/advanced/proxy/endpoints/#cdn-proxy) feature allows you to proxy/cache config JSON downloads and the ConfigCat SDKs can be routed to the ConfigCat Proxy running in your own infrastructure greatly reducing config JSON downloads.
+
+### Purchase additional quota
+
+You can purchase additional quota to your subscription to increase your limits. [Contact us](https://configcat.com/support/) for more information.
+
+| Plan           | Price              | Additional config JSON downloads | Additional network traffic |
+| -------------- | ------------------ | -------------------------------: | -------------------------: |
+| **Smart**      | $250 or €229 / mo  | +250 million                     | +1TB                       |
+| **Enterprise** | $700 or €649 / mo  | +1 billion                       | +4TB                       |
