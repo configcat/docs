@@ -1,0 +1,50 @@
+---
+id: scim-overview
+title: User provisioning (SCIM) Overview
+description: This section is a step-by-step guide on how you can configure User provisioning (SCIM) for your organization in ConfigCat.
+---
+
+This section describes how you can configure User provisioning (SCIM) for your organization in ConfigCat.
+
+User provisioning (SCIM) is for synchronizing users and groups from your Identity Provider. You have the option to assign ConfigCat permissions to each synchronized Identity Provider (IdP) group. Each member in those groups will be put into the configured ConfigCat permission groups during the provisioning process.
+
+Go to the [User provisioning (SCIM)](https://app.configcat.com/organization/user-provisioning/) page to set up User provisioning. You need to be an organization admin to do this.
+
+## Prerequisites
+
+- [Verified domain](../domain-verification.mdx)  
+  In order to configure User provisioning (SCIM), you have to verify the ownership of the domain that your company uses for email addresses. 
+- Identity Provider that supports SCIM 2.0 
+
+
+## Supported SCIM 2.0 endpoints
+
+- Identity Provider User synchronization (Read, Create, Replace, Update, Delete)
+- Identity Provider Group synchronization (Read, Create, Replace, Update, Delete)
+
+
+## Configure an Identity Provider
+
+For setting up SCIM synchronization, you have to configure your Identity Provider with a SCIM URL and a bearer token.  
+The SCIM URL and the bearer token can be acquired on the [User provisioning (SCIM)](https://app.configcat.com/organization/user-provisioning/) page.
+
+We tested and validated the following Identity Providers:
+
+- [Entra ID (Azure AD)](./identity-providers/azure-ad.mdx)
+- [ADFS](./identity-providers/adfs.mdx)
+- [Google](./identity-providers/google.mdx)
+- [Okta](./identity-providers/okta.mdx)
+- [Auth0](./identity-providers/auth0.mdx)
+- [OneLogin](./identity-providers/onelogin.mdx)
+- [Cloudflare Zero Trust](./identity-providers/cloudflare.mdx)
+
+:::info
+Other Identity Providers might also work with ConfigCat, if they support the SCIM 2.0 protocol.
+:::
+
+:::info
+The very first synchronization won't affect the current permissions in ConfigCat until you start the provisioning for each synchronized user.
+New users are not created automatically and existing users' permissions will not change.
+:::
+
+## 
