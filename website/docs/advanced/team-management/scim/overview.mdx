@@ -97,3 +97,31 @@ The Identity Provider Users calculated ConfigCat permissions will be the followi
 
 After a successful synchronization, the Identity Provider Users will be connected with existing ConfigCat users in your ConfigCat Organization.  
 New ConfigCat accounts are not created automatically. Existing ConfigCat users' permissions will not change until you explicitly start the provisioning for them.
+
+### What is managed by provisioning?
+
+The User Provisioning feature manages the following user related attributes:
+- ConfigCat permissions: with a fine-tuned provisioning configuration you can manage your team members permissions with your Identity Provider easily.
+- ConfigCat account's email address: if an Identity Provider User's email address has been changed in the Identity Provider, the associated ConfigCat user's email address will be changed too and the ConfigCat user will only be able to log in with the new email address.
+- ConfigCat account's full name: the Identity Provider User's full name is synchronized from the Identity Provider and overwrites the ConfigCat user's full name property.
+- Soft delete: if an Identity Provider User is soft deleted in the Identity provider, the ConfigCat account will be disabled and cannot be used.
+- Hard delete: if an Identity Provider User is hard deleted in the Identity provider, the ConfigCat account will be removed from the organization entirely but the account won't be deleted for a while.
+
+### Start/stop provisioning
+
+In the Identity Provider Users table, you can see a start/stop button in the last column. This indicates if an Identity Provider User's provisioning is running or not. 
+As long as the provisioning is not started, you can adjust your Identity Provider Groups' provisioning configurations till the permissions for your Identity Provider Users match the expected permissions without having to worry about changing existing users' permissions.
+The provisioning status column can give you an overview what will happen if you start the provisioning for the Identity Provider User.
+
+If you start the provisioning for an Identity Provider User that already has a ConfigCat account, the provisioning permissions will overwrite their current permissions.  
+If you start the provisioning for an Identity Provider User that doesn't have a ConfigCat account yet, we will send them an invitation email to let them know that they can start using ConfigCat. After they register an account, their permissions will be set based on the permissions you see in the Identity Provider User table.
+
+:::info
+After you start provisioning an Identity Provider User, you won't be able to set their permissions manually on the team members/organization members pages. The permissions can only be changed via changing the permissions in the Identity Provider Groups table, or modifying the Identity Provider Groups associated with the Identity Provider Users in your Identity Provider.
+:::
+
+If you stop the provisioning an Identity Provider User, their permissions will stay in the last state, and modifying provisioning permissions or changing the Identity Provider User's Identity Provider Groups won't change their permissions. You'll be able to manually modify permissions for provisioning stopped Identity Provider Users on the team members/organization members pages.  
+After turning back the provisioning the permissions may change regarding the actual provisioning configurations.
+
+### Provisioning status
+
