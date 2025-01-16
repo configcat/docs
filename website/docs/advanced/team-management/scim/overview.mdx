@@ -16,12 +16,10 @@ Go to the [User provisioning (SCIM)](https://app.configcat.com/organization/user
   In order to configure User provisioning (SCIM), you have to verify the ownership of the domain that your company uses for email addresses. 
 - Identity Provider that supports SCIM 2.0 
 
-
 ## Supported SCIM 2.0 endpoints
 
 - Identity Provider User synchronization (Read, Create, Replace, Update, Delete)
 - Identity Provider Group synchronization (Read, Create, Replace, Update, Delete)
-
 
 ## Configure an Identity Provider
 
@@ -44,7 +42,58 @@ Other Identity Providers might also work with ConfigCat, if they support the SCI
 
 :::info
 The very first synchronization won't affect the current permissions in ConfigCat until you start the provisioning for each synchronized user.
-New users are not created automatically and existing users' permissions will not change.
+New users are not created automatically. Existing users' permissions will not change until you explicitly start the provisioning for them.
 :::
 
-## 
+## Configure Identity Provider Groups
+
+After a successful synchronization from your Identity Provider to ConfigCat, the synchronized Identity Provider Groups and Identity Provider Users should be visible on the [User provisioning (SCIM)](https://app.configcat.com/organization/user-provisioning/) page.
+You can configure ConfigCat permissions to each Identity Provider Group by clicking on the gear icon in the Identity Provider Groups table. 
+By setting up their permission configuration, you can control which ConfigCat permission will be assigned to each group's member.
+
+As an Identity Provider User can be a member in multiple Identity Provider Groups, the user provisioning is merging the permissions associated with the Identity Provider Groups based on the following rules:
+- If any of the Identity Provider User's Identity Provider Groups is assigned to the Organization Admin role, the Identity Provider User will be assigned to the Organization Admin role.
+- If any of the Identity Provider User's Identity Provider Groups is assigned to the Billing Manager role, the Identity Provider User will be assigned to the Billing Manager role.
+- If none of the Identity Provider User's Identity Provider Groups is assigned to the Organization Admin role, the user provisioning will merge the product level permissions associated with each Identity Provider Group. 
+  If multiple Identity Provider Groups has permissions associated for the same product, the first Identity Provider Group's permission will be set based on the Identity Provider Groups' priority. 
+  You can adjust the Identity Provider Group priorities by clicking on the Set priority button above the Identity Provider Groups table.
+
+### Limitations
+
+ConfigCat limits how many Identity Provider Groups can have associated ConfigCat permissions based on your subscription
+
+| Free    | Pro     | Smart   | Enterprise | Dedicated | Student | Teacher |
+| ------- | ------- | ------- | ---------- | --------- | ------- | ------- |
+| 2       | 5       | 10      | unlimited  | unlimited | 5       | 5       |
+
+### Example
+
+A ConfigCat organization has 2 products and each product has several permission groups:
+
+| Product   | Permission groups                   |
+| --------- | ----------------------------------- |
+| Product A | Readers, Writers, Developers        |
+| Product B | Readers, Product owners, Developers |
+
+There are 5 Identity Provider Groups that are marked for synchronization with the following permissions:
+
+| Priority | Identity Provider Group   | Associated ConfigCat Permissions            |
+| -------- | ------------------------- | ------------------------------------------- |
+| 1.       | Owners                    | Organziation Admin, Billing Manager         |
+| 2.       | Billing Managers          | Organziation Admin                          |
+| 3.       | Developers                | Product A/Developers, Product B/Developers  |
+| 4.       | Product owners            | Product B/Product owners                    |
+| 5.       | Readers                   | Product A/Readers, Product B/Readers        |
+
+The Identity Provider Users calculated ConfigCat permissions will be the following based on their Identity Provider Groups:
+
+| Identity Provider User | Identity Provider Groups  | Calculated ConfigCat Permissions                        | Explanation |
+| ---------------------- | ------------------------- | ------------------------------------------------------- | ----------- | 
+| John                   | Owners, Readers           | Organziation Admin, Billing Manager                     | As John is assigned to the Owners Identity Provider Group that has the Organization Admin role, the Readers Identity Provider Group's product level permissions won't be assigned as he is already an Organization Admin. |
+| Jane                   | Readers, Billing Managers | Billing Manager, Product A/Readers, Product B/Readers   | A ConfigCat user can have the Billing Manager role and Product level permissions too, so the permissions are merged based on the Identity Provider Groups. |
+| Peter                  | Readers, Developers       | Product A/Developers, Product B/Developers              | As both the Readers and Developers Identity Provider Groups have associated permissions to the same Products, the permissions will be merged based on the Identity Provider Group's priority |
+
+## Configure Identity Provider Users
+
+After a successful synchronization, the Identity Provider Users will be connected with existing ConfigCat users in your ConfigCat Organization.  
+New ConfigCat accounts are not created automatically. Existing ConfigCat users' permissions will not change until you explicitly start the provisioning for them.
