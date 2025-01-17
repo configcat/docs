@@ -100,12 +100,12 @@ New ConfigCat accounts are not created automatically. Existing ConfigCat users' 
 
 ### What is managed by provisioning?
 
-The User Provisioning feature manages the following user related attributes:
-- ConfigCat permissions: with a fine-tuned provisioning configuration you can manage your team members permissions with your Identity Provider easily.
-- ConfigCat account's email address: if an Identity Provider User's email address has been changed in the Identity Provider, the associated ConfigCat user's email address will be changed too and the ConfigCat user will only be able to log in with the new email address.
-- ConfigCat account's full name: the Identity Provider User's full name is synchronized from the Identity Provider and overwrites the ConfigCat user's full name property.
-- Soft delete: if an Identity Provider User is soft deleted in the Identity provider, the ConfigCat account will be disabled and cannot be used.
-- Hard delete: if an Identity Provider User is hard deleted in the Identity provider, the ConfigCat account will be removed from the organization entirely but the account won't be deleted for a while.
+The User Provisioning feature manages the following user related attributes if you start provisioning the Identity Provider User:
+- **ConfigCat permissions**: with a fine-tuned provisioning configuration you can manage your team members permissions with your Identity Provider easily.
+- **ConfigCat account's email address**: if an Identity Provider User's email address has been changed in the Identity Provider, the associated ConfigCat user's email address will be changed too and the ConfigCat user will only be able to log in with the new email address.
+- **ConfigCat account's full name**: the Identity Provider User's full name is synchronized from the Identity Provider and overwrites the ConfigCat user's full name property.
+- **Soft delete**: if an Identity Provider User is soft deleted in the Identity Provider, the ConfigCat account will be disabled and cannot be used.
+- **Hard delete**: if an Identity Provider User is hard deleted in the Identity Provider, the ConfigCat account will be removed from the organization entirely but the ConfigCat account won't be deleted for a while.
 
 ### Start/stop provisioning
 
@@ -125,3 +125,37 @@ After turning back the provisioning the permissions may change regarding the act
 
 ### Provisioning status
 
+The Provisioning status column in the Identity Provider Users table shows you important information about the provisioning state.
+
+#### Identity Provider User with an unverified email domain
+
+The user provisining is synchronizing all Identity Provider Users from your Identity Provider regardless if the Identity Provider User's email domain is a verified email domain in ConfigCat or not.  
+The provisioning status will show an error message regarding this issue and you won't be able to start provisioning for Identity Provider User until you verify the email domain.
+
+#### Identity Provider User without a ConfigCat account
+
+The provisioning status shows you information about what permissions will be assigned and what will happen to the Identity Provider User after a successful sign up.  
+The Provisioning status will show you a warning if an Identity Provider User's won't have any permissions in ConfigCat after a sign up so you can fine-tune your provisioning configuration.
+
+#### Identity Provider User with an already existing ConfigCat account
+
+If provisioning the Identity Provider User is stopped, the provisioning status shows information about what will happen to the ConfigCat account when you start provisioning is started. 
+If provisioning the Identity Provider User is started the provisioning status can be:
+- **Provisioning is active**: the provisioning is active, all permissions/user properties are matching your Identity Provider configuration for the Identity Provider User.
+- **Provisioning is in progress**: the provisioning is happening in a background job, so for a short period of time you can see the provisioning is in progress status. This can happen if your Identity Provider sends ConfigCat updates about your Identity Provider User or you modify your Identity Provider Group's provisioning permissions.
+
+## Auto provisioning for new users
+
+By default, after the Identity Provider synchronizes a new Identity Provider User to ConfigCat, the Identity Provider User will be in a provisioning stopped state, so you can verify your configuration/permissions and adjust your settings if needed.  
+After you are confident that the provisioning works like you expect, you can turn the **Auto provisioning for new users** toggle to ON to immediately start the provisioning for newly synchronized Identity Provider Users. 
+
+## Disabling Domain Auto-assign
+
+After verifying your domain name in ConfigCat, all users signing up with that domain will added to your organization. With the auto-assign feature, you can also specify the initial permissions for these users.  
+The auto-assign feature of verified domains may interfere with user provisioning. If you want to allow only provisioned users to enter your organization, you should deactivate the auto-assign feature on verified domains. You can do it by deactivating the auto-assign feature next to the verified domains.
+
+## ConfigCat users not managed by user provisioning
+
+After configuring the user provisioning and synchronizing your Identity Provider Users from your Identity Provider, it may happen that there are some ConfigCat accounts in your organization who are not synchronized by the User Provisioning. There could be two possible reasons for this:
+- It may happen that these accounts are not added to your Identity Provider synchronization accidentally and these accounts should be set up for synchronization too. This can be done in your Identity Provider.
+- If these accounts are not existing anymore in your company, you can safely remove them from your ConfigCat Organization in the *ConfigCat users not managed by user provisioning* table.
