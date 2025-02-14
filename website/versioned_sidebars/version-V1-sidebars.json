@@ -205,6 +205,11 @@
         },
         {
           "type": "doc",
+          "id": "integrations/intellij",
+          "label": "JetBrains/IntelliJ IDE"
+        },
+        {
+          "type": "doc",
           "id": "integrations/jira",
           "label": "Jira Cloud Plugin"
         },

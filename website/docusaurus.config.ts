@@ -111,7 +111,7 @@ const config: Config = {
             specPath: 'https://api.configcat.com/docs/v1/swagger.json',
             outputDir: 'api/reference',
             sidebarOptions: {
-              groupPathsBy: 'tag',
+              groupPathsBy: 'tagGroup',
               categoryLinkSource: 'tag'
             },
           },
