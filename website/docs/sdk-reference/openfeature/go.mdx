@@ -20,23 +20,26 @@ The ConfigCat Provider needs a pre-configured [ConfigCat Go SDK](../../go/#creat
 
 ```go
 import (
-    "context"
+    "time"
 
-    sdk "github.com/configcat/go-sdk/v8"
-    configcat "github.com/open-feature/go-sdk-contrib/providers/configcat/pkg"
+    configcat "github.com/configcat/go-sdk/v9"
+    configcatprovider "github.com/open-feature/go-sdk-contrib/providers/configcat/pkg"
+
     "github.com/open-feature/go-sdk/openfeature"
 )
 
-// Configure the ConfigCat SDK.
-configcatClient := sdk.NewCustomClient(sdk.Config{SDKKey: "#YOUR-SDK-KEY#",
-    PollingMode: sdk.AutoPoll,
-    PollInterval: time.Second * 60})
+func main() {
+    // Configure the ConfigCat SDK.
+    configcatClient := configcat.NewCustomClient(configcat.Config{SDKKey: "#YOUR-SDK-KEY#",
+        PollingMode:  configcat.AutoPoll,
+        PollInterval: time.Second * 60})
 
-// Configure the provider.
-openfeature.SetProvider(configcat.NewProvider(configcatClient))
+    // Configure the provider.
+    _ = openfeature.SetProviderAndWait(configcatprovider.NewProvider(configcatClient))
 
-// Create a client.
-client := openfeature.NewClient("app")
+    // Create a client.
+    client := openfeature.NewClient("app")
+}
 ```
 
 For more information about all the configuration options, see the [Go SDK documentation](../../go/#creating-the-configcat-client).
