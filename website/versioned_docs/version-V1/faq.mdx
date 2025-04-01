@@ -171,7 +171,7 @@ ELSE IF Email CONTAINS @mycompany.com THEN feature is ON
 To all other users the feature is OFF
 ```
 
-<img src="/docs/assets/faq/or-example.png" className="zoomable" alt="OR example" />
+<img src="/docs/assets/faq/or-example.png" className="zoomable" alt="OR example" decoding="async" loading="lazy" />
 
 #### AND Example
 
@@ -183,7 +183,7 @@ ELSE IF Email DOES NOT CONTAIN @mycompany.com THEN feature is OFF
 To all other users the feature is ON
 ```
 
-<img src="/docs/assets/faq/and-example.png" className="zoomable" alt="AND example" />
+<img src="/docs/assets/faq/and-example.png" className="zoomable" alt="AND example" decoding="async" loading="lazy" />
 
 [Here is an example in our blog.](https://configcat.com/blog/2019/10/23/user-segmentation-and-targeting/#everyone-in-my-company-plus-android-users-from-germany-above-v53)
 
@@ -206,7 +206,7 @@ If you want to use Targeting Rules based on email address, phone number, or othe
 
 ### What are Zombie (Stale) Flags?
 
-<img src="/docs/assets/faq/zombie.svg" alt="Zombie cat" width="200"/>
+<img src="/docs/assets/faq/zombie.svg" alt="Zombie cat" width="200" decoding="async" loading="lazy"/>
 
 Zombie (Stale) flags are feature flags that are not changed in the last (configurable) number of days. Most of the time if a feature flag isn't changed for a long time it means it is time to be removed from your source code and from the [ConfigCat Dashboard](https://app.configcat.com/) as well to avoid technical debt.
 
@@ -223,7 +223,7 @@ You can change the frequency, criteria and scope of the Zombie Feature Flag repo
 ### How to avoid technical debt caused by feature flags?
 
 The [ConfigCat CLI](./advanced/code-references/overview.mdx) can scan your code, upload code references to the [ConfigCat Dashboard](https://app.configcat.com/) and notify you about stale feature flags.
-<img src="/docs/assets/cli/code-refs.png" className="zoomable" alt="Code references screenshot" />
+<img src="/docs/assets/cli/code-refs.png" className="zoomable" alt="Code references screenshot" decoding="async" loading="lazy" />
 
 ### Is there a way to compare flag statuses between two or more environments?
 

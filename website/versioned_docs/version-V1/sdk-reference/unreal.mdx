@@ -46,7 +46,7 @@ Note: if you are using a locally built plugin, you will need to rebuild from sou
 
 ### 2. Enable the ConfigCat plugin in your project
 
-<img className="unreal-enable-plugin zoomable" src="/docs/assets/unreal/enable-plugin.png" alt="Unreal Engine enable plugin" />
+<img className="unreal-enable-plugin zoomable" src="/docs/assets/unreal/enable-plugin.png" alt="Unreal Engine enable plugin" decoding="async" loading="lazy" />
 
 Navigate to `Edit -> Plugins` and perform the following steps:
 1. Find the `ConfigCat` plugin and **tick** the enable checkbox.
@@ -56,7 +56,7 @@ Navigate to `Edit -> Plugins` and perform the following steps:
 
 You can configure all ConfigCat related settings inside the `Edit -> Project Settings -> Feature Flags -> ConfigCat`.
 
-<img className="unreal-plugin-settings zoomable" src="/docs/assets/unreal/plugin-settings.png" alt="Unreal Engine plugin settings" />
+<img className="unreal-plugin-settings zoomable" src="/docs/assets/unreal/plugin-settings.png" alt="Unreal Engine plugin settings" decoding="async" loading="lazy" />
 
 | Properties                    | Description                                                                                                                                                                                                                                                                                         |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -78,7 +78,7 @@ You can configure all ConfigCat related settings inside the `Edit -> Project Set
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-get-value zoomable" src="/docs/assets/unreal/blueprints-get-value.png" alt="Unreal Engine Get Value" />
+<img className="unreal-blueprints-get-value zoomable" src="/docs/assets/unreal/blueprints-get-value.png" alt="Unreal Engine Get Value" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -115,8 +115,8 @@ SetMyAwesomeFeatureEnabled(bIsMyAwesomeFeatureEnabled);
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-get-value-overloads zoomable" src="/docs/assets/unreal/blueprints-get-value-overloads.png" alt="Unreal Engine Get Value Overloads" />
-<img className="unreal-blueprints-get-value-targeted zoomable" src="/docs/assets/unreal/blueprints-get-value-targeted.png" alt="Unreal Engine Get Values Targeted" />
+<img className="unreal-blueprints-get-value-overloads zoomable" src="/docs/assets/unreal/blueprints-get-value-overloads.png" alt="Unreal Engine Get Value Overloads" decoding="async" loading="lazy" />
+<img className="unreal-blueprints-get-value-targeted zoomable" src="/docs/assets/unreal/blueprints-get-value-targeted.png" alt="Unreal Engine Get Values Targeted" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -155,7 +155,7 @@ FString TargetValue = ConfigCat->GetStringValue(TEXT("targetValue"), TEXT(""), U
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-get-value-details zoomable" src="/docs/assets/unreal/blueprints-get-value-details.png" alt="Unreal Engine Get Value Details" />
+<img className="unreal-blueprints-get-value-details zoomable" src="/docs/assets/unreal/blueprints-get-value-details.png" alt="Unreal Engine Get Value Details" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -190,7 +190,7 @@ The [User Object](../advanced/user-object.mdx) is essential if you'd like to use
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-create-user zoomable" src="/docs/assets/unreal/blueprints-create-user.png" alt="Unreal Engine Create User" />
+<img className="unreal-blueprints-create-user zoomable" src="/docs/assets/unreal/blueprints-create-user.png" alt="Unreal Engine Create User" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -214,7 +214,7 @@ auto User = UConfigCatUserWrapper::CreateUser(TEXT("#UNIQUE-USER-IDENTIFIER#"));
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-create-user-custom zoomable" src="/docs/assets/unreal/blueprints-create-user-custom.png" alt="Unreal Engine Create User Custom" />
+<img className="unreal-blueprints-create-user-custom zoomable" src="/docs/assets/unreal/blueprints-create-user-custom.png" alt="Unreal Engine Create User Custom" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -239,7 +239,7 @@ You can set the default User Object with the `setDefaultUser()` method of the Co
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-set-default-user zoomable" src="/docs/assets/unreal/blueprints-set-default-user.png" alt="Unreal Engine Set Default User" />
+<img className="unreal-blueprints-set-default-user zoomable" src="/docs/assets/unreal/blueprints-set-default-user.png" alt="Unreal Engine Set Default User" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -258,7 +258,7 @@ Whenever the `GetValue()`, `GetValueDetails()`, `GetAllValues()`, or `GetAllValu
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-default-user-example zoomable" src="/docs/assets/unreal/blueprints-default-user-example.png" alt="Unreal Engine Default User Example" />
+<img className="unreal-blueprints-default-user-example zoomable" src="/docs/assets/unreal/blueprints-default-user-example.png" alt="Unreal Engine Default User Example" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -280,7 +280,7 @@ When the `user` parameter is specified on the requesting method, it takes preced
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-other-user-example zoomable" src="/docs/assets/unreal/blueprints-other-user-example.png" alt="Unreal Engine Other User Example" />
+<img className="unreal-blueprints-other-user-example zoomable" src="/docs/assets/unreal/blueprints-other-user-example.png" alt="Unreal Engine Other User Example" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -304,7 +304,7 @@ For deleting the default user, you can do the following:
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-clear-default-user zoomable" src="/docs/assets/unreal/blueprints-clear-default-user.png" alt="Unreal Engine Clear Default User" />
+<img className="unreal-blueprints-clear-default-user zoomable" src="/docs/assets/unreal/blueprints-clear-default-user.png" alt="Unreal Engine Clear Default User" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -326,7 +326,7 @@ The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setti
 
 The _ConfigCat SDK_ downloads the latest values and stores them automatically every 60 seconds.
 
-<img className="unreal-blueprints-settings-polling-mode-auto zoomable" src="/docs/assets/unreal/settings-polling-mode-auto.png" alt="Unreal Engine Polling Mode Auto" />
+<img className="unreal-blueprints-settings-polling-mode-auto zoomable" src="/docs/assets/unreal/settings-polling-mode-auto.png" alt="Unreal Engine Polling Mode Auto" decoding="async" loading="lazy" />
 
 Available options:
 
@@ -339,7 +339,7 @@ Available options:
 
 When calling `getValue()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `getValue()` will return the setting value after the cache is updated.
 
-<img className="unreal-settings-polling-mode-lazy zoomable" src="/docs/assets/unreal/settings-polling-mode-lazy.png" alt="Unreal Engine Polling Mode Lazy" />
+<img className="unreal-settings-polling-mode-lazy zoomable" src="/docs/assets/unreal/settings-polling-mode-lazy.png" alt="Unreal Engine Polling Mode Lazy" decoding="async" loading="lazy" />
 
 Available options:
 
@@ -351,12 +351,12 @@ Available options:
 
 Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
 
-<img className="unreal-settings-polling-mode-manual zoomable" src="/docs/assets/unreal/settings-polling-mode-manual.png" alt="Unreal Engine Polling Mode Manual" />
+<img className="unreal-settings-polling-mode-manual zoomable" src="/docs/assets/unreal/settings-polling-mode-manual.png" alt="Unreal Engine Polling Mode Manual" decoding="async" loading="lazy" />
 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-manual-force-refresh zoomable" src="/docs/assets/unreal/blueprints-manual-force-refresh.png" alt="Unreal Engine Manual Force Refresh" />
+<img className="unreal-blueprints-manual-force-refresh zoomable" src="/docs/assets/unreal/blueprints-manual-force-refresh.png" alt="Unreal Engine Manual Force Refresh" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -389,7 +389,7 @@ You can subscribe to these events either on SDK initialization:
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprint-event-delegates zoomable" src="/docs/assets/unreal/blueprint-event-delegates.png" alt="Unreal Engine Blueprint Event Delegates" />
+<img className="unreal-blueprint-event-delegates zoomable" src="/docs/assets/unreal/blueprint-event-delegates.png" alt="Unreal Engine Blueprint Event Delegates" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -419,7 +419,7 @@ To put the SDK back in online mode, you can use `SetOnline`;
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprint-offline-functionality zoomable" src="/docs/assets/unreal/blueprint-offline-functionality.png" alt="Unreal Engine Blueprint Offline Functionality" />
+<img className="unreal-blueprint-offline-functionality zoomable" src="/docs/assets/unreal/blueprint-offline-functionality.png" alt="Unreal Engine Blueprint Offline Functionality" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -448,7 +448,7 @@ Moreover, you can specify how the overrides should apply over the downloaded val
 
 You can set up the SDK to load your feature flag & setting overrides from a file or a map.
 
-<img className="unreal-settings-overrides zoomable" src="/docs/assets/unreal/settings-overrides.png" alt="Unreal Engine Settings Overrides" />
+<img className="unreal-settings-overrides zoomable" src="/docs/assets/unreal/settings-overrides.png" alt="Unreal Engine Settings Overrides" decoding="async" loading="lazy" />
 
 ### JSON File
 
@@ -569,7 +569,7 @@ You can query the keys of each feature flag and setting with the `getAllKeys()` 
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-get-all-keys zoomable" src="/docs/assets/unreal/blueprints-get-all-keys.png" alt="Unreal Engine Get All Keys" />
+<img className="unreal-blueprints-get-all-keys zoomable" src="/docs/assets/unreal/blueprints-get-all-keys.png" alt="Unreal Engine Get All Keys" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -590,7 +590,7 @@ Evaluates and returns the values of all feature flags and settings. Passing a Us
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-get-all-values zoomable" src="/docs/assets/unreal/blueprints-get-all-values.png" alt="Unreal Engine Get All Values" />
+<img className="unreal-blueprints-get-all-values zoomable" src="/docs/assets/unreal/blueprints-get-all-values.png" alt="Unreal Engine Get All Values" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -613,7 +613,7 @@ Evaluates and returns the detailed values of all feature flags and settings. Pas
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-get-all-value-details zoomable" src="/docs/assets/unreal/blueprints-get-all-value-details.png" alt="Unreal Engine Get All Value Details" />
+<img className="unreal-blueprints-get-all-value-details zoomable" src="/docs/assets/unreal/blueprints-get-all-value-details.png" alt="Unreal Engine Get All Value Details" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -643,7 +643,7 @@ Call the `forceRefresh()` method on the client to download the latest config JSO
 <Tabs groupId="unreal-languages">
 <TabItem value="blueprints" label="Blueprints">
 
-<img className="unreal-blueprints-force-refresh zoomable" src="/docs/assets/unreal/blueprints-force-refresh.png" alt="Unreal Engine Blueprint Force Refresh" />
+<img className="unreal-blueprints-force-refresh zoomable" src="/docs/assets/unreal/blueprints-force-refresh.png" alt="Unreal Engine Blueprint Force Refresh" decoding="async" loading="lazy" />
 
 </TabItem>
 <TabItem value="cpp" label="C++">
@@ -668,7 +668,7 @@ The Unreal Engine HTTP module doesn't support running behinde a proxy.
 Set the maximum wait time for a ConfigCat HTTP response by changing the _ConnectTimeoutMs_ or _ReadTimeoutMs_ in the ConfigCat `ProjectSettings`.
 The default _ConnectTimeoutMs_ is 8 seconds. The default _ReadTimeoutMs_ is 5 seconds.
 
-<img className="unreal-settings-http-timeout zoomable" src="/docs/assets/unreal/settings-http-timeout.png" alt="Unreal Engine Settings Http Timeout" />
+<img className="unreal-settings-http-timeout zoomable" src="/docs/assets/unreal/settings-http-timeout.png" alt="Unreal Engine Settings Http Timeout" decoding="async" loading="lazy" />
 
 ## Logging
 
