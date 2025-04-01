@@ -63,7 +63,7 @@ const configCatClient = configcat.getClient("#YOUR_SDK_KEY", PollingMode.AutoPol
 </TabItem>
 
 <TabItem value="other" label="Other languages">
-While our documentation primarily provides code examples for JavaScript-based SDKs, you can integrate with other languages by utilizing the <a href="https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag" target="_blank" rel="noopener noreferrer">Send Measurement Protocol events to Google Analytics</a> endpoint. Here’s how to set it up:
+While our documentation primarily provides code examples for JavaScript-based SDKs, you can integrate with other languages by utilizing the <a href="https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag" target="_blank" rel="noopener noreferrer">Send Measurement Protocol events to Google Analytics</a> endpoint. Here's how to set it up:
 
 1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
 2. **Send an event to Google Analytics** using the `experience_impression` event name. Include the following event properties:
