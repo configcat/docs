@@ -14,13 +14,13 @@ Using this feature you will be able to set different setting values for differen
 2. Go to **Feature Flags & Settings**
 3. Select **TARGET SPECIFIC USERS** after clicking the actions icon.
 
-<img src="/docs/assets/targeting-1.png" className="zoomable" alt="targeting-1" decoding="async" loading="lazy" />
+<img src="/docs/assets/targeting-1.png" alt="targeting-1" decoding="async" loading="lazy" />
 
 ## Anatomy of a Targeting Rule
 
 By adding a rule, you specify a group of your users and what feature flag or setting value they should get. A rule consists of a **Comparison attribute** of a user in your application (e.g. email address), a **Comparison value** (e.g. a list of email addresses), and a **Comparator** (e.g. IS ONE OF). ConfigCat evaluates the Targeting Rule every time your application requires and decides what value to serve.
 
-<img src="/docs/assets/sensitive2.png" className="zoomable" alt="Confidential" decoding="async" loading="lazy" />
+<img src="/docs/assets/sensitive2.png" alt="Confidential" decoding="async" loading="lazy" />
 
 | Field                | Purpose                                                                                                                                              |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -76,12 +76,12 @@ In this case, the feature flag evaluation is based on the secure hashes of the c
 
 Since confidential text comparators don't support CONTAINS or DOES NOT CONTAIN comparisons, here is an example of how to target users from the same company. Which used to be handled by a rule like:
 
-<img src="/docs/assets/sensitive2.png" className="zoomable" alt="Confidential" decoding="async" loading="lazy" />
+<img src="/docs/assets/sensitive2.png" alt="Confidential" decoding="async" loading="lazy" />
 
 You can add a custom attribute called `domain` and use only confidential comparators in the Targeting Rule.
 
 On the Dashboard:
-<img src="/docs/assets/sensitive1.png" className="zoomable" alt="Confidential" decoding="async" loading="lazy" />
+<img src="/docs/assets/sensitive1.png" alt="Confidential" decoding="async" loading="lazy" />
 
 In your code:
 
@@ -191,7 +191,7 @@ With percentage-based user targeting, you can specify a randomly selected fracti
 2. Go to **Feature Flags & Settings**
 3. Select **TARGET % OF USERS** after clicking the actions icon.
 
-<img src="/docs/assets/targeting-2.png" className="zoomable" alt="targeting-2" decoding="async" loading="lazy" />
+<img src="/docs/assets/targeting-2.png" alt="targeting-2" decoding="async" loading="lazy" />
 
 ## Anatomy of the percentage-based targeting
 
