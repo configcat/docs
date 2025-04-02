@@ -110,7 +110,7 @@ Otherwise, the calculated signature could be completely different from the value
 
 ConfigCat uses `HMAC` with `SHA-256` to sign webhooks. You can retrieve the **signing key(s)** required for the signature calculation from the <a href="https://app.configcat.com/product/webhooks" target="_blank">ConfigCat Dashboard's webhook page</a>.
 
-<img src="/docs/assets/whsk.png" className="zoomable bottom-spaced" alt="signing keys" />
+<img src="/docs/assets/whsk.png" className="bottom-spaced" alt="signing keys" decoding="async" loading="lazy" />
 
 :::info
 For **key rotation** purposes, you can generate a secondary signing key. In this case ConfigCat sends two signatures (one signed with the _primary_ and one signed with the _secondary_ key) in the `X-ConfigCat-Webhook-Signature-V1` header separated by a comma (`,`):
