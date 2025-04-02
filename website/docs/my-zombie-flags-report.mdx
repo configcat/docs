@@ -1,0 +1,31 @@
+---
+id: my-zombie-flags-report
+title: My Zombie Flags Report
+description: This page explains how to use The Zombie Flags Report to list all feature flags that weren't flipped for a while.
+---
+
+Zombie flags are feature flags that are no longer needed or rarely used. Over time, they can sneak up on you when you least expect it—just like zombies in an apocalypse.
+
+When feature flags become stale, they contribute to technical debt and, if left unmanaged, can lead to unintended errors or issues.
+
+### How are zombie flags formed?
+
+These are just a few ways zombie flags can creep into your system:
+
+- A flag was initially tied to a feature that has since become permanent and is no longer controlled by the flag.
+
+- A decision was made to keep a feature on or off, yet the flag still lingers in your code or DevOps workflow.
+
+- The flag was used for a one-time deployment, but the rollout is over.
+
+- You haven’t toggled the flag in a long time.
+
+## The Zombie Flags Report
+
+The Zombie Flags (Stale Flags) Report lists all feature flags that weren't flipped for a while. There is a high chance these flags are not needed anymore but are still referenced in your source code, and ConfigCat recommends removing these flags to avoid tech debt.
+
+### Setting Up the Stale Feature Flags Report
+
+Login to your [ConfigCat dashboard](https://app.configcat.com), click your Organization name at the top right, then select **My Zombie Flags Report**.
+
+TODO: Continue from here
