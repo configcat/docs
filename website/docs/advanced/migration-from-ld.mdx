@@ -8,52 +8,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-This document is for current LaunchDarkly users who want to migrate to ConfigCat. It guides you through the migration
-process while providing information on the technical differences between the two services that you need to be aware of.
-
-Migration can be done on a project basis, and migration of a LaunchDarkly project usually consists of the following
-three steps:
-1. Migrating LaunchDarkly feature flags and segments to ConfigCat
-1. Migrating LaunchDarkly teams and permissions to ConfigCat
-1. Adjusting the code of your applications to use ConfigCat instead of LaunchDarkly
-
-ConfigCat provides a wizard-like GUI tool that is able to do the heavy lifting for step 1. However, there is currently
-no automation for step 2 and 3. So please expect these steps to require some manual work.
-
-## Getting started
-
-LaunchDarkly projects correspond to ConfigCat products in the ConfigCat hierarchy. However, products are not standalone
-entities, they are contained by a ConfigCat organization.
-
-So, to get started with migration, you will need to have a ConfigCat account and be a member of the ConfigCat
-organization that you want to host the products corresponding to the projects you plan to migrate from LaunchDarkly.
-You will also need to have the Organization Admin permission in that ConfigCat organization to be able to create
-products.
-
-* If the target ConfigCat organization does not exist yet, you can create one by <a target="_blank" href="https://app.configcat.com/auth/signup">
-signing up</a>. During the signup process, you will have the opportunity to create an own organization, in which
-you will have the Organization Admin permission by default.
-* Otherwise, you will need to get an invitation to the target ConfigCat organization, and after joining it, you will
-need to request the Organization Admin permission.
-
-Once the target ConfigCat organization is set up and you have the necessary permissions in it, you can start the actual
-migration.
-
-## Migrating LaunchDarkly feature flags and segments to ConfigCat
-
-It is recommended to migrate your LaunchDarkly feature flags and segments to ConfigCat first, using ConfigCat's official
-import tool, which was designed for this specific purpose.
-
-The tool also takes care of creating the corresponding ConfigCat products and environments, and reproduces your
-LaunchDarkly feature flags and segments in ConfigCat so they match the original evaluation behavior as close as
-possible.
-
 ### Using the import tool
 
 To launch the import tool, open the dropdown menu in the top left corner of the ConfigCat Dashboard, navigate to the
 Organization Overview page, then click the card labeled "Import from LaunchDarkly".
 
-<img alt="Launching the import tool" src="/docs/assets/migration-from-ld/launch_192dpi.png" width="1366" decoding="async" loading="lazy" />
+<img alt="Launching the import tool" src="/docs/assets/migration-from-ld/launch_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" style={{height: "auto"}} />
 
 This will take you to a page with a wizard-like UI. Follow the instructions displayed there and go through the steps to
 perform the import.
@@ -66,108 +26,3 @@ It is also possible to re-import products or specific parts of those without hav
 previously. The import tool is able to update the existing entities with fresh data. However, this may involve undoable
 overwriting of existing data, so please be careful. The import tool will warn you though if something like this is about
 to happen.
-
-### Targeting toggle translation mode
-
-In step 3 of the wizard, you may need to make a decision that might not be self-evident.
-
-LaunchDarkly feature flags have a <a href="https://docs.launchdarkly.com/home/flags/toggle" target="_blank" rel="noopener noreferrer">
-toggle</a> that allows you to enable or disable targeting for the specific feature flag. However, there is no similar
-feature in ConfigCat.
-
-So, in case the LaunchDarkly projects you selected for import contain feature flags where the targeting toggle is turned
-off in some of the environments, you need to decide how to work around such cases.
-
-Your options are the following:
-
-#### Ignore targeting toggle and import rules anyway
-
-This will result in an evaluation behavior different from LaunchDarkly. Choose this option if you want to keep your
-targeting rules even if the targeting toggle is off.
-
-Please consider the following consequences:
-
-* The state of targeting toggles will be ignored.
-* The *off variation* values won't be served.
-* The targeting rules will be imported and evaluated as if the targeting toggle was on.
-
-#### Respect targeting toggle and don't import rules
-
-This will result in the same evaluation behavior as in LaunchDarkly. Choose this option if you want your feature flags
-to produce the same values as in LaunchDarkly.
-
-Please consider the following consequences:
-
-* The state of targeting toggles will be respected.
-* The *off variation* values will be served.
-* The targeting rules won't be imported where the targeting toggle is off.
-
-#### Emulate targeting toggle using a prerequisite flag
-
-This is a workaround that combines the upsides of the other two options at the expense of creating extra feature flags.
-Choose this option if you want to import your targeting rules and want your feature flags to produce the same values as
-in LaunchDarkly at the same time.
-
-Please consider the following consequences:
-
-* The state of targeting toggles will be respected, however, for each problematic LaunchDarkly feature flag an extra
-[prerequisite flag](../../targeting/targeting-rule/flag-condition)
-will be created in ConfigCat to emulate the targeting toggle.
-* The *off variation* values will be served.
-* The targeting rules will be imported and evaluated depending on the state of the extra prerequisite flag.
-
-
-### The import operation
-
-After making your choices on what and how to import in the first steps of the wizard, the import tool performs the
-operation by importing the selected LaunchDarkly projects one by one. Importing a project consists of two phases:
-
-#### Translation phase
-
-First, the import tool translates the LaunchDarkly project to a ConfigCat product. (In practice, this means that the
-tool converts the project data fetched from LaunchDarkly's REST API to ConfigCat's Export/Import JSON format.)
-
-However, it's important to note that there are technical differences between LaunchDarkly and ConfigCat, and therefore
-it's not always possible to translate all entities perfectly, i.e. so that they are represented identically in
-ConfigCat, and provide equivalent behavior to the original. (By equivalent behaviour we primarily mean equivalent
-evaluation behaviour, i.e. that the evaluation of a feature flag or segment with the same input parameters produces
-the same result in every case.)
-
-Such problematic cases are called *translation issues*, and a *severity level* is assigned to them as follows:
-<br/>🔴 HIGH - The imported entity cannot provide equivalent behavior to the original at all.
-<br/>🟡 MEDIUM - The imported entity may not provide equivalent behavior to the original in every case.
-<br/>🔵 LOW - The imported entity does not exactly reflect the original in some way, but it is expected to provide
-equivalent behavior to the original.
-
-The import tool detects and collects these issues during translation, and includes them in the report generated at the
-end of the import operation so you can review them and make the necessary adjustments where necessary.
-
-For more details on translation and translation issues, please refer to [this document](#TODO).
-
-#### Import phase
-
-After the translation phase, the import tool loads the result into ConfigCat. This is when the corresponding ConfigCat
-product is actually created (or updated if it has already existed).
-
-As the import tool has previously performed all the necessary validation and adjustments, generally you shouldn't
-encounter any issues during this phase. However, in rare cases failures may occur (most likely, due to a concurrent
-modification in ConfigCat).
-
-The import tool notifies you of such cases, and it also includes the failure details in the report.
-
-### Final steps
-
-After finishing the import operation, the import tool displays a summary. This shows you the overall success for each
-LaunchDarkly project selected for import.
-
-If you see success icons next to every project, it means that everything went fine, no significant issues were detected.
-
-If you see a warning or error icon next to any project, it means that there are significant issues you need to
-pay close attention to, and you will almost certainly need to make manual adjustments, or even repeat the import.
-
-In either case, it's highly recommended to download and go through the report. It provides details on the detected
-issues, and make it easier to solve them by including links to the original and imported entities.
-
-## Migrating LaunchDarkly teams and permissions to ConfigCat
-
-## Adjusting the code of your applications
