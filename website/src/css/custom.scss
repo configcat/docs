@@ -81,3 +81,7 @@ span[class*='codeLineNumber'] {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
+
+main article img:not(.no-auto-height) {
+  height: auto;
+}
