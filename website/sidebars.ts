@@ -162,6 +162,7 @@ const sidebars: SidebarsConfig = {
             },
           ],
         },
+        'advanced/migration-from-ld',
       ],
     },
     {

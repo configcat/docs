@@ -1,0 +1,788 @@
+---
+id: migration-from-ld-translation
+title: Import from LaunchDarkly - Translation
+description: Details of the LaunchDarkly to ConfigCat translation performed by the "Import from LaunchDarkly" tool.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+This document discusses the details of how [ConfigCat's "Import from LaunchDarkly" tool](../migration-from-ld#migrate-launchdarkly-feature-flags-and-segments-to-configcat) translates LaunchDarkly projects to ConfigCat products (i.e., in practice, how the import tool converts the project data
+fetched fromLaunchDarkly's REST API to ConfigCat's Export/Import JSON format).
+
+You need this information if you want to understand
+* why the import tool produces the result that it does,
+* what issues can arise during translation, and how to solve them,
+* what the limitations of translation are.
+
+## Mapping between LaunchDarkly and ConfigCat entitities
+
+The table below shows how LaunchDarkly entities are mapped to ConfigCat entities.
+
+| LaunchDarkly entity | Corresponding ConfigCat entity | Notes |
+| ------------------- | ------------------------------ | ----- |
+| project             | [product](../../main-concepts#product) | |
+| environment         | [environment](../../main-concepts#environment) | |
+| segment             | [segment](../../targeting/targeting-rule/segment-condition#what-is-a-segment-condition-what-is-a-segment) | LaunchDarkly segments are specific to an environment, but ConfigCat segments are specific to a product, so mapped segment names are prefixed with the environment name to avoid ambiguity. |
+| feature flag        | [feature flag / setting](../../targeting/targeting-overview#feature-flag--setting) | LaunchDarkly feature flags are directly contained by a project, but ConfigCat feature flags are organized into [configs](../../main-concepts#config), so a config named "Main Config" is created to contain them. |
+| targeting toggle    | -                              | No direct translation is possible. More on this [here](../migration-from-ld#targeting-toggle-translation-mode). |
+| prerequisites       | -                              | Each prerequisite is translated to a [Targeting Rule](../../targeting/targeting-overview#targeting-rule) containing a [Flag Condition](../../targeting/targeting-rule/flag-condition). |
+| individual targets  | -                              | Each target group is translated to a [Targeting Rule](../../targeting/targeting-overview#targeting-rule) containing an IS ONE OF [User Condition](../../targeting/targeting-rule/user-condition). |
+| custom rule         | [Targeting Rule](../../targeting/targeting-overview#targeting-rule) | Multiple clauses (i.e. [AND conditions](../../targeting/targeting-rule/targeting-rule-overview/#and-and-or-relationships) in ConfigCat's terminology) are not supported for segments, only for feature flags at the moment. |
+| custom rule clause  | [User Condition](../../targeting/targeting-rule/user-condition) or [Segment Condition](../../targeting/targeting-rule/segment-condition) | Some LaunchDarkly clauses cannot be translated to ConfigCat conditions with the same evaluation behavior, or at all. See also [translation issues](#translation-issues) |
+| clause attribute reference | [comparison attribute](../../targeting/targeting-rule/user-condition#comparison-attribute) | LaunchDarkly context attribute paths don't always translate to ConfigCat user attribute names directly. See also [this section](##mapping-between-launchdarkly-contexts-and-configcat-user-objects).  |
+| clause operator     | [comparator](../../targeting/targeting-rule/user-condition#comparator) | Most LaunchDarkly operators have their counterparts in ConfigCat (there can be minor or major differences between them though), but a few operators are not supported by ConfigCat at all (e.g. "matches" / "does not match"). |
+| clause values       | [comparison value](../../targeting/targeting-rule/user-condition#comparison-value) | As opposed to LaunchDarkly, not all counterparts of operators support multiple values. |
+| percentage rollout  | [Percentage Options](../../targeting/percentage-options) | In LaunchDarkly, the basis of the grouping can be set for each percentage rollout, while in ConfigCat [Percentage Evaluation Attribute](../../targeting/percentage-options#percentage-evaluation-attribute) can only be set at the feature flag level. |
+| default rule        | [trivial / fallback rule](../../targeting/targeting-overview#to-all-users--to-all-other--to-unidentified-value) | |
+
+## Mapping between LaunchDarkly contexts and ConfigCat User Objects
+
+Both LaunchDarkly and ConfigCat support passing user and/or session-related contextual information to feature flag
+evaluation, which is essential for targeting: LaunchDarkly offers [contexts](https://launchdarkly.com/docs/home/observability/contexts),
+while ConfigCat offers [User Objects](../../targeting/user-object) for this purpose.
+
+However, the data structure of these is different:
+* In LaunchDarkly, in addition to the default user context, it is possible to define and use other, arbitrary
+contexts (e.g. device, application, etc.). [Multi-contexts](https://launchdarkly.com/docs/home/observability/multi-contexts)
+and nested objects are also possible.
+* On the contrary, ConfigCat's User Object is a simpler data structure, primarily designed for storing user-related
+information. However, via custom attributes it's still able to store arbitrary information.
+
+On top of that, LaunchDarkly context attributes are identified by the combination of a context kind and a path
+expression, while ConfigCat uses simple attribute names. For this reason, it is necessary to define an unambiguous
+mapping between the two.
+
+This is done as shown in the following table:
+
+| LaunchDarkly context kind | LaunchDarkly context attribute path | Corresponding ConfigCat user attribute name |
+| ------------------------- | ------------------------------------| ------------------------------------------- |
+| not specified or `user`   | empty string or `/`                 | `/`                                         |
+| not specified or `user`   | `key` or `/key`                     | `Identifier`                                |
+| not specified or `user`   | `email` or `/email`                 | `Email`                                     |
+| not specified or `user`   | `country` or `/country`             | `Country`                                   |
+| not specified or `user`   | `Identifier` or `/Identifier`       | `/Identifier`                               |
+| not specified or `user`   | `Email` or `/Email`                 | `/Email`                                    |
+| not specified or `user`   | `Country` or `/Country`             | `/Country`                                  |
+| not specified or `user`   | `name` or `/name`                   | `name`                                      |
+| not specified or `user`   | `/address/city`                     | `/address/city`                             |
+| `device`                  | empty string or `/`                 | `device:/`                                  |
+| `device`                  | `name` or `/name`                   | `device:name`                               |
+| `organization`            | `name` or `/name`                   | `organization:name`                         |
+| `organization`            | `/address/city`                     | `organization:/address/city`                |
+| any                       | `kind` or `/kind`                   | `/kind`                                     |
+
+Please note that:
+* Both LaunchDarkly context attribute paths and ConfigCat user attribute names are case-sensitive.
+* In ConfigCat, `Identifier`, `Email` and `Country` are predefined attributes. Everything else qualifies as custom
+  attributes.
+* One-component LaunchDarkly attribute path expressions are always normalized to their unescaped form if possible. E.g.
+  `/~0~1x` → `~/x`, but `/~1~00` → `/~1~00` (as `/~0` would be an ambiguous mapping).
+* Multi-component LaunchDarkly attribute path expressions are kept as is (unless they contain `:` characters - see
+  below).
+* Context kinds other than `user` are included as a prefix in the mapped ConfigCat user attribute name, with `:` as the
+  separator. Because of this, LaunchDarkly context attribute paths containing `:` characters needs to be escaped to
+  avoid ambiguity. E.g. `a:b` -> `/a~;b`, `/a:b` -> `/a~;b`.
+
+## Translation issues
+
+There are technical differences between LaunchDarkly and ConfigCat, therefore it's not always possible to translate all
+entities accurately, i.e. so that they are represented identically in ConfigCat, and provide equivalent behavior to the
+original. (By equivalent behaviour we primarily mean equivalent evaluation behaviour, i.e. that the evaluation of a
+feature flag or segment produces the same result for the same input parameters.)
+
+Such problematic cases are called *translation issues*, and a *severity level* is assigned to them as follows.
+
+🔴&nbsp;HIGH - The imported entity cannot provide equivalent behavior to the original at all.<br/>
+🟡&nbsp;MEDIUM - The imported entity may not provide equivalent behavior to the original in every case.<br/>
+🔵&nbsp;LOW - The imported entity does not exactly reflect the original in some way, but it is expected to provide
+equivalent behavior to the original.
+
+The tables below show the possible translation issues.
+
+### Limitations
+
+<table>
+  <thead>
+    <tr>
+      <th style={{width: "4rem"}}>Code</th>
+      <th style={{width: "7.25rem"}}>Level</th>
+      <th>Issue</th>
+      <th style={{width: "30%"}}>What can be the cause?</th>
+      <th style={{width: "30%"}}>How is it resolved?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><span id="translation-issue-L001">L001</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        The number of Targeting Rules resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
+      </td>
+      <td>
+        There are too many rules in the original feature flag.
+      </td>
+      <td>
+        As many LaunchDarkly rules as the limit allows are imported, but the rest is omitted. 
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-L002">L002</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        The number of conditions resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
+      </td>
+      <td>
+        There are too many clauses in a rule of the original feature flag.
+      </td>
+      <td>
+        As many LaunchDarkly clauses as the limit allows are imported, but the rest is omitted.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-L003">L003</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        The number of percentage options resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
+      </td>
+      <td>
+        There are too many percentage rollout variations in the original feature flag.
+      </td>
+      <td>
+        As many LaunchDarkly percentage rollout variations as the limit allows are imported, but the rest is omitted.
+        The percentage of the last imported item is adjusted so that the sum of percentages equals 100%.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-L004">L004</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        The length of a comparison value resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
+      </td>
+      <td>
+        The value(s) of a LaunchDarkly clause translate to a string comparison value that would be too long.
+      </td>
+      <td>
+        The comparison value is truncated so that it fits within the limit.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-L005">L005</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        The number of items in a comparison value list resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
+      </td>
+      <td>
+        The values of a clause translate to a comparison value list that would have too many items.
+      </td>
+      <td>
+        The comparison value list is truncated so that it fits within the limit.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-L006">L006</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        The length of an item in a comparison value list resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
+      </td>
+      <td>
+        One or more values of a clause translate to a comparison value item that would be too long.
+      </td>
+      <td>
+        The comparison value item is truncated so that it fits within the limit.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-L007">L007</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        The length of a text setting value resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
+      </td>
+      <td>
+        A feature flag variation value translates to a text setting value that would be too long.
+      </td>
+      <td>
+        The text setting value is truncated so that it fits within the limit.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Technical differences
+
+<table>
+  <thead>
+    <tr>
+      <th style={{width: "4rem"}}>Code</th>
+      <th style={{width: "7.25rem"}}>Level</th>
+      <th>Issue</th>
+      <th style={{width: "30%"}}>What can be the cause?</th>
+      <th style={{width: "30%"}}>How is it resolved?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><span id="translation-issue-T001">T001</span></td>
+      <td>🔵&nbsp;LOW</td>
+      <td>
+        A project, environment, segment or feature flag was imported under a different name than the original.
+      </td>
+      <td>
+        <ol>
+          <li>LaunchDarkly project, environment and segment names do not have to be unique (since those items always
+            have a unique key in LaunchDarkly too). The corresponding ConfigCat entities, however, must have a
+            case-insensitive unique name.</li>
+          <li>LaunchDarkly allows longer names than ConfigCat.</li>
+        </ol>
+      </td>
+      <td>
+        <ol>
+          <li>In the case of identical names, the LaunchDarkly unique key is included in the name. If this is still not
+            unique, then a number suffix is added as well.</li>
+          <li>Names that are too long are truncated at the maximum length. If this results in a conflicting name, it is
+            made unique by adding a number suffix.</li>
+         </ol>
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T002">T002</span></td>
+      <td>🔵&nbsp;LOW</td>
+      <td>
+        A feature flag was imported with a different key than the original.
+      </td>
+      <td>
+        <ol>
+          <li>Feature flag keys are unique in both systems, but they must be case sensitive in LaunchDarkly and case
+            insensitive in ConfigCat.</li>
+          <li>As opposed to LaunchDarkly, ConfigCat feature flag keys are not allowed to start with a number or contain
+            dots.</li>
+          <li>Depending on the Targeting Toggle Translation Mode option, the targeting toggle may be emulated using an
+            extra prerequisite flag. The key for this is generated by adding the suffix `_tt` to the key of the main
+            flag.</li>
+        </ol>
+      </td>
+      <td>
+        <ol>
+          <li>Conflicts are resolved by adding a number suffix.</li>
+          <li>Characters that are invalid in ConfigCat are replaced with `_`. If the first character is not a letter,
+            the prefix `x_` is also added to the key. If this results in a conflicting key, it is made unique by adding
+            a number suffix.</li>
+          <li>Conflicts are resolved by adding a number suffix. (But always the uniqueness of the the actually imported
+            flags' keys are ensured first.)</li>
+        </ol>
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T003">T003</span></td>
+      <td>🔵&nbsp;LOW</td>
+      <td>
+        A feature flag tag name was truncated.
+      </td>
+      <td>
+        LaunchDarkly may allow longer tag names than ConfigCat.
+      </td>
+      <td>
+        Names that are too long are truncated at the maximum length. If this results in a conflicting name, no effort is
+        made to make it unique.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T004">T004</span></td>
+      <td>🔵&nbsp;LOW</td>
+      <td>
+        A JSON feature flag was encountered.
+      </td>
+      <td>
+        LaunchDarkly allows feature flags with JSON values, but ConfigCat doesn't support that directly at the moment.
+      </td>
+      <td>
+        A text setting is created in ConfigCat, with values containing the JSON variation values serialized to text. It
+        is your responsibility to deserialize the text once returned by feature flag evaluation.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T005">T005</span></td>
+      <td>🟡&nbsp;MEDIUM</td>
+      <td>
+        A comparison attribute name was truncated.
+      </td>
+      <td>
+        A context attribute name is mapped to a user attribute name that is too long.
+      </td>
+      <td>
+        The comparison attribute name is truncated so that it fits within the limit. If this results in a conflicting
+        name, no effort is made to make it unique.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T006">T006</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        Unset off variation was encountered.
+      </td>
+      <td>
+        In LaunchDarkly, it is not required to set a variation for the case when targeting is turned off. In that case,
+        feature flag evaluation will return the default value you pass to the LaunchDarkly SDK. There is no way to
+        reproduce this behavior in ConfigCat.
+      </td>
+      <td>
+        There is no way to emulate this behavior in ConfigCat, so a placeholder value is used as follows:
+        <ul>
+          <li>boolean flag: `false`</li>
+          <li>string flag: `""` (empty string)</li>
+          <li>json flag: `"null"`</li>
+          <li>number flag: 0</li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T007">T007</span></td>
+      <td>🔵&nbsp;LOW</td>
+      <td>
+        Targeting is turned off, and the targeting toggle was respected.
+      </td>
+      <td>
+        Targeting Toggle Translation Mode option was set to "Respect targeting toggle and don't import rules", and
+        <ol>
+          <li>targeting is turned off for the feature flag in the specific environment,</li>
+          <li>or targeting is turned off for one or more prerequisites in the specific environment (see also the
+            "Prerequisite flags must be on" section in [this article](https://launchdarkly.com/docs/home/flags/prereqs)).</li>
+        </ol>
+      </td>
+      <td>
+        A single Targeting Rule that returns the off variation is created in ConfigCat, and the actual rules are not
+        imported for the specific environment. (The imported feature flag will work as it does in LaunchDarkly at the
+        time of import.)
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T008">T008</span></td>
+      <td>🟡&nbsp;MEDIUM</td>
+      <td>
+        Targeting is turned off, and the targeting toggle was ignored.
+      </td>
+      <td>
+        Targeting Toggle Translation Mode option was set to "Ignore targeting toggle and import rules anyway", and
+        <ol>
+          <li>targeting is turned off for the feature flag in the specific environment,</li>
+          <li>or targeting is turned off for one or more prerequisites in the specific environment (see also the
+            "Prerequisite flags must be on" section in [this article](https://launchdarkly.com/docs/home/flags/prereqs)).</li>
+        </ol>
+      </td>
+      <td>
+        The off variation is ignored, and the actual rules are imported for the specific environment. (The imported
+        feature flag will not work as it does in LaunchDarkly at the time of import.)
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T009">T009</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        A segment clause references multiple segments, but cannot be translated due to subscription / technical limit.
+      </td>
+      <td>
+        ConfigCat doesn't support referencing multiple segments in Segment Conditions. There is a workaround though:
+        non-negated LaunchDarkly clauses can be expanded into multiple ConfigCat Targeting Rules, negated LaunchDarkly
+        clauses can be expanded into multiple ConfigCat conditions. However, in the specific case the expansion is not
+        possible because of subscription / technical limits.
+      </td>
+      <td>
+        A Segment Condition is created in ConfigCat but it references the first segment only. The rest of the segment
+        references are omitted.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T010">T010</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        A segment that references another segment was encountered.
+      </td>
+      <td>
+        ConfigCat segments do not support targeting segments.
+      </td>
+      <td>
+        A placeholder condition is created in ConfigCat.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T011">T011</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        An untranslatable clause was encountered in a feature flag or segment rule.
+      </td>
+      <td>
+        The LaunchDarkly clause is not translatable to a ConfigCat condition, not even via a workaround. Such cases are:
+        <ol>
+          <li>Feature flag or segment rule clause uses the "matches" / "does not match" operators.</li>
+          <li>Feature flag rule clause is based on Context kind but cannot be translated to an ARRAY IS (NOT) ONE OF
+            condition.</li>
+          <li>Segment rule clause is based on Context kind.</li>
+          <li>Segment rule clause uses the "starts with" / "does not start with" / "ends with" / "does not end with"
+            operators.</li>
+          <li>Segment rule clause uses the "before" or "after" operator.</li>
+          <li>Feature flag or segment rule targets application versions (no such feature in ConfigCat).</li>
+        </ol>
+      </td>
+      <td>
+        A placeholder condition is created in ConfigCat.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T012">T012</span></td>
+      <td>🔵&nbsp;LOW</td>
+      <td>
+        A clause was translated to multiple Targeting Rules or conditions.
+      </td>
+      <td>
+        Some LaunchDarkly clauses like segment clauses referencing multiple segments cannot be directly translated to a
+        single ConfigCat condition. However, in the specific case, a workaround that provides logically equivalent
+        evaluation behavior is possible.
+      </td>
+      <td>
+        If the LaunchDarkly clause is non-negated, it is expanded into multiple ConfigCat Targeting Rules, otherwise it
+        is expanded into multiple ConfigCat conditions.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T013">T013</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        A "contains" / "does not contain" segment clause with multiple values was encountered.
+      </td>
+      <td>
+        In segments, the ConfigCat counterparts of the "contains" / "does not contain" operators only accept a single
+        comparison value at the moment.
+      </td>
+      <td>
+        The clause is translated to a CONTAINS / DOES NOT CONTAIN segment, however only the first clause value is
+        preserved. The rest of the values are omitted.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T014">T014</span></td>
+      <td>🔵&nbsp;LOW</td>
+      <td>
+        A "&lt;", "&lt;=", "&gt;", "&gt;=", "SemVer &lt;", "SemVer &lt;=", "SemVer &gt;", "SemVer &gt;=" or
+        "before" / "after" clause with multiple values was encountered.
+      </td>
+      <td>
+        The ConfigCat counterpart of these operators allows a single comparison value only.
+      </td>
+      <td>
+        Multiple comparison values are reduced to a single one. (This can be done in such a way that the clause remains
+        logically accurate.) The rest of the values are omitted though.<br/>
+        It is also worth noting that the evaluation behavior of "SemVer &lt;=" and "SemVer &gt;=" clauses with multiple
+        values is inconsistent with similar operators in LaunchDarkly. So, since translation preserves the inconsistent
+        behavior, it may produce surprising results in such cases.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T015">T015</span></td>
+      <td>🟡&nbsp;MEDIUM</td>
+      <td>
+        A "Context kind is (not) one of" clause was encountered.
+      </td>
+      <td>
+        In ConfigCat, there is no such concept as contexts and context kinds. ConfigCat SDKs won't automatically provide
+        context kinds as an attribute via the User Object.
+      </td>
+      <td>
+        An ARRAY IS (NOT) ONE OF condition is created in ConfigCat, but it is your responsibility to pass the context
+        kind values to the ConfigCat SDK via the custom user attribute named `/kind`.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T016">T016</span></td>
+      <td>🟡&nbsp;MEDIUM</td>
+      <td>
+        A mobile targeting-related clause was encountered.
+      </td>
+      <td>
+        For mobile apps, LaunchDarkly allows targeting special,
+        [automatically provided context attributes](https://launchdarkly.com/docs/sdk/features/environment-attributes)
+        of context kinds `ld_application` and `ld_device`. ConfigCat SDKs won't automatically provide these attributes
+        via the User Object.
+      </td>
+      <td>
+        The clause is translated, but it is your responsibility to pass the attribute values to the ConfigCat SDK via
+        custom user attributes.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T017">T017</span></td>
+      <td>🟡&nbsp;MEDIUM</td>
+      <td>
+        A not accurately translatable "is (not) one of" clause was encountered.
+      </td>
+      <td>
+        In LaunchDarkly, "is (not) one of" clauses can work with string, boolean and number values, but their ConfigCat
+        counterparts can work with strings only. This can be a problem in two cases:
+        <ol>
+          <li>"is (not) one of" clauses with boolean comparison values cannot be translated accurately as ConfigCat
+            offers no comparators that work with boolean values at the moment,</li>
+          <li>"is (not) one of" clauses with number comparison values may be translated accurately using the = (number)
+            / != (number) comparators. These accept a single comparison value though, so clauses with multiple values
+            must be expanded into multiple targeting rules or conditions, depending on negation. However, in the
+            specific case the expansion is not possible because of subscription / technical limits.</li>
+        </ol>
+      </td>
+      <td>
+        An IS (NOT) ONE OF condition is created in ConfigCat and the non-string values are converted to string.<br/>
+        From the perspective of feature flag evaluation this means the following: the ConfigCat SDK will convert
+        non-string user attributes to string, and do case-sensitive string comparisons when evaluating the feature flag.
+        In the case of boolean and decimal number values this can lead to undesired behavior. E.g. on some platforms,
+        the ConfigCat SDK may convert the false boolean value to the string `False`, which won't be matched by an
+        IS ONE OF condition having a comparison value `false`. Similarly, there could be subtle differences in decimal
+        number to string conversion across various platforms.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T018">T018</span></td>
+      <td>🔵&nbsp;LOW</td>
+      <td>
+        One or more variations of a percentage rollout had to be omitted.
+      </td>
+      <td>
+        LaunchDarkly includes all the feature flag variations in a percentage rollout even if most of them are set 0%.
+        However, this could lead to exceeding the subscription limit on Percentage Options in ConfigCat (especially, on
+        lower plans).
+      </td>
+      <td>
+        As variations set to 0% don't affect the evaluation of the imported Percentage Options, translation omits as
+        many of them as needed to fit within the limit.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T019">T019</span></td>
+      <td>🟡&nbsp;MEDIUM</td>
+      <td>
+        One or more percentage values of a percentage rollout had to be adjusted.
+      </td>
+      <td>
+        As opposed to LaunchDarkly, ConfigCat doesn't allow fractional percentage values in Percentage Options.
+      </td>
+      <td>
+        Non-integer percentage values are rounded. This may also cause the sum of the percentage values to over or
+        undershoot 100%. In such cases, further adjustments are performed to make the sum exactly 100%.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T020">T020</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        There are multiple percentage rollout rules in the feature flag, but they do not use the same attribute as the
+        basis of the rollout.
+      </td>
+      <td>
+        In LaunchDarkly, it is possible to set different attributes as the basis of the rollout for each percentage
+        rollout rule. In ConfigCat, this can only be set at the feature flag level.
+      </td>
+      <td>
+        There is no workaround. The attribute that occurs the most times is set as the flag's Percentage Evaluation
+        Attribute.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T021">T021</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        A segment with no rules was encountered.
+      </td>
+      <td>
+        LaunchDarkly allows segments to have no rules, while ConfigCat segments specify exactly one rule.
+      </td>
+      <td>
+        A segment with a placeholder condition is created in ConfigCat.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T022">T022</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        A segment with multiple rules was encountered.
+      </td>
+      <td>
+        LaunchDarkly allows segments to have multiple rules, while ConfigCat segments specify exactly one rule.
+      </td>
+      <td>
+        A segment is created in ConfigCat, with a translation of the first rule only. The rest of the rules are omitted.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T023">T023</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        A segment rule with multiple clauses was encountered.
+      </td>
+      <td>
+        LaunchDarkly allows multiple clauses in segment rules, while ConfigCat doesn't support AND conditions in
+        segments at the moment.
+      </td>
+      <td>
+        There is no workaround. Clauses except for the first one are omitted.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T024">T024</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        A segment rule with percentage targeting was encountered.
+      </td>
+      <td>
+        LaunchDarkly allows segment rules to include a percentage of targets only. ConfigCat segments doesn't offer such
+        feature.
+      </td>
+      <td>
+        There is no workaround. The percentage targeting part is ignored.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T025">T025</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        A segment rule was only partially translated.
+      </td>
+      <td>
+        Translating the segment rule would require multiple rules in ConfigCat, which is not supported.
+      </td>
+      <td>
+        The segment rule is only partially imported.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T026">T026</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        A big segment was encountered.
+      </td>
+      <td>
+        Big segments are not supported by ConfigCat.
+      </td>
+      <td>
+        A normal segment with a hint about the issue is created in ConfigCat.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-T027">T027</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        Comparison value list item contains comma.
+      </td>
+      <td>
+        In the case of segments, multiple clause values translate to a comma separated comparison value list. There is
+        no way to escape the comma, so it must be replaced with another character, otherwise values containing a comma
+        would be interpreted as multiple items.
+      </td>
+      <td>
+        Comma is replaced with semicolon in comparison value list items.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Data consistency
+
+<table>
+  <thead>
+    <tr>
+      <th style={{width: "4rem"}}>Code</th>
+      <th style={{width: "7.25rem"}}>Level</th>
+      <th>Issue</th>
+      <th style={{width: "30%"}}>What can be the cause?</th>
+      <th style={{width: "30%"}}>How is it resolved?</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><span id="translation-issue-D001">D001</span></td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        The data model fetched from LaunchDarkly contains invalid, inconsistent or unexpected data.
+      </td>
+      <td>
+        In theory, such a thing cannot happen, but in practice it cannot be excluded.
+      </td>
+      <td>
+        Obviously, the import tool cannot produce a correct result from an inherently incorrect input. As a
+        best effort, it generates a valid import model so that the import operation can go through, and you can review
+        and fix the problematic entities.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span id="translation-issue-D002">D002</span></td>
+      <td>🟡&nbsp;MEDIUM</td>
+      <td>
+        The feature flag was modified in LaunchDarkly while the feature flag data was being fetched.
+      </td>
+      <td>
+        Due to the peculiarities of the LaunchDarkly REST API, the full data model of a feature flag can only be queried
+        for a single environment per a single request. So, it may happen that some non-environment-related properties of
+        the feature flag are modified while fetching the feature flag data (e.g. name, variations, etc.) In such cases,
+        inconsistencies across environments are possible in the retrieved data.
+      </td>
+      <td>
+        The import tool can only detect inconsistencies, but cannot do anything about them. Please check whether the
+        imported feature flag is set correctly in each environment. Alternatively, you may try to re-import the specific
+        feature flag.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Further technical differences
+
+* As opposed to LaunchDarkly, ConfigCat distinguishes between integer and decimal number feature flags. Therefore, when
+  translating number feature flags, the ConfigCat setting type is guessed based on the variation values specified at
+  the time of the import.
+* For percentage rollouts, LaunchDarkly and ConfigCat use different algorithms to split users into groups. That is,
+  even if the percentage values are the same, the distribution of users will be different. In other words,
+  [stickiness](../../targeting/percentage-options#stickiness) of percentage rollouts cannot be transferred to
+  ConfigCat.
+* In LaunchDarkly, all clause operators can work with context attribute value lists. In ConfigCat, most of the
+  comparators (counterparts of operators) can work with a single user attribute only. The only exceptions is
+  ARRAY IS (NOT) ONE OF.
+* In LaunchDarkly, it is possible to control whether or not specific feature flags are visible to mobile and/or
+  client-side SDKs ([Client-side SDK availability](https://launchdarkly.com/docs/home/flags/new#make-flags-available-to-client-side-and-mobile-sdks)).
+  There is no such feature in ConfigCat, so this preference is ignored. All the feature flags are imported into a single
+  config which can be accessed by all kinds of ConfigCat SDKs.
+* In LaunchDarkly, it is possible to mark a feature flag as temporary or permanent. There is no such feature in
+  ConfigCat. Yet translation preserves this piece of information by adding a tag to the feature flag.
+* In LaunchDarkly, it is possible to assign a name to the variations (possible outcomes of the feature flag). There is
+  no such feature in ConfigCat at the moment, so these pieces of information are not transferred.
