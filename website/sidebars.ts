@@ -162,6 +162,7 @@ const sidebars: SidebarsConfig = {
             },
           ],
         },
+        'my-zombie-flags-report'
       ],
     },
     {
