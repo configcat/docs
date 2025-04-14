@@ -162,6 +162,18 @@ const sidebars: SidebarsConfig = {
             },
           ],
         },
+        {
+          label: 'Migration from LaunchDarkly',
+          type: 'category',
+          link: { type: 'doc', id: 'advanced/migration-from-ld' },
+          items: [
+            {
+              type: 'doc',
+              id: 'advanced/migration-from-ld-translation',
+              label: 'Details of LaunchDarkly to ConfigCat Translation',
+            },
+          ],
+        },
       ],
     },
     {
