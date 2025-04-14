@@ -1,6 +1,6 @@
 ---
 id: migration-from-ld-translation
-title: Import from LaunchDarkly - Translation
+title: Details of LaunchDarkly to ConfigCat Translation
 description: Details of the LaunchDarkly to ConfigCat translation performed by the "Import from LaunchDarkly" tool.
 ---
 
@@ -8,8 +8,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-This document discusses the details of how [ConfigCat's "Import from LaunchDarkly" tool](../migration-from-ld#migrate-launchdarkly-feature-flags-and-segments-to-configcat) translates LaunchDarkly projects to ConfigCat products (i.e., in practice, how the import tool converts the project data
-fetched fromLaunchDarkly's REST API to ConfigCat's Export/Import JSON format).
+This document discusses the details of how [ConfigCat's "Import from LaunchDarkly" tool](../migration-from-ld#migrate-launchdarkly-feature-flags-and-segments-to-configcat) translates LaunchDarkly projects to ConfigCat products (i.e., how, in practice, the import tool converts the project
+data fetched fromLaunchDarkly's REST API to ConfigCat's Export/Import JSON format).
 
 You need this information if you want to understand
 * why the import tool produces the result that it does,
@@ -31,7 +31,7 @@ The table below shows how LaunchDarkly entities are mapped to ConfigCat entities
 | individual targets  | -                              | Each target group is translated to a [Targeting Rule](../../targeting/targeting-overview#targeting-rule) containing an IS ONE OF [User Condition](../../targeting/targeting-rule/user-condition). |
 | custom rule         | [Targeting Rule](../../targeting/targeting-overview#targeting-rule) | Multiple clauses (i.e. [AND conditions](../../targeting/targeting-rule/targeting-rule-overview/#and-and-or-relationships) in ConfigCat's terminology) are not supported for segments, only for feature flags at the moment. |
 | custom rule clause  | [User Condition](../../targeting/targeting-rule/user-condition) or [Segment Condition](../../targeting/targeting-rule/segment-condition) | Some LaunchDarkly clauses cannot be translated to ConfigCat conditions with the same evaluation behavior, or at all. See also [translation issues](#translation-issues) |
-| clause attribute reference | [comparison attribute](../../targeting/targeting-rule/user-condition#comparison-attribute) | LaunchDarkly context attribute paths don't always translate to ConfigCat user attribute names directly. See also [this section](##mapping-between-launchdarkly-contexts-and-configcat-user-objects).  |
+| clause attribute reference | [comparison attribute](../../targeting/targeting-rule/user-condition#comparison-attribute) | LaunchDarkly context attribute paths don't always translate to ConfigCat user attribute names directly. See also [this section](#mapping-between-launchdarkly-contexts-and-configcat-user-objects).  |
 | clause operator     | [comparator](../../targeting/targeting-rule/user-condition#comparator) | Most LaunchDarkly operators have their counterparts in ConfigCat (there can be minor or major differences between them though), but a few operators are not supported by ConfigCat at all (e.g. "matches" / "does not match"). |
 | clause values       | [comparison value](../../targeting/targeting-rule/user-condition#comparison-value) | As opposed to LaunchDarkly, not all counterparts of operators support multiple values. |
 | percentage rollout  | [Percentage Options](../../targeting/percentage-options) | In LaunchDarkly, the basis of the grouping can be set for each percentage rollout, while in ConfigCat [Percentage Evaluation Attribute](../../targeting/percentage-options#percentage-evaluation-attribute) can only be set at the feature flag level. |
