@@ -21,19 +21,19 @@ If you already configured your organization to use Entra ID as a SAML provider, 
 
 - Log in to the <a href="https://portal.azure.com/" target="_blank">Azure Portal</a>, go to the `Entra ID` resource, and select `Enterprise applications`.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/eapplications.png" alt="Entra ID enterprise applications"/>
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/eapplications.png" alt="Entra ID enterprise applications" decoding="async" loading="lazy"/>
 
 - Click on `New application`.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/new_app.png" alt="Entra ID new application"/>
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/new_app.png" alt="Entra ID new application" decoding="async" loading="lazy"/>
 
 - Click on `Create your own application`.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/create_app.png" alt="Entra ID create own application"/>
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/create_app.png" alt="Entra ID create own application" decoding="async" loading="lazy"/>
 
 - Enter a descriptive `App name`, select the `Integrate any other application you don't find in the gallery (Non-gallery)` option, then click `Create`.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/app_name.png" alt="Entra ID app name"/>
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/app_name.png" alt="Entra ID app name" decoding="async" loading="lazy"/>
 
 The next step will guide you on how to setup Entra ID to synchronize your Identity Provider Users and Identity Provider Groups to ConfigCat.
 
@@ -42,17 +42,17 @@ The next step will guide you on how to setup Entra ID to synchronize your Identi
 - On the `Manage` section of the application, select `Provisioning`, then click on  `New Configuration`.
 
   TODO SCREENSHOT
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/authentication.png" width="1293" alt="ConfigCat authentication settings"/>
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/authentication.png" width="1293" alt="ConfigCat authentication settings" decoding="async" loading="lazy"/>
 
 - Gather the `SCIM URL` and the `Token` from the [User provisioning (SCIM)](https://app.configcat.com/organization/user-provisioning/) page in ConfigCat.
 
   TODO SCREENSHOT
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" decoding="async" loading="lazy"/>
 
 - Add the `SCIM URL` as the `Tenant URL` and the `Token` as the `Secret token` on the New provisioning configuration page in Azure. Click on the `Create` button.
 
   TODO SCREENSHOT
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/aad_name.png" alt="ConfigCat Name Identity Provider" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/aad_name.png" alt="ConfigCat Name Identity Provider" decoding="async" loading="lazy"/>
 
 - Select the `Provisioning` menu and in the Mappings, configure the mapping for Users and Groups.
   - Mapping for Users:
@@ -83,25 +83,25 @@ To start user provisioning with Entra ID, you need to assign individual users or
 
 - Select `Users and groups` on the `Manage` section of the menu.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/users_groups.png" alt="Entra ID users and groups" />
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/users_groups.png" alt="Entra ID users and groups" decoding="async" loading="lazy"/>
 
 - Click `Add user/group`, then select the users or groups you want to assign.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/add_users.png" alt="Entra ID add user/group" />
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/add_users.png" alt="Entra ID add user/group" decoding="async" loading="lazy"/>
 
 ## 4. Start provisioning
 
 - Go to the `Overview` page of the provisioning configuration and click on Start provisioning.
 
   TODO SCREENSHOT
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login"  />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" decoding="async" loading="lazy" />
 
 - Wait till the first provisioning is finished and check the logs for any errors.
 
 - Go back to the [User provisioning (SCIM)](https://app.configcat.com/organization/user-provisioning/) page in ConfigCat and check if your Identity Provider Users and Identity Provider Groups are synchronized to ConfigCat.
 
   TODO SCREENSHOT
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/login.png" alt="Entra ID sign in page" />
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/login.png" alt="Entra ID sign in page" decoding="async" loading="lazy" />
 
 ## 5. Next Steps
 

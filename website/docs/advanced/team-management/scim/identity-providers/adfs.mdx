@@ -17,77 +17,77 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat Dashboard</a>.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings"  decoding="async" loading="lazy"/>
 
 - Click `ADD SAML IDENTITY PROVIDER`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider"  decoding="async" loading="lazy"/>
 
 - Give a name for your Identity Provider, and click `Create`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/adfs_name.png" alt="ConfigCat Name Identity Provider" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/adfs_name.png" alt="ConfigCat Name Identity Provider"  decoding="async" loading="lazy" />
 
 - From the next section of the dialog, copy the following values and save them for further use.
 
   - `Entity ID`
   - `Assertion Consumer Service`
 
-    <img className="bordered-img" src="/docs/assets/saml/dashboard/acs_entity_id_1.png" alt="ConfigCat SAML configuration" />
+    <img className="bordered-img" src="/docs/assets/saml/dashboard/acs_entity_id_1.png" alt="ConfigCat SAML configuration" decoding="async" loading="lazy" />
 
 ## 2. Configure a Relying Party Trust
 
 - Open the ADFS Management console, and click `Add Relying Party Trust`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/2_add_relying_party.png" alt="ADFS add relying party trust" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/2_add_relying_party.png" alt="ADFS add relying party trust"  decoding="async" loading="lazy"/>
 
 - Make sure the `Claims aware` option is selected, and click `Start`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/3_claims_aware.png" alt="ADFS claims aware" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/3_claims_aware.png" alt="ADFS claims aware"  decoding="async" loading="lazy"/>
 
 - Select the `Enter data about this relying party manually` option, and click `Next`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/4_manual_metadata.png" alt="ADFS manual relying party setup" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/4_manual_metadata.png" alt="ADFS manual relying party setup"  decoding="async" loading="lazy"/>
 
 - Type a descriptive `Display name`, and click `Next`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/5_name.png" alt="ADFS display name" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/5_name.png" alt="ADFS display name" decoding="async" loading="lazy"/>
 
 - No action required on the `Configure Certificate` pane, click `Next`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/6_configure_cert.png" alt="ADFS certificate configuration" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/6_configure_cert.png" alt="ADFS certificate configuration"  decoding="async" loading="lazy"/>
 
 - Select the `Enable support for the SAML 2.0 WebSSO protocol` option, and paste the value of `Assertion Consumer Service` from [Step 1](#1-collect-saml-metadata-from-configcat) into the `Relying party SAML 2.0 SSO service URL` field.  
 Then, Click `Next`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/7_acs_url.png" alt="ADFS acs URL" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/7_acs_url.png" alt="ADFS acs URL"  decoding="async" loading="lazy"/>
 
 - Paste the value of `Entity ID` from [Step 1](#1-collect-saml-metadata-from-configcat) into the `Relying party trust identifier` field, and click `Add`.  
 Then, click `Next`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/8_add_entity_id.png" alt="ADFS entity ID" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/8_add_entity_id.png" alt="ADFS entity ID"  decoding="async" loading="lazy"/>
 
 - No action required on the `Choose Access Control Policy` pane, click `Next`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/9_access_control_policy.png" alt="ADFS Access Control Policy" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/9_access_control_policy.png" alt="ADFS Access Control Policy"  decoding="async" loading="lazy"/>
 
 - Review the changes, then click `Next`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/10_ready_to_add_trust.png" alt="ADFS add trust" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/10_ready_to_add_trust.png" alt="ADFS add trust"  decoding="async" loading="lazy"/>
 
 - The Relying Party Trust is now successfully added, make sure the `Configure claims issuance policy for this application` option is checked, and click `Close`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/11_finish_party.png" alt="ADFS finish configuration" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/11_finish_party.png" alt="ADFS finish configuration"  decoding="async" loading="lazy"/>
 
 ## 3. Configure Claims Issuance Policy
 
 - After adding the Relying Party Trust, the following dialog should appear.  
 Click `Add rule`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/12_edit_claims.png" alt="ADFS edit claims" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/12_edit_claims.png" alt="ADFS edit claims"  decoding="async" loading="lazy"/>
 
 - Select `Send LDAP Attributes as Claims` as the `Claim rule template`, and click `Next`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/13_ldap_claims.png" alt="ADFS LDAP claims" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/13_ldap_claims.png" alt="ADFS LDAP claims"  decoding="async" loading="lazy"/>
 
 - Apply the following, and click `Finish`.
 
@@ -96,11 +96,11 @@ Click `Add rule`.
   - Select `User-Principal-Name` as `LDAP Attribute`.
   - Select `Name ID` as `Outgoing Claim Type`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/14_unc_to_nameid.png" alt="ADFS unc to nameid" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/14_unc_to_nameid.png" alt="ADFS unc to nameid"  decoding="async" loading="lazy"/>
 
 - Click `OK`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/15_finish_claims.png" alt="ADFS finish claims" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/15_finish_claims.png" alt="ADFS finish claims"  decoding="async" loading="lazy"/>
 
 ## 4. Configure ConfigCat with SAML Details from ADFS
 
@@ -111,15 +111,15 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
     <ul>
       <li>
         <p>Select <code>Endpoints</code>, and copy the URL Path of the <code>Federation Metadata</code> endpoint.</p>
-        <img className="bordered-img" src="/docs/assets/saml/adfs/metadata_url.png" alt="ADFS metadata url path" />
+        <img className="bordered-img" src="/docs/assets/saml/adfs/metadata_url.png" alt="ADFS metadata url path"  decoding="async" loading="lazy"/>
       </li>
       <li>
         <p>Type the URL into the <code>Metadata URL</code> field at ConfigCat in the following format: <code>https://[ADFS-DOMAIN]/[FEDERATION-METADATA-URL-PATH]</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/adfs/cc_metadata_new.png" alt="ADFS metadata url" />
+        <img className="bordered-img" src="/docs/assets/saml/adfs/cc_metadata_new.png" alt="ADFS metadata url"  decoding="async" loading="lazy"/>
       </li>
       <li>
         <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
-        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
+        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains"  decoding="async" loading="lazy" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -130,44 +130,44 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
     <ul>
       <li>
         <p>Select <code>Endpoints</code>, and save the URL Path of the <code>SAML 2.0/WS-Federation</code> endpoint.</p>
-        <img className="bordered-img" src="/docs/assets/saml/adfs/login_url.png" alt="ADFS SAML verification" />
+        <img className="bordered-img" src="/docs/assets/saml/adfs/login_url.png" alt="ADFS SAML verification" decoding="async" loading="lazy"/>
       </li>
       <li>
         <p>Select <code>Certificates</code>, then select the <code>Token Signing</code> certificate, and click <code>View Certificate</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/adfs/view_cert.png" alt="ADFS certificates" />
+        <img className="bordered-img" src="/docs/assets/saml/adfs/view_cert.png" alt="ADFS certificates" decoding="async" loading="lazy"/>
       </li>
       <li>
         <p>On the <code>Details</code> tab click <code>Copy to File</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/adfs/copy_cert_to_file.png" alt="ADFS cert details" />
+        <img className="bordered-img" src="/docs/assets/saml/adfs/copy_cert_to_file.png" alt="ADFS cert details" decoding="async" loading="lazy"/>
       </li>
       <li>
         <p>Click <code>Next</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/adfs/cert_wizard.png" alt="ADFS cert wizard" />
+        <img className="bordered-img" src="/docs/assets/saml/adfs/cert_wizard.png" alt="ADFS cert wizard" decoding="async" loading="lazy"/>
       </li>
       <li>
         <p>Select the <code>Base-64 encoded X.509 (.CER)</code> option, and click <code>Next</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/adfs/cert_export_base64.png" alt="ADFS export base64" />
+        <img className="bordered-img" src="/docs/assets/saml/adfs/cert_export_base64.png" alt="ADFS export base64" decoding="async" loading="lazy"/>
       </li>
       <li>
         <p>Browse the location where the certificate should be exported, and click <code>Next</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/adfs/cert_name.png" alt="ADFS cert name" />
+        <img className="bordered-img" src="/docs/assets/saml/adfs/cert_name.png" alt="ADFS cert name" decoding="async" loading="lazy"/>
       </li>
       <li>
         <p>Click <code>Finish</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/adfs/cert_finish.png" alt="ADFS finish cert" />
+        <img className="bordered-img" src="/docs/assets/saml/adfs/cert_finish.png" alt="ADFS finish cert" decoding="async" loading="lazy"/>
       </li>
       <li>
         <p>Click <code>OK</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/adfs/cert_export_ok.png" alt="ADFS cert OK" />
+        <img className="bordered-img" src="/docs/assets/saml/adfs/cert_export_ok.png" alt="ADFS cert OK" decoding="async" loading="lazy"/>
       </li>
       <li>
         <p>Type the <code>SAML 2.0/WS-Federation</code> endpoint into the <code>Sign-on URL</code> field in the following format: <code>https://[ADFS-DOMAIN]/[WS-FEDERATION-URL-PATH]</code>.
         Then, paste the exported <code>Token Signing</code> certificate into the <code>X.509 Certificate</code> field.</p>
-        <img className="bordered-img" src="/docs/assets/saml/adfs/cc_manual_new.png" alt="ConfigCat manual configuration" />
+        <img className="bordered-img" src="/docs/assets/saml/adfs/cc_manual_new.png" alt="ConfigCat manual configuration" decoding="async" loading="lazy"/>
       </li>
       <li>
         <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
-        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
+        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" decoding="async" loading="lazy"/>
       </li>
       <li>
         Click on <code>Save</code>.
@@ -180,15 +180,15 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
 
 - Go to the <a href="https://app.configcat.com/auth/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" decoding="async" loading="lazy"/>
 
 - Sign in with your company email address.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/company_email.png" alt="ConfigCat SAML company login" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/company_email.png" alt="ConfigCat SAML company login" decoding="async" loading="lazy" />
 
 - ConfigCat will redirect you to the ADFS sign in page. Type your credentials, and click `Sign in`.
 
-  <img className="bordered-img" src="/docs/assets/saml/adfs/login.png" alt="ADFS log in" />
+  <img className="bordered-img" src="/docs/assets/saml/adfs/login.png" alt="ADFS log in" decoding="async" loading="lazy" />
 
 - You should be redirected to ConfigCat signed in with your company account.
 
