@@ -9,7 +9,7 @@ to automatically scan your source code for feature flag and setting usages and u
 ## Setup
 
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in Azure DevOps <a target="_blank" href="https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables">Pipeline Variables</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
-   <img  src="/docs/assets/cli/scan/azure_secrets.png" alt="Azure secrets" />
+   <img src="/docs/assets/cli/scan/azure_secrets.png" alt="Azure secrets" decoding="async" loading="lazy" />
 
 2. Get your selected [Config's ID](overview.mdx#config-id).
 
@@ -17,7 +17,7 @@ to automatically scan your source code for feature flag and setting usages and u
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
    ```yaml
    - job: configcat_scan_and_upload
-     container: configcat/cli:azure-devops-1.9.2
+     container: configcat/cli:azure-devops-2.4.0
      pool:
        vmImage: ubuntu-latest
      steps:

@@ -18,13 +18,13 @@ There are two available integration opportunities between ConfigCat and Amplitud
 
 Every feature flag change in ConfigCat is annotated on the Amplitude charts as a vertical line and some details are added automatically about the change.
 
-<img src="/docs/assets/amplitude_chart.png" className="bordered-img zoomable" alt="amplitude_chart" />
+<img src="/docs/assets/amplitude_chart.png" className="bordered-img" alt="amplitude_chart" decoding="async" loading="lazy" />
 
 ### Installation
 
 1. Have an <a href="https://www.amplitude.com/" target="_blank">Amplitude subscription.</a>
 2. Get an <a href="https://www.docs.developers.amplitude.com/analytics/find-api-credentials/" target="_blank">Amplitude API Key and Secret Key.</a>
-   <img src="/docs/assets/amplitude_apikey_secretkey.png" className="zoomable" alt="amplitude_apikey_secretkey" />
+   <img src="/docs/assets/amplitude_apikey_secretkey.png" alt="amplitude_apikey_secretkey" decoding="async" loading="lazy" />
 3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
 4. Click on Amplitude's CONNECT button and set your Amplitude API key and Secret key.
 5. You're all set. Go ahead and make some changes on your feature flags, then check your charts in Amplitude.
@@ -41,7 +41,7 @@ Every annotation sent to Amplitude by ConfigCat has:
 - **Name:** A brief summary of the change.
 - **Description:** A direct link to the Product/Config/Environment of the feature flag in ConfigCat.
 
-<img src="/docs/assets/amplitude_annotation.png" className="bordered-img zoomable" alt="amplitude_annoation" />
+<img src="/docs/assets/amplitude_annotation.png" className="bordered-img" alt="amplitude_annotation" decoding="async" loading="lazy" />
 
 
 ## Sending feature flag evaluation analytics to Amplitude Experiments {#experiments}
@@ -260,8 +260,8 @@ Check your Experiments page in Amplitude and select your feature flag as the Exp
 ### Usage with custom chart
 If you don't have access to the Experiments feature in Amplitude, you can create a custom chart based on the `Exposure` event. 
 You can filter for your feature flag keys with the `Flag Key` property and visualize the different variants by using the `Variant` property as a Breakdown. Example:
-<img src="/docs/assets/amplitude/customchart.png" className="bordered-img zoomable" alt="Amplitude custom chart" />
+<img src="/docs/assets/amplitude/customchart.png" className="bordered-img" alt="Amplitude custom chart" decoding="async" loading="lazy" />
 
 ### Usage with enriched user properties for your custom events.
 If you use the <a href="https://www.docs.developers.amplitude.com/analytics/apis/identify-api/" target="_blank" rel="noopener noreferrer">Identify API</a> approach, you'll be able to use the feature flag evaluation data in your current reports. You can Group Segments by your feature flag evaluations:
-<img src="/docs/assets/amplitude/enriched.png" className="bordered-img zoomable" alt="Amplitude chart with enriched data" />
+<img src="/docs/assets/amplitude/enriched.png" className="bordered-img" alt="Amplitude chart with enriched data" decoding="async" loading="lazy" />

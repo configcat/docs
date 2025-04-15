@@ -32,7 +32,7 @@
   display: table-row !important;
 }
 
-.video-container {
+.youtube-container {
   height: 0;
   margin: 0;
   margin-bottom: 30px;
@@ -42,12 +42,17 @@
   position: relative;
 }
 
-.video-container iframe {
+.youtube-container iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.video{
+  width: 100%;
+  height: auto;
 }
 
 .bordered-img {
@@ -75,4 +80,9 @@ span[class*='codeLineNumber'] {
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+main article img:not(.no-auto-height) {
+  // See also https://github.com/configcat-labs/content-wiki/blob/main/screenshot-guide.md#embedding-screenshots
+  height: auto;
 }

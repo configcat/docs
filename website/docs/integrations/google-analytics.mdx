@@ -63,7 +63,7 @@ const configCatClient = configcat.getClient("#YOUR_SDK_KEY", PollingMode.AutoPol
 </TabItem>
 
 <TabItem value="other" label="Other languages">
-While our documentation primarily provides code examples for JavaScript-based SDKs, you can integrate with other languages by utilizing the <a href="https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag" target="_blank" rel="noopener noreferrer">Send Measurement Protocol events to Google Analytics</a> endpoint. Here’s how to set it up:
+While our documentation primarily provides code examples for JavaScript-based SDKs, you can integrate with other languages by utilizing the <a href="https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag" target="_blank" rel="noopener noreferrer">Send Measurement Protocol events to Google Analytics</a> endpoint. Here's how to set it up:
 
 1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
 2. **Send an event to Google Analytics** using the `experience_impression` event name. Include the following event properties:
@@ -83,4 +83,4 @@ For Text feature flags with lengthy values (e.g., JSON), send the `variationId` 
 5. **Define an audience** in Google Analytics using the `exp_variant_string` parameter with the same values that you using in your events (e.g. `configcat-isMyAwesomeFeatureEnabled-true`) it by following the guide [here](https://support.google.com/analytics/answer/9267572). This allows you to leverage feature flag evaluation events effectively.
 
 ### Example audiences reports
-<img src="/docs/assets/googleanalytics/audiences.png" className="zoomable" alt="Google Analytics Audience report" />
+<img src="/docs/assets/googleanalytics/audiences.png" alt="Google Analytics Audience report" decoding="async" loading="lazy"/>

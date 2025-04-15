@@ -17,23 +17,23 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 - Log in to the <a href="https://portal.azure.com/" target="_blank">Azure Portal</a>, go to the `Entra ID` resource, and select `Enterprise applications`.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/eapplications.png" alt="Entra ID enterprise applications"/>
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/eapplications.png" alt="Entra ID enterprise applications" decoding="async" loading="lazy" />
 
 - Click on `New application`.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/new_app.png" alt="Entra ID new application"/>
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/new_app.png" alt="Entra ID new application" decoding="async" loading="lazy" />
 
 - Click on `Create your own application`.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/create_app.png" alt="Entra ID create own application"/>
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/create_app.png" alt="Entra ID create own application" decoding="async" loading="lazy" />
 
 - Enter a descriptive `App name`, select the `Integrate any other application you don't find in the gallery (Non-gallery)` option, then click `Create`.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/app_name.png" alt="Entra ID app name"/>
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/app_name.png" alt="Entra ID app name" decoding="async" loading="lazy" />
 
 - On the `Manage` section of the application, select `Single sign-on`, then select `SAML`.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/enable_saml.png" alt="Entra ID enable SAML"/>
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/enable_saml.png" alt="Entra ID enable SAML" decoding="async" loading="lazy" />
 
 The next step will guide you on how to collect the information required for Configuring SAML in the application.
 
@@ -41,26 +41,26 @@ The next step will guide you on how to collect the information required for Conf
 
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat Dashboard</a>.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings"/>
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" decoding="async" loading="lazy" />
 
 - Click `ADD SAML IDENTITY PROVIDER`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" decoding="async" loading="lazy" />
 
 - Give a name for your Identity Provider, and click `Create`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/aad_name.png" alt="ConfigCat Name Identity Provider" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/aad_name.png" alt="ConfigCat Name Identity Provider" decoding="async" loading="lazy" />
 
 - From the next section of the dialog, copy the following values and paste them into the Enterprise application.
 
   - `Entity ID` -> `Identifier (Entity ID)`
   - `Assertion Consumer Service` -> `Reply URL (Assertion Consumer Service URL)`
 
-    <img className="bordered-img" src="/docs/assets/saml/dashboard/acs_entity_id_1.png" alt="ConfigCat SAML configuration" />
+    <img className="bordered-img" src="/docs/assets/saml/dashboard/acs_entity_id_1.png" alt="ConfigCat SAML configuration" decoding="async" loading="lazy" />
 
-    <img className="bordered-img" src="/docs/assets/saml/azure-ad/saml_urls.png" alt="Entra ID URL configuration" />
+    <img className="bordered-img" src="/docs/assets/saml/azure-ad/saml_urls.png" alt="Entra ID URL configuration" decoding="async" loading="lazy" />
 
-    <img className="bordered-img" src="/docs/assets/saml/azure-ad/aad_acs_eid.png" alt="Entra ID URLs" />
+    <img className="bordered-img" src="/docs/assets/saml/azure-ad/aad_acs_eid.png" alt="Entra ID URLs" decoding="async" loading="lazy" />
 
 ## 3. Configure ConfigCat with SAML Details from Azure
 
@@ -71,15 +71,15 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
     <ul>
       <li>
         <p>Copy the value of <code>App Federation Metadata Url</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/azure-ad/metadata_url.png" alt="Entra ID metadata URL" />
+        <img className="bordered-img" src="/docs/assets/saml/azure-ad/metadata_url.png" alt="Entra ID metadata URL" decoding="async" loading="lazy" />
       </li>
       <li>
         <p>Paste the copied value into the <code>Metadata URL</code> field at ConfigCat.</p>
-        <img className="bordered-img" src="/docs/assets/saml/azure-ad/cc_metadata_new.png" alt="ConfigCat Entra ID metadata URL" />
+        <img className="bordered-img" src="/docs/assets/saml/azure-ad/cc_metadata_new.png" alt="ConfigCat Entra ID metadata URL" decoding="async" loading="lazy" />
       </li>
       <li>
         <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
-        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
+        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" decoding="async" loading="lazy" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -90,13 +90,13 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
     <ul>
       <li>
         <p>Copy the value of <code>Login URL</code> and download the <code>Certificate (Base64)</code>, then paste them into the Configuration dialog at ConfigCat.</p>
-        <img className="bordered-img" src="/docs/assets/saml/azure-ad/metadata_logon.png" alt="Entra ID metadata login URL" />
-        <img className="bordered-img" src="/docs/assets/saml/azure-ad/metadata_cert.png" alt="Entra ID metadata certificate"/>
-        <img className="bordered-img" src="/docs/assets/saml/azure-ad/cc_manual_new.png" alt="ConfigCat Entra ID manual configuration"/>
+        <img className="bordered-img" src="/docs/assets/saml/azure-ad/metadata_logon.png" alt="Entra ID metadata login URL" decoding="async" loading="lazy" />
+        <img className="bordered-img" src="/docs/assets/saml/azure-ad/metadata_cert.png" alt="Entra ID metadata certificate" decoding="async" loading="lazy" />
+        <img className="bordered-img" src="/docs/assets/saml/azure-ad/cc_manual_new.png" alt="ConfigCat Entra ID manual configuration" decoding="async" loading="lazy" />
       </li>
       <li>
         <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
-        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
+        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" decoding="async" loading="lazy" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -111,25 +111,25 @@ To let users authenticate via SAML, you need to assign individual users or group
 
 - Select `Users and groups` on the `Manage` section of the menu.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/users_groups.png" alt="Entra ID users and groups" />
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/users_groups.png" alt="Entra ID users and groups" decoding="async" loading="lazy" />
 
 - Click `Add user/group`, then select the users or groups you want to assign.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/add_users.png" alt="Entra ID add user/group" />
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/add_users.png" alt="Entra ID add user/group" decoding="async" loading="lazy" />
 
 ## 5. Sign In
 
 - Go to the <a href="https://app.configcat.com/auth/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login"  />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" decoding="async" loading="lazy" />
 
 - Sign in with your company email address assigned to the Enterprise application.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/company_email.png" alt="ConfigCat SAML company login"  />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/company_email.png" alt="ConfigCat SAML company login" decoding="async" loading="lazy" />
 
 - ConfigCat will redirect you to Microsoft's sign in page. Type your credentials for sign-in.
 
-  <img className="bordered-img" src="/docs/assets/saml/azure-ad/login.png" alt="Entra ID sign in page" />
+  <img className="bordered-img" src="/docs/assets/saml/azure-ad/login.png" alt="Entra ID sign in page" decoding="async" loading="lazy" />
 
 - You should be redirected to ConfigCat signed in with your company account.
 

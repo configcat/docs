@@ -9,7 +9,7 @@ to automatically scan your source code for feature flag and setting usages and u
 ## Setup
 
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in GitLab's <a target="_blank" href="https://docs.gitlab.com/ee/ci/variables/">CI/CD Variables</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
-   <img  src="/docs/assets/cli/scan/gl_secrets.png" alt="Gitlab secrets" />
+   <img src="/docs/assets/cli/scan/gl_secrets.png" alt="GitLab secrets" decoding="async" loading="lazy"/>
 
 2. Get your selected [Config's ID](overview.mdx#config-id).
 
@@ -20,7 +20,7 @@ to automatically scan your source code for feature flag and setting usages and u
    configcat-scan-repository:
      stage: deploy # the job will run in the deploy phase, but you can choose from any other phases you have
      image:
-       name: configcat/cli:1.9.2
+       name: configcat/cli:2.4.0
        entrypoint: ['']
      script:
        - configcat scan $CI_PROJECT_DIR

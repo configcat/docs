@@ -14,7 +14,7 @@ Use the <a href="https://configcat.com/calculator/" target="_blank">Plan Calcula
 
 Keep track of the number of config JSON downloads your apps are making on the <a href="https://app.configcat.com/product/usage" target="_blank">Usage & Quota page.</a>
 
-<img src="/docs/assets/stats.png" className="zoomable" alt="ConfigCat Statistics" />
+<img src="/docs/assets/stats.png" alt="ConfigCat Statistics" decoding="async" loading="lazy"/>
 
 ## Current config JSON download limits
 
@@ -96,7 +96,7 @@ Backend applications typically have a lower number of instances than frontend ap
 
 #### Example: Average frequency polling in 4 instances
 
-Let’s say you have an API for your frontend application and you have 4 instances of them behind a load balancer.
+Let's say you have an API for your frontend application and you have 4 instances of them behind a load balancer.
 All these 4 instances use ConfigCat SDK in auto polling mode with a 1-minute polling interval.
 
 > **4** _(instances)_ × **43,800** _(minutes in a month)_ = **175,200 config JSON downloads / month**
@@ -125,4 +125,18 @@ In a backend application, you might want to try using [Webhooks.](./advanced/not
 
 ### Call your backend instead of the ConfigCat CDN
 
-In the case of a frontend application, you can lower the number of calls made towards the ConfigCat CDN by moving the evaluation logic from the frontend application to your backend.
+In the case of a frontend application, you can reduce the number of calls made towards the ConfigCat CDN by moving the evaluation logic from the frontend application to your backend.
+
+### Use the ConfigCat Proxy to cache/proxy config JSON downloads
+
+The [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) allows you to host a feature flag evaluation and config JSON proxy/cache service within your own infrastructure.  
+The [CDN proxy](https://configcat.com/docs/advanced/proxy/endpoints/#cdn-proxy) feature allows you to proxy/cache config JSON downloads and the ConfigCat SDKs can be routed to the ConfigCat Proxy running in your own infrastructure greatly reducing the number of config JSON downloads.
+
+### Purchase additional quota
+
+You can purchase additional quota for your subscription to increase your limits. [Contact us](https://configcat.com/support/) for more information.
+
+| Plan           | Price              | Additional config JSON downloads | Additional network traffic |
+| -------------- | ------------------ | -------------------------------: | -------------------------: |
+| **Smart**      | $250 or €229 / mo  | +250 million                     | +1TB                       |
+| **Enterprise** | $700 or €649 / mo  | +1 billion                       | +4TB                       |

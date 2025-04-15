@@ -17,19 +17,19 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 - Log in to <a href="https://login.okta.com/" target="_blank">Okta</a>, go to the admin Dashboard, and select `Applications`.
 
-  <img className="bordered-img" src="/docs/assets/saml/okta/applications.png" alt="Okta applications" />
+  <img className="bordered-img" src="/docs/assets/saml/okta/applications.png" alt="Okta applications" decoding="async" loading="lazy" />
 
 - Click on `Create App Integration`.
 
-  <img className="bordered-img" src="/docs/assets/saml/okta/create_app.png" alt="Okta create app"/>
+  <img className="bordered-img" src="/docs/assets/saml/okta/create_app.png" alt="Okta create app" decoding="async" loading="lazy"/>
 
 - Select `SAML 2.0` as the Sign-in method.
 
-  <img className="bordered-img" src="/docs/assets/saml/okta/select_saml.png" alt="Okta select SAML" />
+  <img className="bordered-img" src="/docs/assets/saml/okta/select_saml.png" alt="Okta select SAML" decoding="async" loading="lazy" />
 
 - Enter a descriptive `App name`, then click `Next`.
 
-  <img className="bordered-img" src="/docs/assets/saml/okta/app_name.png" alt="Okta app name"/>
+  <img className="bordered-img" src="/docs/assets/saml/okta/app_name.png" alt="Okta app name" decoding="async" loading="lazy"/>
 
 The next step will guide you on how to collect the information required for the appearing `Configure SAML` section.
 
@@ -37,32 +37,32 @@ The next step will guide you on how to collect the information required for the 
 
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat Dashboard</a>.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" decoding="async" loading="lazy" />
 
 - Click `ADD SAML IDENTITY PROVIDER`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" decoding="async" loading="lazy" />
 
 - Give a name for your Identity Provider, and click `Create`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/okta_name.png" alt="ConfigCat Name Identity Provider" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/okta_name.png" alt="ConfigCat Name Identity Provider" decoding="async" loading="lazy" />
 
 - From the next section of the dialog, copy the following values and paste them into the Okta application.
 
   - `Entity ID` -> `Audience URI (SP Entity ID)`
   - `Assertion Consumer Service` -> `Single sign on URL`
 
-    <img className="bordered-img" src="/docs/assets/saml/dashboard/acs_entity_id_1.png" alt="ConfigCat SAML configuration" />
+    <img className="bordered-img" src="/docs/assets/saml/dashboard/acs_entity_id_1.png" alt="ConfigCat SAML configuration" decoding="async" loading="lazy" />
 
-    <img className="bordered-img" src="/docs/assets/saml/okta/okta_acs_eid.png" alt="Okta SAML url EID" />
+    <img className="bordered-img" src="/docs/assets/saml/okta/okta_acs_eid.png" alt="Okta SAML url EID" decoding="async" loading="lazy" />
 
 - Set the `Name ID format` to `EmailAddress`, then click `Next`.
 
-  <img className="bordered-img" src="/docs/assets/saml/okta/okta_name_id.png" alt="Okta SAML nameid" />
+  <img className="bordered-img" src="/docs/assets/saml/okta/okta_name_id.png" alt="Okta SAML nameid" decoding="async" loading="lazy" />
 
 - Select `I'm an Okta customer adding an internal app`. Complete the form with any comments and click `Finish`.
 
-  <img className="bordered-img" src="/docs/assets/saml/okta/feedback.png" alt="Okta SAML feedback" />
+  <img className="bordered-img" src="/docs/assets/saml/okta/feedback.png" alt="Okta SAML feedback" decoding="async" loading="lazy" />
 
 ## 3. Configure ConfigCat with SAML Details from Okta
 
@@ -73,19 +73,19 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
     <ul>
       <li>
         <p>Select the <code>Sign On</code> tab.</p>
-        <img className="bordered-img" src="/docs/assets/saml/okta/metadata_url1.png" alt="Okta sign on tab" />
+        <img className="bordered-img" src="/docs/assets/saml/okta/metadata_url1.png" alt="Okta sign on tab" decoding="async" loading="lazy" />
       </li>
       <li>
         <p>Copy the URL of <code>View IdP metadata</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/okta/metadata_url2.png" alt="Okta metadata url" />
+        <img className="bordered-img" src="/docs/assets/saml/okta/metadata_url2.png" alt="Okta metadata url" decoding="async" loading="lazy" />
       </li>
       <li>
         <p>Paste the copied value into the <code>Metadata URL</code> field at ConfigCat.</p>
-        <img className="bordered-img" src="/docs/assets/saml/okta/cc_metadata_new.png" alt="ConfigCat metadata url" />
+        <img className="bordered-img" src="/docs/assets/saml/okta/cc_metadata_new.png" alt="ConfigCat metadata url" decoding="async" loading="lazy" />
       </li>
       <li>
         <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
-        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
+        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" decoding="async" loading="lazy" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -96,16 +96,16 @@ You can choose one of the following options to configure ConfigCat with SAML Ide
     <ul>
       <li>
         <p>Select the <code>Sign On</code> tab, and click on <code>View SAML setup instructions</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/okta/manual_setup.png" alt="Okta SAML setup" />
+        <img className="bordered-img" src="/docs/assets/saml/okta/manual_setup.png" alt="Okta SAML setup" decoding="async" loading="lazy" />
       </li>
       <li>
         <p>Copy the value of the <code>Identity Provider Single Sign-On URL</code> and <code>X.509 Certificate</code> fields and paste them into the Configuration dialog at ConfigCat.</p>
-        <img className="bordered-img" src="/docs/assets/saml/okta/manual.png" alt="Okta manual configuration" />
-        <img className="bordered-img" src="/docs/assets/saml/okta/manual_cc_new.png" alt="ConfigCat manual configuration"  />
+        <img className="bordered-img" src="/docs/assets/saml/okta/manual.png" alt="Okta manual configuration" decoding="async" loading="lazy" />
+        <img className="bordered-img" src="/docs/assets/saml/okta/manual_cc_new.png" alt="ConfigCat manual configuration" decoding="async" loading="lazy" />
       </li>
       <li>
         <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
-        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
+        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" decoding="async" loading="lazy" />
       </li>
       <li>
         Click on <code>Save</code>.
@@ -120,21 +120,21 @@ To let users authenticate via SAML, you need to assign individual users or group
 
 - Select the `Assignments` tab, and select either the `Assign to People` or the `Assign to Groups` option.
 
-  <img className="bordered-img" src="/docs/assets/saml/okta/assign.png" alt="Okta assign to groups" />
+  <img className="bordered-img" src="/docs/assets/saml/okta/assign.png" alt="Okta assign to groups" decoding="async" loading="lazy" />
 
 ## 5. Sign In
 
 - Go to the <a href="https://app.configcat.com/auth/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" decoding="async" loading="lazy" />
 
 - Sign in with your company email address assigned to the Okta application.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/company_email.png" alt="ConfigCat SAML company login" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/company_email.png" alt="ConfigCat SAML company login" decoding="async" loading="lazy" />
 
 - ConfigCat will redirect you to Okta's sign in page. Type your credentials, and click `Sign In`.
 
-  <img className="bordered-img" src="/docs/assets/saml/okta/okta_sign_in.png" alt="Okta sign in" />
+  <img className="bordered-img" src="/docs/assets/saml/okta/okta_sign_in.png" alt="Okta sign in" decoding="async" loading="lazy" />
 
 - You should be redirected to ConfigCat signed in with your company account.
 

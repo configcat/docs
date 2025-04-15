@@ -10,7 +10,7 @@ You can find more information about Bitbucket Pipelines <a target="_blank" href=
 ## Setup
 
 1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in secure pipeline variables with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
-   <img  src="/docs/assets/cli/scan/pipe_secrets.png" alt="Bitbucket Pipe secrets" />
+   <img src="/docs/assets/cli/scan/pipe_secrets.png" alt="Bitbucket Pipe secrets" decoding="async" loading="lazy" />
 
 2. Get your selected [Config's ID](overview.mdx#config-id).
 
@@ -18,7 +18,7 @@ You can find more information about Bitbucket Pipelines <a target="_blank" href=
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
 
    ```yaml
-   - pipe: configcat/scan-repository-pipe:1.4.4
+   - pipe: configcat/scan-repository-pipe:1.8.0
      variables:
        CONFIG_ID: 'PASTE-YOUR-CONFIG-ID-HERE'
        # LINE_COUNT: '3'         # optional
