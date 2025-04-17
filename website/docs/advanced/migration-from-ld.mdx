@@ -38,9 +38,9 @@ You will also need to have the Organization Admin permission in that ConfigCat o
 products.
 
 * If the target ConfigCat organization does not exist yet, you can create one by <a target="_blank" href="https://app.configcat.com/auth/signup">
-signing up</a>. During the signup process, you will have the opportunity to create an own organization, in which
+signing up</a>. During the signup process, you will have the opportunity to create your own organization, in which
 you will have the Organization Admin permission by default.
-* Otherwise, you will need to get an invitation to the target ConfigCat organization, and after joining it, you will
+* Otherwise, you will need to get an invitation to the target ConfigCat organization, and after joining, you will
 need to request the Organization Admin permission.
 
 Once the target ConfigCat organization is set up and you have the necessary permissions in it, you can start the actual
@@ -51,9 +51,9 @@ migration.
 It is recommended to migrate your LaunchDarkly feature flags and segments to ConfigCat first, using ConfigCat's official
 import tool, which was designed for this specific purpose.
 
-The tool also takes care of creating the corresponding ConfigCat products and environments, and it will do everything
+The tool also takes care of creating the corresponding ConfigCat products and environments, and it does everything
 possible to reproduce your LaunchDarkly feature flags and segments in ConfigCat so they match the original evaluation
-behavior as close as possible.
+behavior as closely as possible.
 
 ### Using the import tool
 
@@ -74,7 +74,7 @@ result.
 
 It is also possible to re-import products or specific parts of those without having to delete the products created
 previously. The import tool is able to update the existing entities with fresh data. However, this may involve undoable
-overwriting of existing data, so please be careful. The import tool will warn you though if something like this is about
+overwriting of existing data, so please be careful. The import tool will warn you if something like this is about
 to happen.
 
 ### Targeting toggle translation mode
@@ -115,8 +115,8 @@ Please consider the following consequences:
 #### Emulate targeting toggle using a prerequisite flag
 
 This is a workaround that combines the upsides of the other two options at the expense of creating extra feature flags.
-Choose this option if you want to import your targeting rules and want your feature flags to produce the same values as
-in LaunchDarkly at the same time.
+Choose this option if you want to import your targeting rules in all cases, and also want your feature flags to produce
+the same values as they do in LaunchDarkly.
 
 Please consider the following consequences:
 
@@ -148,8 +148,8 @@ You can find the list of possible translation issues [here](../migration-from-ld
 
 #### Import phase
 
-After the translation phase, the import tool loads the result of that into ConfigCat. This is when the corresponding
-ConfigCat product is actually created (or updated if it has already existed).
+After the translation phase, the import tool loads the result into ConfigCat. This is when the corresponding
+ConfigCat product is actually created (or updated if it already exists).
 
 As the import tool has previously performed all the necessary validation and adjustments, generally you shouldn't
 encounter any issues during this phase. However, in rare cases failures may occur (most likely, due to a concurrent
@@ -159,16 +159,16 @@ The import tool notifies you of such cases, and it also includes the failure det
 
 ### Final steps
 
-After finishing the import operation, the import tool displays a summary. This shows you the overall success for each
+After finishing the import operation, the import tool displays a summary. This shows you the overall success of each
 LaunchDarkly project selected for import.
 
-* If you see success icons next to every project, it means that everything went fine, no significant issues were
+* If you see success icons next to every project, it means everything went fine, no significant issues were
   detected.
 * If you see a warning or error icon next to any project, it means that there are significant issues you need to
   pay closer attention to, and you will almost certainly need to make manual adjustments, or, in case of failure,
   even repeat the import.
 
-In either case, it's highly recommended to download and go through the report. It provides details on the detected
+In either case, it's highly recommended to download and go through the report. It provides details about the detected
 issues, and also includes links to the original and imported entities, which can make it easier for you to look into and
 resolve the issues.
 
@@ -179,7 +179,7 @@ LaunchDarkly since there are fundamental differences between the user management
 services.
 
 LaunchDarkly allows more fine-grained access control over resources, while ConfigCat's permission system was designed to
-be more simpler and easier to understand, at the expense of fewer possibilities for fine-tuning access control.
+be simpler and easier to understand, at the expense of fewer possibilities for fine-tuning access control.
 
 Therefore, we can only give you some pointers, but this task will inevitably require some effort on your part.
 
@@ -227,7 +227,7 @@ This means that they will be automatically assigned to the specified permission 
 as you have already created the permission groups, ideally you can immediately invite your users to the right
 permission groups. (Of course, you may need to do this in batches.)
 
-It can easily happen though that you want to add a user to more than one product. In such cases, invite the user to
+It can easily happen that you want to add a user to more than one product. In such cases, invite the user to
 one of the products (it doesn't matter which one), then, after they've signed up, navigate to the "Members & Roles" page of your
 organization, and assign them to the other products too, using the "Change roles" feature of the "Members & Roles"
 table.
@@ -242,7 +242,7 @@ LaunchDarkly to evaluate your feature flags.
 This will also require more or less manual work, depending on what API your applications currently use for feature flag
 evaluation.
 
-### Adjust a code base that use LaunchDarkly SDK
+### Adjust a codebase that uses LaunchDarkly SDK
 
 If your applications implement feature flagging by directly consuming the LaunchDarkly SDK API, you will need to
 change those parts to use the ConfigCat SDK API. We show how to do this through a simple example.
@@ -314,7 +314,7 @@ Let's see now step by step how to convert this code to ConfigCat:
    });
    ```
 
-   Please note that ConfigCat client doesn't maintain a persistent connection to the remote server, but use different
+   Please note that the ConfigCat client doesn't maintain a persistent connection to the remote server, but uses different
    polling strategies to get the data necessary for feature flag evaluation. Refer to the [SDK reference](../../sdk-reference/node#creating-the-configcat-client)
    to learn more about the options. For frontend applications and long-running backend services, Auto Polling mode is
    usually a good choice.
@@ -330,7 +330,7 @@ Let's see now step by step how to convert this code to ConfigCat:
 
      Please note that the `waitForReady` method is not available on all platforms. On such platforms, you can't really
      implement this logic at the moment. However, you don't really need to as the feature flag evaluation methods wait
-     for initialization internally anyway. (It's worth noting though that if initialization can't complete within the
+     for initialization internally anyway. (It's worth noting that if initialization can't complete within the
      timeout duration specified by the `maxInitWaitTimeSeconds` option, then feature flag evaluation methods will return
      the default value you pass to them.)
 
@@ -418,13 +418,13 @@ if (flagValue) {
 process.exit(0);
 ```
 
-The conversion can be done in a similar way on other platforms as well. Obviously, there can be minor differences, plus
-advanced topics are not covered here, so it's recommended to start this work with going through the SDK reference for
+The conversion can be done in a similar way on other platforms as well. Obviously, there may be minor differences, plus
+advanced topics are not covered here, so it's recommended to start this work by going through the SDK reference for
 your platform.
 
-### Adjust a code base that use OpenFeature
+### Adjust a codebase that uses OpenFeature
 
-You may have an easier time if feature flagging is done using the [OpenFeature](https://openfeature.dev/docs/reference/intro/)
+You should have an easier time if feature flagging is done using the [OpenFeature](https://openfeature.dev/docs/reference/intro/)
 abstraction in your applications.
 
 In this case, please check [this list](https://configcat.com/docs/sdk-reference/openfeature/overview/) to see if a
@@ -490,7 +490,7 @@ the privacy and security of user data.
 However, this has an important consequence: as opposed to LaunchDarkly, ConfigCat cannot provide an out-of-the-box
 solution to A/B testing, experiments or other analytics.
 
-For this you will need an additional service that provides the necessary functionality. Here are some examples of how
+For this, you will need an additional service that provides the necessary functionality. Here are some examples of how
 you can integrate such tools with ConfigCat to replicate LaunchDarkly's analytics features:
 * [Amplitude](../../integrations/amplitude#experiments)
 * [Google Analytics](../../integrations/google-analytics)
