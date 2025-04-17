@@ -369,7 +369,7 @@ Let's see now step by step how to convert this code to ConfigCat:
    * The order of parameters is different. In ConfigCat, the User Object comes last.
    * The ConfigCat feature flag key may be different from the LaunchDarkly one. E.g. if the key starts with a non-letter
      character, or contains a dot, it will be changed by the import tool because such keys are not valid in ConfigCat.
-     To see which keys have been changed, look for [T002](../migration-from-ld-translation#translation-issue-T002)
+     To see which keys have been changed, look for <a href="/docs/advanced/migration-from-ld-translation#translation-issue-T002">T002</a>
      translation issues in the report.
    * ConfigCat SDKs don't support [automatic camel casing](https://launchdarkly.com/docs/sdk/client-side/react/react-web#flag-keys-in-the-react-web-sdk)
      of feature flag keys.
