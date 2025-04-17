@@ -435,7 +435,11 @@ BOOL isMyFeatureEnabled = [snapshot getBoolValueFor:@"isMyFeatureEnabled"
 </TabItem>
 </Tabs>
 
-Snapshots are created from the actual state of the SDK; therefore it's crucial to know whether the SDK has valid feature flag data to work on. To determine whether it's safe to create snapshots, the SDK provides an `onReady` [hook](#hooks). It accepts a state enum parameter to give details about the SDK's initialization state.
+Snapshots are created from the actual state of the SDK; therefore it's crucial to know whether the SDK has valid feature flag data to work on. 
+To determine whether it's safe to create snapshots, the SDK provides an `onReady` [hook](#hooks). 
+It accepts a state enum parameter to give details about the SDK's initialization state.
+
+Snapshots created before the SDK reaches its ready state are considered empty, thus they will return default values for feature flag evaluation requests.
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -470,6 +474,14 @@ The SDK's state is also accessible via the `waitForReady()` awaitable method, wh
 ```swift
 let state = await client.waitForReady()
 ```
+
+:::caution
+Please note that when you create and utilize a snapshot, it won't refresh your local cache once the cached config data expires.
+Additionally, when working with [shared caching](../advanced/caching.mdx#shared-cache), creating a snapshot also doesn't
+trigger a sync with the external cache, since the snapshot only captures the config instance stored in the client's memory.
+Therefore, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically updates the local cache
+in the background. For other polling modes, you'll need to manually initiate a cache refresh by invoking `forceRefresh()`.
+:::
 
 ## User Object
 
