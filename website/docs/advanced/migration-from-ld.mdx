@@ -367,6 +367,12 @@ Let's see now step by step how to convert this code to ConfigCat:
 
    A few things to pay attention to:
    * The order of parameters is different. In ConfigCat, the User Object comes last.
+   * The ConfigCat feature flag key may be different from the LaunchDarkly one. E.g. if the key starts with a non-letter
+     character, or contains a dot, it will be changed by the import tool because such keys are not valid in ConfigCat.
+     To see which keys have been changed, look for [T002](../migration-from-ld-translation#translation-issue-T002)
+     translation issues in the report.
+   * ConfigCat SDKs don't support [automatic camel casing](https://launchdarkly.com/docs/sdk/client-side/react/react-web#flag-keys-in-the-react-web-sdk)
+     of feature flag keys.
    * In statically typed languages, ConfigCat evaluation methods require that the default value type and the feature
      flag type match. (Usually, there is [a section about this](../../sdk-reference/node#setting-type-mapping) in the
      SDK reference.)
@@ -478,6 +484,10 @@ Otherwise, to switch to ConfigCat, you need to do the following:
      "/kind": ["user", "organization"],
    };
    ```
+1. Review feature flag evaluation calls.
+
+   Most of the pitfalls pointed out in the "Rewrite feature flag evaluation calls" part of the previous section applies
+   here too.
 
 ### Implement experiments and analytics
 

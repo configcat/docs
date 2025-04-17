@@ -103,6 +103,11 @@ The tables below show the possible translation issues.
 
 ### Limitations
 
+:::info
+Usually these issues arise when you are on a lower plan, and hitting a subscription limit. If this prevents you from
+migrating to ConfigCat, feel free to <a href="https://configcat.com/support/?prefilled=ld-import-limit" target="_blank">contact us</a>.
+:::
+
 <table>
   <thead>
     <tr>
@@ -110,7 +115,7 @@ The tables below show the possible translation issues.
       <th style={{width: "7.25rem"}}>Level</th>
       <th>Issue</th>
       <th style={{width: "30%"}}>What can be the cause?</th>
-      <th style={{width: "30%"}}>How is it resolved?</th>
+      <th style={{width: "30%"}}>How is it handled?</th>
     </tr>
   </thead>
 
@@ -225,7 +230,7 @@ The tables below show the possible translation issues.
       <th style={{width: "7.25rem"}}>Level</th>
       <th>Issue</th>
       <th style={{width: "30%"}}>What can be the cause?</th>
-      <th style={{width: "30%"}}>How is it resolved?</th>
+      <th style={{width: "30%"}}>How is it handled?</th>
     </tr>
   </thead>
 
@@ -256,7 +261,7 @@ The tables below show the possible translation issues.
 
     <tr id="translation-issue-T002">
       <td>T002</td>
-      <td>🔵&nbsp;LOW</td>
+      <td>🟡&nbsp;MEDIUM</td>
       <td>
         A feature flag was imported with a different key than the original.
       </td>
@@ -724,7 +729,7 @@ The tables below show the possible translation issues.
       <th style={{width: "7.25rem"}}>Level</th>
       <th>Issue</th>
       <th style={{width: "30%"}}>What can be the cause?</th>
-      <th style={{width: "30%"}}>How is it resolved?</th>
+      <th style={{width: "30%"}}>How is it handled?</th>
     </tr>
   </thead>
 
@@ -775,6 +780,10 @@ The tables below show the possible translation issues.
   even if the percentage values are the same, the distribution of users will be different. In other words,
   [stickiness](../../targeting/percentage-options#stickiness) of percentage rollouts cannot be transferred to
   ConfigCat.
+* In the case of percentage rollouts within custom rules, evaluation behavior is different between the two services when
+  the attribute used as the basis of the percentage rollout is not provided (i.e. not passed to the SDK on evaluation):
+  * LaunchDarkly will serve the value of the first variation whose percentage value is not 0%.
+  * ConfigCat will skip the targeting rule and continue evaluation with the next rule.
 * In LaunchDarkly, all clause operators can work with context attribute value lists. In ConfigCat, most of the
   comparators (counterparts of operators) can work with a single user attribute only. The only exceptions is
   ARRAY IS (NOT) ONE OF.
