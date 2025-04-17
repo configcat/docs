@@ -435,7 +435,7 @@ BOOL isMyFeatureEnabled = [snapshot getBoolValueFor:@"isMyFeatureEnabled"
 </TabItem>
 </Tabs>
 
-Snapshots are created from the actual state of the SDK; therefore it's crucial to know whether the SDK has valid feature flag data to work on. To determine whether it's safe to create snapshots, the SDK provides an `onClientReady` [hook](#hooks). It accepts a state enum parameter to give details about the SDK's initialization state.
+Snapshots are created from the actual state of the SDK; therefore it's crucial to know whether the SDK has valid feature flag data to work on. To determine whether it's safe to create snapshots, the SDK provides an `onReady` [hook](#hooks). It accepts a state enum parameter to give details about the SDK's initialization state.
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
@@ -465,7 +465,7 @@ The possible `state` values:
 - `hasCachedFlagDataOnly`: The SDK has feature flag data only from the cache. This can happen when the SDK is configured with `manualPoll()` and there wasn't a `client.forceRefresh()` call yet. Another example could be an SDK configured with `autoPoll()`, but it can't reach the ConfigCat CDN so it falls back to the cache.
 - `hasUpToDateFlagData`: The SDK is initialized with up-to-date feature flag data.
 
-The SDK's state is also accessible via the `waitForReady()` awaitable method, which asynchronously waits for the `onClientReady` hook to fire and returns with the SDK's initialization state.
+The SDK's state is also accessible via the `waitForReady()` awaitable method, which asynchronously waits for the `onReady` hook to fire and returns with the SDK's initialization state.
 
 ```swift
 let state = await client.waitForReady()
@@ -962,8 +962,8 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 
 With the following hooks you can subscribe to particular events fired by the SDK:
 
-- `onClientReady()`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling it's considered ready right after instantiation.
-  If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onClientReady` event fires when the auto polling's `maxInitWaitTimeInSeconds` is reached.
+- `onReady(ClientReadyState)`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling it's considered ready right after instantiation.
+  If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onReady` event fires when the auto polling's `maxInitWaitTimeInSeconds` is reached.
 
 - `onConfigChanged([String: Setting])`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
