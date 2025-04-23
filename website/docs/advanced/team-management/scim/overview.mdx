@@ -6,28 +6,35 @@ description: This section is a step-by-step guide on how to configure User provi
 
 This section describes how to configure User provisioning (SCIM) for your Organization in ConfigCat.
 
-User provisioning (SCIM) synchronizes users and groups from your Identity Provider. You can assign ConfigCat permissions to each synchronized Identity Provider (IdP) group. 
-During the provisioning process, each member in those groups will be put into the configured ConfigCat permission groups during the provisioning process.
+User provisioning (SCIM) allows you to synchronize users and groups from your Identity Provider into a ConfigCat Organization. 
+ConfigCat permissions then can be assigned to each synchronized Identity Provider (IdP) group, 
+which puts their members to the selected ConfigCat permission groups upon a user provisioning process.
 
 Go to the *User provisioning (SCIM)* section on the [Authentication & Provisioning](https://app.configcat.com/organization/authentication/) page to set up User provisioning. You need to be an Organization Admin to do this.
 
 ## Prerequisites
 
-- To configure User provisioning (SCIM), you need to [verify the ownership of the domain](../domain-verification.mdx) that your company uses for email addresses. 
+- [Verified domain](../domain-verification.mdx)  
+  To configure User provisioning (SCIM), you have to verify the ownership of the domain that your company uses for email addresses. 
 - Identity Provider that supports SCIM 2.0.
 
 ## Supported SCIM 2.0 endpoints
 
-- Identity Provider user synchronization (Read, Create, Replace, Update, Delete)
-- Identity Provider group synchronization (Read, Create, Replace, Update, Delete)
+TODO: Point to the SCIM endpoints
 
 ## 1. Connect your Identity Provider {#connect}
 
-To set up SCIM synchronization, you need to configure your Identity Provider with an SCIM URL and a bearer token.  
-The SCIM URL and the bearer token can be acquired on the [Authentication & Provisioning](https://app.configcat.com/organization/authentication/) page.  
-Go to the *1. Connect your Identity Provider* section and click the *+ GENERATE* button to acquire the bearer token.
+To enable SCIM in your Identity Provider, you have to let it know where ConfigCat accepts SCIM endpoint calls and how these calls are authorized.
+On on the [Authentication & Provisioning](https://app.configcat.com/organization/authentication/) page, 
+you can get a **SCIM Url** used to point your Identity Provider to ConfigCat's SCIM endpoints, and a **Token** used to authorize requests with the `Bearer:` scheme.
 
-TODO image.
+To acquire the bearer token, go to the **1. Connect your Identity Provider** section and click the `+ GENERATE` button.
+
+<img src="/docs/assets/scim/dashboard/token_generate.png" alt="ConfigCat SCIM token generate" decoding="async" loading="lazy"/>
+
+From the opening dialog, copy and save the token, it will be used in the Identity Provider configuration section.
+
+<img src="/docs/assets/scim/dashboard/token.png" alt="ConfigCat SCIM token" decoding="async" loading="lazy"/>
 
 Go to your Identity Provider and follow the instructions. We tested and validated the following Identity Providers:
 
@@ -46,7 +53,7 @@ Other Identity Providers might also work with ConfigCat, if they support the SCI
 :::
 
 :::info
-Connecting your Identity Provider and starting to sync users and groups is safe. Clicking the *START PROVISIONING* button later will not affect your current ConfigCat users or permissions.
+Connecting your Identity Provider and starting to sync users and groups is safe. It won't affect your current ConfigCat users or permissions until you click the `START PROVISIONING` button later.
 :::
 
 ## 2. Assign ConfigCat permissions to Identity Provider groups  {#groups}

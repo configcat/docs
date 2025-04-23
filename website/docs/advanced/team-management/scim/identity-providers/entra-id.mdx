@@ -1,0 +1,95 @@
+---
+id: entra-id
+title: User Provisioning (SCIM) with Entra ID (Azure AD) 
+description: This is a step-by-step guide on how to set up and configure Entra ID (Azure AD) as a User provisioning (SCIM) provider for your organization.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Introduction
+
+Each Identity Provider requires specific information to configure a SCIM integration. The following guide will walk you through how you can connect ConfigCat with Entra ID via SCIM.
+
+## 1. Create an Entra ID Enterprise Application
+
+:::info
+If you already configured your organization to use Entra ID as a SAML provider, you can use the existing Entra ID Enterprise application and skip to the [next step](#2-configure-provisioning-scim-for-the-azure-enterprise-application).
+:::
+
+- Log in to the <a href="https://portal.azure.com/" target="_blank">Azure Portal</a>, go to the `Entra ID` resource, select `Enterprise applications`, and click on `New application`.
+
+  <img className="bordered-img" src="/docs/assets/scim/entra_id/new_application.png" alt="Entra ID enterprise applications" decoding="async" loading="lazy"/>
+
+- Click on `Create your own application`.
+
+  <img className="bordered-img" src="/docs/assets/scim/entra_id/create_application.png" alt="Entra ID create own application" decoding="async" loading="lazy"/>
+
+- Enter a descriptive `App name`, select the `Integrate any other application you don't find in the gallery (Non-gallery)` option, then click `Create`.
+
+  <img className="bordered-img" src="/docs/assets/scim/entra_id/app_name.png" alt="Entra ID app name" decoding="async" loading="lazy"/>
+
+The next step will guide you on how to setup Entra ID to synchronize your Identity Provider users and Identity Provider groups to ConfigCat.
+
+## 2. Configure Provisioning (SCIM) for the Azure Enterprise Application
+
+- On the `Manage` section of the application, select `Provisioning`, then click on  `New Configuration`.
+
+  <img className="bordered-img" src="/docs/assets/scim/entra_id/new_config.png" width="1293" alt="Entra ID new SCIM configuration" decoding="async" loading="lazy"/>
+
+- Gather the `SCIM URL` and the `Token` from the [User provisioning (SCIM)](https://app.configcat.com/organization/authentication/) page in ConfigCat.
+
+  <img className="bordered-img" src="/docs/assets/scim/dashboard/token_generate_url.png" alt="SCIM URL and token" decoding="async" loading="lazy"/>
+
+  <img className="bordered-img" src="/docs/assets/scim/dashboard/token.png" alt="SCIM token" decoding="async" loading="lazy"/>
+
+- Add the `SCIM URL` as the `Tenant URL` and the `Token` as the `Secret token` on the New provisioning configuration page in Azure. Click on the `Create` button.
+
+  <img className="bordered-img" src="/docs/assets/scim/entra_id/scim_meta.png" alt="Entra ID SCIM URL and token" decoding="async" loading="lazy"/>
+
+- Select the `Provisioning` menu and in the Mappings, configure the mapping for Users and Groups.
+
+  <img className="bordered-img" src="/docs/assets/scim/entra_id/mappings.png" alt="Entra ID SCIM mappings" decoding="async" loading="lazy"/>
+
+  - Mapping for Users:
+    Configure only the following mappings and remove all other mappings if there are any.
+    
+    | Provisioning Attribute  | Microsoft Entra ID Attribute                                |
+    | ----------------------- | ----------------------------------------------------------- | 
+    | externalId              | objectId                                                    |
+    | userName                | userPrincipalName                                           |
+    | displayName             | displayName                                                 |
+    | active                  | Switch([IsSoftDeleted], , "False", "True", "True", "False") |
+  
+    <img className="bordered-img" src="/docs/assets/scim/entra_id/user_mappings.png" alt="Entra ID SCIM User mappings" decoding="async" loading="lazy"/>
+
+  - Mapping for Groups:
+    Configure only the following mappings and remove all other mappings if there are any.
+    
+    | Provisioning Attribute  | Microsoft Entra ID Attribute |
+    | ----------------------- | ---------------------------- | 
+    | externalId              | objectId                     |
+    | displayName             | displayName                  |
+    | members                 | members                      |
+
+    <img className="bordered-img" src="/docs/assets/scim/entra_id/group_mappings.png" alt="Entra ID SCIM Group mappings" decoding="async" loading="lazy"/>
+
+## 3. Assign Users/Groups to the Enterprise Application
+
+To start user provisioning with Entra ID, you need to assign individual users or groups to the Enterprise application.
+
+- Select `Users and groups` on the `Manage` section of the menu, and click `Add user/group`. Then, you can select the users or groups you want to assign.
+
+  <img className="bordered-img" src="/docs/assets/scim/entra_id/add_user.png" alt="Entra ID users and groups" decoding="async" loading="lazy"/>
+
+## 4. Start provisioning
+
+- Go to the `Overview` page of the provisioning configuration and click on `Start provisioning`.
+
+  <img className="bordered-img" src="/docs/assets/scim/entra_id/start_provisioning.png" alt="Entra ID start provisioning" decoding="async" loading="lazy" />
+
+- Wait until the first provisioning is finished, and check the logs for any errors.
+
+## 5. Next Steps
+
+- Continue configuring user provisioning in ConfigCat based on the [documentation](../overview.mdx#groups).

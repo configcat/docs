@@ -99,13 +99,8 @@ const sidebars: SidebarsConfig = {
               items: [
                 {
                   type: 'doc',
-                  id: 'advanced/team-management/scim/identity-providers/azure-ad',
+                  id: 'advanced/team-management/scim/identity-providers/entra-id',
                   label: 'Entra ID (Azure AD)',
-                },
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/scim/identity-providers/adfs',
-                  label: 'ADFS',
                 },
                 {
                   type: 'doc',
@@ -126,11 +121,6 @@ const sidebars: SidebarsConfig = {
                   type: 'doc',
                   id: 'advanced/team-management/scim/identity-providers/onelogin',
                   label: 'OneLogin',
-                },
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/scim/identity-providers/cloudflare',
-                  label: 'Cloudflare Zero Trust',
                 },
               ],
             },
