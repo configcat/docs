@@ -92,6 +92,48 @@ const sidebars: SidebarsConfig = {
                 },
               ],
             },
+            {
+              label: 'User provisioning (SCIM)',
+              type: 'category',
+              link: { type: 'doc', id: 'advanced/team-management/scim/scim-overview' },
+              items: [
+                {
+                  type: 'doc',
+                  id: 'advanced/team-management/scim/identity-providers/azure-ad',
+                  label: 'Entra ID (Azure AD)',
+                },
+                {
+                  type: 'doc',
+                  id: 'advanced/team-management/scim/identity-providers/adfs',
+                  label: 'ADFS',
+                },
+                {
+                  type: 'doc',
+                  id: 'advanced/team-management/scim/identity-providers/google',
+                  label: 'Google',
+                },
+                {
+                  type: 'doc',
+                  id: 'advanced/team-management/scim/identity-providers/okta',
+                  label: 'Okta',
+                },
+                {
+                  type: 'doc',
+                  id: 'advanced/team-management/scim/identity-providers/auth0',
+                  label: 'Auth0',
+                },
+                {
+                  type: 'doc',
+                  id: 'advanced/team-management/scim/identity-providers/onelogin',
+                  label: 'OneLogin',
+                },
+                {
+                  type: 'doc',
+                  id: 'advanced/team-management/scim/identity-providers/cloudflare',
+                  label: 'Cloudflare Zero Trust',
+                },
+              ],
+            },
             'advanced/team-management/domain-verification',
           ],
         },
