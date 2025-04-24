@@ -10,7 +10,7 @@ User provisioning (SCIM) allows you to synchronize users and groups from your Id
 ConfigCat permissions then can be assigned to each synchronized Identity Provider (IdP) group, 
 which puts their members to the selected ConfigCat permission groups upon a user provisioning process.
 
-Go to the *User provisioning (SCIM)* section on the [Authentication & Provisioning](https://app.configcat.com/organization/authentication/) page to set up User provisioning. You need to be an Organization Admin to do this.
+Go to the *User provisioning (SCIM)* section on the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page to set up User provisioning. You need to be an Organization Admin to do this.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ TODO: Point to the SCIM endpoints
 ## 1. Connect your Identity Provider {#connect}
 
 To enable SCIM in your Identity Provider, you have to let it know where ConfigCat accepts SCIM endpoint calls and how these calls are authorized.
-On on the [Authentication & Provisioning](https://app.configcat.com/organization/authentication/) page, 
+On on the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page, 
 you can get a **SCIM Url** used to point your Identity Provider to ConfigCat's SCIM endpoints, and a **Token** used to authorize requests with the `Bearer:` scheme.
 
 To acquire the bearer token, go to the **1. Connect your Identity Provider** section and click the `+ GENERATE` button.
@@ -56,7 +56,7 @@ Connecting your Identity Provider and starting to sync users and groups is safe.
 
 ## 2. Assign ConfigCat permissions to Identity Provider groups  {#groups}
 
-After a successful sync from your Identity Provider, each synchronized group will appear on the [Authentication & Provisioning](https://app.configcat.com/organization/authentication/) page in the **2. Assign ConfigCat permissions to Identity Provider groups** section.
+After a successful sync from your Identity Provider, each synchronized group will appear on the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page in the **2. Assign ConfigCat permissions to Identity Provider groups** section.
 For each Identity Provider group, you can assign ConfigCat permissions by clicking on their gear icon.
 
 <img className="bordered-img" src="/docs/assets/scim/dashboard/assign_permissions.png" alt="ConfigCat SCIM assign permissions" decoding="async" loading="lazy"/>
@@ -117,7 +117,7 @@ The Identity Provider users calculated ConfigCat permissions will be the followi
 
 ## 3. Start and stop provisioning for Identity Provider users  {#users}
 
-After a successful synchronization, the Identity Provider users will appear on the [Authentication & Provisioning](https://app.configcat.com/organization/authentication/) page in the at the *3. Start and stop provisioning for Identity Provider users* section.
+After a successful synchronization, the Identity Provider users will appear on the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page in the at the *3. Start and stop provisioning for Identity Provider users* section.
 You can see and control their provisioning state there. New ConfigCat accounts are not created automatically, but they'll receive an invitation email to join your Organization. Existing ConfigCat users' permissions will not change until you explicitly start the provisioning for them.
 
 TODO screenshot
