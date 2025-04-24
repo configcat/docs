@@ -74,7 +74,39 @@ The next step will guide you on how to collect the information required for the 
 
 ## 4. Assign Users/Groups to Okta Application
 
-TODO
+To select users for synchronization into ConfigCat, you have to assign their Okta group to the Application.
+
+- Select the `Assignments` tab, click on the `Assign` dropdown, and select `Assign to Groups`.
+
+  <img className="bordered-img" src="/docs/assets/scim/okta/assign_groups.png" alt="Okta assign groups" decoding="async" loading="lazy"/>
+
+- Click the `Assign` button on those groups whose members you want to sync to ConfigCat.
+
+  <img className="bordered-img" src="/docs/assets/scim/okta/assign_group.png" alt="Okta assign group" decoding="async" loading="lazy"/>
+
+The above action starts the synchronization of the selected users but not their groups.
+
+:::caution
+Okta does not support using the same Okta group for assignments and for syncing group-member relations. 
+You need to create a separate group that is used exclusively for syncing group-member relations.
+These groups are called `Push Groups` in Okta. 
+
+To learn more, see <a href="https://help.okta.com/en-us/content/topics/users-groups-profiles/usgp-about-group-push.htm" target="_blank" rel="noopener noreferrer">Okta's documentation about Push Groups</a>.
+:::
+
+To enable group syncing, create separate groups for the users that you want to sync and add these new groups to the application as `Push Groups`.
+
+- Go to the `Push Groups` tab, click on the `Push Groups` dropdown, and select `Find groups by name`.
+ 
+  <img className="bordered-img" src="/docs/assets/scim/okta/push_groups.png" alt="Okta push groups" decoding="async" loading="lazy"/>
+
+- Select the group that you want to push, and click on the `Save` button.
+
+  <img className="bordered-img" src="/docs/assets/scim/okta/add_push_group.png" alt="Okta add push group" decoding="async" loading="lazy"/>
+
+- Make sure that the created push group's status is active.
+
+  <img className="bordered-img" src="/docs/assets/scim/okta/push_group_active.png" alt="Okta push group active" decoding="async" loading="lazy"/>
 
 ## 5. Next Steps
 

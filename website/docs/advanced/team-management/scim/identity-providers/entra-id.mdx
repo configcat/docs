@@ -76,11 +76,16 @@ The next step will guide you on how to setup Entra ID to synchronize your Identi
 
 ## 3. Assign Users/Groups to the Enterprise Application
 
-To start user provisioning with Entra ID, you need to assign individual users or groups to the Enterprise application.
+To start user provisioning with Entra ID, you need to assign groups to the Enterprise application.
 
-- Select `Users and groups` on the `Manage` section of the menu, and click `Add user/group`. Then, you can select the users or groups you want to assign.
+- Select `Users and groups` on the `Manage` section of the menu, and click `Add user/group`. Then, you can select the groups you want to assign.
 
   <img className="bordered-img" src="/docs/assets/scim/entra_id/add_user.png" alt="Entra ID users and groups" decoding="async" loading="lazy"/>
+
+:::caution
+In ConfigCat, you can assign permissions only to groups that are synchronized from your Identity Provider, 
+therefore it's important to select groups for synchronization rather than individual users.
+:::
 
 ## 4. Start provisioning
 

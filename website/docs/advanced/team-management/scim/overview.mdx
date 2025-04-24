@@ -30,11 +30,11 @@ you can get a **SCIM Url** used to point your Identity Provider to ConfigCat's S
 
 To acquire the bearer token, go to the **1. Connect your Identity Provider** section and click the `+ GENERATE` button.
 
-<img src="/docs/assets/scim/dashboard/token_generate.png" alt="ConfigCat SCIM token generate" decoding="async" loading="lazy"/>
+<img className="bordered-img" src="/docs/assets/scim/dashboard/token_generate.png" alt="ConfigCat SCIM token generate" decoding="async" loading="lazy"/>
 
 From the opening dialog, copy and save the token, it will be used in the Identity Provider configuration section.
 
-<img src="/docs/assets/scim/dashboard/token.png" alt="ConfigCat SCIM token" decoding="async" loading="lazy"/>
+<img className="bordered-img" src="/docs/assets/scim/dashboard/token.png" alt="ConfigCat SCIM token" decoding="async" loading="lazy"/>
 
 Go to your Identity Provider and follow the instructions. We tested and validated the following Identity Providers:
 
@@ -56,17 +56,29 @@ Connecting your Identity Provider and starting to sync users and groups is safe.
 
 ## 2. Assign ConfigCat permissions to Identity Provider groups  {#groups}
 
-After a successful synchronization from your Identity Provider to ConfigCat, the synchronized Identity Provider groups should appear on the [Authentication & Provisioning](https://app.configcat.com/organization/authentication/) page in the *2. Assign ConfigCat permissions to Identity Provider groups* section.
-You can configure ConfigCat permissions for each Identity Provider group by clicking on the gear icon in the table. 
-By setting up their permission configuration, you can control which ConfigCat permission will be assigned to each group member.
+After a successful sync from your Identity Provider, each synchronized group will appear on the [Authentication & Provisioning](https://app.configcat.com/organization/authentication/) page in the **2. Assign ConfigCat permissions to Identity Provider groups** section.
+For each Identity Provider group, you can assign ConfigCat permissions by clicking on their gear icon.
 
-TODO screenshot
+<img className="bordered-img" src="/docs/assets/scim/dashboard/assign_permissions.png" alt="ConfigCat SCIM assign permissions" decoding="async" loading="lazy"/>
 
-As an Identity Provider user can be a member in multiple Identity Provider groups, the user provisioning is merging the permissions associated with the Identity Provider groups based on the following rules:
-- If any Identity Provider users' Identity Provider groups are assigned to the Organization Admin role, the Organization Admin role will be assigned to the Identity Provider user.
-- If any Identity Provider users' Identity Provider groups are assigned to the Billing Manager role, the Billing Manager role will be assigned to the Identity Provider user.
-- If none of the Identity Provider users' Identity Provider groups is assigned to the Organization Admin role, the user provisioning will merge the product level permissions associated with each Identity Provider group. 
-  If there's a conflict, the group with higher priority (listed first) will decide the user's permissions. You can adjust the Identity Provider group priorities by clicking on the Set priority button above the Identity Provider groups table.
+On the appearing dialog, you can control which ConfigCat permission will be assigned to the given group's members.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/select_permissions.png" alt="ConfigCat SCIM select permissions" decoding="async" loading="lazy"/>
+
+### How permission conflicts are resolved
+
+An Identity Provider user can be a member of multiple Identity Provider groups, therefore the user provisioning is merging the associated permissions based on the following rules:
+
+- If an Identity Provider user is in a group that has the Organization Admin role, the user's ConfigCat account will get Organization Admin privileges.
+- If an Identity Provider user is in a group that has the Billing Manager role, the user's ConfigCat account will get Billing Manager privileges.
+- If none of the Identity Provider users' groups has the Organization Admin role, the user provisioning process will merge the product-level permissions assigned to each Identity Provider group. 
+  If there's a conflict, the group with a higher priority (listed first) will decide the user's permissions. You can adjust the Identity Provider group priorities by clicking on the `Set priority` button above the Identity Provider groups table.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/set_priority.png" alt="ConfigCat SCIM set group priority" decoding="async" loading="lazy"/>
+
+You can change the order of the groups by dragging and dropping items of the appearing list.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/change_priority.png" alt="ConfigCat SCIM change group priority" decoding="async" loading="lazy"/>
 
 ### Limitations
 
