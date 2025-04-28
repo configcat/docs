@@ -104,18 +104,8 @@ const sidebars: SidebarsConfig = {
                 },
                 {
                   type: 'doc',
-                  id: 'advanced/team-management/scim/identity-providers/google',
-                  label: 'Google',
-                },
-                {
-                  type: 'doc',
                   id: 'advanced/team-management/scim/identity-providers/okta',
                   label: 'Okta',
-                },
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/scim/identity-providers/auth0',
-                  label: 'Auth0',
                 },
                 {
                   type: 'doc',
