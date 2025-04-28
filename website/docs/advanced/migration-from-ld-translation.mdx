@@ -16,7 +16,7 @@ You need this information if you want to understand
 * what issues can arise during translation, and how to solve them,
 * what the limitations of translation are.
 
-## Mapping between LaunchDarkly and ConfigCat entitities
+## Mapping between LaunchDarkly and ConfigCat entities
 
 The table below shows how LaunchDarkly entities are mapped to ConfigCat entities.
 
@@ -103,6 +103,11 @@ The tables below show the possible translation issues.
 
 ### Limitations
 
+:::info
+Usually these issues arise when you are on a lower plan, and hitting a subscription limit. If this prevents you from
+migrating to ConfigCat, feel free to <a href="https://configcat.com/support/?prefilled=ld-import-limit" target="_blank">contact us</a>.
+:::
+
 <table>
   <thead>
     <tr>
@@ -110,13 +115,13 @@ The tables below show the possible translation issues.
       <th style={{width: "7.25rem"}}>Level</th>
       <th>Issue</th>
       <th style={{width: "30%"}}>What can be the cause?</th>
-      <th style={{width: "30%"}}>How is it resolved?</th>
+      <th style={{width: "30%"}}>How is it handled?</th>
     </tr>
   </thead>
 
   <tbody>
-    <tr>
-      <td><span id="translation-issue-L001">L001</span></td>
+    <tr id="translation-issue-L001">
+      <td>L001</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         The number of Targeting Rules resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
@@ -129,8 +134,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-L002">L002</span></td>
+    <tr id="translation-issue-L002">
+      <td>L002</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         The number of conditions resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
@@ -143,8 +148,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-L003">L003</span></td>
+    <tr id="translation-issue-L003">
+      <td>L003</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         The number of percentage options resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
@@ -158,8 +163,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-L004">L004</span></td>
+    <tr id="translation-issue-L004">
+      <td>L004</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         The length of a comparison value resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
@@ -172,8 +177,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-L005">L005</span></td>
+    <tr id="translation-issue-L005">
+      <td>L005</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         The number of items in a comparison value list resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
@@ -186,8 +191,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-L006">L006</span></td>
+    <tr id="translation-issue-L006">
+      <td>L006</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         The length of an item in a comparison value list resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
@@ -200,8 +205,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-L007">L007</span></td>
+    <tr id="translation-issue-L007">
+      <td>L007</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         The length of a text setting value resulting from the translation would exceed the [subscription / technical limit](../../subscription-plan-limits).
@@ -225,13 +230,13 @@ The tables below show the possible translation issues.
       <th style={{width: "7.25rem"}}>Level</th>
       <th>Issue</th>
       <th style={{width: "30%"}}>What can be the cause?</th>
-      <th style={{width: "30%"}}>How is it resolved?</th>
+      <th style={{width: "30%"}}>How is it handled?</th>
     </tr>
   </thead>
 
   <tbody>
-    <tr>
-      <td><span id="translation-issue-T001">T001</span></td>
+    <tr id="translation-issue-T001">
+      <td>T001</td>
       <td>🔵&nbsp;LOW</td>
       <td>
         A project, environment, segment or feature flag was imported under a different name than the original.
@@ -254,9 +259,9 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T002">T002</span></td>
-      <td>🔵&nbsp;LOW</td>
+    <tr id="translation-issue-T002">
+      <td>T002</td>
+      <td>🟡&nbsp;MEDIUM</td>
       <td>
         A feature flag was imported with a different key than the original.
       </td>
@@ -283,8 +288,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T003">T003</span></td>
+    <tr id="translation-issue-T003">
+      <td>T003</td>
       <td>🔵&nbsp;LOW</td>
       <td>
         A feature flag tag name was truncated.
@@ -298,8 +303,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T004">T004</span></td>
+    <tr id="translation-issue-T004">
+      <td>T004</td>
       <td>🔵&nbsp;LOW</td>
       <td>
         A JSON feature flag was encountered.
@@ -313,8 +318,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T005">T005</span></td>
+    <tr id="translation-issue-T005">
+      <td>T005</td>
       <td>🟡&nbsp;MEDIUM</td>
       <td>
         A comparison attribute name was truncated.
@@ -328,8 +333,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T006">T006</span></td>
+    <tr id="translation-issue-T006">
+      <td>T006</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         Unset off variation was encountered.
@@ -350,8 +355,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T007">T007</span></td>
+    <tr id="translation-issue-T007">
+      <td>T007</td>
       <td>🔵&nbsp;LOW</td>
       <td>
         Targeting is turned off, and the targeting toggle was respected.
@@ -371,8 +376,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T008">T008</span></td>
+    <tr id="translation-issue-T008">
+      <td>T008</td>
       <td>🟡&nbsp;MEDIUM</td>
       <td>
         Targeting is turned off, and the targeting toggle was ignored.
@@ -391,8 +396,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T009">T009</span></td>
+    <tr id="translation-issue-T009">
+      <td>T009</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         A segment clause references multiple segments, but cannot be translated due to subscription / technical limit.
@@ -409,8 +414,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T010">T010</span></td>
+    <tr id="translation-issue-T010">
+      <td>T010</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         A segment that references another segment was encountered.
@@ -423,8 +428,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T011">T011</span></td>
+    <tr id="translation-issue-T011">
+      <td>T011</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         An untranslatable clause was encountered in a feature flag or segment rule.
@@ -447,8 +452,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T012">T012</span></td>
+    <tr id="translation-issue-T012">
+      <td>T012</td>
       <td>🔵&nbsp;LOW</td>
       <td>
         A clause was translated to multiple Targeting Rules or conditions.
@@ -464,8 +469,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T013">T013</span></td>
+    <tr id="translation-issue-T013">
+      <td>T013</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         A "contains" / "does not contain" segment clause with multiple values was encountered.
@@ -480,8 +485,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T014">T014</span></td>
+    <tr id="translation-issue-T014">
+      <td>T014</td>
       <td>🔵&nbsp;LOW</td>
       <td>
         A "&lt;", "&lt;=", "&gt;", "&gt;=", "SemVer &lt;", "SemVer &lt;=", "SemVer &gt;", "SemVer &gt;=" or
@@ -499,8 +504,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T015">T015</span></td>
+    <tr id="translation-issue-T015">
+      <td>T015</td>
       <td>🟡&nbsp;MEDIUM</td>
       <td>
         A "Context kind is (not) one of" clause was encountered.
@@ -515,8 +520,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T016">T016</span></td>
+    <tr id="translation-issue-T016">
+      <td>T016</td>
       <td>🟡&nbsp;MEDIUM</td>
       <td>
         A mobile targeting-related clause was encountered.
@@ -533,8 +538,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T017">T017</span></td>
+    <tr id="translation-issue-T017">
+      <td>T017</td>
       <td>🟡&nbsp;MEDIUM</td>
       <td>
         A not accurately translatable "is (not) one of" clause was encountered.
@@ -562,8 +567,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T018">T018</span></td>
+    <tr id="translation-issue-T018">
+      <td>T018</td>
       <td>🔵&nbsp;LOW</td>
       <td>
         One or more variations of a percentage rollout had to be omitted.
@@ -579,8 +584,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T019">T019</span></td>
+    <tr id="translation-issue-T019">
+      <td>T019</td>
       <td>🟡&nbsp;MEDIUM</td>
       <td>
         One or more percentage values of a percentage rollout had to be adjusted.
@@ -594,8 +599,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T020">T020</span></td>
+    <tr id="translation-issue-T020">
+      <td>T020</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         There are multiple percentage rollout rules in the feature flag, but they do not use the same attribute as the
@@ -611,8 +616,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T021">T021</span></td>
+    <tr id="translation-issue-T021">
+      <td>T021</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         A segment with no rules was encountered.
@@ -625,8 +630,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T022">T022</span></td>
+    <tr id="translation-issue-T022">
+      <td>T022</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         A segment with multiple rules was encountered.
@@ -639,8 +644,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T023">T023</span></td>
+    <tr id="translation-issue-T023">
+      <td>T023</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         A segment rule with multiple clauses was encountered.
@@ -654,8 +659,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T024">T024</span></td>
+    <tr id="translation-issue-T024">
+      <td>T024</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         A segment rule with percentage targeting was encountered.
@@ -669,8 +674,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T025">T025</span></td>
+    <tr id="translation-issue-T025">
+      <td>T025</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         A segment rule was only partially translated.
@@ -683,8 +688,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T026">T026</span></td>
+    <tr id="translation-issue-T026">
+      <td>T026</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         A big segment was encountered.
@@ -697,8 +702,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-T027">T027</span></td>
+    <tr id="translation-issue-T027">
+      <td>T027</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         Comparison value list item contains comma.
@@ -724,13 +729,13 @@ The tables below show the possible translation issues.
       <th style={{width: "7.25rem"}}>Level</th>
       <th>Issue</th>
       <th style={{width: "30%"}}>What can be the cause?</th>
-      <th style={{width: "30%"}}>How is it resolved?</th>
+      <th style={{width: "30%"}}>How is it handled?</th>
     </tr>
   </thead>
 
   <tbody>
-    <tr>
-      <td><span id="translation-issue-D001">D001</span></td>
+    <tr id="translation-issue-D001">
+      <td>D001</td>
       <td>🔴&nbsp;HIGH</td>
       <td>
         The data model fetched from LaunchDarkly contains invalid, inconsistent or unexpected data.
@@ -745,8 +750,8 @@ The tables below show the possible translation issues.
       </td>
     </tr>
 
-    <tr>
-      <td><span id="translation-issue-D002">D002</span></td>
+    <tr id="translation-issue-D002">
+      <td>D002</td>
       <td>🟡&nbsp;MEDIUM</td>
       <td>
         The feature flag was modified in LaunchDarkly while the feature flag data was being fetched.
@@ -775,6 +780,10 @@ The tables below show the possible translation issues.
   even if the percentage values are the same, the distribution of users will be different. In other words,
   [stickiness](../../targeting/percentage-options#stickiness) of percentage rollouts cannot be transferred to
   ConfigCat.
+* In the case of percentage rollouts within custom rules, evaluation behavior is different between the two services when
+  the attribute used as the basis of the percentage rollout is not provided (i.e. not passed to the SDK on evaluation):
+  * LaunchDarkly will serve the value of the first variation whose percentage value is not 0%.
+  * ConfigCat will skip the targeting rule and continue evaluation with the next rule.
 * In LaunchDarkly, all clause operators can work with context attribute value lists. In ConfigCat, most of the
   comparators (counterparts of operators) can work with a single user attribute only. The only exceptions is
   ARRAY IS (NOT) ONE OF.
