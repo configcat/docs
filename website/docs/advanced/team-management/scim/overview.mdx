@@ -117,10 +117,10 @@ The Identity Provider users calculated ConfigCat permissions will be the followi
 
 ## 3. Start and stop provisioning for Identity Provider users  {#users}
 
-After a successful synchronization, the Identity Provider users will appear on the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page in the at the *3. Start and stop provisioning for Identity Provider users* section.
+After a successful synchronization, the Identity Provider users will appear on the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page in the *3. Start and stop provisioning for Identity Provider users* section.
 You can see and control their provisioning state there. New ConfigCat accounts are not created automatically, but they'll receive an invitation email to join your Organization. Existing ConfigCat users' permissions will not change until you explicitly start the provisioning for them.
 
-TODO screenshot
+<img className="bordered-img" src="/docs/assets/scim/dashboard/start_stop_provisioning.png" alt="Start/Stop provisioning" decoding="async" loading="lazy"/>
 
 ### What is managed by the provisioning?
 
@@ -173,10 +173,14 @@ If provisioning the Identity Provider user is started the provisioning status ca
 By default, after the Identity Provider synchronizes a new Identity Provider user to ConfigCat, the Identity Provider user will be in a provisioning stopped state, so you can verify your configuration/permissions and adjust your settings if needed.  
 After you are confident that the provisioning works like you expect, you can turn the **Provision future users automatically** toggle to ON to immediately start the provisioning for newly synchronized Identity Provider users. 
 
+<img className="bordered-img" src="/docs/assets/scim/dashboard/auto_provisioning.png" alt="Auto provisioning for new users" decoding="async" loading="lazy"/>
+
 ### Disable Domain Auto-assign
 
 After verifying your domain name in ConfigCat, all users signing up with that domain will be added to your Organization. With the auto-assign feature, you can also specify initial permissions for these users.  
 User provisioning may interfere with ConfigCat's auto-assign feature. If you want to allow only provisioned users into your ConfigCat Organization, you should deactivate the auto-assign feature on Domain verification & Auto-assign users panel.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/disable_auto_assign.png" alt="Disable domain auto-assign" decoding="async" loading="lazy"/>
 
 ## 5. Review ConfigCat users who are not managed by user provisioning  {#not-managed}
 
