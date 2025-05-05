@@ -37,8 +37,8 @@ organization that you want to host the products corresponding to the projects yo
 You will also need to have the Organization Admin permission in that ConfigCat organization to be able to create
 products.
 
-* If the target ConfigCat organization does not exist yet, you can create one by <a target="_blank" href="https://app.configcat.com/auth/signup">
-signing up</a>. During the signup process, you will have the opportunity to create your own organization, in which
+* If the target ConfigCat organization does not exist yet, you can create one by
+<a target="_blank" href="https://app.configcat.com/auth/signup">signing up</a>. During the signup process, you will have the opportunity to create your own organization, in which
 you will have the Organization Admin permission by default.
 * Otherwise, you will need to get an invitation to the target ConfigCat organization, and after joining, you will
 need to request the Organization Admin permission.
@@ -57,8 +57,8 @@ behavior as closely as possible.
 
 ### Using the import tool
 
-To launch the import tool, open the dropdown menu in the top left corner of the ConfigCat Dashboard, navigate to the
-Organization Overview page, then click the card labeled "Import from LaunchDarkly".
+To launch the import tool, open the dropdown menu in the top left corner of the [ConfigCat Dashboard](https://app.configcat.com/organization),
+navigate to the Organization Overview page, then click the card labeled "Import from LaunchDarkly".
 
 <img alt="Launching the import tool" src="/docs/assets/migration-from-ld/launch-import-tool_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
 
@@ -242,8 +242,9 @@ Let's see now step by step how to convert this code to ConfigCat:
    ```
 1. Replace the LaunchDarkly SDK key with the ConfigCat one.
 
-   You can obtain it from the ConfigCat Dashboard, by selecting the config containing the imported feature flag on the
-   sidebar, and clicking the "VIEW SDK KEY" button in the top right corner of the page.
+   You can obtain it from the [ConfigCat Dashboard](https://app.configcat.com/organization), by selecting the config
+   containing the imported feature flag on the sidebar, and clicking the "VIEW SDK KEY" button in the top right corner
+   of the page.
 1. Instead of a LaunchDarkly client instance, obtain a ConfigCat one:
 
    ```js
@@ -482,8 +483,8 @@ Permission groups roughly correspond to LaunchDarkly roles, with a few key diffe
 With this in mind, create the necessary permission groups in your products, based on the roles defined in your
 LaunchDarkly organization.
 
-To set up permission groups for a product, open the ConfigCat Dashboard, select the product on the sidebar, and choose
-"Permission Groups" in the top menu.
+To set up permission groups for a product, open the [ConfigCat Dashboard](https://app.configcat.com/organization),
+select the product on the sidebar, and choose "Permission Groups" in the top menu.
 
 <img alt="Launching the import tool" src="/docs/assets/migration-from-ld/permission-groups_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
 
