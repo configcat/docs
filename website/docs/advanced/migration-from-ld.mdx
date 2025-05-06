@@ -14,8 +14,8 @@ process while providing information on the technical differences between the two
 Migration can be done on a LaunchDarkly project basis, and migration of a project usually consists of the following
 three steps:
 1. Migrating LaunchDarkly feature flags and segments to ConfigCat
-1. Migrating LaunchDarkly teams and permissions to ConfigCat
 1. Adjusting the code of your applications to use ConfigCat instead of LaunchDarkly
+1. Migrating LaunchDarkly teams and permissions to ConfigCat
 
 ConfigCat provides a wizard-like tool that is able to do the heavy lifting for step 1. However, there is currently
 no automation for step 2 and 3. So please expect these steps to require some manual work.
@@ -37,8 +37,8 @@ organization that you want to host the products corresponding to the projects yo
 You will also need to have the Organization Admin permission in that ConfigCat organization to be able to create
 products.
 
-* If the target ConfigCat organization does not exist yet, you can create one by <a target="_blank" href="https://app.configcat.com/auth/signup">
-signing up</a>. During the signup process, you will have the opportunity to create your own organization, in which
+* If the target ConfigCat organization does not exist yet, you can create one by
+<a target="_blank" href="https://app.configcat.com/auth/signup">signing up</a>. During the signup process, you will have the opportunity to create your own organization, in which
 you will have the Organization Admin permission by default.
 * Otherwise, you will need to get an invitation to the target ConfigCat organization, and after joining, you will
 need to request the Organization Admin permission.
@@ -57,8 +57,8 @@ behavior as closely as possible.
 
 ### Using the import tool
 
-To launch the import tool, open the dropdown menu in the top left corner of the ConfigCat Dashboard, navigate to the
-Organization Overview page, then click the card labeled "Import from LaunchDarkly".
+To launch the import tool, open the dropdown menu in the top left corner of the [ConfigCat Dashboard](https://app.configcat.com/organization),
+navigate to the Organization Overview page, then click the card labeled "Import from LaunchDarkly".
 
 <img alt="Launching the import tool" src="/docs/assets/migration-from-ld/launch-import-tool_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
 
@@ -172,71 +172,9 @@ In either case, it's highly recommended to download and go through the report. I
 issues, and also includes links to the original and imported entities, which can make it easier for you to look into and
 resolve the issues.
 
-## Migrate LaunchDarkly teams and permissions to ConfigCat
-
-At the moment, ConfigCat doesn't offer a tool or other automated solution for migrating your teams and permissions from
-LaunchDarkly since there are fundamental differences between the user management and permission systems of the two
-services.
-
-LaunchDarkly allows more fine-grained access control over resources, while ConfigCat's permission system was designed to
-be simpler and easier to understand, at the expense of fewer possibilities for fine-tuning access control.
-
-Therefore, we can only give you some pointers, but this task will inevitably require some effort on your part.
-
-As the first step, we recommend getting familiar with ConfigCat's user management and permission system. You
-can find the basic concepts in the following guides:
-  * [Organization & Roles](../../organization)
-  * [Team Management Basics](../team-management/team-management-basics)
-
-As you can see from this, ConfigCat doesn't use the concept of teams and roles of LaunchDarkly. You can't define such
-entities at the organization level, but *permission groups* per product instead.
-
-### Map LaunchDarkly roles to ConfigCat permission groups
-
-Permission groups roughly correspond to LaunchDarkly roles, with a few key differences:
-* They are scoped to the product where they are defined.
-* There are no [built-in roles](https://launchdarkly.com/docs/home/account/built-in-roles) like Reader or Writer. To
-  recreate these in ConfigCat, you will need to define the corresponding permission groups in each relevant product.
-  However, LaunchDarkly's Admin and Owner roles can't really be represented using permission groups. ConfigCat supports
-  the concept of [Organization Admin role](../../organization/#organization-admin-role) but it's an organization-level
-  permission. You can assign this to users on invite or on your organization's "Members & Roles" page as shown in the
-  next section.
-* To migrate [custom roles](https://launchdarkly.com/docs/home/account/custom-roles) to ConfigCat, you will need to
-  translate the [policies](https://launchdarkly.com/docs/home/account/role-concepts#policies) they define to the fixed
-  set of permissions offered by ConfigCat permission groups. Obviously, this won't be entirely possible in every case.
-
-With this in mind, create the necessary permission groups in your products, based on the roles defined in your
-LaunchDarkly organization.
-
-To set up permission groups for a product, open the ConfigCat Dashboard, select the product on the sidebar, and choose
-"Permission Groups" in the top menu.
-
-<img alt="Launching the import tool" src="/docs/assets/migration-from-ld/permission-groups_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
-
-### Invite users to ConfigCat and assign them to permission groups
-
-Permission groups also act as per-product teams. Once created, you can assign users to them, who will then have the
-permissions specified by the permission group. (A user can only be a member of a single permission group at a time
-though.) This is how you map your LaunchDarkly teams to ConfigCat.
-
-However, users don't yet exist in ConfigCat at this point. You need to invite them to ConfigCat first. To do this,
-follow [these instructions](../team-management/team-management-basics/#invite-others-to-collaborate).
-
-When inviting users, you will need to choose a product, more specifically, a permission group to invite them to.
-This means that they will be automatically assigned to the specified permission groups after signing up. So,
-as you have already created the permission groups, ideally you can immediately invite your users to the right
-permission groups. (Of course, you may need to do this in batches.)
-
-It can easily happen that you want to add a user to more than one product. In such cases, invite the user to
-one of the products (it doesn't matter which one), then, after they've signed up, navigate to the "Members & Roles" page of your
-organization, and assign them to the other products too, using the "Change roles" feature of the "Members & Roles"
-table.
-
-<img alt="Launching the import tool" src="/docs/assets/migration-from-ld/member-and-roles_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
-
 ## Adjust the code of your applications
 
-The final step in the migration process is to adjust the code of your applications to use ConfigCat instead of
+The next step in the migration process is to adjust the code of your applications to use ConfigCat instead of
 LaunchDarkly to evaluate your feature flags.
 
 This will also require more or less manual work, depending on what API your applications currently use for feature flag
@@ -304,8 +242,9 @@ Let's see now step by step how to convert this code to ConfigCat:
    ```
 1. Replace the LaunchDarkly SDK key with the ConfigCat one.
 
-   You can obtain it from the ConfigCat Dashboard, by selecting the config containing the imported feature flag on the
-   sidebar, and clicking the "VIEW SDK KEY" button in the top right corner of the page.
+   You can obtain it from the [ConfigCat Dashboard](https://app.configcat.com/organization), by selecting the config
+   containing the imported feature flag on the sidebar, and clicking the "VIEW SDK KEY" button in the top right corner
+   of the page.
 1. Instead of a LaunchDarkly client instance, obtain a ConfigCat one:
 
    ```js
@@ -506,3 +445,66 @@ you can integrate such tools with ConfigCat to replicate LaunchDarkly's analytic
 * [Google Analytics](../../integrations/google-analytics)
 * [Mixpanel](../../integrations/mixpanel#experiments)
 * [Twilio Segment](../../integrations/segment#analytics)
+
+## Migrate LaunchDarkly teams and permissions to ConfigCat
+
+To complete the migration process, you will also need to migrate your teams and permissions from LaunchDarkly.
+
+At the moment, ConfigCat doesn't offer a tool or other automated solution for this task since there are fundamental
+differences between the user management and permission systems of the two services.
+
+LaunchDarkly allows more fine-grained access control over resources, while ConfigCat's permission system was designed to
+be simpler and easier to understand, at the expense of fewer possibilities for fine-tuning access control.
+
+Therefore, we can only give you some pointers, but this task will inevitably require some effort on your part.
+
+As the first step, we recommend getting familiar with ConfigCat's user management and permission system. You
+can find the basic concepts in the following guides:
+  * [Organization & Roles](../../organization)
+  * [Team Management Basics](../team-management/team-management-basics)
+
+As you can see from this, ConfigCat doesn't use the concept of teams and roles of LaunchDarkly. You can't define such
+entities at the organization level, but *permission groups* per product instead.
+
+### Map LaunchDarkly roles to ConfigCat permission groups
+
+Permission groups roughly correspond to LaunchDarkly roles, with a few key differences:
+* They are scoped to the product where they are defined.
+* There are no [built-in roles](https://launchdarkly.com/docs/home/account/built-in-roles) like Reader or Writer. To
+  recreate these in ConfigCat, you will need to define the corresponding permission groups in each relevant product.
+  However, LaunchDarkly's Admin and Owner roles can't really be represented using permission groups. ConfigCat supports
+  the concept of [Organization Admin role](../../organization/#organization-admin-role) but it's an organization-level
+  permission. You can assign this to users on invite or on your organization's "Members & Roles" page as shown in the
+  next section.
+* To migrate [custom roles](https://launchdarkly.com/docs/home/account/custom-roles) to ConfigCat, you will need to
+  translate the [policies](https://launchdarkly.com/docs/home/account/role-concepts#policies) they define to the fixed
+  set of permissions offered by ConfigCat permission groups. Obviously, this won't be entirely possible in every case.
+
+With this in mind, create the necessary permission groups in your products, based on the roles defined in your
+LaunchDarkly organization.
+
+To set up permission groups for a product, open the [ConfigCat Dashboard](https://app.configcat.com/organization),
+select the product on the sidebar, and choose "Permission Groups" in the top menu.
+
+<img alt="Launching the import tool" src="/docs/assets/migration-from-ld/permission-groups_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+### Invite users to ConfigCat and assign them to permission groups
+
+Permission groups also act as per-product teams. Once created, you can assign users to them, who will then have the
+permissions specified by the permission group. (A user can only be a member of a single permission group at a time
+though.) This is how you map your LaunchDarkly teams to ConfigCat.
+
+However, users don't yet exist in ConfigCat at this point. You need to invite them to ConfigCat first. To do this,
+follow [these instructions](../team-management/team-management-basics/#invite-others-to-collaborate).
+
+When inviting users, you will need to choose a product, more specifically, a permission group to invite them to.
+This means that they will be automatically assigned to the specified permission groups after signing up. So,
+as you have already created the permission groups, ideally you can immediately invite your users to the right
+permission groups. (Of course, you may need to do this in batches.)
+
+It can easily happen that you want to add a user to more than one product. In such cases, invite the user to
+one of the products (it doesn't matter which one), then, after they've signed up, navigate to the "Members & Roles" page of your
+organization, and assign them to the other products too, using the "Change roles" feature of the "Members & Roles"
+table.
+
+<img alt="Launching the import tool" src="/docs/assets/migration-from-ld/member-and-roles_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
