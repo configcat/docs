@@ -18,12 +18,12 @@ There are two available integration opportunities between [ConfigCat and Mixpane
 
 Ensures that every setting change in ConfigCat is sent to Mixpanel as an [Annotation](https://docs.mixpanel.com/docs/reports/insights#annotations).
 
-<img src="/docs/assets/mixpanel/annotation.png" className="zoomable" alt="Mixpanel Annotation" />
+<img src="/docs/assets/mixpanel/annotation.png" alt="Mixpanel Annotation" decoding="async" loading="lazy" />
 
 ### Installation
 
 1. Have a [Mixpanel account](https://mixpanel.com/).
-2. Create a Service account that has at least an Analyst role. <img src="/docs/assets/mixpanel/service_account.png" className="zoomable" alt="mixpanel_service_Account" />
+2. Create a Service account that has at least an Analyst role. <img src="/docs/assets/mixpanel/service_account.png" alt="mixpanel_service_Account" decoding="async" loading="lazy" />
 3. Open the [integrations tab](https://app.configcat.com/product/integrations) on the ConfigCat Dashboard.
 4. Click on Mixpanel's CONNECT button and set your Mixpanel Service Account's Username, Secret, and your Project ID.
 5. OPTIONAL - Set the proper server of your Mixpanel account. [More about Mixpanel servers](https://docs.mixpanel.com/docs/privacy/eu-residency).
@@ -265,13 +265,13 @@ The `variationId` is a hashed version of the feature flag value, accessible on t
 
 ### Usage with Experiments
 Check your Experiments page in Mixpanel, select your feature flag as the Experiment.
-<img src="/docs/assets/mixpanel/experiments.png" className="zoomable" alt="Mixpanel Experiments report" />
+<img src="/docs/assets/mixpanel/experiments.png" alt="Mixpanel Experiments report" decoding="async" loading="lazy" />
 
 ### Usage with Insights report
 If you don't have access to the Experiments feature in Mixpanel, you can create a custom Insights report based on the `Experiment Started` event. 
 You can filter for your feature flag keys with the `Experiment name` property and visualize the different variants by using the `Variant name` property as a Breakdown. Example:
-<img src="/docs/assets/mixpanel/insights.png" className="zoomable" alt="Mixpanel Insights report" />
+<img src="/docs/assets/mixpanel/insights.png" alt="Mixpanel Insights report" decoding="async" loading="lazy" />
 
 ### Usage with enriched user properties for your custom events.
 If you use the [Identify API](https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users) approach, you'll be able to use the feature flag evaluation data in your current reports. Example with a Breakdown:
-<img src="/docs/assets/mixpanel/enrichment.png" className="zoomable" alt="Mixpanel Insights report with enriched data" />
+<img src="/docs/assets/mixpanel/enrichment.png" alt="Mixpanel Insights report with enriched data" decoding="async" loading="lazy" />

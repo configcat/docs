@@ -17,15 +17,15 @@ Each SSO Identity Provider requires specific information to configure a SAML int
 
 - Log in to <a href="https://admin.google.com/" target="_blank">Google Admin console</a>, select `Apps` from the side menu, then select `Web and mobile apps`.
 
-  <img className="bordered-img" src="/docs/assets/saml/google/applications.png" alt="Google applications" />
+  <img className="bordered-img" src="/docs/assets/saml/google/applications.png" alt="Google applications" decoding="async" loading="lazy" />
 
 - Click `Add App`, then select `Add custom SAML app`.
 
-  <img className="bordered-img" src="/docs/assets/saml/google/add_saml_app.png" alt="Google add SAML app" />
+  <img className="bordered-img" src="/docs/assets/saml/google/add_saml_app.png" alt="Google add SAML app" decoding="async" loading="lazy" />
 
 - Enter a descriptive `App name`, then click `CONTINUE`.
 
-  <img className="bordered-img" src="/docs/assets/saml/google/app_name.png" alt="Google SAML app name" />
+  <img className="bordered-img" src="/docs/assets/saml/google/app_name.png" alt="Google SAML app name" decoding="async" loading="lazy" />
 
 The next step will guide you on how to configure ConfigCat with appearing information.
 
@@ -33,27 +33,27 @@ The next step will guide you on how to configure ConfigCat with appearing inform
 
 - Copy the value of `SSO URL` and `Certificate` fields and save them for further use.
 
-  <img className="bordered-img" src="/docs/assets/saml/google/meta_url_cert.png" alt="Google SSO url" />
+  <img className="bordered-img" src="/docs/assets/saml/google/meta_url_cert.png" alt="Google SSO url" decoding="async" loading="lazy" />
 
 - Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat Dashboard</a>.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" decoding="async" loading="lazy" />
 
 - Click `ADD SAML IDENTITY PROVIDER`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" decoding="async" loading="lazy" />
 
 - Give a name for your Identity Provider, and click `Create`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/google_name.png" alt="ConfigCat Name Identity Provider" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/google_name.png" alt="ConfigCat Name Identity Provider" decoding="async" loading="lazy" />
 
 - Select the `3. Set up ConfigCat` step, click `Manual Configuration`, then paste the copied values into the appearing fields.
 
-  <img className="bordered-img" src="/docs/assets/saml/google/cc_manual_new.png" alt="ConfigCat manual configuration" />
+  <img className="bordered-img" src="/docs/assets/saml/google/cc_manual_new.png" alt="ConfigCat manual configuration" decoding="async" loading="lazy" />
 
 - Click `CONTINUE` on the Google App configuration.
 
-  <img className="bordered-img" src="/docs/assets/saml/google/meta_continue.png" alt="Google SSO app configuration" />
+  <img className="bordered-img" src="/docs/assets/saml/google/meta_continue.png" alt="Google SSO app configuration" decoding="async" loading="lazy" />
 
 The next step will guide you on how to configure the Google App with details provided by ConfigCat.
 
@@ -64,24 +64,24 @@ The next step will guide you on how to configure the Google App with details pro
   - `Entity ID` -> `Entity ID`
   - `Assertion Consumer Service` -> `ACS URL`
 
-    <img className="bordered-img" src="/docs/assets/saml/dashboard/acs_entity_id_2.png" alt="Google acs url" />
+    <img className="bordered-img" src="/docs/assets/saml/dashboard/acs_entity_id_2.png" alt="Google acs url" decoding="async" loading="lazy" />
 
   - Make sure the `Signed response` option is checked.
   - Select `EMAIL` as `Name ID format`.
   - Select `Basic Information > Primary email` as `Name ID`.
   - Click `CONTINUE`.
 
-    <img className="bordered-img" src="/docs/assets/saml/google/google_acs_eid.png" alt="Google meta data" />
+    <img className="bordered-img" src="/docs/assets/saml/google/google_acs_eid.png" alt="Google meta data" decoding="async" loading="lazy" />
 
 - Click `FINISH`.
 
-  <img className="bordered-img" src="/docs/assets/saml/google/attribute_mapping.png" alt="Google attribute mapping" />
+  <img className="bordered-img" src="/docs/assets/saml/google/attribute_mapping.png" alt="Google attribute mapping" decoding="async" loading="lazy" />
 
 ## 4. Select Trusted Domains on the SAML Configuration Dialog
 
 - Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.
   
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" decoding="async" loading="lazy" />
 
 - Click `Save`.
 
@@ -89,25 +89,25 @@ The next step will guide you on how to configure the Google App with details pro
 
 - Click on `View details` under the `User access` section.
 
-  <img className="bordered-img" src="/docs/assets/saml/google/user_access.png" alt="Google user access" />
+  <img className="bordered-img" src="/docs/assets/saml/google/user_access.png" alt="Google user access" decoding="async" loading="lazy" />
 
 - Select `ON for everyone`, then click `SAVE`.
 
-  <img className="bordered-img" src="/docs/assets/saml/google/on_for_everyone.png" alt="Google ON for everyone"/>
+  <img className="bordered-img" src="/docs/assets/saml/google/on_for_everyone.png" alt="Google ON for everyone" decoding="async" loading="lazy" />
 
 ## 6. Sign In
 
 - Go to the <a href="https://app.configcat.com/auth/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" decoding="async" loading="lazy" />
 
 - Sign in with your company email address used in Google.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/company_email.png" alt="ConfigCat SAML company login" />
+  <img className="bordered-img" src="/docs/assets/saml/dashboard/company_email.png" alt="ConfigCat SAML company login" decoding="async" loading="lazy" />
 
 - ConfigCat will redirect you to Google's sign in page. Type your credentials, and sign in.
 
-  <img className="bordered-img" src="/docs/assets/saml/google/login.png" alt="Google SSO login" />
+  <img className="bordered-img" src="/docs/assets/saml/google/login.png" alt="Google SSO login" decoding="async" loading="lazy" />
 
 - You should be redirected to ConfigCat signed in with your company account.
 

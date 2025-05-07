@@ -52,6 +52,10 @@ const features = [
         url: 'advanced/proxy/proxy-overview',
         title: 'ConfigCat Proxy',
       },
+      {
+        url: 'advanced/migration-from-ld',
+        title: 'Migration from LaunchDarkly',
+      },
       // { url: 'advanced/config-v2-migration-guide', title: 'Config V2 Migration Guide' },
     ],
   },
@@ -121,7 +125,7 @@ function Feature({ imageUrl, title, description, links }) {
     <div className={clsx('col col--3', styles.feature)}>
       {imgUrl && (
         <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
+          <img className={clsx('no-auto-height', styles.featureImage)} src={imgUrl} alt={title} />
         </div>
       )}
       <h3>{title}</h3>
@@ -150,7 +154,7 @@ function Home() {
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <img
-            className={styles.heroImage}
+            className={clsx('no-auto-height', styles.heroImage)}
             src={useBaseUrl('img/docs.svg')}
             alt="ConfigCat Docs"
           />
