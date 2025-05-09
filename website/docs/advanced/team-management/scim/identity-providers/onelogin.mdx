@@ -18,153 +18,74 @@ Each Identity Provider requires specific information to configure a SCIM integra
 
 ## 1. Create an Application in OneLogin
 
-- Log in to <a href="https://app.onelogin.com/login" target="_blank">OneLogin</a>, and select `Applications`.
+- Log in to <a href="https://app.onelogin.com/login" target="_blank">OneLogin</a>, select `Applications` and click on `Add App`.
 
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/applications.png" alt="OneLogin applications" decoding="async" loading="lazy" />
+  <img className="bordered-img" src="/docs/assets/scim/onelogin/add_app.png" alt="OneLogin add application" decoding="async" loading="lazy" />
 
-- Click on `Add App`.
+- Type `SCIM V2` into the search bar, and select `SCIM Provisioner with SAML (SCIM v2 Core)`.
 
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/add_app.png" alt="OneLogin add application" decoding="async" loading="lazy" />
-
-- Type `SAML` into the search bar, and select `SAML Custom Connector (Advanced)`.
-
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/select_app.png" alt="OneLogin select APP" decoding="async" loading="lazy" />
+  <img className="bordered-img" src="/docs/assets/scim/onelogin/select_app.png" alt="OneLogin select APP" decoding="async" loading="lazy" />
 
 - Enter a descriptive `Display Name`, then click `Save`.
 
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/app_name.png" alt="OneLogin app name" decoding="async" loading="lazy" />
+  <img className="bordered-img" src="/docs/assets/scim/onelogin/app_name.png" alt="OneLogin app name" decoding="async" loading="lazy" />
 
-The next step will guide you on how to collect the information required for the appearing `Configuration` page.
+## 2. Configure Provisioning (SCIM) for the OneLogin Application
 
-## 2. Configure SAML for the OneLogin Application
+- Gather the `SCIM URL` and the `Token` from the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page in ConfigCat.
 
-- Open your organization's authentication settings on the <a href="https://app.configcat.com/organization/authentication" target="_blank">ConfigCat Dashboard</a>.
+  <img className="bordered-img" src="/docs/assets/scim/dashboard/token_generate_url.png" alt="SCIM URL and token" decoding="async" loading="lazy"/>
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/authentication.png" alt="ConfigCat authentication settings" decoding="async" loading="lazy" />
+  <img className="bordered-img" src="/docs/assets/scim/dashboard/token.png" alt="SCIM token" decoding="async" loading="lazy"/>
 
-- Click `ADD SAML IDENTITY PROVIDER`.
+- On the OneLogin application's Configuration tab's API Connection section configure the following:
+  - Add the `SCIM URL` from the ConfigCat Dashboard as the `SCIM Base URL`.
+  - Add the `Token` from the ConfigCat Dashboard as the `SCIM Bearer Token`.
+  - Add the following as the `SCIM JSON Template`: 
+    ```json
+    {
+      "schemas": [
+        "urn:ietf:params:scim:schemas:core:2.0:User"
+      ],
+      "userName": "{$parameters.scimusername}",
+      "displayName": "{$user.display_name}"
+    }
+    ```
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/add_idp.png" alt="ConfigCat Add Identity Provider" decoding="async" loading="lazy" />
+  <img className="bordered-img" src="/docs/assets/scim/onelogin/configuration.png" alt="ConfigCat authentication settings" decoding="async" loading="lazy" />
 
-- Give a name for your Identity Provider, and click `Create`.
+- On the OneLogin application's Provisioning tab configure the following:
+  - Check the `Enable provisioning` checkbox.
+  - Configure the other checkboxes and dropdowns based on your preference.
 
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/onelogin_name.png" alt="ConfigCat Name Identity Provider" decoding="async" loading="lazy" />
+  <img className="bordered-img" src="/docs/assets/scim/onelogin/enable_provisioning.png" alt="ConfigCat authentication settings" decoding="async" loading="lazy" />
 
-- From the next section of the dialog, copy the following values and paste them into the OneLogin application's configuration page.
+- On the OneLogin application's Parameters tab configure the following:
+  - Set Email as the `scimusername` parameter.
+    <img className="bordered-img" src="/docs/assets/scim/onelogin/scimusername.png" alt="SCIM username parameter" decoding="async" loading="lazy" />
+  - Check the `Include in User Provisioning` checkbox at the Groups parameter.
+    <img className="bordered-img" src="/docs/assets/scim/onelogin/include_in_provisioning.png" alt="Include in User Provisioning" decoding="async" loading="lazy" />
 
-  - Copy `Entity ID` and paste it into the `Audience (EntityID)` field.
-  - Copy `Assertion Consumer Service` and paste it into the `ACS (Consumer) URL` field.
-  - Paste the same `Assertion Consumer Service` into the `ACS (Consumer) URL Validator` field in regex format e.g. `^https:\/\/dashboard\-api\.configcat\.com\/saml\/acs\/08db93fc\-c4e7\-441f\-834f\-17c804385c29$`
+- On the OneLogin application's Rules tab configure which property should OneLogin send as the user's groups to ConfigCat.  
+  In the following example we are mapping the user's role in OneLogin as the synced group to ConfigCat, but you can create other mappings as well based on your preference. Read more about mappings [here](https://developers.onelogin.com/scim/create-app#scimruleexamples).
+  - Click on te `Add rule` button.
+  - Specify a `Name` for your rule.
+  - Select `Set Groups in ##YOUR APPLICATION NAME##` at the `Actions`.
+  - Select `role` at the `For each` dropdown.
+  - Set `.*` for the `with value that matches` input.
 
-    <img className="bordered-img" src="/docs/assets/saml/dashboard/acs_entity_id_1.png" alt="ConfigCat SAML configuration" decoding="async" loading="lazy" />
+  <img className="bordered-img" src="/docs/assets/scim/onelogin/rule.png" alt="Include in User Provisioning" decoding="async" loading="lazy" />
 
-    <img className="bordered-img" src="/docs/assets/saml/onelogin/onelogin_acs_eid.png" alt="OneLogin SML configuration" decoding="async" loading="lazy" />
+## 3. Assign users manually to the application or set access based on policies/roles on the OneLogin application's Access tab.
 
-- Scroll down a bit on this page and configure the following:
+  <img className="bordered-img" src="/docs/assets/scim/onelogin/assign.png" alt="ConfigCat Name Identity Provider" decoding="async" loading="lazy" />
 
-  - Select `OneLogin` as `SAML Initiator`.
-  - Select `Email` as `SAML nameID format`.
-  - Select `Both` as `SAML signature element`.
+## 4. Start provisioning
+- On the OneLogin application's Configuration tab click on the `Enable` button to start the provisioning.
+  <img className="bordered-img" src="/docs/assets/scim/onelogin/enable.png" alt="ConfigCat Add Identity Provider" decoding="async" loading="lazy" />
 
-    <img className="bordered-img" src="/docs/assets/saml/onelogin/saml_config2.png" alt="OneLogin SAML initiator" decoding="async" loading="lazy" />
+- Wait until the first provisioning is finished, and you should see each synced group and user on ConfigCat's <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page.
 
-- Select `Parameters`, and make sure there is a `NameID value` entry under the `SAML Custom Connector (Advanced) Field` with the value `Email`.
+## 5. Next Steps
 
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/name_id.png" alt="OneLogin nameID" decoding="async" loading="lazy" />
-
-- Select `SSO`, then select `SHA-256` as `SAML Signature Algorithm`.
-
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/sso_signing_algo.png" alt="OneLogin SAML Signature Algorithm" decoding="async" loading="lazy" />
-
-## 3. Configure ConfigCat with SAML Details from OneLogin
-
-You can choose one of the following options to configure ConfigCat with SAML Identity Provider metadata.
-
-<Tabs>
-  <TabItem value="metadataUrl" label="Metadata URL" default>
-    <ul>
-      <li>
-        <p>Select <code>SSO</code>, and copy the value of <code>Issuer URL</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/onelogin/sso_config.png" alt="OneLogin SAML SSO configuration" decoding="async" loading="lazy" />
-      </li>
-      <li>
-        <p>Paste the copied value into the <code>Metadata URL</code> field at ConfigCat.</p>
-        <img className="bordered-img" src="/docs/assets/saml/onelogin/cc_meta_url_new.png" alt="ConfigCat SAML configuration" decoding="async" loading="lazy" />
-      </li>
-      <li>
-        <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
-        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" decoding="async" loading="lazy" />
-      </li>
-      <li>
-        Click on <code>Save</code>.
-      </li>
-    </ul>
-  </TabItem>
-  <TabItem value="manual" label="Manual Configuration">
-    <ul>
-      <li>
-        <p>Select <code>SSO</code>, and copy the value of <code>SAML 2.0 Endpoint (HTTP)</code>, then click <code>View Details</code> under the <code>X.509 Certificate</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/onelogin/sso_config_manual.png" alt="OneLogin manual SAML SSO configuration" decoding="async" loading="lazy" />
-      </li>
-      <li>
-        <p>Copy the value of the <code>X.509 Certificate</code>.</p>
-        <img className="bordered-img" src="/docs/assets/saml/onelogin/cert.png" alt="OneLogin certificate" decoding="async" loading="lazy" />
-      </li>
-      <li>
-        <p>Paste the value of the <code>SAML 2.0 Endpoint (HTTP)</code> and the <code>X.509 Certificate</code> into the Configuration dialog at ConfigCat</p>
-        <img className="bordered-img" src="/docs/assets/saml/onelogin/cc_manual_new.png" alt="ConfigCat manual configuration" decoding="async" loading="lazy" />
-      </li>
-      <li>
-        <p>Select the <strong>trusted domains</strong>. Only user accounts from trusted domains can login with SAML SSO. You can bind multiple verified domains to a SAML Identity Provider.</p>
-        <img className="bordered-img" src="/docs/assets/saml/dashboard/select_trusted_domains.png" alt="Select trusted domains" decoding="async" loading="lazy" />
-      </li>
-      <li>
-        Click on <code>Save</code>.
-      </li>
-    </ul>
-  </TabItem>
-</Tabs>
-
-## 4. Assign the OneLogin Application to Users
-
-To let users authenticate via SAML, you need to assign the newly created application to them.
-
-- Select `Users`.
-
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/users.png" alt="OneLogin users" decoding="async" loading="lazy" />
-
-- Select the user you want to get access to the application.
-
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/select_user.png" alt="OneLogin select user" decoding="async" loading="lazy"/>
-
-- Select `Applications`, then click on the `+` sign.
-
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/add_application.png" alt="OneLogin add application" decoding="async" loading="lazy"/>
-
-- Select your application, then click `Continue`.
-
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/app_added.png" alt="OneLogin application added" decoding="async" loading="lazy"/>
-
-- Click `Save`.
-
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/app_details.png" alt="OneLogin application details" decoding="async" loading="lazy"/>
-
-## 5. Sign In
-
-- Go to the <a href="https://app.configcat.com/auth/login" target="_blank">ConfigCat Log In</a> page, and click `COMPANY ACCOUNT - SAML`.
-
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/saml_login.png" alt="ConfigCat SAML login" decoding="async" loading="lazy" />
-
-- Sign in with your company email address assigned to the OneLogin application.
-
-  <img className="bordered-img" src="/docs/assets/saml/dashboard/company_email.png" alt="ConfigCat SAML company login" decoding="async" loading="lazy"/>
-
-- ConfigCat will redirect you to OneLogin's sign in page. Type your credentials, and click `Continue`.
-
-  <img className="bordered-img" src="/docs/assets/saml/onelogin/login.png" alt="OneLogin SAML login" decoding="async" loading="lazy" />
-
-- You should be redirected to ConfigCat signed in with your company account.
-
-## 6. Next Steps
-
-- Configure the [auto-assignment of users](../../auto-assign-users.mdx).
+- Continue with [assigning ConfigCat permissions to the synced groups](../overview.mdx#groups).
