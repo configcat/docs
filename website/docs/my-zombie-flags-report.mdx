@@ -4,35 +4,37 @@ title: My Zombie Flags Report
 description: This page explains how to use The Zombie Flags Report to list all feature flags that weren't flipped for a while.
 ---
 
-Zombie flags, also known as stale feature flags, are feature flags that are no longer needed or rarely used. Over time, they contribute to technical debt and, if left unmanaged, may cause unintended errors, performance issues, or bloated codebases. 
+My Zombie Flags Report is a ConfigCat feature that helps you identify stale or unused feature flags—also known as zombie flags—in your projects. Removing these outdated flags can reduce technical debt, improve performance, and simplify your codebase.
 
 ## What Are Zombie (Stale) Feature Flags?
 
-Zombie flags typically form when: 
+Zombie flags are feature flags that are no longer needed or actively used. They often remain in the codebase long after their purpose has been fulfilled.
 
-- A feature flag originally controlled a feature that has since become permanent, and the flag is no longer needed. 
+Common scenarios where zombie flags appear:
 
-- A decision was made to keep a feature on or off, yet the flag still lingers in your code or DevOps workflow.
+- A temporary feature becomes permanent, but its flag is never removed.
+- A flag was introduced for a one-time rollout or experiment that’s now complete.
+- A decision was made to always keep a feature on or off, making the flag redundant.
+- The flag hasn’t been toggled or referenced for an extended period.
 
-- The flag was used for a one-time deployment or experiment that is now complete. 
 
-- The flag hasn't been toggled or referenced in a long time. 
 
-## Why Should You Remove Zombie Flags?
 
-Keeping unused feature flags in your code can:
+## Why Removing Zombie Flags Matters
 
-- Increase technical complexity and reduce maintainability.
+Leaving stale flags in your code can lead to:
+- **Increased complexity:** Unused flags clutter code and reduce maintainability.
+- **Unexpected behavior:** Outdated flags might trigger legacy logic unintentionally.
+- **Longer onboarding and reviews:** Developers waste time reviewing obsolete logic.
+- **Performance degradation:** In large-scale systems, excess flags can slow down operations.
 
-- Lead to unexpected behavior if old flags are triggered.
 
-- Waste time during code reviews or onboarding.
 
-- Negatively impact performance in large-scale applications. 
 
-## Managing Zombie Flags
 
-The Zombie Flags (Stale Flags) Report helps you identify feature flags that haven't been updated or toggled recently. These flags are most likely obsolete but still referenced in your source code. 
+## About the My Zombie Flags Report
+
+My Zombie Flags Report scans your ConfigCat environments and identifies feature flags that haven’t been updated or toggled within a specified timeframe. It highlights flags that are likely obsolete but still present in your source code or workflows.
 
 ### How to Set Up Zombie Feature Flags Report
 
@@ -50,7 +52,7 @@ On the My Zombie Flags Report page, you can customize the report to fit your wor
 - **Frequency:** Set how often you'd like to receive the report (e.g., weekly or monthly).
 - **Criteria:** Define how long a flag must be inactive before it's marked as stale.
 - **Scope:** Choose to include all feature flags or only the ones you're watching. 
-- **Environment:** Select the ConfigCat [**environment**](https://configcat.com/docs/main-concepts/#environment) for which you want to analyze flags. 
+- **Environment:** Select the ConfigCat [environment](https://configcat.com/docs/main-concepts/#environment) for which you want to analyze flags. 
 
 
 <img alt="My Zombie Flags Report" src="/docs/assets/guide/my-zombie-flags-report/my-zombie-flags-report_192dpi.png" width="1366" decoding="async" loading="lazy" />
@@ -63,7 +65,7 @@ Once your preferences are set, ConfigCat will email you a Zombie Flags Report. H
 
 ## Other Tools for Identifying Unused Feature Flags
 
-In addition to the Zombie Flags Report, we offer other tools to help you clean up unused flags: 
+In addition to the My Zombie Flags Report, ConfigCat provides several tools to help you detect and clean up unused feature flags:
 
 - [Scan & Upload Code References](https://configcat.com/docs/advanced/code-references/overview): Track where feature flags appear in your code. 
 - [The ConfigCat CLI](https://configcat.com/docs/advanced/cli): Detect flags still in your code that no longer exist in the ConfigCat Dashboard. 
