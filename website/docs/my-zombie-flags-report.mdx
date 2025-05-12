@@ -13,12 +13,9 @@ Zombie flags are feature flags that are no longer needed or actively used. They 
 Common scenarios where zombie flags appear:
 
 - A temporary feature becomes permanent, but its flag is never removed.
-- A flag was introduced for a one-time rollout or experiment that’s now complete.
+- A flag was introduced for a one-time rollout or experiment that's now complete.
 - A decision was made to always keep a feature on or off, making the flag redundant.
-- The flag hasn’t been toggled or referenced for an extended period.
-
-
-
+- The flag hasn't been toggled or referenced for an extended period.
 
 ## Why Removing Zombie Flags Matters
 
@@ -28,13 +25,9 @@ Leaving stale flags in your code can lead to:
 - **Longer onboarding and reviews:** Developers waste time reviewing obsolete logic.
 - **Performance degradation:** In large-scale systems, excess flags can slow down operations.
 
-
-
-
-
 ## About the My Zombie Flags Report
 
-My Zombie Flags Report scans your ConfigCat environments and identifies feature flags that haven’t been updated or toggled within a specified timeframe. It highlights flags that are likely obsolete but still present in your source code or workflows.
+My Zombie Flags Report scans your ConfigCat environments and identifies feature flags that haven't been updated or toggled within a specified timeframe. It highlights flags that are likely obsolete but still present in your source code or workflows.
 
 ### How to Set Up Zombie Feature Flags Report
 
@@ -42,7 +35,7 @@ My Zombie Flags Report scans your ConfigCat environments and identifies feature 
 2. Click your Organization name in the top-right corner.
 3. Select  **My Zombie Flags Report** from the dropdown menu. 
 
-<img alt="Navigating to My Zombie Flags Report" src="/docs/assets/guide/my-zombie-flags-report/navigating-to-my-zombie-flags-report_192dpi.png" width="1224" decoding="async" loading="lazy" />
+<img alt="Navigating to My Zombie Flags Report" src="/docs/assets/guide/my-zombie-flags-report/navigating-to-my-zombie-flags-report_192dpi.png" width="1366" height="768"  decoding="async" loading="lazy" />
 
 ### Exploring the My Zombie Flags Report Page
 
@@ -54,14 +47,13 @@ On the My Zombie Flags Report page, you can customize the report to fit your wor
 - **Scope:** Choose to include all feature flags or only the ones you're watching. 
 - **Environment:** Select the ConfigCat [environment](https://configcat.com/docs/main-concepts/#environment) for which you want to analyze flags. 
 
-
-<img alt="My Zombie Flags Report" src="/docs/assets/guide/my-zombie-flags-report/my-zombie-flags-report_192dpi.png" width="1366" decoding="async" loading="lazy" />
+<img alt="My Zombie Flags Report" src="/docs/assets/guide/my-zombie-flags-report/my-zombie-flags-report_192dpi.png" width="1366" height="850" decoding="async" loading="lazy" />
 
 ## Sample Email Report
 
 Once your preferences are set, ConfigCat will email you a Zombie Flags Report. Here's a preview of what that report might look like: 
 
-<img alt="Zombie Flags Report Email" src="/docs/assets/guide/my-zombie-flags-report/zombie-flags-report-email_192dpi.png" width="1366" decoding="async" loading="lazy" />
+<img alt="Zombie Flags Report Email" src="/docs/assets/guide/my-zombie-flags-report/zombie-flags-report-email_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
 
 ## Other Tools for Identifying Unused Feature Flags
 
