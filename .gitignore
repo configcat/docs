@@ -19,3 +19,4 @@ website/i18n/*
 .dccache
 
 website/api/reference/*
+website/api/scim/*
