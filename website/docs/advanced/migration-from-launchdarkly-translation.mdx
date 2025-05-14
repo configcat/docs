@@ -1,5 +1,5 @@
 ---
-id: migration-from-ld-translation
+id: migration-from-launchdarkly-translation
 title: Details of LaunchDarkly to ConfigCat Translation
 description: Details of the LaunchDarkly to ConfigCat translation performed by the "Import from LaunchDarkly" tool.
 ---
@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-This document discusses the details of how [ConfigCat's "Import from LaunchDarkly" tool](../migration-from-ld#migrate-launchdarkly-feature-flags-and-segments-to-configcat) translates LaunchDarkly projects to ConfigCat products (i.e., how, in practice, the import tool converts the project
+This document discusses the details of how [ConfigCat's "Import from LaunchDarkly" tool](../migration-from-launchdarkly#migrate-launchdarkly-feature-flags-and-segments-to-configcat) translates LaunchDarkly projects to ConfigCat products (i.e., how, in practice, the import tool converts the project
 data fetched fromLaunchDarkly's REST API to ConfigCat's Export/Import JSON format).
 
 You need this information if you want to understand
@@ -26,7 +26,7 @@ The table below shows how LaunchDarkly entities are mapped to ConfigCat entities
 | environment         | [environment](../../main-concepts#environment) | |
 | segment             | [segment](../../targeting/targeting-rule/segment-condition#what-is-a-segment-condition-what-is-a-segment) | LaunchDarkly segments are specific to an environment, but ConfigCat segments are specific to a product, so mapped segment names are prefixed with the environment name to avoid ambiguity. |
 | feature flag        | [feature flag / setting](../../targeting/targeting-overview#feature-flag--setting) | LaunchDarkly feature flags are directly contained by a project, but ConfigCat feature flags are organized into [configs](../../main-concepts#config), so a config named "Main Config" is created to contain them. |
-| targeting toggle    | -                              | No direct translation is possible. More on this [here](../migration-from-ld#targeting-toggle-translation-mode). |
+| targeting toggle    | -                              | No direct translation is possible. More on this [here](../migration-from-launchdarkly#targeting-toggle-translation-mode). |
 | prerequisites       | -                              | Each prerequisite is translated to a [Targeting Rule](../../targeting/targeting-overview#targeting-rule) containing a [Flag Condition](../../targeting/targeting-rule/flag-condition). |
 | individual targets  | -                              | Each target group is translated to a [Targeting Rule](../../targeting/targeting-overview#targeting-rule) containing an IS ONE OF [User Condition](../../targeting/targeting-rule/user-condition). |
 | custom rule         | [Targeting Rule](../../targeting/targeting-overview#targeting-rule) | Multiple clauses (i.e. [AND conditions](../../targeting/targeting-rule/targeting-rule-overview/#and-and-or-relationships) in ConfigCat's terminology) are not supported for segments, only for feature flags at the moment. |

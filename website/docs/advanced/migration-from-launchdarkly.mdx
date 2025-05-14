@@ -1,5 +1,5 @@
 ---
-id: migration-from-ld
+id: migration-from-launchdarkly
 title: Migration from LaunchDarkly
 description: A guide to migration from LaunchDarkly to ConfigCat.
 ---
@@ -60,11 +60,11 @@ behavior as closely as possible.
 To launch the import tool, open the dropdown menu in the top left corner of the [ConfigCat Dashboard](https://app.configcat.com/organization),
 navigate to the Organization Overview page, then click the card labeled "Import from LaunchDarkly".
 
-<img alt="Launching the import tool" src="/docs/assets/migration-from-ld/launch-import-tool_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
+<img alt="Launching the import tool" src="/docs/assets/migration-from-launchdarkly/launch-import-tool_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
 
 This will take you to a page with a wizard-like UI:
 
-<img alt="The import tool" src="/docs/assets/migration-from-ld/import-tool_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
+<img alt="The import tool" src="/docs/assets/migration-from-launchdarkly/import-tool_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
 
 Follow the instructions and go through the steps to perform the import.
 
@@ -134,7 +134,7 @@ operation by importing the selected LaunchDarkly projects one by one. Importing 
 #### Translation phase
 
 First, the import tool translates the LaunchDarkly project to a ConfigCat product. For more details on how this is done,
-please refer to [this document](../migration-from-ld-translation).
+please refer to [this document](../migration-from-launchdarkly-translation).
 
 It's important to note that the import tool performs translation on a best effort basis. It aims to do translation in
 such a way that you get a feature flag evaluation behavior as close to the original as possible. However, since there
@@ -144,7 +144,7 @@ Such problematic cases are called *translation issues*. The import tool detects 
 translation, and includes them in the report generated at the end of the import operation so you can review them, and
 make the necessary adjustments where necessary.
 
-You can find the list of possible translation issues [here](../migration-from-ld-translation#translation-issues).
+You can find the list of possible translation issues [here](../migration-from-launchdarkly-translation#translation-issues).
 
 #### Import phase
 
@@ -285,7 +285,7 @@ Let's see now step by step how to convert this code to ConfigCat:
    To be able to convert a context data structure to a User Object one, you will need to do the following:
    * Read [the section on User Objects](../../sdk-reference/node#user-object) in the reference of the SDK for your
      platform.
-   * Read [this section](../migration-from-ld-translation#mapping-between-launchdarkly-contexts-and-configcat-user-objects)
+   * Read [this section](../migration-from-launchdarkly-translation#mapping-between-launchdarkly-contexts-and-configcat-user-objects)
      to learn how context paths are mapped to User Object attribute names.
 
    For an example of such conversion, see the adjusted code at the end of this section.
@@ -308,7 +308,7 @@ Let's see now step by step how to convert this code to ConfigCat:
    * The order of parameters is different. In ConfigCat, the User Object comes last.
    * The ConfigCat feature flag key may be different from the LaunchDarkly one. E.g. if the key starts with a non-letter
      character, or contains a dot, it will be changed by the import tool because such keys are not valid in ConfigCat.
-     To see which keys have been changed, look for <a href="/docs/advanced/migration-from-ld-translation#translation-issue-T002">T002</a>
+     To see which keys have been changed, look for <a href="/docs/advanced/migration-from-launchdarkly-translation#translation-issue-T002">T002</a>
      translation issues in the report.
    * ConfigCat SDKs don't support [automatic camel casing](https://launchdarkly.com/docs/sdk/client-side/react/react-web#flag-keys-in-the-react-web-sdk)
      of feature flag keys.
@@ -387,7 +387,7 @@ Otherwise, to switch to ConfigCat, you need to do the following:
 1. Convert [LaunchDarkly-specific evaluation context objects](https://github.com/launchdarkly/openfeature-node-server?tab=readme-ov-file#openfeature-specific-considerations)
    to have a data structure compatible with ConfigCat.
 
-   This is done in a very similar way to what's described in the previous section. Read [this section](../migration-from-ld-translation#mapping-between-launchdarkly-contexts-and-configcat-user-objects)
+   This is done in a very similar way to what's described in the previous section. Read [this section](../migration-from-launchdarkly-translation#mapping-between-launchdarkly-contexts-and-configcat-user-objects)
    to learn how context paths are mapped to User Object attribute names.
 
    For example, something like
@@ -486,7 +486,7 @@ LaunchDarkly organization.
 To set up permission groups for a product, open the [ConfigCat Dashboard](https://app.configcat.com/organization),
 select the product on the sidebar, and choose "Permission Groups" in the top menu.
 
-<img alt="Launching the import tool" src="/docs/assets/migration-from-ld/permission-groups_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
+<img alt="Launching the import tool" src="/docs/assets/migration-from-launchdarkly/permission-groups_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
 
 ### Invite users to ConfigCat and assign them to permission groups
 
@@ -507,4 +507,4 @@ one of the products (it doesn't matter which one), then, after they've signed up
 organization, and assign them to the other products too, using the "Change roles" feature of the "Members & Roles"
 table.
 
-<img alt="Launching the import tool" src="/docs/assets/migration-from-ld/member-and-roles_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
+<img alt="Launching the import tool" src="/docs/assets/migration-from-launchdarkly/member-and-roles_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
