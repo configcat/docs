@@ -39,6 +39,10 @@ const features = [
         title: 'SAML Single Sign-On',
       },
       {
+        url: 'advanced/team-management/scim/scim-overview',
+        title: 'User provisioning (SCIM)',
+      },
+      {
         url: 'advanced/notifications-webhooks',
         title: 'Notifications - Webhooks',
       },

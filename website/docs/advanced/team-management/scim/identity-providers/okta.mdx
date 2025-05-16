@@ -1,0 +1,120 @@
+---
+id: okta
+title: (Beta) User Provisioning (SCIM) with Okta
+description: This is a step-by-step guide on how to set up and configure Okta as a User provisioning (SCIM) provider for your organization.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+:::info
+**Beta Feature**: SCIM provisioning is in public beta. It has been thoroughly tested with various Identity Providers. 
+We're now collecting feedback from real-world usage to fine-tune the experience. Share your feedback [here](https://configcat.com/support).
+:::
+
+## Introduction
+
+Each Identity Provider requires specific information to configure a SCIM integration. The following guide will walk you through how you can connect ConfigCat with Okta via SCIM.
+
+## 1. Create an Application in Okta
+
+- Log in to <a href="https://login.okta.com/" target="_blank">Okta</a>, go to the admin Dashboard, select `Applications`, and click on `Create App Integration`.
+
+  <img className="bordered-img" src="/docs/assets/scim/okta/create_app.png" alt="Okta applications" decoding="async" loading="lazy" />
+
+- Select `SAML 2.0` as the Sign-in method.
+
+  <img className="bordered-img" src="/docs/assets/scim/okta/app_type.png" alt="Okta select SAML" decoding="async" loading="lazy"/>
+
+- Enter a descriptive `App name`, then click `Next`.
+
+  <img className="bordered-img" src="/docs/assets/scim/okta/app_name.png" alt="Okta app name" decoding="async" loading="lazy"/>
+
+The next step will guide you on how to collect the information required for the appearing `Configure SAML` section.
+
+## 2. Configure SAML authentication for the Okta Application
+
+- Follow our [SAML configuration guide for Okta](../../../saml/identity-providers/okta/#2-configure-saml-for-the-okta-application).
+
+## 3. Configure Provisioning (SCIM) for the Okta Application
+
+- Click on `Edit` at the `App Settings`.
+   
+  <img className="bordered-img" src="/docs/assets/scim/okta/edit_settings.png" alt="Okta edit app settings" decoding="async" loading="lazy"/>
+
+- Check the `Enable SCIM provisioning` checkbox, and hit `Save`.
+   
+  <img className="bordered-img" src="/docs/assets/scim/okta/enable_provisioning.png" alt="Okta enable provisioning" decoding="async" loading="lazy"/>
+
+- Gather the `SCIM URL` and the `Token` from the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page in ConfigCat.
+
+  <img className="bordered-img" src="/docs/assets/scim/dashboard/token_generate_url.png" alt="SCIM URL and token" decoding="async" loading="lazy"/>
+
+  <img className="bordered-img" src="/docs/assets/scim/dashboard/token.png" alt="SCIM token" decoding="async" loading="lazy"/>
+
+- Select the `Provisioning` tab and click on the `Edit` button.
+   
+  <img className="bordered-img" src="/docs/assets/scim/okta/edit_provisioning.png" alt="Okta edit provisioning" decoding="async" loading="lazy"/>
+
+- On the `SCIM Connection` section configure the following:
+  - Add the `SCIM URL` from the ConfigCat Dashboard as the `SCIM connector base URL`.
+  - Set the `Unique identifier field for users` field to `email`.
+  - Check the following `Supported provisioning actions`:
+    - `Push New Users`
+    - `Push Profile Updates`
+    - `Push Groups`
+  - Select the `HTTP Header` as the `Authentication Mode`.
+  - Set the `Token` from the ConfigCat Dashboard as the `HTTP Header Authorization`.
+  - Click on `Save`.<br/><br/>
+  
+  <img className="bordered-img" src="/docs/assets/scim/okta/scim_connection.png" alt="Okta SCIM connection" decoding="async" loading="lazy"/>
+
+- Select the `To App` menu item and click on `Edit`.
+   
+  <img className="bordered-img" src="/docs/assets/scim/okta/to_app_edit.png" alt="Okta To App edit" decoding="async" loading="lazy"/>
+
+- Check the `Create Users`, `Update User Attributes`, and `Deactivate Users` checkboxes, and hit `Save`.
+   
+  <img className="bordered-img" src="/docs/assets/scim/okta/to_app_save.png" alt="Okta To App save" decoding="async" loading="lazy"/>
+
+## 4. Assign Users/Groups to Okta Application
+
+To select users for synchronization into ConfigCat, you have to assign their Okta group to the Application.
+
+- Select the `Assignments` tab, click on the `Assign` dropdown, and select `Assign to Groups`.
+
+  <img className="bordered-img" src="/docs/assets/scim/okta/assign_groups.png" alt="Okta assign groups" decoding="async" loading="lazy"/>
+
+- Click the `Assign` button on those groups whose members you want to sync to ConfigCat.
+
+  <img className="bordered-img" src="/docs/assets/scim/okta/assign_group.png" alt="Okta assign group" decoding="async" loading="lazy"/>
+
+The above action starts the synchronization of the selected users but not their groups.
+
+:::caution
+Okta does not support using the same Okta group for assignments and for syncing group-member relations. 
+You need to create a separate group that is used exclusively for syncing group-member relations.
+These groups are called `Push Groups` in Okta. 
+
+To learn more, see <a href="https://help.okta.com/en-us/content/topics/users-groups-profiles/usgp-about-group-push.htm" target="_blank" rel="noopener noreferrer">Okta's documentation about Push Groups</a>.
+:::
+
+To enable group syncing, create separate groups for the users that you want to sync and add these new groups to the application as `Push Groups`.
+
+- Go to the `Push Groups` tab, click on the `Push Groups` dropdown, and select `Find groups by name`.
+ 
+  <img className="bordered-img" src="/docs/assets/scim/okta/push_groups.png" alt="Okta push groups" decoding="async" loading="lazy"/>
+
+- Select the group that you want to push, and click on the `Save` button.
+
+  <img className="bordered-img" src="/docs/assets/scim/okta/add_push_group.png" alt="Okta add push group" decoding="async" loading="lazy"/>
+
+- Make sure that the created push group's status is active.
+
+  <img className="bordered-img" src="/docs/assets/scim/okta/push_group_active.png" alt="Okta push group active" decoding="async" loading="lazy"/>
+
+- You should see each synced group and user on ConfigCat's <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page.
+
+## 5. Next Steps
+
+- Continue with [assigning ConfigCat permissions to the synced groups](../overview.mdx#groups).
