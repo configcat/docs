@@ -13,7 +13,6 @@ const loadingAttributeRegex = attributeRegex('loading');
 const checkImageNameConvention = (imagePath, errors) => {
   const imageName = path.basename(imagePath);
   const imageNameMatch = imageName.match(imageNameRegex);
-  console.log(imageNameMatch)
   if (!imageNameMatch) {
     errors.push(['warn', `Image (${imagePath}) does not follow the name convention: {name}_{density}dpi.{extension}. (Assuming 96 DPI.)`]);
     return [96, path.extname(imageName)];
