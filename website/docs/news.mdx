@@ -8,6 +8,39 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 {/* This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html */}
 
+## User provisioning (SCIM) is here!
+
+#### May 21, 2025
+
+**We're happy to announce that ConfigCat now supports user provisioning using SCIM (System for Cross-domain Identity Management)!**
+
+SCIM makes it easy to sync users and groups from your Identity Provider into your ConfigCat Organization.
+Once synced, you can link Identity Provider groups to ConfigCat permission groups, so users are placed in the right roles without manual work.
+
+We've tested the feature with [Entra ID (Azure AD)](../advanced/team-management/scim/identity-providers/entra-id/), 
+[Okta](../advanced/team-management/scim/identity-providers/okta/) and [OneLogin](../advanced/team-management/scim/identity-providers/onelogin/), 
+but any Identity Provider that supports the SCIM 2.0 protocol should work too.
+
+
+SCIM provisioning is available on all ConfigCat plans, including the Free plan. Each plan includes limits for synced users, groups, and permission assignments. See details [here](/subscription-plan-limits/).
+
+Read our [documentation](../advanced/team-management/scim/scim-overview/) and set up the User provisioning on the
+[Authentication & Provisioning](https://app.configcat.com/organization/authentication) page in your ConfigCat Dashboard.
+
+:::info
+You'll need to be an Organization Admin to access it.
+:::
+
+<p>
+  <img alt="Identity Provider groups" src="/docs/assets/news/scim-groups.png" width="1366" height="768" decoding="async" loading="lazy" />
+</p>
+
+<p>
+  <img alt="Identity Provider users" src="/docs/assets/news/scim-users.png" width="1366" height="768" decoding="async" loading="lazy" />
+</p>
+
+---
+
 ## Import from LaunchDarkly is here!
 
 #### Apr 29, 2025
