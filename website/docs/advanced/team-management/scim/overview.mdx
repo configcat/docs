@@ -9,18 +9,17 @@ description: This section is a step-by-step guide on how to configure User provi
 We're now collecting feedback from real-world usage to fine-tune the experience. Share your feedback [here](https://configcat.com/support).
 :::
 
-This section describes how to configure User provisioning (SCIM) for your Organization in ConfigCat.
+This section describes how to configure *User provisioning (SCIM)* for your Organization in ConfigCat.
 
 User provisioning (SCIM) allows you to synchronize users and groups from your Identity Provider into a ConfigCat Organization. 
 ConfigCat permissions then can be assigned to each synchronized Identity Provider (IdP) group, 
-which puts their members to the selected ConfigCat permission groups upon a user provisioning process.
+which puts their members to the selected *ConfigCat permission groups* upon a user provisioning process.
 
-Go to the *User provisioning (SCIM)* section on the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page to set up User provisioning. You need to be an Organization Admin to do this.
+Go to the **User provisioning (SCIM)** section on the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page to set up User provisioning. You need to be an Organization Admin to do this.
 
 ## Prerequisites
 
-- [Verified domain](../domain-verification.mdx)  
-  To configure User provisioning (SCIM), you have to verify the ownership of the domain that your company uses for email addresses. 
+- [Verified domain](../domain-verification.mdx): You must verify your company's email domain before you can set up User provisioning (SCIM).
 - Identity Provider that supports SCIM 2.0.
 
 ## Supported SCIM 2.0 endpoints
@@ -30,8 +29,10 @@ Check our User Provisioning (SCIM) API documentation [here](/api/scim/configcat-
 ## 1. Connect your Identity Provider {#connect}
 
 To enable SCIM in your Identity Provider, you have to let it know where ConfigCat accepts SCIM endpoint calls and how these calls are authorized.
-On on the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page, 
-you can get a **SCIM Url** used to point your Identity Provider to ConfigCat's SCIM endpoints, and a **Token** used to authorize requests with the `Bearer:` scheme.
+Configcat displays this information on its <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page,
+where you'll find:
+- The **SCIM URL**: this points your Identity Provider to ConfigCat's SCIM endpoint.
+- The **Token**: use this to authorize requests with the `Bearer:` scheme.
 
 To acquire the bearer token, go to the **1. Connect your Identity Provider** section and click the `+ GENERATE` button.
 
