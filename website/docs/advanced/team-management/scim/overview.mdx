@@ -176,14 +176,20 @@ After you are confident that the provisioning works as expected, you can turn ON
 
 ### Disable Domain Auto-assign
 
-User provisioning may interfere with ConfigCat's auto-assign feature. If you want to allow only provisioned users into your ConfigCat Organization, you should deactivate the auto-assign feature on Domain verification & Auto-assign users panel.
+ConfigCat has a few other features that might interfere with *User provisioning*:
+- **Domain verification**: after verifying your domain name in ConfigCat, all users signing up with that domain will be added to your Organization.
+- **Auto-assign**: the *auto-assign feature* assigns initial permissions to those users automatically.
+
+If you want to allow only provisioned users into your ConfigCat Organization, you should deactivate the auto-assign feature in **Domain verification & Auto-assign users** panel.
 
 <img className="bordered-img" src="/docs/assets/scim/dashboard/disable_auto_assign.png" alt="Disable domain auto-assign" decoding="async" loading="lazy"/>
 
 ## 5. Review ConfigCat users who are not managed by user provisioning  {#not-managed}
 
-After configuring the user provisioning and synchronizing your Identity Provider users from your Identity Provider, it may happen that there are some ConfigCat accounts in your Organization who are not synchronized by the User Provisioning. 
+Even after configuring *user provisioning* and synchronizing *Identity Provider users* from your Identity Provider, there might be *ConfigCat accounts* in your Organization that are not managed by *user provisioning*.
+
+
 There can always be exceptions, but in most cases:
 - Either they no longer need access to ConfigCat - you may want to delete them.
 - Or you want to manage them through your Identity Provider - in this case, go to your Identity Provider and set up sync for them.
-- Or you want to keep them this way - in this case, you need to manage their ConfigCat permissions on the Members & Roles page.
+- Or you want to keep them this way - in this case, you need to manage their ConfigCat permissions on the **Members & Roles** page.
