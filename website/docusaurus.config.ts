@@ -115,12 +115,20 @@ const config: Config = {
         id: 'api-docs',
         docsPluginId: 'api-content',
         config: {
-          server: {
+          publicApi: {
             specPath: 'https://api.configcat.com/docs/v1/swagger.json',
             outputDir: 'api/reference',
             sidebarOptions: {
               groupPathsBy: 'tagGroup',
               categoryLinkSource: 'tag'
+            },
+          },
+          scim: {
+            specPath: 'https://test-scim-api.configcat.com/openapi/v1/openapi.json',
+            outputDir: 'api/scim',
+            sidebarOptions: {
+              groupPathsBy: 'tag',
+              categoryLinkSource: 'auto'
             },
           },
         },

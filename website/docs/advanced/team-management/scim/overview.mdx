@@ -1,0 +1,195 @@
+---
+id: scim-overview
+title: (Beta) User provisioning (SCIM) Overview
+description: This section is a step-by-step guide on how to configure User provisioning (SCIM) for your Organization in ConfigCat.
+---
+
+:::info
+**Beta Feature**: SCIM provisioning is in public beta. It has been thoroughly tested with various Identity Providers. 
+We're now collecting feedback from real-world usage to fine-tune the experience. Share your feedback [here](https://configcat.com/support).
+:::
+
+This section describes how to configure *User provisioning (SCIM)* for your Organization in ConfigCat.
+
+User provisioning (SCIM) allows you to synchronize users and groups from your Identity Provider into a ConfigCat Organization. 
+ConfigCat permissions then can be assigned to each synchronized Identity Provider (IdP) group, 
+which puts their members to the selected *ConfigCat permission groups* upon a user provisioning process.
+
+Go to the **User provisioning (SCIM)** section on the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page to set up User provisioning. You need to be an Organization Admin to do this.
+
+## Prerequisites
+
+- [Verified domain](../domain-verification.mdx): You must verify your company's email domain before you can set up User provisioning (SCIM).
+- Identity Provider that supports SCIM 2.0.
+
+## Supported SCIM 2.0 endpoints
+
+Check our User Provisioning (SCIM) API documentation [here](/api/scim/configcat-user-provisioning-scim-api/).
+
+## 1. Connect your Identity Provider {#connect}
+
+To enable SCIM in your Identity Provider, you have to let it know where ConfigCat accepts SCIM endpoint calls and how these calls are authorized.
+Configcat displays this information on its <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page,
+where you'll find:
+- The **SCIM URL**: this points your Identity Provider to ConfigCat's SCIM endpoint.
+- The **Token**: use this to authorize requests with the `Bearer:` scheme.
+
+To get the bearer token, go to the **1. Connect your Identity Provider** section and click the **+ GENERATE** button.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/token_generate.png" alt="ConfigCat SCIM token generate" decoding="async" loading="lazy"/>
+
+A dialog will open. Copy the *token* and save it somewhere safe - you'll need it when setting up your Identity Provider.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/token.png" alt="ConfigCat SCIM token" decoding="async" loading="lazy"/>
+
+Go to your Identity Provider, and connect it to ConfigCat. To help, we prepared specific Identity Provider-specific instructions for a few providers. These instructions are tested and validated:
+
+- [Entra ID (Azure AD)](./identity-providers/entra-id.mdx)
+- [Okta](./identity-providers/okta.mdx)
+- [OneLogin](./identity-providers/onelogin.mdx)
+
+:::info
+Other Identity Providers might also work with ConfigCat, if they support the SCIM 2.0 protocol.
+:::
+
+:::info
+Connecting your Identity Provider and starting to sync users and groups is safe. It won't affect your current ConfigCat users or permissions until you click the `START PROVISIONING` button later.
+:::
+
+## 2. Assign ConfigCat permissions to Identity Provider groups  {#groups}
+
+After the first successful sync, your Identity Provider groups will show up in ConfigCat. You will find them in the **2. Assign ConfigCat permissions to Identity Provider groups** section of the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page.
+For each Identity Provider group, you can assign ConfigCat permissions by clicking their gear icon.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/assign_permissions.png" alt="ConfigCat SCIM assign permissions" decoding="async" loading="lazy"/>
+
+A dialog will appear. Choose which ConfigCat permissions should be assigned to the members of the given *Identity Provider group*.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/select_permissions.png" alt="ConfigCat SCIM select permissions" decoding="async" loading="lazy"/>
+
+### How permission conflicts are resolved
+
+An Identity Provider user can be a member of multiple Identity Provider groups. ConfigCat's user provisioning merges the associated permissions using the following rules:
+
+- If a user is in an Identity Provider group linked to ConfigCat's Organization Admin role, they get Organization Admin access in ConfigCat.
+- If a user is in an Identity Provider group linked to ConfigCat's Billing Manager role, they get Billing Manager access in ConfigCat.
+- If none of the groups have the Organization Admin role, ConfigCat merges the product-level permissions from each Identity Provider group. 
+
+If there's a conflict, the group with a higher priority (listed first) wins. You can change the Identity Provider group priorities by clicking the **Set priority** button above the **Identity Provider groups** table.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/set_priority.png" alt="ConfigCat SCIM set group priority" decoding="async" loading="lazy"/>
+
+You can change the group order by dragging and dropping items in the list.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/change_priority.png" alt="ConfigCat SCIM change group priority" decoding="async" loading="lazy"/>
+
+### Example
+
+A ConfigCat Organization has 2 *products*. Each product has its own *permission groups*:
+
+| Product   | Permission groups                   |
+| --------- | ----------------------------------- |
+| Product A | Readers, Writers, Developers        |
+| Product B | Readers, Product owners, Developers |
+
+There are 5 *Identity Provider groups* that are marked for synchronization with the following permissions:
+
+| Priority | Identity Provider group   | Associated ConfigCat Permissions            |
+| -------- | ------------------------- | ------------------------------------------- |
+| 1.       | Owners                    | Organziation Admin, Billing Manager         |
+| 2.       | Billing Managers          | Organziation Admin                          |
+| 3.       | Developers                | Product A/Developers, Product B/Developers  |
+| 4.       | Product owners            | Product B/Product owners                    |
+| 5.       | Readers                   | Product A/Readers, Product B/Readers        |
+
+Based on their *Identity Provider groups*, users will get the following *ConfigCat permissions*:
+
+| Identity Provider user | Identity Provider groups  | Calculated ConfigCat Permissions                        | Explanation |
+| ---------------------- | ------------------------- | ------------------------------------------------------- | ----------- | 
+| John                   | Owners, Readers           | Organization Admin, Billing Manager                     | John is in the Owners group (IdP), which gives him the Organization Admin role in ConfigCat. Product-level permissions from the Readers group (IdP) are skipped because ConfigCat's Organization Admin role automatically grants all permissions in all *ConfigCat products*. |
+| Jane                   | Readers, Billing Managers | Billing Manager, Product A/Readers, Product B/Readers   | Jane gets both Billing Manager and product-level permissions. These are merged from her groups. |
+| Peter                  | Readers, Developers       | Product A/Developers, Product B/Developers              | As both the Readers and Developers Identity Provider groups have associated permissions to the same Products, the permissions will be merged based on the Identity Provider group's priority. |
+
+## 3. Start and stop provisioning for Identity Provider users  {#users}
+
+After successful synchronization, Identity Provider users will appear in ConfigCat. You can find them in the **3. Start and stop provisioning for Identity Provider users** section of the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page.
+You can see and control their provisioning state there. 
+
+Some of those users are new to ConfigCat, and they do not yet have a ConfigCat account under your Organization. When they are synced from your Identity Provider, ConfigCat does not create accounts for them right away. Instead, they receive an invitation email to join.
+
+Other users might already have a ConfigCat account in your Organization - either because they joined earlier or accepted a previous invite. For them, ConfigCat permissions won't change automatically. You must start provisioning manually to apply the permissions linked to their Identity Provider groups.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/start_stop_provisioning.png" alt="Start/Stop provisioning" decoding="async" loading="lazy"/>
+
+### What is managed by the provisioning?
+
+After you start provisioning an Identity Provider user, the following user-related attributes are managed:
+- **ConfigCat permissions**: with a fine-tuned provisioning configuration, you can manage your team members' *ConfigCat permissions* through your Identity Provider.
+- **ConfigCat account's email address**: if an *Identity Provider user*'s email address has been changed in the Identity Provider, the associated *ConfigCat user*'s email address will be changed too. The *ConfigCat user* will be able to log in with the new email address only.
+- **ConfigCat account's full name**: the *Identity Provider user*'s full name is synchronized from the Identity Provider and overwrites the *ConfigCat user*'s full name property.
+- **Soft delete**: if an *Identity Provider user* is soft deleted in the Identity Provider, the *ConfigCat account* will be disabled and cannot be used.
+- **Hard delete**: if an *Identity Provider user* is hard deleted in the Identity Provider, the *ConfigCat account* will be removed from your ConfigCat Organization entirely, but the *ConfigCat account* will not be deleted for a while.
+
+### Start/stop provisioning
+
+In the **Identity Provider users** table, the last column has a start/stop button. This indicates whether an *Identity Provider user*'s provisioning is active or not. 
+As long as the provisioning is not started, you can adjust your Identity Provider groups' provisioning configurations till the permissions for your Identity Provider users match the expected permissions without having to worry about changing existing users' permissions.
+The provisioning status column can give you an overview what will happen if you start the provisioning for the *Identity Provider user*.
+
+If you start the provisioning for an *Identity Provider user* who already has a *ConfigCat account*, the provisioning will overwrite the account's current *ConfigCat permissions*.
+If you start the provisioning for an *Identity Provider user* who doesn't have a *ConfigCat account yet*, we will send the user an invitation email to ConfigCat. After they sign up for a *ConfigCat account* through that invitation email, their *ConfigCat permissions* will be set based on the permissions you see in the **Identity Provider user** table.
+
+:::info
+After you start provisioning an *Identity Provider user*, you won't be able to set their ConfigCat permissions manually on the <a href="https://app.configcat.com/product/members/" target="_blank" rel="noopener noreferrer">Team Members</a> or <a href="https://app.configcat.com/organization/members/" target="_blank" rel="noopener noreferrer">Members & Roles</a> pages. Their *ConfigCat permissions* can only be changed by modifying their group memberships in your Identity Provider, or by changing the *ConfigCat permissions* associated with those groups in the **Identity Provider groups table** in ConfigCat.
+:::
+
+If you stop provisioning an Identity Provider user, it will disconnect that user's *ConfigCat permissions* from their *Identity Provider group memberships*. Modifying provisioning permissions or changing the user's *Identity Provider groups* will not change their *ConfigCat permissions*. If you want to manage the *ConfigCat permissions* of that user, you should use ConfigCat's <a href="https://app.configcat.com/product/members/" target="_blank" rel="noopener noreferrer">Team Members</a> and <a href="https://app.configcat.com/organization/members/" target="_blank" rel="noopener noreferrer">Members & Roles</a> pages.  
+After starting the provisioning again, *ConfigCat permissions* may change according to the actual provisioning configurations.
+
+### Provisioning status
+
+The **Provisioning status** column in the **Identity Provider users** table shows important information about the provisioning state.
+
+#### Identity Provider user with an unverified email domain
+
+User Provisioning synchronizes all *Identity Provider users* from your Identity Provider regardless of whether the *Identity Provider user*'s email domain is a verified email domain in ConfigCat.
+**Provisioning status** displays an error message if the Identity Provider user's email address is not from a *verified domain*. You will not be able to start provisioning for that Identity Provider user until you verify the email domain in ConfigCat.
+
+#### Identity Provider user without a ConfigCat account
+
+The Provisioning status shows you information about what permissions will be assigned and what will happen to the Identity Provider user after a successful sign up.  
+**Provisioning status** displays a warning if an Identity Provider user will have no permissions in ConfigCat after signup. This allows you to fine-tune your provisioning configuration.
+
+#### Identity Provider user with an already existing ConfigCat account
+
+If the provisioning of the *Identity Provider user* is stopped, the **provisioning status** shows what will happen to the *ConfigCat account* when you start provisioning again. 
+After the provisioning is started again, the **provisioning status** can take the following values:
+- **Provisioning is active**: all permissions and user properties match your Identity Provider configuration for the *Identity Provider user*.
+- **Provisioning is in progress**: the provisioning process is running in the background. For a short time, you can see the **provisioning is in progress** status. This happens when your Identity Provider sends updates to ConfigCat about the *Identity Provider user*, or when you modify your *Identity Provider group*'s provisioning permissions.
+
+## 4. Provision future users automatically {#auto-provisioning}
+
+By default, after the Identity Provider synchronizes a new Identity Provider user to ConfigCat, the Identity Provider user will be in the **provisioning stopped** state. This allows you time to verify your configuration/permissions and adjust your settings if needed.  
+After you are confident that the provisioning works as expected, you can turn ON the **Provision future users automatically** toggle. This will immediately start the provisioning for newly synchronized Identity Provider users. 
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/auto_provisioning.png" alt="Auto provisioning for new users" decoding="async" loading="lazy"/>
+
+### Disable Domain Auto-assign
+
+ConfigCat has a few other features that might interfere with *User provisioning*:
+- **Domain verification**: after verifying your domain name in ConfigCat, all users signing up with that domain will be added to your Organization.
+- **Auto-assign**: the *auto-assign feature* assigns initial permissions to those users automatically.
+
+If you want to allow only provisioned users into your ConfigCat Organization, you should deactivate the auto-assign feature in **Domain verification & Auto-assign users** panel.
+
+<img className="bordered-img" src="/docs/assets/scim/dashboard/disable_auto_assign.png" alt="Disable domain auto-assign" decoding="async" loading="lazy"/>
+
+## 5. Review ConfigCat users who are not managed by user provisioning  {#not-managed}
+
+Even after configuring *user provisioning* and synchronizing *Identity Provider users* from your Identity Provider, there might be *ConfigCat accounts* in your Organization that are not managed by *user provisioning*.
+
+
+There can always be exceptions, but in most cases:
+- Either they no longer need access to ConfigCat - you may want to delete them.
+- Or you want to manage them through your Identity Provider - in this case, go to your Identity Provider and set up sync for them.
+- Or you want to keep them this way - in this case, you need to manage their ConfigCat permissions on the <a href="https://app.configcat.com/product/members/" target="_blank" rel="noopener noreferrer">Team Members</a> or <a href="https://app.configcat.com/organization/members/" target="_blank" rel="noopener noreferrer">Members & Roles</a> page.

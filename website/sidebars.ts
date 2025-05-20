@@ -92,6 +92,28 @@ const sidebars: SidebarsConfig = {
                 },
               ],
             },
+            {
+              label: 'User provisioning (SCIM)',
+              type: 'category',
+              link: { type: 'doc', id: 'advanced/team-management/scim/scim-overview' },
+              items: [
+                {
+                  type: 'doc',
+                  id: 'advanced/team-management/scim/identity-providers/entra-id',
+                  label: 'Entra ID (Azure AD)',
+                },
+                {
+                  type: 'doc',
+                  id: 'advanced/team-management/scim/identity-providers/okta',
+                  label: 'Okta',
+                },
+                {
+                  type: 'doc',
+                  id: 'advanced/team-management/scim/identity-providers/onelogin',
+                  label: 'OneLogin',
+                },
+              ],
+            },
             'advanced/team-management/domain-verification',
           ],
         },
