@@ -82,6 +82,31 @@
                 }
               ]
             },
+            {
+              "label": "User provisioning (SCIM)",
+              "type": "category",
+              "link": {
+                "type": "doc",
+                "id": "advanced/team-management/scim/scim-overview"
+              },
+              "items": [
+                {
+                  "type": "doc",
+                  "id": "advanced/team-management/scim/identity-providers/entra-id",
+                  "label": "Entra ID (Azure AD)"
+                },
+                {
+                  "type": "doc",
+                  "id": "advanced/team-management/scim/identity-providers/okta",
+                  "label": "Okta"
+                },
+                {
+                  "type": "doc",
+                  "id": "advanced/team-management/scim/identity-providers/onelogin",
+                  "label": "OneLogin"
+                }
+              ]
+            },
             "advanced/team-management/domain-verification"
           ]
         },
@@ -167,7 +192,7 @@
         "type": "doc",
         "id": "integrations/overview"
       },
-      "items": [  
+      "items": [
         {
           "type": "doc",
           "id": "integrations/amplitude",
@@ -387,14 +412,42 @@
       "type": "category",
       "link": { "type": "doc", "id": "sdk-reference/openfeature/overview" },
       "items": [
-        { "type": "doc", "id": "sdk-reference/openfeature/dotnet", "label": ".NET" },
+        {
+          "type": "doc",
+          "id": "sdk-reference/openfeature/dotnet",
+          "label": ".NET"
+        },
         { "type": "doc", "id": "sdk-reference/openfeature/go", "label": "Go" },
-        { "type": "doc", "id": "sdk-reference/openfeature/java", "label": "Java" },
-        { "type": "doc", "id": "sdk-reference/openfeature/js", "label": "JavaScript" },
-        { "type": "doc", "id": "sdk-reference/openfeature/node", "label": "Node.js" },
-        { "type": "doc", "id": "sdk-reference/openfeature/php", "label": "PHP" },
-        { "type": "doc", "id": "sdk-reference/openfeature/python", "label": "Python" },
-        { "type": "doc", "id": "sdk-reference/openfeature/rust", "label": "Rust" }
+        {
+          "type": "doc",
+          "id": "sdk-reference/openfeature/java",
+          "label": "Java"
+        },
+        {
+          "type": "doc",
+          "id": "sdk-reference/openfeature/js",
+          "label": "JavaScript"
+        },
+        {
+          "type": "doc",
+          "id": "sdk-reference/openfeature/node",
+          "label": "Node.js"
+        },
+        {
+          "type": "doc",
+          "id": "sdk-reference/openfeature/php",
+          "label": "PHP"
+        },
+        {
+          "type": "doc",
+          "id": "sdk-reference/openfeature/python",
+          "label": "Python"
+        },
+        {
+          "type": "doc",
+          "id": "sdk-reference/openfeature/rust",
+          "label": "Rust"
+        }
       ]
     },
     {
