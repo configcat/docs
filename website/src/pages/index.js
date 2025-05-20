@@ -57,7 +57,7 @@ const features = [
         title: 'ConfigCat Proxy',
       },
       {
-        url: 'advanced/migration-from-ld',
+        url: 'advanced/migration-from-launchdarkly',
         title: 'Migration from LaunchDarkly',
       },
       // { url: 'advanced/config-v2-migration-guide', title: 'Config V2 Migration Guide' },

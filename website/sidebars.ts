@@ -187,11 +187,11 @@ const sidebars: SidebarsConfig = {
         {
           label: 'Migration from LaunchDarkly',
           type: 'category',
-          link: { type: 'doc', id: 'advanced/migration-from-ld' },
+          link: { type: 'doc', id: 'advanced/migration-from-launchdarkly' },
           items: [
             {
               type: 'doc',
-              id: 'advanced/migration-from-ld-translation',
+              id: 'advanced/migration-from-launchdarkly-translation',
               label: 'Details of LaunchDarkly to ConfigCat Translation',
             },
           ],

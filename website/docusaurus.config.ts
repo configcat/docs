@@ -55,6 +55,14 @@ const config: Config = {
             to: '/targeting/targeting-rule/segment-condition',
           },
           {
+            from: '/advanced/migration-from-ld',
+            to: '/advanced/migration-from-launchdarkly',
+          },
+          {
+            from: '/advanced/migration-from-ld-translation',
+            to: '/advanced/migration-from-launchdarkly-translation',
+          },
+          {
             from: '/V2/targeting/targeting-overview',
             to: '/targeting/targeting-overview',
           },
