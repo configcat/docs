@@ -124,7 +124,7 @@ const config: Config = {
             },
           },
           scim: {
-            specPath: 'https://test-scim-api.configcat.com/openapi/v1/openapi.json',
+            specPath: 'https://scim-api.configcat.com/openapi/v1/openapi.json',
             outputDir: 'api/scim',
             sidebarOptions: {
               groupPathsBy: 'tag',
