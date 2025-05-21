@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const ignore = require('ignore');
 
 const imageTagsRegex = /(<img\b[^>]*>)|!\[.*?\]\((.*?)\)/g;
 const imageNameRegex = /^(?:[a-z0-9_\-]+?)(?:_(\d{2,4})dpi)?\.(png|jpe?g|gif|mp4)$/i;
@@ -102,7 +103,7 @@ const checkImages = async (content) => {
   return errors;
 };
 
-const checkDocumentFile = async (fileFullPath) => {
+const checkDocumentFile = async (fileFullPath, ignore) => {
   const filePath = path.relative(__dirname, fileFullPath).replaceAll('\\', '/');
   console.log(`Checking file: "${filePath}"`);
 
@@ -112,10 +113,12 @@ const checkDocumentFile = async (fileFullPath) => {
     const content = fs.readFileSync(fileFullPath, 'utf-8');
     console.log('Running image checks...');
     const imageCheckErrors = await checkImages(content);
-
-    for (const error of imageCheckErrors) {
-      const [isWarning, message] = !Array.isArray(error) ? [false, error] : [error[0] === 'warn', error[1]];
-      (!isWarning ? errors : warnings).push(message);
+    if (imageCheckErrors.length) {
+      const strict = !ignore.ignores(filePath);
+      for (const error of imageCheckErrors) {
+        const [isWarning, message] = !Array.isArray(error) ? [false, error] : [error[0] === 'warn', error[1]];
+        (!isWarning || strict ? errors : warnings).push(message);
+      }
     }
 
   } catch (err) {
@@ -146,10 +149,11 @@ if (files.length === 0) {
 
 let allErrors = [];
 const checkFiles = async () => {
+  const ig = ignore().add(fs.readFileSync(path.join(__dirname, '.validationignore'), 'utf-8'));
   for (const file of files) {
     if (file.endsWith('.mdx')) {
       const filePath = path.resolve(__dirname, file);
-      const errors = await checkDocumentFile(filePath);
+      const errors = await checkDocumentFile(filePath, ig);
       if (errors) {
         allErrors = allErrors.concat(errors);
       }
