@@ -35,6 +35,9 @@ on:
             node-version: "22"
             cache: "npm"
             cache-dependency-path: website/package-lock.json
+
+        - name: Install dependencies
+          run: npm install ignore
         
         - name: Run validate document script
           run: |
