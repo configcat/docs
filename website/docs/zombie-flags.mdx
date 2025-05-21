@@ -1,7 +1,7 @@
 ---
-id: my-zombie-flags-report
-title: My Zombie Flags Report
-description: This page explains how to use The Zombie Flags Report to list all feature flags that weren't flipped for a while.
+id: zombie-flags
+title: Zombie Flags
+description: This page explains how to identify and manage Zombie Flags in ConfigCat—feature flags that haven't been toggled in a while—using the dashboard, email reports, or the API.
 ---
 
 My Zombie Flags Report is a ConfigCat feature that helps you identify stale or unused feature flags—also known as zombie flags—in your projects. Removing these outdated flags can reduce technical debt, improve performance, and simplify your codebase.
@@ -24,6 +24,21 @@ Leaving stale flags in your code can lead to:
 - **Unexpected behavior:** Outdated flags might trigger legacy logic unintentionally.
 - **Longer onboarding and reviews:** Developers waste time reviewing obsolete logic.
 - **Performance degradation:** In large-scale systems, excess flags can slow down operations.
+
+## Managing Zombie Flags in ConfigCat
+
+There are three ways to manage your Zombie flags in ConfigCat. These include:
+
+- In the Dashboard
+- Using the Zombie flags report
+- Using the Zombie Flags API
+
+### Using the Dashboard
+
+Using the Dashboard is the quickest way to find your stale feature flags...
+
+{/* TODO: */}
+
 
 ## About the My Zombie Flags Report
 
@@ -62,3 +77,13 @@ In addition to the My Zombie Flags Report, ConfigCat provides several tools to h
 - [Scan & Upload Code References](https://configcat.com/docs/advanced/code-references/overview): Track where feature flags appear in your code. 
 - [The ConfigCat CLI](https://configcat.com/docs/advanced/cli): Detect flags still in your code that no longer exist in the ConfigCat Dashboard. 
 - [GitHub Action](https://configcat.com/docs/integrations/github/) and [CircleCI Orb](https://configcat.com/docs/integrations/circleci): Find feature flags in your code that you might want to remove. 
+
+## Notes to develop the new documentation 
+
+- Overview
+
+- There are three ways to manage your Zombie flags.
+
+  1. The Zombie flags report
+  2. In your ConfigCat Dashboard
+  3. Via the API 
