@@ -162,7 +162,7 @@ const sidebars: SidebarsConfig = {
             },
           ],
         },
-        'my-zombie-flags-report',
+        'zombie-flags',
         {
           label: 'Migration from LaunchDarkly',
           type: 'category',
