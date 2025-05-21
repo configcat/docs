@@ -119,6 +119,8 @@ const checkDocumentFile = async (fileFullPath, ignore) => {
         const [isWarning, message] = !Array.isArray(error) ? [false, error] : [error[0] === 'warn', error[1]];
         (!isWarning || strict ? errors : warnings).push(message);
       }
+    } else {
+      console.log('Image checks passed.')
     }
 
   } catch (err) {
