@@ -115,7 +115,7 @@ Based on their *Identity Provider groups*, users will get the following *ConfigC
 After successful synchronization, Identity Provider users will appear in ConfigCat. You can find them in the **3. Start and stop provisioning for Identity Provider users** section of the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page.
 You can see and control their provisioning state there. 
 
-Some of those users are new to ConfigCat, and they do not yet have a ConfigCat account under your Organization. When they are synced from your Identity Provider, ConfigCat does not create accounts for them right away. Instead, they receive an invitation email to join.
+Some of those users are new to ConfigCat, and they do not yet have a ConfigCat account under your Organization. When they are synced from your Identity Provider, ConfigCat does not create accounts for them right away.
 
 Other users might already have a ConfigCat account in your Organization - either because they joined earlier or accepted a previous invite. For them, ConfigCat permissions won't change automatically. You must start provisioning manually to apply the permissions linked to their Identity Provider groups.
 
@@ -137,7 +137,7 @@ As long as the provisioning is not started, you can adjust your Identity Provide
 The provisioning status column can give you an overview what will happen if you start the provisioning for the *Identity Provider user*.
 
 If you start the provisioning for an *Identity Provider user* who already has a *ConfigCat account*, the provisioning will overwrite the account's current *ConfigCat permissions*.
-If you start the provisioning for an *Identity Provider user* who doesn't have a *ConfigCat account yet*, we will send the user an invitation email to ConfigCat. After they sign up for a *ConfigCat account* through that invitation email, their *ConfigCat permissions* will be set based on the permissions you see in the **Identity Provider user** table.
+If you start the provisioning for an *Identity Provider user* who doesn't have a *ConfigCat account yet*, their *ConfigCat permissions* will be set based on the permissions you see in the **Identity Provider user** table after they sign up for a *ConfigCat account*.
 
 :::info
 After you start provisioning an *Identity Provider user*, you won't be able to set their ConfigCat permissions manually on the <a href="https://app.configcat.com/product/members/" target="_blank" rel="noopener noreferrer">Team Members</a> or <a href="https://app.configcat.com/organization/members/" target="_blank" rel="noopener noreferrer">Members & Roles</a> pages. Their *ConfigCat permissions* can only be changed by modifying their group memberships in your Identity Provider, or by changing the *ConfigCat permissions* associated with those groups in the **Identity Provider groups table** in ConfigCat.
