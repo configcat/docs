@@ -15,7 +15,7 @@ Common scenarios where zombie flags appear:
 
 ## Why Removing Zombie Flags Matters
 
-Leaving stale flags in your code can lead to:
+Leaving stale flags in your code can lead to the following:
 - **Increased complexity:** Unused flags clutter code and reduce maintainability.
 - **Unexpected behavior:** Outdated flags might trigger legacy logic unintentionally.
 - **Longer onboarding and reviews:** Developers waste time reviewing obsolete logic.
@@ -25,21 +25,20 @@ Leaving stale flags in your code can lead to:
 
 There are three ways to access and manage Zombie flags in ConfigCat:
 
-- Through the Dashboard
-- Using the Zombie Flags Email Report
-- Via the Zombie Flags API
+- Through the [Dashboard](https://app.configcat.com/product/zombie-flags).
+- Using the [Zombie Flags Email Report](https://app.configcat.com/my-account/zombie-flags-report).
+- Via the [Zombie Flags API](https://api.configcat.com/docs/index.html#tag/Zombie-(stale)-flags).
 
 ### Using the Dashboard
 
-Using the [Dashboard](https://app.configcat.com) is the quickest way to view your zombie flags. Here's how to access the Zombie flags page:
+Using the Dashboard is the quickest way to view your zombie flags. Here's how to access the Zombie Flags page:
 
-1. In your [organization overview page](https://app.configcat.com/organization), select your product.
-2. Select the Zombie flags tab from the product menu at the top of the page.
+1. In the [organization overview page](https://app.configcat.com/organization), select the product.
+2. Select **Zombie flags** from the product menu at the top of the page.
 
 <img alt="Navigating to Zombie Flags in the ConfigCat dashboard" src="/docs/assets/guide/my-zombie-flags-report/navigating-to-zombie-flags-in-the-dashboard_192dpi.png" width="1366" height="768"  decoding="async" loading="lazy" />
 
-The Zombie flags page will shows all the stale flags in a table for the selected product. 
-You can filter the flags by:
+The Zombie flags page shows all the stale flags in a table for the selected product based on the filters set:
 
 - **Inactivity**: How long the flag was inactive for.
 - **Feature flag scope**: All flags or only ones that are watched.
@@ -50,17 +49,15 @@ You can filter the flags by:
 
 <img alt="Navigating to Zombie Flags in the ConfigCat dashboard" src="/docs/assets/guide/my-zombie-flags-report/the-zombie-flags-page-in-the-dashboard_192dpi.png" width="1366" height="768"  decoding="async" loading="lazy" />
 
-By default, the Zombie flags page will filter your zombie flags based on the settings you set in the **My Zombie Flags Report** page (more on this soon).
+By default, the Zombie Flags page will filter the zombie flags based on the settings set in the **My Zombie Flags Report** page (more on this soon).
 
 :::tip
-If you have the [Code references](https://configcat.com/docs/advanced/code-references/overview/) feature enabled, you can also see where the flags are referenced in your code. This is useful for identifying where the flags are used and if they can be removed.
+If you have the [Code references](https://configcat.com/docs/advanced/code-references/overview/) feature enabled, you can also see where the flags are referenced in your code.
 :::
 
-### Using the Zombie Flags Report
+### Using the Zombie Flags Report Email
 
-My Zombie Flags Report scans your ConfigCat environments and identifies feature flags that haven't been updated or toggled within a specified timeframe. It highlights flags that are likely obsolete but still present in your source code or workflows.
-
-The difference between the Zombie flags report and the dashboard is that the report compiles and emails a list of all the stale feature flags in your product and sends to you.
+The Zombie Flags Report scans your ConfigCat dashboard and sends an email highlighting the feature flags that haven't been updated or toggled within a specified time frame.
 
 You could customize the report to include only the flags you want to track, similar to filtering in the dashboard.
 
@@ -76,7 +73,7 @@ You could customize the report to include only the flags you want to track, simi
 
 On the My Zombie Flags Report page, you can customize the report as follows:
 
-- **Receive Report via Email:** Toggle this option to enable the email reports and specify how often you'd like to receive the report (e.g., daily, weekly or monthly).
+- **Receive Report via Email:** Toggle this option to enable the email reports and specify how often you'd like to receive the report (e.g., daily, weekly, or monthly).
 
 - **Criteria:** Define how long a flag must be inactive before it's marked as stale.
 
@@ -89,16 +86,15 @@ On the My Zombie Flags Report page, you can customize the report as follows:
 
 #### Sample Email Report
 
-Once your preferences are set, ConfigCat will email you a Zombie Flags Report. Here's a preview of what that report might look like: 
+Here's a preview of what the Zombie Flags report email looks like:
 
-{/* TODO: This would need to be updated */}
-{/* <img alt="Zombie Flags Report Email" src="/docs/assets/guide/my-zombie-flags-report/zombie-flags-report-email_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" /> */}
+<img alt="Zombie Flags Report Email" src="/docs/assets/guide/my-zombie-flags-report/zombie-flags-report-email_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
 
 ### Using the Zombie Flags API
 
-The Zombie Flags API allows you to programmatically access and manage your zombie flags. This is useful for teams that want to automate the process of identifying and removing stale feature flags.
+The Zombie Flags API allows you to programmatically access and manage your zombie flags.
 
-You can learn more about tye Zombie Flags API in the [ConfigCat API documentation](https://api.configcat.com/docs/index.html#tag/Zombie-(stale)-flags).
+You can learn more about the Zombie Flags API in the [ConfigCat API documentation](https://api.configcat.com/docs/index.html#tag/Zombie-(stale)-flags).
 
 {/* TODO: May need a screenshot here of how it works in postman */}
 
@@ -108,4 +104,4 @@ In addition to the My Zombie Flags Report, ConfigCat provides several tools to h
 
 - [Scan & Upload Code References](https://configcat.com/docs/advanced/code-references/overview): Track where feature flags appear in your code. 
 - [The ConfigCat CLI](https://configcat.com/docs/advanced/cli): Detect flags still in your code that no longer exist in the ConfigCat Dashboard. 
-- [GitHub Action](https://configcat.com/docs/integrations/github/) and [CircleCI Orb](https://configcat.com/docs/integrations/circleci): Find feature flags in your code that you might want to remove. 
+- [GitHub Action](https://configcat.com/docs/integrations/github/) and [CircleCI Orb](https://configcat.com/docs/integrations/circleci): Find feature flags in your code that you might want to remove.
