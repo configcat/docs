@@ -126,7 +126,7 @@ const checkDocumentFile = async (fileFullPath, ignore) => {
     }
 
   } catch (err) {
-    console.error(`Error reading file "${filePath}" : ${err.message}`);
+    console.error(`Error reading file "${filePath}": ${err.message}`);
     errors.push(`File read error: ${err.message}`);
   }
 
