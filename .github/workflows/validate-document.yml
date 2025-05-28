@@ -47,4 +47,20 @@ on:
               echo "No document files changed."
               exit 0
             fi
-            node website/validate-document.js $FILES
+            
+            # Filter out files that no longer exist
+            EXISTING_FILES=""
+            for FILE in $FILES; do
+              if [ -f "$FILE" ]; then
+                EXISTING_FILES="$EXISTING_FILES $FILE"
+              else
+                echo "Warning: File '$FILE' no longer exists and will be skipped."
+              fi
+            done
+
+            if [ -z "$EXISTING_FILES" ]; then
+              echo "No existing markdown files found after filtering."
+              exit 0
+            fi
+
+            node website/validate-document.js $EXISTING_FILES
