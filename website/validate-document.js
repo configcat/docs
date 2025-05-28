@@ -156,7 +156,7 @@ const checkFiles = async () => {
   const ig = ignore().add(fs.readFileSync(path.join(__dirname, '.validationignore'), 'utf-8'));
   for (const file of files) {
     if (file.endsWith('.mdx')) {
-      const filePath = path.resolve(__dirname, file);
+      const filePath = path.resolve(__dirname, '..', file); // Resolve the path relative to the root of the repo
       const errors = await checkDocumentFile(filePath, ig);
       if (errors) {
         allErrors = allErrors.concat(errors);
