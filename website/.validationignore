@@ -1,6 +1,6 @@
-# DO NOT ADD NEW ENTRIES TO THIS FILE. New documentation articles should be created
+# DO NOT ADD NEW ENTRIES TO THIS FILE. New documents should be created
 # according to the guidelines outlined in https://github.com/configcat-labs/content-wiki/blob/main/screenshot-guide.md. For older
-# articles, we don't enforce every rule. However, when an article is updated,
+# documents, we don't enforce every rule. However, when an document is updated,
 # it should be removed from here and adjusted to conform to the new guidelines.
 
 /docs/advanced/caching.mdx
@@ -124,3 +124,6 @@
 /docs/targeting/targeting-rule/targeting-rule-overview.mdx
 /docs/targeting/targeting-rule/user-condition.mdx
 /docs/targeting/user-object.mdx
+
+/api/**/*.mdx
+/versioned_docs/**/*.mdx  
