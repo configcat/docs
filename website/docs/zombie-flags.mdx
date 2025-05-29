@@ -31,21 +31,14 @@ There are three ways to access and manage Zombie flags in ConfigCat:
 
 ### Using the Dashboard
 
-Using the Dashboard is the quickest way to view your zombie flags. Here's how to access the Zombie Flags page:
-
-1. In the [organization overview page](https://app.configcat.com/organization), select the product.
-2. Select **Zombie flags** from the product menu at the top of the page.
-
-<img alt="Navigating to Zombie Flags in the ConfigCat dashboard" src="/docs/assets/guide/my-zombie-flags-report/navigating-to-zombie-flags-in-the-dashboard_192dpi.png" width="1366" height="768"  decoding="async" loading="lazy" />
-
-The Zombie flags page shows all the stale flags in a table for the selected product based on the filters set:
+The [Zombie flags page](https://app.configcat.com/product/zombie-flags) shows all the stale flags in a table for the selected product based on the filters set:
 
 - **Inactivity**: How long the flag was inactive for.
-- **Feature flag scope**: All flags or only ones that are watched by you.
+- **Feature flag scope**: All flags or only ones that are watched.
 - **Included environments**: The ConfigCat [environment](https://configcat.com/docs/main-concepts/#environment) for which you want to analyze flags. 
 - **Ignored flags based on tags**: The flags to exclude based on their tags.
 - **Stale in all/any selected environments**: Choose whether to include flags that are stale in all or any of the selected environments.
-- **Filter by config or feature flag name**: Type at least the first letter of the feature flag or config name to filter the results.
+- **Filter by config or feature flag name**: Type at least the first letter of the feature flag or config name to auto-filter the results.
 
 <img alt="Navigating to Zombie Flags in the ConfigCat dashboard" src="/docs/assets/guide/my-zombie-flags-report/the-zombie-flags-page-in-the-dashboard_192dpi.png" width="1366" height="768"  decoding="async" loading="lazy" />
 
@@ -78,9 +71,9 @@ The email report could be customized as follows:
 - **Criteria:** Define how long a flag must be inactive before it's marked as stale.
 
 - **Scope:** Choose to include all feature flags or only the ones you're watching. 
-- **Environment:** Select the ConfigCat [environment](https://configcat.com/docs/main-concepts/#environment) for which you want to analyze flags. 
-- **Tags:** Select the flags you want to ignore in the report based on their tags.
-- **Stale in all/any selected environments:** Choose whether to include flags that are stale in all or any of the selected environments.
+  - **Environment:** Select the ConfigCat [environment](https://configcat.com/docs/main-concepts/#environment) for which you want to analyze flags. 
+  - **Tags:** Select the flags you want to ignore in the report based on their tags.
+  - **Stale in all/any selected environments:** Choose whether to include flags that are stale in all or any of the selected environments.
 
 <img alt="My Zombie Flags Report page in the dashboard" src="/docs/assets/guide/my-zombie-flags-report/my-zombie-flags-report-page-in-the-dashboard_192dpi.png" width="1366" height="945" decoding="async" loading="lazy" />
 
