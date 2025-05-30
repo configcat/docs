@@ -184,6 +184,7 @@ const sidebars: SidebarsConfig = {
             },
           ],
         },
+        'zombie-flags',
         {
           label: 'Migration from LaunchDarkly',
           type: 'category',

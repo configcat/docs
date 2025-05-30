@@ -182,7 +182,8 @@
               "label": "Monitoring"
             }
           ]
-        }
+        },
+        "zombie-flags"
       ]
     },
     {
