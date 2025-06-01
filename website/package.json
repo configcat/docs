@@ -47,7 +47,8 @@
     "@docusaurus/tsconfig": "^3.5.2",
     "@docusaurus/types": "^3.5.2",
     "replace-in-file": "7.1.0",
-    "typescript": "~5.2.2"
+    "typescript": "~5.2.2",
+    "sharp": "^0.34.2"
   },
   "engines": {
     "node": ">=18.0"
