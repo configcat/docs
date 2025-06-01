@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const ignore = require('ignore');
+const sharp = require('sharp');
 
 const imageTagsRegex = /(<img\b[^>]*>)|!\[.*?\]\((.*?)\)/g;
 const imageNameRegex = /^(?:[a-z0-9_\-]+?)(?:_(\d{2,4})dpi)?\.(png|jpe?g|gif|mp4)$/i;
@@ -16,6 +17,7 @@ const loadingAttributeRegex = attributeRegex('loading');
 const checkImageNameConvention = (imagePath, errors) => {
   const imageName = path.basename(imagePath);
   const imageNameMatch = imageName.match(imageNameRegex);
+
   if (!imageNameMatch) {
     errors.push(['warn', `Image (${imagePath}) does not follow the name convention: {name}_{density}dpi.{extension}. (Assuming 96 DPI.)`]);
     return [96, path.extname(imageName)];
@@ -28,6 +30,42 @@ const checkImageNameConvention = (imagePath, errors) => {
   }
 
   return [Number(dpi), ext];
+}
+
+const checkImageDimensions = async (imageTag, imagePath, cssWidth, cssHeight, dpi, errors) => {
+  const imageFullPath = getImageFullPath(imagePath);
+  if (dpi !== 192) {
+    errors.push(['Warn', `DPI of image (${imagePath}) is not 192.`]);
+  }
+
+  let imageMetaData;
+
+  try {
+    imageMetaData = await sharp(imageFullPath).metadata();
+  } catch (err) {
+    errors.push(`Error checking image (${imagePath}) dimensions: ${err.message}`);
+    return;
+  }
+
+  const { width, height } = imageMetaData;
+
+  if (cssWidth != null) {
+    const factor = dpi / 96;
+    const expectedWidth = cssWidth * factor;
+    // NOTE: We need to account for the integer division used to calculate the value of the `width` attribute.
+    if (width < expectedWidth || expectedWidth + factor <= width) {
+      errors.push(['warn', `Horizontal image resolution doesn't correspond to attribute (width="...") in ${imageTag}. The image should be ${expectedWidth} pixels wide, considering the image DPI (${dpi}).`]);
+    }
+  }
+
+  if (cssHeight != null) {
+    const factor = dpi / 96;
+    const expectedHeight = cssHeight * factor;
+    // NOTE: We need to account for the integer division used to calculate the value of the `height` attribute.
+    if (height < expectedHeight || expectedHeight + factor <= height) {
+      errors.push(['warn', `Vertical image resolution doesn't correspond to attribute (height="...") in ${imageTag}. The image should be ${expectedHeight} pixels tall, considering the image DPI (${dpi}).`]);
+    }
+  }
 }
 
 const checkForImageAttributes = (imageTag, errors) => {
@@ -86,7 +124,7 @@ const checkImages = async (content) => {
       continue;
     }
 
-    let [imageSrc] = checkForImageAttributes(tag, errors);
+    let [imageSrc, cssWidth, cssHeight] = checkForImageAttributes(tag, errors);
 
     const pathPrefix = "/docs/"
     if (imageSrc.startsWith(pathPrefix)) {
@@ -98,7 +136,9 @@ const checkImages = async (content) => {
       continue;
     }
 
-    checkImageNameConvention(imageSrc, errors);
+    const [dpi] = checkImageNameConvention(imageSrc, errors);
+
+    await checkImageDimensions(tag, imageSrc, cssWidth, cssHeight, dpi, errors);
 
   }
 
@@ -185,6 +225,10 @@ function* extractImageData(content) {
     const [tag] = imageTagsRegexMatch;
     yield tag;
   }
+}
+
+function getImageFullPath(imagePath) {
+  return path.join(__dirname, 'static', imagePath);
 }
 
 checkFiles();
