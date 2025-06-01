@@ -37,7 +37,7 @@ on:
             cache-dependency-path: website/package-lock.json
 
         - name: Install dependencies
-          run: npm install ignore
+          run: npm install ignore sharp
         
         - name: Run validate document script
           run: |
