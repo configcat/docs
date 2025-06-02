@@ -446,6 +446,11 @@
         },
         {
           "type": "doc",
+          "id": "sdk-reference/openfeature/react",
+          "label": "React"
+        },
+        {
+          "type": "doc",
           "id": "sdk-reference/openfeature/rust",
           "label": "Rust"
         }
