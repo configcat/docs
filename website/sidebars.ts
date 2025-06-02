@@ -271,6 +271,7 @@ const sidebars: SidebarsConfig = {
         { type: 'doc', id: 'sdk-reference/openfeature/node', label: 'Node.js' },
         { type: 'doc', id: 'sdk-reference/openfeature/php', label: 'PHP' },
         { type: 'doc', id: 'sdk-reference/openfeature/python', label: 'Python' },
+        { type: 'doc', id: 'sdk-reference/openfeature/react', label: 'React' },
         { type: 'doc', id: 'sdk-reference/openfeature/rust', label: 'Rust' },
       ],
     },
