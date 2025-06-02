@@ -34,8 +34,8 @@ const checkImageNameConvention = (imagePath, errors) => {
 
 const checkImageDimensions = async (imageTag, imagePath, cssWidth, cssHeight, dpi, errors) => {
   const imageFullPath = getImageFullPath(imagePath);
-  if (dpi !== 192) {
-    errors.push(['Warn', `DPI of image (${imagePath}) is not 192.`]);
+  if (dpi < 96) {
+    errors.push(['warn', `DPI of image (${imagePath}) must be at least 96.`]);
   }
 
   let imageMetaData;
