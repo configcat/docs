@@ -418,6 +418,11 @@
           "id": "sdk-reference/openfeature/dotnet",
           "label": ".NET"
         },
+        {
+          "type": "doc",
+          "id": "sdk-reference/openfeature/angular",
+          "label": "Angular"
+        },
         { "type": "doc", "id": "sdk-reference/openfeature/go", "label": "Go" },
         {
           "type": "doc",

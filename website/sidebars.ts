@@ -265,6 +265,7 @@ const sidebars: SidebarsConfig = {
       link: { type: 'doc', id: 'sdk-reference/openfeature/overview' },
       items: [
         { type: 'doc', id: 'sdk-reference/openfeature/dotnet', label: '.NET' },
+        { type: 'doc', id: 'sdk-reference/openfeature/angular', label: 'Angular' },
         { type: 'doc', id: 'sdk-reference/openfeature/go', label: 'Go' },
         { type: 'doc', id: 'sdk-reference/openfeature/java', label: 'Java' },
         { type: 'doc', id: 'sdk-reference/openfeature/js', label: 'JavaScript' },
