@@ -8,6 +8,64 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 {/* This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html */}
 
+## Quality of Life improvements
+
+#### Jun 3, 2025
+
+We've just rolled out a set of updates that make working with feature flags in ConfigCat smoother and more practical. Here's what's new:
+
+### Zombie flag Report improvements
+
+Stale feature flags can build up quickly and lead to technical debt. We've improved the Zombie Flags feature to make it more useful and easier to manage:
+- **New Zombie Flags page**
+    The original email report didn't offer immediate feedback. That's why we created the new [Zombie Flags page](https://app.configcat.com/product/zombie-flags), 
+    where you can instantly view stale flags and filter them by product. If you're using our [Code References](../advanced/code-references/overview/) feature, 
+    the page also shows exactly where the flags appear in your code, making it easier to clean things up.
+- **Ignore flags by tag**
+    If you have long-lived feature flags that are meant to stay, you can now tag them (for example, with “permanent”) and exclude them from the Zombie Flags Report.
+- **Less noise, more focus**
+    The previous report included any flag that was stale in at least one selected environment. 
+    Now, you can adjust the settings so only flags that are stale in all selected environments appear in the report.
+- **Now available via API**
+    You can also check stale flags programmatically using the [Zombie (stale) flags](../api/reference/get-staleflags/) endpoint in our Public Management API.
+
+Narrow down your [Zombie Flags Report](https://app.configcat.com/my-account/zombie-flags-report) email with the new preferences, 
+try out our new [Zombie Flags page](https://app.configcat.com/product/zombie-flags), 
+or check the [documentation](../zombie-flags/) to learn more.
+
+<p>
+    <img src="/docs/assets/news/zombie-page_192dpi.png" alt="Zombie Flags page" width="1366" height="768" decoding="async" loading="lazy" />
+</p>
+
+### Clone feature flag
+
+Cloning a feature flag now lets you quickly create a new flag in any config. 
+It copies over all the targeting rules, values across environments, and tags, making setup faster and more consistent.
+
+<p>
+    <img src="/docs/assets/news/clone-feature-flag_192dpi.png" alt="Clone feature flag" width="1366" height="768" decoding="async" loading="lazy" />
+</p>
+
+### Copy all feature flag rules
+
+We've made it easier to copy flag values across environments. Now, you can:
+- Copy rules for an entire config, or
+- Choose specific feature flags to copy.
+
+<p>
+    <img src="/docs/assets/news/copy-all-feature-flag-values_192dpi.png" alt="Copy all feature flag rules" width="1366" height="768" decoding="async" loading="lazy" />
+</p>
+
+### A Smoother Flag Creation Experience
+
+When creating a new feature flag, you no longer have to set values separately for each environment. 
+You can now set them once globally, then fine-tune as needed later.
+
+
+We truly hope you'll love these new features and improvements. Happy feature flagging! ❤️
+
+---
+
 ## 🚀 Refer & Earn with ConfigCat
 
 #### May 30, 2025
@@ -33,6 +91,8 @@ Earn up to **$10,000 per referral** just by sharing something you already love.
 
 **Ready to start earning?**  
 Click the **“Refer & Earn”** button in your ConfigCat dashboard and let the rewards roll in.
+
+---
 
 ## User provisioning (SCIM) is here!
 
