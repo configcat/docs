@@ -60,6 +60,7 @@ const features = [
         url: 'advanced/migration-from-launchdarkly',
         title: 'Migration from LaunchDarkly',
       },
+      { url: 'zombie-flags', title: 'Zombie Flags' },
       // { url: 'advanced/config-v2-migration-guide', title: 'Config V2 Migration Guide' },
     ],
   },
