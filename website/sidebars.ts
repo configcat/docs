@@ -269,6 +269,7 @@ const sidebars: SidebarsConfig = {
         { type: 'doc', id: 'sdk-reference/openfeature/go', label: 'Go' },
         { type: 'doc', id: 'sdk-reference/openfeature/java', label: 'Java' },
         { type: 'doc', id: 'sdk-reference/openfeature/js', label: 'JavaScript' },
+        { type: 'doc', id: 'sdk-reference/openfeature/nestjs', label: 'NestJS' },
         { type: 'doc', id: 'sdk-reference/openfeature/node', label: 'Node.js' },
         { type: 'doc', id: 'sdk-reference/openfeature/php', label: 'PHP' },
         { type: 'doc', id: 'sdk-reference/openfeature/python', label: 'Python' },

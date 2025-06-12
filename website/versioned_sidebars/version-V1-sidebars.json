@@ -436,6 +436,11 @@
         },
         {
           "type": "doc",
+          "id": "sdk-reference/openfeature/nestjs",
+          "label": "NestJS"
+        },
+        {
+          "type": "doc",
           "id": "sdk-reference/openfeature/node",
           "label": "Node.js"
         },
