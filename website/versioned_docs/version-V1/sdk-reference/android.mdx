@@ -120,7 +120,7 @@ These are the available options on the `Options` class:
 | `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
 | `pollingMode(PollingMode)`                                    | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
 | `logLevel(LogLevel)`                                          | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging).                                                                                                                                                                                                      |
-| `flagOverrides(OverrideDataSourceBuilder, OverrideBehaviour)` | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
+| `flagOverrides(OverrideDataSource, OverrideBehaviour)`        | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                   |
 | `defaultUser(User)`                                           | Optional, sets the default user. [More about default user](#default-user).                                                                                                                                                                                                                         |
 | `offline(boolean)`                                            | Optional, defaults to `false`. Indicates whether the SDK should be initialized in offline mode. [More about offline mode](#online--offline-mode).                                                                                                                                                  |
 | `hooks()`                                                     | Optional, used to subscribe events that the SDK sends in specific scenarios. [More about hooks](#hooks).                                                                                                                                                                                           |
@@ -451,7 +451,7 @@ map.put("doubleSetting", 3.14);
 map.put("stringSetting", "test");
 
 ConfigCatClient client = ConfigCatClient.get("localhost", options -> {
-    options.flagOverrides(OverrideDataSourceBuilder.map(map), OverrideBehaviour.LOCAL_ONLY);
+    options.flagOverrides(OverrideDataSource.map(map), OverrideBehaviour.LOCAL_ONLY);
 });
 ```
 
