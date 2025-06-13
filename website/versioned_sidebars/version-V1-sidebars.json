@@ -418,6 +418,11 @@
           "id": "sdk-reference/openfeature/dotnet",
           "label": ".NET"
         },
+        {
+          "type": "doc",
+          "id": "sdk-reference/openfeature/angular",
+          "label": "Angular"
+        },
         { "type": "doc", "id": "sdk-reference/openfeature/go", "label": "Go" },
         {
           "type": "doc",
@@ -428,6 +433,11 @@
           "type": "doc",
           "id": "sdk-reference/openfeature/js",
           "label": "JavaScript"
+        },
+        {
+          "type": "doc",
+          "id": "sdk-reference/openfeature/nestjs",
+          "label": "NestJS"
         },
         {
           "type": "doc",
@@ -443,6 +453,11 @@
           "type": "doc",
           "id": "sdk-reference/openfeature/python",
           "label": "Python"
+        },
+        {
+          "type": "doc",
+          "id": "sdk-reference/openfeature/react",
+          "label": "React"
         },
         {
           "type": "doc",

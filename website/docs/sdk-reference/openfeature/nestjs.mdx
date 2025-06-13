@@ -1,0 +1,118 @@
+---
+id: nestjs
+title: Using ConfigCat's OpenFeature Provider in NestJS
+description: This is a step-by-step guide on how to use ConfigCat with the OpenFeature NestJS SDK.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## Getting started
+
+OpenFeature offers a [NestJS SDK](https://github.com/open-feature/js-sdk/tree/main/packages/nest) to streamline the use
+of OpenFeature in NestJS applications. This SDK is built on top of the [OpenFeature JavaScript Node.js SDK](https://github.com/open-feature/js-sdk/blob/main/packages/server).
+
+Since ConfigCat implements [a provider](./node.mdx) for the Node.js SDK, you can use ConfigCat with the OpenFeature NestJS SDK,
+as explained below.
+
+### 1. Install the NestJS SDK and the ConfigCat provider
+
+```bash
+npm i @openfeature/nestjs-sdk @openfeature/config-cat-provider
+```
+
+### 2. Initialize the NestJS SDK
+
+The `ConfigCatProvider.create()` function takes the SDK key, the desired [polling mode](../../node#polling-modes)
+(Auto Polling is recommended for this kind of application) and an optional `options` argument containing additional
+configuration options for the underlying [ConfigCat client](../../node#creating-the-configcat-client):
+
+```ts
+import { Module } from '@nestjs/common';
+import { OpenFeatureModule } from '@openfeature/nestjs-sdk';
+import { ConfigCatProvider } from '@openfeature/config-cat-provider';
+import { createConsoleLogger, LogLevel, PollingMode } from 'configcat-js-ssr';
+import { FeatureFlagService } from './_services/feature-flag.service';
+
+const configCatProvider = ConfigCatProvider.create('#YOUR-SDK-KEY#', PollingMode.AutoPoll, {
+  // Specify options for the underlying ConfigCat client
+  logger: createConsoleLogger(LogLevel.Info),
+  setupHooks: (hooks) => hooks.on('clientReady', () => console.log('Client is ready!')),
+  // ...
+});
+
+@Module({
+  imports: [
+    OpenFeatureModule.forRoot({
+      defaultProvider: configCatProvider,
+      // Set the context for your evaluations
+      contextFactory: (request) => ({ targetingKey: 'user-1' })
+    }),
+  ],
+  controllers: [/* ... */],
+  providers: [FeatureFlagService],
+})
+export class AppModule {}
+```
+
+### 3. Use your feature flag
+
+To improve maintainability and testability, it's usually a good idea not to directly evaluate your feature flags, but to
+wrap them in a service:
+
+```ts
+import { Injectable } from '@nestjs/common';
+import { OpenFeatureClient, Client } from '@openfeature/nestjs-sdk';
+
+@Injectable()
+export class FeatureFlagService {
+  constructor(
+    @OpenFeatureClient() private readonly defaultClient: Client,
+  ) {
+  }
+
+  public async isAwesomeFeatureEnabled() {
+    return await this.defaultClient.getBooleanValue('isAwesomeFeatureEnabled', false);
+  }
+}
+```
+
+Then you can inject this service into your controllers and use it to evaluate feature flags:
+
+```ts
+import { Controller, Get } from '@nestjs/common';
+import { FeatureFlagService } from './_services/feature-flag.service';
+
+@Controller()
+export class AppController {
+  constructor(
+    private readonly featureFlagService: FeatureFlagService
+  ) {}
+
+  @Get()
+  async welcome() {
+    return await this.featureFlagService.isAwesomeFeatureEnabled()
+      ? 'Awesome feature is enabled!'
+      : 'Awesome feature is disabled.';
+  }
+}
+```
+
+## Evaluation Context
+
+An <a href="https://openfeature.dev/docs/reference/concepts/evaluation-context" target="_blank">evaluation context</a>
+in the OpenFeature specification is a container for arbitrary contextual data that can be used as a basis for feature
+flag evaluation.
+
+You can find [here](./node.mdx#evaluation-context) how the ConfigCat provider translates these evaluation contexts to
+ConfigCat [User Objects](../../node/#user-object).
+
+## Advanced features
+
+Read the documentation of the [OpenFeature NestJS SDK](https://openfeature.dev/docs/reference/technologies/server/javascript/nestjs/)
+to learn more about the advanced capabilities of the SDK.
+
+## Look under the hood
+
+- <a href="https://github.com/open-feature/js-sdk-contrib/tree/main/libs/providers/config-cat" target="_blank">ConfigCat OpenFeature Provider's repository on GitHub</a>
+- <a href="https://www.npmjs.com/package/@openfeature/config-cat-provider" target="_blank">ConfigCat OpenFeature Provider in NPM</a>
