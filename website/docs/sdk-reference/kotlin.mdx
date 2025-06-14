@@ -321,7 +321,7 @@ client.setDefaultUser(user)
 val otherUser = ConfigCatUser(identifier = "brian@example.com")
 
 // otherUser will be used at the evaluation process.
-val value = await client.getValue("keyOfMySetting", false, otherUser)
+val value = client.getValue("keyOfMySetting", false, otherUser)
 ```
 
 For deleting the default user, you can do the following:

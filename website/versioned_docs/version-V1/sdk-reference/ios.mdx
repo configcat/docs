@@ -381,7 +381,7 @@ let isMyFeatureEnabled = snapshot.getValue(for: "isMyFeatureEnabled", defaultVal
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-ConfigCatSnapshot* snapshot = [client snapshot];
+ConfigCatClientSnapshot* snapshot = [client snapshot];
         
 BOOL isMyFeatureEnabled = [snapshot getBoolValueFor:@"isMyFeatureEnabled" 
                                        defaultValue:false
@@ -410,7 +410,7 @@ client.hooks.addOnReady { state in
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-[client.hooks addOnReadyWithHandler:^(enum ClientReadyState state) {
+[client.hooks addOnReadyWithHandler:^(enum ClientCacheState state) {
     // the state parameter tells what is the SDK's initialization state
 }];
 ```
@@ -866,10 +866,10 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 
 With the following hooks you can subscribe to particular events fired by the SDK:
 
-- `onReady(ClientReadyState)`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling it's considered ready right after instantiation.
+- `onReady(ClientCacheState)`: This event is sent when the SDK reaches the ready state. If the SDK is initialized with lazy load or manual polling it's considered ready right after instantiation.
   If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `onReady` event fires when the auto polling's `maxInitWaitTimeInSeconds` is reached.
 
-- `onConfigChanged([String: Setting])`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
+- `onConfigChanged((Config, ConfigCatClientSnapshot))`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
 
 - `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
 
