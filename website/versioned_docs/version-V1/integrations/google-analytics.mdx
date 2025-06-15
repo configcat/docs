@@ -80,7 +80,15 @@ For Text feature flags with lengthy values (e.g., JSON), send the `variationId` 
 
 4. **Deploy your application** and wait for feature flag evaluations to occur. This process might take 1-2 days for the `experience_impression` events to populate in Google Analytics.
 
-5. **Define an audience** in Google Analytics using the `exp_variant_string` parameter with the same values that you using in your events (e.g. `configcat-isMyAwesomeFeatureEnabled-true`) it by following the guide [here](https://support.google.com/analytics/answer/9267572). This allows you to leverage feature flag evaluation events effectively.
+5. **Define an audience** in Google Analytics using the `exp_variant_string` parameter with the same values you used in your events (e.g. `configcat-isMyAwesomeFeatureEnabled-true`) by following the guide [here](https://support.google.com/analytics/answer/9267572). This allows you to leverage feature flag evaluation events effectively.
 
 ### Example audiences reports
+
 <img src="/docs/assets/googleanalytics/audiences.png" alt="Google Analytics Audience report" decoding="async" loading="lazy" />
+
+### Useful resources
+
+- [A/B Testing with ConfigCat and Google Analytics - Blog post](https://configcat.com/blog/2024/09/20/ab-testing-configcat-google-analytics/)
+- [A/B Testing with ConfigCat and Google Analytics - Sample app](https://github.com/configcat-labs/configcat-google-analytics-integration-sample)
+- [Creating Audiences in Google Analytics - Google documentation](https://support.google.com/analytics/answer/9267572)
+- [ConfigCat Integrations API](https://configcat.com/docs/api/reference/integrations/)
