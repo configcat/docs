@@ -1,0 +1,95 @@
+---
+id: kotlin
+title: OpenFeature Provider for Kotlin
+description: ConfigCat OpenFeature Provider for Kotlin. This is a step-by-step guide on how to use ConfigCat with the OpenFeature Kotlin SDK.
+---
+
+[![CI](https://github.com/configcat/openfeature-kotlin/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/configcat/openfeature-kotlin/actions/workflows/ci.yml)
+[![Maven Central](https://img.shields.io/maven-central/v/com.configcat/configcat-openfeature-provider?label=maven%20central)](https://central.sonatype.com/artifact/com.configcat/configcat-openfeature-provider)
+
+<a href="https://github.com/configcat/openfeature-kotlin" target="_blank">
+  ConfigCat OpenFeature Provider for Kotlin on GitHub
+</a>
+
+## Getting started
+
+### 1. Install the provider
+
+```kotlin
+dependencies {
+    implementation("com.configcat:configcat-openfeature-provider:$providerVersion")
+}
+```
+
+### 2. Initialize the provider
+
+The `ConfigCatProvider` function takes the SDK key and an optional `ConfigCatOptions`
+argument containing the additional configuration options for
+the [ConfigCat Kotlin SDK](../../kotlin/#setting-up-the-configcat-client):
+
+```kotlin
+import com.configcat.*
+import dev.openfeature.sdk.*
+
+coroutineScope.launch(Dispatchers.IO) {
+    // Configure the provider.
+    val provider = ConfigCatProvider("<YOUR-CONFIGCAT-SDK-KEY>") {
+        pollingMode = autoPoll { pollingInterval = 60.seconds }
+    }
+
+    // Configure the OpenFeature API with the ConfigCat provider.
+    OpenFeatureAPI.setProviderAndWait(provider)
+
+    // Create a client.
+    val client = OpenFeatureAPI.getClient()
+}
+```
+
+For more information about all the configuration options, see the [Kotlin SDK documentation](../../kotlin/#setting-up-the-configcat-client).
+
+### 3. Evaluate your feature flag
+
+```kotlin
+val isAwesomeFeatureEnabled = client.getBooleanValue("isAwesomeFeatureEnabled", false)
+if (isAwesomeFeatureEnabled) {
+    doTheNewThing()
+} else {
+    doTheOldThing()
+}
+```
+
+## Evaluation Context
+
+An <a href="https://openfeature.dev/docs/reference/concepts/evaluation-context" target="_blank">evaluation context</a> in the OpenFeature specification is a container for arbitrary contextual data that can be used as a basis for feature flag evaluation.
+The ConfigCat provider translates these evaluation contexts to ConfigCat [User Objects](../../kotlin/#user-object).
+
+The following table shows how the different context attributes are mapped to User Object attributes.
+
+| Evaluation context | User Object  | Required |
+| ------------------ | ------------ | -------- |
+| `targetingKey`     | `identifier` | &#9745;  |
+| `Email`            | `email`      |          |
+| `Country`          | `country`    |          |
+| Any other          | `custom`     |          |
+
+To evaluate feature flags for a context, use the `setEvaluationContext()` method on the `OpenFeatureAPI` to set the context for the provider:
+
+```kotlin
+val context = ImmutableContext(
+    targetingKey = "#SOME-USER-ID#",
+    attributes = mapOf(
+        "Email" to Value.String("configcat@example.com"),
+        "Country" to Value.String("CountryID"),
+        "Rating" to Value.Double(4.5),
+        "RegisteredAt" to Value.Date(Date.from(Instant.parse("2023-11-22T12:34:56+00:00"))),
+        "Roles" to Value.List(listOf(Value.String("Role1"), Value.String("Role2")))
+    ),
+)
+OpenFeatureAPI.setEvaluationContext(context)
+```
+
+## Look under the hood
+
+- <a href="https://github.com/configcat/openfeature-kotlin/tree/main/samples/android" target="_blank">Sample Android APP</a>
+- <a href="https://github.com/configcat/openfeature-kotlin" target="_blank">ConfigCat OpenFeature Provider's repository on GitHub</a>
+- <a href="https://central.sonatype.com/artifact/com.configcat/configcat-openfeature-provider" target="_blank">ConfigCat OpenFeature Provider on Maven Central</a>

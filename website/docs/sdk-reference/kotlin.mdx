@@ -11,7 +11,6 @@ export const KotlinSchema = require('@site/src/schema-markup/sdk-reference/kotli
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/kotlin-sdk.svg?style=social)](https://github.com/configcat/kotlin-sdk/stargazers)
 [![Kotlin CI](https://github.com/configcat/kotlin-sdk/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/configcat/kotlin-sdk/actions/workflows/ci.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.configcat/configcat-kotlin-client?label=maven%20central)](https://search.maven.org/artifact/com.configcat/configcat-kotlin-client/)
-![Snapshot](https://img.shields.io/nexus/s/com.configcat/configcat-kotlin-client?label=snapshot&server=https%3A%2F%2Foss.sonatype.org)
 [![Quality Gate Status](https://img.shields.io/sonar/quality_gate/configcat_kotlin-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=configcat_kotlin-sdk)
 [![SonarCloud Coverage](https://img.shields.io/sonar/coverage/configcat_kotlin-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=configcat_kotlin-sdk)
 
@@ -321,7 +320,7 @@ client.setDefaultUser(user)
 val otherUser = ConfigCatUser(identifier = "brian@example.com")
 
 // otherUser will be used at the evaluation process.
-val value = await client.getValue("keyOfMySetting", false, otherUser)
+val value = client.getValue("keyOfMySetting", false, otherUser)
 ```
 
 For deleting the default user, you can do the following:
@@ -752,4 +751,4 @@ Check out our Sample Applications how they use the ConfigCat SDK
 
 - <a href="https://github.com/configcat/kotlin-sdk" target="_blank">ConfigCat Kotlin Multiplatform SDK's repository on GitHub</a>
 - <a href="https://configcat.github.io/kotlin-sdk/" target="_blank">ConfigCat Kotlin Multiplatform SDK's API documentation</a>
-- <a href="https://search.maven.org/artifact/com.configcat/configcat-kotlin-client" target="_blank">ConfigCat Kotlin Multiplatform SDK on Maven Central</a>
+- <a href="https://central.sonatype.com/artifact/com.configcat/configcat-kotlin-client" target="_blank">ConfigCat Kotlin Multiplatform SDK on Maven Central</a>
