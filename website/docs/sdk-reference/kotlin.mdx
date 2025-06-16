@@ -572,7 +572,20 @@ Using the `snapshot()` method, you can capture the current state of the _ConfigC
 and use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
 
 ```kotlin
-// TODO
+val client = ConfigCatClient("#YOUR-SDK-KEY#") {
+    pollingMode = autoPoll
+}
+
+// Wait for the client to initialize.
+client.waitForReady()
+
+val snapshot = client.snapshot()
+
+val user = ConfigCatUser(identifier = "#UNIQUE-USER-IDENTIFIER#")
+for (key in snapshot.getAllKeys()) {
+    val value = snapshot.getAnyValue(key, null, user)
+    println("$key: $value")
+}
 ```
 
 Creating a snapshot is a cheap operation. This is possible because snapshots capture the client's internal (in-memory) cache.
@@ -608,7 +621,10 @@ may be empty or expired even after the ready state is reported. You can verify t
 :::
 
 ```kotlin
-// TODO
+val clientCacheState = client.waitForReady()
+if (clientCacheState == ClientCacheState.NO_FLAG_DATA) {
+    // Handle initialization failure (see below).
+}
 ```
 
 You have the following options to handle unsuccessful initialization:
