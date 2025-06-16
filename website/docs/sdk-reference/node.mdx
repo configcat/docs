@@ -727,28 +727,31 @@ Creating a snapshot is a cheap operation. This is possible because snapshots cap
 No attempt is made to refresh the internal cache, even if it's empty or expired.
 
 :::caution
-So please note that creating and using a snapshot
+Please note that creating and using a snapshot
 * won't trigger a sync with the external cache when working with [shared caching](../advanced/caching.mdx#shared-cache),
 * won't fetch the latest config data from the ConfigCat CDN when the internally cached config data is empty or expired.
 :::
 
-Therefore, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically updates the internal cache
-in the background. (For other polling modes, you'll need to manually initiate a cache refresh by calling `forceRefreshAsync`.)
+For the above reasons, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically
+updates the internal cach in the background. (For other polling modes, you'll need to manually initiate a cache refresh
+by calling `forceRefreshAsync`.)
 
 Because of this behavior, it's important to make sure that the client has completed initialization and populated its internal cache
-before creating snapshots. Otherwise you may end up using them to evaluate feature flags too early, i.e. the snapshot's
-evaluation methods won't have the data to do actual evaluation, but will just return the default value you pass to them,
-which may lead to unwanted behavior in your application.
+before creating snapshots. Otherwise the snapshot's evaluation methods won't have the data to do actual evaluation,
+but will just return the default value you pass to them. Which behavior may not be acceptable in your application.
 
-In Auto Poll mode, you can use the `waitForReady` method to wait for the latest config data to become available locally.
-The promise returned by this method resolves as soon as the client reaches the ready state, i.e. completes initialization
+In Auto Polling mode, you can use the `waitForReady` method to wait for the latest config data to become available locally.
+This is an asynchronous operation, which completes as soon as the client reaches the ready state, i.e. completes initialization
 (or the time specified via the `maxInitWaitTime` option passes).
 
-Typically, you call `waitForReady` and await the returned promise once, in the initialization phase of your application.
+(Please note that this doesn't apply to other polling modes. In those cases, the client doesn't contact the ConfigCat CDN
+during initialization, so the ready state is reached as soon as the first sync with the external cache completes.)
+
+Typically, you call `waitForReady` and wait for its completion only once, in the initialization phase of your application.
 
 :::caution
 Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
-However, please note that **this is not guaranteed**. In case of initialization failure or timeout, the internal cache
+However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
 may be empty or expired even after the ready state is reported. You can verify this by checking the return value.
 :::
 
