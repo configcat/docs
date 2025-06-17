@@ -400,132 +400,6 @@ The details result contains the following information:
 | `matchedTargetingRule`            | `TargetingRule?`                     | The Targeting Rule (if any) that matched during the evaluation and was used to return the evaluated value.  |
 | `fetchTime`                       | `Date`                               | The last download time of the current config.                                             |
 
-## Snapshots and non-blocking synchronous feature flag evaluation
-
-The _ConfigCat_ client doesn't directly provide synchronous methods for evaluating feature flags and settings because
-such synchronous methods could block the executing thread for longer periods of time (e.g. when downloading config data
-from the ConfigCat CDN servers), which could lead to an unresponsive application.
-
-However, there can be circumstances where synchronous evaluation is preferable, thus, since `v10.0.0`, the Swift SDK provides a way
-to synchronously evaluate feature flags and settings as a non-blocking operation, via _snapshots_.
-
-<Tabs groupId="ios-languages">
-<TabItem value="swift" label="Swift">
-
-Using the `snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
-and use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
-
-```swift
-let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
-    options.pollingMode = PollingModes.autoPoll()
-}
-
-// Wait for the client to initialize.
-await client.waitForReady()
-
-let snapshot = client.snapshot()
-
-let user = ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#")
-for key in snapshot.getAllKeys() {
-    let value: Any? = snapshot.getValue(for: key, defaultValue: nil, user: user)
-    print("\(key): \(String(describing: value))")
-}
-```
-
-</TabItem>
-<TabItem value="objectivec" label="Objective-C">
-
-Subscribing to the `onReady` hook gives you a snapshot of the captured initialized state of the _ConfigCat_ client (including the latest downloaded config data)
-that you can use to synchronously evaluate feature flags and settings:
-
-```objectivec
-ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#" configurator:^(ConfigCatOptions* options) {
-    [options.hooks addOnReadyWithSnapshotHandler:^(ConfigCatClientSnapshot* snapshot) {
-        ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
-                                                                 email:NULL
-                                                               country:NULL
-                                                                custom:NULL];
-                
-        for (NSString* key in [snapshot getAllKeys]) {
-            id def = NULL;
-            id value = [snapshot getAnyValueFor:key defaultValue:def user:user];
-            NSLog(@"%@: %@", key, value);
-        }
-    }];
-}];
-```
-
-</TabItem>
-</Tabs>
-
-Creating a snapshot is a cheap operation. This is possible because snapshots capture the client's internal (in-memory) cache.
-No attempt is made to refresh the internal cache, even if it's empty or expired.
-
-:::caution
-Please note that creating and using a snapshot
-* won't trigger a sync with the external cache when working with [shared caching](../advanced/caching.mdx#shared-cache),
-* won't fetch the latest config data from the ConfigCat CDN when the internally cached config data is empty or expired.
-:::
-
-For the above reasons, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically
-updates the internal cache in the background. (For other polling modes, you'll need to manually initiate a cache refresh
-by calling `forceRefresh`.)
-
-Because of this behavior, it's important to make sure that the client has completed initialization and populated its internal cache
-before creating snapshots. Otherwise the snapshot's evaluation methods won't have the data to do actual evaluation,
-but will just return the default value you pass to them. Which behavior is usually not what you want in your application.
-
-In Auto Polling mode, you can use the `waitForReady` method to wait for the latest config data to become available locally.
-This is an asynchronous operation, which completes as soon as the client reaches the ready state, i.e. completes initialization
-(or the time specified via the `maxInitWaitTimeInSeconds` option passes).
-
-(Please note that this doesn't apply to other polling modes. In those cases, the client doesn't contact the ConfigCat CDN
-during initialization, so the ready state is reached as soon as the first sync with the external cache completes.)
-
-Typically, you call `waitForReady` and wait for its completion only once, in the initialization phase of your application.
-(In Objective-C, `waitForReady` is not available. As an alternative, you can subscribe to the `onReady` hook and wait for
-the first event.)
-
-:::caution
-Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
-However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
-may be empty or expired even after the ready state is reported. You can verify this by checking the return value.
-:::
-
-<Tabs groupId="ios-languages">
-<TabItem value="swift" label="Swift">
-
-```swift
-let clientCacheState = await client.waitForReady()
-if (clientCacheState == .noFlagData) {
-    // Handle initialization failure (see below).
-}
-```
-
-</TabItem>
-<TabItem value="objectivec" label="Objective-C">
-
-```objectivec
-ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#" configurator:^(ConfigCatOptions* options) {
-    [options.hooks addOnReadyWithSnapshotHandler:^(ConfigCatClientSnapshot* snapshot) {
-        if ([snapshot cacheState] == ClientCacheStateNoFlagData) {
-            // Handle initialization failure (see below).        
-        }
-    }];
-}];
-```
-
-</TabItem>
-</Tabs>
-
-You have the following options to handle unsuccessful initialization:
-* If it's acceptable for your application to start up and use the default values passed to the evaluation methods,
-  you may log some warning (or skip the check altogether as the client will log warnings anyway), and let the application continue.
-* Otherwise, you need to either terminate the application or continue waiting. The latter is an option because the client
-  might be able to obtain the config data later, in the case of a transient problem like some temporary network issue.
-  However, the _ConfigCat SDK_ doesn't provide out-of-the-box support for this case currently. You can implement this logic by
-  subscribing to the `onConfigChanged` hook and waiting for the first event.
-
 ## User Object
 
 The [User Object](../targeting/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../targeting/targeting-overview.mdx) feature.
@@ -1077,6 +951,132 @@ client.hooks.addOnFlagEvaluated { details in
 
 </TabItem>
 </Tabs>
+
+## Snapshots and non-blocking synchronous feature flag evaluation
+
+The _ConfigCat_ client doesn't directly provide synchronous methods for evaluating feature flags and settings because
+such synchronous methods could block the executing thread for longer periods of time (e.g. when downloading config data
+from the ConfigCat CDN servers), which could lead to an unresponsive application.
+
+However, there can be circumstances where synchronous evaluation is preferable, thus, since `v10.0.0`, the Swift SDK provides a way
+to synchronously evaluate feature flags and settings as a non-blocking operation, via _snapshots_.
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
+Using the `snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
+and use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
+
+```swift
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.pollingMode = PollingModes.autoPoll()
+}
+
+// Wait for the client to initialize.
+await client.waitForReady()
+
+let snapshot = client.snapshot()
+
+let user = ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#")
+for key in snapshot.getAllKeys() {
+    let value: Any? = snapshot.getValue(for: key, defaultValue: nil, user: user)
+    print("\(key): \(String(describing: value))")
+}
+```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+Subscribing to the `onReady` hook gives you a snapshot of the captured initialized state of the _ConfigCat_ client (including the latest downloaded config data)
+that you can use to synchronously evaluate feature flags and settings:
+
+```objectivec
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#" configurator:^(ConfigCatOptions* options) {
+    [options.hooks addOnReadyWithSnapshotHandler:^(ConfigCatClientSnapshot* snapshot) {
+        ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
+                                                                 email:NULL
+                                                               country:NULL
+                                                                custom:NULL];
+                
+        for (NSString* key in [snapshot getAllKeys]) {
+            id def = NULL;
+            id value = [snapshot getAnyValueFor:key defaultValue:def user:user];
+            NSLog(@"%@: %@", key, value);
+        }
+    }];
+}];
+```
+
+</TabItem>
+</Tabs>
+
+Creating a snapshot is a cheap operation. This is possible because snapshots capture the client's internal (in-memory) cache.
+No attempt is made to refresh the internal cache, even if it's empty or expired.
+
+:::caution
+Please note that creating and using a snapshot
+* won't trigger a sync with the external cache when working with [shared caching](../advanced/caching.mdx#shared-cache),
+* won't fetch the latest config data from the ConfigCat CDN when the internally cached config data is empty or expired.
+:::
+
+For the above reasons, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically
+updates the internal cache in the background. (For other polling modes, you'll need to manually initiate a cache refresh
+by calling `forceRefresh`.)
+
+Because of this behavior, it's important to make sure that the client has completed initialization and populated its internal cache
+before creating snapshots. Otherwise the snapshot's evaluation methods won't have the data to do actual evaluation,
+but will just return the default value you pass to them. Which behavior is usually not what you want in your application.
+
+In Auto Polling mode, you can use the `waitForReady` method to wait for the latest config data to become available locally.
+This is an asynchronous operation, which completes as soon as the client reaches the ready state, i.e. completes initialization
+(or the time specified via the `maxInitWaitTimeInSeconds` option passes).
+
+(Please note that this doesn't apply to other polling modes. In those cases, the client doesn't contact the ConfigCat CDN
+during initialization, so the ready state is reached as soon as the first sync with the external cache completes.)
+
+Typically, you call `waitForReady` and wait for its completion only once, in the initialization phase of your application.
+(In Objective-C, `waitForReady` is not available. As an alternative, you can subscribe to the `onReady` hook and wait for
+the first event.)
+
+:::caution
+Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
+However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
+may be empty or expired even after the ready state is reported. You can verify this by checking the return value.
+:::
+
+<Tabs groupId="ios-languages">
+<TabItem value="swift" label="Swift">
+
+```swift
+let clientCacheState = await client.waitForReady()
+if (clientCacheState == .noFlagData) {
+    // Handle initialization failure (see below).
+}
+```
+
+</TabItem>
+<TabItem value="objectivec" label="Objective-C">
+
+```objectivec
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#" configurator:^(ConfigCatOptions* options) {
+    [options.hooks addOnReadyWithSnapshotHandler:^(ConfigCatClientSnapshot* snapshot) {
+        if ([snapshot cacheState] == ClientCacheStateNoFlagData) {
+            // Handle initialization failure (see below).        
+        }
+    }];
+}];
+```
+
+</TabItem>
+</Tabs>
+
+You have the following options to handle unsuccessful initialization:
+* If it's acceptable for your application to start up and use the default values passed to the evaluation methods,
+  you may log some warning (or skip the check altogether as the client will log warnings anyway), and let the application continue.
+* Otherwise, you need to either terminate the application or continue waiting. The latter is an option because the client
+  might be able to obtain the config data later, in the case of a transient problem like some temporary network issue.
+  However, the _ConfigCat SDK_ doesn't provide out-of-the-box support for this case currently. You can implement this logic by
+  subscribing to the `onConfigChanged` hook and waiting for the first event.
 
 ## Online / Offline mode
 

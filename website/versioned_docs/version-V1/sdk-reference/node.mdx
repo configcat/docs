@@ -473,6 +473,84 @@ configCatClient.on('flagEvaluated', () => {
 });
 ```
 
+## Snapshots and synchronous feature flag evaluation
+
+On JavaScript platforms, the _ConfigCat_ client provides only asynchronous methods for evaluating feature flags and settings
+because these operations may involve network communication (e.g. downloading config data from the ConfigCat CDN servers),
+which is necessarily an asynchronous operation in JavaScript.
+
+However, there can be circumstances where synchronous evaluation is preferable, thus, since v10.1.0, the Node.js SDK provides a way
+to synchronously evaluate feature flags and settings via _snapshots_.
+
+Using the `snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
+and use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
+
+```js
+const configCatClient = configcat.getClient(
+  '#YOUR-SDK-KEY#',
+  configcat.PollingMode.AutoPoll,
+);
+
+// Wait for the client to initialize.
+await configCatClient.waitForReady();
+
+const snapshot = configCatClient.snapshot();
+
+const user = new configcat.User('#UNIQUE-USER-IDENTIFIER#');
+for (const key of snapshot.getAllKeys()) {
+  const value = snapshot.getValue(key, null, user);
+  console.log(`${key}: ${value}`);
+}
+```
+
+Creating a snapshot is a cheap operation. This is possible because snapshots capture the client's internal (in-memory) cache.
+No attempt is made to refresh the internal cache, even if it's empty or expired.
+
+:::caution
+Please note that creating and using a snapshot
+* won't trigger a sync with the external cache when working with [shared caching](../advanced/caching.mdx#shared-cache),
+* won't fetch the latest config data from the ConfigCat CDN when the internally cached config data is empty or expired.
+:::
+
+For the above reasons, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically
+updates the internal cache in the background. (For other polling modes, you'll need to manually initiate a cache refresh
+by calling `forceRefreshAsync`.)
+
+Because of this behavior, it's important to make sure that the client has completed initialization and populated its internal cache
+before creating snapshots. Otherwise the snapshot's evaluation methods won't have the data to do actual evaluation,
+but will just return the default value you pass to them. Which behavior is usually not what you want in your application.
+
+In Auto Polling mode, you can use the `waitForReady` method to wait for the latest config data to become available locally.
+This is an asynchronous operation, which completes as soon as the client reaches the ready state, i.e. completes initialization
+(or the time specified via the `maxInitWaitTimeSeconds` option passes).
+
+(Please note that this doesn't apply to other polling modes. In those cases, the client doesn't contact the ConfigCat CDN
+during initialization, so the ready state is reached as soon as the first sync with the external cache completes.)
+
+Typically, you call `waitForReady` and wait for its completion only once, in the initialization phase of your application.
+
+:::caution
+Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
+However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
+may be empty or expired even after the ready state is reported. You can verify this by checking the return value.
+:::
+
+```js
+const clientCacheState = await configCatClient.waitForReady();
+if (clientCacheState === configcat.ClientCacheState.NoFlagData) {
+  // Handle initialization failure (see below).
+  console.warn('ConfigCat client failed to obtain the config data during initialization.');
+}
+```
+
+You have the following options to handle unsuccessful initialization:
+* If it's acceptable for your application to start up and use the default values passed to the evaluation methods,
+  you may log some warning (or skip the check altogether as the client will log warnings anyway), and let the application continue.
+* Otherwise, you need to either terminate the application or continue waiting. The latter is an option because the client
+  might be able to obtain the config data later, in the case of a transient problem like some temporary network issue.
+  However, the _ConfigCat SDK_ doesn't provide out-of-the-box support for this case currently. You can implement this logic by
+  subscribing to the `configChanged` hook and waiting for the first event.
+
 ## Online / Offline mode
 
 In cases where you want to prevent the SDK from making HTTP calls, you can switch it to offline mode:
@@ -653,84 +731,6 @@ const userObject = new configcat.User('john@example.com');
 settingValues = await configCatClient.getAllValueDetailsAsync(userObject);
 settingValues.forEach((details) => console.log(details));
 ```
-
-## Snapshots and synchronous feature flag evaluation
-
-On JavaScript platforms, the _ConfigCat_ client provides only asynchronous methods for evaluating feature flags and settings
-because these operations may involve network communication (e.g. downloading config data from the ConfigCat CDN servers),
-which is necessarily an asynchronous operation in JavaScript.
-
-However, there can be circumstances where synchronous evaluation is preferable, thus, since v10.1.0, the Node.js SDK provides a way
-to synchronously evaluate feature flags and settings via _snapshots_.
-
-Using the `snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
-and use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
-
-```js
-const configCatClient = configcat.getClient(
-  '#YOUR-SDK-KEY#',
-  configcat.PollingMode.AutoPoll,
-);
-
-// Wait for the client to initialize.
-await configCatClient.waitForReady();
-
-const snapshot = configCatClient.snapshot();
-
-const user = new configcat.User('#UNIQUE-USER-IDENTIFIER#');
-for (const key of snapshot.getAllKeys()) {
-  const value = snapshot.getValue(key, null, user);
-  console.log(`${key}: ${value}`);
-}
-```
-
-Creating a snapshot is a cheap operation. This is possible because snapshots capture the client's internal (in-memory) cache.
-No attempt is made to refresh the internal cache, even if it's empty or expired.
-
-:::caution
-Please note that creating and using a snapshot
-* won't trigger a sync with the external cache when working with [shared caching](../advanced/caching.mdx#shared-cache),
-* won't fetch the latest config data from the ConfigCat CDN when the internally cached config data is empty or expired.
-:::
-
-For the above reasons, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically
-updates the internal cache in the background. (For other polling modes, you'll need to manually initiate a cache refresh
-by calling `forceRefreshAsync`.)
-
-Because of this behavior, it's important to make sure that the client has completed initialization and populated its internal cache
-before creating snapshots. Otherwise the snapshot's evaluation methods won't have the data to do actual evaluation,
-but will just return the default value you pass to them. Which behavior is usually not what you want in your application.
-
-In Auto Polling mode, you can use the `waitForReady` method to wait for the latest config data to become available locally.
-This is an asynchronous operation, which completes as soon as the client reaches the ready state, i.e. completes initialization
-(or the time specified via the `maxInitWaitTimeSeconds` option passes).
-
-(Please note that this doesn't apply to other polling modes. In those cases, the client doesn't contact the ConfigCat CDN
-during initialization, so the ready state is reached as soon as the first sync with the external cache completes.)
-
-Typically, you call `waitForReady` and wait for its completion only once, in the initialization phase of your application.
-
-:::caution
-Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
-However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
-may be empty or expired even after the ready state is reported. You can verify this by checking the return value.
-:::
-
-```js
-const clientCacheState = await configCatClient.waitForReady();
-if (clientCacheState === configcat.ClientCacheState.NoFlagData) {
-  // Handle initialization failure (see below).
-  console.warn('ConfigCat client failed to obtain the config data during initialization.');
-}
-```
-
-You have the following options to handle unsuccessful initialization:
-* If it's acceptable for your application to start up and use the default values passed to the evaluation methods,
-  you may log some warning (or skip the check altogether as the client will log warnings anyway), and let the application continue.
-* Otherwise, you need to either terminate the application or continue waiting. The latter is an option because the client
-  might be able to obtain the config data later, in the case of a transient problem like some temporary network issue.
-  However, the _ConfigCat SDK_ doesn't provide out-of-the-box support for this case currently. You can implement this logic by
-  subscribing to the `configChanged` hook and waiting for the first event.
 
 ## Using ConfigCat behind a proxy
 
