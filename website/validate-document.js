@@ -114,23 +114,24 @@ const checkImages = async (content) => {
   const errors = [];
 
   let i = -1;
-  for (const tag of extractImageData(content)) {
+  for (const [tag, mdImageSrc] of extractImageData(content)) {
     i++;
 
     const isMarkdown = tag.startsWith('![');
-    if (isMarkdown) {
-      // Markdown image detected
-      errors.push(['warn', `Markdown image syntax found (${tag}). Use <img src="..." alt="..." width="..." height="..." /> instead for images.`]);
+    if (isMarkdown) { // Markdown image detected
+      if (shouldCheckImage(mdImageSrc)) {
+        errors.push(['warn', `Markdown image syntax found (${tag}). Use <img src="..." alt="..." width="..." height="..." /> instead for images.`]);
+      }
       continue;
     }
 
     let [imageSrc, cssWidth, cssHeight] = checkForImageAttributes(tag, errors);
 
     const pathPrefix = "/docs/"
-    if (imageSrc.startsWith(pathPrefix)) {
-      imageSrc = imageSrc.substring(pathPrefix.length - 1);
-    } else if (/^https?:/i.test(imageSrc)) {
+    if (!shouldCheckImage(imageSrc)) {
       continue;
+    } else if (imageSrc.startsWith(pathPrefix)) {
+      imageSrc = imageSrc.substring(pathPrefix.length - 1);
     } else {
       errors.push(`Invalid image src found in ${tag}`);
       continue;
@@ -222,13 +223,19 @@ function attributeRegex(attribute) {
 function* extractImageData(content) {
   let imageTagsRegexMatch;
   while ((imageTagsRegexMatch = imageTagsRegex.exec(content)) !== null) {
-    const [tag] = imageTagsRegexMatch;
-    yield tag;
+    const [tag, , mdImageSrc] = imageTagsRegexMatch;
+    yield [tag, mdImageSrc?.trim()];
   }
 }
 
 function getImageFullPath(imagePath) {
   return path.join(__dirname, 'static', imagePath);
+}
+
+function shouldCheckImage(imageSrc) {
+  if (/^https?:/i.test(imageSrc)) return false;
+  if (path.extname(imageSrc).toLowerCase() === ".svg") return false;
+  return true;
 }
 
 checkFiles();
