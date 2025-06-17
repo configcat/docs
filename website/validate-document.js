@@ -49,22 +49,12 @@ const checkImageDimensions = async (imageTag, imagePath, cssWidth, cssHeight, dp
 
   const { width, height } = imageMetaData;
 
-  if (cssWidth != null) {
-    const factor = dpi / 96;
-    const expectedWidth = cssWidth * factor;
-    // NOTE: We need to account for the integer division used to calculate the value of the `width` attribute.
-    if (width < expectedWidth || expectedWidth + factor <= width) {
-      errors.push(['warn', `Horizontal image resolution doesn't correspond to attribute (width="...") in ${imageTag}. The image should be ${expectedWidth} pixels wide, considering the image DPI (${dpi}).`]);
-    }
+  if (cssWidth != null && cssWidth !== Math.trunc(width * 96 / dpi)) {
+    errors.push(['warn', `The relation \`CSS width = image width in pixels * 96 / DPI\` is not satisfied. CSS width specified via attribute (width="...") = ${cssWidth}, image width in pixels = ${width}, DPI = ${dpi}.`]);
   }
 
-  if (cssHeight != null) {
-    const factor = dpi / 96;
-    const expectedHeight = cssHeight * factor;
-    // NOTE: We need to account for the integer division used to calculate the value of the `height` attribute.
-    if (height < expectedHeight || expectedHeight + factor <= height) {
-      errors.push(['warn', `Vertical image resolution doesn't correspond to attribute (height="...") in ${imageTag}. The image should be ${expectedHeight} pixels tall, considering the image DPI (${dpi}).`]);
-    }
+  if (cssHeight != null && cssHeight !== Math.trunc(height * 96 / dpi)) {
+    errors.push(['warn', `The relation \`CSS height = image height in pixels * 96 / DPI\` is not satisfied. CSS height specified via attribute (height="...") = ${cssHeight}, image height in pixels = ${height}, DPI = ${dpi}.`]);
   }
 }
 
