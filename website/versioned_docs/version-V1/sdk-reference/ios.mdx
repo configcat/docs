@@ -356,93 +356,88 @@ The details result contains the following information:
 | `matchedEvaluationRule`           | `RolloutRule?`                       | If the evaluation was based on a Targeting Rule, this field contains that specific rule.  |
 | `fetchTime`                       | `Date`                               | The last download time of the current config.                                             |
 
-## Snapshots and non-blocking synchronous feature flag evaluation
+## Snapshots and synchronous feature flag evaluation
 
-The _ConfigCat_ client doesn't directly provide synchronous methods for evaluating feature flags and settings because
-such synchronous methods could block the executing thread for longer periods of time (e.g. when downloading config data
-from the ConfigCat CDN servers), which could lead to an unresponsive application.
+The _ConfigCat_ client provides only asynchronous methods for evaluating feature flags and settings
+because these operations may involve network communication (downloading config data from the ConfigCat CDN servers),
+which is necessarily an asynchronous operation.
 
-However, there can be circumstances where synchronous evaluation is preferable, thus, since `v10.0.0`, the Swift SDK provides a way
-to synchronously evaluate feature flags and settings as a non-blocking operation, via _snapshots_.
+However, there may be use cases where synchronous evaluation is preferable, thus, since `v10.0.0`, the Swift SDK provides a way
+to synchronously evaluate feature flags and settings via **Snapshots**.
 
 Using the `snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
-and use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
+and you can use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
 
 ```swift
-// TODO
+let snapshot = configCatClient.snapshot()
+
+let isMyFeatureEnabled = snapshot.getValue(for: "isMyFeatureEnabled", defaultValue: false)
 ```
 
 </TabItem>
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-// TODO
+ConfigCatClientSnapshot* snapshot = [client snapshot];
+        
+BOOL isMyFeatureEnabled = [snapshot getBoolValueFor:@"isMyFeatureEnabled" 
+                                       defaultValue:false
+                                               user:NULL];
 ```
 
 </TabItem>
 </Tabs>
 
-Creating a snapshot is a cheap operation. This is possible because snapshots capture the client's internal (in-memory) cache.
-No attempt is made to refresh the internal cache, even if it's empty or expired.
+Snapshots are created from the actual state of the SDK; therefore it's crucial to know whether the SDK has valid feature flag data to work on. 
+To determine whether it's safe to create snapshots, the SDK provides an `onReady` [hook](#hooks). 
+It accepts a state enum parameter to give details about the SDK's initialization state.
 
-:::caution
-Please note that creating and using a snapshot
-* won't trigger a sync with the external cache when working with [shared caching](../advanced/caching.mdx#shared-cache),
-* won't fetch the latest config data from the ConfigCat CDN when the internally cached config data is empty or expired.
-:::
-
-For the above reasons, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically
-updates the internal cache in the background. (For other polling modes, you'll need to manually initiate a cache refresh
-by calling `forceRefresh`.)
-
-Because of this behavior, it's important to make sure that the client has completed initialization and populated its internal cache
-before creating snapshots. Otherwise the snapshot's evaluation methods won't have the data to do actual evaluation,
-but will just return the default value you pass to them. Which behavior is usually not what you want in your application.
-
-In Auto Polling mode, you can use the `waitForReady` method to wait for the latest config data to become available locally.
-This is an asynchronous operation, which completes as soon as the client reaches the ready state, i.e. completes initialization
-(or the time specified via the `maxInitWaitTimeInSeconds` option passes).
-
-(Please note that this doesn't apply to other polling modes. In those cases, the client doesn't contact the ConfigCat CDN
-during initialization, so the ready state is reached as soon as the first sync with the external cache completes.)
-
-Typically, you call `waitForReady` and wait for its completion only once, in the initialization phase of your application.
-(In Objective-C, `waitForReady` is not available. As an alternative, you can subscribe to the `onReady` hook and wait for
-the first event.)
-
-:::caution
-Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
-However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
-may be empty or expired even after the ready state is reported. You can verify this by checking the return value.
-:::
+Snapshots created before the SDK reaches its ready state are considered empty, thus they will return default values for feature flag evaluation requests.
 
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
 
 ```swift
-// TODO
+client.hooks.addOnReady { state in
+    // the state parameter tells what is the SDK's initialization state
+}
 ```
 
 </TabItem>
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-// TODO
+[client.hooks addOnReadyWithHandler:^(enum ClientCacheState state) {
+    // the state parameter tells what is the SDK's initialization state
+}];
 ```
 
 </TabItem>
 </Tabs>
 
-You have the following options to handle unsuccessful initialization:
-* If it's acceptable for your application to start up and use the default values passed to the evaluation methods,
-  you may log some warning (or skip the check altogether as the client will log warnings anyway), and let the application continue.
-* Otherwise, you need to either terminate the application or continue waiting. The latter is an option because the client
-  might be able to obtain the config data later, in the case of a transient problem like some temporary network issue.
-  However, the _ConfigCat SDK_ doesn't provide out-of-the-box support for this case currently. You can implement this logic by
-  subscribing to the `onConfigChanged` hook and waiting for the first event.
+The possible `state` values:
+
+- `noFlagData`: The SDK has no feature flag data to work on (it didn't get anything from the cache or from the network)
+- `hasLocalOverrideFlagDataOnly`: The SDK was initialized with `localOnly` [flag overrides](#flag-overrides).
+- `hasCachedFlagDataOnly`: The SDK has feature flag data only from the cache. This can happen when the SDK is configured with `manualPoll()` and there wasn't a `client.forceRefresh()` call yet. Another example could be an SDK configured with `autoPoll()`, but it can't reach the ConfigCat CDN so it falls back to the cache.
+- `hasUpToDateFlagData`: The SDK is initialized with up-to-date feature flag data.
+
+The SDK's state is also accessible via the `waitForReady()` awaitable method, which asynchronously waits for the `onReady` hook to fire and returns with the SDK's initialization state.
+
+```swift
+let state = await client.waitForReady()
+```
+
+:::caution
+Please note that when you create and utilize a snapshot, it won't refresh your local cache once the cached config data expires.
+Additionally, when working with [shared caching](../advanced/caching.mdx#shared-cache), creating a snapshot also doesn't
+trigger a sync with the external cache, since the snapshot only captures the config instance stored in the client's memory.
+Therefore, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically updates the local cache
+in the background. For other polling modes, you'll need to manually initiate a cache refresh by invoking `forceRefresh()`.
+:::
 
 ## User Object
 

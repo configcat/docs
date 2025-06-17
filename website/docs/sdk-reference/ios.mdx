@@ -409,21 +409,50 @@ from the ConfigCat CDN servers), which could lead to an unresponsive application
 However, there can be circumstances where synchronous evaluation is preferable, thus, since `v10.0.0`, the Swift SDK provides a way
 to synchronously evaluate feature flags and settings as a non-blocking operation, via _snapshots_.
 
-Using the `snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
-and use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
-
 <Tabs groupId="ios-languages">
 <TabItem value="swift" label="Swift">
 
+Using the `snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
+and use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
+
 ```swift
-// TODO
+let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
+    options.pollingMode = PollingModes.autoPoll()
+}
+
+// Wait for the client to initialize.
+await client.waitForReady()
+
+let snapshot = client.snapshot()
+
+let user = ConfigCatUser(identifier: "#UNIQUE-USER-IDENTIFIER#")
+for key in snapshot.getAllKeys() {
+    let value: Any? = snapshot.getValue(for: key, defaultValue: nil, user: user)
+    print("\(key): \(String(describing: value))")
+}
 ```
 
 </TabItem>
 <TabItem value="objectivec" label="Objective-C">
 
+Subscribing to the `onReady` hook gives you a snapshot of the captured initialized state of the _ConfigCat_ client (including the latest downloaded config data)
+that you can use to synchronously evaluate feature flags and settings:
+
 ```objectivec
-// TODO
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#" configurator:^(ConfigCatOptions* options) {
+    [options.hooks addOnReadyWithSnapshotHandler:^(ConfigCatClientSnapshot* snapshot) {
+        ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
+                                                                 email:nil
+                                                               country:nil
+                                                                custom:nil];
+                
+        for (NSString* key in [snapshot getAllKeys]) {
+            id def = nil;
+            id value = [snapshot getAnyValueFor:key defaultValue:def user:user];
+            NSLog(@"%@: %@", key, value);
+        }
+    }];
+}];
 ```
 
 </TabItem>
@@ -467,14 +496,23 @@ may be empty or expired even after the ready state is reported. You can verify t
 <TabItem value="swift" label="Swift">
 
 ```swift
-// TODO
+let clientCacheState = await client.waitForReady()
+if (clientCacheState == .noFlagData) {
+    // Handle initialization failure (see below).
+}
 ```
 
 </TabItem>
 <TabItem value="objectivec" label="Objective-C">
 
 ```objectivec
-// TODO
+ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#" configurator:^(ConfigCatOptions* options) {
+    [options.hooks addOnReadyWithSnapshotHandler:^(ConfigCatClientSnapshot* snapshot) {
+        if ([snapshot cacheState] == ClientCacheStateNoFlagData) {
+            // Handle initialization failure (see below).        
+        }
+    }];
+}];
 ```
 
 </TabItem>
