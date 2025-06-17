@@ -442,12 +442,12 @@ that you can use to synchronously evaluate feature flags and settings:
 ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#" configurator:^(ConfigCatOptions* options) {
     [options.hooks addOnReadyWithSnapshotHandler:^(ConfigCatClientSnapshot* snapshot) {
         ConfigCatUser* user = [[ConfigCatUser alloc]initWithIdentifier:@"#UNIQUE-USER-IDENTIFIER#"
-                                                                 email:nil
-                                                               country:nil
-                                                                custom:nil];
+                                                                 email:NULL
+                                                               country:NULL
+                                                                custom:NULL];
                 
         for (NSString* key in [snapshot getAllKeys]) {
-            id def = nil;
+            id def = NULL;
             id value = [snapshot getAnyValueFor:key defaultValue:def user:user];
             NSLog(@"%@: %@", key, value);
         }
