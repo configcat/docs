@@ -416,7 +416,7 @@ The SDK provides several hooks (events), by means of which you can get notified 
 Via the following events you can subscribe to particular events raised by the client:
 
 - `event EventHandler<ClientReadyEventArgs> ClientReady`: This event is raised when the SDK reaches the ready state. If the SDK is set up to use lazy loading or manual polling, it's considered ready right after syncing up with the config cache.
-  If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `ClientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
+  If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `ClientReady` event fires when the auto polling's `maxInitWaitTime` has passed.
 - `event EventHandler<ConfigFetchedEventArgs> ConfigFetched`: This event is raised each time when the SDK attempts to refresh the locally cached config by fetching the latest version from the remote server. It is raised not only when `ForceRefreshAsync` is called but also
   when the refresh is initiated by the SDK automatically. Thus, this event allows you to observe potential network issues that occur under the hood.
 - `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
@@ -438,6 +438,85 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 ```csharp
 client.FlagEvaluated += (s, e) => { /* handle the event */ };
 ```
+
+## Snapshots and non-blocking synchronous feature flag evaluation
+
+Currently, the _ConfigCat_ client provides both asynchronous and synchronous methods for evaluating feature flags and settings.
+However, depending on the setup, the synchronous methods may block the executing thread for longer periods of time
+(e.g. when downloading config data from the ConfigCat CDN servers), which can lead to an unresponsive application.
+To prevent such issues, the problematic methods have been deprecated and are going to be removed in a future major version.
+
+As an alternative, since v9.2.0, the .NET SDK provides a way to synchronously evaluate feature flags and settings
+as a non-blocking operation, via _snapshots_.
+
+Using the `Snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
+and use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
+
+```csharp
+using var client = ConfigCatClient.Get("#YOUR-SDK-KEY#",
+    options => options.PollingMode = PollingModes.AutoPoll());
+
+// Wait for the client to initialize.
+await client.WaitForReadyAsync();
+
+var snapshot = client.Snapshot();
+
+var user = new User("#UNIQUE-USER-IDENTIFIER#");
+foreach (var key in snapshot.GetAllKeys())
+{
+    var value = snapshot.GetValue(key, default(object), user);
+    Console.WriteLine($"{key}: {value}");
+}
+```
+
+Creating a snapshot is a cheap operation. This is possible because snapshots capture the client's internal (in-memory) cache.
+No attempt is made to refresh the internal cache, even if it's empty or expired.
+
+:::caution
+Please note that creating and using a snapshot
+* won't trigger a sync with the external cache when working with [shared caching](../advanced/caching.mdx#shared-cache),
+* won't fetch the latest config data from the ConfigCat CDN when the internally cached config data is empty or expired.
+:::
+
+For the above reasons, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically
+updates the internal cache in the background. (For other polling modes, you'll need to manually initiate a cache refresh
+by calling `ForceRefreshAsync`.)
+
+Because of this behavior, it's important to make sure that the client has completed initialization and populated its internal cache
+before creating snapshots. Otherwise the snapshot's evaluation methods won't have the data to do actual evaluation,
+but will just return the default value you pass to them. Which behavior is usually not what you want in your application.
+
+In Auto Polling mode, you can use the `WaitForReadyAsync` method to wait for the latest config data to become available locally.
+This is an asynchronous operation, which completes as soon as the client reaches the ready state, i.e. completes initialization
+(or the time specified via the `maxInitWaitTime` option passes).
+
+(Please note that this doesn't apply to other polling modes. In those cases, the client doesn't contact the ConfigCat CDN
+during initialization, so the ready state is reached as soon as the first sync with the external cache completes.)
+
+Typically, you call `WaitForReadyAsync` and wait for its completion only once, in the initialization phase of your application.
+
+:::caution
+Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
+However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
+may be empty or expired even after the ready state is reported. You can verify this by checking the return value.
+:::
+
+```csharp
+var clientCacheState = await client.WaitForReadyAsync();
+if (clientCacheState == ClientCacheState.NoFlagData)
+{
+    // Handle initialization failure (see below).
+    Console.WriteLine("ConfigCat client failed to obtain the config data during initialization.");
+}
+```
+
+You have the following options to handle unsuccessful initialization:
+* If it's acceptable for your application to start up and use the default values passed to the evaluation methods,
+  you may log some warning (or skip the check altogether as the client will log warnings anyway), and let the application continue.
+* Otherwise, you need to either terminate the application or continue waiting. The latter is an option because the client
+  might be able to obtain the config data later, in the case of a transient problem like some temporary network issue.
+  However, the _ConfigCat SDK_ doesn't provide out-of-the-box support for this case currently. You can implement this logic by
+  subscribing to the `ConfigChanged` hook and waiting for the first event.
 
 ## Online / Offline mode
 
@@ -767,55 +846,6 @@ IReadOnlyList<EvaluationDetails> settingValues = await client.GetAllValueDetails
 // invoke with User Object
 User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
 IReadOnlyList<EvaluationDetails> settingValuesTargeting = await client.GetAllValueDetailsAsync(userObject);
-```
-
-## Snapshots and non-blocking synchronous feature flag evaluation
-
-Currently, the _ConfigCat_ client provides both asynchronous and synchronous methods for evaluating feature flags and settings.
-However, depending on the setup, the synchronous methods may block the executing thread for longer periods of time
-(e.g. when downloading config data from the ConfigCat CDN servers), which can lead to an unresponsive application.
-To prevent such issues, the problematic methods have been deprecated and are going to be removed in a future major version.
-
-As an alternative, since v9.2.0, the .NET SDK provides a way to synchronously evaluate feature flags and settings via _snapshots_.
-
-Using the `Snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
-and you can use the resulting snapshot object to synchronously evaluate feature flags and settings based on the captured state:
-
-```csharp
-using var client = ConfigCatClient.Get("#YOUR-SDK-KEY#",
-    options => options.PollingMode = PollingModes.ManualPoll);
-
-// Make sure that the latest config data is available locally.
-await client.ForceRefreshAsync();
-
-var snapshot = client.Snapshot();
-
-var user = new User("#UNIQUE-USER-IDENTIFIER#");
-foreach (var key in snapshot.GetAllKeys())
-{
-    var value = snapshot.GetValue(key, default(object), user);
-    Console.WriteLine($"{key}: {value}");
-}
-```
-
-:::caution
-Please note that when you create and utilize a snapshot, it won't refresh your local cache once the cached config data expires.
-Additionally, when working with [shared caching](../advanced/caching.mdx#shared-cache), creating a snapshot also doesn't
-trigger a sync with the external cache, since the snapshot only captures the config instance stored in the client's memory.
-Therefore, it's recommended to use snapshots in conjunction with the Auto Polling mode, where the SDK automatically updates the local cache
-in the background. For other polling modes, you'll need to manually initiate a cache refresh by invoking `ForceRefreshAsync`.
-:::
-
-In Auto Poll mode, you can use the `WaitForReadyAsync` method to wait for the latest config data to become available locally:
-
-```csharp
-using var client = ConfigCatClient.Get("#YOUR-SDK-KEY#",
-    options => options.PollingMode = PollingModes.AutoPoll());
-
-// Make sure that the latest config data is available locally.
-await client.WaitForReadyAsync();
-
-var snapshot = client.Snapshot();
 ```
 
 ## Using custom cache implementation

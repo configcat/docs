@@ -685,7 +685,7 @@ The SDK provides several hooks (events), by means of which you can get notified 
 You can subscribe to the following events emitted by the client:
 
 - `clientReady`: This event is emitted when the SDK reaches the ready state. If the SDK is set up to use lazy loading or manual polling, it's considered ready right after syncing up with the config cache.
-  If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `MaxInitWaitTime` has passed.
+  If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `maxInitWaitTimeSeconds` has passed.
 - `configChanged`: This event is emitted first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
 - `flagEvaluated`: This event is emitted each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from `getValueDetailsAsync()`.
 - `clientError`: This event is emitted when an error occurs within the _ConfigCat SDK_.
