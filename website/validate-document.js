@@ -50,11 +50,11 @@ const checkImageDimensions = async (imageTag, imagePath, cssWidth, cssHeight, dp
   const { width, height } = imageMetaData;
 
   if (cssWidth != null && cssWidth !== Math.trunc(width * 96 / dpi)) {
-    errors.push(['warn', `The relation \`CSS width = image width in pixels * 96 / DPI\` is not satisfied. CSS width specified via attribute (width="...") = ${cssWidth}, image width in pixels = ${width}, DPI = ${dpi}.`]);
+    errors.push(['warn', `The relation \`CSS width = image width in pixels * 96 / DPI\` is not satisfied in ${imageTag}. CSS width specified via attribute (width="...") = ${cssWidth}, image width in pixels = ${width}, DPI = ${dpi}.`]);
   }
 
   if (cssHeight != null && cssHeight !== Math.trunc(height * 96 / dpi)) {
-    errors.push(['warn', `The relation \`CSS height = image height in pixels * 96 / DPI\` is not satisfied. CSS height specified via attribute (height="...") = ${cssHeight}, image height in pixels = ${height}, DPI = ${dpi}.`]);
+    errors.push(['warn', `The relation \`CSS height = image height in pixels * 96 / DPI\` is not satisfied in ${imageTag}. CSS height specified via attribute (height="...") = ${cssHeight}, image height in pixels = ${height}, DPI = ${dpi}.`]);
   }
 }
 
