@@ -409,7 +409,7 @@ You can subscribe to the following events emitted by the _ConfigCat_ client:
 
   Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
   However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
-  may be empty or expired even after the ready state is reported. You can verify this by checking the `cacheState` argument.
+  may be empty or expired even after the ready state is reported. You can verify this by checking the `ClientCacheState` argument.
 - `onConfigChanged(Map<String, Setting>, ConfigCatClientSnapshot)`: This event is emitted first when the client's internal cache gets populated.
   Afterwards, it is emitted again each time the internally cached config is updated to a newer version, either as a result of synchronization
   with the external cache, or as a result of fetching a newer version from the ConfigCat CDN.
