@@ -334,13 +334,15 @@ client.Refresh()
 
 ## Hooks
 
-With the following hooks you can subscribe to particular events fired by the SDK:
+The SDK provides several hooks (events), by means of which you can get notified of its actions.
+You can subscribe to the following events emitted by the _ConfigCat_ client:
 
-- `OnConfigChanged()`: This event is sent when the SDK loads a new config JSON into memory from cache or via HTTP.
-
-- `OnFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`Get[TYPE]ValueDetails()`](#anatomy-of-gettypevaluedetails).
-
-- `OnError(error)`: This event is sent when an error occurs within the ConfigCat SDK.
+- `OnConfigChanged()`: This event is emitted first when the client's internal cache gets populated.
+  Afterwards, it is emitted again each time the internally cached config is updated to a newer version, either as a result of synchronization
+  with the external cache, or as a result of fetching a newer version from the ConfigCat CDN.
+- `OnFlagEvaluated(EvaluationDetails)`: This event is emitted each time the client evaluates a feature flag or setting.
+  The event provides the same evaluation details that you would get from [`Get[TYPE]ValueDetails()`](#anatomy-of-gettypevaluedetails).
+- `OnError(error)`: This event is emitted when an error occurs within the client.
 
 You can subscribe to these events on SDK initialization:
 

@@ -413,15 +413,27 @@ Console.WriteLine(await client.GetValueAsync("keyOfMyTextSetting", "my default v
 ## Hooks
 
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
-Via the following events you can subscribe to particular events raised by the client:
+Via the following events you can subscribe to particular events raised by the _ConfigCat_ client:
 
-- `event EventHandler<ClientReadyEventArgs> ClientReady`: This event is raised when the SDK reaches the ready state. If the SDK is set up to use lazy loading or manual polling, it's considered ready right after syncing up with the config cache.
-  If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `ClientReady` event fires when the auto polling's `maxInitWaitTime` has passed.
-- `event EventHandler<ConfigFetchedEventArgs> ConfigFetched`: This event is raised each time when the SDK attempts to refresh the locally cached config by fetching the latest version from the remote server. It is raised not only when `ForceRefreshAsync` is called but also
-  when the refresh is initiated by the SDK automatically. Thus, this event allows you to observe potential network issues that occur under the hood.
-- `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
-- `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`GetValueDetailsAsync()`](#anatomy-of-getvaluedetailsasync).
-- `event EventHandler<ConfigCatClientErrorEventArgs> Error`: This event is raised when an error occurs within the _ConfigCat SDK_.
+- `event EventHandler<ClientReadyEventArgs> ClientReady`: This event is raised when the client reaches the ready state, i.e. completes initialization.
+  * If Lazy Loading or Manual Polling is used, it's considered ready right after the initial sync with the external cache (if any) completes.
+  * If Auto Polling is used, the ready state is reached as soon as
+    * the initial sync with the external cache yields up-to-date config data,
+    * otherwise, if the client is online (i.e. HTTP requests are allowed), the first config fetch operation completes (regardless of success or failure),
+    * or the time specified via Auto Polling's `maxInitWaitTime` option has passed.
+
+  Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
+  However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
+  may be empty or expired even after the ready state is reported. You can verify this by checking the `CacheState` property of the event arguments.
+- `event EventHandler<ConfigFetchedEventArgs> ConfigFetched`: This event is raised each time the client attempts to refresh the cached config by
+  fetching the latest version from the ConfigCat CDN. It is raised not only when `ForceRefreshAsync` is called but also
+  when the refresh is initiated by the client automatically. Thus, this event allows you to observe potential network issues that occur under the hood.
+- `event EventHandler<ConfigChangedEventArgs> ConfigChanged`: This event is raised first when the client's internal cache gets populated.
+  Afterwards, it is raised again each time the internally cached config is updated to a newer version, either as a result of synchronization
+  with the external cache, or as a result of fetching a newer version from the ConfigCat CDN.
+- `event EventHandler<FlagEvaluatedEventArgs> FlagEvaluated`: This event is raised each time the client evaluates a feature flag or setting.
+  The event provides the same evaluation details that you would get from [`GetValueDetailsAsync()`](#anatomy-of-getvaluedetailsasync).
+- `event EventHandler<ConfigCatClientErrorEventArgs> Error`: This event is raised when an error occurs within the client.
 
 You can subscribe to these events either on initialization:
 
