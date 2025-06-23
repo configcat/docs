@@ -55,7 +55,7 @@ The basic package includes:
 #### On-Premise (Self-hosted)
 
 Runs on the customer's own infrastructure. We suggest <a href="https://configcat.com/support/" target="_blank">contacting ConfigCat's engineering</a>
-team for exact requirements and performance details.
+team for exact requirements and performance characteristics.
 
 ## config JSON downloads
 
@@ -72,7 +72,7 @@ subsequent `GetValue()` calls will then be served from the cache.
 
 ### Frontend/mobile/desktop applications
 
-Typically, you have a high number of frontend/mobile/desktop application instances. Your user count determines their number.
+Typically, you have a high number of frontend/mobile/desktop application instances. Your user count determines this number.
 
 #### Example: A standard web application with 15k active users
 
@@ -104,7 +104,7 @@ All these 4 instances use the ConfigCat SDK in Auto Polling mode with a 1-minute
 #### Example: High frequency polling in 10 instances
 
 Suppose you want your system to react faster after changing a feature flag in ConfigCat. You can decrease
-the default polling interval down up to 1 second. In this case, we are calculating with 10 running instances.
+the default polling interval all the way down to 1 second. In this case, we are calculating with 10 running instances.
 
 > **10** _(instances)_ × **2,592,000** _(seconds in a month)_ = **25,920,000 config JSON downloads / month**
 
