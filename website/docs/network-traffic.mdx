@@ -48,7 +48,7 @@ Here are a few examples of config JSON file sizes:
   </table>
 
 #### Size of the `config JSON`
-It is affected by the number of feature flags, settings, Targeting Rules, segments, and the length of their values.
+It is affected by the number of feature flags, settings, targeting rules, segments, and the length of their values.
 
 #### Number of clients connecting to ConfigCat
 Every time a client downloads the config JSON, it contributes to the overall Network Traffic.
@@ -91,7 +91,7 @@ Runs on the customer's own servers. We suggest <a href="https://configcat.com/su
 
 ### Delete the old feature flags and unused Targeting Rules
 
-If you have a large number of feature flags and Targeting Rules in a config, you can reduce the size of the `config JSON` by deleting the old ones. The [Zombie Flags](/zombie-flags) feature can help you finding stale feature flags.
+If you have a large number of feature flags and Targeting Rules in a config, you can reduce the size of the `config JSON` by deleting the old ones. The [Zombie Flags](./zombie-flags) feature can help you finding stale feature flags.
 
 ### Avoid keeping lots of data in the comparison value of Targeting Rules or segments
 
@@ -107,12 +107,12 @@ If you have a large number of feature flags, you can reduce the size of the `con
 
 ### Use the ConfigCat Proxy to cache/proxy config JSON downloads
 
-The [ConfigCat Proxy](/advanced/proxy/proxy-overview/) allows you to host a feature flag evaluation and config JSON proxy/cache service within your own infrastructure.  
-The [CDN proxy](/advanced/proxy/endpoints/#cdn-proxy) feature allows you to proxy/cache config JSON downloads, and the ConfigCat SDKs can be routed to the ConfigCat Proxy running in your own infrastructure greatly reducing network traffic.
+The [ConfigCat Proxy](./advanced/proxy/proxy-overview/) allows you to host a feature flag evaluation and config JSON proxy/cache service within your own infrastructure.  
+The [CDN proxy](./advanced/proxy/endpoints/#cdn-proxy) feature allows you to proxy/cache config JSON downloads, and the ConfigCat SDKs can be routed to the ConfigCat Proxy running in your own infrastructure greatly reducing network traffic.
 
-### Purchase additional quota
+### Purchase additional network traffic
 
-You can purchase an additional quota for your subscription to increase your limits. [Contact us](https://configcat.com/support/) for more information.
+You can purchase an add-on for your subscription to increase your limits. [Contact us](https://configcat.com/support/) for more information.
 
 | Plan           | Price              | Additional config JSON downloads | Additional network traffic |
 | -------------- | ------------------ | -------------------------------: | -------------------------: |
