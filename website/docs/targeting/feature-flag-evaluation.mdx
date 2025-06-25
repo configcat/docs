@@ -46,7 +46,7 @@ In case the prerequisite flag is missing or there is a type mismatch between the
 
 ### Evaluation of a Segment Condition
 
-The SDK looks up the segment referenced by the condition and evaluates the condition described by the segment similarly to [User Conditions](../targeting-rule/user-condition). Then, the result is checked against the comparator. In the case of `IS IN SEGMENT` the result of the Segment Condition will be the same as the result of the segment. The result will be negated in the case of `IS NOT IN SEGMENT`.
+The SDK looks up the segment referenced by the condition and evaluates the condition described by the segment similarly to [User Conditions](../targeting-rule/user-condition). Then, the result is checked against the comparator. In the case of **IS IN SEGMENT**, the result of the Segment Condition will be the same as the result of the segment. In the case of **IS NOT IN SEGMENT**, the result will be negated.
 
 If the segment evaluates to `cannot evaluate`, so does the Segment Condition.
 
@@ -71,7 +71,7 @@ The evaluation process is entirely implemented within the SDKs, meaning your use
 
 ### Example Scenarios for Percentage Options
 
-Imagine you have two users, Jane and Joe, and you're experimenting with two different feature flags (`isTwitterSharingEnabled` and `isFacebookSharingEnabled`) that use percentage-based targeting. In these scenarios, we see how Percentage Options allow for a controlled and gradual rollout of features, ensuring a smooth transition for users like Jane and Joe.
+Imagine you have two users, Jane and Joe, and you're experimenting with two different feature flags (**isTwitterSharingEnabled** and **isFacebookSharingEnabled**) that use percentage-based targeting. In these scenarios, we see how Percentage Options allow for a controlled and gradual rollout of features, ensuring a smooth transition for users like Jane and Joe.
 
 First, the users are assigned a number between 0 and 99 based on the hash of the feature flag's key and their identifier. According to the Percentage Options specified on the Dashboard, this number determines which group they are assigned to, i.e. whether or not the feature is enabled for them.
 
@@ -98,10 +98,10 @@ In this case both feature flags are enabled for only 10% of users.
 | Joe  | 32 >= 10 <br/>→ **OFF**                       | 12 >= 10 <br/>→ **OFF**                        |
 
 :::info
-Despite both feature flags being set to 10% ON / 90% OFF, the `isTwitterSharingEnabled` feature flag is only enabled for Jane, while `isFacebookSharingEnabled` is disabled for both of them. This happens because the feature flag key is also involved in computing the hash.
+Despite both feature flags being set to 10% ON / 90% OFF, the **isTwitterSharingEnabled** feature flag is only enabled for Jane, while **isFacebookSharingEnabled** is disabled for both of them. This happens because the feature flag key is also involved in computing the hash.
 :::
 
-3\. **Increasing `isTwitterSharingEnabled` to 40% ON / 60% OFF**
+3\. **Increasing _isTwitterSharingEnabled_ to 40% ON / 60% OFF**
 
 |      | isTwitterSharingEnabled <br/> 40% ON / 60% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |

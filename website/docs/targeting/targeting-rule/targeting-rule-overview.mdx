@@ -64,8 +64,8 @@ Since this feature is new, we want to make sure that only frequent shoppers and 
 
 #### Solution
 We can achieve this by adding a Targeting Rule to the **Enable Cafe Notifications** feature flag. The Targeting Rule will have two conditions:
-- User Condition: user attribute **AppVersion** is greater than **3.0.0**
-- Segment Condition: user is in segment **Frequent Shoppers**
+- a Segment Condition, which requires that the user is in segment **Frequent Shoppers**,
+- a User Condition, which requires that the user attribute **AppVersion** is greater than **3.0.0**.
 
 On the Dashboard:
 ![Targeting Rule example](/assets/targeting/targeting-rule/and-example.png)
