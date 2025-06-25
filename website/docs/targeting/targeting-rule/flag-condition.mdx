@@ -20,7 +20,9 @@ For more details on the evaluation of Flag Conditions, please refer to [Feature 
 
 ## How to set a Flag Condition?
 
-You can set a Flag Condition for a feature flag on the ConfigCat Dashboard. The prerequisite flag can be any feature flag already defined in the same config on the Dashboard. In the case of settings other than feature flags (boolean settings), you can also set a comparison value to which the prerequisite flag's value will be compared.
+You can set a Flag Condition for a feature flag on the ConfigCat Dashboard by clicking on the **+IF** ("Add targeting rule") button.
+
+The prerequisite flag can be any feature flag already defined in the same config on the Dashboard. In the case of settings other than feature flags (boolean settings), you can also set a comparison value to which the prerequisite flag's value will be compared.
 
 <img src="/docs/assets/targeting/targeting-rule/flag-condition/flag-condition.png" width="700" alt="set flag condition" decoding="async" loading="lazy"/>
 
@@ -36,11 +38,11 @@ You can set a Flag Condition for a feature flag on the ConfigCat Dashboard. The 
 
 A Flag Condition consists of the following: 
 
-- **Prerequisite flag key**: The key of the feature flag (or setting) on which the condition is based.
+- **Prerequisite flag key**: The key of the feature flag or setting on which the condition is based.
 - **Comparator**: The comparison operator that defines the relation between the prerequisite flag's value and the comparison value. See the available comparators below.
 - **Comparison value**: Available only when the prerequisite flag is a string, integer or double setting. The value that the prerequisite flag's value is compared to.
 
-### Comparators
+### Comparator
 
 Different comparators are available for different types of prerequisites.
 
@@ -65,8 +67,8 @@ When the prerequisite is a string, integer or double setting, the following comp
 #### Context
 Our demo company, Whisker Co. has a mobile app, which, among other things, can show the cat-friendly cafés in the neighborhood.
 
-The app can send notifications about the users' favorite cafés. This feature is not available to everyone though, it's enabled using the `Enable Cafe Notifications` feature flag.
-There is another feature that allows users to rate cafés, whose availability is controlled similarly, via the `Enable Cafe Ratings` feature flag.
+The app can send notifications about the users' favorite cafés. This feature is not available to everyone though, it's enabled using the **Enable Cafe Notifications** feature flag.
+There is another feature that allows users to rate cafés, whose availability is controlled similarly, via the **Enable Cafe Ratings** feature flag.
 
 #### Goal
 We want to make sure that users only receive notifications about their favorite cafés if they can rate them.
@@ -74,7 +76,7 @@ We want to make sure that users only receive notifications about their favorite 
 #### Solution
 ConfigCat offers a built-in way to solve this problem without the need of extra coding: prerequisite flags.
 
-We can achieve our goal by adding a Targeting Rule containing a Flag Condition to `Enable Cafe Notifications`, then referencing `Enable Cafe Ratings` in the condition and setting the comparator to `IS ON`, meaning that the `Enable Cafe Notifications` feature flag will be enabled only if the `Enable Cafe Ratings` feature flag is ON.
+We can achieve our goal by adding a Targeting Rule containing a Flag Condition to **Enable Cafe Notifications**, then referencing **Enable Cafe Ratings** in the condition and setting the comparator to **IS ON**, meaning that the **Enable Cafe Notifications** feature flag will be enabled only if the **Enable Cafe Ratings** feature flag is ON.
 
 On the Dashboard:
 ![Flag Condition example](/assets/targeting/targeting-rule/flag-condition/flag-condition-example.png)
