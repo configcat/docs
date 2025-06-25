@@ -414,16 +414,26 @@ ConfigCat.get_value("otherKey", "other default", client: :second)
 
 ## Hooks
 
-With the following hooks you can subscribe to particular events fired by the SDK:
+The SDK provides several hooks (events), by means of which you can get notified of its actions.
+You can subscribe to the following events emitted by the _ConfigCat_ client:
 
-- `on_client_ready`: This event is sent when the SDK reaches the ready state. If the SDK is set up with lazy load or manual polling it's considered ready right after instantiation.
-  If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `on_client_ready` event fires when the auto polling's `max_init_wait_time_seconds` is reached.
+- `on_client_ready`: This event is emitted when the client reaches the ready state, i.e. completes initialization.
+  * If Lazy Loading or Manual Polling is used, it's considered ready right after instantiation.
+  * If Auto Polling is used, the ready state is reached as soon as
+    * the initial sync with the external cache yields up-to-date config data,
+    * otherwise, if the client is online (i.e. HTTP requests are allowed), the first config fetch operation completes (regardless of success or failure),
+    * or the time specified via Auto Polling's `max_init_wait_time_seconds` option has passed.
 
-- `on_config_changed(config: map())`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
-
-- `on_flag_evaluated(evaluation_details: EvaluationDetails.t())`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`get_value_details`](#anatomy-of-getvaluedetails).
-
-- `on_error(error: String.t())`: This event is sent when an error occurs within the ConfigCat SDK.
+  Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
+  However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
+  may be empty or expired even after the ready state is reported. Alternatively, in Auto Polling mode, you can wait for
+  the first `onConfigChanged` event to be notified when the internal cache is actually populated with config data.
+- `on_config_changed(config: map())`: This event is emitted first when the client's internal cache gets populated.
+  Afterwards, it is emitted again each time the internally cached config is updated to a newer version, either as a result of synchronization
+  with the external cache, or as a result of fetching a newer version from the ConfigCat CDN.
+- `on_flag_evaluated(evaluation_details: EvaluationDetails.t())`: This event is emitted each time the client evaluates a feature flag or setting.
+  The event provides the same evaluation details that you would get from [`get_value_details`](#anatomy-of-getvaluedetails).
+- `on_error(error: String.t())`: This event is emitted when an error occurs within the client.
 
 You can subscribe to these events either on SDK initialization:
 

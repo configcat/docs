@@ -481,13 +481,24 @@ console.log(value);
 ## Hooks
 
 The SDK provides several hooks (events), by means of which you can get notified of its actions.
-You can subscribe to the following events emitted by the client:
+You can subscribe to the following events emitted by the _ConfigCat_ client:
 
-- `clientReady`: This event is emitted when the SDK reaches the ready state. If the SDK is set up to use lazy loading or manual polling, it's considered ready right after syncing up with the config cache.
-  If auto polling is used, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP, the `clientReady` event fires when the auto polling's `maxInitWaitTimeSeconds` has passed.
-- `configChanged`: This event is emitted first when the SDK loads a valid config JSON into memory from cache, then each time afterwards when a config JSON with changed content is downloaded via HTTP.
-- `flagEvaluated`: This event is emitted each time when the SDK evaluates a feature flag or setting. The event provides the same evaluation details that you would get from [`getValueDetailsAsync()`](#anatomy-of-getvaluedetailsasync).
-- `clientError`: This event is emitted when an error occurs within the _ConfigCat SDK_.
+- `clientReady: [cacheState: ClientCacheState]`: This event is emitted when the client reaches the ready state, i.e. completes initialization.
+  * If Lazy Loading or Manual Polling is used, it's considered ready right after the initial sync with the external cache (if any) completes.
+  * If Auto Polling is used, the ready state is reached as soon as
+    * the initial sync with the external cache yields up-to-date config data,
+    * otherwise, if the client is online (i.e. HTTP requests are allowed), the first config fetch operation completes (regardless of success or failure),
+    * or the time specified via Auto Polling's `maxInitWaitTimeSeconds` option has passed.
+
+  Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
+  However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
+  may be empty or expired even after the ready state is reported. You can verify this by checking the `cacheState` argument.
+- `configChanged: [newConfig: IConfig]`: This event is emitted first when the client's internal cache gets populated.
+  Afterwards, it is emitted again each time the internally cached config is updated to a newer version, either as a result of synchronization
+  with the external cache, or as a result of fetching a newer version from the ConfigCat CDN.
+- `flagEvaluated: [evaluationDetails: IEvaluationDetails]`: This event is emitted each time the client evaluates a feature flag or setting.
+  The event provides the same evaluation details that you would get from [`getValueDetailsAsync()`](#anatomy-of-getvaluedetailsasync).
+- `clientError: [message: string, exception?: any]`: This event is emitted when an error occurs within the client.
 
 You can subscribe to these events either on initialization:
 
