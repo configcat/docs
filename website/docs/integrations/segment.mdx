@@ -27,7 +27,7 @@ Ensures that every setting change in ConfigCat is sent to Segment as a <a href="
 3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
 4. Click on Twilio Segment's CONNECT button and set the Twilio Segment Write Key acquired while adding the ConfigCat source in Twilio Segment.
 5. OPTIONAL - Set the proper server of your Twilio Segment account. <a href="https://segment.com/docs/guides/regional-segment/" target="_blank" rel="noopener noreferrer">More about Segment servers</a>.
-6. You're all set. Go ahead and make some changes on your feature flags, then check your events in Twilio Segment.
+6. You're all set. Go ahead and make some changes to your feature flags, then check your events in Twilio Segment.
 
 ### Un-installation
 
@@ -40,7 +40,7 @@ Every feature flag change event sent to Twilio Segment by ConfigCat has the foll
 
 - **event name:** `Feature Flag Changed`.
 - **timestamp:** When the change happened.
-- **details:** A brief summary of the change.
+- **details:** A summary of the change.
 - **product_id, product_name**: The product where the change happened.
 - **config_id, config_name**: The config where the change happened.
 - **environment_id, environment_name**: The environment where the change happened.
@@ -49,7 +49,7 @@ Every feature flag change event sent to Twilio Segment by ConfigCat has the foll
 
 ## Sending feature flag evaluation analytics to Twilio Segment {#analytics}
 
-Ensures that feature flag evaluations are sent into the Twilio Segment <a href="https://segment.com/catalog/integrations/source/configcat/" target="_blank" rel="noopener noreferrer">ConfigCat source</a>. With this integration, you can have advanced analytics about your feature flag usages, A/B test results in any of Segment's destinations.
+Ensures that feature flag evaluations are sent into the Twilio Segment <a href="https://segment.com/catalog/integrations/source/configcat/" target="_blank" rel="noopener noreferrer">ConfigCat source</a>. With this integration, you get advanced analytics on your feature flag usage and A/B test results in any of Segment's destinations.
 
 ### Setup
 
@@ -423,9 +423,9 @@ For Text feature flags with lengthy values (e.g., JSON), send the `variationId` 
 The `variationId` is a hashed version of the feature flag value, accessible on the ConfigCat Dashboard by enabling the _Show VariationIDs to support A/B testing_ setting. Learn more [here](https://app.configcat.com/product/preferences).
 :::
 
-4. Deploy your application and wait for feature flag evaluations to happen so feature flag evaluation events could be sent to Twilio Segment.
+4. Deploy your application and wait for feature flag evaluations to happen so feature flag evaluation events can be sent to Twilio Segment.
 5. Add the preferred destination in Twilio Segment for your source and configure your mappings. 
-6. Enable the destination and leverage advanced feature flag analytics in the destination.
+6. Enable the destination and utilize advanced feature flag analytics in the destination.
 
 ### Example event
 Check your source's debugger to see the events.
