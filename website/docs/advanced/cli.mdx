@@ -6,7 +6,9 @@ description: The ConfigCat Command Line Interface (CLI) connect and match featur
 
 The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> allows you to interact with the [Public Management API](/api/reference/configcat-public-management-api) via the command line. It supports most functionality found on the ConfigCat Dashboard. You can manage ConfigCat resources like Feature Flags, Targeting / Percentage rules, Products, Configs, Environments, and more.
 
-The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> has the ability to [scan your source code](../advanced/code-references/overview.mdx) for feature flag and setting usages and upload the found code references to ConfigCat.
+The CLI also has the ability to [scan your source code](../advanced/code-references/overview.mdx) for feature flag and setting usage and upload the found code references to ConfigCat.
+
+Finally, the CLI provides additional handy utilities, such as validating a config JSON file, downloading one from the ConfigCat CDN by SDK Key, etc.
 
 ```
 configcat
@@ -50,7 +52,7 @@ Use "configcat [command] -?" for more information about a command.
 
 See the <a target="_blank" href="https://configcat.github.io/cli/">command reference documentation</a> for more information about each available command.
 
-## Getting Started
+## Getting started
 
 The following instructions will guide you through the first steps to start using this tool.
 
@@ -201,21 +203,21 @@ You can download the executables directly from <a target="_blank" href="https://
 
 ### Setup
 
-After a successful installation, the CLI must be set up with your <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credentials</a>.
+After a successful installation, the CLI must be set up with your <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Public Management API credentials</a>.
 
 You can do this by using the `configcat setup` command.
 
 <img src="/docs/assets/cli/setup.gif" alt="interactive" decoding="async" loading="lazy"/>
 
-#### Environment Variables
+#### Environment variables
 
 Besides the `setup` command above, the CLI can read your credentials from the following environment variables.
 
-| Name                 | Description                                           |
-| -------------------- | ----------------------------------------------------- |
-| `CONFIGCAT_API_HOST` | The Management API host. (default: api.configcat.com) |
-| `CONFIGCAT_API_USER` | The Management API basic authentication username.     |
-| `CONFIGCAT_API_PASS` | The Management API basic authentication password.     |
+| Name                 | Description                              |
+| -------------------- | ---------------------------------------- |
+| `CONFIGCAT_API_HOST` | API host (default: `api.configcat.com`). |
+| `CONFIGCAT_API_USER` | API basic auth user name.                |
+| `CONFIGCAT_API_PASS` | API basic auth password.                 |
 
 :::caution
 When any of these environment variables are set, the CLI will use them over the local values set by the `configcat setup` command.
@@ -229,7 +231,7 @@ The CLI supports both interactive and argument driven execution. When no argumen
 
 <img src="/docs/assets/cli/teaser.gif" alt="interactive" decoding="async" loading="lazy"/>
 
-### With Arguments
+### With arguments
 
 The same operation with command arguments would look like this:
 
@@ -257,37 +259,37 @@ CONFIG_ID=$(configcat config create -p $PRODUCT_ID -n "<config-name>")
 :::
 
 :::info
-You can change the output format of several command's result to JSON with the `--json` option, like: `configcat flag ls --json`. See more about these commands in the <a target="_blank" href="https://configcat.github.io/cli/">command reference documentation</a>.
+You can change the output format of several commands' result to JSON with the `--json` option, like: `configcat flag ls --json`. See more about these commands in the <a target="_blank" href="https://configcat.github.io/cli/">command reference documentation</a>.
 :::
 
-## Scan & Upload Code References
+## Scan & upload code references
 
-The CLI has the ability to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat. You can read more about this feature [here](../advanced/code-references/overview.mdx).
+The CLI has the ability to scan your source code for feature flag and setting usage and upload the found code references to ConfigCat. You can read more about this feature [here](../advanced/code-references/overview.mdx).
 
 ## Examples
 
 Here are a few examples showing the true power of the CLI.
 
-### Create a Feature Flag
+### Create a feature flag
 
-The following example shows how you can create a Feature Flag in a specific Config.
+The following example shows how you can create a feature flag in a specific config.
 
 <img src="/docs/assets/cli/create-flag.gif" alt="create flag" decoding="async" loading="lazy"/>
 
 ### Value update
 
-The following example shows how you can update the value of a Feature Flag in a specific Environment.
+The following example shows how you can update the value of a feature flag in a specific environment.
 
 <img src="/docs/assets/cli/flag-value-update.gif" alt="flag value update" decoding="async" loading="lazy"/>
 
-### Add Targeting Rules
+### Add targeting rules
 
-The following example shows how you can add Targeting Rules to a Feature Flag.
+The following example shows how you can add targeting rules to a feature flag.
 
 <img src="/docs/assets/cli/flag-targeting-add.gif" alt="flag targeting add" decoding="async" loading="lazy"/>
 
-### Add percentage rules
+### Add percentage options
 
-The following example shows how you can set percentage rules on a Feature Flag.
+The following example shows how you can set percentage options in a feature flag.
 
 <img src="/docs/assets/cli/flag-percentage-add.gif" alt="flag percentage add" decoding="async" loading="lazy"/>
