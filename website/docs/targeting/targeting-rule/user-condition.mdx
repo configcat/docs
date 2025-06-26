@@ -6,7 +6,9 @@ description: A User Condition is a condition that is based on the comparison of 
 
 ## What is a User Condition?
 
-A *User Condition* is a condition that is based on the comparison of a user attribute (*comparison attribute*) and a preset value (*comparison value*). It allows you to define Targeting Rules which target users based on their properties.
+A _User Condition_ is a condition that is based on the comparison of a user attribute (_comparison attribute_) and a preset value (_comparison value_).
+
+It allows you to define Targeting Rules which target users based on their properties.
 
 ## How does the User Condition work?
 
@@ -16,7 +18,7 @@ For more details on the evaluation of User Conditions, please refer to [Feature 
 
 ## How to set a User Condition?
 
-You can add a Targeting Rule with a condition on the Dashboard by clicking on the **+IF** ("Add Targeting Rule") button, then add more conditions by clicking on the **+AND** ("Add AND condition") button.
+You can add a User Condition to a feature flag on the Dashboard by clicking on the **+IF** ("Add targeting rule") button, then more conditions by clicking on the **+AND** ("Add AND condition") button.
 
 <img src="/docs/assets/targeting/targeting-rule/user-condition/user-condition.png" width="700" alt="add user condition" decoding="async" loading="lazy"/>
 
@@ -26,9 +28,9 @@ You can add a Targeting Rule with a condition on the Dashboard by clicking on th
 
 A User Condition consists of three parts:
 
-- **Comparison attribute:** The user attribute on which the condition is based. Can be **Identifier** (user ID), **Email**, **Country**, or any custom attribute.
-- **Comparator:** The comparison operator that defines the relation between the comparison attribute and the comparison value. See the available comparators [here](#comparator).
-- **Comparison value:** The preset value to which the comparison attribute is compared. Depending on the comparator, can be a string, a list of strings, a number, a semantic version, a list of semantic versions or a date.
+- **_Comparison attribute_:** The user attribute on which the condition is based. Can be **Identifier** (user ID), **Email**, **Country**, or any custom attribute.
+- **_Comparator_:** The comparison operator that defines the relation between the comparison attribute and the comparison value. See the available comparators [here](#comparator).
+- **_Comparison value_:** The preset value to which the comparison attribute is compared. Depending on the comparator, can be a string, a list of strings, a number, a semantic version, a list of semantic versions or a date.
 
 ### Comparison attribute
 
@@ -139,7 +141,7 @@ The following comparators expect the comparison attribute to be an array of stri
 
 ## Examples
 
-### Black Friday Sale
+### Black Friday sale
 
 #### Context
 Black Friday is coming and we want to offer a special discount to our users.
@@ -182,7 +184,7 @@ Let's work around the problem by extracting the domain part of the email and pas
 This way we can define the desired Targeting Rule using confidential comparators only.
 
 On the Dashboard:
-{/* <img src="/docs/assets/targeting/targeting-rule/user-condition/user-condition-example1.jpg" alt="User Condition Example" decoding="async" loading="lazy" /> */}
+{/* <img src="/docs/assets/targeting/targeting-rule/user-condition/user-condition-example1.png" alt="User Condition Example" decoding="async" loading="lazy" /> */}
 ![User Condition Example](/assets/targeting/targeting-rule/user-condition/user-condition-example1.png)
 
 In the code:
