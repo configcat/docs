@@ -20,11 +20,11 @@ For more details on the evaluation of User Conditions, please refer to [Feature 
 
 You can add a User Condition to a feature flag on the Dashboard by clicking on the **+IF** ("Add targeting rule") button, then more conditions by clicking on the **+AND** ("Add AND condition") button.
 
-<img src="/docs/assets/targeting/targeting-rule/user-condition/user-condition.png" width="700" alt="add user condition" decoding="async" loading="lazy"/>
+<img alt="Target users" src="/docs/assets/targeting/targeting-rule/user-condition/target-users_192dpi.png" width="700" height="525" decoding="async" loading="lazy" />
 
 ## Anatomy of a User Condition
 
-![User Condition anatomy](/assets/targeting/targeting-rule/user-condition/user-condition-anatomy.png)
+<img alt="User condition anatomy" src="/docs/assets/targeting/targeting-rule/user-condition/user-condition-anatomy_192dpi.png" width="1033" height="46" decoding="async" loading="lazy" />
 
 A User Condition consists of three parts:
 
@@ -147,13 +147,13 @@ The following comparators expect the comparison attribute to be an array of stri
 Black Friday is coming and we want to offer a special discount to our users.
 
 #### Goal
-The deal should become available at midnight on Black Friday. We want to make sure that the users can't access the deal before that. Also, the deal should be available for the whole weekend.
+The deals should become available at midnight on Black Friday. We want to make sure that the users can't access the deals before that. Also, the deals should be available for the whole weekend.
 
 #### Solution
 Let's use the **AFTER** comparator to check whether the current time is after midnight on Black Friday AND the current time is **BEFORE** midnight on Sunday.
 
 On the Dashboard:
-![Black Friday Sale Example](/assets/targeting/targeting-rule/user-condition/black-friday-example.png)
+<img alt="Black Friday sale example" src="/docs/assets/targeting/targeting-rule/user-condition/black-friday-example_192dpi.png" width="1084" height="473" decoding="async" loading="lazy" />
 
 In the code:
 ```js
@@ -179,13 +179,12 @@ However, there is no confidential version of these comparators and we are well a
 How can we solve this?
 
 #### Solution
-Let's work around the problem by extracting the domain part of the email and passing it as a custom attribute named **domain** to the ConfigCat SDK.
+Let's work around the problem by extracting the domain part of the email and passing it as a custom attribute named **Domain** to the ConfigCat SDK.
 
 This way we can define the desired Targeting Rule using confidential comparators only.
 
 On the Dashboard:
-{/* <img src="/docs/assets/targeting/targeting-rule/user-condition/user-condition-example1.png" alt="User Condition Example" decoding="async" loading="lazy" /> */}
-![User Condition Example](/assets/targeting/targeting-rule/user-condition/user-condition-example1.png)
+<img alt="Confidential CONTAINS example" src="/docs/assets/targeting/targeting-rule/user-condition/confidential-contains-example_192dpi.png" width="1084" height="433" decoding="async" loading="lazy" />
 
 In the code:
 
@@ -193,8 +192,12 @@ In the code:
 const userDomain = userEmail.split('@').pop();
 
 const userObject = new configcat.User(userId, userEmail, undefined, {
-  { domain: userDomain }
+  { Domain: userDomain }
 });
 
 const value = await configCatClient.getValueAsync(key, defaultValue, userObject);
 ```
+
+:::info
+Since the introduction of [Config V2](../../../advanced/config-v2), this workaround is no longer needed: in a V2 config, you can simply use the hashed version of the **ENDS WITH ANY OF** comparator.
+:::

@@ -22,13 +22,13 @@ The Targeting Rules are in an **OR** relationship, meaning that the Targeting Ru
 
 You can add a Targeting Rule to a feature flag on the Dashboard by clicking on the **+IF** ("Add targeting rule") button, then more Targeting Rules by clicking on the **+OR** button at the bottom of the last Targeting Rule.
 
-![Add Targeting Rule](/assets/targeting/targeting-rule/add-rule.png)
+<img alt="Add targeting rule" src="/docs/assets/targeting/targeting-rule/add-targeting-rule_192dpi.png" width="700" height="525" decoding="async" loading="lazy" />
 
 ## How does it work? - Anatomy of a Targeting Rule
 
 A Targeting Rule consists of an _IF part_ and a _THEN part_.
 
-![Targeting Rule anatomy](/assets/targeting/targeting-rule/targeting-rule.png)
+<img alt="Targeting rule anatomy" src="/docs/assets/targeting/targeting-rule/targeting-rule-anatomy_192dpi.png" width="1084" height="433" decoding="async" loading="lazy" />
 
 ### IF part
 
@@ -52,7 +52,7 @@ The order of Targeting Rules matters because they are in an **OR** relationship,
 
 The order of the Targeting Rules can be changed on the Dashboard by dragging and dropping the Targeting Rules.
 
-![Change Targeting Rule order](/assets/targeting/targeting-rule/reorder.png)
+<img alt="Change targeting rule order" src="/docs/assets/targeting/targeting-rule/targeting-rule-reorder_192dpi.png" width="333" height="399" decoding="async" loading="lazy" />
 
 ## Examples
 
@@ -62,15 +62,15 @@ The order of the Targeting Rules can be changed on the Dashboard by dragging and
 In our demo company (Whisker Co.) we have a new feature in our mobile app that notifies frequent shopper cat owners about the cat-friendly cafés in the neighborhood. 
 
 #### Goal
-Since this feature is new, we want to make sure that only frequent shoppers and cat owners who have the right version of the app receive these notifications. The earlier versions of the app don't have this feature, so we want to make sure that only those who are running a version higher than 3.0.0 receive the notifications.
+Since this feature is new, we want to make sure that only frequent shoppers and cat owners who have the right version of the app receive these notifications. The earlier versions of the app don't have this feature, so we want to make sure that only those who are running version 3.0.0 or higher receive the notifications.
 
 #### Solution
 We can achieve this by adding a Targeting Rule to the **Enable Cafe Notifications** feature flag. The Targeting Rule will have two conditions:
 - a Segment Condition, which requires that the user is in segment **Frequent Shoppers**,
-- a User Condition, which requires that the user attribute **AppVersion** is greater than **3.0.0**.
+- a User Condition, which requires that the user attribute **AppVersion** is greater than or equal to **3.0.0**.
 
 On the Dashboard:
-![Targeting Rule example](/assets/targeting/targeting-rule/and-example.png)
+<img alt="AND relationship example" src="/docs/assets/targeting/targeting-rule/and-example_192dpi.png" width="1084" height="473" decoding="async" loading="lazy" />
 
 In the code:
 ```js

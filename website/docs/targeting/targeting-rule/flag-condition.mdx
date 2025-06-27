@@ -24,17 +24,15 @@ You can add a Flag Condition to a feature flag on the Dashboard by clicking on t
 
 The prerequisite flag can be any feature flag already defined in the same config on the Dashboard. In the case of settings other than feature flags (boolean settings), you can also set a comparison value to which the prerequisite flag's value will be compared.
 
-<img src="/docs/assets/targeting/targeting-rule/flag-condition/flag-condition.png" width="700" alt="set flag condition" decoding="async" loading="lazy"/>
+<img alt="Add prerequisite" src="/docs/assets/targeting/targeting-rule/flag-condition/add-prerequisite_192dpi.png" width="700" height="525" decoding="async" loading="lazy" />
 
 ## Anatomy of a Flag Condition
 
 #### Prerequisite is a feature flag (boolean setting)
-{/* ![Flag Condition anatomy 1](/assets/targeting/targeting-rule/flag-condition/flag-condition-anatomy1.png) */}
-<img src="/docs/assets/targeting/targeting-rule/flag-condition/flag-condition-anatomy1.png" width="572" height="50" alt="Flag Condition anatomy 1" decoding="async" loading="lazy"/>
+<img alt="Flag condition anatomy (feature flag)" src="/docs/assets/targeting/targeting-rule/flag-condition/flag-condition-anatomy1_192dpi.png" width="1033" height="46" decoding="async" loading="lazy" />
 
 #### Prerequisite is a string, integer or double setting
-{/* ![Flag Condition anatomy 2](/assets/targeting/targeting-rule/flag-condition/flag-condition-anatomy2.png) */}
-<img src="/docs/assets/targeting/targeting-rule/flag-condition/flag-condition-anatomy2.png" width="958" height="50" alt="Flag Condition anatomy 2" decoding="async" loading="lazy"/>
+<img alt="Flag condition anatomy (non-boolean setting)" src="/docs/assets/targeting/targeting-rule/flag-condition/flag-condition-anatomy2_192dpi.png" width="1033" height="46" decoding="async" loading="lazy" />
 
 A Flag Condition consists of the following: 
 
@@ -79,4 +77,4 @@ ConfigCat offers a built-in way to solve this problem without the need of extra 
 We can achieve our goal by adding a Targeting Rule containing a Flag Condition to **Enable Cafe Notifications**, then referencing **Enable Cafe Ratings** in the condition and setting the comparator to **IS ON**, meaning that the **Enable Cafe Notifications** feature flag will be enabled only if the **Enable Cafe Ratings** feature flag is ON.
 
 On the Dashboard:
-![Flag Condition example](/assets/targeting/targeting-rule/flag-condition/flag-condition-example.png)
+<img alt="Flag condition example" src="/docs/assets/targeting/targeting-rule/flag-condition/flag-condition-example_192dpi.png" width="1084" height="686" decoding="async" loading="lazy" />
