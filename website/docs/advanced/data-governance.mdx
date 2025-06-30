@@ -4,13 +4,11 @@ title: Data Governance - CDN
 description: ConfigCat customers can control the geographic location where their data will be published to. Helps to stay compliant with GDPR and other data protection regulations.
 ---
 
-Addressing global data handling and processing trends via Data Governance feature. Customers
-can control the geographic location where their config JSONs get published to.
+ConfigCat's Data Governance feature gives you control over how and where your config JSONs are published and served from. This helps you comply with regional data handling requiremens such as GDPR. 
 
 ## CDN - Data Centers
 
-To ensure high availability and low response times all around the globe, ConfigCat provides data centers at multiple global 
-locations. All of the data centers have multiple CDN nodes to guarantee proper redundancy.
+To ensure high availability and low response times worldwide, ConfigCat provides multiple global data centers, each with multiple CDN nodes for built-in redundancy and failover. 
 
 ### ConfigCat Data Center locations
 
@@ -44,10 +42,10 @@ in your application code when it is being initialized.
 
 ## Troubleshooting
 
-#### What if I forgot to pass the `dataGovernance` parameter?
+#### What happens if I forget to pass the `dataGovernance` parameter?
 
 The ConfigCat backend will take the Dashboard preference as primary. Having `EU Only` selected on the Dashboard but forgot to pass the proper `dataGovernance` parameter to the SDK. In this case your config JSONs will only published to the EU CDN nodes. And every config JSON download made from your application to any node outside the EU, the request will be redirected automatically to the EU CDN. Recommended to deploy a fix with the correct `dataGovernance` param, since response times will be significantly longer.
 
 #### `Warning: Your dataGovernance parameter at ConfigCatClient initialization is not in sync with your preferences...`
 
-**You worry do not.** Your feature flags are served. See above example.
+**Don't worry,** your feature flags will still be served. See above example.
