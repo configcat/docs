@@ -7,34 +7,37 @@ description: Webhooks are a way to send notifications to your applications about
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Your application can be notified about Setting value changes in real-time. ConfigCat enables this by calling a public URL of your system (a so-called Webhook). You can add your Webhook URLs in the _Dashboard_.
+ConfigCat Webhooks can notify your applications when a feature flag or other Setting changes by calling a public HTTP endpoint on your end.
+This allows your applications to react almost immediately to updates.
+Webhooks add the speed of near real-time updates to the reliability of Polling, giving your applications a fast and robust way to stay in sync.
+To enable Webhooks, simply tell us which HTTP endpoint to call. ConfigCat will send a request to that URL whenever a change occurs.
 
-## Adding Webhook
+## Adding a Webhook
 
-1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab.
-2. Set the Url and the HttpMethod.
-3. Optionally, you can add additional HTTP headers and a body to the request.
+1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> screen.
+2. Click the **+ ADD WEBHOOK** button.
+3. Choose **when** webhook notifications should be sent by selecting the **Config** and **Environment**  where changes should trigger the Webhook.
+4. Define **how** to notify your system by setting the **URL** and the **HTTP METHOD**. This tells us which endpoint to call.
+5. (Optional) Add custom HTTP headers and a request body if needed.
 
 ## Request body with variables
 
-You can specify a Request body that will be sent as the payload of the HTTP request.
+You can customize the request body that will be sent with each Webhook call. ConfigCat will replace certain placeholders in the body with real values at runtime.
 
-ConfigCat will replace the following variables in the request body:
-
-| Variable                   | The values it gets replaced with                                                                  |
+| Variable                   | Replaced with                                                                                     |
 | -------------------------- | ------------------------------------------------------------------------------------------------- |
-| **##ConfigName##**         | The name of the Config your setting belongs to.                                                   |
-| **##ConfigId##**           | ID of the Config.                                                                                 |
-| **##EnvironmentName##**    | The name of the Environment where the Setting value changed.                                      |
-| **##EnvironmentId##**      | ID of the Environment.                                                                            |
+| **##ConfigName##**         | The name of the Config where the change happened.                                                 |
+| **##ConfigId##**           | ID of the Config where the change happened.                                                       |
+| **##EnvironmentName##**    | The name of the Environment where the change happened.                                            |
+| **##EnvironmentId##**      | ID of the Environment where the change happened.                                                  |
 | **##URL##**                | A direct link to the Config in the _ConfigCat Dashboard._                                         |
 | **##ChangeNotes##**        | The **Mandatory notes** added to the actual changeset.                                            |
 | **##ChangedBy##**          | The name and email address of the user who made the changes.                                      |
-| **##ChangeDetails##**      | Details of the change in JSON format including setting name, old, new values and Targeting Rules. |
-| **##ChangeDetailsTeams##** | Details of the change in MS Teams format.                                                         |
-| **##ChangeDetailsSlack##** | Details of the change in Slack message format.                                                    |
+| **##ChangeDetails##**      | Detailed change info in JSON format, including the name of the Setting or feature flag, old and new values and Targeting Rules. |
+| **##ChangeDetailsTeams##** | Change details formatted for Microsoft Teams.                                                     |
+| **##ChangeDetailsSlack##** | Change details formatted for Slack.                                                     |
 
-The structure of the JSON array injected into the **##ChangeDetails##** looks like the following:
+The ##ChangeDetails## variable is replaced with a JSON array in the following format:
 
 ```
 [
@@ -54,27 +57,29 @@ The structure of the JSON array injected into the **##ChangeDetails##** looks li
 ## Testing your Webhook
 
 1. Change some of your settings in the _ConfigCat Dashboard._
-2. Click **SAVE & PUBLISH SETTINGS**.
+2. Click **SAVE & PUBLISH CHANGES**.
 3. Check if your Webhook was called correctly.
 
 :::info
-**Developer Tip:** Running your Webhook on `localhost`? Expose it to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your local development environment.
+**Developer Tip**
+- Running your Webhook on `localhost`? Expose it to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your local development environment.
+- Just interested in what ConfigCat sends?Try [Webhhok.site](https://webhook.site/). This allows you to catch HTTP requests and see their content without requiring your to run anything anywhere.
 :::
 
 ## Verifying Webhook requests
 
-To ensure the requests you receive are actually sent by ConfigCat, we highly recommend to verify
-the signature sent in the request headers by comparing it with your own calculated signature.
+To make sure the requests you receive are actually sent by ConfigCat, we strongly recommend verifying the signature included in the request headers.
+You can do this by comparing the received signature with one you compute using your signing key.
 
-Each webhook request contains the following headers:
+Each webhook request includes the following headers:
 
 | Header                             | Description                                                                                                   |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `X-ConfigCat-Webhook-ID`           | The webhook request's unique identifier. Different in every request.                                          |
-| `X-ConfigCat-Webhook-Timestamp`    | The time the webhook was sent in unix timestamp format. (seconds since epoch)                                 |
-| `X-ConfigCat-Webhook-Signature-V1` | The list of the `base64` encoded HMAC-SHA-256 signatures. (comma delimited, 1 signature for each signing key) |
+| `X-ConfigCat-Webhook-ID`           | A unique ID for the webhook request. This is different for every request.                                     |
+| `X-ConfigCat-Webhook-Timestamp`    | The time the request was sent, in Unix timestamp format (seconds since epoch).                                |
+| `X-ConfigCat-Webhook-Signature-V1` | A comma-separated list of base64-encoded HMAC-SHA-256 signatures (one for each signing key).                  |
 
-Currently the latest (and the only) signature header version is `V1`. If the signing process is going to be changed in the future, more headers will be added with incremented version postfix.
+Currently, the latest (and the only) signature header version is `V1`. If the signing process changes in the future, new headers will be added with incremented version numbers.
 
 Example request:
 
@@ -358,23 +363,27 @@ public class Main {
 
 ### Timestamp validation
 
-To prevent replay attacks, you can determine whether the request is within your timeframe tolerance by comparing the timestamp value received in the `X-ConfigCat-Webhook-Timestamp` header with your system's actual timestamp. If the signature is valid but the timestamp is too old, you can reject the request.
+To prevent replay attacks, you can check if the request was sent within an acceptable time window.
+Compare the timestamp from the `X-ConfigCat-Webhook-Timestamp` header with your system's current time.
+If timestamp is too old, you can safely reject the request.
 
-Also, as the timestamp is part of the signed content, an attacker can't change it without breaking the signature.
+Since the timestamp is part of the signed content, an attacker cannot modify it without invalidating the signature.
 
 ## Retries
 
-When ConfigCat notices that a webhook request might not delivered successfully (either due to network instabilities or when we receive a non-2XX status response), it attempts to retry the request at most 5 times with variable frequency.
+If ConfigCat detects that a Webhook request may not have been delivered successfully
+(for example, due to network issues or a non-2XX response),
+it will retry the request up to 5 times, using variable delays between attempts.
 
 ## Connecting to Slack
 
 A few steps to set up Slack and get a message when a setting changes:
 
-1. Define a <a href="https://api.slack.com/incoming-webhooks" target="_blank">Slack Incoming Webhook</a> and copy the Webhook URL.
-2. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the _ConfigCat Dashboard._
-3. Create a Webhook and add your Slack URL.
-4. Select POST as HTTP method.
-5. Add a request body like so:
+1. In Slack, create an <a href="https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks#create_a_webhook" target="_blank">Incoming Webhook</a> and copy the **Webhook URL**.
+2. In ConfigCat, go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> screen, and click **+ ADD WEBHOOK**.
+3. Paste Slack's **Webhhok URL** to ConfigCat's **URL** field.
+4. Select **POST** as the **HTTP METHOD**.
+5. Add the following request body:
 
 ```
 {
@@ -386,13 +395,11 @@ A few steps to set up Slack and get a message when a setting changes:
 
 A few steps to set up Microsoft Teams and get a message when a setting changes:
 
-1. Define an <a href="https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#create-incoming-webhook-1" target="_blank">Incoming Webhook connector in Microsoft Teams</a> and copy the Webhook URL.
-2. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> tab in the _ConfigCat Dashboard._
-3. Create a Webhook and add your Teams URL.
-4. Select POST as the HTTP method.
-5. Add a request body similar to the one below.
-
-Sample request body of the Webhook:
+1. In Microsoft Teams, create an <a href="https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#create-incoming-webhook-1" target="_blank">Incoming Webhook</a> and copy the **Webhook URL**.
+2. In ConfigCat, go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> screen, and click **+ ADD WEBHOOK**.
+3. Paste Microsoft Teams' **Webhhok URL** to ConfigCat's **URL** field.
+4. Select **POST** as the **HTTP METHOD**.
+5. Add the following request body:
 
 ```
 {
