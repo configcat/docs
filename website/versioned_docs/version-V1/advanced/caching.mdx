@@ -20,9 +20,9 @@ You can set it to any value between 1 and 2,147,483,647 seconds.
 
 ## Manual polling
 
-Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded.
-The ConfigCat SDK will not download the `config JSON` automatically.
-You can (and should) update the cache manually, by calling a `forceRefresh()` - this will download the latest `config JSON` and update the cache.
+Manual polling gives you full control over when the latest feature flags and settings are downloaded from the ConfigCat CDN.
+The ConfigCat SDK will not download them automatically.
+You can (and should) update the cache manually, by calling a `forceRefresh()` - this will download the latest feature flags and settings and update the cache.
 
 This animation explains the different polling modes:
 
