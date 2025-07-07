@@ -126,7 +126,11 @@ Yes. You can review our DPA through our [Trust Center](https://configcat.com/tru
 
 ### Does ConfigCat collect browser data when serving feature flag data download requests?
 
-No. The SDK only downloads config JSON files. ConfigCat doesn't collect, store, or process any user or browser data.
+No. ConfigCat doesn't collect, store or process any user or browser data.
+
+The data flow is one directional - the SDKs are only downloading the config JSON files and the feature flag evaluation happens in the SDKs.
+
+ConfigCat doesn't collect any information about the customer's users.
 
 ### Is data hosted only within the EU?
 
