@@ -39,4 +39,4 @@ We believe that this is a rare edge case that only happens during development.
 
 ## Python Auto Polling issue with uWSGI web server
 
-The Python SDK's Auto Polling mode utilizes its polling job in a `threading.Thread` object. If you run your application behind an uWSGI web server, the Auto Polling mode may not work as expected because the uWSGI web server disables Python's threading by default. Please [enable threading](https://uwsgi-docs.readthedocs.io/en/latest/Options.html#enable-threads) or switch to another polling mode in this case.
+The Python SDK's Auto Polling mode runs its polling job in a `threading.Thread` object. If you run your application behind an uWSGI web server, the Auto Polling mode may not work as expected because the uWSGI web server disables Python's threading by default. Please [enable threading](https://uwsgi-docs.readthedocs.io/en/latest/Options.html#enable-threads) or switch to another polling mode in this case.
