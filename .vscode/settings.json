@@ -19,5 +19,10 @@
         "authorTitle"
     ],
     "editor.inlineSuggest.showToolbar": "onHover",
-    "terminal.integrated.cwd": "website"
+    "terminal.integrated.cwd": "website",
+    "files.associations": {
+      "*.mdx": "mdx"
+    },
+    "mdx.experimentalLanguageServer": true,
+    "typescript.tsserver.experimental.enableProjectDiagnostics": true
 }
