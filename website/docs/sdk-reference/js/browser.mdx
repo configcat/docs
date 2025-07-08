@@ -1,0 +1,22 @@
+---
+id: 'browser'
+title: Browser (JavaScript) SDK
+description: ConfigCat Browser (JavaScript) SDK Reference. This is a step-by-step guide on how to use feature flags in your frontend applications and Web Workers running in the browser.
+---
+
+import JSSdkReferenceTemplate, { getAdjustedToc } from "./\_template.mdx";
+
+{/* TODO */}
+export const JavaScriptSchema = require('@site/src/schema-markup/sdk-reference/js.json');
+
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(JavaScriptSchema) }}
+></script>
+
+export const platform = "browser";
+
+<JSSdkReferenceTemplate platform={platform}>
+</JSSdkReferenceTemplate>
+
+export const toc = getAdjustedToc(platform);

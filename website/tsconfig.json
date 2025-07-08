@@ -9,10 +9,5 @@
     "build/",
     "node_modules/",
     "static/"
-  ],
-  "mdx": {
-    // Enable strict type checking in MDX files.
-    // See also: https://github.com/mdx-js/mdx-analyzer?tab=readme-ov-file#typescript
-    "checkMdx": true
-  }
+  ]
 }
