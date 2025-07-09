@@ -1,0 +1,22 @@
+---
+id: 'chromium-extension'
+title: Chromium Extension SDK
+description: ConfigCat Chromium Extension SDK Reference. This is a step-by-step guide on how to use feature flags in your extensions for Chromium-based browsers (Chrome, Edge, etc.)
+---
+
+import JSSdkReferenceTemplate, { getAdjustedToc } from "./\_template.mdx";
+
+{/* TODO */}
+export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.json');
+
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(NodeSchema) }}
+></script>
+
+export const platform = "chromium-extension";
+
+<JSSdkReferenceTemplate platform={platform}>
+</JSSdkReferenceTemplate>
+
+export const toc = getAdjustedToc(platform);

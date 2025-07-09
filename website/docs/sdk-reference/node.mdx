@@ -1,7 +1,7 @@
 ---
 id: node
-title: Node.js SDK Reference
-description: ConfigCat Node.js SDK Reference. This is a step-by-step guide on how to use feature flags in your Node.js applications.
+title: Legacy Node.js SDK Reference
+description: ConfigCat Legacy Node.js SDK Reference. This is a step-by-step guide on how to use feature flags in your Node.js applications.
 ---
 
 export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.json');
@@ -18,8 +18,15 @@ export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.js
 ![License](https://img.shields.io/github/license/configcat/node-sdk.svg)
 [![Node.JS](https://img.shields.io/node/v/configcat-node)](https://img.shields.io/node/v/configcat-node)
 
-:::info
-For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](./js-ssr.mdx).
+:::caution
+This SDK is no longer maintained as it has been superseded by the new [Node.js SDK](../js/node).
+
+The new SDK maintains backward compatibility, so migration is typically as simple as:
+1. uninstalling the old NPM package,
+1. installing the new one,
+1. adjusting the `import` statements.
+
+For installation details, see the [relavant section](../js/node#1-install-and-import-package) in the new SDK's documentation.
 :::
 
 <a href="https://github.com/configcat/node-sdk" target="_blank">
