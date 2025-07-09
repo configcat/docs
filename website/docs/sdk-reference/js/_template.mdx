@@ -59,6 +59,7 @@ export const getAdjustedToc = (platform) => {
 
   :::info
   The ConfigCat SDK for JavaScript unifies the following platform-specific SDKs into a [single, unified NPM package](https://www.npmjs.com/package/@configcat/sdk):
+
   <ul>
     {Object.keys(sdks).map((platform, index) => (
       <li key={index}>
@@ -73,13 +74,23 @@ export const getAdjustedToc = (platform) => {
 <If condition={props.platform === "browser"}>
 
   :::info
-  This SDK is suitable for the following types of browser applications:
+  This SDK supersedes the legacy [JavaScript SDK](../../js) and [JavaScript (SSR) SDK](../../js-ssr).
+
+  It is suitable for the following types of browser applications:
   * Static HTML websites
   * Server-side rendered Multi-Page Applications (MPA), e.g. PHP, ASP.NET Core Razor Pages, Spring MVC, etc.
   * Client-side rendered Single-Page Applications (SPA), e.g. Angular, React, Vue.js, etc.
   * Server-side rendered Single-Page Applications (SSR), e.g. Angular SSR, Next.js, Nuxt, etc.
   * Prerendered Single/Multi-Page Applications (SSG), e.g. Angular SSG, Vue.js SSG, Astro, etc.
   * Web Workers
+  :::
+
+</If>
+
+<If condition={props.platform === "node"}>
+
+  :::info
+  This SDK supersedes the legacy [Node.js SDK](../../js).
   :::
 
 </If>
@@ -144,8 +155,9 @@ export const canImportFromCdn = (platform) => platform === "browser" || platform
 
       :::info
       For subpath imports to work **in TypeScript**, you must set the [moduleResolution](https://www.typescriptlang.org/tsconfig/#moduleResolution)
-      option to `node16`, `nodenext` or `bundler` in your `tsconfig.json`. For TypeScript versions older than 4.7, you need to fall back to
-      module resolution `node` and importing from the main entry point `@configcat/sdk`.
+      option to `node16`, `nodenext` or `bundler` in your `tsconfig.json`. For TypeScript versions older than 4.7, where
+      these options are not available, you need to fall back to module resolution `node` and importing from the main
+      entry point `@configcat/sdk`.
       :::
 
       :::info
@@ -208,8 +220,9 @@ export const canImportFromCdn = (platform) => platform === "browser" || platform
     :::info
     For subpath imports to work **in TypeScript** when using [ts-node](https://www.npmjs.com/package/ts-node),
     you must set the [moduleResolution](https://www.typescriptlang.org/tsconfig/#moduleResolution)
-    option to `node16` or `nodenext` in your `tsconfig.json`. For TypeScript versions older than 4.7, you need to fall back to
-    module resolution `node` and importing from the main entry point `@configcat/sdk`.
+    option to `node16` or `nodenext` in your `tsconfig.json`. For TypeScript versions older than 4.7, where
+    these options are not available, you need to fall back to module resolution `node` and importing from the main
+    entry point `@configcat/sdk`.
     :::
 
   </If>
@@ -1206,7 +1219,93 @@ Also, we recommend using [confidential targeting comparators](../../targeting/ta
 
 ## Platform compatibility
 
-{/* TODO */}
+<If condition={!props.platform}>
+
+  For details on compatibility with runtimes and build tools, see the platform-specific SDK references:
+
+  <ul>
+    {Object.keys(sdks).map((platform, index) => (
+      <li key={index}>
+        <Link to={`../${getPageId(platform)}#platform-compatibility`}>{getSdkName(platform)}</Link>
+      </li>
+    ))}
+  </ul>
+
+</If>
+
+<If condition={props.platform}>
+
+  { props.platform === "browser" ? <p>The SDK should be compatible with all modern, widely used browsers and bundlers.</p>
+    : props.platform === "bun" ? <p>The SDK should be compatible with newer versions of Bun.</p>
+    : props.platform === "chromium-extension" ? <p>The SDK should be compatible with modern Chromium-based browsers and bundlers.</p>
+    : props.platform === "cloudflare-worker" ? <p>The SDK should be compatible with latest versions of <a href="https://github.com/cloudflare/workerd" target="_blank">workerd</a>.</p>
+    : props.platform === "deno" ? <p>The SDK should be compatible with latest versions of Deno.</p>
+    : props.platform === "node" ? <p>The SDK should be compatible with latest versions of Node.js.</p>
+    : null }
+
+  The SDK is [tested](https://github.com/configcat/js-unified-sdk/blob/master/.github/workflows/js-sdk-ci.yml) against the following { props.platform === "browser" || props.platform === "chromium-extension" ? <>browsers</> : <>runtimes</> }:
+
+  <If condition={props.platform === "browser"}>
+
+    { !props.platform && <>{ getSdkName("browser") }:</> }
+    - Chrome (stable, latest, beta)
+    - Chromium (71.0.3556.0, 72.0.3626.0, 80.0.3987.0)
+    - Firefox (84.0, latest, latest-beta)
+    - Safari (latest)
+
+  </If>
+
+  <If condition={props.platform === "node"}>
+
+    { !props.platform && <>{ getSdkName("node") }:</> }
+    - Node.js (v14.x, v16.x, v18.x, v20.x, v22.x) on Windows / Ubuntu / macOS
+
+  </If>
+
+  <If condition={props.platform === "deno"}>
+
+    { !props.platform && <>{ getSdkName("deno") }:</> }
+    - Deno (v1.31, v1.46, latest stable) on Windows / Ubuntu / macOS
+
+  </If>
+
+  <If condition={props.platform === "bun"}>
+
+    { !props.platform && <>{ getSdkName("bun") }:</> }
+    - Bun (v1.1.0, latest stable) on Windows / Ubuntu / macOS
+
+  </If>
+
+  <If condition={props.platform === "cloudflare-worker"}>
+
+    { !props.platform && <>{ getSdkName("cloudflare-worker") }:</> }
+    - Workerd (2023-02-28)
+
+  </If>
+
+  <If condition={props.platform === "chromium-extension"}>
+
+    { !props.platform && <>{ getSdkName("chromium-extension") }:</> }
+    - Chrome (stable, latest, beta)
+    - Chromium (72.0.3626.0, 80.0.3987.0)
+
+  </If>
+
+  The SDK should be compatible with TypeScript v4.0.2 or newer. Earlier versions may work but those are not tested, thus, not supported officially.
+
+  These tests are running on each pull request, before each deploy, and on a daily basis.
+
+  You can view a sample run [here](https://github.com/configcat/js-unified-sdk/actions/runs/11745259578).
+
+  <If condition={!props.platform}>
+
+    :::info
+    We strive to provide an extensive support for the various JS runtimes and build tools. If you still encounter an issue with the SDK on some platform, please open a [GitHub issue](https://github.com/configcat/js-unified-sdk/issues/new/choose) or [contact support](https://configcat.com/support).
+    :::
+
+  </If>
+
+</If>
 
 <If condition={showBestPracticesSection(props.platform)}>
 
@@ -1264,7 +1363,7 @@ Also, we recommend using [confidential targeting comparators](../../targeting/ta
 <If condition={!props.platform || props.platform === "bun"}>
 
   { !props.platform && <>Bun applications:</> }
-- [Sample Bun console application](https://github.com/configcat/js-unified-sdk/tree/master/samples/bun-console)
+  - [Sample Bun console application](https://github.com/configcat/js-unified-sdk/tree/master/samples/bun-console)
 
 </If>
 
@@ -1275,7 +1374,7 @@ Also, we recommend using [confidential targeting comparators](../../targeting/ta
 
 </If>
 
-<If condition={props.platform === "chromium-extension"}>
+<If condition={!props.platform || props.platform === "chromium-extension"}>
 
   { !props.platform && <>Extensions for Chromium-based browsers:</> }
   - [Sample Chrome extension](https://github.com/configcat/js-unified-sdk/tree/master/samples/chrome-extension)
