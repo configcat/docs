@@ -33,6 +33,7 @@ You can find more information about GitHub Actions <a target="_blank" href="http
              api-pass: ${{ secrets.CONFIGCAT_API_PASS }}
              config-id: PASTE-YOUR-CONFIG-ID-HERE
              # line-count: 5             # optional
+             # timeout: 1800             # optional
              # sub-folder: src           # optional
              # exclude-keys: >           # optional
              #   flag_key_to_exclude_1
@@ -56,6 +57,7 @@ Scan reports are uploaded for each branch of your repository that triggers the w
 | `api-pass`     | <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication password</a>. | &#9745;  |                     |
 | `api-host`     | ConfigCat Management API host.                                                                                                                    |          | `api.configcat.com` |
 | `line-count`   | Context line count before and after the reference line. (min: 1, max: 10)                                                                         |          | 4                   |
+| `timeout`      | Scan timeout in seconds (default: 1800, min: 60)                                                                                                  |          | 1800                |
 | `sub-folder`   | Sub-folder to scan, relative to the repository root folder.                                                                                       |          |                     |
 | `exclude-keys` | List of feature flag keys that must be excluded from the scan report.                                                                             |          |                     |
 | `alias-patterns` | Comma delimited list of custom regex patterns used to search for additional aliases.                                                            |          |                     |
