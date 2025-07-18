@@ -1,7 +1,7 @@
 ---
 id: 'js'
-title: JavaScript SDK Reference
-description: ConfigCat JavaScript SDK Reference. This is a step-by-step guide on how to use feature flags in your JavaScript applications.
+title: Legacy JavaScript SDK Reference
+description: ConfigCat Legacy JavaScript SDK Reference. This is a step-by-step guide on how to use feature flags in your JavaScript applications.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -20,8 +20,15 @@ export const JavaScriptSchema = require('@site/src/schema-markup/sdk-reference/j
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=configcat_js-sdk&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=configcat_js-sdk)
 [![JSDELIVR](https://data.jsdelivr.com/v1/package/npm/configcat-js/badge)](https://www.jsdelivr.com/package/npm/configcat-js)
 
-:::info
-For JavaScript SSR (Server-Side Rendered) applications we recommend using [ConfigCat JS-SSR SDK](./js-ssr.mdx).
+:::caution
+This SDK is no longer maintained as it has been superseded by the new [Browser (JavaScript) SDK](../js/browser).
+
+The new SDK maintains backward compatibility, so migration is typically as simple as:
+1. uninstalling the old NPM package,
+1. installing the new one,
+1. adjusting the `import` statements.
+
+For installation details, see the [relavant section](../js/browser#1-install-and-import-package) in the new SDK's documentation.
 :::
 
 <a href="https://github.com/configcat/js-sdk" target="_blank">

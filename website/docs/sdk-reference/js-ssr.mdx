@@ -1,7 +1,7 @@
 ---
 id: 'js-ssr'
-title: JavaScript (SSR) SDK Reference
-description: ConfigCat JavaScript (SSR) SDK Reference. This is a step-by-step guide on how to use feature flags in your Server-Side-Rendered (SSR) JavaScript application.
+title: Legacy JavaScript (SSR) SDK Reference
+description: ConfigCat Legacy JavaScript (SSR) SDK Reference. This is a step-by-step guide on how to use feature flags in your Server-Side-Rendered (SSR) JavaScript application.
 ---
 
 export const JavaScriptSSRSchema = require('@site/src/schema-markup/sdk-reference/js-ssr.json');
@@ -15,6 +15,17 @@ export const JavaScriptSSRSchema = require('@site/src/schema-markup/sdk-referenc
 [![JS-SSR CI](https://github.com/configcat/js-ssr-sdk/actions/workflows/js-ssr-ci.yml/badge.svg?branch=master)](https://github.com/configcat/js-ssr-sdk/actions/workflows/js-ssr-ci.yml)
 [![codecov](https://codecov.io/gh/configcat/js-ssr-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/configcat/js-ssr-sdk)
 [![Known Vulnerabilities](https://snyk.io/test/github/configcat/js-ssr-sdk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/configcat/js-ssr-sdk?targetFile=package.json)
+
+:::caution
+This SDK is no longer maintained as it has been superseded by the new [Browser (JavaScript) SDK](../js/browser).
+
+The new SDK maintains backward compatibility, so migration is typically as simple as:
+1. uninstalling the old NPM package,
+1. installing the new one,
+1. adjusting the `import` statements.
+
+For installation details, see the [relavant section](../js/browser#1-install-and-import-package) in the new SDK's documentation.
+:::
 
 :::info
 This SDK is for Server-Side Rendered JavaScript frameworks like <a href="https://nuxtjs.org" target="_blank">NuxtJS</a>.
