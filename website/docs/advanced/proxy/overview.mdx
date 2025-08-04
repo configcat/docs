@@ -169,9 +169,30 @@ These are the possible ways to use the Proxy from your application:
     .catch(error => console.error('Error:', error));
   ```
   
-  You can find all endpoints with each HTTP request/response schema under the [API's documentation section](endpoints.mdx#api).
+  You can find each API endpoint with their HTTP request/response schemas [here](endpoints.mdx#api).
 
-- ### 3. Evaluating feature flags and listen to changes with SSE
+- ### 3. Evaluating feature flags with OpenFeature Remote Evaluation (OFREP)
+
+  The Proxy conforms the <a href="https://github.com/open-feature/protocol">OpenFeature Remote Evaluation Protocol</a>, which means it can be used with OFREP compatible OpenFeature providers.
+  
+  ```js title="example.js (Initializing the OFREP JS Web provider to use the Proxy)"
+  import { OFREPWebProvider } from '@openfeature/ofrep-web-provider';
+
+  OpenFeature.setProvider(
+    new OFREPWebProvider({
+      // highlight-next-line
+      baseUrl: 'http://localhost:8050', // Proxy URL
+      headers: [
+        // highlight-next-line
+        ['X-ConfigCat-SdkId', '<sdk-id>'], // SDK identifier
+      ],
+    }),
+  );
+  ```
+  
+  You can find each OFREP endpoint with their HTTP request/response schemas [here](endpoints.mdx#openfeature-remote-evaluation-protocol-ofrep).
+
+- ### 4. Evaluating feature flags and listen to changes with SSE
 
   The Proxy has the ability to evaluate feature flags and send notifications about subsequent evaluated flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
   
@@ -194,7 +215,7 @@ These are the possible ways to use the Proxy from your application:
   
   For more information and usage examples, see the related [SSE endpoints documentation](endpoints.mdx#sse).
 
-- ### 4. Evaluating feature flags and streaming with gRPC
+- ### 5. Evaluating feature flags and streaming with gRPC
 
   The Proxy supports both unary feature flag evaluation RPCs and server streaming of evaluated flag value changes.
   For more information and usage examples, see the [gRPC section of this documentation](grpc.mdx).
