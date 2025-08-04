@@ -22,8 +22,8 @@ export const getSdkName = (platform) => platform ? sdks[platform].name : "Config
 
 export const showCodePenDemoSection = (platform) => !platform || platform === "browser";
 export const showQueryStringFlagOverrideSection = (platform) => platform === "browser" || platform === "chromium-extension" || platform === "cloudflare-worker";
-export const showUsingBehindProxySection = (platform) => platform === "node";
-export const showBestPracticesSection = (platform) => platform === "browser";
+export const showUsingBehindProxySection = (platform) => platform === "node" || platform === "bun";
+export const showBestPracticesSection = (platform) => platform === "browser" || platform === "node";
 export const showGuidesSection = (platform) => !platform || platform === "browser" || platform === "node";
 
 export const getAdjustedToc = (platform) => {
@@ -367,7 +367,7 @@ export const getDefaultCacheImpl = (platform) =>
   : platform === "cloudflare-worker" ? <Link to="https://github.com/configcat/js-unified-sdk/blob/master/src/cloudflare-worker/CloudflareConfigCache.ts"><code>CloudflareConfigCache</code></Link>
   : <>a default implementation corresponding to the platform</>;
 
-<If condition={props.platform !== "node"}>
+<If condition={!(props.platform === "node" || props.platform === "bun")}>
 
   | Option Parameter   | Description                                                                                                                                                                                                                                                                                             | Default                                                                                                                      |
   | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -384,7 +384,7 @@ export const getDefaultCacheImpl = (platform) =>
 
 </If>
 
-<If condition={props.platform === "node"}>
+<If condition={props.platform === "node" || props.platform === "bun"}>
 
   | Option Parameter   | Description                                                                                                                                                                                                                                                                                             | Default                                                                                                                      |
   | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -393,7 +393,8 @@ export const getDefaultCacheImpl = (platform) =>
   | `logger`           | Custom [`IConfigCatLogger`](https://github.com/configcat/js-unified-sdk/blob/master/src/ConfigCatLogger.ts) implementation for tracing.                                                                                                                                                                 | [`ConfigCatConsoleLogger`](https://github.com/configcat/js-unified-sdk/blob/master/src/ConfigCatLogger.ts) (with WARN level) |
   | `logFilter`        | Sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                                                                   | `undefined` (none)                                                                                                           |
   | `baseUrl`          | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                         |                                                                                                                              |
-  | `proxy`            | Proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy).                                                                                                                                                                                                                       |                                                                                                                              |
+  | `httpAgent`        | The [`http.Agent`](https://nodejs.org/api/http.html#class-httpagent) instance to use for non-secure HTTP communication. Can be used to route `http://...` requests made by the SDK through an HTTP, HTTPS or SOCKS proxy (see also [this section](#using-configcat-behind-a-proxy)).                    |                                                                                                                              |
+  | `httpsAgent`       | The [`https.Agent`](https://nodejs.org/api/https.html#class-httpsagent) instance to use for secure HTTP communication. Can be used to route `https://...` requests made by the SDK through an HTTP, HTTPS or SOCKS proxy (see also [this section](#using-configcat-behind-a-proxy)).                    |                                                                                                                              |
   | `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                              | 30000                                                                                                                        |
   | `flagOverrides`    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                           |                                                                                                                              |
   | `dataGovernance`   | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../../advanced/data-governance.mdx). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global`                                                                                                      |
@@ -1242,19 +1243,31 @@ The JavaScript SDK supports _shared caching_. You can read more about this featu
 
   ## Using ConfigCat behind a proxy
 
-  You can provide your own proxy server settings (proxy server/port) by adding a `proxy` option parameter when creating the ConfigCat client.
+  It is possible to set up the SDK to route HTTP requests through a HTTP, HTTPS or SOCKS proxy.
+
+  ```bash
+  npm i https-proxy-agent
+  ```
+
+  ```js
+  import { HttpsProxyAgent } from 'https-proxy-agent';
+
+  const configCatClient = configcat.getClient(
+    '#YOUR-SDK-KEY#',
+    configcat.PollingMode.AutoPoll,
+    {
+      httpsAgent: new HttpsProxyAgent("http://192.168.1.1:8080"),
+    },
+  );
+  ```
+
+  :::info
+  By default, you need to specify the `httpsAgent` option because the SDK always uses HTTPS to access the ConfigCat CDN.
+  However, if you set the `baseUrl` to a `http://...` URL, you will need to install `http-proxy-agent` and set the
+  `httpAgent` option instead.
+  :::
 
 </If>
-
-```js
-const options = { pollIntervalSeconds: 2, proxy: 'http://192.168.1.1:8080' };
-
-const configCatClient = configcat.getClient(
-  '#YOUR-SDK-KEY#',
-  configcat.PollingMode.AutoPoll,
-  options,
-);
-```
 
 ## Sensitive information handling
 
