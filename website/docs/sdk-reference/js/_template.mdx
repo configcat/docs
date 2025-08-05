@@ -32,7 +32,7 @@ export const getAdjustedToc = (platform) => {
   // * github.com/facebook/docusaurus/issues/6201
 
   let adjustedToc;
-  showCodePenDemoSection(platform) || (adjustedToc = removeSection(adjustedToc, toc, "working-demo-on-codepen"));
+  showCodePenDemoSection(platform) || (adjustedToc = removeSection(adjustedToc, toc, "demo-on-codepen"));
   showQueryStringFlagOverrideSection(platform) || (adjustedToc = removeSection(adjustedToc, toc, "query-string"));
   showUsingBehindProxySection(platform) || (adjustedToc = removeSection(adjustedToc, toc, "using-configcat-behind-a-proxy"));
   showBestPracticesSection(platform) || (
@@ -326,10 +326,9 @@ configCatClient.dispose(); // disposes a specific client
 
 <If condition={showCodePenDemoSection(props.platform)}>
 
-  ## Working Demo on CodePen
+  ## Demo on CodePen
 
-  {/* TODO: create another CodePen */}
-  See the Pen [ConfigCat Feature Flag Demo](https://codepen.io/configcat/pen/pozaLLV) on [CodePen](https://codepen.io).
+  See the Pen [ConfigCat Feature Flag Demo](https://codepen.io/configcat/pen/myemzYW) on [CodePen](https://codepen.io).
 
 </If>
 
