@@ -411,8 +411,10 @@ const configCatClient = configcat.getClient(
   '#YOUR-SDK-KEY#',
   configcat.PollingMode.AutoPoll,
   {
-    setupHooks: (hooks) =>
-      hooks.on('clientReady', () => console.log('Client is ready!')),
+    setupHooks: (hooks) => hooks.on('clientReady', function() {
+      const keys = this.configCatClient.snapshot().getAllKeys();
+      console.log(`Client is ready! Number of available feature flags: ${keys.length}`);
+    }),
   },
 );
 ```
@@ -791,7 +793,7 @@ const configCatClient = configcat.getClient(
   configcat.PollingMode.ManualPoll,
   {
     setupHooks: (hooks) =>
-      hooks.on('flagEvaluated', () => {
+      hooks.on('flagEvaluated', function() {
         /* handle the event */
       }),
   },
@@ -801,10 +803,19 @@ const configCatClient = configcat.getClient(
 ...or directly on the `ConfigCatClient` instance:
 
 ```js
-configCatClient.on('flagEvaluated', () => {
+configCatClient.on('flagEvaluated', function() {
   /* handle the event */
 });
 ```
+
+:::caution
+Some events (e.g. `clientReady`, `configChanged` and `clientError`) may be emitted before `getClient` returns.
+This means you may miss them unless you subscribe on initialization.
+
+However, even if you do, there's another gotcha: it's not safe to use the outer `configCatClient` variable in your event handler
+because it may not yet be assigned when the handler is called. Instead, you can safely access the client instance
+via `this.configCatClient` - provided that the event handler is a normal function, not an arrow function.
+:::
 
 ## Snapshots and synchronous feature flag evaluation
 

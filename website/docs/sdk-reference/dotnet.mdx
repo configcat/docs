@@ -128,7 +128,11 @@ For example:
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
-    options.ClientReady += (s, e) => Debug.WriteLine("Client is ready!");
+    options.ClientReady += (s, e) =>
+    {
+        var keys = ((IConfigCatClient)s).Snapshot().GetAllKeys();
+        Console.WriteLine("Client is ready! Number of available feature flags: " + keys.Count);
+    };
 });
 ```
 
@@ -452,6 +456,15 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 ```csharp
 client.FlagEvaluated += (s, e) => { /* handle the event */ };
 ```
+
+:::caution
+Some events (e.g. `ClientReady`, `ConfigChanged` and `Error`) may be raised before `ConfigCatClient.Get` returns.
+This means you may miss them unless you subscribe on initialization.
+
+However, even if you do, there's another gotcha: it's not safe to use the outer `client` variable in your event handler
+because it may not yet be assigned when the handler is called. Instead, you can safely access the client instance
+via the sender parameter like `var client = (IConfigCatClient)s;`.
+:::
 
 ## Snapshots and non-blocking synchronous feature flag evaluation
 
