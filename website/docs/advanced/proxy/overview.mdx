@@ -108,9 +108,13 @@ You can then check the [status endpoint](monitoring.mdx#status) of the Proxy to 
 
 ## Usage Scenarios
 
-These are the possible ways to use the Proxy from your application:
+This section describes the possible ways on how you can use the Proxy from your application. 
+You can decide where you want the actual feature flag evaluation happen.
+- **Local evaluation**: Feature flags are evaluated in your application via a ConfigCat SDK. The Proxy only provides the required data for the evaluation process to the SDK running in your application.
+- **Remote evaluation**: Feature flags are evaluated inside the Proxy, your application only gets the result of the evaluation process.
+<br />
 
-- ### 1. Using a ConfigCat SDK in your application connected to the Proxy
+- ### 1. Local evaluation using a ConfigCat SDK connected to the Proxy
 
   If the Proxy's [CDN proxy](endpoints.mdx#cdn-proxy) endpoint is enabled, you can set up your ConfigCat SDK instances to use the Proxy as data source.
   To do this, you have to set the SDK's `baseUrl` parameter to the Proxy's host.
@@ -141,7 +145,7 @@ These are the possible ways to use the Proxy from your application:
   );
   ```
 
-- ### 2. Evaluating feature flags with the Proxy's API endpoints
+- ### 2. Remote evaluation with the Proxy's API endpoints
 
   You can leverage the Proxy's server side feature flag evaluation feature by sending simple HTTP requests to the Proxy's API endpoints.
   
@@ -171,7 +175,7 @@ These are the possible ways to use the Proxy from your application:
   
   You can find each API endpoint with their HTTP request/response schemas [here](endpoints.mdx#api).
 
-- ### 3. Evaluating feature flags with OpenFeature Remote Evaluation (OFREP)
+- ### 3. Remote evaluation with OpenFeature Remote Evaluation Protocol (OFREP)
 
   The Proxy conforms the <a href="https://github.com/open-feature/protocol">OpenFeature Remote Evaluation Protocol</a>, which means it can be used with OFREP compatible OpenFeature providers.
   
@@ -192,7 +196,7 @@ These are the possible ways to use the Proxy from your application:
   
   You can find each OFREP endpoint with their HTTP request/response schemas [here](endpoints.mdx#openfeature-remote-evaluation-protocol-ofrep).
 
-- ### 4. Evaluating feature flags and listen to changes with SSE
+- ### 4. Remote evaluation and streaming with SSE
 
   The Proxy has the ability to evaluate feature flags and send notifications about subsequent evaluated flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
   
@@ -215,7 +219,7 @@ These are the possible ways to use the Proxy from your application:
   
   For more information and usage examples, see the related [SSE endpoints documentation](endpoints.mdx#sse).
 
-- ### 5. Evaluating feature flags and streaming with gRPC
+- ### 5. Remote evaluation and streaming with gRPC
 
   The Proxy supports both unary feature flag evaluation RPCs and server streaming of evaluated flag value changes.
   For more information and usage examples, see the [gRPC section of this documentation](grpc.mdx).
