@@ -396,13 +396,11 @@ The [User Object](../targeting/user-object.mdx) is essential if you'd like to us
 For simple targeting:
 
 ```tsx
-const userObject = new User('#UNIQUE-USER-IDENTIFIER#');
+const userObject = { identifier: '#UNIQUE-USER-IDENTIFIER#' };
 ```
 
-or
-
 ```tsx
-const userObject = new User('john@example.com');
+const userObject = { identifier: 'john@example.com' };
 ```
 
 | Parameters   | Description                                                                                                                     |
@@ -415,15 +413,15 @@ const userObject = new User('john@example.com');
 For advanced targeting:
 
 ```tsx
-const userObject = new User(
-  /* identifier: */ '#UNIQUE-USER-IDENTIFIER#',
-  /*      email: */ 'john@example.com',
-  /*    country: */ 'United Kingdom',
-  /*     custom: */ {
+const userObject = {
+  identifier: '#UNIQUE-USER-IDENTIFIER#',
+  email: 'john@example.com',
+  country: 'United Kingdom',
+  custom: {
     SubscriptionType: 'Pro',
     UserRole: 'Admin',
   },
-);
+};
 ```
 
 ```tsx
@@ -445,7 +443,7 @@ function ButtonComponent() {
 The `custom` dictionary also allows attribute values other than `string` values:
 
 ```tsx
-let userObject = new User('#UNIQUE-USER-IDENTIFIER#');
+const userObject = { identifier: '#UNIQUE-USER-IDENTIFIER#' };
 userObject.custom = {
   Rating: 4.5,
   RegisteredAt: new Date('2023-11-22T12:34:56.000Z'),
@@ -497,7 +495,7 @@ You can set the default User Object either on SDK initialization:
 <ConfigCatProvider
   sdkKey="YOUR_SDK_KEY"
   pollingMode={PollingMode.AutoPoll}
-  options={{ defaultUser: new User('john@example.com') }}
+  options={{ defaultUser: { identifier: 'john@example.com' } }}
 >
   ...
 </ConfigCatProvider>
@@ -506,12 +504,12 @@ You can set the default User Object either on SDK initialization:
 ...or using the `setDefaultUser()` method of the `configCatClient` instance:
 
 ```tsx
-const CurrentUser: User = new User('john@example.com');
+const currentUser = { identifier: 'john@example.com' };
 
 export const SetConfigCatUserComponent = () => {
   const client = useConfigCatClient();
 
-  const [user] = useState(CurrentUser);
+  const [user] = useState(currentUser);
 
   useEffect(() => {
     client.setDefaultUser(user);
@@ -546,14 +544,14 @@ export const FlagValueDetailsComponent = () => {
 When a `user` parameter is passed to the evaluation methods, it takes precedence over the default user.
 
 ```tsx
-const CurrentUser: User = new User('john@example.com');
+const currentUser = { identifier: 'john@example.com' };
 
 export const FlagValueDetailsComponent = () => {
   const client = useConfigCatClient();
 
   const [flagDetails, setFlagDetails] =
     useState<IEvaluationDetails<boolean> | null>(null);
-  const [user] = useState(CurrentUser);
+  const [user] = useState(currentUser);
 
   // invoke getValueDetailsAsync method WITH User Object
   useEffect(() => {

@@ -439,7 +439,7 @@ Returns a Promise with the value.
 const value = await configCatClient.getValueAsync(
   'keyOfMyFeatureFlag', // Setting Key
   false, // Default value
-  new configcat.User('#UNIQUE-USER-IDENTIFIER#'), // Optional User Object
+  { identifier: '#UNIQUE-USER-IDENTIFIER#' }, // Optional User Object
 );
 ```
 
@@ -450,7 +450,7 @@ configCatClient
   .getValueAsync(
     'keyOfMyFeatureFlag', // Setting Key
     false, // Default value
-    new configcat.User('#UNIQUE-USER-IDENTIFIER#'), // Optional User Object
+    { identifier: '#UNIQUE-USER-IDENTIFIER#' }, // Optional User Object
   )
   .then((value) => {
     console.log(value);
@@ -497,7 +497,7 @@ If you specify an allowed type but it mismatches the setting kind, an error mess
 const details = await configCatClient.getValueDetailsAsync(
   'keyOfMyFeatureFlag', // Setting Key
   false, // Default value
-  new configcat.User('#UNIQUE-USER-IDENTIFIER#'), // Optional User Object
+  { identifier: '#UNIQUE-USER-IDENTIFIER#' }, // Optional User Object
 );
 ```
 
@@ -508,7 +508,7 @@ configCatClient
   .getValueDetailsAsync(
     'keyOfMyFeatureFlag', // Setting Key
     false, // Default value
-    new configcat.User('#UNIQUE-USER-IDENTIFIER#'), // Optional User Object
+    { identifier: '#UNIQUE-USER-IDENTIFIER#' }, // Optional User Object
   )
   .then((details) => {
     console.log(details);
@@ -542,11 +542,11 @@ The [User Object](../../targeting/user-object.mdx) is essential if you'd like to
 For simple targeting:
 
 ```js
-let userObject = new configcat.User('#UNIQUE-USER-IDENTIFIER#');
+const userObject = { identifier: '#UNIQUE-USER-IDENTIFIER#' };
 ```
 
 ```js
-let userObject = new configcat.User('john@example.com');
+const userObject = { identifier: 'john@example.com' };
 ```
 
 | Parameters   | Description                                                                                                                     |
@@ -559,21 +559,21 @@ let userObject = new configcat.User('john@example.com');
 For advanced targeting:
 
 ```js
-let userObject = new configcat.User(
-  /* identifier: */ '#UNIQUE-USER-IDENTIFIER#',
-  /*      email: */ 'john@example.com',
-  /*    country: */ 'United Kingdom',
-  /*     custom: */ {
+const userObject = {
+  identifier: '#UNIQUE-USER-IDENTIFIER#',
+  email: 'john@example.com',
+  country: 'United Kingdom',
+  custom: {
     SubscriptionType: 'Pro',
     UserRole: 'Admin',
   },
-);
+};
 ```
 
 The `custom` dictionary also allows attribute values other than `string` values:
 
 ```js
-let userObject = new configcat.User('#UNIQUE-USER-IDENTIFIER#');
+const userObject = { identifier: '#UNIQUE-USER-IDENTIFIER#' };
 userObject.custom = {
   Rating: 4.5,
   RegisteredAt: new Date('2023-11-22T12:34:56.000Z'),
@@ -626,7 +626,7 @@ const configCatClient = configcat.getClient(
   '#YOUR-SDK-KEY#',
   configcat.PollingMode.AutoPoll,
   {
-    defaultUser: new configcat.User('john@example.com'),
+    defaultUser: { identifier: 'john@example.com' },
   },
 );
 ```
@@ -634,13 +634,13 @@ const configCatClient = configcat.getClient(
 ...or using the `setDefaultUser()` method of the `configCatClient` object:
 
 ```js
-configCatClient.setDefaultUser(new configcat.User('john@example.com'));
+configCatClient.setDefaultUser({ identifier: 'john@example.com' });
 ```
 
 Whenever the evaluation methods like `getValueAsync()`, `getValueDetailsAsync()`, etc. are called without an explicit `user` parameter, the SDK will automatically use the default user as a User Object.
 
 ```js
-const user = new configcat.User('john@example.com');
+const user = { identifier: 'john@example.com' };
 configCatClient.setDefaultUser(user);
 
 // The default user will be used in the evaluation process.
@@ -650,10 +650,10 @@ const value = await configCatClient.getValueAsync('keyOfMyFeatureFlag', false);
 When a `user` parameter is passed to the evaluation methods, it takes precedence over the default user.
 
 ```js
-const user = new configcat.User('john@example.com');
+const user = { identifier: 'john@example.com' };
 configCatClient.setDefaultUser(user);
 
-const otherUser = new configcat.User('brian@example.com');
+const otherUser = { identifier: 'brian@example.com' };
 
 // otherUser will be used in the evaluation process.
 const value = await configCatClient.getValueAsync(
@@ -730,7 +730,7 @@ const configCatClient = configcat.getClient(
 );
 
 await configCatClient.forceRefreshAsync();
-let value = await configCatClient.getValueAsync(
+const value = await configCatClient.getValueAsync(
   'keyOfMyTextSetting',
   'my default value',
 );
@@ -745,7 +745,7 @@ const configCatClient = configcat.getClient(
   configcat.PollingMode.ManualPoll,
 );
 
-let value = await configCatClient.getValueAsync(
+const value = await configCatClient.getValueAsync(
   'keyOfMyTextSetting',
   'my default value',
 );
@@ -830,7 +830,7 @@ await configCatClient.waitForReady();
 
 const snapshot = configCatClient.snapshot();
 
-const user = new configcat.User('#UNIQUE-USER-IDENTIFIER#');
+const user = { identifier: '#UNIQUE-USER-IDENTIFIER#' };
 for (const key of snapshot.getAllKeys()) {
   const value = snapshot.getValue(key, null, user);
   console.log(`${key}: ${value}`);
@@ -1162,7 +1162,7 @@ settingValues.forEach((i) =>
 );
 
 // invoke with User Object
-const userObject = new configcat.User('john@example.com');
+const userObject = { identifier: 'john@example.com' };
 
 settingValues = await configCatClient.getAllValuesAsync(userObject);
 settingValues.forEach((i) =>
@@ -1181,7 +1181,7 @@ let settingValues = await configCatClient.getAllValueDetailsAsync();
 settingValues.forEach((details) => console.log(details));
 
 // invoke with User Object
-const userObject = new configcat.User('john@example.com');
+const userObject = { identifier: 'john@example.com' };
 
 settingValues = await configCatClient.getAllValueDetailsAsync(userObject);
 settingValues.forEach((details) => console.log(details));

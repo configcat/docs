@@ -167,7 +167,7 @@ import { ref } from 'vue';
 import { User } from 'configcat-vue';
 
 // Define the User Object
-const user = new User('john@example.com');
+const user = { identifier: 'john@example.com' };
 const userObject = ref<User>(user)
 
 </script>

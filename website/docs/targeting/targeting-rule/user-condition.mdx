@@ -155,11 +155,15 @@ On the Dashboard:
 
 In the code:
 ```js
-const userObject = new configcat.User(userId, userEmail, undefined, {
-  // In case this code runs on the customer's device, we should consider getting the current time
-  // from a time server since customers are free to set the system clock on their devices.
-  Date: new Date()
-});
+const userObject = {
+  identifier: userId,
+  email: userEmail,
+  custom: {
+    // In case this code runs on the customer's device, we should consider getting the current time
+    // from a time server since customers are free to set the system clock on their devices.
+    Date: new Date()
+  },
+};
 
 const value = await configCatClient.getValueAsync("enableBlackFridayDeals", false, userObject);
 ```
@@ -190,9 +194,13 @@ In the code:
 ```js
 const userDomain = userEmail.split('@').pop();
 
-const userObject = new configcat.User(userId, userEmail, undefined, {
-  { domain: userDomain }
-});
+const userObject = {
+  identifier: userId,
+  email: userEmail,
+  custom: {
+    domain: userDomain
+  },
+};
 
 const value = await configCatClient.getValueAsync(key, defaultValue, userObject);
 ```
