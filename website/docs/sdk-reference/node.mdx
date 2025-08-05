@@ -21,12 +21,7 @@ export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.js
 :::caution
 This SDK is no longer maintained as it has been superseded by the new [Node.js SDK](../js/node).
 
-The new SDK maintains backward compatibility, so migration is typically as simple as:
-1. uninstalling the old NPM package,
-1. installing the new one,
-1. adjusting the `import` statements.
-
-For installation details, see the [relavant section](../js/node#1-install-and-import-package) in the new SDK's documentation.
+For guidance on migration, see [this section](#migration-to-the-new-sdk).
 :::
 
 <a href="https://github.com/configcat/node-sdk" target="_blank">
@@ -887,3 +882,43 @@ See the guides on how to use ConfigCat's Node SDK with the following libraries a
 
 - [ConfigCat Node.js SDK on GitHub](https://github.com/configcat/node-sdk)
 - [ConfigCat's Node.js SDK in NPM](https://www.npmjs.com/package/configcat-node)
+
+## Migration to the new SDK
+
+The new SDK maintains strong backward compatibility, so migration is typically as simple as:
+
+1. Replacing the old NPM package with the new one.
+
+   ```bash
+   npm uninstall configcat-node
+   npm i @configcat/sdk
+   ```
+
+1. Adjusting the `require` or `import` statements, i.e., replacing
+
+   ```js
+   const configcat = require('configcat-node');
+   ```
+ 
+   with 
+ 
+   ```js
+   const configcat = require("@configcat/sdk/node");
+   ```
+
+   In the case of TypeScript issues, refer to [this documentation](../js/node#1-install-and-import-package).
+
+And usually, that's all there is to it! 🚀
+
+If you encounter issues, please note these minor breaking changes which may require further adjustments:
+
+* The `proxy` option has been removed as the SDK no longer provides out-of-the-box support for using a HTTP(S) proxy.
+  You can implement equivalent functionality using the `httpsAgent` option as documented [here](../js/node#using-configcat-behind-a-proxy).
+* The config model has been reworked. Interfaces like `IConfig`, `ITargetingRule`, `IPercentageOption` have been replaced
+  with different types (`Config`, `TargetingRule`, `PercentageOption`, etc.)
+* The `IEvaluationDetails` interface has been deprecated in favor of the new, more accurate `EvaluationDetails` discriminated union type.
+  Although the old type is structurally compatible with the new, it's recommended to use the new one for improved type narrowing.
+* The `RefreshResult` class has been replaced with a new, more accurate discriminated union type with the same name. In most cases,
+  no further action is necessary on your part. However, you can no longer create instances of it using `new RefreshResult`, `RefreshResult.success()`, etc.
+
+For a more comprehensive list of breaking changes, see the [release notes](https://github.com/configcat/js-unified-sdk/releases/tag/v1.0.0).

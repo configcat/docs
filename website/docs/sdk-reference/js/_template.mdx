@@ -216,6 +216,12 @@ export const canImportFromCdn = (platform) => platform === "browser" || platform
   <If condition={props.platform === "node"}>
 
     ```js
+    const configcat = require("@configcat/sdk/node");
+    ```
+
+    or
+
+    ```js
     import * as configcat from "@configcat/sdk/node";
     ```
 

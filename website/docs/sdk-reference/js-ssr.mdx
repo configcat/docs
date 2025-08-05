@@ -19,12 +19,7 @@ export const JavaScriptSSRSchema = require('@site/src/schema-markup/sdk-referenc
 :::caution
 This SDK is no longer maintained as it has been superseded by the new [Browser (JavaScript) SDK](../js/browser).
 
-The new SDK maintains backward compatibility, so migration is typically as simple as:
-1. uninstalling the old NPM package,
-1. installing the new one,
-1. adjusting the `import` statements.
-
-For installation details, see the [relavant section](../js/browser#1-install-and-import-package) in the new SDK's documentation.
+For guidance on migration, see [this section](#migration-to-the-new-sdk).
 :::
 
 :::info
@@ -914,3 +909,52 @@ See the guides on how to use ConfigCat's JavaScript SSR SDK with the following l
 - <a href="https://www.npmjs.com/package/configcat-js-ssr" target="_blank">
     ConfigCat JavaScript (SSR) SDK in NPM
   </a>
+
+## Migration to the new SDK
+
+The new SDK maintains strong backward compatibility, so migration is typically as simple as:
+
+1. Replacing the old NPM package with the new one.
+
+   ```bash
+   npm uninstall configcat-js-ssr
+   npm i @configcat/sdk
+   ```
+
+1. Adjusting the `import` statements, i.e., replacing
+
+   ```js
+   import * as configcat from 'configcat-js-ssr';
+   ```
+ 
+   with
+
+   ```js
+   import * as configcat from '@configcat/sdk/browser';
+   ```
+   in client contexts,
+
+   ```js
+   import * as configcat from '@configcat/sdk/node';
+   ```
+   in server contexts,
+
+   ```js
+   import * as configcat from '@configcat/sdk';
+   ```
+   if your code needs to run in both contexts.
+
+   In the case of bundler compatibility or TypeScript issues, refer to [this documentation](../js/browser#1-install-and-import-package).
+
+And usually, that's all there is to it! 🚀
+
+If you encounter issues, please note these minor breaking changes which may require further adjustments:
+
+* The config model has been reworked. Interfaces like `IConfig`, `ITargetingRule`, `IPercentageOption` have been replaced
+  with different types (`Config`, `TargetingRule`, `PercentageOption`, etc.)
+* The `IEvaluationDetails` interface has been deprecated in favor of the new, more accurate `EvaluationDetails` discriminated union type.
+  Although the old type is structurally compatible with the new, it's recommended to use the new one for improved type narrowing.
+* The `RefreshResult` class has been replaced with a new, more accurate discriminated union type with the same name. In most cases,
+  no further action is necessary on your part. However, you can no longer create instances of it using `new RefreshResult`, `RefreshResult.success()`, etc.
+
+For a more comprehensive list of breaking changes, see the [release notes](https://github.com/configcat/js-unified-sdk/releases/tag/v1.0.0).
