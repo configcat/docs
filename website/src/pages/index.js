@@ -70,28 +70,34 @@ const features = [
     links: [
       { url: 'sdk-reference/dotnet', title: '.NET' },
       { url: 'sdk-reference/android', title: 'Android (Java)' },
-      { url: 'sdk-reference/js/browser', title: 'Browser (JavaScript)' },
-      { url: 'sdk-reference/js/bun', title: 'Bun' },
       { url: 'sdk-reference/cpp', title: 'C++' },
-      { url: 'sdk-reference/js/chromium-extension', title: 'Chromium Extension' },
-      { url: 'sdk-reference/js/cloudflare-worker', title: 'Cloudflare Worker' },
       { url: 'sdk-reference/dart', title: 'Dart (Flutter)' },
-      { url: 'sdk-reference/js/deno', title: 'Deno' },
       { url: 'sdk-reference/elixir', title: 'Elixir' },
       { url: 'sdk-reference/go', title: 'Go' },
       { url: 'sdk-reference/java', title: 'Java' },
+      {
+        url: 'sdk-reference/js/overview',
+        title: 'JavaScript',
+        items: [
+          { url: 'sdk-reference/js/browser', title: 'Browser' },
+          { url: 'sdk-reference/js/bun', title: 'Bun' },
+          { url: 'sdk-reference/js/chromium-extension', title: 'Chromium Extension' },
+          { url: 'sdk-reference/js/cloudflare-worker', title: 'Cloudflare Worker' },
+          { url: 'sdk-reference/js/deno', title: 'Deno' },
+          { url: 'sdk-reference/js/node', title: 'Node.js' },
+          { url: 'sdk-reference/react', title: 'React' },
+          { url: 'sdk-reference/community/vue', title: 'Vue.js' },
+        ],
+      },
       { url: 'sdk-reference/kotlin', title: 'Kotlin Multiplatform' },
-      { url: 'sdk-reference/js/node', title: 'Node.js' },
       { url: 'sdk-reference/php', title: 'PHP' },
       { url: 'sdk-reference/community/laravel', title: 'PHP (Laravel)' },
       { url: 'sdk-reference/python', title: 'Python' },
-      { url: 'sdk-reference/react', title: 'React' },
       { url: 'sdk-reference/ruby', title: 'Ruby' },
       { url: 'sdk-reference/rust', title: 'Rust' },
       { url: 'sdk-reference/ios', title: 'Swift (iOS)' },
       { url: 'sdk-reference/unity', title: 'Unity' },
       { url: 'sdk-reference/unreal', title: 'Unreal Engine' },
-      { url: 'sdk-reference/community/vue', title: 'Vue.js' },
     ],
   },
   {
@@ -137,14 +143,21 @@ function Feature({ imageUrl, title, description, links }) {
       )}
       <h3>{title}</h3>
       <p>{description}</p>
-      <ul>
-        {links.map((link, idx) => (
-          <li>
-            <Link to={useBaseUrl(link.url)}>{link.title}</Link>
-          </li>
-        ))}
-      </ul>
+      {FeatureItems(links)}
     </div>
+  );
+}
+
+function FeatureItems(links) {
+  return (
+    <ul class="feature-list">
+      {links.map(({ url, title, items }) => (
+        <li>
+          <Link to={useBaseUrl(url)}>{title}</Link>
+          {items?.length && FeatureItems(items)}
+        </li>
+      ))}
+    </ul>
   );
 }
 
