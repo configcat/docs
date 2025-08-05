@@ -6,12 +6,11 @@ description: ConfigCat Node.js SDK Reference. This is a step-by-step guide on ho
 
 import JSSdkReferenceTemplate, { getAdjustedToc } from "./\_template.mdx";
 
-{/* TODO */}
-export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.json');
+export const UnifiedJSNodeSchema = require('@site/src/schema-markup/sdk-reference/js/node.json');
 
 <script
   type="application/ld+json"
-  dangerouslySetInnerHTML={{ __html: JSON.stringify(NodeSchema) }}
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(UnifiedJSNodeSchema) }}
 ></script>
 
 export const platform = "node";

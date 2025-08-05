@@ -6,12 +6,11 @@ description: ConfigCat Chromium Extension SDK Reference. This is a step-by-step 
 
 import JSSdkReferenceTemplate, { getAdjustedToc } from "./\_template.mdx";
 
-{/* TODO */}
-export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.json');
+export const UnifiedJSChromiumExtensionSchema = require('@site/src/schema-markup/sdk-reference/js/chromium-extension.json');
 
 <script
   type="application/ld+json"
-  dangerouslySetInnerHTML={{ __html: JSON.stringify(NodeSchema) }}
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(UnifiedJSChromiumExtensionSchema) }}
 ></script>
 
 export const platform = "chromium-extension";

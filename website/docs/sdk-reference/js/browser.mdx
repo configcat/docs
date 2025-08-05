@@ -6,12 +6,11 @@ description: ConfigCat Browser (JavaScript) SDK Reference. This is a step-by-ste
 
 import JSSdkReferenceTemplate, { getAdjustedToc } from "./\_template.mdx";
 
-{/* TODO */}
-export const JavaScriptSchema = require('@site/src/schema-markup/sdk-reference/js.json');
+export const UnifiedJSBrowserSchema = require('@site/src/schema-markup/sdk-reference/js/browser.json');
 
 <script
   type="application/ld+json"
-  dangerouslySetInnerHTML={{ __html: JSON.stringify(JavaScriptSchema) }}
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(UnifiedJSBrowserSchema) }}
 ></script>
 
 export const platform = "browser";

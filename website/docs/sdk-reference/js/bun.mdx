@@ -6,12 +6,11 @@ description: ConfigCat Bun SDK Reference. This is a step-by-step guide on how to
 
 import JSSdkReferenceTemplate, { getAdjustedToc } from "./\_template.mdx";
 
-{/* TODO */}
-export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.json');
+export const UnifiedJSBunSchema = require('@site/src/schema-markup/sdk-reference/js/bun.json');
 
 <script
   type="application/ld+json"
-  dangerouslySetInnerHTML={{ __html: JSON.stringify(NodeSchema) }}
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(UnifiedJSBunSchema) }}
 ></script>
 
 export const platform = "bun";

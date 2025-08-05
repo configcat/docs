@@ -6,12 +6,11 @@ description: ConfigCat Cloudflare Worker SDK Reference. This is a step-by-step g
 
 import JSSdkReferenceTemplate, { getAdjustedToc } from "./\_template.mdx";
 
-{/* TODO */}
-export const NodeSchema = require('@site/src/schema-markup/sdk-reference/node.json');
+export const UnifiedJSCloudflareWorkerSchema = require('@site/src/schema-markup/sdk-reference/js/cloudflare-worker.json');
 
 <script
   type="application/ld+json"
-  dangerouslySetInnerHTML={{ __html: JSON.stringify(NodeSchema) }}
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(UnifiedJSCloudflareWorkerSchema) }}
 ></script>
 
 export const platform = "cloudflare-worker";
