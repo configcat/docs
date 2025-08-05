@@ -276,12 +276,12 @@ client.clearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache, then all `getValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling strategies to fetch feature flags and settings from the ConfigCat CDN. After the latest data is downloaded, it is stored in the cache, then calls to `getValue()` use the cached data to evaluate feature flags and settings. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
 
-The _ConfigCat SDK_ downloads the latest values and stores them automatically every 60 seconds.
+The _ConfigCat SDK_ downloads the latest config data from the ConfigCat CDN automatically every 60 seconds and stores it in the cache.
 
 Use the the `autoPollInterval` option parameter of the `PollingMode.autoPoll()` to change the polling interval.
 
@@ -305,7 +305,7 @@ Available options:
 
 ### Lazy Loading
 
-When calling `getValue()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `getValue()` will return the setting value after the cache is updated.
+When calling `getValue()`, the _ConfigCat SDK_ downloads the latest config data from the ConfigCat CDN only if it is not already present in the cache, or if the cache has expired. In this case `getValue()` will return the setting value after the cache is updated.
 
 Use the `cacheRefreshInterval` option parameter of the `PollingMode.lazyLoad()` to set cache lifetime.
 
@@ -329,7 +329,7 @@ Available options:
 
 ### Manual Polling
 
-Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. ConfigCat SDK will not update them automatically. Calling `forceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the config data is downloaded from the ConfigCat CDN. The _ConfigCat SDK_ will not download it automatically. Calling `forceRefresh()` is your application's responsibility.
 
 ```dart
 final client = ConfigCatClient.get(

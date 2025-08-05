@@ -8,19 +8,19 @@ There are 3 different ways (polling modes) to control caching.
 
 ## Auto polling (default)
 
-In auto polling mode, the ConfigCat SDK downloads the latest feature flags and settings from the ConfigCat CDN automatically and stores it in the cache.
+In auto polling mode, the ConfigCat SDK downloads the latest feature flags and settings from the ConfigCat CDN automatically and stores them in the cache.
 By default, this happens every 60 seconds.
 You can set the polling interval to any value between 1 and 2,147,483 seconds.
 
 ## Lazy loading
 
-In lazy loading mode, the ConfigCat SDK downloads the latest feature flags and settings from the ConfigCat CDN only if it is not already in the cache, or if the cache has expired.
+In lazy loading mode, the ConfigCat SDK downloads the latest feature flags and settings from the ConfigCat CDN only if they are not already present in the cache, or if the cache has expired.
 By default, the cache Time To Live (TTL) value is 60 seconds.
 You can set it to any value between 1 and 2,147,483,647 seconds.
 
 ## Manual polling
 
-Manual polling gives you full control over when the latest feature flags and settings are downloaded from the ConfigCat CDN.
+Manual polling gives you full control over when the feature flags and settings are downloaded from the ConfigCat CDN.
 The ConfigCat SDK will not download them automatically.
 You can (and should) update the cache manually, by calling a `forceRefresh()` - this will download the latest feature flags and settings and update the cache.
 

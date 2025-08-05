@@ -77,7 +77,7 @@ _ConfigCat Client_ is responsible for:
 
 | Properties                     | Description                                                                                                                                                                                                                                                                                                                                                    |
 | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sdk_key`                      | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                                                                                                                                                                                                                                                      |
+| `sdk_key`                      | **REQUIRED.** SDK Key to access your feature flags and settings. Get it from the _ConfigCat Dashboard_.                                                                                                                                                                                                                                                        |
 | `base_url`                     | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                                                                                |
 | `data_governance`              | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. Defaults to `:global`. [More about Data Governance](../advanced/data-governance.mdx). Available options: `:global`, `:eu_only`.                                                                   |
 | `cache_policy`                 | `CachePolicy.auto/1`, `CachePolicy.lazy/1` and `CachePolicy.manual/0`. Defaults to: `CachePolicy.auto/0` See [See below](#polling-modes) for details.                                                                                                                                                                                                          |
@@ -209,12 +209,12 @@ ConfigCat.clear_default_user()
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache, then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling strategies to fetch feature flags and settings from the ConfigCat CDN. After the latest data is downloaded, it is stored in the cache, then calls to `get_value()` use the cached data to evaluate feature flags and settings. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
 
-The _ConfigCat SDK_ downloads the latest values and stores them automatically every 60 seconds.
+The _ConfigCat SDK_ downloads the latest config data from the ConfigCat CDN automatically every 60 seconds and stores it in the cache.
 
 Use the `poll_interval_seconds` option parameter to change the polling interval.
 
@@ -234,7 +234,7 @@ Available options:
 
 ### Lazy loading
 
-When calling `get_value()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `get_value()` will return the setting value after the cache is updated.
+When calling `get_value()`, the _ConfigCat SDK_ downloads the latest config data from the ConfigCat CDN only if it is not already present in the cache, or if the cache has expired. In this case `get_value()` will return the setting value after the cache is updated.
 
 Use `cache_refresh_interval_seconds` option parameter to set cache lifetime.
 
@@ -253,7 +253,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh()` is your application's responsibility.
+Manual polling gives you full control over when the config data is downloaded from the ConfigCat CDN. The _ConfigCat SDK_ will not download it automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```elixir
 ConfigCat.force_refresh()
