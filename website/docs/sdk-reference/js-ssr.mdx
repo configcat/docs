@@ -926,23 +926,24 @@ The new SDK maintains strong backward compatibility, so migration is typically a
    ```js
    import * as configcat from 'configcat-js-ssr';
    ```
- 
-   with
 
-   ```js
-   import * as configcat from '@configcat/sdk/browser';
-   ```
-   in client contexts,
+   * with the following in client contexts:
 
-   ```js
-   import * as configcat from '@configcat/sdk/node';
-   ```
-   in server contexts,
+     ```js
+     import * as configcat from '@configcat/sdk/browser';
+     ```
 
-   ```js
-   import * as configcat from '@configcat/sdk';
-   ```
-   if your code needs to run in both contexts.
+   * with the following in server contexts:
+
+     ```js
+     import * as configcat from '@configcat/sdk/node';
+     ```
+
+   * with the following if your code needs to run in both contexts:
+
+     ```js
+     import * as configcat from '@configcat/sdk';
+     ```
 
    In the case of bundler compatibility or TypeScript issues, refer to [this documentation](../js/browser#1-install-and-import-package).
 
