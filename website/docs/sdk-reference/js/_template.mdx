@@ -23,7 +23,7 @@ export const getSdkName = (platform) => platform ? sdks[platform].name : "Config
 export const showCodePenDemoSection = (platform) => !platform || platform === "browser";
 export const showQueryStringFlagOverrideSection = (platform) => platform === "browser" || platform === "chromium-extension" || platform === "cloudflare-worker";
 export const showUsingBehindProxySection = (platform) => platform === "node" || platform === "bun";
-export const showBestPracticesSection = (platform) => platform === "browser" || platform === "node";
+export const showBestPracticesSection = (platform) => platform === "browser" || platform === "node" || platform === "cloudflare-worker";
 export const showGuidesSection = (platform) => !platform || platform === "browser" || platform === "node";
 
 export const getAdjustedToc = (platform) => {
@@ -267,9 +267,21 @@ export const canImportFromCdn = (platform) => platform === "browser" || platform
 
 ### 2. Create the _ConfigCat_ client with your SDK Key
 
+<If condition={props.platform !== "cloudflare-worker"}>
+
 ```js
 const configCatClient = configcat.getClient('#YOUR-SDK-KEY#');
 ```
+
+</If>
+
+<If condition={props.platform === "cloudflare-worker"}>
+
+```js
+const configCatClient = configcat.getClient('#YOUR-SDK-KEY#', configcat.PollingMode.LazyLoad);
+```
+
+</If>
 
 ### 3. Get your setting value
 
@@ -1390,16 +1402,28 @@ Also, we recommend using [confidential targeting comparators](../../targeting/ta
 
   ### Choosing polling mode for serverless functions
 
-  In most cases, Auto polling is a good choice, but it's not ideal for short-lived serverless functions like AWS Lambdas, Azure Functions, Cloudflare Workers, etc.
+  <If condition={props.platform !== "cloudflare-worker"}>
 
-  For example, if the SDK is running in a Next.js application that is hosted on Vercel (AWS Lambda), or your application is hosted directly in AWS Lambdas, it is recommended to use the SDK in Lazy loading or Manual polling mode instead of the default Auto polling mode.
+    In most cases, Auto polling is a good choice, but it's not ideal for short-lived serverless functions like AWS Lambdas, Azure Functions, Cloudflare Workers, etc.
 
-  As AWS Lambdas try to minimize their uptime, the applications are terminated as soon as the sytem detects inactivity in the application. 
+    For example, if the SDK is running in a Next.js application that is hosted on Vercel (AWS Lambda), or your application is hosted directly in AWS Lambdas, it is recommended to use the SDK in Lazy loading or Manual polling mode instead of the default Auto polling mode.
 
-  Auto polling mode is implemented using an asynchronous background loop to periodically get the config data from the ConfigCat servers, however the AWS Lambda doesn't detect it as a running application and terminates it.
+    As AWS Lambdas try to minimize their uptime, the applications are terminated as soon as the sytem detects inactivity in the application. 
 
-  So it can easily happen that there is an ongoing HTTP GET request towards our servers and this termination can cause errors.
-  The most likely error message in this case is `Request timed out while trying to fetch config JSON.`
+    Auto polling mode is implemented using an asynchronous background loop to periodically get the config data from the ConfigCat servers, however the AWS Lambda doesn't detect it as a running application and terminates it.
+
+    So it can easily happen that there is an ongoing HTTP GET request towards our servers and this termination can cause errors.
+    The most likely error message in this case is `Request timed out while trying to fetch config JSON.`
+
+  </If>
+
+  <If condition={props.platform === "cloudflare-worker"}>
+
+    Auto polling is not ideal for short-lived serverless functions like Cloudflare Workers.
+
+    It is recommended to use the SDK in Lazy loading or Manual polling mode instead of the default Auto polling mode.
+
+  </If>
 
 </If>
 
