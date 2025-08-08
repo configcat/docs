@@ -49,7 +49,7 @@ Currently, there's no direct way to change the email address of an account. Howe
 2. Grant all the necessary permissions to the new account.
 3. Proceed with deleting your old account from [here](https://app.configcat.com/my-account).
 
-If you don't have the required permissions, contact your organization admin or a team management member.
+If you don't have the required permissions, contact your organization admin or a team member who has "Team members and permission groups" permissions.
 
 Please note: Switching emails means you'll lose preferences from your old account, such as permissions, API keys, and Zombie flag settings. Transfer essential settings first.
 
@@ -226,7 +226,7 @@ Yes, you can rename almost everything within ConfigCat. Organizations, products,
 
 ### Can I change my Feature Flag based on a date?
 
-There is no explicit way to do this in ConfigCat, but you can create a text setting anytime with your desired start date as a value and in your code you can use it as a filter. This [guide](https://configcat.com/blog/2020/11/04/enable-my-feature-automatically/) should help get you started in the right direction.
+You can pass the current date as a [custom User Object attribute](./targeting/targeting-rule/user-condition.mdx#comparison-attribute) to the ConfigCat SDK attribute when evaluating the feature flag, and you can use that attribute with our [date and time comparators](./targeting/targeting-rule/user-condition.mdx#date-and-time-comparators) in your targeting rules to target specific dates.
 
 ### Does ConfigCat guarantee % distribution?
 
