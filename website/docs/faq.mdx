@@ -14,7 +14,7 @@ A collection of frequently asked questions.
 
 ### Learning how ConfigCat can work with your product
 
-You can book a free demo session [here](https://calendly.com/configcat/demo), where we'll show you how to use ConfigCat, as well as answer your questions.
+You can book a free demo session [here](https://calendly.com/configcat/demo), where we'll show you how to use ConfigCat and answer any questions you have. 
 
 ## Billing, Payments & Subscriptions
 
@@ -25,21 +25,21 @@ You can always check your Usage & Quota [here](https://app.configcat.com/organiz
 
 ### Where can I find and download my invoices?
 
-All the invoices we issued are available for download from the [Billing & Invoices page.](https://app.configcat.com/organization/billing).
-You need to have a [Billing Manager](organization.mdx#billing-manager-role) role to access the Billing & Invoices page.
+All the invoices we've issued are available for download from the [Billing & Invoices page](https://app.configcat.com/organization/billing).
+You need to have the [Billing Manager](organization.mdx#billing-manager-role) role to access the Billing & Invoices page.
 
 ### Is it possible to pay via wire transfer?
 
-Using a credit card via the ConfigCat Dashboard is the preferred way of payment, but a wire transfer is also an option in our larger subscription plans. [Contact us](https://configcat.com/support/) directly for this process.
+Using a credit card via the ConfigCat Dashboard is the preferred way of payment, but a wire transfer is also an option for larger subscription plans. [Contact us](https://configcat.com/support/) directly for more details. 
 
 ### How do I upgrade / downgrade my billing plan?
 
 You can change your billing plan on the [Plans](https://app.configcat.com/organization/plans) page.
-You need to have a [Billing Manager](organization.mdx#billing-manager-role) role to access the Plans page.
+You need to have the [Billing Manager](organization.mdx#billing-manager-role) role to access the Plans page.
 
 ### Can I get a discounted rate?
 
-This is possible if you join our partnership program or via [referrals](https://configcat.com/referrals/). [Contact us](https://configcat.com/support/) directly for more information.
+Discounts are available through our partnership program. [Contact us](https://configcat.com/support/) directly for more information.
 
 ### Can I change the email address associated with my account?
 
@@ -49,14 +49,14 @@ Currently, there's no direct way to change the email address of an account. Howe
 2. Grant all the necessary permissions to the new account.
 3. Proceed with deleting your old account from [here](https://app.configcat.com/my-account).
 
-If you lack privileges for this, contact your organization admin or a team management member.
+If you don't have the required permissions, contact your organization admin or a team member who has "Team members and permission groups" permissions.
 
 Please note: Switching emails means you'll lose preferences from your old account, such as permissions, API keys, and Zombie flag settings. Transfer essential settings first.
 
-### How do I change the billing email address the way I receive my invoices?
+### How do I change the billing email address where I receive my invoices?
 
-Go to the [Billing & Invoices page.](https://app.configcat.com/organization/billing) And click the `Update billing details` link.
-You need to have a [Billing Manager](organization.mdx#billing-manager-role) role to access the Billing & Invoices page.
+Go to the [Billing & Invoices page](https://app.configcat.com/organization/billing) and click the `Update billing details` link.
+You need to have the [Billing Manager](organization.mdx#billing-manager-role) role to access the Billing & Invoices page.
 
 ### How do I change my payment method or billing information?
 
@@ -81,7 +81,7 @@ You need to have a [Billing Manager](./organization.mdx#billing-manager-role) ro
 
 ### Are you ISO certified?
 
-We can proudly say that as of 2022 May 31, ConfigCat has achieved the ISO/IEC 27001:2013 certification for Information Security Management Systems (ISMS). Click [here](https://configcat.com/iso/) to learn more.
+Yes, ConfigCat complies with the ISO/IEC 27001:2022 standard for Information Security Management Systems (ISMS). Click [here](https://configcat.com/iso/) to learn more.
 
 ### I'm setting up my firewall, which addresses should I whitelist?
 
@@ -92,7 +92,7 @@ If possible, you can allow the whole "configcat.com" domain. Alternatively, you 
 - The Public Management API: https://api.configcat.com
 - The Dashboard URL: https://app.configcat.com
 
-### I can't log in to ConfigCat using two-factor (2FA) authentication.
+### I can't log in to ConfigCat using two-factor authentication (2FA).
 
 _Solution 1:_ There might be an authenticator app on your phone that you can use to log in to ConfigCat.
 
@@ -102,31 +102,35 @@ _Solution 3:_ Contact your `Organization Admin`, and ask them to disable 2FA for
 
 ### The Audit log doesn't show old operations
 
-There is a 7-day log retention in the free plan and a longer, 35 day in all the other plans.
+The Free plan includes a 7-day retention period. The Pro and Smart plans offer a 35-day retention, while the Enterprise and Dedicated plans provide a 2-year retention.
 
 ### Is there a way to allow a group access to only one config rather than all of them?
 
-Config access can't be specified in one Product, but you can split your configs into multiple products, each with the necessary permission settings.
+You can't set config-level access in one product. Instead, split your configs into multiple products with the appropriate permission settings.
 
-### I cannot access my account using google sign-in.
+### I cannot access my account using Google sign-in.
 
-Browser extensions can interfere with this. Please disable all browser extensions and try again.
+Browser extensions may interfere. Please disable all browser extensions and try again.
 
 ## Privacy
 
 ### How can I be sure that my data is safe?
 
-The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system.
+ConfigCat SDKs evaluate feature flags locally, in your application. They send no user data to the ConfigCat servers.
 
-See our the architecture explained [here](https://configcat.com/architecture/).
+See our architecture explained [here](https://configcat.com/architecture/).
 
 ### Can we sign a data processing agreement with you?
 
-Yes, please [contact us](https://configcat.com/support/) and we'll send you our DPA for signing.
+Yes. You can review our DPA through our [Trust Center](https://configcat.com/trust-center/) page, or [contact us](https://configcat.com/support/?prefilled=dpa-sign-request) and we'll send it to you for signing. 
 
-### What browser data is collected, processed or stored by the ConfigCat SDK when pulling feature flag data from the ConfigCat CDN?
+### Does ConfigCat collect browser data when serving feature flag data download requests?
 
-ConfigCat doesn't collect, store or process any browser data. The data flow is one directional - the SDKs are only downloading the config JSON files and the feature flag evaluation happens in the SDK. ConfigCat doesn't collect any information about the customer's users.
+No. ConfigCat doesn't collect, store or process any user or browser fingerprinting data.
+
+The data flow is one directional - the SDKs are only downloading the config JSON files and the feature flag evaluation happens in the SDKs.
+
+ConfigCat doesn't collect any information about the customer's users.
 
 ### Is data hosted only within the EU?
 
@@ -169,7 +173,7 @@ Also, consider the following:
 - All SDKs evaluate the rules in the exact same way. (10% is the same 10% in all SDKs)
 - The percentage rules are sticky by feature flag. (10% is a different 10% for each feature flag)
 
-More on [stickyness](./targeting/percentage-options.mdx#stickiness) and [consistency](./targeting/percentage-options.mdx#consistency)
+More on [stickiness](./targeting/percentage-options.mdx#stickiness) and [consistency](./targeting/percentage-options.mdx#consistency)
 
 ### How to use Targeting Rules based on sensitive data?
 
@@ -210,7 +214,7 @@ Invitations are valid for 14 days by default, but you can re-send them anytime t
 
 ### I can't see the organization that I just joined
 
-If you created a new account before joining an organization via an invite (like that's send by your company via email), then it is likely that a duplicate organization is created for you by ConfigCat.
+If you created a new account before joining an organization via an invite (like the one sent by your company via email), then it is likely that a duplicate organization is created for you by ConfigCat.
 
 Once you find the proper organization where you are supposed to be, we recommend deleting the duplicate from [here](https://app.configcat.com/organization/preferences), but please make sure that you don't accidentally delete the one that you want to keep.
 
@@ -222,13 +226,13 @@ Yes, you can rename almost everything within ConfigCat. Organizations, products,
 
 ### Can I change my Feature Flag based on a date?
 
-There is no explicit way to do this in ConfigCat, but you can create a text setting anytime with your desired start date as a value and in your code you can use it as a filter. This [guide](https://configcat.com/blog/2020/11/04/enable-my-feature-automatically/) should help get things started rolling in the right direction.
+You can pass the current date as a [custom User Object attribute](./targeting/targeting-rule/user-condition.mdx#comparison-attribute) to the ConfigCat SDK attribute when evaluating the feature flag, and you can use that attribute with our [Date and Time comparators](./targeting/targeting-rule/user-condition.mdx#date-and-time-comparators) in your targeting rules to target specific dates.
 
-### Does ConfigCat guarantee % distribution?
+### Does ConfigCat guarantee percentage distribution?
 
-ConfigCat guarantees % distribution across all SDKs, and it guarantees that each user will receive the same experience every time.
+ConfigCat guarantees percentage distribution across all SDKs, and it guarantees that each user will receive the same experience every time.
 
-### Is it possible to set up ABC test (33%/33%/33%) distribution with ConfigCat?
+### Is it possible to set up A/B/C test (33%/33%/33%) distribution with ConfigCat?
 
 Yes, it is possible. All you have to do is to create a text setting and apply the percentage rules. With a normal feature flag you have only two options - true or false, but with a text setting you can apply as many A/B/n options as you want with the percentages.
 

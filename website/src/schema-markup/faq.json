@@ -15,7 +15,7 @@
       "name": "Where can I find and download my ConfigCat invoices?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "With a Billing Manager role, you can access and download the invoices issued by ConfigCat from the Billing & Invoices page: https://app.configcat.com/organization/billing."
+        "text": "With the Billing Manager role, you can access and download the invoices issued by ConfigCat from the Billing & Invoices page: https://app.configcat.com/organization/billing."
       }
     },
     {
@@ -23,7 +23,7 @@
       "name": "Is it possible to pay ConfigCat via wire transfer?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Using a credit card via the ConfigCat Dashboard is the preferred way of payment, but a wire transfer is also an option in larger subscription plans. For this process, contact ConfigCat directly: https://configcat.com/support"
+        "text": "Using a credit card via the ConfigCat Dashboard is the preferred way of payment, but a wire transfer is also an option for larger subscription plans. For this process, contact ConfigCat directly: https://configcat.com/support"
       }
     },
     {
@@ -31,7 +31,7 @@
       "name": "How do I upgrade my ConfigCat billing plan?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "With a Billing Manager role, you can change your billing plan on the Plans page: https://app.configcat.com/organization/plans"
+        "text": "With the Billing Manager role, you can change your billing plan on the Plans page: https://app.configcat.com/organization/plans"
       }
     },
     {
@@ -39,7 +39,7 @@
       "name": "How do I downgrade my ConfigCat billing plan?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "With a Billing Manager role, you can change your billing plan on the Plans page: https://app.configcat.com/organization/plans"
+        "text": "With the Billing Manager role, you can change your billing plan on the Plans page: https://app.configcat.com/organization/plans"
       }
     },
     {
@@ -47,7 +47,7 @@
       "name": "How can I use ConfigCat at a discounted rate?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "This is possible if you join ConfigCat's partnership program or via referrals: https://configcat.com/referrals"
+        "text": "Discounts are available through our partnership program. Contact us at https://configcat.com/support/ directly for more information."
       }
     },
     {
@@ -55,7 +55,7 @@
       "name": "How do I change the billing email address where the ConfigCat invoices should be sent?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
+        "text": "You can do this with the Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
       }
     },
     {
@@ -63,7 +63,7 @@
       "name": "How do I change my payment method in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
+        "text": "You can do this with the Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
       }
     },
     {
@@ -71,7 +71,7 @@
       "name": "How do I change my billing information in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can do this with a Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
+        "text": "You can do this with the Billing Manager role by clicking the Update billing details link on the Billing & Invoices page: https://app.configcat.com/organization/billing"
       }
     },
     {
@@ -95,7 +95,7 @@
       "name": "How do I cancel my ConfigCat account?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can do this with a Billing Manager role by clicking the Switch Plan button under the Free plan on the Plans page: https://app.configcat.com/organization/plans"
+        "text": "You can do this with the Billing Manager role by clicking the Switch Plan button under the Free plan on the Plans page: https://app.configcat.com/organization/plans"
       }
     },
     {
@@ -103,7 +103,7 @@
       "name": "How do I change my currency in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can do this with a Billing Manager role by using the currency toggle to Switch between USD and EUR on the Plans page: https://app.configcat.com/organization/plans"
+        "text": "You can do this with the Billing Manager role by using the currency toggle to Switch between USD and EUR on the Plans page: https://app.configcat.com/organization/plans"
       }
     },
     {
@@ -111,7 +111,7 @@
       "name": "Is ConfigCat ISO certified?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "As of 2022 May 31, ConfigCat has achieved the ISO/IEC 27001:2013 certification for Information Security Management Systems (ISMS). Learn more here: https://configcat.com/iso/"
+        "text": "Yes, ConfigCat complies with the ISO/IEC 27001:2022 standard for Information Security Management Systems (ISMS). Learn more here: https://configcat.com/iso/"
       }
     },
     {
@@ -124,7 +124,7 @@
     },
     {
       "@type": "Question",
-      "name": "I can't log in to ConfigCat because I forgot my 2FA (Two-factor authentication) code.",
+      "name": "I can't log in to ConfigCat because I forgot my two-factor authentication (2FA) code.",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Solution 1: There might be an authenticator app on your phone that you can use to log in to ConfigCat.  Solution 2: Contact your Organization Admin, and ask them to disable 2FA for your account until you set it up again.  Solution 3: Use your recovery codes that you received when you first set your 2FA up."
@@ -135,7 +135,7 @@
       "name": "The Audit log in ConfigCat does not show old operations.",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "There is a 7-day log retention in the free plan and a longer, 35 day in all the other plans."
+        "text": "The Free plan includes a 7-day retention period. The Pro and Smart plans offer a 35-day retention, while the Enterprise and Dedicated plans provide a 2-year retention."
       }
     },
     {
@@ -143,15 +143,15 @@
       "name": "Is there a way to allow group access to only one config in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Config access can't be specified in one Product, but you can split your configs into multiple products, each with the necessary permission settings."
+        "text": "You can't set config-level access in one product. Instead, split your configs into multiple products with the appropriate permission settings."
       }
     },
     {
       "@type": "Question",
-      "name": "I cannot access my ConfigCat account using google sign-in.",
+      "name": "I cannot access my ConfigCat account using Google sign-in.",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Browser extensions can interfere with this. Please disable all browser extensions and try again."
+        "text": "Browser extensions may interfere with this. Please disable all browser extensions and try again."
       }
     },
     {
@@ -159,7 +159,7 @@
       "name": "How can I be sure that my data is safe at ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The feature flag evaluation is done on the client-side in the ConfigCat SDK. So if you are using the SDK, you can be sure that your data will never leave your system. See ConfigCat's architecture explained here: https://configcat.com/architecture/."
+        "text": "ConfigCat SDKs evaluate feature flags locally, in your application. They send no user data to the ConfigCat servers. See ConfigCat's architecture explained here: https://configcat.com/architecture/."
       }
     },
     {
@@ -167,15 +167,15 @@
       "name": "Can I sign a data processing agreement with ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, ConfigCat is happy to sign a data processing agreement (DPA)"
+        "text": "Yes, ConfigCat is happy to sign a data processing agreement (DPA). You can review our DPA through our Trust Center page: https://configcat.com/trust-center/"
       }
     },
     {
       "@type": "Question",
-      "name": "What browser data is collected, processed or stored by the ConfigCat SDK when pulling feature flag data from the ConfigCat CDN?",
+      "name": "Does ConfigCat collect browser data when serving feature flag data download requests?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "ConfigCat doesn't collect, store or process any browser data. The data flow is one directional - the SDKs are only downloading the config JSON files and the feature flag evaluation happens in the SDK. ConfigCat doesn't collect any information about the customer's users."
+        "text": "No. ConfigCat doesn't collect, store or process any user or browser fingerprinting data. The data flow is one directional - the SDKs are only downloading the config JSON files and the feature flag evaluation happens in the SDK. ConfigCat doesn't collect any information about the customer's users."
       }
     },
     {
@@ -207,12 +207,12 @@
       "name": "How can I use AND operators in my Targeting Rules in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, since Config V2 there is direct support for 'AND' operators in ConfigCat. "
+        "text": "Yes, since Config V2 there is direct support for AND operators in ConfigCat. "
       }
     },
     {
       "@type": "Question",
-      "name": "Are ConfigCat percentage targeting options sticky?",
+      "name": "Are percentage options sticky?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes. The percentage-based targeting is sticky by design and consistent across all SDKs. More on stickiness and consistency: https://configcat.com/docs/targeting/percentage-options/#stickiness, https://configcat.com/docs/targeting/percentage-options/#consistency"
@@ -295,7 +295,7 @@
       "name": "Can I change my Feature Flag based on a date in ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "While there is no explicit way to do this, you can create a text setting with your desired start date as a value which can be used as a filter in your code: https://configcat.com/blog/2020/11/04/enable-my-feature-automatically"
+        "text": "You can pass the current date as a custom User Object attribute to the ConfigCat SDK attribute when evaluating the feature flag, and you can use that attribute with our Date and Time comparators in your targeting rules to target specific dates."
       }
     },
     {
@@ -308,7 +308,7 @@
     },
     {
       "@type": "Question",
-      "name": "Is it possible to set up an ABC test distribution with ConfigCat?",
+      "name": "Is it possible to set up an A/B/C test distribution with ConfigCat?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes, it is possible. All you have to do is create a text setting and apply the percentage rules. With a normal feature flag, you have only two options - true or false, but with a text setting you can apply as many A/B/n options as you want with the percentages."
