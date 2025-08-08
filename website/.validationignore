@@ -84,14 +84,6 @@
 /docs/requests.mdx
 /docs/service/status.mdx
 /docs/subscription-plan-limits.mdx
-/docs/targeting/feature-flag-evaluation.mdx
-/docs/targeting/percentage-options.mdx
-/docs/targeting/targeting-overview.mdx
-/docs/targeting/targeting-rule/flag-condition.mdx
-/docs/targeting/targeting-rule/segment-condition.mdx
-/docs/targeting/targeting-rule/targeting-rule-overview.mdx
-/docs/targeting/targeting-rule/user-condition.mdx
-/docs/targeting/user-object.mdx
 
 /api/**/*.mdx
 /versioned_docs/**/*.mdx  
