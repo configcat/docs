@@ -254,7 +254,7 @@ Let's see now step by step how to convert this code to ConfigCat:
    ```
 
    Please note that the ConfigCat client doesn't maintain a persistent connection to the remote server, but uses different
-   polling strategies to get the data necessary for feature flag evaluation. Refer to the [SDK reference](../../sdk-reference/node#creating-the-configcat-client)
+   polling strategies to get the data necessary for feature flag evaluation. Refer to the [SDK reference](../../sdk-reference/js/overview#creating-the-configcat-client)
    to learn more about the options. For frontend applications and long-running backend services, Auto Polling mode is
    usually a good choice.
 1. Adjust the wait-for-initialization logic.
@@ -274,7 +274,7 @@ Let's see now step by step how to convert this code to ConfigCat:
      the default value you pass to them.)
 
      Actually, you only need this wait-for-initialization logic at the startup of your applications if you want to use
-     [synchronous feature flag evaluation via snapshots](../../sdk-reference/node#snapshots-and-synchronous-feature-flag-evaluation).
+     [synchronous feature flag evaluation via snapshots](../../sdk-reference/js/overview#snapshots-and-synchronous-feature-flag-evaluation).
    * For other polling modes, the wait-for-initialization logic doesn't make sense, so just omit it.
 1. Rewrite LaunchDarkly contexts to ConfigCat User Objects.
 
@@ -283,7 +283,7 @@ Let's see now step by step how to convert this code to ConfigCat:
    but it's a simpler data structure.
 
    To be able to convert a context data structure to a User Object one, you will need to do the following:
-   * Read [the section on User Objects](../../sdk-reference/node#user-object) in the reference of the SDK for your
+   * Read [the section on User Objects](../../sdk-reference/js/overview#user-object) in the reference of the SDK for your
      platform.
    * Read [this section](../migration-from-launchdarkly-translation#mapping-between-launchdarkly-contexts-and-configcat-user-objects)
      to learn how context paths are mapped to User Object attribute names.
@@ -313,14 +313,14 @@ Let's see now step by step how to convert this code to ConfigCat:
    * ConfigCat SDKs don't support [automatic camel casing](https://launchdarkly.com/docs/sdk/client-side/react/react-web#flag-keys-in-the-react-web-sdk)
      of feature flag keys.
    * In statically typed languages, ConfigCat evaluation methods require that the default value type and the feature
-     flag type match. (Usually, there is [a section about this](../../sdk-reference/node#setting-type-mapping) in the
+     flag type match. (Usually, there is [a section about this](../../sdk-reference/js/overview#setting-type-mapping) in the
      SDK reference.)
    * Please be extra careful when evaluating number type feature flags. ConfigCat distinguishes between integer and
      decimal number feature flags. The former must be evaluated using `getValue<int>`, `getIntValue` or similar, while
      the latter must be evaluated using `getValue<double>`, `getDoubleValue` or similar. (JavaScript-based SDKs don't
      have this issue, but you can run into it in other languages.)
    * On some platforms, the ConfigCat client provides asynchronous evaluation methods only. In such cases, synchronous
-     feature flag evaluation is usually still possible, [via snapshots](../../sdk-reference/node#snapshots-and-synchronous-feature-flag-evaluation).
+     feature flag evaluation is usually still possible, [via snapshots](../../sdk-reference/js/overview#snapshots-and-synchronous-feature-flag-evaluation).
      But this works slightly differently from the asynchronous methods, so make sure you understand its behavior and
      possible pitfalls.
 

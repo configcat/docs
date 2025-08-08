@@ -1,0 +1,21 @@
+---
+id: 'node'
+title: Node.js SDK
+description: ConfigCat Node.js SDK Reference. This is a step-by-step guide on how to use feature flags in your Node.js applications.
+---
+
+import JSSdkReferenceTemplate, { getAdjustedToc } from "./\_template.mdx";
+
+export const UnifiedJSNodeSchema = require('@site/src/schema-markup/sdk-reference/js/node.json');
+
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(UnifiedJSNodeSchema) }}
+></script>
+
+export const platform = "node";
+
+<JSSdkReferenceTemplate platform={platform}>
+</JSSdkReferenceTemplate>
+
+export const toc = getAdjustedToc(platform);

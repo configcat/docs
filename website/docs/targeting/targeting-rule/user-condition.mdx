@@ -155,11 +155,15 @@ On the Dashboard:
 
 In the code:
 ```js
-const userObject = new configcat.User(userId, userEmail, undefined, {
-  // In case this code runs on the customer's device, we should consider getting the current time
-  // from a time server since customers are free to set the system clock on their devices.
-  Date: new Date()
-});
+const userObject = {
+  identifier: userId,
+  email: userEmail,
+  custom: {
+    // In case this code runs on the customer's device, we should consider getting the current time
+    // from a time server since customers are free to set the system clock on their devices.
+    Date: new Date()
+  },
+};
 
 const value = await configCatClient.getValueAsync("enableBlackFridayDeals", false, userObject);
 ```
@@ -182,7 +186,7 @@ Let's work around the problem by extracting the domain part of the email and pas
 This way we can define the desired Targeting Rule using confidential comparators only.
 
 On the Dashboard:
-{/* <img src="/docs/assets/targeting/targeting-rule/user-condition/user-condition-example1.jpg" alt="User Condition Example" decoding="async" loading="lazy" /> */}
+{/* <img src="/docs/assets/targeting/targeting-rule/user-condition/user-condition-example1.png" alt="User Condition Example" decoding="async" loading="lazy" /> */}
 ![User Condition Example](/assets/targeting/targeting-rule/user-condition/user-condition-example1.png)
 
 In the code:
@@ -190,9 +194,13 @@ In the code:
 ```js
 const userDomain = userEmail.split('@').pop();
 
-const userObject = new configcat.User(userId, userEmail, undefined, {
-  { domain: userDomain }
-});
+const userObject = {
+  identifier: userId,
+  email: userEmail,
+  custom: {
+    domain: userDomain
+  },
+};
 
 const value = await configCatClient.getValueAsync(key, defaultValue, userObject);
 ```
