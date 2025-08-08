@@ -92,7 +92,7 @@ If possible, you can allow the whole "configcat.com" domain. Alternatively, you 
 - The Public Management API: https://api.configcat.com
 - The Dashboard URL: https://app.configcat.com
 
-### I can't log in to ConfigCat using two-factor (2FA) authentication.
+### I can't log in to ConfigCat using two-factor authentication (2FA).
 
 _Solution 1:_ There might be an authenticator app on your phone that you can use to log in to ConfigCat.
 
@@ -126,7 +126,7 @@ Yes. You can review our DPA through our [Trust Center](https://configcat.com/tru
 
 ### Does ConfigCat collect browser data when serving feature flag data download requests?
 
-No. ConfigCat doesn't collect, store or process any user or browser data.
+No. ConfigCat doesn't collect, store or process any user or browser fingerprinting data.
 
 The data flow is one directional - the SDKs are only downloading the config JSON files and the feature flag evaluation happens in the SDKs.
 
@@ -226,13 +226,13 @@ Yes, you can rename almost everything within ConfigCat. Organizations, products,
 
 ### Can I change my Feature Flag based on a date?
 
-You can pass the current date as a [custom User Object attribute](./targeting/targeting-rule/user-condition.mdx#comparison-attribute) to the ConfigCat SDK attribute when evaluating the feature flag, and you can use that attribute with our [date and time comparators](./targeting/targeting-rule/user-condition.mdx#date-and-time-comparators) in your targeting rules to target specific dates.
+You can pass the current date as a [custom User Object attribute](./targeting/targeting-rule/user-condition.mdx#comparison-attribute) to the ConfigCat SDK attribute when evaluating the feature flag, and you can use that attribute with our [Date and Time comparators](./targeting/targeting-rule/user-condition.mdx#date-and-time-comparators) in your targeting rules to target specific dates.
 
-### Does ConfigCat guarantee % distribution?
+### Does ConfigCat guarantee percentage distribution?
 
-ConfigCat guarantees % distribution across all SDKs, and it guarantees that each user will receive the same experience every time.
+ConfigCat guarantees percentage distribution across all SDKs, and it guarantees that each user will receive the same experience every time.
 
-### Is it possible to set up ABC test (33%/33%/33%) distribution with ConfigCat?
+### Is it possible to set up A/B/C test (33%/33%/33%) distribution with ConfigCat?
 
 Yes, it is possible. All you have to do is to create a text setting and apply the percentage rules. With a normal feature flag you have only two options - true or false, but with a text setting you can apply as many A/B/n options as you want with the percentages.
 
