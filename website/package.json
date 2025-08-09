@@ -9,7 +9,7 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "gen-api-docs": "docusaurus gen-api-docs all && node ./api/cleanup-api-docs.js",
+    "gen-api-docs": "docusaurus gen-api-docs all && node ./api/cleanup-api-docs.mjs",
     "typecheck": "tsc",
     "cf": "npm run gen-api-docs && docusaurus build --out-dir build/docs && echo / /docs > build/_redirects && node testrobots.js && cp _headers build/_headers"
   },
