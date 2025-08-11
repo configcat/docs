@@ -313,12 +313,12 @@ client.ClearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache, then all `GetValue()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling strategies to fetch feature flags and settings from the ConfigCat CDN. Once the latest data is downloaded, it is stored in the cache, then calls to `GetValue()` use the cached data to evaluate feature flags and settings. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
 
-The _ConfigCat SDK_ downloads and stores the latest values automatically every 60 seconds.
+The _ConfigCat SDK_ downloads the latest config data from the ConfigCat CDN automatically every 60 seconds and stores it in the cache.
 
 Use the `pollInterval` option parameter to change the polling interval.
 
@@ -338,7 +338,7 @@ Available options:
 
 ### Lazy loading
 
-When calling `GetValue()` or `GetValueAsync()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `GetValue()` or `GetValueAsync()` will return the setting value after the cache is updated.
+When calling `GetValue()` or `GetValueAsync()`, the _ConfigCat SDK_ downloads the latest config data from the ConfigCat CDN only if it is not already present in the cache, or if the cache has expired. In this case `GetValue()` or `GetValueAsync()` will return the setting value after the cache is updated.
 
 Use `cacheTimeToLive` parameter to manage configuration lifetime.
 
@@ -357,7 +357,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the config JSON (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `ForceRefresh()` is your application's responsibility.
+Manual polling gives you full control over when the config data is downloaded from the ConfigCat CDN. The _ConfigCat SDK_ will not download it automatically. Calling `ForceRefresh()` is your application's responsibility.
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
@@ -605,7 +605,7 @@ Another sample which shows how to implement an adapter to [the built-in logging 
 
 ## `GetAllKeys()`, `GetAllKeysAsync()`
 
-You can get all the setting keys from your configuration by calling the `GetAllKeys()` or `GetAllKeysAsync()` method of the `ConfigCatClient`.
+You can get the keys for all available feature flags and settings by calling the `GetAllKeys()` or `GetAllKeysAsync()` method of the `ConfigCatClient`.
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");

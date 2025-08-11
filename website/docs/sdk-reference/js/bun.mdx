@@ -1,0 +1,21 @@
+---
+id: 'bun'
+title: Bun SDK
+description: ConfigCat Bun SDK Reference. This is a step-by-step guide on how to use feature flags in your Bun applications.
+---
+
+import JSSdkReferenceTemplate, { getAdjustedToc } from "./\_template.mdx";
+
+export const UnifiedJSBunSchema = require('@site/src/schema-markup/sdk-reference/js/bun.json');
+
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{ __html: JSON.stringify(UnifiedJSBunSchema) }}
+></script>
+
+export const platform = "bun";
+
+<JSSdkReferenceTemplate platform={platform}>
+</JSSdkReferenceTemplate>
+
+export const toc = getAdjustedToc(platform);

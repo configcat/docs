@@ -119,7 +119,7 @@ app.use(ConfigCatPlugin, {
 
 You may want to log the actions of the underlying ConfigCat SDK client. To do this, specify a logger in `clientOptions`:
 
-> See documentation [here](../js.mdx#logging).
+> See documentation [here](../js/browser.mdx#logging).
 
 Add `createConsoleLogger`, and `LoggerLevel` to your import:
 
@@ -129,7 +129,7 @@ import { createConsoleLogger, LogLevel } from "configcat-vue";
 
 Create the logger with a specified log level:
 
-> See documentation [here](../js.mdx#setting-log-levels).
+> See documentation [here](../js/browser.mdx#setting-log-levels).
 
 Use the logger in `clientOptions`:
 
@@ -167,7 +167,7 @@ import { ref } from 'vue';
 import { User } from 'configcat-vue';
 
 // Define the User Object
-const user = new User('john@example.com');
+const user = { identifier: 'john@example.com' };
 const userObject = ref<User>(user)
 
 </script>
@@ -214,7 +214,7 @@ const handleFlagValueChange = (flagValue: boolean) => {
 
 This plugin exposes (provides) the underlying ConfigCat client. By injecting the provided client instance, you can use all the features it offers.
 
-> See documentation [here](../js.mdx).
+> See documentation [here](../js/browser.mdx).
 
 One of the ways it can be used is by subscribing to events emitted by the ConfigCat client.
 
