@@ -213,7 +213,7 @@ const rawData = {
 }
 
 const data = btoa(JSON.stringify(rawData))
-const url = "http://localhost:8050/sse/my-sdk/eval"; // Proxy SSE URL with SDK identifier
+const url = "http://localhost:8050/sse/my_sdk/eval"; // Proxy SSE URL with SDK identifier
 
 const evtSource = new EventSource(url + "/" + data);
 evtSource.onmessage = (event) => {
@@ -737,7 +737,7 @@ There are two ways to let the Proxy know which SDK Keys it should use:
   
   Furthermore, when configuring the Proxy **via environment variables**, the identifier becomes a **part of the SDK specific environment variable's name** in the following format: `CONFIGCAT_<SDK_ID>_<OPTION>`.
   
-  For example, suppose we have the following setup: `CONFIGCAT_SDKS={"my-sdk":"<your-sdk-key>"}`.  
+  For example, suppose we have the following setup: `CONFIGCAT_SDKS={"my_sdk":"<your-sdk-key>"}`.  
   In this case, the environment variable that sets the corresponding SDK instance's poll interval will be named as follows: `CONFIGCAT_MY_SDK_POLL_INTERVAL`.
   
   :::info
@@ -789,7 +789,7 @@ There are two ways to let the Proxy know which SDK Keys it should use:
   
   These are the SDK specific environment variables.
   ```shell
-  CONFIGCAT_SDKS='{"my-sdk":"<your-sdk-key>","another-sdk":"<another-sdk-key>"}'
+  CONFIGCAT_SDKS='{"my_sdk":"<your-sdk-key>","another-sdk":"<another-sdk-key>"}'
   CONFIGCAT_MY_SDK_BASE_URL="<base-url>"
   CONFIGCAT_MY_SDK_POLL_INTERVAL=30
   CONFIGCAT_MY_SDK_DATA_GOVERNANCE="<eu|global>"
@@ -846,7 +846,7 @@ There are two ways to let the Proxy know which SDK Keys it should use:
   </tbody>
   </table>
   
-  #### Additional options for the underlying SDK
+  #### Additional options for the underlying SDK {#additional-sdk-options}
   
   <table className="proxy-arg-table">
   <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>

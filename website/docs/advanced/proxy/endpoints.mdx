@@ -325,7 +325,7 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 **Example**:
 
 ```js title="example.js"
-const url = "http://localhost:8050/api/{SDK-ID}/eval"; // Proxy API URL with SDK identifier
+const url = "http://localhost:8050/api/my_sdk/eval"; // Proxy API URL with SDK identifier
 
 const data = {
   key: "isMyAwesomeFeatureEnabled", // Feature flag key
@@ -342,10 +342,13 @@ const requestOptions = {
   body: JSON.stringify(data),
 };
 
-fetch(url, requestOptions)
-  .then(response => response.json())
-  .then(data => console.log(data)) // {"value":<evaluated-value>,"variationId":"<variation-id>"}
-  .catch(error => console.error('Error:', error));
+try {
+  const response = await fetch(url, requestOptions);
+  const responseData = await response.json();
+  console.log(responseData); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
+} catch (error) {
+  console.error('Error:', error)
+}
 ```
 
 </details>
@@ -414,10 +417,13 @@ const requestOptions = {
   body: JSON.stringify(data),
 };
 
-fetch(url, requestOptions)
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Error:', error));
+try {
+  const response = await fetch(url, requestOptions);
+  const responseData = await response.json();
+  console.log(responseData);
+} catch (error) {
+  console.error('Error:', error)
+}
 ```
 
 </details>
@@ -740,7 +746,7 @@ OpenFeature.setProvider(
   new OFREPWebProvider({
     baseUrl: 'http://localhost:8050', // Proxy URL
     headers: [
-      ['X-ConfigCat-SdkId', `<sdk-id>`], // SDK identifier
+      ['X-ConfigCat-SdkId', `my_sdk`], // SDK identifier
     ],
   }),
 );
@@ -805,7 +811,7 @@ OpenFeature.setProvider(
   new OFREPWebProvider({
     baseUrl: 'http://localhost:8050', // Proxy URL
     headers: [
-      ['X-ConfigCat-SdkId', '<sdk-id>'], // SDK identifier
+      ['X-ConfigCat-SdkId', 'my_sdk'], // SDK identifier
     ],
   }),
 );
