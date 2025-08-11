@@ -40,7 +40,7 @@ In order to let a ConfigCat SDK use the Proxy, you have to set the SDK's `baseUr
 ```js title="example.js"
 import * as configcat from "configcat-js";
 
-var configCatClient = configcat.getClient(
+const configCatClient = configcat.getClient(
   "#YOUR-SDK-KEY#", 
   configcat.PollingMode.AutoPoll,
   // highlight-next-line
@@ -56,7 +56,7 @@ So, let's assume you set up the Proxy with an SDK key mapped to the `my_sdk` SDK
 ```js title="example.js"
 import * as configcat from "configcat-js";
 
-var configCatClient = configcat.getClient(
+const configCatClient = configcat.getClient(
   // highlight-next-line
   "configcat-proxy/my_sdk", // SDK identifier prefixed with 'configcat-proxy/'
   configcat.PollingMode.AutoPoll,
@@ -688,7 +688,7 @@ CONFIGCAT_HTTP_API_AUTH_HEADERS='{"X-API-KEY":"<auth-value>"}'
 
 ## OpenFeature Remote Evaluation Protocol (OFREP)
 
-The Proxy conforms the <a href="https://github.com/open-feature/protocol">OpenFeature Remote Evaluation Protocol</a>, which means it can be used with OFREP compatible OpenFeature providers.
+The Proxy conforms to the <a href="https://github.com/open-feature/protocol">OpenFeature Remote Evaluation Protocol</a>, which means it can be used with OFREP compatible OpenFeature providers.
 
 <details>
   <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/ofrep/v1/evaluate/flags/&#123;key&#125;</span></summary>
@@ -1353,8 +1353,8 @@ CONFIGCAT_HTTP_SSE_LOG_LEVEL="<error|warn|info|debug>"
 Through the webhook endpoint, you can notify the Proxy about the availability of new feature flag evaluation data. Also, with the appropriate [SDK options](overview.mdx#additional-sdk-options), the Proxy can [validate the signature](../../advanced/notifications-webhooks.mdx#verifying-webhook-requests) of each incoming webhook request.
 
 :::info
-If you use the [automatic configuration with Proxy Profiles](overview.mdx#1-automatic-configuration-with-proxy-profiles), you don't have to set up individual webhooks manually. 
-You can follow the documentation of webhook notifications for Proxy Profiles [here](overview.mdx#webhook-notification).
+If you use the [automatic configuration with Proxy profiles](overview.mdx#1-automatic-configuration-with-proxy-profiles), you don't have to set up individual webhooks manually. 
+You can follow the documentation of webhook notifications for Proxy profiles [here](overview.mdx#webhook-notification).
 :::
 
 <details open>
