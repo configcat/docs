@@ -313,7 +313,7 @@ ConfigCat->ClearDefaultUser();
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling strategies to fetch feature flags and settings from the ConfigCat CDN. After the latest data is downloaded, it is stored in the cache, then calls to `GetValue()` use the cached data to evaluate feature flags and settings. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling strategies to fetch feature flags and settings from the ConfigCat CDN. Once the latest data is downloaded, it is stored in the cache, then calls to `GetValue()` use the cached data to evaluate feature flags and settings. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
