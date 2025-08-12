@@ -99,3 +99,8 @@ main article img:not(.no-auto-height) {
   // See also https://github.com/configcat-labs/content-wiki/blob/main/screenshot-guide.md#embedding-screenshots
   height: auto;
 }
+
+ul.feature-list {
+  --ifm-list-left-padding: 1.25em;
+  -moz-padding-start: 1em;
+}

@@ -128,8 +128,8 @@ _ConfigCat Client_ is responsible for:
 
 | Attributes    | Description                                                                                                                             | Default                |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| `sdkKey`      | **REQUIRED.** SDK Key to access your feature flags and configurations. Get it from _ConfigCat Dashboard_.                               | -                      |
-| `pollingMode` | Optional. The polling mode to use to acquire the setting values from the ConfigCat servers. [More about polling modes](#polling-modes). | `PollingMode.AutoPoll` |
+| `sdkKey`      | **REQUIRED.** SDK Key to access your feature flags and settings. Get it from the _ConfigCat Dashboard_.                                 | -                      |
+| `pollingMode` | Optional. The polling mode to use to fetch the config data from the ConfigCat CDN. [More about polling modes](#polling-modes).          | `PollingMode.AutoPoll` |
 | `options`     | Optional. The options object. See the table below.                                                                                      | -                      |
 | `id`          | Optional. Instructs the ConfigCat Client to use a specific `ConfigCatProvider` instead of the default one. Use it if you have multiple `ConfigCatProvider`s in your code. [More about multiple providers](#using-multiple-providers).                                  | `undefined` (none)     |
 
@@ -396,13 +396,11 @@ The [User Object](../targeting/user-object.mdx) is essential if you'd like to us
 For simple targeting:
 
 ```tsx
-const userObject = new User('#UNIQUE-USER-IDENTIFIER#');
+const userObject = { identifier: '#UNIQUE-USER-IDENTIFIER#' };
 ```
 
-or
-
 ```tsx
-const userObject = new User('john@example.com');
+const userObject = { identifier: 'john@example.com' };
 ```
 
 | Parameters   | Description                                                                                                                     |
@@ -415,15 +413,15 @@ const userObject = new User('john@example.com');
 For advanced targeting:
 
 ```tsx
-const userObject = new User(
-  /* identifier: */ '#UNIQUE-USER-IDENTIFIER#',
-  /*      email: */ 'john@example.com',
-  /*    country: */ 'United Kingdom',
-  /*     custom: */ {
+const userObject = {
+  identifier: '#UNIQUE-USER-IDENTIFIER#',
+  email: 'john@example.com',
+  country: 'United Kingdom',
+  custom: {
     SubscriptionType: 'Pro',
     UserRole: 'Admin',
   },
-);
+};
 ```
 
 ```tsx
@@ -445,7 +443,7 @@ function ButtonComponent() {
 The `custom` dictionary also allows attribute values other than `string` values:
 
 ```tsx
-let userObject = new User('#UNIQUE-USER-IDENTIFIER#');
+const userObject = { identifier: '#UNIQUE-USER-IDENTIFIER#' };
 userObject.custom = {
   Rating: 4.5,
   RegisteredAt: new Date('2023-11-22T12:34:56.000Z'),
@@ -497,7 +495,7 @@ You can set the default User Object either on SDK initialization:
 <ConfigCatProvider
   sdkKey="YOUR_SDK_KEY"
   pollingMode={PollingMode.AutoPoll}
-  options={{ defaultUser: new User('john@example.com') }}
+  options={{ defaultUser: { identifier: 'john@example.com' } }}
 >
   ...
 </ConfigCatProvider>
@@ -506,12 +504,12 @@ You can set the default User Object either on SDK initialization:
 ...or using the `setDefaultUser()` method of the `configCatClient` instance:
 
 ```tsx
-const CurrentUser: User = new User('john@example.com');
+const currentUser = { identifier: 'john@example.com' };
 
 export const SetConfigCatUserComponent = () => {
   const client = useConfigCatClient();
 
-  const [user] = useState(CurrentUser);
+  const [user] = useState(currentUser);
 
   useEffect(() => {
     client.setDefaultUser(user);
@@ -546,14 +544,14 @@ export const FlagValueDetailsComponent = () => {
 When a `user` parameter is passed to the evaluation methods, it takes precedence over the default user.
 
 ```tsx
-const CurrentUser: User = new User('john@example.com');
+const currentUser = { identifier: 'john@example.com' };
 
 export const FlagValueDetailsComponent = () => {
   const client = useConfigCatClient();
 
   const [flagDetails, setFlagDetails] =
     useState<IEvaluationDetails<boolean> | null>(null);
-  const [user] = useState(CurrentUser);
+  const [user] = useState(currentUser);
 
   // invoke getValueDetailsAsync method WITH User Object
   useEffect(() => {
@@ -584,12 +582,12 @@ export const ClearConfigCatUserComponent = () => {
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the local cache, then all `getValueAsync()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
+The _ConfigCat SDK_ supports 3 different polling strategies to fetch feature flags and settings from the ConfigCat CDN. Once the latest data is downloaded, it is stored in the cache, then calls to `getValueAsync()` use the cached data to evaluate feature flags and settings. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
 
-The _ConfigCat SDK_ downloads the latest values and stores them automatically every 60 seconds.
+The _ConfigCat SDK_ downloads the latest config data from the ConfigCat CDN automatically every 60 seconds and stores it in the cache.
 
 #### Initialization
 
@@ -628,7 +626,7 @@ Available options (in addition to the [common ones](#creating-the-configcat-clie
 
 ### Lazy loading
 
-When calling `useFeatureFlag()` or `WithConfigCatClientProps.getValue()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache.
+When calling `useFeatureFlag()` or `WithConfigCatClientProps.getValue()`, the _ConfigCat SDK_ downloads the latest config data from the ConfigCat CDN only if it is not already present in the cache, or if the cache has expired.
 
 #### Initialization
 
@@ -658,7 +656,7 @@ Available options (in addition to the [common ones](#creating-the-configcat-clie
 
 ### Manual polling
 
-Manual polling gives you full control over when the config JSON (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `forceRefreshAsync()` is your application's responsibility.
+Manual polling gives you full control over when the config data is downloaded from the ConfigCat CDN. The _ConfigCat SDK_ will not download it automatically. Calling `forceRefreshAsync()` is your application's responsibility.
 
 #### Initialization
 
