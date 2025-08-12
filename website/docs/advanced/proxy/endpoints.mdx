@@ -38,7 +38,7 @@ This endpoint is mainly used by ConfigCat SDKs to retrieve all required data for
 In order to let a ConfigCat SDK use the Proxy, you have to set the SDK's `baseUrl` parameter to point to the Proxy's host.
 
 ```js title="example.js"
-import * as configcat from "configcat-js";
+import * as configcat from "@configcat/sdk";
 
 const configCatClient = configcat.getClient(
   "#YOUR-SDK-KEY#", 
@@ -54,7 +54,7 @@ you can use that identifier prefixed with `configcat-proxy/` as the SDK key at t
 So, let's assume you set up the Proxy with an SDK key mapped to the `my_sdk` SDK identifier:
 
 ```js title="example.js"
-import * as configcat from "configcat-js";
+import * as configcat from "@configcat/sdk";
 
 const configCatClient = configcat.getClient(
   // highlight-next-line
@@ -325,7 +325,7 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 **Example**:
 
 ```js title="example.js"
-const url = "http://localhost:8050/api/my_sdk/eval"; // Proxy API URL with SDK identifier
+const url = "http://localhost:8050/api/#SDK-IDENTIFIER#/eval"; // Proxy API URL with SDK identifier
 
 const data = {
   key: "isMyAwesomeFeatureEnabled", // Feature flag key
@@ -401,7 +401,7 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 **Example**:
 
 ```js title="example.js"
-const url = "http://localhost:8050/api/my_sdk/eval-all"; // Proxy API URL with SDK identifier
+const url = "http://localhost:8050/api/#SDK-IDENTIFIER#/eval-all"; // Proxy API URL with SDK identifier
 
 const data = {
   user: { // User Object for evaluation
@@ -746,7 +746,7 @@ OpenFeature.setProvider(
   new OFREPWebProvider({
     baseUrl: 'http://localhost:8050', // Proxy URL
     headers: [
-      ['X-ConfigCat-SdkId', `my_sdk`], // SDK identifier
+      ['X-ConfigCat-SdkId', `#SDK-IDENTIFIER#`],
     ],
   }),
 );
@@ -811,7 +811,7 @@ OpenFeature.setProvider(
   new OFREPWebProvider({
     baseUrl: 'http://localhost:8050', // Proxy URL
     headers: [
-      ['X-ConfigCat-SdkId', 'my_sdk'], // SDK identifier
+      ['X-ConfigCat-SdkId', '#SDK-IDENTIFIER#'],
     ],
   }),
 );
@@ -1079,7 +1079,7 @@ const rawData = {
 }
 
 const data = btoa(JSON.stringify(rawData))
-const evtSource = new EventSource("http://localhost:8050/sse/my_sdk/eval/" + data);
+const evtSource = new EventSource("http://localhost:8050/sse/#SDK-IDENTIFIER#/eval/" + data);
 evtSource.onmessage = (event) => {
   console.log(event.data); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
 };
@@ -1131,7 +1131,7 @@ const rawData = {
 }
 
 const data = btoa(JSON.stringify(rawData))
-const evtSource = new EventSource("http://localhost:8050/sse/my_sdk/eval-all/" + data);
+const evtSource = new EventSource("http://localhost:8050/sse/#SDK-IDENTIFIER#/eval-all/" + data);
 evtSource.onmessage = (event) => {
   console.log(event.data); // {"feature-flag-key":{"value":<evaluated-value>,"variationId":"<variation-id>"}}
 };

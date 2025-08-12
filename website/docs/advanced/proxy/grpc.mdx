@@ -137,7 +137,7 @@ ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 defer cancel()
 
 resp, err := client.EvalFlag(ctx, &proto.EvalRequest{
-    SdkId: "my_sdk", 
+    SdkId: "<sdk-identifier>", 
     Key: "<flag-key>", 
     User: map[string]*proto.UserValue{"Identifier": {Value: &proto.UserValue_StringValue{StringValue: "<user-id>"}}}
 })
