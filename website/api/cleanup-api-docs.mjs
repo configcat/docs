@@ -1,5 +1,5 @@
-const replace = require('replace-in-file');
-const fs = require('fs');
+import {replaceInFile} from 'replace-in-file'
+import fs from 'fs'
 
 const options = {
   files: 'api/reference/**/*.mdx',
@@ -76,5 +76,5 @@ filesToDelete.forEach(file => {
     fs.unlinkSync(path);
   }
 });
-replace(options);
+replaceInFile(options);
 
