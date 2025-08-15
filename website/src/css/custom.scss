@@ -92,3 +92,8 @@ ul.feature-list {
   --ifm-list-left-padding: 1.25em;
   -moz-padding-start: 1em;
 }
+
+[data-theme="dark"] .monochrome-image.theme-aware {
+  -webkit-filter: invert(1);
+  filter: invert(1);
+}
