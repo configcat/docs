@@ -252,7 +252,7 @@ val user = ConfigCatUser(
     country = "United Kingdom",
     custom = mapOf(
         "Rating" to 4.5,
-        "RegisteredAt" to DateTime.fromString("2023-11-22T12:34:56.999Z"),
+        "RegisteredAt" to Instant.parse("2023-11-22T12:34:56.999Z"),
         "Roles" to arrayOf("Role1", "Role2")
     )
 )
@@ -275,7 +275,7 @@ All comparators support `String` values as User Object attribute (in some cases 
 * all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
 **Date time-based comparators** (BEFORE / AFTER)
-* accept `com.soywiz.klock.DateTime` values, which are automatically converted to a second-based Unix timestamp,
+* accept `kotlin.time.Instant` values, which are automatically converted to a second-based Unix timestamp,
 * accept `Double` values representing a second-based Unix timestamp and all other numeric values which can safely be converted to `Double`,
 * accept `String` values containing a properly formatted, valid `Double` value,
 * all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
