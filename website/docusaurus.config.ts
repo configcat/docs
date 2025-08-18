@@ -1,6 +1,7 @@
 import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 import type * as Preset from '@docusaurus/preset-classic';
+import { relative } from 'path';
 
 const config: Config = {
   title: 'ConfigCat Docs',
@@ -139,6 +140,19 @@ const config: Config = {
         },
       },
     ],
+    [
+      '@signalwire/docusaurus-plugin-llms-txt',
+      {
+        // Plugin options (optional)
+        siteTitle: 'ConfigCat Docs',
+        siteDescription: 'Learn more on how to use ConfigCat Feature Flags.',
+        depth: 2,
+        content: {
+          enableLlmsFullTxt: true,
+          relativePaths: false,
+        },
+      }
+    ]
     // ['./src/plugins/smartlook',
     //   {
     //     smartlookKey: '05d0e4ca90c61150955104a9d4b76ab16a0b2380',
