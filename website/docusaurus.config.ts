@@ -18,6 +18,12 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+  future: {
+    experimental_faster: true,
+    v4: {
+      removeLegacyPostBuildHeadAttribute: true,
+    },
+  },
   plugins: [
     [
       '@docusaurus/plugin-google-tag-manager',
@@ -104,9 +110,8 @@ const config: Config = {
         path: 'api',
         routeBasePath: 'api',
         sidebarPath: './api/sidebars.ts',
-        docRootComponent: "@theme/DocRoot",
-        docItemComponent: "@theme/ApiItem",
-
+        docRootComponent: '@theme/DocRoot',
+        docItemComponent: '@theme/ApiItem',
       },
     ],
     [
@@ -120,7 +125,7 @@ const config: Config = {
             outputDir: 'api/reference',
             sidebarOptions: {
               groupPathsBy: 'tagGroup',
-              categoryLinkSource: 'tag'
+              categoryLinkSource: 'tag',
             },
           },
           scim: {
@@ -128,7 +133,7 @@ const config: Config = {
             outputDir: 'api/scim',
             sidebarOptions: {
               groupPathsBy: 'tag',
-              categoryLinkSource: 'auto'
+              categoryLinkSource: 'auto',
             },
           },
         },
@@ -328,7 +333,7 @@ const config: Config = {
     imgZoom: {
       selector: '.markdown img:not([src^="http"])',
       zoomedInClass: 'zoomed-in-img',
-    }
+    },
   } satisfies Preset.ThemeConfig,
   presets: [
     [
@@ -345,10 +350,10 @@ const config: Config = {
               label: 'Config V2',
               path: '/',
             },
-            "V1": {
+            V1: {
               label: 'Config V1 (legacy)',
               path: '/V1',
-              noIndex: true
+              noIndex: true,
             },
           },
         },
@@ -360,11 +365,11 @@ const config: Config = {
         },
         sitemap: {
           ignorePatterns: ['/docs/V1/**'],
-        }
+        },
       } satisfies Preset.Options,
     ],
   ],
-  themes: ["docusaurus-theme-openapi-docs"],
+  themes: ['docusaurus-theme-openapi-docs'],
   scripts: [],
   stylesheets: [],
   clientModules: ['./src/client-modules/img-zoom'],

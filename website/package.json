@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@docusaurus/core": "^3.8.1",
+    "@docusaurus/faster": "^3.8.1",
     "@docusaurus/plugin-client-redirects": "^3.8.1",
     "@docusaurus/plugin-google-tag-manager": "^3.8.1",
     "@docusaurus/preset-classic": "^3.8.1",
@@ -47,8 +48,8 @@
     "@docusaurus/tsconfig": "^3.8.1",
     "@docusaurus/types": "^3.8.1",
     "replace-in-file": "8.3.0",
-    "typescript": "~5.9.2",
-    "sharp": "^0.34.3"
+    "sharp": "^0.34.3",
+    "typescript": "~5.9.2"
   },
   "engines": {
     "node": ">=22.18"
