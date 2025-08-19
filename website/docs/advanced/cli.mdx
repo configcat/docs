@@ -207,7 +207,7 @@ After a successful installation, the CLI must be set up with your <a target="_bl
 
 You can do this by using the `configcat setup` command.
 
-<img src="/docs/assets/cli/setup.gif" alt="interactive" decoding="async" loading="lazy"/>
+<img src="/docs/assets/cli/cli-setup.gif" alt="interactive" decoding="async" loading="lazy"/>
 
 #### Environment variables
 
@@ -229,20 +229,21 @@ The CLI supports both interactive and argument driven execution. When no argumen
 
 ### Interactive
 
-<img src="/docs/assets/cli/teaser.gif" alt="interactive" decoding="async" loading="lazy"/>
+<img src="/docs/assets/cli/cli-flag-create.gif" alt="interactive" decoding="async" loading="lazy"/>
 
 ### With arguments
 
 The same operation with command arguments would look like this:
 
 ```bash
-configcat flag create \
+configcat flag-v2 create \
   --config-id <config-id> \
   --name "My awesome feature" \
   --hint "This is my awesome feature" \
   --key my_awesome_feature
   --type boolean \
   --tag-ids <tag-id-1> <tag-id-2> \
+  --init-values-per-environment <environment-id>:<initial-value> \
 ```
 
 :::info
@@ -270,30 +271,26 @@ The CLI has the ability to scan your source code for feature flag and setting us
 
 Here are a few examples showing the true power of the CLI.
 
-:::info
-The examples below are for legacy V1 configs. In the case of [V2 configs](../config-v2), you need to use the `flag-v2` command instead of `flag`.
-:::
-
 ### Create a feature flag
 
 The following example shows how you can create a feature flag in a specific config.
 
-<img src="/docs/assets/cli/create-flag.gif" alt="create flag" decoding="async" loading="lazy"/>
+<img src="/docs/assets/cli/cli-flag-create.gif" alt="create flag" decoding="async" loading="lazy"/>
 
 ### Value update
 
 The following example shows how you can update the value of a feature flag in a specific environment.
 
-<img src="/docs/assets/cli/flag-value-update.gif" alt="flag value update" decoding="async" loading="lazy"/>
+<img src="/docs/assets/cli/cli-flag-update.gif" alt="flag value update" decoding="async" loading="lazy"/>
 
 ### Add targeting rules
 
 The following example shows how you can add targeting rules to a feature flag.
 
-<img src="/docs/assets/cli/flag-targeting-add.gif" alt="flag targeting add" decoding="async" loading="lazy"/>
+<img src="/docs/assets/cli/cli-flag-targeting-add.gif" alt="flag targeting add" decoding="async" loading="lazy"/>
 
 ### Add percentage options
 
 The following example shows how you can set percentage options in a feature flag.
 
-<img src="/docs/assets/cli/flag-percentage-add.gif" alt="flag percentage add" decoding="async" loading="lazy"/>
+<img src="/docs/assets/cli/cli-flag-targeting-percentage.gif" alt="flag percentage add" decoding="async" loading="lazy"/>
