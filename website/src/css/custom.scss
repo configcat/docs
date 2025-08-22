@@ -105,7 +105,15 @@ ul.feature-list {
   -moz-padding-start: 1em;
 }
 
-[data-theme="dark"] .monochrome-image.theme-aware {
+[data-theme='dark'] .monochrome-image.theme-aware {
   -webkit-filter: invert(1);
   filter: invert(1);
+}
+
+.docs-doc-id-subscription-plan-limits {
+  table {
+    th:first-of-type {
+      width: 100%;
+    }
+  }
 }
