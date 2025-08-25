@@ -747,6 +747,16 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
   </tr>
   </tbody>
   </table>
+  <br/>
+
+  #### Profile caching
+  Proxy instances running in online mode are caching their connected profile if they have a [cache](#cache) configured.
+  This means that other Proxy instances running with [global offline mode](#global-offline-mode) enabled can use those cached profiles from
+  the same shared cache.
+
+  :::info
+  Offline Proxy instances only need the profile's `key` to read the connected profile from the cache, the `secret` option is not mandatory in this mode.
+  :::
 
 ### 2. Manual configuration
 
