@@ -188,6 +188,7 @@ OFREP compatibility is only available from Proxy version <a target="_blank" href
 The Proxy conforms to the <a href="https://github.com/open-feature/protocol">OpenFeature Remote Evaluation Protocol</a>, which means it can be used with OFREP compatible OpenFeature providers.
 
 ```js title="example.js (Initializing the OFREP JS Web provider to use the Proxy)"
+import { OpenFeature } from "@openfeature/web-sdk";
 import { OFREPWebProvider } from '@openfeature/ofrep-web-provider';
 
 OpenFeature.setProvider(
