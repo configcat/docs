@@ -29,7 +29,7 @@ the [ConfigCat Kotlin SDK](../../kotlin/#setting-up-the-configcat-client):
 
 ```kotlin
 import com.configcat.*
-import dev.openfeature.sdk.*
+import dev.openfeature.kotlin.sdk.*
 
 coroutineScope.launch(Dispatchers.IO) {
     // Configure the provider.
@@ -81,7 +81,7 @@ val context = ImmutableContext(
         "Email" to Value.String("configcat@example.com"),
         "Country" to Value.String("CountryID"),
         "Rating" to Value.Double(4.5),
-        "RegisteredAt" to Value.Date(Date.from(Instant.parse("2023-11-22T12:34:56+00:00"))),
+        "RegisteredAt" to Value.Instant(kotlin.time.Instant.parse("2025-05-30T10:15:30.00Z")),
         "Roles" to Value.List(listOf(Value.String("Role1"), Value.String("Role2")))
     ),
 )
