@@ -36,7 +36,7 @@ data "configcat_products" "my_products" {
 # Retrieve your Config
 data "configcat_configs" "my_configs" {
   product_id        = data.configcat_products.my_products.products[0].product_id
-  name_filter_regex = "Main"
+  name_filter_regex = "Main Config"
 }
 
 # Retrieve your Environment
