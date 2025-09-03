@@ -197,6 +197,7 @@ const sidebars: SidebarsConfig = {
             },
           ],
         },
+        'advanced/mcp-server',
       ],
     },
     {
