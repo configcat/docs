@@ -35,7 +35,7 @@ The MCP server's configuration includes the following environment variables:
 | `CONFIGCAT_API_PASS` | ✔ | – | Management API basic auth password. |
 | `CONFIGCAT_BASE_URL` |  | `https://api.configcat.com` | Override API host (rarely needed). |
 
-## Client Configuration
+### Client Configuration
 
 <Tabs>
   <TabItem value="cursor" label="Cursor" default>
@@ -106,119 +106,6 @@ or
 or
 
 > Update the "my_awesome_feature” flag in dev environment so it’s only enabled for users in Canada
-
-## Available Tools
-
-### Membership Management
-
-#### Organizations
-- `list-organizations` – List all organizations
-
-#### Members
-- `list-organization-members` – List organization members
-- `list-pending-invitations` – List pending invitations (product scope)
-- `list-pending-invitations-org` – List pending invitations (org scope)
-- `list-product-members` – List product members
-- `invite-member` – Invite a new member
-- `update-member-permissions` – Update a member's permissions
-- `delete-organization-member` – Remove an org member
-- `delete-product-member` – Remove a product member
-- `delete-invitation` – Cancel an outstanding invitation
-
-#### Permission Groups
-- `list-permission-groups` – List permission groups
-- `create-permission-group` – Create a permission group
-- `get-permission-group` – Get permission group details
-- `update-permission-group` – Update a permission group
-- `delete-permission-group` – Delete a permission group
-
-### General
-
-#### Products
-- `list-products`
-- `get-product`
-- `update-product`
-- `delete-product`
-- `get-product-preferences`
-- `update-product-preferences`
-- `create-product`
-
-#### Configs
-- `list-configs`
-- `create-config`
-- `get-config`
-- `update-config`
-- `delete-config`
-
-#### Environments
-- `list-environments`
-- `create-environment`
-- `get-environment`
-- `update-environment`
-- `delete-environment`
-
-#### Segments
-- `list-segments`
-- `create-segment`
-- `get-segment`
-- `update-segment`
-- `delete-segment`
-
-#### SDK Keys
-- `get-sdk-keys` – Fetch SDK keys for a config/environment pair
-
-#### Webhooks
-- `list-webhooks`
-- `get-webhook`
-- `replace-webhook`
-- `update-webhook`
-- `delete-webhook`
-- `get-webhook-signing-keys`
-- `create-webhook`
-
-#### Integrations
-- `list-integrations`
-- `create-integration`
-- `get-integration`
-- `update-integration`
-- `delete-integration`
-
-#### Code References
-- `get-code-references`
-
-### Diagnostics
-
-#### Audit Logs
-- `list-auditlogs` – Product audit logs
-- `list-organization-auditlogs` – Organization audit logs
-
-#### Zombie (Stale) Flags
-- `list-staleflags` – Stale feature flags report
-
-### Feature Flag Metadata
-
-#### Feature Flags & Settings
-- `list-settings`
-- `create-setting`
-- `get-setting`
-- `replace-setting`
-- `update-setting`
-- `delete-setting`
-
-#### Tags
-- `list-tags`
-- `create-tag`
-- `list-settings-by-tag`
-- `get-tag`
-- `update-tag`
-- `delete-tag`
-
-### Feature Flag & Setting Values
-- `get-setting-value`
-- `update-setting-value`
-- `replace-setting-value`
-- `get-setting-values`
-- `post-setting-values`
 
 ## See Also
 
