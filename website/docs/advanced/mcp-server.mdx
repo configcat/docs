@@ -9,21 +9,23 @@ import TabItem from '@theme/TabItem';
 
 ## Overview
 
-The ConfigCat Model Context Protocol (MCP) server exposes the full power of the [Public Management API](/api/reference/configcat-public-management-api/) to AI assistants and MCP‑capable developer tools. It lets you Create, Read, Update and Delete entities (Products, Configs, Environments, Feature Flags, Segments, Tags, Webhooks, Integrations, etc.) safely and consistently.
-
-> Management only. For evaluating feature flag values inside applications use the [SDKs](/sdk-reference/overview/) or the [ConfigCat Proxy](/advanced/proxy/proxy-overview/).
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro) is an open protocol that standardizes how applications provide context to large language models (LLMs).
+The ConfigCat MCP server lets you manage feature flags and configurations via the Public Management API seamlessly from AI tools.
 
 ## Features
 
 - Complete CRUD coverage of ConfigCat management entities
-- Both Config (v1) and Config V2 feature flag/value endpoints
 - Fine‑grained membership, permission group & invitation management
 - Tagging, stale flag reporting, audit logs & code reference visibility
-- Respect for API rate limits (propagates error details back to the client)
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org) version 16 or higher installed
+- [Public Management API basic auth credentials](https://app.configcat.com/my-account/public-api-credentials) for ConfigCat MCP server created
 
 ## Setup
 
-Install & run via `npx` (no local clone required). Supply your Public Management API basic auth credentials (find them at https://app.configcat.com/my-account/public-api-credentials).
+Supply your Public Management API basic auth credentials (find them at https://app.configcat.com/my-account/public-api-credentials).
 
 ### Environment Variables
 
@@ -33,11 +35,7 @@ Install & run via `npx` (no local clone required). Supply your Public Management
 | `CONFIGCAT_API_PASS` | ✔ | – | Management API basic auth password. |
 | `CONFIGCAT_BASE_URL` |  | `https://api.configcat.com` | Override API host (rarely needed). |
 
-Keep credentials secret. Prefer using your tool's secret storage facilities over committing them.
-
-## Client Configuration Examples
-
-Below are quick recipes for popular MCP clients.
+## Client Configuration
 
 <Tabs>
   <TabItem value="cursor" label="Cursor" default>
@@ -49,7 +47,7 @@ Below are quick recipes for popular MCP clients.
 ```json
 {
   "mcpServers": {
-    "configcat": {
+    "ConfigCat": {
       "command": "npx",
       "args": ["-y", "@configcat/mcp-server"],
       "env": {
@@ -61,7 +59,7 @@ Below are quick recipes for popular MCP clients.
 }
 ```
 4. Save – the server will start on demand.
-
+  
   </TabItem>
   <TabItem value="claude" label="Claude Desktop">
 
@@ -72,7 +70,7 @@ Below are quick recipes for popular MCP clients.
 ```json
 {
   "mcpServers": {
-    "configcat": {
+    "ConfigCat": {
       "command": "npx",
       "args": ["-y", "@configcat/mcp-server"],
       "env": {
@@ -87,6 +85,25 @@ Below are quick recipes for popular MCP clients.
 
   </TabItem>
 </Tabs>
+
+Replace YOUR_API_USER and YOUR_API_PASSWORD environment variables with your [Public Management API basic auth credentials](https://app.configcat.com/my-account/public-api-credentials).
+
+## Interaction
+
+After you install the ConfigCat MCP server in your AI client, you can prompt your agent to create or manage your feature flags and configurations.
+Typically you need to click Run tool or similar in your AI client to execute the result.
+
+For example, you could try asking
+
+> Create a boolean feature flag called "my_awesome_feature" in the "Backend" config
+
+or
+
+> Turn the "my_awesome_feature" flag ON in all environments
+
+or
+
+> Update the "my_awesome_feature” flag in dev environment so it’s only enabled for users in Canada
 
 ## Available Tools
 
@@ -194,29 +211,14 @@ Below are quick recipes for popular MCP clients.
 - `update-tag`
 - `delete-tag`
 
-### Feature Flag & Setting Values (v1 & v2)
+### Feature Flag & Setting Values
 - `get-setting-value`
 - `update-setting-value`
 - `replace-setting-value`
 - `get-setting-values`
 - `post-setting-values`
-- V2 variants: each tool above has a `*-v2` counterpart for Config V2
-
-## API Rate Limits
-
-The Public Management API enforces rate limits. The MCP server surfaces limit exceed errors directly so clients can adapt (e.g. backing off or summarizing batched operations). See [Subscription Plan Limits](/subscription-plan-limits) for general guidance.
-
-## Security Note
-
-Credentials grant management rights. Store them securely, do not embed them in shared config, and rotate periodically. Avoid using the MCP server from untrusted or multi‑tenant environments.
 
 ## See Also
 
+- [ConfigCat MCP server GitHub repository](https://github.com/configcat/mcp-server)
 - [Management API Reference](/api/reference/configcat-public-management-api/)
-- [SDK Reference](/sdk-reference/overview/)
-- [Proxy Overview](/advanced/proxy/proxy-overview/)
-- [Zombie (Stale) Flags](/zombie-flags)
-
----
-Need another operation exposed? Let us know via the ConfigCat support channels.
-
