@@ -14,7 +14,35 @@ The ConfigCat MCP server lets you manage feature flags and configurations via th
 
 ## Features
 
-- Complete CRUD coverage of ConfigCat management entities
+- Manage organizations & members
+  - View organizations and members
+  - Invite, remove, or update member permissions
+  - Handle invitations
+  - Organize members into permission groups
+
+- Manage products & configurations
+  - Create, update, or delete products
+  - Set up product configs, environments, and segments
+  - Adjust product preferences
+
+- Manage feature flags and settings
+  - Create, update, or delete feature flags
+  - Control flag values and settings
+  - Tag and organize flags
+
+- Connect tools & automate workflows
+  - Create and manage integrations
+  - Set up webhooks and signing keys
+  - Access SDK keys
+  
+- Track changes & activity
+  - Review audit logs for products or organizations
+  - Get reports on stale feature flags
+  - Find code references linked to your features
+
+
+
+- Membership Management: Complete CRUD coverage of ConfigCat management entities
 - Fine‑grained membership, permission group & invitation management
 - Tagging, stale flag reporting, audit logs & code reference visibility
 
@@ -31,8 +59,8 @@ The MCP server's configuration includes the following environment variables:
 
 | Variable | Required | Default | Description |
 | -------- | -------- | ------- | ----------- |
-| `CONFIGCAT_API_USER` | ✔ | – | Management API basic auth username. |
-| `CONFIGCAT_API_PASS` | ✔ | – | Management API basic auth password. |
+| `CONFIGCAT_API_USER` | &#9745; | – | Management API basic auth username. |
+| `CONFIGCAT_API_PASS` | &#9745; | – | Management API basic auth password. |
 | `CONFIGCAT_BASE_URL` |  | `https://api.configcat.com` | Override API host (rarely needed). |
 
 ### Client Configuration
