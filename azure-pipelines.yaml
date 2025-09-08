@@ -27,7 +27,7 @@ steps:
   - script: |
       mkdir -pv $(build.artifactstagingdirectory)/output
       rm -rf $(build.artifactstagingdirectory)/output/*
-      IMAGEID=$(docker images configcat/home-page:$(Build.BuildId) --format "{{.ID}}")
+      IMAGEID=$(docker images configcat/docs:$(Build.BuildId) --format "{{.ID}}")
       CONTAINERID=$(docker create $IMAGEID)
       docker cp $CONTAINERID:/usr/share/nginx/temphtml/. $(build.artifactstagingdirectory)/output/
       docker rm $CONTAINERID
