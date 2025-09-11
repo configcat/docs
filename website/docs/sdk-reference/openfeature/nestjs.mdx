@@ -23,15 +23,15 @@ npm i @openfeature/nestjs-sdk @openfeature/config-cat-provider
 
 ### 2. Initialize the NestJS SDK
 
-The `ConfigCatProvider.create()` function takes the SDK key, the desired [polling mode](../../node#polling-modes)
+The `ConfigCatProvider.create()` function takes the SDK key, the desired [polling mode](../../js/node/#polling-modes)
 (Auto Polling is recommended for this kind of application) and an optional `options` argument containing additional
-configuration options for the underlying [ConfigCat client](../../node#creating-the-configcat-client):
+configuration options for the underlying [ConfigCat client](../../js/node/#creating-the-configcat-client):
 
 ```ts
 import { Module } from '@nestjs/common';
 import { OpenFeatureModule } from '@openfeature/nestjs-sdk';
 import { ConfigCatProvider } from '@openfeature/config-cat-provider';
-import { createConsoleLogger, LogLevel, PollingMode } from 'configcat-js-ssr';
+import { createConsoleLogger, LogLevel, PollingMode } from '@configcat/sdk';
 import { FeatureFlagService } from './_services/feature-flag.service';
 
 const configCatProvider = ConfigCatProvider.create('#YOUR-SDK-KEY#', PollingMode.AutoPoll, {
@@ -105,7 +105,7 @@ in the OpenFeature specification is a container for arbitrary contextual data th
 flag evaluation.
 
 You can find [here](./node.mdx#evaluation-context) how the ConfigCat provider translates these evaluation contexts to
-ConfigCat [User Objects](../../node/#user-object).
+ConfigCat [User Objects](../../js/node/#user-object).
 
 ## Advanced features
 

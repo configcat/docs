@@ -24,12 +24,12 @@ npm i @openfeature/react-sdk @openfeature/config-cat-web-provider
 ### 2. Initialize the React SDK
 
 The `ConfigCatWebProvider.create()` function takes the SDK key and an optional `options` argument containing additional
-configuration options for the underlying [ConfigCat client](../../js#creating-the-configcat-client):
+configuration options for the underlying [ConfigCat client](../../js/browser/#creating-the-configcat-client):
 
 ```jsx
 import { OpenFeature, OpenFeatureProvider } from '@openfeature/react-sdk';
 import { ConfigCatWebProvider } from '@openfeature/config-cat-web-provider';
-import { createConsoleLogger, LogLevel } from 'configcat-js-ssr';
+import { createConsoleLogger, LogLevel } from '@configcat/sdk';
 
 const configCatProvider = ConfigCatWebProvider.create('#YOUR-SDK-KEY#', {
   // Specify options for the underlying ConfigCat client
@@ -85,7 +85,7 @@ in the OpenFeature specification is a container for arbitrary contextual data th
 flag evaluation.
 
 You can find [here](./js.mdx#evaluation-context) how the ConfigCat provider translates these evaluation contexts to
-ConfigCat [User Objects](../../js/#user-object).
+ConfigCat [User Objects](../../js/browser/#user-object).
 
 ## Advanced features
 
