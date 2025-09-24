@@ -88,6 +88,27 @@ The MCP server's configuration includes the following environment variables:
 4. Save & restart Claude Desktop.
 
   </TabItem>
+    <TabItem value="claude" label="Visual Studio Code">
+
+1. Create a `.vscode/mcp.json` file in your project root with the following content:
+
+```json
+{
+  "servers": {
+    "ConfigCat": {
+      "command": "npx",
+      "args": ["-y", "@configcat/mcp-server"],
+      "env": {
+        "CONFIGCAT_API_USER": "YOUR_API_USER",
+        "CONFIGCAT_API_PASS": "YOUR_API_PASSWORD"
+      }
+    }
+  }
+}
+```
+2. Save the settings file. The MCP server should now be available in VS Code.
+
+  </TabItem>
 </Tabs>
 
 :::info
