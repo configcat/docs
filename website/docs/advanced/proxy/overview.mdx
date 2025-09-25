@@ -185,6 +185,10 @@ You can find the available API endpoints with their HTTP request/response schema
 OFREP compatibility is only available from Proxy version <a target="_blank" href="https://github.com/configcat/configcat-proxy/releases/tag/v2.0.0"><code>v2.0.0</code></a>.
 :::
 
+:::info
+The OFREP feature of the Proxy is turned OFF by default, to use it, you have to turn it ON with the [OFREP endpoint options](endpoints.mdx#available-options-2).
+:::
+
 The Proxy conforms to the <a href="https://github.com/open-feature/protocol">OpenFeature Remote Evaluation Protocol</a>, which means it can be used with OFREP compatible OpenFeature providers.
 
 ```js title="example.js (Initializing the OFREP JS Web provider to use the Proxy)"
