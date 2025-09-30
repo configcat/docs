@@ -11,6 +11,7 @@ import TabItem from '@theme/TabItem';
 
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro) is an open protocol that standardizes how applications provide context to large language models (LLMs).
 The ConfigCat MCP server lets you manage feature flags and configurations via the Public Management API seamlessly from AI tools.
+It also enables your code editor to understand your feature flags, integrate the appropriate ConfigCat SDK into your project or even create new feature flags directly in your codebase.
 
 <video
   autoPlay
@@ -35,6 +36,7 @@ The ConfigCat MCP server lets you manage feature flags and configurations via th
 - Connect with integrations and webhooks
 - Track activity with audit logs and zombie flag (stale flag) reports
 - Find code references linked to your features
+- Integrate ConfigCat SDK and implement feature flags in your project
 
 ## Prerequisites
 
@@ -79,6 +81,27 @@ The MCP server's configuration includes the following environment variables:
 4. Save – the server will start on demand.
   
   </TabItem>
+  <TabItem value="vscode" label="Visual Studio Code">
+
+1. Create a `.vscode/mcp.json` file in your project root with the following content:
+
+```json
+{
+  "servers": {
+    "ConfigCat": {
+      "command": "npx",
+      "args": ["-y", "@configcat/mcp-server"],
+      "env": {
+        "CONFIGCAT_API_USER": "YOUR_API_USER",
+        "CONFIGCAT_API_PASS": "YOUR_API_PASSWORD"
+      }
+    }
+  }
+}
+```
+2. Save the settings file. The MCP server should now be available in VS Code.
+
+  </TabItem>
   <TabItem value="claude" label="Claude Desktop">
 
 1. Open **Settings** → **Developer**
@@ -100,27 +123,6 @@ The MCP server's configuration includes the following environment variables:
 }
 ```
 4. Save & restart Claude Desktop.
-
-  </TabItem>
-  <TabItem value="vscode" label="Visual Studio Code">
-
-1. Create a `.vscode/mcp.json` file in your project root with the following content:
-
-```json
-{
-  "servers": {
-    "ConfigCat": {
-      "command": "npx",
-      "args": ["-y", "@configcat/mcp-server"],
-      "env": {
-        "CONFIGCAT_API_USER": "YOUR_API_USER",
-        "CONFIGCAT_API_PASS": "YOUR_API_PASSWORD"
-      }
-    }
-  }
-}
-```
-2. Save the settings file. The MCP server should now be available in VS Code.
 
   </TabItem>
 </Tabs>
