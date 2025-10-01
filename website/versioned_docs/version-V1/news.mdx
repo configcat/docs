@@ -4,9 +4,38 @@ title: News & Product Updates
 description: Instead of spamming your mailbox, we're posting news and product updates here.
 ---
 
+import LazyVideo from '@site/src/components/LazyVideo';
+
 Here, you'll find all the latest updates, enhancements, and new features we've added to our service. Stay tuned to this page to keep up with all the latest news from ConfigCat!
 
 {/* This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html */}
+
+## ConfigCat MCP Server
+
+#### Spet 30, 2025
+
+We just released a new official ConfigCat's Model Context Protocol (MCP) Server.
+AI tools like Cursor can now interact with ConfigCat via our new MCP server.
+
+- **Complete set of tools for ConfigCat's Public Management API operations**
+    You can Create, Read, Update and Delete any entities like Feature Flags, Configs, Environments or
+    Products within ConfigCat.
+- **Enables your code editor to understand your feature flags**
+    Integrate the appropriate ConfigCat SDK, implement feature flags in your project, remove Zombie (stale)
+    flags and more.
+    
+<LazyVideo
+  autoPlay
+  muted
+  loop
+  controls
+  preload="metadata"
+  playsInline
+  style={{ width: '100%', maxWidth: 960, borderRadius: 8 }}
+  src="/docs/assets/mcp/mcp-demo.mp4"
+/>
+
+For more info about how to set up the MCP server, [see Documentation](../../advanced/mcp-server/).
 
 ## Automatic ConfigCat Proxy configuration with Proxy profiles / OpenFeature Remote Evaluation Protocol
 
