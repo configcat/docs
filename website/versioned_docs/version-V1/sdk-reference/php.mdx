@@ -34,8 +34,17 @@ composer require configcat/configcat-client
 ### 2. Create the _ConfigCat_ client with your _SDK Key_
 
 ```php
-$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
+  \ConfigCat\ClientOptions::CACHE => new \ConfigCat\Cache\LaravelCache(\Illuminate\Support\Facades\Cache::store()),
+]);
 ```
+
+:::warning
+Due to the nature of PHP, for each HTTP request, it spawns a dedicated PHP process that will instantiate a new ConfigCat client every time.
+Therefore, to avoid the download of all feature flag data at every initialization, it's crucial to set up appropriate caching.
+
+For more caching options, see the [Cache](#cache) section of this documentation.
+:::
 
 ### 3. Get your setting value
 
@@ -220,7 +229,7 @@ $client->clearDefaultUser();
 
 ## `getAllKeys()`
 
-You can query the keys of each feature flag and setting with the `getAllKeys()` method.
+You can get the keys for all available feature flags and settings by calling the `getAllKeys()` method.
 
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");

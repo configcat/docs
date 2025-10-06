@@ -4,13 +4,11 @@ title: Data Governance - CDN
 description: ConfigCat customers can control the geographic location where their data will be published to. Helps to stay compliant with GDPR and other data protection regulations.
 ---
 
-Addressing global data handling and processing trends via Data Governance feature. Customers
-can control the geographic location where their config JSONs get published to.
+ConfigCat's Data Governance feature gives you control over how and where your config JSONs are published and served from. This helps you comply with regional data handling requirements such as GDPR. 
 
 ## CDN - Data Centers
 
-To ensure high availability and low response times all around the globe, ConfigCat provides data centers at multiple global 
-locations. All of the data centers have multiple CDN nodes to guarantee proper redundancy.
+To ensure high availability and low response times worldwide, ConfigCat provides multiple global data centers, each with multiple CDN nodes for built-in redundancy and failover. 
 
 ### ConfigCat Data Center locations
 
@@ -36,18 +34,17 @@ Open <a href="https://app.configcat.com/organization/data-governance">Data Gover
 
 ## Set up the ConfigCat SDK in your application code
 
-Make sure the `dataGovernance` parameter is passed to the ConfigCat SDK
-in your application code when it is being initialized.
+Make sure the `dataGovernance` option is specified when initializing the ConfigCat SDK in your application code.
 
-> The `dataGovernance` parameter value must be in sync with the selected option on
+> The `dataGovernance` option's value must be in sync with the selected option on
 > the Dashboard.
 
 ## Troubleshooting
 
-#### What if I forgot to pass the `dataGovernance` parameter?
+#### What if I forget to specify the `dataGovernance` option?
 
-The ConfigCat backend will take the Dashboard preference as primary. Having `EU Only` selected on the Dashboard but forgot to pass the proper `dataGovernance` parameter to the SDK. In this case your config JSONs will only published to the EU CDN nodes. And every config JSON download made from your application to any node outside the EU, the request will be redirected automatically to the EU CDN. Recommended to deploy a fix with the correct `dataGovernance` param, since response times will be significantly longer.
+By default, the ConfigCat SDK contacts the ConfigCat Global CDN. However, if you switch to the EU CDN on the Dashboard, your config JSONs will only be published to the EU CDN nodes. Therefore, if you forget to specify the `dataGovernance` option when initializing the ConfigCat SDK, feature flag data download requests will need to be redirected to the EU CDN. To avoid this, it's recommended to specify the correct `dataGovernance` option, otherwise response times can be significantly longer.
 
-#### `Warning: Your dataGovernance parameter at ConfigCatClient initialization is not in sync with your preferences...`
+#### `Warning: The dataGovernance parameter specified at the client initialization is not in sync with the preferences on the ConfigCat Dashboard....`
 
-**You worry do not.** Your feature flags are served. See above example.
+**Don't worry,** your feature flags will still be served. See above example.

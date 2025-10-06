@@ -28,8 +28,17 @@ composer require configcat/configcat-client
 ### 2. Create the _ConfigCat_ client with your _SDK Key_
 
 ```php
-$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
+$client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#", [
+  \ConfigCat\ClientOptions::CACHE => new \ConfigCat\Cache\LaravelCache(\Illuminate\Support\Facades\Cache::store()),
+]);
 ```
+
+:::warning
+Due to the nature of PHP, for each HTTP request, it spawns a dedicated PHP process that will instantiate a new ConfigCat client every time.
+Therefore, to avoid the download of all feature flag data at every initialization, it's crucial to set up appropriate caching.
+
+For more caching options, see the [Cache](#cache) section of this documentation.
+:::
 
 ### 3. Get your setting value
 
@@ -265,7 +274,7 @@ $client->clearDefaultUser();
 
 ## `getAllKeys()`
 
-You can query the keys of each feature flag and setting with the `getAllKeys()` method.
+You can get the keys for all available feature flags and settings by calling the `getAllKeys()` method.
 
 ```php
 $client = new \ConfigCat\ConfigCatClient("#YOUR-SDK-KEY#");
@@ -287,13 +296,15 @@ $settingValuesTargeting = $client->getAllValues($user);
 
 ## Hooks
 
-With the following hooks you can subscribe to particular events fired by the SDK:
+The SDK provides several hooks (events), by means of which you can get notified of its actions.
+You can subscribe to the following events emitted by the _ConfigCat_ client:
 
-- `onConfigChanged([key => setting])`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
-
-- `onFlagEvaluated(EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
-
-- `onError(string)`: This event is sent when an error occurs within the ConfigCat SDK.
+- `onConfigChanged([key => setting])`: This event is emitted first when the client's internal cache gets populated.
+  Afterwards, it is emitted again each time the internally cached config is updated to a newer version, either as a result of synchronization
+  with the external cache, or as a result of fetching a newer version from the ConfigCat CDN.
+- `onFlagEvaluated(EvaluationDetails)`: This event is emitted each time the client evaluates a feature flag or setting.
+  The event provides the same evaluation details that you would get from [`getValueDetails()`](#anatomy-of-getvaluedetails).
+- `onError(string)`: This event is emitted when an error occurs within the client.
 
 You can subscribe to these events with the `hooks` property of the ConfigCat client:
 

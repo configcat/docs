@@ -14,7 +14,7 @@ Integrate your feature flag evaluations with [Google Analytics experiments](http
 
 ### Setup Instructions
 
-1. **Install SDKs:** Add both the ConfigCat SDK and Google Analytics SDK to your application.
+1. **Install SDKs:** Add both the ConfigCat SDK and the Google Analytics SDK to your application.
 2. **Configure SDKs:**
    - **ConfigCat SDK:** Initialize with your ConfigCat SDK key.
    - **Google Analytics SDK:** Set up with your Google Analytics measurement ID.
@@ -69,7 +69,7 @@ While our documentation primarily provides code examples for JavaScript-based SD
 2. **Send an event to Google Analytics** using the `experience_impression` event name. Include the following event properties:
    - `exp_variant_string`: Format this string as `configcat-<feature_flag_key>-<feature_flag_value>`. For example, `configcat-isMyAwesomeFeatureEnabled-true`.
    - `variant_id`: The evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
-   - `user_id` (optional): If tracking in a backend component and utilizing the user_id feature in Google Analytics, include this property to identify your user. Use the Identifier property from the User object in the FlagEvaluated hook, or a value that best describes your user.
+   - `user_id` (optional): If tracking in a backend component and utilizing the user_id feature in Google Analytics, include this property to identify your user. Use the Identifier property from the User object in the FlagEvaluated hook, or another value that best describes your user.
 
 </TabItem>
 </Tabs>
@@ -91,4 +91,3 @@ For Text feature flags with lengthy values (e.g., JSON), send the `variationId` 
 - [A/B Testing with ConfigCat and Google Analytics - Blog post](https://configcat.com/blog/2024/09/20/ab-testing-configcat-google-analytics/)
 - [A/B Testing with ConfigCat and Google Analytics - Sample app](https://github.com/configcat-labs/configcat-google-analytics-integration-sample)
 - [Creating Audiences in Google Analytics - Google documentation](https://support.google.com/analytics/answer/9267572)
-- [ConfigCat Integrations API](https://configcat.com/docs/api/reference/integrations/)

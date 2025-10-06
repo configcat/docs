@@ -52,9 +52,21 @@
   height: 100%;
 }
 
-.video{
+.video {
   width: 100%;
   height: auto;
+}
+
+li > h3 {
+  font-size: 1.4rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+h5 {
+  font-size: 1.1rem;
 }
 
 .bordered-img {
@@ -86,4 +98,22 @@ span[class*='codeLineNumber'] {
 main article img:not(.no-auto-height) {
   // See also https://github.com/configcat-labs/content-wiki/blob/main/screenshot-guide.md#embedding-screenshots
   height: auto;
+}
+
+ul.feature-list {
+  --ifm-list-left-padding: 1.25em;
+  -moz-padding-start: 1em;
+}
+
+[data-theme='dark'] .monochrome-image.theme-aware {
+  -webkit-filter: invert(1);
+  filter: invert(1);
+}
+
+.docs-doc-id-subscription-plan-limits {
+  table {
+    th:first-of-type {
+      width: 100%;
+    }
+  }
 }

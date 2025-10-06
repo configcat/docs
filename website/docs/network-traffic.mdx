@@ -48,13 +48,13 @@ Here are a few examples of config JSON file sizes:
   </table>
 
 #### Size of the `config JSON`
-Affected by the number of feature flags, settings, Targeting Rules, segments, and the length of their values.
+It is affected by the number of feature flags, settings, targeting rules, segments, and the length of their values.
 
 #### Number of clients connecting to ConfigCat
 Every time a client downloads the config JSON, it contributes to the overall Network Traffic.
 
 #### Frequency of changes in the `config JSON`
-The `config JSON` is cached on the ConfigCat CDN. If there is no change, the ConfigCat CDN will reply with a `304 Not Modified` response. If there is a change, the ConfigCat CDN will reply with a `200 OK` response and the new `config JSON` will be downloaded.
+The `config JSON` is cached on the ConfigCat CDN. If there is no change, the ConfigCat CDN will respond with `304 Not Modified`. If there is a change, the ConfigCat CDN will respond with `200 OK` and the new `config JSON` content in the response body.
 
 ### Shared infrastructure
 
@@ -91,28 +91,28 @@ Runs on the customer's own servers. We suggest <a href="https://configcat.com/su
 
 ### Delete the old feature flags and unused Targeting Rules
 
-If you have a lot of feature flags and Targeting Rules in a config, you can lower the size of the `config JSON` by deleting the old ones.
+If you have a large number of feature flags and Targeting Rules in a config, you can reduce the size of the `config JSON` by deleting the old ones. The [Zombie Flags](../zombie-flags) feature can help you finding stale feature flags.
 
 ### Avoid keeping lots of data in the comparison value of Targeting Rules or segments
 
-The comparison value of a Targeting Rule or segment is stored in the `config JSON` and downloaded by the SDKs. If you have a lot of Targeting Rules or segments with long comparison values, you can lower the size of the `config JSON` by shortening them.
+The comparison value of a Targeting Rule or segment is stored in the `config JSON` and downloaded by the SDKs. If you have a lot of Targeting Rules or segments with lengthy comparison values, you can reduce the size of the `config JSON` by shortening them.
 
 ### Consider the amount of text you keep in a text setting's value
 
-Similarly to the comparison value of Targeting Rules or segments, the value of a text setting is stored in the `config JSON` and downloaded by the SDKs. If you have a lot of text settings with long values, you can lower the size of the `config JSON` by shortening them.
+Similarly to the comparison value of Targeting Rules or segments, the value of a text setting is stored in the `config JSON` and downloaded by the SDKs. If you have a lot of text settings with lengthy values, you can reduce the size of the `config JSON` by shortening them.
 
 ### Separate your feature flags into multiple configs
 
-If you have a lot of feature flags, you can reduce the size of the `config JSON` by separating them into multiple configs. This way, the payload of each download will be smaller.
+If you have a large number of feature flags, you can reduce the size of the `config JSON` by separating them into multiple configs. This way, the payload of each download will be smaller.
 
 ### Use the ConfigCat Proxy to cache/proxy config JSON downloads
 
-The [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) allows you to host a feature flag evaluation and config JSON proxy/cache service within your own infrastructure.  
-The [CDN proxy](https://configcat.com/docs/advanced/proxy/endpoints/#cdn-proxy) feature allows you to proxy/cache config JSON downloads and the ConfigCat SDKs can be routed to the ConfigCat Proxy running in your own infrastructure greatly reducing network traffic.
+The [ConfigCat Proxy](./advanced/proxy/overview.mdx) allows you to host a feature flag evaluation and config JSON proxy/cache service within your own infrastructure.  
+The [CDN proxy](./advanced/proxy/endpoints.mdx#cdn-proxy) feature allows you to proxy/cache config JSON downloads, and the ConfigCat SDKs can be routed to the ConfigCat Proxy running in your own infrastructure greatly reducing network traffic.
 
-### Purchase additional quota
+### Purchase additional network traffic
 
-You can purchase additional quota for your subscription to increase your limits. [Contact us](https://configcat.com/support/) for more information.
+You can purchase an add-on for your subscription to increase your limits. [Contact us](https://configcat.com/support/) for more information.
 
 | Plan           | Price              | Additional config JSON downloads | Additional network traffic |
 | -------------- | ------------------ | -------------------------------: | -------------------------: |

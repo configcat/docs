@@ -1,6 +1,7 @@
 import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 import type * as Preset from '@docusaurus/preset-classic';
+import { relative } from 'path';
 
 const config: Config = {
   title: 'ConfigCat Docs',
@@ -17,6 +18,12 @@ const config: Config = {
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
+  },
+  future: {
+    experimental_faster: true,
+    v4: {
+      removeLegacyPostBuildHeadAttribute: true,
+    },
   },
   plugins: [
     [
@@ -104,9 +111,8 @@ const config: Config = {
         path: 'api',
         routeBasePath: 'api',
         sidebarPath: './api/sidebars.ts',
-        docRootComponent: "@theme/DocRoot",
-        docItemComponent: "@theme/ApiItem",
-
+        docRootComponent: '@theme/DocRoot',
+        docItemComponent: '@theme/ApiItem',
       },
     ],
     [
@@ -120,7 +126,7 @@ const config: Config = {
             outputDir: 'api/reference',
             sidebarOptions: {
               groupPathsBy: 'tagGroup',
-              categoryLinkSource: 'tag'
+              categoryLinkSource: 'tag',
             },
           },
           scim: {
@@ -128,12 +134,68 @@ const config: Config = {
             outputDir: 'api/scim',
             sidebarOptions: {
               groupPathsBy: 'tag',
-              categoryLinkSource: 'auto'
+              categoryLinkSource: 'auto',
             },
           },
         },
       },
     ],
+    [
+      '@signalwire/docusaurus-plugin-llms-txt',
+      {
+        siteTitle: 'ConfigCat Docs',
+        siteDescription: 'Learn more on how to use ConfigCat Feature Flags.',
+        depth: 2,
+        content: {
+          enableLlmsFullTxt: true,
+          relativePaths: false,
+          includeVersionedDocs: false,
+          excludeRoutes: [
+            '/docs/search/', // Exclude the /search route from llms.txt
+          ],
+          routeRules: [
+            { route: '/docs', categoryName: 'HomePage', 
+              includeOrder: [
+                '/docs/getting-started',
+                '/docs/main-concepts',
+                '/docs/targeting',
+                '/docs/requests',
+                '/docs/network-traffic',
+                '/docs/service',
+                '/docs/purchase',
+                '/docs/subscription-plan-limits',
+                '/docs/organization',
+                '/docs/news',
+                '/docs/faq',
+                '/docs/glossary',
+                '/docs/advanced',
+                '/docs/zombie-flags',
+                '/docs/sdk-reference',
+                '/docs/integrations',
+                '/docs/api',
+              ]
+             },
+            { route: '/docs/api', categoryName: 'Public Management API' },
+            { route: '/docs/advanced', categoryName: 'Advanced Guides' },
+            { route: '/docs/faq', categoryName: 'FAQ' },
+            { route: '/docs/getting-started', categoryName: 'Getting Started' },
+            { route: '/docs/glossary', categoryName: 'Glossary' },
+            { route: '/docs/integrations', categoryName: 'Integrations' },
+            { route: '/docs/main-concepts', categoryName: 'Main Concepts' },
+            { route: '/docs/network-traffic', categoryName: 'Network Traffic' },
+            { route: '/docs/news', categoryName: 'News & Product Updates' },
+            { route: '/docs/organization', categoryName: 'Organization & Roles' },
+            { route: '/docs/purchase', categoryName: 'Plans, Purchase & Billing' },
+            { route: '/docs/requests', categoryName: 'What is a JSON download?' },
+            { route: '/docs/sdk-reference', categoryName: 'SDK Reference' },
+            { route: '/docs/service', categoryName: 'Service Status & Monitoring' },
+            { route: '/docs/subscription-plan-limits', categoryName: 'Subscription Plan Limits' },
+            { route: '/docs/targeting', categoryName: 'Targeting' },
+            { route: '/docs/zombie-flags', categoryName: 'Zombie Flags' },
+          ],
+        },
+      }
+    ]
     // ['./src/plugins/smartlook',
     //   {
     //     smartlookKey: '05d0e4ca90c61150955104a9d4b76ab16a0b2380',
@@ -328,7 +390,7 @@ const config: Config = {
     imgZoom: {
       selector: '.markdown img:not([src^="http"])',
       zoomedInClass: 'zoomed-in-img',
-    }
+    },
   } satisfies Preset.ThemeConfig,
   presets: [
     [
@@ -345,10 +407,10 @@ const config: Config = {
               label: 'Config V2',
               path: '/',
             },
-            "V1": {
+            V1: {
               label: 'Config V1 (legacy)',
               path: '/V1',
-              noIndex: true
+              noIndex: true,
             },
           },
         },
@@ -360,11 +422,11 @@ const config: Config = {
         },
         sitemap: {
           ignorePatterns: ['/docs/V1/**'],
-        }
+        },
       } satisfies Preset.Options,
     ],
   ],
-  themes: ["docusaurus-theme-openapi-docs"],
+  themes: ['docusaurus-theme-openapi-docs'],
   scripts: [],
   stylesheets: [],
   clientModules: ['./src/client-modules/img-zoom'],

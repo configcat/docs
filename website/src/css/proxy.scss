@@ -26,6 +26,10 @@
   td:nth-child(1) {
     max-width: 500px;
   }
+
+  th:last-of-type {
+    width: 100%;
+  }
 }
 
 .endpoint {

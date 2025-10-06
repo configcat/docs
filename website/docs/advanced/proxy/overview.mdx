@@ -2,6 +2,7 @@
 id: proxy-overview
 title: ConfigCat Proxy
 description: The ConfigCat Proxy allows you to host a feature flag evaluation service in your own infrastructure.
+toc_max_heading_level: 5
 ---
 
 import Tabs from '@theme/Tabs';
@@ -105,11 +106,142 @@ You can download the executables directly from <a target="_blank" href="https://
 
 You can then check the [status endpoint](monitoring.mdx#status) of the Proxy to ensure it's working correctly: `http://localhost:8051/status`
 
+## Usage Scenarios
+
+This section describes the possible ways of how you can use the Proxy from your application. 
+You can decide where you want the actual feature flag evaluation to happen.
+- **Local evaluation**: Feature flags are evaluated in your application by the ConfigCat SDK running in your application. The Proxy only provides the data required for the evaluation process.
+- **Remote evaluation**: Feature flags are evaluated within the Proxy, your application only gets the result of the evaluation process.
+
+### 1. Local evaluation using a ConfigCat SDK connected to the Proxy
+
+The Proxy has the ability to forward all information required for feature flag evaluation to ConfigCat SDKs via its [CDN proxy](endpoints.mdx#cdn-proxy) endpoint. 
+This means that you can set up your ConfigCat SDK instances to use the Proxy as their data source.
+
+To do this, you have to set the SDK's `baseUrl` option to the Proxy's host.
+
+```js title="example.js (Initializing the ConfigCat JS SDK to use the Proxy with SDK Key)"
+import * as configcat from "@configcat/sdk";
+
+const configCatClient = configcat.getClient(
+  "#YOUR-SDK-KEY#", 
+  configcat.PollingMode.AutoPoll,
+  // highlight-next-line
+  { baseUrl: "http://localhost:8050" } // Proxy URL
+);
+```
+  
+Additionally, as the Proxy maps [unique identifiers to each configured SDK key](#sdk-identifier--sdk-key) it works with, 
+you can use that identifier prefixed with `configcat-proxy/` as the SDK key at the ConfigCat SDK's initialization.
+
+```js title="example.js (Initializing the ConfigCat JS SDK to use the Proxy with SDK identifier)"
+import * as configcat from "@configcat/sdk";
+
+var configCatClient = configcat.getClient(
+  // highlight-next-line
+  "configcat-proxy/#SDK-IDENTIFIER#", // SDK identifier prefixed with 'configcat-proxy/'
+  configcat.PollingMode.AutoPoll,
+  // highlight-next-line
+  { baseUrl: "http://localhost:8050" } // Proxy URL
+);
+```
+
+### 2. Remote evaluation with the Proxy's API endpoints
+
+You can leverage the Proxy's server side feature flag evaluation feature by sending simple HTTP requests to the Proxy's API endpoints.
+
+```js title="example.js (Evaluating a feature flag with API)"
+const url = "http://localhost:8050/api/#SDK-IDENTIFIER#/eval"; // Proxy API URL with SDK identifier
+
+const data = {
+  key: "isMyAwesomeFeatureEnabled", // Feature flag key
+  user: { // User Object for evaluation
+    Identifier: "#UNIQUE-USER-IDENTIFIER#"
+  }
+};
+
+const requestOptions = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+};
+
+try {
+  const response = await fetch(url, requestOptions);
+  const responseData = await response.json();
+  console.log(responseData); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
+} catch (error) {
+  console.error('Error:', error)
+}
+```
+
+You can find the available API endpoints with their HTTP request/response schemas [here](endpoints.mdx#api).
+
+### 3. Remote evaluation with OpenFeature Remote Evaluation Protocol (OFREP)
+
+:::info
+OFREP compatibility is only available from Proxy version <a target="_blank" href="https://github.com/configcat/configcat-proxy/releases/tag/v2.0.0"><code>v2.0.0</code></a>.
+:::
+
+:::info
+The OFREP feature of the Proxy is turned OFF by default, to use it, you have to turn it ON with the [OFREP endpoint options](endpoints.mdx#available-options-2).
+:::
+
+The Proxy conforms to the <a href="https://github.com/open-feature/protocol">OpenFeature Remote Evaluation Protocol</a>, which means it can be used with OFREP compatible OpenFeature providers.
+
+```js title="example.js (Initializing the OFREP JS Web provider to use the Proxy)"
+import { OpenFeature } from "@openfeature/web-sdk";
+import { OFREPWebProvider } from '@openfeature/ofrep-web-provider';
+
+OpenFeature.setProvider(
+  new OFREPWebProvider({
+    // highlight-next-line
+    baseUrl: 'http://localhost:8050', // Proxy URL
+    headers: [
+      // highlight-next-line
+      ['X-ConfigCat-SdkId', '#SDK-IDENTIFIER#'],
+    ],
+  }),
+);
+```
+
+You can find the available OFREP endpoints with their HTTP request/response schemas [here](endpoints.mdx#openfeature-remote-evaluation-protocol-ofrep).
+
+### 4. Remote evaluation and streaming with SSE
+
+The Proxy has the ability to evaluate feature flags and send notifications about subsequent evaluated flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
+
+```js title="example.js (Evaluating a feature flag and listening to changes with SSE)"
+const rawData = {
+  key: "isMyAwesomeFeatureEnabled", // Feature flag key
+  user: { // User Object for evaluation
+    Identifier: "#UNIQUE-USER-IDENTIFIER#"
+  }
+}
+
+const data = btoa(JSON.stringify(rawData))
+const url = "http://localhost:8050/sse/#SDK-IDENTIFIER#/eval"; // Proxy SSE URL with SDK identifier
+
+const evtSource = new EventSource(url + "/" + data);
+evtSource.onmessage = (event) => {
+  console.log(event.data); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
+};
+```
+
+For more information and usage examples, see the related [SSE endpoints documentation](endpoints.mdx#sse).
+
+### 5. Remote evaluation and streaming with gRPC
+
+The Proxy supports both unary feature flag evaluation RPCs and server streaming of evaluated flag value changes.
+For more information and usage examples, see the [gRPC section of this documentation](grpc.mdx).
+
 ## Configuration Options
 
 You can specify options for the Proxy either via a YAML file or with environment variables. When an option is defined in both places, the environment variable's value takes precedence.
 
-The Proxy is able to read the options YAML from the following default locations:
+By default, the Proxy reads the options YAML from the following default locations:
 
 - **Windows**: `%PROGRAMDATA%\configcat\proxy\options.yml`, usually `C:\ProgramData\configcat\proxy\options.yml`
 - **macOS**: `/Library/Application Support/configcat/proxy/options.yml`
@@ -192,7 +324,7 @@ Run the Proxy as a standalone executable with the options YAML file in its defau
 <details open>
   <summary><strong>Docker</strong></summary>
 
-When running the Proxy in docker, you can pass environment variables for the executing container.
+When running the Proxy in docker, you can pass environment variables to the executing container.
 ```shell
 docker run -d --name configcat-proxy \ 
   -p 8050:8050 -p 8051:8051 -p 50051:50051 \
@@ -245,71 +377,400 @@ Then start the Proxy:
 
 The following sections will go through each available option in detail.
 
-## Logging
+## How does the Proxy learn about feature flags? {#sdk}
 
-The Proxy supports the following log levels: `debug`, `info`, `warn`, and `error`. The default is `warn`.
+In order to make the Proxy work properly, it must be set up with one or more <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a>. 
+It creates one SDK instance per SDK key internally and uses those for feature flag evaluation. 
 
-You can specify the log level either globally or for each individual component. If you don't set a component's log level explicitly, it will inherit the global level's value.
+### SDK Identifier {#sdk-identifier--sdk-key}
 
-<Tabs groupId="yaml-env">
-<TabItem value="yaml" label="YAML" default>
+Within the Proxy, <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a> are mapped to unique SDK identifiers. 
 
-```yaml
-log:
-  level: "<error|warn|info|debug>"
-```
+The <i>SDK key</i> identifies a config/environment pair and is used to configure an SDK instance to fetch the config JSON of that config/environment pair.
+The <i>SDK identifier</i> identifies an SDK instance running within the Proxy and configured to use the associated SDK key. 
+That is, the SDK identifier is effectively an alias for the associated SDK key and is used in <a href="/docs/advanced/proxy/endpoints">endpoint routes</a> to avoid exposing the SDK Key.
 
-</TabItem>
-<TabItem value="env-vars" label="Environment variables">
+There are two ways to let the Proxy know which SDK Keys it should use:
 
-```shell
-CONFIGCAT_LOG_LEVEL="<error|warn|info|debug>"
-```
-
-</TabItem>
-</Tabs>
+### 1. Automatic configuration with Proxy profiles
 
 :::info
-When the main HTTP server's or gRPC server's log level is set to `debug`, each HTTP request or RPC the Proxy receives is logged with additional details. (duration, response status, etc.)
+**Beta Feature**: Automatic configuration with Proxy profiles is in public beta. 
+We're now collecting feedback from real-world usage to fine-tune the experience. Share your feedback <a target="_blank" href="https://configcat.com/support">here</a>.
 :::
-
-## Default User Attributes
-
-There's an option to predefine [User Object](../../targeting/user-object.mdx) attributes with default values. Whenever the Proxy receives an evaluation request it will automatically attach these predefined attributes to the request. If the evaluation request contains a different value for an attribute you previously defined, the request's value will take precedence.
-
-<Tabs groupId="yaml-env">
-<TabItem value="yaml" label="YAML" default>
-
-```yaml
-default_user_attributes:
-  attribute_key1: "<attribute_value1>"
-  attribute_key2: "<attribute_value2>"
-```
-
-</TabItem>
-<TabItem value="env-vars" label="Environment variables">
-
-```shell
-CONFIGCAT_DEFAULT_USER_ATTRIBUTES='{"attribute_key1":"<attribute_value1>","attribute_key2":"<attribute_value2>"}'
-```
-
-</TabItem>
-</Tabs>
 
 :::info
-It's also possible to set default user attributes at the SDK level. See the [SDK options](#sdk) section below for more details.
+The automatic configuration with Proxy profiles feature is only available from Proxy version <a target="_blank" href="https://github.com/configcat/configcat-proxy/releases/tag/v2.0.0"><code>v2.0.0</code></a>.
 :::
 
-## SDK
+The Proxy has the ability to use _Proxy profiles_ to determine which SDK keys to download and distribute.
+It periodically checks for profile changes, allowing it to pick up the changes on the fly, without needing a restart.
 
-In order to make the Proxy work properly, it must be set up with one or more <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a>. It will instantiate one SDK instance for each SDK key.
-In case of environment variables, the SDK keys can be specified in a **JSON key-value** format, where the **key is the identifier** of a specific SDK and the **value is the actual SDK key**.
-The **SDK identifier** part is later used in [endpoint route variables](endpoints.mdx) to recognize which SDK must serve the given flag evaluation request.
+You can set up Proxy profiles under the `Manage organization` -> `Proxy Profiles` menu on the <a target="_blank" href="https://app.configcat.com/organization/proxy-profiles">ConfigCat Dashboard</a>.
 
-Furthermore, when configuring the Proxy **via environment variables**, the identifier becomes a **part of the SDK specific environment variable's name** using the following format: `CONFIGCAT_<SDK_ID>_<OPTION>`.
+<img alt="Proxy Profiles menu" src="/docs/assets/proxy/profile-menu.png" width="1366" height="768" decoding="async" loading="lazy" />
+<br/>
+<br/>
+To connect a Proxy instance to a Proxy profile, follow these steps:
 
-For example, suppose we have the following SDK key-value option: `CONFIGCAT_SDKS={"my-sdk":"<your-sdk-key>"}`.  
-In this case, the environment variable that sets the SDK's poll interval will be named as follows: `CONFIGCAT_MY_SDK_POLL_INTERVAL`.
+- #### Create a new Proxy profile
+  Click on the `+ ADD PROFILE` button.
+  <img alt="Add Profile" src="/docs/assets/proxy/profile-add.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+  Give the profile a meaningful name and description, then click `CREATE`.
+  <img alt="Create Profile" src="/docs/assets/proxy/profile-create.png" width="1366" height="768" decoding="async" loading="lazy" />
+  <br/>
+  <br/>
+
+- #### Configure your Proxy instance
+  Grab the `Key` and `Secret` from the profile creation dialog and put them into the Proxy's configuration.
+  <img alt="Configure Proxy with key and secret" src="/docs/assets/proxy/profile-key-secret.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+  <Tabs groupId="yaml-env">
+  <TabItem value="yaml" label="YAML" default>
+  
+  ```yaml title="options.yml"
+  profile:
+    key: <key>
+    secret: <secret>
+  ```
+  
+  </TabItem>
+  <TabItem value="env-vars" label="Environment variables">
+  
+  ```shell
+  CONFIGCAT_PROFILE_KEY="<key>"
+  CONFIGCAT_PROFILE_SECRET="<secret>"
+  ```
+  
+  </TabItem>
+  </Tabs>
+  <br/>
+
+- #### Select which SDK Keys your Proxy should use
+  Click on the edit icon in the `SDK Keys` column.
+  <img alt="Click on Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-configure.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+  Select the config/environment pairs whose SDK key you want to make available for your Proxy instance.
+  <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-select.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+  :::info
+  You can click config names in the first column to toggle all SDK keys in a row, or environment names in the column headers to toggle all SDK keys in a column.
+  :::
+  <br/>
+
+- #### Locate SDK identifiers for the selected SDK Keys
+  You can find the SDK identifiers generated for the selected config/environment pairs on the ConfigCat Dashboard right where you find their SDK Key.
+  <img alt="Click on view SDK identifiers for ConfigCat Proxy" src="/docs/assets/proxy/profile-sdk-ids-arrow.png" width="1366" height="768" decoding="async" loading="lazy" />
+  
+  In the dialog that appears, you can find the SDK identifiers for the current config/environment pair, listed for each available Proxy profile.
+  <img alt="Click on view SDK identifiers for ConfigCat Proxy" src="/docs/assets/proxy/profile-sdk-ids-dialog.png" width="1366" height="768" decoding="async" loading="lazy" />
+  <br/>
+  <br/>
+
+- #### (Optional) Set up how your Proxy should learn about feature flag changes
+  There are two ways a Proxy can detect feature flag changes. Each config/environment pair identified by each SDK key is automatically monitored for changes by periodic polling of the corresponding config JSON file at a configured frequency.
+  Besides polling, the Proxy can receive change notifications over HTTP, via its [webhook endpoint](endpoints.mdx#webhook).
+
+  - ##### Config JSON poll interval 
+    You have the option to control how frequently the Proxy should poll for config JSON changes.  
+    Click on the configure icon in the `Connection preferences` column, set the poll interval and click on `SAVE POLL INTERVAL`.
+    <img alt="Set config JSON poll interval" src="/docs/assets/proxy/profile-sdk-poll-interval.png" width="1366" height="768" decoding="async" loading="lazy" />
+    <br/>
+    <br/>
+  
+  - ##### Webhook notification
+    You can set up automatic webhook notifications about feature flag changes for your Proxy by providing its public URL.  
+    Click on the configure icon in the `Connection preferences` column and select `Webhook notification`.
+    Then, enter your Proxy instance's public URL and click `ADD PROXY URL`.
+    <img alt="Set Proxy webhook URL" src="/docs/assets/proxy/profile-webhook-url.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+    Put the displayed webhook signing key(s) into your Proxy's configuration. 
+    Signing keys are for making sure that webhook requests received by your Proxy are sent by ConfigCat.
+    Signatures are automatically [verified](../../advanced/notifications-webhooks.mdx#verifying-webhook-requests) by the Proxy.
+    <img alt="Copy webhook signing key" src="/docs/assets/proxy/profile-webhook-signing-key.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+    <Tabs groupId="yaml-env">
+    <TabItem value="yaml" label="YAML" default>
+    
+    ```yaml title="options.yml"
+    profile:
+      webhook_signing_key: <signing-key>
+    ```
+    
+    </TabItem>
+    <TabItem value="env-vars" label="Environment variables">
+    
+    ```shell
+    CONFIGCAT_PROFILE_WEBHOOK_SIGNING_KEY="<signing-key>"
+    ```
+    
+    </TabItem>
+    </Tabs>
+
+    Test the connection to your Proxy instance.
+    <img alt="Test the webhook configuration" src="/docs/assets/proxy/profile-webhook-test.png" width="1366" height="768" decoding="async" loading="lazy" />
+    <br/>
+    <br/>
+
+- #### All configuration options related to Proxy profiles
+
+  <table className="proxy-arg-table">
+  <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+  <tbody>
+  <tr>
+  <td>
+  
+  <Tabs groupId="yaml-env">
+  <TabItem value="yaml" label="YAML" default>
+  
+  ```yaml
+  profile:
+    key: "<key>"
+  ```
+  
+  </TabItem>
+  <TabItem value="env-vars" label="Environment variable">
+  
+  ```shell
+  CONFIGCAT_PROFILE_KEY="<key>"
+  ```
+  
+  </TabItem>
+  </Tabs>
+  
+  </td>
+  <td>-</td>
+  <td>The Proxy profile's key.</td>
+  </tr>
+  <tr>
+  <td>
+  
+  <Tabs groupId="yaml-env">
+  <TabItem value="yaml" label="YAML" default>
+  
+  ```yaml
+  profile:
+    secret: "<secret>"
+  ```
+  
+  </TabItem>
+  <TabItem value="env-vars" label="Environment variable">
+  
+  ```shell
+  CONFIGCAT_PROFILE_SECRET="<secret>"
+  ```
+  
+  </TabItem>
+  </Tabs>
+  
+  </td>
+  <td>-</td>
+  <td>The Proxy profile's secret used by the Proxy to authenticate requests to the Public Management API.</td>
+  </tr>
+  <tr>
+  <td>
+  
+  <Tabs groupId="yaml-env">
+  <TabItem value="yaml" label="YAML" default>
+  
+  ```yaml
+  profile:
+    base_url: "<base-url>"
+  ```
+  
+  </TabItem>
+  <TabItem value="env-vars" label="Environment variable">
+  
+  ```shell
+  CONFIGCAT_PROFILE_BASE_URL="<base-url>"
+  ```
+  
+  </TabItem>
+  </Tabs>
+  
+  </td>
+  <td>ConfigCat Public Management API URL</td>
+  <td>The base URL from where the Proxy should fetch the SDK Keys selected in the connected Proxy profile.</td>
+  </tr>
+  <tr>
+  <td>
+  
+  <Tabs groupId="yaml-env">
+  <TabItem value="yaml" label="YAML" default>
+  
+  ```yaml
+  profile:
+    poll_interval: 300
+  ```
+  
+  </TabItem>
+  <TabItem value="env-vars" label="Environment variable">
+  
+  ```shell
+  CONFIGCAT_PROFILE_POLL_INTERVAL=300
+  ```
+  
+  </TabItem>
+  </Tabs>
+  
+  </td>
+  <td>300</td>
+  <td>The interval (in seconds) specifying how frequently the Proxy should poll for changes in the connected Proxy profile.</td>
+  </tr>
+  <tr>
+  <td>
+  
+  <Tabs groupId="yaml-env">
+  <TabItem value="yaml" label="YAML" default>
+  
+  ```yaml
+  profile:
+    webhook_signing_key: "<signing-key>"
+  ```
+  
+  </TabItem>
+  <TabItem value="env-vars" label="Environment variable">
+  
+  ```shell
+  CONFIGCAT_PROFILE_WEBHOOK_SIGNING_KEY="<signing-key>"
+  ```
+  
+  </TabItem>
+  </Tabs>
+  
+  </td>
+  <td>-</td>
+  <td>The <a href="/docs/advanced/notifications-webhooks/#calculating-signature">key used to sign</a> the webhook requests sent to the Proxy. 
+  <a href="#webhook-notification">More about how to set up webhooks for a Proxy profile</a>.</td>
+  </tr>
+  <tr>
+  <td>
+  
+  <Tabs groupId="yaml-env">
+  <TabItem value="yaml" label="YAML" default>
+  
+  ```yaml
+  profile:
+    webhook_signature_valid_for: 300
+  ```
+  
+  </TabItem>
+  <TabItem value="env-vars" label="Environment variable">
+  
+  ```shell
+  CONFIGCAT_PROFILE_WEBHOOK_SIGNATURE_VALID_FOR=300
+  ```
+  
+  </TabItem>
+  </Tabs>
+  
+  </td>
+  <td>300</td>
+  <td>The time period (in seconds) within which webhook requests are considered valid. 
+  <a href="#webhook-notification">More about how to set up webhooks for a Proxy profile</a>.</td>
+  </tr>
+  <tr>
+  <td>
+  
+  <Tabs groupId="yaml-env">
+  <TabItem value="yaml" label="YAML" default>
+  
+  ```yaml
+  profile:
+    log:
+      level: "<error|warn|info|debug>"
+  ```
+  
+  </TabItem>
+  <TabItem value="env-vars" label="Environment variable">
+  
+  ```shell
+  CONFIGCAT_PROFILE_LOG_LEVEL="<error|warn|info|debug>"
+  ```
+  
+  </TabItem>
+  </Tabs>
+  
+  </td>
+  <td><code>warn</code></td>
+  <td>The verbosity level for Proxy profile-related logging.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code>, or <code>debug</code>.</td>
+  </tr>
+  <tr>
+  <td>
+  
+  <Tabs groupId="yaml-env">
+  <TabItem value="yaml" label="YAML" default>
+  
+  ```yaml
+  profile:
+    sdks:
+      base_url: "<sdk-base-url>"
+  ```
+  
+  </TabItem>
+  <TabItem value="env-vars" label="Environment variable">
+  
+  ```shell
+  CONFIGCAT_PROFILE_SDKS_BASE_URL="<sdk-base-url>"
+  ```
+  
+  </TabItem>
+  </Tabs>
+  
+  </td>
+  <td>ConfigCat's CDN URL.</td>
+  <td>The CDN base URL (forward proxy, dedicated subscription) from where the ConfigCat SDKs should download the config JSON.</td>
+  </tr>
+  <tr>
+  <td>
+  
+  <Tabs groupId="yaml-env">
+  <TabItem value="yaml" label="YAML" default>
+  
+  ```yaml
+  profile:
+    sdks:
+      log:
+        level: "<error|warn|info|debug>"
+  ```
+  
+  </TabItem>
+  <TabItem value="env-vars" label="Environment variable">
+  
+  ```shell
+  CONFIGCAT_PROFILE_SDKS_LOG_LEVEL="<error|warn|info|debug>"
+  ```
+  
+  </TabItem>
+  </Tabs>
+  
+  </td>
+  <td><code>warn</code></td>
+  <td>The verbosity level for logging performed by the ConfigCat SDKs spawned for the connected Proxy profile.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code>, or <code>debug</code>.</td>
+  </tr>
+  </tbody>
+  </table>
+  <br/>
+
+  #### Profile caching
+  Proxy instances running in online mode are caching their connected profile if they have a [cache](#cache) configured.
+  This means that other Proxy instances running with [global offline mode](#global-offline-mode) enabled can use those cached profiles from
+  the same shared cache.
+
+  :::info
+  Offline Proxy instances only need the profile's `key` to read the connected profile from the cache, the `secret` option is not mandatory in this mode.
+  :::
+
+### 2. Manual configuration
+
+When using environment variables, the SDK keys can be specified as a JSON object, where the **property name is the SDK identifier** (the identifier of the config/environment pair whose SDK Key the underlying SDK instance is configured to use) and the **property value is the actual SDK key**.
+The **SDK identifier** part is later used in [endpoint routes](endpoints.mdx) to recognize which SDK must serve the given flag evaluation request.
+
+Furthermore, when configuring the Proxy **via environment variables**, the identifier becomes a **part of the SDK specific environment variable's name** in the following format: `CONFIGCAT_<SDK_ID>_<OPTION>`.
+
+For example, suppose we have the following setup: `CONFIGCAT_SDKS={"my_sdk":"<your-sdk-key>"}`.  
+In this case, the environment variable that sets the corresponding SDK instance's poll interval will be named as follows: `CONFIGCAT_MY_SDK_POLL_INTERVAL`.
 
 :::info
 The SDK identifier part of the environment variables is always transformed to uppercase and each hyphen (`-`) character is replaced with underscore (`_`).
@@ -333,7 +794,7 @@ sdks:
   my_sdk:
     key: "<your-sdk-key>"
     base_url: "<base-url>"
-    poll_interval: 30
+    poll_interval: 60
     data_governance: <"eu"|"global">
     webhook_signing_key: "<key>"
     webhook_signature_valid_for: 300
@@ -360,7 +821,7 @@ sdks:
 
 These are the SDK specific environment variables.
 ```shell
-CONFIGCAT_SDKS='{"my-sdk":"<your-sdk-key>","another-sdk":"<another-sdk-key>"}'
+CONFIGCAT_SDKS='{"my_sdk":"<your-sdk-key>","another-sdk":"<another-sdk-key>"}'
 CONFIGCAT_MY_SDK_BASE_URL="<base-url>"
 CONFIGCAT_MY_SDK_POLL_INTERVAL=30
 CONFIGCAT_MY_SDK_DATA_GOVERNANCE="<eu|global>"
@@ -385,7 +846,7 @@ CONFIGCAT_ANOTHER_SDK_POLL_INTERVAL=15
 
 Here's the explanation for each option:
 
-### SDK Identifier / SDK Key
+#### SDK Identifier / SDK Key mapping
 
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Description</th></tr></thead>
@@ -412,12 +873,12 @@ CONFIGCAT_SDKS={"my_sdk":"<your-sdk-key>"}
 </Tabs>
 
 </td>
-<td>The <strong>SDK identifier</strong> and the <strong>SDK key</strong>. The <strong>SDK identifier</strong> is used in <a href="/docs/advanced/proxy/endpoints">endpoint route variables</a> to recognize which SDK must serve the given flag evaluation request. The <a target="blank" href="https://app.configcat.com/sdkkey">SDK key</a> is crucial for the underlying SDK to operate.</td>
+<td>The <a href="#sdk-identifier--sdk-key">SDK identifier</a> and the associated <a target="blank" href="https://app.configcat.com/sdkkey">SDK key</a>.</td>
 </tr>
 </tbody>
 </table>
 
-### Additional SDK Options
+#### Additional options for underlying SDKs
 
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
@@ -444,8 +905,8 @@ CONFIGCAT_MY_SDK_BASE_URL="<base-url>"
 </Tabs>
 
 </td>
-<td>ConfigCat's CDN url.</td>
-<td>The CDN base url (forward proxy, dedicated subscription) from where the SDK will download the <code>config.json</code>.</td>
+<td>ConfigCat's CDN URL.</td>
+<td>The CDN base URL (forward proxy, dedicated subscription) from where the SDK should download the <code>config JSON</code>.</td>
 </tr>
 
 <tr>
@@ -456,21 +917,21 @@ CONFIGCAT_MY_SDK_BASE_URL="<base-url>"
 
 ```yaml
 my_sdk:
-  poll_interval: 30
+  poll_interval: 60
 ```
 
 </TabItem>
 <TabItem value="env-vars" label="Environment variable">
 
 ```shell
-CONFIGCAT_MY_SDK_POLL_INTERVAL=30
+CONFIGCAT_MY_SDK_POLL_INTERVAL=60
 ```
 
 </TabItem>
 </Tabs>
 
 </td>
-<td><code>30</code></td>
+<td><code>60</code></td>
 <td>The underlying SDK's polling interval in seconds.</td>
 </tr>
 
@@ -549,7 +1010,7 @@ CONFIGCAT_MY_SDK_WEBHOOK_SIGNATURE_VALID_FOR=300
 
 </td>
 <td><code>300</code></td>
-<td>The time period within the webhook requests are considered valid. <a href="/docs/advanced/proxy/endpoints#webhook">More about the webhook endpoint</a>.</td>
+<td>The time period (in seconds) within which webhook requests are considered valid. <a href="/docs/advanced/proxy/endpoints#webhook">More about the webhook endpoint</a>.</td>
 </tr>
 
 <tr>
@@ -603,18 +1064,19 @@ CONFIGCAT_MY_SDK_LOG_LEVEL="<error|warn|info|debug>"
 
 </td>
 <td><code>warn</code></td>
-<td>The verbosity of the SDK related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code>, or <code>debug</code>.</td>
+<td>The verbosity level for logging performed by the underlying SDK.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code>, or <code>debug</code>.</td>
 </tr>
 
 </tbody>
 </table>
 
-### Offline Mode
+#### Offline Mode
 
-The following options are specific to the SDK's offline mode. In offline mode, there are two ways the Proxy can get the required feature flag evaluation data for the underlying SDKs.
+The following options are specific to the SDK's offline mode. In offline mode, there are two ways the Proxy can provide the underlying SDKs with the data required for feature flag evaluation.
 
-- **Polling a cache**: The Proxy can poll a cache for feature flag changes. It can use the same cache that an **online** Proxy instance writes. <a href="#cache">More about the cache option</a>.
-- **Watching / polling a file**: The Proxy can watch or poll for modifications in a file that contains the evaluation data of feature flags. For watching, the Proxy uses the <a target="blank" href="https://github.com/fsnotify/fsnotify">fsnotify</a> library.
+- **Polling a cache**: The Proxy can poll a cache for feature flag changes. It can use a shared cache that an **online** Proxy instance writes to. <a href="#cache">More about the cache option</a>.
+- **Watching / polling a file**: The Proxy can watch or poll for modifications in a file that contains data for feature flag evaluation. For watching, the Proxy uses the <a target="blank" href="https://github.com/fsnotify/fsnotify">fsnotify</a> library.
+
 
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
@@ -643,7 +1105,7 @@ CONFIGCAT_MY_SDK_OFFLINE_ENABLED=<true|false>
 
 </td>
 <td><code>false</code></td>
-<td>Turns the SDK's offline mode on/off. In offline mode the SDK will not communicate with the ConfigCat CDN network. Instead, it uses the configured cache or a file as the source of its <code>config.json</code>.</td>
+<td>Turns the SDK's offline mode on/off. In offline mode, the SDK will not communicate with the ConfigCat CDN network. Instead, it uses the configured cache or a file as the source of its config JSON.</td>
 </tr>
 
 <tr>
@@ -670,7 +1132,7 @@ CONFIGCAT_MY_SDK_OFFLINE_USE_CACHE=<true|false>
 
 </td>
 <td><code>false</code></td>
-<td>Indicates whether the SDK should use the configured cache as the source of its <code>config.json</code>. <a href="#cache">More about the cache option</a>.</td>
+<td>Controls whether the SDK should use the configured cache as the source of its config JSON. <a href="#cache">More about the cache option</a>.</td>
 </tr>
 
 <tr>
@@ -725,7 +1187,7 @@ CONFIGCAT_MY_SDK_OFFLINE_LOG_LEVEL="<error|warn|info|debug>"
 
 </td>
 <td><code>warn</code></td>
-<td>The verbosity of the offline mode related logs.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code> or <code>debug</code>.</td>
+<td>The verbosity level for offline mode-related logging.<br />Possible values: <code>error</code>, <code>warn</code>, <code>info</code> or <code>debug</code>.</td>
 </tr>
 
 <tr>
@@ -753,7 +1215,7 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_FILE_PATH="./path/local.json"
 
 </td>
 <td>-</td>
-<td>Path to the local file that contains the appropriate <code>config.json</code>.</td>
+<td>Path to the local file that contains the config JSON to use for feature flag evaluation.</td>
 </tr>
 
 <tr>
@@ -781,7 +1243,7 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_POLLING=<true|false>
 
 </td>
 <td><code>false</code></td>
-<td>Indicates whether the Proxy should switch to local file polling instead of file system watching.</td>
+<td>Controls whether the Proxy should use polling instead of file system watching for monitoring the local file for changes.</td>
 </tr>
 
 <tr>
@@ -809,12 +1271,39 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_POLL_INTERVAL=5
 
 </td>
 <td><code>5</code></td>
-<td>The polling interval of the local file in seconds.</td>
+<td>The interval to use for polling the local file in seconds.</td>
 </tr>
 </tbody>
 </table>
 
-### Global Offline Mode
+## Default User Attributes
+
+There's an option to predefine [User Object](../../targeting/user-object.mdx) attributes with default values. Whenever the Proxy receives an evaluation request, it will automatically attach these predefined attributes to the request. If the evaluation request contains a different value for an attribute you previously defined, the request's value will take precedence.
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+default_user_attributes:
+  attribute_key1: "<attribute_value1>"
+  attribute_key2: "<attribute_value2>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+```shell
+CONFIGCAT_DEFAULT_USER_ATTRIBUTES='{"attribute_key1":"<attribute_value1>","attribute_key2":"<attribute_value2>"}'
+```
+
+</TabItem>
+</Tabs>
+
+:::info
+It's also possible to set default user attributes at the SDK level. See the [SDK options](#additional-options-for-underlying-sdks) section above for more details.
+:::
+
+## Global Offline Mode
 
 It is possible to turn on offline mode globally for a whole Proxy instance. When it's turned on, each underlying SDK switches to work from the configured [cache](#cache).
 
@@ -1940,3 +2429,31 @@ CONFIGCAT_TLS_CERTIFICATES='[{"key":"<path-to-key>","cert":"<path-to-cert>"}]'
 </tr>
 </tbody>
 </table>
+
+## Logging
+
+The Proxy supports the following log levels: `debug`, `info`, `warn`, and `error`. The default is `warn`.
+
+You can specify the log level either globally or for each individual component. If you don't set a component's log level explicitly, it will inherit the global level's value.
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+log:
+  level: "<error|warn|info|debug>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+```shell
+CONFIGCAT_LOG_LEVEL="<error|warn|info|debug>"
+```
+
+</TabItem>
+</Tabs>
+
+:::info
+When the main HTTP server's or gRPC server's log level is set to `debug`, each HTTP request or RPC the Proxy receives is logged with additional details. (duration, response status, etc.)
+:::

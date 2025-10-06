@@ -4,9 +4,112 @@ title: News & Product Updates
 description: Instead of spamming your mailbox, we're posting news and product updates here.
 ---
 
+import LazyVideo from '@site/src/components/LazyVideo';
+
 Here, you'll find all the latest updates, enhancements, and new features we've added to our service. Stay tuned to this page to keep up with all the latest news from ConfigCat!
 
 {/* This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html */}
+
+## ConfigCat MCP Server
+
+#### Spet 30, 2025
+
+We just released a new official ConfigCat's Model Context Protocol (MCP) Server.
+AI tools like Cursor can now interact with ConfigCat via our new MCP server.
+
+- **Complete set of tools for ConfigCat's Public Management API operations**
+    You can Create, Read, Update and Delete any entities like Feature Flags, Configs, Environments or
+    Products within ConfigCat.
+- **Enables your code editor to understand your feature flags**
+    Integrate the appropriate ConfigCat SDK, implement feature flags in your project, remove Zombie (stale)
+    flags and more.
+    
+<LazyVideo
+  autoPlay
+  muted
+  loop
+  controls
+  preload="metadata"
+  playsInline
+  style={{ width: '100%', maxWidth: 960, borderRadius: 8 }}
+  src="/docs/assets/mcp/mcp-demo.mp4"
+/>
+
+For more info about how to set up the MCP server, [see Documentation](../advanced/mcp-server/).
+            
+## Automatic ConfigCat Proxy configuration with Proxy profiles / OpenFeature Remote Evaluation Protocol
+
+#### Aug 22, 2025
+
+We have two exciting [ConfigCat Proxy](/docs/advanced/proxy/overview.mdx) related news:
+
+1. From the [v2.0.0](https://github.com/configcat/configcat-proxy/releases/tag/v2.0.0) version, 
+the Proxy has the ability to use [Proxy profiles](https://app.configcat.com/organization/proxy-profiles) to determine which SDK keys to download and distribute.
+   :::info
+   You need to be an Organization Admin to access the Proxy profiles page on the Dashboard.
+   :::
+   <img src="/docs/assets/news/proxy-profiles.png" alt="Proxy profiles page" width="1366" height="768" decoding="async" loading="lazy" />
+   [See the documentation](/docs/advanced/proxy/overview.mdx#1-automatic-configuration-with-proxy-profiles) for more information on how to set up your Proxy with profiles.
+
+2. From the [v2.0.0](https://github.com/configcat/configcat-proxy/releases/tag/v2.0.0) version, the Proxy conforms to the [OpenFeature Remote Evaluation Protocol](https://github.com/open-feature/protocol) (OFREP), which means it can be used with OFREP compatible OpenFeature providers.
+[See the API documentation](/docs/advanced/proxy/endpoints/#openfeature-remote-evaluation-protocol-ofrep) for the OFREP implementation with usage examples.
+
+## New SDK for JavaScript with Cloudflare Workers support
+
+#### Aug 15, 2025
+
+We just released the [new, revamped ConfigCat SDK for JavaScript platforms](https://configcat.com/docs/sdk-reference/js/overview/).
+Unlike the previous platform-specific SDKs, it ships as a [single, unified NPM package](https://www.npmjs.com/package/@configcat/sdk)
+that supports multiple JS environments.
+
+<p>
+  <img className="monochrome-image theme-aware" src="/docs/assets/news/unified-js-sdk_192dpi.png" alt="Unified NPM package" width="400" height="398" decoding="async" loading="lazy" />
+</p>
+
+The new SDK combines and, thus, supersedes these SDKs:
+* [ConfigCat SDK for JavaScript frontend applications](https://configcat.com/docs/sdk-reference/js/)
+* [ConfigCat SDK for JavaScript Server-Side Rendered applications](https://configcat.com/docs/sdk-reference/js-ssr/)
+* [ConfigCat SDK for Node.js](https://configcat.com/docs/sdk-reference/node/)
+* [ConfigCat SDK for Chromium Extensions](https://github.com/configcat/js-chromium-extension-sdk)
+
+The legacy SDKs remain available for use but won't receive new features and improvements any more. They will continue
+getting security updates until official support ends on August 31, 2026.
+
+The new SDK maintains strong backward compatibility, so in most cases migration is simple and straightforward.
+For details, see the "Migration to the new SDK" section in the SDK references linked above.
+
+But there are other advantages to upgrading to the new SDK sooner rather than later:
+
+* Most notably, it adds support for **Deno**, **Bun** and **Cloudflare Workers**. Plus, makes the Browser and 
+  Chromium Extension SDKs work in **Web Workers** too.
+* Another improvement worth mentioning is that the new SDK is a **zero-dependency library**, which can spare you
+  some package management-related headaches. It distributes **ES2017-compatible code** to allow you to minimize the
+  library's footprint in your application bundles.
+* A nice new feature is **query string-based flag overrides** (especially handy during development) and the possibility
+  of **custom flag override data sources** - even with full feature flags, not just simple values (useful for testing).
+* Then there is a **new hook** named `configFetched` for observing config fetch errors and **new options** named
+  `configFetcher` and `logFilter` for customizing config fetching and logging.
+* Error reporting received nice improvements as well: among others, the SDK now includes **error codes** to help identify
+  error causes.
+
+For the full list of new features and improvements, take a look at the [release notes](https://github.com/configcat/js-unified-sdk/releases/tag/v1.0.0).
+
+## New ConfigCat OpenFeature providers
+
+#### July 4, 2025
+
+We're happy to share that we have released new OpenFeature providers for the following platforms:
+
+- [Angular](./sdk-reference/openfeature/angular.mdx)
+- [React](./sdk-reference/openfeature/react.mdx)
+- [NestJS](./sdk-reference/openfeature/nestjs.mdx)
+- [Swift (iOS)](./sdk-reference/openfeature/swift.mdx)
+- [Kotlin (Android)](./sdk-reference/openfeature/kotlin.mdx)
+- [Ruby](./sdk-reference/openfeature/ruby.mdx)
+
+[See the documentation](./sdk-reference/openfeature/overview.mdx) for the complete list of currently supported platforms.
+
+---
 
 ## Quality of Life improvements
 
@@ -60,7 +163,6 @@ We've made it easier to copy flag values across environments. Now, you can:
 
 When creating a new feature flag, you no longer have to set values separately for each environment. 
 You can now set them once globally, then fine-tune as needed later.
-
 
 We truly hope you'll love these new features and improvements. Happy feature flagging! ❤️
 
@@ -232,7 +334,7 @@ You can disable two-factor authentication for your team members. This feature is
 
 ---
 
-## Introducing ConfigCat Playground:<br/>Test Feature Flags Easily in a safe environment
+## Introducing ConfigCat Playground: Test Feature Flags Easily in a safe environment
 
 #### Sept 26, 2024
 
@@ -294,7 +396,7 @@ From now on, you can manage your Integrations through the ConfigCat Public Manag
 
 We just released a new official ConfigCat SDK supporting Unreal Engine applications.
 
-<img src="/docs/assets/news/unreal.jpg" width="400" decoding="async" loading="lazy"/>
+<img src="/docs/assets/news/unreal.jpg" width="400" alt="ConfigCat SDK for Unreal Engine" decoding="async" loading="lazy"/>
 
 [See Documentation](./sdk-reference/unreal.mdx)
 
@@ -319,8 +421,8 @@ We just released a new official ConfigCat SDK supporting Rust applications.
 We're happy to share that we have added the ability to connect multiple <a href="https://app.configcat.com/integrations" target="_blank" rel="noopener noreferrer">integrations</a> of the same type.<br/>
 Moreover, it's now possible to apply environment/config filters on each individual integration.
 
-<img src="/docs/assets/news/multi_integ_1.png" width="440" height="500" decoding="async" loading="lazy"/>
-<img src="/docs/assets/news/multi_integ_2.png" width="380" height="500" decoding="async" loading="lazy"/>
+<img src="/docs/assets/news/multi_integ_1.png" alt="Multiple integrations menu" width="440" height="500" decoding="async" loading="lazy"/>
+<img src="/docs/assets/news/multi_integ_2.png" alt="Multiple integrations dialog" width="380" height="500" decoding="async" loading="lazy"/>
 
 
 ---
@@ -342,7 +444,7 @@ From now on you can [send feature flag change events and](./integrations/segment
 We're excited to launch our [Feature Flags Tutorial](https://tutorial.configcat.com/?lm=13), a comprehensive guide designed to enhance your skills in feature management. 
 This tutorial covers everything from basic toggling and simple targeting to advanced techniques like percentage rollouts and handling rollbacks.
 
-<img src="/docs/assets/news/tutorial.png" alt="Feature Flags Tutorial" decoding="async" loading="lazy"/>
+<img src="/docs/assets/news/tutorial_192dpi.png" alt="Feature Flags Tutorial" decoding="async" loading="lazy"/>
 
 ### Tutorial Highlights:
 - Begin with toggling a feature flag on and off to see its immediate impact on a user interface, simulating real-world user scenarios.

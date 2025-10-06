@@ -269,12 +269,12 @@ client.clear_default_user()
 
 ## Polling Modes
 
-The _ConfigCat SDK_ supports 3 different polling mechanisms to acquire the setting values from _ConfigCat_. After latest setting values are downloaded, they are stored in the internal cache, then all `get_value()` calls are served from there. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
+The _ConfigCat SDK_ supports 3 different polling strategies to fetch feature flags and settings from the ConfigCat CDN. Once the latest data is downloaded, it is stored in the cache, then calls to `get_value()` use the cached data to evaluate feature flags and settings. With the following polling modes, you can customize the SDK to best fit to your application's lifecycle.  
 [More about polling modes.](../advanced/caching.mdx)
 
 ### Auto polling (default)
 
-The _ConfigCat SDK_ downloads the latest values and stores them automatically every 60 seconds.
+The _ConfigCat SDK_ downloads the latest config data from the ConfigCat CDN automatically every 60 seconds and stores it in the cache.
 
 Use the `poll_interval_seconds` option parameter of the `PollingMode.auto_poll()` to change the polling interval.
 
@@ -299,7 +299,7 @@ Auto polling mode utilizes its polling job in a `threading.Thread` object. If yo
 
 ### Lazy loading
 
-When calling `get_value()`, the _ConfigCat SDK_ downloads the latest setting values if they are not present or expired in the cache. In this case `get_value()` will return the setting value after the cache is updated.
+When calling `get_value()`, the _ConfigCat SDK_ downloads the latest config data from the ConfigCat CDN only if it is not already present in the cache, or if the cache has expired. In this case `get_value()` will return the setting value after the cache is updated.
 
 Use `cache_refresh_interval_seconds` option parameter to set cache lifetime.
 
@@ -320,7 +320,7 @@ Available options:
 
 ### Manual polling
 
-Manual polling gives you full control over when the `config JSON` (with the setting values) is downloaded. _ConfigCat SDK_ will not update them automatically. Calling `force_refresh()` is your application's responsibility.
+Manual polling gives you full control over when the config data is downloaded from the ConfigCat CDN. The _ConfigCat SDK_ will not download it automatically. Calling `force_refresh()` is your application's responsibility.
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#',
@@ -346,18 +346,29 @@ value = client.get_value('key', 'my default value') # Returns "value from server
 
 ## Hooks
 
-With the following hooks you can subscribe to particular events fired by the SDK:
+The SDK provides several hooks (events), by means of which you can get notified of its actions.
+You can subscribe to the following events emitted by the _ConfigCat_ client:
 
-- `on_client_ready()`: This event is sent when the SDK reaches the ready state. If the SDK is set up with lazy load or manual polling it's considered ready right after instantiation.
-If it's using auto polling, the ready state is reached when the SDK has a valid config JSON loaded into memory either from cache or from HTTP. If the config couldn't be loaded neither from cache nor from HTTP the `on_client_ready` event fires when the auto polling's `max_init_wait_time_seconds` is reached.
+- `on_client_ready()`: This event is emitted when the client reaches the ready state, i.e. completes initialization.
+  * If Lazy Loading or Manual Polling is used, it's considered ready right after instantiation.
+  * If Auto Polling is used, the ready state is reached as soon as
+    * the initial sync with the external cache yields up-to-date config data,
+    * otherwise, if the client is online (i.e. HTTP requests are allowed), the first config fetch operation completes (regardless of success or failure),
+    * or the time specified via Auto Polling's `max_init_wait_time_seconds` option has passed.
 
-- `on_config_changed(config: dict)`: This event is sent when the SDK loads a valid config JSON into memory from cache, and each subsequent time when the loaded config JSON changes via HTTP.
+  Reaching the ready state usually means the client is ready to evaluate feature flags and settings.
+  However, please note that this is not guaranteed. In case of initialization failure or timeout, the internal cache
+  may be empty or expired even after the ready state is reported. Alternatively, in Auto Polling mode, you can wait for
+  the first `onConfigChanged` event to be notified when the internal cache is actually populated with config data.
+- `on_config_changed(config: dict)`: This event is emitted first when the client's internal cache gets populated.
+  Afterwards, it is emitted again each time the internally cached config is updated to a newer version, either as a result of synchronization
+  with the external cache, or as a result of fetching a newer version from the ConfigCat CDN.
+- `on_flag_evaluated(evaluation_details: EvaluationDetails)`: This event is emitted each time the client evaluates a feature flag or setting.
+  The event provides the same evaluation details that you would get from [`get_value_details()`](#anatomy-of-getvaluedetails).
+- `on_error(error: str)`: This event is emitted when an error occurs within the client.
 
-- `on_flag_evaluated(evaluation_details: EvaluationDetails)`: This event is sent each time when the SDK evaluates a feature flag or setting. The event sends the same evaluation details that you would get from [`get_value_details()`](#anatomy-of-getvaluedetails).
+You can subscribe to these events either on SDK initialization:
 
-- `on_error(error: str)`: This event is sent when an error occurs within the ConfigCat SDK.
-
-You can subscribe to these events either on SDK initialization: 
 ```python
 def on_flag_evaluated(evaluation_details):
     # handle the event
@@ -652,7 +663,7 @@ INFO:configcat:[5000] Evaluating 'isPOCFeatureEnabled' for User '{"Identifier":"
 
 ## `get_all_keys()`
 
-You can query the keys from your config JSON in the SDK with the `get_all_keys()` method.
+You can get the keys for all available feature flags and settings by calling the `get_all_keys()` method.
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#')

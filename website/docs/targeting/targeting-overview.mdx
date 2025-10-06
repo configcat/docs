@@ -93,13 +93,13 @@ Here is how we get the value of the feature flag in your application:
 
 ```js
 // Create the User Object
-const userObject = new configcat.User(
-  // Identifier - used by the Percentage Options to split the users into groups
-  '867428724',
-  // Email - used by the Targeting Rule's User Condition to determine whether
+const userObject = {
+  // Used by the Percentage Options to split the users into groups
+  identifier: '867428724',
+  // Used by the Targeting Rule's User Condition to determine whether
   // the user is an employee at Whisker Co.
-  'isaac@whisker.cc',
-);
+  email: 'isaac@whisker.cc',
+};
 
 // Get the value of the feature flag
 const value = await configCatClient.getValueAsync(

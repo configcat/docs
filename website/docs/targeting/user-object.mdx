@@ -37,15 +37,15 @@ The User Object offers the following properties to store user data:
 ### Code example
 
 ```js
-const userObject = new configcat.User(
-  '#UNIQUE-USER-IDENTIFIER#', // Identifier attribute (Required)
-  'john@example.com', // Email attribute (Optional)
-  'United Kingdom', // Country attribute (Optional)
-  { // Custom attributes (Optional)
-    SubscriptionType: 'Pro', 
+const userObject = {
+  identifier: '#UNIQUE-USER-IDENTIFIER#', // required
+  email: 'john@example.com',
+  country: 'United Kingdom',
+  custom: {
+    SubscriptionType: 'Pro',
     UserRole: 'Admin',
   },
-);
+};
 ```
 
 ### Identifier attribute
@@ -88,7 +88,10 @@ This allows us to define a Targeting Rule that turns on the feature for the cust
 Add the **SubscriptionType** custom attribute to the User Object in your application code.
 
 ```js
-const userObject = new configcat.User(userId, undefined, undefined, {
-  SubscriptionType: 'Pro',
-});
+const userObject = {
+  identifier: userId,
+  custom: {
+    SubscriptionType: 'Pro',
+  },
+};
 ```

@@ -4,7 +4,7 @@ COPY ./start.sh start.sh
 COPY ./nginx/nginx.conf.template /etc/nginx/conf.d/nginx.conf.template
 
 # If you update node version, please also update the node version in the .nvmrc file.
-FROM node:18 AS builder
+FROM node:22 AS builder
 COPY ./website/package.json /app/website/package.json
 COPY ./website/package-lock.json /app/website/package-lock.json
 WORKDIR /app/website
@@ -12,7 +12,7 @@ RUN npm install
 COPY ./website /app/website
 RUN npm run build
 
-FROM sonarsource/sonar-scanner-cli:4 AS sonarqube_scan
+FROM sonarsource/sonar-scanner-cli:11 AS sonarqube_scan
 WORKDIR /app
 ARG SONAR_TOKEN
 COPY --from=builder /app/website/build /app
