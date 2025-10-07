@@ -30,7 +30,7 @@
     },
     {
       "@type": "HowToStep",
-      "text": "Install ConfigCat SDK Nuget package",
+      "text": "Install ConfigCat SDK NuGet package",
       "name": "Installation",
       "url": "https://configcat.com/docs/sdk-reference/dotnet/#1-install-configcat-sdk-nuget-package",
       "image": "https://configcat.com/images/shared/home.png"
