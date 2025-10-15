@@ -384,6 +384,7 @@ const config: Config = {
       indexName: 'configcat',
       contextualSearch: true,
       searchPagePath: 'search',
+      placeholder: "Search the documentation",
       searchParameters: {},
       externalUrlRegex: 'configcat\\.com/blog',
     },
