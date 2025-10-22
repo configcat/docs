@@ -60,9 +60,10 @@ The MCP server's configuration includes the following environment variables:
 <Tabs>
   <TabItem value="cursor" label="Cursor" default>
 
-1. Open Preferences → Cursor Settings → MCP & Integrations
-2. Click **Add Custom MCP**
-3. Add (or merge) the snippet below into your JSON settings:
+1. Install [Cursor](https://cursor.com/)
+2. Open **Preferences** → **Cursor Settings** → **MCP & Integrations**
+3. Click **Add Custom MCP**
+4. Add (or merge) the snippet below into your JSON settings:
 
 ```json
 {
@@ -78,12 +79,14 @@ The MCP server's configuration includes the following environment variables:
   }
 }
 ```
-4. Save – the server will start on demand.
+5. **Save** – the server will start on demand.
+6. You can start writing prompts into Cursor's AI panel.
   
   </TabItem>
   <TabItem value="vscode" label="Visual Studio Code">
 
-1. Create a `.vscode/mcp.json` file in your project root with the following content:
+1. Install [VS Code](https://code.visualstudio.com/) and [GitHub Copilot](https://code.visualstudio.com/docs/copilot/setup)
+2. Create a `.vscode/mcp.json` file in your project root with the following content:
 
 ```json
 {
@@ -99,14 +102,16 @@ The MCP server's configuration includes the following environment variables:
   }
 }
 ```
-2. Save the settings file. The MCP server should now be available in VS Code.
+3. Save the settings file. The MCP server should now be available in VS Code.
+4. You can start writing prompts into VS Code's AI panel.
 
   </TabItem>
   <TabItem value="claude" label="Claude Desktop">
 
-1. Open **Settings** → **Developer**
-2. Click **Edit Config**
-3. In `claude_desktop_config.json` add:
+1. Install [Claude Desktop](https://claude.ai/download)
+2. Open **Settings** → **Developer**
+3. Click **Edit Config**
+4. In `claude_desktop_config.json` add:
 
 ```json
 {
@@ -122,13 +127,13 @@ The MCP server's configuration includes the following environment variables:
   }
 }
 ```
-4. Save & restart Claude Desktop.
+5. **Save** & restart Claude Desktop.
 
   </TabItem>
 </Tabs>
 
 :::info
-Replace `CONFIGCAT_API_USER` and `CONFIGCAT_API_PASS` environment variables with your [Public Management API basic auth credentials](https://app.configcat.com/my-account/public-api-credentials).
+Replace `YOUR_API_USER` and `YOUR_API_PASSWORD` environment variables with your [Public Management API basic auth credentials](https://app.configcat.com/my-account/public-api-credentials).
 :::
 
 ## Interaction
@@ -147,6 +152,26 @@ or
 or
 
 > Update the "my_awesome_feature” flag in dev environment so it’s only enabled for users in Canada
+
+or 
+
+> Create a new feature flag by cloning the configuration of the "my_awesome_feature" flag, and name it "my_another_awesome_feature".
+
+or
+
+> Update the "my_awesome_feature" flag description: "When enabled, show my awesome feature.”
+
+or
+
+> List the stale feature flags that haven’t been modified in the past 6 days.
+
+or 
+
+> Show who last modified the "myNewAwesomeFeature" flag, and to what.
+
+or
+
+> Invite <span>sarah</span>@<span>example.com</span> to the "Main" product with "Administrators" permissions.
 
 ## See Also
 
