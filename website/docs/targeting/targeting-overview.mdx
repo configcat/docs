@@ -6,9 +6,9 @@ description: Overview of the ConfigCat targeting feature with examples.
 
 Targeting allows you to enable or disable a feature for specific users or groups of users in your application. Typical use cases are:
 
-- Beta testing
-- A/B testing
-- Phased rollouts, canary releases
+- [Beta testing](../../glossary#beta-testing)
+- [A/B testing](../../glossary#ab-testing)
+- [Phased rollouts, canary releases](../../glossary#canary-release)
 
 ## How does it work?
 
@@ -19,7 +19,7 @@ Targeting allows you to enable or disable a feature for specific users or groups
 
 ## What is what?
 
-![Targeting Overview](/assets/targeting/targeting-overview/targeting.png)
+<img alt="Targeting Overview" src="/docs/assets/targeting/targeting-overview/what-is-what_192dpi.png" width="1467" height="649" decoding="async" loading="lazy" />
 
 ### Feature Flag / Setting
 
@@ -37,7 +37,8 @@ simplicity because feature flags are the most common type of settings.
 ### Targeting Rule
 
 A _Targeting Rule_ consists of a collection of conditions and a value to serve. If the conditions are met (the Targeting
-Rule _matches_), the value is served to the user. More about [Targeting Rules here](../targeting-rule/targeting-rule-overview).
+Rule _matches_), the value is served, i.e. returned as the result of the feature flag evaluation. More about
+Targeting Rules [here](../targeting-rule/targeting-rule-overview).
 
 ### Condition
 
@@ -47,9 +48,9 @@ A _condition_ is a logical expression that can be evaluated to true or false. Th
 
 ### Percentage Options
 
-_Percentage Options_ are used to split users into groups that will receive a specific value for the feature flag.
-The groups are allocated based on the ratio of the percentages. Percentage Options are often used for A/B testing or
-phased rollouts. More about [Percentage Options here](../percentage-options).
+_Percentage Options_ divide users into groups, each receiving a specific value.
+The groups are allocated according to the specified percentage split. Percentage Options are often used for A/B testing or
+phased rollouts. More about Percentage Options [here](../percentage-options).
 
 ### "To all users" / "To all other" / "To unidentified" value
 
@@ -64,29 +65,29 @@ value will be returned in case the SDK fails to fetch the config or some other e
 ### User Object
 
 A _User Object_ is a collection of _user attributes_ that describe the properties of a user. Referencing these attributes
-in conditions allows you to define rules for targeting users. More about the [User Object here](../user-object).
+in conditions allows you to define rules for targeting users. More about the User Object [here](../user-object).
 
 ## Examples
 
-### Phased rollout / Canary release / Percentage rollout Scenario
+### Phased rollout / Canary release / Percentage rollout scenario
 
 #### Context
 
-Our demo company, Whisker Co. is about to release a new feature called `Park Weather Info`. The stakeholders want to make
-sure that releasing the new feature will go smoothly and it will be received well by the customers.
+Our demo company, Whisker Co. is about to release a new feature called **Park Weather Info**. The stakeholders want to make
+sure that the release of the new feature goes smoothly and it is received well by the customers.
 
 #### Goal
 
 To make sure that the new feature is working as expected before releasing it to everyone, we initially want to make the
-feature available to the employees and to `20%` of the customers only.
+feature available to the employees and to 20% of the customers only.
 
 #### Solution
 
-Let's create a feature flag called `Enable Park Weather Info` with a Targeting Rule that matches the employees at
-Whisker Co. and Percentage Options set to `20%` `ON` and `80%` `OFF` for the rest of the users (i.e. for the customers).
+Let's create a feature flag called **Enable Park Weather Info** with a Targeting Rule that matches the employees at
+Whisker Co. and Percentage Options set to **20% ON** and **80% OFF** for the rest of the users (i.e. for the customers).
 
 Here is what such a feature flag looks like on the Dashboard:
-![Phased rollout Example](../../static/assets/targeting/targeting-overview/phased-rollout.png)
+<img alt="Phased rollout example" src="/docs/assets/targeting/targeting-overview/phased-rollout-example_192dpi.png" width="1084" height="553" decoding="async" loading="lazy" />
 
 Here is how we get the value of the feature flag in your application:
 
@@ -97,7 +98,7 @@ const userObject = {
   identifier: '867428724',
   // Used by the Targeting Rule's User Condition to determine whether
   // the user is an employee at Whisker Co.
-  email: 'isaac@whisker.example',
+  email: 'isaac@whisker.cc',
 };
 
 // Get the value of the feature flag
