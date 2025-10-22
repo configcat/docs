@@ -30,7 +30,7 @@ The User Object offers the following properties to store user data:
 | Attribute  | Description                                                                                                                                                              |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Identifier | **REQUIRED.** We recommend using a user ID, email address, or session ID.                                                                                                |
-| Email      | Optional. Setting this allows you to target users based on their email address. E.g.: "Turn on a feature for users with **@example.com** addresses only."                |
+| Email      | Optional. Set this if you want to target users based on their email address. E.g.: "Turn on a feature for users with **@example.com** addresses only."                |
 | Country    | Optional. Specify this for location or country-based targeting. E.g.: "Turn on a feature for users in Canada only."                                                      |
 | Custom     | Optional. A map/dictionary that lets you set custom user attributes to target users based on any user data. E.g.: age, subscription type, user role, device type, app version, etc. |
 
@@ -50,11 +50,11 @@ const userObject = {
 
 ### Identifier attribute
 
-The unique identifier of a user in your application. This is a **REQUIRED** attribute, which enables ConfigCat to differentiate your users from each other and to evaluate Targeting Rules and Percentage Options.
+The unique identifier of a user in your application. This is a **REQUIRED** attribute. ConfigCat uses this attribute to differentiate your users from each other. By default, it is used to evaluate [Percentage Options](../percentage-options).
 
 Our recommendation for an identifier:
 
-- User ID - If such an ID is available in your application, you can as well use it with ConfigCat.
+- User ID - You can simply use the user ID native to your application.
 - Email address - In most cases, using an email address works perfectly - as long as it is unique.
 - Session ID - This is useful for targeting users who are not logged in to your application.
 
@@ -74,7 +74,7 @@ The custom attribute's value can be of multiple types: e.g. string, number, date
 Our demo company, Whisker Co. developed a new feature called **Personalized Layout** to enhance the user experience of their most valuable customers.
 
 #### Goal
-We want to enable the **Personalized Layout** feature but only for customers with a **Pro** subscription.
+We want to enable the **Personalized Layout** feature but only for customers with the **Pro** subscription.
 
 #### Solution
 To achieve this goal, we need a custom attribute named e.g. **SubscriptionType**, which stores the subscription type of the customer.

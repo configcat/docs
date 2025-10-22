@@ -20,7 +20,7 @@ The Targeting Rules are in an **OR** relationship, meaning that the Targeting Ru
 
 ## How to add a Targeting Rule?
 
-You can add a Targeting Rule to a feature flag on the Dashboard by clicking on the **+IF** ("Add targeting rule") button, then more Targeting Rules by clicking on the **+OR** button at the bottom of the last Targeting Rule.
+You can add a Targeting Rule to a feature flag by clicking the **+IF** ("Add targeting rule") button on the Dashboard. To add more Targeting Rules, click the **+OR** button at the bottom of the last Targeting Rule.
 
 <img alt="Add targeting rule" src="/docs/assets/targeting/targeting-rule/add-targeting-rule_192dpi.png" width="700" height="525" decoding="async" loading="lazy" />
 
@@ -43,7 +43,7 @@ The conditions can be added to the Targeting Rule on the Dashboard, using the **
 
 ### THEN part
 
-The _THEN part_ contains either a value or Percentage Options that will be used to determine the result of the feature flag when the Targeting Rule matches.
+The _THEN part_ determines the result of the feature flag when the Targeting Rule matches. It can be either a simple value or Percentage Options.
 
 ## Multiple Targeting Rules and ordering
 The order of Targeting Rules matters because they are in an **OR** relationship, meaning that the Targeting Rule which matches first in order, from top to bottom, will provide the value of the feature flag.

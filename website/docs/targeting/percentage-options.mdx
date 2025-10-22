@@ -12,17 +12,19 @@ This way, you can gradually release a new feature to a subset of users. Instead 
 
 ## How to add Percentage Options?
 
-You can add Percentage Options to a feature flag on the Dashboard by clicking on the **+%** button.
+You can add Percentage Options to a feature flag by clicking the **+%** button on the Dashboard.
 
 <img alt="Add percentage options" src="/docs/assets/targeting/percentage-options/add-percentage-options_192dpi.png" width="700" height="525" decoding="async" loading="lazy" />
 
 ## How does it work? - Anatomy of Percentage Options
 
-Percentage Options are a list of _% value_ and _served value_ pairs, where % values add up to 100.
+Percentage Options is a list of _% value_ and _served value_ pairs, where % values add up to 100.
 
-According to the percentage split defined by the % values, it divides users into groups. The grouping is random and based on the [User Object's](../user-object) **Identifier** attribute by default. You can also use [other user attributes](#percentage-evaluation-attribute) as the basis of the grouping.
+It divides users into groups according to the percentage split defined by the % values. The grouping is random and based on the [Percentage Evaluation Attribute](#percentage-evaluation-attribute). By default, this is the [User Object's](../user-object) **Identifier** attribute. However, you can use any other user attribute as the basis of the grouping.
 
-If the attribute to use as the basis of the grouping is not present in the [User Object](../user-object), the ["To unidentified" value](../targeting-overview/#to-all-users--to-all-other--to-unidentified-value) will be returned. (Read more about the feature flag evaluation algorithm [here](../feature-flag-evaluation).)
+:::info
+If the Percentage Evaluation Attribute is not present in the [User Object](../user-object), the ["To unidentified" value](../targeting-overview/#to-all-users--to-all-other--to-unidentified-value) will be returned. (Read more about the feature flag evaluation algorithm [here](../feature-flag-evaluation).)
+:::
 
 Percentage Options are designed to be [sticky](#stickiness) and [consistent](#consistency) across all SDKs, ensuring a reliable experience.
 
@@ -36,7 +38,7 @@ The value to return when the user falls into the group determined by the % value
 
 ### Number of Percentage Options
 
-In the case of a feature flag (boolean setting), the number of options must be 2. One for the **ON** and one for the **OFF** state.
+In the case of a feature flag (boolean setting), there must be two options. One for the **ON** and one for the **OFF** state.
 
 In the case of a string, integer or double setting, the maximum number of options [depends on your subscription plan](../../subscription-plan-limits). You can add options by clicking the **+% OPTION** button.
 
@@ -44,22 +46,24 @@ In the case of a string, integer or double setting, the maximum number of option
 
 Percentage Options can be used in combination with Targeting Rules.
 
-In this case, the Percentage Options will be evaluated only when the Targeting Rule matches. In other words, the Percentage Options apply only to the users that matched the Targeting Rule.
+In this case, the Percentage Options will be evaluated only if the Targeting Rule matches. In other words, the Percentage Options apply only to the users that matched the Targeting Rule.
 
-If the attribute to use as the basis of the grouping is not present in the [User Object](../user-object), the targeting rule will be skipped - despite the matching Targeting Rule. Read more about the feature flag evaluation algorithm [here](../feature-flag-evaluation).
+:::info
+If the Percentage Evaluation Attribute is not present in the [User Object](../user-object), the targeting rule will be skipped - despite the matching Targeting Rule. Read more about the feature flag evaluation algorithm [here](../feature-flag-evaluation).
+:::
 
 <img alt="Percentage options within targeting rules" src="/docs/assets/targeting/percentage-options/percentage-options-within-targeting-rule_192dpi.png" width="1084" height="449" decoding="async" loading="lazy" />
 
 ## Percentage Evaluation Attribute
 
-The _Percentage Evaluation Attribute_ is the user attribute by which users are grouped. It is the [User Object's](../user-object) **Identifier** attribute by default. You can also use other user attributes as the basis of the grouping (see the example use case [below](#percentage-options-based-on-other-user-attributes)).
+The _Percentage Evaluation Attribute_ (sometimes called _percentage attribute_) is the user attribute by which users are grouped. By default, it is the [User Object's](../user-object) **Identifier** attribute. However, you can use any other user attribute as the basis of the grouping (see the example use case [below](#percentage-options-based-on-other-user-attributes)).
 
 ### How to change the Percentage Evaluation Attribute?
 
-Open the kebab menu in the top right corner of the feature flag and choose the **Change percentage attribute** item.
+In the top right corner of the feature flag, open the kebab (3 dots) menu and choose the **Change percentage attribute** item.
 
 :::info
-The selected Percentage Evaluation Attribute applies to all Percentage Options within the feature flag - but only in the current environment.
+The selected Percentage Evaluation Attribute applies to all Percentage Options within the feature flag - but only in the current ConfigCat environment.
 :::
 
 <img alt="Change percentage attribute" src="/docs/assets/targeting/percentage-options/change-percentage-attribute_192dpi.png" width="1084" height="569" decoding="async" loading="lazy" />
@@ -134,7 +138,7 @@ Let's create a feature flag called **Enable Park Weather Info** with a Targeting
 ### Platform-specific phased rollout
 
 #### Context
-Whisker Co. is about to release a new feature called **Cafe Notifications** in their mobile app, which has an Android and an iOS version. We know that the user base of the iOS app is much larger than the Android app. The stakeholders want to make sure that the new feature is received well by the customers.
+Whisker Co. is about to release a new feature called **Cafe Notifications** in their mobile app, which has an Android and an iOS version. We know that the userbase of the iOS app is much larger than the Android app. The stakeholders want to make sure that the new feature is received well by the customers.
 
 #### Goal
 To get some feedback from our customers before releasing it to everyone, we initially want to make the feature available to a limited number of customers only. We also want to release the feature to roughly the same number of Android and iOS users.

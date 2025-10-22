@@ -17,7 +17,7 @@ The feature flag's value is determined by:
 The feature flag's value always comes from exactly one rule, following this algorithm:
 
 1. **Evaluation of Targeting Rules:** If Targeting Rules are present, the SDK evaluates them one by one, from top to bottom. It checks if all the conditions in the rule's IF part are met (i.e. all the conditions evaluate to true).
-   - If the conditions are met, the THEN part determines the value to return. However, if the THEN part contains Percentage Options but the [Percentage Evaluation Attribute](../percentage-options#percentage-evaluation-attribute) is missing from the User Object, the SDK will skip the Targeting Rule and continue with the next rule - even though the Targeting Rule's conditions are met!
+   - If the conditions are met, the THEN part determines the value to return. However, if the THEN part contains Percentage Options but the [Percentage Evaluation Attribute](../percentage-options#percentage-evaluation-attribute) is missing from the User Object, the SDK will skip the Targeting Rule and continue with the next rule - even though the Targeting Rule's conditions are met.
    - If the conditions aren't met, the SDK moves to the next Targeting Rule, or to step 2 (below) if there are no more Targeting Rules.
 2. **Evaluation of Percentage Options:** If a Percentage Options rule exists, the SDK executes the [Evaluation of Percentage Options](#evaluation-of-percentage-options) algorithm to determine which Percentage Option applies to the user and returns the value associated with that option. If the [Percentage Evaluation Attribute](../percentage-options#percentage-evaluation-attribute) is missing from the User Object, the SDK skips to step 3 (below).
 3. **Returning simple value:** At this stage, the only remaining "rule" is the simple value specified at the end of the feature flag, which the SDK then returns.
@@ -46,7 +46,9 @@ In case the prerequisite flag is missing or there is a type mismatch between the
 
 ### Evaluation of a Segment Condition
 
-The SDK looks up the segment referenced by the condition and evaluates the condition described by the segment similarly to [User Conditions](../targeting-rule/user-condition). Then, the result is checked against the comparator. In the case of **IS IN SEGMENT**, the result of the Segment Condition will be the same as the result of the segment. In the case of **IS NOT IN SEGMENT**, the result will be negated.
+The SDK looks up the segment referenced by the condition. Then evaluates the condition described by the segment similarly to [User Conditions](../targeting-rule/user-condition). Finally, the result is checked against the comparator:
+- For **IS IN SEGMENT**, the result of the Segment Condition will be the same as the result of the segment itself.
+- For **IS NOT IN SEGMENT**, the result will be negated (i.e. it will be the opposite of the result of the segment).
 
 If the segment evaluates to `cannot evaluate`, so does the Segment Condition.
 
@@ -57,13 +59,11 @@ The evaluation process stops if the referenced segment is missing, and the SDK w
 [Percentage Options](../percentage-options) are designed to be _consistent_ and _sticky_ across all SDKs, which means that users with the same attributes fall in the same group and get the same feature flag value across the supported platforms as long as the percentage split is the same.
 
 The SDK looks up the [Percentage Evaluation Attribute](../percentage-options#percentage-evaluation-attribute) in the [User Object](../user-object), then:
-- The SDK creates a hash from the combination of the specific feature flag's key and the Percentage Evaluation Attribute's value.
+- The SDK creates a hash from the combination of the specific feature flag's key and the Percentage Evaluation Attribute's value (by default, it is the user identifier).
 - The hashing algorithm assigns the user a number between 0 and 99.
 - The assigned number determines which group the user falls into, i.e. which Percentage Option applies to the user.
 
-The fact that the above algorithm is implemented across all SDKs guarantees [stickiness](../percentage-options#stickiness) and [consistency](../percentage-options#consistency).
-
-By hashing the combination of the feature flag's key and the user attribute, we ensure diverse user groups for different feature flags. In other words, the algorithm prevents the same users from being assigned to the same Percentage Options for different feature flags.
+The fact that the above algorithm is implemented across all SDKs guarantees [stickiness](../percentage-options#stickiness), [consistency](../percentage-options#consistency) and [randomness](../percentage-options#randomness).
 
 :::info
 The evaluation process is entirely implemented within the SDKs, meaning your users' sensitive data never leaves your system. The data flow is one-way – from ConfigCat CDN servers to your SDKs – and ConfigCat does not receive or store any attributes of the [User Object](../user-object) passed to the SDKs. This design prioritizes the privacy and security of user data.
@@ -71,7 +71,13 @@ The evaluation process is entirely implemented within the SDKs, meaning your use
 
 ### Example scenarios for Percentage Options
 
-Imagine you have two users, Jane and Joe, and you're experimenting with two different feature flags (**isTwitterSharingEnabled** and **isFacebookSharingEnabled**) that use percentage-based targeting. In these scenarios, we see how Percentage Options allow for a controlled and gradual rollout of features, ensuring a smooth transition for users like Jane and Joe.
+The following scenarios show how Percentage Options enable controlled and gradual rollouts of features.
+
+Let's imagine the following setup:
+- you have two users: Jane and Joe,
+- you have two features flags: **isTwitterSharingEnabled** and **isFacebookSharingEnabled**,
+- the feature flags use percentage-based targeting,
+- the Percentage Evaluation Attribute is the user identifier (which is simply the users' name in this example).
 
 First, the users are assigned a number between 0 and 99 based on the hash of the feature flag's key and their identifier. According to the Percentage Options specified on the Dashboard, this number determines which group they are assigned to, i.e. whether or not the feature is enabled for them.
 
@@ -98,7 +104,9 @@ In this case both feature flags are enabled for only 10% of users.
 | Joe  | 32 >= 10 <br/>→ **OFF**                       | 12 >= 10 <br/>→ **OFF**                        |
 
 :::info
-Despite both feature flags being set to 10% ON / 90% OFF, the **isTwitterSharingEnabled** feature flag is only enabled for Jane, while **isFacebookSharingEnabled** is disabled for both of them. This happens because the feature flag key is also involved in computing the hash.
+The **isTwitterSharingEnabled** feature flag is enabled only for Jane because Joe's user identifier places him in a different group.
+
+However, **isFacebookSharingEnabled** is disabled for both of them even though both feature flags are set to 10% ON / 90% OFF. This happens because the feature flag key is also involved in computing the hash.
 :::
 
 3\. **Increasing _isTwitterSharingEnabled_ to 40% ON / 60% OFF**
@@ -112,7 +120,7 @@ Despite both feature flags being set to 10% ON / 90% OFF, the **isTwitterSharing
 
 Same setup as in Step 2.
 
-There are cases when you want to roll back a feature flag to a safer state. In this case, you can change the Percentage Options to 10% ON / 90% OFF again. The sticky nature of percentage-based targeting ensures that the same user base is served **ON** as in Step 2, not another random 10% of users.
+There are cases when you want to roll back a feature flag to a safer state. In this case, you can change the Percentage Options to 10% ON / 90% OFF again. The sticky nature of percentage-based targeting ensures that the same userbase is served **ON** as in Step 2, not another random 10% of users.
 
 |      | isTwitterSharingEnabled <br/> 10% ON / 90% OFF | isFacebookSharingEnabled <br/> 10% ON / 90% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |
@@ -121,7 +129,7 @@ There are cases when you want to roll back a feature flag to a safer state. In t
 
 5\. **Final Step: Moving to 100% ON / 0% OFF**
 
-After testing the feature flags, you can safely move them to 100% ON. This will enable the features for all users.
+After testing the feature flags, you can safely move them to 100% ON. This enables the features for all users.
 
 |      | isTwitterSharingEnabled <br/> 100% ON / 0% OFF | isFacebookSharingEnabled <br/> 100% ON / 0% OFF |
 | ---- | ---------------------------------------------- | ----------------------------------------------- |

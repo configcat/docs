@@ -16,13 +16,15 @@ One segment belongs to one product and can be used in multiple feature flags wit
 
 ## How does the Segment Condition work?
 
-The segment is evaluated with the [User Object](../../user-object), and the result is checked against the comparator you set on the Dashboard. In the case of **IS IN SEGMENT**, the result of the Segment Condition will be the same as that of the segment. In the case of **IS NOT IN SEGMENT**, the result will be negated.
+The segment is evaluated with the [User Object](../../user-object). Then the result is checked against the comparator you set on the Dashboard:
+- For **IS IN SEGMENT**, the result of the Segment Condition will be the same as the result of the segment itself.
+- For **IS NOT IN SEGMENT**, the result will be negated (i.e. it will be the opposite of the result of the segment).
 
-For more details on the evaluation of Segment Conditions, please refer to [Feature Flag Evaluation](../../feature-flag-evaluation).
+For more details on the evaluation of Segment Conditions, please refer to [Feature Flag Evaluation](../../feature-flag-evaluation#evaluation-of-a-segment-condition).
 
 ## How to set a Segment Condition?
 
-You can add a Segment Condition to a feature flag on the Dashboard by clicking on the **+IF** ("Add targeting rule") button.
+You can add a Segment Condition to a feature flag by clicking the **+IF** ("Add targeting rule") button on the Dashboard.
 
 <img alt="Target a segment" src="/docs/assets/targeting/targeting-rule/segment-condition/target-segment_192dpi.png" width="700" height="525" decoding="async" loading="lazy" />
 

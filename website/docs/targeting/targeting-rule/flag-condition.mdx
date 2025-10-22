@@ -16,13 +16,13 @@ The prerequisite flag is evaluated with the same User Object as the one used to 
 
 The prerequisite flag can be other than a feature flag (boolean setting), in which case the prerequisite flag's evaluated value will be compared to the comparison value that you set on the Dashboard. The comparison is done according to the selected comparator and will result in true or false. This will be the result of the condition.
 
-For more details on the evaluation of Flag Conditions, please refer to [Feature Flag Evaluation](../../feature-flag-evaluation).
+For more details on the evaluation of Flag Conditions, please refer to [Feature Flag Evaluation](../../feature-flag-evaluation#evaluation-of-a-flag-condition).
 
 ## How to set a Flag Condition?
 
-You can add a Flag Condition to a feature flag on the Dashboard by clicking on the **+IF** ("Add targeting rule") button.
+You can add a Flag Condition to a feature flag by clicking the **+IF** ("Add targeting rule") button on the Dashboard.
 
-The prerequisite flag can be any feature flag already defined in the same config on the Dashboard. In the case of settings other than feature flags (boolean settings), you can also set a comparison value to which the prerequisite flag's value will be compared.
+The prerequisite flag can be any feature flag already defined in the same config on the Dashboard. In the case of a non-boolean setting (e.g. text setting or number setting), you can also set a comparison value which the prerequisite flag's value will be compared to.
 
 <img alt="Add prerequisite" src="/docs/assets/targeting/targeting-rule/flag-condition/add-prerequisite_192dpi.png" width="700" height="525" decoding="async" loading="lazy" />
 
@@ -38,7 +38,7 @@ A Flag Condition consists of the following:
 
 - **_Prerequisite flag key_:** The key of the feature flag or setting on which the condition is based.
 - **_Comparator_:** The comparison operator that defines the relation between the prerequisite flag's value and the comparison value. See the available comparators below.
-- **_Comparison value_:** The preset value to which the prerequisite flag's value is compared. Available only when the prerequisite flag is a string, integer or double setting. The value that the prerequisite flag's value is compared to.
+- **_Comparison value_:** The value that the prerequisite flag's value is compared to. Available only when the prerequisite flag is a string, integer or double setting. 
 
 ### Comparator
 
