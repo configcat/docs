@@ -195,12 +195,14 @@ const config: Config = {
           ],
         },
       }
-    ]
+    ],
     // ['./src/plugins/smartlook',
     //   {
     //     smartlookKey: '05d0e4ca90c61150955104a9d4b76ab16a0b2380',
     //   }
     // ],
+    // Documentation: https://github.com/portdeveloper/docusaurus-plugin-copy-page-button
+    "docusaurus-plugin-copy-page-button",
   ],
   themeConfig: {
     image: '/img/docs-cover.png',
