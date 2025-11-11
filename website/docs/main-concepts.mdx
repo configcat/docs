@@ -16,6 +16,7 @@ A _Feature Flag_ is a _Setting_ of type Bool.
 | ---------- | ---------------------------------------------------------------------------------------------------------------------- |
 | Name       | A human readable name that differentiates the _Setting_ on the _ConfigCat Dashboard_. e.g., `My Cool Feature enabled`. |
 | Key        | A variable name within your code. e.g., `isCoolFeatureEnabled`.                                                        |
+| Hint       | A hint to help you remember the purpose of your _Setting_.                                                             |
 | Type       | Type of information you'd like to keep in the _Setting_. e.g., On/Off Toggle, Text, Number                             |
 | Value      | The actual value of your _Setting_. e.g., `true`, `false`. Can be different in each environment.                       |
 
@@ -24,9 +25,32 @@ A _Feature Flag_ is a _Setting_ of type Bool.
 | Setting Kind   | Setting Type | Description                                                                       |
 | -------------- | ------------ | --------------------------------------------------------------------------------- |
 | On/Off Toggle  | Boolean      | true/false, usually referenced as Feature Flag, Feature Toggle or Feature switch. |
-| Text           | String       | Any string, max. 100000 characters, can't be empty.                                |
-| Whole Number   | Integer      | Any whole number within the range of `Int32`.                                      |
-| Decimal Number | Double       | Any decimal number within the range of `double`.                                   |
+| Text           | String       | Any string, max. 100000 characters, can't be empty.                               |
+| Whole Number   | Integer      | Any whole number within the range of `Int32`.                                     |
+| Decimal Number | Double       | Any decimal number within the range of `double`.                                  |
+
+### Free-form values vs predefined variations
+
+A _Feature flag_ or _Setting_ can be defined to use free-form values or _predefined variations_.
+
+Free-form values allows you to set any value of the _Setting_ type in each environment without any restrictions.  
+It is especially useful if you don't know which values you want to set for a _Feature flag or Setting_ in the future.
+
+_Predefined variations_ allows you to define the _Feature flag_ or _Setting_'s possible values in advance. 
+The possible values can be edited later, but you cannot set the _Feature flag_ or _Setting_'s value to a custom value, you can only choose from the predefined variations.  
+It is useful if you want to restrict the _Feature flag_ or _Setting_'s value to a set of predefined values and don't want to allow any other values to be set. e.g. A/B/n testing scenarios.
+
+:::info
+You can easily convert a _Feature flag_ or _Setting_ from using free-form values to using _predefined variations_ and vica versa.
+:::
+
+#### Anatomy of a _predefined variation_
+
+| Property | Description                                                                                                                                                                                       |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Value        | Required. The actual value of your _Setting_. e.g., `true`, `false`.                                                                                                                          |
+| Display name | Optional. The display name will be visible while selecting the _predefined variation_ for the _Feature flag_ or _Setting_. If not set, the feature flag's value will act as the display name. |
+| Hint         | Optional. A hint to help you remember the purpose of the _predefined variation_. It will be visible as a tooltip.                                                                             |
 
 ## Config
 
