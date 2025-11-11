@@ -23,7 +23,6 @@
     "@signalwire/docusaurus-plugin-llms-txt": "^1.2.2",
     "@svgr/webpack": "^8.1.0",
     "clsx": "^2.1.1",
-    "docusaurus-plugin-copy-page-button": "^0.3.5",
     "docusaurus-plugin-openapi-docs": "4.5.1",
     "docusaurus-plugin-sass": "^0.2.6",
     "docusaurus-theme-openapi-docs": "4.5.1",
