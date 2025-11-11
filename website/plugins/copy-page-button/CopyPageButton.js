@@ -95,13 +95,13 @@ export default function CopyPageButton({
   useEffect(() => {
     if (isOpen && buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
-      const isMobile = window.innerWidth <= 996; // adjust breakpoint if needed
+      const isMobile = window.innerWidth <= 767; // Mobile break-point
 
       setDropdownPosition({
         top: rect.bottom + 8, // dropdown below the button
         left: isMobile
           ? rect.left // mobile: left-aligned with button
-          : rect.right - 300, // desktop: original right-aligned
+          : rect.right - 300, // desktop: right-aligned with button
       });
     }
   }, [isOpen]);
