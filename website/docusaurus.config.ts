@@ -154,7 +154,9 @@ const config: Config = {
             '/docs/search/', // Exclude the /search route from llms.txt
           ],
           routeRules: [
-            { route: '/docs', categoryName: 'HomePage', 
+            {
+              route: '/docs',
+              categoryName: 'HomePage',
               includeOrder: [
                 '/docs/getting-started',
                 '/docs/main-concepts',
@@ -173,8 +175,8 @@ const config: Config = {
                 '/docs/sdk-reference',
                 '/docs/integrations',
                 '/docs/api',
-              ]
-             },
+              ],
+            },
             { route: '/docs/api', categoryName: 'Public Management API' },
             { route: '/docs/advanced', categoryName: 'Advanced Guides' },
             { route: '/docs/faq', categoryName: 'FAQ' },
@@ -184,23 +186,45 @@ const config: Config = {
             { route: '/docs/main-concepts', categoryName: 'Main Concepts' },
             { route: '/docs/network-traffic', categoryName: 'Network Traffic' },
             { route: '/docs/news', categoryName: 'News & Product Updates' },
-            { route: '/docs/organization', categoryName: 'Organization & Roles' },
-            { route: '/docs/purchase', categoryName: 'Plans, Purchase & Billing' },
-            { route: '/docs/requests', categoryName: 'What is a JSON download?' },
+            {
+              route: '/docs/organization',
+              categoryName: 'Organization & Roles',
+            },
+            {
+              route: '/docs/purchase',
+              categoryName: 'Plans, Purchase & Billing',
+            },
+            {
+              route: '/docs/requests',
+              categoryName: 'What is a JSON download?',
+            },
             { route: '/docs/sdk-reference', categoryName: 'SDK Reference' },
-            { route: '/docs/service', categoryName: 'Service Status & Monitoring' },
-            { route: '/docs/subscription-plan-limits', categoryName: 'Subscription Plan Limits' },
+            {
+              route: '/docs/service',
+              categoryName: 'Service Status & Monitoring',
+            },
+            {
+              route: '/docs/subscription-plan-limits',
+              categoryName: 'Subscription Plan Limits',
+            },
             { route: '/docs/targeting', categoryName: 'Targeting' },
             { route: '/docs/zombie-flags', categoryName: 'Zombie Flags' },
           ],
         },
-      }
-    ]
+      },
+    ],
     // ['./src/plugins/smartlook',
     //   {
     //     smartlookKey: '05d0e4ca90c61150955104a9d4b76ab16a0b2380',
     //   }
     // ],
+    // Documentation: https://github.com/portdeveloper/docusaurus-plugin-copy-page-button
+    [
+      require.resolve('./plugins/copy-page-button'),
+      {
+        customStyles: {},
+      },
+    ],
   ],
   themeConfig: {
     image: '/img/docs-cover.png',
