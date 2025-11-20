@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import styles from './styles.module.css';
 
 // Static selectors for content cleanup
@@ -16,47 +17,7 @@ const SELECTORS_TO_REMOVE = [
   '.line-number',
 ];
 
-// Utility function to merge custom styles with default classes
-const mergeStyles = (defaultClassName, customStyleConfig = {}) => {
-  const { className: customClassName, style: customStyle } = customStyleConfig;
-
-  const finalClassName = customClassName
-    ? `${defaultClassName} ${customClassName}`
-    : defaultClassName;
-
-  return {
-    className: finalClassName,
-    style: customStyle || {},
-  };
-};
-
-// Utility function to separate positioning styles from other styles
-const separatePositioningStyles = (styleObject = {}) => {
-  const positioningProps = [
-    'position',
-    'top',
-    'right',
-    'bottom',
-    'left',
-    'zIndex',
-    'transform',
-  ];
-  const positioning = {};
-  const nonPositioning = {};
-
-  Object.entries(styleObject).forEach(([key, value]) => {
-    if (positioningProps.includes(key)) {
-      positioning[key] = value;
-    } else {
-      nonPositioning[key] = value;
-    }
-  });
-
-  return { positioning, nonPositioning };
-};
-
 export default function CopyPageButton({
-  customStyles = {},
   enabledActions = ['copy', 'view', 'chatgpt', 'claude'],
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,12 +25,7 @@ export default function CopyPageButton({
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
-
-  // Extract custom style configurations
-  const containerStyleConfig = customStyles.container || {};
-  const buttonStyleConfig = customStyles.button || {};
-  const dropdownStyleConfig = customStyles.dropdown || {};
-  const dropdownItemStyleConfig = customStyles.dropdownItem || {};
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -113,6 +69,11 @@ export default function CopyPageButton({
     if (content) {
       setPageContent(content);
     }
+  }, []);
+
+  useEffect(() => {
+    // mark mounted to avoid createPortal on the server (document may be undefined)
+    setMounted(true);
   }, []);
 
   const convertToMarkdown = (element) => {
@@ -559,47 +520,11 @@ Please provide a clear summary and help me understand the key concepts covered i
     enabledActions.includes(item.id),
   );
 
-  // Handle positioning styles - if button config has positioning, move it to container
-  const {
-    positioning: buttonPositioning,
-    nonPositioning: buttonNonPositioning,
-  } = separatePositioningStyles(buttonStyleConfig.style);
-
-  // Create final style configs
-  const finalContainerConfig = {
-    ...containerStyleConfig,
-    style: {
-      ...containerStyleConfig.style,
-      ...buttonPositioning, // Apply button positioning to container
-    },
-  };
-
-  const finalButtonConfig = {
-    ...buttonStyleConfig,
-    style: buttonNonPositioning, // Apply only non-positioning styles to button
-  };
-
-  // Merge custom styles with default styles
-  const containerProps = mergeStyles(
-    styles.copyPageContainer,
-    finalContainerConfig,
-  );
-  const buttonProps = mergeStyles(styles.copyPageButton, finalButtonConfig);
-  const dropdownProps = mergeStyles(
-    styles.copyPageDropdown,
-    dropdownStyleConfig,
-  );
-  const dropdownItemProps = mergeStyles(
-    styles.dropdownItem,
-    dropdownItemStyleConfig,
-  );
-
   return (
     <>
-      <div className={containerProps.className} style={containerProps.style}>
+      <div className={styles.copyPageContainer}>
         <button
-          className={buttonProps.className}
-          style={buttonProps.style}
+          className={styles.copyPageButton}
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-haspopup="true"
@@ -633,37 +558,43 @@ Please provide a clear summary and help me understand the key concepts covered i
         </button>
       </div>
 
-      {isOpen && (
-        <div
-          className={dropdownProps.className}
-          style={{
-            position: 'fixed',
-            top: `${dropdownPosition.top}px`,
-            left: `${dropdownPosition.left}px`,
-            zIndex: 10000,
-            ...dropdownProps.style,
-          }}
-          ref={dropdownRef}
-        >
-          {dropdownItems.map((item) => (
-            <button
-              key={item.id}
-              className={dropdownItemProps.className}
-              style={dropdownItemProps.style}
-              onClick={() => {
-                item.action();
-                setIsOpen(false);
-              }}
-            >
-              {item.icon}
-              <div>
-                <div className={styles.itemTitle}>{item.title}</div>
-                <div className={styles.itemDescription}>{item.description}</div>
-              </div>
-            </button>
-          ))}
-        </div>
-      )}
+      {mounted && isOpen &&
+        createPortal(
+          <div
+            className={styles.copyPageDropdown}
+            style={{
+              position: 'fixed',
+              top: `${dropdownPosition.top}px`,
+              left: `${dropdownPosition.left}px`,
+              zIndex: 10000,
+            }}
+            ref={dropdownRef}
+            role="menu"
+            aria-label="Copy page actions"
+          >
+            {dropdownItems.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                role="menuitem"
+                className={styles.dropdownItem}
+                onClick={() => {
+                  item.action();
+                  setIsOpen(false);
+                }}
+              >
+                {item.icon}
+                <div>
+                  <div className={styles.itemTitle}>{item.title}</div>
+                  <div className={styles.itemDescription}>{item.description}</div>
+                </div>
+              </button>
+            ))}
+          </div>,
+          // Ensure body exists
+          (typeof document !== 'undefined' && document.body) ? document.body : null
+        )}
+
     </>
   );
 }
