@@ -18,7 +18,7 @@
   margin-bottom: 30px;
 }
 
-.theme-doc-sidebar-menu ul.menu__list {
+.theme-doc-sidebar-menu > li > ul.menu__list {
   margin-bottom: 16px;
   padding-left: 0;
   border-left: 1px solid var(--ifm-toc-border-color);
@@ -31,19 +31,37 @@
 
   .menu__link {
     padding-left: 16px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
   }
 
   .menu__link--active {
-    border-left: 3px solid var(--ifm-color-primary);
-    margin-left: -2px;
-    padding-left: 15px;
+    position: relative;
   }
-}
 
-.menu__list-item:not(:first-child) {
-  margin-top: unset;
+  .menu__link--active:not(.menu__link--sublist):after,
+  .menu__list-item-collapsible--active:after {
+    background: var(--ifm-color-primary);
+    width: 3px;
+    position: absolute;
+    bottom: 0;
+    left: -2px;
+    top: 0;
+    content: '';
+  }
+
+  ul .menu__link--active:not(.menu__link--sublist):after,
+  ul .menu__list-item-collapsible--active:after {
+    left: -14px;
+  }
+
+  ul ul .menu__link--active:not(.menu__link--sublist):after,
+  ul ul .menu__list-item-collapsible--active:after {
+    left: -26px;
+  }
+
+  ul ul ul .menu__link--active:not(.menu__link--sublist):after,
+  ul ul ul .menu__list-item-collapsible--active:after {
+    left: -38px;
+  }
 }
 
 .menu__caret:before,
@@ -63,7 +81,7 @@ a.menu__link--sublist-caret:after {
   position: relative;
 }
 
-.icon::before {
+.icon:before {
   content: '';
   position: absolute;
   top: 0.5em;
@@ -75,39 +93,39 @@ a.menu__link--sublist-caret:after {
   background-color: var(--ifm-menu-color);
 }
 
-.basics-icon::before {
+.basics-icon:before {
   @include mask-base();
   mask-image: url('/static/assets/category-icons/basics.svg');
 }
 
-.guides-icon::before {
+.guides-icon:before {
   @include mask-base();
   mask-image: url('/static/assets/category-icons/guides.svg');
 }
 
-.integrations-icon::before {
+.integrations-icon:before {
   @include mask-base();
   width: 16px;
   height: 16px;
   mask-image: url('/static/assets/category-icons/integrations.svg');
 }
 
-.status-icon::before {
+.status-icon:before {
   @include mask-base();
   mask-image: url('/static/assets/category-icons/status.svg');
 }
 
-.news-icon::before {
+.news-icon:before {
   @include mask-base();
   mask-image: url('/static/assets/category-icons/news.svg');
 }
 
-.faq-icon::before {
+.faq-icon:before {
   @include mask-base();
   mask-image: url('/static/assets/category-icons/faq.svg');
 }
 
-.sdk-icon::before {
+.sdk-icon:before {
   @include mask-base();
   mask-image: url('/static/assets/category-icons/sdk.svg');
 }
@@ -117,24 +135,24 @@ a.menu__link--sublist-caret:after {
   mask-image: url('/static/assets/category-icons/of.svg');
 }
 
-.community-icon::before {
+.community-icon:before {
   @include mask-base();
   mask-image: url('/static/assets/category-icons/community.svg');
 }
 
-.legacy-icon::before {
+.legacy-icon:before {
   @include mask-base();
   mask-image: url('/static/assets/category-icons/legacy.svg');
 }
 
-.api-icon::before {
+.api-icon:before {
   @include mask-base();
   width: 18px;
   height: 18px;
   mask-image: url('/static/assets/category-icons/api.svg');
 }
 
-.scim-icon::before {
+.scim-icon:before {
   @include mask-base();
   width: 18px;
   height: 18px;
