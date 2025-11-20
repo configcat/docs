@@ -9,11 +9,13 @@
 
 @use 'proxy';
 @use 'api';
+@use 'sidebar';
+@use 'toc';
 
 :root {
-  --ifm-color-primary: #f7912d;
-  --ifm-color-primary-dark: #f68211;
-  --ifm-color-primary-darker: #ef7b09;
+  --ifm-color-primary: #f08d2a;
+  --ifm-color-primary-dark: #ec8013;
+  --ifm-color-primary-darker: #e7790a;
   --ifm-color-primary-darkest: #c56508;
   --ifm-color-primary-light: #f8a049;
   --ifm-color-primary-lighter: #f9a757;
@@ -21,11 +23,13 @@
   --ifm-code-font-size: 95%;
   --ifm-background-color: #fff;
 
+  --menu-secondary-color: rgb(83, 83, 95);
   --docusaurus-highlighted-code-line-bg: rgb(235, 235, 235);
   --bordered-img-color: rgb(226, 226, 226);
 }
 
 [data-theme='dark'] {
+  --menu-secondary-color: rgb(192, 192, 192);
   --docusaurus-highlighted-code-line-bg: #3f4255;
   --bordered-img-color: rgb(138, 138, 138);
 }

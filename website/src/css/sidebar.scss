@@ -1,0 +1,137 @@
+.theme-doc-sidebar-menu > li > div:first-child,
+.theme-doc-sidebar-menu > li > a:first-child {
+  font-size: 16px;
+  margin-top: 10px;
+  font-weight: 700;
+  padding-left: 24px;
+}
+
+.theme-doc-sidebar-menu > li:first-of-type > div:first-child {
+  margin-top: 6px;
+}
+
+.theme-doc-sidebar-menu > li > a:first-child {
+  padding-left: 36px;
+}
+
+.theme-doc-sidebar-menu > li:last-child {
+  margin-bottom: 30px;
+}
+
+.theme-doc-sidebar-menu
+  > li.theme-doc-sidebar-item-category:not(:last-of-type)::after {
+  content: '';
+  width: 90%;
+  height: 1px;
+  margin-left: 12px;
+  background-color: var(--ifm-toc-border-color);
+  display: inline-block;
+}
+
+.theme-doc-sidebar-menu > li > ul.menu__list {
+  padding-left: unset;
+}
+
+.menu > .menu__list .menu__list {
+  font-size: 14px;
+  font-weight: 450;
+
+  .menu__link:not(.menu__link--active) {
+    color: var(--menu-secondary-color);
+  }
+}
+
+.menu__caret:before,
+a.menu__link--sublist-caret:after {
+  width: 20px;
+  height: 20px;
+  background: var(--ifm-menu-link-sublist-icon) 50% / 1.5rem 1.5rem;
+}
+
+@mixin mask-base() {
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+.icon {
+  position: relative;
+}
+
+.icon::before {
+  content: '';
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  display: inline-block;
+  margin: auto auto auto 12px;
+  width: 16px;
+  height: 16px;
+  background-color: var(--ifm-menu-color);
+}
+
+.basics-icon::before {
+  @include mask-base();
+  mask-image: url('/static/assets/category-icons/basics.svg');
+}
+
+.guides-icon::before {
+  @include mask-base();
+  mask-image: url('/static/assets/category-icons/guides.svg');
+}
+
+.integrations-icon::before {
+  @include mask-base();
+  width: 16px;
+  height: 16px;
+  mask-image: url('/static/assets/category-icons/integrations.svg');
+}
+
+.status-icon::before {
+  @include mask-base();
+  mask-image: url('/static/assets/category-icons/status.svg');
+}
+
+.news-icon::before {
+  @include mask-base();
+  mask-image: url('/static/assets/category-icons/news.svg');
+}
+
+.faq-icon::before {
+  @include mask-base();
+  mask-image: url('/static/assets/category-icons/faq.svg');
+}
+
+.sdk-icon::before {
+  @include mask-base();
+  mask-image: url('/static/assets/category-icons/sdk.svg');
+}
+
+.of-icon::before {
+  @include mask-base();
+  mask-image: url('/static/assets/category-icons/of.svg');
+}
+
+.community-icon::before {
+  @include mask-base();
+  mask-image: url('/static/assets/category-icons/community.svg');
+}
+
+.legacy-icon::before {
+  @include mask-base();
+  mask-image: url('/static/assets/category-icons/legacy.svg');
+}
+
+.api-icon::before {
+  @include mask-base();
+  width: 18px;
+  height: 18px;
+  mask-image: url('/static/assets/category-icons/api.svg');
+}
+
+.scim-icon::before {
+  @include mask-base();
+  width: 18px;
+  height: 18px;
+  mask-image: url('/static/assets/category-icons/scim.svg');
+}
