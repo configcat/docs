@@ -1,15 +1,27 @@
 {
   "docs": [
     {
-      "Basics": [
+      "label": "Basics",
+      "type": "category",
+      "collapsed": false,
+      "collapsible": true,
+      "className": "icon basics-icon",
+      "items": [
         "getting-started",
         "main-concepts",
         "purchase",
         "requests",
         "network-traffic",
         "organization"
-      ],
-      "Guides": [
+      ]
+    },
+    {
+      "label": "Guides",
+      "type": "category",
+      "collapsed": false,
+      "collapsible": true,
+      "className": "icon guides-icon",
+      "items": [
         {
           "label": "Config V2",
           "type": "category",
@@ -189,6 +201,9 @@
     {
       "label": "Integrations",
       "type": "category",
+      "collapsed": false,
+      "collapsible": true,
+      "className": "icon integrations-icon",
       "link": {
         "type": "doc",
         "id": "integrations/overview"
@@ -289,23 +304,27 @@
     {
       "type": "doc",
       "id": "service/status",
-      "label": "Service Status"
+      "label": "Service Status",
+      "className": "icon status-icon"
     },
     {
       "type": "doc",
       "id": "news",
-      "label": "News & Product Updates"
+      "label": "News & Product Updates",
+      "className": "icon news-icon"
     },
     {
       "type": "doc",
       "id": "faq",
-      "label": "FAQ"
+      "label": "FAQ",
+      "className": "icon faq-icon"
     }
   ],
   "sdks": [
     {
       "label": "SDK References",
       "type": "category",
+      "className": "icon sdk-icon",
       "link": {
         "type": "doc",
         "id": "sdk-reference/overview"
@@ -411,6 +430,7 @@
     {
       "label": "OpenFeature Providers",
       "type": "category",
+      "className": "icon of-icon",
       "link": { "type": "doc", "id": "sdk-reference/openfeature/overview" },
       "items": [
         {
@@ -482,7 +502,10 @@
       ]
     },
     {
-      "Community Maintained": [
+      "label": "Community Maintained",
+      "type": "category",
+      "className": "icon of-icon",
+      "items": [
         {
           "type": "doc",
           "id": "sdk-reference/community/laravel",

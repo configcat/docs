@@ -23,7 +23,7 @@
   --ifm-code-font-size: 95%;
   --ifm-background-color: #fff;
 
-  --menu-secondary-color: rgb(83, 83, 95);
+  --menu-secondary-color: var(--ifm-menu-color);
   --docusaurus-highlighted-code-line-bg: rgb(235, 235, 235);
   --bordered-img-color: rgb(226, 226, 226);
 }

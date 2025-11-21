@@ -6,7 +6,7 @@ const sidebars: SidebarsConfig = {
       label: 'Basics',
       type: 'category',
       collapsed: false,
-      collapsible: false,
+      collapsible: true,
       className: 'icon basics-icon',
       items: [
         'getting-started',
@@ -21,7 +21,7 @@ const sidebars: SidebarsConfig = {
       label: 'Guides',
       type: 'category',
       collapsed: false,
-      collapsible: false,
+      collapsible: true,
       className: 'icon guides-icon',
       items: [
         {
@@ -228,7 +228,7 @@ const sidebars: SidebarsConfig = {
       label: 'Integrations',
       type: 'category',
       collapsed: false,
-      collapsible: false,
+      collapsible: true,
       className: 'icon integrations-icon',
       link: { type: 'doc', id: 'integrations/overview' },
       items: [
