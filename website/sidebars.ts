@@ -376,95 +376,114 @@ const sidebars: SidebarsConfig = {
   ],
   integrations: [
     {
-      label: 'Integrations',
+      type: 'doc',
+      id: 'integrations/overview',
+      label: 'Overview',
+      className: 'icon overview-icon',
+    },
+    {
+      label: 'Analytics',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon analytics-icon',
+      items: [
+        { type: 'doc', id: 'integrations/amplitude', label: 'Amplitude' },
+        { type: 'doc', id: 'integrations/datadog', label: 'Datadog' },
+        {
+          type: 'doc',
+          id: 'integrations/google-analytics',
+          label: 'Google Analytics',
+        },
+        { type: 'doc', id: 'integrations/mixpanel', label: 'Mixpanel' },
+        {
+          type: 'doc',
+          id: 'integrations/segment',
+          label: 'Twilio Segment',
+        },
+      ],
+    },
+    {
+      label: 'Project Management',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon project-management-icon',
+      items: [
+        {
+          type: 'doc',
+          id: 'integrations/jira',
+          label: 'Jira Cloud Plugin',
+        },
+        { type: 'doc', id: 'integrations/monday', label: 'monday.com' },
+        {
+          type: 'doc',
+          id: 'integrations/trello',
+          label: 'Trello Power-Up',
+        },
+      ],
+    },
+    {
+      label: 'Communication',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon communication-icon',
+      items: [{ type: 'doc', id: 'integrations/slack', label: 'Slack' }],
+    },
+    {
+      label: 'DevOps',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon devops-icon',
+      items: [
+        {
+          type: 'doc',
+          id: 'integrations/bitbucket',
+          label: 'Bitbucket Pipe',
+        },
+        { type: 'doc', id: 'integrations/bitrise', label: 'Bitrise Step' },
+        { type: 'doc', id: 'integrations/circleci', label: 'CircleCI Orb' },
+        { type: 'doc', id: 'integrations/github', label: 'GitHub Action' },
+        { type: 'doc', id: 'integrations/terraform', label: 'Terraform' },
+      ],
+    },
+    {
+      label: 'IDE Extensions',
       type: 'category',
       collapsed: false,
       collapsible: true,
       className: 'icon integrations-icon',
-      link: { type: 'doc', id: 'integrations/overview' },
       items: [
         {
-          label: 'Analytics',
-          type: 'category',
-          items: [
-            { type: 'doc', id: 'integrations/amplitude', label: 'Amplitude' },
-            { type: 'doc', id: 'integrations/datadog', label: 'Datadog' },
-            {
-              type: 'doc',
-              id: 'integrations/google-analytics',
-              label: 'Google Analytics',
-            },
-            { type: 'doc', id: 'integrations/mixpanel', label: 'Mixpanel' },
-            {
-              type: 'doc',
-              id: 'integrations/segment',
-              label: 'Twilio Segment',
-            },
-          ],
+          type: 'doc',
+          id: 'integrations/intellij',
+          label: 'JetBrains/IntelliJ IDE',
         },
         {
-          label: 'Project Management',
-          type: 'category',
-          items: [
-            {
-              type: 'doc',
-              id: 'integrations/jira',
-              label: 'Jira Cloud Plugin',
-            },
-            { type: 'doc', id: 'integrations/monday', label: 'monday.com' },
-            {
-              type: 'doc',
-              id: 'integrations/trello',
-              label: 'Trello Power-Up',
-            },
-          ],
+          type: 'doc',
+          id: 'integrations/vscode',
+          label: 'Visual Studio Code',
         },
-        {
-          label: 'Communication',
-          type: 'category',
-          items: [{ type: 'doc', id: 'integrations/slack', label: 'Slack' }],
-        },
-        {
-          label: 'DevOps',
-          type: 'category',
-          items: [
-            {
-              type: 'doc',
-              id: 'integrations/bitbucket',
-              label: 'Bitbucket Pipe',
-            },
-            { type: 'doc', id: 'integrations/bitrise', label: 'Bitrise Step' },
-            { type: 'doc', id: 'integrations/circleci', label: 'CircleCI Orb' },
-            { type: 'doc', id: 'integrations/github', label: 'GitHub Action' },
-            { type: 'doc', id: 'integrations/terraform', label: 'Terraform' },
-          ],
-        },
-        {
-          label: 'IDE Extensions',
-          type: 'category',
-          items: [
-            {
-              type: 'doc',
-              id: 'integrations/intellij',
-              label: 'JetBrains/IntelliJ IDE',
-            },
-            {
-              type: 'doc',
-              id: 'integrations/vscode',
-              label: 'Visual Studio Code',
-            },
-          ],
-        },
-        {
-          label: 'Workflow Automation',
-          type: 'category',
-          items: [
-            { type: 'doc', id: 'integrations/zapier', label: 'Zapier Zap' },
-            { type: 'doc', id: 'integrations/zoho-flow', label: 'Zoho Flow' },
-          ],
-        },
-        'advanced/notifications-webhooks',
       ],
+    },
+    {
+      label: 'Workflow Automation',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon workflow-icon',
+      items: [
+        { type: 'doc', id: 'integrations/zapier', label: 'Zapier Zap' },
+        { type: 'doc', id: 'integrations/zoho-flow', label: 'Zoho Flow' },
+      ],
+    },
+    {
+      type: 'doc',
+      id: 'advanced/notifications-webhooks',
+      label: 'Notifications - Webhook',
+      className: 'icon webhook-icon',
     },
   ],
 };
