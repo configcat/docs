@@ -242,6 +242,12 @@ const config: Config = {
           position: 'left',
         },
         {
+          type: 'docSidebar',
+          label: 'Integrations',
+          sidebarId: 'integrations',
+          position: 'left',
+        },
+        {
           to: '/api/reference/configcat-public-management-api',
           label: 'API',
           position: 'left',
