@@ -20,8 +20,13 @@ if (ExecutionEnvironment.canUseDOM) {
         try {
           root.unmount();
         } catch (e) {}
+        root = null;
       }
       container.remove();
+    }
+    if (recheckInterval) {
+      clearInterval(recheckInterval);
+      recheckInterval = null;
     }
   };
 
@@ -40,7 +45,7 @@ if (ExecutionEnvironment.canUseDOM) {
     const scrollX = window.scrollX || window.pageXOffset || 0;
     const scrollY = window.scrollY || window.pageYOffset || 0;
 
-    // Remove old container (if present anywhere) to avoid duplicates
+    // Remove old container (if present) to avoid duplicates
     cleanup();
 
     const container = document.createElement('div');
@@ -51,8 +56,7 @@ if (ExecutionEnvironment.canUseDOM) {
     const containerStyles = customStyles.container?.style || {};
     Object.assign(container.style, containerStyles);
 
-    // Insert after the <h1>
-    // Use insertAdjacentElement to avoid affecting focus
+    // Insert after the <h1> using insertAdjacentElement to avoid affecting focus
     h1.insertAdjacentElement('afterend', container);
 
     // Render React root into container
@@ -69,19 +73,6 @@ if (ExecutionEnvironment.canUseDOM) {
         enabledActions: pluginOptions.enabledActions,
       }),
     );
-
-    // Restore scroll position on next frame(s) to avoid browser jump
-    // Use requestAnimationFrame then a small timeout to be robust across mobile browsers
-    try {
-      requestAnimationFrame(() => {
-        window.scrollTo(scrollX, scrollY);
-        // extra safety for some Android / iOS WebViews
-        setTimeout(() => window.scrollTo(scrollX, scrollY), 50);
-      });
-    } catch (e) {
-      // fallback
-      setTimeout(() => window.scrollTo(scrollX, scrollY), 50);
-    }
   };
 
   const initializeButton = () => {
@@ -98,30 +89,17 @@ if (ExecutionEnvironment.canUseDOM) {
         if (h1 && !hasButton) injectNextToHeading();
         if (attempts > maxAttempts || hasButton) {
           clearInterval(recheckInterval);
+          recheckInterval = null;
         }
       }, 300);
     }, 150);
   };
 
   const handleRouteChange = () => {
-    // cleanup first so we don't duplicate; keep scroll safe by capturing it
-    const scrollX = window.scrollX || window.pageXOffset || 0;
-    const scrollY = window.scrollY || window.pageYOffset || 0;
-
     cleanup();
-
     // Delay slightly to let Docusaurus render the new heading, then inject
     setTimeout(() => {
       injectNextToHeading();
-      // ensure scroll is restored after route change injection
-      try {
-        requestAnimationFrame(() => {
-          window.scrollTo(scrollX, scrollY);
-          setTimeout(() => window.scrollTo(scrollX, scrollY), 50);
-        });
-      } catch (e) {
-        setTimeout(() => window.scrollTo(scrollX, scrollY), 50);
-      }
     }, 250);
   };
 
@@ -134,7 +112,6 @@ if (ExecutionEnvironment.canUseDOM) {
 
   // Handle SPA navigation
   window.addEventListener('popstate', handleRouteChange);
-  // Note: guard existence of the event to avoid errors in some setups
   if (typeof document !== 'undefined') {
     document.addEventListener('docusaurus-route-update', handleRouteChange);
   }
