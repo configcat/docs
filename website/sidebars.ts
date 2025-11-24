@@ -459,7 +459,7 @@ const sidebars: SidebarsConfig = {
         {
           type: 'doc',
           id: 'integrations/intellij',
-          label: 'JetBrains/IntelliJ IDE',
+          label: 'JetBrains/IntelliJ',
         },
         {
           type: 'doc',
