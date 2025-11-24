@@ -322,7 +322,7 @@ const sidebars: SidebarsConfig = {
         {
           type: 'doc',
           id: 'sdk-reference/openfeature/kotlin',
-          label: 'Kotlin (Android)',
+          label: 'Kotlin Multiplatform',
         },
         {
           type: 'doc',
