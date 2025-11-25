@@ -3,7 +3,12 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   docs: [
     {
-      Basics: [
+      label: 'Basics',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon basics-icon',
+      items: [
         'getting-started',
         'main-concepts',
         'purchase',
@@ -11,7 +16,14 @@ const sidebars: SidebarsConfig = {
         'network-traffic',
         'organization',
       ],
-      Guides: [
+    },
+    {
+      label: 'Guides',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon guides-icon',
+      items: [
         {
           label: 'Config V2',
           type: 'category',
@@ -30,7 +42,10 @@ const sidebars: SidebarsConfig = {
             {
               label: 'Targeting Rule',
               type: 'category',
-              link: { type: 'doc', id: 'targeting/targeting-rule/targeting-rule-overview' },
+              link: {
+                type: 'doc',
+                id: 'targeting/targeting-rule/targeting-rule-overview',
+              },
               items: [
                 'targeting/targeting-rule/user-condition',
                 'targeting/targeting-rule/flag-condition',
@@ -43,82 +58,115 @@ const sidebars: SidebarsConfig = {
           ],
         },
         'advanced/caching',
+        'advanced/troubleshooting',
+        'zombie-flags',
         {
-          label: 'Team Management',
+          label: 'Migration from LaunchDarkly',
           type: 'category',
-          link: { type: 'doc', id: 'advanced/team-management/team-management-basics' },
+          link: { type: 'doc', id: 'advanced/migration-from-launchdarkly' },
           items: [
-            'advanced/team-management/single-sign-on-sso',
-            'advanced/team-management/auto-assign-users',
             {
-              label: 'SAML SSO',
-              type: 'category',
-              link: { type: 'doc', id: 'advanced/team-management/saml/saml-overview' },
-              items: [
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/saml/identity-providers/azure-ad',
-                  label: 'Entra ID (Azure AD)',
-                },
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/saml/identity-providers/adfs',
-                  label: 'ADFS',
-                },
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/saml/identity-providers/google',
-                  label: 'Google',
-                },
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/saml/identity-providers/okta',
-                  label: 'Okta',
-                },
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/saml/identity-providers/auth0',
-                  label: 'Auth0',
-                },
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/saml/identity-providers/onelogin',
-                  label: 'OneLogin',
-                },
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/saml/identity-providers/cloudflare',
-                  label: 'Cloudflare Zero Trust',
-                },
-              ],
+              type: 'doc',
+              id: 'advanced/migration-from-launchdarkly-translation',
+              label: 'Details of LaunchDarkly to ConfigCat Translation',
             },
-            {
-              label: 'User provisioning (SCIM)',
-              type: 'category',
-              link: { type: 'doc', id: 'advanced/team-management/scim/scim-overview' },
-              items: [
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/scim/identity-providers/entra-id',
-                  label: 'Entra ID (Azure AD)',
-                },
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/scim/identity-providers/okta',
-                  label: 'Okta',
-                },
-                {
-                  type: 'doc',
-                  id: 'advanced/team-management/scim/identity-providers/onelogin',
-                  label: 'OneLogin',
-                },
-              ],
-            },
-            'advanced/team-management/domain-verification',
           ],
         },
-        'advanced/notifications-webhooks',
-        'advanced/troubleshooting',
+      ],
+    },
+    {
+      label: 'Team Management',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon team-icon',
+      link: {
+        type: 'doc',
+        id: 'advanced/team-management/team-management-basics',
+      },
+      items: [
+        'advanced/team-management/single-sign-on-sso',
+        'advanced/team-management/auto-assign-users',
+        {
+          label: 'SAML SSO',
+          type: 'category',
+          link: {
+            type: 'doc',
+            id: 'advanced/team-management/saml/saml-overview',
+          },
+          items: [
+            {
+              type: 'doc',
+              id: 'advanced/team-management/saml/identity-providers/azure-ad',
+              label: 'Entra ID (Azure AD)',
+            },
+            {
+              type: 'doc',
+              id: 'advanced/team-management/saml/identity-providers/adfs',
+              label: 'ADFS',
+            },
+            {
+              type: 'doc',
+              id: 'advanced/team-management/saml/identity-providers/google',
+              label: 'Google',
+            },
+            {
+              type: 'doc',
+              id: 'advanced/team-management/saml/identity-providers/okta',
+              label: 'Okta',
+            },
+            {
+              type: 'doc',
+              id: 'advanced/team-management/saml/identity-providers/auth0',
+              label: 'Auth0',
+            },
+            {
+              type: 'doc',
+              id: 'advanced/team-management/saml/identity-providers/onelogin',
+              label: 'OneLogin',
+            },
+            {
+              type: 'doc',
+              id: 'advanced/team-management/saml/identity-providers/cloudflare',
+              label: 'Cloudflare Zero Trust',
+            },
+          ],
+        },
+        {
+          label: 'User provisioning (SCIM)',
+          type: 'category',
+          link: {
+            type: 'doc',
+            id: 'advanced/team-management/scim/scim-overview',
+          },
+          items: [
+            {
+              type: 'doc',
+              id: 'advanced/team-management/scim/identity-providers/entra-id',
+              label: 'Entra ID (Azure AD)',
+            },
+            {
+              type: 'doc',
+              id: 'advanced/team-management/scim/identity-providers/okta',
+              label: 'Okta',
+            },
+            {
+              type: 'doc',
+              id: 'advanced/team-management/scim/identity-providers/onelogin',
+              label: 'OneLogin',
+            },
+          ],
+        },
+        'advanced/team-management/domain-verification',
+      ],
+    },
+    {
+      label: 'Tools',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon tools-icon',
+      items: [
         'advanced/cli',
         {
           label: 'Scan & Upload Code References',
@@ -184,55 +232,28 @@ const sidebars: SidebarsConfig = {
             },
           ],
         },
-        'zombie-flags',
-        {
-          label: 'Migration from LaunchDarkly',
-          type: 'category',
-          link: { type: 'doc', id: 'advanced/migration-from-launchdarkly' },
-          items: [
-            {
-              type: 'doc',
-              id: 'advanced/migration-from-launchdarkly-translation',
-              label: 'Details of LaunchDarkly to ConfigCat Translation',
-            },
-          ],
-        },
         'advanced/mcp-server',
       ],
     },
     {
-      label: 'Integrations',
-      type: 'category',
-      link: { type: 'doc', id: 'integrations/overview' },
-      items: [
-        { type: 'doc', id: 'integrations/amplitude', label: 'Amplitude' },
-        { type: 'doc', id: 'integrations/bitbucket', label: 'Bitbucket Pipe' },
-        { type: 'doc', id: 'integrations/bitrise', label: 'Bitrise Step' },
-        { type: 'doc', id: 'integrations/circleci', label: 'CircleCI Orb' },
-        { type: 'doc', id: 'integrations/datadog', label: 'Datadog' },
-        { type: 'doc', id: 'integrations/github', label: 'GitHub Action' },
-        { type: 'doc', id: 'integrations/google-analytics', label: 'Google Analytics' },
-        { type: 'doc', id: 'integrations/intellij', label: 'JetBrains/IntelliJ IDE' },
-        { type: 'doc', id: 'integrations/jira', label: 'Jira Cloud Plugin' },
-        { type: 'doc', id: 'integrations/mixpanel', label: 'Mixpanel' },
-        { type: 'doc', id: 'integrations/monday', label: 'monday.com' },
-        { type: 'doc', id: 'integrations/slack', label: 'Slack' },
-        { type: 'doc', id: 'integrations/terraform', label: 'Terraform' },
-        { type: 'doc', id: 'integrations/trello', label: 'Trello Power-Up' },
-        { type: 'doc', id: 'integrations/segment', label: 'Twilio Segment' },
-        { type: 'doc', id: 'integrations/vscode', label: 'Visual Studio Code' },
-        { type: 'doc', id: 'integrations/zapier', label: 'Zapier Zap' },
-        { type: 'doc', id: 'integrations/zoho-flow', label: 'Zoho Flow' },
-      ],
+      type: 'doc',
+      id: 'service/status',
+      label: 'Service Status',
+      className: 'icon status-icon',
     },
-    { type: 'doc', id: 'service/status', label: 'Service Status' },
-    { type: 'doc', id: 'news', label: 'News & Product Updates' },
-    { type: 'doc', id: 'faq', label: 'FAQ' },
+    {
+      type: 'doc',
+      id: 'news',
+      label: 'News & Product Updates',
+      className: 'icon news-icon',
+    },
+    { type: 'doc', id: 'faq', label: 'FAQ', className: 'icon faq-icon' },
   ],
   sdks: [
     {
       label: 'SDK References',
       type: 'category',
+      className: 'icon sdk-icon',
       link: { type: 'doc', id: 'sdk-reference/overview' },
       items: [
         { type: 'doc', id: 'sdk-reference/dotnet', label: '.NET' },
@@ -250,14 +271,26 @@ const sidebars: SidebarsConfig = {
           items: [
             { type: 'doc', id: 'sdk-reference/js/browser', label: 'Browser' },
             { type: 'doc', id: 'sdk-reference/js/bun', label: 'Bun' },
-            { type: 'doc', id: 'sdk-reference/js/chromium-extension', label: 'Chromium Extension' },
-            { type: 'doc', id: 'sdk-reference/js/cloudflare-worker', label: 'Cloudflare Worker' },
+            {
+              type: 'doc',
+              id: 'sdk-reference/js/chromium-extension',
+              label: 'Chromium Extension',
+            },
+            {
+              type: 'doc',
+              id: 'sdk-reference/js/cloudflare-worker',
+              label: 'Cloudflare Worker',
+            },
             { type: 'doc', id: 'sdk-reference/js/deno', label: 'Deno' },
             { type: 'doc', id: 'sdk-reference/js/node', label: 'Node.js' },
             { type: 'doc', id: 'sdk-reference/react', label: 'React' },
           ],
         },
-        { type: 'doc', id: 'sdk-reference/kotlin', label: 'Kotlin Multiplatform' },
+        {
+          type: 'doc',
+          id: 'sdk-reference/kotlin',
+          label: 'Kotlin Multiplatform',
+        },
         { type: 'doc', id: 'sdk-reference/php', label: 'PHP' },
         { type: 'doc', id: 'sdk-reference/python', label: 'Python' },
         { type: 'doc', id: 'sdk-reference/ruby', label: 'Ruby' },
@@ -270,26 +303,54 @@ const sidebars: SidebarsConfig = {
     {
       label: 'OpenFeature Providers',
       type: 'category',
+      className: 'icon of-icon',
       link: { type: 'doc', id: 'sdk-reference/openfeature/overview' },
       items: [
         { type: 'doc', id: 'sdk-reference/openfeature/dotnet', label: '.NET' },
-        { type: 'doc', id: 'sdk-reference/openfeature/angular', label: 'Angular' },
+        {
+          type: 'doc',
+          id: 'sdk-reference/openfeature/angular',
+          label: 'Angular',
+        },
         { type: 'doc', id: 'sdk-reference/openfeature/go', label: 'Go' },
         { type: 'doc', id: 'sdk-reference/openfeature/java', label: 'Java' },
-        { type: 'doc', id: 'sdk-reference/openfeature/js', label: 'JavaScript' },
-        { type: 'doc', id: 'sdk-reference/openfeature/kotlin', label: 'Kotlin (Android)' },
-        { type: 'doc', id: 'sdk-reference/openfeature/nestjs', label: 'NestJS' },
+        {
+          type: 'doc',
+          id: 'sdk-reference/openfeature/js',
+          label: 'JavaScript',
+        },
+        {
+          type: 'doc',
+          id: 'sdk-reference/openfeature/kotlin',
+          label: 'Kotlin Multiplatform',
+        },
+        {
+          type: 'doc',
+          id: 'sdk-reference/openfeature/nestjs',
+          label: 'NestJS',
+        },
         { type: 'doc', id: 'sdk-reference/openfeature/node', label: 'Node.js' },
         { type: 'doc', id: 'sdk-reference/openfeature/php', label: 'PHP' },
-        { type: 'doc', id: 'sdk-reference/openfeature/python', label: 'Python' },
+        {
+          type: 'doc',
+          id: 'sdk-reference/openfeature/python',
+          label: 'Python',
+        },
         { type: 'doc', id: 'sdk-reference/openfeature/react', label: 'React' },
         { type: 'doc', id: 'sdk-reference/openfeature/ruby', label: 'Ruby' },
         { type: 'doc', id: 'sdk-reference/openfeature/rust', label: 'Rust' },
-        { type: 'doc', id: 'sdk-reference/openfeature/swift', label: 'Swift (iOS)' },
+        {
+          type: 'doc',
+          id: 'sdk-reference/openfeature/swift',
+          label: 'Swift (iOS)',
+        },
       ],
     },
     {
-      'Community Maintained': [
+      label: 'Community Maintained',
+      type: 'category',
+      className: 'icon community-icon',
+      items: [
         {
           type: 'doc',
           id: 'sdk-reference/community/laravel',
@@ -303,13 +364,128 @@ const sidebars: SidebarsConfig = {
       ],
     },
     {
-      'Legacy SDKs': [
+      label: 'Legacy SDKs',
+      type: 'category',
+      className: 'icon legacy-icon',
+      items: [
         { type: 'doc', id: 'sdk-reference/js', label: 'JavaScript' },
         { type: 'doc', id: 'sdk-reference/js-ssr', label: 'JavaScript (SSR)' },
         { type: 'doc', id: 'sdk-reference/node', label: 'Node.js' },
       ],
     },
-  ]
+  ],
+  integrations: [
+    {
+      type: 'doc',
+      id: 'integrations/overview',
+      label: 'Overview',
+      className: 'icon overview-icon',
+    },
+    {
+      label: 'Analytics',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon analytics-icon',
+      items: [
+        { type: 'doc', id: 'integrations/amplitude', label: 'Amplitude' },
+        { type: 'doc', id: 'integrations/datadog', label: 'Datadog' },
+        {
+          type: 'doc',
+          id: 'integrations/google-analytics',
+          label: 'Google Analytics',
+        },
+        { type: 'doc', id: 'integrations/mixpanel', label: 'Mixpanel' },
+        {
+          type: 'doc',
+          id: 'integrations/segment',
+          label: 'Twilio Segment',
+        },
+      ],
+    },
+    {
+      label: 'Project Management',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon project-management-icon',
+      items: [
+        {
+          type: 'doc',
+          id: 'integrations/jira',
+          label: 'Jira Cloud Plugin',
+        },
+        { type: 'doc', id: 'integrations/monday', label: 'monday.com' },
+        {
+          type: 'doc',
+          id: 'integrations/trello',
+          label: 'Trello Power-Up',
+        },
+      ],
+    },
+    {
+      label: 'Communication',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon communication-icon',
+      items: [{ type: 'doc', id: 'integrations/slack', label: 'Slack' }],
+    },
+    {
+      label: 'DevOps',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon devops-icon',
+      items: [
+        {
+          type: 'doc',
+          id: 'integrations/bitbucket',
+          label: 'Bitbucket Pipe',
+        },
+        { type: 'doc', id: 'integrations/bitrise', label: 'Bitrise Step' },
+        { type: 'doc', id: 'integrations/circleci', label: 'CircleCI Orb' },
+        { type: 'doc', id: 'integrations/github', label: 'GitHub Action' },
+        { type: 'doc', id: 'integrations/terraform', label: 'Terraform' },
+      ],
+    },
+    {
+      label: 'IDE Extensions',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon integrations-icon',
+      items: [
+        {
+          type: 'doc',
+          id: 'integrations/intellij',
+          label: 'JetBrains/IntelliJ',
+        },
+        {
+          type: 'doc',
+          id: 'integrations/vscode',
+          label: 'Visual Studio Code',
+        },
+      ],
+    },
+    {
+      label: 'Workflow Automation',
+      type: 'category',
+      collapsed: false,
+      collapsible: true,
+      className: 'icon workflow-icon',
+      items: [
+        { type: 'doc', id: 'integrations/zapier', label: 'Zapier Zap' },
+        { type: 'doc', id: 'integrations/zoho-flow', label: 'Zoho Flow' },
+      ],
+    },
+    {
+      type: 'doc',
+      id: 'advanced/notifications-webhooks',
+      label: 'Notifications - Webhook',
+      className: 'icon webhook-icon',
+    },
+  ],
 };
 
 export default sidebars;
