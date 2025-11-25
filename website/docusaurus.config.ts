@@ -1,7 +1,7 @@
 import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 import type * as Preset from '@docusaurus/preset-classic';
-import { relative } from 'path';
+// import { relative } from 'path';
 
 const config: Config = {
   title: 'ConfigCat Docs',
@@ -218,7 +218,7 @@ const config: Config = {
     //     smartlookKey: '05d0e4ca90c61150955104a9d4b76ab16a0b2380',
     //   }
     // ],
-    require.resolve('./plugins/copy-page-button'),
+    // require.resolve('./plugins/copy-page-button'),
   ],
   themeConfig: {
     image: '/img/docs-cover.png',
