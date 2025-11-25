@@ -26,6 +26,10 @@ ul ul ul ul .table-of-contents__link--active:before {
   left: -65px;
 }
 
+.table-of-contents__link--active {
+  position: relative;
+}
+
 .table-of-contents__link--active:before {
   background: var(--ifm-color-primary);
   width: 2px;
