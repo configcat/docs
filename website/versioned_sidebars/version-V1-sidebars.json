@@ -419,7 +419,7 @@
     {
       "label": "Community Maintained",
       "type": "category",
-      "className": "icon of-icon",
+      "className": "icon community-icon",
       "items": [
         {
           "type": "doc",
