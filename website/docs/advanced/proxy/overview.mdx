@@ -482,6 +482,11 @@ The automatic configuration with Proxy profiles feature is only available from P
 The Proxy has the ability to use _Proxy profiles_ to determine which SDK keys to download and distribute.
 It periodically checks for profile changes, allowing it to pick up the changes on the fly, without needing a restart.
 
+By using Proxy profiles, your deployed Proxy instances can detect and react to:
+- SDK key rotation.
+- Data governance change.
+- Product, config and environment state changes, such as creation, renaming and deletion.
+
 You can set up Proxy profiles under the `Manage organization` -> `Proxy Profiles` menu on the <a target="_blank" href="https://app.configcat.com/organization/proxy-profiles">ConfigCat Dashboard</a>.
 
 <img alt="Proxy Profiles menu" src="/docs/assets/proxy/profile-menu.png" width="1366" height="768" decoding="async" loading="lazy" />
@@ -527,13 +532,39 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
   Click on the edit icon in the `SDK Keys` column.
   <img alt="Click on Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-configure.png" width="1366" height="768" decoding="async" loading="lazy" />
 
-  Select the config/environment pairs whose SDK key you want to make available for your Proxy instance.
-  <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-select.png" width="1366" height="768" decoding="async" loading="lazy" />
+  You can choose SDK Keys in two ways: by creating selection rules or by choosing individual SDK Keys manually.
+  Your applications will have access to all feature flags in the config/environment pairs whose SDK Keys you select.
 
-  :::info
-  You can click config names in the first column to toggle all SDK keys in a row, or environment names in the column headers to toggle all SDK keys in a column.
-  :::
-  <br/>
+  - ##### Selection rules
+    With selection rules, you can describe which existing or future config/environment pairs should be distributed to Proxy instances.
+    Rules can be based on products, configs and environments with the following filtering options:
+      - **Exact**: This option filters for an exact product/config/environment. It's not sensitive to product, config and environment renaming.
+      - **Any**: This option is similar to a single wildcard (`*`) expression. It filters for every product/config/environment.
+      - **Match expression**: The option matches the names of products/configs/environments. It's sensitive to product, config, and environment renaming.
+    
+    Rules are evaluated as follows:
+      - **Exclude** rules are taking precedence over **Include** rules.
+      - **Exclude** rules are joined with `AND` logical operator.
+      - **Include** rules are joined with `OR` logical operator.
+      - Filter options within a rule are joined with `AND` logical operator.
+    <br/>
+
+    <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-selection-rules.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+    :::info
+    Exclude rules are taking precedence over Include rules. Exclude rules are joined with AND logical operator, Include rules are joined with OR logical operator.
+    :::
+
+    <br/>
+
+  - ##### Manual selection
+    You can manually select the config/environment pairs whose SDK key you want to make available for your Proxy instance.
+    <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-select.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+    :::info
+    You can click config names in the first column to toggle all SDK keys in a row, or environment names in the column headers to toggle all SDK keys in a column.
+    :::
+    <br/>
 
 - #### Locate SDK identifiers for the selected SDK Keys
   You can find the SDK identifiers generated for the selected config/environment pairs on the ConfigCat Dashboard right where you find their SDK Key.
