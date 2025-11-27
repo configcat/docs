@@ -6,6 +6,7 @@ description: ConfigCat .NET SDK Reference. This is a step-by-step guide on how t
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import { Steps, Step, Title } from '@site/src/components/Steps';
 export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json');
 
 <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(NetSchema) }}></script>
@@ -20,7 +21,11 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 
 ## Getting started
 
-### 1. Install _ConfigCat SDK_ [NuGet package](https://www.nuget.org/packages/ConfigCat.Client)
+<Steps>
+<Step>
+<Title>
+### Install _ConfigCat SDK_ [NuGet package](https://www.nuget.org/packages/ConfigCat.Client)
+</Title>
 
 <Tabs groupId="dotnet-install">
 <TabItem value="Powershell / NuGet Package Manager Console" label="Powershell / NuGet Package Manager Console">
@@ -43,19 +48,35 @@ dotnet add package ConfigCat.Client
 To get the _ConfigCat SDK_ up and running in Unity, please refer to [this guide](./unity.mdx).
 :::
 
-### 2. Import package
+</Step>
+
+<Step>
+<Title>
+### Import package
+</Title>
 
 ```csharp
 using ConfigCat.Client;
 ```
 
-### 3. Create the _ConfigCat_ client with your _SDK Key_
+</Step>
+
+<Step>
+<Title>
+### Create the _ConfigCat_ client with your _SDK Key_
+</Title>
 
 ```csharp
 var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 ```
 
-### 4. Get your setting value
+</Step>
+
+
+<Step>
+<Title>
+### Get your setting value
+</Title>
 
 ```csharp
 var isMyAwesomeFeatureEnabled = await client.GetValueAsync("isMyAwesomeFeatureEnabled", false);
@@ -71,7 +92,12 @@ else
 
 The _ConfigCat SDK_ also offers a synchronous API for feature flag evaluation. Read more [here](#snapshots-and-non-blocking-synchronous-feature-flag-evaluation).
 
-### 5. Dispose the _ConfigCat_ client
+</Step>
+
+<Step>
+<Title>
+### Dispose the _ConfigCat_ client
+</Title>
 
 You can safely dispose all clients at once or individually and release all associated resources on application exit.
 
@@ -80,6 +106,9 @@ ConfigCatClient.DisposeAll(); // disposes all clients
 // -or-
 client.Dispose(); // disposes a specific client
 ```
+
+</Step>
+</Steps>
 
 ## Creating the _ConfigCat Client_
 

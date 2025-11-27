@@ -8,6 +8,7 @@ toc_max_heading_level: 5
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
+import { Steps, Step, Title } from '@site/src/components/Steps';
 
 The <a target="_blank" href="https://github.com/configcat/configcat-proxy">ConfigCat Proxy</a> allows you to host a feature flag evaluation service in your own infrastructure. It's a small Go application that communicates with ConfigCat's CDN network and caches/proxies *config JSON* files for your frontend and backend applications. The *config JSON* contains all the data that is needed for ConfigCat SDKs to evaluate feature flags.
 
@@ -113,7 +114,11 @@ You can decide where you want the actual feature flag evaluation to happen.
 - **Local evaluation**: Feature flags are evaluated in your application by the ConfigCat SDK running in your application. The Proxy only provides the data required for the evaluation process.
 - **Remote evaluation**: Feature flags are evaluated within the Proxy, your application only gets the result of the evaluation process.
 
-### 1. Local evaluation using a ConfigCat SDK connected to the Proxy
+<Steps>
+<Step>
+<Title>
+### Local evaluation using a ConfigCat SDK connected to the Proxy
+</Title>
 
 The Proxy has the ability to forward all information required for feature flag evaluation to ConfigCat SDKs via its [CDN proxy](endpoints.mdx#cdn-proxy) endpoint. 
 This means that you can set up your ConfigCat SDK instances to use the Proxy as their data source.
@@ -146,7 +151,12 @@ var configCatClient = configcat.getClient(
 );
 ```
 
-### 2. Remote evaluation with the Proxy's API endpoints
+</Step>
+
+<Step>
+<Title>
+### Remote evaluation with the Proxy's API endpoints
+</Title>
 
 You can leverage the Proxy's server side feature flag evaluation feature by sending simple HTTP requests to the Proxy's API endpoints.
 
@@ -179,7 +189,12 @@ try {
 
 You can find the available API endpoints with their HTTP request/response schemas [here](endpoints.mdx#api).
 
-### 3. Remote evaluation with OpenFeature Remote Evaluation Protocol (OFREP)
+</Step>
+
+<Step>
+<Title>
+### Remote evaluation with OpenFeature Remote Evaluation Protocol (OFREP)
+</Title>
 
 :::info
 OFREP compatibility is only available from Proxy version <a target="_blank" href="https://github.com/configcat/configcat-proxy/releases/tag/v2.0.0"><code>v2.0.0</code></a>.
@@ -209,7 +224,12 @@ OpenFeature.setProvider(
 
 You can find the available OFREP endpoints with their HTTP request/response schemas [here](endpoints.mdx#openfeature-remote-evaluation-protocol-ofrep).
 
-### 4. Remote evaluation and streaming with SSE
+</Step>
+
+<Step>
+<Title>
+### Remote evaluation and streaming with SSE
+</Title>
 
 The Proxy has the ability to evaluate feature flags and send notifications about subsequent evaluated flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
 
@@ -232,10 +252,18 @@ evtSource.onmessage = (event) => {
 
 For more information and usage examples, see the related [SSE endpoints documentation](endpoints.mdx#sse).
 
-### 5. Remote evaluation and streaming with gRPC
+</Step>
+
+<Step>
+<Title>
+### Remote evaluation and streaming with gRPC
+</Title>
 
 The Proxy supports both unary feature flag evaluation RPCs and server streaming of evaluated flag value changes.
 For more information and usage examples, see the [gRPC section of this documentation](grpc.mdx).
+
+</Step>
+</Steps>
 
 ## Configuration Options
 
@@ -413,107 +441,119 @@ You can set up Proxy profiles under the `Manage organization` -> `Proxy Profiles
 <br/>
 To connect a Proxy instance to a Proxy profile, follow these steps:
 
-- #### Create a new Proxy profile
-  Click on the `+ ADD PROFILE` button.
-  <img alt="Add Profile" src="/docs/assets/proxy/profile-add.png" width="1366" height="768" decoding="async" loading="lazy" />
+<Steps>
+<Step>
+<Title>
+#### Create a new Proxy profile
+</Title>
+Click on the `+ ADD PROFILE` button.
+<img alt="Add Profile" src="/docs/assets/proxy/profile-add.png" width="1366" height="768" decoding="async" loading="lazy" />
+<br/>
+<br/>
+Give the profile a meaningful name and description, then click `CREATE`.
+<img alt="Create Profile" src="/docs/assets/proxy/profile-create.png" width="1366" height="768" decoding="async" loading="lazy" />
+</Step>
+<Step>
+<Title>
+#### Configure your Proxy instance
+</Title>
+Grab the `Key` and `Secret` from the profile creation dialog and put them into the Proxy's configuration.
+<img alt="Configure Proxy with key and secret" src="/docs/assets/proxy/profile-key-secret.png" width="1366" height="768" decoding="async" loading="lazy" />
 
-  Give the profile a meaningful name and description, then click `CREATE`.
-  <img alt="Create Profile" src="/docs/assets/proxy/profile-create.png" width="1366" height="768" decoding="async" loading="lazy" />
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml title="options.yml"
+profile:
+  key: <key>
+  secret: <secret>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variables">
+
+```shell
+CONFIGCAT_PROFILE_KEY="<key>"
+CONFIGCAT_PROFILE_SECRET="<secret>"
+```
+
+</TabItem>
+</Tabs>
+</Step>
+<Step>
+<Title>
+#### Select which SDK Keys your Proxy should use
+</Title>
+Click on the edit icon in the `SDK Keys` column.
+<img alt="Click on Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-configure.png" width="1366" height="768" decoding="async" loading="lazy" />
+<br/>
+<br/>
+Select the config/environment pairs whose SDK key you want to make available for your Proxy instance.
+<img alt="Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-select.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+:::info
+You can click config names in the first column to toggle all SDK keys in a row, or environment names in the column headers to toggle all SDK keys in a column.
+:::
+</Step>
+<Step>
+<Title>
+#### Locate SDK identifiers for the selected SDK Keys
+</Title>
+You can find the SDK identifiers generated for the selected config/environment pairs on the ConfigCat Dashboard right where you find their SDK Key.
+<img alt="Click on view SDK identifiers for ConfigCat Proxy" src="/docs/assets/proxy/profile-sdk-ids-arrow.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+In the dialog that appears, you can find the SDK identifiers for the current config/environment pair, listed for each available Proxy profile.
+<img alt="Click on view SDK identifiers for ConfigCat Proxy" src="/docs/assets/proxy/profile-sdk-ids-dialog.png" width="1366" height="768" decoding="async" loading="lazy" />
+</Step>
+<Step>
+<Title>
+#### (Optional) Set up how your Proxy should learn about feature flag changes
+</Title>
+There are two ways a Proxy can detect feature flag changes. Each config/environment pair identified by each SDK key is automatically monitored for changes by periodic polling of the corresponding config JSON file at a configured frequency.
+Besides polling, the Proxy can receive change notifications over HTTP, via its [webhook endpoint](endpoints.mdx#webhook).
+
+- ##### Config JSON poll interval 
+  You have the option to control how frequently the Proxy should poll for config JSON changes.  
+  Click on the configure icon in the `Connection preferences` column, set the poll interval and click on `SAVE POLL INTERVAL`.
+  <img alt="Set config JSON poll interval" src="/docs/assets/proxy/profile-sdk-poll-interval.png" width="1366" height="768" decoding="async" loading="lazy" />
   <br/>
   <br/>
 
-- #### Configure your Proxy instance
-  Grab the `Key` and `Secret` from the profile creation dialog and put them into the Proxy's configuration.
-  <img alt="Configure Proxy with key and secret" src="/docs/assets/proxy/profile-key-secret.png" width="1366" height="768" decoding="async" loading="lazy" />
+- ##### Webhook notification
+  You can set up automatic webhook notifications about feature flag changes for your Proxy by providing its public URL.  
+  Click on the configure icon in the `Connection preferences` column and select `Webhook notification`.
+  Then, enter your Proxy instance's public URL and click `ADD PROXY URL`.
+  <img alt="Set Proxy webhook URL" src="/docs/assets/proxy/profile-webhook-url.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+  Put the displayed webhook signing key(s) into your Proxy's configuration. 
+  Signing keys are for making sure that webhook requests received by your Proxy are sent by ConfigCat.
+  Signatures are automatically [verified](../../advanced/notifications-webhooks.mdx#verifying-webhook-requests) by the Proxy.
+  <img alt="Copy webhook signing key" src="/docs/assets/proxy/profile-webhook-signing-key.png" width="1366" height="768" decoding="async" loading="lazy" />
 
   <Tabs groupId="yaml-env">
   <TabItem value="yaml" label="YAML" default>
   
   ```yaml title="options.yml"
   profile:
-    key: <key>
-    secret: <secret>
+    webhook_signing_key: <signing-key>
   ```
   
   </TabItem>
   <TabItem value="env-vars" label="Environment variables">
   
   ```shell
-  CONFIGCAT_PROFILE_KEY="<key>"
-  CONFIGCAT_PROFILE_SECRET="<secret>"
+  CONFIGCAT_PROFILE_WEBHOOK_SIGNING_KEY="<signing-key>"
   ```
   
   </TabItem>
   </Tabs>
-  <br/>
 
-- #### Select which SDK Keys your Proxy should use
-  Click on the edit icon in the `SDK Keys` column.
-  <img alt="Click on Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-configure.png" width="1366" height="768" decoding="async" loading="lazy" />
+  Test the connection to your Proxy instance.
+  <img alt="Test the webhook configuration" src="/docs/assets/proxy/profile-webhook-test.png" width="1366" height="768" decoding="async" loading="lazy" />
+</Step>
+</Steps>
 
-  Select the config/environment pairs whose SDK key you want to make available for your Proxy instance.
-  <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-select.png" width="1366" height="768" decoding="async" loading="lazy" />
-
-  :::info
-  You can click config names in the first column to toggle all SDK keys in a row, or environment names in the column headers to toggle all SDK keys in a column.
-  :::
-  <br/>
-
-- #### Locate SDK identifiers for the selected SDK Keys
-  You can find the SDK identifiers generated for the selected config/environment pairs on the ConfigCat Dashboard right where you find their SDK Key.
-  <img alt="Click on view SDK identifiers for ConfigCat Proxy" src="/docs/assets/proxy/profile-sdk-ids-arrow.png" width="1366" height="768" decoding="async" loading="lazy" />
-  
-  In the dialog that appears, you can find the SDK identifiers for the current config/environment pair, listed for each available Proxy profile.
-  <img alt="Click on view SDK identifiers for ConfigCat Proxy" src="/docs/assets/proxy/profile-sdk-ids-dialog.png" width="1366" height="768" decoding="async" loading="lazy" />
-  <br/>
-  <br/>
-
-- #### (Optional) Set up how your Proxy should learn about feature flag changes
-  There are two ways a Proxy can detect feature flag changes. Each config/environment pair identified by each SDK key is automatically monitored for changes by periodic polling of the corresponding config JSON file at a configured frequency.
-  Besides polling, the Proxy can receive change notifications over HTTP, via its [webhook endpoint](endpoints.mdx#webhook).
-
-  - ##### Config JSON poll interval 
-    You have the option to control how frequently the Proxy should poll for config JSON changes.  
-    Click on the configure icon in the `Connection preferences` column, set the poll interval and click on `SAVE POLL INTERVAL`.
-    <img alt="Set config JSON poll interval" src="/docs/assets/proxy/profile-sdk-poll-interval.png" width="1366" height="768" decoding="async" loading="lazy" />
-    <br/>
-    <br/>
-  
-  - ##### Webhook notification
-    You can set up automatic webhook notifications about feature flag changes for your Proxy by providing its public URL.  
-    Click on the configure icon in the `Connection preferences` column and select `Webhook notification`.
-    Then, enter your Proxy instance's public URL and click `ADD PROXY URL`.
-    <img alt="Set Proxy webhook URL" src="/docs/assets/proxy/profile-webhook-url.png" width="1366" height="768" decoding="async" loading="lazy" />
-
-    Put the displayed webhook signing key(s) into your Proxy's configuration. 
-    Signing keys are for making sure that webhook requests received by your Proxy are sent by ConfigCat.
-    Signatures are automatically [verified](../../advanced/notifications-webhooks.mdx#verifying-webhook-requests) by the Proxy.
-    <img alt="Copy webhook signing key" src="/docs/assets/proxy/profile-webhook-signing-key.png" width="1366" height="768" decoding="async" loading="lazy" />
-
-    <Tabs groupId="yaml-env">
-    <TabItem value="yaml" label="YAML" default>
-    
-    ```yaml title="options.yml"
-    profile:
-      webhook_signing_key: <signing-key>
-    ```
-    
-    </TabItem>
-    <TabItem value="env-vars" label="Environment variables">
-    
-    ```shell
-    CONFIGCAT_PROFILE_WEBHOOK_SIGNING_KEY="<signing-key>"
-    ```
-    
-    </TabItem>
-    </Tabs>
-
-    Test the connection to your Proxy instance.
-    <img alt="Test the webhook configuration" src="/docs/assets/proxy/profile-webhook-test.png" width="1366" height="768" decoding="async" loading="lazy" />
-    <br/>
-    <br/>
-
-- #### All configuration options related to Proxy profiles
+  #### All configuration options related to Proxy profiles
 
   <table className="proxy-arg-table">
   <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>

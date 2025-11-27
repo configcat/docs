@@ -1,0 +1,111 @@
+:root {
+  --step-number-background-color: rgba(172, 172, 172, 0.08);
+  --step-line-color: rgba(39, 39, 39, 0.12);
+}
+
+[data-theme='dark'] {
+  --step-number-background-color: rgba(255, 255, 255, 0.05);
+  --step-line-color: rgba(255, 255, 255, 0.14);
+}
+
+.steps {
+    margin-bottom: 25px;
+}
+
+.step.withtitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.step.withouttitle {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.step.withouttitle .content {
+  margin-top: 6px;
+}
+
+.step.withtitle .content {
+  margin-top: 15px;
+}
+
+.step > .titlerow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.step .stepnum {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 28px;
+  min-height: 28px;
+  font-weight: 600;
+  background-color: var(--step-number-background-color);
+  border: 1px solid var(--step-line-color);
+  border-radius: 50%;
+  font-size: 0.9rem;
+  margin: 6px 0;
+}
+
+.step .line {
+  width: 1px;
+  background-color: var(--step-line-color);
+}
+
+.step > .contentrow {
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.step > .stepnumcol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.step .content {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.step .linecont {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 28px;
+  max-width: 28px;
+}
+
+.step > .titlerow .title {
+  margin-top: -3px;
+}
+
+.step.withtitle:not(:last-of-type) .padder .linecont {
+  height: 15px;
+}
+
+.step .content {
+  width: calc(100% - 40px);
+}
+
+.step:last-of-type .content > *:last-child {
+  margin: unset;
+}
+
+.title > h1,
+.title > h2,
+.title > h3,
+.title > h4,
+.title > h5,
+.title > h6 {
+  margin: unset;
+}

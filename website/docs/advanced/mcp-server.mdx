@@ -6,6 +6,7 @@ description: Use the ConfigCat Model Context Protocol (MCP) server to manage fea
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import { Steps, Step } from '@site/src/components/Steps';
 
 ## Overview
 
@@ -58,12 +59,19 @@ The MCP server's configuration includes the following environment variables:
 ### Client Configuration
 
 <Tabs>
-  <TabItem value="cursor" label="Cursor" default>
-
-1. Install [Cursor](https://cursor.com/)
-2. Open **Preferences** → **Cursor Settings** → **MCP & Integrations**
-3. Click **Add Custom MCP**
-4. Add (or merge) the snippet below into your JSON settings:
+<TabItem value="cursor" label="Cursor" default>
+<Steps>
+<Step>
+Install [Cursor](https://cursor.com/)
+</Step>
+<Step>
+Open **Preferences** → **Cursor Settings** → **MCP & Integrations**
+</Step>
+<Step>
+Click **Add Custom MCP**
+</Step>
+<Step>
+Add (or merge) the snippet below into your JSON settings:
 
 ```json
 {
@@ -79,14 +87,22 @@ The MCP server's configuration includes the following environment variables:
   }
 }
 ```
-5. **Save** – the server will start on demand.
-6. You can start writing prompts into Cursor's AI panel.
-  
-  </TabItem>
-  <TabItem value="vscode" label="Visual Studio Code">
-
-1. Install [VS Code](https://code.visualstudio.com/) and [GitHub Copilot](https://code.visualstudio.com/docs/copilot/setup)
-2. Create a `.vscode/mcp.json` file in your project root with the following content:
+</Step>
+<Step>
+**Save** – the server will start on demand.
+</Step>
+<Step>
+You can start writing prompts into Cursor's AI panel.
+</Step>
+</Steps>
+</TabItem>
+<TabItem value="vscode" label="Visual Studio Code">
+<Steps>
+<Step>
+Install [VS Code](https://code.visualstudio.com/) and [GitHub Copilot](https://code.visualstudio.com/docs/copilot/setup)
+</Step>
+<Step>
+Create a `.vscode/mcp.json` file in your project root with the following content:
 
 ```json
 {
@@ -102,16 +118,28 @@ The MCP server's configuration includes the following environment variables:
   }
 }
 ```
-3. Save the settings file. The MCP server should now be available in VS Code.
-4. You can start writing prompts into VS Code's AI panel.
-
-  </TabItem>
-  <TabItem value="claude" label="Claude Desktop">
-
-1. Install [Claude Desktop](https://claude.ai/download)
-2. Open **Settings** → **Developer**
-3. Click **Edit Config**
-4. In `claude_desktop_config.json` add:
+</Step>
+<Step>
+Save the settings file. The MCP server should now be available in VS Code.
+</Step>
+<Step>
+You can start writing prompts into VS Code's AI panel.
+</Step>
+</Steps>
+</TabItem>
+<TabItem value="claude" label="Claude Desktop">
+<Steps>
+<Step>
+Install [Claude Desktop](https://claude.ai/download)
+</Step>
+<Step>
+Open **Settings** → **Developer**
+</Step>
+<Step>
+Click **Edit Config**
+</Step>
+<Step>
+In `claude_desktop_config.json` add:
 
 ```json
 {
@@ -127,9 +155,12 @@ The MCP server's configuration includes the following environment variables:
   }
 }
 ```
-5. **Save** & restart Claude Desktop.
-
-  </TabItem>
+</Step>
+<Step>
+**Save** & restart Claude Desktop.
+</Step>
+</Steps>
+</TabItem>
 </Tabs>
 
 :::info
