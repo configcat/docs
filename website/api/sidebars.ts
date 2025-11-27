@@ -17,8 +17,9 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Public Management API',
+      collapsed: false,
       collapsible: true,
-      collapsed: true,
+      className: "icon api-icon",
       items: [
         {
           label: 'Introduction',
@@ -30,9 +31,10 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'User Provisioning (SCIM) API',
+      label: 'User Provisioning (SCIM)',
+      collapsed: false,
       collapsible: true,
-      collapsed: true,
+      className: "icon scim-icon",
       items: [
         {
           label: 'Introduction',
