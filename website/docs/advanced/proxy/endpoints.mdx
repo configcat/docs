@@ -281,7 +281,216 @@ CONFIGCAT_HTTP_CDN_PROXY_HEADERS='{"Custom-Header-Name":"<header-value>"}'
 
 ## API
 
-The API endpoints are for server side feature flag evaluation.
+These API endpoints are for server side feature flag evaluation.
+
+### Endpoints using SDK key
+
+The following endpoints are using SDK keys to determine which config / environment is the target of the desired action.
+The SDK key must be provided in the `X-ConfigCat-SdkKey` HTTP header.
+
+<details>
+  <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/eval</span></summary>
+
+This endpoint evaluates a single feature flag identified by a `key` with the given [User Object](../../targeting/user-object.mdx). 
+
+**Headers**:
+- `X-ConfigCat-SdkKey`: The SDK key that determines the feature flag's config / environment.
+
+**Request body**:
+```json
+{
+  "key": "<feature-flag-key>",
+  "user": {
+    "Identifier": "<user-id>",
+    "Rating": 4.5,
+    "Roles": ["Role1","Role2"],
+    // any other attribute
+  }
+}
+```
+
+The type of the `user` object's fields can only be `string`, `number`, or `string[]`.
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The feature flag evaluation finished successfully.</li>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "value": <evaluated-value>,
+  "variationId": "<variation-id>"
+}
+```
+
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>X-ConfigCat-SdkKey</code> header or the <code>key</code> from the request body is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>X-ConfigCat-SdkKey</code> header is pointing to a non-existent SDK.</li>
+</ul>
+
+**Example**:
+
+```js title="example.js"
+// highlight-next-line
+const url = "http://localhost:8050/api/eval"; // Proxy API URL
+
+const data = {
+  key: "isMyAwesomeFeatureEnabled", // Feature flag key
+  user: { // User Object for evaluation
+    Identifier: "#UNIQUE-USER-IDENTIFIER#"
+  }
+};
+
+const requestOptions = {
+  method: "POST",
+  headers: {
+    // highlight-next-line
+    "X-ConfigCat-SdkKey": "#YOUR-SDK-KEY#",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(data),
+};
+
+try {
+  const response = await fetch(url, requestOptions);
+  const responseData = await response.json();
+  console.log(responseData); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
+} catch (error) {
+  console.error("Error:", error)
+}
+```
+
+</details>
+
+<details>
+  <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/eval-all</span></summary>
+
+This endpoint evaluates all feature flags with the given [User Object](../../targeting/user-object.mdx). 
+
+**Headers**:
+- `X-ConfigCat-SdkKey`: The SDK key that determines which config's feature flags should be evaluated in which environment.
+
+**Request body**:
+```json
+{
+  "user": {
+    "Identifier": "<user-id>",
+    "Rating": 4.5,
+    "Roles": ["Role1","Role2"],
+    // any other attribute
+  }
+}
+```
+
+The type of the `user` object's fields can only be `string`, `number`, or `string[]`.
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The evaluation of all feature flags finished successfully.</li>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "feature-flag-key-1": {
+    "value": <evaluated-value>,
+    "variationId": "<variation-id>"
+  },
+  "feature-flag-key-2": {
+    "value": <evaluated-value>,
+    "variationId": "<variation-id>"
+  }
+}
+```
+
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>X-ConfigCat-SdkKey</code> header is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>X-ConfigCat-SdkKey</code> header is pointing to a non-existent SDK.</li>
+</ul>
+
+**Example**:
+
+```js title="example.js"
+// highlight-next-line
+const url = "http://localhost:8050/api/eval-all"; // Proxy API URL
+
+const data = {
+  user: { // User Object for evaluation
+    Identifier: "#UNIQUE-USER-IDENTIFIER#"
+  }
+};
+
+const requestOptions = {
+  method: "POST",
+  headers: {
+    // highlight-next-line
+    "X-ConfigCat-SdkKey": "#YOUR-SDK-KEY#",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(data),
+};
+
+try {
+  const response = await fetch(url, requestOptions);
+  const responseData = await response.json();
+  console.log(responseData);
+} catch (error) {
+  console.error("Error:", error)
+}
+```
+
+</details>
+
+<details>
+  <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/refresh</span></summary>
+
+This endpoint commands the underlying SDK to download the latest available *config JSON*. 
+
+**Headers**:
+- `X-ConfigCat-SdkKey`: The SDK key that identifies an SDK within the Proxy.
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The refresh was successful.</li>
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>X-ConfigCat-SdkKey</code> header is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>X-ConfigCat-SdkKey</code> header is pointing to a non-existent SDK.</li>
+</ul>
+
+</details>
+
+<details>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/api/keys</span></summary>
+
+This endpoint returns all feature flag keys belonging to the given SDK key. 
+
+**Headers**:
+- `X-ConfigCat-SdkKey`: The SDK key that identifies an SDK within the Proxy.
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The keys are returned successfully.</li>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "keys": [
+    "feature-flag-key-1",
+    "feature-flag-key-1"
+  ]
+}
+```
+
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>X-ConfigCat-SdkKey</code> header is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>X-ConfigCat-SdkKey</code> header is pointing to a non-existent SDK.</li>
+</ul>
+
+</details>
+
+### Endpoints using SDK identifier
+
+The following endpoints are using an [SDK identifier](overview.mdx#sdk-identifier--sdk-key) to determine which config / environment is the target of the desired action.
+The SDK identifier must be provided as a route parameter of the HTTP request.
 
 <details>
   <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/&#123;sdkId&#125;/eval</span></summary>
@@ -289,7 +498,7 @@ The API endpoints are for server side feature flag evaluation.
 This endpoint evaluates a single feature flag identified by a `key` with the given [User Object](../../targeting/user-object.mdx). 
 
 **Route parameters**:
-- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that determines the feature flag's config / environment.
 
 **Request body**:
 ```json
@@ -326,6 +535,7 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 **Example**:
 
 ```js title="example.js"
+// highlight-next-line
 const url = "http://localhost:8050/api/#SDK-IDENTIFIER#/eval"; // Proxy API URL with SDK identifier
 
 const data = {
@@ -336,9 +546,9 @@ const data = {
 };
 
 const requestOptions = {
-  method: 'POST',
+  method: "POST",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
   body: JSON.stringify(data),
 };
@@ -348,7 +558,7 @@ try {
   const responseData = await response.json();
   console.log(responseData); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
 } catch (error) {
-  console.error('Error:', error)
+  console.error("Error:", error)
 }
 ```
 
@@ -360,7 +570,7 @@ try {
 This endpoint evaluates all feature flags with the given [User Object](../../targeting/user-object.mdx). 
 
 **Route parameters**:
-- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.  
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that determines which config's feature flags should be evaluated in which environment.
 
 **Request body**:
 ```json
@@ -402,6 +612,7 @@ The type of the `user` object's fields can only be `string`, `number`, or `strin
 **Example**:
 
 ```js title="example.js"
+// highlight-next-line
 const url = "http://localhost:8050/api/#SDK-IDENTIFIER#/eval-all"; // Proxy API URL with SDK identifier
 
 const data = {
@@ -411,9 +622,9 @@ const data = {
 };
 
 const requestOptions = {
-  method: 'POST',
+  method: "POST",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
   body: JSON.stringify(data),
 };
@@ -423,7 +634,7 @@ try {
   const responseData = await response.json();
   console.log(responseData);
 } catch (error) {
-  console.error('Error:', error)
+  console.error("Error:", error)
 }
 ```
 
@@ -701,6 +912,10 @@ OFREP compatibility is only available from Proxy version <a target="_blank" href
 
 The Proxy conforms to the <a href="https://github.com/open-feature/protocol">OpenFeature Remote Evaluation Protocol</a>, which means it can be used with OFREP compatible OpenFeature providers.
 
+### Endpoints using SDK key
+
+The following endpoints are using SDK keys to determine which config / environment is the target of the desired action. The SDK key must be provided in the `X-ConfigCat-SdkKey` HTTP header.
+
 <details>
   <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/ofrep/v1/evaluate/flags/&#123;key&#125;</span></summary>
 
@@ -710,7 +925,141 @@ This endpoint is used by OFREP compatible OpenFeature providers to evaluate a fe
 - `key`: The key of the feature flag to evaluate.  
 
 **Headers**:
-- `X-ConfigCat-SdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+- `X-ConfigCat-SdkKey`: The SDK key that determines the feature flag's config / environment.
+
+**Request body**:
+```json
+{
+  "context": {
+    "targetingKey": "<user-id>",
+    "Rating": 4.5,
+    "Roles": ["Role1","Role2"],
+  }
+}
+```
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The feature flag evaluation finished successfully.</li>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "key": "<flag-key>",
+  "value": <evaluated-value>,
+  "variant": "<variation-id>",
+  "reason": "<reason>"
+}
+```
+
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>X-ConfigCat-SdkKey</code> header is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>X-ConfigCat-SdkKey</code> header is pointing to a non-existent SDK or the feature flag for <code>key</code> is not found.</li>
+</ul>
+
+**Example**:
+
+```js title="example.js"
+import { OpenFeature } from "@openfeature/web-sdk";
+import { OFREPWebProvider } from '@openfeature/ofrep-web-provider';
+
+OpenFeature.setProvider(
+  new OFREPWebProvider({
+    // highlight-next-line
+    baseUrl: "http://localhost:8050", // Proxy URL
+    headers: [
+      // highlight-next-line
+      ["X-ConfigCat-SdkKey", "#YOUR-SDK-KEY#"],
+    ],
+  }),
+);
+```
+
+</details>
+
+<details>
+  <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/ofrep/v1/evaluate/flags</span></summary>
+
+This endpoint is used by OFREP compatible OpenFeature providers to evaluate all feature flags.
+
+**Headers**:
+- `X-ConfigCat-SdkKey`: The SDK key that determines which config's feature flags should be evaluated in which environment.
+
+**Request body**:
+```json
+{
+  "context": {
+    "targetingKey": "<user-id>",
+    "Rating": 4.5,
+    "Roles": ["Role1","Role2"],
+  }
+}
+```
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The evaluation of all feature flags finished successfully.</li>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "flags": [
+    {
+      "key": "<flag1-key>",
+      "value": <evaluated-value>,
+      "variant": "<variation-id>",
+      "reason": "<reason>"
+    },
+    {
+      "key": "<flag2-key>",
+      "value": <evaluated-value>,
+      "variant": "<variation-id>",
+      "reason": "<reason>"
+    }
+  ]
+}
+```
+
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>X-ConfigCat-SdkKey</code> header is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>X-ConfigCat-SdkKey</code> header is pointing to a non-existent SDK.</li>
+</ul>
+
+**Example**:
+
+```js title="example.js"
+import { OpenFeature } from "@openfeature/web-sdk";
+import { OFREPWebProvider } from '@openfeature/ofrep-web-provider';
+
+OpenFeature.setProvider(
+  new OFREPWebProvider({
+    // highlight-next-line
+    baseUrl: "http://localhost:8050", // Proxy URL
+    headers: [
+      // highlight-next-line
+      ["X-ConfigCat-SdkKey", "#YOUR-SDK-KEY#"],
+    ],
+  }),
+);
+```
+
+</details>
+
+### Endpoints using SDK identifier
+
+The following endpoints are using an [SDK identifier](overview.mdx#sdk-identifier--sdk-key) to determine which config / environment is the target of the desired action.
+The SDK identifier must be provided in the `X-ConfigCat-SdkId` HTTP header.
+
+<details>
+  <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/ofrep/v1/evaluate/flags/&#123;key&#125;</span></summary>
+
+This endpoint is used by OFREP compatible OpenFeature providers to evaluate a feature flag.
+
+**Route parameters**:
+- `key`: The key of the feature flag to evaluate.  
+
+**Headers**:
+- `X-ConfigCat-SdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that determines the feature flag's config / environment.
 
 **Request body**:
 ```json
@@ -750,9 +1099,11 @@ import { OFREPWebProvider } from '@openfeature/ofrep-web-provider';
 
 OpenFeature.setProvider(
   new OFREPWebProvider({
-    baseUrl: 'http://localhost:8050', // Proxy URL
+    // highlight-next-line
+    baseUrl: "http://localhost:8050", // Proxy URL
     headers: [
-      ['X-ConfigCat-SdkId', `#SDK-IDENTIFIER#`],
+      // highlight-next-line
+      ["X-ConfigCat-SdkId", "#SDK-IDENTIFIER#"],
     ],
   }),
 );
@@ -766,7 +1117,7 @@ OpenFeature.setProvider(
 This endpoint is used by OFREP compatible OpenFeature providers to evaluate all feature flags.
 
 **Headers**:
-- `X-ConfigCat-SdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+- `X-ConfigCat-SdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that determines which config's feature flags should be evaluated in which environment.
 
 **Request body**:
 ```json
@@ -816,9 +1167,11 @@ import { OFREPWebProvider } from '@openfeature/ofrep-web-provider';
 
 OpenFeature.setProvider(
   new OFREPWebProvider({
+    // highlight-next-line
     baseUrl: 'http://localhost:8050', // Proxy URL
     headers: [
-      ['X-ConfigCat-SdkId', '#SDK-IDENTIFIER#'],
+      // highlight-next-line
+      ["X-ConfigCat-SdkId", "#SDK-IDENTIFIER#"],
     ],
   }),
 );
@@ -856,7 +1209,7 @@ CONFIGCAT_HTTP_OFREP_ENABLED=<true|false>
 </Tabs>
 
 </td>
-<td><code>false</code></td>
+<td><code>true</code></td>
 <td>Turns the hosting of the OFREP endpoints on/off. These endpoints can be used by OFREP compatible OpenFeature providers for server side feature flag evaluation.</td>
 </tr>
 
@@ -1047,6 +1400,119 @@ CONFIGCAT_HTTP_OFREP_AUTH_HEADERS='{"X-API-KEY":"<auth-value>"}'
 
 The SSE endpoint allows you to subscribe for feature flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
 
+### Endpoints using SDK key
+
+The following endpoints are using SDK keys to determine which config / environment is the target of the desired action. 
+The SDK key must be provided in the `sdkKey` field of the base64 encoded `data` route parameter.
+
+<details>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/eval/k/&#123;data&#125;</span></summary> 
+
+This endpoint subscribes to a single flag's changes. Whenever the watched flag's value changes, the Proxy sends the new value to each connected client.
+
+**Route parameters**:
+- `data`: The `base64` encoded input data for feature flag evaluation that must contain the SDK key, the feature flag's key, and a [User Object](../../targeting/user-object.mdx).
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The SSE connection established successfully.</li>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "value": <evaluated-value>,
+  "variationId": "<variation-id>"
+}
+```
+
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>data</code>, or the <code>sdkKey</code> or <code>key</code> field of <code>data</code> is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkKey</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+**Example**:
+```js title="example.js"
+const rawData = {
+  // highlight-next-line
+  sdkKey: "#YOUR-SDK-KEY#",
+  key: "isMyAwesomeFeatureEnabled",
+  user: { // field types can only be `string`, `number`, or `string[]`.
+    Identifier: "#UNIQUE-USER-IDENTIFIER#",
+    Rating: 4.5,
+    Roles: ["Role1","Role2"],
+    // any other attribute
+  }
+};
+
+const data = btoa(JSON.stringify(rawData));
+// highlight-next-line
+const evtSource = new EventSource("http://localhost:8050/sse/eval/k/" + data);
+evtSource.onmessage = (event) => {
+  console.log(event.data); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
+};
+```
+
+</details>
+
+<details>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/eval-all/k/&#123;data&#125;</span></summary> 
+
+This endpoint subscribes to all feature flags' changes behind the given SDK key. When any of the watched flags' value change, the Proxy sends its new value to each connected client.
+
+**Route parameters**:
+- `data`: The `base64` encoded input data for feature flag evaluation that contains the SDK key and a [User Object](../../targeting/user-object.mdx).
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The SSE connection established successfully.</li>
+<div className="response-body">Response body:</div>
+
+```json
+{
+  "feature-flag-key-1": {
+    "value": <evaluated-value>,
+    "variationId": "<variation-id>"
+  },
+  "feature-flag-key-2": {
+    "value": <evaluated-value>,
+    "variationId": "<variation-id>"
+  }
+}
+```
+
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>sdkKey</code> field of <code>data</code> is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkKey</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+**Example**:
+```js title="example.js"
+const rawData = {
+  // highlight-next-line
+  sdkKey: "#YOUR-SDK-KEY#",
+  user: { // field types can only be `string`, `number`, or `string[]`.
+    Identifier: "#UNIQUE-USER-IDENTIFIER#",
+    Rating: 4.5,
+    Roles: ["Role1","Role2"],
+    // any other attribute
+  }
+};
+
+const data = btoa(JSON.stringify(rawData));
+// highlight-next-line
+const evtSource = new EventSource("http://localhost:8050/sse/eval-all/k/" + data);
+evtSource.onmessage = (event) => {
+  console.log(event.data); // {"feature-flag-key":{"value":<evaluated-value>,"variationId":"<variation-id>"}}
+};
+```
+
+</details>
+
+### Endpoints using SDK identifier
+
+The following endpoints are using an SDK identifier to determine which config / environment is the target of the desired action. 
+The SDK identifier must be provided in the `sdkId` route parameter.
+
 <details>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/eval/&#123;data&#125;</span></summary> 
 
@@ -1076,16 +1542,17 @@ This endpoint subscribes to a single flag's changes. Whenever the watched flag's
 **Example**:
 ```js title="example.js"
 const rawData = {
-  key: "<feature-flag-key>",
+  key: "isMyAwesomeFeatureEnabled",
   user: { // field types can only be `string`, `number`, or `string[]`.
-    Identifier: "<user-id>",
+    Identifier: "#UNIQUE-USER-IDENTIFIER#",
     Rating: 4.5,
     Roles: ["Role1","Role2"],
     // any other attribute
   }
-}
+};
 
-const data = btoa(JSON.stringify(rawData))
+const data = btoa(JSON.stringify(rawData));
+// highlight-next-line
 const evtSource = new EventSource("http://localhost:8050/sse/#SDK-IDENTIFIER#/eval/" + data);
 evtSource.onmessage = (event) => {
   console.log(event.data); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
@@ -1130,14 +1597,15 @@ This endpoint subscribes to all feature flags' changes behind the given [SDK ide
 ```js title="example.js"
 const rawData = {
   user: { // field types can only be `string`, `number`, or `string[]`.
-    Identifier: "<user-id>",
+    Identifier: "#UNIQUE-USER-IDENTIFIER#",
     Rating: 4.5,
     Roles: ["Role1","Role2"],
     // any other attribute
   }
-}
+};
 
-const data = btoa(JSON.stringify(rawData))
+const data = btoa(JSON.stringify(rawData));
+// highlight-next-line
 const evtSource = new EventSource("http://localhost:8050/sse/#SDK-IDENTIFIER#/eval-all/" + data);
 evtSource.onmessage = (event) => {
   console.log(event.data); // {"feature-flag-key":{"value":<evaluated-value>,"variationId":"<variation-id>"}}
