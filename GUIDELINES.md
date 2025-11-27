@@ -1,68 +1,16 @@
----
-applyTo: "**/*.md,**/*.mdx"
----
+# ConfigCat's Guidelines for Text (Docs edition)
 
-# Project Overview
-
-This is the ConfigCat documentation repository, a Docusaurus-based documentation site for ConfigCat's feature flag and configuration management service. The site is available at https://configcat.com/docs.
-
-## Architecture
-
-### Key Technologies
-
-- **Docusaurus 3.8+**
-- **TypeScript**
-- **OpenAPI docs plugins**
-  - Public Management API: https://api.configcat.com/docs/v1/swagger.json
-  - SCIM API: https://scim-api.configcat.com/openapi/v1/openapi.json
-- **Algolia**
-- **SASS**
-
-### Documentation Versioning
-
-The site maintains two versions:
-- **Config V2** (current) - Default version at `/docs/`
-- **Config V1** (legacy) - Available at `/docs/V1/`, excluded from sitemap
-
-### Directory Structure
-
-- **`website/docs/`** - Main documentation content (MDX files)
-  - `sdk-reference/` - Documentation of ConfigCat SDKs for various platforms
-  - `integrations/` - Integration guides
-  - `advanced/` - Guides on advanced topics
-  - `targeting/` - Targeting and feature flag evaluation docs
-  - `glossary/` - Glossary of terms
-- **`website/api/`** - ConfigCat Public Management API documentation content
-- **`website/src/`** - React components, custom CSS, and plugins
-  - `components/` - Reusable React components
-  - `schema-markup/` - JSON-LD schema markup files for SEO
-  - `pages/` - Custom pages
-  - `css/` - Custom SCSS styles
-- **`website/static/`** - Static assets (images, etc.)
-- **`website/versioned_docs/`** - Config V1 documentation
-- **`website/sidebars.ts`** - Main sidebar configuration (defines navigation structure)
-- **`website/docusaurus.config.ts`** - Docusaurus configuration
-
-### Important Configuration Details
-
-- **Base URL:** `/docs/` (not root)
-- **Trailing slashes:** Enabled
-- **Multi-language support:** Configured but only English enabled
-
-# Review Focus
-
-When reviewing documentation changes, check for:
-* **Typos and grammatical errors**.
-* **Adherence to the writing style and text formatting guidelines defined by ConfigCat's Guidelines for Text below.
-* **Accuracy of any code snippets or technical instructions**.
-
-# ConfigCat's Guidelines for Text
+This is a copy of the official guidelines available at https://github.com/configcat-labs/content-wiki/blob/main/text-guidelines.md, thus, should be kept in sync with that.
 
 ## 1. Introduction
 
 This document provides guidelines for writing and formatting text.
 
 Its purpose is to serve as a single reference point for the entire company.
+
+## 2. Scopes
+
+(removed)
 
 ## 3. General guidelines
 
