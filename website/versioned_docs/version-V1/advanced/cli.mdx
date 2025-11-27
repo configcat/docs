@@ -9,7 +9,7 @@ The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command
 The <a target="_blank" href="https://github.com/configcat/cli">ConfigCat Command Line Interface (CLI)</a> has the ability to [scan your source code](../advanced/code-references/overview.mdx) for feature flag and setting usages and upload the found code references to ConfigCat.
 
 ```
-configcat
+configcat                                                                                                          ❮  2
   This is the Command Line Tool of ConfigCat.
   ConfigCat is a hosted feature flag service: https://configcat.com
   For more information, see the documentation here: https://configcat.com/docs/advanced/cli
@@ -38,10 +38,12 @@ Commands:
   t, tag                       Manage Tags
   k, sdk-key                   List SDK Keys
   scan <directory>             Scan files for Feature Flag & Setting usages
+  eval                         Evaluate feature flags. In case of a single feature flag, by default, the command
+                               writes only the evaluated value to the output. In case of multiple feature flags, the
+                               command writes a table if no other format is specified
   config-json                  Config JSON-related utilities
-  w, workspace                 Manage the CLI workspace. When set, the CLI's interactive mode
-                               filters Product and Config selectors by the values set in the
-                               workspace
+  w, workspace                 Manage the CLI workspace. When set, the CLI's interactive mode filters Product and
+                               Config selectors by the values set in the workspace
 
 Use "configcat [command] -?" for more information about a command.
 ```
