@@ -30,7 +30,8 @@ jobs:
           flag-keys: |
             flag1
             flag2
-          user-attributes: id:1234
+          user-attributes: |
+            id:1234
       
       - name: Step depending on flag1
         if: steps.flags.outputs.flag1 == 'true'
