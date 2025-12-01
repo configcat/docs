@@ -540,7 +540,7 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
     Rules can be based on products, configs and environments with the following filtering options:
       - **Exact**: This option filters for an exact product/config/environment. It's not sensitive to product, config and environment renaming.
       - **Any**: This option is similar to a single wildcard (`*`) expression. It filters for every product/config/environment.
-      - **Match expression**: The option matches the names of products/configs/environments. It's sensitive to product, config, and environment renaming.
+      - **Match expression**: This option matches the given pattern to the names of products/configs/environments, accepting wildcards (`*`). It's sensitive to product, config, and environment renaming.
     
     Rules are evaluated as follows:
       - **Exclude** rules are taking precedence over **Include** rules.
