@@ -9,6 +9,9 @@ on:
   #     - 'submitted'
   pull_request:
     types: [opened, reopened, synchronize]
+    paths:
+      - '**/*.md'
+      - '**/*.mdx'
   # issues:
   #   types:
   #     - 'opened'
