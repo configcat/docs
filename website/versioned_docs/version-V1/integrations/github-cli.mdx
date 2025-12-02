@@ -1,0 +1,38 @@
+---
+id: github-cli
+title: Install the ConfigCat CLI in GitHub Actions
+description: This is a step-by-step guide on how to use the ConfigCat CLI in your GitHub Action workflow.
+---
+
+This section describes how to install and use the ConfigCat CLI in GitHub Action workflows.
+
+### Prerequisites
+
+- To let the CLI access the ConfigCat Public Management API, you have to create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">API credential</a>.
+  Store the credential in your repository's <a target="_blank" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">GitHub Secrets</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
+  
+  <img src="/docs/assets/cli/scan/gh_secrets.png" alt="Github Action secrets" decoding="async" loading="lazy" />
+
+### Example
+The following example shows how you can install the ConfigCat CLI with ConfigCat's <a href="https://github.com/configcat/cli-actions" target="_blank">CLI Github Actions</a> in your workflow.
+
+```yaml
+name: Workflow with ConfigCat CLI
+on: push
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+    env: 
+      CONFIGCAT_API_USER: ${{ secrets.CONFIGCAT_API_USER }}
+      CONFIGCAT_API_PASS: ${{ secrets.CONFIGCAT_API_PASS }}
+    steps:
+      - uses: configcat/cli-actions@v1
+      
+      # Using the CLI in other steps
+      - name: Update feature flag value
+        run: configcat flag value update --flag-id <flag-id> --environment-id <environment-id> --flag-value true          
+```
+
+:::info
+The action doesn't execute the `setup` command. It's recommended to set the `CONFIGCAT_API_USER` and `CONFIGCAT_API_PASS` environment variables on a job level, so each subsequent step that uses a ConfigCat CLI command can access them.
+:::
