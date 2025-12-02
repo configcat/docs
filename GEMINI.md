@@ -14,5 +14,5 @@ When reviewing pull requests:
 
 When reviewing documentation changes, check for:
 - Typos and grammatical errors.
-- Check adherence to the writing style and text formatting guidelines defined by ConfigCat's Guidelines for Text located at @./GUIDELINES.md
+- Adherence to the writing style and text formatting guidelines defined by ConfigCat's Guidelines for Text located at @./GUIDELINES.md
 - Accuracy of any code snippets or technical instructions.
