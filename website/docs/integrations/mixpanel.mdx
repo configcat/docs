@@ -259,6 +259,8 @@ you have to send the [distinct_id](https://docs.mixpanel.com/docs/tracking-metho
 :::note
 For Text feature flags with lengthy values (e.g., JSON), send the `variationId` instead of the `value` as the `Variant name` to Mixpanel.
 The `variationId` is a hashed version of the feature flag value, accessible on the ConfigCat Dashboard by enabling the _Show VariationIDs to support A/B testing_ setting. Learn more [here](https://app.configcat.com/product/preferences).
+
+For more information about VariationIDs, see [VariationID for analytics](../advanced/predefined-variations#variationid-for-analytics).
 :::
 
 4. Deploy your application and wait for feature flag evaluations to happen so Experiments in Mixpanel could be populated.
