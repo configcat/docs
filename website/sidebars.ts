@@ -34,6 +34,7 @@ const sidebars: SidebarsConfig = {
           ],
         },
         'advanced/data-governance',
+        'advanced/predefined-variations',
         {
           label: 'Targeting',
           type: 'category',
