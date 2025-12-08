@@ -1,54 +1,41 @@
 ---
 id: predefined-variations
-title: Predefined variations \ plain values
-description: Learn about Plain Values and Predefined Variations in ConfigCat, how they differ, and when to use each approach for managing feature flag values.
+title: Predefined variations
+description: Learn about Free-form values and Predefined Variations in ConfigCat, how they differ, and when to use each approach for managing feature flag values.
 ---
 
-ConfigCat supports two types of feature flag configurations: **Plain Values** and **Predefined Variations**. This guide explains the differences between these approaches and helps you choose the right one for your use case.
+ConfigCat supports two types of feature flag configurations: **Free-form values** and **Predefined Variations**. This guide explains the differences between these approaches and helps you choose the right one for your use case.
 
----
 
 ## Overview
 
 Feature flags in ConfigCat can be configured in two ways:
 
-- **Plain Values** - Define values directly each time you set a feature flag value.
-- **Predefined Variations** - Create a set of reusable variation definitions that can be selected easily.
+- **Free-form values** - Define values directly each time you set a feature flag's value
+- **Predefined Variations** - Create a set of reusable variation definitions that can be selected from a dropdown
 
----
 
-## Plain Values
+## Free-form values
 
-Plain Values are the traditional approach where you manually specify the exact value each time you configure a feature flag rule or target.
+Free-form values are the traditional approach where you manually specify the exact value each time you configure a feature flag's value.
 
 ### Characteristics
 
-**Direct Input**: You type or input the value directly when setting up flag rules
-**Ad-hoc Definition**: Values are defined on-the-fly as needed
-**No Reusability**: Each value must be entered separately for each rule
-**Simple Setup**: Straightforward for basic use cases
-**Flexible**: Any valid value can be entered at any time
+- **Direct Input**: You type or input the value directly when setting up flag rules
+- **Ad-hoc Definition**: Values are defined on-the-fly as needed
+- **No Reusability**: Each value must be entered separately for each rule
+- **Simple Setup**: Straightforward for basic use cases
+- **Flexible**: Any valid value can be entered at any time
 
 ### Use Cases
 
-Plain Values work well when:
-You have simple, one-off configurations
-Flag values are unique and unlikely to be reused
-You need quick setup without upfront planning
-Working with primitive values (booleans, simple strings/numbers)
-Values change frequently or unpredictably
+Free-form values work well when:
+- You have simple, one-off configurations
+- Feature Flag values are unique and unlikely to be reused
+- You need quick setup without upfront planning
+- Working with primitive values (booleans, simple strings/numbers)
+- Values change frequently or unpredictably
 
-### Example
-
-```
-Setting Rule 1: Return "blue"
-Setting Rule 2: Return "red"
-Setting Rule 3: Return "green"
-```
-
-Each color value is manually typed for each rule.
-
----
 
 ## Predefined Variations
 
@@ -56,474 +43,84 @@ Predefined Variations allow you to define a library of reusable values upfront w
 
 ### Variation Fields
 
-#### 1. Value (Required)
-The actual value that will be returned by the feature flag when this variation is selected.
-
-**Type**: Depends on the flag type (string, number, boolean, JSON)
-**Purpose**: The technical value used by your application
-**Modification**: Can only be updated if the variation is not currently used in any active rules
-**Example**: `#0066FF`, `50`, `{"theme": "dark", "fontSize": 14}`
-
-#### 2. Name (Optional)
-A human-readable identifier for the variation displayed in the dropdown.
-
-**Type**: String
-**Purpose**: Helps team members quickly identify the variation in the ConfigCat Dashboard
-**Display**: Shown in the dropdown when selecting variations
-**Fallback**: If not provided, a string representation of the value is displayed instead
-**Modification**: Can be updated at any time
-**Best Practice**: Use clear, descriptive names
-**Example**: `Primary Blue`, `Standard Discount`, `Dark Mode Config`
-
-#### 3. Hint (Optional)
-Additional context or description to explain when or why to use this variation.
-
-**Type**: String
-**Purpose**: Provides guidance to team members about the variation's purpose or usage
-**Modification**: Can be updated at any time
-**Best Practice**: Include relevant context, constraints, or warnings
-**Example**: `"Use for promotional campaigns only"`, `"Approved by design team on 2025-11-15"`, `"Experimental - monitor performance"`
+| Field | Required | Description |
+|-------|----------|-------------|
+| **Value** | Yes | The actual value that will be returned by the feature flag in your application when this variation is selected. |
+| **Name** | No | A human-readable identifier for the variation displayed in the dropdown. If not provided, a string representation of the value is displayed instead. |
+| **Hint** | No | Additional context or description to explain when or why to use this variation. It will be visible as a tooltip. |
 
 ### Characteristics
 
-**Defined at Creation**: Variations must be defined when creating the feature flag
-**Reusability**: Define once, use multiple times across rules and targets
-**Consistency**: Ensures the same values are used throughout your configuration
-**Dropdown Selection**: Choose from predefined options instead of typing
-**Self-Documenting**: Names and hints provide context and reduce errors
-**Managed Lifecycle**: Variations can be modified or removed with usage-based restrictions
-
-### Variation Lifecycle
-
-**Creation**: Variations are defined when the feature flag is created
-**Name Modification**: Can be edited at any time without restrictions
-**Hint Modification**: Can be edited at any time without restrictions
-**Value Modification**: Can only be edited if the variation is not currently used in any active rules or targets
-**Removal**: A variation can only be deleted if it is not currently used in any active rules or targets
-**Protection**: Active variations are protected from value changes and deletion to prevent breaking configurations
+- **Defined at Creation**: Variations must be defined when creating the feature flag
+- **Reusability**: Define once, use multiple times across rules and targets
+- **Consistency**: Ensures the same values are used throughout your configuration
+- **Dropdown Selection**: Choose from predefined options instead of typing
 
 ### Use Cases
 
 Predefined Variations are ideal when:
-You have a standard set of values used across multiple rules
-Consistency is critical (e.g., color schemes, API endpoints, configuration objects)
-Multiple team members need to understand what each value represents
-You want to prevent typos or invalid values
-Complex values (JSON objects) need to be reused
-You need to provide guidance on when to use specific values
-Values are known upfront and relatively stable
+- You have a standard set of values used across multiple rules
+- Consistency is critical (e.g., color schemes, API endpoints, configuration objects)
+- Multiple team members need to understand what each value represents
+- You want to prevent typos or invalid values
+- Complex values (JSON objects) need to be reused
+- You need to provide guidance on when to use specific values
+- Values are known upfront and relatively stable
 
-### Example
+## Converting Between Free-form values and Predefined Variations
 
-**Define Variations at Flag Creation:**
-```
-Variation 1:
-  Name: "Primary Blue"
-  Value: "#0066FF"
-  Hint: "Brand color - use for primary CTAs"
-
-Variation 2:
-  Name: "Alert Red"
-  Value: "#FF0000"
-  Hint: "Use only for error states and critical alerts"
-
-Variation 3:
-  Name: "Success Green"
-  Value: "#00CC66"
-  Hint: "Confirmation messages and success indicators"
-```
-
-**Dropdown Display:**
-When configuring rules, you will see:
-```
-[Primary Blue ▼]
-[Alert Red ▼]
-[Success Green ▼]
-```
-
-**Use in Multiple Rules:**
-```
-Rule 1: If user is in beta group → Return [Primary Blue ▼]
-Rule 2: If user has premium plan → Return [Primary Blue ▼]
-Rule 3: If error rate > 5% → Return [Alert Red ▼]
-```
-
-Select from dropdown instead of typing hex codes repeatedly.
-
-**Without Names:**
-If you do not provide names, the dropdown would show:
-```
-[#0066FF ▼]
-[#FF0000 ▼]
-[#00CC66 ▼]
-```
-
----
-
-## Differences Between Plain Values and Predefined Variations
-
-### Plain Values
-Values are entered manually each time you create a rule
-No predefined structure or reusability
-Maximum flexibility - any value can be entered at any time
-No built-in documentation or context
-Best for temporary, experimental, or unique configurations
-
-### Predefined Variations
-Values are defined once when creating the feature flag
-Selected from a dropdown when configuring rules
-Names and hints provide context and documentation
-Ensures consistency across all rules
-Values can only be changed if not currently in use
-Names and hints can be updated anytime
-Best for standardized, team-based configurations
-
----
-
-## Converting Between Plain Values and Predefined Variations
-
-ConfigCat provides an easy way to convert feature flags between Plain Values and Predefined Variations.
+ConfigCat provides an easy way to convert feature flags between Free-form values and Predefined Variations.
 
 ### Converting to Predefined Variations
 
-When you convert a feature flag from Plain Values to Predefined Variations:
+When you convert a feature flag from Free-form values to Predefined Variations:
 
-**Automatic Collection**: ConfigCat automatically collects all currently used values from your existing rules and targets
-**Variation Creation**: These collected values are presented as suggested variations
-**Customization**: You can add names and hints to each variation
-**Seamless Transition**: Existing rules are automatically updated to reference the new variations
-**No Downtime**: The conversion happens without affecting your running applications
+- ConfigCat automatically collects all currently used values from your existing rules and targets
+- These collected values are presented as suggested variations but you can modify their names/hints and add new ones
+- The conversion happens without affecting your running applications
 
-**Example:**
-```
-Current Flag (Plain Values):
-  Rule 1: Return "blue"
-  Rule 2: Return "red"
-  Rule 3: Return "blue"
+### Converting to Free-form values
 
-After Conversion (Predefined Variations):
-  Variation 1: Name: "Blue", Value: "blue", Hint: ""
-  Variation 2: Name: "Red", Value: "red", Hint: ""
-  
-  Rule 1: Return [Blue ▼]
-  Rule 2: Return [Red ▼]
-  Rule 3: Return [Blue ▼]
-```
+When you convert a feature flag from Predefined Variations to Free-form values:
 
-### Converting to Plain Values
-
-When you convert a feature flag from Predefined Variations to Plain Values:
-
-**Value Extraction**: The actual values from variations are extracted
-**Rule Update**: Rules are updated to use the raw values directly
-**Loss of Metadata**: Names and hints are removed (only values remain)
-**Flexibility Gained**: You can now enter any value without restriction
-
-**Example:**
-```
-Current Flag (Predefined Variations):
-  Variation 1: Name: "Primary Blue", Value: "#0066FF", Hint: "Brand color"
-  Variation 2: Name: "Alert Red", Value: "#FF0000", Hint: "Errors only"
-  
-  Rule 1: Return [Primary Blue ▼]
-  Rule 2: Return [Alert Red ▼]
-
-After Conversion (Plain Values):
-  Rule 1: Return "#0066FF"
-  Rule 2: Return "#FF0000"
-```
-
----
+- The actual values from variations are extracted
+- Feature flag values are updated to use the raw values directly
+- Names and hints are removed (only values remain)
 
 ## Working with Predefined Variations
 
 ### Creating a Feature Flag with Predefined Variations
 
-Navigate to create a new feature flag
-Select your flag type (string, number, boolean, JSON)
-Choose the Predefined Variations mode
-Define your variations:
-**Value** (required): The actual value your application will receive
-**Name** (optional): A descriptive identifier shown in the dropdown
-**Hint** (optional): Additional context or usage guidelines
-Add as many variations as needed
-Save the feature flag
+- Navigate to create a new feature flag
+- Select your flag type (string, number, boolean)
+- Choose the Predefined Variations mode
+- Add as many variations as needed
+- Create the feature flag
 
-### Modifying Predefined Variations
+### Adding/removing/changing Predefined Variations
 
-You can modify variations with the following rules:
-
-#### Name (Anytime)
-:white_check_mark: Update the display name anytime
-No impact on existing rules
-Improves clarity in the dropdown
-
-#### Hint (Anytime)
-:white_check_mark: Update guidance text anytime
-No impact on existing rules
-Helps team members make better decisions
-
-#### Value (Restricted)
-:warning: Can only change if the variation is not currently used in any active rules or targets
-If in use, you must first remove all references to the variation
-Prevents accidental breaking changes to active configurations
-
-#### Add New Variations
-:white_check_mark: Create additional variations as needed at any time
-No restrictions on adding new variations
-
-### Removing Predefined Variations
-
-Variations can only be removed if they meet these conditions:
-
-:white_check_mark: Not currently referenced in any active targeting rules
-:white_check_mark: Not currently used in percentage rollouts
-:white_check_mark: Not set as the default value
-:x: Cannot remove if actively used (protection against breaking changes)
-
-**Workflow for Removing a Variation:**
-Identify all rules using the variation you want to remove
-Update those rules to use different variations
-Once the variation is no longer in use, it can be safely deleted
-
-### Best Practices
-
-#### Naming Conventions
-Use descriptive, meaningful names
-Consider your team's domain language
-Be consistent across similar flags
-Remember: if no name is provided, the value itself appears in the dropdown
-Examples:
-:white_check_mark: `High Performance Mode` (better than showing the JSON value)
-:white_check_mark: `Legacy API Endpoint` (clearer than the URL)
-:white_check_mark: `Free Tier Limit` (more readable than `100`)
-:x: `Option 1` (too generic)
-:x: `Test Value` (not descriptive)
-:x: `Var 2` (meaningless)
-
-#### Naming for Complex Values
-For JSON or complex values, names are especially valuable:
-:white_check_mark: `Dark Mode Configuration` instead of `{"theme": "dark", "contrast": "high", ...}`
-:white_check_mark: `Enterprise Features Bundle` instead of `{"ai": true, "analytics": true, ...}`
-:white_check_mark: `US East API Cluster` instead of `{"region": "us-east-1", "endpoints": [...], ...}`
-
-#### Writing Effective Hints
-Explain **when** to use the variation
-Mention any **constraints** or **prerequisites**
-Include **who approved** or **when added** if relevant
-Reference **related documentation** if applicable
-Examples:
-`"Use during peak traffic hours (9 AM - 5 PM)"`
-`"Requires backend version >= 2.5.0"`
-`"Approved for EU region only - GDPR compliant"`
-`"Experimental - monitor performance closely"`
-`"Deprecated - migrate to 'New Primary Blue' by Q2 2026"`
-
-#### Value Management
-Keep values focused and purposeful
-For JSON values, validate structure before saving
-Document value format/schema in the hint if complex
-Consider versioning for complex configurations
-Plan variations upfront during flag creation
-Remember: once a variation is in use, its value cannot be changed
-If you need to change a value in use, create a new variation and migrate rules
-
-#### Planning Variations
-Think through all possible values before creating the flag
-Consider future use cases and growth
-Balance between too few (limiting) and too many (overwhelming)
-Group related values logically
-Leave room for future additions
-Consider creating variations even if only one rule uses them initially
-
----
+- You can create additional variations as needed at any time
+- You can only remove a Predefined variation if it is not used currently in your feature flag values.
+- You can modify the Predefined variations' names and hints anytime
+- You can only modify the value of the Predefined variation if it is not used currently in your feature flag values.
 
 ## When to Use Each Type
 
-### Choose Plain Values when:
-✓ Prototyping or experimenting
-✓ One-off configurations unlikely to be reused
-✓ Simple boolean or single-word string flags
-✓ Quick testing scenarios
-✓ You are the only person managing the flag
-✓ Values are unpredictable or change frequently
-✓ Maximum flexibility is needed
+### Choose Free-form values when:
+- Prototyping or experimenting
+- One-off configurations unlikely to be reused
+- Simple boolean flags
+- Quick testing scenarios
+- Values are unpredictable or change frequently
+- Maximum flexibility is needed
 
 ### Choose Predefined Variations when:
-✓ Multiple team members work with the flags
-✓ Values are used in multiple rules or targets
-✓ Consistency and standardization are important
-✓ Working with complex JSON configurations
-✓ Need to provide context about value usage
-✓ Want to prevent configuration errors
-✓ Planning for long-term flag maintenance
-✓ Values are known upfront and relatively stable
-✓ Team needs guidance on which values to use when
-✓ Want self-documenting configurations
-
----
-
-## Example Scenarios
-
-### Scenario 1: Theme Configuration (Predefined Variations)
-
-**Problem**: Multiple developers need to configure theme settings consistently across different targeting rules.
-
-**Solution**: Use Predefined Variations
-
-```
-Variation: "Light Theme"
-Value: {"theme": "light", "primaryColor": "#FFFFFF", "textColor": "#000000"}
-Hint: "Default theme - use for general audience"
-
-Variation: "Dark Theme"
-Value: {"theme": "dark", "primaryColor": "#1a1a1a", "textColor": "#FFFFFF"}
-Hint: "Opt-in theme - requires user preference setting"
-
-Variation: "High Contrast"
-Value: {"theme": "high-contrast", "primaryColor": "#000000", "textColor": "#FFFF00"}
-Hint: "Accessibility mode - WCAG AAA compliant"
-```
-
-**Benefits**:
-No risk of JSON syntax errors
-Consistent theme objects across all rules
-Clear guidance on when to use each theme
-Dropdown shows "Light Theme" instead of the entire JSON object
-Easy to update names and hints as requirements evolve
-
-### Scenario 2: API Rate Limits (Predefined Variations)
-
-**Problem**: Different user tiers have different rate limits that need to be applied consistently.
-
-**Solution**: Use Predefined Variations
-
-```
-Variation: "Free Tier"
-Value: 100
-Hint: "100 requests/hour - default for new users"
-
-Variation: "Pro Tier"
-Value: 1000
-Hint: "1,000 requests/hour - requires active subscription"
-
-Variation: "Enterprise Tier"
-Value: 10000
-Hint: "10,000 requests/hour - contact sales for higher limits"
-```
-
-**Benefits**:
-Rate limits are standardized across all rules
-Dropdown shows "Free Tier" instead of just "100"
-Self-documenting for team members
-Prevents accidental misconfiguration
-Can update hints without affecting active rules
-
-### Scenario 3: Quick A/B Test (Plain Values)
-
-**Problem**: Testing a simple button label change for a short-term experiment.
-
-**Solution**: Use Plain Values
-
-```
-Rule 1: 50% of users → "Get Started"
-Rule 2: 50% of users → "Start Free Trial"
-```
-
-**Benefits**:
-Quick setup without upfront planning
-Temporary test does not need long-term structure
-Simple strings do not require standardization
-Easy to remove after test completes
-Can iterate rapidly on different text variations
-
-### Scenario 4: Feature Rollout Strategy (Predefined Variations)
-
-**Problem**: Rolling out a new feature with different configuration stages.
-
-**Solution**: Use Predefined Variations
-
-```
-Variation: "Disabled"
-Value: {"enabled": false}
-Hint: "Feature completely disabled"
-
-Variation: "Beta - Internal"
-Value: {"enabled": true, "mode": "beta", "analytics": true, "debugMode": true}
-Hint: "Internal testing only - full debug logging enabled"
-
-Variation: "Limited Release"
-Value: {"enabled": true, "mode": "limited", "analytics": true, "debugMode": false}
-Hint: "10% of production users - monitor metrics closely"
-
-Variation: "General Availability"
-Value: {"enabled": true, "mode": "production", "analytics": false, "debugMode": false}
-Hint: "Full production rollout - optimized performance"
-```
-
-**Benefits**:
-Clear progression through rollout stages
-Complex JSON configurations guaranteed correct
-Team understands the purpose of each stage
-Dropdown shows "Beta - Internal" instead of complex JSON
-Easy to move users between stages
-Can update hints to reflect current rollout status
-
-### Scenario 5: API Endpoint Configuration (Predefined Variations)
-
-**Problem**: Multiple environments with different API endpoints that must be exact.
-
-**Solution**: Use Predefined Variations
-
-```
-Variation: "Production"
-Value: "https://api.production.example.com/v2"
-Hint: "Primary production endpoint - use for all GA traffic"
-
-Variation: "Production Backup"
-Value: "https://api-backup.production.example.com/v2"
-Hint: "Failover endpoint - use only during primary outage"
-
-Variation: "Staging"
-Value: "https://api.staging.example.com/v2"
-Hint: "Pre-production testing - data may be reset weekly"
-
-Variation: "Development"
-Value: "https://api.dev.example.com/v2"
-Hint: "Development environment - unstable, for testing only"
-```
-
-**Benefits**:
-Zero chance of typos in critical URLs
-Names make it clear which environment you are selecting
-Hints provide critical usage information
-If endpoint URLs change, update once (if not in use) rather than in every rule
-Team members cannot accidentally use wrong endpoints
-
----
-
-## Summary
-
-Predefined Variations provide enhanced reusability, consistency, and team collaboration for feature flag management. While Plain Values remain useful for simple or experimental scenarios, Predefined Variations offer the structure and documentation needed for professional, team-based feature flag operations.
-
-**Key Takeaways:**
-**Plain Values**: Flexible, ad-hoc, best for simple or temporary configurations
-**Predefined Variations**: Structured, reusable, best for standardized values across teams
-**Conversion**: Easy migration between types with intelligent value collection
-**Field Modification Rules**:
-**Name & Hint**: Can be updated anytime
-**Value**: Can only be updated if not currently in use
-**Deletion**: Only possible if not currently in use
-**Three Fields**: 
-**Value** (required, technical value)
-**Name** (optional, shown in dropdown, falls back to value string if empty)
-**Hint** (optional, provides context and guidance)
-
-By leveraging Predefined Variations effectively, you can create a self-documenting feature flag system that scales with your team and reduces configuration errors.
-
----
-
-## Need help?
-
-<a href="https://configcat.com/support/" target="_blank">Contact us</a> if you have questions or need assistance with feature flag variations.
-```
+- Multiple team members work with the flags
+- Values are used in multiple rules or targets
+- Consistency and standardization are important
+- Working with complex JSON configurations
+- Need to provide context about value usage
+- Want to prevent configuration errors
+- Values are known upfront and relatively stable
+- Team needs guidance on which values to use when
+- Want self-documenting configurations
