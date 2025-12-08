@@ -113,9 +113,12 @@ When working with feature flags, especially for A/B testing and analytics purpos
 The VariationID is a hashed version of the feature flag's value. For feature flags with lengthy values (such as JSON objects), the VariationID provides a shorter, more manageable identifier that can be sent to analytics platforms instead of the full value.
 
 ### How to access VariationIDs
-
-You can view VariationIDs on the ConfigCat Dashboard by enabling the **Show VariationIDs to support A/B testing** setting. Learn more about this setting <a href="https://app.configcat.com/product/preferences" target="_blank">here</a>.
-
+- You can only remove a Predefined variation if it is not used currently in your feature flag values.
++ You can only remove a predefined variation if it is not used currently in your feature flag values.
+- You can modify the Predefined variations' names and hints anytime
++ You can modify the predefined variations' names and hints anytime
+- You can only modify the value of the Predefined variation if it is not used currently in your feature flag values.
++ You can only modify the value of the predefined variation if it is not used currently in your feature flag values.
 ### VariationID vs. PredefinedVariationID
 
 :::note
