@@ -27,14 +27,11 @@ Free-form values are the traditional approach where you manually specify the exa
 - **Simple Setup**: Straightforward for basic use cases
 - **Flexible**: Any valid value can be entered at any time
 
-### Use Cases
+### Use cases
 
-Free-form values work well when:
-- You have simple, one-off configurations
-- Feature flag values are unique and unlikely to be reused
-- You need quick setup without upfront planning
-- Working with primitive values (booleans, simple strings/numbers)
-- Values change frequently or unpredictably
+Free-form values work well when you have simple, one-off configurations where feature flag values are unique and unlikely to be reused. They're ideal when you need quick setup without upfront planning, especially when working with primitive values like booleans or simple strings and numbers. This approach is also suitable when values change frequently or unpredictably.
+
+Choose Free-form values when you're prototyping or experimenting, working on one-off configurations unlikely to be reused, creating simple boolean flags, running quick testing scenarios, dealing with unpredictable or frequently changing values, or when you need maximum flexibility.
 
 
 ## Predefined Variations
@@ -43,11 +40,11 @@ Predefined Variations allow you to define a library of reusable values upfront w
 
 ### Variation fields
 
-| Field | Required | Description |
-|-------|----------|-------------|
-| **Value** | Yes | The actual value that will be returned by the feature flag in your application when this variation is selected. |
-| **Name** | No | A human-readable identifier for the variation displayed in the dropdown. If not provided, a string representation of the value is displayed instead. |
-| **Hint** | No | Additional context or description to explain when or why to use this variation. It will be visible as a tooltip. |
+| Field | Description |
+|-------|-------------|
+| Value | Required, the actual value that will be returned by the feature flag in your application when this variation is selected. |
+| Name | Optional, a human-readable identifier for the variation displayed in the dropdown. If not provided, a string representation of the value is displayed instead. |
+| Hint | Optional, additional context or description to explain when or why to use this variation. It will be visible as a tooltip. |
 
 ### Characteristics
 
@@ -58,14 +55,9 @@ Predefined Variations allow you to define a library of reusable values upfront w
 
 ### Use cases
 
-Predefined Variations are ideal when:
-- You have a standard set of values used across multiple rules
-- Consistency is critical (e.g., color schemes, API endpoints, configuration objects)
-- Multiple team members need to understand what each value represents
-- You want to prevent typos or invalid values
-- Complex values (JSON objects) need to be reused
-- You need to provide guidance on when to use specific values
-- Values are known upfront and relatively stable
+Predefined Variations are ideal when you have a standard set of values used across multiple rules, especially when consistency is critical for things like color schemes, API endpoints, or configuration objects. They work well when multiple team members need to understand what each value represents and you want to prevent typos or invalid values. This approach is particularly valuable when complex values like JSON objects need to be reused, when you need to provide guidance on when to use specific values, and when values are known upfront and relatively stable.
+
+Choose Predefined Variations when multiple team members work with the flags, values are used in multiple rules or targets, consistency and standardization are important, you're working with complex JSON configurations, you need to provide context about value usage, you want to prevent configuration errors, you want self-documenting configurations, or when your team needs guidance on which values to use when.
 
 ## Converting between Free-form values and Predefined Variations
 
@@ -117,28 +109,4 @@ The **PredefinedVariationID** is the resource identifier in the ConfigCat Public
 
 When integrating ConfigCat with analytics platforms, you can send the VariationID along with (or instead of) the feature flag value. This is especially recommended for text feature flags with lengthy values (such as JSON configurations), maintaining consistent identifiers across analytics reports, and simplifying A/B test analysis.
 
-For detailed integration instructions, see the [Amplitude integration](/integrations/amplitude)
-- [Google Analytics integration](/integrations/google-analytics)
-- [Mixpanel integration](/integrations/mixpanel)
-- [Segment integration](/integrations/segment)
-
-## When to use each kind
-
-### Choose Free-form values when:
-- Prototyping or experimenting
-- One-off configurations unlikely to be reused
-- Simple boolean flags
-- Quick testing scenarios
-- Values are unpredictable or change frequently
-- Maximum flexibility is needed
-
-### Choose Predefined Variations when:
-- Multiple team members work with the flags
-- Values are used in multiple rules or targets
-- Consistency and standardization are important
-- Working with complex JSON configurations
-- Need to provide context about value usage
-- Want to prevent configuration errors
-- Values are known upfront and relatively stable
-- Team needs guidance on which values to use when
-- Want self-documenting configurations
+For detailed integration instructions, see the [Amplitude integration](/integrations/amplitude), [Google Analytics integration](/integrations/google-analytics), [Mixpanel integration](/integrations/mixpanel), and [Segment integration](/integrations/segment) documentation.
