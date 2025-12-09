@@ -4,7 +4,7 @@ title: Predefined Variations
 description: Learn about Free-form values and Predefined Variations in ConfigCat, how they differ, and when to use each approach for managing feature flag values.
 ---
 
-ConfigCat supports two kinds of feature flag configurations: **Free-form values** and **Predefined Variations**. This guide explains the differences between these approaches and helps you choose the right one for your use case.
+ConfigCat supports two types of feature flag configurations: **Free-form values** and **Predefined Variations**. This guide explains the differences between these approaches and helps you choose the right one for your use case.
 
 
 ## Overview
@@ -104,27 +104,6 @@ When you convert a feature flag from Predefined Variations to Free-form values:
 - You can modify the Predefined variations' names and hints anytime
 - You can only modify the value of the Predefined variation if it is not used currently in your feature flag values.
 
-## When to use each kind
-
-### Choose Free-form values when:
-- Prototyping or experimenting
-- One-off configurations unlikely to be reused
-- Simple boolean flags
-- Quick testing scenarios
-- Values are unpredictable or change frequently
-- Maximum flexibility is needed
-
-### Choose Predefined Variations when:
-- Multiple team members work with the flags
-- Values are used in multiple rules or targets
-- Consistency and standardization are important
-- Working with complex JSON configurations
-- Need to provide context about value usage
-- Want to prevent configuration errors
-- Values are known upfront and relatively stable
-- Team needs guidance on which values to use when
-- Want self-documenting configurations
-
 ## VariationID for analytics
 
 When working with feature flags, especially for A/B testing and analytics purposes, ConfigCat provides a **VariationID** for each evaluated feature flag value. This VariationID is particularly useful when integrating with analytics tools.
@@ -159,3 +138,24 @@ For detailed integration instructions, see:
 - [Google Analytics integration](/integrations/google-analytics)
 - [Mixpanel integration](/integrations/mixpanel)
 - [Segment integration](/integrations/segment)
+
+## When to use each type
+
+### Choose Free-form values when:
+- Prototyping or experimenting
+- One-off configurations unlikely to be reused
+- Simple boolean flags
+- Quick testing scenarios
+- Values are unpredictable or change frequently
+- Maximum flexibility is needed
+
+### Choose Predefined Variations when:
+- Multiple team members work with the flags
+- Values are used in multiple rules or targets
+- Consistency and standardization are important
+- Working with complex JSON configurations
+- Need to provide context about value usage
+- Want to prevent configuration errors
+- Values are known upfront and relatively stable
+- Team needs guidance on which values to use when
+- Want self-documenting configurations
