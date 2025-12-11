@@ -122,3 +122,16 @@ ul.feature-list {
     }
   }
 }
+
+/* Customize Algolia's default "See all results" text */
+
+/* Hide the original text */
+.DocSearch-HitsFooter a {
+  font-size: 0 !important;
+}
+
+/* Set the new text */
+.DocSearch-HitsFooter a::after {
+  content: "See all results";
+  font-size: 14px;
+}
