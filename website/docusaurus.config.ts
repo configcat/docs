@@ -1,7 +1,6 @@
 import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 import type * as Preset from '@docusaurus/preset-classic';
-import { relative } from 'path';
 
 const config: Config = {
   title: 'ConfigCat Docs',
