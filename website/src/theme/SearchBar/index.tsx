@@ -1,34 +1,26 @@
+import React from 'react';
 import { DocSearch } from '@docsearch/react';
-
 import '@docsearch/css';
 
-function App() {
+export default function SearchBar() {
   return (
     <DocSearch
-      appId="0MLXBNIK0Q"
-      apiKey="6484bd6c163502bacf229cb8d22024ab"
-      indices={
-        [
-          {
-            name: "configcat",
-          }
-        ]
-      }
-      resultsFooterComponent={({ state }) => {
-        const query = state.query
-        return (
-          <div className="ds-footer">
-            <a
-              href={`/search?q=${encodeURIComponent(query)}`}
-              className="ds-footer-link"
-            >
-              See all results
-            </a>
-          </div>
-        );
-      }}
+      appId='0MLXBNIK0Q'
+      apiKey='6484bd6c163502bacf229cb8d22024ab'
+      indices={[
+        {
+          name: 'configcat',
+        },
+      ]}
+      resultsFooterComponent={({state}) => {
+          return (
+            <div className="DocSearch-HitsFooter">
+              <a href={`/docs/search?q=${encodeURIComponent(state.query)}`}>
+                See all results
+              </a>
+            </div>
+          );
+        }}
     />
   );
-}
-
-export default App;
+};
