@@ -14,11 +14,9 @@ export default function SearchBar() {
       ]}
       resultsFooterComponent={({state}) => {
           return (
-            <div className="DocSearch-HitsFooter">
-              <a href={`/docs/search?q=${encodeURIComponent(state.query)}`}>
-                See all results
-              </a>
-            </div>
+            <a href={`/docs/search?q=${encodeURIComponent(state.query)}`}>
+              See all results
+            </a>
           );
         }}
     />
