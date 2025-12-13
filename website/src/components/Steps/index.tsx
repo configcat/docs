@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
 import clsx from 'clsx';
+import React, { ReactNode } from 'react';
 import styles from './styles.module.css';
 
 interface ChildrenProps {
@@ -20,7 +20,12 @@ export const Steps: React.FC<ChildrenProps> = ({
                     return titleNode ? (
                         <div key={index} className={clsx(styles.step, styles.withtitle)}>
                             <div className={clsx(styles.titlerow)}>
-                                <div className={clsx(styles.stepnum)}>{index + 1}</div>
+                                <div className={clsx(styles.stepnumcont)}>
+                                    <div className={clsx(styles.stepnum)}>{index + 1}</div>
+                                    <div className={clsx(styles.linecont)}>
+                                        <div className={clsx(styles.line)}></div>
+                                    </div>
+                                </div>
                                 <div>{titleNode}</div>
                             </div>
                             <div className={clsx(styles.contentrow)}>
