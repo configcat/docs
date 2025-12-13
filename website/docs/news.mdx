@@ -5,14 +5,21 @@ description: Instead of spamming your mailbox, we're posting news and product up
 ---
 
 import LazyVideo from '@site/src/components/LazyVideo';
+import { Steps, Step, Title } from '@site/src/components/Steps';
 
 Here, you'll find all the latest updates, enhancements, and new features we've added to our service. Stay tuned to this page to keep up with all the latest news from ConfigCat!
 
 {/* This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html */}
 
-## ConfigCat MCP Server
+<Steps>
+<Step>
+<Title>
 
-#### Spet 30, 2025
+#### Sept 30, 2025
+
+</Title>
+
+## ConfigCat MCP Server
 
 We just released a new official ConfigCat's Model Context Protocol (MCP) Server.
 AI tools like Cursor can now interact with ConfigCat via our new MCP server.
@@ -36,10 +43,16 @@ AI tools like Cursor can now interact with ConfigCat via our new MCP server.
 />
 
 For more info about how to set up the MCP server, [see Documentation](../advanced/mcp-server/).
-            
-## Automatic ConfigCat Proxy configuration with Proxy profiles / OpenFeature Remote Evaluation Protocol
+
+</Step>
+<Step>
+<Title>
 
 #### Aug 22, 2025
+
+</Title>
+
+## Automatic ConfigCat Proxy configuration with Proxy profiles / OpenFeature Remote Evaluation Protocol
 
 We have two exciting [ConfigCat Proxy](/docs/advanced/proxy/overview.mdx) related news:
 
@@ -54,9 +67,15 @@ the Proxy has the ability to use [Proxy profiles](https://app.configcat.com/orga
 2. From the [v2.0.0](https://github.com/configcat/configcat-proxy/releases/tag/v2.0.0) version, the Proxy conforms to the [OpenFeature Remote Evaluation Protocol](https://github.com/open-feature/protocol) (OFREP), which means it can be used with OFREP compatible OpenFeature providers.
 [See the API documentation](/docs/advanced/proxy/endpoints/#openfeature-remote-evaluation-protocol-ofrep) for the OFREP implementation with usage examples.
 
-## New SDK for JavaScript with Cloudflare Workers support
+</Step>
+<Step>
+<Title>
 
 #### Aug 15, 2025
+
+</Title>
+
+## New SDK for JavaScript with Cloudflare Workers support
 
 We just released the [new, revamped ConfigCat SDK for JavaScript platforms](https://configcat.com/docs/sdk-reference/js/overview/).
 Unlike the previous platform-specific SDKs, it ships as a [single, unified NPM package](https://www.npmjs.com/package/@configcat/sdk)
@@ -94,9 +113,15 @@ But there are other advantages to upgrading to the new SDK sooner rather than la
 
 For the full list of new features and improvements, take a look at the [release notes](https://github.com/configcat/js-unified-sdk/releases/tag/v1.0.0).
 
-## New ConfigCat OpenFeature providers
+</Step>
+<Step>
+<Title>
 
 #### July 4, 2025
+
+</Title>
+
+## New ConfigCat OpenFeature providers
 
 We're happy to share that we have released new OpenFeature providers for the following platforms:
 
@@ -109,7 +134,8 @@ We're happy to share that we have released new OpenFeature providers for the fol
 
 [See the documentation](./sdk-reference/openfeature/overview.mdx) for the complete list of currently supported platforms.
 
----
+</Step>
+</Steps>
 
 ## Quality of Life improvements
 
