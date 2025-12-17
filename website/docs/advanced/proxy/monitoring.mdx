@@ -9,9 +9,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-The ConfigCat Proxy provides diagnostic data via its `/status` and a Prometheus-compatible `/metrics` endpoint. These endpoints are served on a specific port, so you can separate them from the public HTTP communication.
+The ConfigCat Proxy provides diagnostic data including health status, metrics, and traces.
 
-The following diagnostics related configuration options are available:
+:::info
+Exposed endpoints (`/status` and `/metrics`) are served on a specific port, so you can separate them from the public HTTP communication.
+:::
+
+These are the basic diagnostic-related options:
 
 <table className="proxy-arg-table">
 <thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
@@ -39,7 +43,7 @@ CONFIGCAT_DIAG_ENABLED=<true|false>
 
 </td>
 <td><code>true</code></td>
-<td>Turns the diagnostics HTTP server on/off.</td>
+<td>Turns the collection of diagnostic data on/off.</td>
 </tr>
 
 <tr>
@@ -66,60 +70,6 @@ CONFIGCAT_DIAG_PORT=8051
 </td>
 <td><code>8051</code></td>
 <td>The port used by the diagnostics HTTP server.</td>
-</tr>
-
-<tr>
-<td>
-
-<Tabs groupId="yaml-env">
-<TabItem value="yaml" label="YAML" default>
-
-```yaml
-diag:
-  status:
-    enabled: <true|false>
-```
-
-</TabItem>
-<TabItem value="env-vars" label="Environment variable">
-
-```shell
-CONFIGCAT_DIAG_STATUS_ENABLED=<true|false>
-```
-
-</TabItem>
-</Tabs>
-
-</td>
-<td><code>true</code></td>
-<td>Turns the hosting of the <a href="#status">status endpoint</a> on the diagnostics HTTP server on/off.</td>
-</tr>
-
-<tr>
-<td>
-
-<Tabs groupId="yaml-env">
-<TabItem value="yaml" label="YAML" default>
-
-```yaml
-diag:
-  metrics:
-    enabled: <true|false>
-```
-
-</TabItem>
-<TabItem value="env-vars" label="Environment variable">
-
-```shell
-CONFIGCAT_DIAG_METRICS_ENABLED=<true|false>
-```
-
-</TabItem>
-</Tabs>
-
-</td>
-<td><code>true</code></td>
-<td>Turns the <a href="#prometheus-metrics">Prometheus metrics</a> on the diagnostics HTTP server on/off.</td>
 </tr>
 
 </tbody>
@@ -196,77 +146,95 @@ The root `status` is `healthy` if all of the SDKs are `healthy`. If any of the S
 
 </details>
 
-:::note
+You can control whether metrics collection should be enabled with the following configuration option:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  status:
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_STATUS_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Turns the hosting of the <a href="#status">status endpoint</a> on the diagnostics HTTP server on/off.</td>
+</tr>
+
+</tbody>
+</table>
+
+:::info
 You can enable the status endpoint on the main HTTP port (default: `8050`) with the [HTTP configuration options](overview.mdx#http).
 :::
 
-## Prometheus Metrics
+## Metrics 
 
-You can set up the Proxy to export metrics about its internal state in Prometheus format. These metrics are served via the `/metrics` endpoint.
+If enabled, the Proxy collects various metrics. These can be either exported in Prometheus format or sent to an OTLP-compatible observability backend.
 
-The following metrics are exported:
+You can control whether metric collection should be enabled with the following configuration option:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  metrics:
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_METRICS_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Turns metrics collection on/off.</td>
+</tr>
+
+</tbody>
+</table>
+
+### Prometheus {#prometheus-metrics}
+
+You can set up the Proxy to export metrics about its internal state in Prometheus format. These metrics are served on the `/metrics` endpoint.
+
+#### Custom Metrics
 
 <table className="proxy-arg-table">
 <thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
 <tbody>
-<tr>
-<td>
-
-`configcat_http_request_duration_seconds`
-
-</td>
-<td>
-Histogram
-</td>
-<td>
-Histogram of Proxy HTTP response time in seconds.<br/><br/>
-Tags:
-
-- `route`: The request's URL path.
-- `method`: The request's HTTP method.
-- `status`: The response's HTTP status.
-
-</td>
-</tr>
-
-<tr>
-<td>
-
-`configcat_grpc_rpc_duration_seconds`
-
-</td>
-<td>
-Histogram
-</td>
-<td>
-Histogram of RPC call latency in seconds.<br/><br/>
-Tags:
-
-- `method`: The RPCs name.
-- `code`: The RPCs response code.
-
-</td>
-</tr>
-
-<tr>
-<td>
-
-`configcat_sdk_http_request_duration_seconds`
-
-</td>
-<td>
-Histogram
-</td>
-<td>
-Histogram of ConfigCat CDN HTTP response time in seconds.<br/><br/>
-Tags:
-
-- `sdk`: The SDK's identifier that initiated the request.
-- `route`: The request's URL path.
-- `status`: The response's HTTP status.
-
-</td>
-</tr>
 
 <tr>
 <td>
@@ -310,9 +278,9 @@ Tags:
 </tbody>
 </table>
 
-:::info
 The Proxy also exports metrics about the Go environment, e.g., `go_goroutines` or `go_memstats_alloc_bytes`, and process-related stats, e.g., `process_cpu_seconds_total`.
-:::
+
+#### Integration
 
 To integrate with Prometheus, put the following scrape config—that points to the Proxy—into your Prometheus configuration:
 
@@ -324,3 +292,349 @@ scrape_configs:
       - targets:
           - <proxy-host>:8051
 ```
+
+#### Configuration Options
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  metrics:
+    prometheus:
+      enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_METRICS_PROMETHEUS_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>true</code></td>
+<td>Turns the Prometheus compatible `/metrics` endpoint on the diagnostics HTTP server on/off.</td>
+</tr>
+
+</tbody>
+</table>
+
+### OTLP
+
+You can set up the Proxy to send metrics via <a href="https://opentelemetry.io/docs/specs/otlp/" target="_blank" rel="noreferrer noopener">OTLP</a> 
+to a compatible collector such as <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-OTLPEndpoint.html" target="_blank" rel="noreferrer noopener">Amazon CloudWatch</a>,
+<a href="https://docs.newrelic.com/docs/opentelemetry/get-started/apm-monitoring/opentelemetry-apm-intro/" target="_blank" rel="noreferrer noopener">NewRelic</a>,
+<a href="https://docs.datadoghq.com/opentelemetry/setup/otlp_ingest_in_the_agent" target="_blank" rel="noreferrer noopener">DataDog</a>,
+or <a href="https://docs.honeycomb.io/send-data/opentelemetry/" target="_blank" rel="noreferrer noopener">Honeycomb</a>.
+
+#### Custom Metrics
+
+<table className="proxy-arg-table">
+<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
+<tbody>
+
+<tr>
+<td>
+
+`stream.connections`
+
+</td>
+<td>
+Gauge
+</td>
+<td>
+Number of active client connections per stream.<br/><br/>
+Tags:
+
+- `sdk`: The SDK's identifier that handles the connection.
+- `type`: `sse` or `grpc`.
+- `flag`: The streamed feature flag's key.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`stream.msg.sent.total`
+
+</td>
+<td>
+Counter
+</td>
+<td>
+Total number of all messages sent with streaming.<br/><br/>
+Tags:
+
+- `sdk`: The related SDK's identifier.
+- `type`: `sse` or `grpc`.
+- `flag`: The evaluated feature flag's key.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+#### Configuration Options
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  metrics:
+    otlp:
+      enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_METRICS_OTLP_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>false</code></td>
+<td>Turns the sending of metrics via OTLP on/off.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  metrics:
+    otlp:
+      protocol: "<http|https|grpc>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_METRICS_OTLP_PROTOCOL="<http|https|grpc>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>http</code></td>
+<td>The protocol used to send metrics over OTLP. Possible values: <code>http</code>, <code>https</code>, and <code>grpc</code>.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  metrics:
+    otlp:
+      endpoint: "localhost:4318"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_METRICS_OTLP_ENDPOINT="localhost:4318"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>localhost:4318</code></td>
+<td>The OTLP collector's endpoint.</td>
+</tr>
+
+</tbody>
+</table>
+
+Additional OTLP-related options can be set by using the default <a href="https://opentelemetry.io/docs/languages/sdk-configuration/otlp-exporter/" target="_blank" rel="noreferrer noopener">OpenTelemetry environment variables</a>. 
+For example, to set custom headers for each OTLP request, you can use the `OTEL_EXPORTER_OTLP_HEADERS` environment variable.
+
+```shell
+OTEL_EXPORTER_OTLP_HEADERS="Authorization=Bearer <token>"
+```
+
+## Traces
+
+The Proxy is able to send traces via <a href="https://opentelemetry.io/docs/specs/otlp/" target="_blank" rel="noreferrer noopener">OTLP</a> 
+to a compatible collector such as <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-OTLPEndpoint.html" target="_blank" rel="noreferrer noopener">Amazon CloudWatch</a>,
+<a href="https://docs.newrelic.com/docs/opentelemetry/get-started/apm-monitoring/opentelemetry-apm-intro/" target="_blank" rel="noreferrer noopener">NewRelic</a>,
+<a href="https://docs.datadoghq.com/opentelemetry/setup/otlp_ingest_in_the_agent" target="_blank" rel="noreferrer noopener">DataDog</a>,
+or <a href="https://docs.honeycomb.io/send-data/opentelemetry/" target="_blank" rel="noreferrer noopener">Honeycomb</a>.
+
+You can control whether trace collection should be enabled with the following configuration option:
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  traces:
+    enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_TRACES_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>false</code></td>
+<td>Turns trace collection on/off.</td>
+</tr>
+
+</tbody>
+</table>
+
+#### OTLP-related Options
+
+<table className="proxy-arg-table">
+<thead><tr><th>Option</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  traces:
+    otlp:
+      enabled: <true|false>
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_TRACES_OTLP_ENABLED=<true|false>
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>false</code></td>
+<td>Turns the sending of traces via OTLP on/off.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  traces:
+    otlp:
+      protocol: "<http|https|grpc>"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_TRACES_OTLP_PROTOCOL="<http|https|grpc>"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>http</code></td>
+<td>The protocol used to send traces over OTLP. Possible values: <code>http</code>, <code>https</code>, and <code>grpc</code>.</td>
+</tr>
+
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  traces:
+    otlp:
+      endpoint: "localhost:4318"
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_TRACES_OTLP_ENDPOINT="localhost:4318"
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>localhost:4318</code></td>
+<td>The OTLP collector's endpoint.</td>
+</tr>
+
+</tbody>
+</table>
+
+Additional OTLP-related options can be set by using the default <a href="https://opentelemetry.io/docs/languages/sdk-configuration/otlp-exporter/" target="_blank" rel="noreferrer noopener">OpenTelemetry environment variables</a>. 
+For example, to set custom headers for each OTLP request, you can use the `OTEL_EXPORTER_OTLP_HEADERS` environment variable.
+
+```shell
+OTEL_EXPORTER_OTLP_HEADERS="Authorization=Bearer <token>"
+```
+
+## OpenTelemetry Instrumentation Libraries 
+
+Metrics and traces are also exported by the following official OpenTelemetry instrumentation libraries:
+- <a href="https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/net/http/otelhttp" target="_blank" rel="noreferrer noopener">otelhttp</a>
+- <a href="https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/google.golang.org/grpc/otelgrpc" target="_blank" rel="noreferrer noopener">otelgrpc</a>
+- <a href="https://github.com/redis/go-redis/tree/master/extra/redisotel" target="_blank" rel="noreferrer noopener">redisotel</a>
+- <a href="https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/go.mongodb.org/mongo-driver/v2/mongo/otelmongo" target="_blank" rel="noreferrer noopener">otelmongo</a>
+- <a href="https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation/github.com/aws/aws-sdk-go-v2/otelaws" target="_blank" rel="noreferrer noopener">otelaws</a>
