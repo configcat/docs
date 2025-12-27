@@ -10,3 +10,27 @@
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
   Content-Security-Policy: default-src 'none';frame-src 'self' https://*.google.com https://challenges.cloudflare.com https://www.youtube.com https://*.googletagmanager.com https://*.doubleclick.net;script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://googletagmanager.com https://*.google.com https://*.google-analytics.com https://*.gstatic.com https://challenges.cloudflare.com https://*.cloudflareinsights.com https://*.cello.so https://*.smartlook.com https://*.licdn.com;style-src 'self' 'unsafe-inline' https://*.bootstrapcdn.com https://*.googleapis.com https://*.googletagmanager.com https://googletagmanager.com https://tagmanager.google.com https://*.typekit.net;font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com https://use.typekit.net;img-src 'self' data: https://*.configcat.com https://*.google-analytics.com https://*.google.com https://*.googletagmanager.com https://codecov.io https://img.shields.io https://github.com https://snyk.io https://sonarcloud.io https://data.jsdelivr.com https://maven-badges.herokuapp.com https://javadoc.io https://ci.appveyor.com https://goreportcard.com https://godoc.org https://poser.pugx.org https://badge.fury.io https://coveralls.io https://pkg.go.dev https://*.cloudfront.net https://img.youtube.com https://raw.githubusercontent.com https://px.ads.linkedin.com https://s3.amazonaws.com;media-src 'self';connect-src 'self' https://*.configcat.com https://*.googletagmanager.com https://*.google-analytics.com https://*.g.doubleclick.net https://*.google.com https://*.amplitude.com https://*.cloudflareinsights.com https://*.algolia.net https://*.cello.so https://*.smartlook.com https://*.smartlook.cloud;object-src 'self';child-src 'self' blob:;frame-ancestors 'self';upgrade-insecure-requests;block-all-mixed-content;base-uri 'self';manifest-src 'self';
+
+/*.jpg
+  ! Cross-Origin-Resource-Policy
+  Cross-Origin-Resource-Policy: cross-origin
+
+/*.jpeg
+  ! Cross-Origin-Resource-Policy
+  Cross-Origin-Resource-Policy: cross-origin
+
+/*.png
+  ! Cross-Origin-Resource-Policy
+  Cross-Origin-Resource-Policy: cross-origin
+
+/*.svg
+  ! Cross-Origin-Resource-Policy
+  Cross-Origin-Resource-Policy: cross-origin
+
+/*.gif
+  ! Cross-Origin-Resource-Policy
+  Cross-Origin-Resource-Policy: cross-origin
+
+/*.css
+  ! Cross-Origin-Resource-Policy
+  Cross-Origin-Resource-Policy: cross-origin

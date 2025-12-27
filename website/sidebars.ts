@@ -445,7 +445,15 @@ const sidebars: SidebarsConfig = {
         },
         { type: 'doc', id: 'integrations/bitrise', label: 'Bitrise Step' },
         { type: 'doc', id: 'integrations/circleci', label: 'CircleCI Orb' },
-        { type: 'doc', id: 'integrations/github', label: 'GitHub Action' },
+        {
+          type: 'category',
+          label: 'GitHub Actions',
+          items: [
+            { type: 'doc', id: 'integrations/github', label: 'Scan & Upload Code References' },
+            { type: 'doc', id: 'integrations/github-cli', label: 'Install CLI' },
+            { type: 'doc', id: 'integrations/github-eval', label: 'Evaluate Feature Flags' },
+          ],
+        },
         { type: 'doc', id: 'integrations/terraform', label: 'Terraform' },
       ],
     },
