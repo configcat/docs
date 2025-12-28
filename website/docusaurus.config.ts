@@ -404,7 +404,7 @@ const config: Config = {
       // The search crawling repo can be found here: https://github.com/configcat/docsearch
       appId: '0G4A1N5W4D', // Revert to 0MLXBNIK0Q before merging.
       apiKey: '6ef464aa13ff206475397b835c52b646', // Revert to 6484bd6c163502bacf229cb8d22024ab before merging.
-      indexName: 'configcat',
+      indexName: 'docs',
       contextualSearch: true,
       searchPagePath: 'search',
       searchParameters: {},
