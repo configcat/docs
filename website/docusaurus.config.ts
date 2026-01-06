@@ -453,7 +453,7 @@ const config: Config = {
   themes: ['docusaurus-theme-openapi-docs'],
   scripts: [],
   stylesheets: [],
-  clientModules: ['./src/client-modules/img-zoom'],
+  clientModules: ['./src/client-modules/img-zoom', './src/client-modules/search-interceptor'],
 };
 
 export default config;
