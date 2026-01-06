@@ -24,22 +24,10 @@ export default function SearchBar() {
 
         return items.map((item) => {
           const url = new URL(item.url);
-          const currentPath = window.location.pathname;
-
-          const isDocsResult = url.pathname.startsWith('/docs');
-          const isBlogResult = url.pathname.startsWith('/blog');
-
-          const onDocsSite = currentPath.startsWith('/docs');
-          const onBlogSite = currentPath.startsWith('/blog');
-
-          // Only rewrite if the item belongs to current site
-          if ((isDocsResult && onDocsSite) || (isBlogResult && onBlogSite)) {
-            return {
-              ...item,
-              url: `${origin}${url.pathname}${url.search}${url.hash}`,
-            };
-          }
-          return item;
+          return {
+            ...item,
+            url: `${origin}${url.pathname}${url.search}${url.hash}`,
+          };
         });
       }}
     />
