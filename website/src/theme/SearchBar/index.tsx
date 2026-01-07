@@ -9,7 +9,7 @@ export default function SearchBar() {
       apiKey="6484bd6c163502bacf229cb8d22024ab"
       indices={[
         {
-          name: 'configcat', // Same as indexName in docusaurus.config.ts
+          name: 'docs', // Same as indexName in docusaurus.config.ts
         },
       ]}
       resultsFooterComponent={({ state }) => {
