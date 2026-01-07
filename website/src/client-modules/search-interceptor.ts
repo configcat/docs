@@ -1,7 +1,7 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 if (ExecutionEnvironment.canUseDOM) {
-  const fixSearchPageLinks = () => {
+  const modifySearchPageLinks = () => {
     // 1. Target the <article> elements used on the /search page
     const articles = document.querySelectorAll('[class*="searchResultItem"]');
 
@@ -16,10 +16,6 @@ if (ExecutionEnvironment.canUseDOM) {
 
           // 3. Reconstruct the URL to use the current host (origin)
           link.href = `${origin}${url.pathname}${url.search}${url.hash}`;
-
-          // 4. Ensure it matches the target requirement
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
         } catch (e) {
           // Skip if the URL is not valid
         }
@@ -27,7 +23,7 @@ if (ExecutionEnvironment.canUseDOM) {
     });
   };
 
-  const observer = new MutationObserver(fixSearchPageLinks);
+  const observer = new MutationObserver(modifySearchPageLinks);
 
   observer.observe(document.body, {
     childList: true,
