@@ -28,7 +28,7 @@ const CONFIG = {
   MIN_CONTENT_LENGTH: 100,
 } as const;
 
-// static selectors for content cleanup
+// Static selectors for content cleanup
 const DEFAULT_SELECTORS_TO_REMOVE = [
   '.theme-edit-this-page',
   '.theme-last-updated',
