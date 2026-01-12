@@ -140,8 +140,6 @@ const extractCodeContent = (codeElement: HTMLElement): string => {
     .replace(/^\s*Copy to clipboard\s*$/gm, '');
 };
 
-
-
 export default function CopyPageButton() {
   const enabledActions = ENABLED_ACTIONS;
   const [isOpen, setIsOpen] = useState(false);
