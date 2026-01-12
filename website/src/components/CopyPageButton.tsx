@@ -24,7 +24,7 @@ const CONFIG = {
   DROPDOWN_OFFSET: 8,
   DROPDOWN_WIDTH: 300,
   DEBUG: process.env.NODE_ENV === 'development',
-  MIN_CONTENT_LENGTH: 100, // Named constant for magic number
+  MIN_CONTENT_LENGTH: 100,
 } as const;
 
 // static selectors for content cleanup
@@ -61,15 +61,15 @@ const log = (...args: any[]) => {
   }
 };
 
-// Extracted text cleaning utility
+// Text cleaning
 const cleanSpecialChars = (text: string): string => {
   return text
-    .replace(/[\u200B-\u200D\uFEFF]/g, '') // Remove zero-width spaces
-    .replace(/\u00A0/g, ' ') // Replace non-breaking spaces
-    .replace(/[\u2018\u2019]/g, "'") // Smart quotes
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .replace(/\u00A0/g, ' ')
+    .replace(/[\u2018\u2019]/g, "'")
     .replace(/[\u201C\u201D]/g, '"')
-    .replace(/â€‹/g, '') // Clean encoding issues
-    .replace(/\s+/g, ' ') // Normalize whitespace
+    .replace(/â€‹/g, '')
+    .replace(/\s+/g, ' ')
     .trim();
 };
 
@@ -97,13 +97,13 @@ const findContentElement = (): HTMLElement | null => {
 };
 
 const extractCodeContent = (codeElement: HTMLElement): string => {
-  // Strategy 1: Data attributes
+  // 1: Data attributes
   const dataContent =
     codeElement.getAttribute('data-code') ||
     codeElement.getAttribute('data-raw');
   if (dataContent) return dataContent;
 
-  // Strategy 2: Line-based elements
+  // 2: Line-based elements
   const lineSelectors =
     'span[data-line], .token-line, .code-line, .highlight-line';
   const codeLines = codeElement.querySelectorAll(lineSelectors);
@@ -113,7 +113,7 @@ const extractCodeContent = (codeElement: HTMLElement): string => {
       .join('\n');
   }
 
-  // Strategy 3: Div-based structure
+  // 3: Div-based structure
   const codeLineDivs = codeElement.querySelectorAll('div');
   if (codeLineDivs.length > 0) {
     return Array.from(codeLineDivs)
@@ -130,7 +130,7 @@ const extractCodeContent = (codeElement: HTMLElement): string => {
       .join('\n');
   }
 
-  // Strategy 4: Direct text with cleanup
+  // 4: Direct text
   return (codeElement.textContent || '')
     .replace(/^\d+\s+/gm, '') // Remove line numbers
     .replace(/^Copy$/gm, '')
@@ -172,7 +172,7 @@ export default function CopyPageButton() {
     };
   }, [isOpen]);
 
-  // Only recalculate position when isOpen changes to true
+  // Recalculate position when isOpen changes to true
   useEffect(() => {
     if (isOpen && buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
