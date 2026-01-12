@@ -24,7 +24,6 @@ const CONFIG = {
   DROPDOWN_OFFSET: 8,
   DROPDOWN_WIDTH: 300,
   DEBUG: process.env.NODE_ENV === 'development',
-  COPY_SUCCESS_DURATION: 2000,
   MIN_CONTENT_LENGTH: 100, // Named constant for magic number
 } as const;
 
