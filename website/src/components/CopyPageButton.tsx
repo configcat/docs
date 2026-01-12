@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import styles from '../css/copy-page-button.module.scss';
 
 // --- TYPES ---
+
 type ActionId = 'copy' | 'view' | 'chatgpt' | 'claude';
 
 interface DropdownItem {
@@ -73,6 +74,7 @@ const cleanSpecialChars = (text: string): string => {
     .trim();
 };
 
+// Sanitize content
 const sanitizeContent = (content: string): string => {
   return content
     .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
@@ -138,7 +140,7 @@ const extractCodeContent = (codeElement: HTMLElement): string => {
     .replace(/^\s*Copy to clipboard\s*$/gm, '');
 };
 
-// -- MAIN COMPONENT --
+
 
 export default function CopyPageButton() {
   const enabledActions = ENABLED_ACTIONS;
