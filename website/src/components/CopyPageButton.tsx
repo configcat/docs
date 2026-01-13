@@ -21,7 +21,6 @@ interface DropdownPosition {
 // --- CONFIGS ---
 
 const CONFIG = {
-  MOBILE_BREAKPOINT: 767,
   DROPDOWN_OFFSET: 8,
   DROPDOWN_WIDTH: 300,
   DEBUG: process.env.NODE_ENV === 'development',
@@ -176,11 +175,10 @@ export default function CopyPageButton() {
   useEffect(() => {
     if (isOpen && buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
-      const isMobile = window.innerWidth <= CONFIG.MOBILE_BREAKPOINT;
 
       setDropdownPosition({
         top: rect.bottom + CONFIG.DROPDOWN_OFFSET,
-        left: isMobile ? rect.left : rect.right - CONFIG.DROPDOWN_WIDTH,
+        left: rect.left
       });
     }
   }, [isOpen]);
