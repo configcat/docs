@@ -1,6 +1,12 @@
 .copyPageButtonContainer {
   position: relative;
-  display: inline-block;
+  display: flex;
+  width: 100%;
+  justify-content: right;
+
+  @media screen and (max-width: 767px) {
+    justify-content: start;
+  }
 }
 
 .copyPageButton {
