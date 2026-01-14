@@ -1,8 +1,6 @@
 .copyPageButtonContainer {
   position: relative;
-  display: flex;
-  width: 100%;
-  margin: 16px 0;
+  display: inline-block;
 }
 
 .copyPageButton {
@@ -10,6 +8,7 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
+  margin-bottom: 16px;
   background: var(--ifm-navbar-background-color, #1c1e21);
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 6px;

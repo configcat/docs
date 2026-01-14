@@ -6,6 +6,7 @@ import Heading from '@theme/Heading';
 import MDXContent from '@theme/MDXContent';
 import type { Props } from '@theme/DocItem/Content';
 import CopyPageButton from '@site/src/components/CopyPageButton';
+import styles from '@site/src/css/doc-item-content.module.scss';
 
 /**
  Title can be declared inside md content or declared through
@@ -31,10 +32,10 @@ export default function DocItemContent({ children }: Props): ReactNode {
   const syntheticTitle = useSyntheticTitle();
   return (
     <div className={clsx(ThemeClassNames.docs.docMarkdown, 'markdown')}>
-      <CopyPageButton />
       {syntheticTitle && (
-        <header>
+        <header style={styles.header}>
           <Heading as="h1">{syntheticTitle}</Heading>
+          <CopyPageButton />
         </header>
       )}
       <MDXContent>{children}</MDXContent>
