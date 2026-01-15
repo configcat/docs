@@ -1,0 +1,27 @@
+:global(.hash-link) {
+  opacity: 0;
+  padding-left: 0.5rem;
+  transition: opacity var(--ifm-transition-fast);
+  user-select: none;
+}
+
+:global(.hash-link::before) {
+  content: '#';
+}
+
+:global(.hash-link:focus),
+:global(*:hover > .hash-link) {
+  opacity: 1;
+}
+
+/* Custom Styles */
+:global(.custom-header) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  @media (max-width: 767px) {
+    display: block;
+  }
+}
