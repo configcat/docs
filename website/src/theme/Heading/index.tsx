@@ -13,13 +13,18 @@ export default function Heading({as: As, id, ...props}: Props): ReactNode {
   const anchorTargetClassName = useAnchorTargetClassName(id);
 
   // H1 headings do not need an id because they don't appear in the TOC.
-  if (As === 'h1' || !id) {
+  // H1 headings do not need an id because they don't appear in the TOC.
+  if (As === 'h1') {
+    return (
       <div className="custom-h1-wrapper">
         <As {...props} id={undefined} />
-        {As === 'h1' && <CopyPageButton />} 
+        <CopyPageButton />
       </div>
-        {As === 'h1' && <CopyPageButton />} 
-      </div>
+    );
+  }
+  if (!id) {
+    return <As {...props} id={undefined} />;
+  }
     )
   }
 
