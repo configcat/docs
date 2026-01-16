@@ -15,7 +15,7 @@
 }
 
 /* Custom Styles */
-:global(.custom-header) {
+:global(.custom-h1-wrapper) {
   display: flex;
   justify-content: space-between;
   align-items: center;
