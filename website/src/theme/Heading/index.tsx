@@ -1,31 +1,31 @@
-import React, {type ReactNode} from 'react';
+import React, { type ReactNode } from 'react';
 import clsx from 'clsx';
-import {translate} from '@docusaurus/Translate';
-import {useAnchorTargetClassName} from '@docusaurus/theme-common';
+import { translate } from '@docusaurus/Translate';
+import { useAnchorTargetClassName } from '@docusaurus/theme-common';
 import Link from '@docusaurus/Link';
 import useBrokenLinks from '@docusaurus/useBrokenLinks';
-import type {Props} from '@theme/Heading';
+import type { Props } from '@theme/Heading';
 import './styles.module.css';
 import CopyPageButton from '@site/src/components/CopyPageButton';
 
-export default function Heading({as: As, id, ...props}: Props): ReactNode {
+export default function Heading({ as: As, id, ...props }: Props): ReactNode {
   const brokenLinks = useBrokenLinks();
   const anchorTargetClassName = useAnchorTargetClassName(id);
 
   // H1 headings do not need an id because they don't appear in the TOC.
-  // H1 headings do not need an id because they don't appear in the TOC.
-  if (As === 'h1') {
+  if (As === 'h1' || !id) {
     return (
-      <div className="custom-h1-wrapper">
-        <As {...props} id={undefined} />
-        <CopyPageButton />
-      </div>
+      <>
+        {As === 'h1' ? (
+          <div className="custom-h1-wrapper">
+            <As {...props} id={undefined} />
+            <CopyPageButton />
+          </div>
+        ) : (
+          <As {...props} id={undefined} />
+        )}
+      </>
     );
-  }
-  if (!id) {
-    return <As {...props} id={undefined} />;
-  }
-    )
   }
 
   brokenLinks.collectAnchor(id);
