@@ -26,7 +26,7 @@ const CONFIG = {
   DROPDOWN_WIDTH: 300,
   DEBUG: process.env.NODE_ENV === 'development',
   MIN_CONTENT_LENGTH: 100,
-} as const;
+};
 
 // Static selectors for content cleanup
 const DEFAULT_SELECTORS_TO_REMOVE = [
@@ -41,7 +41,7 @@ const DEFAULT_SELECTORS_TO_REMOVE = [
   '.clean-btn',
   '.theme-code-block-title',
   '.line-number',
-] as const;
+];
 
 const DEFAULT_CONTENT_SELECTORS = [
   'main article',
