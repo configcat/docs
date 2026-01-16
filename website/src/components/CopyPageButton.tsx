@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import styles from '../css/copy-page-button.module.scss';
 
 // --- TYPES ---
@@ -51,8 +51,6 @@ const DEFAULT_CONTENT_SELECTORS = [
   '.main-wrapper',
   '[role="main"]',
 ] as const;
-
-const ENABLED_ACTIONS = ['copy', 'view', 'chatgpt', 'claude'] as const;
 
 // --- UTILS ---
 
@@ -141,7 +139,6 @@ const extractCodeContent = (codeElement: HTMLElement): string => {
 };
 
 export default function CopyPageButton() {
-  const enabledActions = ENABLED_ACTIONS;
   const [isOpen, setIsOpen] = useState(false);
   const [pageContent, setPageContent] = useState<string>('');
   const [dropdownPosition, setDropdownPosition] = useState<DropdownPosition>({
@@ -425,8 +422,7 @@ Please provide a clear summary and help me understand the key concepts covered i
     }
   }, [getPageContent]);
 
-  const allDropdownItems: DropdownItem[] = useMemo(
-    () => [
+  const dropdownItems: DropdownItem[] = [
       {
         id: 'copy',
         title: 'Copy page',
@@ -506,14 +502,7 @@ Please provide a clear summary and help me understand the key concepts covered i
         ),
         action: () => openInAI('https://claude.ai/new'),
       },
-    ],
-    [copyToClipboard, viewAsMarkdown, openInAI],
-  );
-
-  const dropdownItems = useMemo(
-    () => allDropdownItems.filter((item) => enabledActions.includes(item.id)),
-    [allDropdownItems, enabledActions],
-  );
+    ];
 
   return (
     <>
