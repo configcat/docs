@@ -14,9 +14,10 @@ export default function Heading({as: As, id, ...props}: Props): ReactNode {
 
   // H1 headings do not need an id because they don't appear in the TOC.
   if (As === 'h1' || !id) {
-    return (
       <div className="custom-h1-wrapper">
         <As {...props} id={undefined} />
+        {As === 'h1' && <CopyPageButton />} 
+      </div>
         {As === 'h1' && <CopyPageButton />} 
       </div>
     )
