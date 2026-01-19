@@ -1,7 +1,6 @@
 import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 import type * as Preset from '@docusaurus/preset-classic';
-import { relative } from 'path';
 
 const config: Config = {
   title: 'ConfigCat Docs',
@@ -403,6 +402,7 @@ const config: Config = {
     },
     algolia: {
       // The search crawling repo can be found here: https://github.com/configcat/docsearch
+      // Keep appId, apiKey, and indexName in sync with website/src/theme/SearchBar/index.tsx
       appId: '0MLXBNIK0Q',
       apiKey: '6484bd6c163502bacf229cb8d22024ab',
       indexName: 'configcat',
@@ -453,7 +453,7 @@ const config: Config = {
   themes: ['docusaurus-theme-openapi-docs'],
   scripts: [],
   stylesheets: [],
-  clientModules: ['./src/client-modules/img-zoom'],
+  clientModules: ['./src/client-modules/img-zoom', './src/client-modules/search-interceptor'],
 };
 
 export default config;
