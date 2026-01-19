@@ -20,3 +20,6 @@ website/i18n/*
 
 website/api/reference/*
 website/api/scim/*
+
+.gemini/
+gha-creds-*.json
