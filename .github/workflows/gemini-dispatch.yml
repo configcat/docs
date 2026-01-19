@@ -4,9 +4,9 @@ on:
   pull_request_review_comment:
     types:
       - 'created'
-  # pull_request_review:
-  #   types:
-  #     - 'submitted'
+  pull_request_review:
+    types:
+      - 'submitted'
   pull_request:
     types: [opened, reopened]
     paths:
@@ -16,9 +16,9 @@ on:
   #   types:
   #     - 'opened'
   #     - 'reopened'
-  # issue_comment:
-  #   types:
-  #     - 'created'
+  issue_comment:
+    types:
+      - 'created'
 
 defaults:
   run:
