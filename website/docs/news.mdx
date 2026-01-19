@@ -10,9 +10,30 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 {/* This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html */}
 
+## More control over your Slack notifications
+
+#### Jan 19, 2026
+
+Good news! We listened to your feedback and made our Slack integration more flexible.
+
+You can now control whether Slack notifications show or hide sensitive targeting data. This gives more context in private channels, while keeping safe defaults for shared ones.
+
+Until now, comparison values used with confidential (hashed) operators were always masked in Slack. This remains the default behavior.
+
+From now on, you can optionally change this setting for existing Slack integrations on the [Integrations page](https://app.configcat.com/product/integrations).  
+When creating a new Slack integration, you will be asked during setup whether targeting rule values should be sent in cleartext.
+
+No action is required to keep sensitive data hidden for existing integrations. We recommend keeping this setting disabled for shared or public Slack channels.
+
+<p>
+    <img src="/docs/assets/news/slack-sensitive_192dpi.png" alt="Slack integration sensitive data" width="1366" height="768" decoding="async" loading="lazy" />
+</p>
+
+---
+
 ## ConfigCat MCP Server
 
-#### Spet 30, 2025
+#### Sept 30, 2025
 
 We just released a new official ConfigCat's Model Context Protocol (MCP) Server.
 AI tools like Cursor can now interact with ConfigCat via our new MCP server.
@@ -36,7 +57,9 @@ AI tools like Cursor can now interact with ConfigCat via our new MCP server.
 />
 
 For more info about how to set up the MCP server, [see Documentation](../advanced/mcp-server/).
-            
+
+---
+
 ## Automatic ConfigCat Proxy configuration with Proxy profiles / OpenFeature Remote Evaluation Protocol
 
 #### Aug 22, 2025
@@ -53,6 +76,8 @@ the Proxy has the ability to use [Proxy profiles](https://app.configcat.com/orga
 
 2. From the [v2.0.0](https://github.com/configcat/configcat-proxy/releases/tag/v2.0.0) version, the Proxy conforms to the [OpenFeature Remote Evaluation Protocol](https://github.com/open-feature/protocol) (OFREP), which means it can be used with OFREP compatible OpenFeature providers.
 [See the API documentation](/docs/advanced/proxy/endpoints/#openfeature-remote-evaluation-protocol-ofrep) for the OFREP implementation with usage examples.
+
+---
 
 ## New SDK for JavaScript with Cloudflare Workers support
 
@@ -93,6 +118,8 @@ But there are other advantages to upgrading to the new SDK sooner rather than la
   error causes.
 
 For the full list of new features and improvements, take a look at the [release notes](https://github.com/configcat/js-unified-sdk/releases/tag/v1.0.0).
+
+---
 
 ## New ConfigCat OpenFeature providers
 
