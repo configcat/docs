@@ -8,7 +8,7 @@ on:
   #   types:
   #     - 'submitted'
   pull_request:
-    types: [opened, reopened, synchronize]
+    types: [opened, reopened]
     paths:
       - '**/*.md'
       - '**/*.mdx'
@@ -95,7 +95,7 @@ jobs:
             const request = process.env.REQUEST;
             core.setOutput('request', request);
 
-            if (['pull_request.opened', 'pull_request.reopened', 'pull_request.synchronize'].includes(eventType)) {
+            if (['pull_request.opened', 'pull_request.reopened'].includes(eventType)) {
               core.setOutput('command', 'review');
             // } else if (['issues.opened', 'issues.reopened'].includes(eventType)) {
             //   core.setOutput('command', 'triage');
