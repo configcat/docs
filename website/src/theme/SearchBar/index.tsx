@@ -26,7 +26,7 @@ export default function SearchBar() {
       ]}
       resultsFooterComponent={({ state }) => {
         return (
-          <a href={`/docs/search?q=${encodeURIComponent(state.query)}`}>
+          <a href={`/docs/search?q=${encodeURIComponent(state.query)}&version=${currentVersion}`}>
             See all results
           </a>
         );
@@ -36,7 +36,6 @@ export default function SearchBar() {
 
         return items.filter((item) => {
           const url = new URL(item.url);
-          console.log(item.url)
           const isV1Item = url.pathname.startsWith('/docs/V1/');
 
           if (currentVersion === 'V1') {
