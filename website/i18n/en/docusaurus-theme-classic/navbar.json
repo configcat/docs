@@ -1,0 +1,38 @@
+{
+  "title": {
+    "message": "ConfigCat",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "ConfigCat",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Docs": {
+    "message": "Docs",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.SDKs": {
+    "message": "SDKs",
+    "description": "Navbar item with label SDKs"
+  },
+  "item.label.Integrations": {
+    "message": "Integrations",
+    "description": "Navbar item with label Integrations"
+  },
+  "item.label.API": {
+    "message": "API",
+    "description": "Navbar item with label API"
+  },
+  "item.label.Blog": {
+    "message": "Blog",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.configcat.com": {
+    "message": "configcat.com",
+    "description": "Navbar item with label configcat.com"
+  },
+  "item.label.Search": {
+    "message": "Search",
+    "description": "Navbar item with label Search"
+  }
+}

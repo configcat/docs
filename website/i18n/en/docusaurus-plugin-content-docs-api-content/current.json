@@ -1,0 +1,622 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.api.category.Public Management API": {
+    "message": "Public Management API",
+    "description": "The label for category 'Public Management API' in sidebar 'api'"
+  },
+  "sidebar.api.category.Feature Flag values V2": {
+    "message": "Feature Flag values V2",
+    "description": "The label for category 'Feature Flag values V2' in sidebar 'api'"
+  },
+  "sidebar.api.category.Feature Flag & Setting values using SDK Key V2": {
+    "message": "Feature Flag & Setting values using SDK Key V2",
+    "description": "The label for category 'Feature Flag & Setting values using SDK Key V2' in sidebar 'api'"
+  },
+  "sidebar.api.category.Feature Flag & Setting values V2": {
+    "message": "Feature Flag & Setting values V2",
+    "description": "The label for category 'Feature Flag & Setting values V2' in sidebar 'api'"
+  },
+  "sidebar.api.category.Feature Flag values (legacy)": {
+    "message": "Feature Flag values (legacy)",
+    "description": "The label for category 'Feature Flag values (legacy)' in sidebar 'api'"
+  },
+  "sidebar.api.category.Feature Flag & Setting values using SDK Key": {
+    "message": "Feature Flag & Setting values using SDK Key",
+    "description": "The label for category 'Feature Flag & Setting values using SDK Key' in sidebar 'api'"
+  },
+  "sidebar.api.category.Feature Flag & Setting values": {
+    "message": "Feature Flag & Setting values",
+    "description": "The label for category 'Feature Flag & Setting values' in sidebar 'api'"
+  },
+  "sidebar.api.category.Feature Flag metadata": {
+    "message": "Feature Flag metadata",
+    "description": "The label for category 'Feature Flag metadata' in sidebar 'api'"
+  },
+  "sidebar.api.category.Feature Flags & Settings": {
+    "message": "Feature Flags & Settings",
+    "description": "The label for category 'Feature Flags & Settings' in sidebar 'api'"
+  },
+  "sidebar.api.category.Tags": {
+    "message": "Tags",
+    "description": "The label for category 'Tags' in sidebar 'api'"
+  },
+  "sidebar.api.category.General": {
+    "message": "General",
+    "description": "The label for category 'General' in sidebar 'api'"
+  },
+  "sidebar.api.category.Products": {
+    "message": "Products",
+    "description": "The label for category 'Products' in sidebar 'api'"
+  },
+  "sidebar.api.category.Webhooks": {
+    "message": "Webhooks",
+    "description": "The label for category 'Webhooks' in sidebar 'api'"
+  },
+  "sidebar.api.category.Configs": {
+    "message": "Configs",
+    "description": "The label for category 'Configs' in sidebar 'api'"
+  },
+  "sidebar.api.category.Environments": {
+    "message": "Environments",
+    "description": "The label for category 'Environments' in sidebar 'api'"
+  },
+  "sidebar.api.category.Segments": {
+    "message": "Segments",
+    "description": "The label for category 'Segments' in sidebar 'api'"
+  },
+  "sidebar.api.category.SDK Keys": {
+    "message": "SDK Keys",
+    "description": "The label for category 'SDK Keys' in sidebar 'api'"
+  },
+  "sidebar.api.category.Integrations": {
+    "message": "Integrations",
+    "description": "The label for category 'Integrations' in sidebar 'api'"
+  },
+  "sidebar.api.category.Code References": {
+    "message": "Code References",
+    "description": "The label for category 'Code References' in sidebar 'api'"
+  },
+  "sidebar.api.category.Proxy Profiles": {
+    "message": "Proxy Profiles",
+    "description": "The label for category 'Proxy Profiles' in sidebar 'api'"
+  },
+  "sidebar.api.category.Membership": {
+    "message": "Membership",
+    "description": "The label for category 'Membership' in sidebar 'api'"
+  },
+  "sidebar.api.category.Organizations": {
+    "message": "Organizations",
+    "description": "The label for category 'Organizations' in sidebar 'api'"
+  },
+  "sidebar.api.category.Members": {
+    "message": "Members",
+    "description": "The label for category 'Members' in sidebar 'api'"
+  },
+  "sidebar.api.category.Permission Groups": {
+    "message": "Permission Groups",
+    "description": "The label for category 'Permission Groups' in sidebar 'api'"
+  },
+  "sidebar.api.category.Diagnostics": {
+    "message": "Diagnostics",
+    "description": "The label for category 'Diagnostics' in sidebar 'api'"
+  },
+  "sidebar.api.category.Audit logs": {
+    "message": "Audit logs",
+    "description": "The label for category 'Audit logs' in sidebar 'api'"
+  },
+  "sidebar.api.category.Zombie (stale) flags": {
+    "message": "Zombie (stale) flags",
+    "description": "The label for category 'Zombie (stale) flags' in sidebar 'api'"
+  },
+  "sidebar.api.category.Me": {
+    "message": "Me",
+    "description": "The label for category 'Me' in sidebar 'api'"
+  },
+  "sidebar.api.category.User Provisioning (SCIM)": {
+    "message": "User Provisioning (SCIM)",
+    "description": "The label for category 'User Provisioning (SCIM)' in sidebar 'api'"
+  },
+  "sidebar.api.category.Service provider config": {
+    "message": "Service provider config",
+    "description": "The label for category 'Service provider config' in sidebar 'api'"
+  },
+  "sidebar.api.category.Service provider config.link.generated-index.title": {
+    "message": "Service provider config",
+    "description": "The generated-index page title for category 'Service provider config' in sidebar 'api'"
+  },
+  "sidebar.api.category.Groups": {
+    "message": "Groups",
+    "description": "The label for category 'Groups' in sidebar 'api'"
+  },
+  "sidebar.api.category.Groups.link.generated-index.title": {
+    "message": "Groups",
+    "description": "The generated-index page title for category 'Groups' in sidebar 'api'"
+  },
+  "sidebar.api.category.Users": {
+    "message": "Users",
+    "description": "The label for category 'Users' in sidebar 'api'"
+  },
+  "sidebar.api.category.Users.link.generated-index.title": {
+    "message": "Users",
+    "description": "The generated-index page title for category 'Users' in sidebar 'api'"
+  },
+  "sidebar.api.doc.reference/configcat-public-management-api": {
+    "message": "Introduction",
+    "description": "The label for the doc item 'Introduction' in sidebar 'api', linking to the doc reference/configcat-public-management-api"
+  },
+  "sidebar.api.doc.reference/get-setting-value-by-sdkkey-v-2": {
+    "message": "Get value",
+    "description": "The label for the doc item 'Get value' in sidebar 'api', linking to the doc reference/get-setting-value-by-sdkkey-v-2"
+  },
+  "sidebar.api.doc.reference/replace-setting-value-by-sdkkey-v-2": {
+    "message": "Replace value",
+    "description": "The label for the doc item 'Replace value' in sidebar 'api', linking to the doc reference/replace-setting-value-by-sdkkey-v-2"
+  },
+  "sidebar.api.doc.reference/update-setting-value-by-sdkkey-v-2": {
+    "message": "Update value",
+    "description": "The label for the doc item 'Update value' in sidebar 'api', linking to the doc reference/update-setting-value-by-sdkkey-v-2"
+  },
+  "sidebar.api.doc.reference/get-setting-value-v-2": {
+    "message": "Get value",
+    "description": "The label for the doc item 'Get value' in sidebar 'api', linking to the doc reference/get-setting-value-v-2"
+  },
+  "sidebar.api.doc.reference/replace-setting-value-v-2": {
+    "message": "Replace value",
+    "description": "The label for the doc item 'Replace value' in sidebar 'api', linking to the doc reference/replace-setting-value-v-2"
+  },
+  "sidebar.api.doc.reference/update-setting-value-v-2": {
+    "message": "Update value",
+    "description": "The label for the doc item 'Update value' in sidebar 'api', linking to the doc reference/update-setting-value-v-2"
+  },
+  "sidebar.api.doc.reference/get-setting-values-v-2": {
+    "message": "Get values",
+    "description": "The label for the doc item 'Get values' in sidebar 'api', linking to the doc reference/get-setting-values-v-2"
+  },
+  "sidebar.api.doc.reference/post-setting-values-v-2": {
+    "message": "Post values",
+    "description": "The label for the doc item 'Post values' in sidebar 'api', linking to the doc reference/post-setting-values-v-2"
+  },
+  "sidebar.api.doc.reference/get-setting-value-by-sdkkey": {
+    "message": "Get value",
+    "description": "The label for the doc item 'Get value' in sidebar 'api', linking to the doc reference/get-setting-value-by-sdkkey"
+  },
+  "sidebar.api.doc.reference/replace-setting-value-by-sdkkey": {
+    "message": "Replace value",
+    "description": "The label for the doc item 'Replace value' in sidebar 'api', linking to the doc reference/replace-setting-value-by-sdkkey"
+  },
+  "sidebar.api.doc.reference/update-setting-value-by-sdkkey": {
+    "message": "Update value",
+    "description": "The label for the doc item 'Update value' in sidebar 'api', linking to the doc reference/update-setting-value-by-sdkkey"
+  },
+  "sidebar.api.doc.reference/get-setting-value": {
+    "message": "Get value",
+    "description": "The label for the doc item 'Get value' in sidebar 'api', linking to the doc reference/get-setting-value"
+  },
+  "sidebar.api.doc.reference/replace-setting-value": {
+    "message": "Replace value",
+    "description": "The label for the doc item 'Replace value' in sidebar 'api', linking to the doc reference/replace-setting-value"
+  },
+  "sidebar.api.doc.reference/update-setting-value": {
+    "message": "Update value",
+    "description": "The label for the doc item 'Update value' in sidebar 'api', linking to the doc reference/update-setting-value"
+  },
+  "sidebar.api.doc.reference/get-setting-values": {
+    "message": "Get values",
+    "description": "The label for the doc item 'Get values' in sidebar 'api', linking to the doc reference/get-setting-values"
+  },
+  "sidebar.api.doc.reference/post-setting-values": {
+    "message": "Post values",
+    "description": "The label for the doc item 'Post values' in sidebar 'api', linking to the doc reference/post-setting-values"
+  },
+  "sidebar.api.doc.reference/get-settings": {
+    "message": "List Flags",
+    "description": "The label for the doc item 'List Flags' in sidebar 'api', linking to the doc reference/get-settings"
+  },
+  "sidebar.api.doc.reference/create-setting": {
+    "message": "Create Flag",
+    "description": "The label for the doc item 'Create Flag' in sidebar 'api', linking to the doc reference/create-setting"
+  },
+  "sidebar.api.doc.reference/get-predefined-variations": {
+    "message": "Get predefined variations (Beta)",
+    "description": "The label for the doc item 'Get predefined variations (Beta)' in sidebar 'api', linking to the doc reference/get-predefined-variations"
+  },
+  "sidebar.api.doc.reference/update-predefined-variations": {
+    "message": "Update predefined variations (Beta)",
+    "description": "The label for the doc item 'Update predefined variations (Beta)' in sidebar 'api', linking to the doc reference/update-predefined-variations"
+  },
+  "sidebar.api.doc.reference/get-setting": {
+    "message": "Get Flag",
+    "description": "The label for the doc item 'Get Flag' in sidebar 'api', linking to the doc reference/get-setting"
+  },
+  "sidebar.api.doc.reference/replace-setting": {
+    "message": "Replace Flag",
+    "description": "The label for the doc item 'Replace Flag' in sidebar 'api', linking to the doc reference/replace-setting"
+  },
+  "sidebar.api.doc.reference/update-setting": {
+    "message": "Update Flag",
+    "description": "The label for the doc item 'Update Flag' in sidebar 'api', linking to the doc reference/update-setting"
+  },
+  "sidebar.api.doc.reference/delete-setting": {
+    "message": "Delete Flag",
+    "description": "The label for the doc item 'Delete Flag' in sidebar 'api', linking to the doc reference/delete-setting"
+  },
+  "sidebar.api.doc.reference/get-tags": {
+    "message": "List Tags",
+    "description": "The label for the doc item 'List Tags' in sidebar 'api', linking to the doc reference/get-tags"
+  },
+  "sidebar.api.doc.reference/create-tag": {
+    "message": "Create Tag",
+    "description": "The label for the doc item 'Create Tag' in sidebar 'api', linking to the doc reference/create-tag"
+  },
+  "sidebar.api.doc.reference/get-settings-by-tag": {
+    "message": "List Settings by Tag",
+    "description": "The label for the doc item 'List Settings by Tag' in sidebar 'api', linking to the doc reference/get-settings-by-tag"
+  },
+  "sidebar.api.doc.reference/get-tag": {
+    "message": "Get Tag",
+    "description": "The label for the doc item 'Get Tag' in sidebar 'api', linking to the doc reference/get-tag"
+  },
+  "sidebar.api.doc.reference/update-tag": {
+    "message": "Update Tag",
+    "description": "The label for the doc item 'Update Tag' in sidebar 'api', linking to the doc reference/update-tag"
+  },
+  "sidebar.api.doc.reference/delete-tag": {
+    "message": "Delete Tag",
+    "description": "The label for the doc item 'Delete Tag' in sidebar 'api', linking to the doc reference/delete-tag"
+  },
+  "sidebar.api.doc.reference/get-products": {
+    "message": "List Products",
+    "description": "The label for the doc item 'List Products' in sidebar 'api', linking to the doc reference/get-products"
+  },
+  "sidebar.api.doc.reference/get-product": {
+    "message": "Get Product",
+    "description": "The label for the doc item 'Get Product' in sidebar 'api', linking to the doc reference/get-product"
+  },
+  "sidebar.api.doc.reference/update-product": {
+    "message": "Update Product",
+    "description": "The label for the doc item 'Update Product' in sidebar 'api', linking to the doc reference/update-product"
+  },
+  "sidebar.api.doc.reference/delete-product": {
+    "message": "Delete Product",
+    "description": "The label for the doc item 'Delete Product' in sidebar 'api', linking to the doc reference/delete-product"
+  },
+  "sidebar.api.doc.reference/get-product-preferences": {
+    "message": "Get Product Preferences",
+    "description": "The label for the doc item 'Get Product Preferences' in sidebar 'api', linking to the doc reference/get-product-preferences"
+  },
+  "sidebar.api.doc.reference/update-product-preferences": {
+    "message": "Update Product Preferences",
+    "description": "The label for the doc item 'Update Product Preferences' in sidebar 'api', linking to the doc reference/update-product-preferences"
+  },
+  "sidebar.api.doc.reference/create-product": {
+    "message": "Create Product",
+    "description": "The label for the doc item 'Create Product' in sidebar 'api', linking to the doc reference/create-product"
+  },
+  "sidebar.api.doc.reference/get-webhooks": {
+    "message": "List Webhooks",
+    "description": "The label for the doc item 'List Webhooks' in sidebar 'api', linking to the doc reference/get-webhooks"
+  },
+  "sidebar.api.doc.reference/get-webhook": {
+    "message": "Get Webhook",
+    "description": "The label for the doc item 'Get Webhook' in sidebar 'api', linking to the doc reference/get-webhook"
+  },
+  "sidebar.api.doc.reference/replace-webhook": {
+    "message": "Replace Webhook",
+    "description": "The label for the doc item 'Replace Webhook' in sidebar 'api', linking to the doc reference/replace-webhook"
+  },
+  "sidebar.api.doc.reference/update-webhook": {
+    "message": "Update Webhook",
+    "description": "The label for the doc item 'Update Webhook' in sidebar 'api', linking to the doc reference/update-webhook"
+  },
+  "sidebar.api.doc.reference/delete-webhook": {
+    "message": "Delete Webhook",
+    "description": "The label for the doc item 'Delete Webhook' in sidebar 'api', linking to the doc reference/delete-webhook"
+  },
+  "sidebar.api.doc.reference/get-webhook-signing-keys": {
+    "message": "Get Webhook Signing Keys",
+    "description": "The label for the doc item 'Get Webhook Signing Keys' in sidebar 'api', linking to the doc reference/get-webhook-signing-keys"
+  },
+  "sidebar.api.doc.reference/create-webhook": {
+    "message": "Create Webhook",
+    "description": "The label for the doc item 'Create Webhook' in sidebar 'api', linking to the doc reference/create-webhook"
+  },
+  "sidebar.api.doc.reference/get-configs": {
+    "message": "List Configs",
+    "description": "The label for the doc item 'List Configs' in sidebar 'api', linking to the doc reference/get-configs"
+  },
+  "sidebar.api.doc.reference/create-config": {
+    "message": "Create Config",
+    "description": "The label for the doc item 'Create Config' in sidebar 'api', linking to the doc reference/create-config"
+  },
+  "sidebar.api.doc.reference/get-config": {
+    "message": "Get Config",
+    "description": "The label for the doc item 'Get Config' in sidebar 'api', linking to the doc reference/get-config"
+  },
+  "sidebar.api.doc.reference/update-config": {
+    "message": "Update Config",
+    "description": "The label for the doc item 'Update Config' in sidebar 'api', linking to the doc reference/update-config"
+  },
+  "sidebar.api.doc.reference/delete-config": {
+    "message": "Delete Config",
+    "description": "The label for the doc item 'Delete Config' in sidebar 'api', linking to the doc reference/delete-config"
+  },
+  "sidebar.api.doc.reference/get-environments": {
+    "message": "List Environments",
+    "description": "The label for the doc item 'List Environments' in sidebar 'api', linking to the doc reference/get-environments"
+  },
+  "sidebar.api.doc.reference/create-environment": {
+    "message": "Create Environment",
+    "description": "The label for the doc item 'Create Environment' in sidebar 'api', linking to the doc reference/create-environment"
+  },
+  "sidebar.api.doc.reference/get-environment": {
+    "message": "Get Environment",
+    "description": "The label for the doc item 'Get Environment' in sidebar 'api', linking to the doc reference/get-environment"
+  },
+  "sidebar.api.doc.reference/update-environment": {
+    "message": "Update Environment",
+    "description": "The label for the doc item 'Update Environment' in sidebar 'api', linking to the doc reference/update-environment"
+  },
+  "sidebar.api.doc.reference/delete-environment": {
+    "message": "Delete Environment",
+    "description": "The label for the doc item 'Delete Environment' in sidebar 'api', linking to the doc reference/delete-environment"
+  },
+  "sidebar.api.doc.reference/get-segments": {
+    "message": "List Segments",
+    "description": "The label for the doc item 'List Segments' in sidebar 'api', linking to the doc reference/get-segments"
+  },
+  "sidebar.api.doc.reference/create-segment": {
+    "message": "Create Segment",
+    "description": "The label for the doc item 'Create Segment' in sidebar 'api', linking to the doc reference/create-segment"
+  },
+  "sidebar.api.doc.reference/get-segment": {
+    "message": "Get Segment",
+    "description": "The label for the doc item 'Get Segment' in sidebar 'api', linking to the doc reference/get-segment"
+  },
+  "sidebar.api.doc.reference/update-segment": {
+    "message": "Update Segment",
+    "description": "The label for the doc item 'Update Segment' in sidebar 'api', linking to the doc reference/update-segment"
+  },
+  "sidebar.api.doc.reference/delete-segment": {
+    "message": "Delete Segment",
+    "description": "The label for the doc item 'Delete Segment' in sidebar 'api', linking to the doc reference/delete-segment"
+  },
+  "sidebar.api.doc.reference/get-sdk-keys": {
+    "message": "Get SDK Key",
+    "description": "The label for the doc item 'Get SDK Key' in sidebar 'api', linking to the doc reference/get-sdk-keys"
+  },
+  "sidebar.api.doc.reference/get-integrations": {
+    "message": "List Integrations",
+    "description": "The label for the doc item 'List Integrations' in sidebar 'api', linking to the doc reference/get-integrations"
+  },
+  "sidebar.api.doc.reference/create-integration": {
+    "message": "Create Integration",
+    "description": "The label for the doc item 'Create Integration' in sidebar 'api', linking to the doc reference/create-integration"
+  },
+  "sidebar.api.doc.reference/get-integration": {
+    "message": "Get Integration",
+    "description": "The label for the doc item 'Get Integration' in sidebar 'api', linking to the doc reference/get-integration"
+  },
+  "sidebar.api.doc.reference/update-integration": {
+    "message": "Update Integration",
+    "description": "The label for the doc item 'Update Integration' in sidebar 'api', linking to the doc reference/update-integration"
+  },
+  "sidebar.api.doc.reference/delete-integration": {
+    "message": "Delete Integration",
+    "description": "The label for the doc item 'Delete Integration' in sidebar 'api', linking to the doc reference/delete-integration"
+  },
+  "sidebar.api.doc.reference/get-references-for-feature-flag-or-setting": {
+    "message": "Get References for Feature Flag or Setting",
+    "description": "The label for the doc item 'Get References for Feature Flag or Setting' in sidebar 'api', linking to the doc reference/get-references-for-feature-flag-or-setting"
+  },
+  "sidebar.api.doc.reference/delete-reference-reports": {
+    "message": "Delete Reference reports",
+    "description": "The label for the doc item 'Delete Reference reports' in sidebar 'api', linking to the doc reference/delete-reference-reports"
+  },
+  "sidebar.api.doc.reference/upload-references": {
+    "message": "Upload References",
+    "description": "The label for the doc item 'Upload References' in sidebar 'api', linking to the doc reference/upload-references"
+  },
+  "sidebar.api.doc.reference/get-proxy-profile": {
+    "message": "Get Proxy Profile",
+    "description": "The label for the doc item 'Get Proxy Profile' in sidebar 'api', linking to the doc reference/get-proxy-profile"
+  },
+  "sidebar.api.doc.reference/replace-proxy-profile": {
+    "message": "Replace Proxy Profile",
+    "description": "The label for the doc item 'Replace Proxy Profile' in sidebar 'api', linking to the doc reference/replace-proxy-profile"
+  },
+  "sidebar.api.doc.reference/update-proxy-profile": {
+    "message": "Update Proxy Profile",
+    "description": "The label for the doc item 'Update Proxy Profile' in sidebar 'api', linking to the doc reference/update-proxy-profile"
+  },
+  "sidebar.api.doc.reference/delete-proxy-profile": {
+    "message": "Delete Proxy Profile",
+    "description": "The label for the doc item 'Delete Proxy Profile' in sidebar 'api', linking to the doc reference/delete-proxy-profile"
+  },
+  "sidebar.api.doc.reference/get-proxy-profiles": {
+    "message": "List Proxy Profiles",
+    "description": "The label for the doc item 'List Proxy Profiles' in sidebar 'api', linking to the doc reference/get-proxy-profiles"
+  },
+  "sidebar.api.doc.reference/create-proxy-profile": {
+    "message": "Create Proxy Profile",
+    "description": "The label for the doc item 'Create Proxy Profile' in sidebar 'api', linking to the doc reference/create-proxy-profile"
+  },
+  "sidebar.api.doc.reference/get-proxy-profile-sdk-keys": {
+    "message": "Get selected SDK keys",
+    "description": "The label for the doc item 'Get selected SDK keys' in sidebar 'api', linking to the doc reference/get-proxy-profile-sdk-keys"
+  },
+  "sidebar.api.doc.reference/deselect-proxy-profile-sdk-keys": {
+    "message": "Deselect SDK keys",
+    "description": "The label for the doc item 'Deselect SDK keys' in sidebar 'api', linking to the doc reference/deselect-proxy-profile-sdk-keys"
+  },
+  "sidebar.api.doc.reference/generate-proxy-profile-secret": {
+    "message": "Generate Secret",
+    "description": "The label for the doc item 'Generate Secret' in sidebar 'api', linking to the doc reference/generate-proxy-profile-secret"
+  },
+  "sidebar.api.doc.reference/select-proxy-profile-sdk-keys": {
+    "message": "Select SDK keys",
+    "description": "The label for the doc item 'Select SDK keys' in sidebar 'api', linking to the doc reference/select-proxy-profile-sdk-keys"
+  },
+  "sidebar.api.doc.reference/get-organizations": {
+    "message": "List Organizations",
+    "description": "The label for the doc item 'List Organizations' in sidebar 'api', linking to the doc reference/get-organizations"
+  },
+  "sidebar.api.doc.reference/get-organization-limitations": {
+    "message": "Get Organization limitations",
+    "description": "The label for the doc item 'Get Organization limitations' in sidebar 'api', linking to the doc reference/get-organization-limitations"
+  },
+  "sidebar.api.doc.reference/get-organization-members": {
+    "message": "List Organization Members",
+    "description": "The label for the doc item 'List Organization Members' in sidebar 'api', linking to the doc reference/get-organization-members"
+  },
+  "sidebar.api.doc.reference/get-organization-members-v-2": {
+    "message": "List Organization Members",
+    "description": "The label for the doc item 'List Organization Members' in sidebar 'api', linking to the doc reference/get-organization-members-v-2"
+  },
+  "sidebar.api.doc.reference/get-pending-invitations-org": {
+    "message": "List Pending Invitations in Organization",
+    "description": "The label for the doc item 'List Pending Invitations in Organization' in sidebar 'api', linking to the doc reference/get-pending-invitations-org"
+  },
+  "sidebar.api.doc.reference/get-pending-invitations": {
+    "message": "List Pending Invitations in Product",
+    "description": "The label for the doc item 'List Pending Invitations in Product' in sidebar 'api', linking to the doc reference/get-pending-invitations"
+  },
+  "sidebar.api.doc.reference/get-product-members": {
+    "message": "List Product Members",
+    "description": "The label for the doc item 'List Product Members' in sidebar 'api', linking to the doc reference/get-product-members"
+  },
+  "sidebar.api.doc.reference/invite-member": {
+    "message": "Invite Member",
+    "description": "The label for the doc item 'Invite Member' in sidebar 'api', linking to the doc reference/invite-member"
+  },
+  "sidebar.api.doc.reference/add-member-to-group": {
+    "message": "Update Member Permissions",
+    "description": "The label for the doc item 'Update Member Permissions' in sidebar 'api', linking to the doc reference/add-member-to-group"
+  },
+  "sidebar.api.doc.reference/delete-organization-member": {
+    "message": "Delete Member from Organization",
+    "description": "The label for the doc item 'Delete Member from Organization' in sidebar 'api', linking to the doc reference/delete-organization-member"
+  },
+  "sidebar.api.doc.reference/delete-invitation": {
+    "message": "Delete Invitation",
+    "description": "The label for the doc item 'Delete Invitation' in sidebar 'api', linking to the doc reference/delete-invitation"
+  },
+  "sidebar.api.doc.reference/delete-product-member": {
+    "message": "Delete Member from Product",
+    "description": "The label for the doc item 'Delete Member from Product' in sidebar 'api', linking to the doc reference/delete-product-member"
+  },
+  "sidebar.api.doc.reference/get-permission-groups": {
+    "message": "List Permission Groups",
+    "description": "The label for the doc item 'List Permission Groups' in sidebar 'api', linking to the doc reference/get-permission-groups"
+  },
+  "sidebar.api.doc.reference/create-permission-group": {
+    "message": "Create Permission Group",
+    "description": "The label for the doc item 'Create Permission Group' in sidebar 'api', linking to the doc reference/create-permission-group"
+  },
+  "sidebar.api.doc.reference/get-permission-group": {
+    "message": "Get Permission Group",
+    "description": "The label for the doc item 'Get Permission Group' in sidebar 'api', linking to the doc reference/get-permission-group"
+  },
+  "sidebar.api.doc.reference/update-permission-group": {
+    "message": "Update Permission Group",
+    "description": "The label for the doc item 'Update Permission Group' in sidebar 'api', linking to the doc reference/update-permission-group"
+  },
+  "sidebar.api.doc.reference/delete-permission-group": {
+    "message": "Delete Permission Group",
+    "description": "The label for the doc item 'Delete Permission Group' in sidebar 'api', linking to the doc reference/delete-permission-group"
+  },
+  "sidebar.api.doc.reference/get-auditlogs": {
+    "message": "List Audit log items for Product",
+    "description": "The label for the doc item 'List Audit log items for Product' in sidebar 'api', linking to the doc reference/get-auditlogs"
+  },
+  "sidebar.api.doc.reference/get-deleted-settings": {
+    "message": "List Deleted Settings",
+    "description": "The label for the doc item 'List Deleted Settings' in sidebar 'api', linking to the doc reference/get-deleted-settings"
+  },
+  "sidebar.api.doc.reference/get-organization-auditlogs": {
+    "message": "List Audit log items for Organization",
+    "description": "The label for the doc item 'List Audit log items for Organization' in sidebar 'api', linking to the doc reference/get-organization-auditlogs"
+  },
+  "sidebar.api.doc.reference/get-staleflags": {
+    "message": "List Zombie (stale) flags for Product",
+    "description": "The label for the doc item 'List Zombie (stale) flags for Product' in sidebar 'api', linking to the doc reference/get-staleflags"
+  },
+  "sidebar.api.doc.reference/get-me": {
+    "message": "Get authenticated user details",
+    "description": "The label for the doc item 'Get authenticated user details' in sidebar 'api', linking to the doc reference/get-me"
+  },
+  "sidebar.api.doc.scim/configcat-user-provisioning-scim-api": {
+    "message": "Introduction",
+    "description": "The label for the doc item 'Introduction' in sidebar 'api', linking to the doc scim/configcat-user-provisioning-scim-api"
+  },
+  "sidebar.api.doc.scim/get-service-provider-config": {
+    "message": "Get Service Provider Config",
+    "description": "The label for the doc item 'Get Service Provider Config' in sidebar 'api', linking to the doc scim/get-service-provider-config"
+  },
+  "sidebar.api.doc.scim/get-schemas": {
+    "message": "Get Schemas",
+    "description": "The label for the doc item 'Get Schemas' in sidebar 'api', linking to the doc scim/get-schemas"
+  },
+  "sidebar.api.doc.scim/get-schema": {
+    "message": "Get Schema",
+    "description": "The label for the doc item 'Get Schema' in sidebar 'api', linking to the doc scim/get-schema"
+  },
+  "sidebar.api.doc.scim/get-resource-types": {
+    "message": "Get Resource Types",
+    "description": "The label for the doc item 'Get Resource Types' in sidebar 'api', linking to the doc scim/get-resource-types"
+  },
+  "sidebar.api.doc.scim/get-resource-type": {
+    "message": "Get Resource Type",
+    "description": "The label for the doc item 'Get Resource Type' in sidebar 'api', linking to the doc scim/get-resource-type"
+  },
+  "sidebar.api.doc.scim/get-groups": {
+    "message": "Get Groups",
+    "description": "The label for the doc item 'Get Groups' in sidebar 'api', linking to the doc scim/get-groups"
+  },
+  "sidebar.api.doc.scim/create-group": {
+    "message": "Create Group",
+    "description": "The label for the doc item 'Create Group' in sidebar 'api', linking to the doc scim/create-group"
+  },
+  "sidebar.api.doc.scim/get-group": {
+    "message": "Get Group",
+    "description": "The label for the doc item 'Get Group' in sidebar 'api', linking to the doc scim/get-group"
+  },
+  "sidebar.api.doc.scim/replace-group": {
+    "message": "Replace Group",
+    "description": "The label for the doc item 'Replace Group' in sidebar 'api', linking to the doc scim/replace-group"
+  },
+  "sidebar.api.doc.scim/update-group": {
+    "message": "Update Group",
+    "description": "The label for the doc item 'Update Group' in sidebar 'api', linking to the doc scim/update-group"
+  },
+  "sidebar.api.doc.scim/delete-group": {
+    "message": "Delete Group",
+    "description": "The label for the doc item 'Delete Group' in sidebar 'api', linking to the doc scim/delete-group"
+  },
+  "sidebar.api.doc.scim/get-users": {
+    "message": "Get Users",
+    "description": "The label for the doc item 'Get Users' in sidebar 'api', linking to the doc scim/get-users"
+  },
+  "sidebar.api.doc.scim/create-user": {
+    "message": "Create User",
+    "description": "The label for the doc item 'Create User' in sidebar 'api', linking to the doc scim/create-user"
+  },
+  "sidebar.api.doc.scim/get-user": {
+    "message": "Get User",
+    "description": "The label for the doc item 'Get User' in sidebar 'api', linking to the doc scim/get-user"
+  },
+  "sidebar.api.doc.scim/replace-user": {
+    "message": "Replace User",
+    "description": "The label for the doc item 'Replace User' in sidebar 'api', linking to the doc scim/replace-user"
+  },
+  "sidebar.api.doc.scim/update-user": {
+    "message": "Update User",
+    "description": "The label for the doc item 'Update User' in sidebar 'api', linking to the doc scim/update-user"
+  },
+  "sidebar.api.doc.scim/delete-user": {
+    "message": "Delete User",
+    "description": "The label for the doc item 'Delete User' in sidebar 'api', linking to the doc scim/delete-user"
+  }
+}
