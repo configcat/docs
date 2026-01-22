@@ -55,35 +55,18 @@ function useDocumentsFoundPlural() {
 function useDocsSearchVersionsHelpers() {
   const allDocsData = useAllDocsData();
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const versionParam = searchParams.get('version');
 
   // State of the version select menus / algolia facet filters
   // docsPluginId -> versionName map
   const [searchVersions, setSearchVersions] = useState<{
     [pluginId: string]: string;
-  }>(() => {
-    // If version parameter is provided, use it for the default docs plugin
-    if (versionParam) {
-      return Object.entries(allDocsData).reduce(
-        (acc, [pluginId, pluginData]) => ({
-          ...acc,
-          // Only change the default version value
-          [pluginId]: versionParam === 'V1' ? 'V1' : pluginData.versions[0]!.name,
-        }),
-        {},
-      );
-    }
-
-    // Otherwise use the default (current) version
-    return Object.entries(allDocsData).reduce(
-      (acc, [pluginId, pluginData]) => ({
-        ...acc,
-        [pluginId]: pluginData.versions[0]!.name,
-      }),
-      {},
-    )
-  }
+  }>(() => Object.entries(allDocsData).reduce(
+    (acc, [pluginId, pluginData]) => ({
+      ...acc,
+      [pluginId]: pluginData.versions[0]!.name,
+    }),
+    {},
+  )
   );
 
   // Set the value of a single select menu
@@ -93,6 +76,23 @@ function useDocsSearchVersionsHelpers() {
   const versioningEnabled = Object.values(allDocsData).some(
     (docsData) => docsData.versions.length > 1,
   );
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const versionParam = searchParams.get('version');
+
+    if (versionParam === 'V1') {
+      setSearchVersions((prev) =>
+        Object.entries(allDocsData).reduce(
+          (acc, [pluginId, pluginData]) => ({
+            ...acc,
+            [pluginId]: pluginId === 'default' ? 'V1' : pluginData.versions[0]!.name,
+          }),
+          {},
+        )
+      );
+    }
+  }, []);
 
   return {
     allDocsData,
@@ -134,7 +134,7 @@ function SearchVersionSelectList({
                 e.target.value,
               )
             }
-            defaultValue={docsSearchVersionsHelpers.searchVersions[pluginId]}
+            value={docsSearchVersionsHelpers.searchVersions[pluginId]}
             className={styles.searchVersionInput}>
             {docsData.versions.map((version, i) => (
               <option
