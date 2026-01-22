@@ -67,6 +67,7 @@
             {
               "type": "doc",
               "id": "advanced/team-management/saml/identity-providers/azure-ad",
+              "key": "v1/advanced/team-management/saml/identity-providers/azure-ad",
               "label": "Entra ID (Azure AD)"
             },
             {
@@ -82,7 +83,8 @@
             {
               "type": "doc",
               "id": "advanced/team-management/saml/identity-providers/okta",
-              "label": "Okta"
+              "label": "Okta",
+              "key": "v1/advanced/team-management/saml/identity-providers/okta"
             },
             {
               "type": "doc",
@@ -92,6 +94,7 @@
             {
               "type": "doc",
               "id": "advanced/team-management/saml/identity-providers/onelogin",
+              "key": "v1/advanced/team-management/saml/identity-providers/onelogin",
               "label": "OneLogin"
             },
             {
@@ -241,96 +244,115 @@
         {
           "type": "doc",
           "id": "sdk-reference/dotnet",
+          "key": "sdk-reference/dotnet",
           "label": ".NET"
         },
         {
           "type": "doc",
           "id": "sdk-reference/android",
+          "key": "sdk-reference/android",
           "label": "Android (Java)"
         },
         {
           "type": "doc",
           "id": "sdk-reference/cpp",
+          "key": "sdk-reference/cpp",
           "label": "C++"
         },
         {
           "type": "doc",
           "id": "sdk-reference/dart",
+          "key": "sdk-reference/dart",
           "label": "Dart (Flutter)"
         },
         {
           "type": "doc",
           "id": "sdk-reference/elixir",
+          "key": "sdk-reference/elixir",
           "label": "Elixir"
         },
         {
           "type": "doc",
           "id": "sdk-reference/go",
+          "key": "sdk-reference/go",
           "label": "Go"
         },
         {
           "type": "doc",
           "id": "sdk-reference/java",
+          "key": "sdk-reference/java",
           "label": "Java"
         },
         {
           "type": "doc",
           "id": "sdk-reference/js",
+          "key": "sdk-reference/js",
           "label": "JavaScript"
         },
         {
           "type": "doc",
           "id": "sdk-reference/react",
+          "key": "sdk-reference/react",
           "label": "JavaScript (React)"
         },
         {
           "type": "doc",
           "id": "sdk-reference/js-ssr",
+          "key": "sdk-reference/js-ssr",
           "label": "JavaScript (SSR)"
         },
         {
           "type": "doc",
           "id": "sdk-reference/kotlin",
+          "key": "sdk-reference/kotlin",
           "label": "Kotlin Multiplatform"
         },
         {
           "type": "doc",
           "id": "sdk-reference/node",
+          "key": "sdk-reference/node",
           "label": "Node.js"
         },
         {
           "type": "doc",
           "id": "sdk-reference/php",
+          "key": "sdk-reference/php",
           "label": "PHP"
         },
         {
           "type": "doc",
           "id": "sdk-reference/python",
+          "key": "sdk-reference/python",
           "label": "Python"
         },
         {
           "type": "doc",
           "id": "sdk-reference/ruby",
+          "key": "sdk-reference/ruby",
           "label": "Ruby"
         },
         {
           "type": "doc",
           "id": "sdk-reference/rust",
+          "key": "sdk-reference/rust",
           "label": "Rust"
         },
         {
           "type": "doc",
           "id": "sdk-reference/ios",
+          "key": "sdk-reference/ios",
           "label": "Swift (iOS)"
         },
         {
           "type": "doc",
           "id": "sdk-reference/unity",
+          "key": "sdk-reference/unity",
           "label": "Unity"
         },
         {
           "type": "doc",
           "id": "sdk-reference/unreal",
+          "key": "sdk-reference/unreal",
           "label": "Unreal Engine"
         }
       ]
@@ -347,71 +369,85 @@
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/dotnet",
+          "key": "sdk-reference/openfeature/dotnet",
           "label": ".NET"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/angular",
+          "key": "sdk-reference/openfeature/angular",
           "label": "Angular"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/go",
+          "key": "sdk-reference/openfeature/go",
           "label": "Go"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/java",
+          "key": "sdk-reference/openfeature/java",
           "label": "Java"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/js",
+          "key": "sdk-reference/openfeature/js",
           "label": "JavaScript"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/kotlin",
+          "key": "sdk-reference/openfeature/kotlin",
           "label": "Kotlin (Android)"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/nestjs",
+          "key": "sdk-reference/openfeature/nestjs",
           "label": "NestJS"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/node",
+          "key": "sdk-reference/openfeature/node",
           "label": "Node.js"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/php",
+          "key": "sdk-reference/openfeature/php",
           "label": "PHP"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/python",
+          "key": "sdk-reference/openfeature/python",
           "label": "Python"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/react",
+          "key": "sdk-reference/openfeature/react",
           "label": "React"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/ruby",
+          "key": "sdk-reference/openfeature/ruby",
           "label": "Ruby"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/rust",
+          "key": "sdk-reference/openfeature/rust",
           "label": "Rust"
         },
         {
           "type": "doc",
           "id": "sdk-reference/openfeature/swift",
+          "key": "sdk-reference/openfeature/swift",
           "label": "Swift (iOS)"
         }
       ]
