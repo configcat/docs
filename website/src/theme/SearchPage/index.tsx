@@ -69,7 +69,7 @@ function useDocsSearchVersionsHelpers() {
         (acc, [pluginId, pluginData]) => ({
           ...acc,
           // Only change the default version value
-          [pluginId]: pluginId === 'default' && versionParam === 'V1' ? 'V1' : pluginData.versions[0]!.name,
+          [pluginId]: versionParam === 'V1' ? 'V1' : pluginData.versions[0]!.name,
         }),
         {},
       );
