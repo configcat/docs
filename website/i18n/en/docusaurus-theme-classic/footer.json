@@ -1,0 +1,98 @@
+{
+  "link.title.Legal & Company": {
+    "message": "Legal & Company",
+    "description": "The title of the footer links column with title=Legal & Company in the footer"
+  },
+  "link.title.Know more": {
+    "message": "Know more",
+    "description": "The title of the footer links column with title=Know more in the footer"
+  },
+  "link.title.Help & Resources": {
+    "message": "Help & Resources",
+    "description": "The title of the footer links column with title=Help & Resources in the footer"
+  },
+  "link.title.Engage": {
+    "message": "Engage",
+    "description": "The title of the footer links column with title=Engage in the footer"
+  },
+  "link.item.label.Terms & Policies": {
+    "message": "Terms & Policies",
+    "description": "The label of footer link with label=Terms & Policies linking to https://configcat.com/policies/"
+  },
+  "link.item.label.Public Roadmap": {
+    "message": "Public Roadmap",
+    "description": "The label of footer link with label=Public Roadmap linking to https://trello.com/b/8gYunIb6/configcat-public-roadmap"
+  },
+  "link.item.label.Our Team": {
+    "message": "Our Team",
+    "description": "The label of footer link with label=Our Team linking to https://configcat.com/team/"
+  },
+  "link.item.label.Jobs": {
+    "message": "Jobs",
+    "description": "The label of footer link with label=Jobs linking to https://configcat.com/jobs/"
+  },
+  "link.item.label.Pricing": {
+    "message": "Pricing",
+    "description": "The label of footer link with label=Pricing linking to https://configcat.com/pricing/"
+  },
+  "link.item.label.On-Premise Self Hosted Plan": {
+    "message": "On-Premise Self Hosted Plan",
+    "description": "The label of footer link with label=On-Premise Self Hosted Plan linking to https://configcat.com/on-premise/"
+  },
+  "link.item.label.Referrals": {
+    "message": "Referrals",
+    "description": "The label of footer link with label=Referrals linking to https://configcat.com/referrals/"
+  },
+  "link.item.label.Blog": {
+    "message": "Blog",
+    "description": "The label of footer link with label=Blog linking to https://configcat.com/blog/"
+  },
+  "link.item.label.Subscription Plan Limits": {
+    "message": "Subscription Plan Limits",
+    "description": "The label of footer link with label=Subscription Plan Limits linking to /subscription-plan-limits/"
+  },
+  "link.item.label.Service Status Monitor": {
+    "message": "Service Status Monitor",
+    "description": "The label of footer link with label=Service Status Monitor linking to https://status.configcat.com"
+  },
+  "link.item.label.Architectural Overview": {
+    "message": "Architectural Overview",
+    "description": "The label of footer link with label=Architectural Overview linking to https://configcat.com/architecture/"
+  },
+  "link.item.label.Public Management API Docs": {
+    "message": "Public Management API Docs",
+    "description": "The label of footer link with label=Public Management API Docs linking to /api/reference/configcat-public-management-api"
+  },
+  "link.item.label.Search the documentation": {
+    "message": "Search the documentation",
+    "description": "The label of footer link with label=Search the documentation linking to /search/"
+  },
+  "link.item.label.Support": {
+    "message": "Support",
+    "description": "The label of footer link with label=Support linking to https://configcat.com/support/"
+  },
+  "link.item.label.Talk with our team on Community Slack": {
+    "message": "Talk with our team on Community Slack",
+    "description": "The label of footer link with label=Talk with our team on Community Slack linking to https://configcat.com/slack/"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/configcat"
+  },
+  "link.item.label.Twitter": {
+    "message": "Twitter",
+    "description": "The label of footer link with label=Twitter linking to https://twitter.com/configcat"
+  },
+  "link.item.label.Facebook": {
+    "message": "Facebook",
+    "description": "The label of footer link with label=Facebook linking to https://www.facebook.com/configcat"
+  },
+  "link.item.label.LinkedIn": {
+    "message": "LinkedIn",
+    "description": "The label of footer link with label=LinkedIn linking to https://www.linkedin.com/company/configcat/"
+  },
+  "copyright": {
+    "message": "Copyright © 2026 ConfigCat.",
+    "description": "The footer copyright"
+  }
+}
