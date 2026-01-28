@@ -288,6 +288,10 @@ These API endpoints are for server side feature flag evaluation.
 The following endpoints are using SDK keys to determine which config / environment is the target of the desired action.
 The SDK key must be provided in the `X-ConfigCat-SdkKey` HTTP header.
 
+:::info
+These endpoints are only available from Proxy version <a target="_blank" href="https://github.com/configcat/configcat-proxy/releases/tag/v3.0.0"><code>v3.0.0</code></a>.
+:::
+
 <details>
   <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/api/eval</span></summary>
 
@@ -475,7 +479,7 @@ This endpoint returns all feature flag keys belonging to the given SDK key.
 {
   "keys": [
     "feature-flag-key-1",
-    "feature-flag-key-1"
+    "feature-flag-key-2"
   ]
 }
 ```
@@ -675,7 +679,7 @@ This endpoint returns all feature flag keys belonging to the given [SDK identifi
 {
   "keys": [
     "feature-flag-key-1",
-    "feature-flag-key-1"
+    "feature-flag-key-2"
   ]
 }
 ```
@@ -915,6 +919,10 @@ The Proxy conforms to the <a href="https://github.com/open-feature/protocol">Ope
 ### Endpoints using SDK key
 
 The following endpoints are using SDK keys to determine which config / environment is the target of the desired action. The SDK key must be provided in the `X-ConfigCat-SdkKey` HTTP header.
+
+:::info
+These endpoints are only available from Proxy version <a target="_blank" href="https://github.com/configcat/configcat-proxy/releases/tag/v3.0.0"><code>v3.0.0</code></a>.
+:::
 
 <details>
   <summary><span className="endpoint"><span className="http-method blue">POST</span><span className="http-method gray">OPTIONS</span>/ofrep/v1/evaluate/flags/&#123;key&#125;</span></summary>
@@ -1404,6 +1412,10 @@ The SSE endpoint allows you to subscribe for feature flag value changes through 
 
 The following endpoints are using SDK keys to determine which config / environment is the target of the desired action. 
 The SDK key must be provided in the `sdkKey` field of the base64 encoded `data` route parameter.
+
+:::info
+These endpoints are only available from Proxy version <a target="_blank" href="https://github.com/configcat/configcat-proxy/releases/tag/v3.0.0"><code>v3.0.0</code></a>.
+:::
 
 <details>
   <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/eval/k/&#123;data&#125;</span></summary> 
