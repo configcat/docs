@@ -1,6 +1,7 @@
 import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 import type * as Preset from '@docusaurus/preset-classic';
+import type { PluginOptions } from '@signalwire/docusaurus-plugin-llms-txt/public';
 
 const config: Config = {
   title: 'ConfigCat Docs',
@@ -142,75 +143,128 @@ const config: Config = {
     [
       '@signalwire/docusaurus-plugin-llms-txt',
       {
-        siteTitle: 'ConfigCat Docs',
-        siteDescription: 'Learn more on how to use ConfigCat Feature Flags.',
-        depth: 2,
-        content: {
-          enableLlmsFullTxt: true,
+        markdown: {
+          enableFiles: true,
           relativePaths: false,
+          includeDocs: true,
+          includePages: false,
           includeVersionedDocs: false,
-          excludeRoutes: [
-            '/docs/search/', // Exclude the /search route from llms.txt
-          ],
-          routeRules: [
+          excludeRoutes: ['/docs/search/'],
+        },
+        llmsTxt: {
+          enableLlmsFullTxt: true,
+          includeDocs: true,
+          includePages: false,
+          includeVersionedDocs: false,
+          excludeRoutes: ['/docs/search/'],
+          siteTitle: 'ConfigCat Docs',
+          siteDescription: 'Learn more on how to use ConfigCat Feature Flags.',
+          sections: [
             {
-              route: '/docs',
-              categoryName: 'HomePage',
-              includeOrder: [
-                '/docs/getting-started',
-                '/docs/main-concepts',
-                '/docs/targeting',
-                '/docs/requests',
-                '/docs/network-traffic',
-                '/docs/service',
-                '/docs/purchase',
-                '/docs/subscription-plan-limits',
-                '/docs/organization',
-                '/docs/news',
-                '/docs/faq',
-                '/docs/glossary',
-                '/docs/advanced',
-                '/docs/zombie-flags',
-                '/docs/sdk-reference',
-                '/docs/integrations',
-                '/docs/api',
-              ],
-            },
-            { route: '/docs/api', categoryName: 'Public Management API' },
-            { route: '/docs/advanced', categoryName: 'Advanced Guides' },
-            { route: '/docs/faq', categoryName: 'FAQ' },
-            { route: '/docs/getting-started', categoryName: 'Getting Started' },
-            { route: '/docs/glossary', categoryName: 'Glossary' },
-            { route: '/docs/integrations', categoryName: 'Integrations' },
-            { route: '/docs/main-concepts', categoryName: 'Main Concepts' },
-            { route: '/docs/network-traffic', categoryName: 'Network Traffic' },
-            { route: '/docs/news', categoryName: 'News & Product Updates' },
-            {
-              route: '/docs/organization',
-              categoryName: 'Organization & Roles',
+              id: 'getting-started',
+              name: 'Getting Started',
+              position: 1,
+              routes: [{ route: '/docs/getting-started/**' }],
             },
             {
-              route: '/docs/purchase',
-              categoryName: 'Plans, Purchase & Billing',
+              id: 'main-concepts',
+              name: 'Main Concepts',
+              position: 2,
+              routes: [{ route: '/docs/main-concepts/**' }],
             },
             {
-              route: '/docs/requests',
-              categoryName: 'What is a JSON download?',
-            },
-            { route: '/docs/sdk-reference', categoryName: 'SDK Reference' },
-            {
-              route: '/docs/service',
-              categoryName: 'Service Status & Monitoring',
+              id: 'targeting',
+              name: 'Targeting',
+              position: 3,
+              routes: [{ route: '/docs/targeting/**' }],
             },
             {
-              route: '/docs/subscription-plan-limits',
-              categoryName: 'Subscription Plan Limits',
+              id: 'requests',
+              name: 'What is a JSON download?',
+              position: 4,
+              routes: [{ route: '/docs/requests/**' }],
             },
-            { route: '/docs/targeting', categoryName: 'Targeting' },
-            { route: '/docs/zombie-flags', categoryName: 'Zombie Flags' },
+            {
+              id: 'network-traffic',
+              name: 'Network Traffic',
+              position: 5,
+              routes: [{ route: '/docs/network-traffic/**' }],
+            },
+            {
+              id: 'service',
+              name: 'Service Status & Monitoring',
+              position: 6,
+              routes: [{ route: '/docs/service/**' }],
+            },
+            {
+              id: 'purchase',
+              name: 'Plans, Purchase & Billing',
+              position: 7,
+              routes: [{ route: '/docs/purchase/**' }],
+            },
+            {
+              id: 'subscription-plan-limits',
+              name: 'Subscription Plan Limits',
+              position: 8,
+              routes: [{ route: '/docs/subscription-plan-limits/**' }],
+            },
+            {
+              id: 'organization',
+              name: 'Organization & Roles',
+              position: 9,
+              routes: [{ route: '/docs/organization/**' }],
+            },
+            {
+              id: 'news',
+              name: 'News & Product Updates',
+              position: 10,
+              routes: [{ route: '/docs/news/**' }],
+            },
+            {
+              id: 'faq',
+              name: 'FAQ',
+              position: 11,
+              routes: [{ route: '/docs/faq/**' }],
+            },
+            {
+              id: 'glossary',
+              name: 'Glossary',
+              position: 12,
+              routes: [{ route: '/docs/glossary/**' }],
+            },
+            {
+              id: 'advanced',
+              name: 'Advanced Guides',
+              position: 13,
+              routes: [{ route: '/docs/advanced/**' }],
+            },
+            {
+              id: 'zombie-flags',
+              name: 'Zombie Flags',
+              position: 14,
+              routes: [{ route: '/docs/zombie-flags/**' }],
+            },
+            {
+              id: 'sdk-reference',
+              name: 'SDK Reference',
+              position: 15,
+              routes: [{ route: '/docs/sdk-reference/**' }],
+            },
+            {
+              id: 'integrations',
+              name: 'Integrations',
+              position: 16,
+              routes: [{ route: '/docs/integrations/**' }],
+            },
+            {
+              id: 'api',
+              name: 'Public Management API',
+              position: 17,
+              routes: [{ route: '/docs/api/**' }],
+            },
           ],
         },
-      },
+      } satisfies PluginOptions,
     ],
     // ['./src/plugins/smartlook',
     //   {
