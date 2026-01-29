@@ -536,18 +536,13 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
   Your applications will have access to all feature flags in the config/environment pairs whose SDK Keys you select.
 
   - ##### Selection rules
-    With selection rules, you can describe which existing or future config/environment pairs should be distributed to Proxy instances.
+    With selection rules, you can describe which existing and future config/environment pairs should be distributed to Proxy instances.
     Rules can be based on products, configs and environments with the following filtering options:
       - **Exact**: This option filters for an exact product/config/environment. It's not sensitive to product, config and environment renaming.
       - **Any**: This option is similar to a single wildcard (`*`) expression. It filters for every product/config/environment.
       - **Match expression**: This option matches the given pattern to the names of products/configs/environments, accepting wildcards (`*`). It's sensitive to product, config, and environment renaming.
     
-    Rules are evaluated as follows:
-      - **Exclude** rules are taking precedence over **Include** rules.
-      - **Exclude** rules are joined with `AND` logical operator.
-      - **Include** rules are joined with `OR` logical operator.
-      - Filter options within a rule are joined with `AND` logical operator.
-    <br/>
+    Whenever a config/environment pair matches both an **Include** and an **Exclude** rule, the **Exclude** rule will always take precedence.
 
     <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-selection-rules.png" width="1366" height="768" decoding="async" loading="lazy" />
     <br/>
