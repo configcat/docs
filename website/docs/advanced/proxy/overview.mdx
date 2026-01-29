@@ -462,7 +462,7 @@ It creates one SDK instance per SDK key internally and uses those for feature fl
 
 Within the Proxy, <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a> are mapped to unique SDK identifiers. 
 
-The <i>SDK key</i> identifies a config/environment pair and is used to configure an SDK instance to fetch the config JSON of that config/environment pair.
+The <i>SDK key</i> identifies a config-environment pair and is used to configure an SDK instance to fetch the config JSON of that config-environment pair.
 The <i>SDK identifier</i> identifies an SDK instance running within the Proxy and configured to use the associated SDK key. 
 That is, the SDK identifier is effectively an alias for the associated SDK key and is used in <a href="/docs/advanced/proxy/endpoints">endpoint routes</a> to avoid exposing the SDK Key.
 
@@ -533,23 +533,23 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
   <img alt="Click on Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-configure.png" width="1366" height="768" decoding="async" loading="lazy" />
 
   You can choose SDK Keys in two ways: by creating selection rules or by choosing individual SDK Keys manually.
-  Your applications will have access to all feature flags in the config/environment pairs whose SDK Keys you select.
+  Your applications will have access to all feature flags in the config-environment pairs whose SDK Keys you select.
 
   - ##### Selection rules
-    With selection rules, you can describe which existing and future config/environment pairs should be distributed to Proxy instances.
+    With selection rules, you can describe which existing and future config-environment pairs should be distributed to Proxy instances.
     Rules can be based on products, configs and environments with the following filtering options:
-      - **Exact**: This option filters for an exact product/config/environment. It's not sensitive to product, config and environment renaming.
-      - **Any**: This option is similar to a single wildcard (`*`) expression. It filters for every product/config/environment.
-      - **Match expression**: This option matches the given pattern to the names of products/configs/environments, accepting wildcards (`*`). It's sensitive to product, config, and environment renaming.
+      - **Exact** (by selecting an exact product, config or environment): This option filters for the ID of the selected product, config or environment. It's not sensitive to renaming.
+      - **Any**: This option is similar to a single wildcard (`*`) expression. It filters for every product, config or environment.
+      - **Match expression** (by selecting `Matches`): This option matches the given pattern to the name of products/configs/environments, accepting wildcards (`*`). It's sensitive to renaming.
     
-    Whenever a config/environment pair matches both an **Include** and an **Exclude** rule, the **Exclude** rule will always take precedence.
+    Whenever a config-environment pair matches both an **Include** and an **Exclude** rule, the **Exclude** rule will always take precedence.
 
     <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-selection-rules2.png" width="1366" height="768" decoding="async" loading="lazy" />
     <br/>
     <br/>
 
   - ##### Manual selection
-    You can manually select the config/environment pairs whose SDK key you want to make available for your Proxy instance.
+    You can manually select the config-environment pairs whose SDK key you want to make available for your Proxy instance.
     <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-select.png" width="1366" height="768" decoding="async" loading="lazy" />
 
     :::info
@@ -558,16 +558,16 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
     <br/>
 
 - #### Locate SDK identifiers for the selected SDK Keys
-  You can find the SDK identifiers generated for the selected config/environment pairs on the ConfigCat Dashboard right where you find their SDK Key.
+  You can find the SDK identifiers generated for the selected config-environment pairs on the ConfigCat Dashboard right where you find their SDK Key.
   <img alt="Click on view SDK identifiers for ConfigCat Proxy" src="/docs/assets/proxy/profile-sdk-ids-arrow.png" width="1366" height="768" decoding="async" loading="lazy" />
   
-  In the dialog that appears, you can find the SDK identifiers for the current config/environment pair, listed for each available Proxy profile.
+  In the dialog that appears, you can find the SDK identifiers for the current config-environment pair, listed for each available Proxy profile.
   <img alt="Click on view SDK identifiers for ConfigCat Proxy" src="/docs/assets/proxy/profile-sdk-ids-dialog.png" width="1366" height="768" decoding="async" loading="lazy" />
   <br/>
   <br/>
 
 - #### (Optional) Set up how your Proxy should learn about feature flag changes
-  There are two ways a Proxy can detect feature flag changes. Each config/environment pair identified by each SDK key is automatically monitored for changes by periodic polling of the corresponding config JSON file at a configured frequency.
+  There are two ways a Proxy can detect feature flag changes. Each config-environment pair identified by each SDK key is automatically monitored for changes by periodic polling of the corresponding config JSON file at a configured frequency.
   Besides polling, the Proxy can receive change notifications over HTTP, via its [webhook endpoint](endpoints.mdx#webhook).
 
   - ##### Config JSON poll interval 
@@ -862,7 +862,7 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
 
 ### 2. Manual configuration
 
-When using environment variables, the SDK keys can be specified as a JSON object, where the **property name is the SDK identifier** (the identifier of the config/environment pair whose SDK Key the underlying SDK instance is configured to use) and the **property value is the actual SDK key**.
+When using environment variables, the SDK keys can be specified as a JSON object, where the **property name is the SDK identifier** (the identifier of the config-environment pair whose SDK Key the underlying SDK instance is configured to use) and the **property value is the actual SDK key**.
 The **SDK identifier** part is later used in [endpoint routes](endpoints.mdx) to recognize which SDK must serve the given flag evaluation request.
 
 Furthermore, when configuring the Proxy **via environment variables**, the identifier becomes a **part of the SDK specific environment variable's name** in the following format: `CONFIGCAT_<SDK_ID>_<OPTION>`.
