@@ -110,7 +110,7 @@ You can then check the [status endpoint](monitoring.mdx#status) of the Proxy to 
 
 This section describes the possible ways of how you can use the Proxy from your application. 
 You can decide where you want the actual feature flag evaluation to happen.
-- **Local evaluation**: Feature flags are evaluated in your application by the ConfigCat SDK running in your application. The Proxy only provides the data required for the evaluation process.
+- **Local evaluation**: Feature flags are evaluated by a ConfigCat SDK running in your application. The Proxy only provides the data required for the evaluation process.
 - **Remote evaluation**: Feature flags are evaluated within the Proxy, your application only gets the result of the evaluation process.
 
 ### 1. Local evaluation using a ConfigCat SDK connected to the Proxy
@@ -150,8 +150,8 @@ var configCatClient = configcat.getClient(
 
 You can leverage the Proxy's server side feature flag evaluation feature by sending simple HTTP requests to the Proxy's API endpoints.
 
-```js title="example.js (Evaluating a feature flag with API)"
-const url = "http://localhost:8050/api/#SDK-IDENTIFIER#/eval"; // Proxy API URL with SDK identifier
+```js title="example.js (Evaluating a feature flag with API using SDK key)"
+const url = "http://localhost:8050/api/eval"; // Proxy API URL with SDK identifier
 
 const data = {
   key: "isMyAwesomeFeatureEnabled", // Feature flag key
@@ -161,9 +161,11 @@ const data = {
 };
 
 const requestOptions = {
-  method: 'POST',
+  method: "POST",
   headers: {
-    'Content-Type': 'application/json',
+    // highlight-next-line
+    "X-ConfigCat-SdkKey": "#YOUR-SDK-KEY#",
+    "Content-Type": "application/json",
   },
   body: JSON.stringify(data),
 };
@@ -173,7 +175,38 @@ try {
   const responseData = await response.json();
   console.log(responseData); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
 } catch (error) {
-  console.error('Error:', error)
+  console.error("Error:", error)
+}
+```
+
+Additionally, as the Proxy maps [unique identifiers to each configured SDK key](#sdk-identifier--sdk-key) it works with, 
+you can use that identifier in the API endpoint's path instead of the SDK key header.
+
+```js title="example.js (Evaluating a feature flag with API using SDK identifier)"
+// highlight-next-line
+const url = "http://localhost:8050/api/#SDK-IDENTIFIER#/eval"; // Proxy API URL
+
+const data = {
+  key: "isMyAwesomeFeatureEnabled", // Feature flag key
+  user: { // User Object for evaluation
+    Identifier: "#UNIQUE-USER-IDENTIFIER#"
+  }
+};
+
+const requestOptions = {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(data),
+};
+
+try {
+  const response = await fetch(url, requestOptions);
+  const responseData = await response.json();
+  console.log(responseData); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
+} catch (error) {
+  console.error("Error:", error)
 }
 ```
 
@@ -191,17 +224,36 @@ The OFREP feature of the Proxy is turned OFF by default, to use it, you have to 
 
 The Proxy conforms to the <a href="https://github.com/open-feature/protocol">OpenFeature Remote Evaluation Protocol</a>, which means it can be used with OFREP compatible OpenFeature providers.
 
-```js title="example.js (Initializing the OFREP JS Web provider to use the Proxy)"
+```js title="example.js (Initializing the OFREP JS Web provider to use the Proxy with SDK key)"
 import { OpenFeature } from "@openfeature/web-sdk";
 import { OFREPWebProvider } from '@openfeature/ofrep-web-provider';
 
 OpenFeature.setProvider(
   new OFREPWebProvider({
     // highlight-next-line
-    baseUrl: 'http://localhost:8050', // Proxy URL
+    baseUrl: "http://localhost:8050", // Proxy URL
     headers: [
       // highlight-next-line
-      ['X-ConfigCat-SdkId', '#SDK-IDENTIFIER#'],
+      ["X-ConfigCat-SdkKey", "#YOUR-SDK-KEY#"],
+    ],
+  }),
+);
+```
+
+Additionally, as the Proxy maps [unique identifiers to each configured SDK key](#sdk-identifier--sdk-key) it works with, 
+you can use that identifier in the `X-ConfigCat-SdkId` HTTP header.
+
+```js title="example.js (Initializing the OFREP JS Web provider to use the Proxy with SDK identifier)"
+import { OpenFeature } from "@openfeature/web-sdk";
+import { OFREPWebProvider } from "@openfeature/ofrep-web-provider";
+
+OpenFeature.setProvider(
+  new OFREPWebProvider({
+    // highlight-next-line
+    baseUrl: "http://localhost:8050", // Proxy URL
+    headers: [
+      // highlight-next-line
+      ["X-ConfigCat-SdkId", "#SDK-IDENTIFIER#"],
     ],
   }),
 );
@@ -213,7 +265,30 @@ You can find the available OFREP endpoints with their HTTP request/response sche
 
 The Proxy has the ability to evaluate feature flags and send notifications about subsequent evaluated flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
 
-```js title="example.js (Evaluating a feature flag and listening to changes with SSE)"
+```js title="example.js (Evaluating a feature flag and listening to changes with SDK key)"
+const rawData = {
+  // highlight-next-line
+  sdkKey: "#YOUR-SDK-KEY#",
+  key: "isMyAwesomeFeatureEnabled", // Feature flag key
+  user: { // User Object for evaluation
+    Identifier: "#UNIQUE-USER-IDENTIFIER#"
+  }
+}
+
+const data = btoa(JSON.stringify(rawData))
+  // highlight-next-line
+const url = "http://localhost:8050/sse/eval/k"; // Proxy SSE URL
+
+const evtSource = new EventSource(url + "/" + data);
+evtSource.onmessage = (event) => {
+  console.log(event.data); // {"value":<evaluated-value>,"variationId":"<variation-id>"}
+};
+```
+
+Additionally, as the Proxy maps [unique identifiers to each configured SDK key](#sdk-identifier--sdk-key) it works with, 
+you can use that identifier in the SSE endpoint's path.
+
+```js title="example.js (Evaluating a feature flag and listening to changes with SDK identifier)"
 const rawData = {
   key: "isMyAwesomeFeatureEnabled", // Feature flag key
   user: { // User Object for evaluation
@@ -222,6 +297,7 @@ const rawData = {
 }
 
 const data = btoa(JSON.stringify(rawData))
+  // highlight-next-line
 const url = "http://localhost:8050/sse/#SDK-IDENTIFIER#/eval"; // Proxy SSE URL with SDK identifier
 
 const evtSource = new EventSource(url + "/" + data);
@@ -386,7 +462,7 @@ It creates one SDK instance per SDK key internally and uses those for feature fl
 
 Within the Proxy, <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a> are mapped to unique SDK identifiers. 
 
-The <i>SDK key</i> identifies a config/environment pair and is used to configure an SDK instance to fetch the config JSON of that config/environment pair.
+The <i>SDK key</i> identifies a config-environment pair and is used to configure an SDK instance to fetch the config JSON of that config-environment pair.
 The <i>SDK identifier</i> identifies an SDK instance running within the Proxy and configured to use the associated SDK key. 
 That is, the SDK identifier is effectively an alias for the associated SDK key and is used in <a href="/docs/advanced/proxy/endpoints">endpoint routes</a> to avoid exposing the SDK Key.
 
@@ -405,6 +481,11 @@ The automatic configuration with Proxy profiles feature is only available from P
 
 The Proxy has the ability to use _Proxy profiles_ to determine which SDK keys to download and distribute.
 It periodically checks for profile changes, allowing it to pick up the changes on the fly, without needing a restart.
+
+By using Proxy profiles, your deployed Proxy instances can detect and react to:
+- SDK key rotation.
+- Data governance change.
+- Product, config and environment state changes, such as creation, renaming and deletion.
 
 You can set up Proxy profiles under the `Manage organization` -> `Proxy Profiles` menu on the <a target="_blank" href="https://app.configcat.com/organization/proxy-profiles">ConfigCat Dashboard</a>.
 
@@ -451,25 +532,42 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
   Click on the edit icon in the `SDK Keys` column.
   <img alt="Click on Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-configure.png" width="1366" height="768" decoding="async" loading="lazy" />
 
-  Select the config/environment pairs whose SDK key you want to make available for your Proxy instance.
-  <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-select.png" width="1366" height="768" decoding="async" loading="lazy" />
+  You can choose SDK Keys in two ways: by creating selection rules or by choosing individual SDK Keys manually.
+  Your applications will have access to all feature flags in the config-environment pairs whose SDK Keys you select.
 
-  :::info
-  You can click config names in the first column to toggle all SDK keys in a row, or environment names in the column headers to toggle all SDK keys in a column.
-  :::
-  <br/>
+  - ##### Selection rules
+    With selection rules, you can describe which existing and future config-environment pairs should be distributed to Proxy instances.
+    Rules can be based on products, configs and environments with the following filtering options:
+      - **Exact** (by selecting an exact product, config or environment): This option filters for the ID of the selected product, config or environment. It's not sensitive to renaming.
+      - **Any**: This option is similar to a single wildcard (`*`) expression. It filters for every product, config or environment.
+      - **Match expression** (by selecting `Matches`): This option matches the given pattern to the name of products/configs/environments, accepting wildcards (`*`). It's sensitive to renaming.
+    
+    Whenever a config-environment pair matches both an **Include** and an **Exclude** rule, the **Exclude** rule will always take precedence.
+
+    <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-selection-rules2.png" width="1366" height="768" decoding="async" loading="lazy" />
+    <br/>
+    <br/>
+
+  - ##### Manual selection
+    You can manually select the config-environment pairs whose SDK key you want to make available for your Proxy instance.
+    <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-select.png" width="1366" height="768" decoding="async" loading="lazy" />
+
+    :::info
+    You can click config names in the first column to toggle all SDK keys in a row, or environment names in the column headers to toggle all SDK keys in a column.
+    :::
+    <br/>
 
 - #### Locate SDK identifiers for the selected SDK Keys
-  You can find the SDK identifiers generated for the selected config/environment pairs on the ConfigCat Dashboard right where you find their SDK Key.
+  You can find the SDK identifiers generated for the selected config-environment pairs on the ConfigCat Dashboard right where you find their SDK Key.
   <img alt="Click on view SDK identifiers for ConfigCat Proxy" src="/docs/assets/proxy/profile-sdk-ids-arrow.png" width="1366" height="768" decoding="async" loading="lazy" />
   
-  In the dialog that appears, you can find the SDK identifiers for the current config/environment pair, listed for each available Proxy profile.
+  In the dialog that appears, you can find the SDK identifiers for the current config-environment pair, listed for each available Proxy profile.
   <img alt="Click on view SDK identifiers for ConfigCat Proxy" src="/docs/assets/proxy/profile-sdk-ids-dialog.png" width="1366" height="768" decoding="async" loading="lazy" />
   <br/>
   <br/>
 
 - #### (Optional) Set up how your Proxy should learn about feature flag changes
-  There are two ways a Proxy can detect feature flag changes. Each config/environment pair identified by each SDK key is automatically monitored for changes by periodic polling of the corresponding config JSON file at a configured frequency.
+  There are two ways a Proxy can detect feature flag changes. Each config-environment pair identified by each SDK key is automatically monitored for changes by periodic polling of the corresponding config JSON file at a configured frequency.
   Besides polling, the Proxy can receive change notifications over HTTP, via its [webhook endpoint](endpoints.mdx#webhook).
 
   - ##### Config JSON poll interval 
@@ -764,7 +862,7 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
 
 ### 2. Manual configuration
 
-When using environment variables, the SDK keys can be specified as a JSON object, where the **property name is the SDK identifier** (the identifier of the config/environment pair whose SDK Key the underlying SDK instance is configured to use) and the **property value is the actual SDK key**.
+When using environment variables, the SDK keys can be specified as a JSON object, where the **property name is the SDK identifier** (the identifier of the config-environment pair whose SDK Key the underlying SDK instance is configured to use) and the **property value is the actual SDK key**.
 The **SDK identifier** part is later used in [endpoint routes](endpoints.mdx) to recognize which SDK must serve the given flag evaluation request.
 
 Furthermore, when configuring the Proxy **via environment variables**, the identifier becomes a **part of the SDK specific environment variable's name** in the following format: `CONFIGCAT_<SDK_ID>_<OPTION>`.
@@ -1399,7 +1497,7 @@ When an SDK also has its offline option set, that will override what it would in
 
 The Proxy in its default setup stores all the information it needs for feature flag evaluation in memory. This behavior is extendable with an external cache that you can use for pointing the underlying SDKs to your own data storage.
 
-Currently, <a target="blank" href="https://redis.io">Redis</a>, <a target="blank" href="https://mongodb.com/">MongoDB</a>, and <a target="blank" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide">DynamoDB</a> is supported as external cache. The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
+Currently, <a target="_blank" href="https://redis.io">Redis</a>, <a target="_blank" href="https://mongodb.com/">MongoDB</a>, and <a target="_blank" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide">DynamoDB</a> is supported as external cache. The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
 
 :::info
 The ConfigCat Proxy supports *shared caching*, which means it can feed an external cache that is shared by other ConfigCat SDKs. You can read more about this feature and the required minimum SDK versions [here](../caching.mdx#shared-cache).
@@ -1409,6 +1507,11 @@ The ConfigCat Proxy supports *shared caching*, which means it can feed an extern
 :::
 
 ### Redis
+
+:::info
+The Proxy uses the <a href="https://github.com/redis/go-redis" target="_blank" rel="noopener noreferrer">go-redis</a> client for communicating with Redis. 
+Alternatives supported by this library, like <a href="https://valkey.io/" target="_blank" rel="noopener noreferrer">Valkey</a> or <a href="https://docs.keydb.dev/" target="_blank" rel="noopener noreferrer">KeyDB</a>, are also compatible.
+:::
 
 <Tabs groupId="yaml-env">
 <TabItem value="yaml" label="YAML" default>
