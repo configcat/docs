@@ -14,6 +14,20 @@ const heightAttributeRegex = attributeRegex('height');
 const decodingAttributeRegex = attributeRegex('decoding');
 const loadingAttributeRegex = attributeRegex('loading');
 
+const checkFirstSubheading = (content) => {
+  const lines = content.split('\n');
+  for (const line of lines) {
+    if (line.startsWith('#')) {
+      if (line.startsWith('## ')) {
+        return null;
+      } else {
+        return 'The first subheading must be a H2 (##).';
+      }
+    }
+  }
+  return 'No subheading found.';
+};
+
 const checkImageNameConvention = (imagePath, errors) => {
   const imageName = path.basename(imagePath);
   const imageNameMatch = imageName.match(imageNameRegex);
@@ -144,6 +158,15 @@ const checkDocumentFile = async (fileFullPath, ignore) => {
 
   try {
     const content = fs.readFileSync(fileFullPath, 'utf-8');
+    
+    console.log('Running first subheading check...');
+    const subheadingError = checkFirstSubheading(content);
+    if (subheadingError) {
+      errors.push(`First subheading error: ${subheadingError}`);
+    } else {
+      console.log('First subheading check passed.');
+    }
+
     console.log('Running image checks...');
     const imageCheckErrors = await checkImages(content);
     if (imageCheckErrors.length) {

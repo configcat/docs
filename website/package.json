@@ -11,7 +11,8 @@
     "serve": "docusaurus serve",
     "gen-api-docs": "docusaurus gen-api-docs all && node ./api/cleanup-api-docs.mjs",
     "typecheck": "tsc",
-    "cf": "npm run gen-api-docs && docusaurus build --out-dir build/docs && echo / /docs > build/_redirects && node testrobots.js && cp _headers build/_headers"
+    "cf": "npm run gen-api-docs && docusaurus build --out-dir build/docs && echo / /docs > build/_redirects && node testrobots.js && cp _headers build/_headers",
+    "write-translations": "docusaurus write-translations -l en"
   },
   "dependencies": {
     "@docusaurus/core": "^3.9.2",
@@ -20,7 +21,7 @@
     "@docusaurus/plugin-google-tag-manager": "^3.9.2",
     "@docusaurus/preset-classic": "^3.8.1",
     "@mdx-js/react": "^3.1.0",
-    "@signalwire/docusaurus-plugin-llms-txt": "^1.2.2",
+    "@signalwire/docusaurus-plugin-llms-txt": "^2.0.0-alpha.7",
     "@svgr/webpack": "^8.1.0",
     "clsx": "^2.1.1",
     "docusaurus-plugin-openapi-docs": "4.5.1",
