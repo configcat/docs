@@ -496,16 +496,16 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
 
 - #### Create a new Proxy profile
   Click on the `+ ADD PROFILE` button.
-  <img alt="Add Profile" src="/docs/assets/proxy/profile-add.png" width="1366" height="768" decoding="async" loading="lazy" />
+  <img alt="Add Profile" src="/docs/assets/proxy/profile-add2.png" width="1366" height="768" decoding="async" loading="lazy" />
 
   Give the profile a meaningful name and description, then click `CREATE`.
-  <img alt="Create Profile" src="/docs/assets/proxy/profile-create.png" width="1366" height="768" decoding="async" loading="lazy" />
+  <img alt="Create Profile" src="/docs/assets/proxy/profile-create2.png" width="1366" height="768" decoding="async" loading="lazy" />
   <br/>
   <br/>
 
 - #### Configure your Proxy instance
   Grab the `Key` and `Secret` from the profile creation dialog and put them into the Proxy's configuration.
-  <img alt="Configure Proxy with key and secret" src="/docs/assets/proxy/profile-key-secret.png" width="1366" height="768" decoding="async" loading="lazy" />
+  <img alt="Configure Proxy with key and secret" src="/docs/assets/proxy/profile-key-secret2.png" width="1366" height="768" decoding="async" loading="lazy" />
 
   <Tabs groupId="yaml-env">
   <TabItem value="yaml" label="YAML" default>
@@ -530,7 +530,7 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
 
 - #### Select which SDK Keys your Proxy should use
   Click on the edit icon in the `SDK Keys` column.
-  <img alt="Click on Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-configure.png" width="1366" height="768" decoding="async" loading="lazy" />
+  <img alt="Click on Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-configure2.png" width="1366" height="768" decoding="async" loading="lazy" />
 
   You can choose SDK Keys in two ways: by creating selection rules or by choosing individual SDK Keys manually.
   Your applications will have access to all feature flags in the config-environment pairs whose SDK Keys you select.
@@ -550,7 +550,7 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
 
   - ##### Manual selection
     You can manually select the config-environment pairs whose SDK key you want to make available for your Proxy instance.
-    <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-select.png" width="1366" height="768" decoding="async" loading="lazy" />
+    <img alt="Select SDK Keys" src="/docs/assets/proxy/profile-sdk-keys-select2.png" width="1366" height="768" decoding="async" loading="lazy" />
 
     :::info
     You can click config names in the first column to toggle all SDK keys in a row, or environment names in the column headers to toggle all SDK keys in a column.
@@ -573,7 +573,7 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
   - ##### Config JSON poll interval 
     You have the option to control how frequently the Proxy should poll for config JSON changes.  
     Click on the configure icon in the `Connection preferences` column, set the poll interval and click on `SAVE POLL INTERVAL`.
-    <img alt="Set config JSON poll interval" src="/docs/assets/proxy/profile-sdk-poll-interval.png" width="1366" height="768" decoding="async" loading="lazy" />
+    <img alt="Set config JSON poll interval" src="/docs/assets/proxy/profile-sdk-poll-interval2.png" width="1366" height="768" decoding="async" loading="lazy" />
     <br/>
     <br/>
   
@@ -581,12 +581,12 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
     You can set up automatic webhook notifications about feature flag changes for your Proxy by providing its public URL.  
     Click on the configure icon in the `Connection preferences` column and select `Webhook notification`.
     Then, enter your Proxy instance's public URL and click `ADD PROXY URL`.
-    <img alt="Set Proxy webhook URL" src="/docs/assets/proxy/profile-webhook-url.png" width="1366" height="768" decoding="async" loading="lazy" />
+    <img alt="Set Proxy webhook URL" src="/docs/assets/proxy/profile-webhook-url2.png" width="1366" height="768" decoding="async" loading="lazy" />
 
     Put the displayed webhook signing key(s) into your Proxy's configuration. 
     Signing keys are for making sure that webhook requests received by your Proxy are sent by ConfigCat.
     Signatures are automatically [verified](../../advanced/notifications-webhooks.mdx#verifying-webhook-requests) by the Proxy.
-    <img alt="Copy webhook signing key" src="/docs/assets/proxy/profile-webhook-signing-key.png" width="1366" height="768" decoding="async" loading="lazy" />
+    <img alt="Copy webhook signing key" src="/docs/assets/proxy/profile-webhook-signing-key2.png" width="1366" height="768" decoding="async" loading="lazy" />
 
     <Tabs groupId="yaml-env">
     <TabItem value="yaml" label="YAML" default>
@@ -607,7 +607,7 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
     </Tabs>
 
     Test the connection to your Proxy instance.
-    <img alt="Test the webhook configuration" src="/docs/assets/proxy/profile-webhook-test.png" width="1366" height="768" decoding="async" loading="lazy" />
+    <img alt="Test the webhook configuration" src="/docs/assets/proxy/profile-webhook-test2.png" width="1366" height="768" decoding="async" loading="lazy" />
     <br/>
     <br/>
 
