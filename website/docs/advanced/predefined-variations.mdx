@@ -31,7 +31,6 @@ Free-form values are the traditional, unrestrictive mode that lets you enter a f
 
 Free-form values work well when you have simple, one-off configurations where feature flag values are unique and unlikely to be reused. They're ideal when you need quick setup without upfront planning, especially when working with primitive values like booleans or simple strings and numbers. This approach is also suitable when values change frequently or unpredictably.
 
-Choose Free-form values when you're prototyping or experimenting, working on one-off configurations unlikely to be reused, creating simple boolean flags, running quick testing scenarios, dealing with unpredictable or frequently changing values, or when you need maximum flexibility.
 
 
 ## Predefined variations
@@ -57,7 +56,6 @@ Predefined variations allow you to define a set of reusable values upfront when 
 
 Predefined variations are ideal when you have a standard set of values used across multiple rules, especially when consistency is critical for things like color schemes, API endpoints, or configuration objects. They work well when multiple team members need to understand what each value represents and you want to prevent typos or invalid values. This approach is particularly valuable when complex values like JSON objects need to be reused, when you need to provide guidance on when to use specific values, and when values are known upfront and relatively stable.
 
-Choose Predefined Variations when multiple team members work with the flags, values are used in multiple rules or targets, consistency and standardization are important, you're working with complex JSON configurations, you need to provide context about value usage, you want to prevent configuration errors, you want self-documenting configurations, or when your team needs guidance on which values to use when.
 
 ## Converting between free-form values and predefined variations
 
@@ -92,27 +90,31 @@ You can modify the display name and hint of predefined variations at any time, b
 
 ## Variation ID for analytics
 
-When working with feature flags, especially for A/B testing and analytics purposes, ConfigCat provides a **VariationID** for each evaluated feature flag value. This VariationID is particularly useful when integrating with analytics tools.
+To support working with feature flags, especially A/B testing and analytics, ConfigCat provides an auto-generated identifier called Variation ID for each distinct served value. This identifier is particularly useful when integrating with analytics tools.
 
-### What is a VariationID?
+### What is a Variation ID?
 
-The VariationID is a hashed version of the feature flag's value. For feature flags with lengthy values (such as JSON objects), the VariationID provides a shorter, more manageable identifier that can be sent to analytics platforms instead of the full value.
+The _Variation ID_ is a hashed version of the feature flag's served value. For feature flags with lengthy values (such as JSON objects), the Variation ID provides a shorter, more manageable identifier that can be sent to analytics platforms, instead of the full value.
 
-### How to access VariationIDs
+### How to access Variation IDs
 
-You can view VariationIDs on the ConfigCat Dashboard by enabling the **Show VariationIDs to support A/B testing** setting. Learn more about this setting <a href="https://app.configcat.com/product/preferences" target="_blank">here</a>.
+You can view Variation IDs on the ConfigCat Dashboard by enabling the **Show Variation IDs to support A/B testing** setting. Learn more about this setting <a href="https://app.configcat.com/product/preferences" target="_blank">here</a>.
 
 ### VariationID vs. PredefinedVariationID
 
 :::note
-The **VariationID** (for analytics) is different from the **PredefinedVariationID** available in the Public Management API:
+`VariationID` (for analytics) is different from `PredefinedVariationID` available in the Public Management API:
 
-The **VariationID** is hashed identifier of the evaluated feature flag value, used for analytics and A/B testing integrations. This is what you send to analytics tools like Amplitude, Google Analytics, Mixpanel, and Segment.  
-The **PredefinedVariationID** is the resource identifier in the ConfigCat Public Management API that can be used to reference a specific predefined variation when managing feature flags programmatically.
+`VariationID` is a hashed identifier of the feature flag's served value, used for analytics and A/B testing integrations. This is what you send to analytics tools like Amplitude, Google Analytics, Mixpanel, and Segment.  
+`PredefinedVariationID` is the resource identifier in the ConfigCat Public Management API that can be used to reference a specific predefined variation when managing feature flags programmatically.
 :::
 
-### Using VariationIDs with analytics integrations
+### Using Variation IDs with analytics integrations
 
-When integrating ConfigCat with analytics platforms, you can send the VariationID along with (or instead of) the feature flag value. This is especially recommended for text feature flags with lengthy values (such as JSON configurations), maintaining consistent identifiers across analytics reports, and simplifying A/B test analysis.
+When integrating ConfigCat with analytics platforms, you can send the Variation ID along with (or instead of) the feature flag value. This is especially recommended for text feature flags with lengthy values (such as JSON configurations), maintaining consistent identifiers across analytics reports, and simplifying A/B test analysis.
 
-For detailed integration instructions, see the [Amplitude integration](/integrations/amplitude), [Google Analytics integration](/integrations/google-analytics), [Mixpanel integration](/integrations/mixpanel), and [Segment integration](/integrations/segment) documentation.
+For detailed integration instructions, see the documentation of
+- [Amplitude integration](/integrations/amplitude),
+- [Google Analytics integration](/integrations/google-analytics),
+- [Mixpanel integration](/integrations/mixpanel),
+- [Segment integration](/integrations/segment).
