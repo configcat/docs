@@ -42,12 +42,14 @@ service FlagService {
 
 // Feature flag evaluation request message.
 message EvalRequest {
-  // The SDK identifier.
-  string sdk_id = 1;
+  // The SDK identifier. Deprecated, the field `target` should be used instead for SDK identification.
+  string sdk_id = 1 [ deprecated = true ];
   // The feature flag's key to evaluate.
   string key = 2;
-  // The User Object.
+  // The user object.
   map<string, UserValue> user = 3;
+  // The evaluation request's target.
+  Target target = 4;
 }
 
 // Feature flag evaluation response message.
@@ -71,8 +73,10 @@ message EvalAllResponse {
 
 // Request message for getting each available feature flag's key.
 message KeysRequest {
-  // The SDK identifier.
-  string sdk_id = 1;
+  // The SDK identifier. Deprecated, the field `target` should be used instead for SDK identification.
+  string sdk_id = 1 [ deprecated = true ];
+  // The request's target.
+  Target target = 2;
 }
 
 // Response message that contains each available feature flag's key.
@@ -83,8 +87,10 @@ message KeysResponse {
 
 // Request message for the given SDK to refresh its evaluation data.
 message RefreshRequest {
-  // The SDK identifier.
-  string sdk_id = 1;
+  // The SDK identifier. Deprecated, the field `target` should be used instead for SDK identification.
+  string sdk_id = 1 [ deprecated = true ];
+  // The request's target.
+  Target target = 2;
 }
 
 // Defines the possible values that can be set in the `user` map.
@@ -94,6 +100,16 @@ message UserValue {
     string string_value = 2;
     google.protobuf.Timestamp time_value = 3;
     StringList string_list_value = 4;
+  }
+}
+
+// Identifies the target of evaluation requests by either an SDK Id or an SDK Key.
+message Target {
+  oneof identifier {
+    // The SDK Id.
+    string sdk_id = 1;
+    // The SDK key.
+    string sdk_key = 2;
   }
 }
 
@@ -112,17 +128,10 @@ In order to secure the gRPC communication with the Proxy, set up [TLS](../../adv
 The following example uses a generated Go client, but gRPC clients generated for other languages are working as well.
 
 ```go title="example.go"
-opts := []grpc.DialOption{
-    grpc.WithBlock(),
+conn, err := grpc.NewClient("localhost:50051",
     grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{
-        // Any TLS options
-    })),
-}
-
-conn, err := grpc.DialContext(context.Background(), 
-    // highlight-next-line
-    "localhost:50051", // Proxy host and gRPC port
-    opts...)
+      // Any TLS options
+    })))
 if err != nil {
     panic(err)
 }
@@ -137,9 +146,12 @@ ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 defer cancel()
 
 resp, err := client.EvalFlag(ctx, &proto.EvalRequest{
-    SdkId: "<sdk-identifier>", 
-    Key: "<flag-key>", 
-    User: map[string]*proto.UserValue{"Identifier": {Value: &proto.UserValue_StringValue{StringValue: "<user-id>"}}}
+    // highlight-next-line
+    Target: &proto.Target{Identifier: &proto.Target_SdkKey{SdkKey: "#YOUR-SDK-KEY#"}},
+    // Or with SDK identifier
+    // Target: &proto.Target{Identifier: &proto.Target_SdkId{SdkId: "#SDK-IDENTIFIER#"}},
+    Key: "<flag-key>",
+    User: map[string]*proto.UserValue{"Identifier": {Value: &proto.UserValue_StringValue{StringValue: "<user-id>"}}},
 })
 if err != nil {
     panic(err)
