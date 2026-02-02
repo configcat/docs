@@ -19,10 +19,11 @@ In ConfigCat, you can configure feature flags to operate in either of these mode
 </p>
 
 ## Free-form values
+Free-form values are the traditional, unrestrictive mode that lets you enter a feature flag's exact value each time you set it.
+
 <p>
     <img src="/docs/assets/predefined-variations/free-form-create_192dpi.png" alt="Clone feature flag" width="1366" height="768" decoding="async" loading="lazy" />
 </p>
-Free-form values are the traditional, unrestrictive mode that lets you enter a feature flag's exact value each time you set it.
 
 ### Characteristics
 
@@ -40,18 +41,18 @@ Free-form values work well when you have simple, one-off configurations where fe
 
 ## Predefined variations
 
+Predefined variations allow you to define a set of reusable values upfront when creating a feature flag. These variations can then be selected from a dropdown when setting up flag rules. Each variation consists of three fields:
+
 <p>
     <img src="/docs/assets/predefined-variations/predefined-variations-create_192dpi.png" alt="Clone feature flag" width="1366" height="768" decoding="async" loading="lazy" />
 </p>
-
-Predefined variations allow you to define a set of reusable values upfront when creating a feature flag. These variations can then be selected from a dropdown when setting up flag rules. Each variation consists of three fields:
 
 ### Variation fields
 
 | Field | Description |
 |-------|-------------|
 | Served value | **Required.** The actual value that feature flag evaluation will return in your application when this variation is selected. |
-| Display name | Optional. A human-readable identifier for the variation displayed in the dropdown. If not provided, a string representation of the value is displayed instead. |
+| Display name | Optional. A human-readable identifier for the variation displayed in the dropdown. If not provided, a string representation of the served value is displayed instead. |
 | Hint | Optional. Additional context or description to explain when or why to use this variation. It will be visible as a tooltip. |
 
 ### Characteristics
@@ -72,7 +73,7 @@ ConfigCat provides an easy way to convert feature flags between free-form values
 
 ### Converting to predefined variations
 
-When you convert a feature flag from free-form values to predefined variations, ConfigCat automatically collects all currently used values from your existing flag rules. These collected values are presented as suggested variations, but you can modify their display names and hints or add new ones.
+When you convert a feature flag from free-form values to predefined variations, ConfigCat automatically collects all currently used values from your existing flag rules. These collected values are presented as suggested variations, but you can modify their display names and hints, or even add new variations.
 
 The conversion doesn't affect your deployed applications.
 
@@ -90,11 +91,11 @@ When creating a new feature flag, you can choose between free-form values and pr
 
 ### Managing predefined variations
 
+You can add/remove/modify predefined variations for a feature flag by clicking the related button in any served value dropdowns or by clicking the **Manage predefined variations** item in the kebab (3 dots) menu of the feature flag.  
+
 <p>
     <img src="/docs/assets/predefined-variations/manage_192dpi.png" alt="Clone feature flag" width="1366" height="768" decoding="async" loading="lazy" />
 </p>
-
-You can add/remove/modify predefined variations for a feature flag by clicking the related button in any served value dropdowns or by clicking the **Manage predefined variations** item in the kebab (3 dots) menu of the feature flag.  
 
 You can create additional variations as needed at any time. However, you can only remove a predefined variation if it is not currently in use.  
 
