@@ -59,6 +59,7 @@ const docs: SidebarConfig = [
           'targeting/feature-flag-evaluation',
         ],
       },
+      'advanced/variation-id-for-analytics',
       'advanced/caching',
       'advanced/troubleshooting',
       'zombie-flags',

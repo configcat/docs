@@ -101,34 +101,11 @@ You can create additional variations as needed at any time. However, you can onl
 
 You can modify the display name and hint of predefined variations at any time, but you can only change the served value of a predefined variation if it is not currently in use.
 
-
-## Variation ID for analytics
-
-To support working with feature flags, especially A/B testing and analytics, ConfigCat provides an auto-generated identifier called Variation ID for each distinct served value. This identifier is particularly useful when integrating with analytics tools.
-
-### What is a Variation ID?
-
-The _Variation ID_ is a hashed version of the feature flag's served value. For feature flags with lengthy values (such as JSON objects), the Variation ID provides a shorter, more manageable identifier that can be sent to analytics platforms, instead of the full value.
-
-### How to access Variation IDs
-
-You can view Variation IDs on the ConfigCat Dashboard by enabling the **Show Variation IDs to support A/B testing** setting. Learn more about this setting <a href="https://app.configcat.com/product/preferences" target="_blank">here</a>.
-
-### VariationID vs. PredefinedVariationID
+## Variation ID (for analytics) vs. predefined variations
 
 :::note
-`VariationID` (for analytics) is different from `PredefinedVariationID` available in the Public Management API:
+`Variation ID` (for analytics) is different from `PredefinedVariationID` available in the Public Management API:
 
-`VariationID` is a hashed identifier of the feature flag's served value, used for analytics and A/B testing integrations. This is what you send to analytics tools like Amplitude, Google Analytics, Mixpanel, and Segment.  
+`Variation ID` is a hashed identifier of the feature flag's served value, used for analytics and A/B testing integrations. This is what you send to analytics tools like Amplitude, Google Analytics, Mixpanel, and Segment. Read more at [Variation ID for analytics](/advanced/variation-id-for-analytics).
 `PredefinedVariationID` is the resource identifier in the ConfigCat Public Management API that can be used to reference a specific predefined variation when managing feature flags programmatically.
 :::
-
-### Using Variation IDs with analytics integrations
-
-When integrating ConfigCat with analytics platforms, you can send the Variation ID along with (or instead of) the feature flag value. This is especially recommended for text feature flags with lengthy values (such as JSON configurations), maintaining consistent identifiers across analytics reports, and simplifying A/B test analysis.
-
-For detailed integration instructions, see the documentation of
-- [Amplitude integration](/integrations/amplitude),
-- [Google Analytics integration](/integrations/google-analytics),
-- [Mixpanel integration](/integrations/mixpanel),
-- [Segment integration](/integrations/segment).
