@@ -101,11 +101,14 @@ You can create additional variations as needed at any time. However, you can onl
 
 You can modify the display name and hint of predefined variations at any time, but you can only change the served value of a predefined variation if it is not currently in use.
 
-## Variation ID (for analytics) vs. predefined variations
+## Variation ID vs predefined variations
 
-:::note
-`Variation ID` (for analytics) is different from `PredefinedVariationID` available in the Public Management API:
+ConfigCat also has a feature called _Variation ID_, but this is different from predefined variations, as it is designed primarily for analytics and A/B testing integrations. It is a hashed identifier of the feature flag's served value.
 
-`Variation ID` is a hashed identifier of the feature flag's served value, used for analytics and A/B testing integrations. This is what you send to analytics tools like Amplitude, Google Analytics, Mixpanel, and Segment. Read more at [Variation ID for analytics](/advanced/variation-id-for-analytics).
-`PredefinedVariationID` is the resource identifier in the ConfigCat Public Management API that can be used to reference a specific predefined variation when managing feature flags programmatically.
+However, since predefined variations require unique served values, there is an inherent connection between the two concepts: a Variation ID uniquely identifies a predefined variation.
+
+Therefore, if you enable the Variation ID feature in your product's preferences as explained [here](../variation-id-for-analytics/#how-to-access-variation-ids), the **Manage predefined variations** dialog will also display the Variation IDs corresponding to the variations.
+
+:::tip
+Learn more about Variation ID [here](../variation-id-for-analytics).
 :::
