@@ -1,23 +1,23 @@
 ---
 id: predefined-variations
 title: Predefined Variations
-description: Learn about Free-form values and Predefined Variations in ConfigCat, how they differ, and when to use each approach for managing feature flag values.
+description: Learn about free-form values and predefined variations in ConfigCat, how they differ, and when to use each approach for managing feature flag values.
 ---
 
-ConfigCat supports two kinds of feature flag configurations: **Free-form values** and **Predefined Variations**. This guide explains the differences between these approaches and helps you choose the right one for your use case.
+ConfigCat supports two value-modes for feature flags: _free-form values_ and _predefined variations_. This guide explains the differences between these approaches and helps you choose the right one for your use case.
 
 
 ## Overview
 
-Feature flags in ConfigCat can be configured in two ways:
+In ConfigCat, you can configure feature flags to operate in either of these modes:
 
-- **Free-form values** - Define values directly each time you set a feature flag's value
-- **Predefined Variations** - Create a set of reusable variation definitions that can be selected from a dropdown
+- **Free-form values** - Allows arbitrary feature flag values. You can set served values to any value.
+- **Predefined variations** - Constrains feature flag values to a set of variations specified beforehand. You can select served values from a dropdown.
 
 
 ## Free-form values
 
-Free-form values are the traditional approach where you manually specify the exact value each time you configure a feature flag's value.
+Free-form values are the traditional, unrestrictive mode that lets you enter a feature flag's exact value each time you set it.
 
 ### Characteristics
 
@@ -34,57 +34,63 @@ Free-form values work well when you have simple, one-off configurations where fe
 Choose Free-form values when you're prototyping or experimenting, working on one-off configurations unlikely to be reused, creating simple boolean flags, running quick testing scenarios, dealing with unpredictable or frequently changing values, or when you need maximum flexibility.
 
 
-## Predefined Variations
+## Predefined variations
 
-Predefined Variations allow you to define a library of reusable values upfront when creating a feature flag. These variations can then be selected from a dropdown when configuring rules and targets. Each variation consists of three fields:
+Predefined variations allow you to define a set of reusable values upfront when creating a feature flag. These variations can then be selected from a dropdown when setting up flag rules. Each variation consists of three fields:
 
 ### Variation fields
 
 | Field | Description |
 |-------|-------------|
-| Value | Required, the actual value that will be returned by the feature flag in your application when this variation is selected. |
-| Name | Optional, a human-readable identifier for the variation displayed in the dropdown. If not provided, a string representation of the value is displayed instead. |
-| Hint | Optional, additional context or description to explain when or why to use this variation. It will be visible as a tooltip. |
+| Served value | **Required.** The actual value that feature flag evaluation will return in your application when this variation is selected. |
+| Display name | Optional. A human-readable identifier for the variation displayed in the dropdown. If not provided, a string representation of the value is displayed instead. |
+| Hint | Optional. Additional context or description to explain when or why to use this variation. It will be visible as a tooltip. |
 
 ### Characteristics
 
 - **Defined at Creation**: Variations must be defined when creating the feature flag
-- **Reusability**: Define once, use multiple times across rules and targets
+- **Reusability**: Define once, use multiple times across flag rules
 - **Consistency**: Ensures the same values are used throughout your configuration
 - **Dropdown Selection**: Choose from predefined options instead of typing
 
 ### Use cases
 
-Predefined Variations are ideal when you have a standard set of values used across multiple rules, especially when consistency is critical for things like color schemes, API endpoints, or configuration objects. They work well when multiple team members need to understand what each value represents and you want to prevent typos or invalid values. This approach is particularly valuable when complex values like JSON objects need to be reused, when you need to provide guidance on when to use specific values, and when values are known upfront and relatively stable.
+Predefined variations are ideal when you have a standard set of values used across multiple rules, especially when consistency is critical for things like color schemes, API endpoints, or configuration objects. They work well when multiple team members need to understand what each value represents and you want to prevent typos or invalid values. This approach is particularly valuable when complex values like JSON objects need to be reused, when you need to provide guidance on when to use specific values, and when values are known upfront and relatively stable.
 
 Choose Predefined Variations when multiple team members work with the flags, values are used in multiple rules or targets, consistency and standardization are important, you're working with complex JSON configurations, you need to provide context about value usage, you want to prevent configuration errors, you want self-documenting configurations, or when your team needs guidance on which values to use when.
 
-## Converting between Free-form values and Predefined Variations
+## Converting between free-form values and predefined variations
 
-ConfigCat provides an easy way to convert feature flags between Free-form values and Predefined Variations.
+ConfigCat provides an easy way to convert feature flags between free-form values and predefined variations.
 
-### Converting to Predefined Variations
+### Converting to predefined variations
 
-When you convert a feature flag from Free-form values to Predefined Variations, ConfigCat automatically collects all currently used values from your existing rules and targets. These collected values are presented as suggested variations, but you can modify their names and hints or add new ones. The conversion happens without affecting your running applications.
+When you convert a feature flag from free-form values to predefined variations, ConfigCat automatically collects all currently used values from your existing flag rules. These collected values are presented as suggested variations, but you can modify their display names and hints or add new ones.
 
-### Converting to Free-form values
+The conversion doesn't affect your deployed applications.
 
-When you convert a feature flag from Predefined Variations to Free-form values, the actual values from variations are extracted and feature flag values are updated to use the raw values directly. Names and hints are removed, leaving only the values.
+### Converting to free-form values
 
-## Working with Predefined Variations
+When you convert a feature flag from predefined variations to free-form values, the actual values from variations are extracted and feature flag values are updated to use the values directly. Display names and hints are irreversibly deleted, leaving only the values.
 
-### Creating a feature flag with Predefined Variations
+The conversion doesn't affect your deployed applications.
 
-When you create a new feature flag you'll have the ability to switch between free-form values and predefined variations.
+## Working with predefined variations
 
-### Adding/removing/changing Predefined Variations
+### Creating a feature flag with predefined variations
 
-You can manage the predefined variations for a feature flag by clicking the button in any dropdowns or by clicking on the Manage predefined variations menu item in the hamburger menu on the feature flag.  
-You can create additional variations as needed at any time. However, you can only remove a Predefined variation if it is not currently used in your feature flag values.  
-You can modify the Predefined variations' names and hints anytime, but you can only modify the value of a Predefined variation if it is not currently used in your feature flag values.
+When creating a new feature flag, you can choose between free-form values and predefined variations.
+
+### Managing predefined variations
+
+You can add/remove/modify predefined variations for a feature flag by clicking the related button in any served value dropdowns or by clicking the **Manage predefined variations** item in the kebab (3 dots) menu of the feature flag.  
+
+You can create additional variations as needed at any time. However, you can only remove a predefined variation if it is not currently in use.  
+
+You can modify the display name and hint of predefined variations at any time, but you can only change the served value of a predefined variation if it is not currently in use.
 
 
-## VariationID for analytics
+## Variation ID for analytics
 
 When working with feature flags, especially for A/B testing and analytics purposes, ConfigCat provides a **VariationID** for each evaluated feature flag value. This VariationID is particularly useful when integrating with analytics tools.
 
