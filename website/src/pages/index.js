@@ -8,33 +8,87 @@ import styles from './styles.module.css';
 
 const features = [
   {
+    column: 0,
     title: 'Basics',
     description: <>Familiarize with ConfigCat basics.</>,
     links: [
-      { url: 'getting-started', title: 'Getting started' },
+      { url: 'getting-started', title: 'Getting Started' },
       { url: 'main-concepts', title: 'Main Concepts' },
+      { url: 'organization', title: 'Organization & Roles' },
       { url: 'targeting/targeting-overview', title: 'Targeting' },
+      { url: 'advanced/predefined-variations', title: 'Predefined Variations vs Free‑Form Values' },
+    ],
+  },
+  {
+    column: 0,
+    cssClass: "last-on-mobile",
+    title: 'Plans & Usage',
+    description: <>The financial side of feature flagging.</>,
+    links: [
+      { url: 'purchase', title: 'Plans, Purchase & Billing' },
       { url: 'requests', title: 'What is a config JSON download?' },
       { url: 'network-traffic', title: 'Network Traffic' },
-      { url: 'purchase', title: 'Plans, Purchase & Billing' },
-      { url: 'organization', title: 'Organization & Roles' },
+    ],
+  },
+  {
+    column: 0,
+    cssClass: "last-on-mobile",
+    title: 'Further Reading',
+    description: <>Additional useful information.</>,
+    links: [
+      { url: 'advanced/config-v2-migration-guide', title: 'Config V2 Migration Guide' },
       { url: 'news', title: 'News & Product Updates' },
       { url: 'faq', title: 'FAQ' },
+      { url: 'advanced/troubleshooting', title: 'Troubleshooting' },
       { url: 'glossary', title: 'Glossary' },
     ],
   },
   {
-    title: 'Advanced Guides',
-    description: <>API, CLI, SAML, Webhooks...</>,
+    column: 1,
+    title: 'Advanced Features',
+    description: <>Boost your feature flagging efficiency.</>,
     links: [
-      { url: 'api/reference/configcat-public-management-api', title: 'Public Management API' },
+      { url: 'advanced/cli', title: 'Command Line Interface (CLI)' },
+      {
+        url: 'advanced/proxy/proxy-overview',
+        title: 'ConfigCat Proxy',
+      },
       { url: 'advanced/data-governance', title: 'Data Governance - CDN' },
-      { url: 'advanced/predefined-variations', title: 'Predefined Variations vs Free‑Form Values' },
-      { url: 'advanced/variation-id-for-analytics', title: 'Variation ID for analytics' },
-      { url: 'advanced/caching', title: 'Polling modes & Caching' },
+      {
+        url: 'advanced/migration-from-launchdarkly',
+        title: 'Migration from LaunchDarkly',
+      },
+      { url: 'advanced/mcp-server', title: 'MCP Server' },
+      {
+        url: 'advanced/notifications-webhooks',
+        title: 'Notifications - Webhooks',
+      },
+      { url: 'api/reference/configcat-public-management-api', title: 'Public Management API' },
+      {
+        url: 'advanced/code-references/overview',
+        title: 'Scan & Upload Code References',
+      },
+
+      { url: 'advanced/variation-id-for-analytics', title: 'Variation ID for Analytics' },
+      { url: 'zombie-flags', title: 'Zombie Flags' },
+    ],
+  },
+  {
+    column: 1,
+    title: 'Team Management',
+    description: <>Grant your team access to ConfigCat.</>,
+    links: [
       {
         url: 'advanced/team-management/team-management-basics',
-        title: 'Team Management',
+        title: 'Team Management Basics',
+      },
+      {
+        url: 'advanced/team-management/single-sign-on-sso',
+        title: 'SSO (Single Sign-On)',
+      },
+      {
+        url: 'advanced/team-management/auto-assign-users',
+        title: 'Auto-Assign Users',
       },
       {
         url: 'advanced/team-management/saml/saml-overview',
@@ -42,33 +96,17 @@ const features = [
       },
       {
         url: 'advanced/team-management/scim/scim-overview',
-        title: 'User provisioning (SCIM)',
+        title: 'User Provisioning (SCIM)',
       },
       {
-        url: 'advanced/notifications-webhooks',
-        title: 'Notifications - Webhooks',
+        url: 'advanced/team-management/domain-verification',
+        title: 'Domain Verification',
       },
-      { url: 'advanced/troubleshooting', title: 'Troubleshooting' },
-      { url: 'advanced/cli', title: 'Command Line Interface (CLI)' },
-      {
-        url: 'advanced/code-references/overview',
-        title: 'Scan & Upload Code References',
-      },
-      {
-        url: 'advanced/proxy/proxy-overview',
-        title: 'ConfigCat Proxy',
-      },
-      {
-        url: 'advanced/migration-from-launchdarkly',
-        title: 'Migration from LaunchDarkly',
-      },
-      { url: 'advanced/mcp-server', title: 'MCP Server' },
-      { url: 'zombie-flags', title: 'Zombie Flags' },
-      // { url: 'advanced/config-v2-migration-guide', title: 'Config V2 Migration Guide' },
     ],
   },
   {
-    title: 'SDK references', // This list should be in alphabetical order
+    column: 2,
+    title: 'SDK References', // This list should be in alphabetical order
     description: <>Let's do some coding.</>,
     links: [
       { url: 'sdk-reference/dotnet', title: '.NET' },
@@ -104,6 +142,7 @@ const features = [
     ],
   },
   {
+    column: 3,
     title: 'Integrations', // This list should be in alphabetical order
     description: <>Get connected to increase productivity.</>,
     links: [
@@ -135,29 +174,44 @@ const features = [
   },
 ];
 
-function Feature({ imageUrl, title, description, links }) {
-  const imgUrl = useBaseUrl(imageUrl);
+const featuresByColumn = features.reduce((acc, feature) => {
+  let group = acc[feature.column];
+  if (!group) acc[feature.column] = group = [];
+  group.push(feature);
+  return acc;
+}, []);
+
+function Feature({ features }) {
   return (
     <div className={clsx('col col--3', styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={clsx('no-auto-height', styles.featureImage)} src={imgUrl} alt={title} />
-        </div>
-      )}
-      <h3>{title}</h3>
-      <p>{description}</p>
-      {FeatureItems(links)}
+      {features
+        .map(({ cssClass, imageUrl, title, description, links }, idx) => {
+          const imgUrl = useBaseUrl(imageUrl);
+          return (
+            <div key={idx} className={clsx(cssClass, styles.featureSection)}>
+              {imgUrl && (
+                <div className="text--center">
+                  <img className={clsx('no-auto-height', styles.featureImage)} src={imgUrl} alt={title} />
+                </div>
+              )}
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <FeatureItems links={links} />
+            </div>
+          );
+        })
+      }
     </div>
   );
 }
 
-function FeatureItems(links) {
+function FeatureItems({ links }) {
   return (
-    <ul class="feature-list">
-      {links.map(({ url, title, items }) => (
-        <li>
+    <ul className="feature-list">
+      {links.map(({ url, title, items }, idx) => (
+        <li key={idx}>
           <Link to={useBaseUrl(url)}>{title}</Link>
-          {items?.length && FeatureItems(items)}
+          {items?.length && <FeatureItems links={items} />}
         </li>
       ))}
     </ul>
@@ -189,24 +243,24 @@ function Home() {
               )}
               to={useBaseUrl('getting-started')}
             >
-              Open Docs
+              Get started
             </Link>
           </div>
         </div>
       </header>
       <main>
-        {features && features.length > 0 && (
           <section className={styles.features}>
             <div className="container">
-              <h2 className="text--center">Quick links</h2>
               <div className="row">
-                {features.map((props, idx) => (
-                  <Feature key={idx} {...props} />
-                ))}
+              {featuresByColumn
+                .filter(group => group.length)
+                .map((group, idx) => (
+                  <Feature key={idx} features={group} />
+                ))
+              }
               </div>
             </div>
           </section>
-        )}
       </main>
     </Layout>
   );

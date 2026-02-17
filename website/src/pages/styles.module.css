@@ -25,6 +25,28 @@
   width: 100%;
 }
 
+.featureSection {
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 996px) {
+  .features > :global(.container > .row) {
+    flex-direction: column;
+  }
+
+  .features > :global(.container > .row > .col) {
+    display: contents;
+  }
+
+  .features > :global(.container > .row > .col > div) {
+    padding: 0 var(--ifm-spacing-horizontal);
+  }
+
+  .featureSection:global(.last-on-mobile) {
+    order: 1000;
+  }
+}
+
 .featureImage {
   height: 200px;
   width: 200px;

@@ -287,7 +287,7 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          label: 'Docs',
+          label: 'Product Docs',
           sidebarId: 'docs',
           position: 'left',
         },
