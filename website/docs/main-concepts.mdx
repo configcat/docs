@@ -28,6 +28,22 @@ A _Feature Flag_ is a _Setting_ of type Bool.
 | Whole Number   | Integer      | Any whole number within the range of `Int32`.                                      |
 | Decimal Number | Double       | Any decimal number within the range of `double`.                                   |
 
+### Free-form values vs predefined variations
+
+ConfigCat supports two value-modes for feature flags:
+- **Free-form values**: Allows you to enter a feature flag's exact value each time you set it. Best for simple, one-off configurations or quick experiments.
+  <p>
+    <img src="/docs/assets/predefined-variations/free-form-create_192dpi.png" alt="Clone feature flag" width="1366" height="768" decoding="async" loading="lazy" />
+  </p>
+- **Predefined Variations**: Allows you to define a set of reusable values upfront when creating a feature flag. These variations can then be selected from a dropdown when setting up flag rules. Choose this mode to ensure consistency across rules, prevent typos in complex values (like JSON configurations), and provide self-documenting configurations for your team.
+  <p>
+    <img src="/docs/assets/predefined-variations/predefined-variations-create_192dpi.png" alt="Clone feature flag" width="1366" height="768" decoding="async" loading="lazy" />
+  </p>
+
+:::tip
+Learn more about [predefined variations](/advanced/predefined-variations), including when to use this value-mode, how to convert between the two value-modes, and best practices.
+:::
+
 ## Config
 
 A _Config_ is a collection of _Settings_. _Configs_ help you organize settings around topics, or around your software components. A _Config_ is like an online version of a traditional config file.
