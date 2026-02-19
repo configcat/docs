@@ -29,8 +29,6 @@ const features = [
     links: [
       { url: 'api/reference/configcat-public-management-api', title: 'Public Management API' },
       { url: 'advanced/data-governance', title: 'Data Governance - CDN' },
-      { url: 'advanced/predefined-variations', title: 'Predefined Variations' },
-      { url: 'advanced/variation-id-for-analytics', title: 'Variation ID for analytics' },
       { url: 'advanced/caching', title: 'Polling modes & Caching' },
       {
         url: 'advanced/team-management/team-management-basics',
