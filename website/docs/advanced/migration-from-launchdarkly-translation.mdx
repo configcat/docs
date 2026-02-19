@@ -349,7 +349,7 @@ we are happy to raise your limits temporarily so you can fully explore the produ
         There is no way to emulate this behavior in ConfigCat, so a placeholder value is used as follows:
         <ul>
           <li>boolean flag: `false`</li>
-          <li>string flag: `""` (empty string)</li>
+          <li>string flag: `"_"`</li>
           <li>json flag: `"null"`</li>
           <li>number flag: 0</li>
         </ul>
@@ -716,6 +716,39 @@ we are happy to raise your limits temporarily so you can fully explore the produ
       </td>
       <td>
         Comma is replaced with semicolon in comparison value list items.
+      </td>
+    </tr>
+
+    <tr id="translation-issue-T028">
+      <td>T028</td>
+      <td>🔴&nbsp;HIGH</td>
+      <td>
+        A feature flag variation value was changed.
+      </td>
+      <td>
+        LaunchDarkly allows variation values that are not valid in ConfigCat. More specifically, the empty string in the
+        case of string feature flags.
+      </td>
+      <td>
+        Problematic variation values are changed into valid ConfigCat values, and if necessary, they are made unique by
+        adding a number suffix.
+      </td>
+    </tr>
+
+    <tr id="translation-issue-T029">
+      <td>T029</td>
+      <td>🔵&nbsp;LOW</td>
+      <td>
+        A feature flag variation name was changed.
+      </td>
+      <td>
+        LaunchDarkly may allow longer variation names than ConfigCat. Also, LaunchDarkly enforces looser rules than
+        ConfigCat with regard to variation name uniqueness.
+      </td>
+      <td>
+        Names that are too long are truncated at the maximum length. Then the effective name (the truncated name or,
+        if no name is specified, the variation value) is checked for conflicts, and if necessary, it is made unique
+        by adding a number suffix.
       </td>
     </tr>
   </tbody>
