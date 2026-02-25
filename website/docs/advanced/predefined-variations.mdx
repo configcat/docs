@@ -1,17 +1,16 @@
 ---
 id: predefined-variations
-title: Predefined Variations
+title: Predefined Variations vs Free‑Form Values
 description: Learn about free-form values and predefined variations in ConfigCat, how they differ, and when to use each approach for managing feature flag values.
 ---
 
 ConfigCat supports two value-modes for feature flags: _free-form values_ and _predefined variations_. This guide explains the differences between these approaches and helps you choose the right one for your use case.
 
-
 ## Overview
 
 In ConfigCat, you can configure feature flags to operate in either of these modes:
 
-- **Free-form values** - Allows arbitrary feature flag values. You can set served values to any value.
+- **Free-form values** - Allows arbitrary values for non-boolean feature flags. You can set served values of such flags to any value.
 - **Predefined variations** - Constrains feature flag values to a set of variations specified beforehand. You can select served values from a dropdown.
 
 <p>
@@ -19,6 +18,7 @@ In ConfigCat, you can configure feature flags to operate in either of these mode
 </p>
 
 ## Free-form values
+
 Free-form values are the traditional, unrestrictive mode that lets you enter a feature flag's exact value each time you set it.
 
 <p>
@@ -36,8 +36,6 @@ Free-form values are the traditional, unrestrictive mode that lets you enter a f
 ### Use cases
 
 Free-form values work well when you have simple, one-off configurations where feature flag values are unique and unlikely to be reused. They're ideal when you need quick setup without upfront planning, especially when working with primitive values like booleans or simple strings and numbers. This approach is also suitable when values change frequently or unpredictably.
-
-
 
 ## Predefined variations
 
@@ -66,24 +64,25 @@ Predefined variations allow you to define a set of reusable values upfront when 
 
 Predefined variations are ideal when you have a standard set of values used across multiple rules, especially when consistency is critical for things like color schemes, API endpoints, or configuration objects. They work well when multiple team members need to understand what each value represents and you want to prevent typos or invalid values. This approach is particularly valuable when complex values like JSON objects need to be reused, when you need to provide guidance on when to use specific values, and when values are known upfront and relatively stable.
 
-
 ## Converting between free-form values and predefined variations
 
 ConfigCat provides an easy way to convert feature flags between free-form values and predefined variations.
 
 ### Converting to predefined variations
 
-You can convert a feature flag to use predefined variations by clicking the **Convert to use variations** item in the kebab (3 dots) menu of the feature flag.  
+You can convert a feature flag to use predefined variations by clicking the **Convert to use variations** item in the kebab (3 dots) menu of the feature flag.
+
 When you convert a feature flag from free-form values to predefined variations, ConfigCat automatically collects all currently used values from your existing flag rules. These collected values are presented as suggested variations, but you can modify their display names and hints, or even add new variations.
 
-The conversion doesn't affect your deployed applications.
+The conversion doesn't affect your applications deployed to production.
 
 ### Converting to free-form values
 
-You can convert a feature flag to use free-form values by clicking the **Convert to use free-form values** item in the kebab (3 dots) menu of the feature flag.  
+You can convert a feature flag to use free-form values by clicking the **Convert to use free-form values** item in the kebab (3 dots) menu of the feature flag. (For boolean feature flags, the corresponding menu item is **Convert to use ON/OFF toggle**.)
+
 When you convert a feature flag from predefined variations to free-form values, the actual values from variations are extracted and feature flag values are updated to use the values directly. Display names and hints are irreversibly deleted, leaving only the values.
 
-The conversion doesn't affect your deployed applications.
+The conversion doesn't affect your applications deployed to production.
 
 ## Working with predefined variations
 
