@@ -4,11 +4,17 @@ title: OpenFeature Providers
 description: List of all supported OpenFeature Providers.
 ---
 
-OpenFeature is an open specification that provides a vendor-agnostic, community-driven API for feature flagging. 
+OpenFeature is an open specification that provides a vendor-agnostic API and SDK for feature flagging. It enables developers to integrate feature flags in a standardized way across different feature flag management platforms.
 
-OpenFeature providers are the abstraction between an OpenFeature SDK and an underlying flag management system like ConfigCat. To learn more, see the [OpenFeature documentation](https://openfeature.dev/docs/reference/intro).
+OpenFeature providers act as the bridge between an OpenFeature SDK and a feature flag service like ConfigCat. When your application evaluates a feature flag through the OpenFeature API, the configured provider retrieves and evaluates the flag value from the underlying feature flag system.
 
-ConfigCat offers providers for the following platforms supported by OpenFeature SDKs:
+Using OpenFeature providers allows teams to adopt a standardized feature flag interface while managing flags with ConfigCat. To learn more, see the [OpenFeature documentation](https://openfeature.dev/docs/reference/intro/).
+
+## ConfigCat OpenFeature Providers
+
+ConfigCat offers OpenFeature providers for several platforms supported by OpenFeature SDKs, allowing applications to evaluate feature flags through the OpenFeature API while managing configuration in ConfigCat. 
+
+Supported platforms include:
 
 <div className="sdk-cards">
     <div className="sdk-card">
@@ -113,9 +119,7 @@ ConfigCat offers providers for the following platforms supported by OpenFeature 
 
 ## OpenFeature Remote Evaluation Protocol (OFREP)
 
-The <a href="https://github.com/open-feature/protocol" target="_blank">OpenFeature Remote Flag Evaluation Protocol</a> is an 
-API specification for feature flagging that allows the use of generic providers to connect 
-to any feature flag management systems that supports the protocol.
+The <a href="https://github.com/open-feature/protocol" target="_blank">OpenFeature Remote Flag Evaluation Protocol (OFREP)</a> defines a standard API for remote feature flag evaluation. It allows generic providers to connect to any feature flag system that supports the protocol.
 
-ConfigCat conforms to OFREP via the [ConfigCat Proxy](../../advanced/proxy/overview.mdx).
+ConfigCat supports OFREP through the [ConfigCat Proxy](../../advanced/proxy/overview.mdx), enabling OpenFeature-compatible clients to evaluate flags remotely.
 The API documentation for the OFREP implementation with usage examples is available [here](../../advanced/proxy/endpoints.mdx#openfeature-remote-evaluation-protocol-ofrep).
