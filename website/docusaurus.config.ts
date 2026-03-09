@@ -38,6 +38,10 @@ const config: Config = {
       {
         redirects: [
           {
+            from: '/sdk-reference/openfeature/overview',
+            to: '/sdk-reference/openfeature',
+          },
+          {
             from: '/sdk-reference/csharp',
             to: '/sdk-reference/dotnet',
           },
