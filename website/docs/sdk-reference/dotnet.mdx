@@ -114,7 +114,7 @@ These are the available options on the `ConfigCatClientOptions` class:
 | `Logger`            | Optional, [`IConfigCatLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/IConfigCatLogger.cs) instance for tracing.                                                                                                                                           | [`ConsoleLogger`](https://github.com/configcat/.net-sdk/blob/master/src/ConfigCatClient/Logging/ConsoleLogger.cs) (with WARNING level) |
 | `LogFilter`         | Optional, sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                                                   | `null` (none)                                                                                                                          |
 | `BaseUrl`           | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                         |                                                                                                                                        |
-| `HttpClientHandler` | Optional, `HttpClientHandler` to provide network credentials and proxy settings. [More about the proxy settings](#using-configcat-behind-a-proxy).                                                                                                                                                | built-in `HttpClientHandler`                                                                                                           |
+| `Proxy`             | Optional, [`IWebProxy`](https://learn.microsoft.com/en-us/dotnet/api/system.net.iwebproxy) instance that provides settings for routing HTTP requests made by the SDK through an HTTP, HTTPS, SOCKS, etc. proxy. [More about the proxy settings](#using-configcat-behind-a-proxy).                 |                                                                                                                                        |
 | `HttpTimeout`       | Optional, sets the underlying HTTP client's timeout. [More about the HTTP timeout](#http-timeout).                                                                                                                                                                                                | `TimeSpan.FromSeconds(30)`                                                                                                             |
 | `FlagOverrides`     | Optional, sets the local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                  |                                                                                                                                        |
 | `DataGovernance`    | Optional, describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly`                   | `Global`                                                                                                                               |
@@ -924,7 +924,7 @@ The .NET SDK supports *shared caching*. You can read more about this feature and
 ## Using ConfigCat behind a proxy {#using-configcat-behind-a-proxy}
 
 Provide your own network credentials (username/password) and proxy server settings (proxy server/port) by setting the
-`HttpClientHandler` property in the setup callback of `ConfigCatClient.Get`.
+`Proxy` property in the setup callback of `ConfigCatClient.Get`.
 
 ```csharp
 var myProxySettings = new WebProxy(proxyHost, proxyPort)
@@ -933,11 +933,9 @@ var myProxySettings = new WebProxy(proxyHost, proxyPort)
     Credentials = new NetworkCredential(proxyUserName, proxyPassword)
 };
 
-var myHttpClientHandler = new HttpClientHandler { Proxy = myProxySettings };
-
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
-    options.HttpClientHandler = myHttpClientHandler;
+    options.Proxy = myProxySettings;
 });
 ```
 
