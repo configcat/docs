@@ -26,7 +26,11 @@
 }
 
 .featureSection {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.74rem;
+}
+
+.featureSection > :global(p) {
+  --ifm-paragraph-margin-bottom: 0.75rem;
 }
 
 @media screen and (max-width: 996px) {

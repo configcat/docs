@@ -10,7 +10,7 @@ const features = [
   {
     column: 0,
     title: 'Basics',
-    description: <>Familiarize with ConfigCat basics.</>,
+    description: <>Learn the fundamentals of ConfigCat.</>,
     links: [
       { url: 'getting-started', title: 'Getting Started' },
       { url: 'main-concepts', title: 'Main Concepts' },
@@ -139,6 +139,7 @@ const features = [
       { url: 'sdk-reference/ios', title: 'Swift (iOS)' },
       { url: 'sdk-reference/unity', title: 'Unity' },
       { url: 'sdk-reference/unreal', title: 'Unreal Engine' },
+      { url: 'sdk-reference/openfeature', title: 'OpenFeature Providers' },
     ],
   },
   {
