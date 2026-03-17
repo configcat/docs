@@ -45,7 +45,7 @@ const features = [
   },
   {
     column: 1,
-    title: 'Advanced Features',
+    title: 'Advanced Features', // This list should be in alphabetical order
     description: <>Boost your feature flagging efficiency.</>,
     links: [
       { url: 'advanced/cli', title: 'Command Line Interface (CLI)' },
