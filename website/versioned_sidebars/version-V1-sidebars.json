@@ -9,10 +9,10 @@
       "items": [
         "getting-started",
         "main-concepts",
-        "purchase",
-        "requests",
-        "network-traffic",
-        "organization"
+        "organization",
+        "advanced/targeting",
+        "advanced/segments",
+        "advanced/user-object"
       ]
     },
     {
@@ -34,13 +34,13 @@
             "advanced/config-v2-sdk-compatibility"
           ]
         },
-        "advanced/data-governance",
-        "advanced/targeting",
-        "advanced/segments",
-        "advanced/user-object",
+        "purchase",
+        "requests",
+        "network-traffic",
         "advanced/caching",
-        "advanced/troubleshooting",
-        "zombie-flags"
+        "advanced/data-governance",
+        "zombie-flags",
+        "advanced/troubleshooting"
       ]
     },
     {
@@ -105,7 +105,7 @@
           ]
         },
         {
-          "label": "User provisioning (SCIM)",
+          "label": "User Provisioning (SCIM)",
           "type": "category",
           "link": {
             "type": "doc",

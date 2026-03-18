@@ -35,6 +35,10 @@
 /docs/advanced/team-management/saml/identity-providers/okta.mdx
 /docs/advanced/team-management/saml/identity-providers/onelogin.mdx
 /docs/advanced/team-management/saml/overview.mdx
+/docs/advanced/team-management/scim/identity-providers/entra-id.mdx
+/docs/advanced/team-management/scim/identity-providers/okta.mdx
+/docs/advanced/team-management/scim/identity-providers/onelogin.mdx
+/docs/advanced/team-management/scim/overview.mdx
 /docs/advanced/team-management/single-sign-on-sso.mdx
 /docs/advanced/team-management/team-management-basics.mdx
 /docs/advanced/troubleshooting.mdx

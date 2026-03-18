@@ -12,30 +12,7 @@ const docs: SidebarConfig = [
     items: [
       'getting-started',
       'main-concepts',
-      'purchase',
-      'requests',
-      'network-traffic',
       'organization',
-    ],
-  },
-  {
-    label: 'Guides',
-    type: 'category',
-    collapsed: false,
-    collapsible: true,
-    className: 'icon guides-icon',
-    items: [
-      {
-        label: 'Config V2',
-        type: 'category',
-        link: { type: 'doc', id: 'advanced/config-v2' },
-        items: [
-          'advanced/config-v2-migration-guide',
-          'advanced/config-v2-sdk-compatibility',
-        ],
-      },
-      'advanced/data-governance',
-      'advanced/predefined-variations',
       {
         label: 'Targeting',
         type: 'category',
@@ -59,9 +36,22 @@ const docs: SidebarConfig = [
           'targeting/feature-flag-evaluation',
         ],
       },
-      'advanced/variation-id-for-analytics',
+      'advanced/predefined-variations',
+    ],
+  },
+  {
+    label: 'Guides',
+    type: 'category',
+    collapsed: false,
+    collapsible: true,
+    className: 'icon guides-icon',
+    items: [
+      'purchase',
+      'requests',
+      'network-traffic',
       'advanced/caching',
-      'advanced/troubleshooting',
+      'advanced/data-governance',
+      'advanced/variation-id-for-analytics',
       'zombie-flags',
       {
         label: 'Migration from LaunchDarkly',
@@ -75,6 +65,16 @@ const docs: SidebarConfig = [
           },
         ],
       },
+      {
+        label: 'Config V2',
+        type: 'category',
+        link: { type: 'doc', id: 'advanced/config-v2' },
+        items: [
+          'advanced/config-v2-migration-guide',
+          'advanced/config-v2-sdk-compatibility',
+        ],
+      },
+      'advanced/troubleshooting',
     ],
   },
   {
@@ -136,7 +136,7 @@ const docs: SidebarConfig = [
         ],
       },
       {
-        label: 'User provisioning (SCIM)',
+        label: 'User Provisioning (SCIM)',
         type: 'category',
         link: {
           type: 'doc',
