@@ -6,6 +6,7 @@ description: Webhooks are a way to send notifications to your applications about
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import { Steps, Step, Title } from '@site/src/components/Steps';
 
 ConfigCat Webhooks can notify your applications when a feature flag or other Setting changes by calling a public HTTP endpoint on your end.
 This allows your applications to react almost immediately to updates.
@@ -14,11 +15,23 @@ To enable Webhooks, simply tell us which HTTP endpoint to call. ConfigCat will s
 
 ## Adding a Webhook
 
-1. Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> screen.
-2. Click the **+ ADD WEBHOOK** button.
-3. Choose **when** webhook notifications should be sent by selecting the **Config** and **Environment**  where changes should trigger the Webhook.
-4. Define **how** to notify your system by setting the **URL** and the **HTTP METHOD**. This tells us which endpoint to call.
-5. (Optional) Add custom HTTP headers and a request body if needed.
+<Steps>
+<Step>
+Go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> screen.
+</Step>
+<Step>
+Click the **+ ADD WEBHOOK** button.
+</Step>
+<Step>
+Choose **when** webhook notifications should be sent by selecting the **Config** and **Environment**  where changes should trigger the Webhook.
+</Step>
+<Step>
+Define **how** to notify your system by setting the **URL** and the **HTTP METHOD**. This tells us which endpoint to call.
+</Step>
+<Step>
+(Optional) Add custom HTTP headers and a request body if needed.
+</Step>
+</Steps>
 
 ## Request body with variables
 
@@ -55,16 +68,24 @@ The ##ChangeDetails## variable is replaced with a JSON array in the following fo
 ```
 
 ## Testing your Webhook
-
-1. Change some of your settings in the _ConfigCat Dashboard._
-2. Click **SAVE & PUBLISH CHANGES**.
-3. Check if your Webhook was called correctly.
+<Steps>
+<Step>
+Change some of your settings in the _ConfigCat Dashboard._
+</Step>
+<Step>
+Click **SAVE & PUBLISH CHANGES**.
+</Step>
+<Step>
+Check if your Webhook was called correctly.
 
 :::info
 **Developer Tip**
 - Running your Webhook on `localhost`? Expose it to the public internet temporarily by using a tool like <a href="https://ngrok.com/" target="_blank">ngrok</a>. This enables ConfigCat to call your webhook even in your local development environment.
 - Just interested in what ConfigCat sends? Try [Webhhok.site](https://webhook.site/). This allows you to catch HTTP requests and see their content without requiring your to run anything anywhere.
 :::
+</Step>
+</Steps>
+
 
 ## Verifying Webhook requests
 
@@ -378,28 +399,49 @@ it will retry the request up to 5 times, using variable delays between attempts.
 ## Connecting to Slack
 
 A few steps to set up Slack and get a message when a setting changes:
-
-1. In Slack, create an <a href="https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks#create_a_webhook" target="_blank">Incoming Webhook</a> and copy the **Webhook URL**.
-2. In ConfigCat, go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> screen, and click **+ ADD WEBHOOK**.
-3. Paste Slack's **Webhhok URL** to ConfigCat's **URL** field.
-4. Select **POST** as the **HTTP METHOD**.
-5. Add the following request body:
+<Steps>
+<Step>
+In Slack, create an <a href="https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks#create_a_webhook" target="_blank">Incoming Webhook</a> and copy the **Webhook URL**.
+</Step>
+<Step>
+In ConfigCat, go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> screen, and click **+ ADD WEBHOOK**.
+</Step>
+<Step>
+Paste Slack's **Webhhok URL** to ConfigCat's **URL** field.
+</Step>
+<Step>
+Select **POST** as the **HTTP METHOD**.
+</Step>
+<Step>
+Add the following request body:
 
 ```
 {
   "text": "<##URL##|##ConfigName## - ##EnvironmentName##> changed in ConfigCat: \n\n##ChangeDetailsSlack##"
 }
 ```
+</Step>
+</Steps>
 
 ## Connecting to Microsoft Teams
 
 A few steps to set up Microsoft Teams and get a message when a setting changes:
 
-1. In Microsoft Teams, create an <a href="https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#create-incoming-webhook-1" target="_blank">Incoming Webhook</a> and copy the **Webhook URL**.
-2. In ConfigCat, go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> screen, and click **+ ADD WEBHOOK**.
-3. Paste Microsoft Teams' **Webhhok URL** to ConfigCat's **URL** field.
-4. Select **POST** as the **HTTP METHOD**.
-5. Add the following request body:
+<Steps>
+<Step>
+In Microsoft Teams, create an <a href="https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook#create-incoming-webhook-1" target="_blank">Incoming Webhook</a> and copy the **Webhook URL**.
+</Step>
+<Step>
+In ConfigCat, go to the <a href="https://app.configcat.com/webhook" target="_blank">Webhooks</a> screen, and click **+ ADD WEBHOOK**.
+</Step>
+<Step>
+Paste Microsoft Teams' **Webhhok URL** to ConfigCat's **URL** field.
+</Step>
+<Step>
+Select **POST** as the **HTTP METHOD**.
+</Step>
+<Step>
+Add the following request body:
 
 ```
 {
@@ -419,3 +461,5 @@ A few steps to set up Microsoft Teams and get a message when a setting changes:
   ]
 }
 ```
+</Step>
+</Steps>

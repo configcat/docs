@@ -4,6 +4,8 @@ title: Troubleshooting
 description: This section helps you troubleshoot your issues. It's a good idea to double check these before contacting support.
 ---
 
+import { Steps, Step, Title } from '@site/src/components/Steps';
+
 The following issues were reported by customers. We've collected what we've learned and provided the possible solutions below.
 
 ## Long response times and connection issues
@@ -12,26 +14,48 @@ First, check the [Service Status Monitor](https://status.configcat.com) to see i
 
 ### General SDK Checklist
 
-1. Make sure you're using the latest version of the ConfigCat SDK. 
-1. Check if you've configured the [Data Governance](../advanced/data-governance.mdx) functionality correctly.
-1. Singleton: We strongly recommend using the ConfigCat SDK as a Singleton object. Initializing the SDK multiple times can cause serious performance issues in production. If you need to use multiple SDK Keys in the same application, create only one _ConfigCat Client_ per SDK Key.
-1. Are you using the proper polling mode for your use case? Details on polling modes in the [SDK 
+<Steps>
+<Step>
+Make sure you're using the latest version of the ConfigCat SDK. 
+</Step>
+<Step>
+Check if you've configured the [Data Governance](../advanced/data-governance.mdx) functionality correctly.
+</Step>
+<Step>
+Singleton: We strongly recommend using the ConfigCat SDK as a Singleton object. Initializing the SDK multiple times can cause serious performance issues in production. If you need to use multiple SDK Keys in the same application, create only one _ConfigCat Client_ per SDK Key.
+</Step>
+<Step>
+Are you using the proper polling mode for your use case? Details on polling modes in the [SDK 
 Docs](../sdk-reference/overview.mdx).
-1. Are you using the right polling interval for `Auto Polling`? Too frequent polling will increase your network traffic. Please check the [SDK Docs](../sdk-reference/overview.mdx).
-1. In `Manual Polling` mode, are you calling `forceRefresh()` in your code as frequently as needed? Excessive refreshes will increase your network traffic.
-1. You can try one of our lightweight sample applications to rule out local issues. Find in the [repository of each SDK](https://github.com/configcat).
+</Step>
+<Step>
+Are you using the right polling interval for `Auto Polling`? Too frequent polling will increase your network traffic. Please check the [SDK Docs](../sdk-reference/overview.mdx).
+</Step>
+<Step>
+In `Manual Polling` mode, are you calling `forceRefresh()` in your code as frequently as needed? Excessive refreshes will increase your network traffic.
+</Step>
+<Step>
+You can try one of our lightweight sample applications to rule out local issues. Find in the [repository of each SDK](https://github.com/configcat).
+</Step>
+</Steps>
 
 ### Network Checklist
 
 :::caution
-Please, **do not load test** the ConfigCat production infrastructure without our consent.
+**Do not load test** the ConfigCat production infrastructure without our consent.
 :::
 
-1. You can check response times manually by navigating to `https://cdn.configcat.com/ping.txt` and opening your browser's network tab.
-1. Does the machine/server running your code have access to the above address?
-1. You might need to whitelist the following addresses in your firewall: `cdn.configcat.com`, `cdn-eu.configcat.com`, `cdn-global.configcat.com`.
-
----
+<Steps>
+<Step>
+You can check response times manually by navigating to `https://cdn.configcat.com/ping.txt` and opening your browser's network tab.
+</Step>
+<Step>
+Does the machine/server running your code have access to the above address?
+</Step>
+<Step>
+You might need to whitelist the following addresses in your firewall: `cdn.configcat.com`, `cdn-eu.configcat.com`, `cdn-global.configcat.com`.
+</Step>
+</Steps>
 
 ## Too many requests error in Angular
 

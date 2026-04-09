@@ -4,6 +4,8 @@ title: Slack - Get notified when a feature flag changes
 description: ConfigCat Feature Flags app for Slack. This is a step-by-step guide on how to connect the ConfigCat feature flag service to Slack.
 ---
 
+import { Steps, Step, Title } from '@site/src/components/Steps';
+
 ## Overview
 
 Receive notifications via a Slack Channel message when someone changes a feature flag using the <a href="https://configcat.slack.com/apps/A011CN2QZJB-configcat-feature-flags" target="_blank">ConfigCat Feature Flags app for Slack</a>.
@@ -12,24 +14,52 @@ Receive notifications via a Slack Channel message when someone changes a feature
 
 ## Installation
 
-1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on the ConfigCat Dashboard.
-1. Click on Slack's CONNECT button and connect ConfigCat Feature Flags with your Slack workspace.
-1. You're all set. Go ahead and make some changes to your feature flags, then check your Slack Channel for notifications.
+<Steps>
+<Step>
+Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on the ConfigCat Dashboard.
+</Step>
+<Step>
+Click on Slack's CONNECT button and connect ConfigCat Feature Flags with your Slack workspace.
+</Step>
+<Step>
+You're all set. Go ahead and make some changes to your feature flags, then check your Slack Channel for notifications.
+</Step>
+</Steps>
 
 ## Un-installation
 
-1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
-1. Click on Slack's DISCONNECT button.
+<Steps>
+<Step>
+Open the <a href="https://app.configcat.com/product/integrations" target="_blank">integrations tab</a> on ConfigCat Dashboard.
+</Step>
+<Step>
+Click on Slack's DISCONNECT button.
+</Step>
+</Steps>
 
 Disconnection from ConfigCat stops sending notifications to your selected Slack channel. To manage authorization or remove the integration completely, please follow the instructions below:
 
-1. Open your Slack App Directory: `<YOUR-WORKSPACE>.slack.com/apps/manage`
-2. Select the `ConfigCat Feature Flags` app.
-3. Select the `Configuration` tab.
+<Steps>
+<Step>
+Open your Slack App Directory: `<YOUR-WORKSPACE>.slack.com/apps/manage`
+</Step>
+<Step>
+Select the `ConfigCat Feature Flags` app.
+</Step>
+<Step>
+Select the `Configuration` tab.
    - If you'd like to remove the integration from an individual channel, you can **Revoke** its access in the `Your authorization` section.
    - If you'd like to remove the integration from your workspace completely, click the **Remove app** button in the `Remove app` section.
+</Step>
+</Steps>
 
 ## Usage
 
-1. Make some changes to your feature flags.
-1. Check your Slack Channel for notifications.
+<Steps>
+<Step>
+Make some changes to your feature flags.
+</Step>
+<Step>
+Check your Slack Channel for notifications.
+</Step>
+</Steps>

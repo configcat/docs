@@ -3,14 +3,24 @@ id: manual
 title: CLI - Add to CI/CD pipelines manually
 ---
 
+import { Steps, Step, Title } from '@site/src/components/Steps';
+
 This section describes how to use the [ConfigCat CLI](../cli.mdx)
 to scan your source code for feature flag and setting usages and upload the found code references to ConfigCat.
 
 ## Prerequisites
 
-- [Install](../cli.mdx#installation) the CLI in your CI/CD or local environment.
-- [Setup](../cli.mdx#setup) the CLI with your ConfigCat Management API credentials.
-- Get your selected [Config's ID](overview.mdx#config-id).
+<Steps>
+<Step>
+[Install](../cli.mdx#installation) the CLI in your CI/CD or local environment.
+</Step>
+<Step>
+[Setup](../cli.mdx#setup) the CLI with your ConfigCat Management API credentials.
+</Step>
+<Step>
+Get your selected [Config's ID](overview.mdx#config-id).
+</Step>
+</Steps>
 
 ## Scan & Upload
 

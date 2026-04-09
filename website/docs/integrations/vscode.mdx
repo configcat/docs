@@ -4,6 +4,8 @@ title: Visual Studio Code - Manage your feature flags from VSCode
 description: ConfigCat Visual Studio Code extension. This is a step-by-step guide on how to use the ConfigCat Visual Studio Code extension to manage feature flags in your project.
 ---
 
+import { Steps, Step, Title } from '@site/src/components/Steps';
+
 <a href="https://marketplace.visualstudio.com/items?itemName=ConfigCat.configcat-feature-flags" target="_blank">ConfigCat's Visual Studio Code extension</a> to manage feature flags from Visual Studio Code.
 
 Connect your ConfigCat Product and Config to your Visual Studio Code Workspace. Find your Feature Flag's usages in your code easily.
@@ -31,23 +33,41 @@ This guide will help you with the Visual Studio Code Extensions installation and
 ## Install extension
 
 ### Install from Visual Studio Code Marketplace
-
-1. In the Visual Studio Marketplace, open the [ConfigCat Feature Flags Extension](https://marketplace.visualstudio.com/items?itemName=ConfigCat.configcat-feature-flags).
-1. Click on the **Install** button.
-1. [Configure extension](#configure-extension).
+<Steps>
+<Step>
+In the Visual Studio Marketplace, open the [ConfigCat Feature Flags Extension](https://marketplace.visualstudio.com/items?itemName=ConfigCat.configcat-feature-flags).
+</Step>
+<Step>
+Click on the **Install** button.
+</Step>
+<Step>
+[Configure extension](#configure-extension).
+</Step>
+</Steps>
 
 ### Install within Visual Studio Code
-
-1. In Visual Studio Code, open the Extensions page, and search for ConfigCat Feature Flags.
-1. Click on the **Install** button.
-1. [Configure extension](#configure-extension).
+<Steps>
+<Step>
+In Visual Studio Code, open the Extensions page, and search for ConfigCat Feature Flags.
+</Step>
+<Step>
+Click on the **Install** button.
+</Step>
+<Step>
+[Configure extension](#configure-extension).
+</Step>
+</Steps>
 
 ## Configure extension
 
 ### Authentication
 
-1. Get your API credentials for [ConfigCat Public Management API](https://app.configcat.com/my-account/public-api-credentials).
-1. Authenticate ConfigCat in Visual Studio Code by
+<Steps>
+<Step>
+Get your API credentials for [ConfigCat Public Management API](https://app.configcat.com/my-account/public-api-credentials).
+</Step>
+<Step>
+Authenticate ConfigCat in Visual Studio Code by
    - clicking on the ConfigCat Feature Flags icon on the Activity Bar and clicking on any of the **Authenticate** buttons.
    - or running the **ConfigCat - Log In** command from the Command Palette.
 
@@ -55,6 +75,8 @@ This guide will help you with the Visual Studio Code Extensions installation and
   <source src="/docs/assets/vscode/auth.mp4" type="video/mp4"/>
   Your browser does not support the video tag.
 </video>
+</Step>
+</Steps>
 
 ### Advanced
 
@@ -84,34 +106,79 @@ After you successfully connect your ConfigCat Config to your Visual Studio Code 
 
 #### View or Update your Feature Flag's value
 
-1. Open the **Feature Flags & Settings** view.
-1. Find the Flag and click the **View or Update Feature Flag values** icon next to the Flag name.
-1. Select the Environment.
-1. See the Feature Flag in the opened tab.
-1. You can turn your features On / Off right from the opened tab.
-1. You can add new Targeting Rules with User, Segment or Prerequisite conditions with a large selection of Comparators. [Read more about Targeting.](../targeting/targeting-overview.mdx)
-1. You can add new Percentage Options to Feature Flags or Targeting Rules
+<Steps>
+<Step>
+Open the **Feature Flags & Settings** view.
+</Step>
+<Step>
+Find the Flag and click the **View or Update Feature Flag values** icon next to the Flag name.
+</Step>
+<Step>
+Select the Environment.
+</Step>
+<Step>
+See the Feature Flag in the opened tab.
+</Step>
+<Step>
+You can turn your features On / Off right from the opened tab.
+</Step>
+<Step>
+You can add new Targeting Rules with User, Segment or Prerequisite conditions with a large selection of Comparators. [Read more about Targeting.](../targeting/targeting-overview.mdx)
+</Step>
+<Step>
+You can add new Percentage Options to Feature Flags or Targeting Rules
+</Step>
+</Steps>
 
 #### Create a new Feature Flag
 
-1. Open the **Feature Flags & Settings** view.
-1. Click the **+** in the view header.
-1. Select the Setting type.
-1. Enter the new Feature Flag name.
-1. Enter the new Feature Flag key.
-1. Add a hint to your Feature Flag (optional).
-1. Select **Yes** to confirm the Flag creation.
+<Steps>
+<Step>
+Open the **Feature Flags & Settings** view.
+</Step>
+<Step>
+Click the **+** in the view header.
+</Step>
+<Step>
+Select the Setting type.
+</Step>
+<Step>
+Enter the new Feature Flag name.
+</Step>
+<Step>
+Enter the new Feature Flag key.
+</Step>
+<Step>
+Add a hint to your Feature Flag (optional).
+</Step>
+<Step>
+Select **Yes** to confirm the Flag creation.
+</Step>
+</Steps>
 
 #### Copy a Feature Flag's key to the clipboard
 
-1. Open the **Feature Flags & Settings** View.
-1. Find the Flag and click the **Copy Key to clipboard** icon next to the Flag name.
+<Steps>
+<Step>
+Open the **Feature Flags & Settings** View.
+</Step>
+<Step>
+Find the Flag and click the **Copy Key to clipboard** icon next to the Flag name.
+</Step>
+</Steps>
 
 #### Find your Feature Flag's usages in your code
-
-1. Open the **Feature Flags & Settings** view.
-1. Find the Flag and click the **Find usage** icon next to the Flag name.
-1. See the search results in the opened tab.
+<Steps>
+<Step>
+Open the **Feature Flags & Settings** view.
+</Step>
+<Step>
+Find the Flag and click the **Find usage** icon next to the Flag name.
+</Step>
+<Step>
+See the search results in the opened tab.
+</Step>
+</Steps>
 
 ### Products & Configs View
 
@@ -129,23 +196,53 @@ Manage your products and configs on the **Products & Configs** view by performin
 
 #### Create a new Config under a product
 
-1. Open the **Products & Configs** view.
-1. In the products list, click the **+** icon next to the product where you want to create the new config.
-1. Enter a name for the new Config.
-1. Add a description to your Config (optional).
-1. Connect the new config to your current Workspace (optional).
+<Steps>
+<Step>
+Open the **Products & Configs** view.
+</Step>
+<Step>
+In the products list, click the **+** icon next to the product where you want to create the new config.
+</Step>
+<Step>
+Enter a name for the new Config.
+</Step>
+<Step>
+Add a description to your Config (optional).
+</Step>
+<Step>
+Connect the new config to your current Workspace (optional).
+</Step>
+</Steps>
 
 #### Connect a Config to your current Workspace
 
-1. Open the **Products & Configs** view.
-1. Find the Config you want to connect to your current Workspace under your product list.
-1. Click the **Connector** icon next to the Config in the list.
-1. You can see the Config's Feature Flags in the **Feature Flags & Setting** view.
+<Steps>
+<Step>
+Open the **Products & Configs** view.
+</Step>
+<Step>
+Find the Config you want to connect to your current Workspace under your product list.
+</Step>
+<Step>
+Click the **Connector** icon next to the Config in the list.
+</Step>
+<Step>
+You can see the Config's Feature Flags in the **Feature Flags & Setting** view.
+</Step>
+</Steps>
 
 #### Open your Configs on the ConfigCat Dashboard
-1. Open the **Products & Configs** view.
-1. Find the Config you want to connect to your current Workspace under your product list.
-1. Click the **Open Config in ConfigCat Dashboard** icon next to the Config in the list.
+<Steps>
+<Step>
+Open the **Products & Configs** view.
+</Step>
+<Step>
+Find the Config you want to connect to your current Workspace under your product list.
+</Step>
+<Step>
+Click the **Open Config in ConfigCat Dashboard** icon next to the Config in the list.
+</Step>
+</Steps>
 
 ### Help & Feedback View
 

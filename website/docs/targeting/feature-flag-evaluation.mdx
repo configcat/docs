@@ -4,6 +4,8 @@ title: Feature Flag Evaluation
 description: This document offers an in-depth explanation of how the ConfigCat SDK determines the value of a feature flag.
 ---
 
+import { Steps, Step, Title } from '@site/src/components/Steps';
+
 This document offers an in-depth explanation of how the SDK determines the value of a feature flag when executing the `GetValue` function. Understanding this process requires prior knowledge of [targeting concepts](../targeting-overview).
 
 The feature flag's value is determined by:
@@ -14,11 +16,19 @@ The feature flag's value is determined by:
 
 The feature flag's value always comes from exactly one rule, following this algorithm:
 
-1. **Evaluation of Targeting Rules:** If Targeting Rules are present, the SDK evaluates them one by one, from top to bottom. It checks if all the conditions in the rule's IF part are met (i.e. all the conditions evaluate to true).
+<Steps>
+<Step>
+**Evaluation of Targeting Rules:** If Targeting Rules are present, the SDK evaluates them one by one, from top to bottom. It checks if all the conditions in the rule's IF part are met (i.e. all the conditions evaluate to true).
    - If the conditions are met, the THEN part determines the value to return. However, if the THEN part contains Percentage Options but the [Percentage Evaluation Attribute](../percentage-options#percentage-evaluation-attribute) is missing from the User Object, the SDK will skip the Targeting Rule and continue with the next rule - even though the Targeting Rule's conditions are met.
    - If the conditions aren't met, the SDK moves to the next Targeting Rule, or to step 2 (below) if there are no more Targeting Rules.
-2. **Evaluation of Percentage Options:** If a Percentage Options rule exists, the SDK executes the [Evaluation of Percentage Options](#evaluation-of-percentage-options) algorithm to determine which Percentage Option applies to the user and returns the value associated with that option. If the [Percentage Evaluation Attribute](../percentage-options#percentage-evaluation-attribute) is missing from the User Object, the SDK skips to step 3 (below).
-3. **Returning simple value:** At this stage, the only remaining "rule" is the simple value specified at the end of the feature flag, which the SDK then returns.
+</Step>
+<Step>
+**Evaluation of Percentage Options:** If a Percentage Options rule exists, the SDK executes the [Evaluation of Percentage Options](#evaluation-of-percentage-options) algorithm to determine which Percentage Option applies to the user and returns the value associated with that option. If the [Percentage Evaluation Attribute](../percentage-options#percentage-evaluation-attribute) is missing from the User Object, the SDK skips to step 3 (below).
+</Step>
+<Step>
+**Returning simple value:** At this stage, the only remaining "rule" is the simple value specified at the end of the feature flag, which the SDK then returns.
+</Step>
+</Steps>
 
 In the event of an unexpected error during evaluation, the SDK returns the [default value](../targeting-overview#default-value) passed to the `GetValue` function.
 

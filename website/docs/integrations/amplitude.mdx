@@ -269,14 +269,19 @@ Ensures that feature flag evaluations are logged into <a href="https://amplitude
    <TabItem value="other" label="Other languages">
    While our documentation primarily provides code examples for languages that Amplitude natively supports and has an official SDK, 
    you can integrate with other languages by sending an event to Amplitude with a third-party SDK or with using the <a href="https://www.docs.developers.amplitude.com/analytics/apis/http-v2-api/#upload-request" target="_blank" rel="noopener noreferrer">Amplitude's Upload request API</a>. 
-
-   1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
-   2. **Send an event to Amplitude** using the `$exposure` event name. Include the following event properties:
+   <Steps>
+   <Step>
+   **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
+   </Step>
+   <Step>
+   **Send an event to Amplitude** using the `$exposure` event name. Include the following event properties:
       - `flag_key`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
       - `variant`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
       - `variation_id`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
       - `user_id` (optional): in case you are using the tracking in a backend component or you don't identify all your event sendings to Amplitude with user details, 
    you have to send the `user_id` property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
+   </Step>
+   </Steps>
    </TabItem>
 
    </Tabs>
@@ -288,7 +293,11 @@ The `variationId` is a hashed version of the feature flag value, accessible on t
 For more information about Variation IDs, see [Variation ID for analytics](/advanced/variation-id-for-analytics).
 :::
 
-4. Deploy your application and wait for feature flag evaluations to happen so Experiments in Amplitude could be populated.
+</Step>
+<Step>
+Deploy your application and wait for feature flag evaluations to happen so Experiments in Amplitude could be populated.
+</Step>
+</Steps>
 
 ### Usage with Experiments
 Check your Experiments page in Amplitude and select your feature flag as the Experiment.

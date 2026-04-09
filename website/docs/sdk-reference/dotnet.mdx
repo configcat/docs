@@ -21,11 +21,7 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 
 ## Getting started
 
-<Steps>
-<Step>
-<Title>
-### Install _ConfigCat SDK_ [NuGet package](https://www.nuget.org/packages/ConfigCat.Client)
-</Title>
+### 1. Install _ConfigCat SDK_ [NuGet package](https://www.nuget.org/packages/ConfigCat.Client)
 
 <Tabs groupId="dotnet-install">
 <TabItem value="Powershell / NuGet Package Manager Console" label="Powershell / NuGet Package Manager Console">
@@ -48,35 +44,20 @@ dotnet add package ConfigCat.Client
 To get the _ConfigCat SDK_ up and running in Unity, please refer to [this guide](./unity.mdx).
 :::
 
-</Step>
 
-<Step>
-<Title>
-### Import package
-</Title>
+### 2. Import package
 
 ```csharp
 using ConfigCat.Client;
 ```
 
-</Step>
-
-<Step>
-<Title>
-### Create the _ConfigCat_ client with your _SDK Key_
-</Title>
+### 3. Create the _ConfigCat_ client with your _SDK Key_
 
 ```csharp
 var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 ```
 
-</Step>
-
-
-<Step>
-<Title>
-### Get your setting value
-</Title>
+### 4. Get your setting value
 
 ```csharp
 var isMyAwesomeFeatureEnabled = await client.GetValueAsync("isMyAwesomeFeatureEnabled", false);
@@ -92,12 +73,7 @@ else
 
 The _ConfigCat SDK_ also offers a synchronous API for feature flag evaluation. Read more [here](#snapshots-and-non-blocking-synchronous-feature-flag-evaluation).
 
-</Step>
-
-<Step>
-<Title>
-### Dispose the _ConfigCat_ client
-</Title>
+### 5. Dispose the _ConfigCat_ client
 
 You can safely dispose all clients at once or individually and release all associated resources on application exit.
 
@@ -106,9 +82,6 @@ ConfigCatClient.DisposeAll(); // disposes all clients
 // -or-
 client.Dispose(); // disposes a specific client
 ```
-
-</Step>
-</Steps>
 
 ## Creating the _ConfigCat Client_
 
