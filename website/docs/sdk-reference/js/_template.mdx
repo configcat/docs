@@ -55,7 +55,7 @@ export const getAdjustedToc = (platform) => {
 [![SonarCloud Coverage](https://img.shields.io/sonar/coverage/configcat_js-unified-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=configcat_js-unified-sdk)
 [![Known Vulnerabilities](https://snyk.io/test/github/configcat/js-unified-sdk/badge.svg?targetFile=package.json)](https://snyk.io/test/github/configcat/js-unified-sdk?targetFile=package.json)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=configcat_js-sdk&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=configcat_js-sdk)
-[![JSDELIVR](https://data.jsdelivr.com/v1/package/npm/@configcat/sdk/badge)](https://data.jsdelivr.com/v1/package/npm/@configcat/sdk/badge)
+[![JSDELIVR](https://data.jsdelivr.com/v1/package/npm/@configcat/sdk/badge)](https://www.jsdelivr.com/package/npm/@configcat/sdk)
 
 <If condition={!props.platform}>
 
@@ -92,7 +92,7 @@ export const getAdjustedToc = (platform) => {
 <If condition={props.platform === "node"}>
 
   :::info
-  This SDK supersedes the legacy [Node.js SDK](../../js).
+  This SDK supersedes the legacy [Node.js SDK](../../node).
   :::
 
 </If>
@@ -1347,7 +1347,7 @@ Also, we recommend using [confidential targeting comparators](../../targeting/ta
   <If condition={props.platform === "node"}>
 
     { !props.platform && <>{ getSdkName("node") }:</> }
-    - Node.js (v14.x, v16.x, v18.x, v20.x, v22.x) on Windows / Ubuntu / macOS
+    - Node.js (v14.x, v16.x, v18.x, v20.x, v22.x, v24.x) on Windows / Ubuntu / macOS
 
   </If>
 
@@ -1368,7 +1368,7 @@ Also, we recommend using [confidential targeting comparators](../../targeting/ta
   <If condition={props.platform === "cloudflare-worker"}>
 
     { !props.platform && <>{ getSdkName("cloudflare-worker") }:</> }
-    - Workerd (2023-02-28)
+    - Workerd (2026-04-02)
 
   </If>
 
