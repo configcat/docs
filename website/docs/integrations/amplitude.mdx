@@ -130,11 +130,11 @@ Ensures that feature flag evaluations are logged into <a href="https://amplitude
          hooks.on('flagEvaluated', evaluationDetails => {
             // Send an `$exposure` event.
             amplitude.track('$exposure',
-                  {
-                     'flag_key': evaluationDetails.key,
-                     'variant': evaluationDetails.value,
-                     'variation_id': evaluationDetails.variationId
-                  });
+                {
+                   'flag_key': evaluationDetails.key,
+                   'variant': evaluationDetails.value,
+                   'variation_id': evaluationDetails.variationId
+                });
 
             // Use the identify API.
             const identifyEvent = new amplitude.Identify();
