@@ -15,22 +15,22 @@
     "write-translations": "docusaurus write-translations -l en"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.9.2",
-    "@docusaurus/faster": "^3.9.2",
-    "@docusaurus/plugin-client-redirects": "^3.9.2",
-    "@docusaurus/plugin-google-tag-manager": "^3.9.2",
-    "@docusaurus/preset-classic": "^3.8.1",
-    "@mdx-js/react": "^3.1.0",
+    "@docusaurus/core": "^3.10.0",
+    "@docusaurus/faster": "^3.10.0",
+    "@docusaurus/plugin-client-redirects": "^3.10.0",
+    "@docusaurus/plugin-google-tag-manager": "^3.10.0",
+    "@docusaurus/preset-classic": "^3.10.0",
+    "@mdx-js/react": "^3.1.1",
     "@signalwire/docusaurus-plugin-llms-txt": "^2.0.0-alpha.7",
     "@svgr/webpack": "^8.1.0",
     "clsx": "^2.1.1",
-    "docusaurus-plugin-openapi-docs": "4.5.1",
+    "docusaurus-plugin-openapi-docs": "5.0.0",
     "docusaurus-plugin-sass": "^0.2.6",
-    "docusaurus-theme-openapi-docs": "4.5.1",
+    "docusaurus-theme-openapi-docs": "5.0.0",
     "file-loader": "^6.2.0",
     "prism-react-renderer": "^2.4.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "url-loader": "^4.1.1"
   },
   "browserslist": {
@@ -46,12 +46,12 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.8.1",
-    "@docusaurus/tsconfig": "^3.8.1",
-    "@docusaurus/types": "^3.8.1",
-    "replace-in-file": "8.3.0",
-    "sharp": "^0.34.3",
-    "typescript": "~5.9.2"
+    "@docusaurus/module-type-aliases": "^3.10.0",
+    "@docusaurus/tsconfig": "^3.10.0",
+    "@docusaurus/types": "^3.10.0",
+    "replace-in-file": "8.4.0",
+    "sharp": "^0.34.5",
+    "typescript": "~6.0.2"
   },
   "engines": {
     "node": ">=22.18"
