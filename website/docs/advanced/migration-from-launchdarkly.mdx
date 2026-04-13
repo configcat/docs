@@ -7,15 +7,24 @@ description: A guide to migration from LaunchDarkly to ConfigCat.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
+import { Steps, Step, Title } from '@site/src/components/Steps';
 
 This document is for current LaunchDarkly users who want to migrate to ConfigCat. It guides you through the migration
 process while providing information on the technical differences between the two services that you need to be aware of.
 
 Migration can be done on a LaunchDarkly project basis, and migration of a project usually consists of the following
 three steps:
-1. Migrating LaunchDarkly feature flags and segments to ConfigCat
-1. Adjusting the code of your applications to use ConfigCat instead of LaunchDarkly
-1. Migrating LaunchDarkly teams and permissions to ConfigCat
+<Steps>
+<Step>
+Migrating LaunchDarkly feature flags and segments to ConfigCat
+</Step>
+<Step>
+Adjusting the code of your applications to use ConfigCat instead of LaunchDarkly
+</Step>
+<Step>
+Migrating LaunchDarkly teams and permissions to ConfigCat
+</Step>
+</Steps>
 
 ConfigCat provides a wizard-like tool that is able to do the heavy lifting for step 1. However, there is currently
 no automation for step 2 and 3. So please expect these steps to require some manual work.
@@ -229,23 +238,31 @@ process.exit(0);
 
 Let's see now step by step how to convert this code to ConfigCat:
 
-1. Uninstall the LaunchDarkly SDK package, and install the ConfigCat one instead:
+<Steps>
+<Step>
+Uninstall the LaunchDarkly SDK package, and install the ConfigCat one instead:
 
    ```bash
    npm uninstall @launchdarkly/node-server-sdk
    npm install configcat-node
    ```
-1. Instead of the `LaunchDarkly` namespace, import `configcat`:
+</Step>
+<Step>
+Instead of the `LaunchDarkly` namespace, import `configcat`:
 
    ```js
    import configcat from "configcat-node";
    ```
-1. Replace the LaunchDarkly SDK key with the ConfigCat one.
+</Step>
+<Step>
+Replace the LaunchDarkly SDK key with the ConfigCat one.
 
    You can obtain it from the [ConfigCat Dashboard](https://app.configcat.com/organization), by selecting the config
    containing the imported feature flag on the sidebar, and clicking the "VIEW SDK KEY" button in the top right corner
    of the page.
-1. Instead of a LaunchDarkly client instance, obtain a ConfigCat one:
+</Step>
+<Step>
+Instead of a LaunchDarkly client instance, obtain a ConfigCat one:
 
    ```js
    const client = configcat.getClient(sdkKey, configcat.PollingMode.AutoPoll, {
@@ -257,7 +274,9 @@ Let's see now step by step how to convert this code to ConfigCat:
    polling strategies to get the data necessary for feature flag evaluation. Refer to the [SDK reference](../../sdk-reference/js/overview#creating-the-configcat-client)
    to learn more about the options. For frontend applications and long-running backend services, Auto Polling mode is
    usually a good choice.
-1. Adjust the wait-for-initialization logic.
+</Step>
+<Step>
+Adjust the wait-for-initialization logic.
    * When using Auto Polling mode, you can rewrite it like this:
      ```js
      const clientCacheState = await client.waitForReady();
@@ -276,7 +295,9 @@ Let's see now step by step how to convert this code to ConfigCat:
      Actually, you only need this wait-for-initialization logic at the startup of your applications if you want to use
      [synchronous feature flag evaluation via snapshots](../../sdk-reference/js/overview#snapshots-and-synchronous-feature-flag-evaluation).
    * For other polling modes, the wait-for-initialization logic doesn't make sense, so just omit it.
-1. Rewrite LaunchDarkly contexts to ConfigCat User Objects.
+</Step>
+<Step>
+Rewrite LaunchDarkly contexts to ConfigCat User Objects.
 
    ConfigCat uses the concept of [User Object](../../targeting/user-object) to pass user and/or session-related contextual
    data to feature flag evaluation. It serves the same purpose as [LaunchDarkly contexts](https://launchdarkly.com/docs/home/observability/contexts),
@@ -299,7 +320,9 @@ Let's see now step by step how to convert this code to ConfigCat:
      comparators only. This means that it's not possible to specify multiple values for a user attribute if the
      evaluated feature flag contains a [User Condition](../../targeting/targeting-rule/user-condition) that references
      the attribute, but has a comparator other than the two mentioned. Unfortunately, no workaround exists for this case.
-1. Rewrite feature flag evaluation calls.
+</Step>
+<Step>
+Rewrite feature flag evaluation calls.
 
    This step is pretty straightforward as ConfigCat SDKs provide similar evaluation methods to LaunchDarkly SDKs. Those
    methods are named `getValue`, `getValueAsync` or similar.
@@ -323,6 +346,8 @@ Let's see now step by step how to convert this code to ConfigCat:
      feature flag evaluation is usually still possible, [via snapshots](../../sdk-reference/js/overview#snapshots-and-synchronous-feature-flag-evaluation).
      But this works slightly differently from the asynchronous methods, so make sure you understand its behavior and
      possible pitfalls.
+</Step>
+</Steps>
 
 By adjusting the example code according to the above, we get this:
 
@@ -379,12 +404,18 @@ If you're out of luck, you can still use the ConfigCat SDK directly as explained
 [contact us](https://configcat.com/support) about the missing OpenFeature provider.
 
 Otherwise, to switch to ConfigCat, you need to do the following:
-1. Uninstall the LaunchDarkly OpenFeature provider package, and install the ConfigCat one instead.
-1. Adjust the initialization logic.
+<Steps>
+<Step>
+Uninstall the LaunchDarkly OpenFeature provider package, and install the ConfigCat one instead.
+</Step>
+<Step>
+Adjust the initialization logic.
 
    Look for a call to `setProvider`, `setProviderAndWait` or similar, and change it so an instance of ConfigCat
    OpenFeature provider is passed to it. (For ConfigCat, use `setProviderAndWait` if possible.)
-1. Convert [LaunchDarkly-specific evaluation context objects](https://github.com/launchdarkly/openfeature-node-server?tab=readme-ov-file#openfeature-specific-considerations)
+</Step>
+<Step>
+Convert [LaunchDarkly-specific evaluation context objects](https://github.com/launchdarkly/openfeature-node-server?tab=readme-ov-file#openfeature-specific-considerations)
    to have a data structure compatible with ConfigCat.
 
    This is done in a very similar way to what's described in the previous section. Read [this section](../migration-from-launchdarkly-translation#mapping-between-launchdarkly-contexts-and-configcat-user-objects)
@@ -423,10 +454,14 @@ Otherwise, to switch to ConfigCat, you need to do the following:
      "/kind": ["user", "organization"],
    };
    ```
-1. Review feature flag evaluation calls.
+</Step>
+<Step>
+Review feature flag evaluation calls.
 
    Most of the pitfalls pointed out in the "Rewrite feature flag evaluation calls" part of the previous section applies
    here too.
+</Step>
+</Steps>
 
 ### Implement experiments and analytics
 

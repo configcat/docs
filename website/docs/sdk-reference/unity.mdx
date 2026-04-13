@@ -6,6 +6,7 @@ description: Using the ConfigCat SDK in Unity. This is a step-by-step guide on h
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import { Steps, Step, Title } from '@site/src/components/Steps';
 export const UnitySchema = require('@site/src/schema-markup/sdk-reference/unity.json');
 
 <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(UnitySchema) }}></script>
@@ -35,7 +36,9 @@ So, as a first step, you will need to get the assembly .dll files for `netstanda
 You can do this by downloading these packages and extracting the .dll files manually from the .nupkg files (which are actually plain ZIP files).
 
 Or, if you have [.NET](https://dotnet.microsoft.com) installed, you can take a shortcut:
-1. Create a file named `Plugins.csproj` (anywhere in your file system) with the following content:
+<Steps>
+<Step>
+Create a file named `Plugins.csproj` (anywhere in your file system) with the following content:
    ```xml
    <Project Sdk="Microsoft.NET.Sdk">
      <PropertyGroup>
@@ -46,8 +49,14 @@ Or, if you have [.NET](https://dotnet.microsoft.com) installed, you can take a s
      </ItemGroup>
    </Project>
    ```
-1. Run `dotnet publish -c Release` in the same folder.
-1. You will now have all the necessary .dll files in the `bin/Release/netstandard2.0/publish` folder.
+</Step>
+<Step>
+Run `dotnet publish -c Release` in the same folder.
+</Step>
+<Step>
+You will now have all the necessary .dll files in the `bin/Release/netstandard2.0/publish` folder.
+</Step>
+</Steps>
 
 ### 2. Add the SDK assembly files to your Unity project
 

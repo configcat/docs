@@ -7,6 +7,7 @@ description: ConfigCat Twilio Segment integration. This is a step-by-step guide 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
+import { Steps, Step, Title } from '@site/src/components/Steps';
 
 ## Overview
 
@@ -21,18 +22,37 @@ Ensures that every setting change in ConfigCat is sent to Segment as a <a href="
 <img src="/docs/assets/segment/featureflagchanged.png" className="bordered-img" alt="Twilio Segment Feature Flag Changed event" decoding="async" loading="lazy"/>
 
 ### Installation
-
-1. Have a <a href="https://segment.com/" target="_blank" rel="noopener noreferrer">Twilio Segment account.</a>
-2. Add the <a href="https://segment.com/catalog/integrations/source/configcat/" target="_blank" rel="noopener noreferrer">ConfigCat source</a> to your Twilio Segment account and copy the Write Key.
-3. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
-4. Click on Twilio Segment's CONNECT button and set the Twilio Segment Write Key acquired while adding the ConfigCat source in Twilio Segment.
-5. OPTIONAL - Set the proper server of your Twilio Segment account. <a href="https://segment.com/docs/guides/regional-segment/" target="_blank" rel="noopener noreferrer">More about Segment servers</a>.
-6. You're all set. Go ahead and make some changes to your feature flags, then check your events in Twilio Segment.
+<Steps>
+<Step>
+Have a <a href="https://segment.com/" target="_blank" rel="noopener noreferrer">Twilio Segment account.</a>
+</Step>
+<Step>
+Add the <a href="https://segment.com/catalog/integrations/source/configcat/" target="_blank" rel="noopener noreferrer">ConfigCat source</a> to your Twilio Segment account and copy the Write Key.
+</Step>
+<Step>
+Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
+</Step>
+<Step>
+Click on Twilio Segment's CONNECT button and set the Twilio Segment Write Key acquired while adding the ConfigCat source in Twilio Segment.
+</Step>
+<Step>
+OPTIONAL - Set the proper server of your Twilio Segment account. <a href="https://segment.com/docs/guides/regional-segment/" target="_blank" rel="noopener noreferrer">More about Segment servers</a>.
+</Step>
+<Step>
+You're all set. Go ahead and make some changes to your feature flags, then check your events in Twilio Segment.
+</Step>
+</Steps>
 
 ### Un-installation
 
-1. Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
-2. Click on Twilio Segment's DISCONNECT button.
+<Steps>
+<Step>
+Open the <a href="https://app.configcat.com/product/integrations" target="_blank" rel="noopener noreferrer">integrations tab</a> on the ConfigCat Dashboard.
+</Step>
+<Step>
+Click on Twilio Segment's DISCONNECT button.
+</Step>
+</Steps>
 
 ### Event details
 
@@ -53,12 +73,20 @@ Ensures that feature flag evaluations are sent into the Twilio Segment <a href="
 
 ### Setup
 
-1. **Add ConfigCat source in Twilio Segment:** Add the ConfigCat source in Twilio Segment.
-1. **Install SDKs:** Add both the ConfigCat SDK and Segment SDK to your application.
-2. **Configure SDKs:**
+<Steps>
+<Step>
+**Add ConfigCat source in Twilio Segment:** Add the ConfigCat source in Twilio Segment.
+</Step>
+<Step>
+**Install SDKs:** Add both the ConfigCat SDK and Segment SDK to your application.
+</Step>
+<Step>
+**Configure SDKs:**
    - **ConfigCat SDK:** Initialize with your ConfigCat SDK key.
    - **Twilio Segment SDK:** Set up with the Twilio Segment Write Key acquired while adding the ConfigCat source in Twilio Segment.
-3. **Integrate Feature Flag Evaluations:**
+</Step>
+<Step>
+**Integrate Feature Flag Evaluations:**
    - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
    - Send feature flag evaluation data to Twilio Segment using the `Feature Flag Evaluated` event name. Include the following parameters:
      - `feature_flag_key`: the feature flag's key.
@@ -408,12 +436,18 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 While our documentation primarily provides code examples for languages that Twilio Segment natively supports and has an official SDK, 
 you can integrate with other languages by sending an event to Twilio Segment with a third-party SDK or with using the <a href="https://segment.com/docs/connections/sources/catalog/libraries/server/http-api/" target="_blank" rel="noopener noreferrer">Segment's HTTP API source</a>. 
 
-1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
-2. **Send an event to Twilio Segment** using the `Feature Flag Evaluated` event name. If the feature flag was evaluated with a user object, set the event's `userId` property to the user object's identifier. Otherwise, set the `anonymousId` property to a random generated string. Also, include the following event properties:
+<Steps>
+<Step>
+**Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
+</Step>
+<Step>
+**Send an event to Twilio Segment** using the `Feature Flag Evaluated` event name. If the feature flag was evaluated with a user object, set the event's `userId` property to the user object's identifier. Otherwise, set the `anonymousId` property to a random generated string. Also, include the following event properties:
     - `feature_flag_key`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails.
     - `value`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
     - `variation_id`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails.
     - `user` (optional): the user object used during feature flag evaluation.
+</Step>
+</Steps>
 </TabItem>
 
 </Tabs>
@@ -425,9 +459,17 @@ The `variationId` is a hashed version of the feature flag value, accessible on t
 For more information about Variation IDs, see [Variation ID for analytics](/advanced/variation-id-for-analytics).
 :::
 
-4. Deploy your application and wait for feature flag evaluations to happen so feature flag evaluation events can be sent to Twilio Segment.
-5. Add the preferred destination in Twilio Segment for your source and configure your mappings. 
-6. Enable the destination and utilize advanced feature flag analytics in the destination.
+</Step>
+<Step>
+Deploy your application and wait for feature flag evaluations to happen so feature flag evaluation events can be sent to Twilio Segment.
+</Step>
+<Step>
+Add the preferred destination in Twilio Segment for your source and configure your mappings. 
+</Step>
+<Step>
+Enable the destination and utilize advanced feature flag analytics in the destination.
+</Step>
+</Steps>
 
 ### Example event
 Check your source's debugger to see the events.

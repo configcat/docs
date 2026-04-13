@@ -6,6 +6,7 @@ description: ConfigCat Unreal Engine SDK Reference. This is a step-by-step guide
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import { Steps, Step, Title } from '@site/src/components/Steps';
 export const CPPSchema = require('@site/src/schema-markup/sdk-reference/cpp.json');
 
 <script
@@ -43,8 +44,14 @@ Note: if you are using a locally built plugin, you will need to rebuild from sou
 <img className="unreal-enable-plugin" src="/docs/assets/unreal/enable-plugin.png" alt="Unreal Engine enable plugin" decoding="async" loading="lazy" />
 
 Navigate to `Edit -> Plugins` and perform the following steps:
-1. Find the `ConfigCat` plugin and **tick** the enable checkbox.
-1. Press `Restart` to load up the editor.
+<Steps>
+<Step>
+Find the `ConfigCat` plugin and **tick** the enable checkbox.
+</Step>
+<Step>
+Press `Restart` to load up the editor.
+</Step>
+</Steps>
 
 ### 3. Set up the _ConfigCat_ settings with your _SDK Key_
 

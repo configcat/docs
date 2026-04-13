@@ -8,6 +8,7 @@ toc_max_heading_level: 5
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
+import { Steps, Step, Title } from '@site/src/components/Steps';
 
 The <a target="_blank" href="https://github.com/configcat/configcat-proxy">ConfigCat Proxy</a> allows you to host a feature flag evaluation service in your own infrastructure. It's a small Go application that communicates with ConfigCat's CDN network and caches/proxies *config JSON* files for your frontend and backend applications. The *config JSON* contains all the data that is needed for ConfigCat SDKs to evaluate feature flags.
 
@@ -110,10 +111,16 @@ You can then check the [status endpoint](monitoring.mdx#status) of the Proxy to 
 
 This section describes the possible ways of how you can use the Proxy from your application. 
 You can decide where you want the actual feature flag evaluation to happen.
-- **Local evaluation**: Feature flags are evaluated by a ConfigCat SDK running in your application. The Proxy only provides the data required for the evaluation process.
-- **Remote evaluation**: Feature flags are evaluated within the Proxy, your application only gets the result of the evaluation process.
 
-### 1. Local evaluation using a ConfigCat SDK connected to the Proxy
+**Local evaluation**: Feature flags are evaluated by a ConfigCat SDK running in your application. The Proxy only provides the data required for the evaluation process.
+
+**Remote evaluation**: Feature flags are evaluated within the Proxy, your application only gets the result of the evaluation process.
+
+<Steps>
+<Step>
+<Title>
+### Local evaluation using a ConfigCat SDK connected to the Proxy {#1-local-evaluation-using-a-configcat-sdk-connected-to-the-proxy}
+</Title>
 
 The Proxy has the ability to forward all information required for feature flag evaluation to ConfigCat SDKs via its [CDN proxy](endpoints.mdx#cdn-proxy) endpoint. 
 This means that you can set up your ConfigCat SDK instances to use the Proxy as their data source.
@@ -146,7 +153,12 @@ var configCatClient = configcat.getClient(
 );
 ```
 
-### 2. Remote evaluation with the Proxy's API endpoints
+</Step>
+
+<Step>
+<Title>
+### Remote evaluation with the Proxy's API endpoints {#2-remote-evaluation-with-the-proxys-api-endpoints}
+</Title>
 
 You can leverage the Proxy's server side feature flag evaluation feature by sending simple HTTP requests to the Proxy's API endpoints.
 
@@ -212,14 +224,15 @@ try {
 
 You can find the available API endpoints with their HTTP request/response schemas [here](endpoints.mdx#api).
 
-### 3. Remote evaluation with OpenFeature Remote Evaluation Protocol (OFREP)
+</Step>
+
+<Step>
+<Title>
+### Remote evaluation with OpenFeature Remote Evaluation Protocol (OFREP) {#3-remote-evaluation-with-openfeature-remote-evaluation-protocol-ofrep}
+</Title>
 
 :::info
 OFREP compatibility is only available from Proxy version <a target="_blank" href="https://github.com/configcat/configcat-proxy/releases/tag/v2.0.0"><code>v2.0.0</code></a>.
-:::
-
-:::info
-The OFREP feature of the Proxy is turned OFF by default, to use it, you have to turn it ON with the [OFREP endpoint options](endpoints.mdx#available-options-2).
 :::
 
 The Proxy conforms to the <a href="https://github.com/open-feature/protocol">OpenFeature Remote Evaluation Protocol</a>, which means it can be used with OFREP compatible OpenFeature providers.
@@ -261,7 +274,12 @@ OpenFeature.setProvider(
 
 You can find the available OFREP endpoints with their HTTP request/response schemas [here](endpoints.mdx#openfeature-remote-evaluation-protocol-ofrep).
 
-### 4. Remote evaluation and streaming with SSE
+</Step>
+
+<Step>
+<Title>
+### Remote evaluation and streaming with SSE {#4-remote-evaluation-and-streaming-with-sse}
+</Title>
 
 The Proxy has the ability to evaluate feature flags and send notifications about subsequent evaluated flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
 
@@ -308,10 +326,18 @@ evtSource.onmessage = (event) => {
 
 For more information and usage examples, see the related [SSE endpoints documentation](endpoints.mdx#sse).
 
-### 5. Remote evaluation and streaming with gRPC
+</Step>
+
+<Step>
+<Title>
+### Remote evaluation and streaming with gRPC {#5-remote-evaluation-and-streaming-with-grpc}
+</Title>
 
 The Proxy supports both unary feature flag evaluation RPCs and server streaming of evaluated flag value changes.
 For more information and usage examples, see the [gRPC section of this documentation](grpc.mdx).
+
+</Step>
+</Steps>
 
 ## Configuration Options
 
@@ -468,7 +494,11 @@ That is, the SDK identifier is effectively an alias for the associated SDK key a
 
 There are two ways to let the Proxy know which SDK Keys it should use:
 
-### 1. Automatic configuration with Proxy profiles
+<Steps>
+<Step>
+<Title>
+### Automatic configuration with Proxy profiles {#1-automatic-configuration-with-proxy-profiles}
+</Title>
 
 :::info
 **Beta Feature**: Automatic configuration with Proxy profiles is in public beta. 
@@ -512,21 +542,18 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
   
   ```yaml title="options.yml"
   profile:
-    key: <key>
-    secret: <secret>
+    webhook_signing_key: <signing-key>
   ```
   
   </TabItem>
   <TabItem value="env-vars" label="Environment variables">
   
   ```shell
-  CONFIGCAT_PROFILE_KEY="<key>"
-  CONFIGCAT_PROFILE_SECRET="<secret>"
+  CONFIGCAT_PROFILE_WEBHOOK_SIGNING_KEY="<signing-key>"
   ```
   
   </TabItem>
   </Tabs>
-  <br/>
 
 - #### Select which SDK Keys your Proxy should use
   Click on the edit icon in the `SDK Keys` column.
@@ -859,8 +886,11 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
   :::info
   Offline Proxy instances only need the profile's `key` to read the connected profile from the cache, the `secret` option is not mandatory in this mode.
   :::
-
-### 2. Manual configuration
+</Step>
+<Step>
+<Title>
+### Manual configuration {#2-manual-configuration}
+</Title>
 
 When using environment variables, the SDK keys can be specified as a JSON object, where the **property name is the SDK identifier** (the identifier of the config-environment pair whose SDK Key the underlying SDK instance is configured to use) and the **property value is the actual SDK key**.
 The **SDK identifier** part is later used in [endpoint routes](endpoints.mdx) to recognize which SDK must serve the given flag evaluation request.
@@ -1373,6 +1403,9 @@ CONFIGCAT_MY_SDK_OFFLINE_LOCAL_POLL_INTERVAL=5
 </tr>
 </tbody>
 </table>
+
+</Step>
+</Steps>
 
 ## Default User Attributes
 

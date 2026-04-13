@@ -3,18 +3,23 @@ id: bitrise-step
 title: Bitrise - Scan your source code for feature flags
 ---
 
+import { Steps, Step, Title } from '@site/src/components/Steps';
+
 This section describes how to use ConfigCat's <a target="_blank" href="https://www.bitrise.io/integrations/steps/configcat-feature-flag-sync">Bitrise Step</a>
 to automatically scan your source code for feature flag and setting usages and upload the found code references to ConfigCat.
 <a target="_blank" href="https://www.bitrise.io/">Bitrise</a> is full-featured mobile CI/CD platform. You can find more information about Bitrise Steps <a target="_blank" href="https://devcenter.bitrise.io/en/steps-and-workflows/introduction-to-steps.html">here</a>.
 
 ## Setup
-
-1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in secure pipeline variables with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
-   <img src="/docs/assets/cli/scan/bitrise_secrets.png" className="bordered-img" alt="Bitrise secrets" decoding="async" loading="lazy"/>
-
-2. Get your selected [Config's ID](overview.mdx#config-id).
-
-3. Add the following step to the workflows section of your `bitrise.yml` file.
+<Steps>
+<Step>
+Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in secure pipeline variables with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
+<img src="/docs/assets/cli/scan/bitrise_secrets.png" className="bordered-img" alt="Bitrise secrets" decoding="async" loading="lazy"/>
+</Step>
+<Step>
+Get your selected [Config's ID](overview.mdx#config-id).
+</Step>
+<Step>
+Add the following step to the workflows section of your `bitrise.yml` file.
    Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
 
    ```yaml
@@ -30,8 +35,11 @@ to automatically scan your source code for feature flag and setting usages and u
        # - usage-patterns: feature_flags\.enabled\(:CC_KEY\)   # optional
        # - verbose: true           # optional
    ```
-
-4. Commit & push your changes.
+</Step>
+<Step>
+Commit & push your changes.
+</Step>
+</Steps>
 
 Scan reports are uploaded for each branch of your repository that triggers the job.
 

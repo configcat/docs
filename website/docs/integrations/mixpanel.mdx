@@ -7,6 +7,7 @@ description: ConfigCat Mixpanel integration. This is a step-by-step guide on how
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
+import { Steps, Step, Title } from '@site/src/components/Steps';
 
 ## Overview
 
@@ -21,18 +22,35 @@ Ensures that every setting change in ConfigCat is sent to Mixpanel as an [Annota
 <img src="/docs/assets/mixpanel/annotation.png" alt="Mixpanel Annotation" decoding="async" loading="lazy"/>
 
 ### Installation
-
-1. Have a [Mixpanel account](https://mixpanel.com/).
-2. Create a Service account that has at least an Analyst role. <img src="/docs/assets/mixpanel/service_account.png" alt="mixpanel_service_Account" decoding="async" loading="lazy"/>
-3. Open the [integrations tab](https://app.configcat.com/product/integrations) on the ConfigCat Dashboard.
-4. Click on Mixpanel's CONNECT button and set your Mixpanel Service Account's Username, Secret, and your Project ID.
-5. OPTIONAL - Set the proper server of your Mixpanel account. [More about Mixpanel servers](https://docs.mixpanel.com/docs/privacy/eu-residency).
-6. You're all set. Go ahead and make some changes on your feature flags, then check your annotations in Mixpanel.
-
+<Steps>
+<Step>
+Have a [Mixpanel account](https://mixpanel.com/).
+</Step>
+<Step>
+Create a Service account that has at least an Analyst role. <img src="/docs/assets/mixpanel/service_account.png" alt="mixpanel_service_Account" decoding="async" loading="lazy"/>
+</Step>
+<Step>
+Open the [integrations tab](https://app.configcat.com/product/integrations) on the ConfigCat Dashboard.
+</Step>
+<Step>
+Click on Mixpanel's CONNECT button and set your Mixpanel Service Account's Username, Secret, and your Project ID.
+</Step>
+<Step>
+OPTIONAL - Set the proper server of your Mixpanel account. [More about Mixpanel servers](https://docs.mixpanel.com/docs/privacy/eu-residency).
+</Step>
+<Step>
+You're all set. Go ahead and make some changes on your feature flags, then check your annotations in Mixpanel.
+</Step>
+</Steps>
 ### Un-installation
-
-1. Open the [integrations tab](https://app.configcat.com/product/integrations) on the ConfigCat Dashboard.
-2. Click on Mixpanel's DISCONNECT button.
+<Steps>
+<Step>
+Open the [integrations tab](https://app.configcat.com/product/integrations) on the ConfigCat Dashboard.
+</Step>
+<Step>
+Click on Mixpanel's DISCONNECT button.
+</Step>
+</Steps>
 
 ### Annotation details
 
@@ -47,12 +65,17 @@ Every annotation sent to Mixpanel by ConfigCat has:
 Ensures that feature flag evaluations are logged into [Mixpanel Experiments](https://docs.mixpanel.com/docs/reports/apps/experiments). With this integration, you can have advanced analytics about your feature flag usages, A/B test results.
 
 ### Setup
-
-1. **Install SDKs:** Add both the ConfigCat SDK and Mixpanel SDK to your application.
-2. **Configure SDKs:**
+<Steps>
+<Step>
+**Install SDKs:** Add both the ConfigCat SDK and Mixpanel SDK to your application.
+</Step>
+<Step>
+**Configure SDKs:**
    - **ConfigCat SDK:** Initialize with your ConfigCat SDK key.
    - **Mixpanel SDK:** Set up with your Mixpanel token.
-3. **Integrate Feature Flag Evaluations:**
+</Step>
+<Step>
+**Integrate Feature Flag Evaluations:**
    - During the initialization of the ConfigCat SDK, subscribe to the `flagEvaluated` hook.
    - Send feature flag evaluation data to Mixpanel using the `$experiment_started` event name. Include the following parameters:
      - `Experiment name`: the feature flag's key.
@@ -244,14 +267,20 @@ let client = ConfigCatClient.get(sdkKey: "#YOUR-SDK-KEY#") { options in
 <TabItem value="other" label="Other languages">
 While our documentation primarily provides code examples for languages that Mixpanel natively supports and has an official SDK, 
 you can integrate with other languages by sending an event to Mixpanel with a third-party SDK or with using the [Mixpanel's Track Events API](https://developer.mixpanel.com/reference/track-event). 
-
-1. **Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
-2. **Send an event to Mixpanel** using the `$experiment_started` event name. Include the following event properties:
+<Steps>
+<Step>
+**Subscribe to the FlagEvaluated hook** in the ConfigCat SDK.
+</Step>
+<Step>
+**Send an event to Mixpanel** using the `$experiment_started` event name. Include the following event properties:
     - `Experiment name`: the feature flag's key from the FlagEvaluated hook's EvaluationDetails
     - `Variant name`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
     - `Variant name`: the evaluated feature flag's value or the variationId from the FlagEvaluated hook's EvaluationDetails
     - `distinct_id` (optional): in case you are using the tracking in a backend component or you don't identify all your event sendings to Mixpanel with user details, 
 you have to send the [distinct_id](https://docs.mixpanel.com/docs/tracking-methods/id-management/identifying-users#what-is-distinct-id) property as well to identify your user. You can use the User object's Identifier property from the FlagEvaluated hook or a value that best describes your user.
+</Step>
+</Steps>
+
 </TabItem>
 
 </Tabs>
@@ -262,8 +291,11 @@ The `variationId` is a hashed version of the feature flag value, accessible on t
 
 For more information about Variation IDs, see [Variation ID for analytics](/advanced/variation-id-for-analytics).
 :::
-
-4. Deploy your application and wait for feature flag evaluations to happen so Experiments in Mixpanel could be populated.
+</Step>
+<Step>
+Deploy your application and wait for feature flag evaluations to happen so Experiments in Mixpanel could be populated.
+</Step>
+</Steps>
 
 ### Usage with Experiments
 Check your Experiments page in Mixpanel, select your feature flag as the Experiment.

@@ -3,18 +3,23 @@ id: github-action
 title: GitHub Action - Scan your source code for feature flags
 ---
 
+import { Steps, Step, Title } from '@site/src/components/Steps';
+
 This section describes how to use ConfigCat's <a target="_blank" href="https://github.com/marketplace/actions/configcat-scan-repository">Scan Repository GitHub Action</a>
 to automatically scan your source code for feature flag and setting usages and upload the found code references to ConfigCat.
 You can find more information about GitHub Actions <a target="_blank" href="https://github.com/features/actions">here</a>.
 
 ## Setup
-
-1. Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in your repository's <a target="_blank" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">GitHub Secrets</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
-   <img src="/docs/assets/cli/scan/github_secrets.png" alt="Github Action secrets" decoding="async" loading="lazy" />
-
-2. Get your selected [Config's ID](overview.mdx#config-id).
-
-3. Create a new Actions workflow in your GitHub repository under the `.github/workflows` folder, and put the following snippet into it. Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
+<Steps>
+<Step>
+Create a new <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API credential</a> and store its values in your repository's <a target="_blank" href="https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository">GitHub Secrets</a> with the following names: `CONFIGCAT_API_USER`, `CONFIGCAT_API_PASS`.
+<img src="/docs/assets/cli/scan/github_secrets.png" alt="Github Action secrets" decoding="async" loading="lazy" />
+</Step>
+<Step>
+Get your selected [Config's ID](overview.mdx#config-id).
+</Step>
+<Step>
+Create a new Actions workflow in your GitHub repository under the `.github/workflows` folder, and put the following snippet into it. Don't forget to replace the `PASTE-YOUR-CONFIG-ID-HERE` value with your actual Config ID.
 
    ```yaml
    on: [push]
@@ -42,8 +47,11 @@ You can find more information about GitHub Actions <a target="_blank" href="http
              # usage-patterns: feature_flags\.enabled\(:CC_KEY\)   # optional, comma delimited flag key usage patterns
              # verbose: true             # optional
    ```
-
-4. Commit & push your action.
+</Step>
+<Step>
+Commit & push your action.
+</Step>
+</Steps>
 
 The above example configures a workflow that executes the scan and code references upload on every git `push` event.
 Scan reports are uploaded for each branch of your repository that triggers the workflow.

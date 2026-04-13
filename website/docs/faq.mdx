@@ -6,6 +6,8 @@ description: This is a collection of frequently asked questions and the most typ
 
 export const FaqSchema = require('@site/src/schema-markup/faq.json');
 
+import { Steps, Step, Title } from '@site/src/components/Steps';
+
 <script type='application/ld+json' dangerouslySetInnerHTML={ { __html: JSON.stringify(FaqSchema) }}></script>
 
 A collection of frequently asked questions.
@@ -45,9 +47,17 @@ Discounts are available through our partnership program. [Contact us](https://co
 
 Currently, there's no direct way to change the email address of an account. However, you can:
 
-1. Invite the new email to join your ConfigCat organization; this will create a fresh ConfigCat account.
-2. Grant all the necessary permissions to the new account.
-3. Proceed with deleting your old account from [here](https://app.configcat.com/my-account).
+<Steps>
+<Step>
+Invite the new email to join your ConfigCat organization; this will create a fresh ConfigCat account.
+</Step>
+<Step>
+Grant all the necessary permissions to the new account.
+</Step>
+<Step>
+Proceed with deleting your old account from [here](https://app.configcat.com/my-account).
+</Step>
+</Steps>
 
 If you don't have the required permissions, contact your organization admin or a team member who has "Team members and permission groups" permissions.
 
