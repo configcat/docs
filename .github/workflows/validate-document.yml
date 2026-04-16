@@ -9,11 +9,6 @@ on:
 
   workflow_dispatch:
     inputs:
-      base_ref:
-        description: "Base branch to compare against (for manual runs)"
-        required: false
-        default: "master"
-        type: string
       logLevel:
         description: "Log level"
         required: true
@@ -42,17 +37,11 @@ jobs:
           cache-dependency-path: website/package-lock.json
 
       - name: Install dependencies
-        run: npm install
+        run: npm install ignore sharp
 
       - name: Run validate document script
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            BASE_REF="${{ github.base_ref }}"
-          else
-            BASE_REF="${{ inputs.base_ref }}"
-          fi
-
-          FILES=$(git diff --name-only origin/$BASE_REF HEAD | grep '\.mdx$')
+          FILES=$(git diff --name-only origin/${{ github.base_ref }} HEAD | grep '\.mdx$')
           echo "Changed document files: $FILES"
           if [ -z "$FILES" ]; then
             echo "No document files changed."
