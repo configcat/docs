@@ -9,6 +9,11 @@ on:
 
   workflow_dispatch:
     inputs:
+      base_ref:
+        description: "Base branch to compare against (for manual runs)"
+        required: false
+        default: "master"
+        type: string
       logLevel:
         description: "Log level"
         required: true
@@ -30,7 +35,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses:  actions/setup-node@v4
+        uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: "npm"
@@ -41,13 +46,19 @@ jobs:
 
       - name: Run validate document script
         run: |
-          FILES=$(git diff --name-only origin/${{ github.base_ref }} HEAD | grep '\.mdx$')
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_REF="${{ github.base_ref }}"
+          else
+            BASE_REF="${{ inputs.base_ref }}"
+          fi
+
+          FILES=$(git diff --name-only origin/$BASE_REF HEAD | grep '\.mdx$')
           echo "Changed document files: $FILES"
           if [ -z "$FILES" ]; then
             echo "No document files changed."
             exit 0
           fi
-          
+
           # Filter out files that no longer exist
           EXISTING_FILES=""
           for FILE in $FILES; do
