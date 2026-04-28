@@ -27,7 +27,7 @@ const config: Config = {
   },
   plugins: [
     [
-      '@docusaurus/plugin-google-tag-manager',        
+      '@docusaurus/plugin-google-tag-manager',
       {
         containerId: 'GTM-5LP6XWS5',
       },
