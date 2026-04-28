@@ -20,7 +20,7 @@ const config: Config = {
     locales: ['en'],
   },
   future: {
-    faster: true,
+    experimental_faster: true,
     v4: {
       removeLegacyPostBuildHeadAttribute: true,
     },
