@@ -20,14 +20,14 @@ const config: Config = {
     locales: ['en'],
   },
   future: {
-    experimental_faster: true,
+    faster: true,
     v4: {
       removeLegacyPostBuildHeadAttribute: true,
     },
   },
   plugins: [
     [
-      '@docusaurus/plugin-google-tag-manager',
+      '@docusaurus/plugin-google-tag-manager',        
       {
         containerId: 'GTM-5LP6XWS5',
       },
