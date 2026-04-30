@@ -11,6 +11,24 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 {/* This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html */}
 
+## Breaking change: Audit log API endpoints updated to support pagination
+
+#### Apr 30, 2026
+
+We have added two new Public Management API endpoints that supersede the existing audit log endpoints:
+- List Audit log items for Product (V2)
+- List Audit log items for Organization (V2)
+
+The new V2 endpoints introduce pagination support, giving you finer control over the amount of data returned per request.
+
+**On June 1, 2026**, the old endpoints (**List Audit log items for Product**, **List Audit log items for Organization**)
+will be redirected to the new V2 endpoints with default pagination parameters applied.
+
+We recommend switching to the new V2 endpoints as soon as possible to avoid any unexpected behavior after the redirect takes effect.
+For more details, please refer to the [Public Management API documentation](https://api.configcat.com/docs/).
+
+---
+
 ## Predefined variations are here!
 
 #### Feb 20, 2026
