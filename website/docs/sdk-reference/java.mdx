@@ -824,8 +824,8 @@ You can set the maximum connect and read wait time for a ConfigCat HTTP response
 ```java
 ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options ->
     options.httpOptions()
-            .connectTimeoutMillis(2000)
-            .readTimeoutMillis(2000));
+            .connectTimeoutMillis(2000) //set connect timeout to 2 seconds
+            .readTimeoutMillis(2000)); //set read timeout to 2 seconds
 ```
 
 OkHttpClient's default timeout is 10 seconds.
