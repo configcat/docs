@@ -28,7 +28,7 @@ export const JavaSchema = require('@site/src/schema-markup/sdk-reference/java.js
 
 ```groovy title="build.gradle"
 dependencies {
-    implementation 'com.configcat:configcat-java-client:9.+'
+    implementation 'com.configcat:configcat-java-client:10.+'
 }
 ```
 
@@ -39,7 +39,7 @@ dependencies {
 <dependency>
   <groupId>com.configcat</groupId>
   <artifactId>configcat-java-client</artifactId>
-  <version>[9.0.0,)</version>
+  <version>[10.0.0,)</version>
 </dependency>
 ```
 
@@ -115,7 +115,7 @@ These are the available options on the `Options` class:
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataGovernance(DataGovernance)`                              | Optional, defaults to `Global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `Global`, `EuOnly`. |
 | `baseUrl(string)`                                             | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the configurations.                                                                                                                                                            |
-| `httpClient(OkHttpClient)`                                    | Optional, sets the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Client](#httpclient).                                                                                                                                                 |
+| `httpOptions()`                                               | Optional, configure the underlying `OkHttpClient` used to download the feature flags and settings over HTTP. [More about the HTTP Options](#http-options).                                                                                                                                                 |
 | `cache(ConfigCache)`                                          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
 | `pollingMode(PollingMode)`                                    | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
 | `logLevel(LogLevel)`                                          | Optional, defaults to `WARNING`. Sets the internal log level. [More about logging](#logging).                                                                                                                                                                                                      |
@@ -800,11 +800,11 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 The Java SDK supports *shared caching*. You can read more about this feature and the required minimum SDK versions [here](../advanced/caching.mdx#shared-cache).
 :::
 
-## HttpClient
+## HTTP Options
 
-The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to download the latest configuration over HTTP. You have the option to override the internal Http client with your customized one.
+The ConfigCat SDK internally uses an <a href="https://github.com/square/okhttp" target="_blank">OkHttpClient</a> instance to download the latest configuration over HTTP. You have the option to configure the internal HTTP client with your HTTP options.
 
-### HTTP Proxy
+### HTTP Proxy Option
 
 If your application runs behind a proxy you can do the following:
 
@@ -814,23 +814,18 @@ import java.net.Proxy;
 
 Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxyHost", proxyPort));
 
-ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-    options.httpClient(new OkHttpClient.Builder()
-            .proxy(proxy)
-            .build())
-});
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> options.httpOptions().proxy(proxy));
 ```
 
-### HTTP Timeout
+### HTTP Timeout Options
 
-You can set the maximum wait time for a ConfigCat HTTP response by using OkHttpClient's timeouts.
+You can set the maximum connect and read wait time for a ConfigCat HTTP response by using http option's timeouts.
 
 ```java
-ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
-    options.httpClient(new OkHttpClient.Builder()
-            .readTimeout(2, TimeUnit.SECONDS) // set the read timeout to 2 seconds
-            .build())
-});
+ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options ->
+    options.httpOptions()
+            .connectTimeoutMillis(2000)
+            .readTimeoutMillis(2000));
 ```
 
 OkHttpClient's default timeout is 10 seconds.
