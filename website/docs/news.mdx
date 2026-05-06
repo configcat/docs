@@ -11,6 +11,26 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 {/* This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html */}
 
+## Introducing: Review Changes
+
+#### May 06, 2026
+
+As part of our ongoing **approval flow** and **scheduled changes** development, one of the key tasks was building a component that lets you compare feature flag changes side by side.  
+Once we had it, we quickly realized how useful it could be across the board, so we rolled it out in several places:
+
+- **Review changes in the feature flag editor:** see exactly what you're about to save before you save it.
+- **Navigate away dialogs:** if you have unsaved changes, and try to navigate away from the page, the confirmation dialog now shows you what changes are not saved.
+- **Compare between environments:** a brand new feature that lets you diff configs and feature flags across environments.
+- **Audit log entries:** setting value change entries in the audit log now use the new comparison tool to display what changed.
+- **Copy rules to:** the copy rules dialog now previews the changes that will be applied before you confirm.
+
+We're also considering integrating the **Review Changes** dialog directly into the save & publish flow, so before you save, you'd get a clear summary of exactly what's about to be saved.  
+Let us know if that would make sense for you.
+
+<p>
+    <img src="/docs/assets/news/review-changes_192dpi.png" alt="Review changes" width="1366" height="768" decoding="async" loading="lazy" />
+</p>
+
 ## Breaking change: Audit log API endpoints updated to support pagination
 
 #### Apr 30, 2026
