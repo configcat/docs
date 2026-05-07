@@ -416,8 +416,8 @@ const config: Config = {
               href: 'https://github.com/configcat',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/configcat',
+              label: 'X',
+              href: 'https://x.com/configcat',
             },
             {
               label: 'Facebook',
