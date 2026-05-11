@@ -7,11 +7,11 @@ description: This is a step-by-step guide on how to evaluate ConfigCat feature f
 ConfigCat's <a href="https://github.com/configcat/cli-actions" target="_blank">CLI GitHub Actions</a> has the ability to evaluate feature flags in GitHub Action workflows.
 This feature lets you use your feature flag values or create conditional steps in your workflow.
 
-### Prerequisites
+## Prerequisites
 
 - An SDK key for the ConfigCat config/environment pair that contains the feature flags you want to evaluate.
 
-### Example
+## Example
 
 The following example shows how you can evaluate ConfigCat feature flags and use the evaluated results in subsequent steps.
 
@@ -28,8 +28,8 @@ jobs:
         with:
           sdk-key: ${{ secrets.CONFIGCAT_SDK_KEY }}
           flag-keys: |
-            flag1
-            flag2
+            flag1:false
+            flag2:false
           user-attributes: |
             id:1234
       
@@ -44,12 +44,12 @@ jobs:
 
 The results of the flag evaluations are stored in the step outputs named with each flag's key.
 
-### Available Options
+## Available Options
 
 | Parameter        | Description                                                                                                | Required   | Default             |
 | ---------------- | ---------------------------------------------------------------------------------------------------------- | ---------- | ------------------- |
 | `sdk-key`        | SDK key identifying the config to download, also loaded from the `CONFIGCAT_SDK_KEY` environment variable  |            |                     |
-| `flag-keys`      | List of feature flag keys to evaluate. Multiple values must be in separate lines.                          | &#9745;    |                     |
+| `flag-keys`      | List of feature flag keys and their default values to evaluate. Multiple values must be in separate lines in the following format: `<key>:<default_value>`. Not setting a default value will set the flag's default value to `''`. | &#9745;    |                     |
 | `user-attributes` | List of user attributes used for evaluation. Multiple values must be in separate lines in the following format: `<key>:<value>`. Dedicated User Object attributes are mapped like the following: Identifier => id, Email => email, Country => country. |            |                     |
 | `base-url`       | The CDN base url from where the CLI will download the config JSON.                                         |            | ConfigCat CDN servers. |
 | `data-governance` | Describes the location of your feature flag and setting data within the ConfigCat CDN. Possible values: `eu`, `global`.  |            | `global`                   |
