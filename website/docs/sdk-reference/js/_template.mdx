@@ -360,6 +360,8 @@ _ConfigCat Client_ is responsible for:
 
 `configcat.getClient('<sdkKey>')` returns a client with default options.
 
+### Customizing the _ConfigCat_ Client
+
 The `getClient` function has optional parameters, which can be used to adjust the behavior of the client.
 
 | Parameters    | Description                                                                                                                             | Default                |
@@ -410,8 +412,8 @@ export const getDefaultCacheImpl = (platform) =>
   | `logger`           | Custom [`IConfigCatLogger`](https://github.com/configcat/js-unified-sdk/blob/master/src/ConfigCatLogger.ts) implementation for tracing.                                                                                                                                                                 | [`ConfigCatConsoleLogger`](https://github.com/configcat/js-unified-sdk/blob/master/src/ConfigCatLogger.ts) (with WARN level) |
   | `logFilter`        | Sets a custom log filter. [More about log filtering](#log-filtering).                                                                                                                                                                                                                                   | `undefined` (none)                                                                                                           |
   | `baseUrl`          | Sets the CDN base url (forward proxy, dedicated subscription) from where the SDK will download the config JSON.                                                                                                                                                                                         |                                                                                                                              |
-  | `httpAgent`        | The [`http.Agent`](https://nodejs.org/api/http.html#class-httpagent) instance to use for non-secure HTTP communication. Can be used to route `http://...` requests made by the SDK through an HTTP, HTTPS or SOCKS proxy (see also [this section](#using-configcat-behind-a-proxy)).                    |                                                                                                                              |
-  | `httpsAgent`       | The [`https.Agent`](https://nodejs.org/api/https.html#class-httpsagent) instance to use for secure HTTP communication. Can be used to route `https://...` requests made by the SDK through an HTTP, HTTPS or SOCKS proxy (see also [this section](#using-configcat-behind-a-proxy)).                    |                                                                                                                              |
+  | `httpAgentFactory` | A callback that provides [`http.Agent`](https://nodejs.org/api/http.html#class-httpagent) instances for the SDK to use for non-secure HTTP communication. Can be used to route `http://...` requests made by the SDK through an HTTP, HTTPS or SOCKS proxy (see also [this section](#using-configcat-behind-a-proxy)). |                                                                                                               |
+  | `httpsAgentFactory` | A callback that provides [`https.Agent`](https://nodejs.org/api/https.html#class-httpsagent) instances for the SDK to use for secure HTTP communication. Can be used to route `https://...` requests made by the SDK through an HTTP, HTTPS or SOCKS proxy (see also [this section](#using-configcat-behind-a-proxy)). |                                                                                                              |
   | `requestTimeoutMs` | The amount of milliseconds the SDK waits for a response from the ConfigCat servers before returning values from the cache.                                                                                                                                                                              | 30000                                                                                                                        |
   | `flagOverrides`    | Local feature flag & setting overrides. [More about feature flag overrides](#flag-overrides).                                                                                                                                                                                                           |                                                                                                                              |
   | `dataGovernance`   | Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../../advanced/data-governance.mdx). Available options: `DataGovernance.Global`, `DataGovernance.EuOnly`. | `DataGovernance.Global`                                                                                                      |
@@ -1284,15 +1286,15 @@ The JavaScript SDK supports _shared caching_. You can read more about this featu
     '#YOUR-SDK-KEY#',
     configcat.PollingMode.AutoPoll,
     {
-      httpsAgent: new HttpsProxyAgent("http://192.168.1.1:8080"),
+      httpsAgentFactory: () => new HttpsProxyAgent("http://192.168.1.1:8080"),
     },
   );
   ```
 
   :::info
-  By default, you need to specify the `httpsAgent` option because the SDK always uses HTTPS to access the ConfigCat CDN.
+  By default, you need to specify the `httpsAgentFactory` option because the SDK always uses HTTPS to access the ConfigCat CDN.
   However, if you set the `baseUrl` to a `http://...` URL, you will need to install `http-proxy-agent` and set the
-  `httpAgent` option instead.
+  `httpAgentFactory` option instead.
   :::
 
 </If>
