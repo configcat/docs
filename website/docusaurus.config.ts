@@ -153,14 +153,22 @@ const config: Config = {
           includeDocs: true,
           includePages: false,
           includeVersionedDocs: false,
-          excludeRoutes: ['/docs/search/'],
+          excludeRoutes: [
+            '/docs/search/',
+            '/docs/sdk-reference/js',
+            '/docs/sdk-reference/js-ssr'
+          ],
         },
         llmsTxt: {
           enableLlmsFullTxt: true,
           includeDocs: true,
           includePages: false,
           includeVersionedDocs: false,
-          excludeRoutes: ['/docs/search/'],
+          excludeRoutes: [
+            '/docs/search/',
+            '/docs/sdk-reference/js',
+            '/docs/sdk-reference/js-ssr'
+          ],
           siteTitle: 'ConfigCat Docs',
           siteDescription: 'Learn more on how to use ConfigCat Feature Flags.',
           sections: [
@@ -269,12 +277,7 @@ const config: Config = {
           ],
         },
       } satisfies PluginOptions,
-    ],
-    // ['./src/plugins/smartlook',
-    //   {
-    //     smartlookKey: '05d0e4ca90c61150955104a9d4b76ab16a0b2380',
-    //   }
-    // ],
+    ]
   ],
   themeConfig: {
     image: '/img/docs-cover.png',
