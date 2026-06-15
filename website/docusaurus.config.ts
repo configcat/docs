@@ -155,9 +155,9 @@ const config: Config = {
           includeVersionedDocs: false,
           excludeRoutes: [
             '/docs/search/',
-            '/docs/sdk-reference/js',
-            '/docs/sdk-reference/js-ssr',
-            '/docs/sdk-reference/node'
+            '/docs/sdk-reference/js/',
+            '/docs/sdk-reference/js-ssr/',
+            '/docs/sdk-reference/node/'
           ],
         },
         llmsTxt: {
@@ -167,9 +167,9 @@ const config: Config = {
           includeVersionedDocs: false,
           excludeRoutes: [
             '/docs/search/',
-            '/docs/sdk-reference/js',
-            '/docs/sdk-reference/js-ssr',
-            '/docs/sdk-reference/node'
+            '/docs/sdk-reference/js/',
+            '/docs/sdk-reference/js-ssr/',
+            '/docs/sdk-reference/node/'
           ],
           siteTitle: 'ConfigCat Docs',
           siteDescription: 'Learn more on how to use ConfigCat Feature Flags.',
