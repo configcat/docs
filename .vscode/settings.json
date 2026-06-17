@@ -23,6 +23,6 @@
     "files.associations": {
       "*.mdx": "mdx"
     },
-    "mdx.experimentalLanguageServer": true,
-    "typescript.tsserver.experimental.enableProjectDiagnostics": true
+    "mdx.server.enable": true,
+    "js/ts.tsserver.experimental.enableProjectDiagnostics": false
 }

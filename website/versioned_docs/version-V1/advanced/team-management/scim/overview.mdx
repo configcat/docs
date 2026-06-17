@@ -21,7 +21,7 @@ Go to the **User provisioning (SCIM)** section on the <a href="https://app.confi
 
 Check our User Provisioning (SCIM) API documentation [here](/api/scim/configcat-user-provisioning-scim-api/).
 
-## 1. Connect your Identity Provider {#connect}
+## 1. Connect your Identity Provider {/* #connect */}
 
 To enable SCIM in your Identity Provider, you have to let it know where ConfigCat accepts SCIM endpoint calls and how these calls are authorized.
 Configcat displays this information on its <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page,
@@ -51,7 +51,7 @@ Other Identity Providers might also work with ConfigCat, if they support the SCI
 Connecting your Identity Provider and starting to sync users and groups is safe. It won't affect your current ConfigCat users or permissions until you click the `START PROVISIONING` button later.
 :::
 
-## 2. Assign ConfigCat permissions to Identity Provider groups  {#groups}
+## 2. Assign ConfigCat permissions to Identity Provider groups  {/* #groups */}
 
 After the first successful sync, your Identity Provider groups will show up in ConfigCat. You will find them in the **2. Assign ConfigCat permissions to Identity Provider groups** section of the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page.
 For each Identity Provider group, you can assign ConfigCat permissions by clicking their gear icon.
@@ -105,7 +105,7 @@ Based on their *Identity Provider groups*, users will get the following *ConfigC
 | Jane                   | Readers, Billing Managers | Billing Manager, Product A/Readers, Product B/Readers   | Jane gets both Billing Manager and product-level permissions. These are merged from her groups. |
 | Peter                  | Readers, Developers       | Product A/Developers, Product B/Developers              | As both the Readers and Developers Identity Provider groups have associated permissions to the same Products, the permissions will be merged based on the Identity Provider group's priority. |
 
-## 3. Start and stop provisioning for Identity Provider users  {#users}
+## 3. Start and stop provisioning for Identity Provider users  {/* #users */}
 
 After successful synchronization, Identity Provider users will appear in ConfigCat. You can find them in the **3. Start and stop provisioning for Identity Provider users** section of the <a href="https://app.configcat.com/organization/authentication/" target="_blank" rel="noopener noreferrer">Authentication & Provisioning</a> page.
 You can see and control their provisioning state there. 
@@ -162,7 +162,7 @@ After the provisioning is started again, the **provisioning status** can take th
 - **Provisioning is active**: all permissions and user properties match your Identity Provider configuration for the *Identity Provider user*.
 - **Provisioning is in progress**: the provisioning process is running in the background. For a short time, you can see the **provisioning is in progress** status. This happens when your Identity Provider sends updates to ConfigCat about the *Identity Provider user*, or when you modify your *Identity Provider group*'s provisioning permissions.
 
-## 4. Provision future users automatically {#auto-provisioning}
+## 4. Provision future users automatically {/* #auto-provisioning */}
 
 By default, after the Identity Provider synchronizes a new Identity Provider user to ConfigCat, the Identity Provider user will be in the **provisioning stopped** state. This allows you time to verify your configuration/permissions and adjust your settings if needed.  
 After you are confident that the provisioning works as expected, you can turn ON the **Provision future users automatically** toggle. This will immediately start the provisioning for newly synchronized Identity Provider users. 
@@ -179,7 +179,7 @@ If you want to allow only provisioned users into your ConfigCat Organization, yo
 
 <img className="bordered-img" src="/docs/assets/scim/dashboard/disable_auto_assign.png" alt="Disable domain auto-assign" decoding="async" loading="lazy"/>
 
-## 5. Review ConfigCat users who are not managed by user provisioning  {#not-managed}
+## 5. Review ConfigCat users who are not managed by user provisioning  {/* #not-managed */}
 
 Even after configuring *user provisioning* and synchronizing *Identity Provider users* from your Identity Provider, there might be *ConfigCat accounts* in your Organization that are not managed by *user provisioning*.
 
