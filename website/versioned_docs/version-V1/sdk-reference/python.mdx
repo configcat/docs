@@ -294,7 +294,9 @@ client = configcatclient.get('#YOUR-SDK-KEY#',
 client.force_refresh()
 ```
 
-> `get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
+:::caution
+`get_value()` returns `default_value` if the cache is empty. Call `force_refresh()` to update the cache.
+:::
 
 ```python
 client = configcatclient.get('#YOUR-SDK-KEY#',

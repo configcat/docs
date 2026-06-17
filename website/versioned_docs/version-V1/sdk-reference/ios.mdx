@@ -860,7 +860,9 @@ ConfigCatClient* client = [ConfigCatClient getWithSdkKey:@"#YOUR-SDK-KEY#"
 </TabItem>
 </Tabs>
 
-> `getValue()` returns `defaultValue` if the cache is empty. Call `refresh()` to update the cache.
+:::caution
+`getValue()` returns `defaultValue` if the cache is empty. Call `refresh()` to update the cache.
+:::
 
 ## Hooks
 

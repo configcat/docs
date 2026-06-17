@@ -430,7 +430,9 @@ let value = await configCatClient.getValueAsync(
 console.log(value);
 ```
 
-> `getValueAsync()` returns `defaultValue` if the cache is empty. Call `forceRefreshAsync()` to update the cache.
+:::caution
+`getValueAsync()` returns `defaultValue` if the cache is empty. Call `forceRefreshAsync()` to update the cache.
+:::
 
 ```js
 const configCatClient = configcat.getClient(
@@ -521,7 +523,7 @@ No attempt is made to refresh the internal cache, even if it's empty or expired.
 
 :::caution
 Please note that creating and using a snapshot
-* won't trigger a sync with the external cache when working with [shared caching](../advanced/caching.mdx#shared-cache),
+* won't trigger synchronization with the external cache when working with [shared caching](../advanced/caching.mdx#shared-cache),
 * won't fetch the latest config data from the ConfigCat CDN when the internally cached config data is empty or expired.
 :::
 
@@ -540,7 +542,7 @@ This is an asynchronous operation, which completes as soon as the client reaches
 (Please note that this doesn't apply to other polling modes. In those cases, the client doesn't contact the ConfigCat CDN
 during initialization, so the ready state is reached as soon as the first sync with the external cache completes.)
 
-Typically, you call `waitForReady` and wait for its completion only once, in the initialization phase of your application.
+Typically, you call `waitForReady` and wait for its completion only once, in the startup phase of your application.
 
 :::caution
 Reaching the ready state usually means the client is ready to evaluate feature flags and settings.

@@ -371,7 +371,9 @@ auto client = ConfigCatClient::get("#YOUR-SDK-KEY#", &options);
 client->forceRefresh();
 ```
 
-> `getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
+:::caution
+`getValue()` returns `defaultValue` if the cache is empty. Call `forceRefresh()` to update the cache.
+:::
 
 ## Hooks
 

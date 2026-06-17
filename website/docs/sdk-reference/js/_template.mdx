@@ -79,12 +79,12 @@ export const getAdjustedToc = (platform) => {
   This SDK supersedes the legacy [JavaScript SDK](../../js) and [JavaScript (SSR) SDK](../../js-ssr).
 
   It is suitable for the following types of browser applications:
-  * Static HTML websites
-  * Server-side rendered Multi-Page Applications (MPA), e.g. PHP, ASP.NET Core Razor Pages, Spring MVC, etc.
-  * Client-side rendered Single-Page Applications (SPA), e.g. Angular, React, Vue.js, etc.
-  * Server-side rendered Single-Page Applications (SSR), e.g. Angular SSR, Next.js, Nuxt, etc.
-  * Prerendered Single/Multi-Page Applications (SSG), e.g. Angular SSG, Vue.js SSG, Astro, etc.
-  * Web Workers
+  - Static HTML websites
+  - Server-side rendered Multi-Page Applications (MPA), e.g. PHP, ASP.NET Core Razor Pages, Spring MVC, etc.
+  - Client-side rendered Single-Page Applications (SPA), e.g. Angular, React, Vue.js, etc.
+  - Server-side rendered Single-Page Applications (SSR), e.g. Angular SSR, Next.js, Nuxt, etc.
+  - Prerendered Single/Multi-Page Applications (SSG), e.g. Angular SSG, Vue.js SSG, Astro, etc.
+  - Web Workers
   :::
 
 </If>
@@ -125,7 +125,7 @@ export const canImportFromCdn = (platform) => platform === "browser" || platform
   <Tabs groupId="install">
     <TabItem value="NPM" label="via NPM">
 
-      First install the [NPM package](https://npmjs.com/package/@configcat/sdk):
+      First, install the [NPM package](https://npmjs.com/package/@configcat/sdk):
 
       ```bash
       npm i @configcat/sdk
@@ -205,7 +205,7 @@ export const canImportFromCdn = (platform) => platform === "browser" || platform
 
 <If condition={props.platform && !canImportFromCdn(props.platform)}>
 
-  First install the [NPM package](https://npmjs.com/package/@configcat/sdk):
+  First, install the [NPM package](https://npmjs.com/package/@configcat/sdk):
 
   ```bash
   npm i @configcat/sdk
@@ -758,7 +758,9 @@ const value = await configCatClient.getValueAsync(
 console.log(value);
 ```
 
-> `getValueAsync()` returns `defaultValue` if the cache is empty. Call `forceRefreshAsync()` to update the cache.
+:::caution
+`getValueAsync()` returns `defaultValue` if the cache is empty. Call `forceRefreshAsync()` to update the cache.
+:::
 
 ```js
 const configCatClient = configcat.getClient(
@@ -872,7 +874,7 @@ No attempt is made to refresh the internal cache, even if it's empty or expired.
 
 :::caution
 Please note that creating and using a snapshot
-* won't trigger a sync with the external cache when working with [shared caching](../../advanced/caching.mdx#shared-cache),
+* won't trigger synchronization with the external cache when working with [shared caching](../../advanced/caching.mdx#shared-cache),
 * won't fetch the latest config data from the ConfigCat CDN when the internally cached config data is empty or expired.
 :::
 
@@ -891,7 +893,7 @@ This is an asynchronous operation, which completes as soon as the client reaches
 (Please note that this doesn't apply to other polling modes. In those cases, the client doesn't contact the ConfigCat CDN
 during initialization, so the ready state is reached as soon as the first sync with the external cache completes.)
 
-Typically, you call `waitForReady` and wait for its completion only once, in the initialization phase of your application.
+Typically, you call `waitForReady` and wait for its completion only once, in the startup phase of your application.
 
 :::caution
 Reaching the ready state usually means the client is ready to evaluate feature flags and settings.

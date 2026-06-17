@@ -368,7 +368,9 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 client.ForceRefresh();
 ```
 
-> `GetValue()` returns `defaultValue` if the cache is empty. Call `ForceRefresh()` to update the cache.
+:::caution
+`GetValue()` returns `defaultValue` if the cache is empty. Call `ForceRefresh()` to update the cache.
+:::
 
 ```csharp
 IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
