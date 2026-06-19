@@ -6,7 +6,9 @@ description: Using the ConfigCat SDK in DI-based .NET applications. This is a st
 
 import DotNetSdkReferenceTemplate, { getAdjustedToc } from "./\_template.mdx";
 
-{/* TODO: schema */}
+export const NetGenericHostSchema = require('@site/src/schema-markup/sdk-reference/dotnet/generic-host.json');
+
+<script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(NetGenericHostSchema) }}></script>
 
 export const platform = "generic-host";
 
