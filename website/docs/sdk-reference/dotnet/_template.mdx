@@ -682,6 +682,7 @@ All comparators support `string` values as User Object attribute (in some cases 
 * all other values are automatically converted to `string` (a warning will be logged but evaluation will continue as normal).
 
 **SemVer-based comparators** (IS ONE OF, &lt;, &gt;=, etc.)
+* accept `SemVersion` values containing a preparsed semver value,
 * accept `string` values containing a properly formatted, valid semver value,
 * all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
@@ -697,7 +698,7 @@ All comparators support `string` values as User Object attribute (in some cases 
 * all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
   
 **String array-based comparators** (ARRAY CONTAINS ANY OF / ARRAY NOT CONTAINS ANY OF)
-* accept arrays of `string`,
+* accept arrays of `string`, `IReadOnlyList<string>` or `IList<string>`,
 * accept `string` values containing a valid JSON string which can be deserialized to an array of `string`,
 * all other values are considered invalid (a warning will be logged and the currently evaluated Targeting Rule will be skipped).
 
