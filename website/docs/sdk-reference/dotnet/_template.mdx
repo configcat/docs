@@ -1641,24 +1641,14 @@ This allows you to seamlessly integrate ConfigCat with your existing caching inf
 ```csharp
 public class MyCustomCache : IConfigCatCache
 {
-    public string? Get(string key)
+    public ValueTask<string?> GetAsync(string key, CancellationToken cancellationToken = default)
     {
-        /* insert your synchronous cache read logic here */
+        /* insert your cache read logic here */
     }
 
-    public Task<string?> GetAsync(string key, CancellationToken cancellationToken = default)
+    public ValueTask SetAsync(string key, string value, CancellationToken cancellationToken = default)
     {
-        /* insert your asynchronous cache read logic here */
-    }
-
-    public void Set(string key, string value)
-    {
-        /* insert your synchronous cache write logic here */
-    }
-
-    public Task SetAsync(string key, string value, CancellationToken cancellationToken = default)
-    {
-        /* insert your asynchronous cache write logic here */
+        /* insert your cache write logic here */
     }
 }
 ```
