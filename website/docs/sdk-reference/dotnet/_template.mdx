@@ -1443,6 +1443,60 @@ You can set up the SDK to load your feature flag & setting overrides from a `Dic
 
 </If>
 
+### Custom data source implementation
+
+You can create a custom flag override data source by implementing `IOverrideDataSource`.
+
+The SDK provides the `Setting.FromValue()` method to create `Setting` objects from simple `bool`, `string`, `int` and `double`
+values. In case you need complex (full-featured) flag overrides, you can use the `Config.Deserialize()` method to obtain `Setting` objects
+from a config JSON conforming to the [config JSON v6 format](https://github.com/configcat/config-json/blob/main/V6/config.schema.json).
+
+```csharp
+class MyCustomOverrideDataSource : IOverrideDataSource
+{
+    private IReadOnlyDictionary<string, Setting> settings;
+
+    public MyCustomOverrideDataSource(string configJson)
+    {
+        this.settings = Config.Deserialize(configJson).Settings;
+    }
+
+    public IReadOnlyDictionary<string, Setting> GetOverrides()
+    {
+        return this.settings;
+    }
+}
+```
+
+Then configure the client to use the `MyCustomOverrideDataSource` implementation:
+
+<If condition={!props.platform}>
+
+  ```csharp
+  var flagOverrideDataSource = new MyCustomOverrideDataSource("{ \"f\": { ... } }");
+
+  IConfigCatClient client = ConfigCatClient.Get("localhost", options =>
+  {
+      options.FlagOverrides = new FlagOverrides(flagOverrideDataSource, OverrideBehaviour.LocalOnly);
+  });
+  ```
+
+</If>
+
+<If condition={props.platform === "generic-host"}>
+
+  ```csharp
+  var flagOverrideDataSource = new MyCustomOverrideDataSource("{ \"f\": { ... } }");
+
+  configCatBuilder.AddDefaultClient(options =>
+  {
+      options.SdkKey = "localhost";
+      options.FlagOverrides = new FlagOverrides(flagOverrideDataSource, OverrideBehaviour.LocalOnly);
+  });
+  ```
+
+</If>
+
 ## Logging
 
 ### Setting log level
