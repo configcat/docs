@@ -101,7 +101,7 @@ To customize the SDK's behavior, you can pass an additional `Action<ConfigCatCli
 factory method where the `ConfigCatClientOptions` class is used to set up the _ConfigCat Client_.
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
     options.PollingMode = PollingModes.ManualPoll;
     options.Logger = new ConsoleLogger(LogLevel.Info);
@@ -128,7 +128,7 @@ Via the events provided by `ConfigCatClientOptions` you can also subscribe to th
 For example:
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
     options.ClientReady += (s, e) => Debug.WriteLine("Client is ready!");
 });
@@ -150,12 +150,12 @@ You can close all open clients at once using the `ConfigCatClient.DisposeAll()` 
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#");  // Optional User Object
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#");  // Optional User Object
 var value = client.GetValue("keyOfMyFeatureFlag", false, userObject);
 ```
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
 var value = await client.GetValueAsync("keyOfMyFeatureFlag", false, userObject);
 ```
 
@@ -206,12 +206,12 @@ var value = client.GetValue<double>("keyOfMyDecimalSetting", 0);
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../advanced/targeting.mdx) |
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
 var details = client.GetValueDetails("keyOfMyFeatureFlag", false, userObject);
 ```
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
 var details = await client.GetValueDetailsAsync("keyOfMyFeatureFlag", false, userObject);
 ```
 
@@ -239,11 +239,11 @@ The `details` result contains the following information:
 The [User Object](../advanced/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../advanced/targeting.mdx) feature.
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 ```
 
 ```csharp
-User userObject = new User("john@example.com");
+var userObject = new User("john@example.com");
 ```
 
 | Parameters | Description                                                                                                                     |
@@ -254,7 +254,7 @@ User userObject = new User("john@example.com");
 | `Custom`   | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. E.g. User role, Subscription type. |
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#")
 {
     Email = "john@example.com",
     Country = "United Kingdom",
@@ -273,7 +273,7 @@ It's possible to set a default User Object that will be used on feature flag and
 You can set the default User Object either on SDK initialization:
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
     options.DefaultUser = new User(identifier: "john@example.com"));
 ```
 
@@ -323,7 +323,7 @@ The _ConfigCat SDK_ downloads the latest config data from the ConfigCat CDN auto
 Use the `pollInterval` option parameter to change the polling interval.
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
     options.PollingMode = PollingModes.AutoPoll(pollInterval: TimeSpan.FromSeconds(95));
 });
@@ -343,7 +343,7 @@ When calling `GetValue()` or `GetValueAsync()`, the _ConfigCat SDK_ downloads th
 Use `cacheTimeToLive` parameter to manage configuration lifetime.
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
     options.PollingMode = PollingModes.LazyLoad(cacheTimeToLive: TimeSpan.FromSeconds(600));
 });
@@ -360,7 +360,7 @@ Available options:
 Manual polling gives you full control over when the config data is downloaded from the ConfigCat CDN. The _ConfigCat SDK_ will not download it automatically. Calling `ForceRefresh()` is your application's responsibility.
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
     options.PollingMode = PollingModes.ManualPoll;
 });
@@ -373,7 +373,7 @@ client.ForceRefresh();
 :::
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
     options.PollingMode = PollingModes.ManualPoll;
 });
@@ -397,7 +397,7 @@ Via the following events you can subscribe to particular events raised by the cl
 You can subscribe to these events either on initialization:
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
     options.PollingMode = PollingModes.ManualPoll;
     options.FlagEvaluated += (s, e) => { /* handle the event */ };
@@ -449,7 +449,7 @@ You can also specify whether the file should be reloaded when it gets modified.
 #### File
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("localhost", options =>
+var client = ConfigCatClient.Get("localhost", options =>
 {
     options.FlagOverrides = FlagOverrides.LocalFile(
         "path/to/local_flags.json", // path to the file
@@ -565,7 +565,7 @@ var dictionary = new Dictionary<string, object>
     {"stringSetting", "test"},
 };
 
-IConfigCatClient client = ConfigCatClient.Get("localhost", options =>
+var client = ConfigCatClient.Get("localhost", options =>
 {
     options.FlagOverrides = FlagOverrides.LocalDictionary(dictionary, OverrideBehaviour.LocalOnly);
 });
@@ -576,7 +576,7 @@ IConfigCatClient client = ConfigCatClient.Get("localhost", options =>
 ### Setting log level
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 
 client.LogLevel = LogLevel.Info;
 ```
@@ -610,13 +610,13 @@ Another sample which shows how to implement an adapter to [the built-in logging 
 You can get the keys for all available feature flags and settings by calling the `GetAllKeys()` or `GetAllKeysAsync()` method of the `ConfigCatClient`.
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IEnumerable<string> keys = client.GetAllKeys();
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+var keys = client.GetAllKeys();
 ```
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IEnumerable<string> keys = await client.GetAllKeysAsync();
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+var keys = await client.GetAllKeysAsync();
 ```
 
 ## `GetAllValues()`, `GetAllValuesAsync()`
@@ -624,21 +624,21 @@ IEnumerable<string> keys = await client.GetAllKeysAsync();
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IDictionary<string, object> settingValues = client.GetAllValues();
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+var settingValues = client.GetAllValues();
 
 // invoke with User Object
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
-IDictionary<string, object> settingValuesTargeting = client.GetAllValues(userObject);
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#");
+var settingValuesTargeting = client.GetAllValues(userObject);
 ```
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IDictionary<string, object> settingValues = await client.GetAllValuesAsync();
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+var settingValues = await client.GetAllValuesAsync();
 
 // invoke with User Object
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
-IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#");
+var settingValuesTargeting = await client.GetAllValuesAsync(userObject);
 ```
 
 ## `GetAllValueDetails()`, `GetAllValueDetailsAsync()`
@@ -646,21 +646,21 @@ IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAs
 Evaluates and returns the values along with evaluation details of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IReadOnlyList<EvaluationDetails> settingValues = client.GetAllValueDetails();
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+var settingValues = client.GetAllValueDetails();
 
 // invoke with User Object
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
-IReadOnlyList<EvaluationDetails> settingValuesTargeting = client.GetAllValueDetails(userObject);
+var userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+var settingValuesTargeting = client.GetAllValueDetails(userObject);
 ```
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
-IReadOnlyList<EvaluationDetails> settingValues = await client.GetAllValueDetailsAsync();
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+var settingValues = await client.GetAllValueDetailsAsync();
 
 // invoke with User Object
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
-IReadOnlyList<EvaluationDetails> settingValuesTargeting = await client.GetAllValueDetailsAsync(userObject);
+var userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+var settingValuesTargeting = await client.GetAllValueDetailsAsync(userObject);
 ```
 
 ## Using custom cache implementation
@@ -699,7 +699,7 @@ public class MyCustomCache : IConfigCatCache
 then
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
     options.ConfigCache = new MyCustomCache()
 });
@@ -723,7 +723,7 @@ var myProxySettings = new WebProxy(proxyHost, proxyPort)
 
 var myHttpClientHandler = new HttpClientHandler { Proxy = myProxySettings };
 
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
     options.HttpClientHandler = myHttpClientHandler;
 });
@@ -734,7 +734,7 @@ IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 You can set the maximum wait time for a ConfigCat HTTP response.
 
 ```csharp
-IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
 {
     options.HttpTimeout = TimeSpan.FromSeconds(10);
 });

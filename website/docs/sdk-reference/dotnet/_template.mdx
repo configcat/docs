@@ -439,7 +439,7 @@ _ConfigCat Client_ is responsible for:
   factory method where the `ConfigCatClientOptions` class is used to set up the _ConfigCat Client_.
 
   ```csharp
-  IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+  var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
   {
       options.PollingMode = PollingModes.AutoPoll(maxInitWaitTime: TimeSpan.FromSeconds(10));
       options.Logger = new ConsoleLogger(LogLevel.Info);
@@ -508,7 +508,7 @@ For example:
 <If condition={!props.platform}>
 
   ```csharp
-  IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+  var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
   {
       options.ClientReady += (s, e) =>
       {
@@ -552,7 +552,7 @@ For example:
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../../targeting/targeting-overview.mdx) |
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
 var value = await client.GetValueAsync("keyOfMyFeatureFlag", false, userObject);
 ```
 
@@ -603,7 +603,7 @@ var value = await client.GetValueAsync<double>("keyOfMyDecimalSetting", 0);
 | `user`         | Optional, _User Object_. Essential when using Targeting. [Read more about Targeting.](../../targeting/targeting-overview.mdx) |
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#"); // Optional User Object
 var details = await client.GetValueDetailsAsync("keyOfMyFeatureFlag", false, userObject);
 ```
 
@@ -632,11 +632,11 @@ The `details` result contains the following information:
 The [User Object](../../targeting/user-object.mdx) is essential if you'd like to use ConfigCat's [Targeting](../../targeting/targeting-overview.mdx) feature.
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#");
 ```
 
 ```csharp
-User userObject = new User("john@example.com");
+var userObject = new User("john@example.com");
 ```
 
 | Parameters | Description                                                                                                                     |
@@ -647,7 +647,7 @@ User userObject = new User("john@example.com");
 | `Custom`   | Optional dictionary for custom attributes of a user for advanced Targeting Rule definitions. E.g. User role, Subscription type. |
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#")
 {
     Email = "john@example.com",
     Country = "United Kingdom",
@@ -662,7 +662,7 @@ User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
 The `Custom` dictionary also allows attribute values other than `string` values:
 
 ```csharp
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#")
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#")
 {
     Custom =
     {
@@ -711,7 +711,7 @@ You can set the default User Object either on SDK initialization:
 <If condition={!props.platform}>
 
   ```csharp
-  IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+  var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
       options.DefaultUser = new User(identifier: "john@example.com"));
   ```
 
@@ -777,7 +777,7 @@ Use the {props.platform === "generic-host" ? <><code>PollInterval</code> option 
 <If condition={!props.platform}>
 
   ```csharp
-  IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+  var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
   {
       options.PollingMode = PollingModes.AutoPoll(pollInterval: TimeSpan.FromSeconds(95));
   });
@@ -829,7 +829,7 @@ Use the {props.platform === "generic-host" ? <><code>CacheTimeToLive</code> opti
 <If condition={!props.platform}>
 
   ```csharp
-  IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+  var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
   {
       options.PollingMode = PollingModes.LazyLoad(cacheTimeToLive: TimeSpan.FromSeconds(600));
   });
@@ -878,7 +878,7 @@ Manual polling gives you full control over when the config data is downloaded fr
 <If condition={!props.platform}>
 
   ```csharp
-  IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+  var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
   {
       options.PollingMode = PollingModes.ManualPoll;
   });
@@ -957,7 +957,7 @@ You can subscribe to these events either on initialization:
 <If condition={!props.platform}>
 
   ```csharp
-  IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+  var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
   {
       options.PollingMode = PollingModes.ManualPoll;
       options.FlagEvaluated += (s, e) => { /* handle the event */ };
@@ -1199,7 +1199,7 @@ You can also specify whether the file should be reloaded when it gets modified.
 <If condition={!props.platform}>
 
   ```csharp
-  IConfigCatClient client = ConfigCatClient.Get("localhost", options =>
+  var client = ConfigCatClient.Get("localhost", options =>
   {
       options.FlagOverrides = FlagOverrides.LocalFile(
           "path/to/local_flags.json", // path to the file
@@ -1415,7 +1415,7 @@ You can set up the SDK to load your feature flag & setting overrides from a `Dic
       {"stringSetting", "test"},
   };
 
-  IConfigCatClient client = ConfigCatClient.Get("localhost", options =>
+  var client = ConfigCatClient.Get("localhost", options =>
   {
       options.FlagOverrides = FlagOverrides.LocalDictionary(dictionary, OverrideBehaviour.LocalOnly);
   });
@@ -1476,7 +1476,7 @@ Then configure the client to use the `MyCustomOverrideDataSource` implementation
   ```csharp
   var flagOverrideDataSource = new MyCustomOverrideDataSource("{ \"f\": { ... } }");
 
-  IConfigCatClient client = ConfigCatClient.Get("localhost", options =>
+  var client = ConfigCatClient.Get("localhost", options =>
   {
       options.FlagOverrides = new FlagOverrides(flagOverrideDataSource, OverrideBehaviour.LocalOnly);
   });
@@ -1505,7 +1505,7 @@ Then configure the client to use the `MyCustomOverrideDataSource` implementation
 <If condition={!props.platform}>
 
   ```csharp
-  IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
+  var client = ConfigCatClient.Get("#YOUR-SDK-KEY#");
 
   client.LogLevel = LogLevel.Info;
   ```
@@ -1604,7 +1604,7 @@ Please make sure that your log filter logic doesn't perform heavy computation an
 You can get the keys for all available feature flags and settings by calling the `GetAllKeysAsync()` method.
 
 ```csharp
-IEnumerable<string> keys = await client.GetAllKeysAsync();
+var keys = await client.GetAllKeysAsync();
 ```
 
 ## `GetAllValuesAsync()`
@@ -1612,11 +1612,11 @@ IEnumerable<string> keys = await client.GetAllKeysAsync();
 Evaluates and returns the values of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
 ```csharp
-IDictionary<string, object> settingValues = await client.GetAllValuesAsync();
+var settingValues = await client.GetAllValuesAsync();
 
 // invoke with User Object
-User userObject = new User("#UNIQUE-USER-IDENTIFIER#");
-IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAsync(userObject);
+var userObject = new User("#UNIQUE-USER-IDENTIFIER#");
+var settingValuesTargeting = await client.GetAllValuesAsync(userObject);
 ```
 
 ## `GetAllValueDetailsAsync()`
@@ -1624,11 +1624,11 @@ IDictionary<string, object> settingValuesTargeting = await client.GetAllValuesAs
 Evaluates and returns the values along with evaluation details of all feature flags and settings. Passing a [User Object](#user-object) is optional.
 
 ```csharp
-IReadOnlyList<EvaluationDetails> settingValues = await client.GetAllValueDetailsAsync();
+var settingValues = await client.GetAllValueDetailsAsync();
 
 // invoke with User Object
-User userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
-IReadOnlyList<EvaluationDetails> settingValuesTargeting = await client.GetAllValueDetailsAsync(userObject);
+var userObject = new User("435170f4-8a8b-4b67-a723-505ac7cdea92");
+var settingValuesTargeting = await client.GetAllValueDetailsAsync(userObject);
 ```
 
 ## Using custom cache implementation
@@ -1659,7 +1659,7 @@ then
 <If condition={!props.platform}>
 
   ```csharp
-  IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+  var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
   {
       options.ConfigCache = new MyCustomCache();
   });
@@ -1701,7 +1701,7 @@ This setting does not apply if you configure the client to use a custom config f
       Credentials = new NetworkCredential(proxyUserName, proxyPassword)
   };
 
-  IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+  var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
   {
       options.Proxy = myProxySettings;
   });
@@ -1751,7 +1751,7 @@ This setting does not apply if you configure the client to use a custom config f
 <If condition={!props.platform}>
 
   ```csharp
-  IConfigCatClient client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
+  var client = ConfigCatClient.Get("#YOUR-SDK-KEY#", options =>
   {
       options.HttpTimeout = TimeSpan.FromSeconds(10);
   });
