@@ -119,7 +119,7 @@ You can decide where you want the actual feature flag evaluation to happen.
 <Steps>
 <Step>
 <Title>
-### Local evaluation using a ConfigCat SDK connected to the Proxy {#1-local-evaluation-using-a-configcat-sdk-connected-to-the-proxy}
+### Local evaluation using a ConfigCat SDK connected to the Proxy {/* #1-local-evaluation-using-a-configcat-sdk-connected-to-the-proxy */}
 </Title>
 
 The Proxy has the ability to forward all information required for feature flag evaluation to ConfigCat SDKs via its [CDN proxy](endpoints.mdx#cdn-proxy) endpoint. 
@@ -157,7 +157,7 @@ var configCatClient = configcat.getClient(
 
 <Step>
 <Title>
-### Remote evaluation with the Proxy's API endpoints {#2-remote-evaluation-with-the-proxys-api-endpoints}
+### Remote evaluation with the Proxy's API endpoints {/* #2-remote-evaluation-with-the-proxys-api-endpoints */}
 </Title>
 
 You can leverage the Proxy's server side feature flag evaluation feature by sending simple HTTP requests to the Proxy's API endpoints.
@@ -228,7 +228,7 @@ You can find the available API endpoints with their HTTP request/response schema
 
 <Step>
 <Title>
-### Remote evaluation with OpenFeature Remote Evaluation Protocol (OFREP) {#3-remote-evaluation-with-openfeature-remote-evaluation-protocol-ofrep}
+### Remote evaluation with OpenFeature Remote Evaluation Protocol (OFREP) {/* #3-remote-evaluation-with-openfeature-remote-evaluation-protocol-ofrep */}
 </Title>
 
 :::info
@@ -278,7 +278,7 @@ You can find the available OFREP endpoints with their HTTP request/response sche
 
 <Step>
 <Title>
-### Remote evaluation and streaming with SSE {#4-remote-evaluation-and-streaming-with-sse}
+### Remote evaluation and streaming with SSE {/* #4-remote-evaluation-and-streaming-with-sse */}
 </Title>
 
 The Proxy has the ability to evaluate feature flags and send notifications about subsequent evaluated flag value changes through <a target="blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events">Server-Sent Events</a> connections.
@@ -330,7 +330,7 @@ For more information and usage examples, see the related [SSE endpoints document
 
 <Step>
 <Title>
-### Remote evaluation and streaming with gRPC {#5-remote-evaluation-and-streaming-with-grpc}
+### Remote evaluation and streaming with gRPC {/* #5-remote-evaluation-and-streaming-with-grpc */}
 </Title>
 
 The Proxy supports both unary feature flag evaluation RPCs and server streaming of evaluated flag value changes.
@@ -479,12 +479,12 @@ Then start the Proxy:
 
 The following sections will go through each available option in detail.
 
-## How does the Proxy learn about feature flags? {#sdk}
+## How does the Proxy learn about feature flags? {/* #sdk */}
 
 In order to make the Proxy work properly, it must be set up with one or more <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a>. 
 It creates one SDK instance per SDK key internally and uses those for feature flag evaluation. 
 
-### SDK Identifier {#sdk-identifier--sdk-key}
+### SDK Identifier {/* #sdk-identifier--sdk-key */}
 
 Within the Proxy, <a target="blank" href="https://app.configcat.com/sdkkey">SDK keys</a> are mapped to unique SDK identifiers. 
 
@@ -497,7 +497,7 @@ There are two ways to let the Proxy know which SDK Keys it should use:
 <Steps>
 <Step>
 <Title>
-### Automatic configuration with Proxy profiles {#1-automatic-configuration-with-proxy-profiles}
+### Automatic configuration with Proxy profiles {/* #1-automatic-configuration-with-proxy-profiles */}
 </Title>
 
 :::info
@@ -889,7 +889,7 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
 </Step>
 <Step>
 <Title>
-### Manual configuration {#2-manual-configuration}
+### Manual configuration {/* #2-manual-configuration */}
 </Title>
 
 When using environment variables, the SDK keys can be specified as a JSON object, where the **property name is the SDK identifier** (the identifier of the config-environment pair whose SDK Key the underlying SDK instance is configured to use) and the **property value is the actual SDK key**.

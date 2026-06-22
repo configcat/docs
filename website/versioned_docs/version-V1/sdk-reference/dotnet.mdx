@@ -164,7 +164,7 @@ It is important to provide an argument for the `defaultValue` parameter, specifi
 that matches the type of the feature flag or setting you are evaluating. Please refer to the following table for the corresponding types.
 :::
 
-### Setting type mapping {#setting-type-mapping}
+### Setting type mapping {/* #setting-type-mapping */}
 
 | Setting Kind   | Type parameter `T`                |
 | -------------- | --------------------------------- |
@@ -195,7 +195,7 @@ var value = client.GetValue("keyOfMyDecimalSetting", 0d);
 var value = client.GetValue<double>("keyOfMyDecimalSetting", 0);
 ```
 
-## Anatomy of `GetValueDetails()`, `GetValueDetailsAsync()` {#anatomy-of-getvaluedetails}
+## Anatomy of `GetValueDetails()`, `GetValueDetailsAsync()` {/* #anatomy-of-getvaluedetails */}
 
 `GetValueDetails()`/`GetValueDetailsAsync()` are similar to `GetValue()`/`GetValueAsync()` but instead of returning the evaluated value only, they provide more detailed information about the evaluation result.
 
