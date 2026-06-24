@@ -96,6 +96,32 @@ You can start writing prompts into Cursor's AI panel.
 </Step>
 </Steps>
 </TabItem>
+<TabItem value="claudecode" label="Claude Code" default>
+<Steps>
+<Step>
+Install [Claude Code](https://claude.com/product/claude-code)
+</Step>
+<Step>
+Add ConfigCat MCP server to Claude Code from your terminal:
+
+```bash
+claude mcp add --env CONFIGCAT_API_USER=YOUR_API_USER  \
+  --env CONFIGCAT_API_PASS=YOUR_API_PASSWORD \
+  --transport stdio ConfigCat -- npx -y @configcat/mcp-server
+```
+
+</Step>
+<Step>
+Start Claude Code with the `claude` command.
+</Step>
+<Step>
+Check the ConfigCat MCP server with the `/mcp` command in Claude Code. The connected ConfigCat server should appear in the Local MCPs list.
+</Step>
+<Step>
+You can now start writing prompts in Claude Code.
+</Step>
+</Steps>
+</TabItem>
 <TabItem value="vscode" label="Visual Studio Code">
 <Steps>
 <Step>
