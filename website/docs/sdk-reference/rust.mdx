@@ -352,7 +352,9 @@ let client = Client::builder("#YOUR-SDK-KEY#")
 _ = client.refresh().await;
 ```
 
-> `get_value()` returns `default` if the cache is empty. Call `refresh()` to update the cache.
+:::caution
+`get_value()` returns `default` if the cache is empty. Call `refresh()` to update the cache.
+:::
 
 ## Online / Offline mode
 

@@ -109,7 +109,13 @@ const features = [
     title: 'SDK References', // This list should be in alphabetical order
     description: <>Let's do some coding.</>,
     links: [
-      { url: 'sdk-reference/dotnet', title: '.NET' },
+      {
+        url: 'sdk-reference/dotnet',
+        title: '.NET',
+        items: [
+          { url: 'sdk-reference/dotnet/generic-host', title: 'ASP.NET Core & DI‑Based Apps' },
+        ],
+      },
       { url: 'sdk-reference/android', title: 'Android (Java)' },
       { url: 'sdk-reference/cpp', title: 'C++' },
       { url: 'sdk-reference/dart', title: 'Dart (Flutter)' },
