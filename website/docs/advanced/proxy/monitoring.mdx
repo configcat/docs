@@ -72,6 +72,32 @@ CONFIGCAT_DIAG_PORT=8051
 <td>The port used by the diagnostics HTTP server.</td>
 </tr>
 
+<tr>
+<td>
+
+<Tabs groupId="yaml-env">
+<TabItem value="yaml" label="YAML" default>
+
+```yaml
+diag:
+  service_name: my-service
+```
+
+</TabItem>
+<TabItem value="env-vars" label="Environment variable">
+
+```shell
+CONFIGCAT_DIAG_SERVICE_NAME=my-service
+```
+
+</TabItem>
+</Tabs>
+
+</td>
+<td><code>configcat-proxy</code></td>
+<td>The name of the service reported with the diagnostic data.</td>
+</tr>
+
 </tbody>
 </table>
 
