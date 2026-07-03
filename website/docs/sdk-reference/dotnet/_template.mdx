@@ -62,7 +62,7 @@ export const getAdjustedToc = (platform) => {
   - [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor)
   - [MAUI](https://dotnet.microsoft.com/en-us/apps/maui)
   - [Worker Services](https://learn.microsoft.com/en-us/dotnet/core/extensions/workers)
-  - Any other application built on [.NET Generic Host](https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host)
+  - Any other application built on [.NET Generic Host](https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host) (`Microsoft.Extensions.Hosting`)
   or [.NET's standard dependency injection](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection/overview) (`Microsoft.Extensions.DependencyInjection`).
   :::
 
@@ -380,7 +380,7 @@ using ConfigCat.Extensions.Hosting;
   ### 5. Obtain the _ConfigCat_ client
 
   Resolve the singleton `IConfigCatClient` service from the DI container via constructor injection, method injection
-  (using the `FromServices` attribute) or by `ServiceProvider.GetRequiredService<IConfigCatClient>()`:
+  (using the `FromServices` attribute), etc., or by `ServiceProvider.GetRequiredService<IConfigCatClient>()`. E.g.:
 
   ```csharp
   var client = app.Services.GetRequiredService<IConfigCatClient>();
@@ -1814,10 +1814,10 @@ We strive to provide an extensive support for the various .NET runtimes and vers
 Check out our Sample Applications how they use the _ConfigCat SDK_:
 
 - <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ConsoleApp" target="_blank">Sample Console App</a>
-- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Multi-page Web App (ASP.NET Core MVC)</a>
-- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/BlazorWasm" target="_blank">Sample Single-page Web App (ASP.NET Core Blazor WebAssembly)</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/ASP.NETCore" target="_blank">Sample Multi-Page Web App (ASP.NET Core MVC)</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/BlazorWasm" target="_blank">Sample Single-Page Web App (ASP.NET Core Blazor WebAssembly)</a>
 - <a href="https://github.com/configcat/.net-sdk/tree/master/samples/MAUI" target="_blank">Sample Mobile/Windows Store App (.NET MAUI)</a>
-- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/WindowsService" target="_blank">Sample Windows Service (.NET Generic Host)</a>
+- <a href="https://github.com/configcat/.net-sdk/tree/master/samples/WindowsService" target="_blank">Sample Windows Service (Worker Service built on .NET Generic Host)</a>
 
 ## Guides
 
