@@ -37,6 +37,7 @@ const docs: SidebarConfig = [
         ],
       },
       'advanced/predefined-variations',
+      'change-requests',
     ],
   },
   {
