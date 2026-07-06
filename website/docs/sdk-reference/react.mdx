@@ -103,7 +103,7 @@ class TestHOCComponent extends React.Component<
   }
 
   render() {
-    return loading ? (
+    return this.state.loading ? (
       <div>Loading...</div>
     ) : (
       <div>
@@ -341,7 +341,7 @@ A helper function to get the value of a feature flag.
 ```tsx
 class TestHOCComponent extends React.Component<
   WithConfigCatClientProps,
-  { isAwesomeFeatureEnabled: string }
+  { isAwesomeFeatureEnabled: boolean; loading: boolean }
 > {
   constructor(props: WithConfigCatClientProps) {
     super(props);
@@ -369,7 +369,7 @@ class TestHOCComponent extends React.Component<
   }
 
   render() {
-    return loading ? (
+    return this.state.loading ? (
       <div>Loading...</div>
     ) : (
       <div>
@@ -956,7 +956,7 @@ then
 <ConfigCatProvider
   sdkKey="YOUR_SDK_KEY"
   pollingMode={PollingMode.ManualPoll}
-  options={{ cache: new MyCustomLogger() }}
+  options={{ logger: new MyCustomLogger() }}
 >
   ...
 </ConfigCatProvider>
