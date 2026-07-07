@@ -5,10 +5,10 @@ description: Propose, schedule, and review feature flag changes with the ConfigC
 ---
 
 :::info
-**Beta Feature**: Approval flow and scheduled changes are in closed beta. You can join the beta by contacting support at configcat.com/support. We are collecting feedback from real-world use to improve the experience.
+**Beta Feature**: Approval flow & Scheduled Changes is in closed beta. You can join the beta by writing to our support at configcat.com/support. We are collecting feedback from real-world use to improve the experience.
 :::
 
-A change request is a set of feature flag changes that you prepare in the Dashboard without publishing them right away.
+A _Change Request_ is a set of feature flag changes that you prepare in the Dashboard without publishing them right away.
 You can propose a change for later manual publishing, or schedule it to be applied automatically at a specific time.
 This supports the four-eyes principle, because another person can review and approve the change before it reaches production.
 
@@ -26,7 +26,7 @@ Feature flag changes in ConfigCat can be:
 - **Proposed**: Saved as a change request for later manual publishing.
 - **Scheduled**: Saved as a change request that ConfigCat applies automatically at a selected date and time.
 
-If an environment is configured as approval-required, changes cannot be applied immediately. A change request must be opened, reviewed, and approved by another member before it can be published. This also applies to scheduled changes. A scheduled change request is only applied on schedule if it has been approved.
+If an environment is configured as _approval-required_, changes cannot be applied immediately. A change request must be opened, reviewed, and approved by another member before it can be published. This also applies to scheduled changes - a scheduled change request is only applied on schedule if it has been approved.
 
 ## Permissions
 
@@ -38,7 +38,7 @@ Only members with **Read/Write** permission for feature management in the enviro
 
 The **Approval flow** product preference controls which environments require approval.
 
-You can enable it for the whole product or for each environment.
+You can enable it for the entire product, or per environment.
 
 When an environment is approval-required, all feature flag changes must go through a change request. The only exception is the **Can bypass approval** permission, described below.
 
@@ -137,7 +137,7 @@ This option starts from your proposed values and then lets you apply the changes
 
 ### Remove feature flag from change request
 
-This removes that feature flag from the change request and discards its changes. This option is only available when the change request contains more than one feature flag.
+This removes the feature flag from the change request and discards its changes. This option is only available when the change request contains more than one feature flag.
 
 ### Close change request
 
