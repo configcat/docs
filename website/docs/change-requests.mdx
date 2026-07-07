@@ -91,10 +91,6 @@ If the owner edits a Change Request, for example by changing feature flag values
 - **Applied**: The changes have been published.
 - **Closed**: The Change Request was closed without being applied. Closed Change Requests cannot be reopened.
 
-### Scheduled request fallback
-
-If a scheduled Change Request cannot be applied at the planned time, for example because it was never approved, the schedule is removed and the request becomes a regular open Change Request. You can then fix the issue and apply it manually or schedule it again.
-
 ### Needs approval
 
 A Change Request shows **Needs approval** when it is in an approval-required environment and has not yet been approved.
@@ -109,6 +105,10 @@ Possible causes:
 - **Owner is unavailable**: The owner left the organization or lost **Read/Write** permission in the environment. Another eligible member must claim the Change Request.
 - **Missing mandatory notes**: Mandatory notes were enabled on the environment after the Change Request was created, and the Change Request does not have notes.
 - **Circular dependency**: A change was published after the Change Request was opened, and applying the request now would create a circular dependency through prerequisite flags.
+
+#### Scheduled request fallback
+
+If a scheduled Change Request cannot be applied at the planned time, for example because it was never approved, the schedule is removed and the request becomes a regular open Change Request. You can then fix the issue and apply it manually or schedule it again.
 
 ## Conflict handling
 
@@ -153,4 +153,6 @@ The approval flow currently applies to feature flag value changes only. The foll
 
 ### Removal restrictions
 
-Feature flags cannot be removed if they are referenced by a Change Request, including as prerequisites. Predefined variations cannot be removed if they are referenced by a Change Request. Segments cannot be removed if they are referenced by a Change Request.
+- Feature flags cannot be removed if they are referenced by a Change Request, including as prerequisites. 
+- Predefined variations cannot be removed if they are referenced by a Change Request. 
+- Segments cannot be removed if they are referenced by a Change Request.
