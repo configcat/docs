@@ -106,7 +106,7 @@ Possible causes:
 - **Conflicting changes**: Changes to the included feature flags were published concurrently after the change request was opened. See [Conflict handling](#conflict-handling).
 - **Owner is unavailable**: The change request owner left the organization or lost **Read/Write** permission in the target environment. Another eligible member must claim the change request.
 - **Missing mandatory notes**: Notes became mandatory in the target environment after the change request was created, but no notes were provided.
-- **Circular dependency**: Changes to the included feature flags were published concurrently after the change request was opened, and applying the change request now would create a circular dependency through prerequisite flags.
+- **Circular dependency**: Changes to the included feature flags were published concurrently after the change request was opened, and applying the change request now would create a circular dependency through [prerequisite flags](../targeting/targeting-rule/flag-condition/).
 
 #### Failed to apply on schedule
 
@@ -146,10 +146,11 @@ This option removes the feature flag from the change request and discards its ch
 
 This option closes the entire change request. Choose this when the conflict cannot or should not be resolved at all.
 
-## Current limitations
+## Limitations
 
 The approval flow currently applies to feature flag changes only. The following actions do not require a change request or approval:
 
+- The features are only available for V2 configs. See the [Config V2 Migration Guide](../advanced/config-v2-migration-guide).
 - Creating or deleting a feature flag.
 - Changes to predefined variations.
 - Changes to segments.
