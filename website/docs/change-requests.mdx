@@ -1,158 +1,161 @@
 ---
 id: change-requests
 title: Approval Flow & Scheduled Changes (Beta)
-description: Propose, schedule, and review feature flag changes with the ConfigCat Change Requests.
+description: Propose, schedule, and review feature flag changes using change requests.
 ---
 
 :::info
 **Beta Feature**: Approval Flow and Scheduled Changes are in closed beta. You can join the beta by contacting [support](https://configcat.com/support). We are collecting feedback from real-world use to improve the experience.
 :::
 
-A _Change Request_ is a set of feature flag changes that you prepare in the Dashboard without publishing them right away.
-You can propose a change for later manual publishing, or schedule it to be applied automatically at a specific time.
+A _change request_ is a set of feature flag changes that you prepare on ConfigCat Dashboard without publishing them right away.
+You can propose changes for later manual publishing, or schedule it to be applied automatically at a specific time.
 This supports the four-eyes principle, because another person can review and approve the change before it reaches production.
 
 Typical use cases:
 
-- **Scheduled release**: You want a feature turned on next Monday at 9 AM without being at your desk.
-- **Approval before go-live**: You work in a regulated environment where a colleague must review every change before it reaches production.
+- **Approval before publishing**: You work in a regulated environment where a colleague must review every change before it reaches production.
 - **Draft and collaborate**: You want to prepare changes, collect feedback in comments, and only publish when the team agrees.
+- **Scheduled release**: You want a feature turned on next Monday at 9 AM without being at your desk.
 
 ## How does it work?
 
 Feature flag changes in ConfigCat can be:
 
 - **Published immediately**: The classic way. The change takes effect right away.
-- **Proposed**: Saved as a Change Request for later manual publishing.
-- **Scheduled**: Saved as a Change Request that ConfigCat applies automatically at a selected date and time.
+- **Proposed**: Saved as a change request for later manual publishing.
+- **Scheduled**: Saved as a change request that ConfigCat applies automatically at a selected date and time.
 
-If an environment is configured as _approval-required_, changes cannot be applied immediately. A Change Request must be opened, reviewed, and approved by another member before it can be published. This also applies to scheduled changes - a scheduled Change Request is only applied on schedule if it has been approved.
+If an environment is configured as _approval-required_, changes cannot be applied immediately. A change request must be opened, reviewed, and approved by another member before it can be published.
+
+This also applies to scheduled changes: a scheduled change request is only applied on schedule if it has been approved.
 
 ## Permissions
 
-### Who can create Change Requests?
+### Who can create change requests?
 
-Only members with **Read/Write** permission for feature management in the environment can propose or schedule changes.
+Only members who have **Read/Write** permission for feature management in the target environment may propose or schedule changes.
 
-### Approval Flow Product preference
+### How to require approval for environments?
 
-The **Approval Flow** Product preference controls which environments require approval.
+The **Approval Flow** product preferences control which environments require approval.
 
-You can enable it for the entire product or per environment. You can manage it in the [Product preferences page](https://app.configcat.com/product/preferences).
+You can enable it for the entire product or for specific environments. You can manage it on the [Product Preferences](https://app.configcat.com/product/preferences) page.
 
-When an environment is approval-required, all feature flag changes must go through a Change Request. The only exception is the **Can bypass approval** permission, described below.
+When an environment is approval-required, feature flag changes must first be proposed as a change request and then go through the approval flow. This process can be skipped only by members with **Can bypass approval** permission, described below.
 
-### Change Request approvals permission
+### How to manage permissions for approval flow?
 
-Permission groups include a **Change Request approvals** permission with these values:
+Permission groups include a **Change request approvals** permission, which can be set to one of the following values:
 
-- **Cannot approve**: The member cannot approve any Change Request.
-- **Can approve others**: The member can approve Change Requests opened by other members.
-- **Can bypass approval**: The member can approve Change Requests opened by other members, or apply changes directly without going through the approval flow.
+- **Cannot approve**: The member cannot approve change requests.
+- **Can approve others**: The member can approve change requests opened by other members.
+- **Can bypass approval**: The member can approve change requests opened by other members, or apply changes directly without going through the approval flow.
 
-This permission can be set product-wide or overridden per environment.
+This permission can be set product-wide or specified per environment.
 
 In approval-required environments:
 
-- Members with **Read/Write** can create Change Requests and propose or schedule changes.
-- Members with at least **Can approve others** can approve Change Requests.
-- Members with **Read/Write** can apply an approved Change Request.
-- Members with **Can bypass approval** can approve Change Requests or apply changes directly, skipping the approval step.
-- Members with at least **Can approve others** can close any Change Request.
+- Members with **Read/Write** permission can create change requests to propose or schedule changes.
+- Members with **Can approve others** permission (or above) can approve change requests.
+- Members with **Read/Write** permission can apply an approved change request.
+- Members with **Can bypass approval** permission can approve change requests or apply changes directly, skipping the approval step.
+- Members with **Can approve others** permission (or above) can close any change request.
 
 :::info
-**Can bypass approval** is meant for firefighting. The default behavior is always the full approval flow for both proposed and scheduled changes. To bypass approval for a specific change, the user must explicitly opt in. It is never automatic.
+The **Can bypass approval** permission is intended for emergency situations. By default, both proposed and scheduled changes are expected to go through the approval flow. Bypassing approval always requires an explicit action by the user. It is never automatic.
 
-For scheduled Change Requests, a member with **Can bypass approval** can choose to apply a scheduled Change Request on its set date without prior approval. This opt-in must be set for each Change Request.
+For scheduled change requests, a member with **Can bypass approval** permission can choose to apply the change request on schedule without prior approval. However, they must opt in to this behavior per change request.
 :::
 
-## Lifecycle of a Change Request
+## Lifecycle of a change request
 
 ### Ownership and editing
 
-Only the owner can edit a Change Request. Other members can:
+Only the owner can edit a change request. Other members can:
 
-- comment on the request
-- approve it if they have the right permission
-- close it if they have at least **Can approve others**
-- apply it if they have **Read/Write** permission and the request is approved or doesn't require approval.
+- comment on the change request,
+- approve it if they have the appropriate permission,
+- close it if they have **Can approve others** permission,
+- apply it if they have **Read/Write** permission and the change request is approved or doesn't require approval.
 
 ### Comments, notifications, and activity
 
-Each Change Request supports comments for team discussion. Email notifications are sent for important events, such as approvals, comments, and status changes. The activity log records everything that happened on the request.
+Change requests allow comments for team discussion. Email notifications are sent on important events, such as approvals, comments, and status changes. The activity log records everything that happens on the change request.
 
 ### Re-approval after edits
 
-If the owner edits a Change Request, for example by changing feature flag values or the schedule, all existing approvals are removed. The request must be reviewed and approved again before it can be applied.
+If the owner edits a change request, for example, by updating the proposed changes or schedule, the existing approval is removed. The request must be reviewed and approved again before it can be applied.
 
 ## Statuses
 
-- **Open**: The Change Request has been created and is waiting to be applied.
-- **Applied**: The changes have been published.
-- **Closed**: The Change Request was closed without being applied. Closed Change Requests cannot be reopened.
+- **Open**: The change request has been created and is waiting to be applied.
+- **Applied**: The change request has been applied, meaning that the proposed changes have been published.
+- **Closed**: The change request has been closed without being applied. Closed change requests cannot be reopened.
 
 ### Needs approval
 
-A Change Request shows **Needs approval** when it is in an approval-required environment and has not yet been approved.
+A change request is labeled as **Needs approval** when it is in an approval-required environment and has not yet been approved.
 
 ### Needs attention
 
-A Change Request shows **Needs attention** when there is a problem that prevents it from being applied, either manually or on schedule. The issue must be resolved before the request can continue.
+A change request is labeled as **Needs attention** when there is a blocking issue that prevents it from being applied, either manually or on schedule. The issue must be resolved before the change request can move forward.
 
 Possible causes:
 
-- **Conflicting changes**: Changes for the same feature flags were published after the Change Request was opened. See [Conflict handling](#conflict-handling).
-- **Owner is unavailable**: The owner left the organization or lost **Read/Write** permission in the environment. Another eligible member must claim the Change Request.
-- **Missing mandatory notes**: Mandatory notes were enabled on the environment after the Change Request was created, and the Change Request does not have notes.
-- **Circular dependency**: A change was published after the Change Request was opened, and applying the request now would create a circular dependency through prerequisite flags.
+- **Conflicting changes**: Changes to the included feature flags were published concurrently after the change request was opened. See [Conflict handling](#conflict-handling).
+- **Owner is unavailable**: The change request owner left the organization or lost **Read/Write** permission in the target environment. Another eligible member must claim the change request.
+- **Missing mandatory notes**: Notes became mandatory in the target environment after the change request was created, but no notes were provided.
+- **Circular dependency**: Changes to the included feature flags were published concurrently after the change request was opened, and applying the change request now would create a circular dependency through prerequisite flags.
 
-#### Scheduled request fallback
+#### Failed to apply on schedule
 
-If a scheduled Change Request cannot be applied at the planned time, for example because it was never approved, the schedule is removed and the request becomes a regular open Change Request. You can then fix the issue and apply it manually or schedule it again.
+If a scheduled change request cannot be applied at the planned time (for example, because it was never approved), scheduling is disabled and the change request becomes a regular open change request. You can then resolve the issue and apply it manually or schedule it again.
 
 ## Conflict handling
 
-When you open a Change Request, ConfigCat notifies you if another open Change Request already includes the same feature flags.
+When you create a change request, ConfigCat warns you if another open change request in the target environment already includes the same feature flags.
 
-This matters because if two Change Requests modify the same flag, the one applied first will mark the other as invalid. An invalid Change Request cannot be applied until its conflicts are resolved.
+This is important because when two change requests modify the same feature flag, applying one will mark the other as invalid. Such a change request cannot be applied until its conflicts are resolved.
 
-The conflict resolver shows the changes your Change Request proposes and the changes that were published after you opened it.
+The **Resolve conflicts** dialog shows the changes your change request proposes and the changes that were published concurrently after you created it (or after you last resolved its conflicts).
 
 You can resolve conflicts in one of these ways:
 
-### Auto merge
+### Auto-merge
 
-This option automatically merges your proposed changes with the currently published state. It is only available when the system can merge the changes safely.
+This option automatically merges your proposed version with the currently published version. It is only available when the system can merge the changes safely.
 
 :::tip
-Always review the merged result carefully before applying it to make sure it shows the correct values.
+Always review the merged result before applying it to ensure it produces the intended behavior.
 :::
 
-### Accept theirs and re-apply your changes
+### Accept their version and re-apply your changes
 
-This option starts from the currently published values and then lets you re-apply your intended changes on top. Use this when you want your changes applied to the current state of the flag. This is the recommended option when Auto merge is not available.
+This option allows you to resolve conflicts starting from the current published version. Choose this if it is easier to re-apply your intended changes. This is the recommended option when Auto-merge is not available.
 
-### Accept yours and re-apply the published changes
+### Accept your version and re-apply the changes published since
 
-This option starts from your proposed values and then lets you apply the changes that were published since you opened the request. Use this when you want the published changes layered on top of your proposal.
+This option allows you to resolve conflicts starting from your proposed version. Choose this if it is easier to re-apply the concurrently published changes.
 
-### Remove feature flag from Change Request
+### Remove feature flag from change request
 
-This removes the feature flag from the Change Request and discards its changes. This option is only available when the Change Request contains more than one feature flag.
+This option removes the feature flag from the change request and discards its changes. This option is only available when the change request includes more than one feature flag.
 
-### Close Change Request
+### Close change request
 
-This closes the whole Change Request. Use this when the conflict should not be resolved and the changes should not be applied at all.
+This option closes the entire change request. Choose this when the conflict cannot or should not be resolved at all.
 
 ## Current limitations
 
-The approval flow currently applies to feature flag value changes only. The following actions do not require a Change Request or approval:
+The approval flow currently applies to feature flag changes only. The following actions do not require a change request or approval:
 
 - Creating or deleting a feature flag.
+- Changes to predefined variations.
 - Changes to segments.
 
 ## Restrictions
 
-- Feature flags cannot be removed if they are referenced by a Change Request, including as prerequisites. 
-- Predefined variations cannot be removed if they are referenced by a Change Request. 
-- Segments cannot be removed if they are referenced by a Change Request.
+- Feature flags cannot be deleted if they are referenced by a change request (even if referenced indirectly, as prerequisites).
+- Predefined variations cannot be removed if the feature flag is referenced by a change request. 
+- Segments cannot be removed if they are used in a feature flag referenced by a change request.
