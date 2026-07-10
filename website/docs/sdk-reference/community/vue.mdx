@@ -9,7 +9,7 @@ export const VueSchema = require('@site/src/schema-markup/sdk-reference/communit
 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(VueSchema) }}></script>
 
 :::caution
-As this is a community-maintained package, ConfigCat can't guarantee its stability, and safety and can't provide official customer support.
+As this is a community-maintained package, ConfigCat can't guarantee its stability and safety, and can't provide official customer support.
 :::
 
 <a href="https://github.com/codedbychavez/configcat-vue" target="_blank">ConfigCat SDK for Vue.js on GitHub</a>
@@ -121,7 +121,7 @@ You may want to log the actions of the underlying ConfigCat SDK client. To do th
 
 > See documentation [here](../js/browser.mdx#logging).
 
-Add `createConsoleLogger`, and `LoggerLevel` to your import:
+Add `createConsoleLogger`, and `LogLevel` to your import:
 
 ```js
 import { createConsoleLogger, LogLevel } from "configcat-vue"; 
@@ -135,7 +135,7 @@ Use the logger in `clientOptions`:
 
 ```js
 app.use(ConfigCatPlugin, {
-  sdkKey: "YOUR-CONFIGCAT-SDK-KEY-GOES-HERE", // // sdkKey is required
+  sdkKey: "YOUR-CONFIGCAT-SDK-KEY-GOES-HERE", // sdkKey is required
   clientOptions: { // clientOptions is optional
     // ...
     logger: createConsoleLogger(LogLevel.Info),
