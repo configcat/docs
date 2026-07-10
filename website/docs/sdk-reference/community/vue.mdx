@@ -91,7 +91,7 @@ Optionally, the `FeatureWrapper` component also provides an `#else` and `#loadin
 
 ### Specifying a polling mode
 
-Polling modes are used to control how often ConfigCat's SDK client downloads the values of feature flags from ConfigCat's servers. The default polling mode is `AutoPoll`. Auto Polling fetches the latest feature flag values every 60 seconds by default. To change this, Specify a polling mode and set the polling interval (in seconds) via the `pollingIntervalInSeconds` property.
+Polling modes are used to control how often ConfigCat's SDK client downloads the values of feature flags from ConfigCat's servers. The default polling mode is `AutoPoll`. Auto Polling fetches the latest feature flag values every 60 seconds by default. To change this, Specify a polling mode and set the polling interval (in seconds) via the `pollIntervalSeconds` property.
 
 Import:
 
@@ -103,7 +103,7 @@ Add `pollingMode` to the `ConfigCatPlugin` options and set the polling interval 
 
 ```js
 app.use(ConfigCatPlugin, {
-    sdkKey: "YOUR-CONFIGCAT-SDKKEY-GOES-HERE",
+    sdkKey: "YOUR-CONFIGCAT-SDK-KEY-GOES-HERE",
     pollingMode: PollingMode.AutoPoll, // Optional. Default is AutoPoll
     clientOptions: {
         pollIntervalSeconds: 5 // Optional. Specify the polling interval in seconds. The default is 60 seconds.
