@@ -1595,7 +1595,7 @@ Then configure the client to use the `MyCustomOverrideDataSource` implementation
 
 <If condition={props.platform === "generic-host"}>
 
-The SDK automatically configures the clients to integrate with `Microsoft.Extensions.Logging`, the [the built-in logging framework](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging)
+The SDK automatically configures the registered clients to integrate with `Microsoft.Extensions.Logging`, the [built-in logging framework](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging)
 of .NET Core/.NET 5+. Accordingly, you can set log levels using the standard configuration approach described [here](https://learn.microsoft.com/en-us/dotnet/core/extensions/logging/overview#configure-logging).
 E.g., via `appsettings.json`:
 
