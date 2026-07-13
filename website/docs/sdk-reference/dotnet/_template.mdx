@@ -36,11 +36,21 @@ export const getAdjustedToc = (platform) => {
   }
 };
 
+<If condition={!props.platform}>
 [![Star on GitHub](https://img.shields.io/github/stars/configcat/.net-sdk.svg?style=social)](https://github.com/configcat/.net-sdk/stargazers)
 [![Build status](https://github.com/configcat/.net-sdk/actions/workflows/dotnet-sdk-ci.yml/badge.svg?branch=master)](https://github.com/configcat/.net-sdk/actions/workflows/dotnet-sdk-ci.yml)
 [![NuGet Version](https://img.shields.io/nuget/v/ConfigCat.Client)](https://www.nuget.org/packages/ConfigCat.Client/)
 [![Sonar Coverage](https://img.shields.io/sonar/coverage/net-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=net-sdk)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
+</If>
+
+<If condition={props.platform === "generic-host"}>
+[![Star on GitHub](https://img.shields.io/github/stars/configcat/.net-sdk.svg?style=social)](https://github.com/configcat/.net-sdk/stargazers)
+[![Build status](https://github.com/configcat/.net-sdk/actions/workflows/dotnet-sdk-ci.yml/badge.svg?branch=master)](https://github.com/configcat/.net-sdk/actions/workflows/dotnet-sdk-ci.yml)
+[![NuGet Version](https://img.shields.io/nuget/v/ConfigCat.Extensions.Hosting)](https://www.nuget.org/packages/ConfigCat.Extensions.Hosting/)
+[![Sonar Coverage](https://img.shields.io/sonar/coverage/net-sdk?logo=SonarCloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=net-sdk)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=net-sdk&metric=alert_status)](https://sonarcloud.io/dashboard?id=net-sdk)
+</If>
 
 <If condition={!props.platform}>
 
@@ -63,7 +73,7 @@ export const getAdjustedToc = (platform) => {
   - [MAUI](https://dotnet.microsoft.com/en-us/apps/maui)
   - [Worker Services](https://learn.microsoft.com/en-us/dotnet/core/extensions/workers)
   - Any other application built on [.NET Generic Host](https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host) (`Microsoft.Extensions.Hosting`)
-  or [.NET's standard dependency injection](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection/overview) (`Microsoft.Extensions.DependencyInjection`).
+    or [.NET's standard dependency injection](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection/overview) (`Microsoft.Extensions.DependencyInjection`).
   :::
 
 </If>
@@ -1585,7 +1595,7 @@ Then configure the client to use the `MyCustomOverrideDataSource` implementation
 
 <If condition={props.platform === "generic-host"}>
 
-The SDK automatically configures the clients to integrate with `Microsoft.Extensions.Logging`, the [the built-in logging framework](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging)
+The SDK automatically configures the registered clients to integrate with `Microsoft.Extensions.Logging`, the [built-in logging framework](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging)
 of .NET Core/.NET 5+. Accordingly, you can set log levels using the standard configuration approach described [here](https://learn.microsoft.com/en-us/dotnet/core/extensions/logging/overview#configure-logging).
 E.g., via `appsettings.json`:
 
