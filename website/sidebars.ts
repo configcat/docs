@@ -260,7 +260,15 @@ const sdks: SidebarConfig = [
     className: 'icon sdk-icon',
     link: { type: 'doc', id: 'sdk-reference/overview' },
     items: [
-      { type: 'doc', id: 'sdk-reference/dotnet', label: '.NET' },
+      {
+        label: '.NET',
+        type: 'category',
+        link: { type: 'doc', id: 'sdk-reference/dotnet' },
+        collapsed: false,
+        items: [
+          { type: 'doc', id: 'sdk-reference/dotnet/generic-host', label: 'ASP.NET Core & DI‑Based Apps' },
+        ],
+      },
       { type: 'doc', id: 'sdk-reference/android', label: 'Android (Java)' },
       { type: 'doc', id: 'sdk-reference/cpp', label: 'C++' },
       { type: 'doc', id: 'sdk-reference/dart', label: 'Dart (Flutter)' },
