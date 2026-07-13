@@ -329,6 +329,9 @@ using ConfigCat.Extensions.Hosting;
   });
   ```
 
+  Named clients are registered as [keyed services](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection#keyed-services),
+  using the client name as the service key. See [this section](#5-obtain-the-configcat-client) on how to obtain such services.
+
   ### 4. Initialize the _ConfigCat_ client
 
   Although not necessarily needed, it is highly recommended to initialize the registered client(s) at application startup
@@ -379,15 +382,63 @@ using ConfigCat.Extensions.Hosting;
 
   ### 5. Obtain the _ConfigCat_ client
 
-  Resolve the singleton `IConfigCatClient` service from the DI container via constructor injection, method injection
-  (using the `FromServices` attribute), etc., or by `ServiceProvider.GetRequiredService<IConfigCatClient>()`. E.g.:
+  The singleton `IConfigCatClient` service can be resolved from the DI container
+  - using constructor injection, e.g.:
 
-  ```csharp
-  var client = app.Services.GetRequiredService<IConfigCatClient>();
-  ```
+    ```csharp
+    [ApiController, Route("[controller]")]
+    public class SampleController(
+        IConfigCatClient defaultClient,
+        [FromKeyedServices("secondary")] IConfigCatClient secondaryClient)
+        : ControllerBase
+    {
+      /* ... */
+    }
+    ```
 
-  Named clients can be resolved similarly, using the `FromKeyedServices` attribute or by
-  `ServiceProvider.GetRequiredKeyedService<IConfigCatClient>()`. Use the client name you specified as the service key.
+  - using method injection, e.g.:
+
+    ```csharp
+    [ApiController, Route("[controller]")]
+    public class SampleController : ControllerBase
+    {
+        [HttpGet]
+        public async Task<IActionResult> Get(
+            [FromServices] IConfigCatClient defaultClient,
+            [FromKeyedServices("secondary")] IConfigCatClient secondaryClient)
+        {
+          /* ... */
+        }
+    }
+    ```
+
+  - using property injection, e.g.:
+
+    ```razor
+    @using ConfigCat.Client
+
+    @inject IConfigCatClient DefaultClient
+
+    @* Razor syntax does not support keyed services at the moment.
+       See also: https://github.com/dotnet/razor/issues/9286 *@
+
+    @code {
+        // Alternatively, using the Inject attribute:
+
+        [Inject]
+        private IConfigCatClient DefaultClient { get; set; }
+
+        [Inject(Key = "secondary")]
+        private IConfigCatClient SecondaryClient { get; set; }
+    }
+    ```
+
+  - directly, e.g.:
+
+    ```csharp
+    var defaultClient = ServiceProvider.GetRequiredService<IConfigCatClient>();
+    var secondaryClient = ServiceProvider.GetRequiredKeyedService<IConfigCatClient>("secondary");
+    ```
 
   ### 6. Get your setting value
 
@@ -1831,5 +1882,12 @@ See the following guides on how to use ConfigCat's .NET SDK:
 
 ## Look under the hood
 
+<If condition={!props.platform}>
 - <a href="https://github.com/configcat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
 - <a href="https://www.nuget.org/packages/ConfigCat.Client" target="_blank">ConfigCat .NET SDK on nuget.org</a>
+</If>
+
+<If condition={props.platform === "generic-host"}>
+- <a href="https://github.com/configcat/.net-sdk" target="_blank">ConfigCat .NET SDK on GitHub</a>
+- <a href="https://www.nuget.org/packages/ConfigCat.Extensions.Hosting" target="_blank">ConfigCat .NET SDK on nuget.org</a>
+</If>
