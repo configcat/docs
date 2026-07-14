@@ -30,8 +30,9 @@ A _Feature Flag_ is a _Setting_ of type Bool.
 
 #### JSON validation for text settings
 
-You can enable JSON validation for text settings to ensure their values are always valid JSON. When this option is turned on, ConfigCat enforces JSON validity for the setting's value.  
-Your application will get a string value. You will need to parse it into JSON if necessary.
+For text settings, there is an additional option to require valid JSON values. When turned on, ConfigCat will only allow valid JSON values to be entered.
+
+However, please note that this means validation only. Your application will still get a string value, and you will need to parse it into JSON manually if necessary.
 
 ### Free-form values vs predefined variations
 
