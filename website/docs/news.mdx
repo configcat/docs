@@ -11,6 +11,52 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 {/* This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html */}
 
+## ConfigCat .NET SDK v10 is out, with a new integration package for modern .NET!
+
+#### Jul 17, 2026
+
+We're happy to announce that, after quite some time in the works, the new major version of the ConfigCat SDK for .NET
+has finally been released.
+
+<p>
+  <img src="/docs/assets/news/dotnet-sdk-v10-192dpi.png" alt="ConfigCat .NET SDK" width="400" height="300" decoding="async" loading="lazy" />
+</p>
+
+This version brings the SDK up to par with our most feature-complete SDKs, with some nice additions like support
+for **custom flag override data sources** (which can also come in handy for testing).
+
+We've also put considerable effort into making the SDK even lighter on resources: in a typical production setup
+(e.g., with info logging turned off), **feature flag evaluation is now allocation-free and can be 2.5-3x faster**
+depending on feature flag complexity.
+
+However, the most exciting addition is probably the **new integration package**, `ConfigCat.Extensions.Hosting`.
+It offers a more streamlined integration experience for ASP.NET Core applications and other modern .NET applications
+built on [.NET Generic Host](https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host)
+or [.NET's standard dependency injection](https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection/overview).
+
+The integration package builds on top of the core ConfigCat SDK package and brings the following improvements:
+- **Configuration via the standard Options API** (`Microsoft.Extensions.Options`).
+  Now you can specify the SDK Key or other SDK settings via environment variables or the `appsettings.json` file
+  without manual wiring.
+- **Automatic integration with the standard Logging infrastructure** (`Microsoft.Extensions.Logging`).
+  No need to include a logging adapter in your application anymore.
+- **Automatic registration in the standard Dependency Injection container** (`Microsoft.Extensions.DependencyInjection`).
+  No manual wiring is required for registering the ConfigCat client in DI anymore.
+  Even multiple client instances are supported out-of-the-box via [keyed services](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0#keyed-services).
+- **Automatic client initialization at startup** on application hosts that support [hosted services](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services).
+  The `UseInitMode` / `ConfigCat:Init:Mode` option lets you configure the initialization process, making it simple to
+  set up your application to use non-blocking synchronous feature flag evaluation.
+- **Additional minor convenience features** like `UseHttpClientFactory`, which save you from writing tricky boilerplate
+  code.
+
+For more details, see the [release notes](https://github.com/configcat/.net-sdk/releases/tag/v10.0.0) and
+[the SDK reference of the integration package](../sdk-reference/dotnet/generic-host).
+
+Finally, it's worth mentioning that to make these improvements possible, we had to drop support for some deprecated
+.NET runtimes, namely .NET Framework versions 4.6.1 and below. For these runtime versions, the SDK's v9.x line can still
+be used as long as [Config JSON schema V6](https://github.com/configcat/config-json/tree/main/V6) is supported.
+However, please note that v9.x will not be actively maintained.
+
 ## Feature Flags for Startups: Meet the ConfigCat Startup Program
 
 #### Jun 17, 2026
