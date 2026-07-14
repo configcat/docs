@@ -28,6 +28,11 @@ A _Feature Flag_ is a _Setting_ of type Bool.
 | Whole Number   | Integer      | Any whole number within the range of `Int32`.                                      |
 | Decimal Number | Double       | Any decimal number within the range of `double`.                                   |
 
+#### JSON validation for text settings
+
+You can enable JSON validation for text settings to ensure their values are always valid JSON. When this option is turned on, ConfigCat enforces JSON validity for the setting's value.  
+Your application will get a string value. You will need to parse it into JSON if necessary.
+
 ### Free-form values vs predefined variations
 
 ConfigCat supports two value-modes for feature flags:
@@ -43,11 +48,6 @@ ConfigCat supports two value-modes for feature flags:
 :::tip
 Learn more about [predefined variations](/advanced/predefined-variations), including when to use this value-mode, how to convert between the two value-modes, and best practices.
 :::
-
-### JSON validation for text settings
-
-You can enable JSON validation for text settings to ensure their values are always valid JSON. When this option is turned on, ConfigCat enforces JSON validity for the setting's value.  
-Your application will get a string value. You will need to parse it into JSON if necessary.
 
 ## Config
 
