@@ -44,6 +44,11 @@ ConfigCat supports two value-modes for feature flags:
 Learn more about [predefined variations](/advanced/predefined-variations), including when to use this value-mode, how to convert between the two value-modes, and best practices.
 :::
 
+### JSON validation for text settings
+
+You can enable JSON validation for text settings to ensure their values are always valid JSON. When this option is turned on, ConfigCat enforces JSON validity for the setting's value.  
+Your application will get a string value. You will need to parse it into JSON if necessary.
+
 ## Config
 
 A _Config_ is a collection of _Settings_. _Configs_ help you organize settings around topics, or around your software components. A _Config_ is like an online version of a traditional config file.
