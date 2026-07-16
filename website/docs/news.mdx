@@ -56,6 +56,20 @@ Finally, it's worth mentioning that to make these improvements possible, we had 
 .NET runtimes, namely .NET Framework versions 4.6.1 and below. For these runtime versions, the SDK's v9.x line can still
 be used for the time being. However, please note that v9.x will not be actively maintained.
 
+---
+
+## JSON validation for text settings
+
+#### Jul 15, 2026
+
+We implemented a new option for text settings that allows you to **require valid JSON values**.  
+
+This can be turned on for newly created text settings, and for existing ones as well, in the **Edit feature flag** dialog.
+
+When enabled, ConfigCat validates setting values before saving, ensuring that no invalid JSON is published.
+
+---
+
 ## Feature Flags for Startups: Meet the ConfigCat Startup Program
 
 #### Jun 17, 2026
