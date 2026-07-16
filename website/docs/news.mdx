@@ -19,7 +19,7 @@ We're happy to announce that, after quite some time in the works, the new major 
 has finally been released.
 
 <p>
-  <img src="/docs/assets/news/dotnet-sdk-v10-192dpi.png" alt="ConfigCat .NET SDK" width="400" height="300" decoding="async" loading="lazy" />
+  <img src="/docs/assets/news/dotnet-sdk-v10-192dpi.png" alt="ConfigCat .NET SDK v10" width="400" height="300" decoding="async" loading="lazy" />
 </p>
 
 This version brings the SDK up to par with our most feature-complete SDKs, with some nice additions like support
@@ -42,7 +42,7 @@ The integration package builds on top of the core ConfigCat SDK package and brin
   No need to include a logging adapter in your application anymore.
 - **Automatic registration in the standard Dependency Injection container** (`Microsoft.Extensions.DependencyInjection`).
   No manual wiring is required for registering the ConfigCat client in DI anymore.
-  Even multiple client instances are supported out-of-the-box via [keyed services](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0#keyed-services).
+  Even multiple client instances are supported out-of-the-box via [keyed services](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection#keyed-services).
 - **Automatic client initialization at startup** on application hosts that support [hosted services](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services).
   The `UseInitMode` / `ConfigCat:Init:Mode` option lets you configure the initialization process, making it simple to
   set up your application to use non-blocking synchronous feature flag evaluation.
