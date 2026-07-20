@@ -542,14 +542,16 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
   
   ```yaml title="options.yml"
   profile:
-    webhook_signing_key: <signing-key>
+    key: "<key>"
+    secret: "<secret>"
   ```
   
   </TabItem>
   <TabItem value="env-vars" label="Environment variables">
   
   ```shell
-  CONFIGCAT_PROFILE_WEBHOOK_SIGNING_KEY="<signing-key>"
+  CONFIGCAT_PROFILE_KEY="<key>"
+  CONFIGCAT_PROFILE_SECRET="<secret>"
   ```
   
   </TabItem>
