@@ -265,7 +265,7 @@ using ConfigCat.Extensions.Hosting;
   {
       configCatBuilder.AddDefaultClient(options =>
       {
-        options.SdkKey = "#YOUR-SDK-KEY#";
+          options.SdkKey = "#YOUR-SDK-KEY#";
       });
   });
   ```
@@ -301,10 +301,10 @@ using ConfigCat.Extensions.Hosting;
   ```csharp
   services.AddConfigCat(configCatBuilder =>
   {
-    configCatBuilder.AddDefaultClient(options =>
-    {
-        options.SdkKey = "#YOUR-SDK-KEY#";
-    });
+      configCatBuilder.AddDefaultClient(options =>
+      {
+          options.SdkKey = "#YOUR-SDK-KEY#";
+      });
   });
   ```
 
