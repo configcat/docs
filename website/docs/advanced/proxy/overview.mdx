@@ -90,7 +90,7 @@ services:
 
 To start docker services, execute the following command:
 ```shell
-docker-compose up -f docker-compose.yml -d
+docker-compose -f docker-compose.yml up -d
 ```
 
 </TabItem>
@@ -501,11 +501,6 @@ There are two ways to let the Proxy know which SDK Keys it should use:
 </Title>
 
 :::info
-**Beta Feature**: Automatic configuration with Proxy profiles is in public beta. 
-We're now collecting feedback from real-world usage to fine-tune the experience. Share your feedback <a target="_blank" href="https://configcat.com/support">here</a>.
-:::
-
-:::info
 The automatic configuration with Proxy profiles feature is only available from Proxy version <a target="_blank" href="https://github.com/configcat/configcat-proxy/releases/tag/v2.0.0"><code>v2.0.0</code></a>.
 :::
 
@@ -542,14 +537,16 @@ To connect a Proxy instance to a Proxy profile, follow these steps:
   
   ```yaml title="options.yml"
   profile:
-    webhook_signing_key: <signing-key>
+    key: "<key>"
+    secret: "<secret>"
   ```
   
   </TabItem>
   <TabItem value="env-vars" label="Environment variables">
   
   ```shell
-  CONFIGCAT_PROFILE_WEBHOOK_SIGNING_KEY="<signing-key>"
+  CONFIGCAT_PROFILE_KEY="<key>"
+  CONFIGCAT_PROFILE_SECRET="<secret>"
   ```
   
   </TabItem>

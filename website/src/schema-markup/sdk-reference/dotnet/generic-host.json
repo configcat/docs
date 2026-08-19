@@ -1,0 +1,74 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "HowTo",
+  "name": "How to use feature flags in ASP.NET Core and other DI-based .NET applications?",
+  "description": "How to use feature flags ASP.NET Core and other DI-based .NET applications using ConfigCat Feature Flags. https://configcat.com",
+  "image": "https://configcat.com/images/shared/home.png",
+  "totalTime": "PT10M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "tool": {
+    "@type": "HowToTool",
+    "name": "ConfigCat Feature Flags - https://configcat.com"
+  },
+  "supply": {
+    "@type": "HowToSupply",
+    "name": "ConfigCat",
+    "image": "https://configcat.com/images/shared/home.png",
+    "url": "https://configcat.com"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "text": "Sign up for a free ConfigCat account",
+      "name": "Registration",
+      "url": "https://app.configcat.com/auth/signup",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Install ConfigCat SDK NuGet package",
+      "name": "Installation",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/generic-host/#1-install-configcat-sdk-nuget-package",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Import package",
+      "name": "Import",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/generic-host/#2-import-package",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Register the *ConfigCat* client with your *SDK Key*",
+      "name": "ServiceRegistrationIntoDI",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/generic-host/#3-register-the-configcat-client-with-your-sdk-key",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Initialize the *ConfigCat* client",
+      "name": "Initialization",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/generic-host/#4-initialize-the-configcat-client",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Obtain the *ConfigCat* client",
+      "name": "ServiceResolutionFromDI",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/generic-host/#5-obtain-the-configcat-client",
+      "image": "https://configcat.com/images/shared/home.png"
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Get your setting value",
+      "name": "Evaluation",
+      "url": "https://configcat.com/docs/sdk-reference/dotnet/generic-host/#6-get-your-setting-value",
+      "image": "https://configcat.com/images/shared/home.png"
+    }
+  ]
+}
