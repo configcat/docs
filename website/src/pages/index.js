@@ -17,6 +17,7 @@ const features = [
       { url: 'organization', title: 'Organization & Roles' },
       { url: 'targeting/targeting-overview', title: 'Targeting' },
       { url: 'advanced/predefined-variations', title: 'Predefined Variations vs Free‑Form Values' },
+      { url: 'change-requests', title: 'Approval Flow & Scheduled Changes (Beta)' },
     ],
   },
   {
