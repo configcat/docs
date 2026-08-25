@@ -38,9 +38,9 @@ Only members who have **Read/Write** permission for feature management in the ta
 
 ### How to require approval for environments?
 
-The **Approval Flow** product preferences control which environments require approval.
+The **Approval Flow** [product preferences](https://app.configcat.com/product/preferences) control which environments require approval.
 
-You can enable it for the entire product or for specific environments. You can manage it on the [Product Preferences](https://app.configcat.com/product/preferences) page.
+You can enable it for the entire product or for specific environments.
 
 When an environment is approval-required, feature flag changes must first be proposed as a change request and then go through the approval flow. This process can be skipped only by members with **Can bypass approval** permission, described below.
 
@@ -183,6 +183,6 @@ The approval flow currently applies to feature flag changes only. The following 
 
 ## Restrictions
 
-- Feature flags cannot be deleted if they are referenced by a change request (even if referenced indirectly, as prerequisites).
-- Predefined variations cannot be removed if the feature flag is referenced by a change request. 
-- Segments cannot be removed if they are used in a feature flag referenced by a change request.
+- Feature flags cannot be deleted if they are referenced by an open change request (even if referenced indirectly, as prerequisites).
+- Predefined variations cannot be removed if the feature flag is referenced by an open change request. 
+- Segments cannot be removed if they are used in a feature flag referenced by an open change request.
