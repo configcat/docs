@@ -11,6 +11,34 @@ Here, you'll find all the latest updates, enhancements, and new features we've a
 
 {/* This page must be in sync with the news page on the Dashboard: https://github.com/configcat/app/blob/master/src/app/home-module/news/news.component.html */}
 
+## Introducing: Approval Flow & Scheduled Changes
+
+#### Aug 27, 2026
+
+We're excited to roll out our latest features: now you can require feature flag changes to go through peer review before publishing, schedule them to be applied automatically at a specific time, or even both.
+
+This is made possible by _change requests_, which let you prepare feature flag changes without publishing them right away.
+
+<p>
+  <img src="/docs/assets/change-request/cr_192dpi.png" alt="Change Request detail with approval and schedule" width="640" height="480" decoding="async" loading="lazy" />
+</p>
+
+How to give it a spin:
+
+- Enable approval requirement on the [Product Preferences](https://app.configcat.com/product/preferences) page.
+- Configure who can approve change requests on the [Permission Groups](https://app.configcat.com/product/permission-groups) page.
+- Review and manage change requests on the [Change Requests](https://app.configcat.com/product/change-requests) page.
+
+<p>
+  <img src="/docs/assets/change-request/cr_list_192dpi.png" alt="Change Requests list" width="640" height="480" decoding="async" loading="lazy" />
+</p>
+
+Change requests are available for [V2 configs](../advanced/config-v2). They are not supported for V1 configs.
+
+Read more in the [Approval Flow & Scheduled Changes documentation](./change-requests.mdx).
+
+---
+
 ## ConfigCat .NET SDK v10 is out, with a new integration package for modern .NET!
 
 #### Jul 17, 2026
