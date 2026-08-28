@@ -80,6 +80,23 @@ The **Can bypass approval** permission is intended for emergency situations. By 
 For scheduled change requests, a member with **Can bypass approval** permission can choose to apply the change request on schedule without prior approval. However, they must opt in to this behavior per change request.
 :::
 
+
+## Scheduled changes
+
+A change request can be scheduled to apply the proposed changes automatically at a selected date and time. You can create a scheduled change request by clicking the down arrow next to the **Save & publish changes** or **Propose changes** button and selecting **Schedule changes**.
+
+<img src="/docs/assets/change-request/schedule-changes-button_192dpi.png" alt="Schedule changes button location" width="1366" height="768" decoding="async" loading="lazy"/>
+
+In the **Schedule change request** dialog, you can set when the proposed changes should be applied. A non-scheduled change request can also be converted into a scheduled one later, and a scheduled request can be unscheduled at any time, reverting it to a normal, non-scheduled change request.
+
+<img src="/docs/assets/change-request/schedule-change-request_192dpi.png" alt="Schedule changes button location" width="1366" height="768" decoding="async" loading="lazy"/>
+
+In approval-required environments, a scheduled change request is only applied if it is approved before the scheduled time. If approval is pending, or the change request is otherwise blocked, ConfigCat will not apply it at the planned time.
+
+### Failed to apply on schedule
+
+If a scheduled change request cannot be applied at the planned time (for example, because it was never approved), scheduling is disabled and the change request is reverted to a regular open change request. You can then resolve the issue and apply it manually or schedule it again.
+
 ## Lifecycle of a change request
 
 ### Ownership and editing
@@ -126,10 +143,6 @@ Possible causes:
 - **Owner is unavailable**: The change request owner left the organization or lost **Read/Write** permission in the target environment. Another eligible member must claim the change request.
 - **Missing mandatory notes**: Notes became mandatory in the target environment after the change request was created, but no notes were provided.
 - **Circular dependency**: Changes to the included feature flags were published concurrently after the change request was opened, and applying the change request now would create a circular dependency through [prerequisite flags](../targeting/targeting-rule/flag-condition/).
-
-#### Failed to apply on schedule
-
-If a scheduled change request cannot be applied at the planned time (for example, because it was never approved), scheduling is disabled and the change request becomes a regular open change request. You can then resolve the issue and apply it manually or schedule it again.
 
 ## Conflict handling
 
