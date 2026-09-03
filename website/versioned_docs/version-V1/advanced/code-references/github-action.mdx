@@ -32,15 +32,16 @@ You can find more information about GitHub Actions <a target="_blank" href="http
              api-user: ${{ secrets.CONFIGCAT_API_USER }}
              api-pass: ${{ secrets.CONFIGCAT_API_PASS }}
              config-id: PASTE-YOUR-CONFIG-ID-HERE
-             # line-count: 5             # optional
-             # timeout: 1800             # optional
-             # sub-folder: src           # optional
-             # exclude-keys: >           # optional
+             # repository: owner/repository     # optional, defaults to the current GitHub repository
+             # line-count: 5                    # optional
+             # timeout: 1800                    # optional
+             # sub-folder: src                  # optional
+             # exclude-keys: >                  # optional
              #   flag_key_to_exclude_1
              #   flag_key_to_exclude_2
-             # alias-patterns: (\w+) = :CC_KEY,const (\w+) = feature_flags\.enabled\(:CC_KEY\) #optional
+             # alias-patterns: (\w+) = :CC_KEY,const (\w+) = feature_flags\.enabled\(:CC_KEY\)   #optional
              # usage-patterns: feature_flags\.enabled\(:CC_KEY\)   # optional, comma delimited flag key usage patterns
-             # verbose: true             # optional
+             # verbose: true                    # optional
    ```
 
 4. Commit & push your action.
@@ -56,6 +57,7 @@ Scan reports are uploaded for each branch of your repository that triggers the w
 | `api-user`     | <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication username</a>. | &#9745;  |                     |
 | `api-pass`     | <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">ConfigCat Management API basic authentication password</a>. | &#9745;  |                     |
 | `api-host`     | ConfigCat Management API host.                                                                                                                    |          | `api.configcat.com` |
+| `repository`   | Name of the repository.                                                                                                                           |          | Current GitHub repository (owner/repository) |
 | `line-count`   | Context line count before and after the reference line. (min: 1, max: 10)                                                                         |          | 4                   |
 | `timeout`      | Scan timeout in seconds (default: 1800, min: 60). If the scan does not finish within this time, it is aborted. No partial results are returned. The command exits with a timeout error. |          | 1800                |
 | `sub-folder`   | Sub-folder to scan, relative to the repository root folder.                                                                                       |          |                     |
