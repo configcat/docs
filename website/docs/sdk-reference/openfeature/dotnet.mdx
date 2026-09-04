@@ -7,7 +7,7 @@ description: ConfigCat OpenFeature Provider for .NET. This is a step-by-step gui
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<a href="https://github.com/open-feature/dotnet-sdk-contrib/tree/OpenFeature.Contrib.Providers.ConfigCat-v0.1.1/src/OpenFeature.Contrib.Providers.ConfigCat" target="_blank">ConfigCat OpenFeature Provider for .NET on GitHub</a>
+<a href="https://github.com/open-feature/dotnet-sdk-contrib/tree/main/src/OpenFeature.Providers.ConfigCat" target="_blank">ConfigCat OpenFeature Provider for .NET on GitHub</a>
 
 ## Getting started
 
@@ -17,21 +17,21 @@ import TabItem from '@theme/TabItem';
 <TabItem value="Powershell / NuGet Package Manager Console" label="Powershell / NuGet Package Manager Console">
 
 ```powershell
-Install-Package OpenFeature.Contrib.Providers.ConfigCat
+Install-Package OpenFeature.Providers.ConfigCat
 ```
 
 </TabItem>
 <TabItem value=".NET CLI" label=".NET CLI">
 
 ```bash
-dotnet add package OpenFeature.Contrib.Providers.ConfigCat
+dotnet add package OpenFeature.Providers.ConfigCat
 ```
 
 </TabItem>
 <TabItem value="Package Reference" label="Package Reference">
 
 ```xml
-<PackageReference Include="OpenFeature.Contrib.Providers.ConfigCat" />
+<PackageReference Include="OpenFeature.Providers.ConfigCat" />
 ```
 
 </TabItem>
@@ -43,7 +43,7 @@ The `ConfigCatProvider` constructor takes the SDK key and an optional callback t
 ```cs
 using System;
 using ConfigCat.Client;
-using OpenFeature.Contrib.ConfigCat;
+using OpenFeature.Providers.ConfigCat;
 
 // Specify options for the ConfigCat SDK.
 Action<ConfigCat.Client.Configuration.ConfigCatClientOptions> configureOptions = (options) =>
@@ -91,18 +91,25 @@ The ConfigCat provider translates these evaluation contexts to ConfigCat [User O
 
 The following table shows how the different context attributes are mapped to User Object attributes.
 
-| Evaluation context | User Object  | Required |
-| ------------------ | ------------ | -------- |
-| `Id`/`Identifier`  | `Identifier` | &#9745;  | 
-| `Email`            | `Email`      |          | 
-| `Country`          | `Country`    |          | 
-| Any other          | `Custom`     |          | 
+| Evaluation context                   | User Object  | Required |
+| ------------------------------------ | ------------ | -------- |
+| `targetingKey` (`Id` / `Identifier`) | `Identifier` | &#9745;  |
+| `Email`                              | `Email`      |          |
+| `Country`                            | `Country`    |          |
+| Any other                            | `Custom`     |          |
+
+Remarks:
+- If `targetingKey` is present in the evaluation context, it will be mapped to the `Identifier` property. Otherwise, `Id` or `Identifier` will be mapped, whichever occurs first.
+  (If none of these keys are present, the `Identifier` property will be set to the fallback value `"<n/a>"`.)
+- The keys `Id`, `Identifier`, `Email` and `Country` are matched case-insensitively. If the same key appears in multiple cases - e.g. `email` and `Email` - the first occurrence will be mapped to the corresponding property.
+- All of the above will also be included in the `Custom` dictionary (except for the exact keys `Identifier`, `Email` and `Country`). This allows them to be referenced using their original names in feature flag rules.
+- Other keys are mapped as custom user attributes with their values unchanged. (Although the ConfigCat SDK handles value conversion internally, it's recommended to use the type expected by the referencing feature flag rules. Read more [here](../../dotnet/#user-object-attribute-types).)
 
 To evaluate feature flags for a context, use the <a href="https://openfeature.dev/docs/reference/concepts/evaluation-api/" target="_blank">OpenFeature Evaluation API</a>:
 
 ```cs
 var context = OpenFeature.Model.EvaluationContext.Builder()
-    .Set("Id", "#SOME-USER-ID#")
+    .SetTargetingKey("#SOME-USER-ID#")
     .Set("Email", "configcat@example.com")
     .Set("Country", "CountryID")
     .Set("Rating", 4.5)
@@ -114,5 +121,5 @@ var isAwesomeFeatureEnabled = await client.GetBooleanValueAsync("isAwesomeFeatur
 
 ## Look under the hood
 
-- <a href="https://github.com/open-feature/dotnet-sdk-contrib/tree/OpenFeature.Contrib.Providers.ConfigCat-v0.1.1/src/OpenFeature.Contrib.Providers.ConfigCat" target="_blank">ConfigCat OpenFeature Provider's repository on GitHub</a>
-- <a href="https://www.nuget.org/packages/OpenFeature.Contrib.Providers.ConfigCat" target="_blank">ConfigCat OpenFeature Provider on nuget.org</a>
+- <a href="https://github.com/open-feature/dotnet-sdk-contrib/tree/main/src/OpenFeature.Providers.ConfigCat" target="_blank">ConfigCat OpenFeature Provider's repository on GitHub</a>
+- <a href="https://www.nuget.org/packages/OpenFeature.Providers.ConfigCat" target="_blank">ConfigCat OpenFeature Provider on nuget.org</a>

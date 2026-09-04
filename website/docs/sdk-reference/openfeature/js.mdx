@@ -68,12 +68,19 @@ The ConfigCat provider translates these evaluation contexts to ConfigCat [User O
 
 The following table shows how the different context attributes are mapped to User Object attributes.
 
-| Evaluation context | User Object  | Required |
-| ------------------ | ------------ | -------- |
-| `targetingKey`     | `identifier` | &#9745;  | 
-| `email`            | `email`      |          | 
-| `country`          | `country`    |          | 
-| Any other          | `custom`     |          | 
+| Evaluation context            | User Object  | Required |
+| ----------------------------- | ------------ | -------- |
+| `targetingKey` (`identifier`) | `identifier` | &#9745;  |
+| `email`                       | `email`      |          |
+| `country`                     | `country`    |          |
+| Any other                     | `custom`     |          |
+
+Remarks:
+- If `targetingKey` is present in the evaluation context, it will be mapped to the `Identifier` property. Otherwise, `identifier` will be mapped.
+  (If none of these keys are present, the ConfigCat SDK will fall back to using an empty string for the identifier.)
+- Predefined keys (i.e., `targetingKey`, `identifier`, `email` and `country`) are matched case-sensitively. (Despite this, never use the keys `Identifier`, `Email` or `Country`, as those are ignored for technical reasons.)
+- Predefined keys will also be included in the `custom` object. This allows them to be referenced using their original names in feature flag rules.
+- Other keys are mapped as custom user attributes with their values unchanged, except for objects and non-string arrays, which are converted to JSON for historical reasons. (Although the ConfigCat SDK handles value conversion internally, it's recommended to use the type expected by the referencing feature flag rules. Read more [here](../../js/overview#user-object-attribute-types).)
 
 To evaluate feature flags for a context, use the <a href="https://openfeature.dev/docs/reference/concepts/evaluation-api/" target="_blank">OpenFeature Evaluation API</a>:
 
