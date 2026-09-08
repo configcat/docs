@@ -1520,6 +1520,40 @@ evtSource.onmessage = (event) => {
 
 </details>
 
+<details>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/notify/k/&#123;data&#125;</span></summary> 
+
+This endpoint subscribes to all feature flags' changes behind the given SDK key. When it receives a change, the Proxy sends a notification signal to each connected client.
+This endpoint doesn't evaluate feature flags.
+
+**Route parameters**:
+- `data`: The `base64` encoded input data that contains the SDK key.
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The SSE connection established successfully.</li>
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>sdkKey</code> field of <code>data</code> is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkKey</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+**Example**:
+```js title="example.js"
+const rawData = {
+  // highlight-next-line
+  sdkKey: "#YOUR-SDK-KEY#"
+};
+
+const data = btoa(JSON.stringify(rawData));
+// highlight-next-line
+const evtSource = new EventSource("http://localhost:8050/sse/notify/k/" + data);
+evtSource.onmessage = () => {
+  console.log("notification received");
+};
+```
+
+</details>
+
 ### Endpoints using SDK identifier
 
 The following endpoints are using an SDK identifier to determine which config / environment is the target of the desired action. 
@@ -1621,6 +1655,34 @@ const data = btoa(JSON.stringify(rawData));
 const evtSource = new EventSource("http://localhost:8050/sse/#SDK-IDENTIFIER#/eval-all/" + data);
 evtSource.onmessage = (event) => {
   console.log(event.data); // {"feature-flag-key":{"value":<evaluated-value>,"variationId":"<variation-id>"}}
+};
+```
+
+</details>
+
+<details>
+  <summary><span className="endpoint"><span className="http-method green">GET</span><span className="http-method gray">OPTIONS</span>/sse/&#123;sdkId&#125;/notify</span></summary> 
+
+This endpoint subscribes to all feature flags' changes behind the given [SDK identifier](overview.mdx#sdk-identifier--sdk-key). When it receives a change, the Proxy sends a notification signal to each connected client.
+This endpoint doesn't evaluate feature flags.
+
+**Route parameters**:
+- `sdkId`: The [SDK identifier](overview.mdx#sdk-identifier--sdk-key) that uniquely identifies an SDK within the Proxy.
+
+**Responses**:
+<ul className="responses">
+<li className="success"><span className="status">200</span>: The SSE connection established successfully.</li>
+<li className="success"><span className="status">204</span>: In response to an <code>OPTIONS</code> request.</li>
+<li className="error"><span className="status">400</span>: The <code>sdkId</code> is missing.</li>
+<li className="error"><span className="status">404</span>: The <code>sdkId</code> is pointing to a non-existent SDK.</li>
+</ul>
+
+**Example**:
+```js title="example.js"
+// highlight-next-line
+const evtSource = new EventSource("http://localhost:8050/sse/#SDK-IDENTIFIER#/notify");
+evtSource.onmessage = () => {
+  console.log("notification received");
 };
 ```
 
