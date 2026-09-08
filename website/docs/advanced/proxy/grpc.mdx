@@ -29,6 +29,8 @@ service FlagService {
   rpc EvalFlagStream(EvalRequest) returns (stream EvalResponse) {}
   // Stream for getting notified when any feature flag's value changes.
   rpc EvalAllFlagsStream(EvalRequest) returns (stream EvalAllResponse) {}
+  // Signal for getting notified upon feature flag data changes.
+  rpc NotifyStream(Target) returns (stream google.protobuf.Empty) {}
 
   // Evaluates a feature flag.
   rpc EvalFlag(EvalRequest) returns (EvalResponse) {}
