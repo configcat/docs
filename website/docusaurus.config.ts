@@ -32,7 +32,14 @@ const config: Config = {
         containerId: 'GTM-5LP6XWS5',
       },
     ],
-    'docusaurus-plugin-sass',
+    [
+      'docusaurus-plugin-sass',
+      {
+        sassOptions: {
+          charset: false, // Prevents Sass from prepending 0xFEFF to modules
+        },
+      },
+    ],
     [
       '@docusaurus/plugin-client-redirects',
       {
@@ -157,7 +164,7 @@ const config: Config = {
             '/docs/search/',
             '/docs/sdk-reference/js/',
             '/docs/sdk-reference/js-ssr/',
-            '/docs/sdk-reference/node/'
+            '/docs/sdk-reference/node/',
           ],
         },
         llmsTxt: {
@@ -169,7 +176,7 @@ const config: Config = {
             '/docs/search/',
             '/docs/sdk-reference/js/',
             '/docs/sdk-reference/js-ssr/',
-            '/docs/sdk-reference/node/'
+            '/docs/sdk-reference/node/',
           ],
           siteTitle: 'ConfigCat Docs',
           siteDescription: 'Learn more on how to use ConfigCat Feature Flags.',
@@ -279,7 +286,7 @@ const config: Config = {
           ],
         },
       } satisfies PluginOptions,
-    ]
+    ],
   ],
   themeConfig: {
     image: '/img/docs-cover.png',
