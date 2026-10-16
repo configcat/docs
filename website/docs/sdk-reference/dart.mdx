@@ -469,7 +469,7 @@ The _ConfigCat_ client doesn't directly provide synchronous methods for evaluati
 such synchronous methods could block the executing thread for longer periods of time (e.g. when downloading config data
 from the ConfigCat CDN servers), which could lead to an unresponsive application.
 
-However, there can be circumstances where synchronous evaluation is preferable, thus, since `v5.2.0`, the Dart SDK provides a way
+However, there can be circumstances where synchronous evaluation is preferable, thus, since `v5.0.0`, the Dart SDK provides a way
 to synchronously evaluate feature flags and settings as a non-blocking operation, via _snapshots_.
 
 Using the `snapshot()` method, you can capture the current state of the _ConfigCat_ client (including the latest downloaded config data)
