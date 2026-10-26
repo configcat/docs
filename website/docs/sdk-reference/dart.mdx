@@ -450,9 +450,7 @@ final client = ConfigCatClient.get(
     sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(
         pollingMode: PollingMode.manualPoll(),
-        hooks: Hooks(
-            onFlagEvaluated: (details) => /* handle the event */
-        )
+        hooks: (h) => h.addOnFlagEvaluated((details) => /* handle the event */),
     )
 );
 ```
