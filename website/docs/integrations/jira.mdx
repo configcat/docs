@@ -1,16 +1,16 @@
 ---
 id: jira
-title: Jira Cloud Plugin - Manage feature flags from Jira
-description: ConfigCat Jira Cloud Plugin. This is a step-by-step guide on how to connect and manage feature flags from Jira Cloud boards.
+title: Jira Cloud App - Manage feature flags from Jira
+description: ConfigCat Jira Cloud App. This is a step-by-step guide on how to connect and manage feature flags from Jira Cloud boards.
 ---
 
-import { Steps, Step, Title } from '@site/src/components/Steps';
+import { Steps, Step} from '@site/src/components/Steps';
 
-The <a href="https://marketplace.atlassian.com/1222421" target="_blank">ConfigCat Feature Flags Jira Cloud Plugin</a> allows you to connect your Jira Issues and feature flags. Create or link existing flags to your Jira issues without leaving your Jira instance.
+The <a href="https://marketplace.atlassian.com/1222421" target="_blank">ConfigCat Feature Flags Jira Cloud App</a> allows you to connect your Jira Issues and feature flags. Create or link existing flags to your Jira issues without leaving your Jira instance.
 
 Turn features On/Off right from a linked Issue on your Jira board. You can also easily modify the linked flags to edit or add new Targeting or Percentage Rules.
 
-This guide will help you with the plugin installation and familiarise you with the plugin usage.
+This guide will help you with the app installation and familiarise you with the app usage.
 
 :::info
 This integration is for Jira Cloud. It does not work on Jira Data Center or Jira Server instances.
@@ -29,186 +29,224 @@ The new version of the app will be available before the Connect Framework's EOS.
 ### Migration steps
 To complete the migration, you may have to do the following steps.
 <Steps>
-<Step>
-Update the app to the latest version in Jira.
-</Step>
-<Step>
-Re-authorize in ConfigCat if required.
-</Step>
+    <Step>
+        Update the app to the latest version in Jira.
+    </Step>
+    <Step>
+        Re-authorize in ConfigCat if required.
+    </Step>
 </Steps>
 
 ### Update the app in Jira
 If the app is not updated automatically.
 <Steps>
-<Step>
-Navigate to your Jira instance's app management page.
-</Step>
-<Step>
-Search for "ConfigCat Feature Flags".
-</Step>
-<Step>
-Update the app to the latest version by hand.
-</Step>
+    <Step>
+        Navigate to your Jira instance's app management page.
+    </Step>
+    <Step>
+        Search for "ConfigCat Feature Flags".
+    </Step>
+    <Step>
+        Update the app to the latest version by hand.
+    </Step>
 </Steps>
 
 ## Installation
 
 <Steps>
-<Step>
-Add <a href="https://marketplace.atlassian.com/1222421" target="_blank">ConfigCat Feature Flags</a> to your Jira Cloud instance.
-</Step>
-<Step>
-Select **Configure**.
-</Step>
-<Step>
-Copy your ConfigCat Public API credentials to the inputs. Read more about <a href="https://app.configcat.com/my-account/public-api-credentials" target="_blank">ConfigCat Public API credentials here</a>.
-</Step>
-<Step>
-Click **Authorize**.
+    <Step>
+        Add <a href="https://marketplace.atlassian.com/1222421" target="_blank">ConfigCat Feature Flags</a> to your Jira Cloud instance.
+    </Step>
+</Steps>
+
+## Configuration
+### Authorization
+<Steps>
+    <Step>
+        Navigate to any Issue on your Jira board.
+    </Step>
+    <Step>
+        Open the **ConfigCat Feature Flags** Issue Panel or the **ConfigCat Feature Flags** Issue Context section.
+    </Step>
+    <Step>
+        Click **Authorize**.
+    </Step>
+    <Step>
+        Follow the Atlassian authorization steps to authorize ConfigCat in Jira. Click **Configure access**.
+    </Step>
+    <Step>
+        In the opened window, inspect the required access by ConfigCat and click **Continue**.
+    </Step>
+    <Step>
+        In the ConfigCat authorization window, click the **Allow Access** button to complete the authorization.
+    </Step>
+    <Step>
+        After successful authorization, you will be redirected back to the Issue.
+    </Step>
+</Steps>
 
 :::info
-Every Jira user must authorize ConfigCat in Jira who wants to use the ConfigCat Feature Flags Plugin.
+Every Jira user must authorize ConfigCat in Jira who wants to use the ConfigCat Feature Flags App.
 :::
 
-<video className="video" controls muted>
-  <source src="/docs/assets/jira/auth.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-</Step>
+### Revoke Authorization
+<Steps>
+    <Step>
+        Navigate to **Account Settings** in Jira.
+    </Step>
+    <Step>
+        Select the **Connected Apps** tab.
+    </Step>
+    <Step>
+        In the **Atlassian third party account access** section, click **Revoke** next to ConfigCat.
+    </Step>
 </Steps>
+
+### Enable ConfigCat Feature Flags Issue Panel
+<Steps>
+    <Step>
+        Navigate to any Issue on your Jira board.
+    </Step>
+    <Step>
+        If the **ConfigCat Feature Flags** Issue Panel is not visible, click the **View app actions** button under the Issue summary, and select **ConfigCat Feature Flags** in the dropdown.
+    </Step>
+    <Step>
+        Admins can enable the **ConfigCat Feature Flags** Issue Panel for all users in the project. To do this, select the **Show for all work items** option in the panel **Actions** menu.
+    </Step>
+</Steps>
+
+<video className="video" controls muted>
+    <source src="/docs/assets/jira/authorize-configcat.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
 
 ## Usage
 
 ### Linking existing feature flags
 
 <Steps>
-<Step>
-Navigate to any Issue on your Jira board.
-</Step>
-<Step>
-Open the **ConfigCat Feature Flag** issue context.
-</Step>
-<Step>
-On the **Link existing** tab, select a ConfigCat Product, Config, Environment, and Feature Flag to be linked to your Issue.
-</Step>
-<Step>
-When linked, you can manage the selected feature flag from this Issue.
+    <Step>
+        Navigate to any Issue on your Jira board.
+    </Step>
+    <Step>
+        Open the **ConfigCat Feature Flags** issue context.
+    </Step>
+    <Step>
+        On the **Link existing** tab, select a ConfigCat Product, Config, Environment, and Feature Flag to be linked to your Issue.
+    </Step>
+    <Step>
+        When linked, you can manage the selected feature flag from this Issue.
 
-<video className="video" controls muted>
-  <source src="/docs/assets/jira/link-existing.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+        <video className="video" controls muted>
+          <source src="/docs/assets/jira/link-existing.mp4" type="video/mp4"/>
+          Your browser does not support the video tag.
+        </video>
 
-</Step>
+    </Step>
 </Steps>
 
 ### Creating new feature flags
 
 <Steps>
-<Step>
-Navigate to any Issue on your Jira board.
-</Step>
-<Step>
-Open the **ConfigCat Feature Flag** issue context.
-</Step>
-<Step>
-On the **Create and Link** tab, select a ConfigCat Product and Config where you want to create the feature flag.
-</Step>
-<Step>
-Set up your feature flag.
-</Step>
-<Step>
-Select which environment you would like to link to this item.
-</Step>
-<Step>
-When linked, you can manage the selected feature flag from this Issue.
+    <Step>
+        Navigate to any Issue on your Jira board.
+    </Step>
+    <Step>
+        Open the **ConfigCat Feature Flags** issue context.
+    </Step>
+    <Step>
+        On the **Create and Link** tab, select a ConfigCat Product and Config where you want to create the feature flag.
+    </Step>
+    <Step>
+        Set up your feature flag.
+    </Step>
+    <Step>
+        Select which environment you would like to link to this item.
+    </Step>
+    <Step>
+        When linked, you can manage the selected feature flag from this Issue.
 
-<video className="video" controls muted>
-  <source src="/docs/assets/jira/create-link.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-</Step>
+        <video className="video" controls muted>
+          <source src="/docs/assets/jira/create-and-link.mp4" type="video/mp4"/>
+          Your browser does not support the video tag.
+        </video>
+    </Step>
 </Steps>
 
 ### View and Edit linked feature flags
 
 <Steps>
-<Step>
-Open an Issue on your Jira board with a linked feature flag.
-</Step>
-<Step>
-See the linked feature flags in the **Feature Flag (ConfigCat)** issue section.
-</Step>
-<Step>
-You can manage the selected feature flag from this Issue.
-</Step>
-<Step>
-You can add new Targeting Rules or Percentage Options to Feature Flags.
-</Step>
-<Step>
-You can add new Targeting Rules with User, Segment or Prerequisite Conditions with a large selection of Comparators.  [Read more about Targeting.](../targeting/targeting-overview.mdx)
-</Step>
-<Step>
-You can remove Targeting Rules as well.
+    <Step>
+        Open an Issue on your Jira board with a linked feature flag.
+    </Step>
+    <Step>
+        See the linked feature flags in the **ConfigCat Feature Flags** issue section.
+    </Step>
+    <Step>
+        You can manage the selected feature flag from this Issue.
+    </Step>
+    <Step>
+        You can add new Targeting Rules or Percentage Options to Feature Flags.
+    </Step>
+    <Step>
+        You can add new Targeting Rules with User, Segment or Prerequisite Conditions with a large selection of Comparators.  [Read more about Targeting.](../targeting/targeting-overview.mdx)
+    </Step>
+    <Step>
+        You can remove Targeting Rules as well.
 
-<video className="video" controls muted>
-  <source src="/docs/assets/jira/edit-ff.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-</Step>
+        <video className="video" controls muted>
+          <source src="/docs/assets/jira/edit-ff.mp4" type="video/mp4"/>
+          Your browser does not support the video tag.
+        </video>
+    </Step>
 </Steps>
 
 ### Remove linked feature flags
 
 <Steps>
-<Step>
-Open an Issue on your Jira board with a linked feature flag.
-</Step>
-<Step>
-Remove the linked feature flag by opening the **More menu** and selecting the **Remove from Issue** option.
+    <Step>
+        Open an Issue on your Jira board with a linked feature flag.
+    </Step>
+    <Step>
+        Remove the linked feature flag by opening the **More menu** and selecting the **Remove from Issue** option.
 
-<video className="video" controls muted>
-  <source src="/docs/assets/jira/remove-ff.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-</Step>
+        <video className="video" controls muted>
+          <source src="/docs/assets/jira/remove-ff.mp4" type="video/mp4"/>
+          Your browser does not support the video tag.
+        </video>
+    </Step>
 </Steps>
 
 ### View flag status in Releases
 
 <Steps>
-<Step>
-Open an Issue on your Jira board with a linked feature flag.
-</Step>
-<Step>
-Check the **Releases** field values in the issue **Details** section to see the linked feature flags status in the Issue.
-</Step>
-<Step>
-Click it for a more detailed dialog.
+    <Step>
+        Open an Issue on your Jira board with a linked feature flag.
+    </Step>
+    <Step>
+        Check the **Releases** field values in the issue **Development** section to see the linked feature flags status in the Issue.
+    </Step>
+    <Step>
+        Click it for a more detailed dialog.
 
-<video className="video" controls muted>
-  <source src="/docs/assets/jira/release-field.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-</Step>
+        <video className="video" controls muted>
+          <source src="/docs/assets/jira/jira-development-view.mp4" type="video/mp4"/>
+          Your browser does not support the video tag.
+        </video>
+    </Step>
 </Steps>
 
 <Steps>
-<Step>
-Open a version in the Jira project's Release Hub page to see the related issues feature flag status.
-</Step>
-<Step>
-Click it for a more detailed dialog.
-
-<video className="video" controls muted>
-  <source src="/docs/assets/jira/release-hub.mp4" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-</Step>
+    <Step>
+        Open a version in the Jira project's Release Hub page to see the related issues feature flag status.
+    </Step>
+    <Step>
+        Click it for a more detailed dialog.
+    </Step>
 </Steps>
 
 :::info
-This plugin doesn't implement the **Releases - Create/Connect feature flag** action. Instead, you can create or link 
+This app doesn't implement the **Releases - Create/Connect feature flag** action. Instead, you can create or link
 feature flags from the ConfigCat Feature Flags section below the Details section of the Issue.
 :::
 
