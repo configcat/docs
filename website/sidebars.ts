@@ -427,7 +427,7 @@ const integrations: SidebarConfig = [
       {
         type: 'doc',
         id: 'integrations/jira',
-        label: 'Jira Cloud Plugin',
+        label: 'Jira Cloud App',
       },
       { type: 'doc', id: 'integrations/monday', label: 'monday.com' },
       {
