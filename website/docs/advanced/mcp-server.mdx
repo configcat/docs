@@ -141,7 +141,45 @@ Install [Claude Desktop](https://claude.ai/download).
 Open **Settings** → **Connectors** → **Add custom connector**.
 </Step>
 <Step>
-Enter `https://mcp.configcat.com/mcp` as the remote MCP server URL, then connect and sign in to ConfigCat.
+Enter `https://mcp.configcat.com/mcp` as the MCP server URL, then connect and sign in to ConfigCat.
+</Step>
+</Steps>
+</TabItem>
+
+<TabItem value="claudeai-remote" label="Claude (Web)">
+<Steps>
+<Step>
+Sign in to [Claude.ai](https://claude.ai/).
+</Step>
+<Step>
+Open **Settings** → **Connectors** → **Add custom connector**.
+</Step>
+<Step>
+Enter `ConfigCat` as the name and `https://mcp.configcat.com/mcp` as the MCP server URL, then click **Continue**.
+</Step>
+<Step>
+Click **Add**, then sign in to your ConfigCat account in the browser that opens.
+</Step>
+<Step>
+In a chat, open the **+** menu → **Connectors** and make sure ConfigCat is enabled.
+</Step>
+</Steps>
+</TabItem>
+
+<TabItem value="codex-remote" label="OpenAI Codex CLI">
+<Steps>
+<Step>
+Install the [Codex CLI](https://developers.openai.com/codex/cli).
+</Step>
+<Step>
+Add the remote ConfigCat MCP server from your terminal:
+
+```bash
+codex mcp add configcat --url https://mcp.configcat.com/mcp
+```
+</Step>
+<Step>
+Start Codex with `codex` and run `/mcp` to verify that the ConfigCat MCP server is connected.
 </Step>
 </Steps>
 </TabItem>
