@@ -105,11 +105,11 @@
 }
 
 .step .content > *:last-child {
-  margin: 0 0 var(--ifm-paragraph-margin-bottom) 0 !important;
+  margin: 0 0 var(--ifm-paragraph-margin-bottom) 0;
 }
 
 .step:last-of-type .content > *:last-child {
-  margin: unset !important;
+  margin: unset;
 }
 
 .title > h1,
