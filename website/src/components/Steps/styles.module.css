@@ -104,8 +104,12 @@
   width: calc(100% - 40px);
 }
 
+.step .content > *:last-child {
+  margin: 0 0 var(--ifm-paragraph-margin-bottom) 0 !important;
+}
+
 .step:last-of-type .content > *:last-child {
-  margin: unset;
+  margin: unset !important;
 }
 
 .title > h1,
