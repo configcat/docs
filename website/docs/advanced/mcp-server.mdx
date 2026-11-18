@@ -52,8 +52,8 @@ The remote MCP server uses Streamable HTTP and is hosted by ConfigCat, so you do
 It uses **OAuth authentication**. Sign in to your ConfigCat account in your browser when prompted by the AI client.
 The MCP server uses your ConfigCat user permissions. You can manage your MCP connections in the [ConfigCat Dashboard](https://app.configcat.com/my-account/oauth-integrations).
 
-OAuth access tokens for the MCP server are valid for 16 hours, and your AI client refreshes them automatically.
-If your ConfigCat account is deleted, your MCP connection is terminated. Any changes to your account permissions take effect immediately.
+OAuth access tokens are refreshed automatically by your AI client, so you only need to reauthorize after 14 days of inactivity.
+If your ConfigCat account is deleted, the MCP connection ends. Any changes to your account permissions take effect immediately.
 
 :::info
 To limit the MCP server's access, you can create a dedicated ConfigCat user with only the necessary permissions, such as read-only access,
