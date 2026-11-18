@@ -16,43 +16,7 @@ This guide will help you with the app installation and familiarise you with the 
 This integration is for Jira Cloud. It does not work on Jira Data Center or Jira Server instances.
 :::
 
-## Migration to Jira Forge
-Atlassian ends support for the Jira Connect Frameworks on January 31, 2027 and advises vendors to migrate their apps to Jira Forge.
-To meet these requirements, ConfigCat developed a new Forge-based ConfigCat Feature Flags Jira app.
-
-:::info Development in progress
-The development of the Forge app is currently in progress and not available yet.
-
-The new version of the app will be available before the Connect Framework's EOS. For the exact release date, check the <a href="https://trello.com/b/8gYunIb6/configcat-public-roadmap" target="_blank">ConfigCat Public Roadmap</a>.
-:::
-
-### Migration steps
-To complete the migration, you may have to do the following steps.
-<Steps>
-    <Step>
-        Update the app to the latest version in Jira.
-    </Step>
-    <Step>
-        Re-authorize in ConfigCat if required.
-    </Step>
-</Steps>
-
-### Update the app in Jira
-If the app is not updated automatically.
-<Steps>
-    <Step>
-        Navigate to your Jira instance's app management page.
-    </Step>
-    <Step>
-        Search for "ConfigCat Feature Flags".
-    </Step>
-    <Step>
-        Update the app to the latest version by hand.
-    </Step>
-</Steps>
-
 ## Installation
-
 <Steps>
     <Step>
         Add <a href="https://marketplace.atlassian.com/1222421" target="_blank">ConfigCat Feature Flags</a> to your Jira Cloud instance.
@@ -61,6 +25,12 @@ If the app is not updated automatically.
 
 ## Configuration
 ### Authorization
+
+:::info
+Every Jira user who wants to use the ConfigCat Feature Flags App must authorize ConfigCat in Jira individually.
+This ensures that each user's ConfigCat permissions are validated in Jira, so the user can only see the Products, Configs, Environments, and Feature Flags that they have access to in ConfigCat.
+:::
+
 <Steps>
     <Step>
         Navigate to any Issue on your Jira board.
@@ -84,10 +54,10 @@ If the app is not updated automatically.
         After successful authorization, you will be redirected back to the Issue.
     </Step>
 </Steps>
-
-:::info
-Every Jira user must authorize ConfigCat in Jira who wants to use the ConfigCat Feature Flags App.
-:::
+<video className="video" controls muted>
+    <source src="/docs/assets/jira/authorize-configcat.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
 
 ### Revoke Authorization
 <Steps>
@@ -115,15 +85,8 @@ Every Jira user must authorize ConfigCat in Jira who wants to use the ConfigCat 
     </Step>
 </Steps>
 
-<video className="video" controls muted>
-    <source src="/docs/assets/jira/authorize-configcat.mp4" type="video/mp4"/>
-    Your browser does not support the video tag.
-</video>
-
 ## Usage
-
 ### Linking existing feature flags
-
 <Steps>
     <Step>
         Navigate to any Issue on your Jira board.
@@ -136,17 +99,14 @@ Every Jira user must authorize ConfigCat in Jira who wants to use the ConfigCat 
     </Step>
     <Step>
         When linked, you can manage the selected feature flag from this Issue.
-
-        <video className="video" controls muted>
-          <source src="/docs/assets/jira/link-existing.mp4" type="video/mp4"/>
-          Your browser does not support the video tag.
-        </video>
-
     </Step>
 </Steps>
+<video className="video" controls muted>
+    <source src="/docs/assets/jira/link-existing.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
 
 ### Creating new feature flags
-
 <Steps>
     <Step>
         Navigate to any Issue on your Jira board.
@@ -165,16 +125,15 @@ Every Jira user must authorize ConfigCat in Jira who wants to use the ConfigCat 
     </Step>
     <Step>
         When linked, you can manage the selected feature flag from this Issue.
-
-        <video className="video" controls muted>
-          <source src="/docs/assets/jira/create-and-link.mp4" type="video/mp4"/>
-          Your browser does not support the video tag.
-        </video>
     </Step>
 </Steps>
+<video className="video" controls muted>
+    <source src="/docs/assets/jira/create-and-link.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
+
 
 ### View and Update linked feature flags
-
 <Steps>
     <Step>
         Open an Issue on your Jira board with a linked feature flag.
@@ -197,32 +156,27 @@ Every Jira user must authorize ConfigCat in Jira who wants to use the ConfigCat 
     <Step>
         Publish your changes immediately or propose/schedule them.
     </Step>
-    <Step>
-        <video className="video" controls muted>
-          <source src="/docs/assets/jira/edit-ff.mp4" type="video/mp4"/>
-          Your browser does not support the video tag.
-        </video>
-    </Step>
 </Steps>
+<video className="video" controls muted>
+    <source src="/docs/assets/jira/edit-ff.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
 
 ### Remove linked feature flags
-
 <Steps>
     <Step>
         Open an Issue on your Jira board with a linked feature flag.
     </Step>
     <Step>
         Remove the linked feature flag by opening the **More menu** and selecting the **Remove from Issue** option.
-
-        <video className="video" controls muted>
-          <source src="/docs/assets/jira/remove-ff.mp4" type="video/mp4"/>
-          Your browser does not support the video tag.
-        </video>
     </Step>
 </Steps>
+<video className="video" controls muted>
+    <source src="/docs/assets/jira/remove-ff.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
 
 ### View flag status in Releases
-
 <Steps>
     <Step>
         Open an Issue on your Jira board with a linked feature flag.
@@ -232,22 +186,12 @@ Every Jira user must authorize ConfigCat in Jira who wants to use the ConfigCat 
     </Step>
     <Step>
         Click it for a more detailed dialog.
-
-        <video className="video" controls muted>
-          <source src="/docs/assets/jira/jira-development-view.mp4" type="video/mp4"/>
-          Your browser does not support the video tag.
-        </video>
     </Step>
 </Steps>
-
-<Steps>
-    <Step>
-        Open a version in the Jira project's Release Hub page to see the related issues feature flag status.
-    </Step>
-    <Step>
-        Click it for a more detailed dialog.
-    </Step>
-</Steps>
+ <video className="video" controls muted>
+    <source src="/docs/assets/jira/jira-development-view.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
 
 :::info
 This app doesn't implement the **Releases - Create/Connect feature flag** action. Instead, you can create or link
@@ -262,3 +206,32 @@ View linked issues next to your Feature Flags in ConfigCat and jump to the Jira 
   <source src="/docs/assets/jira/open-from-dashboard.mp4" type="video/mp4"/>
   Your browser does not support the video tag.
 </video>
+
+## Migration to Jira Forge
+Atlassian ends support for the Jira Connect Frameworks on January 31, 2027 and advises vendors to migrate their apps to Jira Forge.
+To meet these requirements, ConfigCat developed a new Forge-based ConfigCat Feature Flags Jira app.
+
+### Migration steps
+To complete the migration, you may have to do the following steps.
+<Steps>
+    <Step>
+        Update the app to the latest version in Jira.
+    </Step>
+    <Step>
+        Re-authorize in ConfigCat if required.
+    </Step>
+</Steps>
+
+### Update the app in Jira
+If the app is not updated automatically.
+<Steps>
+    <Step>
+        Navigate to your Jira instance's app management page.
+    </Step>
+    <Step>
+        Search for "ConfigCat Feature Flags".
+    </Step>
+    <Step>
+        Update the app to the latest version by hand.
+    </Step>
+</Steps>
