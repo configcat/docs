@@ -69,11 +69,15 @@ behavior as closely as possible.
 To launch the import tool, open the dropdown menu in the top left corner of the [ConfigCat Dashboard](https://app.configcat.com/organization),
 navigate to the Organization Overview page, then click the card labeled "Import from LaunchDarkly".
 
-<img alt="Launching the import tool" src="/docs/assets/migration-from-launchdarkly/launch-import-tool_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
+<p>
+  <img alt="Launching the import tool" src="/docs/assets/migration-from-launchdarkly/launch-import-tool_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
+</p>
 
 This will take you to a page with a wizard-like UI:
 
-<img alt="The import tool" src="/docs/assets/migration-from-launchdarkly/import-tool_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
+<p>
+  <img alt="The import tool" src="/docs/assets/migration-from-launchdarkly/import-tool_192dpi.png" width="1366" height="768" decoding="async" loading="lazy" />
+</p>
 
 Follow the instructions and go through the steps to perform the import.
 
@@ -85,6 +89,16 @@ It is also possible to re-import products or specific parts of those without hav
 previously. The import tool is able to update the existing entities with fresh data. However, this may involve undoable
 overwriting of existing data, so please be careful. The import tool will warn you if something like this is about
 to happen.
+
+### Providing access to LaunchDarkly data
+
+The import tool uses the LaunchDarkly REST API to retrieve the data you want to migrate. Therefore, in the first step of
+the wizard, you need to provide a LaunchDarkly **API access token** with the "Reader" role. If you don't have one, refer
+to [this guide](https://launchdarkly.com/docs/home/account/api-create) for instructions. Be sure to create it
+using API version 20240415.
+
+If your data is hosted in LaunchDarkly's EU-based infrastructure, you also need to set the **LaunchDarkly instance**
+option accordingly. For more details, see [this document](https://launchdarkly.com/docs/home/infrastructure/eu).
 
 ### Targeting toggle translation mode
 
