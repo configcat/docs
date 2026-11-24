@@ -41,7 +41,7 @@ Or put the following directly to your `pubspec.yml` and run `dart pub get` or `f
 
 ```yaml title="pubspec.yml"
 dependencies:
-  configcat_client: ^5.0.0
+  configcat_client: ^6.0.0
 ```
 
 ### 2. Import the ConfigCat SDK
@@ -122,9 +122,7 @@ These are the available options on the `ConfigCatOptions` class:
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `dataGovernance` | Optional, defaults to `global`. Describes the location of your feature flag and setting data within the ConfigCat CDN. This parameter needs to be in sync with your Data Governance preferences. [More about Data Governance](../advanced/data-governance.mdx). Available options: `global`, `euOnly`. |
 | `baseUrl`        | Optional, sets the CDN base url (forward proxy, dedicated subscription) from where the sdk will download the config JSON.                                                                                                                                                                          |
-| `connectTimeout` | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's connect timeout. [More about the HTTP Client](#httpclient).                                                                                                                      |
-| `receiveTimeout` | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's receive timeout. [More about the HTTP Client](#httpclient).                                                                                                                      |
-| `sendTimeout`    | Optional, sets the underlying <a href="https://github.com/flutterchina/dio" target="_blank">Dio</a> HTTP client's send timeout. [More about the HTTP Client](#httpclient).                                                                                                                         |
+| `requestTimeout` | Optional, sets the underlying <code><a href="https://github.com/dart-lang/http/tree/master/pkgs/http" target="_blank">http.Client</a></code>'s request timeout. [More about the HTTP Client](#httpclient).                                                                                                             |
 | `cache`          | Optional, sets a custom cache implementation for the client. [More about cache](#custom-cache).                                                                                                                                                                                                    |
 | `pollingMode`    | Optional, sets the polling mode for the client. [More about polling modes](#polling-modes).                                                                                                                                                                                                        |
 | `logger`         | Optional, sets the internal logger and log level. [More about logging](#logging).                                                                                                                                                                                                                  |
@@ -361,7 +359,7 @@ Use the the `autoPollInterval` option parameter of the `PollingMode.autoPoll()` 
 
 ```dart
 final client = ConfigCatClient.get(
-    sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
+    sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(
         pollingMode: PollingMode.autoPoll(
             autoPollInterval: Duration(seconds: 100),
@@ -385,7 +383,7 @@ Use the `cacheRefreshInterval` option parameter of the `PollingMode.lazyLoad()` 
 
 ```dart
 final client = ConfigCatClient.get(
-    sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
+    sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(
         pollingMode: PollingMode.lazyLoad(
             // the cache will expire in 100 seconds
@@ -407,7 +405,7 @@ Manual polling gives you full control over when the config data is downloaded fr
 
 ```dart
 final client = ConfigCatClient.get(
-    sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
+    sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(
         pollingMode: PollingMode.manualPoll(),
     )
@@ -647,7 +645,7 @@ Then use your custom cache implementation:
 
 ```dart
 final client = ConfigCatClient.get(
-    sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
+    sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(cache: MyCustomCache()));
 ```
 
@@ -657,42 +655,45 @@ The Dart (Flutter) SDK supports *shared caching*. You can read more about this f
 
 ## HttpClient
 
-The ConfigCat SDK internally uses a <a href="https://github.com/flutterchina/dio" target="_blank">Dio HTTP client</a> instance to download the latest config JSON over HTTP. You have the option to customize the internal HTTP client.
+The ConfigCat SDK internally uses a <a href="https://github.com/dart-lang/http/tree/master/pkgs/http" target="_blank">http.Client</a> instance to download the latest config JSON over HTTP. You have the option to customize the internal HTTP client.
 
 ### HTTP Timeout
 
-You can set the maximum wait time for a ConfigCat HTTP response by using Dio's timeouts.
+You can set the maximum wait time for a ConfigCat HTTP response by using the `requestTimeout` option.
 
 ```dart
 final client = ConfigCatClient.get(
-    sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
+    sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(
-        connectTimeout: Duration(seconds: 10), // timeout for establishing a HTTP connection with the server
-        sendTimeout: Duration(seconds: 10), // timeout for sending a HTTP request to the server
-        receiveTimeout: Duration(seconds: 10), // timeout for reading the server's HTTP response
+        requestTimeout: Duration(seconds: 10), // timeout for the entire HTTP request
     )
 );
 ```
 
 Default timeout values:
 
-- `connectTimeout`: 10 seconds
-- `sendTimeout`: 20 seconds
-- `receiveTimeout`: 20 seconds
+- `requestTimeout`: 30 seconds
 
 ### HTTP Proxy
 
-If your application runs behind a proxy you can do the following:
+You can set an HTTP proxy for `dart:io`'s HTTP client and pass it to the SDK:
 
 ```dart
-import 'package:dio/adapter.dart';
+import 'package:configcat_client/configcat_client.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
+import 'dart:io';
 
-(client.httpClient.httpClientAdapter as DefaultHttpClientAdapter)
-    .onHttpClientCreate = (client) {
-        client.findProxy = (uri) {
-            return 'PROXY proxyHost:proxyPort';
-        };
-    };
+HttpClient httpClient = HttpClient();
+httpClient.findProxy = (uri) {
+    return 'PROXY proxyHost:proxyPort';
+};
+IOClient ioClient = IOClient(httpClient);
+
+final client = ConfigCatClient.get(
+    sdkKey: '#YOUR-SDK-KEY#',
+    options: ConfigCatOptions(httpClient: ioClient),
+);
 ```
 
 ## Force refresh
@@ -736,7 +737,7 @@ Then you can use your custom logger implementation at the SDK's initialization:
 
 ```dart
 final client = ConfigCatClient.get(
-    sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
+    sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(
         logger: ConfigCatLogger(internalLogger: MyCustomLogger()),
     )
@@ -747,7 +748,7 @@ You can change the verbosity of the logs by passing a `LogLevel` parameter to th
 
 ```dart
 final client = ConfigCatClient.get(
-    sdkKey: '<PLACE-YOUR-SDK-KEY-HERE>',
+    sdkKey: '#YOUR-SDK-KEY#',
     options: ConfigCatOptions(
         logger: ConfigCatLogger(level: LogLevel.info),
     )

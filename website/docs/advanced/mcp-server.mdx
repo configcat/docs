@@ -4,14 +4,12 @@ title: MCP Server
 description: Use the ConfigCat Model Context Protocol (MCP) server to manage feature flags & configs via the Public Management API directly from AI tools.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import { Steps, Step } from '@site/src/components/Steps';
 
 ## Overview
 
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro) is an open protocol that standardizes how applications provide context to large language models (LLMs).
-The ConfigCat MCP server lets you manage feature flags and configurations via the Public Management API seamlessly from AI tools.
+The ConfigCat MCP server lets you manage feature flags and configurations via the [Public Management API](/api/reference/configcat-public-management-api/) seamlessly from AI tools. 
 It also enables your code editor to understand your feature flags, integrate the appropriate ConfigCat SDK into your project or even create new feature flags directly in your codebase.
 
 <video
@@ -39,39 +37,321 @@ It also enables your code editor to understand your feature flags, integrate the
 - Find code references linked to your features
 - Integrate ConfigCat SDK and implement feature flags in your project
 
-## Prerequisites
+## Connect to the MCP server
 
-- [Node.js](https://nodejs.org) version 16 or higher installed
-- [Public Management API basic auth credentials](https://app.configcat.com/my-account/public-api-credentials) for ConfigCat MCP server created
+You can connect to the ConfigCat MCP server in two ways:
 
-## Setup
+- [Remote MCP server](#remote-mcp-server): Connect to the hosted MCP server without installing or running anything locally. Authenticate with your ConfigCat account and use it from desktop or browser-based AI tools.
+- [Local MCP server](#local-mcp-server): Runs on your machine as a process that your AI client starts. It connects to ConfigCat using your Public Management API credentials.
 
-Supply your [Public Management API basic auth credentials](https://app.configcat.com/my-account/public-api-credentials).
+Both ways provide the same functionality.
+
+## Remote MCP server
+
+The remote MCP server uses Streamable HTTP and is hosted by ConfigCat, so you don't need to install or run anything locally.  
+It uses **OAuth authentication**. Sign in to your ConfigCat account in your browser when prompted by the AI client.
+The MCP server uses your ConfigCat user permissions. You can manage your MCP connections in the [ConfigCat Dashboard](https://app.configcat.com/my-account/oauth-integrations).
+
+OAuth access tokens are refreshed automatically by your AI client, so you only need to reauthorize after 14 days of inactivity.
+If your ConfigCat account is deleted, the MCP connection ends. Any changes to your account permissions take effect immediately.
+
+:::info
+To limit the MCP server's access, you can create a dedicated ConfigCat user with only the necessary permissions, such as read-only access,
+and use that account to connect to the MCP server.
+:::
+
+### Client Configuration
+
+Select your AI client and follow the instructions to connect to ConfigCat MCP server.
+
+<details>
+  <summary><strong>Cursor</strong></summary>
+
+<Steps>
+<Step>
+Install [Cursor](https://cursor.com/).
+</Step>
+<Step>
+Open **Cursor Settings** → **MCP & Integrations** → **Add Custom MCP**.
+</Step>
+<Step>
+Add (or merge) the following snippet into your MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "ConfigCat": {
+      "url": "https://mcp.configcat.com/mcp"
+    }
+  }
+}
+```
+</Step>
+<Step>
+Save the settings and sign in to ConfigCat when prompted.
+</Step>
+</Steps>
+
+</details>
+
+<details>
+  <summary><strong>Claude Code</strong></summary>
+
+<Steps>
+<Step>
+Install [Claude Code](https://claude.com/product/claude-code).
+</Step>
+<Step>
+Add the remote ConfigCat MCP server from your terminal:
+
+```bash
+claude mcp add --transport http ConfigCat https://mcp.configcat.com/mcp
+```
+</Step>
+<Step>
+Start Claude Code with `claude`, run `/mcp`, and sign in to ConfigCat.
+</Step>
+</Steps>
+
+</details>
+
+<details>
+  <summary><strong>Claude Desktop</strong></summary>
+
+<Steps>
+<Step>
+Install [Claude Desktop](https://claude.ai/download).
+</Step>
+<Step>
+Open **Settings** → **Connectors** → **Add custom connector**.
+</Step>
+<Step>
+Enter `https://mcp.configcat.com/mcp` as the MCP server URL, then connect and sign in to ConfigCat.
+</Step>
+</Steps>
+
+</details>
+
+<details>
+  <summary><strong>Claude (Web)</strong></summary>
+
+<Steps>
+<Step>
+Sign in to [Claude.ai](https://claude.ai/).
+</Step>
+<Step>
+Open **Settings** → **Connectors** → **Add custom connector**.
+</Step>
+<Step>
+Enter `ConfigCat` as the name and `https://mcp.configcat.com/mcp` as the MCP server URL, then click **Continue**.
+</Step>
+<Step>
+Click **Add**, then sign in to your ConfigCat account in the browser that opens.
+</Step>
+<Step>
+In a chat, open the **+** menu → **Connectors** and make sure ConfigCat is enabled.
+</Step>
+</Steps>
+
+</details>
+
+<details>
+  <summary><strong>GitHub Copilot in Visual Studio Code</strong></summary>
+
+<Steps>
+<Step>
+Install [VS Code](https://code.visualstudio.com/) and [GitHub Copilot](https://code.visualstudio.com/docs/copilot/setup).
+</Step>
+<Step>
+Create a `.vscode/mcp.json` file in your project root with the following content:
+
+```json
+{
+  "servers": {
+    "ConfigCat": {
+      "type": "http",
+      "url": "https://mcp.configcat.com/mcp"
+    }
+  }
+}
+```
+</Step>
+<Step>
+Save the settings and sign in to ConfigCat when prompted.
+</Step>
+</Steps>
+
+</details>
+
+<details>
+  <summary><strong>GitHub Copilot App</strong></summary>
+
+<Steps>
+<Step>
+Install the [GitHub Copilot app](https://docs.github.com/en/copilot/get-started/quickstart-copilot-app).
+</Step>
+<Step>
+Click **Customize** in the app sidebar, then click **MCP** and add a custom server.
+</Step>
+<Step>
+Enter the following details:
+
+- **Name:** `ConfigCat`
+- **Type:** HTTP
+- **URL:** `https://mcp.configcat.com/mcp`
+</Step>
+<Step>
+Install the server and sign in to your ConfigCat account in the browser that opens.
+</Step>
+</Steps>
+
+:::tip
+MCP servers you add to GitHub Copilot CLI are automatically available in the GitHub Copilot app.
+:::
+
+</details>
+
+<details>
+  <summary><strong>GitHub Copilot CLI</strong></summary>
+
+<Steps>
+<Step>
+Install [GitHub Copilot CLI](https://github.com/github/copilot-cli).
+</Step>
+<Step>
+Add the remote ConfigCat MCP server from your terminal:
+
+```bash
+copilot mcp add --transport http ConfigCat https://mcp.configcat.com/mcp
+```
+</Step>
+<Step>
+Start Copilot CLI with `copilot` and sign in to ConfigCat when prompted.
+</Step>
+<Step>
+Run `/mcp` to verify that the ConfigCat MCP server is connected.
+</Step>
+</Steps>
+
+</details>
+
+<details>
+  <summary><strong>ChatGPT (Web)</strong></summary>
+
+<Steps>
+<Step>
+Open [ChatGPT Plugins](https://chatgpt.com/plugins) and click **Add** → **Add custom MCP server**.
+</Step>
+<Step>
+Enter the following details:
+
+- **Name:** `ConfigCat`
+- **Server URL:** `https://mcp.configcat.com/mcp`
+</Step>
+<Step>
+Accept the security warning, and click **Create as a plugin**.
+</Step>
+<Step>
+Connect the plugin and sign in to your ConfigCat account in the browser that opens.
+</Step>
+</Steps>
+
+</details>
+
+<details>
+  <summary><strong>OpenAI Codex CLI</strong></summary>
+
+<Steps>
+<Step>
+Install the [Codex CLI](https://developers.openai.com/codex/cli).
+</Step>
+<Step>
+Add the remote ConfigCat MCP server from your terminal:
+
+```bash
+codex mcp add configcat --url https://mcp.configcat.com/mcp
+```
+</Step>
+<Step>
+Start Codex with `codex` and run `/mcp` to verify that the ConfigCat MCP server is connected.
+</Step>
+</Steps>
+
+</details>
+
+<details>
+  <summary><strong>Devin Desktop (Windsurf)</strong></summary>
+
+<Steps>
+<Step>
+Install [Devin Desktop](https://devin.ai/desktop).
+</Step>
+<Step>
+In Cascade, open the **MCP** menu and select **Open MCP config file**.
+</Step>
+<Step>
+Add (or merge) the following snippet into your MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "ConfigCat": {
+      "serverUrl": "https://mcp.configcat.com/mcp"
+    }
+  }
+}
+```
+</Step>
+<Step>
+Save the file, refresh the MCP servers in Cascade, and sign in to ConfigCat when prompted.
+</Step>
+</Steps>
+
+</details>
+
+## Local MCP server
+
+You can also run the ConfigCat MCP server locally on your machine.
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) version 16 or higher installed.
+- [Public Management API basic auth credentials](https://app.configcat.com/my-account/public-api-credentials) created for ConfigCat MCP server access.
+
+### Setup
+
+Supply your [Public Management API basic auth credentials](https://app.configcat.com/my-account/public-api-credentials). 
+The MCP server uses your Public Management API credentials and the associated permissions when performing actions.
 
 The MCP server's configuration includes the following environment variables:
 
 | Variable | Required | Default | Description |
-| -------- | -------- | ------- | ----------- |
-| `CONFIGCAT_API_USER` | &#9745; | – | Management API basic auth username. |
-| `CONFIGCAT_API_PASS` | &#9745; | – | Management API basic auth password. |
-| `CONFIGCAT_BASE_URL` |  | `https://api.configcat.com` | Override API host (rarely needed). |
+| --- | --- | --- | --- |
+| `CONFIGCAT_API_USER` | Yes | – | Management API basic auth username. |
+| `CONFIGCAT_API_PASS` | Yes | – | Management API basic auth password. |
+| `CONFIGCAT_BASE_URL` | No | `https://api.configcat.com` | Override the API host (rarely needed). |
+
+:::info
+To limit the MCP server's permissions, you can create a dedicated ConfigCat user with only the necessary permissions,
+such as read-only access, and use that user's API credentials.
+:::
 
 ### Client Configuration
 
-<Tabs>
-<TabItem value="cursor" label="Cursor" default>
+You can connect to the local MCP server from multiple AI clients using the following instructions.
+
+<details>
+  <summary><strong>Cursor</strong></summary>
+
 <Steps>
 <Step>
-Install [Cursor](https://cursor.com/)
+Install [Cursor](https://cursor.com/).
 </Step>
 <Step>
-Open **Preferences** → **Cursor Settings** → **MCP & Integrations**
+Open **Cursor Settings** → **Tools & Integrations** → **MCP Tools** and select **Add Custom MCP**.
 </Step>
 <Step>
-Click **Add Custom MCP**
-</Step>
-<Step>
-Add (or merge) the snippet below into your JSON settings:
+Add (or merge) this server definition into your JSON settings:
 
 ```json
 {
@@ -89,41 +369,80 @@ Add (or merge) the snippet below into your JSON settings:
 ```
 </Step>
 <Step>
-**Save** – the server will start on demand.
-</Step>
-<Step>
-You can start writing prompts into Cursor's AI panel.
+Save the settings. The MCP server starts on demand. You can now use it in Cursor's AI panel.
 </Step>
 </Steps>
-</TabItem>
-<TabItem value="claudecode" label="Claude Code" default>
+
+</details>
+
+<details>
+  <summary><strong>Claude Code</strong></summary>
+
 <Steps>
 <Step>
-Install [Claude Code](https://claude.com/product/claude-code)
+Install [Claude Code](https://claude.com/product/claude-code).
 </Step>
 <Step>
-Add ConfigCat MCP server to Claude Code from your terminal:
+Add the local ConfigCat MCP server:
 
 ```bash
 claude mcp add --env CONFIGCAT_API_USER=YOUR_API_USER --env CONFIGCAT_API_PASS=YOUR_API_PASSWORD --transport stdio ConfigCat -- npx -y @configcat/mcp-server
 ```
-
 </Step>
 <Step>
-Start Claude Code with the `claude` command.
+Start Claude Code with `claude` command.
 </Step>
 <Step>
-Check the ConfigCat MCP server with the `/mcp` command in Claude Code. The connected ConfigCat server should appear in the Local MCPs list.
+Check the ConfigCat MCP server with `/mcp` command in Claude Code. The connected ConfigCat server should appear in the Local MCPs list.
 </Step>
 <Step>
 You can now start writing prompts in Claude Code.
 </Step>
 </Steps>
-</TabItem>
-<TabItem value="vscode" label="Visual Studio Code">
+
+</details>
+
+<details>
+  <summary><strong>Claude Desktop</strong></summary>
+
 <Steps>
 <Step>
-Install [VS Code](https://code.visualstudio.com/) and [GitHub Copilot](https://code.visualstudio.com/docs/copilot/setup)
+Install [Claude Desktop](https://claude.ai/download).
+</Step>
+<Step>
+Open **Settings** → **Developer** → **Edit Config**.
+</Step>
+<Step>
+In `claude_desktop_config.json` add:
+
+```json
+{
+  "mcpServers": {
+    "ConfigCat": {
+      "command": "npx",
+      "args": ["-y", "@configcat/mcp-server"],
+      "env": {
+        "CONFIGCAT_API_USER": "YOUR_API_USER",
+        "CONFIGCAT_API_PASS": "YOUR_API_PASSWORD"
+      }
+    }
+  }
+}
+```
+</Step>
+<Step>
+**Save** & restart Claude Desktop.
+</Step>
+</Steps>
+
+</details>
+
+<details>
+  <summary><strong>GitHub Copilot in Visual Studio Code</strong></summary>
+
+<Steps>
+<Step>
+Install [VS Code](https://code.visualstudio.com/) and [GitHub Copilot](https://code.visualstudio.com/docs/copilot/setup).
 </Step>
 <Step>
 Create a `.vscode/mcp.json` file in your project root with the following content:
@@ -150,20 +469,92 @@ Save the settings file. The MCP server should now be available in VS Code.
 You can start writing prompts into VS Code's AI panel.
 </Step>
 </Steps>
-</TabItem>
-<TabItem value="claude" label="Claude Desktop">
+
+</details>
+
+<details>
+  <summary><strong>GitHub Copilot App</strong></summary>
+
 <Steps>
 <Step>
-Install [Claude Desktop](https://claude.ai/download)
+Install the [GitHub Copilot app](https://docs.github.com/en/copilot/get-started/quickstart-copilot-app).
 </Step>
 <Step>
-Open **Settings** → **Developer**
+Click **Customize** in the app sidebar, then click **MCP** and add a custom server.
 </Step>
 <Step>
-Click **Edit Config**
+Enter the following details:
+
+- **Name:** `ConfigCat`
+- **Type:** STDIO (local)
+- **Command:** `npx -y @configcat/mcp-server`
+- **Environment variables:** `CONFIGCAT_API_USER` set to `YOUR_API_USER` and `CONFIGCAT_API_PASS` set to `YOUR_API_PASSWORD`
 </Step>
 <Step>
-In `claude_desktop_config.json` add:
+Install the server. You can now use it in the GitHub Copilot app.
+</Step>
+</Steps>
+
+:::tip
+MCP servers you add to GitHub Copilot CLI are automatically available in the GitHub Copilot app.
+:::
+
+</details>
+
+<details>
+  <summary><strong>GitHub Copilot CLI</strong></summary>
+
+<Steps>
+<Step>
+Install [GitHub Copilot CLI](https://github.com/github/copilot-cli).
+</Step>
+<Step>
+Add the local ConfigCat MCP server from your terminal:
+
+```bash
+copilot mcp add --env CONFIGCAT_API_USER=YOUR_API_USER --env CONFIGCAT_API_PASS=YOUR_API_PASSWORD ConfigCat -- npx -y @configcat/mcp-server
+```
+</Step>
+<Step>
+Start Copilot CLI with `copilot` and run `/mcp` to verify that the ConfigCat MCP server is connected.
+</Step>
+</Steps>
+
+</details>
+
+<details>
+  <summary><strong>OpenAI Codex CLI</strong></summary>
+
+<Steps>
+<Step>
+Install the [Codex CLI](https://developers.openai.com/codex/cli).
+</Step>
+<Step>
+Add the local ConfigCat MCP server from your terminal:
+
+```bash
+codex mcp add configcat --env CONFIGCAT_API_USER=YOUR_API_USER --env CONFIGCAT_API_PASS=YOUR_API_PASSWORD -- npx -y @configcat/mcp-server
+```
+</Step>
+<Step>
+Start Codex with `codex` and run `/mcp` to verify that the ConfigCat MCP server is connected.
+</Step>
+</Steps>
+
+</details>
+
+<details>
+  <summary><strong>Devin Desktop (Windsurf)</strong></summary>
+
+<Steps>
+<Step>
+Install [Devin Desktop](https://devin.ai/desktop).
+</Step>
+<Step>
+In Cascade, open the **MCP** menu and select **Open MCP config file**.
+</Step>
+<Step>
+Add (or merge) the following snippet into your MCP settings:
 
 ```json
 {
@@ -181,11 +572,11 @@ In `claude_desktop_config.json` add:
 ```
 </Step>
 <Step>
-**Save** & restart Claude Desktop.
+Save the file and refresh the MCP servers in Cascade.
 </Step>
 </Steps>
-</TabItem>
-</Tabs>
+
+</details>
 
 :::info
 Replace `YOUR_API_USER` and `YOUR_API_PASSWORD` environment variables with your [Public Management API basic auth credentials](https://app.configcat.com/my-account/public-api-credentials).
