@@ -60,6 +60,10 @@
 .video {
   width: 100%;
   height: auto;
+  &.full-hd {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
 }
 
 li > h3 {
