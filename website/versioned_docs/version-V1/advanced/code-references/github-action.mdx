@@ -25,7 +25,7 @@ You can find more information about GitHub Actions <a target="_blank" href="http
        name: Scan repository for code references
        steps:
          - name: Checkout
-           uses: actions/checkout@v3
+           uses: actions/checkout@v7
          - name: Scan & upload
            uses: configcat/scan-repository@v2
            with:
@@ -41,7 +41,8 @@ You can find more information about GitHub Actions <a target="_blank" href="http
              #   flag_key_to_exclude_2
              # alias-patterns: (\w+) = :CC_KEY,const (\w+) = feature_flags\.enabled\(:CC_KEY\)   #optional
              # usage-patterns: feature_flags\.enabled\(:CC_KEY\)   # optional, comma delimited flag key usage patterns
-             # verbose: true                    # optional
+             # fail-on-deleted-flag-found: true   # optional
+             # verbose: true                      # optional
    ```
 
 4. Commit & push your action.
@@ -64,4 +65,5 @@ Scan reports are uploaded for each branch of your repository that triggers the w
 | `exclude-keys` | List of feature flag keys that must be excluded from the scan report.                                                                             |          |                     |
 | `alias-patterns` | Comma delimited list of custom regex patterns used to search for additional aliases.                                                            |          |                     |
 | `usage-patterns` | Comma delimited list of custom regex patterns that describe additional feature flag key usages. |  |                     |
+| `fail-on-deleted-flag-found` | Fail the scan if a deleted feature flag is found. (Requires the `View product level audit logs` ConfigCat permission.)              |          | false               |
 | `verbose`      | Turns on detailed logging.                                                                                                                        |          | false               |
