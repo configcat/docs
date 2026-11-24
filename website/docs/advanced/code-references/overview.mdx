@@ -24,14 +24,19 @@ configcat scan . --print
 
 See the `scan` command's <a target="_blank" href="https://configcat.github.io/cli/configcat-scan.html">reference documentation</a> for all available command parameters.
 
-### Deleted Flags
+### Fail when a deleted flag is found
 
-As part of the scanning operation, the CLI gathers all deleted feature flags and settings from the last 180 days and looks for their usage
-in your source code. When it finds a reference to a deleted feature flag or setting, it prints a warning that lists their keys.
+The scanner can be configured to fail if it detects a deleted feature flag in your code. This is useful to ensure that your code does not reference flags that have been removed from ConfigCat.
+
+You can enable this behavior by using the `--fail-on-deleted-flag-found` switch of the `scan` command.
 
 ```bash
-[warning]: 5 deleted feature flag/setting reference(s) found in 4 file(s). Keys: [featureThatWasDeleted1, featureThatWasDeleted2]
+configcat scan <dir> --fail-on-deleted-flag-found
 ```
+
+:::info
+The `--fail-on-deleted-flag-found` option requires the `View product level audit logs` ConfigCat permission.
+:::
 
 ### Exclude Flags from Scanning
 
