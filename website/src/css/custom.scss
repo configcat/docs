@@ -60,7 +60,9 @@
 .video {
   width: 100%;
   height: auto;
-  &.full-hd {
+  max-width: 960px;
+
+  &:not(:fullscreen), &:not(:-webkit-full-screen) {
     aspect-ratio: 16 / 9;
     object-fit: cover;
   }
