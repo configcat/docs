@@ -32,7 +32,7 @@ This animation explains the different polling modes:
 
 ## Caching
 
-ConfigCat SDKs in their default setup store all the information they need for feature flag evaluation in memory. This behavior is extendable with custom cache implementations that you can use for pointing the SDK to your own data storage.
+ConfigCat SDKs in their default setup store all the information they need for feature flag evaluation in memory. This behavior is extendable with custom cache implementations that you can use to point the SDK to your own data storage.
 
 The main reason for caching is to accelerate serving feature flag evaluation requests when your application is in a stateless environment or frequently restarts.
 When the SDK notices that it has a valid cache entry to work with, it will use the data from the cache rather than initiating a new HTTP request towards ConfigCat.

@@ -908,7 +908,7 @@ When an SDK also has its offline option set, that will override what it would in
 
 ## Cache
 
-The Proxy in its default setup stores all the information it needs for feature flag evaluation in memory. This behavior is extendable with an external cache that you can use for pointing the underlying SDKs to your own data storage.
+The Proxy in its default setup stores all the information it needs for feature flag evaluation in memory. This behavior is extendable with an external cache that you can use to point the underlying SDKs to your own data storage.
 
 Currently, <a target="blank" href="https://redis.io">Redis</a>, <a target="blank" href="https://mongodb.com/">MongoDB</a>, and <a target="blank" href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide">DynamoDB</a> is supported as external cache. The cache key for the underlying SDKs is based on the [SDK Key](#sdk-identifier--sdk-key). This means that multiple Proxy instances using the same SDK key will read/write the same cache entry.
 

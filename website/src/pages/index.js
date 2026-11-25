@@ -159,7 +159,7 @@ const features = [
       { url: 'integrations/bitrise', title: 'Bitrise Step' },
       { url: 'integrations/bitbucket', title: 'Bitbucket Pipe' },
       { url: 'integrations/circleci', title: 'CircleCI Orb' },
-      { url: 'integrations/datadog', title: 'DataDog' },
+      { url: 'integrations/datadog', title: 'Datadog' },
       { url: 'integrations/github', title: 'GitHub Action' },
       { url: 'integrations/google-analytics', title: 'Google Analytics' },
       { url: 'advanced/code-references/gitlab-ci/', title: 'GitLab (via CLI)' },
