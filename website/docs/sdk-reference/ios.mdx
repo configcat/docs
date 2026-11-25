@@ -24,6 +24,20 @@ export const IosSchema = require('@site/src/schema-markup/sdk-reference/ios.json
 ### 1. Add the ConfigCat SDK to your project
 
 <Tabs groupId="ios-install">
+<TabItem value="Swift Package Manager" label="Swift Package Manager">
+
+Add the SDK to your `Package.swift`.
+
+```swift title="Package.swift"
+dependencies: [
+    .package(
+        url: "https://github.com/configcat/swift-sdk",
+        from: "11.3.2"
+    )
+]
+```
+
+</TabItem>
 <TabItem value="CocoaPods" label="CocoaPods">
 
 ```ruby title="Podfile"
@@ -46,20 +60,6 @@ github "configcat/swift-sdk"
 ```
 
 Then, run the carthage update command and then follow the Carthage integration steps to link the framework with your project.
-
-</TabItem>
-<TabItem value="Swift Package Manager" label="Swift Package Manager">
-
-Add the SDK to your `Package.swift`.
-
-```swift title="Package.swift"
-dependencies: [
-    .package(
-        url: "https://github.com/configcat/swift-sdk",
-        from: "11.0.1"
-    )
-]
-```
 
 </TabItem>
 </Tabs>
