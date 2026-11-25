@@ -161,7 +161,7 @@ class DefaultUserTransformer
 
 Feel free to create your own transformer class and use it instead, just **remember** that it needs to be **callable** with the `__invoke()` function.
 
-> **Note:** for security reasons, all of the logic computation for the user targeting is executed on your application side of things using ConfigCat's SDK. No user details will be leaving your application in order find out wether or not a user should have a feature flag enabled or not.
+> **Note:** for security reasons, all of the logic computation for the user targeting is executed on your application side of things using ConfigCat's SDK. No user details will be leaving your application in order to find out whether or not a user should have a feature flag enabled or not.
 
 Once you have defined your mapping, you will be able to explicitly use the representation of your user when checking a feature flag:
 

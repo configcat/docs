@@ -1626,7 +1626,7 @@ See [this sample code](https://github.com/configcat/.net-sdk/blob/master/samples
 ### Log Filtering
 
 You can define an {props.platform === "generic-host" ? <>additional</> : <>custom</>} log filter by providing a callback function via the `ConfigCatClientOptions.LogFilter` property.
-The callback will be called by the _ConfigCat SDK_  each time a log event occurs {!props.platform ? <>(and the event passes the minimum log level specified by the `IConfigCatLogger.LogLevel` property)</> : null}.
+The callback will be called by the _ConfigCat SDK_ each time a log event occurs {!props.platform ? <>(and the event passes the minimum log level specified by the `IConfigCatLogger.LogLevel` property)</> : null}.
 That is, the callback allows you to filter log events by `level`, `eventId`, `message` or `exception`. The formatted message string can be obtained via `message.InvariantFormattedMessage`.
 If the callback function returns `true`, the event will be logged, otherwise it will be skipped.
 

@@ -76,7 +76,7 @@
     },
     {
       "@type": "Question",
-      "name": "The ChargeBee payment gets stuck when trying to subscribe for a paid ConfigCat plan.",
+      "name": "The Chargebee payment gets stuck when trying to subscribe for a paid ConfigCat plan.",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "If you're using Firefox, try switching to a Chromium-based browser that has extensions turned off. If this doesn't work, contact ConfigCat for help: https://configcat.com/support"
@@ -84,7 +84,7 @@
     },
     {
       "@type": "Question",
-      "name": "The ChargeBee payment throws an error when trying to subscribe for a paid ConfigCat plan.",
+      "name": "The Chargebee payment throws an error when trying to subscribe for a paid ConfigCat plan.",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "If you're using Firefox, try switching to a Chromium-based browser that has extensions turned off. If this doesn't work, contact ConfigCat for help: https://configcat.com/support"
@@ -199,7 +199,7 @@
       "name": "How long does ConfigCat keep my data?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "ConfigCat keeps your organization data as long as activity is seen in that organization. After several months of inactivity, you'll receive email notifications about or plans to delete your organization and all associated data. An organization is considered inactive if it meets the following criteria: no audit log events are generated in the organization, no valid calls are made to the organization via the Public Management API, config JSONs aren't downloaded from the ConfigCat CDN, the organization does not have an active paid subscription."
+        "text": "ConfigCat keeps your organization data as long as activity is seen in that organization. After several months of inactivity, you'll receive email notifications about our plans to delete your organization and all associated data. An organization is considered inactive if it meets the following criteria: no audit log events are generated in the organization, no valid calls are made to the organization via the Public Management API, config JSONs aren't downloaded from the ConfigCat CDN, the organization does not have an active paid subscription."
       }
     },
     {
@@ -319,7 +319,7 @@
       "name": "Is there a way to create feature flags via ConfigCat's API?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes there is. You can find the public management API at: https://api.configcat.com"
+        "text": "Yes, there is. You can find the public management API at: https://api.configcat.com"
       }
     }
   ]

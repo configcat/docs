@@ -54,7 +54,6 @@ export const NetSchema = require('@site/src/schema-markup/sdk-reference/net.json
 ## Run locally using Docker
 
 1. Have [Docker](https://www.docker.com) CLI installed
-
 2. Crate container
    ```bash
    docker build -t docs:latest .
